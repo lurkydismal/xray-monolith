@@ -6,10 +6,8 @@
 name: MSBuild
 
 on:
-  push:
-    branches: [ "all-in-one-vs2022-wpo" ]
-  pull_request:
-    branches: [ "all-in-one-vs2022-wpo" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 permissions: write-all
 
