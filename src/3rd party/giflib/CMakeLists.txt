@@ -1,0 +1,361 @@
+set(PROJECT_NAME giflib)
+
+################################################################################
+# Source groups
+################################################################################
+set(Headers
+    "gif_hash.h"
+    "gif_lib.h"
+    "gif_lib_private.h"
+)
+source_group("Headers" FILES ${Headers})
+
+set(Sources
+    "dgif_lib.c"
+    "egif_lib.c"
+    "gif_err.c"
+    "gif_font.c"
+    "gif_hash.c"
+    "gifalloc.c"
+    "openbsd-reallocarray.c"
+)
+source_group("Sources" FILES ${Sources})
+
+set(ALL_FILES
+    ${Headers}
+    ${Sources}
+)
+
+################################################################################
+# Target
+################################################################################
+add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "3rd party")
+
+use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
+################################################################################
+# Includes for CMake from *.props
+################################################################################
+use_props(${PROJECT_NAME} DX10             "../../Common.cmake")
+use_props(${PROJECT_NAME} DX10AVX          "../../Common.cmake")
+use_props(${PROJECT_NAME} DX11             "../../Common.cmake")
+use_props(${PROJECT_NAME} DX11AVX          "../../Common.cmake")
+use_props(${PROJECT_NAME} DX8              "../../Common.cmake")
+use_props(${PROJECT_NAME} DX8AVX           "../../Common.cmake")
+use_props(${PROJECT_NAME} DX9              "../../Common.cmake")
+use_props(${PROJECT_NAME} DX9AVX           "../../Common.cmake")
+use_props(${PROJECT_NAME} ProfiledDX11     "../../Common.cmake")
+use_props(${PROJECT_NAME} Release          "../../Common.cmake")
+use_props(${PROJECT_NAME} ReleaseAVX       "../../Common.cmake")
+use_props(${PROJECT_NAME} Verified         "../../Common.cmake")
+use_props(${PROJECT_NAME} VerifiedDX11     "../../Common.cmake")
+use_props(${PROJECT_NAME} VerifiedDX8      "../../Common.cmake")
+use_props(${PROJECT_NAME} VerifiedDX9      "../../Common.cmake")
+use_props(${PROJECT_NAME} VerifiedDX11ASAN "../../Common.cmake")
+
+set(ROOT_NAMESPACE giflib)
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    VS_GLOBAL_KEYWORD "Win32Proj"
+)
+################################################################################
+# Output directory
+################################################################################
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    OUTPUT_DIRECTORY_DX10             "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_DX10AVX          "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_DX11             "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_DX11AVX          "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_DX8              "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_DX8AVX           "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_DX9              "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_DX9AVX           "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_PROFILEDDX11     "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_RELEASE          "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_RELEASEAVX       "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_VERIFIED         "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_VERIFIEDDX11     "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_VERIFIEDDX8      "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_VERIFIEDDX9      "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+    OUTPUT_DIRECTORY_VERIFIEDDX11ASAN "$ENV{xrGameDir}bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
+)
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    INTERPROCEDURAL_OPTIMIZATION_DX10             "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_DX10AVX          "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_DX11             "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_DX11AVX          "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_DX8              "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_DX8AVX           "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_DX9              "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_DX9AVX           "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_PROFILEDDX11     "FALSE"
+    INTERPROCEDURAL_OPTIMIZATION_RELEASE          "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_RELEASEAVX       "TRUE"
+    INTERPROCEDURAL_OPTIMIZATION_VERIFIED         "FALSE"
+    INTERPROCEDURAL_OPTIMIZATION_VERIFIEDDX11     "FALSE"
+    INTERPROCEDURAL_OPTIMIZATION_VERIFIEDDX8      "FALSE"
+    INTERPROCEDURAL_OPTIMIZATION_VERIFIEDDX9      "FALSE"
+    INTERPROCEDURAL_OPTIMIZATION_VERIFIEDDX11ASAN "FALSE"
+)
+################################################################################
+# MSVC runtime library
+################################################################################
+get_property(MSVC_RUNTIME_LIBRARY_DEFAULT TARGET ${PROJECT_NAME} PROPERTY MSVC_RUNTIME_LIBRARY)
+string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
+    $<$<CONFIG:Verified>:
+        MultiThreadedDLL
+    >
+    $<$<CONFIG:VerifiedDX11>:
+        MultiThreadedDLL
+    >
+    $<$<CONFIG:VerifiedDX8>:
+        MultiThreadedDLL
+    >
+    $<$<CONFIG:VerifiedDX9>:
+        MultiThreadedDLL
+    >
+    $<$<CONFIG:VerifiedDX11ASAN>:
+        MultiThreadedDLL
+    >
+    $<$<NOT:$<OR:$<CONFIG:Verified>,$<CONFIG:VerifiedDX11>,$<CONFIG:VerifiedDX8>,$<CONFIG:VerifiedDX9>,$<CONFIG:VerifiedDX11ASAN>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
+)
+set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
+
+################################################################################
+# Include directories
+################################################################################
+target_include_directories(${PROJECT_NAME} PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/mnt/hdd/Projects/xray-monolith/src/3rd party/giflib"
+)
+
+################################################################################
+# Compile definitions
+################################################################################
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    "$<$<CONFIG:DX10>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:DX10AVX>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:DX11>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:DX11AVX>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:DX8>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:DX8AVX>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:DX9>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:DX9AVX>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:ProfiledDX11>:"
+        "XRCORE_PROFILER;"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:Release>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:ReleaseAVX>:"
+        "NDEBUG"
+    ">"
+    "$<$<CONFIG:Verified>:"
+        "_DEBUG;"
+        "USE_VERIFY_IN_RELEASE"
+    ">"
+    "$<$<CONFIG:VerifiedDX11>:"
+        "_DEBUG;"
+        "USE_VERIFY_IN_RELEASE"
+    ">"
+    "$<$<CONFIG:VerifiedDX8>:"
+        "_DEBUG;"
+        "USE_VERIFY_IN_RELEASE"
+    ">"
+    "$<$<CONFIG:VerifiedDX9>:"
+        "_DEBUG;"
+        "USE_VERIFY_IN_RELEASE"
+    ">"
+    "$<$<CONFIG:VerifiedDX11ASAN>:"
+        "_DEBUG;"
+        "USE_VERIFY_IN_RELEASE"
+    ">"
+    "_LIB;"
+    "UNICODE;"
+    "_UNICODE"
+)
+
+################################################################################
+# Compile and link options
+################################################################################
+if(MSVC)
+    target_compile_options(${PROJECT_NAME} PRIVATE
+        $<$<CONFIG:DX10>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:DX10AVX>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /arch:AVX;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:DX11>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:DX11AVX>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /arch:AVX;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:DX8>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:DX8AVX>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /arch:AVX;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:DX9>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:DX9AVX>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /arch:AVX;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:ProfiledDX11>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /Oy;
+            /Gy-;
+            /Zi
+        >
+        $<$<CONFIG:Release>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:ReleaseAVX>:
+            /O2;
+            /Oi;
+            /GF;
+            /GT;
+            /arch:AVX;
+            /Oy;
+            /Gy;
+            /Zi;
+            /Ob3
+        >
+        $<$<CONFIG:Verified>:
+            /Od;
+            /Ob0;
+            /Oi-;
+            /Oy-;
+            /Gy;
+            /ZI
+        >
+        $<$<CONFIG:VerifiedDX11>:
+            /Od;
+            /Ob0;
+            /Oi-;
+            /Oy-;
+            /Gy;
+            /ZI
+        >
+        $<$<CONFIG:VerifiedDX8>:
+            /Od;
+            /Ob0;
+            /Oi-;
+            /Oy-;
+            /Gy;
+            /ZI
+        >
+        $<$<CONFIG:VerifiedDX9>:
+            /Od;
+            /Ob0;
+            /Oi-;
+            /Oy-;
+            /Gy;
+            /ZI
+        >
+        $<$<CONFIG:VerifiedDX11ASAN>:
+            /Od;
+            /Ob0;
+            /Oi-;
+            /Oy-;
+            /Gy;
+            /ZI
+        >
+        /permissive-;
+        /std:c++17;
+        /sdl;
+        /W3;
+        ${DEFAULT_CXX_EXCEPTION_HANDLING};
+        /Y-
+    )
+endif()
+
