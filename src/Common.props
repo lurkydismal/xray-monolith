@@ -5,9 +5,9 @@
     <xrBinRootDir>.\..\_build\bin\</xrBinRootDir>
     <xrBinPlugRootDir>.\..\_build\bin_plugs\</xrBinPlugRootDir>
     <xrLibRootDir>.\..\_build\lib\</xrLibRootDir>
-    <xrBinDir>$(xrBinRootDir)$(Configuration)\</xrBinDir>
-    <xrBinPlugDir>$(xrBinPlugRootDir)$(Configuration)\</xrBinPlugDir>
-    <xrLibDir>$(xrLibRootDir)$(Configuration)\</xrLibDir>
+    <xrBinDir>..\_build\bin\$(Configuration)\</xrBinDir>
+    <xrBinPlugDir>..\_build\bin_plugs\$(Configuration)\</xrBinPlugDir>
+    <xrLibDir>..\_build\lib\$(Configuration)\</xrLibDir>
     <xrIntDir>.\..\_build\intermediate\$(Configuration)\</xrIntDir>
     <xrSdkDir>.\..\sdk\</xrSdkDir>
     <xrGameDir>.\..\_build\_game\</xrGameDir>
@@ -39,15 +39,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="xrBinRootDir">
-      <Value>$(xrBinRootDir)</Value>
+      <Value>..\_build\bin\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinPlugRootDir">
-      <Value>$(xrBinPlugRootDir)</Value>
+      <Value>..\_build\bin_plugs\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrLibRootDir">
-      <Value>$(xrLibRootDir)</Value>
+      <Value>..\_build\lib\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinDir">
