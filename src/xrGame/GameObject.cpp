@@ -42,8 +42,8 @@ extern MagicBox3 MagicMinBox( int iQuantity, const Fvector* akPoint );
 #pragma warning( pop )
 
 #ifdef DEBUG
-#include "debug_renderer.h"
 #include "PHDebug.h"
+#include "debug_renderer.h"
 #endif
 
 extern ENGINE_API bool g_dedicated_server;
@@ -189,7 +189,7 @@ void CGameObject::OnEvent( NET_Packet& P, u16 type ) {
             HDS.PACKET_TYPE = type;
             HDS.Read_Packet_Cont( P );
             //			Msg("Hit received: %d[%d,%d]", HDS.whoID,
-            //HDS.weaponID, HDS.BulletID);
+            // HDS.weaponID, HDS.BulletID);
             CObject* Hitter = Level().Objects.net_Find( HDS.whoID );
             CObject* Weapon = Level().Objects.net_Find( HDS.weaponID );
             HDS.who = Hitter;
@@ -383,13 +383,13 @@ BOOL CGameObject::net_Spawn( CSE_Abstract* DC ) {
     // load custom user data from server
     if ( !E->client_data.empty() ) {
         //		Msg				("client data is present
-        //for object [%d][%s], load is processed",ID(),*cName());
+        // for object [%d][%s], load is processed",ID(),*cName());
         IReader ireader =
             IReader( &*E->client_data.begin(), E->client_data.size() );
         net_Load( ireader );
     } else {
         //		Msg				("no client data for
-        //object [%d][%s], load is skipped",ID(),*cName());
+        // object [%d][%s], load is skipped",ID(),*cName());
     }
 
     // if we have a parent
@@ -627,7 +627,7 @@ void CGameObject::spawn_supplies() {
 
 void CGameObject::setup_parent_ai_locations( bool assign_position ) {
     //	CGameObject				*l_tpGameObject	=
-    //static_cast<CGameObject*>(H_Root());
+    // static_cast<CGameObject*>(H_Root());
     VERIFY( H_Parent() );
     CGameObject* l_tpGameObject = H_Parent()->cast_game_object();
     VERIFY( l_tpGameObject );
@@ -658,7 +658,8 @@ void CGameObject::setup_parent_ai_locations( bool assign_position ) {
     else
         validate_ai_locations( false );
     //	VERIFY2
-    //(l_tpGameObject->UsedAI_Locations(),*l_tpGameObject->cNameSect()); 	VERIFY2
+    //(l_tpGameObject->UsedAI_Locations(),*l_tpGameObject->cNameSect());
+    //VERIFY2
     //(ai().level_graph().valid_vertex_id(l_tpGameObject->ai_location().level_vertex_id()),*cNameSect());
     //	ai_location().level_vertex
     //(l_tpGameObject->ai_location().level_vertex_id());

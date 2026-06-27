@@ -19,7 +19,7 @@ public:
                               LPCSTR tex_highlighted );
 
     //.			void 	SetTextColor				(u32
-    //color);
+    // color);
     virtual void SetTextureOffset( float x, float y );
     virtual void SetWidth( float width );
     virtual void SetHeight( float height );

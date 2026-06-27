@@ -1834,9 +1834,9 @@ void CWeaponMagazined::SetQueueSize( int size ) {
 float CWeaponMagazined::GetWeaponDeterioration() {
     // modified by Peacemaker [17.10.08]
     //	if (!m_bHasDifferentFireModes || m_iPrefferedFireMode == -1 ||
-    //u32(GetCurrentFireMode()) <= u32(m_iPrefferedFireMode)) 		return
-    //inherited::GetWeaponDeterioration(); 	return
-    //m_iShotNum*conditionDecreasePerShot;
+    // u32(GetCurrentFireMode()) <= u32(m_iPrefferedFireMode)) 		return
+    // inherited::GetWeaponDeterioration(); 	return
+    // m_iShotNum*conditionDecreasePerShot;
     return ( ( m_iShotNum == 1 ) ? conditionDecreasePerShot
                                  : conditionDecreasePerQueueShot ) *
            f_weapon_deterioration;

@@ -38,7 +38,7 @@ dx10ConstantBuffer::dx10ConstantBuffer(
         VERIFY( pType );
         pType->GetDesc( &m_MembersList[ i ] );
         //	Buffers with the same layout can contain totally different
-        //members
+        // members
         CHK_DX( pVar->GetDesc( &var_desc ) );
         m_MembersNames[ i ] = var_desc.Name;
     }

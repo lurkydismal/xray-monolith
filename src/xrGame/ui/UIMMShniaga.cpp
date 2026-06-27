@@ -130,7 +130,7 @@ void CUIMMShniaga::CreateList( xr_vector< CUITextWnd* >& lst,
         st->SetTextST( xml_doc.ReadAttrib( "btn", i, "caption" ) );
 
         //		float font_height			=
-        //st->GetFont()->GetHeight();
+        // st->GetFont()->GetHeight();
         //		UI().ClientToScreenScaledHeight(font_height);
 
         //.		st->SetTextOffset			(0,

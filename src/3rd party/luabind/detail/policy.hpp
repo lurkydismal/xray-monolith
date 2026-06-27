@@ -705,7 +705,7 @@ struct pointer_converter< Direction::cpp_to_lua > {
         lua_setmetatable( L, -2 );
 
         //			make_instance(L, ptr, (pointer_holder<T,
-        //T*>*)0);
+        // T*>*)0);
     }
 };
 

@@ -105,7 +105,8 @@ bool square_equation( float a,
 //	float taget_speed = x/time;
 //
 //		//clamp(taget_speed,-max_possible_shift_speed,
-//max_possible_shift_speed ); 	save_min( taget_speed, max_possible_shift_speed_up
+// max_possible_shift_speed ); 	save_min( taget_speed,
+// max_possible_shift_speed_up
 //); 	save_max( taget_speed, -max_possible_shift_speed_down );
 //
 //	float change_speed = taget_speed - speed;
@@ -118,7 +119,7 @@ bool square_equation( float a,
 //
 //	//clamp(taget_speed,-max_possible_shift_speed, max_possible_shift_speed
 //); 	save_min( taget_speed, max_possible_shift_speed_up ); 	save_max(
-//taget_speed, -max_possible_shift_speed_down ); 	x = taget_speed * time;
+// taget_speed, -max_possible_shift_speed_down ); 	x = taget_speed * time;
 //
 //	taget = x + current;
 //

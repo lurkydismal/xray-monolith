@@ -16,8 +16,8 @@
 #include "xrserver_objects_alife_monsters.h"
 
 #ifdef DEBUG
-#include "level.h"
 #include "debug_renderer.h"
+#include "level.h"
 #endif
 
 CScriptZone::CScriptZone() {}

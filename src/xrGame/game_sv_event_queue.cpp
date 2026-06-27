@@ -34,7 +34,7 @@ GameEvent* GameEventQueue::Create() {
         //---------------------------------------------
 #ifdef _DEBUG
         //		Msg ("* GameEventQueue::Create - ready %d, unused %d",
-        //ready.size(), unused.size());
+        // ready.size(), unused.size());
 #endif
         LastTimeCreate = GetTickCount();
         //---------------------------------------------
@@ -75,7 +75,7 @@ GameEvent* GameEventQueue::Create( NET_Packet& P,
         //---------------------------------------------
 #ifdef _DEBUG
         //		Msg ("* GameEventQueue::Create - ready %d, unused %d",
-        //ready.size(), unused.size());
+        // ready.size(), unused.size());
 #endif
         LastTimeCreate = GetTickCount();
         //---------------------------------------------
@@ -107,7 +107,7 @@ GameEvent* GameEventQueue::Retreive() {
             unused.pop_back();
 #ifdef _DEBUG
             //			Msg ("GameEventQueue::Retreive - ready %d,
-            //unused %d", ready.size(), unused.size());
+            // unused %d", ready.size(), unused.size());
 #endif
         }
     }
@@ -126,7 +126,7 @@ void GameEventQueue::Release() {
         xr_delete( ready.front() );
 #ifdef _DEBUG
         //		Msg ("GameEventQueue::Release - ready %d, unused %d",
-        //ready.size(), unused.size());
+        // ready.size(), unused.size());
 #endif
     } else
         unused.push_back( ready.front() );
@@ -170,7 +170,7 @@ u32 GameEventQueue::EraseEvents( event_predicate to_del ) {
             xr_delete( *need_to_erase );
 #ifdef _DEBUG
             //			Msg ("GameEventQueue::EraseEvents - ready %d,
-            //unused %d", ready.size(), unused.size());
+            // unused %d", ready.size(), unused.size());
 #endif
         } else {
             unused.push_back( *need_to_erase );

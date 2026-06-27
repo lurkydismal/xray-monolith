@@ -490,7 +490,7 @@ void CUILevelMap::UpdateSpots() {
     DetachAll();
 
     //.	if(
-    //fsimilar(MapWnd()->GlobalMap()->GetCurrentZoom(),MapWnd()->GlobalMap()->GetMinZoom(),EPS_L
+    // fsimilar(MapWnd()->GlobalMap()->GetCurrentZoom(),MapWnd()->GlobalMap()->GetMinZoom(),EPS_L
     //) ) return;
 
     Frect _r;

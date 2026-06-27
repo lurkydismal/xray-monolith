@@ -31,12 +31,12 @@ extern "C" {
 #endif
 
 #if defined( HAVE_OPENEXR )
-#include <ImfIO.h>
 #include <ImathBox.h>
+#include <ImfArray.h>
 #include <ImfChannelList.h>
+#include <ImfIO.h>
 #include <ImfInputFile.h>
 #include <ImfOutputFile.h>
-#include <ImfArray.h>
 #endif
 
 using namespace nv;

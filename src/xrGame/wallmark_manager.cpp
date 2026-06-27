@@ -85,7 +85,7 @@ wallmarks_vector,CObject* ignore_obj)
 void CWalmarkManager::PlaceWallmarks( const Fvector& start_pos ) {
     m_pos = start_pos;
     //.	LPCSTR				sect				=
-    //pSettings->r_string(m_owner->cNameSect(), "wallmark_section");
+    // pSettings->r_string(m_owner->cNameSect(), "wallmark_section");
     Load( "explosion_marks" );
 
     //.	Device.seqParallel.push_back
@@ -117,7 +117,7 @@ void CWalmarkManager::StartWorkflow() {
     CDB::RESULT* R_end = XRC.r_end();
     //.	Triangle		ntri;
     //.	float			ndist					=
-    //phInfinity; .	Fvector			npoint;
+    // phInfinity; .	Fvector			npoint;
     u32 wm_count = 0;
 
     u32 _ray_test = 0;
@@ -150,7 +150,7 @@ void CWalmarkManager::StartWorkflow() {
         //(T_array+Res->id,cast_fp(m_pos),tri);
 
         //.		float dist					=
-        //DistToTri(&tri,cast_fp(m_pos),cast_fp(pdir),cast_fp(end_point),c,V_array);
+        // DistToTri(&tri,cast_fp(m_pos),cast_fp(pdir),cast_fp(end_point),c,V_array);
         Fvector _tri[ 3 ];
 
         CDB::TRI* _t = T_array + Res->id;

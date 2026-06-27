@@ -271,7 +271,7 @@ void CScriptGameObject::set_const_force( const Fvector& dir,
     }
     // #ifdef DEBUG
     //	Msg( "const force added: force: %f,  time: %d ,dir(%f,%f,%f)", value,
-    //time_interval, dir.x, dir.y, dir.z ); #endif
+    // time_interval, dir.x, dir.y, dir.z ); #endif
     Fvector force;
     force.set( dir );
     force.mul( value );

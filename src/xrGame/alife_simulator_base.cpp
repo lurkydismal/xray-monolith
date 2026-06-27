@@ -254,7 +254,7 @@ void CALifeSimulatorBase::create( CSE_ALifeObject* object ) {
 
 #ifdef DEBUG
     //	Msg							("Creating
-    //object from client spawn
+    // object from client spawn
     //[%d][%d][%s][%s]",dynamic_object->ID,dynamic_object->ID_Parent,dynamic_object->name(),dynamic_object->name_replace());
 #endif
 

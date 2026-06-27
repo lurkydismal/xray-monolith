@@ -173,7 +173,7 @@ void game_cl_ArtefactHunt::TranslateGameMessage( u32 msg, NET_Packet& P ) {
     char Color_Main[] = "%c[255,192,192,192]";
     char Color_Artefact[] = "%c[255,255,255,0]";
     //	LPSTR	TeamsNames[3]		= {"Zero Team", "Team Green", "Team
-    //Blue"};
+    // Blue"};
 
     switch ( msg ) {
             //-------------------UI MESSAGES
@@ -233,7 +233,7 @@ void game_cl_ArtefactHunt::TranslateGameMessage( u32 msg, NET_Packet& P ) {
                 CurrentGameUI()->CommonMessageOut( Text );
 
             //			pMessageSounds[0].play_at_pos(NULL,
-            //Fvector().set(0,0,0), sm_2D, 0);
+            // Fvector().set(0,0,0), sm_2D, 0);
             PlaySndMessage( ID_AF_LOST );
         } break;
         case GAME_EVENT_ARTEFACT_ONBASE: // ahunt
@@ -466,8 +466,8 @@ void game_cl_ArtefactHunt::shedule_Update( u32 dt ) {
                 s16 lt = local_player->team;
                 if ( lt >= 0 ) {
                     //					if(m_game_ui)
-                    //m_game_ui->SetScoreCaption	(teams[0].score,
-                    //teams[1].score);
+                    // m_game_ui->SetScoreCaption	(teams[0].score,
+                    // teams[1].score);
                 };
             };
             SetScore();

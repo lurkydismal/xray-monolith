@@ -25,8 +25,9 @@ void __stdcall xrMemCopy_MMX( LPVOID dest, const void* src, u32 n ) {
 // bypasses the cache and writes straight to main memory.This code also
 // uses the software prefetch instruction to pre-read the data.
 // USE 64 *1024 FOR THIS VALUE IF YOU ’RE ALWAYS FILLING A "CLEAN CACHE"
-#define BLOCK_PREFETCH_COPY infinity // no limit for movq/movntq w/block
-                                     // prefetch
+#define BLOCK_PREFETCH_COPY \
+    infinity           // no limit for movq/movntq w/block
+                       // prefetch
 #define CACHEBLOCK 80h // #of 64-byte blocks (cache lines)for block prefetch
 // For the largest size blocks,a special technique called Block Prefetch
 // can be used to accelerate the read operations.Block Prefetch reads

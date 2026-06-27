@@ -391,7 +391,7 @@ BYTE CxImage::GetNearestIndex( RGBQUAD c ) {
             ( iDst[ l + 1 ] - c.rgbGreen ) * ( iDst[ l + 1 ] - c.rgbGreen ) +
             ( iDst[ l + 2 ] - c.rgbRed ) * ( iDst[ l + 2 ] - c.rgbRed );
         //		k =
-        //abs(iDst[l]-c.rgbBlue)+abs(iDst[l+1]-c.rgbGreen)+abs(iDst[l+2]-c.rgbRed);
+        // abs(iDst[l]-c.rgbBlue)+abs(iDst[l+1]-c.rgbGreen)+abs(iDst[l+2]-c.rgbRed);
         if ( k == 0 ) {
             j = i;
             break;

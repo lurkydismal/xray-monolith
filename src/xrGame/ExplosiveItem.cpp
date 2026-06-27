@@ -36,8 +36,10 @@ void CExplosiveItem::net_Destroy() {
 }
 
 // void CExplosiveItem::Hit(float P, Fvector &dir,	CObject* who, s16
-// element, 						Fvector position_in_object_space, float impulse, 						ALife::EHitType
-//hit_type)
+// element, 						Fvector
+// position_in_object_space, float impulse,
+// ALife::EHitType
+// hit_type)
 void CExplosiveItem::Hit( SHit* pHDS ) {
     //	inherited::Hit(P,dir,who,element,position_in_object_space,impulse,hit_type);
     if ( CDelayedActionFuse::isActive() )

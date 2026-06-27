@@ -154,7 +154,7 @@ bool SHeliMovementState::AlreadyOnPoint() {
     }
     //	if(res)
     //		Msg("--------OnPoint id=[%d] dist=[%f]",
-    //currPatrolVertex->vertex_id(), dist);
+    // currPatrolVertex->vertex_id(), dist);
 
     return res;
 }

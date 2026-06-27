@@ -254,8 +254,8 @@ bool CInventoryOwner::OfferTalk( CInventoryOwner* talk_partner ) {
     R_ASSERT( pPartnerEntityAlive );
 
     //	ALife::ERelationType relation =
-    //RELATION_REGISTRY().GetRelationType(this, talk_partner); 	if(relation ==
-    //ALife::eRelationTypeEnemy) return false;
+    // RELATION_REGISTRY().GetRelationType(this, talk_partner);
+    // if(relation == ALife::eRelationTypeEnemy) return false;
 
     if ( !is_alive() || !pPartnerEntityAlive->g_Alive() )
         return false;

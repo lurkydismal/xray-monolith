@@ -13,7 +13,7 @@ bool xrServer::Process_event_reject( NET_Packet& P,
     CSE_Abstract* e_entity = game->get_entity_from_eid( id_entity );
 
     //	R_ASSERT2( e_entity, make_string( "entity not found. parent_id = [%d],
-    //entity_id = [%d], frame = [%d]", id_parent, id_entity, Device.dwFrame
+    // entity_id = [%d], frame = [%d]", id_parent, id_entity, Device.dwFrame
     //).c_str() );
     VERIFY2( e_entity, make_string( "entity not found. parent_id = [%d], "
                                     "entity_id = [%d], frame = [%d]",
@@ -27,7 +27,7 @@ bool xrServer::Process_event_reject( NET_Packet& P,
     }
 
     //	R_ASSERT2( e_parent, make_string( "parent not found. parent_id = [%d],
-    //entity_id = [%d], frame = [%d]", id_parent, id_entity, Device.dwFrame
+    // entity_id = [%d], frame = [%d]", id_parent, id_entity, Device.dwFrame
     //).c_str() );
     VERIFY2( e_parent, make_string( "parent not found. parent_id = [%d], "
                                     "entity_id = [%d], frame = [%d]",
@@ -73,7 +73,7 @@ bool xrServer::Process_event_reject( NET_Packet& P,
 
     // Rebuild parentness
     //.	Msg("---ID_Parent [%d], id_parent [%d]", e_entity->ID_Parent,
-    //id_parent);
+    // id_parent);
 
     // R_ASSERT(e_entity->ID_Parent == id_parent);
     if ( e_entity->ID_Parent != id_parent ) {

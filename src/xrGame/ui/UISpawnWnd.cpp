@@ -69,7 +69,7 @@ void CUISpawnWnd::Init() {
     CUIXmlInit::InitStatic( xml_doc, "team_selector:image_frames_tr", 0,
                             m_pFrames[ 1 ] );
     //	CUIXmlInit::InitStatic(xml_doc,"team_selector:image_frames_bottom",
-    //0,	m_pFrames[2]);
+    // 0,	m_pFrames[2]);
     CUIXmlInit::InitScrollView( xml_doc, "team_selector:text_desc", 0,
                                 m_pTextDesc );
 

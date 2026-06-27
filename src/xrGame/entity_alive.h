@@ -76,10 +76,10 @@ public:
     void set_lock_corpse( bool b_l_corpse );
     bool is_locked_corpse();
     //	virtual float			GetfHealth () const; 	virtual float
-    //SetfHealth				(float value);
+    // SetfHealth				(float value);
 
     //	virtual float			g_Health ()	const; 	virtual float
-    //g_MaxHealth				()	const;
+    // g_MaxHealth				()	const;
 
     virtual float g_Radiation() const;
     virtual float SetfRadiation( float value );

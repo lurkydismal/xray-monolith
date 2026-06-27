@@ -45,7 +45,8 @@ void player_account::load_account() {
 
     // gamespy_profile::all_awards_t const & tmp_awards =
     // tmp_store->get_awards(); for
-    // (gamespy_profile::all_awards_t::const_iterator i = tmp_awards.begin(), 	ie
+    // (gamespy_profile::all_awards_t::const_iterator i = tmp_awards.begin(),
+    // ie
     //= tmp_awards.end(); i != ie; ++i)
     //{
     //	m_awards.insert(*i);

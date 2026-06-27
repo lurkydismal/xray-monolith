@@ -271,7 +271,7 @@ static void* lua_alloc_dl( void* ud, void* ptr, size_t osize, size_t nsize ) {
 static const u32 s_arena_size = 8 * 1024 * 1024;
 static char s_fake_array[ s_arena_size ];
 //	doug_lea_allocator	g_render_lua_allocator( s_fake_array,
-//s_arena_size, "render:lua" );
+// s_arena_size, "render:lua" );
 #else  // #ifdef USE_ARENA_ALLOCATOR
 //	doug_lea_allocator	g_render_lua_allocator( 0, 0, "render:lua" );
 #endif // #ifdef USE_ARENA_ALLOCATOR
@@ -496,7 +496,7 @@ Shader* CResourceManager::_lua_Create( LPCSTR d_shader, LPCSTR s_textures ) {
         // Analyze possibility to detail this shader
         C.iElement = 0;
         //.		C.bDetail			=
-        //dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
+        // dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
         // C.bDetail			=
         // dxRenderDeviceRender::Instance().Resources->m_textures_description.GetDetailTexture(C.L_textures[0],C.detail_texture,C.detail_scaler);
         C.bDetail =
@@ -513,7 +513,7 @@ Shader* CResourceManager::_lua_Create( LPCSTR d_shader, LPCSTR s_textures ) {
                                         LUA_TFUNCTION ) ) {
             C.iElement = 0;
             //.			C.bDetail			=
-            //dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
+            // dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
             // C.bDetail			=
             // dxRenderDeviceRender::Instance().Resources->m_textures_description.GetDetailTexture(C.L_textures[0],C.detail_texture,C.detail_scaler);
             C.bDetail =
@@ -529,7 +529,7 @@ Shader* CResourceManager::_lua_Create( LPCSTR d_shader, LPCSTR s_textures ) {
                                     LUA_TFUNCTION ) ) {
         C.iElement = 1;
         //.		C.bDetail			=
-        //dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
+        // dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
         // C.bDetail			=
         // dxRenderDeviceRender::Instance().Resources->m_textures_description.GetDetailTexture(C.L_textures[0],C.detail_texture,C.detail_scaler);
         C.bDetail =

@@ -338,7 +338,7 @@ void CEffect_Rain::UpdateItems() {
 
         // последняя дельта ??
         //.		float xdt		=
-        //float(one.dwTime_Hit-Device.dwTimeGlobal)/1000.f; .		float dt
+        // float(one.dwTime_Hit-Device.dwTimeGlobal)/1000.f; .		float dt
         //= Device.fTimeDelta;//xdt<Device.fTimeDelta?xdt:Device.fTimeDelta;
         float dt = Device.fTimeDelta;
         one.P.mad( one.D, one.fSpeed * dt );

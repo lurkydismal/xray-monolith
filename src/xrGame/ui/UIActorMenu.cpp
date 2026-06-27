@@ -197,8 +197,8 @@ void CUIActorMenu::Update() {
             break;
         case mmInventory: {
             //			m_clock_value->TextItemControl()->SetText(
-            //InventoryUtilities::GetGameTimeAsString(
-            //InventoryUtilities::etpTimeToMinutes ).c_str() );
+            // InventoryUtilities::GetGameTimeAsString(
+            // InventoryUtilities::etpTimeToMinutes ).c_str() );
             CurrentGameUI()->UIMainIngameWnd->UpdateZoneMap();
             break;
         }

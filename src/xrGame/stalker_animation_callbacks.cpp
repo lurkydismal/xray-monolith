@@ -74,7 +74,8 @@ static void _BCL callback_rotation_blend( CBoneInstance* const bone ) {
     VERIFY( parameter->m_blend );
     //	VERIFY2							(
     //*parameter->m_blend, make_string( "%d %s[%s]", Device.dwTimeGlobal,
-    //parameter->m_object->cName().c_str(), parameter->m_object->g_Alive() ? "+"
+    // parameter->m_object->cName().c_str(), parameter->m_object->g_Alive() ?
+    // "+"
     //: "-") );
 
     float multiplier = 1.f;

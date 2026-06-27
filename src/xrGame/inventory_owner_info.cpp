@@ -25,9 +25,9 @@ void CInventoryOwner::OnEvent( NET_Packet& P, u16 type ) {
             shared_str info_id;
             u8 add_info;
 
-            P.r_u16( id ); // отправитель
+            P.r_u16( id );          // отправитель
             P.r_stringZ( info_id ); // номер полученной информации
-            P.r_u8( add_info ); // добавление или убирание информации
+            P.r_u8( add_info );     // добавление или убирание информации
 
             if ( add_info )
                 OnReceiveInfo( info_id );
@@ -98,7 +98,7 @@ void CInventoryOwner::TransferInfo( shared_str info_id, bool add_info ) const {
     CGameObject::u_EventGen( P, GE_INFO_TRANSFER, pThisObject->ID() );
     P.w_u16( pThisObject->ID() ); // отправитель
     P.w_stringZ( info_id );       // сообщение
-    P.w_u8( add_info ? 1 : 0 ); // добавить/удалить информацию
+    P.w_u8( add_info ? 1 : 0 );   // добавить/удалить информацию
     CGameObject::u_EventSend( P );
 
     CInfoPortion info_portion;

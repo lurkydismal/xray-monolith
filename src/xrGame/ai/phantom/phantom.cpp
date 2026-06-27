@@ -345,10 +345,9 @@ void CPhantom::UpdatePosition( const Fvector& tgt_pos ) {
 void CPhantom::PsyHit( const CObject* object, float value ) {
     NET_Packet P;
     SHit HS;
-    HS.GenHeader(
-        GE_HIT,
-        object->ID() );     //				//	u_EventGen
-                            //(P,GE_HIT, object->ID());
+    HS.GenHeader( GE_HIT,
+                  object->ID() ); //				//
+                                  //u_EventGen (P,GE_HIT, object->ID());
     HS.whoID = ( ID() );    // own			//	P.w_u16
                             // (object->ID());
     HS.weaponID = ( ID() ); // own			//	P.w_u16

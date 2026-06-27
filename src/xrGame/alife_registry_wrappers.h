@@ -66,7 +66,7 @@ class CGameTaskWrapper : public CALifeRegistryWrapperObject<
                              CALifeRegistryWrapper< CGameTaskRegistry > > {};
 
 //. class CFogOfWarWrapper :				public
-//CALifeRegistryWrapperObject<CALifeRegistryWrapper<CFogOfWarRegistry> > {};
+// CALifeRegistryWrapperObject<CALifeRegistryWrapper<CFogOfWarRegistry> > {};
 class CActorStatisticsWrapper
     : public CALifeRegistryWrapperObject<
           CALifeRegistryWrapper< CActorStatisticRegistry > > {};

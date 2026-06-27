@@ -95,11 +95,11 @@ void target_selector::add_actions() {
     action = xr_new< target_idle >( &object(), "idle",
                                     eWorldPropertyLoopholeIdle, 0 );
     //	add_condition			(action,
-    //eWorldPropertyLoopholeCanFireAtEnemy,		true); 	add_condition
+    // eWorldPropertyLoopholeCanFireAtEnemy,		true); 	add_condition
     //(action, eWorldPropertyLoopholeCanFire,				true);
     //	add_condition			(action, eWorldPropertyLookedOut,
-    //true); 	add_condition			(action,
-    //eWorldPropertyLoopholeLastHitWasLongAgo,	true);
+    // true); 	add_condition			(action,
+    // eWorldPropertyLoopholeLastHitWasLongAgo,	true);
     add_condition( action, eWorldPropertyLoopholeTooMuchTimeFiring, true );
     add_effect( action, eWorldPropertyLoopholeTooMuchTimeFiring, false );
     add_operator( eWorldOperatorLoopholeTargetIdle, action );

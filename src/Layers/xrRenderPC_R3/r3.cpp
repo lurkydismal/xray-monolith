@@ -142,8 +142,8 @@ static class cl_meatchunks_stuff : public R_constant_setup {
 } binder_meatchunks_stuff;
 
 extern ENGINE_API BOOL r2_sun_static;
-extern ENGINE_API BOOL
-    r2_advanced_pp; //	advanced post process and effects
+extern ENGINE_API BOOL r2_advanced_pp; //	advanced post process and
+                                       //effects
 //////////////////////////////////////////////////////////////////////////
 // Just two static storage
 void CRender::create() {

@@ -629,7 +629,7 @@ void game_sv_ArtefactHunt::OnObjectLeaveTeamBase( u16 id, u16 zone_team ) {
         return;
 
     //	CSE_Abstract*		e_zone	= m_server->ID_to_entity(id_zone);
-    //VERIFY(e_zone	);
+    // VERIFY(e_zone	);
 
     CSE_ALifeCreatureActor* eActor =
         smart_cast< CSE_ALifeCreatureActor* >( e_who );

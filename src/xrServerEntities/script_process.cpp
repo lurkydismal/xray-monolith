@@ -55,7 +55,7 @@ void CScriptProcess::run_scripts() {
 // Oles:
 //		changed to process one script per-frame
 //		changed log-output to stack-based buffer (avoid persistent 4K
-//storage)
+// storage)
 void CScriptProcess::update() {
     PROF_EVENT( "CScriptProcess::update" );
 #ifdef DBG_DISABLE_SCRIPTS

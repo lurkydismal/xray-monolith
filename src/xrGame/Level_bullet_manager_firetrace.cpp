@@ -1,6 +1,7 @@
 // Level_Bullet_Manager.cpp:	для обеспечения полета пули по траектории
 //								все пули и
-//осколки передаются сюда 								(для просчета столкновений и их визуализации)
+// осколки передаются сюда
+// (для просчета столкновений и их визуализации)
 //////////////////////////////////////////////////////////////////////
 
 #include "../Include/xrRender/Kinematics.h"
@@ -266,7 +267,7 @@ void CBulletManager::StaticObjectHit( CBulletManager::_event& E ) {
     FireShotmark( &E.bullet, E.bullet.dir, E.point, E.R, E.tgt_material,
                   E.normal );
     //	ObjectHit	(&E.bullet,					E.point,
-    //E.R, E.tgt_material, hit_normal);
+    // E.R, E.tgt_material, hit_normal);
 }
 
 static bool g_clear = false;
@@ -366,7 +367,7 @@ void CBulletManager::DynamicObjectHit( CBulletManager::_event& E ) {
         Hit.Write_Packet( np );
 
         //		Msg("Hit sended: %d[%d,%d]", Hit.whoID, Hit.weaponID,
-        //Hit.BulletID);
+        // Hit.BulletID);
         CGameObject::u_EventSend( np );
     }
 }
@@ -429,8 +430,8 @@ bool CBulletManager::ObjectHit( SBullet_Hit* hit_res,
         if ( DOT( hit_normal, bullet->dir ) < 0 ) {
             if ( bullet->density_mode ) {
                 //				Log("WARNING: Material in
-                //material found while bullet tracing. Incorrect behaviour of
-                //shooting is possible.");
+                // material found while bullet tracing. Incorrect behaviour of
+                // shooting is possible.");
             }
             bullet->density_mode = true;
             SGameMtl* mtl = GMLib.GetMaterialByIdx( target_material );
@@ -452,7 +453,7 @@ bool CBulletManager::ObjectHit( SBullet_Hit* hit_res,
     hit_res->power = bullet->hit_param.power * speed_factor;
 
     //(Если = 0, то пуля либо рикошетит(если контакт идёт по касательной), либо
-    //застряёт в текущем объекте, если больше 0, то пуля прошивает объект)
+    // застряёт в текущем объекте, если больше 0, то пуля прошивает объект)
 
     SGameMtl* mtl = GMLib.GetMaterialByIdx( target_material );
     float mtl_ap = mtl->fShootFactor;

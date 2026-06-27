@@ -6,7 +6,7 @@ protected:
     virtual ~IPHStaticGeomShell() = 0 {}
 
     //	virtual void
-    //set_ObjectContactCallback	(ObjectContactCallbackFun* callback);
+    // set_ObjectContactCallback	(ObjectContactCallbackFun* callback);
 };
 
 class IPhysicsShellHolder;

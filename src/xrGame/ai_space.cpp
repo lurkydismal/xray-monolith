@@ -185,7 +185,7 @@ void CAI_Space::validate( const u32 level_id ) const {
         game_graph().begin_spawn( i, I, E );
         //		Msg
         //("vertex [%d] has %d death
-        //points",i,game_graph().vertex(i)->death_point_count());
+        // points",i,game_graph().vertex(i)->death_point_count());
         for ( ; I != E; ++I ) {
             VERIFY( cross_table()
                         .vertex( ( *I ).level_vertex_id() )
@@ -194,7 +194,7 @@ void CAI_Space::validate( const u32 level_id ) const {
     }
 
     //	Msg						("* Graph corresponds to
-    //the cross table");
+    // the cross table");
 }
 #endif
 

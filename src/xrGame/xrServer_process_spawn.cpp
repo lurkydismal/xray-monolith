@@ -54,7 +54,7 @@ CSE_Abstract* xrServer::Process_spawn( NET_Packet& P,
             R_ASSERT( !tpExistedEntity );
             //			VERIFY3
             //(smart_cast<CSE_ALifeItemBolt*>(E) ||
-            //smart_cast<CSE_ALifeItemGrenade*>(E),*E->s_name,E->name_replace());
+            // smart_cast<CSE_ALifeItemGrenade*>(E),*E->s_name,E->name_replace());
             F_entity_Destroy( E );
             return NULL;
         }

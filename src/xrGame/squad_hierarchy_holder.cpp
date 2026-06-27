@@ -3,7 +3,7 @@
 //	Created 	: 12.11.2001
 //  Modified 	: 03.09.2004
 //	Author		: Dmitriy Iassenev, Oles Shishkovtsov, Aleksandr
-//Maksimchuk 	Description : Squad hierarchy holder
+// Maksimchuk 	Description : Squad hierarchy holder
 ////////////////////////////////////////////////////////////////////////////
 
 #include "squad_hierarchy_holder.h"

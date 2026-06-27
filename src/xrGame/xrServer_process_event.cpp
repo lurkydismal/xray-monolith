@@ -152,7 +152,7 @@ void xrServer::Process_event( NET_Packet& P, ClientID sender ) {
 
             //		Msg
             //("[%d][%s] killed [%d][%s]",id_src,id_src==u16(-1) ? "UNKNOWN" :
-            //game->get_entity_from_eid(id_src)->name_replace(),id_dest,e_dest->name_replace());
+            // game->get_entity_from_eid(id_src)->name_replace(),id_dest,e_dest->name_replace());
 
             break;
         }
@@ -201,7 +201,8 @@ void xrServer::Process_event( NET_Packet& P, ClientID sender ) {
                 return;
             }
             //			R_ASSERT2			(e_dest &&
-            //e_src, "Killer or/and being killed are offline or not exist at all
+            // e_src, "Killer or/and being killed are offline or not exist at
+            // all
             //:(");
 #ifndef MASTER_GOLD
             if ( game->Type() != eGameIDSingle )

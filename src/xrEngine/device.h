@@ -141,7 +141,7 @@ public:
         u8 frameDelay; // Ia eaeii eaa?a n iiiaioa i?ioeiai ?aiaa?a ai aoi?ie
                        // au?ii?o iu ia?i?i iiaue
                        //(ia ii?ao auou iaiuoa 2 - ea?aue aoi?ie eaa?, ?ai
-                       //aieuoa oai aieaa ieceee FPS ai aoi?ii au?ii?oa)
+                       // aieuoa oai aieaa ieceee FPS ai aoi?ii au?ii?oa)
 
     public:
         bool isCamReady; // Oeaa aioiaiinoe eaia?u (FOV, iiceoey, e o.i) e

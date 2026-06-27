@@ -18,7 +18,7 @@ void CBlender_light_occq::Compile( CBlender_Compile& C ) {
             C.r_Pass( "dumb", "dumb", false, TRUE, FALSE, FALSE );
             C.r_End();
             //	Color write as well as culling and stencil are set up manually
-            //in code.
+            // in code.
             break;
         case 1: // NV40 optimization :)
             C.r_Pass( "stub_notransform_t", "dumb", false, FALSE, FALSE,

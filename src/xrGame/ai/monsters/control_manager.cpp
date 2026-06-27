@@ -76,7 +76,8 @@ CControl_Manager::~CControl_Manager() {
 
 void CControl_Manager::init_external() {
     // for (CONTROLLERS_MAP_IT it = m_control_elems.begin(); it !=
-    // m_control_elems.end(); ++it) 	it->second->init_external(this, m_object);
+    // m_control_elems.end(); ++it) 	it->second->init_external(this,
+    // m_object);
 }
 
 void CControl_Manager::load( LPCSTR section ) {

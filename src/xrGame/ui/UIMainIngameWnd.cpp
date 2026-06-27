@@ -36,8 +36,8 @@
 #include "stdafx.h"
 
 #ifdef DEBUG
-#include "../attachable_item.h"
 #include "../../xrEngine/xr_input.h"
+#include "../attachable_item.h"
 #endif
 
 #include "../game_news.h"
@@ -100,7 +100,7 @@ void CUIMainIngameWnd::Init() {
     Enable( false );
 
     //	AttachChild					(&UIStaticHealth);
-    //xml_init.InitStatic			(uiXml, "static_health", 0,
+    // xml_init.InitStatic			(uiXml, "static_health", 0,
     //&UIStaticHealth); 	AttachChild
     //(&UIStaticArmor);	xml_init.InitStatic			(uiXml,
     //"static_armor", 0, &UIStaticArmor); 	AttachChild

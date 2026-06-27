@@ -91,7 +91,7 @@ void dx103DFluidVolume::Render(
 {
     //	Render debug box
     //	Do it BEFORE update since update resets shaders and other pipeline
-    //settings
+    // settings
 
     //	FluidManager.RenderFluid( m_FluidData );
 

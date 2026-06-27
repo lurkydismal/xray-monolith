@@ -236,7 +236,7 @@ void CRender::LoadBuffers( CStreamReader* base_fs ) {
             fs->r( pData, vCount * vSize );
             //			CopyMemory
             //(pData,fs->pointer(),vCount*vSize);	//.???? copy while skip
-            //T&B
+            // T&B
             VB[ i ]->Unlock();
 
             //			fs->advance			(vCount*vSize);

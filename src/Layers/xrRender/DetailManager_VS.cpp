@@ -4,11 +4,11 @@
 #include "detailmanager.h"
 
 #ifdef _EDITOR
-#include "igame_persistent.h"
 #include "environment.h"
+#include "igame_persistent.h"
 #else
-#include "../../xrEngine/igame_persistent.h"
 #include "../../xrEngine/environment.h"
+#include "../../xrEngine/igame_persistent.h"
 #endif
 
 #include "../xrRenderDX10/dx10BufferUtils.h"
@@ -176,7 +176,7 @@ void CDetailManager::hw_Render( light* L ) {
     // Render-prepare
     //	Update timer
     //	Can't use RDEVICE.fTimeDelta since it is smoothed! Don't know why, but
-    //smoothed value looks more choppy!
+    // smoothed value looks more choppy!
     float fDelta = RDEVICE.fTimeGlobal - m_global_time_old;
     if ( ( fDelta < 0 ) || ( fDelta > 1 ) )
         fDelta = 0.03;

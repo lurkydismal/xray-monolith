@@ -577,7 +577,7 @@ bool CxImage::Load( const TCHAR* filename, DWORD imagetype )
 //	fclose(hFile);
 //
 //	if (!bOK && imagetype > 0) strcpy(info.szLastError,szError); //restore
-//the first error
+// the first error
 //
 //	return bOK;
 // }

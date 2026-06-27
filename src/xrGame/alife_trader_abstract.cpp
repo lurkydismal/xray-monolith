@@ -195,7 +195,7 @@ void add_online_impl( CSE_ALifeDynamicObject* object,
 #ifdef DEBUG
         //		if (psAI_Flags.test(aiALife))
         //			Msg					("[LSS]
-        //Spawning item
+        // Spawning item
         //[%s][%s][%d]",l_tpALifeInventoryItem->base()->name_replace(),*l_tpALifeInventoryItem->base()->s_name,l_tpALifeDynamicObject->ID);
         Msg( "[LSS][%d] Going online [%d][%s][%d] with parent [%d][%s] on '%s'",
              Device.dwFrame, Device.dwTimeGlobal,
@@ -206,7 +206,7 @@ void add_online_impl( CSE_ALifeDynamicObject* object,
 
         //		R_ASSERT3
         //(ai().level_graph().valid_vertex_id(l_tpALifeDynamicObject->m_tNodeID),"Invalid
-        //vertex for object ",l_tpALifeInventoryItem->name_replace());
+        // vertex for object ",l_tpALifeInventoryItem->name_replace());
         l_tpALifeDynamicObject->o_Position = object->o_Position;
         l_tpALifeDynamicObject->m_tNodeID = object->m_tNodeID;
         object->alife().server().Process_spawn(
@@ -250,7 +250,7 @@ void add_offline_impl( CSE_ALifeDynamicObject* object,
 #ifdef DEBUG
         //		if (psAI_Flags.test(aiALife))
         //			Msg					("[LSS]
-        //Destroying item
+        // Destroying item
         //[%s][%s][%d]",inventory_item->base()->name_replace(),*inventory_item->base()->s_name,inventory_item->base()->ID);
         Msg(
             "[LSS][%d] Going offline [%d][%s][%d] with parent [%d][%s] on '%s'",

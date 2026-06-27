@@ -68,11 +68,11 @@ void CPseudoGigant::Load( LPCSTR section ) {
     SVelocityParam& velocity_walk =
         move().get_velocity( MonsterMovement::eVelocityParameterWalkNormal );
     //	SVelocityParam &velocity_run		=
-    //move().get_velocity(MonsterMovement::eVelocityParameterRunNormal);
+    // move().get_velocity(MonsterMovement::eVelocityParameterRunNormal);
     SVelocityParam& velocity_walk_dmg =
         move().get_velocity( MonsterMovement::eVelocityParameterWalkDamaged );
     //	SVelocityParam &velocity_run_dmg	=
-    //move().get_velocity(MonsterMovement::eVelocityParameterRunDamaged);
+    // move().get_velocity(MonsterMovement::eVelocityParameterRunDamaged);
     SVelocityParam& velocity_steal =
         move().get_velocity( MonsterMovement::eVelocityParameterSteal );
 
@@ -502,7 +502,7 @@ void CPseudoGigant::on_threaten_execute() {
         ( 80 * pA->character_physics_support()->movement()->GetMass() );
     //	l_P.w_float	(20 * pA->movement_control()->GetMass());
     HS.hit_type = ( ALife::eHitTypeStrike ); //	l_P.w_u16	(
-                                             //u16(ALife::eHitTypeWound) );
+                                             // u16(ALife::eHitTypeWound) );
     HS.Write_Packet( l_P );
     u_EventSend( l_P );
 }

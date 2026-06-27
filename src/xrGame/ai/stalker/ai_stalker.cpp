@@ -64,8 +64,8 @@
 #include "smart_cover_planner_target_selector.h"
 
 #ifdef DEBUG
-#include "../../alife_simulator.h"
 #include "../../alife_object_registry.h"
+#include "../../alife_simulator.h"
 #include "../../level.h"
 #include "../../map_location.h"
 #include "../../map_manager.h"
@@ -208,7 +208,7 @@ void CAI_Stalker::reinit() {
     {
         m_critical_wound_weights.clear();
         //		LPCSTR
-        //weights = pSettings->r_string(cNameSect(),"critical_wound_weights");
+        // weights = pSettings->r_string(cNameSect(),"critical_wound_weights");
         LPCSTR weights = SpecificCharacter().critical_wound_weights();
         string16 temp;
         for ( int i = 0, n = _GetItemCount( weights ); i < n; ++i )
@@ -328,9 +328,9 @@ void CAI_Stalker::LoadSounds( LPCSTR section ) {
                  xr_new< CStalkerSoundData >( this ) );
     //	sound().add
     //(pSettings->r_string(section,"sound_walking_in_danger"),
-    //100, SOUND_TYPE_MONSTER_TALKING,	6, u32(eStalkerSoundMaskMovingInDanger),
-    //eStalkerSoundWalkingInDanger,			head_bone_name,
-    //xr_new<CStalkerSoundData>(this));
+    // 100, SOUND_TYPE_MONSTER_TALKING,	6, u32(eStalkerSoundMaskMovingInDanger),
+    // eStalkerSoundWalkingInDanger,			head_bone_name,
+    // xr_new<CStalkerSoundData>(this));
     sound().add( pSettings->r_string( section, "sound_kill_wounded" ), 100,
                  SOUND_TYPE_MONSTER_TALKING, 5,
                  u32( eStalkerSoundMaskKillWounded ), eStalkerSoundKillWounded,
@@ -553,36 +553,36 @@ void CAI_Stalker::reload( LPCSTR section ) {
                             "auto_max_queue_interval_close", 500 );
 
         //		m_pstl_queue_fire_dist_close		=
-        //READ_IF_EXISTS(pSettings,r_float,queue_sect,"pstl_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,queue_sect,"pstl_queue_fire_dist_close",
+        // 15.0f);
         m_pstl_queue_fire_dist_med = READ_IF_EXISTS(
             pSettings, r_float, queue_sect, "pstl_queue_fire_dist_med", 15.0f );
         m_pstl_queue_fire_dist_far = READ_IF_EXISTS(
             pSettings, r_float, queue_sect, "pstl_queue_fire_dist_far", 30.0f );
         //		m_shtg_queue_fire_dist_close		=
-        //READ_IF_EXISTS(pSettings,r_float,queue_sect,"shtg_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,queue_sect,"shtg_queue_fire_dist_close",
+        // 15.0f);
         m_shtg_queue_fire_dist_med = READ_IF_EXISTS(
             pSettings, r_float, queue_sect, "shtg_queue_fire_dist_med", 15.0f );
         m_shtg_queue_fire_dist_far = READ_IF_EXISTS(
             pSettings, r_float, queue_sect, "shtg_queue_fire_dist_far", 30.0f );
         //		m_snp_queue_fire_dist_close			=
-        //READ_IF_EXISTS(pSettings,r_float,queue_sect,"snp_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,queue_sect,"snp_queue_fire_dist_close",
+        // 15.0f);
         m_snp_queue_fire_dist_med = READ_IF_EXISTS(
             pSettings, r_float, queue_sect, "snp_queue_fire_dist_med", 15.0f );
         m_snp_queue_fire_dist_far = READ_IF_EXISTS(
             pSettings, r_float, queue_sect, "snp_queue_fire_dist_far", 30.0f );
         //		m_mchg_queue_fire_dist_close			=
-        //READ_IF_EXISTS(pSettings,r_float,queue_sect,"mchg_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,queue_sect,"mchg_queue_fire_dist_close",
+        // 15.0f);
         m_mchg_queue_fire_dist_med = READ_IF_EXISTS(
             pSettings, r_float, queue_sect, "mchg_queue_fire_dist_med", 15.0f );
         m_mchg_queue_fire_dist_far = READ_IF_EXISTS(
             pSettings, r_float, queue_sect, "mchg_queue_fire_dist_far", 30.0f );
         //		m_auto_queue_fire_dist_close		=
-        //READ_IF_EXISTS(pSettings,r_float,queue_sect,"auto_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,queue_sect,"auto_queue_fire_dist_close",
+        // 15.0f);
         m_auto_queue_fire_dist_med = READ_IF_EXISTS(
             pSettings, r_float, queue_sect, "auto_queue_fire_dist_med", 15.0f );
         m_auto_queue_fire_dist_far = READ_IF_EXISTS(
@@ -754,8 +754,8 @@ void CAI_Stalker::reload( LPCSTR section ) {
                             "auto_max_queue_interval_close", 500 );
 
         //		m_pstl_queue_fire_dist_close		=
-        //READ_IF_EXISTS(pSettings,r_float,*cNameSect(),"pstl_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,*cNameSect(),"pstl_queue_fire_dist_close",
+        // 15.0f);
         m_pstl_queue_fire_dist_med =
             READ_IF_EXISTS( pSettings, r_float, *cNameSect(),
                             "pstl_queue_fire_dist_med", 15.0f );
@@ -763,8 +763,8 @@ void CAI_Stalker::reload( LPCSTR section ) {
             READ_IF_EXISTS( pSettings, r_float, *cNameSect(),
                             "pstl_queue_fire_dist_far", 30.0f );
         //		m_shtg_queue_fire_dist_close		=
-        //READ_IF_EXISTS(pSettings,r_float,*cNameSect(),"shtg_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,*cNameSect(),"shtg_queue_fire_dist_close",
+        // 15.0f);
         m_shtg_queue_fire_dist_med =
             READ_IF_EXISTS( pSettings, r_float, *cNameSect(),
                             "shtg_queue_fire_dist_med", 15.0f );
@@ -772,8 +772,8 @@ void CAI_Stalker::reload( LPCSTR section ) {
             READ_IF_EXISTS( pSettings, r_float, *cNameSect(),
                             "shtg_queue_fire_dist_far", 30.0f );
         //		m_snp_queue_fire_dist_close			=
-        //READ_IF_EXISTS(pSettings,r_float,*cNameSect(),"snp_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,*cNameSect(),"snp_queue_fire_dist_close",
+        // 15.0f);
         m_snp_queue_fire_dist_med =
             READ_IF_EXISTS( pSettings, r_float, *cNameSect(),
                             "snp_queue_fire_dist_med", 15.0f );
@@ -781,8 +781,8 @@ void CAI_Stalker::reload( LPCSTR section ) {
             READ_IF_EXISTS( pSettings, r_float, *cNameSect(),
                             "snp_queue_fire_dist_far", 30.0f );
         //		m_mchg_queue_fire_dist_close			=
-        //READ_IF_EXISTS(pSettings,r_float,*cNameSect(),"mchg_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,*cNameSect(),"mchg_queue_fire_dist_close",
+        // 15.0f);
         m_mchg_queue_fire_dist_med =
             READ_IF_EXISTS( pSettings, r_float, *cNameSect(),
                             "mchg_queue_fire_dist_med", 15.0f );
@@ -790,8 +790,8 @@ void CAI_Stalker::reload( LPCSTR section ) {
             READ_IF_EXISTS( pSettings, r_float, *cNameSect(),
                             "mchg_queue_fire_dist_far", 30.0f );
         //		m_auto_queue_fire_dist_close		=
-        //READ_IF_EXISTS(pSettings,r_float,**cNameSect(),"auto_queue_fire_dist_close",
-        //15.0f);
+        // READ_IF_EXISTS(pSettings,r_float,**cNameSect(),"auto_queue_fire_dist_close",
+        // 15.0f);
         m_auto_queue_fire_dist_med =
             READ_IF_EXISTS( pSettings, r_float, *cNameSect(),
                             "auto_queue_fire_dist_med", 15.0f );
@@ -1088,8 +1088,8 @@ void CAI_Stalker::net_Export( NET_Packet& P ) {
     P.w( &l_game_vertex_id, sizeof( l_game_vertex_id ) );
     P.w( &l_game_vertex_id, sizeof( l_game_vertex_id ) );
     //	P.w						(&f1,
-    //sizeof(f1)); 	P.w						(&f1,
-    //sizeof(f1));
+    // sizeof(f1)); 	P.w						(&f1,
+    // sizeof(f1));
     if ( ai().game_graph().valid_vertex_id( l_game_vertex_id ) ) {
         f1 = Position().distance_to(
             ai().game_graph().vertex( l_game_vertex_id )->level_point() );
@@ -1654,7 +1654,7 @@ float CAI_Stalker::shedule_Scale() {
 
 void CAI_Stalker::aim_bone_id( shared_str const& bone_id ) {
     //	IKinematics				*kinematics =
-    //smart_cast<IKinematics*>(Visual()); 	VERIFY2
+    // smart_cast<IKinematics*>(Visual()); 	VERIFY2
     //(kinematics->LL_BoneID(bone_id) != BI_NONE, make_string("Cannot find bone
     //%s",bone_id));
     m_aim_bone_id = bone_id;

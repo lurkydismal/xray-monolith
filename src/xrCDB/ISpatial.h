@@ -51,7 +51,7 @@ enum {
 // visibleforAI? 		physical-decorations	- renderable,
 // collideable 		lights
 //- lightsource 		particles(temp-objects)	- renderable
-//glow
+// glow
 //- renderable 		sound					- ???
 //////////////////////////////////////////////////////////////////////////
 // class 				IRender_Sector;

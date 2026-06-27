@@ -426,10 +426,9 @@ IC void CBackend::set_ColorWriteEnable( u32 _mask ) {
     //	colorwrite_mask=_mask;
     //	CHK_DX(HW.pDevice->SetRenderState	( D3DRS_COLORWRITEENABLE,
     //_mask	)); 	CHK_DX(HW.pDevice->SetRenderState	(
-    //D3DRS_COLORWRITEENABLE1,	_mask	)); 	CHK_DX(HW.pDevice->SetRenderState
-    //( D3DRS_COLORWRITEENABLE2,	_mask	));
-    //	CHK_DX(HW.pDevice->SetRenderState	( D3DRS_COLORWRITEENABLE3,
-    //_mask	));
+    // D3DRS_COLORWRITEENABLE1,	_mask	)); CHK_DX(HW.pDevice->SetRenderState (
+    //D3DRS_COLORWRITEENABLE2,	_mask	)); 	CHK_DX(HW.pDevice->SetRenderState
+    //( D3DRS_COLORWRITEENABLE3, _mask	));
     // }
 }
 

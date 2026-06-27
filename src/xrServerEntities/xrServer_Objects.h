@@ -3,7 +3,7 @@
 //	Created 	: 19.09.2002
 //  Modified 	: 04.06.2003
 //	Author		: Oles Shyshkovtsov, Alexander Maksimchuk, Victor
-//Reutskiy and Dmitriy Iassenev 	Description : Server objects
+// Reutskiy and Dmitriy Iassenev 	Description : Server objects
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -50,15 +50,16 @@
 // order structures changed 36 - CSE_ALifeTrader
 // appended with the organization identifier property
 //		and CSE_ALifeHumanAbstract		appended with
-//known_traders property 		and CSE_ALifeTask				appended
-//with try count property 		and CSE_ALifePersonalTask		no more exists
+// known_traders property 		and CSE_ALifeTask
+// appended with try count property 		and CSE_ALifePersonalTask
+// no more exists
 // 37 - бинокль имеет ServerEntity не CSE_ALifeItemWeapon, а CSE_ALifeItem
 // 38 - CSE_ALifeHumanAbstract			appended with the equipment and
 // weapon preferences 39 - CSE_ALifeAnomalousZone			appended
 // with the start power property 40 - CSE_ALifeObjectPhysic
 // appended with activate flag
 //		and CSE_ALifeItemWeapon			appended with weapon
-//addons state flag
+// addons state flag
 // 41 - CSE_ALifeItemTorch				appended glow
 // 42 - CSE_ALifeItemTorch				appended guid_bone
 // 43 - CSE_ALifeObjectHangingLamp		appended glow_texture and
@@ -67,13 +68,14 @@
 // property 'health' 46 - xrSE_ALifeObjectSearchLight		appended with
 // property 'guid_bone',
 //										appended
-//with property 'rotation_bone'
+// with property 'rotation_bone'
 // 47 - CSE_ALifeItemWeapon				appended with ammo type
 // index 48 - CSE_ALifeObjectSearchlight		appended with property
 // 'cone_bone' 49 - CSE_ALifeObjectHangingLamp		remove some property 50
 // - CSE_ALifeObject					appended with ALife
 // flags property 51 - CSE_ALifeItemBolt				new
-// class based on CSE_ALifeDynamicObject and CSE_AlifeInventoryItem 52 - CSE_ALifeItemExplosive			new class based on CSE_ALifeItem
+// class based on CSE_ALifeDynamicObject and CSE_AlifeInventoryItem 52 -
+// CSE_ALifeItemExplosive			new class based on CSE_ALifeItem
 // 53 - CSE_AlifeInventoryItem			appended with property
 // 'condition' 54 - CSE_AlifeLevelChanger			property
 // 'angles' changed from float to fvector 55 - CSE_AlifeItemCar->CSE_ALifeCar
@@ -86,12 +88,13 @@
 // appended with bones_mask, root_bone 62 - CSE_AlifeObject
 // appended with m_story_id 63 - CSE_AlifeTraderAbstract
 // remove bug with money 64 - CSE_ALifeObjectPhysic			flags,
-// source_id, saved_bones moved to CSE_AlifePHSkeletonObject 65 - CSE_ALifeObjectPhysic			startup_anim moved to CSE_AlifePHSkeletonObject
-// 66 - CSE_ALifeObjectPhysic			CSE_ALifeCar - heritage changed
-// 67 - CSE_ALifeCustomZone				new class appended,
-// heritage changed 68 - CSE_ALifeHumanStalker,
+// source_id, saved_bones moved to CSE_AlifePHSkeletonObject 65 -
+// CSE_ALifeObjectPhysic			startup_anim moved to
+// CSE_AlifePHSkeletonObject 66 - CSE_ALifeObjectPhysic
+// CSE_ALifeCar - heritage changed 67 - CSE_ALifeCustomZone
+// new class appended, heritage changed 68 - CSE_ALifeHumanStalker,
 //		CSE_ALifeMonsterBase			new class appended,
-//heritage changed
+// heritage changed
 // 69 -	object broker changed from this version
 //		CSE_ALifeObjectHangingLamp,
 //		CSE_ALifeHelicopter				heritage changed
@@ -155,21 +158,21 @@
 //	   - CSE_TargetAssault				is no more
 //	   - CSE_Target						is no more
 //	   - CSE_ALifeObject				appended with property
-//m_spawn_story_id
+// m_spawn_story_id
 // 113 - CSE_ALifeAnomalousZone			removed property m_fStartPower
 //	   - CSE_ALifeAnomalousZone			removed property
-//m_faWeights
+// m_faWeights
 //	   - CSE_ALifeAnomalousZone			removed property
-//m_cppArtefactSections
+// m_cppArtefactSections
 //	   - CSE_ALifeAnomalousZone			removed property
-//m_min_start_power
+// m_min_start_power
 //	   - CSE_ALifeAnomalousZone			removed property
-//m_max_start_power
+// m_max_start_power
 //	   - CSE_ALifeAnomalousZone			removed property
-//m_power_artefact_factor
+// m_power_artefact_factor
 //	   - CSE_ALifeCustomZone			removed property m_attn
 //	   - CSE_ALifeCustomZone			removed property
-//m_period
+// m_period
 // 114 - CSE_ALifeMonsterAbstract		m_task_reached, internal member,
 // added 115 - CSE_ALifeCreatureAbstract		fHealth now in range
 // 0..1 116 - CSE_ALifeCreatureAbstract		appended with property
@@ -178,16 +181,18 @@
 // removed property m_tpKnownCustomers, sad but true 119 -
 // CSE_ALifeObjectHangingLamp		added property	m_volumetric_quality
 //										added
-//property	m_volumetric_intensity 										added property	m_volumetric_distance
+// property	m_volumetric_intensity
+// added property	m_volumetric_distance
 // 120 - CSE_SmartCover					added property
 // m_enter_min_enemy_distance
 //										added
-//property	m_exit_min_enemy_distance
+// property	m_exit_min_enemy_distance
 // 121 - GameTypeChooser				m_gameType using instead
 // og u8 value; 122 - CSE_ALifeItemWeapon			appended with
-// count of grenades to spawn in grenade launcher (if it attached) 123 - CSE_ALifeInventoryItem			added functions has_upgrade & add_upgrade, xr_vector<shared_str> m_upgrades
-// 124 - CSE_ALifeInventoryBox			added property m_can_take,
-// m_closed
+// count of grenades to spawn in grenade launcher (if it attached) 123 -
+// CSE_ALifeInventoryItem			added functions has_upgrade &
+// add_upgrade, xr_vector<shared_str> m_upgrades 124 - CSE_ALifeInventoryBox
+// added property m_can_take, m_closed
 //       CSE_ALifeTraderAbstract		added property
 //       m_deadbody_can_take, m_deadbody_closed
 // 127	 CSE_ALifeObjectClimable		added material;

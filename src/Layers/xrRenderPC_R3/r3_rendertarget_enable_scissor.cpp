@@ -104,7 +104,7 @@ BOOL CRenderTarget::enable_scissor( light* L ) // true if intersects near plane
 
     // Scissor
     //. disable scissor because some bugs prevent it to work through
-    //multi-portals . if (!HW.Caps.bScissor)	return		near_intersect;
+    // multi-portals . if (!HW.Caps.bScissor)	return		near_intersect;
     return near_intersect;
 
 #if 0

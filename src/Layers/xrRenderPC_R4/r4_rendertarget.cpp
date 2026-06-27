@@ -586,7 +586,7 @@ CRenderTarget::CRenderTarget() {
         if ( RImplementation.o.dx11_hdr10 ) {
             rt_secondVP.create( r2_RT_secondVP, w, h, D3DFMT_A2R10G10B10,
                                 1 ); //--#SM+#-- +SecondVP+ // NOTE: this is a
-                                     //hack to use DXGI R10G10B10A2_UNORM
+                                     // hack to use DXGI R10G10B10A2_UNORM
             rt_ui_pda.create(
                 r2_RT_ui, w, h,
                 D3DFMT_A2R10G10B10 ); // NOTE: this is a hack to use DXGI
@@ -743,7 +743,7 @@ CRenderTarget::CRenderTarget() {
         //	Igor: for volumetric lights
         // rt_Generic_2.create
         // (r2_RT_generic2,w,h,D3DFMT_A8R8G8B8		); 	temp: for higher
-        //quality blends
+        // quality blends
         if ( RImplementation.o.advancedpp )
             rt_Generic_2.create( r2_RT_generic2, w, h, D3DFMT_A16B16G16R16F,
                                  SampleCount );
@@ -1062,13 +1062,13 @@ CRenderTarget::CRenderTarget() {
     //{
     //	u32		w = Device.dwWidth, h = Device.dwHeight;
     //	rt_ssao_temp.create			(r2_RT_ssao_temp, w, h,
-    //D3DFMT_G16R16F, SampleCount); 	s_ssao.create
+    // D3DFMT_G16R16F, SampleCount); 	s_ssao.create
     //(b_ssao, "r2\\ssao");
 
     //	if( RImplementation.o.dx10_msaa )
     //	{
     //		int bound = RImplementation.o.dx10_msaa_opt ? 1 :
-    //RImplementation.o.dx10_msaa_samples;
+    // RImplementation.o.dx10_msaa_samples;
 
     //		for( int i = 0; i < bound; ++i )
     //		{
@@ -1267,9 +1267,9 @@ CRenderTarget::CRenderTarget() {
             //(name,"%s%d",r2_jitter,it); 	R_CHK	(D3DXCreateTexture
             //(HW.pDevice,TEX_jitter,TEX_jitter,1,0,D3DFMT_Q8W8V8U8,D3DPOOL_MANAGED,&t_noise_surf[it]));
             //	t_noise[it]					=
-            //dxRenderDeviceRender::Instance().Resources->_CreateTexture
-            //(name); 	t_noise[it]->surface_set	(t_noise_surf[it]); 	R_CHK
-            //(t_noise_surf[it]->LockRect	(0,&R[it],0,0));
+            // dxRenderDeviceRender::Instance().Resources->_CreateTexture
+            //(name); 	t_noise[it]->surface_set	(t_noise_surf[it]);
+            //R_CHK (t_noise_surf[it]->LockRect	(0,&R[it],0,0));
             // }
             //	Use DXGI_FORMAT_R8G8B8A8_SNORM
 

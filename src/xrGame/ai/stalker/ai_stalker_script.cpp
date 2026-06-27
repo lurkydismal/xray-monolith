@@ -393,7 +393,7 @@ void CAI_Stalker::script_register( lua_State* L ) {
                        "sound_running_in_danger",
                        StalkerSpace::eStalkerSoundRunningInDanger ),
                    //				::luabind::value("sound_walking_in_danger",
-                   //StalkerSpace::eStalkerSoundWalkingInDanger),
+                   // StalkerSpace::eStalkerSoundWalkingInDanger),
                    ::luabind::value( "sound_kill_wounded",
                                      StalkerSpace::eStalkerSoundKillWounded ),
                    ::luabind::value(

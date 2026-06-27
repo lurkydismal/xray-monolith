@@ -129,8 +129,8 @@ static class cl_meatchunks_stuff : public R_constant_setup {
 } binder_meatchunks_stuff;
 
 extern ENGINE_API BOOL r2_sun_static;
-extern ENGINE_API BOOL
-    r2_advanced_pp; //	advanced post process and effects
+extern ENGINE_API BOOL r2_advanced_pp; //	advanced post process and
+                                       //effects
 //////////////////////////////////////////////////////////////////////////
 // Just two static storage
 void CRender::create() {
@@ -1263,7 +1263,7 @@ HRESULT CRender::shader_compile( LPCSTR name,
         !match_shader_id( name, sh_name, m_file_set, temp_file_name );
     if ( useGeneratedShaderCache ) {
         //		Msg				( "no library shader
-        //found" );
+        // found" );
         string_path file;
         xr_strcpy( file, "shaders_cache\\r2\\" );
         xr_strcat( file, name );
@@ -1284,7 +1284,7 @@ HRESULT CRender::shader_compile( LPCSTR name,
 
     if ( FS.exist( file_name ) ) {
         //		Msg				( "opening library or
-        //cache shader..." );
+        // cache shader..." );
         IReader* file = FS.r_open( file_name );
         if ( useGeneratedShaderCache ) {
             if ( file->length() > 8 ) {
@@ -1300,11 +1300,11 @@ HRESULT CRender::shader_compile( LPCSTR name,
                             file_name, result, o.disasm );
                         // if ( !SUCCEEDED(_result) ) {
                         //	Msg				("! create
-                        //shader failed");
+                        // shader failed");
                         // }
                         // else {
                         //	Msg				( "create
-                        //shaders succeeded" );
+                        // shaders succeeded" );
                         // }
                     }
                 } else {
@@ -1324,11 +1324,11 @@ HRESULT CRender::shader_compile( LPCSTR name,
                                          o.disasm );
                 // if ( !SUCCEEDED(_result) ) {
                 //	Msg				("! create shader
-                //failed");
+                // failed");
                 // }
                 // else {
                 //	Msg				( "create shaders
-                //succeeded" );
+                // succeeded" );
                 // }
             }
         }

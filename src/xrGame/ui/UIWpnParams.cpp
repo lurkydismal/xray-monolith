@@ -309,7 +309,7 @@ void CUIWpnParams::SetInfo( CInventoryItem* slot_wpn,
             Frect tex_rect;
             if ( i >= good_ammo.size() ) {
                 //--> Мы превысили кол-во типов патронов у текущего оружия -
-                //скрываем лишнюю иконку
+                // скрываем лишнюю иконку
                 tex_rect.set( 0, 0, 1, 1 );
             } else {
                 if ( pSettings->line_exist( good_ammo[ i ].c_str(),

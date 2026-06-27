@@ -40,11 +40,11 @@ void CUITalkDialogWnd::InitTalkDialogWnd() {
 
     //	UIOurIcon.AttachChild		(&UICharacterInfoLeft);
     //	UICharacterInfoLeft.InitCharacterInfo(Fvector2().set(0,0),
-    //UIOurIcon.GetWndSize(), "talk_character.xml");
+    // UIOurIcon.GetWndSize(), "talk_character.xml");
 
     //	UIOthersIcon.AttachChild	(&UICharacterInfoRight);
     //	UICharacterInfoRight.InitCharacterInfo(Fvector2().set(0,0),
-    //UIOthersIcon.GetWndSize(), "talk_character.xml");
+    // UIOthersIcon.GetWndSize(), "talk_character.xml");
 
     //	AttachChild					(&UIOurIcon);
     //	AttachChild					(&UIOthersIcon);

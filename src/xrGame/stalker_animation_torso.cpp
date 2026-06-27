@@ -259,7 +259,7 @@ MotionID CStalkerAnimationManager::missile_animation(
     const xr_vector< CAniVector >& animation =
         m_data_storage->m_part_animations.A[ body_state ].m_torso.A[ slot ].A;
     //	const xr_vector<CAniVector>		&animation =
-    //m_data_storage->m_part_animations.A[eBodyStateStand].m_torso.A[slot].A;
+    // m_data_storage->m_part_animations.A[eBodyStateStand].m_torso.A[slot].A;
 
     switch ( m_missile->GetState() ) {
         case CMissile::eShowing: {

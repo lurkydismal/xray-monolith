@@ -55,7 +55,7 @@ void xrServer::Perform_connect_spawn( CSE_Abstract* E,
         E->Spawn_Write( P, FALSE );
         E->UPDATE_Write( P );
         //		CSE_ALifeObject*	object =
-        //smart_cast<CSE_ALifeObject*>(E); 		VERIFY
+        // smart_cast<CSE_ALifeObject*>(E); 		VERIFY
         //(object); 		VERIFY
         //(object->client_data.empty());
     }

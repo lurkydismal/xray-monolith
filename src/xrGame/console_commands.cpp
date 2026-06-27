@@ -51,10 +51,10 @@
 #include "character_hit_animations_params.h"
 #include "inventory_upgrade_manager.h"
 #ifdef DEBUG
-#include "PHDebug.h"
-#include "ui/UIDebugFonts.h"
-#include "game_graph.h"
 #include "CharacterPhysicsSupport.h"
+#include "PHDebug.h"
+#include "game_graph.h"
+#include "ui/UIDebugFonts.h"
 #endif // DEBUG
 
 #include "..\..\xrEngine\x_ray.h"
@@ -385,7 +385,8 @@ static void full_memory_stats( bool assert = true ) {
     u32 m_base = 0, c_base = 0, m_lmaps = 0, c_lmaps = 0;
 
     // if (Device.Resources)	Device.Resources->_GetMemoryUsage
-    // (m_base,c_base,m_lmaps,c_lmaps); 	Resource check moved to m_pRender
+    // (m_base,c_base,m_lmaps,c_lmaps); 	Resource check moved to
+    // m_pRender
     if ( Device.m_pRender )
         Device.m_pRender->ResourcesGetMemoryUsage( m_base, c_base, m_lmaps,
                                                    c_lmaps );
@@ -552,10 +553,13 @@ public:
                     //						Sleep
                     //(1);
                     //						CTimer
-                    //timer; 						timer.Start			(); 						float
-                    //fValue = ai().m_tpAStar->ffFindMinimalPath(id1,id2); 						Msg
+                    // timer;
+                    // timer.Start			();
+                    // float fValue =
+                    // ai().m_tpAStar->ffFindMinimalPath(id1,id2);
+                    // Msg
                     //("* %7.2f[%d] : %11I64u cycles (%.3f
-                    //microseconds)",fValue,ai().m_tpAStar->m_tpaNodes.size(),timer.GetElapsed_ticks(),timer.GetElapsed_ms()*1000.f);
+                    // microseconds)",fValue,ai().m_tpAStar->m_tpaNodes.size(),timer.GetElapsed_ticks(),timer.GetElapsed_ms()*1000.f);
                 }
             else
                 Msg( "! not enough parameters!" );
@@ -2550,7 +2554,7 @@ void CCC_RegisterCommands() {
     CMD3( CCC_Mask, "ai_animation_stats", &psAI_Flags, aiAnimationStats );
 
     /////////////////////////////////////////////HIT
-    ///ANIMATION////////////////////////////////////////////////////
+    /// ANIMATION////////////////////////////////////////////////////
     // float						power_factor
     // = 2.f; float
     // rotational_power_factor		= 3.f; float
@@ -2576,7 +2580,7 @@ void CCC_RegisterCommands() {
           &ghit_anims_params.reduce_power_factor, 0.0f, 1.0f );
     CMD4( CCC_Integer, "hit_anims_tune", &tune_hit_anims, 0, 1 );
     /////////////////////////////////////////////HIT ANIMATION
-    ///END////////////////////////////////////////////////////
+    /// END////////////////////////////////////////////////////
 
 #ifdef DEBUG_MEMORY_MANAGER
     CMD3( CCC_Mask, "debug_on_frame_gather_stats", &psAI_Flags,

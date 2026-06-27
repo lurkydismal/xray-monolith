@@ -79,7 +79,7 @@ void CBreakableObject::enable_notificate() {
 
 // void CBreakableObject::Hit(float P,Fvector &dir, CObject* who,s16 element,
 //					   Fvector p_in_object_space, float
-//impulse, ALife::EHitType hit_type)
+// impulse, ALife::EHitType hit_type)
 void CBreakableObject::Hit( SHit* pHDS ) {
     CheckHitBreak( pHDS->damage(), pHDS->hit_type );
     if ( m_pPhysicsShell ) {

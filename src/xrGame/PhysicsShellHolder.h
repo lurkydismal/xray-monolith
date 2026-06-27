@@ -155,11 +155,11 @@ private: // IPhysicsShellHolder
     virtual void _BCL ObjectSpatialMove();
     virtual CPhysicsShell*& _BCL ObjectPPhysicsShell();
     //	virtual	void
-    //enable_notificate					()
+    // enable_notificate					()
     //;
     virtual bool _BCL has_parent_object();
     //	virtual	void
-    //on_physics_disable					()
+    // on_physics_disable					()
     //;
     virtual IPHCapture* _BCL PHCapture();
     virtual bool _BCL IsInventoryItem();

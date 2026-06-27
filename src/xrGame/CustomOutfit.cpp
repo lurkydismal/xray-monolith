@@ -81,7 +81,7 @@ void CCustomOutfit::Load( LPCSTR section ) {
     m_HitTypeProtection[ ALife::eHitTypeFireWound ] =
         0.f; // pSettings->r_float(section,"fire_wound_protection");
     //	m_HitTypeProtection[ALife::eHitTypePhysicStrike]=
-    //pSettings->r_float(section,"physic_strike_protection");
+    // pSettings->r_float(section,"physic_strike_protection");
     m_HitTypeProtection[ ALife::eHitTypeLightBurn ] =
         m_HitTypeProtection[ ALife::eHitTypeBurn ];
 

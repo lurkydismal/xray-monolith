@@ -4,7 +4,7 @@
 //  Modified 	: 04.06.2003
 //	Author		: Dmitriy Iassenev
 //	Description : Server monsters for ALife simulator, script export, the
-//second part
+// second part
 ////////////////////////////////////////////////////////////////////////////
 
 #include "pch_script.h"

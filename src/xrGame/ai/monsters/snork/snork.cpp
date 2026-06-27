@@ -13,10 +13,11 @@
 
 #ifdef _DEBUG
 #include <dinput.h>
+
 #include "../../../actor.h"
 #include "../../../ai_object_location.h"
-#include "../../../level_debug.h"
 #include "../../../cover_point.h"
+#include "../../../level_debug.h"
 #include "../monster_cover_manager.h"
 #endif
 

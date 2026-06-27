@@ -383,7 +383,8 @@ LJLIB_SET( __index )
 
 #define LJLIB_MODULE_io
 
-    LJLIB_PUSH( top - 2 ) LJLIB_SET( !) /* Set environment. */
+LJLIB_PUSH( top - 2 )
+LJLIB_SET( !) /* Set environment. */
 
     LJLIB_CF( io_open ) {
     const char* fname = strdata( lj_lib_checkstr( L, 1 ) );

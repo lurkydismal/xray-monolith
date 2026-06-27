@@ -166,7 +166,7 @@ const CCoverPoint* CAI_Stalker::find_best_cover(
 #ifdef _DEBUG
     //	Msg
     //("* [%6d][%s] search for new cover
-    //performed",Device.dwTimeGlobal,*cName());
+    // performed",Device.dwTimeGlobal,*cName());
 #endif
 #ifdef _DEBUG
     ++g_near_cover_search_count;
@@ -292,8 +292,8 @@ void CAI_Stalker::update_best_cover_actuality(
 const CCoverPoint* CAI_Stalker::best_cover(
     const Fvector& position_to_cover_from ) {
     //	shared_str const					&cover_id =
-    //movement().current_params().cover_id(); 	if (cover_id != "") 		return
-    //(ai().cover_manager().smart_cover(cover_id));
+    // movement().current_params().cover_id(); 	if (cover_id != "")
+    // return (ai().cover_manager().smart_cover(cover_id));
 
     update_best_cover_actuality( position_to_cover_from );
 

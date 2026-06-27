@@ -16,8 +16,7 @@ void light::vis_prepare() {
     //	. test is sheduled for future	= keep old result
     //	. test time comes :)
     //		. camera inside light volume	= visible,	shedule for
-    //'small' interval 		. perform testing				= ???,
-    //pending
+    //'small' interval 		. perform testing = ???, pending
     if ( !flags.bActive ) {
         vis.visible = false;
         vis.pending = false;
@@ -82,8 +81,8 @@ void light::vis_prepare() {
     RCache.set_xform_world( m_xform );
     CHK_DX( BeginQuery( vis.Q ) );
     //	Hack: Igor. Light is visible if it's frutum is visible. (Only for
-    //volumetric) 	Hope it won't slow down too much since there's not too much
-    //volumetric lights
+    // volumetric) 	Hope it won't slow down too much since there's not too
+    // much volumetric lights
     //	TODO: sort for performance improvement if this technique hurts
     if ( ( flags.type == IRender_Light::SPOT ) && flags.bShadow &&
          flags.bVolumetric )

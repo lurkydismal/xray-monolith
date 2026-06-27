@@ -114,7 +114,7 @@ bool test_sides( const Fvector& center,
         }
     }
     ////sides
-    ///cross///////////////////////////////////////////////////////////////////////////////////////////////
+    /// cross///////////////////////////////////////////////////////////////////////////////////////////////
     Fvector crses[ 3 ];
     crses[ 0 ].set( -tri.side0[ 2 ], 0, tri.side0[ 0 ] );
     crses[ 1 ].set( -tri.side1[ 2 ], 0, tri.side1[ 0 ] );
@@ -866,7 +866,7 @@ bool CPHSimpleCharacter::ValidateWalkOnObject() {
         !m_elevator_state.Active() && b_valide_wall_contact &&
         ( m_contact_count > 1 ) && ( m_wall_contact_normal[ 1 ] < M_SQRT1_2 ) &&
         !b_side_contact ) //&&
-                          //dDOT(m_wall_contact_normal,m_ground_contact_normal)<.9f
+                          // dDOT(m_wall_contact_normal,m_ground_contact_normal)<.9f
     {
         // if( dDOT(m_wall_contact_normal,m_ground_contact_normal)<.999999f)
         // dVector3

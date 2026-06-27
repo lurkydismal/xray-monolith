@@ -88,10 +88,10 @@ void CBaseMonster::Load( LPCSTR section ) {
 
     //	if (pSettings->line_exist(section,"Spawn_Inventory_Item_Section")) {
     //		m_item_section					=
-    //pSettings->r_string(section,"Spawn_Inventory_Item_Section");
+    // pSettings->r_string(section,"Spawn_Inventory_Item_Section");
     //		m_spawn_probability				=
-    //pSettings->r_float(section,"Spawn_Inventory_Item_Probability"); 	} else
-    //m_spawn_probability			= 0.f;
+    // pSettings->r_float(section,"Spawn_Inventory_Item_Probability"); 	} else
+    // m_spawn_probability			= 0.f;
 
     m_melee_rotation_factor = READ_IF_EXISTS( pSettings, r_float, section,
                                               "Melee_Rotation_Factor", 1.5f );
@@ -387,7 +387,7 @@ BOOL CBaseMonster::net_Spawn( CSE_Abstract* DC ) {
     //
     //		CSE_ALifeMonsterBase
     //*se_monster =
-    //smart_cast<CSE_ALifeMonsterBase*>(ai().alife().objects().object(ID()));
+    // smart_cast<CSE_ALifeMonsterBase*>(ai().alife().objects().object(ID()));
     //		VERIFY
     //(se_monster);
     //
@@ -395,12 +395,12 @@ BOOL CBaseMonster::net_Spawn( CSE_Abstract* DC ) {
     //(se_monster->m_flags.is(CSE_ALifeMonsterBase::flNeedCheckSpawnItem)) {
     //			float prob = Random.randF();
     //			if ((prob < m_spawn_probability) ||
-    //fsimilar(m_spawn_probability,1.f))
+    // fsimilar(m_spawn_probability,1.f))
     //				se_monster->m_flags.set(CSE_ALifeMonsterBase::flSkipSpawnItem,
-    //FALSE);
+    // FALSE);
     //
     //			se_monster->m_flags.set(CSE_ALifeMonsterBase::flNeedCheckSpawnItem,
-    //FALSE);
+    // FALSE);
     //		}
     //
     //		if
@@ -408,15 +408,16 @@ BOOL CBaseMonster::net_Spawn( CSE_Abstract* DC ) {
     //			CSE_Abstract	*object = Level().spawn_item
     //(m_item_section,Position(),ai_location().level_vertex_id(),ID(),true);
     //			CSE_ALifeObject	*alife_object =
-    //smart_cast<CSE_ALifeObject*>(object); 			if (alife_object)
-    //				alife_object->m_flags.set
+    // smart_cast<CSE_ALifeObject*>(object); 			if
+    // (alife_object) 				alife_object->m_flags.set
     //(CSE_ALifeObject::flCanSave,FALSE);
     //
     //			{
     //				NET_Packet				P;
     //				object->Spawn_Write		(P,TRUE);
     //				Level().Send
-    //(P,net_flags(TRUE)); 				F_entity_Destroy		(object);
+    //(P,net_flags(TRUE)); 				F_entity_Destroy
+    //(object);
     //			}
     //		}
     //	}

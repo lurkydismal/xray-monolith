@@ -74,7 +74,7 @@ IC void stalker_movement_manager_base::set_mental_state(
     // the October presentation, no time right now to fix it correctly, should
     // be fixed sometimes later") .	m_path_actuality
     //= m_path_actuality && (m_target.m_mental_state ==
-    //m_current.m_mental_state);
+    // m_current.m_mental_state);
 }
 
 IC void stalker_movement_manager_base::set_path_type( EPathType path_type ) {

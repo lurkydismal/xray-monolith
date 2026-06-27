@@ -26,7 +26,7 @@ void CStateMonsterMoveAroundPointAbstract::execute() {
     // if (data.action.sound_type != u32(-1)) {
     //	if (data.action.sound_delay != u32(-1))
     //		object->sound().play(data.action.sound_type,
-    //0,0,data.action.sound_delay); 	else
+    // 0,0,data.action.sound_delay); 	else
     //		object->sound().play(data.action.sound_type);
     // }
 }

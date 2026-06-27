@@ -56,8 +56,8 @@ NVIMAGE_API bool saveFloatEXR( const char* fileName,
 #endif
 
 //	NVIMAGE_API FloatImage * loadFloatPFM(const char * fileName, Stream &
-//s); 	NVIMAGE_API bool saveFloatPFM(const char * fileName, const FloatImage *
-//fimage, uint base_component, uint num_components);
+// s); 	NVIMAGE_API bool saveFloatPFM(const char * fileName, const FloatImage *
+// fimage, uint base_component, uint num_components);
 
 } // namespace ImageIO
 

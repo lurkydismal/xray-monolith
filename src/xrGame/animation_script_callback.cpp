@@ -53,7 +53,7 @@ void anim_script_callback::anim_callback( CBlend* B ) {
     VERIFY( ths->is_set );
 
     ////////////////////BLEND
-    ///UPDATE//////////////////////////////////////////////
+    /// UPDATE//////////////////////////////////////////////
     // float quant = dt*speed;
     // timeCurrent += quant; // stop@end - time is not going
 
@@ -68,13 +68,13 @@ void anim_script_callback::anim_callback( CBlend* B ) {
     // if( at_end )
     //{
     //	timeCurrent	= timeTotal-END_EPS;		// stop@end - time
-    //frozen at the end 	if( timeCurrent<0.f ) timeCurrent =0.f;
+    // frozen at the end 	if( timeCurrent<0.f ) timeCurrent =0.f;
     // }
     // else
     //	timeCurrent	= 0.f;
 
     ////////////////////BLEND
-    ///UPDATE//////////////////////////////////////////////
+    /// UPDATE//////////////////////////////////////////////
 
     if ( B->timeTotal - B->timeCurrent - END_EPS <
          B->timeCurrent ) // this cool expression sims to work for all cases!

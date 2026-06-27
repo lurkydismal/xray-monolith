@@ -68,7 +68,7 @@ void CBlender_Compile::_cpp_Compile( ShaderElement* _SH ) {
         }
         //.		if
         //(!dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(base,detail_texture,detail_scaler))
-        //bDetail	= FALSE;
+        // bDetail	= FALSE;
         if ( !DEV->m_textures_description.GetDetailTexture(
                  base, detail_texture, detail_scaler ) )
             bDetail = FALSE;

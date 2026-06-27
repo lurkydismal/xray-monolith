@@ -23,7 +23,7 @@ void CRenderTarget::phase_smap_direct( light* L, u32 sub_phase ) {
     //	R.y2		= L->X.D.maxY;
     //	CHK_DX
     //(HW.pDevice->Clear( 1L, &R,	  D3DCLEAR_ZBUFFER,
-    //0xFFFFFFFF, 1.0f, 0L)); } else {
+    // 0xFFFFFFFF, 1.0f, 0L)); } else {
     // full-clear
     //	CHK_DX
     //(HW.pDevice->Clear( 0L, NULL, D3DCLEAR_ZBUFFER,	0xFFFFFFFF, 1.0f, 0L));

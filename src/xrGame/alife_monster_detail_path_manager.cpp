@@ -109,7 +109,7 @@ void CALifeMonsterDetailPathManager::update() {
         return;
 
     //	if (ai().game_graph().vertex(object().m_tGraphID)->level_id() ==
-    //ai().level_graph().level_id()) 		Msg
+    // ai().level_graph().level_id()) 		Msg
     //("[detail::update][%6d][%s]",Device.dwTimeGlobal,object().name_replace());
 
     ALife::_TIME_ID time_delta = current_time - m_last_update_time;

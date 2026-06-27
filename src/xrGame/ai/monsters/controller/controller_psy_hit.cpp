@@ -177,9 +177,10 @@ bool CControllerPsyHit::see_enemy() {
     // 	m_object->Center(self_center);
     //
     // 	if ( check_actor_visibility(self_head, get_head_position(Actor()),
-    // m_object) && 		 check_actor_visibility(self_head, actor_center, m_object) &&
-    // 		 check_actor_visibility(self_center, get_head_position(Actor()),
-    // m_object) && 		 check_actor_visibility(self_center, actor_center, m_object)
+    // m_object) && 		 check_actor_visibility(self_head, actor_center,
+    // m_object) && 		 check_actor_visibility(self_center,
+    // get_head_position(Actor()), m_object) &&
+    // check_actor_visibility(self_center, actor_center, m_object)
     // )
     // 	{
     // 		return true;
@@ -325,7 +326,7 @@ void CControllerPsyHit::update_frame() {
     //	if (!monster->m_sound_tube_start._feedback()) {
     //		m_sound_state = ePull;
     //		monster->m_sound_tube_pull.play_at_pos(Actor(),
-    //Fvector().set(0.f, 0.f, 0.f), sm_2D);
+    // Fvector().set(0.f, 0.f, 0.f), sm_2D);
     //	}
     // }
 }

@@ -186,7 +186,7 @@ void door::change_state( actor* const initiator,
                  m_target_state == door_state_open ? "open" : "closed" );
 #endif // #ifdef DEBUG
        //		if ( !xr_strcmp( "sim_default_duty_28212",
-       //initiator->get_name()) ) { 			int i=0; (void)i;
+       // initiator->get_name()) ) { 			int i=0; (void)i;
        //		}
         change_state( initiator ); // Alundaio: Pass the initator! We need to
                                    // know who is trying to open door!
@@ -201,7 +201,7 @@ void door::change_state( actor* const initiator,
                  m_target_state == door_state_open ? "open" : "closed" );
 #endif // #ifdef DEBUG
        //		if ( !xr_strcmp( "sim_default_duty_28212",
-       //initiator->get_name()) ) { 			int i=0; (void)i;
+       // initiator->get_name()) ) { 			int i=0; (void)i;
        //		}
         VERIFY( std::find( m_initiators.begin(), m_initiators.end(),
                            initiator ) == m_initiators.end() );
@@ -222,7 +222,7 @@ void door::change_state( actor* const initiator,
                  m_target_state == door_state_open ? "open" : "closed" );
 #endif // #ifdef DEBUG
        //		if ( !xr_strcmp( "sim_default_duty_28212",
-       //initiator->get_name()) ) { 			int i=0; (void)i;
+       // initiator->get_name()) ) { 			int i=0; (void)i;
        //		}
         m_initiators.erase_fast( found );
     }
@@ -238,7 +238,7 @@ void door::change_state( actor* const initiator,
                  m_target_state == door_state_open ? "open" : "closed" );
 #endif // #ifdef DEBUG
        //		if ( !xr_strcmp( "sim_default_duty_28212",
-       //initiator->get_name()) ) { 			int i=0; (void)i;
+       // initiator->get_name()) ) { 			int i=0; (void)i;
        //		}
         change_state( initiator ); // Alundaio: Pass the initator! We need to
                                    // know who is trying to open door!
@@ -265,7 +265,7 @@ void door::on_change_state( door_state const state ) {
     VERIFY( valid( m_previous_state ) );
 
     //	this could happen when doors hasn't been open but is used to be closed
-    //already or vice versa 	VERIFY
+    // already or vice versa 	VERIFY
     //( m_state == door_state_open );
     m_state = state;
 

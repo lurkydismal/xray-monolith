@@ -338,7 +338,7 @@ bool CInventory::Slot( u16 slot_id,
              pIItem->object().ID(), pIItem );
 #endif
         //.		if(m_slots[pIItem->GetSlot()].m_pIItem == pIItem &&
-        //!bNotActivate ) .			Activate(pIItem->GetSlot());
+        //! bNotActivate ) .			Activate(pIItem->GetSlot());
 
         return false;
     }
@@ -537,16 +537,17 @@ void CInventory::Activate( u16 slot, bool bForce ) {
          ( GetNextActiveSlot() == slot && !bForce ) ) {
         //		if (m_iNextActiveSlot != slot) {
         //			LPCSTR const name = smart_cast<CGameObject
-        //const*>(m_pOwner)->cName().c_str(); 			if (
-        //!xr_strcmp("jup_b43_stalker_assistant_pri6695", name) ) 				LogStackTrace
-        //(""); 			Msg				( "[%6d][%s]
-        //CInventory::Activate changing next active slot to %d",
-        //Device.dwTimeGlobal, name, slot );
+        // const*>(m_pOwner)->cName().c_str(); 			if (
+        //! xr_strcmp("jup_b43_stalker_assistant_pri6695", name) )
+        //! LogStackTrace
+        //(""); 			Msg				(
+        //"[%6d][%s] CInventory::Activate changing next active slot to %d",
+        // Device.dwTimeGlobal, name, slot );
         //		}
         m_iNextActiveSlot = slot;
 #ifdef DEBUG
         //		Msg("--- There's no need to activate slot [%d], next
-        //active slot is [%d]", slot, m_iNextActiveSlot);
+        // active slot is [%d]", slot, m_iNextActiveSlot);
 #endif
         return;
     }
@@ -558,7 +559,7 @@ void CInventory::Activate( u16 slot, bool bForce ) {
 
 #ifdef DEBUG
     //	Msg("--- Activating slot [%d], inventory owner: [%s], Frame[%d]", slot,
-    //m_pOwner->Name(), Device.dwFrame);
+    // m_pOwner->Name(), Device.dwFrame);
 #endif // #ifdef DEBUG
 
     // активный слот не выбран
@@ -566,12 +567,13 @@ void CInventory::Activate( u16 slot, bool bForce ) {
         if ( tmp_item ) {
             //			if ( m_iNextActiveSlot != slot) {
             //				LPCSTR const name =
-            //smart_cast<CGameObject const*>(m_pOwner)->cName().c_str(); 				if (
-            //!xr_strcmp("jup_b43_stalker_assistant_pri6695", name) )
+            // smart_cast<CGameObject const*>(m_pOwner)->cName().c_str();
+            // if (
+            //! xr_strcmp("jup_b43_stalker_assistant_pri6695", name) )
             //					LogStackTrace	("");
             //				Msg				(
             //"[%6d][%s] CInventory::Activate changing next active slot2 to %d",
-            //Device.dwTimeGlobal, name, slot );
+            // Device.dwTimeGlobal, name, slot );
             //			}
             m_iNextActiveSlot = slot;
         } else {
@@ -594,7 +596,7 @@ void CInventory::Activate( u16 slot, bool bForce ) {
                 tempItem->SendDeactivateItem();
 #ifdef DEBUG
             //			Msg("--- Inventory owner [%s]: send deactivate
-            //item [%s]", m_pOwner->Name(), active_item->NameItem());
+            // item [%s]", m_pOwner->Name(), active_item->NameItem());
 #endif         // #ifdef DEBUG
         } else // in case where weapon is going to destroy
         {
@@ -603,9 +605,9 @@ void CInventory::Activate( u16 slot, bool bForce ) {
 
             //!			if ( m_iActiveSlot != slot ) {
             //!				LPCSTR const name =
-            //!smart_cast<CGameObject const*>(m_pOwner)->cName().c_str();
+            //! smart_cast<CGameObject const*>(m_pOwner)->cName().c_str();
             //				if (
-            //!xr_strcmp("jup_b43_stalker_assistant_pri6695", name) )
+            //! xr_strcmp("jup_b43_stalker_assistant_pri6695", name) )
             //					LogStackTrace	("");
             //!				Msg
             //!("[%6d][%s] CInventory::Activate changing active slot from %d to
@@ -616,12 +618,12 @@ void CInventory::Activate( u16 slot, bool bForce ) {
         }
         //		if ( m_iNextActiveSlot != slot ) {
         //			LPCSTR const name = smart_cast<CGameObject
-        //const*>(m_pOwner)->cName().c_str(); 			if (
-        //!xr_strcmp("jup_b43_stalker_assistant_pri6695", name) && !slot )
+        // const*>(m_pOwner)->cName().c_str(); 			if (
+        //! xr_strcmp("jup_b43_stalker_assistant_pri6695", name) && !slot )
         //				LogStackTrace	("");
         //			Msg				( "[%6d][%s]
-        //CInventory::Activate changing next active slot3 to %d",
-        //Device.dwTimeGlobal, name, slot );
+        // CInventory::Activate changing next active slot3 to %d",
+        // Device.dwTimeGlobal, name, slot );
         //		}
         m_iNextActiveSlot = slot;
     }

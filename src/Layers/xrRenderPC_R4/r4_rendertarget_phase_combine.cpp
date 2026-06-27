@@ -12,7 +12,7 @@ void CRenderTarget::DoAsyncScreenshot() {
         HRESULT hr;
 
         //	HACK: unbind RT. CopyResourcess needs src and targetr to be
-        //unbound. u_setrt				(
+        // unbound. u_setrt				(
         // Device.dwWidth,Device.dwHeight,HW.pBaseRT,NULL,NULL,HW.pBaseZB);
 
         // ID3DTexture2D *pTex = 0;
@@ -190,8 +190,8 @@ void CRenderTarget::phase_combine() {
                     g_pGamePersistent->nv_shader_data.lum_factor );
 
         //.		Fvector4	envclr			= {
-        //envdesc.sky_color.x*2+EPS,	envdesc.sky_color.y*2+EPS,
-        //envdesc.sky_color.z*2+EPS,	envdesc.weight
+        // envdesc.sky_color.x*2+EPS,	envdesc.sky_color.y*2+EPS,
+        // envdesc.sky_color.z*2+EPS,	envdesc.weight
         //};
         Fvector4 envclr = { envdesc.hemi_color.x * 2 + EPS,
                             envdesc.hemi_color.y * 2 + EPS,
@@ -625,7 +625,7 @@ void CRenderTarget::phase_combine() {
                      HW.pBaseZB );
     }
     //. u_setrt				(
-    //Device.dwWidth,Device.dwHeight,HW.pBaseRT,NULL,NULL,HW.pBaseZB);
+    // Device.dwWidth,Device.dwHeight,HW.pBaseRT,NULL,NULL,HW.pBaseZB);
     RCache.set_CullMode( CULL_NONE );
     RCache.set_Stencil( FALSE );
 
@@ -762,7 +762,7 @@ void CRenderTarget::phase_combine() {
     }
 
     //	if FP16-BLEND !not! supported - draw flares here, overwise they are
-    //already in the bloom target
+    // already in the bloom target
     /* if (!RImplementation.o.fp16_blend)*/
     if ( ps_r2_anomaly_flags.test( R2_AN_FLAG_FLARES ) &&
          ps_r2_heatvision == 0 )                         //--DSR-- HeatVision

@@ -1052,11 +1052,11 @@ void CActor::g_Physics( Fvector& _accel, float jump, float dt ) {
             //(m_PhysicMovementControl->gcontact_HealthLost,hdir,di->DamageInitiator(),m_PhysicMovementControl->ContactBone(),di->HitPos(),0.f,ALife::eHitTypeStrike);//s16(6
             //+ 2*::Random.randI(0,2))
             if ( Level().CurrentControlEntity() == this ) {
-                SHit HDS = SHit(
-                    mctrl->gcontact_HealthLost,
-                    //. 0.0f,
-                    hdir, initiator, mctrl->ContactBone(), di->HitPos(), 0.f,
-                    di->HitType(), 0.0f, b_hit_initiated );
+                SHit HDS =
+                    SHit( mctrl->gcontact_HealthLost,
+                          //. 0.0f,
+                          hdir, initiator, mctrl->ContactBone(), di->HitPos(),
+                          0.f, di->HitType(), 0.0f, b_hit_initiated );
                 //				Hit(&HDS);
 
                 NET_Packet l_P;

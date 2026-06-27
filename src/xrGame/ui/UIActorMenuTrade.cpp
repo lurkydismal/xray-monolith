@@ -519,7 +519,7 @@ void CUIActorMenu::OnBtnPerformTradeBuy( CUIWindow* w, void* d ) {
         m_partner_trade->OnPerformTrade( partner_price, actor_price );
 
         //		TransferItems( m_pTradeActorList,
-        //m_pTradePartnerBagList, m_partner_trade, true );
+        // m_pTradePartnerBagList, m_partner_trade, true );
         TransferItems( m_pTradePartnerList, m_pTradeActorBagList,
                        m_partner_trade, false );
     } else {
@@ -576,7 +576,7 @@ void CUIActorMenu::OnBtnPerformTradeSell( CUIWindow* w, void* d ) {
         TransferItems( m_pTradeActorList, m_pTradePartnerBagList,
                        m_partner_trade, true );
         //		TransferItems( m_pTradePartnerList,
-        //m_pTradeActorBagList,	m_partner_trade, false );
+        // m_pTradeActorBagList,	m_partner_trade, false );
     } else {
         /*		if ( actor_money < 0 )
                         {

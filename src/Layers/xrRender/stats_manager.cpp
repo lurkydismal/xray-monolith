@@ -207,7 +207,7 @@ stats_manager::~stats_manager() {
 #ifdef DEBUG
     Msg( "m_buffers_list.size() = %d", m_buffers_list.size() );
 //	R_ASSERT( m_buffers_list.size() == 0);	//  Some buffers stats are not
-//removed from the list.
+// removed from the list.
 #endif
 }
 

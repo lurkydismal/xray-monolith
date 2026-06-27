@@ -22,14 +22,15 @@
 //		u32			m_count;
 //
 //		IC		 CStats		(LPCSTR from, LPCSTR to, u32
-//count) : 			m_from	(from), 			m_to	(to), 			m_count	(count)
+// count) : 			m_from	(from), 			m_to
+// (to), 			m_count	(count)
 //		{
 //		}
 //
 //		IC	bool operator<	(const CStats &stats) const
 //		{
 //			return					((m_from <
-//stats.m_from) || ((m_from == stats.m_from) && (m_to < stats.m_to)));
+// stats.m_from) || ((m_from == stats.m_from) && (m_to < stats.m_to)));
 //		}
 //	};
 //
@@ -56,7 +57,8 @@
 // public:
 //	IC			void				add
 //(LPCSTR from, LPCSTR to); 	IC			void
-//clear		(); 	IC			void				show
+// clear		(); 	IC			void
+// show
 //();
 // };
 //
@@ -118,7 +120,7 @@
 //	m_temp.insert
 //(m_temp.begin(),m_stats.begin(),m_stats.end()); 	std::sort
 //(m_temp.begin(),m_temp.end(),CStatsPredicate()); 	u32
-//total = 0;
+// total = 0;
 //
 //	xr_vector<CStats>::const_iterator	I = m_temp.begin();
 //	xr_vector<CStats>::const_iterator	E = m_temp.end();
@@ -131,7 +133,7 @@
 //
 //	I = m_temp.begin(); 	for ( ; I != E; ++I) 		Msg
 //("%8d %6.2f% :
-//smart_cast<%s>(%s)",(*I).m_count,float((*I).m_count)*100.f/float(total),(*I).m_to,(*I).m_from);
+// smart_cast<%s>(%s)",(*I).m_count,float((*I).m_count)*100.f/float(total),(*I).m_to,(*I).m_from);
 // }
 //
 // void add_smart_cast_stats		(LPCSTR from, LPCSTR to)
@@ -159,7 +161,7 @@
 // #	endif
 // #else
 //	Msg							("!
-//SMART_CAST_STATS macros is not defined, stats is disabled"); #endif
+// SMART_CAST_STATS macros is not defined, stats is disabled"); #endif
 // }
 //
 // void clear_smart_cast_stats		()
@@ -171,7 +173,7 @@
 // #	endif
 // #else
 //	Msg							("!
-//SMART_CAST_STATS macros is not defined, stats is disabled"); #endif
+// SMART_CAST_STATS macros is not defined, stats is disabled"); #endif
 // }
 //
 // void release_smart_cast_stats	()

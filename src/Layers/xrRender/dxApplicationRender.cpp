@@ -82,7 +82,7 @@ void dxApplicationRender::load_draw_internal( CApplication& owner ) {
     //	FLOAT ColorRGBA[4] = {0.0f, 0.0f, 1.0f, 0.0f};
     //	HW.pContext->ClearRenderTargetView( RCache.get_RT(), ColorRGBA);
     //	HW.pContext->ClearDepthStencilView( RCache.get_ZB(),
-    //D3D_CLEAR_DEPTH|D3D_CLEAR_STENCIL, 1.0f, 0);
+    // D3D_CLEAR_DEPTH|D3D_CLEAR_STENCIL, 1.0f, 0);
 #endif //	USE_DX10
 
     float _w = ( float )Device.dwWidth;

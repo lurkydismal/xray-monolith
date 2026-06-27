@@ -100,11 +100,11 @@ void CAI_Rat::SelectAnimation( const Fvector& /**_view/**/,
             if ( left_angle( -movement().m_body.target.yaw,
                              -movement().m_body.current.yaw ) )
                 //					tpGlobalAnimation =
-                //m_tRatAnimations.tNormal.tGlobal.tpaIdle[0];
+                // m_tRatAnimations.tNormal.tGlobal.tpaIdle[0];
                 tpGlobalAnimation = m_tRatAnimations.tNormal.tGlobal.tpTurnLeft;
             else
                 //					tpGlobalAnimation =
-                //m_tRatAnimations.tNormal.tGlobal.tpaIdle[0];
+                // m_tRatAnimations.tNormal.tGlobal.tpaIdle[0];
                 tpGlobalAnimation =
                     m_tRatAnimations.tNormal.tGlobal.tpTurnRight;
         }

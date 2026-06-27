@@ -369,10 +369,10 @@ static Reg asm_fuseload( ASMState* as, IRRef ref, RegSet allow ) {
             }
         } else if ( ir->o == IR_XLOAD ) {
             /* Generic fusion is not ok for 8/16 bit operands (but see
-            * asm_comp).
-            ** Fusing unaligned memory operands is ok on x86 (except for SIMD
-            * types).
-            */
+             * asm_comp).
+             ** Fusing unaligned memory operands is ok on x86 (except for SIMD
+             * types).
+             */
             if ( ( !irt_typerange( ir->t, IRT_I8, IRT_U16 ) ) &&
                  noconflict( as, ref, IR_XSTORE, 0 ) ) {
                 asm_fusexref( as, ir->op1, xallow );
@@ -1846,12 +1846,12 @@ static void asm_fpmath( ASMState* as, IRIns* ir ) {
             case IRFPM_LOG2:
             case IRFPM_LOG10:
                 /* Note: the use of fyl2xp1 would be pointless here. When
-                * computing
-                ** log(1.0+eps) the precision is already lost after 1.0 is
-                * added.
-                ** Subtracting 1.0 won't recover it. OTOH math.log1p would make
-                * sense.
-                */
+                 * computing
+                 ** log(1.0+eps) the precision is already lost after 1.0 is
+                 * added.
+                 ** Subtracting 1.0 won't recover it. OTOH math.log1p would make
+                 * sense.
+                 */
                 emit_x87op( as, XI_FYL2X );
                 break;
             case IRFPM_OTHER:

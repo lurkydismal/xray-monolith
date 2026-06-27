@@ -3,6 +3,7 @@
 #include "../../ai_object_location.h"
 #include "../../ai_space.h"
 #include "../../cover_point.h"
+#include "../../game_graph.h"
 #include "../../level_graph.h"
 #include "../../patrol_path.h"
 #include "../../patrol_path_storage.h"
@@ -10,7 +11,6 @@
 #include "BaseMonster/base_monster.h"
 #include "monster_cover_manager.h"
 #include "stdafx.h"
-#include "../../game_graph.h"
 
 #ifdef _DEBUG
 

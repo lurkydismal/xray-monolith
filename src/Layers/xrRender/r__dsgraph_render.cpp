@@ -603,7 +603,7 @@ void CDSGraphManager::r_dsgraph_capture_dynamic( CObject* O ) {
 #endif
 
                 //				if ((spatial->spatial.type &
-                //STYPE_LIGHTSOURCE))
+                // STYPE_LIGHTSOURCE))
                 //				{
                 //					// lightsource
                 //					if (light* L =

@@ -128,7 +128,7 @@ void CShootingObject::LoadFireParams( LPCSTR section ) {
                                              // уровней сложности такие же
 
     int num_game_diff_param = _GetItemCount(
-        *s_sHitPower ); // узнаём колличество параметров для хитов
+        *s_sHitPower );            // узнаём колличество параметров для хитов
     if ( num_game_diff_param > 1 ) // если задан второй параметр хита
     {
         fvHitPower[ egdVeteran ] = ( float )atof(

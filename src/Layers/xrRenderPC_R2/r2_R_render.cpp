@@ -82,7 +82,7 @@ void CRender::Render() {
     }
 
     //.	VERIFY					(g_pGameLevel &&
-    //g_pGameLevel->pHUD);
+    // g_pGameLevel->pHUD);
 
     // Configure
     RImplementation.o.distortion = FALSE; // disable distorion
@@ -205,8 +205,8 @@ void CRender::render_forward() {
         RImplementation.o.distortion_enabled; // enable distorion
 
     //******* Main render - second order geometry (the one, that doesn't support
-    //deffering) .todo: should be done inside "combine" with estimation of of
-    //luminance, tone-mapping, etc.
+    // deffering) .todo: should be done inside "combine" with estimation of of
+    // luminance, tone-mapping, etc.
     {
         HOM.Enable();
         // level

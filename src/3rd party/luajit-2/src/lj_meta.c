@@ -267,17 +267,19 @@ TValue* lj_meta_cat( lua_State* L, TValue* top, int left ) {
                 }
             }
             /* One of the top two elements is not a string, call __cat
-            * metamethod:
-            **
-            ** before:    [...][CAT stack .........................]
-            **                                 top-1     top         top+1 top+2
-            ** pick two:  [...][CAT stack ...] [o1]      [o2]
-            ** setup mm:  [...][CAT stack ...] [cont|?]  [mo|tmtype] [o1]  [o2]
-            ** in asm:    [...][CAT stack ...] [cont|PC] [mo|delta]  [o1]  [o2]
-            **            ^-- func base                              ^-- mm base
-            ** after mm:  [...][CAT stack ...] <--push-- [result]
-            ** next step: [...][CAT stack .............]
-            */
+             * metamethod:
+             **
+             ** before:    [...][CAT stack .........................]
+             **                                 top-1     top         top+1
+             * top+2
+             ** pick two:  [...][CAT stack ...] [o1]      [o2]
+             ** setup mm:  [...][CAT stack ...] [cont|?]  [mo|tmtype] [o1]  [o2]
+             ** in asm:    [...][CAT stack ...] [cont|PC] [mo|delta]  [o1]  [o2]
+             **            ^-- func base                              ^-- mm
+             * base
+             ** after mm:  [...][CAT stack ...] <--push-- [result]
+             ** next step: [...][CAT stack .............]
+             */
             copyTV( L, top + 2,
                     top ); /* Careful with the order of stack copies! */
             copyTV( L, top + 1, top - 1 );
@@ -288,13 +290,13 @@ TValue* lj_meta_cat( lua_State* L, TValue* top, int left ) {
             ( void )tostring( L, top - 1 );
         } else {
             /* Pick as many strings as possible from the top and concatenate
-            * them:
-            **
-            ** before:    [...][CAT stack ...........................]
-            ** pick str:  [...][CAT stack ...] [...... strings ......]
-            ** concat:    [...][CAT stack ...] [result]
-            ** next step: [...][CAT stack ............]
-            */
+             * them:
+             **
+             ** before:    [...][CAT stack ...........................]
+             ** pick str:  [...][CAT stack ...] [...... strings ......]
+             ** concat:    [...][CAT stack ...] [result]
+             ** next step: [...][CAT stack ............]
+             */
             MSize tlen = strV( top )->len;
             char* buffer;
             int i;

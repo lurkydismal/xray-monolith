@@ -4,7 +4,7 @@
 //  Modified 	: 26.11.2002
 //	Author		: Dmitriy Iassenev
 //	Description : AI Behaviour for monster "Rat" (inline functions
-//implementation)
+// implementation)
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

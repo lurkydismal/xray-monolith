@@ -48,15 +48,16 @@ extern u32 dm_cache_line;
 extern u32 dm_cache_size;
 extern float dm_fade;
 extern u32 dm_current_size; //				=
-                            //iFloor((float)ps_r__detail_radius/4)*2;
+                            // iFloor((float)ps_r__detail_radius/4)*2;
                             ////!
 extern u32 dm_current_cache1_line;
 //		= dm_current_size*2/dm_cache1_count;		//!
-//dm_current_size*2 must be div dm_cache1_count
+// dm_current_size*2 must be div dm_cache1_count
 extern u32
-    dm_current_cache_line;        //		= dm_current_size+1+dm_current_size;
-extern u32 dm_current_cache_size; //		=
-                                  //dm_current_cache_line*dm_current_cache_line;
+    dm_current_cache_line; //		= dm_current_size+1+dm_current_size;
+extern u32
+    dm_current_cache_size; //		=
+                           // dm_current_cache_line*dm_current_cache_line;
 extern float
     dm_current_fade; //				= float(2*dm_current_size)-.5f;
 extern float ps_current_detail_density;

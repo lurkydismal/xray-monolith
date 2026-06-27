@@ -2247,7 +2247,7 @@ void game_sv_Deathmatch::FillDeathActorRejectItems(
         smart_cast< CActor* >( Level().Objects.net_Find( actor->ID ) );
 
     //	R_ASSERT2( pActor, make_string("Actor not found. actor_id = [%d]",
-    //actor->ID).c_str() );
+    // actor->ID).c_str() );
     VERIFY2(
         pActor,
         make_string( "Actor not found. actor_id = [%d]", actor->ID ).c_str() );

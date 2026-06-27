@@ -131,7 +131,7 @@ void CUIHudStatesWnd::InitFromXml( CUIXml& xml, LPCSTR path ) {
         UIHelper::CreateStatic( xml, "indik_psi", this );
 
     //	m_lanim_name				= xml.ReadAttrib( "indik_rad",
-    //0, "light_anim", "" );
+    // 0, "light_anim", "" );
 
     m_ui_weapon_cur_ammo =
         UIHelper::CreateTextWnd( xml, "static_cur_ammo", this );

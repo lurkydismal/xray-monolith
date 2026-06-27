@@ -137,7 +137,8 @@ void CPhysicsShellHolder::PHHit( SHit& H ) {
 }
 
 // void	CPhysicsShellHolder::Hit(float P, Fvector &dir, CObject* who, s16
-// element, 						 Fvector p_in_object_space, float impulse, ALife::EHitType hit_type)
+// element, 						 Fvector
+// p_in_object_space, float impulse, ALife::EHitType hit_type)
 void CPhysicsShellHolder::Hit( SHit* pHDS ) {
     bool const is_special_burn_hit_2_self =
         ( pHDS->who == this ) && ( pHDS->boneID == BI_NONE ) &&
@@ -208,9 +209,10 @@ void CPhysicsShellHolder::correct_spawn_pos() {
     ////	VERIFY
     ///(valid_pos(activation_shape.Position(),phBoundaries));
     //	if (!valid_pos(activation_shape.Position(),phBoundaries)) {
-    //		CPHActivationShape activation_shape; 		activation_shape.Create
-    //(c,size,this); 		activation_shape.set_rotation	(XFORM());
-    //		activation_shape.Activate		(size,1,1.f,M_PI/8.f);
+    //		CPHActivationShape activation_shape;
+    //activation_shape.Create (c,size,this);
+    //activation_shape.set_rotation	(XFORM()); 		activation_shape.Activate
+    //(size,1,1.f,M_PI/8.f);
     ////		VERIFY
     ///(valid_pos(activation_shape.Position(),phBoundaries));
     //	}

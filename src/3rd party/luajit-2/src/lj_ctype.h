@@ -332,26 +332,28 @@ enum {
 /* -- C tokens and keywords ----------------------------------------------- */
 
 /* C lexer keywords. */
-#define CTOKDEF( _ )                                                    \
-    _( IDENT, "<identifier>" )                                          \
-    _( STRING, "<string>" ) _( INTEGER, "<integer>" ) _( EOF, "<eof>" ) \
-        _( OROR, "||" ) _( ANDAND, "&&" ) _( EQ, "==" ) _( NE, "!=" )   \
-            _( LE, "<=" ) _( GE, ">=" ) _( SHL, "<<" ) _( SHR, ">>" )   \
-                _( DEREF, "->" )
+#define CTOKDEF( _ )                                                \
+    _( IDENT, "<identifier>" )                                      \
+    _( STRING, "<string>" )                                         \
+    _( INTEGER, "<integer>" ) _( EOF, "<eof>" ) _( OROR, "||" )     \
+        _( ANDAND, "&&" ) _( EQ, "==" ) _( NE, "!=" ) _( LE, "<=" ) \
+            _( GE, ">=" ) _( SHL, "<<" ) _( SHR, ">>" ) _( DEREF, "->" )
 
 /* Simple declaration specifiers. */
-#define CDSDEF( _ )                                                         \
-    _( VOID )                                                               \
-    _( BOOL ) _( CHAR ) _( INT ) _( FP ) _( LONG ) _( LONGLONG ) _( SHORT ) \
-        _( COMPLEX ) _( SIGNED ) _( UNSIGNED ) _( CONST ) _( VOLATILE )     \
-            _( RESTRICT ) _( INLINE ) _( TYPEDEF ) _( EXTERN ) _( STATIC )  \
-                _( AUTO ) _( REGISTER )
+#define CDSDEF( _ )                                                            \
+    _( VOID )                                                                  \
+    _( BOOL )                                                                  \
+    _( CHAR ) _( INT ) _( FP ) _( LONG ) _( LONGLONG ) _( SHORT ) _( COMPLEX ) \
+        _( SIGNED ) _( UNSIGNED ) _( CONST ) _( VOLATILE ) _( RESTRICT )       \
+            _( INLINE ) _( TYPEDEF ) _( EXTERN ) _( STATIC ) _( AUTO )         \
+                _( REGISTER )
 
 /* C keywords. */
-#define CKWDEF( _ )                                                  \
-    CDSDEF( _ )                                                      \
-    _( EXTENSION ) _( ASM ) _( ATTRIBUTE ) _( DECLSPEC ) _( CCDECL ) \
-        _( PTRSZ ) _( STRUCT ) _( UNION ) _( ENUM ) _( SIZEOF ) _( ALIGNOF )
+#define CKWDEF( _ )                                                          \
+    CDSDEF( _ )                                                              \
+    _( EXTENSION )                                                           \
+    _( ASM ) _( ATTRIBUTE ) _( DECLSPEC ) _( CCDECL ) _( PTRSZ ) _( STRUCT ) \
+        _( UNION ) _( ENUM ) _( SIZEOF ) _( ALIGNOF )
 
 /* C token numbers. */
 enum {

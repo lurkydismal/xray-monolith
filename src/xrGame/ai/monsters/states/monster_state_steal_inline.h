@@ -72,7 +72,7 @@ bool CStateMonsterStealAbstract::check_conditions() {
     // Path with minimal deviation
     // if (object->control().path_builder().detail().time_path_built() >=
     // time_state_started) { 	if (object->path().get_path_angle() >
-    //STEAL_MAX_PATH_ANGLE)	return false;
+    // STEAL_MAX_PATH_ANGLE)	return false;
     //}
 
     // check distance to enemy

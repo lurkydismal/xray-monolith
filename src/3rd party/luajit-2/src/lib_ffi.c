@@ -349,8 +349,8 @@ LJLIB_SET( __metatable )
 
 #define LJLIB_MODULE_ffi_clib
 
-    /* Index C library by a name. */
-    static TValue* ffi_clib_index( lua_State* L ) {
+/* Index C library by a name. */
+static TValue* ffi_clib_index( lua_State* L ) {
     TValue* o = L->base;
     CLibrary* cl;
     if ( !( o < L->top && tvisudata( o ) &&
@@ -462,7 +462,7 @@ LJLIB_SET( __index )
 
 #define LJLIB_MODULE_ffi
 
-    LJLIB_CF( ffi_cdef ) {
+LJLIB_CF( ffi_cdef ) {
     GCstr* s = lj_lib_checkstr( L, 1 );
     CPState cp;
     int errcode;
@@ -737,7 +737,7 @@ LJLIB_CF( ffi_abi ) LJLIB_REC(.) {
 LJLIB_PUSH( top - 8 )
 LJLIB_SET( !) /* Store reference to miscmap table. */
 
-    LJLIB_CF( ffi_metatype ) {
+LJLIB_CF( ffi_metatype ) {
     CTState* cts = ctype_cts( L );
     CTypeID id = ffi_checkctype( L, cts, NULL );
     GCtab* mt = lj_lib_checktab( L, 2 );
@@ -763,7 +763,7 @@ LJLIB_SET( !) /* Store reference to miscmap table. */
 LJLIB_PUSH( top - 7 )
 LJLIB_SET( !) /* Store reference to finalizer table. */
 
-    LJLIB_CF( ffi_gc ) LJLIB_REC(.) {
+LJLIB_CF( ffi_gc ) LJLIB_REC(.) {
     GCcdata* cd = ffi_checkcdata( L, 1 );
     TValue* fin = lj_lib_checkany( L, 2 );
     CTState* cts = ctype_cts( L );
@@ -788,7 +788,7 @@ LJLIB_SET( !) /* Store reference to finalizer table. */
 LJLIB_PUSH( top - 5 )
 LJLIB_SET( !) /* Store clib metatable in func environment. */
 
-    LJLIB_CF( ffi_load ) {
+LJLIB_CF( ffi_load ) {
     GCstr* name = lj_lib_checkstr( L, 1 );
     int global = ( L->base + 1 < L->top && tvistruecond( L->base + 1 ) );
     lj_clib_load( L, tabref( curr_func( L )->c.env ), name, global );
@@ -796,8 +796,8 @@ LJLIB_SET( !) /* Store clib metatable in func environment. */
 }
 
 LJLIB_PUSH( top - 4 )
-LJLIB_SET( C ) LJLIB_PUSH( top - 3 ) LJLIB_SET( os ) LJLIB_PUSH( top - 2 )
-    LJLIB_SET( arch )
+LJLIB_SET( C )
+LJLIB_PUSH( top - 3 ) LJLIB_SET( os ) LJLIB_PUSH( top - 2 ) LJLIB_SET( arch )
 #include "lj_libdef.h"
 
     /* ------------------------------------------------------------------------

@@ -100,5 +100,5 @@ protected:
     void Load_section_type( ALife::EInfluenceType type, LPCSTR section );
     void UpdateIndicatorType( CActor* actor, ALife::EInfluenceType type );
     //			void	SwitchLA			( bool state,
-    //ALife::EInfluenceType type );
+    // ALife::EInfluenceType type );
 }; // class CUIHudStatesWnd

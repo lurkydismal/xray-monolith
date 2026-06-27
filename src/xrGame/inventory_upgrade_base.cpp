@@ -84,8 +84,8 @@ bool UpgradeBase::contain_upgrade( const shared_str& upgrade_id ) {
 
 void UpgradeBase::fill_root_container( Root* root ) {
     //!=R_ASSERT2( 0, make_string( "! Can`t fill <%s> in
-    //!<UpgradeBase::fill_root_container> for root = %s", id_str(),
-    //!root->id_str() ) );
+    //!< UpgradeBase::fill_root_container> for root = %s", id_str(),
+    //! root->id_str() ) );
     Groups_type::iterator ib = m_depended_groups.begin();
     Groups_type::iterator ie = m_depended_groups.end();
     for ( ; ib != ie; ++ib ) {

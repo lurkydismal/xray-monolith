@@ -137,7 +137,7 @@ bool CUIActorMenu::OnItemDrop( CUICellItem* itm ) {
         } break;
         case iActorSlot: {
             //.
-            //if(GetSlotList(CurrentIItem()->GetSlot())==new_owner)
+            // if(GetSlotList(CurrentIItem()->GetSlot())==new_owner)
             u16 slot_to_place;
             if ( CanSetItemToList( CurrentIItem(), new_owner, slot_to_place ) )
                 ToSlot( itm, true, slot_to_place );

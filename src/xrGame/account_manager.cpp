@@ -212,7 +212,7 @@ void account_manager::create_profile( char const* nick,
     // if (tmp_res != GP_NO_ERROR)
     //{
     //	m_account_creation_cb(false,
-    //CGameSpy_GP::TryToTranslate(tmp_res).c_str());
+    // CGameSpy_GP::TryToTranslate(tmp_res).c_str());
     // }
 }
 
@@ -239,7 +239,7 @@ void account_manager::delete_profile( account_operation_cb dpcb ) {
     // if (tmp_res != GP_NO_ERROR)
     //{
     //	m_profile_deleting_cb(false,
-    //CGameSpy_GP::TryToTranslate(tmp_res).c_str());
+    // CGameSpy_GP::TryToTranslate(tmp_res).c_str());
     // }
 }
 
@@ -408,7 +408,7 @@ void __cdecl account_manager::new_user_cb( GPConnection* connection,
     // if (creation_resp->result != GP_NO_ERROR)
     //{
     //	tmp_inst->m_account_creation_cb(false,
-    //CGameSpy_GP::TryToTranslate(creation_resp->result).c_str()); 	return;
+    // CGameSpy_GP::TryToTranslate(creation_resp->result).c_str()); 	return;
     // }
     // tmp_inst->m_account_creation_cb(true, "");
 }
@@ -459,7 +459,8 @@ void __cdecl account_manager::unicks_suggestion_cb( GPConnection* connection,
     // for (int i = 0; i < tmp_arg->numSuggestedNicks; ++i)
     //{
     //	tmp_inst->m_suggested_nicks.push_back
-    //(tmp_arg->suggestedNicks[i]); 	tmp_inst->m_suggested_nicks_ptrs.push_back
+    //(tmp_arg->suggestedNicks[i]);
+    //tmp_inst->m_suggested_nicks_ptrs.push_back
     //(tmp_inst->m_suggested_nicks.back().c_str());
     // }
     // tmp_cb(tmp_arg->numSuggestedNicks, "");
@@ -475,7 +476,7 @@ void __cdecl account_manager::delete_profile_cb( GPConnection* connection,
     // GP_NO_ERROR)
     //{
     //	tmp_inst->m_profile_deleting_cb(false,
-    //CGameSpy_GP::TryToTranslate(tmp_arg->result).c_str()); 	return;
+    // CGameSpy_GP::TryToTranslate(tmp_arg->result).c_str()); 	return;
     // }
     // VERIFY(tmp_inst->m_gamespy_gp);
     // login_manager*	tmp_lmngr				=

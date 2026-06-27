@@ -1265,7 +1265,7 @@ void CScriptGameObject::add_restrictions( LPCSTR out, LPCSTR in ) {
     }
 
     //	Msg	( "object[%s] add_restrictions( \"%s\", \"%s\" )",
-    //monster->cName().c_str(), out, in );
+    // monster->cName().c_str(), out, in );
     monster->movement().restrictions().add_restrictions( out, in );
 }
 
@@ -1282,7 +1282,7 @@ void CScriptGameObject::remove_restrictions( LPCSTR out, LPCSTR in ) {
     }
 
     //	Msg	( "object[%s] remove_restrictions( \"%s\", \"%s\" )",
-    //monster->cName().c_str(), out, in );
+    // monster->cName().c_str(), out, in );
     monster->movement().restrictions().remove_restrictions( out, in );
 }
 
@@ -1299,7 +1299,7 @@ void CScriptGameObject::remove_all_restrictions() {
     }
 
     //	Msg	( "object[%s] remove_all_restrictions( )",
-    //monster->cName().c_str() );
+    // monster->cName().c_str() );
     monster->movement().restrictions().remove_all_restrictions();
 }
 

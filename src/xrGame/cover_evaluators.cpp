@@ -46,7 +46,7 @@ CCoverEvaluatorBase::CCoverEvaluatorBase( CRestrictedObject* object ) {
 
 bool CCoverEvaluatorBase::inertia( Fvector const& position, float radius ) {
     //	m_actuality				= m_actuality &&
-    //fsimilar(m_last_radius,radius); 	m_actuality
+    // fsimilar(m_last_radius,radius); 	m_actuality
     //= m_actuality && ((m_last_radius + EPS_L) >= radius);
     bool radius_criteria = ( ( m_last_radius + EPS_L ) >= radius );
     bool time_criteria =
@@ -148,7 +148,7 @@ void CCoverEvaluatorFarFromEnemy::evaluate_cover(
     float enemy_distance =
         m_enemy_position.distance_to( cover_point->position() );
     //	float					my_distance		=
-    //m_start_position.distance_to(cover_point->position());
+    // m_start_position.distance_to(cover_point->position());
 
     if ( ( enemy_distance <= m_min_distance ) &&
          ( m_current_distance > enemy_distance ) )
@@ -165,9 +165,9 @@ void CCoverEvaluatorFarFromEnemy::evaluate_cover(
     //	float					y,p;
     //	direction.sub
     //(m_enemy_position,cover_point->position()); 	direction.getHP
-    //(y,p); 	y						= angle_normalize(y);
-    //	float					cover_value =
-    //ai().level_graph().cover_in_direction(y,cover_point->level_vertex_id());
+    //(y,p); 	y						=
+    //angle_normalize(y); 	float					cover_value =
+    // ai().level_graph().cover_in_direction(y,cover_point->level_vertex_id());
     if ( enemy_distance <= -m_best_value )
         return;
 
@@ -275,7 +275,7 @@ void CCoverEvaluatorBest::evaluate_cover( const CCoverPoint* cover_point,
     m_best_value = value;
     m_loophole = 0;
     //	Msg						("Loophole is NULL
-    //CCoverEvaluatorBest::evaluate_cover");
+    // CCoverEvaluatorBest::evaluate_cover");
 }
 
 void CCoverEvaluatorBest::evaluate_smart_cover(
@@ -397,7 +397,7 @@ void CCoverEvaluatorAmbush::setup( const Fvector& my_position,
     inherited::setup();
 
     //	m_actuality				= m_actuality &&
-    //m_my_position.similar(my_position);
+    // m_my_position.similar(my_position);
     m_my_position = my_position;
 
     m_actuality =
@@ -412,7 +412,7 @@ void CCoverEvaluatorAmbush::setup( const Fvector& my_position,
 void CCoverEvaluatorAmbush::evaluate_cover( const CCoverPoint* cover_point,
                                             float weight ) {
     //	float					enemy_distance =
-    //m_enemy_position.distance_to(cover_point->position());
+    // m_enemy_position.distance_to(cover_point->position());
     float my_distance = m_my_position.distance_to( cover_point->position() );
 
     if ( my_distance <= m_min_enemy_distance )

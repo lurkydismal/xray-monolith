@@ -232,7 +232,7 @@ void game_cl_CaptureTheArtefact::TranslateGameMessage( u32 msg,
     char Color_Main[] = "%c[255,192,192,192]";
     char Color_Artefact[] = "%c[255,255,255,0]";
     //	LPSTR	TeamsNames[3]		= {"Zero Team", "Team Green", "Team
-    //Blue"};
+    // Blue"};
 
     switch ( msg ) {
             //-------------------UI MESSAGES

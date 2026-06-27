@@ -39,8 +39,8 @@ const u16 TEST_RAYS_PER_OBJECT = 5;
 const u16 BLASTED_OBJ_PROCESSED_PER_FRAME = 3;
 const float exp_dist_extinction_factor = 3.f;
 //(>1.f, 1.f -means no dist change of exp effect)	on the dist of
-//m_fBlastRadius exp. wave effect in exp_dist_extinction_factor times less than
-//maximum
+// m_fBlastRadius exp. wave effect in exp_dist_extinction_factor times less than
+// maximum
 
 CExplosive::CExplosive( void ) {
     m_fBlastHit = 50.0f;
@@ -380,7 +380,7 @@ void CExplosive::Explode() {
         m_fBlastRadius * 2.0f );
 
     //	Msg("---------CExplosive Explode [%d]
-    //frame[%d]",cast_game_object()->ID(), Device.dwFrame);
+    // frame[%d]",cast_game_object()->ID(), Device.dwFrame);
     OnBeforeExplosion();
     // играем звук взрыва
 
@@ -549,7 +549,7 @@ void CExplosive::UpdateCL() {
         StopLight();
 
         //		Msg("---------CExplosive OnAfterExplosion [%d]
-        //frame[%d]",cast_game_object()->ID(), Device.dwFrame);
+        // frame[%d]",cast_game_object()->ID(), Device.dwFrame);
     } else {
         m_fExplodeDuration -= Device.fTimeDelta;
         if ( !m_bHideInExplosion && !m_bAlreadyHidden ) {
@@ -593,7 +593,7 @@ void CExplosive::OnAfterExplosion() {
     //(P,GE_DESTROY,cast_game_object()->ID());
     //	//		Msg					("ge_destroy:
     //[%d] - %s",ID(),*cName()); 	if (cast_game_object()->Local())
-    //cast_game_object()->u_EventSend			(P);
+    // cast_game_object()->u_EventSend			(P);
 }
 
 void CExplosive::OnBeforeExplosion() {
@@ -769,8 +769,9 @@ void CExplosive::ExplodeWaveProcessObject( collide::rq_results& storage,
         l_dir.mul( 1.f / rmag ); // перенормировка
         NET_Packet P;
         SHit HS;
-        HS.GenHeader( GE_HIT, l_pGO->ID() ); //		cast_game_object()->u_EventGen
-                                             //(P,GE_HIT,l_pGO->ID());
+        HS.GenHeader( GE_HIT,
+                      l_pGO->ID() ); //		cast_game_object()->u_EventGen
+                                     //(P,GE_HIT,l_pGO->ID());
         HS.whoID =
             Initiator();                        //		P.w_u16			(Initiator());
         HS.weaponID = cast_game_object()->ID(); //		P.w_u16
@@ -778,9 +779,9 @@ void CExplosive::ExplodeWaveProcessObject( collide::rq_results& storage,
         HS.dir = l_dir;                         //		P.w_dir			(l_dir);
         HS.power = l_hit;                       //		P.w_float		(l_hit);
         HS.p_in_bone_space =
-            l_goPos; //		P.w_vec3		(l_goPos);
-        HS.impulse =
-            l_impuls;                      //		P.w_float		(l_impuls);
+            l_goPos;                       //		P.w_vec3		(l_goPos);
+        HS.impulse = l_impuls;             //		P.w_float
+                                           //(l_impuls);
         HS.hit_type = ( m_eHitTypeBlast ); //		P.w_u16
                                            //(u16(m_eHitTypeBlast));
         HS.boneID = 0;                     //		P.w_s16			(0);

@@ -259,7 +259,7 @@ class_< CScriptGameObject > script_register_game_object1(
 
         //.def("set_hear_callback",			(void
         //(CScriptGameObject::*)(const ::luabind::object &,
-        //LPCSTR))(&CScriptGameObject::SetSoundCallback))
+        // LPCSTR))(&CScriptGameObject::SetSoundCallback))
         //.def("set_hear_callback",			(void
         //(CScriptGameObject::*)(const ::luabind::functor<void>
         //&))(&CScriptGameObject::SetSoundCallback)) .def("clear_hear_callback",
@@ -488,9 +488,10 @@ class_< CScriptGameObject > script_register_game_object1(
                                        CScriptGameObject::DisableHitMarks )
         .def( "get_movement_speed", &CScriptGameObject::GetMovementSpeed )
         .def( "set_movement_speed",
-              &CScriptGameObject::SetMovementSpeed ) // momopate:
-                                                     // db.actor:set_momvement_speed(vector
-                                                     // vel)
+              &CScriptGameObject::
+                  SetMovementSpeed ) // momopate:
+                                     // db.actor:set_momvement_speed(vector
+                                     // vel)
 
         .def( "set_npc_position",
               SAFE_WRAP( &CScriptGameObject::SetNpcPosition ) )

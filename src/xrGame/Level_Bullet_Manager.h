@@ -1,6 +1,6 @@
 // Level_Bullet_Manager.h:  для обеспечения полета пули по траектории
 //							все пули и осколки
-//передаются сюда
+// передаются сюда
 //////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -97,7 +97,7 @@ public:
                float start_speed,
                float power,
                //.
-               //float	power_critical,
+               // float	power_critical,
                float impulse,
                u16 sender_id,
                u16 sendersweapon_id,

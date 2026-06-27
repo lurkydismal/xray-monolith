@@ -89,9 +89,10 @@ void CStalkerActionDangerInDirectionTakeCover::execute() {
         object().movement().set_level_dest_vertex( point->level_vertex_id() );
         object().movement().set_desired_position( &point->position() );
         //		if (object().movement().path_completed() &&
-        //object().Position().distance_to(point->position()) < 1.f)
+        // object().Position().distance_to(point->position()) < 1.f)
         //			object().brain().affect_cover
-        //(true); 		else 			object().brain().affect_cover			(false);
+        //(true); 		else
+        //object().brain().affect_cover			(false);
     } else {
         object().movement().set_nearest_accessible_position();
         //		object().brain().affect_cover
@@ -162,7 +163,7 @@ void CStalkerActionDangerInDirectionLookOut::execute() {
     // Alundaio: END
 
     //	CMemoryInfo mem_object =
-    //object().memory().memory(object().memory().danger().selected()->object());
+    // object().memory().memory(object().memory().danger().selected()->object());
     //
     //	if (!mem_object.m_object)
     //		return;
@@ -250,7 +251,7 @@ void CStalkerActionDangerInDirectionHoldPosition::execute() {
     inherited::execute();
 
     //	CMemoryInfo mem_object =
-    //object().memory().memory(object().memory().danger().selected()->object());
+    // object().memory().memory(object().memory().danger().selected()->object());
     //
     //	if (!mem_object.m_object)
     //		return;

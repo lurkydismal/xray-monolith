@@ -187,7 +187,7 @@ void CALifeGraphRegistry::detach( CSE_Abstract& object,
         }
 #endif // DEBUG
        //		R_ASSERT2				(value,"Can't
-       //detach an item which is not on my own");
+       // detach an item which is not on my own");
     }
 }
 

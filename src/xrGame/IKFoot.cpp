@@ -342,7 +342,7 @@ bool CIKFoot::GetFootStepMatrix( ik_goal_matrix& m,
     // if( ph_dbg_draw_mask.test( phDbgDrawIKGoal ) )
     //{
     //	DBG_DrawLine( global_point, Fvector().add( global_point, foot_normal ),
-    //D3DCOLOR_XRGB( 0, 255, 255) );
+    // D3DCOLOR_XRGB( 0, 255, 255) );
     // }
 #endif
     if ( cld.m_collide_point == ik_foot_geom::heel ||

@@ -313,7 +313,7 @@ typedef int32_t UTextOffset;
 U_CFUNC const uint8_t utf8_countTrailBytes[];
 #else
 U_CFUNC U_IMPORT const uint8_t utf8_countTrailBytes[];
-    /* U_IMPORT2? */ /*U_IMPORT*/
+/* U_IMPORT2? */ /*U_IMPORT*/
 #endif
 
 /**

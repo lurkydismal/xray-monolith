@@ -117,7 +117,7 @@ public:
                           ClientID sender );
 
     virtual void OnTeamScore( u32 /**team/**/, bool ); // команда выиграла
-    virtual void OnTeamsInDraw() {}; // ничья
+    virtual void OnTeamsInDraw() {};                   // ничья
 
     // Events
     virtual void OnRoundStart(); // старт раунда

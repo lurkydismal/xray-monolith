@@ -209,7 +209,7 @@ void CMovementManager::update_path() {
             case ePathTypePatrolPath: {
                 //				Msg
                 //("[%6d][%s] actuality is
-                //false",Device.dwFrame,*object().cName());
+                // false",Device.dwFrame,*object().cName());
                 m_path_state = ePathStateSelectPatrolPoint;
                 break;
             }
@@ -399,7 +399,7 @@ void CMovementManager::on_travel_point_change(
 
 void CMovementManager::enable_movement( bool enabled ) {
     //	m_path_actuality					=
-    //m_path_actuality && (m_enabled == enabled);
+    // m_path_actuality && (m_enabled == enabled);
     if ( !enabled && m_enabled )
         m_on_disable_object_position = object().Position();
     else {
@@ -426,7 +426,7 @@ void CMovementManager::build_level_path( bool separate_compute ) {
     //	static int i=0;
     //	Msg
     //("[%6d][%6d][%4d][%f]
-    //build_level_path",Device.dwTimeGlobal,Device.dwFrame,++i,timer.GetElapsed_sec()*1000.f);
+    // build_level_path",Device.dwTimeGlobal,Device.dwFrame,++i,timer.GetElapsed_sec()*1000.f);
 }
 
 Fvector CMovementManager::predict_position( const float& time_delta,

@@ -53,7 +53,7 @@ void game_cl_mp::PlaySndMessage( u32 ID ) {
     SND_Message* SndMsg = *it;
 
     //	if (Level().timeServer()<pSndMgs->pSound._handle()->length_ms() +
-    //pSndMgs->LastStarted) return;
+    // pSndMgs->LastStarted) return;
     if ( SndMsg->pSound._feedback() )
         return;
 

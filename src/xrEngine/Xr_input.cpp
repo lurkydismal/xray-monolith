@@ -71,14 +71,14 @@ CInput::CInput( BOOL bExclusive, int deviceForInit ) {
                                     ( void** )&pDI, NULL ) );
 
     //. u32 kb_input_flags = ((bExclusive)?DISCL_EXCLUSIVE:DISCL_NONEXCLUSIVE) |
-    //DISCL_FOREGROUND;
+    // DISCL_FOREGROUND;
     u32 kb_input_flags =
         ( ( bExclusive ) ? DISCL_EXCLUSIVE : DISCL_NONEXCLUSIVE ) |
         DISCL_FOREGROUND;
 
     //. u32 mouse_input_flags =
     //((bExclusive)?DISCL_EXCLUSIVE:DISCL_NONEXCLUSIVE) | DISCL_FOREGROUND |
-    //DISCL_NOWINKEY,
+    // DISCL_NOWINKEY,
     u32 mouse_input_flags =
         ( ( bExclusive ) ? DISCL_EXCLUSIVE : DISCL_NONEXCLUSIVE ) |
         DISCL_FOREGROUND | DISCL_NOWINKEY;

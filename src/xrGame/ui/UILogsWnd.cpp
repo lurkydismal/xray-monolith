@@ -144,7 +144,8 @@ void CUILogsWnd::Init() {
     m_filter_talk->SetCheck( true );
 
     //	m_date_caption = UIHelper::CreateTextWnd( m_uiXml, "date_caption", this
-    //); 	m_date         = UIHelper::CreateTextWnd( m_uiXml, "date", this );
+    //); 	m_date         = UIHelper::CreateTextWnd( m_uiXml, "date", this
+    //);
 
     m_period_caption =
         UIHelper::CreateTextWnd( m_uiXml, "period_caption", this );

@@ -121,7 +121,7 @@ void CControllerDirection::head_look_point( const Fvector& look_point ) {
     m_bones.SetMotion( m_bone_head, AXIS_X, bone_angle_head, bone_speed, 1000 );
 
     //// установить параметры вращения по pitch (более упрощеная схема, без
-    ///расчета скорости вращения)
+    /// расчета скорости вращения)
     // bone_angle_head		= _pmt_head_bone_limit	/ (_pmt_head_bone_limit
     // + _pmt_torso_bone_limit) * dir_pitch; bone_angle_torso	=
     // _pmt_torso_bone_limit / (_pmt_head_bone_limit + _pmt_torso_bone_limit) *

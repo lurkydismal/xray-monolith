@@ -273,7 +273,7 @@ public:
     LPCSTR r_string( LPCSTR S, LPCSTR L ) const; // оставляет кавычки
     LPCSTR r_string( const shared_str& S, LPCSTR L ) const {
         return r_string( *S, L );
-    }                                                   // оставляет кавычки
+    } // оставляет кавычки
     shared_str r_string_wb( LPCSTR S, LPCSTR L ) const; // убирает кавычки
     shared_str r_string_wb( const shared_str& S, LPCSTR L ) const {
         return r_string_wb( *S, L );

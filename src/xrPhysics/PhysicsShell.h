@@ -216,7 +216,7 @@ public:
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     virtual u16 numberOfGeoms() const = 0;
     //	virtual				dBodyID
-    //get_body								()
+    // get_body								()
     //= 0;
     virtual const Fvector& mass_Center() const = 0;
     virtual const Fvector& local_mass_Center() = 0;
@@ -237,11 +237,11 @@ public:
     virtual void GetPointVel( Fvector& res_vel,
                               const Fvector& point ) const = 0;
     //	virtual			void
-    //get_LinearVel							(
-    //Fvector& velocity )		const
+    // get_LinearVel							(
+    // Fvector& velocity )		const
     //{ get_LinearVel( velocity ); } 	virtual			void
-    //get_AngularVel							(
-    //Fvector& velocity )		const
+    // get_AngularVel							(
+    // Fvector& velocity )		const
     //{ get_AngularVel( velocity ); }
     virtual void get_Box( Fvector& sz, Fvector& c ) const {
         return CPhysicsBase::get_Box( sz, c );
@@ -431,7 +431,7 @@ public:
     virtual void CreateShellAnimator( CInifile const* ini, LPCSTR section ) = 0;
     virtual void SetIgnoreAnimated() = 0;
     //	virtual			bool
-    //Animated ()
+    // Animated ()
     //= 0;
     virtual void AnimatorOnFrame( bool calculate_bones = true ) = 0;
     virtual void SetSmall() = 0;

@@ -9,8 +9,8 @@
 #include "stdafx.h"
 
 #ifdef DEBUG
-#include "stalker_animation_manager.h"
 #include "ai/stalker/ai_stalker.h"
+#include "stalker_animation_manager.h"
 
 #pragma warning( push )
 #pragma warning( disable : 4995 )

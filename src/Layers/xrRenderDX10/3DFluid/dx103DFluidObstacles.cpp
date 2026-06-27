@@ -120,7 +120,8 @@ void dx103DFluidObstacles::ProcessObstacles( const dx103DFluidData& FluidData,
         // Scale.scale((float)m_iTextureWidth-1, (float)m_iTextureHeight-1,
         // (float)m_iTextureDepth-1); Translate.translate(0.5, 0.5, 0.5); It
         // seems that y axis is inverted in fluid simulation, so shange maths a
-        // bit 		Scale.scale(m_vGridDim.x-1, -(m_vGridDim.y-1), m_vGridDim.z-1 );
+        // bit 		Scale.scale(m_vGridDim.x-1, -(m_vGridDim.y-1),
+        // m_vGridDim.z-1 );
         Scale.scale( m_vGridDim.x, -( m_vGridDim.y ), m_vGridDim.z );
         Translate.translate( 0.5, -0.5, 0.5 );
         //	Actually it is mul(Translate, Scale).
@@ -200,7 +201,9 @@ void dx103DFluidObstacles::ProcessDynamicObstacles(
         //	Can use to optimize invisible dynamic objects if necessary
         // CSector*	sector		= (CSector*)spatial->spatial.sector;
         // if	(0==sector)
-        // continue;	// disassociated from S/P structure if	(PortalTraverser.i_marker != sector->r_marker)	continue;	// inactive (untouched) sector
+        // continue;	// disassociated from S/P structure if
+        // (PortalTraverser.i_marker != sector->r_marker)	continue;
+        // // inactive (untouched) sector
 
         // renderable
         // IRenderable*	renderable		= spatial->dcast_Renderable

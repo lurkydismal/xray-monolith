@@ -146,12 +146,12 @@ void CRender::render_lights( light_Package& LP ) {
         // sort lights by importance???
         // while (has_any_lights_that_cast_shadows) {
         //		if (has_point_shadowed)		->	generate point
-        //shadowmap 		if (has_spot_shadowed)		->	generate spot
-        //shadowmap 		switch-to-accumulator 		if (has_point_unshadowed)	->
-        //accum point unshadowed 		if (has_spot_unshadowed)	-> 	accum
-        //spot unshadowed 		if (was_point_shadowed)		->	accum
-        //point shadowed 		if (was_spot_shadowed)		->	accum spot
-        //shadowed
+        // shadowmap 		if (has_spot_shadowed)		->	generate
+        // spot shadowmap 		switch-to-accumulator 		if
+        // (has_point_unshadowed)	-> accum point unshadowed if
+        // (has_spot_unshadowed)	-> 	accum spot unshadowed if
+        // (was_point_shadowed)		->	accum point shadowed if
+        // (was_spot_shadowed)		->	accum spot shadowed
         //	}
         //	if (left_some_lights_that_doesn't cast shadows)
         //		accumulate them
@@ -250,8 +250,9 @@ void CRender::render_lights( light_Package& LP ) {
                             L->GMLight.r_dsgraph_render_static( 1, false );
                             L->GMLight.r_dsgraph_render_dynamic( 1, true );
 
-                            L->GMLight.r_dsgraph_render_sorted(); // strict-sorted
-                                                                  // geoms
+                            L->GMLight
+                                .r_dsgraph_render_sorted(); // strict-sorted
+                                                            // geoms
                         }
                     } else if ( L->flags.bVolumetric &&
                                 ps_r2_ls_flags.test(
@@ -261,7 +262,7 @@ void CRender::render_lights( light_Package& LP ) {
                 }
             }
             //		if (was_spot_shadowed)		->	accum spot
-            //shadowed
+            // shadowed
             if ( !L_spot_s.empty() ) {
                 PROF_EVENT( "ACCUM_SPOT" );
                 stats.ls_shadowed_rendered += ( u32 )L_spot_s.size();

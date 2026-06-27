@@ -236,7 +236,7 @@ void CControlAnimationBase::select_animation( bool anim_end ) {
     strconcat( sizeof( st ), st, *anim_it->target_name,
                itoa( index, tmp, 10 ) );
     //	xr_sprintf		(st, "%s%d", *anim_it->second.target_name,
-    //index);
+    // index);
     m_cur_anim.name = st;
     m_cur_anim.index = u8( index );
     m_cur_anim.time_started = Device.dwTimeGlobal;

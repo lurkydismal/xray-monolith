@@ -176,7 +176,7 @@ void game_sv_CaptureTheArtefact::Update() {
             CheckStatisticsReady();
             if ( !roundStarted && Level().m_bGameConfigStarted )
             ////in case of starting server stage (net_start 1..6) we can't do
-            ///restart ....
+            /// restart ....
             {
                 if ( CheckForAllPlayersReady() ) {
                     if ( HasMapRotation() && SwitchToNextMap() ) {

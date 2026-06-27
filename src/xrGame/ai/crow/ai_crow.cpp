@@ -261,9 +261,10 @@ void CAI_Crow::state_Flying( float fdt ) {
     XFORM().setHPB( vHPB.x, vHPB.y, vHPB.z );
     Position().mad( vOldPosition, vDirection, fSpeed * fdt );
 #ifdef DEBUG
-    VERIFY2( valid_pos( Position() ),
-             dbg_valide_pos_string(
-                 Position(), this, "state_Flying		(float fdt)" ) );
+    VERIFY2(
+        valid_pos( Position() ),
+        dbg_valide_pos_string( Position(), this,
+                               "state_Flying		(float fdt)" ) );
 #endif
 }
 
@@ -552,7 +553,7 @@ void CAI_Crow::CreateSkeleton() {
 // element,Fvector p_in_object_space, float impulse, ALife::EHitType hit_type)
 void CAI_Crow::Hit( SHit* pHDS ) {
     //	inherited::Hit	(P,dir,who,element,p_in_object_space,impulse/100.f,
-    //hit_type);
+    // hit_type);
     SHit HDS = *pHDS;
     HDS.impulse /= 100.f;
     inherited::Hit( &HDS );

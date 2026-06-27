@@ -232,7 +232,7 @@ MotionID CStalkerAnimationManager::legs_no_move_animation() {
     float target = body_orientation.target.yaw;
     if ( angle_difference( target, current ) < EPS_L ) {
         //		float					head_current =
-        //movement.head_orientation().current.yaw;
+        // movement.head_orientation().current.yaw;
         if ( ( movement.mental_state() != eMentalStateFree ) ||
              !object().sight().turning_in_place() ) {
             if ( movement.mental_state() == eMentalStateFree )

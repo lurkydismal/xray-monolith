@@ -88,9 +88,13 @@ private:
                                        char const* err_descr );
 
     // static void __cdecl	get_my_fields_cb			(SAKE
-    // sake, 												 SAKERequest request, 												 SAKERequestResult result, 												 void * inputData,
+    // sake,
+    // SAKERequest request,
+    // SAKERequestResult result,
+    // void * inputData,
     //												 void
-    //* outputData, 												 void * userData);
+    //* outputData,
+    //void * userData);
 
     DECLARE_SCRIPT_REGISTER_FUNCTION
 }; // class profile_store

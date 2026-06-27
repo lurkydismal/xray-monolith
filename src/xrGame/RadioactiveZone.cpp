@@ -61,7 +61,7 @@ void CRadioactiveZone::Affect( SZoneObjectInfo* O ) {
                                                         Device.dwFrame,
                                                         tg);*/
         ///		Msg( "Zone hit ___   damage = %.4f    Frame=%d ",
-        ///send_power, Device.dwFrame );
+        /// send_power, Device.dwFrame );
 #endif
         O->f_time_affected += one;
     } // while

@@ -114,7 +114,7 @@ void CRenderTarget::accum_point( light* L ) {
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET4  MAKEFOURCC('G','E','T','4')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
         //		}
 
         RCache.set_CullMode( CULL_CW ); // back
@@ -159,7 +159,7 @@ void CRenderTarget::accum_point( light* L ) {
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET1  MAKEFOURCC('G','E','T','1')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
         //		}
     }
 

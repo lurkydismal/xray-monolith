@@ -139,7 +139,7 @@ void CUIArtefactDetectorElite::Draw() {
     CUIWindow::Draw();
 
     //.	Frect r						=
-    //m_wrk_area->GetWndRect();
+    // m_wrk_area->GetWndRect();
     Fvector2 wrk_sz = m_wrk_area->GetWndSize();
     Fvector2 rp;
     m_wrk_area->GetAbsolutePos( rp );

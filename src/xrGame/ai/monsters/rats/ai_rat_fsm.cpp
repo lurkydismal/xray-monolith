@@ -128,7 +128,8 @@ void CAI_Rat::Death() {
             //			setEnabled			(FALSE);
             //			NET_Packet			P;
             //			u_EventGen
-            //(P,GE_DESTROY,ID()); 			u_EventSend			(P);
+            //(P,GE_DESTROY,ID()); 			u_EventSend
+            //(P);
         }
     }
 }
@@ -280,7 +281,7 @@ void CAI_Rat::UnderFire() {
     vfUpdateTime( m_fTimeUpdateDelta );
 
     if ( m_bStateChanged ) //(Device.dwTimeGlobal - m_previous_query_time >
-                           //TIME_TO_GO) || !m_previous_query_time)
+                           // TIME_TO_GO) || !m_previous_query_time)
         m_tGoalDir = m_tSpawnPosition;
 
     m_fSpeed = m_fAttackSpeed;
@@ -431,7 +432,7 @@ void CAI_Rat::Retreat() {
             aiRatAttackRun, aiRatAttackRun, aiRatAttackRun, aiRatRetreat,
             aiRatRetreat, this, 30.f ) );
         //		ERatStates eState =
-        //ERatStates(dwfChooseAction(m_dwActionRefreshRate,m_fAttackSuccessProbability,m_fAttackSuccessProbability,m_fAttackSuccessProbability,m_fAttackSuccessProbability,g_Team(),g_Squad(),g_Group(),aiRatAttackRun,aiRatAttackRun,aiRatAttackRun,aiRatAttackRun,aiRatAttackRun,this,30.f));
+        // ERatStates(dwfChooseAction(m_dwActionRefreshRate,m_fAttackSuccessProbability,m_fAttackSuccessProbability,m_fAttackSuccessProbability,m_fAttackSuccessProbability,g_Team(),g_Squad(),g_Group(),aiRatAttackRun,aiRatAttackRun,aiRatAttackRun,aiRatAttackRun,aiRatAttackRun,this,30.f));
         if ( eState != m_eCurrentState ) {
             eState = ERatStates( dwfChooseAction(
                 m_dwActionRefreshRate, m_fAttackSuccessProbability,
@@ -505,7 +506,7 @@ void CAI_Rat::Pursuit() {
 
     //	if ((m_tLastSound.dwTime >= m_dwLastUpdateTime) &&
     //((m_tLastSound.eSoundType & SOUND_TYPE_WEAPON_BULLET_HIT) ==
-    //SOUND_TYPE_WEAPON_BULLET_HIT)) {
+    // SOUND_TYPE_WEAPON_BULLET_HIT)) {
     if ( ( m_tLastSound.dwTime >= m_dwLastUpdateTime ) &&
          ( !m_tLastSound.tpEntity ||
            ( ( !memory().item().selected() ||
@@ -697,11 +698,11 @@ void CAI_Rat::EatCorpse() {
     }
 
     //	IKinematicsAnimated					*V=
-    //smart_cast<IKinematicsAnimated*>(const_cast<CGameObject*>(memory().item().selected())->Visual());
+    // smart_cast<IKinematicsAnimated*>(const_cast<CGameObject*>(memory().item().selected())->Visual());
     //	R_ASSERT							(V);
     //	u16
-    //head_bone = V->LL_BoneID("bip01_head"); 	Fmatrix
-    //l_tMatrix; 	l_tMatrix.mul_43
+    // head_bone = V->LL_BoneID("bip01_head"); 	Fmatrix
+    // l_tMatrix; 	l_tMatrix.mul_43
     //(const_cast<CGameObject*>(memory().item().selected())->XFORM(),smart_cast<IKinematics*>(const_cast<CGameObject*>(memory().item().selected())->Visual())->LL_GetBoneInstance(head_bone).mTransform);
     //	Fvector temp_position = l_tMatrix.c;
     Fvector temp_position;

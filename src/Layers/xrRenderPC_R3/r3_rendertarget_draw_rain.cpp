@@ -48,11 +48,12 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
 
         // setup
         //		float	intensity			=
-        //0.3f*fuckingsun->color.r + 0.48f*fuckingsun->color.g +
-        //0.22f*fuckingsun->color.b; 		Fvector	dir
-        //= L_dir; 		dir.normalize().mul	(- _sqrt(intensity+EPS));
-        //		RCache.set_Element
-        //(s_accum_mask->E[SE_MASK_DIRECT]);		// masker 		RCache.set_c
+        // 0.3f*fuckingsun->color.r + 0.48f*fuckingsun->color.g +
+        // 0.22f*fuckingsun->color.b; 		Fvector	dir
+        //= L_dir; 		dir.normalize().mul	(-
+        //_sqrt(intensity+EPS)); 		RCache.set_Element
+        //(s_accum_mask->E[SE_MASK_DIRECT]);		// masker
+        //RCache.set_c
         //("Ldynamic_dir",		dir.x,dir.y,dir.z,0		);
 
         // if (stencil>=1 && aref_pass)	stencil = light_id
@@ -78,8 +79,9 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
 
     // Perform lighting
     {
-        //		phase_accumulator ()	; 		RCache.set_CullMode
-        //(CULL_NONE); 		RCache.set_ColorWriteEnable			()
+        //		phase_accumulator ()	;
+        //RCache.set_CullMode (CULL_NONE);
+        //RCache.set_ColorWriteEnable			()
         //;
 
         // texture adjustment matrix
@@ -94,12 +96,12 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
         float smapsize = float( RImplementation.o.smapsize );
         float fTexelOffs = ( .5f / smapsize );
         //		float			view_dimX =
-        //float(RainSetup.X.D.maxX-RainSetup.X.D.minX-2)/smapsize; 		float
-        //view_dimY			=
-        //float(RainSetup.X.D.maxX-RainSetup.X.D.minX-2)/smapsize; 		float
-        //view_sx				=
-        //float(RainSetup.X.D.minX+1)/smapsize; 		float			view_sy
-        //= float(RainSetup.X.D.minY+1)/smapsize;
+        // float(RainSetup.X.D.maxX-RainSetup.X.D.minX-2)/smapsize;
+        // float view_dimY			=
+        // float(RainSetup.X.D.maxX-RainSetup.X.D.minX-2)/smapsize;
+        // float view_sx				=
+        // float(RainSetup.X.D.minX+1)/smapsize; 		float
+        // view_sy = float(RainSetup.X.D.minY+1)/smapsize;
         float view_dimX =
             float( RainSetup.X.D.maxX - RainSetup.X.D.minX ) / smapsize;
         float view_dimY =
@@ -192,8 +194,9 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
             //  			m_xform.scale
             //  (1.f,1.f,1.f)				;
             //  			m_clouds_shadow.mulA_44 (m_xform)
-            //  ; 			m_xform.translate (localnormal.mul(w_shift))	;
-            //  			m_clouds_shadow.mulA_44 (m_xform)
+            //  ; 			m_xform.translate
+            //  (localnormal.mul(w_shift))	; 			m_clouds_shadow.mulA_44
+            //  (m_xform)
             //  ;
         }
 
@@ -254,7 +257,8 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
         //		if (u_DBT_enable(zMin,zMax))	{
         // z-test always
         //			HW.pDevice->SetRenderState(D3DRS_ZFUNC,
-        //D3DCMP_ALWAYS); 			HW.pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+        // D3DCMP_ALWAYS);
+        // HW.pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
         //		}
 
         // Fetch4 : enable
@@ -262,20 +266,20 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET4  MAKEFOURCC('G','E','T','4')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
         //		}
 
         // setup stencil
         //		RCache.set_Stencil
-        //(TRUE,D3DCMP_LESSEQUAL,dwLightMarkerID,0xff,0x00); 		RCache.Render
-        //(D3DPT_TRIANGLELIST,Offset,0,4,0,2);
+        //(TRUE,D3DCMP_LESSEQUAL,dwLightMarkerID,0xff,0x00);
+        //RCache.Render (D3DPT_TRIANGLELIST,Offset,0,4,0,2);
 
         // Fetch4 : disable
         //		if (RImplementation.o.HW_smap_FETCH4)	{
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET1  MAKEFOURCC('G','E','T','1')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
         //		}
 
         //	Use for intermediate results

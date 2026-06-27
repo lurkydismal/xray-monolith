@@ -78,7 +78,7 @@ struct ECORE_API STextureParams {
         flDitherColor = ( 1 << 8 ),
         flDitherEachMIPLevel = ( 1 << 9 ),
         //		flGreyScale			= (1<<10),	//
-        //obsolette
+        // obsolette
 
         flDiffuseDetail = ( 1 << 23 ),
         flImplicitLighted = ( 1 << 24 ),

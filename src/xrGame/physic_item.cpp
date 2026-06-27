@@ -101,16 +101,16 @@ void CPhysicItem::UpdateCL() {
     PROF_EVENT( "CPhysicItem::UpdateCL" )
     //	if (!xr_strcmp("bolt",cName()))
     //		Log					("--- B -
-    //CBolt",renderable.xform);
+    // CBolt",renderable.xform);
     if ( !H_Parent() && m_pPhysicsShell && m_pPhysicsShell->isActive() )
         m_pPhysicsShell->InterpolateGlobalTransform( &XFORM() );
     //	if (!xr_strcmp("bolt",cName()))
     //		Log						("--- C -
-    //CBolt",renderable.xform);
+    // CBolt",renderable.xform);
     inherited::UpdateCL();
     //	if (!xr_strcmp("bolt",cName()))
     //		Log						("--- D -
-    //CBolt",renderable.xform);
+    // CBolt",renderable.xform);
 }
 
 void CPhysicItem::activate_physic_shell() {

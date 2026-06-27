@@ -48,7 +48,7 @@ void awards_store::load_awards( store_operation_cb& opcb ) {
     // if (!reqres)
     //{
     //	SAKEStartRequestResult tmp_result	=
-    //m_sake_obj->GetRequestResult(); 	m_award_operation_cb
+    // m_sake_obj->GetRequestResult(); 	m_award_operation_cb
     //(false, CGameSpy_SAKE::TryToTranslate(tmp_result).c_str());
     //	m_award_operation_cb.clear			();
     // }
@@ -128,7 +128,7 @@ void awards_store::process_aw_out_response( SAKEGetMyRecordsOutput* tmp_out,
     // for (int i = 0; i < out_fields_count; ++i)
     //{
     //	if (get_award_by_stat_name(tmp_out->mRecords[0][i].mName) !=
-    //at_awards_count)
+    // at_awards_count)
     //	{
     //		process_award(&tmp_out->mRecords[0][i]);
     //	}
@@ -137,18 +137,21 @@ void awards_store::process_aw_out_response( SAKEGetMyRecordsOutput* tmp_out,
 
 // void __cdecl awards_store::get_my_awards_cb(SAKE sake,
 //											SAKERequest
-//request, 											SAKERequestResult result, 											void * inputData, 											void * outputData, 											void *
-//userData)
+// request,
+// SAKERequestResult result,
+// void * inputData,
+// void * outputData,
+// void * userData)
 //{
 //	awards_store* my_inst					=
-//static_cast<awards_store*>(userData); 	VERIFY(my_inst &&
-//my_inst->m_award_operation_cb); 	if (result != SAKERequestResult_SUCCESS)
+// static_cast<awards_store*>(userData); 	VERIFY(my_inst &&
+// my_inst->m_award_operation_cb); 	if (result != SAKERequestResult_SUCCESS)
 //	{
 //		my_inst->m_award_operation_cb		(false,
-//CGameSpy_SAKE::TryToTranslate(result).c_str()); 	} else
+// CGameSpy_SAKE::TryToTranslate(result).c_str()); 	} else
 //	{
 //		SAKEGetMyRecordsOutput*	tmp_out		=
-//static_cast<SAKEGetMyRecordsOutput*>( 			outputData
+// static_cast<SAKEGetMyRecordsOutput*>( 			outputData
 //		);
 //		VERIFY(tmp_out);
 //		my_inst->process_aw_out_response	(tmp_out, fields_count);

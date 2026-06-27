@@ -4,7 +4,7 @@
 //	Modified	: 13.02.2008
 //	Author		: Dmitriy Iassenev
 //	Description : stalker movement manager class with smart covers inline
-//functions
+// functions
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef STALKER_MOVEMENT_MANAGER_SMART_COVER_INLINE_H_INCLUDED

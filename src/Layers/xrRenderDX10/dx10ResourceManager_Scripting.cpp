@@ -56,9 +56,9 @@ public:
     // TODO: why are these commented out?
     //	adopt_sampler&			_texture		(LPCSTR texture)
     //{ if (C) C->i_Texture	(stage,texture);
-    //return *this;	} 	adopt_sampler&			_projective
+    // return *this;	} 	adopt_sampler&			_projective
     //(bool _b)				{ if (C) C->i_Projective(stage,_b);
-    //return *this;	}
+    // return *this;	}
     adopt_dx10sampler& _clamp() {
         if ( m_pC )
             m_pC->i_dx10Address( m_SI, D3DTADDRESS_CLAMP );
@@ -66,10 +66,10 @@ public:
     }
     //	adopt_sampler&			_wrap			()
     //{ if (C) C->i_Address	(stage,D3DTADDRESS_WRAP);
-    //return *this;	} 	adopt_sampler&			_mirror
+    // return *this;	} 	adopt_sampler&			_mirror
     //()						{ if (C) C->i_Address
     //(stage,D3DTADDRESS_MIRROR);
-    //return *this;	} 	adopt_sampler&			_f_anisotropic
+    // return *this;	} 	adopt_sampler&			_f_anisotropic
     //()						{ if (C) C->i_Filter
     //(stage,D3DTEXF_ANISOTROPIC,D3DTEXF_LINEAR,D3DTEXF_ANISOTROPIC);	return
     //*this;	} 	adopt_sampler&			_f_trilinear	()
@@ -83,37 +83,37 @@ public:
     //(stage,D3DTEXF_LINEAR,D3DTEXF_NONE,  D3DTEXF_LINEAR);		return
     //*this;	} 	adopt_sampler&			_f_none ()
     //{ if (C) C->i_Filter	(stage,D3DTEXF_POINT, D3DTEXF_NONE,
-    //D3DTEXF_POINT);		return *this;	} 	adopt_sampler&
+    // D3DTEXF_POINT);		return *this;	} 	adopt_sampler&
     //_fmin_none		()
     //{ if (C) C->i_Filter_Min(stage,D3DTEXF_NONE);
-    //return *this;	} 	adopt_sampler&			_fmin_point
+    // return *this;	} 	adopt_sampler&			_fmin_point
     //()						{ if (C)
-    //C->i_Filter_Min(stage,D3DTEXF_POINT);
-    //return *this;	} 	adopt_sampler&			_fmin_linear
+    // C->i_Filter_Min(stage,D3DTEXF_POINT);
+    // return *this;	} 	adopt_sampler&			_fmin_linear
     //()						{ if (C)
-    //C->i_Filter_Min(stage,D3DTEXF_LINEAR);
-    //return *this;	} 	adopt_sampler&			_fmin_aniso
+    // C->i_Filter_Min(stage,D3DTEXF_LINEAR);
+    // return *this;	} 	adopt_sampler&			_fmin_aniso
     //()						{ if (C)
-    //C->i_Filter_Min(stage,D3DTEXF_ANISOTROPIC);
-    //return *this;	} 	adopt_sampler&			_fmip_none
+    // C->i_Filter_Min(stage,D3DTEXF_ANISOTROPIC);
+    // return *this;	} 	adopt_sampler&			_fmip_none
     //()						{ if (C)
-    //C->i_Filter_Mip(stage,D3DTEXF_NONE);
-    //return *this;	} 	adopt_sampler&			_fmip_point
+    // C->i_Filter_Mip(stage,D3DTEXF_NONE);
+    // return *this;	} 	adopt_sampler&			_fmip_point
     //()						{ if (C)
-    //C->i_Filter_Mip(stage,D3DTEXF_POINT);
-    //return *this;	} 	adopt_sampler&			_fmip_linear
+    // C->i_Filter_Mip(stage,D3DTEXF_POINT);
+    // return *this;	} 	adopt_sampler&			_fmip_linear
     //()						{ if (C)
-    //C->i_Filter_Mip(stage,D3DTEXF_LINEAR);
-    //return *this;	} 	adopt_sampler&			_fmag_none
+    // C->i_Filter_Mip(stage,D3DTEXF_LINEAR);
+    // return *this;	} 	adopt_sampler&			_fmag_none
     //()						{ if (C)
-    //C->i_Filter_Mag(stage,D3DTEXF_NONE);
-    //return *this;	} 	adopt_sampler&			_fmag_point
+    // C->i_Filter_Mag(stage,D3DTEXF_NONE);
+    // return *this;	} 	adopt_sampler&			_fmag_point
     //()						{ if (C)
-    //C->i_Filter_Mag(stage,D3DTEXF_POINT);
-    //return *this;	} 	adopt_sampler&			_fmag_linear
+    // C->i_Filter_Mag(stage,D3DTEXF_POINT);
+    // return *this;	} 	adopt_sampler&			_fmag_linear
     //()						{ if (C)
-    //C->i_Filter_Mag(stage,D3DTEXF_LINEAR);
-    //return *this;	}
+    // C->i_Filter_Mag(stage,D3DTEXF_LINEAR);
+    // return *this;	}
 };
 
 /*
@@ -313,7 +313,7 @@ static void* lua_alloc( void* ud, void* ptr, size_t osize, size_t nsize ) {
 static const u32 s_arena_size = 8 * 1024 * 1024;
 static char s_fake_array[ s_arena_size ];
 //	doug_lea_allocator	g_render_lua_allocator( s_fake_array,
-//s_arena_size, "render:lua" );
+// s_arena_size, "render:lua" );
 #else  // #ifdef USE_ARENA_ALLOCATOR
 //	doug_lea_allocator	g_render_lua_allocator( 0, 0, "render:lua" );
 #endif // #ifdef USE_ARENA_ALLOCATOR
@@ -392,7 +392,7 @@ void CResourceManager::LS_Load() {
               .def( "getLevel", &adopt_dx10options::_get_level )
           //.def("",
           //&adopt_dx10options::_dx10Options		),	// returns
-          //options-object
+          // options-object
           ,
 
           class_< adopt_dx10sampler >( "_dx10sampler" )
@@ -596,7 +596,7 @@ Shader* CResourceManager::_lua_Create( LPCSTR d_shader, LPCSTR s_textures ) {
         // Analyze possibility to detail this shader
         C.iElement = 0;
         //.		C.bDetail			=
-        //dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
+        // dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
         // C.bDetail			=
         // dxRenderDeviceRender::Instance().Resources->m_textures_description.GetDetailTexture(C.L_textures[0],C.detail_texture,C.detail_scaler);
         C.bDetail =
@@ -613,7 +613,7 @@ Shader* CResourceManager::_lua_Create( LPCSTR d_shader, LPCSTR s_textures ) {
                                         LUA_TFUNCTION ) ) {
             C.iElement = 0;
             //.			C.bDetail			=
-            //dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
+            // dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
             // C.bDetail			=
             // dxRenderDeviceRender::Instance().Resources->m_textures_description.GetDetailTexture(C.L_textures[0],C.detail_texture,C.detail_scaler);
             C.bDetail =
@@ -638,7 +638,7 @@ Shader* CResourceManager::_lua_Create( LPCSTR d_shader, LPCSTR s_textures ) {
                                     LUA_TFUNCTION ) ) {
         C.iElement = 1;
         //.		C.bDetail			=
-        //dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
+        // dxRenderDeviceRender::Instance().Resources->_GetDetailTexture(*C.L_textures[0],C.detail_texture,C.detail_scaler);
         // C.bDetail			=
         // dxRenderDeviceRender::Instance().Resources->m_textures_description.GetDetailTexture(C.L_textures[0],C.detail_texture,C.detail_scaler);
         C.bDetail =

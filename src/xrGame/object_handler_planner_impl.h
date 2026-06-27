@@ -4,7 +4,7 @@
 //  Modified 	: 01.12.2004
 //	Author		: Dmitriy Iassenev
 //	Description : Object handler action planner inline functions
-//implementation
+// implementation
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

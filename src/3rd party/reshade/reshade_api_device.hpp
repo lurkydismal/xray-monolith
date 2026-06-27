@@ -221,9 +221,9 @@ enum class device_caps {
     /// <summary>
     /// Specifies whether amplification and mesh shaders are supported.
     ///	If this feature is not present, the <see
-    ///cref="pipeline_stage::amplification_shader"/> and <see
-    ///cref="pipeline_stage::mesh_shader"/> stages and <see
-    ///cref="command_list::dispatch_mesh"/> must not be used.
+    /// cref="pipeline_stage::amplification_shader"/> and <see
+    /// cref="pipeline_stage::mesh_shader"/> stages and <see
+    /// cref="command_list::dispatch_mesh"/> must not be used.
     /// </summary>
     amplification_and_mesh_shader,
     /// <summary>

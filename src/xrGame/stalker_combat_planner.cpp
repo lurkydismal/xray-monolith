@@ -129,9 +129,9 @@ void CStalkerCombatPlanner::update() {
     object().react_on_member_death();
 
     //	const CEntityAlive				*enemy =
-    //object().memory().enemy().selected(); 	VERIFY
+    // object().memory().enemy().selected(); 	VERIFY
     //(enemy); 	const CAI_Stalker				*stalker =
-    //smart_cast<const CAI_Stalker*>(enemy); 	m_last_wounded
+    // smart_cast<const CAI_Stalker*>(enemy); 	m_last_wounded
     //= stalker && stalker->wounded();
 }
 
@@ -475,7 +475,7 @@ void CStalkerCombatPlanner::add_actions() {
     add_condition( action, eWorldPropertyReadyToDetour, true );
     add_condition( action, eWorldPropertyInCover, false );
     //	add_condition			(action,eWorldPropertyInSmartCover,
-    //false);
+    // false);
     add_condition( action, eWorldPropertyEnemyDetoured, false );
     add_condition( action, eWorldPropertySeeEnemy, false );
     add_condition( action, eWorldPropertyLookedOut, true );
@@ -574,7 +574,7 @@ void CStalkerCombatPlanner::add_actions() {
     add_condition( action, eWorldPropertyCriticallyWounded, false );
     add_condition( action, eWorldPropertyUseSuddenness, false );
     //	add_condition			(action,eWorldPropertySeeEnemy,
-    //true);
+    // true);
     add_condition( action, eWorldPropertyPanic, false );
     add_condition( action, eWorldPropertyPlayerOnThePath, true );
     add_condition( action, eWorldPropertyEnemyWounded, false );
@@ -607,8 +607,8 @@ void CStalkerCombatPlanner::add_actions() {
     action =
         xr_new< CStalkerCombatActionThrowGrenade >( m_object, "throw_grenade" );
     //	add_condition			(action,eWorldPropertyInCover,
-    //true); 	add_condition			(action,eWorldPropertySeeEnemy,
-    //false);
+    // true); 	add_condition			(action,eWorldPropertySeeEnemy,
+    // false);
     add_condition( action, eWorldPropertyCriticallyWounded, false );
     add_condition( action, eWorldPropertyPanic, false );
     add_condition( action, eWorldPropertyEnemyWounded, false );

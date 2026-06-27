@@ -24,7 +24,7 @@ void CMovementManager::process_patrol_path() {
     if ( !patrol().actual() &&
          ( m_path_state > ePathStateSelectPatrolPoint ) ) {
         //		Msg					("[%6d][%s]
-        //actuality is false 2",Device.dwFrame,*object().cName());
+        // actuality is false 2",Device.dwFrame,*object().cName());
         m_path_state = ePathStateSelectPatrolPoint;
     }
 
@@ -85,7 +85,7 @@ void CMovementManager::process_patrol_path() {
             if ( !patrol().actual() ) {
                 //				Msg
                 //("[%6d][%s] actuality is false
-                //3",Device.dwFrame,*object().cName());
+                // 3",Device.dwFrame,*object().cName());
                 m_path_state = ePathStateSelectPatrolPoint;
             } else if ( !level_path().actual() )
                 m_path_state = ePathStateBuildLevelPath;
@@ -95,12 +95,13 @@ void CMovementManager::process_patrol_path() {
                                           !detail().state_patrol_path() ) ) {
                 //							Msg
                 //("[%6d][%s] detail path is
-                //completed",Device.dwFrame,*object().cName()); 							Msg
+                // completed",Device.dwFrame,*object().cName());
+                // Msg
                 //(
                 //								"[path_size=%d][curr_id=%d][last_pp=%d]
-                //start_position=[%f][%f][%f] stop_position=[%f][%f][%f]
-                //position=[%f][%f][%f]", 								detail().path().size(),
-                //								detail().curr_travel_point_index(),
+                // start_position=[%f][%f][%f] stop_position=[%f][%f][%f]
+                // position=[%f][%f][%f]",
+                // detail().path().size(), 								detail().curr_travel_point_index(),
                 //								detail().last_patrol_point(),
                 //								VPUSH(detail().path().front().position),
                 //								VPUSH(detail().curr_travel_point().position),
@@ -119,7 +120,7 @@ void CMovementManager::process_patrol_path() {
             if ( !patrol().actual() ) {
                 //				Msg
                 //("[%6d][%s] actuality is false
-                //4",Device.dwFrame,*object().cName());
+                // 4",Device.dwFrame,*object().cName());
                 m_path_state = ePathStateSelectPatrolPoint;
             }
             break;

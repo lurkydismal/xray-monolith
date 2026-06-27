@@ -26,8 +26,9 @@ int dCylinderClassUser = -1;
 // takes two circles as normals to planes n1,n2, center points cp1,cp2,and
 // radiuses r1,r2 finds line on which circles' planes intersect finds four
 // points O1,O2 - intersection between the line and sphere with center cp1
-// radius r1 					O3,O4 - intersection between the line and sphere with center cp2
-//radius r2 returns false if there is no intersection computes distances O1-O3,
+// radius r1 					O3,O4 - intersection between the
+// line and sphere with center cp2
+// radius r2 returns false if there is no intersection computes distances O1-O3,
 // O1-O4, O2-O3, O2-O4 in "point" returns mean point between intersection points
 // with smallest distance
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -714,7 +715,8 @@ extern "C" int dCylCyl( const dVector3 p1,
     dReal c_cos = dFabs( dDOT44( R1 + 1, R2 + 1 ) );
     dReal c_sin = dSqrt( 1.f - ( c_cos > 1.f ? 1.f : c_cos ) );
 
-    TEST( pp1[ 1 ], ( hlz1 + radius2 * c_sin + hlz2 * c_cos ), R1 + 1, 0 ); // pp
+    TEST( pp1[ 1 ], ( hlz1 + radius2 * c_sin + hlz2 * c_cos ), R1 + 1,
+          0 ); // pp
 
     /// TEST (pp2[1],(radius1*c_sin + hlz1*c_cos + hlz2),R2+1,1);
 
@@ -844,12 +846,12 @@ extern "C" int dCylCyl( const dVector3 p1,
 
     //@ this needed to set right normal when cylinders edges intersect
     //@ the most precise axis for this test may be found as a line between
-    //nearest points of two
+    // nearest points of two
     //@ circles. But it needs comparatively a lot of computation.
     //@ I use a trick which lets not to solve quadric equation.
     //@ In the case when cylinder eidges touches the test below rather accurate.
     //@ I still not sure about problems with sepparation but they have not been
-    //revealed during testing.
+    // revealed during testing.
     dVector3 point;
     {
         dVector3 ca, cb;

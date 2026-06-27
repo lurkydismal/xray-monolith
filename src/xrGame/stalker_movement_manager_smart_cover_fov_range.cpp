@@ -4,7 +4,7 @@
 //	Modified	: 14.02.2008
 //	Author		: Dmitriy Iassenev
 //	Description : stalker movement manager class with smart covers fov and
-//range stuff
+// range stuff
 ////////////////////////////////////////////////////////////////////////////
 
 #include "ai/stalker/ai_stalker.h"

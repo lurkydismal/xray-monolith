@@ -423,13 +423,13 @@ void CStats::Show() {
         // RCache.stat.verts);
         m_pRender->GuardVerts( F );
         ////if (RCache.stat.polys>500000) F.OutNext ("Polys     > 500k: %d",
-        ///RCache.stat.polys);
+        /// RCache.stat.polys);
         if ( psDeviceFlags.test( rsStatistic ) ) {
             m_pRender->GuardDrawCalls( F );
             // if (RCache.stat.calls>1000)  F.OutNext ("DIP/DP    > 1k:   %d",
             // RCache.stat.calls);
             ////if (RCache.stat.textures>1000)F.OutNext ("T_change  > 500:  %d",
-            ///RCache.stat.textures);
+            /// RCache.stat.textures);
             if ( RenderDUMP_DT_Count > 1000 )
                 F.OutNext( "DT_count  > 1000: %u", RenderDUMP_DT_Count );
             F.OutSkip();

@@ -8,8 +8,8 @@
 #include "stdafx.h"
 
 #ifdef XRGAME_EXPORTS
-#include "ui/xrUIXmlParser.h"
 #include "PhraseDialog.h"
+#include "ui/xrUIXmlParser.h"
 #include "xrServer_Objects_ALife_Monsters.h"
 #else // XRGAME_EXPORTS
 #include "xrUIXmlParser.h"

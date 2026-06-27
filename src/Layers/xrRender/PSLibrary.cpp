@@ -10,8 +10,8 @@
 #include "ParticleGroup.h"
 
 #ifdef _EDITOR
-#include "ParticleEffectActions.h"
 #include "../ECore/Editor/ui_main.h"
+#include "ParticleEffectActions.h"
 #endif
 
 #define _game_data_ "$game_data$"

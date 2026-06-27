@@ -183,7 +183,7 @@ void CBurer::Load( LPCSTR section ) {
     // SVelocityParam &velocity_steal		=
     // move().get_velocity(MonsterMovement::eVelocityParameterSteal);
     //		SVelocityParam &velocity_drag		=
-    //move().get_velocity(MonsterMovement::eVelocityParameterDrag);
+    // move().get_velocity(MonsterMovement::eVelocityParameterDrag);
 
     anim().AddAnim( eAnimStandIdle, "stand_idle_", -1, &velocity_none,
                     PS_STAND );
@@ -241,12 +241,12 @@ void CBurer::Load( LPCSTR section ) {
 
     // 	anim().AddAnim(eAnimScared,			"stand_scared_",
     // -1, &velocity_none,		PS_STAND); //, 	"fx_stand_f",
-    // "fx_stand_b", "fx_stand_l", "fx_stand_r"); 	anim().AddAnim(eAnimSteal,
-    // "stand_steal_",			-1, &velocity_steal,	PS_STAND); //,
-    // "fx_stand_f", "fx_stand_b", "fx_stand_l", "fx_stand_r");
-    // 	anim().AddAnim(eAnimEat,			"sit_eat_",
-    // -1, &velocity_none,		PS_SIT); //, 	"fx_stand_f",
     // "fx_stand_b", "fx_stand_l", "fx_stand_r");
+    // anim().AddAnim(eAnimSteal, "stand_steal_",			-1,
+    // &velocity_steal,	PS_STAND); //, "fx_stand_f", "fx_stand_b", "fx_stand_l",
+    // "fx_stand_r"); 	anim().AddAnim(eAnimEat,			"sit_eat_", -1,
+    // &velocity_none,		PS_SIT); //, 	"fx_stand_f", "fx_stand_b",
+    // "fx_stand_l", "fx_stand_r");
     //
     // 	anim().AddAnim(eAnimSitIdle,		"sit_idle_",
     // -1, &velocity_none,		PS_SIT); //, 	"fx_stand_f",
@@ -261,8 +261,8 @@ void CBurer::Load( LPCSTR section ) {
     // "fx_stand_b", "fx_stand_l", "fx_stand_r");
 
     //	anim().AddTransition(PS_SIT,		PS_STAND,
-    //eAnimSitStandUp,	false); 	anim().AddTransition(PS_STAND,		PS_SIT,
-    //eAnimStandSitDown,	false);
+    // eAnimSitStandUp,	false); 	anim().AddTransition(PS_STAND,
+    // PS_SIT, eAnimStandSitDown,	false);
 
     anim().LinkAction( ACT_STAND_IDLE, eAnimStandIdle );
     //	anim().LinkAction		(ACT_SIT_IDLE,		eAnimSitIdle);

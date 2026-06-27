@@ -409,11 +409,11 @@ void CActorCondition::AffectDamage_InjuriousMaterialAndMonstersInfluence() {
             ALife::EHitType type = hits[ i ].type;
 
             if ( damage > EPS ) {
-                SHit HDS = SHit(
-                    damage,
-                    //. 0.0f,
-                    Fvector().set( 0, 1, 0 ), NULL, BI_NONE,
-                    Fvector().set( 0, 0, 0 ), 0.0f, type, 0.0f, false );
+                SHit HDS =
+                    SHit( damage,
+                          //. 0.0f,
+                          Fvector().set( 0, 1, 0 ), NULL, BI_NONE,
+                          Fvector().set( 0, 0, 0 ), 0.0f, type, 0.0f, false );
 
                 HDS.GenHeader( GE_HIT, m_object->ID() );
                 HDS.Write_Packet( np );

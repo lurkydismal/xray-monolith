@@ -9,11 +9,11 @@
 #include "stdafx.h"
 
 #ifdef _EDITOR
-#include "igame_persistent.h"
 #include "environment.h"
+#include "igame_persistent.h"
 #else
-#include "../../xrEngine/igame_persistent.h"
 #include "../../xrEngine/environment.h"
+#include "../../xrEngine/igame_persistent.h"
 #endif
 
 #include "../xrServerEntities/smart_cast.h"
@@ -46,7 +46,7 @@ CROS_impl::CROS_impl() {
     MODE = IRender_ObjectSpecific::TRACE_ALL;
     // #else
     //	MODE				= IRender_ObjectSpecific::TRACE_HEMI +
-    //IRender_ObjectSpecific::TRACE_SUN	; #endif
+    // IRender_ObjectSpecific::TRACE_SUN	; #endif
 }
 
 void CROS_impl::add( light* source ) {
@@ -267,7 +267,7 @@ void CROS_impl::update( IRenderable* O ) {
         //		lacc.y		*= desc.lmap_color.y;
         //		lacc.z		*= desc.lmap_color.z;
         //		Msg				("-
-        //rgb[%f,%f,%f]",lacc.x,lacc.y,lacc.z);
+        // rgb[%f,%f,%f]",lacc.x,lacc.y,lacc.z);
         accum.add( lacc );
     } else
         accum.set( .1f, .1f, .1f );
@@ -410,7 +410,7 @@ void CROS_impl::calc_sky_hemi_value( Fvector& position, CObject* _object ) {
                       hdir[ sample ][ 2 ] )
                 .normalize();
             //.			result[sample]	=
-            //!g_pGameLevel->ObjectSpace.RayTest(position,direction,50.f,collide::rqtBoth,&cache[sample],_object);
+            //! g_pGameLevel->ObjectSpace.RayTest(position,direction,50.f,collide::rqtBoth,&cache[sample],_object);
             result[ sample ] = !g_pGameLevel->ObjectSpace.RayTest(
                 position, direction, 50.f, collide::rqtStatic, &cache[ sample ],
                 _object );

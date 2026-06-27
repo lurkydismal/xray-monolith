@@ -14,8 +14,8 @@
 #include "stalker_movement_params.h"
 
 #ifdef DEBUG
-#include "detail_path_manager.h"
 #include "ai/stalker/ai_stalker.h"
+#include "detail_path_manager.h"
 #else // #ifdef DEBUG
 #include "detail_path_manager_space.h"
 #endif // #ifdef DEBUG

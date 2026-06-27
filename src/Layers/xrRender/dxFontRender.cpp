@@ -96,7 +96,7 @@ void dxFontRender::OnRender( CGameFont& owner ) {
 
 #if defined( USE_DX10 ) || \
     defined( USE_DX11 ) //	Vertex shader will cancel a DX9 correction, so
-                        //make fake offset
+                        // make fake offset
                 X -= 0.5f;
                 Y -= 0.5f;
                 Y2 -= 0.5f;
@@ -116,8 +116,8 @@ void dxFontRender::OnRender( CGameFont& owner ) {
 
                     if ( !fis_zero( l.z ) ) {
                         //						tu
-                        //= ( l.x / owner.vTS.x ) + ( 0.5f / owner.vTS.x ); 						tv
-                        //= ( l.y / owner.vTS.y ) + ( 0.5f / owner.vTS.y );
+                        //= ( l.x / owner.vTS.x ) + ( 0.5f / owner.vTS.x );
+                        //tv = ( l.y / owner.vTS.y ) + ( 0.5f / owner.vTS.y );
                         tu = ( l.x / owner.vTS.x );
                         tv = ( l.y / owner.vTS.y );
 #if !defined( USE_DX10 ) && !defined( USE_DX11 )

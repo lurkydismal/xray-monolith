@@ -115,23 +115,26 @@ void stats_submitter::begin_session() {
     // if (tmp_result != SCResult_NO_ERROR)
     //{
     //	m_last_operation_cb(false,
-    //CGameSpy_ATLAS::TryToTranslate(tmp_result).c_str()); 	terminate_session();
-    //	return;
+    // CGameSpy_ATLAS::TryToTranslate(tmp_result).c_str());
+    // terminate_session(); 	return;
     // }
     //
     // Engine.Sheduler.Register(this, FALSE);
 }
 
 // void __cdecl stats_submitter::created_session_cb(const SCInterfacePtr
-// theInterface, 												 GHTTPResult          theHttpResult, 												 SCResult theResult, 												 void *
-//theUserData)
+// theInterface,
+// GHTTPResult          theHttpResult,
+// SCResult theResult,
+// void *
+// theUserData)
 //{
 //	stats_submitter* my_inst = static_cast<stats_submitter*>(theUserData);
 //	VERIFY(my_inst && my_inst->m_last_operation_profile);
 //	if (theHttpResult != GHTTPSuccess)
 //	{
 //		my_inst->m_last_operation_cb	(false,
-//CGameSpy_ATLAS::TryToTranslate(theHttpResult).c_str());
+// CGameSpy_ATLAS::TryToTranslate(theHttpResult).c_str());
 //		my_inst->terminate_session		();
 //		Engine.Sheduler.Unregister		(my_inst);
 //		return;
@@ -139,8 +142,10 @@ void stats_submitter::begin_session() {
 //	if (theResult != SCResult_NO_ERROR)
 //	{
 //		my_inst->m_last_operation_cb	(false,
-//CGameSpy_ATLAS::TryToTranslate(theResult).c_str()); 		my_inst->terminate_session
-//(); 		Engine.Sheduler.Unregister		(my_inst); 		return;
+// CGameSpy_ATLAS::TryToTranslate(theResult).c_str());
+// my_inst->terminate_session
+//(); 		Engine.Sheduler.Unregister		(my_inst);
+//return;
 //	}
 //	SCResult tmp_result = my_inst->m_atlas_obj->SetReportIntention(
 //		NULL,
@@ -155,7 +160,7 @@ void stats_submitter::begin_session() {
 //	if (tmp_result != SCResult_NO_ERROR)
 //	{
 //		my_inst->m_last_operation_cb(false,
-//CGameSpy_ATLAS::TryToTranslate(tmp_result).c_str());
+// CGameSpy_ATLAS::TryToTranslate(tmp_result).c_str());
 //		my_inst->terminate_session();
 //		Engine.Sheduler.Unregister(my_inst);
 //		return;
@@ -163,15 +168,18 @@ void stats_submitter::begin_session() {
 // }
 
 // void __cdecl stats_submitter::set_intension_cb(const SCInterfacePtr
-// theInterface, 											   GHTTPResult          theHttpResult, 											   SCResult theResult, 											   void *
-//theUserData)
+// theInterface,
+// GHTTPResult          theHttpResult,
+// SCResult theResult,
+// void *
+// theUserData)
 //{
 //	stats_submitter* my_inst = static_cast<stats_submitter*>(theUserData);
 //	VERIFY(my_inst && my_inst->m_last_operation_profile);
 //	if (theHttpResult != GHTTPSuccess)
 //	{
 //		my_inst->m_last_operation_cb	(false,
-//CGameSpy_ATLAS::TryToTranslate(theHttpResult).c_str());
+// CGameSpy_ATLAS::TryToTranslate(theHttpResult).c_str());
 //		my_inst->terminate_session		();
 //		Engine.Sheduler.Unregister		(my_inst);
 //		return;
@@ -179,12 +187,14 @@ void stats_submitter::begin_session() {
 //	if (theResult != SCResult_NO_ERROR)
 //	{
 //		my_inst->m_last_operation_cb	(false,
-//CGameSpy_ATLAS::TryToTranslate(theResult).c_str()); 		my_inst->terminate_session
-//(); 		Engine.Sheduler.Unregister		(my_inst); 		return;
+// CGameSpy_ATLAS::TryToTranslate(theResult).c_str());
+// my_inst->terminate_session
+//(); 		Engine.Sheduler.Unregister		(my_inst);
+//return;
 //	}
 //	char const * tmp_connection_id =
-//my_inst->m_atlas_obj->GetConnectionId(); 	VERIFY(tmp_connection_id); 	xr_strcpy(
-//		static_cast<char*>((void*)my_inst->m_atlas_connection_id),
+// my_inst->m_atlas_obj->GetConnectionId(); 	VERIFY(tmp_connection_id);
+// xr_strcpy( 		static_cast<char*>((void*)my_inst->m_atlas_connection_id),
 //		sizeof(my_inst->m_atlas_connection_id),
 //		tmp_connection_id
 //	);
@@ -192,9 +202,8 @@ void stats_submitter::begin_session() {
 //	if (!my_inst->prepare_report())
 //	{
 //		my_inst->m_last_operation_cb	(false,
-//"mp_failed_to_create_report"); 		my_inst->terminate_session		();
-//		Engine.Sheduler.Unregister		(my_inst);
-//		return;
+//"mp_failed_to_create_report"); 		my_inst->terminate_session
+//(); 		Engine.Sheduler.Unregister		(my_inst); 		return;
 //	}
 //
 //	SCResult tmp_result = my_inst->m_atlas_obj->SubmitReport(
@@ -209,7 +218,7 @@ void stats_submitter::begin_session() {
 //	if (tmp_result != SCResult_NO_ERROR)
 //	{
 //		my_inst->m_last_operation_cb(false,
-//CGameSpy_ATLAS::TryToTranslate(tmp_result).c_str());
+// CGameSpy_ATLAS::TryToTranslate(tmp_result).c_str());
 //		my_inst->terminate_session();
 //		Engine.Sheduler.Unregister(my_inst);
 //		return;
@@ -218,14 +227,16 @@ void stats_submitter::begin_session() {
 
 // void __cdecl stats_submitter::submitted_cb(const SCInterfacePtr theInterface,
 //										   GHTTPResult
-//theHttpResult, 										   SCResult             theResult, 										   void * theUserData)
+// theHttpResult,
+// SCResult             theResult,
+// void * theUserData)
 //{
 //	stats_submitter* my_inst = static_cast<stats_submitter*>(theUserData);
 //	VERIFY(my_inst && my_inst->m_last_operation_profile);
 //	if (theHttpResult != GHTTPSuccess)
 //	{
 //		my_inst->m_last_operation_cb	(false,
-//CGameSpy_ATLAS::TryToTranslate(theHttpResult).c_str());
+// CGameSpy_ATLAS::TryToTranslate(theHttpResult).c_str());
 //		my_inst->terminate_session		();
 //		Engine.Sheduler.Unregister		(my_inst);
 //		return;
@@ -233,8 +244,10 @@ void stats_submitter::begin_session() {
 //	if (theResult != SCResult_NO_ERROR)
 //	{
 //		my_inst->m_last_operation_cb	(false,
-//CGameSpy_ATLAS::TryToTranslate(theResult).c_str()); 		my_inst->terminate_session
-//(); 		Engine.Sheduler.Unregister		(my_inst); 		return;
+// CGameSpy_ATLAS::TryToTranslate(theResult).c_str());
+// my_inst->terminate_session
+//(); 		Engine.Sheduler.Unregister		(my_inst);
+//return;
 //	}
 //
 //	my_inst->m_last_operation_cb	(true, "");
@@ -299,7 +312,7 @@ bool stats_submitter::prepare_report() {
     // if (report_creation_result)
     //{
     //	tmp_res = m_atlas_obj->ReportEnd(m_atlas_report, gsi_true,
-    //SCGameStatus_COMPLETE); 	VERIFY(tmp_res == SCResult_NO_ERROR); 	return
+    // SCGameStatus_COMPLETE); 	VERIFY(tmp_res == SCResult_NO_ERROR); 	return
     //(tmp_res == SCResult_NO_ERROR);
     // }
     return false;
@@ -459,7 +472,7 @@ void stats_submitter::save_file( gamespy_gp::profile const* profile ) {
     //	LPCSTR tmp_award_name = get_award_name(i->first);
     //	ltx_to_write.w_u16(tmp_award_name, award_count_line, i->second.m_count);
     //	ltx_to_write.w_u32(tmp_award_name, award_rdate_line,
-    //i->second.m_last_reward_date);
+    // i->second.m_last_reward_date);
     // }
     //
     // for (all_best_scores_t::const_iterator i = tmp_best_scores.begin(),

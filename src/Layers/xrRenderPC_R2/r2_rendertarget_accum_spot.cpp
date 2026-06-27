@@ -455,7 +455,7 @@ void CRenderTarget::accum_volumetric( light* L ) {
                        m_Lmap._42 );
         RCache.set_c( "vMinBounds", aabb.x1, aabb.y1, aabb.z1, 0 );
         //	Increase camera-space aabb z size to compensate decrease of
-        //slices number
+        // slices number
         RCache.set_c( "vMaxBounds", aabb.x2, aabb.y2,
                       aabb.z1 + ( aabb.z2 - aabb.z1 ) / fQuality, 0 );
 

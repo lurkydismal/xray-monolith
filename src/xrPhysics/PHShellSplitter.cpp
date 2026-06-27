@@ -160,7 +160,7 @@ void CPHShellSplitterHolder::PassEndSplitters( const CShellSplitInfo& spl_inf,
     }
 
     //////correct data in fractures for elements allready added to dest with
-    ///fractures from source///////
+    /// fractures from source///////
     ELEMENT_I i_dest_elem = dest_elements.begin(),
               e_dest_elem = dest_elements.end();
     for ( ; i_dest_elem != e_dest_elem; ++i_dest_elem ) {
@@ -384,7 +384,7 @@ shell_root CPHShellSplitterHolder::ElementSingleSplit(
                              new_shell_last_desc );
     new_shell_last_desc->set_PhysicsRefObject( 0 );
     ///////////////////temporary for initialization set old Kinematics in new
-    ///shell/////////////////
+    /// shell/////////////////
     new_shell_last->set_Kinematics( m_pShell->PKinematics() );
     new_shell_last_desc->AfterSetActive();
     new_shell_last->set_Kinematics( NULL );

@@ -213,7 +213,7 @@ void CUIScrollView::Draw() {
     xrCriticalSectionGuard guard( m_pad->csUi );
     WINDOW_LIST_it it = m_pad->GetChildWndList().begin();
     //	WINDOW_LIST_it it_e					=
-    //m_pad->GetChildWndList().end();
+    // m_pad->GetChildWndList().end();
 
     if ( !Empty() && m_visible_rgn.x != -1 ) {
         std::advance( it, m_visible_rgn.x );

@@ -272,7 +272,7 @@ protected:
 public:
     bool create( shared_str key, IReader* data, vecBones* bones );
     //{ motions_value* v = g_pMotionsContainer->dock(key,data,bones); if (0!=v)
-    //v->m_dwReference++; destroy(); p_ = v; }
+    // v->m_dwReference++; destroy(); p_ = v; }
     bool create( shared_motions const& rhs );
     // { motions_value* v = rhs.p_; if (0!=v) v->m_dwReference++; destroy(); p_
     // = v; }

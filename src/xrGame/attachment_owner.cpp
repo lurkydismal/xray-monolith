@@ -42,9 +42,9 @@ void CAttachmentOwner::net_Destroy() {
         Msg( "Object %s has attached items :",
              *smart_cast< CGameObject* >( this )->cName() );
         //		xr_vector<CAttachableItem*>::const_iterator	I =
-        //attached_objects().begin();
+        // attached_objects().begin();
         //		xr_vector<CAttachableItem*>::const_iterator	E =
-        //attached_objects().end(); 		for ( ; I != E; ++I)
+        // attached_objects().end(); 		for ( ; I != E; ++I)
         //			Msg					("*
         //%s",*(*I)->item().object().cName());
     }

@@ -426,7 +426,7 @@ void CSightAction::execute_fire_object() {
             m_object_start_position = m_object_to_look->Position();
             m_holder_start_position = m_object->Position();
             //			m_vector3d =
-            //m_object->sight().object_position();
+            // m_object->sight().object_position();
             break;
         }
         case 1: {
@@ -439,7 +439,7 @@ void CSightAction::execute_fire_object() {
                         m_already_switched = false;
                         //						Msg
                         //("%6d switch to mode 0 (reson: holder position
-                        //changed)", Device.dwTimeGlobal);
+                        // changed)", Device.dwTimeGlobal);
                         m_state_fire_object = 0;
                         break;
                     }
@@ -449,7 +449,7 @@ void CSightAction::execute_fire_object() {
                         m_vector3d = m_object->sight().object_position();
                         //						Msg
                         //("%6d switch to mode 0 (reson: object position
-                        //changed)", Device.dwTimeGlobal);
+                        // changed)", Device.dwTimeGlobal);
                         m_already_switched = false;
                         m_state_fire_object = 0;
                         break;
@@ -460,7 +460,7 @@ void CSightAction::execute_fire_object() {
                     m_vector3d = m_object->sight().object_position();
                     //					Msg
                     //("%6d switch to mode 0 (reson: time interval)",
-                    //Device.dwTimeGlobal);
+                    // Device.dwTimeGlobal);
                     m_already_switched = true;
                     m_state_fire_object = 0;
                     break;

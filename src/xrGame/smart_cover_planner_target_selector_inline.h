@@ -3,7 +3,7 @@
 //	Created 	: 18.09.2007
 //	Author		: Alexander Dudin
 //	Description : Target selector for smart covers animation planner inline
-//functions
+// functions
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef SMART_COVER_PLANNER_TARGET_SELECTOR_INLINE_H_INCLUDED

@@ -75,9 +75,9 @@ void CServerList::Update() {
     if ( m_bAnimation ) {
         //		m_pAnimation->Update();
         //		m_frame[LST_SRV_PROP].SetColor(subst_alpha(0xffffffff,
-        //color_get_A(m_pAnimation->GetColor())));
+        // color_get_A(m_pAnimation->GetColor())));
         //		m_frame[LST_PLAYERS].SetColor(subst_alpha(0xffffffff,
-        //color_get_A(m_pAnimation->GetColor())));
+        // color_get_A(m_pAnimation->GetColor())));
 
         if ( true /*m_pAnimation->Done()*/ ) {
             m_bAnimation = false;
@@ -182,7 +182,7 @@ void CServerList::FillUpDetailedServerInfo() {
     //		// TEAM 1
     //		xr_vector<PlayerInfo>::iterator it;
     //		for (it = srvInfo.m_aPlayers.begin(); it !=
-    //srvInfo.m_aPlayers.end(); ++it)
+    // srvInfo.m_aPlayers.end(); ++it)
     //		{
     //			PlayerInfo pf = *it;
     //			if (1 != pf.Team)
@@ -193,14 +193,15 @@ void CServerList::FillUpDetailedServerInfo() {
     //			if (!t1)		// add header
     //			{
     //				STRCONCAT(_buff,
-    //CStringTable().translate("ui_st_team").c_str(),
+    // CStringTable().translate("ui_st_team").c_str(),
     //					"\"",
-    //CTeamInfo::GetTeam1_name().c_str(), "\"");
+    // CTeamInfo::GetTeam1_name().c_str(), "\"");
 
     //				pItemAdv = m_list[LST_PLAYERS].AddItem();
     //				pItemAdv->SetTextColor
-    //(m_list[LST_PLAYERS].GetTextColor()); 				pItemAdv->SetFont
-    //(m_list[LST_PLAYERS].GetFont()); 				pItemAdv->SetText
+    //(m_list[LST_PLAYERS].GetTextColor());
+    //pItemAdv->SetFont (m_list[LST_PLAYERS].GetFont());
+    //pItemAdv->SetText
     //(_buff);
     //				pItemAdv->GetTextItem()->SetWidth(m_list[LST_PLAYERS].GetDesiredChildWidth());
     //				t1 = true;
@@ -211,23 +212,23 @@ void CServerList::FillUpDetailedServerInfo() {
 
     //			char buf[16];
     //			pItemAdv->SetTextColor
-    //(m_list[LST_PLAYERS].GetTextColor()); 			pItemAdv->SetFont
-    //(m_list[LST_PLAYERS].GetFont()); 			pItemAdv->SetText	(pf.Name);
-    //			pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
+    //(m_list[LST_PLAYERS].GetTextColor()); pItemAdv->SetFont
+    //(m_list[LST_PLAYERS].GetFont()); 			pItemAdv->SetText
+    //(pf.Name); 			pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Frags); 			pItemAdv->AddTextField
     //(buf, m_header2[2].GetWidth());
 
     //			xr_sprintf
-    //(buf,sizeof(buf),"%d",pf.Deaths); 			pItemAdv->AddTextField
-    //(buf, m_header2[3].GetWidth());
+    //(buf,sizeof(buf),"%d",pf.Deaths);
+    //pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
     //		}
 
     //
     //		// TEAM 2
     //		for (it = srvInfo.m_aPlayers.begin(); it !=
-    //srvInfo.m_aPlayers.end(); it++)
+    // srvInfo.m_aPlayers.end(); it++)
     //		{
     //			PlayerInfo pf = *it;
     //			if (2 != pf.Team)
@@ -238,9 +239,9 @@ void CServerList::FillUpDetailedServerInfo() {
     //			if (!t2)
     //			{
     //				STRCONCAT(_buff,
-    //CStringTable().translate("ui_st_team").c_str(),
+    // CStringTable().translate("ui_st_team").c_str(),
     //					"\"",
-    //CTeamInfo::GetTeam2_name().c_str(), "\"");
+    // CTeamInfo::GetTeam2_name().c_str(), "\"");
 
     //				m_list[LST_PLAYERS].AddTextItem	(_buff);
 
@@ -251,22 +252,23 @@ void CServerList::FillUpDetailedServerInfo() {
 
     //			char buf[16];
     //			pItemAdv->SetTextColor
-    //(m_list[LST_PLAYERS].GetTextColor()); 			pItemAdv->SetFont
+    //(m_list[LST_PLAYERS].GetTextColor()); pItemAdv->SetFont
     //(m_list[LST_PLAYERS].GetFont()); 			pItemAdv->SetText
-    //(pf.Name); 			pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
+    //(pf.Name);
+    //pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
     //
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Frags); 			pItemAdv->AddTextField
     //(buf, m_header2[2].GetWidth());
 
     //			xr_sprintf
-    //(buf,sizeof(buf),"%d",pf.Deaths); 			pItemAdv->AddTextField
-    //(buf, m_header2[3].GetWidth());
+    //(buf,sizeof(buf),"%d",pf.Deaths);
+    //pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
     //		}
 
     //		// SPECTATORS
     //		for (it = srvInfo.m_aPlayers.begin(); it !=
-    //srvInfo.m_aPlayers.end();++it)
+    // srvInfo.m_aPlayers.end();++it)
     //		{
     //			PlayerInfo pf = *it;
     //			if (!pf.Spectator)
@@ -275,7 +277,7 @@ void CServerList::FillUpDetailedServerInfo() {
     //			if (!spect)
     //			{
     //				pItemAdv =
-    //m_list[LST_PLAYERS].AddTextItem(CStringTable().translate("mp_spectator").c_str());
+    // m_list[LST_PLAYERS].AddTextItem(CStringTable().translate("mp_spectator").c_str());
     //				spect = true;
     //			}
 
@@ -284,16 +286,16 @@ void CServerList::FillUpDetailedServerInfo() {
     //			char buf[16];
     //			pItemAdv->SetFont
     //(m_list[LST_PLAYERS].GetFont()); 			pItemAdv->SetTextColor
-    //(m_list[LST_PLAYERS].GetTextColor()); 			pItemAdv->SetText
-    //(pf.Name); 			pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
+    //(m_list[LST_PLAYERS].GetTextColor()); pItemAdv->SetText (pf.Name);
+    //pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Frags); 			pItemAdv->AddTextField
     //(buf, m_header2[2].GetWidth());
 
     //			xr_sprintf
-    //(buf,sizeof(buf),"%d",pf.Deaths); 			pItemAdv->AddTextField
-    //(buf, m_header2[3].GetWidth());
+    //(buf,sizeof(buf),"%d",pf.Deaths);
+    //pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
     //		}
 
     //	}
@@ -301,26 +303,27 @@ void CServerList::FillUpDetailedServerInfo() {
     //	{
     //		xr_vector<PlayerInfo>::iterator it;
     //		for (it = srvInfo.m_aPlayers.begin(); it !=
-    //srvInfo.m_aPlayers.end(); ++it)
+    // srvInfo.m_aPlayers.end(); ++it)
     //		{
     //			PlayerInfo pf = *it;
     //			CUIListBoxItem* pItemAdv		=
-    //m_list[LST_PLAYERS].AddItem();
+    // m_list[LST_PLAYERS].AddItem();
 
     //			char buf[16];
 
     //			pItemAdv->SetTextColor
-    //(m_list[LST_PLAYERS].GetTextColor()); 			pItemAdv->SetFont
+    //(m_list[LST_PLAYERS].GetTextColor()); pItemAdv->SetFont
     //(m_list[LST_PLAYERS].GetFont()); 			pItemAdv->SetText
-    //(pf.Name); 			pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
+    //(pf.Name);
+    //pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Frags); 			pItemAdv->AddTextField
     //(buf, m_header2[2].GetWidth());
 
     //			xr_sprintf
-    //(buf,sizeof(buf),"%d",pf.Deaths); 			pItemAdv->AddTextField
-    //(buf, m_header2[3].GetWidth());
+    //(buf,sizeof(buf),"%d",pf.Deaths);
+    //pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
     //		}
     //	}
 
@@ -328,7 +331,7 @@ void CServerList::FillUpDetailedServerInfo() {
     //	for (it = srvInfo.m_aInfos.begin(); it != srvInfo.m_aInfos.end(); ++it)
     //	{
     //		GameInfo gi = *it; 		CUIListBoxItem* pItemAdv =
-    //m_list[LST_SRV_PROP].AddItem();
+    // m_list[LST_SRV_PROP].AddItem();
 
     //		pItemAdv->SetText
     //(gi.InfoName.c_str()); 		pItemAdv->GetTextItem()->SetWidth
@@ -514,7 +517,7 @@ void CServerList::ConnectToSelected() {
     // if (!browser().CheckDirectConnection(item->GetInfo()->info.Index))
     //{
     //	Msg("! Direct connection to this server is not available -> its behind
-    //firewall"); 	return;
+    // firewall"); 	return;
     // }
 
     // if (xr_strcmp(item->GetInfo()->info.version, MainMenu()->GetGSVer()))

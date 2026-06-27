@@ -3,8 +3,8 @@
 //	Created 	: 19.09.2002
 //  Modified 	: 04.06.2003
 //	Author		: Oles Shyshkovtsov, Alexander Maksimchuk, Victor
-//Reutskiy and Dmitriy Iassenev 	Description : Server objects items for ALife
-//simulator
+// Reutskiy and Dmitriy Iassenev 	Description : Server objects items for
+// ALife simulator
 ////////////////////////////////////////////////////////////////////////////
 
 #include "xrServer_Objects_ALife_Items.h"

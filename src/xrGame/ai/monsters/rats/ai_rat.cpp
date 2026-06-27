@@ -46,7 +46,7 @@ using namespace RatSpace;
 CAI_Rat::CAI_Rat() : m_behaviour_manager( 0 ) {
     init();
     //	m_behaviour_manager				=
-    //xr_new<steering_behaviour::manager>(this); 	m_behaviour_manager->add
+    // xr_new<steering_behaviour::manager>(this); 	m_behaviour_manager->add
     //(xr_new<steering_behaviour::cohesion>(this),	.5f);
     //	m_behaviour_manager->add
     //(xr_new<steering_behaviour::separation>(this),	.5f);
@@ -287,7 +287,7 @@ BOOL CAI_Rat::net_Spawn( CSE_Abstract* DC ) {
     m_fAttackSuccessProbability = tpSE_Rat->fAttackSuccessProbability;
 
     //	m_tCurGP						=
-    //tpSE_Rat->m_tGraphID; 	m_tNextGP = tpSE_Rat->m_tNextGraphID;
+    // tpSE_Rat->m_tGraphID; 	m_tNextGP = tpSE_Rat->m_tNextGraphID;
     m_current_graph_point = m_next_graph_point = ai_location().game_vertex_id();
 
     int iPointCount = ( int )movement().locations().vertex_types().size();
@@ -391,7 +391,7 @@ void CAI_Rat::net_Export( NET_Packet& P ) {
     P.w( &l_game_vertex_id, sizeof( l_game_vertex_id ) );
     P.w( &l_game_vertex_id, sizeof( l_game_vertex_id ) );
     //	P.w						(&m_fGoingSpeed,
-    //sizeof(m_fGoingSpeed)); 	P.w
+    // sizeof(m_fGoingSpeed)); 	P.w
     //(&m_fGoingSpeed,			sizeof(m_fGoingSpeed));
     float f1 = 0;
     if ( ai().game_graph().valid_vertex_id( l_game_vertex_id ) ) {

@@ -6999,10 +6999,10 @@ bool ImGui::InputTextEx( const char* label,
     // (g.ActiveId == id)
     if ( apply_new_text != NULL ) {
         //// We cannot test for 'backup_current_text_length !=
-        ///apply_new_text_length' here because we have no guarantee that the
-        ///size / of our owned buffer matches the size of the string object held
-        ///by the user, and by design we allow InputText() to be used / without
-        ///any storage on user's side.
+        /// apply_new_text_length' here because we have no guarantee that the
+        /// size / of our owned buffer matches the size of the string object
+        /// held by the user, and by design we allow InputText() to be used /
+        /// without any storage on user's side.
         IM_ASSERT( apply_new_text_length >= 0 );
         if ( is_resizable ) {
             ImGuiInputTextCallbackData callback_data;
@@ -12067,9 +12067,11 @@ bool ImGui::BeginMenuEx( const char* label, const char* icon, bool enabled ) {
         OpenPopup( label );
     } else if ( want_open ) {
         menu_is_open = true;
-        OpenPopup( label, ImGuiPopupFlags_NoReopen ); // | (want_open_nav_init ?
-                                                      // ImGuiPopupFlags_NoReopenAlwaysNavInit
-                                                      // : 0));
+        OpenPopup(
+            label,
+            ImGuiPopupFlags_NoReopen ); // | (want_open_nav_init ?
+                                        // ImGuiPopupFlags_NoReopenAlwaysNavInit
+                                        // : 0));
     }
 
     if ( menu_is_open ) {
@@ -13601,7 +13603,7 @@ bool ImGui::TabItemEx( ImGuiTabBar* tab_bar,
             bool undocking_tab =
                 ( g.DragDropActive && g.DragDropPayload.SourceId == id );
             if ( !undocking_tab ) //&& (!g.IO.ConfigDockingWithShift ||
-                                  //g.IO.KeyShift)
+                                  // g.IO.KeyShift)
             {
                 float threshold_base = g.FontSize;
                 float threshold_x = ( threshold_base * 2.2f );

@@ -77,7 +77,7 @@ void CGameTask::CreateMapLocation( bool on_load ) {
             }
         }
         //.		m_linked_map_location =
-        //Level().MapManager().GetMapLocation(m_map_location, m_map_object_id);
+        // Level().MapManager().GetMapLocation(m_map_location, m_map_object_id);
     } else {
         m_linked_map_location = Level().MapManager().AddMapLocation(
             m_map_location, m_map_object_id );

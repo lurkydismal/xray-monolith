@@ -131,7 +131,7 @@ struct DSGraphItem {
 
 #if defined( USE_DX10 ) || \
     defined( USE_DX11 ) //	DX10 needs shader signature to propperly bind
-                        //deometry to shader
+                        // deometry to shader
 using vs_type = SVS*;
 using gs_type = ID3DGeometryShader*;
 #ifdef USE_DX11

@@ -43,8 +43,8 @@ uint BlockDXT1::evaluatePalette( Color32 color_array[ 4 ] ) const {
     // @@ Same as above, but faster?
     //	Color32 c;
     //	c.u = ((col0.u << 3) & 0xf8) | ((col0.u << 5) & 0xfc00) | ((col0.u << 8)
-    //& 0xf80000); 	c.u |= (c.u >> 5) & 0x070007; 	c.u |= (c.u >> 6) & 0x000300;
-    //	color_array[0].u = c.u;
+    //& 0xf80000); 	c.u |= (c.u >> 5) & 0x070007; 	c.u |= (c.u >> 6) &
+    //0x000300; 	color_array[0].u = c.u;
 
     color_array[ 1 ].r = ( col1.r << 3 ) | ( col1.r >> 2 );
     color_array[ 1 ].g = ( col1.g << 2 ) | ( col1.g >> 4 );
@@ -53,8 +53,8 @@ uint BlockDXT1::evaluatePalette( Color32 color_array[ 4 ] ) const {
 
     // @@ Same as above, but faster?
     //	c.u = ((col1.u << 3) & 0xf8) | ((col1.u << 5) & 0xfc00) | ((col1.u << 8)
-    //& 0xf80000); 	c.u |= (c.u >> 5) & 0x070007; 	c.u |= (c.u >> 6) & 0x000300;
-    //	color_array[1].u = c.u;
+    //& 0xf80000); 	c.u |= (c.u >> 5) & 0x070007; 	c.u |= (c.u >> 6) &
+    //0x000300; 	color_array[1].u = c.u;
 
     if ( col0.u > col1.u ) {
         // Four-color block: derive the other two colors.

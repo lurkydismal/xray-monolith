@@ -660,7 +660,7 @@ typedef enum UErrorCode {
                            ']'. */
     U_BRK_ASSIGN_ERROR, /**< Syntax error in RBBI rule assignment statement. */
     U_BRK_VARIABLE_REDFINITION, /**< RBBI rule $Variable redefined. */
-    U_BRK_MISMATCHED_PAREN,     /**< Mis-matched parentheses in an RBBI rule.     */
+    U_BRK_MISMATCHED_PAREN, /**< Mis-matched parentheses in an RBBI rule.     */
     U_BRK_NEW_LINE_IN_QUOTED_STRING, /**< Missing closing quote in an RBBI rule.
                                       */
     U_BRK_UNDEFINED_VARIABLE, /**< Use of an undefined $Variable in an RBBI
@@ -699,10 +699,10 @@ typedef enum UErrorCode {
                                     pattern.  */
     U_REGEX_NUMBER_TOO_BIG,      /**< Decimal number is too large.      */
     U_REGEX_BAD_INTERVAL,        /**< Error in {min,max} interval        */
-    U_REGEX_MAX_LT_MIN,          /**< In {min,max}, max is less than min.          */
-    U_REGEX_INVALID_BACK_REF,    /**< Back-reference to a non-existent capture
-                                    group.    */
-    U_REGEX_INVALID_FLAG,        /**< Invalid value for match mode flags.        */
+    U_REGEX_MAX_LT_MIN, /**< In {min,max}, max is less than min.          */
+    U_REGEX_INVALID_BACK_REF, /**< Back-reference to a non-existent capture
+                                 group.    */
+    U_REGEX_INVALID_FLAG,     /**< Invalid value for match mode flags.        */
     U_REGEX_LOOK_BEHIND_LIMIT,   /**< Look-Behind pattern matches must have a
                                     bounded maximum length.    */
     U_REGEX_SET_CONTAINS_STRING, /**< Regexps cannot have UnicodeSets containing

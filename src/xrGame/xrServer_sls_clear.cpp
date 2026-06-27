@@ -31,7 +31,7 @@ void xrServer::Perform_destroy( CSE_Abstract* object, u32 mode ) {
         R_ASSERT2( child, make_string( "child registered but not found [%d]",
                                        object->children.back() ) );
         //		Msg					("SLS-CLEAR :
-        //REJECT  [%s][%s] FROM
+        // REJECT  [%s][%s] FROM
         //[%s][%s]",child->name(),child->name_replace(),object->name(),object->name_replace());
         Perform_reject( child, object, 2 * NET_Latency );
 #ifdef DEBUG

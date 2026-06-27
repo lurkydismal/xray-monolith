@@ -1060,12 +1060,14 @@ class CPHDebugOutput : public IDebugOutput {
     virtual u32& dbg_tries_num() {
         return ::dbg_tries_num;
         //	make_string( "%s, _14_=%f \n", dump_string( make_string( "%s.i,
-        //", name ).c_str(), form.i ).c_str( ) , form._14_ )	+ 	make_string(
+        //", name ).c_str(), form.i ).c_str( ) , form._14_ )	+
+        //make_string(
         //"%s, _24_=%f \n", dump_string( make_string( "%s.j, ", name ).c_str(),
-        //form.j ).c_str( ) , form._24_ )	+ 	make_string( "%s, _34_=%f \n",
-        //dump_string( make_string( "%s.k, ", name ).c_str(), form.k ).c_str( )
-        //, form._34_  ) + 	make_string( "%s, _44_=%f \n", dump_string(
-        //make_string( "%s.c, ", name ).c_str(), form.c ).c_str( ) , form._44_
+        // form.j ).c_str( ) , form._24_ )	+ 	make_string( "%s,
+        // _34_=%f \n", dump_string( make_string( "%s.k, ", name ).c_str(),
+        // form.k ).c_str( ) , form._34_  ) + 	make_string( "%s, _44_=%f \n",
+        //dump_string( make_string( "%s.c, ", name ).c_str(), form.c ).c_str( )
+        // , form._44_
         //);
     }
     virtual u32& dbg_saved_tries_for_active_objects() {

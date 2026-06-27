@@ -67,7 +67,8 @@ void CSE_ALifeMonsterAbstract::update() {
     EPS_L) { bContinue = true; if ((m_fDistanceFromPoint - m_fDistanceToPoint >
     EPS_L) && (m_fCurSpeed > EPS_L)) m_tTimeID			= tCurTime -
     ALife::_TIME_ID(iFloor((m_fDistanceFromPoint -
-    m_fDistanceToPoint)*1000.f/m_fCurSpeed)); m_fDistanceToPoint = m_fDistanceFromPoint	= 0.0f; m_tPrevGraphID			=
+    m_fDistanceToPoint)*1000.f/m_fCurSpeed)); m_fDistanceToPoint =
+    m_fDistanceFromPoint	= 0.0f; m_tPrevGraphID			=
     m_tGraphID; alife().graph().change	(this,m_tGraphID,m_tNextGraphID);
                                     CSE_ALifeGroupAbstract
     *tpALifeGroupAbstract = smart_cast<CSE_ALifeGroupAbstract*>(this); if

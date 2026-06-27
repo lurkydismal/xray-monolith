@@ -70,7 +70,7 @@ HRESULT dx10State::Apply() {
     //	HW.pDevice->RSSetState(m_pRasterizerState);
     //	VERIFY(m_pDepthStencilState);
     //	HW.pDevice->OMSetDepthStencilState(m_pDepthStencilState,
-    //m_uiStencilRef); 	VERIFY(m_pBlendState);
+    // m_uiStencilRef); 	VERIFY(m_pBlendState);
     //	HW.pDevice->OMSetBlendState(m_pBlendState, BlendFactor, SampleMask);
 
     return S_OK;

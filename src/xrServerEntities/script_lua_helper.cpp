@@ -294,9 +294,9 @@ void CDbgLuaHelper::DrawGlobalVariables() {
     var[ 0 ] = 0;
     while ( lua_next( L, -2 ) ) {
         //!!!!	TRACE2("%s - %s\n",	lua_typename(L, lua_type(L, -2)),
-        //!lua_typename(L, lua_type(L, -1)));
+        //! lua_typename(L, lua_type(L, -1)));
         //		xr_sprintf(var, "%s-%s",	lua_typename(L,
-        //lua_type(L, -2)), lua_typename(L, lua_type(L, -1)) );
+        // lua_type(L, -2)), lua_typename(L, lua_type(L, -1)) );
         //		CScriptDebugger::GetDebugger()->AddLocalVariable(var,
         //"global", "_g_");
         lua_pop( L, 1 ); // pop value, keep key for next iteration;

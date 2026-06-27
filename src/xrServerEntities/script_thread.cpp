@@ -92,7 +92,7 @@ CScriptThread::CScriptThread( LPCSTR caNamespaceName,
         //			fputc
         //(0,stderr); 			ai().script_engine().script_log
         //(ScriptStorage::eLuaMessageTypeInfo,"%s",g_ca_stdout);
-        //fflush (stderr);
+        // fflush (stderr);
         //		}
         //		Msg					("lua get top
         //%d",lua_gettop(ai().script_engine().lua())); 		print_stack_

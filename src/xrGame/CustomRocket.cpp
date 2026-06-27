@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 // CustomRocket.cpp:	ракета, которой стреляет RocketLauncher
 //						(умеет лететь, светиться и
-//отыгрывать партиклы)
+// отыгрывать партиклы)
 //////////////////////////////////////////////////////////////////////
 
 #include "customrocket.h"
@@ -372,14 +372,14 @@ void CCustomRocket::OnH_B_Chield() {
     VERIFY( m_eState == eInactive );
     inherited::OnH_B_Chield();
     //	Msg("! CCustomRocket::OnH_B_Chield called, id[%d]
-    //frame[%d]",ID(),Device.dwFrame);
+    // frame[%d]",ID(),Device.dwFrame);
 }
 
 void CCustomRocket::OnH_A_Chield() {
     VERIFY( m_eState == eInactive );
     inherited::OnH_A_Chield();
     //	Msg("! CCustomRocket::OnH_A_Chield called, id[%d]
-    //frame[%d]",ID(),Device.dwFrame);
+    // frame[%d]",ID(),Device.dwFrame);
 }
 
 void CCustomRocket::OnH_B_Independent( bool just_before_destroy ) {
@@ -399,7 +399,7 @@ void CCustomRocket::OnH_A_Independent() {
     StartFlying();
     StartEngine();
     //	Msg("! CCustomRocket::OnH_A_Independent called, id[%d]
-    //frame[%d]",ID(),Device.dwFrame);
+    // frame[%d]",ID(),Device.dwFrame);
 }
 
 void CCustomRocket::UpdateCL() {

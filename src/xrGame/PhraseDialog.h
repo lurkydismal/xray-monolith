@@ -81,7 +81,7 @@ public:
     // сказать фразу и перейти к следующей стадии диалога
     // если вернули false, то считаем, что диалог закончился
     //(сделано статическим, так как мы должны передавать имеенно
-    //DIALOG_SHARED_PTR&, а не обычный указатель)
+    // DIALOG_SHARED_PTR&, а не обычный указатель)
     static bool SayPhrase( DIALOG_SHARED_PTR& phrase_dialog,
                            const shared_str& phrase_id );
 

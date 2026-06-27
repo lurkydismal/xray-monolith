@@ -1599,11 +1599,11 @@ static CTypeID cp_decl_enum( CPState* cp, CPDecl* sdecl ) {
                 cp_expr_kint( cp, &k );
                 if ( k.id == CTID_UINT32 ) {
                     /* C99 says that enum constants are always (signed)
-                    * integers.
-                    ** But since unsigned constants like 0x80000000 are quite
-                    * common,
-                    ** those are left as uint32_t.
-                    */
+                     * integers.
+                     ** But since unsigned constants like 0x80000000 are quite
+                     * common,
+                     ** those are left as uint32_t.
+                     */
                     if ( k.i32 >= 0 )
                         k.id = CTID_INT32;
                 } else {

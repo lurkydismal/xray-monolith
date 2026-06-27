@@ -423,7 +423,7 @@ void CWeaponMagazinedWGrenade::LaunchGrenade() {
 #ifdef DEBUG
                 //.				DBG_OpenCashedDraw();
                 //.
-                //DBG_DrawLine(p1,Fvector().add(p1,d),D3DCOLOR_XRGB(255,0,0));
+                // DBG_DrawLine(p1,Fvector().add(p1,d),D3DCOLOR_XRGB(255,0,0));
 #endif
 #ifdef CROCKETLAUNCHER_CHANGE
                 u8 canfire0 = TransferenceAndThrowVelToThrowDir(
@@ -435,9 +435,9 @@ void CWeaponMagazinedWGrenade::LaunchGrenade() {
 #endif
 #ifdef DEBUG
                 //.
-                //if(canfire0>0)DBG_DrawLine(p1,Fvector().add(p1,res[0]),D3DCOLOR_XRGB(0,255,0));
+                // if(canfire0>0)DBG_DrawLine(p1,Fvector().add(p1,res[0]),D3DCOLOR_XRGB(0,255,0));
                 //.
-                //if(canfire0>1)DBG_DrawLine(p1,Fvector().add(p1,res[1]),D3DCOLOR_XRGB(0,0,255));
+                // if(canfire0>1)DBG_DrawLine(p1,Fvector().add(p1,res[1]),D3DCOLOR_XRGB(0,0,255));
                 //.				DBG_ClosedCashedDraw(30000);
 #endif
 
@@ -1054,7 +1054,7 @@ bool CWeaponMagazinedWGrenade::install_upgrade_ammo_class( LPCSTR section,
     iMagazineSize = m_bGrenadeMode ? 1 : iMagazineSize2;
 
     //	ammo_class = ammo_5.45x39_fmj, ammo_5.45x39_ap  // name of the
-    //ltx-section of used ammo
+    // ltx-section of used ammo
     bool result2 = process_if_exists_set( section, "ammo_class",
                                           &CInifile::r_string, str, test );
     if ( result2 && !test ) {
@@ -1081,7 +1081,7 @@ bool CWeaponMagazinedWGrenade::install_upgrade_impl( LPCSTR section,
     bool result = inherited::install_upgrade_impl( section, test );
 
     //	grenade_class = ammo_vog-25, ammo_vog-25p          // name of the
-    //ltx-section of used grenades
+    // ltx-section of used grenades
     bool result2 = process_if_exists_set( section, "grenade_class",
                                           &CInifile::r_string, str, test );
     if ( result2 && !test ) {

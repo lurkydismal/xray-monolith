@@ -698,8 +698,10 @@ void CInventoryItem::net_Export( NET_Packet& P ) {
     (u16(1) << 5)); num_items.num_items		= u8(temp);
 
     if (State.enabled)
-    num_items.mask |= CSE_ALifeInventoryItem::inventory_item_state_enabled; if (fis_zero(State.angular_vel.square_magnitude()))	num_items.mask |= CSE_ALifeInventoryItem::inventory_item_angular_null;
-    if (fis_zero(State.linear_vel.square_magnitude()))	num_items.mask |=
+    num_items.mask |= CSE_ALifeInventoryItem::inventory_item_state_enabled; if
+    (fis_zero(State.angular_vel.square_magnitude()))	num_items.mask |=
+    CSE_ALifeInventoryItem::inventory_item_angular_null; if
+    (fis_zero(State.linear_vel.square_magnitude()))	num_items.mask |=
     CSE_ALifeInventoryItem::inventory_item_linear_null;
 
     P.w_u8					(num_items.common);

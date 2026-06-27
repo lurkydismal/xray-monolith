@@ -67,7 +67,7 @@ private:
     void SendDestroy();
     void _BCL enable_notificate();
     //	static 	void	ObjectContactCallback(bool& /**do_colide/**/,bool
-    //bo1,dContact& c,SGameMtl * /*material_1*/,SGameMtl * /*material_2*/);
+    // bo1,dContact& c,SGameMtl * /*material_1*/,SGameMtl * /*material_2*/);
 private:
     virtual ICollisionDamageReceiver* PHCollisionDamageReceiver() {
         return ( this );

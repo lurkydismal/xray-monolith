@@ -51,7 +51,7 @@ protected:
 
     MOTION_ITEM_MAP m_tMotions; // карта соответсвий EAction к SMotionItem
     TRANSITION_ANIM_VECTOR
-        m_tTransitions; // вектор переходов из одной анимации в другую
+    m_tTransitions; // вектор переходов из одной анимации в другую
 
     t_fx_index default_fx_indexes;
     FX_MAP_STRING fx_map_string;

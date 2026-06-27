@@ -133,7 +133,9 @@ private:
                                   void* param );
 
     // static void __cdecl			wslogin_cb
-    // (GHTTPResult httpResult, 												 WSLoginResponse * response, 												 void * userData);
+    // (GHTTPResult httpResult,
+    // WSLoginResponse * response,
+    // void * userData);
     static void __cdecl setunick_cb( GPConnection* connection,
                                      void* arg,
                                      void* param );

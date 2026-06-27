@@ -168,7 +168,7 @@ void stalker_movement_manager_obstacles::move_along_path(
                                               old_desirable_speed() ) ) {
         //		Msg
         //( "%6d stalker %s waits for the some door to be open/closed",
-        //Device.dwTimeGlobal, object().cName().c_str() );
+        // Device.dwTimeGlobal, object().cName().c_str() );
         float desirable_speed = old_desirable_speed();
         set_desirable_speed( 0.f );
 
@@ -180,7 +180,7 @@ void stalker_movement_manager_obstacles::move_along_path(
     }
 
     //	Msg								( "%6d
-    //stalker %s is going", Device.dwTimeGlobal, object().cName().c_str() );
+    // stalker %s is going", Device.dwTimeGlobal, object().cName().c_str() );
 
 #ifndef MASTER_GOLD
     if ( !psAI_Flags.test( aiObstaclesAvoiding ) ) {

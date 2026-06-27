@@ -65,7 +65,7 @@ void CUITalkWnd::InitTalkDialog() {
 
     //.	UITalkDialogWnd->UIDialogFrame.UITitleText.SetText
     //(m_pOthersInvOwner->Name()); .
-    //UITalkDialogWnd->UIOurPhrasesFrame.UITitleText.SetText
+    // UITalkDialogWnd->UIOurPhrasesFrame.UITitleText.SetText
     //(m_pOurInvOwner->Name());
 
     // очистить лог сообщений

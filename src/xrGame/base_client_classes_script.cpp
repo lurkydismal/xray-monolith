@@ -51,14 +51,13 @@ void ISpatialScript::script_register	(lua_State *L)
 */
 
 void ISheduledScript::script_register( lua_State* L ) {
-    module(
-        L )[ class_< ISheduled, CISheduledWrapper >( "ISheduled" )
-             //			.def(constructor<>())
-             //			.def("shedule_Scale",
-             //&ISheduled::shedule_Scale,
-             //&CISheduledWrapper::shedule_Scale_static) 			.def("shedule_Update",
-             //&ISheduled::shedule_Update,
-             //&CISheduledWrapper::shedule_Update_static)
+    module( L )[ class_< ISheduled, CISheduledWrapper >( "ISheduled" )
+                 //			.def(constructor<>())
+                 //			.def("shedule_Scale",
+                 //&ISheduled::shedule_Scale,
+                 //&CISheduledWrapper::shedule_Scale_static)
+                 //.def("shedule_Update", &ISheduled::shedule_Update,
+                 //&CISheduledWrapper::shedule_Update_static)
     ];
 }
 
@@ -100,8 +99,8 @@ void CObjectScript::script_register( lua_State* L ) {
         */
         //			.def("shedule_Scale",
         //&CObject::shedule_Scale,
-        //&CObjectWrapper::shedule_Scale_static) 			.def("shedule_Update",
-        //&CObject::shedule_Update,
+        //&CObjectWrapper::shedule_Scale_static)
+        //.def("shedule_Update", &CObject::shedule_Update,
         //&CObjectWrapper::shedule_Update_static)
 
         //			.def("renderable_Render"
@@ -137,8 +136,8 @@ void CObjectScript::script_register( lua_State* L ) {
             */
             //			.def("shedule_Scale",
             //&CGameObject::shedule_Scale,
-            //&CGameObjectWrapper::shedule_Scale_static) 			.def("shedule_Update",
-            //&CGameObject::shedule_Update,
+            //&CGameObjectWrapper::shedule_Scale_static)
+            //.def("shedule_Update", &CGameObject::shedule_Update,
             //&CGameObjectWrapper::shedule_Update_static)
 
             //			.def("renderable_Render"

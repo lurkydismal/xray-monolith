@@ -50,8 +50,13 @@ private:
     void process_award( SAKEField* ap );
 
     // static void __cdecl	get_my_awards_cb
-    // (SAKE sake, 													 SAKERequest request, 													 SAKERequestResult result, 													 void *
-    //inputData, 													 void * outputData, 													 void * userData);
+    // (SAKE sake,
+    // SAKERequest request,
+    // SAKERequestResult result,
+    // void *
+    // inputData,
+    // void * outputData,
+    // void * userData);
 }; // class award_system
 } // namespace gamespy_profile
 

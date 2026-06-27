@@ -234,7 +234,7 @@ BOOL CPostprocessAnimator::Process( float dt, SPPInfo& PPInfo ) {
 
     PPInfo = m_EffectorParams;
     //	PPInfo.lerp				(pp_identity, m_EffectorParams,
-    //m_factor);
+    // m_factor);
 
     //	if(fsimilar(m_factor,0.001f,EPS_S))
     //		return FALSE;

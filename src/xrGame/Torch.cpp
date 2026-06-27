@@ -344,8 +344,8 @@ void CTorch::Update() {
             //(
             //	!!Render->ViewBase.testSphere_dirty(H_Parent()->SpatialComponent->spatial.sphere.P,
             //		H_Parent()->SpatialComponent->spatial.sphere.R +
-            //SpatialComponent->spatial.sphere.R +
-            //light_render->get_homdata().sphere.R)
+            // SpatialComponent->spatial.sphere.R +
+            // light_render->get_homdata().sphere.R)
             //);
             if ( actor && actor->HUDview() )
                 PKinematics( H_Parent()->Visual() )->CalculateBones( TRUE );

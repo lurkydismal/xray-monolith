@@ -162,7 +162,7 @@ void CSpaceRestrictionShape::test_correctness() {
 
     // if (!m_correct && (xr_strcmp(*m_restrictor->cName(),
     // "agr_factory_hold_restrictor") == 0)) { 	bool flood_less =
-    //m_test_storage.size() > nodes.size();
+    // m_test_storage.size() > nodes.size();
 
     //	Msg("NOT Correct restrictor: [%s], flood less = [%u] Dump unique nodes:
     //", *m_restrictor->cName(), flood_less);
@@ -199,7 +199,8 @@ void CSpaceRestrictionShape::test_correctness() {
 
     //		if (!b_found) {
     //			Msg("Node%u :: index[%u]:: position[%f,%f,%f]", index,
-    //(*I), VPUSH(ai().level_graph().vertex_position((*I)))); 			index ++;
+    //(*I), VPUSH(ai().level_graph().vertex_position((*I))));
+    //index ++;
     //		}
 
     //	}

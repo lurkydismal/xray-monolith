@@ -86,7 +86,7 @@ void game_cl_Deathmatch::OnBuyMenu_Ok() {
         s32 MoneyDiff = pCurBuyMenu->GetPresetCost( _preset_idx_origin ) -
                         pCurBuyMenu->GetPresetCost( _preset_idx_last );
         //		P.w_s32		(s32(pCurBuyMenu->GetMoneyAmount()) -
-        //Pl->money_for_round);
+        // Pl->money_for_round);
         P.w_s32( MoneyDiff );
     }
     //	P.w_u8		(u8(pCurPresetItems->size()));
@@ -430,8 +430,8 @@ void game_cl_Deathmatch::LoadDefItemsForRank( IBuyWnd* pBuyMenu ) {
         for ( u32 it = 0; it < PlayerDefItems.size(); it++ ) {
             //			s16* pItemID = &(PlayerDefItems[it]);
             //			char* ItemName =
-            //pBuyMenu->GetWeaponNameByIndex(u8(((*pItemID)&0xff00)>>0x08),
-            //u8((*pItemID)&0x00ff));
+            // pBuyMenu->GetWeaponNameByIndex(u8(((*pItemID)&0xff00)>>0x08),
+            // u8((*pItemID)&0x00ff));
             PresetItem* pDefItem = &( PlayerDefItems[ it ] );
             const shared_str& ItemName = pBuyMenu->GetWeaponNameByIndex(
                 pDefItem->SlotID, pDefItem->ItemID );
@@ -461,8 +461,8 @@ void game_cl_Deathmatch::LoadDefItemsForRank( IBuyWnd* pBuyMenu ) {
     for ( u32 it = 0; it < PlayerDefItems.size(); it++ ) {
         //		s16* pItemID = &(PlayerDefItems[it]);
         //		char* ItemName =
-        //pBuyMenu->GetWeaponNameByIndex(u8(((*pItemID)&0xff00)>>0x08),
-        //u8((*pItemID)&0x00ff));
+        // pBuyMenu->GetWeaponNameByIndex(u8(((*pItemID)&0xff00)>>0x08),
+        // u8((*pItemID)&0x00ff));
         PresetItem* pDefItem = &( PlayerDefItems[ it ] );
         const shared_str& ItemName = pBuyMenu->GetWeaponNameByIndex(
             pDefItem->SlotID, pDefItem->ItemID );

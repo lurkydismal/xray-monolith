@@ -467,7 +467,7 @@ void CSkeletonX_ext::_Load_hw( Fvisual& V, void* _verts_ ) {
     //	BOOL	bSoft				= HW.Caps.geometry.bSoftware;
     //	u32		dwUsage				= /*D3DUSAGE_WRITEONLY
     //|*/ (bSoft?D3DUSAGE_SOFTWAREPROCESSING:0);	// VB may be read by
-    //wallmarks code
+    // wallmarks code
     switch ( RenderMode ) {
         case RM_SKINNING_SOFT:
             // Msg					("skinning: software");
@@ -478,7 +478,7 @@ void CSkeletonX_ext::_Load_hw( Fvisual& V, void* _verts_ ) {
         case RM_SKINNING_1B: {
             {
                 //	Back up vertex data since we can't read vertex buffer in
-                //DX10
+                // DX10
                 u32 size = V.vCount * sizeof( vertBoned1W );
                 u32 crc = crc32( _verts_, size );
                 Vertices1W.create( crc, V.vCount, ( vertBoned1W* )_verts_ );
@@ -524,7 +524,7 @@ void CSkeletonX_ext::_Load_hw( Fvisual& V, void* _verts_ ) {
         case RM_SKINNING_2B: {
             {
                 //	Back up vertex data since we can't read vertex buffer in
-                //DX10
+                // DX10
                 u32 size = V.vCount * sizeof( vertBoned2W );
                 u32 crc = crc32( _verts_, size );
                 Vertices2W.create( crc, V.vCount, ( vertBoned2W* )_verts_ );
@@ -573,7 +573,7 @@ void CSkeletonX_ext::_Load_hw( Fvisual& V, void* _verts_ ) {
         case RM_SKINNING_3B: {
             {
                 //	Back up vertex data since we can't read vertex buffer in
-                //DX10
+                // DX10
                 u32 size = V.vCount * sizeof( vertBoned3W );
                 u32 crc = crc32( _verts_, size );
                 Vertices3W.create( crc, V.vCount, ( vertBoned3W* )_verts_ );
@@ -624,7 +624,7 @@ void CSkeletonX_ext::_Load_hw( Fvisual& V, void* _verts_ ) {
         case RM_SKINNING_4B: {
             {
                 //	Back up vertex data since we can't read vertex buffer in
-                //DX10
+                // DX10
                 u32 size = V.vCount * sizeof( vertBoned4W );
                 u32 crc = crc32( _verts_, size );
                 Vertices4W.create( crc, V.vCount, ( vertBoned4W* )_verts_ );
@@ -845,7 +845,7 @@ void CSkeletonX_ext::_CollectBoneFaces( Fvisual* V, u32 iBase, u32 iCount ) {
 
 #if !defined( USE_DX10 ) && \
     !defined( USE_DX11 ) //	Don't use hardware buffers in DX10 since we
-                         //can't read them
+                         // can't read them
     switch ( RenderMode ) {
         case RM_SKINNING_SOFT:
 #endif //	USE_DX10
@@ -912,7 +912,7 @@ void CSkeletonX_ext::_CollectBoneFaces( Fvisual* V, u32 iBase, u32 iCount ) {
 
 #if !defined( USE_DX10 ) && \
     !defined( USE_DX11 ) //	Don't use hardware buffers in DX10 since we
-                         //can't read them
+                         // can't read them
         break;
         case RM_SINGLE:
         case RM_SKINNING_1B: {

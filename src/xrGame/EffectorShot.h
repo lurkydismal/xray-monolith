@@ -47,7 +47,7 @@ public:
 
     IC bool IsActive() { return m_actived; }
     //		void	SetActive			(bool Active) {
-    //m_actived = Active;		}
+    // m_actived = Active;		}
     IC void StopShoting() { m_shot_end = true; }
 
     void Update();
@@ -71,8 +71,8 @@ protected:
 
 public:
     //-					CCameraShotEffector	(float
-    //max_angle, float relax_speed, float max_angle_horz, float step_angle_horz,
-    //float angle_frac);
+    // max_angle, float relax_speed, float max_angle_horz, float
+    // step_angle_horz, float angle_frac);
     CCameraShotEffector( const CameraRecoil& cam_recoil );
     virtual ~CCameraShotEffector();
 

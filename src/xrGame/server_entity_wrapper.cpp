@@ -104,5 +104,5 @@ void CServerEntityWrapper::load_update( IReader& stream ) {
     //
     //	net_packet.r_begin		(ID);
     //	R_ASSERT2				(M_UPDATE == ID,"Invalid packet
-    //ID (!= M_UPDATE)!"); 	m_object->load_update	(net_packet);
+    // ID (!= M_UPDATE)!"); 	m_object->load_update	(net_packet);
 }

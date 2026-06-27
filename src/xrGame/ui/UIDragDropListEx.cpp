@@ -268,7 +268,7 @@ void CUIDragDropListEx::OnItemFocusedUpdate( CUIWindow* w, void* pData ) {
 
 void CUIDragDropListEx::OnItemRButtonClick( CUIWindow* w, void* pData ) {
     //*	OnItemSelected						(w, pData); //
-    //instead call function "SetCurrentItem(itm)";
+    // instead call function "SetCurrentItem(itm)";
     CUICellItem* itm = smart_cast< CUICellItem* >( w );
     if ( m_f_item_rbutton_click )
         m_f_item_rbutton_click( itm );
@@ -276,7 +276,7 @@ void CUIDragDropListEx::OnItemRButtonClick( CUIWindow* w, void* pData ) {
 
 void CUIDragDropListEx::OnItemLButtonClick( CUIWindow* w, void* pData ) {
     //*	OnItemSelected						(w, pData); //
-    //instead call function "SetCurrentItem(itm)";
+    // instead call function "SetCurrentItem(itm)";
     CUICellItem* itm = smart_cast< CUICellItem* >( w );
     if ( m_f_item_lbutton_click )
         m_f_item_lbutton_click( itm );
@@ -967,8 +967,10 @@ void CUICellContainer::Draw() {
                 const Fvector2& p = pts[ k ];
                 const Fvector2& uv = uvs[ k ];
                 // pv->set			(iFloor(drawLT.x + p.x*(f_len.x)
-                // + f_len.x*x)-0.5f, 				 iFloor(drawLT.y + p.y*(f_len.y) +
-                //f_len.y*y)-0.5f, 				 0xFFFFFFFF,tp.x+uv.x,tp.y+uv.y);
+                // + f_len.x*x)-0.5f, 				 iFloor(drawLT.y
+                // + p.y*(f_len.y) +
+                // f_len.y*y)-0.5f,
+                // 0xFFFFFFFF,tp.x+uv.x,tp.y+uv.y);
                 UIRender->PushPoint(
                     iFloor( rect_offset.x + p.x * ( f_len.x ) ) - 0.5f,
                     iFloor( rect_offset.y + p.y * ( f_len.y ) ) - 0.5f, 0,

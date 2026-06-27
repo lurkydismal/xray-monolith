@@ -30,7 +30,7 @@ protected:
     xr_vector< RPoint > Artefact_rpoints;
     //.	xr_vector<u8>					ArtefactsRPoints_ID;
     //.	u8
-    //m_LastRespawnPointID;
+    // m_LastRespawnPointID;
     CRandom ArtefactChooserRandom;
 
     u16 artefactBearerID; // ah,ZoneMap

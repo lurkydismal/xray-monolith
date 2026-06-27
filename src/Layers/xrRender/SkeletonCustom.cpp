@@ -179,7 +179,7 @@ void CKinematics::Load( const char* N, IReader* data, u32 dwFlags ) {
             string_path lod_name;
             LD->r_string( lod_name, sizeof( lod_name ) );
             //.         strconcat		(sizeof(name_load),name_load,
-            //short_name, ":lod:", lod_name.c_str());
+            // short_name, ":lod:", lod_name.c_str());
             m_lod = ( dxRender_Visual* )::Render->model_CreateChild( lod_name,
                                                                      NULL );
 
@@ -191,7 +191,7 @@ void CKinematics::Load( const char* N, IReader* data, u32 dwFlags ) {
             VERIFY3( m_lod, "Cant create LOD model for", N );
             //.			VERIFY2
             //(m_lod->Type==MT_HIERRARHY || m_lod->Type==MT_PROGRESSIVE ||
-            //m_lod->Type==MT_NORMAL,lod_name.c_str());
+            // m_lod->Type==MT_NORMAL,lod_name.c_str());
             /*
                                     strconcat		(name_load, short_name,
                ":lod:1"); m_lod 			=

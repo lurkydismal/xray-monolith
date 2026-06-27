@@ -41,9 +41,9 @@ class CPHElement : public CPhysicsElement,
     dReal m_l_limit; //->to shell ??		//bl
     //	dVector3					m_safe_position;
     ////e					//st 	dQuaternion
-    //m_safe_quaternion; 	dVector3
-    //m_safe_velocity;			//e //st 	Fmatrix
-    //m_inverse_local_transform;	//e				//bt
+    // m_safe_quaternion; 	dVector3
+    // m_safe_velocity;			//e //st 	Fmatrix
+    // m_inverse_local_transform;	//e				//bt
     dReal k_w; //->to shell ??		//st
     dReal k_l; //->to shell ??		//st
     // ObjectContactCallbackFun*	temp_for_push_out;
@@ -61,7 +61,7 @@ class CPHElement : public CPhysicsElement,
     };
 
     //	bool was_enabled_before_freeze; 	bool
-    //bUpdate;					//->to shell ??		//st
+    // bUpdate;					//->to shell ??		//st
     //	bool						b_enabled_onstep;
 private:
     ////////////////////////////////////////////Interpolation/////////////////////////////////////////////////////////////////////////////////////
@@ -118,15 +118,15 @@ public:
     virtual void set_PhysicsRefObject( IPhysicsShellHolder* ref_object ); // aux
     virtual IPhysicsShellHolder* PhysicsRefObject() {
         return m_phys_ref_object;
-    }                                  // aux
+    } // aux
     virtual void SetMaterial( u16 m ); // aux
     virtual void SetMaterial( LPCSTR m ) {
         CPHGeometryOwner::SetMaterial( m );
-    }                                  // aux
+    } // aux
     virtual u16 numberOfGeoms() const; // aux
     virtual const Fvector& local_mass_Center() {
         return CPHGeometryOwner::local_mass_Center();
-    }                                                                    // aux
+    } // aux
     virtual float getVolume() { return CPHGeometryOwner::get_volume(); } // aux
     virtual void get_Extensions( const Fvector& axis,
                                  float center_prg,
@@ -329,10 +329,12 @@ public:  //
     virtual const dBodyID get_bodyConst() const { return m_body; } // aux
     //////////////////////////////////////////////////////Breakable//////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    IC CPHFracturesHolder* FracturesHolder() { return m_fratures_holder; } // aux
+    IC CPHFracturesHolder* FracturesHolder() {
+        return m_fratures_holder;
+    } // aux
     IC const CPHFracturesHolder* constFracturesHolder() const {
         return m_fratures_holder;
-    }                                                        // aux
+    } // aux
     void DeleteFracturesHolder();                            //
     virtual bool isBreakable();                              // aux
     virtual u16 setGeomFracturable( CPHFracture& fracture ); // aux
@@ -356,7 +358,7 @@ public:  //
     virtual void Activate( const Fmatrix& start_from,
                            bool disable = false ); // some isues not to be aux
     virtual void Deactivate();                     // aux
-                               // //aux
+                                                   // //aux
     void SetBoneCallback();
     void ClearBoneCallback();
     void CreateSimulBase(); // create body & cpace

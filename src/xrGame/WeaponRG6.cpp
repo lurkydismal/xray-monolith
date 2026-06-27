@@ -33,7 +33,7 @@ BOOL CWeaponRG6::net_Spawn( CSE_Abstract* DC ) {
             }
         }
         //			inheritedRL::SpawnRocket(*fake_grenade_name,
-        //this);
+        // this);
     }
 
     return l_res;
@@ -95,7 +95,7 @@ void CWeaponRG6::FireStart() {
 
             if ( HasPick ) {
                 //			collide::rq_result& RQ =
-                //HUD().GetCurrentRayQuery();
+                // HUD().GetCurrentRayQuery();
                 Fvector Transference;
                 // Transference.add(p1, Fvector().mul(d, RQ.range));
                 Transference.mul( d, RQ.range );

@@ -47,8 +47,9 @@ public:
     ~CxImageJPG();
 
     //	bool Load(const TCHAR * imageFileName){ return
-    //CxImage::Load(imageFileName,CXIMAGE_FORMAT_JPG);} 	bool Save(const TCHAR *
-    //imageFileName){ return CxImage::Save(imageFileName,CXIMAGE_FORMAT_JPG);}
+    // CxImage::Load(imageFileName,CXIMAGE_FORMAT_JPG);} 	bool Save(const
+    // TCHAR * imageFileName){ return
+    // CxImage::Save(imageFileName,CXIMAGE_FORMAT_JPG);}
     bool Decode( CxFile* hFile );
     bool Decode( FILE* hFile ) {
         CxIOFile file( hFile );
@@ -261,7 +262,7 @@ public:
             nbytes = pSource->m_pFile->Read( pSource->m_pBuffer, 1, eBufSize );
             if ( nbytes <= 0 ) {
                 if ( pSource->m_bStartOfFile ) //* Treat empty input file as
-                                               //fatal error
+                                               // fatal error
                     ERREXIT( cinfo, JERR_INPUT_EMPTY );
                 WARNMS( cinfo, JWRN_JPEG_EOF );
                 // Insert a fake EOI marker

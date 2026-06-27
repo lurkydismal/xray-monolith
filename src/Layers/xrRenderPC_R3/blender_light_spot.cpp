@@ -55,7 +55,9 @@ void CBlender_accum_spot::Compile( CBlender_Compile& C ) {
             // C.r_Sampler_rtf		("s_normal",		r2_RT_N);
             // C.r_Sampler_clw		("s_material",		r2_material);
             // C.r_Sampler			("s_lmap",
-            // C.L_textures[0],false,D3DTADDRESS_CLAMP); if (b_HW_smap) { 	if (b_HW_PCF)	C.r_Sampler_clf		("s_smap",r2_RT_smap_depth	);
+            // C.L_textures[0],false,D3DTADDRESS_CLAMP); if (b_HW_smap) {
+            // if (b_HW_PCF)	C.r_Sampler_clf
+            // ("s_smap",r2_RT_smap_depth	);
             //	else			C.r_Sampler_rtf
             //("s_smap",r2_RT_smap_depth	);
             // }
@@ -86,7 +88,9 @@ void CBlender_accum_spot::Compile( CBlender_Compile& C ) {
             // C.r_Sampler_rtf		("s_normal",		r2_RT_N);
             // C.r_Sampler_clw		("s_material",		r2_material);
             // C.r_Sampler			("s_lmap",
-            // C.L_textures[0],false,D3DTADDRESS_CLAMP); if (b_HW_smap) { 	if (b_HW_PCF)	C.r_Sampler_clf		("s_smap",r2_RT_smap_depth	);
+            // C.L_textures[0],false,D3DTADDRESS_CLAMP); if (b_HW_smap) {
+            // if (b_HW_PCF)	C.r_Sampler_clf
+            // ("s_smap",r2_RT_smap_depth	);
             //	else			C.r_Sampler_rtf
             //("s_smap",r2_RT_smap_depth	);
             // }
@@ -119,7 +123,7 @@ void CBlender_accum_spot::Compile( CBlender_Compile& C ) {
             // r2_RT_smap_surf);			// diff here if
             // (b_HW_smap)		{ 	if (b_HW_PCF)	C.r_Sampler_clf
             //("s_smap",r2_RT_smap_depth	); 	else
-            //C.r_Sampler_rtf		("s_smap",r2_RT_smap_depth	);
+            // C.r_Sampler_rtf		("s_smap",r2_RT_smap_depth	);
             // }
             // else				C.r_Sampler_rtf
             // ("s_smap",r2_RT_smap_surf	); C.r_Sampler_rtf
@@ -200,7 +204,9 @@ void CBlender_accum_spot_msaa::Compile( CBlender_Compile& C ) {
             // C.r_Sampler_rtf		("s_normal",		r2_RT_N);
             // C.r_Sampler_clw		("s_material",		r2_material);
             // C.r_Sampler			("s_lmap",
-            // C.L_textures[0],false,D3DTADDRESS_CLAMP); if (b_HW_smap) { 	if (b_HW_PCF)	C.r_Sampler_clf		("s_smap",r2_RT_smap_depth	);
+            // C.L_textures[0],false,D3DTADDRESS_CLAMP); if (b_HW_smap) {
+            // if (b_HW_PCF)	C.r_Sampler_clf
+            // ("s_smap",r2_RT_smap_depth	);
             //	else			C.r_Sampler_rtf
             //("s_smap",r2_RT_smap_depth	);
             // }
@@ -231,7 +237,9 @@ void CBlender_accum_spot_msaa::Compile( CBlender_Compile& C ) {
             // C.r_Sampler_rtf		("s_normal",		r2_RT_N);
             // C.r_Sampler_clw		("s_material",		r2_material);
             // C.r_Sampler			("s_lmap",
-            // C.L_textures[0],false,D3DTADDRESS_CLAMP); if (b_HW_smap) { 	if (b_HW_PCF)	C.r_Sampler_clf		("s_smap",r2_RT_smap_depth	);
+            // C.L_textures[0],false,D3DTADDRESS_CLAMP); if (b_HW_smap) {
+            // if (b_HW_PCF)	C.r_Sampler_clf
+            // ("s_smap",r2_RT_smap_depth	);
             //	else			C.r_Sampler_rtf
             //("s_smap",r2_RT_smap_depth	);
             // }
@@ -264,7 +272,7 @@ void CBlender_accum_spot_msaa::Compile( CBlender_Compile& C ) {
             // r2_RT_smap_surf);			// diff here if
             // (b_HW_smap)		{ 	if (b_HW_PCF)	C.r_Sampler_clf
             //("s_smap",r2_RT_smap_depth	); 	else
-            //C.r_Sampler_rtf		("s_smap",r2_RT_smap_depth	);
+            // C.r_Sampler_rtf		("s_smap",r2_RT_smap_depth	);
             // }
             // else				C.r_Sampler_rtf
             // ("s_smap",r2_RT_smap_surf	); C.r_Sampler_rtf

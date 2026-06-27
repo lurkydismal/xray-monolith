@@ -180,7 +180,8 @@ DECLARE_INTERFACE( ID3DXAllocateHierarchy ) {
     //	pPMesh
     //		Pointer to the progressive mesh object if progressive mesh data
     // found 	pPatchMesh 		Pointer to the patch mesh object if
-    // patch data found 	pMaterials 		Array of materials used in the mesh
+    // patch data found 	pMaterials 		Array of materials used
+    // in the mesh
     //	pEffectInstances
     //		Array of effect instances used in the mesh
     //	NumMaterials

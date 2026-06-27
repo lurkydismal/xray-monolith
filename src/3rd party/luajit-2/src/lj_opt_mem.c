@@ -183,12 +183,13 @@ static TRef fwd_ahload( jit_State* J, IRRef xref ) {
                 }
             }
             /* NEWREF inhibits CSE for HREF, and dependent FLOADs from
-            * HREFK/AREF.
-            ** But the above search for conflicting stores was limited by xref.
-            ** So continue searching, limited by the TNEW/TDUP. Store forwarding
-            ** is ok, too. A conflict does NOT limit the search for a matching
-            * load.
-            */
+             * HREFK/AREF.
+             ** But the above search for conflicting stores was limited by xref.
+             ** So continue searching, limited by the TNEW/TDUP. Store
+             * forwarding
+             ** is ok, too. A conflict does NOT limit the search for a matching
+             * load.
+             */
             while ( ref > tab ) {
                 IRIns* store = IR( ref );
                 switch ( aa_ahref( J, xr, IR( store->op1 ) ) ) {

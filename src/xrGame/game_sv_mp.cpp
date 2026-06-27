@@ -652,7 +652,7 @@ bool game_sv_mp::GetPosAngleFromActor( ClientID id,
 
     CObject* pObject = Level().Objects.net_Find( xrCData->owner->ID );
     ///	R_ASSERT2	((pObject && smart_cast<CActor*>(pObject)),"Dead Player
-    ///is not Actor");
+    /// is not Actor");
 
     if ( !pObject || !smart_cast< CActor* >( pObject ) )
         return false;
@@ -1292,7 +1292,7 @@ void game_sv_mp::SetPlayersDefItems( game_PlayerState* ps ) {
             shared_str WeaponName =
                 m_strWeaponsData->GetItemName( ( *pItemID ) & 0x00FF );
             //			strconcat(ItemStr, "def_item_repl_",
-            //pWpnS->WeaponName.c_str());
+            // pWpnS->WeaponName.c_str());
             strconcat( sizeof( ItemStr ), ItemStr, "def_item_repl_",
                        *WeaponName );
             if ( !pSettings->line_exist( RankStr, ItemStr ) )
@@ -1822,7 +1822,7 @@ void game_sv_mp::RejectGameItem( CSE_Abstract* entity ) {
     CSE_Abstract* e_parent = get_entity_from_eid( entity->ID_Parent );
 
     //	R_ASSERT2( e_parent, make_string( "RejectGameItem: parent not found.
-    //entity_id = [%d], parent_id = [%d]", entity->ID, entity->ID_Parent
+    // entity_id = [%d], parent_id = [%d]", entity->ID, entity->ID_Parent
     //).c_str() );
     VERIFY2( e_parent, make_string( "RejectGameItem: parent not found. "
                                     "entity_id = [%d], parent_id = [%d]",

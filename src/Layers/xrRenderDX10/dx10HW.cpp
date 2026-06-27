@@ -400,7 +400,7 @@ void CHW::CreateDevice( HWND hwnd, bool move_window ) {
 
     //	HACK: DX10: Embed hard target format.
     fTarget = D3DFMT_X8R8G8B8; //	No match in DX10.
-                               //D3DFMT_A8B8G8R8->DXGI_FORMAT_R8G8B8A8_UNORM
+                               // D3DFMT_A8B8G8R8->DXGI_FORMAT_R8G8B8A8_UNORM
     fDepth = selectDepthStencil( fTarget );
     /*
     if (bWindowed)

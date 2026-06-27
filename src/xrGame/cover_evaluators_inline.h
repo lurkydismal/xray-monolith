@@ -113,7 +113,7 @@ IC void CCoverEvaluatorCloseToEnemy::setup( const Fvector& enemy_position,
     inherited::setup();
 
     //	m_actuality				= m_actuality &&
-    //m_enemy_position.similar(enemy_position,10.f);
+    // m_enemy_position.similar(enemy_position,10.f);
     m_enemy_position = enemy_position;
 
     m_actuality = m_actuality && fsimilar( m_deviation, deviation );

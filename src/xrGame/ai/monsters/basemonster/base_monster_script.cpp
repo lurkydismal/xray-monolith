@@ -157,7 +157,7 @@ bool CBaseMonster::bfAssignMovement( CScriptEntityAction* tpEntityAction ) {
             anim().m_tAction = ACT_RUN;
             break;
             //		case eMA_Jump:		anim().m_tAction = ACT_JUMP;
-            //break;
+            // break;
     }
 
     m_force_real_speed = ( l_tMovementAction.m_tSpeedParam == eSP_ForceSpeed );
@@ -283,9 +283,9 @@ bool CBaseMonster::bfAssignMovement( CScriptEntityAction* tpEntityAction ) {
             break;
         case CScriptMovementAction::eGoalTypeJumpToPosition: {
             //			control().deactivate
-            //(ControlCom::eControlRunAttack); 			control().deactivate
-            //(ControlCom::eControlRunAttack); 			control().deactivate
             //(ControlCom::eControlRunAttack);
+            //control().deactivate (ControlCom::eControlRunAttack);
+            //control().deactivate (ControlCom::eControlRunAttack);
             com_man().script_jump( l_tMovementAction.m_tDestinationPosition,
                                    l_tMovementAction.m_fDistToEnd );
             break;
@@ -301,12 +301,12 @@ bool CBaseMonster::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
         return ( false );
 
     //	CScriptObjectAction	&l_tObjectAction =
-    //tpEntityAction->m_tObjectAction; 	if (!l_tObjectAction.m_tpObject) 		return
-    //(false == (l_tObjectAction.m_bCompleted = true));
+    // tpEntityAction->m_tObjectAction; 	if (!l_tObjectAction.m_tpObject)
+    // return (false == (l_tObjectAction.m_bCompleted = true));
     //
     //	CEntityAlive	*l_tpEntity		=
-    //smart_cast<CEntityAlive*>(l_tObjectAction.m_tpObject); 	if (!l_tpEntity)
-    //return	(false == (l_tObjectAction.m_bCompleted = true));
+    // smart_cast<CEntityAlive*>(l_tObjectAction.m_tpObject); 	if (!l_tpEntity)
+    // return	(false == (l_tObjectAction.m_bCompleted = true));
     //
     //	switch (l_tObjectAction.m_tGoalType) {
     //		case eObjectActionTake:

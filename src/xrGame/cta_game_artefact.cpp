@@ -4,7 +4,7 @@
 //	Modified	:	19.12.2007
 //	Autor		:	Alexander Maniluk
 //	Description	:	Artefact object for Capture The Artefact game
-//mode
+// mode
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "cta_game_artefact.h"
@@ -193,8 +193,10 @@ void CtaGameArtefact::net_Export(NET_Packet& P)
 (object().PHGetSyncItemsNumber() == 1)
 
         if (State.enabled)
-num_items.mask |= CSE_ALifeInventoryItem::inventory_item_state_enabled; if (fis_zero(State.angular_vel.square_magnitude()))	num_items.mask |= CSE_ALifeInventoryItem::inventory_item_angular_null;
-        if (fis_zero(State.linear_vel.square_magnitude()))	num_items.mask
+num_items.mask |= CSE_ALifeInventoryItem::inventory_item_state_enabled; if
+(fis_zero(State.angular_vel.square_magnitude()))	num_items.mask |=
+CSE_ALifeInventoryItem::inventory_item_angular_null; if
+(fis_zero(State.linear_vel.square_magnitude()))	num_items.mask
 |= CSE_ALifeInventoryItem::inventory_item_linear_null;
 
         P.w_u8					(num_items.common);

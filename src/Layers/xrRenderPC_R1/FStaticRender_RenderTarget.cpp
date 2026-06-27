@@ -129,10 +129,10 @@ CRenderTarget::~CRenderTarget() {
 
 void CRenderTarget::calc_tc_noise( Fvector2& p0, Fvector2& p1 ) {
     //.	CTexture*	T					=
-    //RCache.get_ActiveTexture	(2); .	VERIFY2		(T, "Texture #3 in noise
-    //shader should be setted up"); .	u32			tw
+    // RCache.get_ActiveTexture	(2); .	VERIFY2		(T, "Texture #3 in noise
+    // shader should be setted up"); .	u32			tw
     //= iCeil(float(T->get_Width	())*param_noise_scale+EPS_S); .	u32
-    //th					= iCeil(float(T->get_Height
+    // th					= iCeil(float(T->get_Height
     //())*param_noise_scale+EPS_S);
     u32 tw = iCeil( 256 * param_noise_scale + EPS_S );
     u32 th = iCeil( 256 * param_noise_scale + EPS_S );

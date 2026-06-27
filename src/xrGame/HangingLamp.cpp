@@ -91,7 +91,7 @@ BOOL CHangingLamp::net_Spawn( CSE_Abstract* DC ) {
     // set bone id
     //	CInifile* pUserData		= K->LL_UserData();
     //	R_ASSERT3				(pUserData,"Empty HangingLamp
-    //user data!",lamp->get_visual());
+    // user data!",lamp->get_visual());
     xr_delete( collidable.model );
     if ( Visual() ) {
         IKinematics* K = smart_cast< IKinematics* >( Visual() );
@@ -429,7 +429,7 @@ void CHangingLamp::TurnOff() {
 
 // void CHangingLamp::Hit(float P,Fvector &dir, CObject* who,s16 element,
 //					   Fvector p_in_object_space, float
-//impulse, ALife::EHitType hit_type)
+// impulse, ALife::EHitType hit_type)
 void CHangingLamp::Hit( SHit* pHDS ) {
     SHit HDS = *pHDS;
     callback( GameObject::eHit )(

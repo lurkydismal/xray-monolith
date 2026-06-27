@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #pragma hdrstop
 
+#include "xrRender_console.h"
+
 #include "../../build_config_defines.h"
 #include "dxRenderDeviceRender.h"
-#include "xrRender_console.h"
 
 u32 ps_Preset = 2;
 xr_token qpreset_token[] = { { "Minimum", 0 }, { "Low", 1 },
@@ -1049,7 +1050,7 @@ void xrRender_initconsole() {
 
     CMD4( CCC_Float, "r__geometry_lod", &ps_r__LOD, 0.1f, 1.5f );
     //.	CMD4(CCC_Float,		"r__geometry_lod_pow",	&ps_r__LOD_Power,
-    //0,		2		);
+    // 0,		2		);
 
     //.	CMD4(CCC_Float,		"r__detail_density",	&ps_r__Detail_density,
     //.05f,	0.99f	);
@@ -1168,10 +1169,10 @@ void xrRender_initconsole() {
           R2FLAG_LIGHTS_DETAILS );
     CMD3( CCC_Mask, "r2_sun_focus", &ps_r2_ls_flags, R2FLAG_SUN_FOCUS );
     //	CMD3(CCC_Mask,		"r2_sun_static",		&ps_r2_ls_flags,
-    //R2FLAG_SUN_STATIC); 	CMD3(CCC_Mask,		"r2_exp_splitscene",
-    //&ps_r2_ls_flags,			R2FLAG_EXP_SPLIT_SCENE); 	CMD3(CCC_Mask,
-    //"r2_exp_donttest_uns",	&ps_r2_ls_flags,
-    //R2FLAG_EXP_DONT_TEST_UNSHADOWED);
+    // R2FLAG_SUN_STATIC); 	CMD3(CCC_Mask,		"r2_exp_splitscene",
+    //&ps_r2_ls_flags,			R2FLAG_EXP_SPLIT_SCENE);
+    //CMD3(CCC_Mask, "r2_exp_donttest_uns",	&ps_r2_ls_flags,
+    // R2FLAG_EXP_DONT_TEST_UNSHADOWED);
     CMD3( CCC_Mask, "r2_exp_donttest_shad", &ps_r2_ls_flags,
           R2FLAG_EXP_DONT_TEST_SHADOWED );
 

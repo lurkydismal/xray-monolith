@@ -33,7 +33,7 @@ bool CControlPathBuilderBase::target_point_need_update() {
         // return (!m_target_actual); // логический конец пути
         return ( true );
         //} else if ((m_state & eStateWaitParamsApplied) ==
-        //eStateWaitParamsApplied) { 	return false;
+        // eStateWaitParamsApplied) { 	return false;
     } else if ( ( m_state & eStateWaitNewPath ) == eStateWaitNewPath ) {
         return false;
     } else if ( ( m_state & eStateNoPath ) == eStateNoPath ) {

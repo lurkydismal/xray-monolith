@@ -26,10 +26,10 @@ public:
     virtual void finalize();
     static void finalize_static( CScriptActionBase* action );
     //	virtual _edge_value_type	weight				(const
-    //CSConditionState &condition0, const CSConditionState &condition1) const;
+    // CSConditionState &condition0, const CSConditionState &condition1) const;
     //	static	_edge_value_type	weight_static
     //(CScriptActionBase *action, const CSConditionState &condition0, const
-    //CSConditionState &condition1);
+    // CSConditionState &condition1);
 };
 
 #include "script_action_wrapper_inline.h"

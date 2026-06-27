@@ -54,8 +54,8 @@ float IK_CALC_SSA = 0.006f;
 //	dBodyID body1=dGeomGetBody( c.geom.g1 );
 //	dBodyID body2=dGeomGetBody( c.geom.g2 );
 //	if( !body1 || !body2 || ( dGeomUserDataHasCallback(
-//c.geom.g1,NodynamicsCollide )&& dGeomUserDataHasCallback( c.geom.g2,
-//NodynamicsCollide ) ) ) 		return; 	do_colide = false;
+// c.geom.g1,NodynamicsCollide )&& dGeomUserDataHasCallback( c.geom.g2,
+// NodynamicsCollide ) ) ) 		return; 	do_colide = false;
 // }
 
 IC bool is_imotion( interactive_motion* im ) {
@@ -434,7 +434,7 @@ bool is_similar( const Fmatrix& m0, const Fmatrix& m1, float param ) {
 // static struct callback_tracks_disable: public IUpdateTracksCallback
 //{
 //	virtual	bool	operator () ( float dt, IKinematicsAnimated& k ){return
-//false;} } tracks_disable_update;
+// false;} } tracks_disable_update;
 
 void CCharacterPhysicsSupport::KillHit( SHit& H ) {
 #ifdef DEBUG
@@ -462,7 +462,7 @@ void CCharacterPhysicsSupport::KillHit( SHit& H ) {
     // ActivateShell( H.who );
 
     //	if(Type() == etStalker && xr_strcmp(dbg_stalker_death_anim, "none") !=
-    //0)
+    // 0)
     float hit_angle = 0;
     MotionID m = m_death_anims.motion( m_EntityAlife, H, hit_angle );
 
@@ -1125,7 +1125,7 @@ void CCharacterPhysicsSupport::CreateShell( CObject* who,
     }
 
     //////////////////////this needs to evaluate object
-    ///box//////////////////////////////////////////////////////
+    /// box//////////////////////////////////////////////////////
     if ( m_eType != etBitting )
         K->LL_SetBoneRoot( anim_root );
 
@@ -1255,8 +1255,8 @@ void CCharacterPhysicsSupport::EndActivateFreeShell(
     //	mXFORM.set( start_xform );
     //	//anim_mov_blend->blendPower = 1;
     //	anim_mov_blend->timeCurrent  += Device.fTimeDelta *
-    //anim_mov_blend->speed; 	m_pPhysicsShell->AnimToVelocityState(
-    //Device.fTimeDelta, 2 * default_l_limit, 10.f * default_w_limit );
+    // anim_mov_blend->speed; 	m_pPhysicsShell->AnimToVelocityState(
+    // Device.fTimeDelta, 2 * default_l_limit, 10.f * default_w_limit );
     //	mXFORM.set( sv_xform );
     // }
     IKinematics* K = smart_cast< IKinematics* >( m_EntityAlife.Visual() );

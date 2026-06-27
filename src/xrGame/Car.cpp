@@ -341,8 +341,8 @@ void CCar::ActorObstacleCallback( bool& do_colide,
 void CCar::SpawnInitPhysics( CSE_Abstract* D ) {
     CSE_PHSkeleton* so = smart_cast< CSE_PHSkeleton* >( D );
     R_ASSERT( so );
-    ParseDefinitions(); // parse ini filling in
-                        // m_driving_wheels,m_steering_wheels,m_breaking_wheels
+    ParseDefinitions();  // parse ini filling in
+                         // m_driving_wheels,m_steering_wheels,m_breaking_wheels
     CreateSkeleton( D ); // creates m_pPhysicsShell & fill in bone_map
     IKinematics* K = smart_cast< IKinematics* >( Visual() );
     K->CalculateBones_Invalidate(); // this need to call callbacks
@@ -896,7 +896,7 @@ void CCar::ParseDefinitions() {
     // CExplosive::SetInitiator(ID());
     m_camera_position = ini->r_fvector3( "car_definition", "camera_pos" );
     ///////////////////////////car
-    ///definition///////////////////////////////////////////////////
+    /// definition///////////////////////////////////////////////////
 #ifdef CAR_NEW
     fill_wheel_vector( READ_IF_EXISTS( ini, r_string, "car_definition",
                                        "driving_wheels", nullptr ),
@@ -2004,14 +2004,15 @@ void CCar::CarExplode() {
 //	if(capturer)
 //	{
 //		CPHCapture*
-//capture=capturer->m_PhysicMovementControl->PHCapture(); 		if(capture)
+// capture=capturer->m_PhysicMovementControl->PHCapture();
+// if(capture)
 //		{
 //			if(capture->m_taget_element->PhysicsRefObject()==l_pUD2->ph_ref_object)
 //			{
 //				do_colide = false;
 //				capture->m_taget_element->Enable();
 //				if(capture->e_state==CPHCapture::cstReleased)
-//capture->ReleaseInCallBack();
+// capture->ReleaseInCallBack();
 //			}
 //
 //		}
@@ -2023,14 +2024,15 @@ void CCar::CarExplode() {
 //	if(capturer)
 //	{
 //		CPHCapture*
-//capture=capturer->m_PhysicMovementControl->PHCapture(); 		if(capture)
+// capture=capturer->m_PhysicMovementControl->PHCapture();
+// if(capture)
 //		{
 //			if(capture->m_taget_element->PhysicsRefObject()==l_pUD1->ph_ref_object)
 //			{
 //				do_colide = false;
 //				capture->m_taget_element->Enable();
 //				if(capture->e_state==CPHCapture::cstReleased)
-//capture->ReleaseInCallBack();
+// capture->ReleaseInCallBack();
 //			}
 //
 //		}

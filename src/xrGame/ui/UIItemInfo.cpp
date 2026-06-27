@@ -116,8 +116,8 @@ void CUIItemInfo::InitItemInfo( LPCSTR xml_name ) {
 
     if ( uiXml.NavigateToNode( "descr_list", 0 ) ) {
         //		UIConditionWnd					=
-        //xr_new<CUIConditionParams>(); 		UIConditionWnd->InitFromXml
-        //(uiXml);
+        // xr_new<CUIConditionParams>();
+        // UIConditionWnd->InitFromXml (uiXml);
         UIWpnParams = xr_new< CUIWpnParams >();
         UIWpnParams->InitFromXml( uiXml );
 
@@ -284,8 +284,8 @@ void CUIItemInfo::InitItem( CUICellItem* pCellItem,
     //	if ( g_pGameLevel && Level().game && actor )
     //	{
     //		game_cl_Deathmatch* gs_mp = smart_cast<game_cl_Deathmatch*>(
-    //Game() ); 		IBuyWnd* buy_menu = gs_mp->pCurBuyMenu->GetItemPrice();
-    //		GetItemPrice();
+    // Game() ); 		IBuyWnd* buy_menu =
+    // gs_mp->pCurBuyMenu->GetItemPrice(); 		GetItemPrice();
     //	}
     if ( UITradeTip && IsGameTypeSingle() ) {
         pos.y = UITradeTip->GetWndPos().y;

@@ -672,12 +672,12 @@ protected:
                                // êîíñòàíòíûì
     float misfireStartProbability; // øàíñ îñå÷êè ïðè èçíîøåíîñòè áîëüøå ÷åì
                                    // misfireStartCondition
-    float misfireEndProbability; // øàíñ îñå÷êè ïðè èçíîøåíîñòè áîëüøå ÷åì
-                                 // misfireEndCondition
+    float misfireEndProbability;   // øàíñ îñå÷êè ïðè èçíîøåíîñòè áîëüøå ÷åì
+                                   // misfireEndCondition
     float conditionDecreasePerQueueShot; // óâåëè÷åíèå èçíîøåíîñòè ïðè âûñòðåëå
                                          // î÷åðåäüþ
-    float conditionDecreasePerShot; // óâåëè÷åíèå èçíîøåíîñòè ïðè îäèíî÷íîì
-                                    // âûñòðåëå
+    float conditionDecreasePerShot;      // óâåëè÷åíèå èçíîøåíîñòè ïðè îäèíî÷íîì
+                                         // âûñòðåëå
 
 public:
     float GetMisfireStartCondition() const { return misfireStartCondition; };
@@ -1047,7 +1047,7 @@ public:
         return 1.f - m_zoom_params.m_fZoomRotationFactor;
     };
     //--> [От 1.0 - Инерция от бедра, до 0.0 - Инерция при зумме] Какую инерцию
-    //использовать
+    // использовать
 
     virtual void DumpActiveParams( shared_str const& section_name,
                                    CInifile& dst_ini ) const;

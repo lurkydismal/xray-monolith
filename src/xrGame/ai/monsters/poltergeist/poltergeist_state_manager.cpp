@@ -78,7 +78,8 @@ void CStateManagerPoltergeist::execute() {
     //	if (state_id == eStateEat) {
     //		if
     //(object->CorpseMan.get_corpse()->Position().distance_to(object->Position())
-    //< 5.f) { 			if (object->is_hidden()) { 				object->CEnergyHolder::deactivate();
+    //< 5.f) { 			if (object->is_hidden()) {
+    //object->CEnergyHolder::deactivate();
     //			}
     //
     //			object->DisableHide();
@@ -115,15 +116,15 @@ void CStateManagerPoltergeist::polter_attack() {
 
     //	object->FireFlame(enemy);
     //	time_next_flame_attack = cur_time +
-    //Random.randI(object->m_flame_delay.min, (b_aggressive) ?
-    //object->m_flame_delay.aggressive : object->m_flame_delay.normal);
+    // Random.randI(object->m_flame_delay.min, (b_aggressive) ?
+    // object->m_flame_delay.aggressive : object->m_flame_delay.normal);
     //}
 
     // if (time_next_tele_attack < cur_time) {
     //	//object->ProcessTelekinesis(enemy);
     //	time_next_tele_attack = cur_time +
-    //Random.randI(object->m_tele_delay.min, (b_aggressive) ?
-    //object->m_tele_delay.aggressive : object->m_tele_delay.normal);
+    // Random.randI(object->m_tele_delay.min, (b_aggressive) ?
+    // object->m_tele_delay.aggressive : object->m_tele_delay.normal);
     // }
 
     // if (time_next_scare_attack < cur_time) {
@@ -133,7 +134,7 @@ void CStateManagerPoltergeist::polter_attack() {
     //		object->StrangeSounds(enemy->Position());
     //
     //	time_next_scare_attack = cur_time +
-    //Random.randI(object->m_scare_delay.min, (b_aggressive) ?
-    //object->m_scare_delay.aggressive : object->m_scare_delay.normal);
+    // Random.randI(object->m_scare_delay.min, (b_aggressive) ?
+    // object->m_scare_delay.aggressive : object->m_scare_delay.normal);
     // }
 }

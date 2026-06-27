@@ -235,7 +235,7 @@ void GetPlayerName_FromRegistry( char* name, u32 const name_size ) {
     // if ( xr_strlen(name) == 0 )
     //{
     //	//Msg( "! Player name in registry is empty! (%s)",
-    //REGISTRY_VALUE_USERNAME );
+    // REGISTRY_VALUE_USERNAME );
     // }
     // modify_player_name(name, new_name);
     // strncpy_s(name, name_size, new_name, max_name_length);

@@ -2533,7 +2533,7 @@ void CLevel::script_register( lua_State* L ) {
         def( "map_add_object_spot_ser", map_add_object_spot_ser ),
         def( "map_add_object_spot", map_add_object_spot ),
         //-		def("map_add_object_spot_complex",
-        //map_add_object_spot_complex),
+        // map_add_object_spot_complex),
         def( "map_remove_object_spot", map_remove_object_spot ),
         def( "map_has_object_spot", map_has_object_spot ),
         def( "map_change_spot_hint", map_change_spot_hint ),

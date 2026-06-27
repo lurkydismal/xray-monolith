@@ -38,7 +38,7 @@ void xrServer::Process_event_ownership( NET_Packet& P,
     if ( !e_entity ) {
         //		Msg( "! ERROR on ownership: entity not found. parent_id
         //= [%d], entity_id = [%d], frame = [%d].", id_parent, id_entity,
-        //Device.dwFrame );
+        // Device.dwFrame );
         return;
     }
 

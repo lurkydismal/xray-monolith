@@ -512,7 +512,7 @@ bool CScriptEntity::bfAssignMovement( CScriptEntityAction* tpEntityAction ) {
             m_monster->movement().set_path_type(
                 MovementManager::ePathTypeLevelPath );
             //			Msg			("%6d Object %s,
-            //position
+            // position
             //[%f][%f][%f]",Device.dwTimeGlobal,*l_tpGameObject->cName(),VPUSH(l_tpGameObject->Position()));
             m_monster->movement().detail().set_dest_position(
                 l_tpGameObject->Position() );
@@ -686,7 +686,7 @@ bool CScriptEntity::bfScriptAnimation() {
 #ifdef DEBUG
         // if (!xr_strcmp("m_stalker_wounded",*object().cName()))
         //	Msg				("%6d Playing animation : %s ,
-        //Object
+        // Object
         //%s",Device.dwTimeGlobal,*GetCurrentAction()->m_tAnimationAction.m_caAnimationToPlay,
         //*object().cName());
 #endif

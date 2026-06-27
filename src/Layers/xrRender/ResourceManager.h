@@ -51,7 +51,7 @@ public:
                      str_pred );
     DEFINE_MAP_PRED( const char*, CRT*, map_RT, map_RTIt, str_pred );
     //	DX10 cut DEFINE_MAP_PRED(const char*,CRTC*,			map_RTC,
-    //map_RTCIt,			str_pred);
+    // map_RTCIt,			str_pred);
     DEFINE_MAP_PRED( const char*, SVS*, map_VS, map_VSIt, str_pred );
 #if defined( USE_DX10 ) || defined( USE_DX11 )
     DEFINE_MAP_PRED( const char*, SGS*, map_GS, map_GSIt, str_pred );
@@ -73,7 +73,7 @@ private:
     map_Constant m_constants;
     map_RT m_rtargets;
     //	DX10 cut map_RTC
-    //m_rtargets_c;
+    // m_rtargets_c;
     map_VS m_vs;
     map_PS m_ps;
 #if defined( USE_DX10 ) || defined( USE_DX11 )

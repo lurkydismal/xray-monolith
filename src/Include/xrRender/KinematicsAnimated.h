@@ -79,7 +79,7 @@ public:
 
     //	CBlend*						LL_PlayFX
     //(u16 bone,		MotionID motion, float blendAccrue,	float
-    //blendFalloff, float Speed, float Power);
+    // blendFalloff, float Speed, float Power);
     virtual CBlend* LL_PlayCycle( u16 partition,
                                   MotionID motion,
                                   BOOL bMixing,
@@ -97,7 +97,7 @@ public:
                                   LPVOID CallbackParam,
                                   u8 channel = 0 ) = 0;
     //	void						LL_FadeCycle	(u16
-    //partition, float	falloff, u8 mask_channel = (1<<0));
+    // partition, float	falloff, u8 mask_channel = (1<<0));
     virtual void LL_CloseCycle( u16 partition,
                                 u8 mask_channel = ( 1 << 0 ) ) = 0;
     virtual void LL_SetChannelFactor( u16 channel, float factor ) = 0;

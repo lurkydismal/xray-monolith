@@ -20,9 +20,9 @@
 #include "vertex_manager_hash_fixed.h"
 
 #ifndef AI_COMPILER
-#include "operator_condition.h"
 #include "condition_state.h"
 #include "operator_abstract.h"
+#include "operator_condition.h"
 #endif // AI_COMPILER
 
 namespace hash_fixed_vertex_manager {

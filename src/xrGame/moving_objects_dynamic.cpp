@@ -3,7 +3,7 @@
 //  Modified 	: 14.05.2007
 //	Author		: Dmitriy Iassenev
 //	Description : moving objects with dynamic objects, i.e. objects with
-//predictable behaviour
+// predictable behaviour
 ////////////////////////////////////////////////////////////////////////////
 
 #include "ai_obstacle.h"

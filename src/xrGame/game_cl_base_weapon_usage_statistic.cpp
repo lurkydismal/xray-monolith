@@ -694,7 +694,7 @@ void WeaponUsageStatistic::Send_Check_Respond() {
         //-----------------------------------------------------
         P.w_begin( M_BULLET_CHECK_RESPOND );
         //		Msg("%d-%d || %d-%d", NumFalse, BChA_Request.NumFalse,
-        //NumTrue, BChA_Request.NumTrue);
+        // NumTrue, BChA_Request.NumTrue);
         P.w_u8( BChA_Request.NumFalse );
         BChA_Request.NumFalse = 0;
         P.w_u8( BChA_Request.NumTrue );
@@ -910,7 +910,7 @@ u8 WeaponUsageStatistic::ConvertToTeamIndex( s16 team ) {
     if ( Game().Type() == eGameIDTeamDeathmatch ) {
         if ( team_index == -1 ) {
             //			Msg("! ERROR: can't process spectators in
-            //deathmatch statistics.");
+            // deathmatch statistics.");
             return 1;
         }
     } else {

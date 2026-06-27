@@ -4,7 +4,7 @@
 //  Modified 	: 13.03.2009
 //	Author		: Evgeniy Sokolov, Prishchepa Sergey
 //	Description : inventory upgrade UI window (additional) class
-//implementation
+// implementation
 ////////////////////////////////////////////////////////////////////////////
 
 #include "../string_table.h"

@@ -40,7 +40,7 @@ extern void Msg( const char* format, ... );
 #endif
 
 //---- Define attributes of all API symbols declarations, e.g. for DLL under
-//Windows
+// Windows
 // Using Dear ImGui via a shared library is not recommended, because of function
 // call overhead and because we don't guarantee backward nor forward ABI
 // compatibility.
@@ -54,7 +54,7 @@ extern void Msg( const char* format, ... );
 // // GCC/Clang: override visibility when set is hidden
 
 //---- Don't define obsolete functions/enums/behaviors. Consider enabling from
-//time to time after updating to clean your code of obsolete function/names.
+// time to time after updating to clean your code of obsolete function/names.
 // #define IMGUI_DISABLE_OBSOLETE_FUNCTIONS
 
 //---- Disable all of Dear ImGui or don't implement standard windows/tools.
@@ -103,9 +103,9 @@ extern void Msg( const char* format, ... );
                                          // linking with them. You will need to
                                          // call ImGui::SetAllocatorFunctions().
 #define IMGUI_DISABLE_DEFAULT_FONT       // Disable default embedded font
-                                   // (ProggyClean.ttf), remove ~9.5 KB from
-                                   // output binary. AddFontDefault() will
-                                   // assert.
+// (ProggyClean.ttf), remove ~9.5 KB from
+// output binary. AddFontDefault() will
+// assert.
 // #define IMGUI_DISABLE_SSE                                 // Disable use of
 // SSE intrinsics even if available
 
@@ -121,19 +121,19 @@ extern void Msg( const char* format, ... );
 #define IMGUI_USER_H_FILENAME "imgui_custom.h"
 
 //---- Pack vertex colors as BGRA8 instead of RGBA8 (to avoid converting from
-//one to another). Need dedicated backend support. #define
+// one to another). Need dedicated backend support. #define
 // IMGUI_USE_BGRA_PACKED_COLOR
 
 //---- Use legacy CRC32-adler tables (used before 1.91.6), in order to preserve
-//old .ini data that you cannot afford to invalidate. #define
+// old .ini data that you cannot afford to invalidate. #define
 // IMGUI_USE_LEGACY_CRC32_ADLER
 
 //---- Use 32-bit for ImWchar (default is 16-bit) to support Unicode planes
-//1-16. (e.g. point beyond 0xFFFF like emoticons, dingbats, symbols, shapes,
-//ancient languages, etc...) #define IMGUI_USE_WCHAR32
+// 1-16. (e.g. point beyond 0xFFFF like emoticons, dingbats, symbols, shapes,
+// ancient languages, etc...) #define IMGUI_USE_WCHAR32
 
 //---- Avoid multiple STB libraries implementations, or redefine path/filenames
-//to prioritize another version
+// to prioritize another version
 // By default the embedded implementations are declared static and not available
 // outside of Dear ImGui sources files.
 // #define IMGUI_STB_TRUETYPE_FILENAME   "my_folder/stb_truetype.h"
@@ -146,13 +146,13 @@ extern void Msg( const char* format, ... );
 // if IMGUI_USE_STB_SPRINTF is defined.
 
 //---- Use stb_sprintf.h for a faster implementation of vsnprintf instead of the
-//one from libc (unless IMGUI_DISABLE_DEFAULT_FORMAT_FUNCTIONS is defined)
+// one from libc (unless IMGUI_DISABLE_DEFAULT_FORMAT_FUNCTIONS is defined)
 // Compatibility checks of arguments and formats done by clang and GCC will be
 // disabled in order to support the extra formats provided by stb_sprintf.h.
 // #define IMGUI_USE_STB_SPRINTF
 
 //---- Use FreeType to build and rasterize the font atlas (instead of
-//stb_truetype which is embedded by default in Dear ImGui)
+// stb_truetype which is embedded by default in Dear ImGui)
 // Requires FreeType headers to be available in the include path. Requires
 // program to be compiled with 'misc/freetype/imgui_freetype.cpp' (in this
 // repository) + the FreeType library (not provided). On Windows you may use
@@ -180,7 +180,7 @@ extern void Msg( const char* format, ... );
 // #define IMGUI_ENABLE_STB_TRUETYPE
 
 //---- Define constructor and implicit cast operators to convert back<>forth
-//between your math types and ImVec2/ImVec4.
+// between your math types and ImVec2/ImVec4.
 // This will be inlined as part of ImVec2 and ImVec4 class declarations.
 /*
 #define IM_VEC2_CLASS_EXTRA \
@@ -195,7 +195,7 @@ MyVec2() const { return MyVec2(x,y); }
 #define IMGUI_DEFINE_MATH_OPERATORS
 
 //---- Use 32-bit vertex indices (default is 16-bit) is one way to allow large
-//meshes with more than 64K vertices.
+// meshes with more than 64K vertices.
 // Your renderer backend will need to support it (most example renderer backends
 // support both 16/32-bit indices). Another way to allow large meshes while
 // keeping 16-bit indices is to handle ImDrawCmd::VtxOffset in your renderer.
@@ -203,12 +203,12 @@ MyVec2() const { return MyVec2(x,y); }
 // #define ImDrawIdx unsigned int
 
 //---- Override ImDrawCallback signature (will need to modify renderer backends
-//accordingly) struct ImDrawList; struct ImDrawCmd; typedef void
+// accordingly) struct ImDrawList; struct ImDrawCmd; typedef void
 // (*MyImDrawCallback)(const ImDrawList* draw_list, const ImDrawCmd* cmd, void*
 // my_renderer_user_data); #define ImDrawCallback MyImDrawCallback
 
 //---- Debug Tools: Macro to break in Debugger (we provide a default
-//implementation of this in the codebase)
+// implementation of this in the codebase)
 // (use 'Metrics->Tools->Item Picker' to pick widgets with the mouse and break
 // into them for easy debugging.)
 // #define IM_DEBUG_BREAK  IM_ASSERT(0)
@@ -218,7 +218,7 @@ MyVec2() const { return MyVec2(x,y); }
 // #define IMGUI_DEBUG_PARANOID
 
 //---- Tip: You can add extra functions within the ImGui:: namespace from
-//anywhere (e.g. your own sources/header files)
+// anywhere (e.g. your own sources/header files)
 /*
 namespace ImGui
 {

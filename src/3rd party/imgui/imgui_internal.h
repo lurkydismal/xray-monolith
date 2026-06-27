@@ -203,9 +203,10 @@ struct ImGuiContextHook; // Hook for extensions like ImGuiTestEngine
 struct ImGuiDataVarInfo; // Variable information (e.g. to access style variables
                          // from an enum)
 struct ImGuiDataTypeInfo; // Type information associated to a ImGuiDataType enum
-struct ImGuiDeactivatedItemData; // Data for
-                                 // IsItemDeactivated()/IsItemDeactivatedAfterEdit()
-                                 // function.
+struct
+    ImGuiDeactivatedItemData; // Data for
+                              // IsItemDeactivated()/IsItemDeactivatedAfterEdit()
+                              // function.
 struct ImGuiDockContext; // Docking system context
 struct ImGuiDockRequest; // Docking system dock/undock queued request
 struct ImGuiDockNode;    // Docking system node (hold a list of Windows OR two
@@ -2540,14 +2541,13 @@ enum ImGuiInputFlagsPrivate_ {
     // - Repeat mode: Repeat rate selection
     ImGuiInputFlags_RepeatRateDefault = 1
                                         << 1, // Repeat rate: Regular (default)
-    ImGuiInputFlags_RepeatRateNavMove = 1 << 2, // Repeat rate: Fast
-    ImGuiInputFlags_RepeatRateNavTweak =
-        1 << 3, // Repeat rate: Faster
-                // - Repeat mode: Specify when repeating key pressed can be
-                // interrupted.
-                // - In theory ImGuiInputFlags_RepeatUntilOtherKeyPress may be a
-                // desirable default, but it would break too many behavior so
-                // everything is opt-in.
+    ImGuiInputFlags_RepeatRateNavMove = 1 << 2,  // Repeat rate: Fast
+    ImGuiInputFlags_RepeatRateNavTweak = 1 << 3, // Repeat rate: Faster
+    // - Repeat mode: Specify when repeating key pressed can be
+    // interrupted.
+    // - In theory ImGuiInputFlags_RepeatUntilOtherKeyPress may be a
+    // desirable default, but it would break too many behavior so
+    // everything is opt-in.
     ImGuiInputFlags_RepeatUntilRelease =
         1 << 4, // Stop repeating when released (default for all functions
                 // except Shortcut). This only exists to allow overriding
@@ -4020,11 +4020,12 @@ struct ImGuiContext {
     int NavTabbingCounter; // >0 when counting items for tabbing
     ImGuiNavItemData
         NavMoveResultLocal; // Best move request candidate within NavWindow
-    ImGuiNavItemData NavMoveResultLocalVisible; // Best move request candidate
-                                                // within NavWindow that are
-                                                // mostly visible (when using
-                                                // ImGuiNavMoveFlags_AlsoScoreVisibleSet
-                                                // flag)
+    ImGuiNavItemData
+        NavMoveResultLocalVisible; // Best move request candidate
+                                   // within NavWindow that are
+                                   // mostly visible (when using
+                                   // ImGuiNavMoveFlags_AlsoScoreVisibleSet
+                                   // flag)
     ImGuiNavItemData
         NavMoveResultOther; // Best move request candidate within NavWindow's
                             // flattened hierarchy (when using
@@ -4045,10 +4046,11 @@ struct ImGuiContext {
     ImGuiKeyChord NavJustMovedToKeyMods;
     bool NavJustMovedToIsTabbing; // Copy of ImGuiNavMoveFlags_IsTabbing. Maybe
                                   // we should store whole flags.
-    bool NavJustMovedToHasSelectionData; // Copy of move result's ItemFlags &
-                                         // ImGuiItemFlags_HasSelectionUserData).
-                                         // Maybe we should just store
-                                         // ImGuiNavItemData.
+    bool
+        NavJustMovedToHasSelectionData; // Copy of move result's ItemFlags &
+                                        // ImGuiItemFlags_HasSelectionUserData).
+                                        // Maybe we should just store
+                                        // ImGuiNavItemData.
 
     // Navigation: Windowing (CTRL+TAB for list, or Menu button + keys or
     // directional pads to move/resize)
@@ -4398,8 +4400,8 @@ struct IMGUI_API ImGuiWindowTempData {
     ImVec2 MenuBarOffset;  // MenuBarOffset.x is sort of equivalent of a
                            // per-layer CursorPos.x, saved/restored as we switch
                            // to the menu bar. The only situation when
-                          // MenuBarOffset.y is > 0 if when (SafeAreaPadding.y >
-                          // FramePadding.y), often used on TVs.
+    // MenuBarOffset.y is > 0 if when (SafeAreaPadding.y >
+    // FramePadding.y), often used on TVs.
     ImGuiMenuColumns
         MenuColumns; // Simplified columns storage for menu items measurement
     int TreeDepth;   // Current tree depth.

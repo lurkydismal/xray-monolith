@@ -51,7 +51,7 @@ CPHDestroyable::CPHDestroyable() {
 }
 
 /////////spawn object representing destroyed
-///item//////////////////////////////////////////////////////////////////////////////////
+/// item//////////////////////////////////////////////////////////////////////////////////
 void CPHDestroyable::GenSpawnReplace( u16 ref_id,
                                       LPCSTR section,
                                       shared_str visual_name ) {

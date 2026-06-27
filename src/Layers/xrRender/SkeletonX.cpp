@@ -236,8 +236,9 @@ void CSkeletonX::_Load( const char* N, IReader* data, u32& dwVertCount ) {
     R_ASSERT( data->find_chunk( OGF_VERTICES ) );
 
     // u16			hw_bones_cnt		=
-    // u16((HW.Caps.geometry.dwRegisters-22)/3); 	Igor: some shaders in r1 need
-    //more free constant registers
+    // u16((HW.Caps.geometry.dwRegisters-22)/3); 	Igor: some shaders in r1
+    // need
+    // more free constant registers
     u16 hw_bones_cnt = u16( ( HW.Caps.geometry.dwRegisters - 22 - 3 ) / 3 );
 
 #if RENDER == R_R1
@@ -745,7 +746,7 @@ void CSkeletonX::_FillVerticesSoft4W( const Fmatrix& view,
 #if defined( USE_DX10 ) || defined( USE_DX11 )
 void CSkeletonX::_DuplicateIndices( const char* N, IReader* data ) {
     //	We will have trouble with container since don't know were to take
-    //readable indices
+    // readable indices
     VERIFY( !data->find_chunk( OGF_ICONTAINER ) );
     //	Index buffer replica since we can't read from index buffer in DX10
     // ref_smem<u16>			Indices;

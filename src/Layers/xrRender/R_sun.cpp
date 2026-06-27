@@ -104,7 +104,7 @@ void CRender::render_sun_cascade( u32 cascade_ind ) {
             // Lets begin from base frustum
             Fmatrix fullxform_inv = ex_full_inverse;
             //******************************* Need to be placed after cuboid
-            //built **************************
+            // built **************************
 
             // COP - 100 km away
             cull_COP.mad( Device.vCameraPosition, fuckingsun->direction,
@@ -139,9 +139,10 @@ void CRender::render_sun_cascade( u32 cascade_ind ) {
                     Fvector3 near_p, edge_vec;
                     for ( int p = 0; p < 4; p++ ) {
                         // 					Fvector asd =
-                        // Device.vCameraDirection; 					asd.mul(-2);
-                        // 					asd.add(Device.vCameraPosition);
-                        // 					near_p = Device.vCameraPosition;//wform		(fullxform_inv,asd); //
+                        // Device.vCameraDirection;
+                        // asd.mul(-2); 					asd.add(Device.vCameraPosition); 					near_p
+                        // = Device.vCameraPosition;//wform
+                        // (fullxform_inv,asd); //
                         near_p = wform( fullxform_inv,
                                         corners[ facetable[ 4 ][ p ] ] );
 

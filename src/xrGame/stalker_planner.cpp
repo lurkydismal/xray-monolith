@@ -174,7 +174,7 @@ void CStalkerPlanner::add_actions() {
 
     planner = xr_new< CStalkerCombatPlanner >( m_object, "combat_planner" );
     //	planner					=
-    //xr_new<CStalkerCombatPlannerNew>(m_object,"combat_planner_new");
+    // xr_new<CStalkerCombatPlannerNew>(m_object,"combat_planner_new");
     add_condition( planner, eWorldPropertyAlive, true );
     add_condition( planner, eWorldPropertyAnomaly, false );
     add_condition( planner, eWorldPropertyEnemy, true );

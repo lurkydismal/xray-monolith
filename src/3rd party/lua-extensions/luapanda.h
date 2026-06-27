@@ -8,8 +8,8 @@
 // #define USE_SOURCE_CODE                        //using source code to build
 #if !defined( USE_SOURCE_CODE ) && defined( _WIN32 )
 #define LUA_INTEGER \
-    long long // set LUA_INTEGER. In 501 is ptrdiff_t. 503 can set
-              // longlong(64bit) or int(32bit)
+    long long               // set LUA_INTEGER. In 501 is ptrdiff_t. 503 can set
+                            // longlong(64bit) or int(32bit)
 #define LUA_VERSION_NUM 501 // lua version used by WIN32 build lib. eg. 501,503
 #endif
 // setting end

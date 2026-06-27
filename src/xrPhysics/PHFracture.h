@@ -87,8 +87,8 @@ class CPHFracturesHolder // stored in CPHElement
     bool m_has_breaks;
 
     FRACTURE_STORAGE m_fractures;
-    PH_IMPACT_STORAGE m_impacts; // filled in anytime from CPHElement
-                                 // applyImpulseTrace cleared in PhDataUpdate
+    PH_IMPACT_STORAGE m_impacts;   // filled in anytime from CPHElement
+                                   // applyImpulseTrace cleared in PhDataUpdate
     CFEEDBACK_STORAGE m_feedbacks; // this store feedbacks for non contact
                                    // joints
 public:

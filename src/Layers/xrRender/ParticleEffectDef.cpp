@@ -350,7 +350,7 @@ BOOL CPEDef::Load2( CInifile& ini ) {
 void CPEDef::Save2( CInifile& ini ) {
     ini.w_u16( "_effect", "version", PED_VERSION );
     //.	ini.w_string	("_effect", "name",
-    //m_Name.c_str());
+    // m_Name.c_str());
     ini.w_u32( "_effect", "max_particles", m_MaxParticles );
     //.!!	F.w
     //(m_Actions.pointer(),m_Actions.size());

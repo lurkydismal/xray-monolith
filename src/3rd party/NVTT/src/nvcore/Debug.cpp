@@ -8,6 +8,7 @@
 #define WIN32_LEAN_AND_MEAN
 #define VC_EXTRALEAN
 #include <windows.h>
+
 #include <direct.h>
 #if NV_CC_MSVC
 #include <crtdbg.h>
@@ -36,10 +37,10 @@
 #endif
 
 #if NV_OS_DARWIN
-#include <unistd.h> // getpid
-#include <sys/types.h>
 #include <sys/sysctl.h> // sysctl
+#include <sys/types.h>
 #include <sys/ucontext.h>
+#include <unistd.h> // getpid
 #undef HAVE_EXECINFO_H
 #if defined( HAVE_EXECINFO_H ) // only after OSX 10.5
 #include <execinfo.h>          // backtrace

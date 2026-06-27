@@ -81,10 +81,10 @@ void CObjectHandlerPlanner::add_operators( CMissile* missile ) {
     add_effect( action, id, eWorldPropertyIdle, true );
     add_effect( action, id, eWorldPropertyThrowStarted, false );
     //	add_effect			(action,id,eWorldPropertyThrowIdle,
-    //false);
+    // false);
     add_effect( action, id, eWorldPropertyFiring1, false );
     //	add_effect			(action,id,eWorldPropertyStrapped,
-    //true); 	add_effect
+    // true); 	add_effect
     //(action,id,eWorldPropertyAimingReady1,true);
     add_operator( uid( id, eWorldOperatorIdle ), action );
 

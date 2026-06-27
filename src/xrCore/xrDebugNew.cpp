@@ -684,14 +684,14 @@ void SetupExceptionHandler( const bool& dedicated ) {
 // MiniDumpWithUnloadedModules |
 #ifndef _EDITOR
           MiniDumpWithIndirectlyReferencedMemory |
-#endif    // _EDITOR
-          // MiniDumpFilterModulePaths |
-          // MiniDumpWithProcessThreadData |
-          // MiniDumpWithPrivateReadWriteMemory |
-          // MiniDumpWithoutOptionalData |
-          // MiniDumpWithFullMemoryInfo |
-          // MiniDumpWithThreadInfo |
-          // MiniDumpWithCodeSegs |
+#endif // _EDITOR
+       // MiniDumpFilterModulePaths |
+       // MiniDumpWithProcessThreadData |
+       // MiniDumpWithPrivateReadWriteMemory |
+       // MiniDumpWithoutOptionalData |
+       // MiniDumpWithFullMemoryInfo |
+       // MiniDumpWithThreadInfo |
+       // MiniDumpWithCodeSegs |
           0 );
 #else // #ifndef MASTER_GOLD
         dedicated ? MiniDumpNoDump
@@ -704,13 +704,13 @@ void SetupExceptionHandler( const bool& dedicated ) {
 #ifndef _EDITOR
                       MiniDumpWithIndirectlyReferencedMemory |
 #endif // _EDITOR
-                      // MiniDumpFilterModulePaths |
-                      // MiniDumpWithProcessThreadData |
-                      // MiniDumpWithPrivateReadWriteMemory |
-                      // MiniDumpWithoutOptionalData |
-                      // MiniDumpWithFullMemoryInfo |
-                      // MiniDumpWithThreadInfo |
-                      // MiniDumpWithCodeSegs |
+       // MiniDumpFilterModulePaths |
+       // MiniDumpWithProcessThreadData |
+       // MiniDumpWithPrivateReadWriteMemory |
+       // MiniDumpWithoutOptionalData |
+       // MiniDumpWithFullMemoryInfo |
+       // MiniDumpWithThreadInfo |
+       // MiniDumpWithCodeSegs |
                       0 );
 #endif // #ifndef MASTER_GOLD
 

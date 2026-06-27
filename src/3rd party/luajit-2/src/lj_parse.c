@@ -847,7 +847,7 @@ static void bcemit_comp( FuncState* fs, BinOpr opr, ExpDesc* e1, ExpDesc* e2 ) {
         if ( expr_isk( e1 ) ) {
             e1 = e2;
             e2 = eret;
-        }                             /* Need constant in 2nd arg. */
+        } /* Need constant in 2nd arg. */
         ra = expr_toanyreg( fs, e1 ); /* First arg must be in a reg. */
         expr_toval( fs, e2 );
         switch ( e2->k ) {

@@ -100,8 +100,8 @@ public:
 
     IC BOOL available( u32 T ) {
         //		if (queue.empty()/* || (T<queue.begin()->timestamp)*/)
-        //return FALSE; 		else
-        //return TRUE;
+        // return FALSE; 		else
+        // return TRUE;
         if ( queue.empty() )
             return FALSE;
         /**

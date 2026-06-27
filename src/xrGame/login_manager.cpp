@@ -306,7 +306,7 @@ void __cdecl login_manager::login_cb( GPConnection* connection,
 
 // void __cdecl login_manager::wslogin_cb(GHTTPResult httpResult,
 //									   WSLoginResponse
-//* response, 									   void * userData)
+//* response, void * userData)
 //{
 //	login_manager* my_inst = static_cast<login_manager*>(userData);
 //	login_operation_cb tmp_cb = my_inst->m_login_operation_cb;
@@ -315,7 +315,7 @@ void __cdecl login_manager::login_cb( GPConnection* connection,
 //	if (httpResult != GHTTPSuccess)
 //	{
 //		tmp_cb(NULL,
-//CGameSpy_ATLAS::TryToTranslate(httpResult).c_str());
+// CGameSpy_ATLAS::TryToTranslate(httpResult).c_str());
 //		my_inst->delete_profile_obj();
 //		return;
 //	}
@@ -324,7 +324,7 @@ void __cdecl login_manager::login_cb( GPConnection* connection,
 //	if (response->mLoginResult != WSLogin_Success)
 //	{
 //		tmp_cb(NULL,
-//CGameSpy_ATLAS::TryToTranslate(response->mLoginResult).c_str());
+// CGameSpy_ATLAS::TryToTranslate(response->mLoginResult).c_str());
 //		my_inst->delete_profile_obj();
 //		return;
 //	}

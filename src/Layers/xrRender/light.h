@@ -6,9 +6,9 @@
 // #include "../../xrEngine/xr_object.h"
 
 #if ( RENDER == R_R2 ) || ( RENDER == R_R3 ) || ( RENDER == R_R4 )
-#include "light_package.h"
-#include "light_GI.h"
 #include "../xrRender/r__dsgraph_manager.h"
+#include "light_GI.h"
+#include "light_package.h"
 #endif //(RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)
 
 extern Fvector4 ps_ssfx_volumetric;

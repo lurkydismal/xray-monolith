@@ -19,7 +19,7 @@ void dBodyAngAccelFromTorqu( const dBodyID body,
                              dReal* ang_accel,
                              const dReal* torque );
 //	float	E_NlS						(dBodyID
-//body,const dReal* norm,float norm_sign) ;
+// body,const dReal* norm,float norm_sign) ;
 float E_NLD( dBodyID b1, dBodyID b2, const dReal* norm );
 
 //	float E_NL( dBodyID b1, dBodyID b2, const dReal* norm );

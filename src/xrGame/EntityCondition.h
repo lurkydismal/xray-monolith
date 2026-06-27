@@ -195,8 +195,8 @@ protected:
     // очистка массива ран
 
     // все величины от 0 до 1
-    float m_fPower;     // сила
-    float m_fRadiation; // доза радиактивного облучения
+    float m_fPower;        // сила
+    float m_fRadiation;    // доза радиактивного облучения
     float m_fPsyHealth;    // здоровье
     float m_fEntityMorale; // мораль
     float m_fBleedSpeedK;

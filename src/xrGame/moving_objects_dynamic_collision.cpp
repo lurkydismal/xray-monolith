@@ -4,7 +4,7 @@
 //  Modified 	: 13.06.2007
 //	Author		: Dmitriy Iassenev
 //	Description : moving objects with dynamic objects collision, i.e.
-//objects with predictable behaviour
+// objects with predictable behaviour
 ////////////////////////////////////////////////////////////////////////////
 
 #include "ai_obstacle.h"

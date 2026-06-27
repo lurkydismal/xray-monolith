@@ -705,7 +705,7 @@ void CCustomZone::CheckForAwaking() {
 void CCustomZone::feel_touch_new( CObject* O ) {
     //	if(smart_cast<CActor*>(O) && O == Level().CurrentEntity())
     //					m_pLocalActor	=
-    //smart_cast<CActor*>(O);
+    // smart_cast<CActor*>(O);
 
     CGameObject* pGameObject = smart_cast< CGameObject* >( O );
     CEntityAlive* pEntityAlive = smart_cast< CEntityAlive* >( pGameObject );

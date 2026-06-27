@@ -3,7 +3,7 @@
 //	Created 	: 20.12.2007
 //	Author		: Alexander Dudin
 //	Description : Animation transition class for smart_cover inline
-//functions
+// functions
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef SMART_COVER_TRANSITION_ANIMATION_INLINE_HPP_INCLUDED

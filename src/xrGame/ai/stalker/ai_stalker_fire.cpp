@@ -381,10 +381,11 @@ void CAI_Stalker::Hit( SHit* pHDS ) {
                 }
 #endif
                 //				int
-                //fx_index =
-                //iFloor(tpKinematics->LL_GetBoneInstance(HDS.bone()).get_param(1)
+                // fx_index =
+                // iFloor(tpKinematics->LL_GetBoneInstance(HDS.bone()).get_param(1)
                 //+ (angle_difference(movement().m_body.current.yaw,-yaw) <=
-                //PI_DIV_2 ? 0 : 1)); 				if (fx_index != -1) 					animation().play_fx
+                // PI_DIV_2 ? 0 : 1)); 				if (fx_index !=
+                // -1) 					animation().play_fx
                 //(power_factor,fx_index);
             } else {
                 if ( !already_critically_wounded &&
@@ -1263,7 +1264,7 @@ bool CAI_Stalker::critical_wound_external_conditions_suitable() {
         return ( false );
 
     //	Msg								("%6d
-    //executing critical hit",Device.dwTimeGlobal);
+    // executing critical hit",Device.dwTimeGlobal);
     animation().global().make_inactual();
     return ( true );
 }

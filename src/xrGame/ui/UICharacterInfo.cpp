@@ -197,7 +197,7 @@ void CUICharacterInfo::InitCharacter( u16 id ) {
         m_icons[ eIcon ]->InitTexture( m_texture_name.c_str() );
     }
     //	if ( m_icons[eRankIcon        ] ) { m_icons[eRankIcon ]->InitTexture(
-    //chInfo.Rank().id().c_str() ); }
+    // chInfo.Rank().id().c_str() ); }
 
     /*
             if ( Actor()->ID() != m_ownerID && !ignore_community( comm_id ) )

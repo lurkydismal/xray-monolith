@@ -46,7 +46,7 @@ public:
     CDB::MODEL* rmPortals;
     CHOM HOM;
     //.	R_occlusion
-    //HWOCC;
+    // HWOCC;
 
     // Global containers
     xr_vector< FSlideWindowItem > SWIs;

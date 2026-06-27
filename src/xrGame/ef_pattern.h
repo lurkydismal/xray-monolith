@@ -4,7 +4,7 @@
 //  Modified 	: 11.10.2002
 //	Author		: Dmitriy Iassenev
 //	Description : Pattern based evaluation functions trained by supervised
-//learning
+// learning
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

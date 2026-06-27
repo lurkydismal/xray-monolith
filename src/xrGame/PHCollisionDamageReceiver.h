@@ -34,8 +34,8 @@ private:
     }
 
     //	static	void
-    //CollisionCallback			(bool& do_colide,bool bo1,dContact&
-    //c,SGameMtl* material_1,SGameMtl* material_2)	;
+    // CollisionCallback			(bool& do_colide,bool
+    // bo1,dContact& c,SGameMtl* material_1,SGameMtl* material_2)	;
     void CollisionHit( u16 source_id,
                        u16 bone_id,
                        float power,

@@ -176,30 +176,33 @@ void profile_store::load_profile_fields() {
     // if (!reqres)
     //{
     //	SAKEStartRequestResult tmp_result	=
-    //m_sake_obj->GetRequestResult(); 	loaded_fields(false,
-    //CGameSpy_SAKE::TryToTranslate(tmp_result).c_str());
+    // m_sake_obj->GetRequestResult(); 	loaded_fields(false,
+    // CGameSpy_SAKE::TryToTranslate(tmp_result).c_str());
     // }
 }
 
 // void __cdecl profile_store::get_my_fields_cb(SAKE sake,
 //											 SAKERequest
-//request, 											 SAKERequestResult result, 											 void * inputData, 											 void * outputData, 											 void *
-//userData)
+// request,
+// SAKERequestResult result,
+// void * inputData,
+// void * outputData,
+// void * userData)
 //{
 //	profile_store* my_inst = static_cast<profile_store*>(userData);
 //	if (result != SAKERequestResult_SUCCESS)
 //	{
 //		my_inst->loaded_fields(false,
-//CGameSpy_SAKE::TryToTranslate(result).c_str()); 		return;
+// CGameSpy_SAKE::TryToTranslate(result).c_str()); 		return;
 //	}
 //	SAKEGetMyRecordsOutput*	tmp_out		=
-//static_cast<SAKEGetMyRecordsOutput*>( 		outputData
+// static_cast<SAKEGetMyRecordsOutput*>( 		outputData
 //	);
 //	VERIFY(tmp_out);
 //	my_inst->m_awards_store->process_aw_out_response(tmp_out,
-//merged_fields_count);
+// merged_fields_count);
 //	my_inst->m_best_scores_store->process_scores_out_response(tmp_out,
-//merged_fields_count); 	my_inst->loaded_fields(true, "");
+// merged_fields_count); 	my_inst->loaded_fields(true, "");
 // }
 
 void profile_store::loaded_fields( bool const result, char const* err_descr ) {

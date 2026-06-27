@@ -3,8 +3,8 @@
 //	Created 	: 19.09.2002
 //  Modified 	: 04.06.2003
 //	Author		: Oles Shyshkovtsov, Alexander Maksimchuk, Victor
-//Reutskiy and Dmitriy Iassenev 	Description : Server objects monsters for ALife
-//simulator
+// Reutskiy and Dmitriy Iassenev 	Description : Server objects monsters
+// for ALife simulator
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -31,7 +31,7 @@ enum eTraderFlags {
 };
 
 //	float m_fCumulativeItemMass; 	int
-//m_iCumulativeItemVolume;
+// m_iCumulativeItemVolume;
 u32 m_dwMoney;
 float m_fMaxItemMass;
 Flags32 m_trader_flags;

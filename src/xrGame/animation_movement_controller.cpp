@@ -426,13 +426,13 @@ float change_pos_delta = 0.02f;
 //	const Fbox &b = m_pKinematicsC->GetBox();
 //	Fsphere		sphere; b.getsphere( sphere.P, sphere.R );
 //	float sq_diff = Fvector().sub(
-//m_pObjXForm.c,m_update_vis_pos).magnitude();
+// m_pObjXForm.c,m_update_vis_pos).magnitude();
 //
 //	float change_pos_sq_delta = change_pos_delta * change_pos_delta * ((
-//Device.fTimeDelta/0.01f )*( Device.fTimeDelta/0.01f ));
+// Device.fTimeDelta/0.01f )*( Device.fTimeDelta/0.01f ));
 //
 //	if(  pos_sq_delta > change_pos_sq_delta || sphere.P.square_magnitude() +
-//change_pos_sq_delta + pos_sq_delta > sphere.R*sphere.R )
+// change_pos_sq_delta + pos_sq_delta > sphere.R*sphere.R )
 //	{
 //		m_update_vis_pos = m_pObjXForm.c;
 //		m_pKinematicsC->LL_VisBoxInvalidate();

@@ -84,19 +84,19 @@ MotionID animation_selector::select_animation(
             if ( !m_planner->initialized() ) {
                 //				Msg
                 //("%6d no planner update, planner is not initialized, exiting",
-                //Device.dwTimeGlobal);
+                // Device.dwTimeGlobal);
                 return ( m_object->animation().assign_global_animation(
                     animation_movement_controller ) );
             }
         }
 
         //		Msg					("%6d updating
-        //planner", Device.dwTimeGlobal);
+        // planner", Device.dwTimeGlobal);
         m_planner->update();
 
         if ( !m_planner->initialized() ) {
             //			Msg				("%6d planner is
-            //not initialized after update, exiting", Device.dwTimeGlobal);
+            // not initialized after update, exiting", Device.dwTimeGlobal);
             return ( m_object->animation().assign_global_animation(
                 animation_movement_controller ) );
         }
@@ -141,7 +141,7 @@ MotionID animation_selector::select_animation(
 
     VERIFY( m_animation._get() );
     //	VERIFY				(m_first_time ||
-    //m_object->animation().global().blend());
+    // m_object->animation().global().blend());
     MotionID result = m_skeleton_animated->ID_Cycle( m_animation.c_str() );
     if ( m_first_time ) {
         m_first_time = false;
@@ -180,7 +180,7 @@ MotionID animation_selector::select_animation(
     }
 
     //	Msg					( "%d on_mark",
-    //Device.dwTimeGlobal );
+    // Device.dwTimeGlobal );
     current_operator()->on_mark();
     return ( result );
 }

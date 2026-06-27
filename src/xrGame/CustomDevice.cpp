@@ -694,7 +694,7 @@ void CCustomDevice::UpdateHudAdditional( Fmatrix& trans ) {
         if ( fYMag > 0.0f && m_fLR_InertiaFactor > 0.0f ||
              fYMag < 0.0f && m_fLR_InertiaFactor < 0.0f ) {
             fSpeed *= 2.f; //--> Ускоряем инерцию при движении в противоположную
-                           //сторону
+                           // сторону
         }
 
         m_fLR_InertiaFactor -=
@@ -706,7 +706,7 @@ void CCustomDevice::UpdateHudAdditional( Fmatrix& trans ) {
         if ( fPMag > 0.0f && m_fUD_InertiaFactor > 0.0f ||
              fPMag < 0.0f && m_fUD_InertiaFactor < 0.0f ) {
             fSpeed *= 2.f; //--> Ускоряем инерцию при движении в противоположную
-                           //сторону
+                           // сторону
         }
 
         m_fUD_InertiaFactor -=

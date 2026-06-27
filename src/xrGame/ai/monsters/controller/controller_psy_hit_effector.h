@@ -14,8 +14,8 @@
 //
 // public:
 //	virtual void	load					(LPCSTR
-//section); 	virtual bool	check_completion		(); 	virtual bool
-//check_start_conditions	(); 	virtual void	update_factor
+// section); 	virtual bool	check_completion		(); 	virtual
+// bool check_start_conditions	(); 	virtual void	update_factor
 //();
 //
 //	virtual CPPEffectorControlled *create_effector	();
@@ -34,6 +34,6 @@
 //
 // public:
 //					CPsyHitEffectorCam	(EEffectorType
-//type); 	virtual	BOOL	Process				(Fvector &p,
-//Fvector &d, Fvector &n, float& fFov, float& fFar, float& fAspect);
+// type); 	virtual	BOOL	Process				(Fvector &p,
+// Fvector &d, Fvector &n, float& fFov, float& fFar, float& fAspect);
 // };

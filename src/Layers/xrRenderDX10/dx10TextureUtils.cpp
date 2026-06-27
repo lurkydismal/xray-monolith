@@ -15,7 +15,7 @@ TextureFormatPairs TextureFormatList[] = {
     // D3DFMT_X8R8G8B8 Not available
     //	TODO: DX10: Remove. Need only for nullrt
     //{ D3DFMT_R5G6B5,		DXGI_FORMAT_B5G6R5_UNORM },		// Not
-    //available
+    // available
     { D3DFMT_R5G6B5, DXGI_FORMAT_R8G8B8A8_UNORM }, // Not available
     // D3DFMT_X1R5G5B5 Not available
     // D3DFMT_A1R5G5B5 Not available
@@ -71,8 +71,9 @@ TextureFormatPairs TextureFormatList[] = {
     // D3DFMT_D32 Not available
     // D3DFMT_D15S1 Not available
     // D3DFMT_D24S8 Not available
-    { D3DFMT_D24X8, DXGI_FORMAT_R24G8_TYPELESS }, // DXGI_FORMAT_D24_UNORM_S8_UINT},
-                                                  // // Not available
+    { D3DFMT_D24X8,
+      DXGI_FORMAT_R24G8_TYPELESS }, // DXGI_FORMAT_D24_UNORM_S8_UINT},
+                                    // // Not available
     // D3DFMT_D24X4S4 Not available
     // D3DFMT_D16 DXGI_FORMAT_D16_UNORM
     //{ D3DFMT_D32F_LOCKABLE, DXGI_FORMAT_D32_FLOAT},

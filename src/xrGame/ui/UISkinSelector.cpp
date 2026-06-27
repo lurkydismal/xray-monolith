@@ -30,13 +30,13 @@ CUISkinSelectorWnd::CUISkinSelectorWnd( const char* strSectionName, s16 team ) {
         AttachChild( m_pImage[ i ] );
     }
     //	m_pAnims[0]		= xr_new<CUIAnimatedStatic>();
-    //m_pFrames->AttachChild(m_pAnims[0]); 	m_pAnims[1]		=
-    //xr_new<CUIAnimatedStatic>(); m_pFrames->AttachChild(m_pAnims[1]);
+    // m_pFrames->AttachChild(m_pAnims[0]); 	m_pAnims[1]		=
+    // xr_new<CUIAnimatedStatic>(); m_pFrames->AttachChild(m_pAnims[1]);
     //	m_pButtons[0]	= xr_new<CUI3tButton>();
-    //m_pFrames->AttachChild(m_pButtons[0]);
-    //m_pButtons[0]->SetMessageTarget(this); 	m_pButtons[1]	=
-    //xr_new<CUI3tButton>();	m_pFrames->AttachChild(m_pButtons[1]);
-    //m_pButtons[1]->SetMessageTarget(this);
+    // m_pFrames->AttachChild(m_pButtons[0]);
+    // m_pButtons[0]->SetMessageTarget(this); 	m_pButtons[1]	=
+    // xr_new<CUI3tButton>();	m_pFrames->AttachChild(m_pButtons[1]);
+    // m_pButtons[1]->SetMessageTarget(this);
 
     m_pBtnAutoSelect = xr_new< CUI3tButton >();
     AttachChild( m_pBtnAutoSelect );
@@ -126,14 +126,14 @@ void CUISkinSelectorWnd::Init( const char* strSectionName ) {
                             m_pFrames );
 
     //	CUIXmlInit::Init3tButton(xml_doc,"skin_selector:image_frames:btn_left",
-    //0,	m_pButtons[0]);
+    // 0,	m_pButtons[0]);
     //	CUIXmlInit::Init3tButton(xml_doc,"skin_selector:image_frames:btn_right",0,
-    //m_pButtons[1]);
+    // m_pButtons[1]);
 
     //	CUIXmlInit::InitAnimatedStatic(xml_doc,"skin_selector:image_frames:a_static_1",
-    //0,	m_pAnims[0]);
+    // 0,	m_pAnims[0]);
     //	CUIXmlInit::InitAnimatedStatic(xml_doc,"skin_selector:image_frames:a_static_2",
-    //0,	m_pAnims[1]);
+    // 0,	m_pAnims[1]);
 
     CUIXmlInit::Init3tButton( xml_doc, "skin_selector:btn_spectator", 0,
                               m_pBtnSpectator );

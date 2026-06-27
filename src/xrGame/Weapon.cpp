@@ -731,8 +731,8 @@ void CWeapon::Load( LPCSTR section ) {
 
     // modified by Peacemaker [17.10.08]
     //	misfireProbability			  =
-    //pSettings->r_float(section,"misfire_probability"); 	misfireConditionK
-    //= READ_IF_EXISTS(pSettings, r_float, section,
+    // pSettings->r_float(section,"misfire_probability"); misfireConditionK =
+    //READ_IF_EXISTS(pSettings, r_float, section,
     //"misfire_condition_k",	1.0f);
     misfireStartCondition =
         pSettings->r_float( section, "misfire_start_condition" );
@@ -1666,7 +1666,7 @@ void CWeapon::SpawnAmmo( u32 boxCurr, LPCSTR ammoSect, u32 ParentID ) {
         D->s_name = ammoSect;
         D->set_name_replace( "" );
         //.		D->s_gameid					=
-        //u8(GameID());
+        // u8(GameID());
         D->s_RP = 0xff;
         D->ID = 0xffff;
         if ( ParentID == 0xffffffff )
@@ -1771,7 +1771,7 @@ float CWeapon::GetConditionMisfireProbability() const {
         result = misfireEndProbability;
     else {
         //	float mis =
-        //misfireProbability+powf(1.f-GetCondition(), 3.f)*misfireConditionK;
+        // misfireProbability+powf(1.f-GetCondition(), 3.f)*misfireConditionK;
         result =
             misfireStartProbability +
             ( ( misfireStartCondition -
@@ -2435,7 +2435,8 @@ void CWeapon::UpdateHudAdditional( Fmatrix& trans ) {
                 curr_rot =
                     g_player_hud->m_adjust_offset[ 1 ][ 5 ]; // rot,normal2
             } else {
-                curr_offs = g_player_hud->m_adjust_offset[ 0 ][ idx ]; // pos,aim
+                curr_offs =
+                    g_player_hud->m_adjust_offset[ 0 ][ idx ];        // pos,aim
                 curr_rot = g_player_hud->m_adjust_offset[ 1 ][ idx ]; // rot,aim
             }
         } else {
@@ -2445,7 +2446,8 @@ void CWeapon::UpdateHudAdditional( Fmatrix& trans ) {
                 curr_rot =
                     hi->m_measures.m_hands_offset[ 1 ][ 5 ]; // pos,normal2
             } else {
-                curr_offs = hi->m_measures.m_hands_offset[ 0 ][ idx ]; // pos,aim
+                curr_offs =
+                    hi->m_measures.m_hands_offset[ 0 ][ idx ];        // pos,aim
                 curr_rot = hi->m_measures.m_hands_offset[ 1 ][ idx ]; // rot,aim
             }
         }
@@ -2785,7 +2787,7 @@ void CWeapon::UpdateHudAdditional( Fmatrix& trans ) {
         if ( fYMag > 0.0f && m_fLR_InertiaFactor > 0.0f ||
              fYMag < 0.0f && m_fLR_InertiaFactor < 0.0f ) {
             fSpeed *= 2.f; //--> Ускоряем инерцию при движении в противоположную
-                           //сторону
+                           // сторону
         }
 
         m_fLR_InertiaFactor -=
@@ -2797,7 +2799,7 @@ void CWeapon::UpdateHudAdditional( Fmatrix& trans ) {
         if ( fPMag > 0.0f && m_fUD_InertiaFactor > 0.0f ||
              fPMag < 0.0f && m_fUD_InertiaFactor < 0.0f ) {
             fSpeed *= 2.f; //--> Ускоряем инерцию при движении в противоположную
-                           //сторону
+                           // сторону
         }
 
         m_fUD_InertiaFactor -=

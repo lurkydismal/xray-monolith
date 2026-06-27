@@ -8,9 +8,9 @@
 #include "stdafx.h"
 #include "xrServer_Objects_ALife.h"
 #ifdef DEBUG
+#include "PHDebug.h"
 #include "debug_renderer.h"
 #include "level.h"
-#include "PHDebug.h"
 #endif
 
 #ifdef DEBUG

@@ -216,7 +216,7 @@ typedef struct {
     const char* targetLimit; /**< Pointer to the limit (end + 1) of target
                                 buffer. @stable ICU 2.0     */
     int32_t* offsets; /**< Pointer to the buffer that receives the offsets.
-                         *offset = blah ; offset++;. @stable ICU 2.0  */
+                       *offset = blah ; offset++;. @stable ICU 2.0  */
 } UConverterFromUnicodeArgs;
 
 /**
@@ -238,7 +238,7 @@ typedef struct {
     const UChar* targetLimit; /**< Pointer to the limit (end + 1) of target
                                  buffer. @stable ICU 2.0     */
     int32_t* offsets; /**< Pointer to the buffer that receives the offsets.
-                         *offset = blah ; offset++;. @stable ICU 2.0  */
+                       *offset = blah ; offset++;. @stable ICU 2.0  */
 } UConverterToUnicodeArgs;
 
 /**

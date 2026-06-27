@@ -3,7 +3,7 @@
 //	Created 	: 15.11.2007
 //	Author		: Alexander Dudin
 //	Description : Default behaviour planner for target selector inline
-//functions
+// functions
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef SMART_COVER_DEFAULT_BEHAVIOUR_PLANNER_INLINE_HPP_INCLUDED

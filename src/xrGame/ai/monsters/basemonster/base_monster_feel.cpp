@@ -130,7 +130,7 @@ void CBaseMonster::HitEntity( const CEntity* pEntity,
                                         //(position_in_bone_space);
         HS.impulse = ( impulse );       //		l_P.w_float	(impulse);
         HS.hit_type = hit_type;         //		l_P.w_u16	(
-                                        //u16(ALife::eHitTypeWound) );
+                                        // u16(ALife::eHitTypeWound) );
         HS.Write_Packet( l_P );
         u_EventSend( l_P );
 
@@ -314,21 +314,20 @@ void CBaseMonster::Hit_Psy( CObject* object, float value ) {
     SHit HS;
     HS.GenHeader( GE_HIT,
                   object->ID() ); //					//
-                                  //u_EventGen		(P,GE_HIT,
-                                  //object->ID()); //
-    HS.whoID = ( ID() );          // own		//	P.w_u16			(ID());
-                                  // // own
+                                  // u_EventGen		(P,GE_HIT,
+                                  // object->ID()); //
+    HS.whoID = ( ID() ); // own		//	P.w_u16			(ID());
+                         // // own
     HS.weaponID =
         ( ID() ); // own		//	P.w_u16			(ID());
                   // // own
     HS.dir = ( Fvector().set(
-        0.f, 1.f, 0.f ) ); // direction	//	P.w_dir
-                           // (Fvector().set(0.f,1.f,0.f)); // direction
-    HS.power = ( value );  // hit value	//	P.w_float		(value);
-                           // // hit value
-    HS.boneID =
-        ( BI_NONE ); // bone		//	P.w_s16 (BI_NONE);
-                     // // bone
+        0.f, 1.f, 0.f ) );   // direction	//	P.w_dir
+                             // (Fvector().set(0.f,1.f,0.f)); // direction
+    HS.power = ( value );    // hit value	//	P.w_float		(value);
+                             // // hit value
+    HS.boneID = ( BI_NONE ); // bone		//	P.w_s16 (BI_NONE);
+                             // // bone
     HS.p_in_bone_space = ( Fvector().set(
         0.f, 0.f,
         0.f ) );          //	P.w_vec3		(Fvector().set(0.f,0.f,0.f));

@@ -34,7 +34,7 @@ void CBlender_SSAO_noMSAA::Compile( CBlender_Compile& C ) {
         case 1: // depth downsample for HBAO
             C.r_Pass( "combine_1", "depth_downs", FALSE, FALSE, FALSE );
             //		C.r_Stencil			(TRUE, D3DCMP_LESSEQUAL,
-            //0xFF);	// stencil should be >= 1 		C.r_StencilRef
+            // 0xFF);	// stencil should be >= 1 		C.r_StencilRef
             //(0x01);
             C.r_CullMode( D3DCULL_NONE );
 

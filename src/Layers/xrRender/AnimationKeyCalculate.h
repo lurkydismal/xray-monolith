@@ -203,7 +203,7 @@ IC void MixInterlerp( CKey& Result,
 #ifdef DEBUG
             //.					if (fis_zero(w0+w1) ||
             //(!_valid(w))){ .
-            //Debug.fatal		(DEBUG_INFO,"TO ALEXMX VERY IMPORTANT:
+            // Debug.fatal		(DEBUG_INFO,"TO ALEXMX VERY IMPORTANT:
             //(TOTAL: %f) w: %f, w0: %f, w1: %f, ws:%f, BIS:
             //%d",w0+w1,w,w0,w1,ws,BLEND_INST.Blend.size()); .
             //}
@@ -246,7 +246,7 @@ IC void MixInterlerp( CKey& Result,
 #ifdef DEBUG
                 //.						if ((total==0)
                 //|| (!_valid(S[cnt].w/total))){ .
-                //Debug.fatal		(DEBUG_INFO,"TO ALEXMX VERY IMPORTANT:
+                // Debug.fatal		(DEBUG_INFO,"TO ALEXMX VERY IMPORTANT:
                 //(TOTAL: %f) w: %f, total: %f, count: %d, real count:
                 //%d",total,S[cnt].w,total,count,BLEND_INST.Blend.size()); .
                 //}

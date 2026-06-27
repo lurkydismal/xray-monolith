@@ -157,7 +157,7 @@ IC static int CollideIntoGroup( dGeomID o1,
         SGameMtl* material_1 = GMLibrary().GetMaterialByIdx( material_idx_1 );
         SGameMtl* material_2 = GMLibrary().GetMaterialByIdx( material_idx_2 );
         ////////////////params can be changed in
-        ///callbacks//////////////////////////////////////////////////////////////////////////
+        /// callbacks//////////////////////////////////////////////////////////////////////////
         surface.mode = dContactApprox1 | dContactSoftERP | dContactSoftCFM;
         float spring =
             material_2->fPHSpring * material_1->fPHSpring * world_spring;

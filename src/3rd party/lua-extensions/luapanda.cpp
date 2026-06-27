@@ -19,7 +19,7 @@
 static int cur_run_state =
     0; // 当前运行状态， c 和 lua 都可能改变这个状态，要保持同步
 static int cur_hook_state = 0; // 当前hook状态， c 和 lua 都可能改变这个状态
-static int logLevel = 1;            // 日志等级（从lua同步）
+static int logLevel = 1;       // 日志等级（从lua同步）
 static int pathCaseSensitivity = 1; // 大小写敏感标志位（从lua同步）
 // static int autoPathMode = 0;        //自动路径标是否开启志位
 static int BPhit = 0;             // BP命中标志位

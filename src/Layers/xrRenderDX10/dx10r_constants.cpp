@@ -357,7 +357,7 @@ BOOL R_constant_table::parse( void* _desc, u32 destination ) {
  ? RC_dest_vertex_cb_index_shift : RC_dest_geometry_cb_index_shift);*/
 
                 //	Encode bind dest (pixel/vertex buffer) and bind point
-                //index
+                // index
                 u32 uiBufferIndex = iBuf;
                 uiBufferIndex |= dest_to_cbuf_type(
                     destination ); /*(destination&RC_dest_pixel)

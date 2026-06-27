@@ -42,8 +42,8 @@
 #include "xr_level_controller.h"
 #include "xrserver_objects_alife_monsters.h"
 #ifdef DEBUG
-#include "debug_renderer.h"
 #include "../xrPhysics/phvalide.h"
+#include "debug_renderer.h"
 #endif
 
 int g_cl_InterpolationType = 0;
@@ -558,8 +558,8 @@ BOOL CActor::net_Spawn( CSE_Abstract* DC ) {
     set_money( pTA->m_dwMoney, false );
 
     //.	if(	TRUE == E->s_flags.test(M_SPAWN_OBJECT_LOCAL) && TRUE ==
-    //E->s_flags.is(M_SPAWN_OBJECT_ASPLAYER)) .
-    //CurrentGameUI()->UIMainIngameWnd->m_artefactPanel->InitIcons(m_ArtefactsOnBelt);
+    // E->s_flags.is(M_SPAWN_OBJECT_ASPLAYER)) .
+    // CurrentGameUI()->UIMainIngameWnd->m_artefactPanel->InitIcons(m_ArtefactsOnBelt);
 
     ROS()->force_mode( IRender_ObjectSpecific::TRACE_ALL );
 
@@ -914,17 +914,18 @@ void ACTOR_DEFS::net_update::lerp( ACTOR_DEFS::net_update& A,
     //	float invf		= 1.f-f;
     //	//
     //	o_model			= angle_lerp	(A.o_model,B.o_model,
-    //f); 	o_torso.yaw		= angle_lerp	(A.o_torso.yaw,B.o_torso.yaw,f);
-    //	o_torso.pitch	= angle_lerp	(A.o_torso.pitch,B.o_torso.pitch,f);
-    //	o_torso.roll	= angle_lerp	(A.o_torso.roll,B.o_torso.roll,f);
-    //	p_pos.lerp		(A.p_pos,B.p_pos,f);
-    //	p_accel			= (f<0.5f)?A.p_accel:B.p_accel;
-    //	p_velocity.lerp	(A.p_velocity,B.p_velocity,f);
-    //	mstate			= (f<0.5f)?A.mstate:B.mstate;
-    //	weapon			= (f<0.5f)?A.weapon:B.weapon;
-    //	fHealth			= invf*A.fHealth+f*B.fHealth;
-    //	fArmor			= invf*A.fArmor+f*B.fArmor;
-    //	weapon			= (f<0.5f)?A.weapon:B.weapon;
+    // f); 	o_torso.yaw		= angle_lerp
+    // (A.o_torso.yaw,B.o_torso.yaw,f); 	o_torso.pitch	= angle_lerp
+    //(A.o_torso.pitch,B.o_torso.pitch,f); 	o_torso.roll	= angle_lerp
+    //(A.o_torso.roll,B.o_torso.roll,f); 	p_pos.lerp
+    //(A.p_pos,B.p_pos,f); 	p_accel			=
+    //(f<0.5f)?A.p_accel:B.p_accel; 	p_velocity.lerp
+    //(A.p_velocity,B.p_velocity,f); 	mstate			=
+    //(f<0.5f)?A.mstate:B.mstate; 	weapon			=
+    //(f<0.5f)?A.weapon:B.weapon; 	fHealth			=
+    //invf*A.fHealth+f*B.fHealth; 	fArmor			=
+    //invf*A.fArmor+f*B.fArmor; 	weapon			=
+    //(f<0.5f)?A.weapon:B.weapon;
 }
 
 InterpData IStartT;
@@ -981,7 +982,7 @@ void CActor::PH_B_CrPr() // actions & operations before physic
             cam_Active()->Set( -unaffected_r_torso.yaw,
                                unaffected_r_torso.pitch, 0 );
             //, unaffected_r_torso.roll);		// set's camera
-            //orientation
+            // orientation
             if ( !N_A.State.enabled ) {
                 pSyncObj->set_State( N_A.State );
             } else {
@@ -1095,7 +1096,7 @@ void CActor::CalculateInterpolationParams() {
     pIEnd->o_torso.roll = pIRec->o_torso.roll;
     /////////////////////////////////////////////////////////////////////
     //	Msg("from %f, to %f", IStart.o_torso.yaw/PI*180.0f,
-    //IEnd.o_torso.yaw/PI*180.0f);
+    // IEnd.o_torso.yaw/PI*180.0f);
     /////////////////////////////////////////////////////////////////////
     Fvector SP0, SP1, SP2, SP3;
     Fvector HP0, HP1, HP2, HP3;
@@ -1179,7 +1180,8 @@ void CActor::CalculateInterpolationParams() {
     //	if (( lV0 + lV1) > 0.000001 && g_cl_lvInterp == 0)
     {
         //		u32		CulcTime = iCeil(TotalLen*2000/( lV0 +
-        //lV1)); 		m_dwIEndTime = m_dwIStartTime + min(CulcTime, ConstTime);
+        // lV1)); 		m_dwIEndTime = m_dwIStartTime + min(CulcTime,
+        // ConstTime);
     }
     //	else
     m_dwIEndTime = m_dwIStartTime + ConstTime;
@@ -1499,7 +1501,7 @@ void CActor::OnRender_Network() {
     float size = 0.2f;
 
     //	dbg_draw_piramid(Position(), m_PhysicMovementControl->GetVelocity(),
-    //size/2, -r_model_yaw, color_rgba(255, 255, 255, 255));
+    // size/2, -r_model_yaw, color_rgba(255, 255, 255, 255));
     //-----------------------------------------------------------------------------------------------------
     if ( g_Alive() ) {
         if ( dbg_net_Draw_Flags.test( dbg_draw_autopickupbox ) ) {
@@ -1585,15 +1587,15 @@ void CActor::OnRender_Network() {
                           color_rgba( 255, 0, 0, 255 ) );
         //		Fvector tmp, tmp1; tmp1.set(0, .1f, 0);
         //		dbg_draw_piramid(tmp.add(IStartT.Pos, tmp1),
-        //IStartT.Vel, size, -IStartT.o_model, color_rgba(155, 0, 0, 155));
+        // IStartT.Vel, size, -IStartT.o_model, color_rgba(155, 0, 0, 155));
         dbg_draw_piramid( IRec.Pos, IRec.Vel, size, -IRec.o_model,
                           color_rgba( 0, 0, 255, 255 ) );
         //		dbg_draw_piramid(tmp.add(IRecT.Pos, tmp1), IRecT.Vel,
-        //size, -IRecT.o_model, color_rgba(0, 0, 155, 155));
+        // size, -IRecT.o_model, color_rgba(0, 0, 155, 155));
         dbg_draw_piramid( IEnd.Pos, IEnd.Vel, size, -IEnd.o_model,
                           color_rgba( 0, 255, 0, 255 ) );
         //		dbg_draw_piramid(tmp.add(IEndT.Pos, tmp1), IEndT.Vel,
-        //size, -IEndT.o_model, color_rgba(0, 155, 0, 155));
+        // size, -IEndT.o_model, color_rgba(0, 155, 0, 155));
         dbg_draw_piramid( NET_Last.p_pos, NET_Last.p_velocity, size * 3 / 4,
                           -NET_Last.o_model, color_rgba( 255, 255, 255, 255 ) );
 

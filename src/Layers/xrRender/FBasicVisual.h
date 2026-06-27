@@ -79,8 +79,9 @@ public:
 
     //	virtual	CKinematics*		dcast_PKinematics ()
     //{ return 0;	} 	virtual
-    //CKinematicsAnimated*dcast_PKinematicsAnimated	()
-    //{ return 0;	} 	virtual IParticleCustom*	dcast_ParticleCustom
+    // CKinematicsAnimated*dcast_PKinematicsAnimated	()
+    //{ return 0;	} 	virtual IParticleCustom*
+    //dcast_ParticleCustom
     //()				{ return 0;	}
 
     virtual void SetShaderTexture( LPCSTR shader, LPCSTR texture );

@@ -189,7 +189,7 @@ u32 CTrade::GetItemPrice( PIItem pItem, bool b_buying, bool b_free ) {
     bool is_actor = ( pThis.type == TT_ACTOR ) || ( pPartner.type == TT_ACTOR );
     if ( is_actor ) {
         //.		buying				= (pPartner.type ==
-        //TT_ACTOR);
+        // TT_ACTOR);
         buying = b_buying;
         _partner = &( buying ? pThis : pPartner );
     } else {

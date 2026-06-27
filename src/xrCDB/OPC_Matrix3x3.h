@@ -550,8 +550,8 @@ public:
         SetRow( 2, RowZ );
         //							this->eZ() =
         // this->eZ().Unit();
-        // this->eY() = (this->eZ() * this->eX()).Unit(); 							this->eX() =
-        // this->eY() * this->eZ();
+        // this->eY() = (this->eZ() * this->eX()).Unit();
+        // this->eX() = this->eY() * this->eZ();
         return *this;
     }
 

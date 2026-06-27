@@ -9,10 +9,9 @@
 #include "../../xrEngine/render.h"
 #endif // #ifndef _EDITOR
 
-#include "fbasicvisual.h"
-
 #include "../../xrEngine/fmesh.h"
 #include "dxRenderDeviceRender.h"
+#include "fbasicvisual.h"
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction

@@ -54,7 +54,7 @@ bool CDetailPathManager::valid() const {
         b = b && fis_zero( m_path.back().position.distance_to_xz_sqr(
                      m_corrected_dest_position ) );
     //		b					= b &&
-    //fis_zero(m_path.back().position.distance_to_xz_sqr(m_dest_position));
+    // fis_zero(m_path.back().position.distance_to_xz_sqr(m_dest_position));
     return ( b );
 }
 

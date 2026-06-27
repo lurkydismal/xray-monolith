@@ -55,9 +55,9 @@ void CScriptActionWrapper::finalize_static( CScriptActionBase* action ) {
 //::luabind::call_member<_edge_value_type>(const_cast<CScriptActionWrapper*>(this),"weight",condition0,condition1);
 //	if (_weight < min_weight()) {
 //		ai().script_engine().script_log	(eLuaMessageTypeError,"Weight is
-//less than effect count! It is corrected from %d to %d",_weight,min_weight());
+// less than effect count! It is corrected from %d to %d",_weight,min_weight());
 //		_weight							=
-//min_weight();
+// min_weight();
 //	}
 //	return (_weight);
 // }
@@ -67,5 +67,5 @@ void CScriptActionWrapper::finalize_static( CScriptActionBase* action ) {
 // CSConditionState &condition1)
 //{
 //	return								(((const
-//CScriptActionWrapper*)action)->CScriptActionBase::weight(condition0,condition1));
+// CScriptActionWrapper*)action)->CScriptActionBase::weight(condition0,condition1));
 // }

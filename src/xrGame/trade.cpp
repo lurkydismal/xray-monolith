@@ -114,9 +114,10 @@ bool CTrade::SetPartner( CEntity* p ) {
 //		case ALife::eStalkerRankNone: xr_strcpy(s,"NO_RANK"); break;
 //		case ALife::eStalkerRankNovice: xr_strcpy(s,"NOVICE"); break;
 //		case ALife::eStalkerRankExperienced: xr_strcpy(s,"EXPERIENCED");
-//break; 		case ALife::eStalkerRankVeteran: xr_strcpy(s,"VETERAN"); break; 		case
-//ALife::eStalkerRankMaster: xr_strcpy(s,"MASTER"); break; 		case
-//ALife::eStalkerRankDummy: xr_strcpy(s,"DUMMY"); break;
+// break; 		case ALife::eStalkerRankVeteran: xr_strcpy(s,"VETERAN");
+// break; 		case ALife::eStalkerRankMaster: xr_strcpy(s,"MASTER");
+// break; 		case ALife::eStalkerRankDummy: xr_strcpy(s,"DUMMY");
+// break;
 //	}
 //
 //	return true;
@@ -129,7 +130,7 @@ void CTrade::StartTrade() {
     m_bNeedToUpdateArtefactTasks = false;
 
     //	if (pThis.type == TT_TRADER)
-    //smart_cast<CAI_Trader*>(pThis.base)->OnStartTrade();
+    // smart_cast<CAI_Trader*>(pThis.base)->OnStartTrade();
 }
 
 void CTrade::StartTradeEx( CInventoryOwner* pInvOwner ) {

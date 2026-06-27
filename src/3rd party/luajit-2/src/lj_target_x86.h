@@ -11,13 +11,15 @@
 #if LJ_64
 #define GPRDEF( _ )                                                         \
     _( EAX )                                                                \
-    _( ECX ) _( EDX ) _( EBX ) _( ESP ) _( EBP ) _( ESI ) _( EDI ) _( R8D ) \
-        _( R9D ) _( R10D ) _( R11D ) _( R12D ) _( R13D ) _( R14D ) _( R15D )
+    _( ECX )                                                                \
+    _( EDX ) _( EBX ) _( ESP ) _( EBP ) _( ESI ) _( EDI ) _( R8D ) _( R9D ) \
+        _( R10D ) _( R11D ) _( R12D ) _( R13D ) _( R14D ) _( R15D )
 #define FPRDEF( _ )                                                       \
     _( XMM0 )                                                             \
-    _( XMM1 ) _( XMM2 ) _( XMM3 ) _( XMM4 ) _( XMM5 ) _( XMM6 ) _( XMM7 ) \
-        _( XMM8 ) _( XMM9 ) _( XMM10 ) _( XMM11 ) _( XMM12 ) _( XMM13 )   \
-            _( XMM14 ) _( XMM15 )
+    _( XMM1 )                                                             \
+    _( XMM2 ) _( XMM3 ) _( XMM4 ) _( XMM5 ) _( XMM6 ) _( XMM7 ) _( XMM8 ) \
+        _( XMM9 ) _( XMM10 ) _( XMM11 ) _( XMM12 ) _( XMM13 ) _( XMM14 )  \
+            _( XMM15 )
 #else
 #define GPRDEF( _ ) \
     _( EAX ) _( ECX ) _( EDX ) _( EBX ) _( ESP ) _( EBP ) _( ESI ) _( EDI )

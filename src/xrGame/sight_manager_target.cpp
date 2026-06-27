@@ -115,8 +115,8 @@ void CSightManager::SetFirePointLookAngles( const Fvector& tPosition,
 
 void CSightManager::SetDirectionLook() {
     //	MonsterSpace::SBoneRotation				orientation =
-    //object().movement().m_head, body_orientation =
-    //object().movement().body_orientation(); 	orientation.target
+    // object().movement().m_head, body_orientation =
+    // object().movement().body_orientation(); 	orientation.target
     //= orientation.current; 	body_orientation.target
     //= body_orientation.current;
     if ( GetDirectionAngles( object().movement().m_head.target.yaw,

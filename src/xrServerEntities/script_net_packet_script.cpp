@@ -57,8 +57,8 @@ void CScriptNetPacket::script_register( lua_State* L ) {
               .def( constructor<>() )
               .def( "w_begin", &NET_Packet::w_begin )
               //			.def("w",
-              //&NET_Packet::w				) 			.def("w_seek",
-              //&NET_Packet::w_seek			)
+              //&NET_Packet::w				)
+              //.def("w_seek", &NET_Packet::w_seek			)
               .def( "w_tell", &NET_Packet::w_tell )
               .def( "w_vec3", &NET_Packet::w_vec3 )
               .def( "w_float", &NET_Packet::w_float )

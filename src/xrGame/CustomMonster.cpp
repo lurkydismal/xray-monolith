@@ -55,8 +55,8 @@
 #include "debug_text_tree.h"
 
 #ifdef DEBUG
-#include "debug_renderer.h"
 #include "animation_movement_controller.h"
+#include "debug_renderer.h"
 #endif // DEBUG
 
 #ifdef HOLDERCUSTOM_NEW
@@ -85,7 +85,7 @@ void CCustomMonster::SAnimState::Create( IKinematicsAnimated* K, LPCSTR base ) {
 //
 //	Fmatrix					spin;
 //	spin.setXYZ				(0, M->NET_Last.o_torso.pitch,
-//0); 	B->mTransform.mulB_43	(spin);
+// 0); 	B->mTransform.mulB_43	(spin);
 // }
 
 //////////////////////////////////////////////////////////////////////
@@ -753,8 +753,8 @@ BOOL CCustomMonster::net_Spawn( CSE_Abstract* DC ) {
     if ( !g_Alive() ) {
         set_death_time();
         //		Msg						("%6d :
-        //Object [%d][%s][%s] is spawned
-        //DEAD",Device.dwTimeGlobal,ID(),*cName(),*cNameSect());
+        // Object [%d][%s][%s] is spawned
+        // DEAD",Device.dwTimeGlobal,ID(),*cName(),*cNameSect());
     }
 
     if ( ai().get_level_graph() && UsedAI_Locations() &&

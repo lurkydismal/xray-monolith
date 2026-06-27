@@ -44,14 +44,14 @@ shared_str strGravityBuoyancy;
 LPCSTR dx103DFluidManager::m_pEngineTextureNames[ NUM_RENDER_TARGETS ] = {
     "$user$Texture_velocity1",    //	RENDER_TARGET_VELOCITY1 = 0,
     "$user$Texture_color_out",    //	RENDER_TARGET_COLOR,	//	Swap
-                                  //with object's
+                                  // with object's
     "$user$Texture_obstacles",    //	RENDER_TARGET_OBSTACLES,
     "$user$Texture_obstvelocity", //	RENDER_TARGET_OBSTVELOCITY,
     "$user$Texture_tempscalar",   //	RENDER_TARGET_TEMPSCALAR,
     "$user$Texture_tempvector",   //	 RENDER_TARGET_TEMPVECTOR,
     "$user$Texture_velocity0",
     //	RENDER_TARGET_VELOCITY0 = NUM_OWN_RENDER_TARGETS,	//	For
-    //textures generated from local data
+    // textures generated from local data
     "$user$Texture_pressure", //	RENDER_TARGET_PRESSURE,
     "$user$Texture_color",    //	RENDER_TARGET_COLOR_IN,
 };
@@ -59,16 +59,16 @@ LPCSTR dx103DFluidManager::m_pEngineTextureNames[ NUM_RENDER_TARGETS ] = {
 LPCSTR dx103DFluidManager::m_pShaderTextureNames[ NUM_RENDER_TARGETS ] = {
     "Texture_velocity1",    //	RENDER_TARGET_VELOCITY1 = 0,
     "Texture_color_out",    //	RENDER_TARGET_COLOR,	//	Swap with
-                            //object's
+                            // object's
     "Texture_obstacles",    //	RENDER_TARGET_OBSTACLES,
     "Texture_obstvelocity", //	RENDER_TARGET_OBSTVELOCITY,
     "Texture_tempscalar",   //	RENDER_TARGET_TEMPSCALAR,
     "Texture_tempvector",   //	 RENDER_TARGET_TEMPVECTOR,
     "Texture_velocity0",    //	RENDER_TARGET_VELOCITY0 =
-                            //NUM_OWN_RENDER_TARGETS,	//	For textures
-                            //generated from local data
-    "Texture_pressure",     //	RENDER_TARGET_PRESSURE,
-    "Texture_color",        //	RENDER_TARGET_COLOR_IN,
+                            // NUM_OWN_RENDER_TARGETS,	//	For textures
+                         // generated from local data
+    "Texture_pressure", //	RENDER_TARGET_PRESSURE,
+    "Texture_color",    //	RENDER_TARGET_COLOR_IN,
 };
 
 dx103DFluidManager::dx103DFluidManager()
@@ -455,8 +455,8 @@ void dx103DFluidManager::AdvectColorBFECC( float timestep, bool bTeperature ) {
     // pShaderResourceVariables[RENDER_TARGET_TEMPSCALAR]->SetResource( NULL );
     // pShaderResourceVariables[RENDER_TARGET_COLOR0]->SetResource(
     // pRenderTargetShaderViews[RENDER_TARGET_TEMPVECTOR] ); 	Overwrite
-    //RENDER_TARGET_COLOR0 with RENDER_TARGET_TEMPVECTOR 	Find texture index and
-    //patch texture manually using DirecX call!
+    // RENDER_TARGET_COLOR0 with RENDER_TARGET_TEMPVECTOR 	Find texture
+    // index and patch texture manually using DirecX call!
     static shared_str strColorName(
         m_pEngineTextureNames[ RENDER_TARGET_COLOR_IN ] );
     STextureList* _T = &*( AdvectElement->passes[ 0 ]->T );
@@ -484,14 +484,14 @@ void dx103DFluidManager::AdvectColorBFECC( float timestep, bool bTeperature ) {
     // if(ColorTextureNumber == 0)
     //{
     //	pShaderResourceVariables[RENDER_TARGET_COLOR1]->SetResource(
-    //pRenderTargetShaderViews[RENDER_TARGET_COLOR1] ); 	SetRenderTarget(
-    //RENDER_TARGET_COLOR0 );
+    // pRenderTargetShaderViews[RENDER_TARGET_COLOR1] ); 	SetRenderTarget(
+    // RENDER_TARGET_COLOR0 );
     //}
     // else
     //{
     //	pShaderResourceVariables[RENDER_TARGET_COLOR0]->SetResource(
-    //pRenderTargetShaderViews[RENDER_TARGET_COLOR0] ); 	SetRenderTarget(
-    //RENDER_TARGET_COLOR1 );
+    // pRenderTargetShaderViews[RENDER_TARGET_COLOR0] ); 	SetRenderTarget(
+    // RENDER_TARGET_COLOR1 );
     //}
     RCache.set_RT( pRenderTargetViews[ RENDER_TARGET_COLOR ] );
     if ( bTeperature )
@@ -525,14 +525,14 @@ void dx103DFluidManager::AdvectColor( float timestep, bool bTeperature ) {
     // if(ColorTextureNumber == 0)
     //{
     //	pShaderResourceVariables[RENDER_TARGET_COLOR1]->SetResource(
-    //pRenderTargetShaderViews[RENDER_TARGET_COLOR1] ); 	SetRenderTarget(
-    //RENDER_TARGET_COLOR0 );
+    // pRenderTargetShaderViews[RENDER_TARGET_COLOR1] ); 	SetRenderTarget(
+    // RENDER_TARGET_COLOR0 );
     // }
     // else
     //{
     //	pShaderResourceVariables[RENDER_TARGET_COLOR0]->SetResource(
-    //pRenderTargetShaderViews[RENDER_TARGET_COLOR0] ); 	SetRenderTarget(
-    //RENDER_TARGET_COLOR1 );
+    // pRenderTargetShaderViews[RENDER_TARGET_COLOR0] ); 	SetRenderTarget(
+    // RENDER_TARGET_COLOR1 );
     // }
 
     RCache.set_RT( pRenderTargetViews[ RENDER_TARGET_COLOR ] );

@@ -3,8 +3,8 @@
 //	Created 	: 19.09.2002
 //  Modified 	: 04.06.2003
 //	Author		: Oles Shyshkovtsov, Alexander Maksimchuk, Victor
-//Reutskiy and Dmitriy Iassenev 	Description : Server objects monsters for ALife
-//simulator
+// Reutskiy and Dmitriy Iassenev 	Description : Server objects monsters
+// for ALife simulator
 ////////////////////////////////////////////////////////////////////////////
 
 #include "xrServer_Objects_ALife_Monsters.h"
@@ -21,22 +21,21 @@
 #endif
 
 #ifdef XRGAME_EXPORTS
-#include "alife_time_manager.h"
-#include "ef_storage.h"
-#include "game_graph.h"
 #include "ai_space.h"
 #include "alife_group_registry.h"
-#include "alife_simulator.h"
-#include "alife_registry_container.h"
-#include "ef_primary.h"
-#include "string_table.h"
-#include "alife_online_offline_group_brain.h"
-#include "alife_simulator.h"
 #include "alife_object_registry.h"
-#include "date_time.h"
+#include "alife_online_offline_group_brain.h"
+#include "alife_registry_container.h"
+#include "alife_simulator.h"
+#include "alife_time_manager.h"
 #include "custommonster.h"
-#include "movement_manager.h"
+#include "date_time.h"
+#include "ef_primary.h"
+#include "ef_storage.h"
+#include "game_graph.h"
 #include "location_manager.h"
+#include "movement_manager.h"
+#include "string_table.h"
 #endif
 
 void setup_location_types_section( GameGraph::TERRAIN_VECTOR& m_vertex_types,
@@ -663,7 +662,7 @@ CSE_ALifeCustomZone::CSE_ALifeCustomZone( LPCSTR caSection )
     : CSE_ALifeSpaceRestrictor( caSection ) {
     m_owner_id = u32( -1 );
     //	m_maxPower					=
-    //pSettings->r_float(caSection,"min_start_power");
+    // pSettings->r_float(caSection,"min_start_power");
     if ( pSettings->line_exist( caSection, "hit_type" ) )
         m_tHitType = ALife::g_tfString2HitType(
             pSettings->r_string( caSection, "hit_type" ) );

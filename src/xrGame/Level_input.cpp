@@ -531,10 +531,11 @@ void CLevel::IR_OnKeyboardPress( int key ) {
             //		ai().level_graph().set_dest_point();
             //		ai().level_graph().build_detail_path();
             //		if (!Objects.FindObjectByName("m_stalker_e0000") ||
-            //!Objects.FindObjectByName("localhost/dima")) 			return; 		if
-            //(!m_bSynchronization) { 			m_bSynchronization	= true;
-            //			ai().level_graph().set_start_point();
-            //			m_bSynchronization	= false;
+            //! Objects.FindObjectByName("localhost/dima"))
+            //! return; 		if
+            //(!m_bSynchronization) { 			m_bSynchronization
+            //= true; 			ai().level_graph().set_start_point(); 			m_bSynchronization
+            //= false;
             //		}
             //		::luabind::functor<void>	functor;
             //		ai().script_engine().functor("alife_test.set_switch_online",functor);
@@ -544,9 +545,10 @@ void CLevel::IR_OnKeyboardPress( int key ) {
             //	case DIK_F11:
             //		ai().level_graph().build_detail_path();
             //		if (!Objects.FindObjectByName("m_stalker_e0000") ||
-            //!Objects.FindObjectByName("localhost/dima")) 			return; 		if
-            //(!m_bSynchronization) { 			m_bSynchronization	= true;
-            //			ai().level_graph().set_dest_point();
+            //! Objects.FindObjectByName("localhost/dima"))
+            //! return; 		if
+            //(!m_bSynchronization) { 			m_bSynchronization
+            //= true; 			ai().level_graph().set_dest_point();
             //			ai().level_graph().select_cover_point();
             //			m_bSynchronization	= false;
             //		}

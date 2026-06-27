@@ -3,7 +3,8 @@
 //	Created 	: 19.09.2002
 //  Modified 	: 04.06.2003
 //	Author		: Oles Shyshkovtsov, Alexander Maksimchuk, Victor
-//Reutskiy and Dmitriy Iassenev 	Description : Server objects for ALife simulator
+// Reutskiy and Dmitriy Iassenev 	Description : Server objects for ALife
+// simulator
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -449,7 +450,8 @@ enum {
     inventory_item_state_enabled = u8( 1 ) << 0,
     inventory_item_angular_null = u8( 1 ) << 1,
     inventory_item_linear_null = u8( 1 ) << 2 //,
-                                              // animated						= u8(1) << 3
+                                              // animated
+                                              // = u8(1) << 3
 };
 
 union mask_num_items {

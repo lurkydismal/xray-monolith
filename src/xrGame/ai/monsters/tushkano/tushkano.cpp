@@ -21,7 +21,7 @@ void CTushkano::Load( LPCSTR section ) {
 
     //	anim().AddReplacedAnim(&m_bDamaged, eAnimRun, eAnimRunDamaged);
     //	anim().AddReplacedAnim(&m_bDamaged, eAnimWalkFwd,
-    //eAnimWalkDamaged);
+    // eAnimWalkDamaged);
 
     anim().accel_load( section );
     anim().accel_chain_add( eAnimWalkFwd, eAnimRun );

@@ -48,7 +48,7 @@ void best_scores_store::load_best_scores( store_operation_cb& opcb ) {
     // if (!reqres)
     //{
     //	SAKEStartRequestResult tmp_result	=
-    //m_sake_obj->GetRequestResult(); 	m_scores_operation_cb
+    // m_sake_obj->GetRequestResult(); 	m_scores_operation_cb
     //(false, CGameSpy_SAKE::TryToTranslate(tmp_result).c_str());
     //	m_scores_operation_cb.clear			();
     // }
@@ -103,18 +103,21 @@ bool best_scores_store::is_sake_equal_to_file() const {
 
 // void __cdecl best_scores_store::get_my_player_scores_cb(SAKE sake,
 //														SAKERequest
-//request, 														SAKERequestResult result, 														void * inputData, 														void * outputData, 														void *
-//userData)
+// request,
+// SAKERequestResult result,
+// void * inputData,
+// void * outputData,
+// void * userData)
 //{
 //	best_scores_store* my_inst				=
-//static_cast<best_scores_store*>(userData); 	VERIFY(my_inst &&
-//my_inst->m_scores_operation_cb); 	if (result != SAKERequestResult_SUCCESS)
+// static_cast<best_scores_store*>(userData); 	VERIFY(my_inst &&
+// my_inst->m_scores_operation_cb); 	if (result != SAKERequestResult_SUCCESS)
 //	{
 //		my_inst->m_scores_operation_cb		(false,
-//CGameSpy_SAKE::TryToTranslate(result).c_str()); 	} else
+// CGameSpy_SAKE::TryToTranslate(result).c_str()); 	} else
 //	{
 //		SAKEGetMyRecordsOutput*	tmp_out		=
-//static_cast<SAKEGetMyRecordsOutput*>( 			outputData
+// static_cast<SAKEGetMyRecordsOutput*>( 			outputData
 //		);
 //		VERIFY(tmp_out);
 //		my_inst->process_scores_out_response(tmp_out, fields_count);
@@ -150,8 +153,8 @@ bool best_scores_store::is_sake_equal_to_file() const {
 //		if (bst == bst_score_types_count)
 //			continue;
 //		s32 bs_value				=
-//tmp_out->mRecords[0][i].mValue.mInt;	//one raw 		m_result_scores.insert
-//(std::make_pair(bst, bs_value));
+// tmp_out->mRecords[0][i].mValue.mInt;	//one raw
+// m_result_scores.insert (std::make_pair(bst, bs_value));
 //	};
 // }
 } // namespace gamespy_profile

@@ -751,8 +751,8 @@ void CLevel::ProcessGameEvents() {
                 //{
                 //	game_events->insert(P);
                 //	Msg("[ProcessGameEvents] postponed M_EVENT, object in
-                //prefetch queue: obj_id %d", dest); 	it =
-                //game_events->queue.erase(it); // remove current event
+                // prefetch queue: obj_id %d", dest); 	it =
+                // game_events->queue.erase(it); // remove current event
                 //	continue;
                 //}
 

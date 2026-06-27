@@ -958,7 +958,8 @@ struct ssl_st {
                          * NB: For servers, the 'new' session may actually be a
                          * previously    cached session or even the previous
                          * session    unless
-                         * SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION is    set */
+                         * SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION is    set
+                         */
     int quiet_shutdown; /* don't send shutdown packets */
     int shutdown;       /* we have shut things down, 0x01 sent, 0x02
                          * for received */

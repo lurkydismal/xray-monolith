@@ -3,7 +3,7 @@
 //	Created 	: 12.11.2001
 //  Modified 	: 03.09.2004
 //	Author		: Dmitriy Iassenev, Oles Shishkovtsov, Aleksandr
-//Maksimchuk 	Description : Team hierarchy holder inline functions
+// Maksimchuk 	Description : Team hierarchy holder inline functions
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

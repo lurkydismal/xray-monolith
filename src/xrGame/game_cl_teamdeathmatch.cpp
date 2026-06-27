@@ -231,7 +231,7 @@ void game_cl_TeamDeathmatch::OnTeamMenu_Cancel() {
              !m_game_ui->m_pUITeamSelectWnd->IsShown() ) {
             m_game_ui->m_pUITeamSelectWnd->ShowDialog( true );
             //.
-            //m_game_ui->StartStopMenu(m_game_ui->m_pUITeamSelectWnd, true);
+            // m_game_ui->StartStopMenu(m_game_ui->m_pUITeamSelectWnd, true);
             return;
         }
     }
@@ -352,7 +352,7 @@ bool game_cl_TeamDeathmatch::CanBeReady() {
         if ( CanCallTeamSelectMenu() )
             m_game_ui->m_pUITeamSelectWnd->ShowDialog( true );
         //.
-        //m_game_ui->StartStopMenu(m_game_ui->m_pUITeamSelectWnd,true);
+        // m_game_ui->StartStopMenu(m_game_ui->m_pUITeamSelectWnd,true);
 
         return false;
     }

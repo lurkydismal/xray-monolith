@@ -142,7 +142,7 @@ void CTracer::Render( const Fvector& pos,
         if ( bActor ) {
             float k_speed = speed / 1000.0f;
             //			float f_distance	=
-            //Device.vCameraPosition.distance_to(pos);
+            // Device.vCameraPosition.distance_to(pos);
 
             FillSprite_Circle( pos, k_speed * width * m_circle_size_k,
                                k_speed * width * m_circle_size_k,

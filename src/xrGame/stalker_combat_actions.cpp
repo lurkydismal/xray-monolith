@@ -290,15 +290,16 @@ void CStalkerActionRetreatFromEnemy::execute() {
                  object().memory().enemy().selected() ) ) {
             object().movement().set_mental_state( eMentalStateDanger );
             //			u32
-            //min_queue_size, max_queue_size, min_queue_interval,
-            //max_queue_interval; 			float
-            //distance =
-            //object().memory().enemy().selected()->Position().distance_to(object().Position());
+            // min_queue_size, max_queue_size, min_queue_interval,
+            // max_queue_interval; 			float
+            // distance =
+            // object().memory().enemy().selected()->Position().distance_to(object().Position());
             //			select_queue_params
             //(distance,min_queue_size, max_queue_size, min_queue_interval,
-            //max_queue_interval); 			object().CObjectHandler::set_goal
+            // max_queue_interval);
+            // object().CObjectHandler::set_goal
             //(eObjectActionFire1,object().best_weapon(),min_queue_size,
-            //max_queue_size, min_queue_interval, max_queue_interval);
+            // max_queue_size, min_queue_interval, max_queue_interval);
             fire();
             object().sight().setup( CSightAction(
                 object().memory().enemy().selected(), true, true ) );
@@ -337,8 +338,8 @@ void CStalkerActionGetReadyToKill::initialize() {
 
     m_body_state = object().movement().body_state();
     //	m_movement_type
-    //= Random.randI(2) ? eMovementTypeRun : eMovementTypeWalk; 	m_movement_type
-    //= eMovementTypeRun;
+    //= Random.randI(2) ? eMovementTypeRun : eMovementTypeWalk;
+    //m_movement_type = eMovementTypeRun;
 
     object().movement().set_desired_direction( 0 );
     object().movement().set_path_type( MovementManager::ePathTypeLevelPath );
@@ -450,7 +451,7 @@ void CStalkerActionGetReadyToKill::execute() {
     //(CSightAction(SightManager::eSightTypePosition,mem_object.m_object_params.m_position,true));
 
     //	if ((point && !point->position().similar(object().Position(),.5f)) ||
-    //!object().movement().path_completed()) 		object().sight().setup
+    //! object().movement().path_completed()) 		object().sight().setup
     //(CSightAction(SightManager::eSightTypePathDirection));
 
     if ( m_affect_properties )
@@ -852,7 +853,7 @@ void CStalkerActionLookOut::execute() {
         object().movement().set_nearest_accessible_position();
 
     //	if (point && point->position().similar(object().Position(),.5f) &&
-    //object().movement().path_completed()) { 		m_storage->set_property
+    // object().movement().path_completed()) { 		m_storage->set_property
     //(eWorldPropertyLookedOut,true);
     //		object().movement().set_nearest_accessible_position	();
     //	}

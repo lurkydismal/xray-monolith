@@ -140,7 +140,7 @@ void CVisualMemoryManager::reinit() {
 
 void CVisualMemoryManager::reload( LPCSTR section ) {
     //	m_max_object_count			=
-    //READ_IF_EXISTS(pSettings,r_s32,section,"DynamicObjectsCount",1);
+    // READ_IF_EXISTS(pSettings,r_s32,section,"DynamicObjectsCount",1);
 
     if ( m_stalker ) {
         m_free.Load( pSettings->r_string( section, "vision_free_section" ),
@@ -490,7 +490,7 @@ void CVisualMemoryManager::add_visible_object( const CObject* object,
     //	STOP_PROFILE
 
     //	START_PROFILE("Memory
-    //Manager/visuals/update/add_visibles/find_object_by_id")
+    // Manager/visuals/update/add_visibles/find_object_by_id")
     self = m_object;
     J = std::find( m_objects->begin(), m_objects->end(),
                    object_id( game_object ) );
@@ -784,7 +784,7 @@ void CVisualMemoryManager::save( NET_Packet& packet ) const {
         return;
 
     //	Msg("before saving object %s[%d]", m_object->cName().c_str(),
-    //packet.w_tell() );
+    // packet.w_tell() );
     u32 count = 0;
     VISIBLES::const_iterator I = objects().begin();
     VISIBLES::const_iterator const E = objects().end();
@@ -839,7 +839,7 @@ void CVisualMemoryManager::save( NET_Packet& packet ) const {
     }
 
     //	Msg("after saving object %s[%d]", m_object->cName().c_str(),
-    //packet.w_tell() );
+    // packet.w_tell() );
 }
 
 void CVisualMemoryManager::load( IReader& packet ) {

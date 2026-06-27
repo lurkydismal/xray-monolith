@@ -274,7 +274,7 @@ bool CPolterTele::tele_raise_objects() {
     //	bool	rotate = false;
 
     //	CTelekinesis::activate		(obj, m_pmt_tele_raise_speed,
-    //m_pmt_tele_object_height, m_pmt_tele_time_object_keep, rotate);
+    // m_pmt_tele_object_height, m_pmt_tele_time_object_keep, rotate);
     //}
 
     if ( !tele_objects.empty() ) {

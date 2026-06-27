@@ -301,9 +301,9 @@ struct ImGuiSelectionBasicStorage; // Optional helper to store multi-selection
 struct ImGuiSelectionExternalStorage; // Optional helper to apply
                                       // multi-selection requests to existing
                                       // randomly accessible storage.
-struct ImGuiSelectionRequest; // A selection request (stored in
-                              // ImGuiMultiSelectIO)
-struct ImGuiSizeCallbackData; // Callback data when using
+struct ImGuiSelectionRequest;         // A selection request (stored in
+                                      // ImGuiMultiSelectIO)
+struct ImGuiSizeCallbackData;         // Callback data when using
                               // SetNextWindowSizeConstraints() (rare/advanced
                               // use)
 struct ImGuiStorage; // Helper for key->value storage (container sorted by key)
@@ -3570,23 +3570,23 @@ enum ImGuiKey : int {
     // http://dearimgui.com/controls_sheets)
     ImGuiKey_GamepadStart, // Menu (Xbox)      + (Switch)   Start/Options (PS)
     ImGuiKey_GamepadBack,  // View (Xbox)      - (Switch)   Share (PS)
-    ImGuiKey_GamepadFaceLeft, // X (Xbox)         Y (Switch)   Square (PS) //
-                              // Tap: Toggle Menu. Hold: Windowing mode
-                              // (Focus/Move/Resize windows)
+    ImGuiKey_GamepadFaceLeft,  // X (Xbox)         Y (Switch)   Square (PS) //
+                               // Tap: Toggle Menu. Hold: Windowing mode
+                               // (Focus/Move/Resize windows)
     ImGuiKey_GamepadFaceRight, // B (Xbox)         A (Switch)   Circle (PS) //
                                // Cancel / Close / Exit
-    ImGuiKey_GamepadFaceUp, // Y (Xbox)         X (Switch)   Triangle (PS) //
-                            // Text Input / On-screen Keyboard
-    ImGuiKey_GamepadFaceDown, // A (Xbox)         B (Switch)   Cross (PS) //
-                              // Activate / Open / Toggle / Tweak
-    ImGuiKey_GamepadDpadLeft, // D-pad Left // Move / Tweak / Resize Window (in
-                              // Windowing mode)
+    ImGuiKey_GamepadFaceUp,    // Y (Xbox)         X (Switch)   Triangle (PS) //
+                               // Text Input / On-screen Keyboard
+    ImGuiKey_GamepadFaceDown,  // A (Xbox)         B (Switch)   Cross (PS) //
+                               // Activate / Open / Toggle / Tweak
+    ImGuiKey_GamepadDpadLeft,  // D-pad Left // Move / Tweak / Resize Window (in
+                               // Windowing mode)
     ImGuiKey_GamepadDpadRight, // D-pad Right // Move / Tweak / Resize Window
                                // (in Windowing mode)
-    ImGuiKey_GamepadDpadUp, // D-pad Up // Move / Tweak / Resize Window (in
-                            // Windowing mode)
-    ImGuiKey_GamepadDpadDown, // D-pad Down // Move / Tweak / Resize Window (in
-                              // Windowing mode)
+    ImGuiKey_GamepadDpadUp,    // D-pad Up // Move / Tweak / Resize Window (in
+                               // Windowing mode)
+    ImGuiKey_GamepadDpadDown,  // D-pad Down // Move / Tweak / Resize Window (in
+                               // Windowing mode)
     ImGuiKey_GamepadL1, // L Bumper (Xbox)  L (Switch)   L1 (PS)            //
                         // Tweak Slower / Focus Previous (in Windowing mode)
     ImGuiKey_GamepadR1, // R Bumper (Xbox)  R (Switch)   R1 (PS)            //
@@ -3871,7 +3871,7 @@ enum ImGuiCol_ {
     ImGuiCol_TabDimmedSelected, // Tab background, when tab-bar is unfocused &
                                 // tab is selected
     ImGuiCol_TabDimmedSelectedOverline, //..horizontal overline, when tab-bar is
-                                        //unfocused & tab is selected
+                                        // unfocused & tab is selected
     ImGuiCol_DockingPreview, // Preview overlay color when about to docking
                              // something
     ImGuiCol_DockingEmptyBg, // Background color for empty node (e.g.
@@ -4978,8 +4978,8 @@ struct ImGuiStyle {
                                 // windows
     float MouseCursorScale;     // Scale software rendered mouse cursor (when
                                 // io.MouseDrawCursor is enabled). We apply
-                            // per-monitor DPI scaling over this scale. May be
-                            // removed later.
+    // per-monitor DPI scaling over this scale. May be
+    // removed later.
     bool AntiAliasedLines; // Enable anti-aliased lines/borders. Disable if you
                            // are really tight on CPU/GPU. Latched at the
                            // beginning of the frame (copied to ImDrawList).
@@ -5169,12 +5169,12 @@ struct ImGuiIO {
                                        // be set on it.
     bool ConfigViewportsNoDecoration;  // = true           // Disable default OS
                                        // window decoration flag for secondary
-                                      // viewports. When a viewport doesn't want
-                                      // window decorations,
-                                      // ImGuiViewportFlags_NoDecoration will be
-                                      // set on it. Enabling decoration can
-                                      // create subsequent issues at OS levels
-                                      // (e.g. minimum window size).
+    // viewports. When a viewport doesn't want
+    // window decorations,
+    // ImGuiViewportFlags_NoDecoration will be
+    // set on it. Enabling decoration can
+    // create subsequent issues at OS levels
+    // (e.g. minimum window size).
     bool ConfigViewportsNoDefaultParent; // = false          // Disable default
                                          // OS parenting to main viewport for
                                          // secondary viewports. By default,
@@ -5314,8 +5314,8 @@ struct ImGuiIO {
                                             // output on recoverable errors.
     bool ConfigErrorRecoveryEnableTooltip;  // = true       // Enable tooltip on
                                             // recoverable errors. The tooltip
-                                           // include a way to enable asserts if
-                                           // they were disabled.
+    // include a way to enable asserts if
+    // they were disabled.
 
     // Option to enable various debug tools showing buttons that will call the
     // IM_DEBUG_BREAK() macro.
@@ -6459,7 +6459,7 @@ enum ImGuiMultiSelectFlags_ {
 // code, 'app'=application/user code.
 struct ImGuiMultiSelectIO {
     //------------------------------------------// BeginMultiSelect /
-    //EndMultiSelect
+    // EndMultiSelect
     ImVector< ImGuiSelectionRequest >
         Requests; //  ms:w, app:r     /  ms:w  app:r   // Requests to apply to
                   //  your selection data.
@@ -6506,7 +6506,7 @@ enum ImGuiSelectionRequestType {
 // Selection request item
 struct ImGuiSelectionRequest {
     //------------------------------------------// BeginMultiSelect /
-    //EndMultiSelect
+    // EndMultiSelect
     ImGuiSelectionRequestType
         Type; //  ms:w, app:r     /  ms:w, app:r   // Request type. You'll most
               //  often receive 1 Clear + 1 SetRange with a single-item range.
@@ -7387,9 +7387,9 @@ struct ImFontConfig {
     float RasterizerDensity;  // 1.0f     // DPI scale for rasterization, not
                               // altering other font metrics: make it easy to
                               // swap between e.g. a 100% and a 400% fonts for a
-                             // zooming display. IMPORTANT: If you increase this
-                             // it is expected that you increase font scale
-                             // accordingly, otherwise quality may look lowered.
+    // zooming display. IMPORTANT: If you increase this
+    // it is expected that you increase font scale
+    // accordingly, otherwise quality may look lowered.
     ImWchar EllipsisChar; // 0        // Explicitly specify Unicode codepoint of
                           // ellipsis character. When fonts are being merged
                           // first specified ellipsis will be used.
@@ -7440,16 +7440,17 @@ struct ImFontGlyphRangesBuilder {
         int off = ( int )( n >> 5 );
         ImU32 mask = 1u << ( n & 31 );
         UsedChars[ off ] |= mask;
-    }                                                 // Set bit n in the array
+    } // Set bit n in the array
     inline void AddChar( ImWchar c ) { SetBit( c ); } // Add character
     IMGUI_API void AddText(
         const char* text,
         const char* text_end =
             NULL ); // Add string (each character of the UTF-8 string are added)
     IMGUI_API void AddRanges(
-        const ImWchar* ranges ); // Add ranges, e.g.
-                                 // builder.AddRanges(ImFontAtlas::GetGlyphRangesDefault())
-                                 // to force add all of ASCII/Latin+Ext
+        const ImWchar*
+            ranges ); // Add ranges, e.g.
+                      // builder.AddRanges(ImFontAtlas::GetGlyphRangesDefault())
+                      // to force add all of ASCII/Latin+Ext
     IMGUI_API void BuildRanges(
         ImVector< ImWchar >* out_ranges ); // Output new ranges
 };
@@ -8457,7 +8458,7 @@ static inline void PopAllowKeyboardFocus() {
 // Renamed in 1.77, renamed back in 1.79. Sorry!
 //-- OBSOLETED in 1.78 (from June 2020): Old drag/sliders functions that took a
 //'float power > 1.0f' argument instead of ImGuiSliderFlags_Logarithmic. See
-//github.com/ocornut/imgui/issues/3361 for details. IMGUI_API bool
+// github.com/ocornut/imgui/issues/3361 for details. IMGUI_API bool
 // DragScalar(const char* label, ImGuiDataType data_type, void* p_data, float
 // v_speed, const void* p_min, const void* p_max, const char* format, float
 // power = 1.0f)                                                            //
@@ -8576,7 +8577,7 @@ static inline void PopAllowKeyboardFocus() {
 } // namespace ImGui
 
 //-- OBSOLETED in 1.82 (from Mars 2021): flags for AddRect(), AddRectFilled(),
-//AddImageRounded(), PathRect() typedef ImDrawFlags ImDrawCornerFlags; enum
+// AddImageRounded(), PathRect() typedef ImDrawFlags ImDrawCornerFlags; enum
 // ImDrawCornerFlags_
 //{
 //    ImDrawCornerFlags_None      = ImDrawFlags_RoundCornersNone,         // Was

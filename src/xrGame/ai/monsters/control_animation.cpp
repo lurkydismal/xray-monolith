@@ -126,7 +126,7 @@ void CControlAnimation::play_part( SAnimationPart& part,
     ///////////////////////////////////////////////////////////////////////////////
     // #ifdef _DEBUG
     //	Msg("Monster[%s] Time[%u] Anim[%s]",*(m_object->cName()),
-    //Device.dwTimeGlobal,*(m_object->anim().GetAnimTranslation(part.motion)));
+    // Device.dwTimeGlobal,*(m_object->anim().GetAnimTranslation(part.motion)));
     // #endif
     ///////////////////////////////////////////////////////////////////////////////
 

@@ -140,16 +140,16 @@ public:
     // Arithmetic operators
     //! Operator for Point Mul = Point * Matrix3x3.
     //					Point		operator*(const
-    //Matrix3x3& mat)		const;
+    // Matrix3x3& mat)		const;
     //! Operator for Point Mul = Point * Matrix4x4.
     //					Point		operator*(const
-    //Matrix4x4& mat)		const;
+    // Matrix4x4& mat)		const;
     //! Operator for Point *= Matrix3x3.
     ///					Point&		operator*=(const
-    ///Matrix3x3& mat);
+    /// Matrix3x3& mat);
     //! Operator for Point *= Matrix4x4.
     //					Point&		operator*=(const
-    //Matrix4x4& mat);
+    // Matrix4x4& mat);
 
     //! Access as array
     ICF operator const float*() const { return &x; }

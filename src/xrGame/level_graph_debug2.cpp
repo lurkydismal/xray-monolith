@@ -62,7 +62,7 @@ void CLevelGraph::draw_nodes() {
     //	float				x,z;
     //	unpack_xz			(Local,x,z);
     //	F->Out				(0.f,0.55f,"%3d,%4d,%3d -> %d",
-    //iFloor(x),iFloor(Local.y()),iFloor(z),u32(ID));
+    // iFloor(x),iFloor(Local.y()),iFloor(z),u32(ID));
 
     svector< u32, 128 > linked;
     {

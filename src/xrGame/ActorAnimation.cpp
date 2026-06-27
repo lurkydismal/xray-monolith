@@ -792,7 +792,7 @@ void CActor::g_SetAnimation( u32 mstate_rl ) {
         m_current_legs_blend =
             PlayMotionByParts( ka, M_legs, TRUE, legs_play_callback, this );
         //		m_current_legs_blend		=
-        //smart_cast<IKinematicsAnimated*>(Visual())->PlayCycle(M_legs,TRUE,legs_play_callback,this);
+        // smart_cast<IKinematicsAnimated*>(Visual())->PlayCycle(M_legs,TRUE,legs_play_callback,this);
 
         if ( ( !( mstate_old & mcAnyMove ) ) && ( mstate_real & mcAnyMove ) ) {
             pos = 0.5f; // 0.5f*Random.randI(2);

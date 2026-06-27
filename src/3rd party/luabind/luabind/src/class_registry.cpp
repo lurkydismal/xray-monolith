@@ -223,7 +223,7 @@ void class_registry::add_class( LUABIND_TYPE_INFO info, class_rep* crep ) {
     // class is already registered
     // if (m_classes.find(info) != m_classes.end())
     //	Msg("*FATAL*: you are trying to register a class twice [%s]",
-    //crep->name()); //To XRay Log
+    // crep->name()); //To XRay Log
 
     assert( ( m_classes.find( info ) == m_classes.end() ) &&
             "you are trying to register a class twice" );

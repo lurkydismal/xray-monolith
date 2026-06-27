@@ -70,7 +70,7 @@ ICE_COMPILE_TIME_ASSERT( sqword, sizeof( sqword ) == 8 );
 typedef udword DynID; //!<	Dynamic identifier
 typedef uword KID;    //!<	Kernel ID
 typedef udword RTYPE; //!<	Relationship-type (!) between owners and
-                      //!<references
+                      //!< references
 #define INVALID_ID \
     0xffffffff             //!<	Invalid dword ID (counterpart of null pointers)
 #define INVALID_KID 0xffff //!<	Invalid Kernel ID

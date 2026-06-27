@@ -82,7 +82,7 @@ bool CAI_Stalker::bfAssignWatch( CScriptEntityAction* tpEntityAction ) {
     CScriptWatchAction& l_tWatchAction = tpEntityAction->m_tWatchAction;
 
     //	float			&yaw = movement().m_head.target.yaw, &pitch =
-    //movement().m_head.target.pitch;
+    // movement().m_head.target.pitch;
 
     switch ( l_tWatchAction.m_tGoalType ) {
         case CScriptWatchAction::eGoalTypeObject: {
@@ -173,7 +173,7 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
                 return ( ( l_tObjectAction.m_bCompleted = true ) == false );
             CObjectHandler::set_goal( eObjectActionIdle, l_tpInventoryItem );
             //			inventory().Action	(kWPN_FIRE,
-            //CMD_STOP);
+            // CMD_STOP);
             return ( ( l_tObjectAction.m_bCompleted =
                            ( CObjectHandler::goal_reached() ) ) == false );
             break;
@@ -182,7 +182,7 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
             CObjectHandler::set_goal( eObjectActionFire1, l_tpInventoryItem );
             //			if (!l_tpWeapon)
             //				return	((l_tObjectAction.m_bCompleted =
-            //true) == false);
+            // true) == false);
             if ( inventory().ActiveItem() && l_tpWeapon ) {
                 if ( l_tpWeapon->GetAmmoElapsed() ) {
                     //					if
@@ -191,15 +191,15 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
                     //					else
                     //						l_tpWeaponMagazined->SetQueueSize(1);
                     //					inventory().Action(kWPN_FIRE,
-                    //CMD_START);
+                    // CMD_START);
                 } else {
                     //					inventory().Action(kWPN_FIRE,
-                    //CMD_STOP);
+                    // CMD_STOP);
                     if ( l_tpWeapon->GetSuitableAmmoTotal() ) {
                         //						CObjectHandler::set_goal
                         //(eObjectActionFire1,l_tObjectAction.m_tpObject);
                         //						inventory().Action(kWPN_RELOAD,
-                        //CMD_START);
+                        // CMD_START);
                     } else
                         l_tObjectAction.m_bCompleted = true;
                 }
@@ -210,7 +210,7 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
             CObjectHandler::set_goal( eObjectActionFire2, l_tpInventoryItem );
             //			if (!l_tpWeapon)
             //				return	((l_tObjectAction.m_bCompleted =
-            //true) == false);
+            // true) == false);
             if ( inventory().ActiveItem() ) {
                 if ( l_tpWeapon->GetAmmoElapsed() ) {
                     //					if
@@ -219,15 +219,15 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
                     //					else
                     //						l_tpWeaponMagazined->SetQueueSize(1);
                     //					inventory().Action(kWPN_FIRE,
-                    //CMD_START);
+                    // CMD_START);
                 } else {
                     //					inventory().Action(kWPN_FIRE,
-                    //CMD_STOP);
+                    // CMD_STOP);
                     if ( l_tpWeapon->GetSuitableAmmoTotal() ) {
                         //						CObjectHandler::set_goal
                         //(eObjectActionFire1,l_tObjectAction.m_tpObject);
                         //						inventory().Action(kWPN_RELOAD,
-                        //CMD_START);
+                        // CMD_START);
                     } else
                         l_tObjectAction.m_bCompleted = true;
                 }
@@ -242,10 +242,10 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
             if ( inventory().ActiveItem()->object().ID() ==
                  l_tObjectAction.m_tpObject->ID() ) {
                 //				inventory().Action(kWPN_FIRE,
-                //CMD_STOP);
+                // CMD_STOP);
                 if ( CWeapon::eReload != l_tpWeapon->GetState() ) {
                     //					inventory().Action(kWPN_RELOAD,
-                    //CMD_START);
+                    // CMD_START);
                 } else
                     l_tObjectAction.m_bCompleted = true;
             } else
@@ -255,13 +255,14 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
 
             //			if (inventory().ActiveItem()) {
             //				inventory().Action(kWPN_FIRE,
-            //CMD_STOP); 				if (CWeapon::eReload != l_tpWeapon->STATE)
-            //					inventory().Action(kWPN_RELOAD,
-            //CMD_START); 				else 					l_tObjectAction.m_bCompleted = true;
+            // CMD_STOP); 				if (CWeapon::eReload !=
+            // l_tpWeapon->STATE) 					inventory().Action(kWPN_RELOAD, CMD_START);
+            // else
+            // l_tObjectAction.m_bCompleted = true;
             //			}
             //			else
             //				ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError,"cannot
-            //reload active item because it is not selected!");
+            // reload active item because it is not selected!");
             break;
         }
         case eObjectActionActivate: {
@@ -274,8 +275,8 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
             //				inventory().Slot(l_tpInventoryItem);
             //				inventory().Activate(l_tpInventoryItem->GetSlot());
             //			if (inventory().ActiveItem() &&
-            //(inventory().ActiveItem()->ID() == l_tpInventoryItem->ID())) 				if
-            //(l_tpWeapon && (CWeapon::eIdle == l_tpWeapon->STATE))
+            //(inventory().ActiveItem()->ID() == l_tpInventoryItem->ID()))
+            //if (l_tpWeapon && (CWeapon::eIdle == l_tpWeapon->STATE))
             //				l_tObjectAction.m_bCompleted = true;
             return ( ( l_tObjectAction.m_bCompleted =
                            ( CObjectHandler::goal_reached() ) ) == false );
@@ -337,7 +338,7 @@ bool CAI_Stalker::bfAssignAnimation( CScriptEntityAction* tpEntityAction ) {
     if ( xr_strlen( tpEntityAction->m_tAnimationAction.m_caAnimationToPlay ) ) {
 #ifdef _DEBUG
         //		Msg				("%6d Assigning
-        //animation :
+        // animation :
         //%s",Device.dwTimeGlobal,*tpEntityAction->m_tAnimationAction.m_caAnimationToPlay);
 #endif
         animation().torso().reset();

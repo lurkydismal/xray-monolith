@@ -167,7 +167,7 @@ public:
     // есть ли информация у персонажа
     virtual bool HasInfo( shared_str info_id ) const;
     //	virtual bool				GetInfo		(shared_str
-    //info_id, INFO_DATA&) const;
+    // info_id, INFO_DATA&) const;
 
 #ifdef DEBUG
     void CInventoryOwner::DumpInfo() const;

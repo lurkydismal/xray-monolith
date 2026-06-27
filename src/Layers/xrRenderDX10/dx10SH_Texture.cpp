@@ -454,7 +454,7 @@ void CTexture::Load() {
 
             //			HRESULT hrr = HW.pDevice->CreateTexture(
             //				_w, _h, 1, 0, D3DFMT_A8R8G8B8,
-            //D3DPOOL_MANAGED, &pTexture, NULL );
+            // D3DPOOL_MANAGED, &pTexture, NULL );
             D3D_TEXTURE2D_DESC desc;
             desc.Width = _w;
             desc.Height = _h;

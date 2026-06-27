@@ -100,7 +100,7 @@ inline bool operator!=( const uialloc< _Ty >&, const uialloc< _Other >& ) {
 
 //. template<typename T>
 //. class	ui_list 		: public std::list<T,uialloc<T> >{
-//public: u32 size() const {return (u32)__super::size(); } };
+// public: u32 size() const {return (u32)__super::size(); } };
 
 #define ui_list xr_vector
 

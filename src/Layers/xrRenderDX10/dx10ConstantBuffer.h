@@ -47,7 +47,7 @@ private:
     static const u32 lineSize = sizeof( Fvector4 );
 
     //	Never try to copy objects of this class due to the pointer and autoptr
-    //members
+    // members
     dx10ConstantBuffer( const dx10ConstantBuffer& );
     dx10ConstantBuffer& operator=( dx10ConstantBuffer& );
 };

@@ -33,7 +33,7 @@ BOOL CVisualZone::net_Spawn( CSE_Abstract* DC ) {
                  cNameVisual().c_str() ) );
 
     //	if (!(m_attack_animation.valid() && m_idle_animation.valid())) return
-    //FALSE;
+    // FALSE;
 
     SA->PlayCycle( m_idle_animation );
 
@@ -45,7 +45,7 @@ BOOL CVisualZone::net_Spawn( CSE_Abstract* DC ) {
 void CVisualZone::SwitchZoneState( EZoneState new_state ) {
     if ( m_eZoneState == eZoneStateBlowout && new_state != eZoneStateBlowout ) {
         //	IKinematicsAnimated*
-        //SA=smart_cast<IKinematicsAnimated*>(Visual());
+        // SA=smart_cast<IKinematicsAnimated*>(Visual());
         smart_cast< IKinematicsAnimated* >( Visual() )
             ->PlayCycle( m_idle_animation );
     }

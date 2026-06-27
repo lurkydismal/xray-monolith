@@ -94,13 +94,13 @@ struct ECORE_API SDeclaration : public xr_resource_flagged {
     //	Maps input signature to input layout
     xr_map< ID3DBlob*, ID3DInputLayout* > vs_to_layout;
     xr_vector< D3D_INPUT_ELEMENT_DESC > dx10_dcl_code;
-#else //	USE_DX10	//	Don't need it: use ID3DInputLayout
-      //instead 	which is per ( declaration, VS input layout) pair
+#else  //	USE_DX10	//	Don't need it: use ID3DInputLayout
+       // instead 	which is per ( declaration, VS input layout) pair
     IDirect3DVertexDeclaration9* dcl;
 #endif //	USE_DX10
 
     //	Use this for DirectX10 to cache DX9 declaration for comparison purpose
-    //only
+    // only
     xr_vector< D3DVERTEXELEMENT9 > dcl_code;
     ~SDeclaration();
 };

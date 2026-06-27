@@ -3,7 +3,7 @@
 //	Created 	: 19.09.2002
 //  Modified 	: 04.06.2003
 //	Author		: Oles Shyshkovtsov, Alexander Maksimchuk, Victor
-//Reutskiy and Dmitriy Iassenev 	Description : Server objects factory
+// Reutskiy and Dmitriy Iassenev 	Description : Server objects factory
 ////////////////////////////////////////////////////////////////////////////
 
 #include "object_factory.h"

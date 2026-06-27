@@ -142,7 +142,7 @@ bool CLevelChanger::get_reject_pos( Fvector& p, Fvector& r ) {
     r.set( 0, 0, 0 );
     //--		db.actor:set_actor_position(patrol("t_way"):point(0))
     //--		local dir =
-    //patrol("t_look"):point(0):sub(patrol("t_way"):point(0))
+    // patrol("t_look"):point(0):sub(patrol("t_way"):point(0))
     //--		db.actor:set_actor_direction(-dir:getH())
 
     if ( m_ini_file && m_ini_file->section_exist( "pt_move_if_reject" ) ) {

@@ -173,7 +173,7 @@ BOOL CEntity::net_Spawn( CSE_Abstract* DC ) {
         //           make_string("server entity [%s][%d] has an killer [%d] and
         //           not dead",
         //	          E->name_replace(), E->ID,
-        //E->get_killer_id()).c_str());
+        // E->get_killer_id()).c_str());
 
         m_killer_id = E->get_killer_id();
 

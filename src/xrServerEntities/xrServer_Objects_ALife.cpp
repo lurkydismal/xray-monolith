@@ -3,7 +3,8 @@
 //	Created 	: 19.09.2002
 //  Modified 	: 04.06.2003
 //	Author		: Oles Shyshkovtsov, Alexander Maksimchuk, Victor
-//Reutskiy and Dmitriy Iassenev 	Description : Server objects for ALife simulator
+// Reutskiy and Dmitriy Iassenev 	Description : Server objects for ALife
+// simulator
 ////////////////////////////////////////////////////////////////////////////
 
 #include "xrServer_Objects_ALife.h"
@@ -561,9 +562,9 @@ u32 CSE_ALifeObject::ef_main_weapon_type() const {
 
 u32 CSE_ALifeObject::ef_weapon_type() const {
     //	string16					temp;
-    //CLSID2TEXT(m_tClassID,temp); 	R_ASSERT3	(false,"Invalid alife weapon
-    //type request, virtual function is not properly overloaded!",temp); 	return
-    //(u32(-1));
+    // CLSID2TEXT(m_tClassID,temp); 	R_ASSERT3	(false,"Invalid alife
+    // weapon type request, virtual function is not properly overloaded!",temp);
+    // return (u32(-1));
     return ( 0 );
 }
 
@@ -1451,8 +1452,8 @@ void CSE_ALifeObjectHangingLamp::FillProps( LPCSTR pref, PropItemVec& values ) {
             values, PrepareKey( pref, *s_name, "Light\\Main\\Cone Angle" ),
             &spot_cone_angle, deg2rad( 1.f ), deg2rad( 120.f ) );
         //		PHelper().CreateFlag16	(values,
-        //PrepareKey(pref,*s_name,"Light\\Main\\Volumetric"),	&flags,
-        //flVolumetric);
+        // PrepareKey(pref,*s_name,"Light\\Main\\Volumetric"),	&flags,
+        // flVolumetric);
         P = PHelper().CreateFlag16(
             values, PrepareKey( pref, *s_name, "Flags\\Volumetric" ), &flags,
             flVolumetric );

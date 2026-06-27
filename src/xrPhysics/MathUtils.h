@@ -182,7 +182,7 @@ IC void twoq_2w( const Fquaternion& q1,
         q1.w * q2.w + v1.dotproduct( v2 ); // q1.w*q2.w+ q1.v.dotproduct(q2.v)
     w.crossproduct( v1, v2 );
     //								  //the signum
-    //must be inverted ?
+    // must be inverted ?
     v1.mul( q2.w );
     v2.mul( q1.w );
     w.sub( v2 );

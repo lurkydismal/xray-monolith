@@ -4,7 +4,7 @@
 //	Modified	: 13.02.2008
 //	Author		: Dmitriy Iassenev
 //	Description : stalker movement manager class with obstacles avoiding
-//inline functions
+// inline functions
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef STALKER_MOVEMENT_MANAGER_OBSTACLES_INLINE_H_INCLUDED

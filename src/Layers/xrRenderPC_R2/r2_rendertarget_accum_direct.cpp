@@ -820,7 +820,7 @@ void CRenderTarget::accum_direct_lum() {
     Fvector2 j0, j1;
     float scale_X = float( Device.dwWidth ) / float( TEX_jitter );
     //		float	scale_Y				=
-    //float(Device.dwHeight)/ float(TEX_jitter);
+    // float(Device.dwHeight)/ float(TEX_jitter);
     float offset = ( .5f / float( TEX_jitter ) );
     j0.set( offset, offset );
     j1.set( scale_X, scale_X ).add( offset );
@@ -971,7 +971,7 @@ void CRenderTarget::accum_direct_volumetric( u32 sub_phase,
         RCache.set_CullMode( CULL_CCW );
 
         //		RCache.set_c				("Ldynamic_dir",
-        //L_dir.x,L_dir.y,L_dir.z,0 );
+        // L_dir.x,L_dir.y,L_dir.z,0 );
         RCache.set_c( "Ldynamic_color", L_clr.x, L_clr.y, L_clr.z, 0 );
         RCache.set_c( "m_shadow", mShadow );
         Fmatrix m_Texgen;
@@ -983,7 +983,7 @@ void CRenderTarget::accum_direct_volumetric( u32 sub_phase,
 
         RCache.set_c( "m_texgen", m_Texgen );
         //		RCache.set_c				("m_sunmask",
-        //m_clouds_shadow);
+        // m_clouds_shadow);
 
         // nv-DBT
         float zMin, zMax;

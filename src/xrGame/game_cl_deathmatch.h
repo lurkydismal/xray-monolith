@@ -109,7 +109,7 @@ protected:
     virtual void LoadDefItemsForRank( IBuyWnd* pBuyMenu );
     virtual void ChangeItemsCosts( IBuyWnd* pBuyMenu );
     ///	virtual		s16
-    ///GetBuyMenuItemIndex			(u8 SlotID, u8 ItemID);
+    /// GetBuyMenuItemIndex			(u8 SlotID, u8 ItemID);
     s16 GetBuyMenuItemIndex( u8 Addons, u8 ItemID );
 
     virtual void ConvertTime2String( string64* str, u32 Time );

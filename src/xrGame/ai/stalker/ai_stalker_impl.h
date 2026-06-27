@@ -4,7 +4,7 @@
 //  Modified 	: 25.02.2003
 //	Author		: Dmitriy Iassenev
 //	Description : AI Behaviour for monster "Stalker" (inline functions
-//implementation)
+// implementation)
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

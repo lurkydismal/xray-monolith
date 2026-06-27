@@ -3,16 +3,16 @@
 //	Created 	: 19.09.2002
 //  Modified 	: 18.06.2004
 //	Author		: Oles Shyshkovtsov, Alexander Maksimchuk, Victor
-//Reutskiy and Dmitriy Iassenev 	Description : Server objects
+// Reutskiy and Dmitriy Iassenev 	Description : Server objects
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
 #pragma pack( push, 4 )
-#include "xrServer_Space.h"
 #include "../xrCDB/xrCDB.h"
 #include "ShapeData.h"
 #include "gametype_chooser.h"
+#include "xrServer_Space.h"
 
 class NET_Packet;
 class CDUInterface;

@@ -10,9 +10,10 @@
 //
 // T_INI_LOADER	-	тип класса CIni_IdToIndex,
 //					откуда будет браться информация размерах
-//таблицы TABLE_INDEX		-	порядковый номер таблицы, нужен только в
-// том случае 					если мы хотим сгененрировать несколько таблиц с одинаковыми 					T_ITEM
-//и T_INI_LOADER
+// таблицы TABLE_INDEX		-	порядковый номер таблицы, нужен только в
+// том случае 					если мы хотим сгененрировать
+// несколько таблиц с одинаковыми 					T_ITEM
+// и T_INI_LOADER
 
 #define TEMPLATE_SPECIALIZATION \
     template < typename T_ITEM, typename T_INI_LOADER, u16 TABLE_INDEX >

@@ -177,7 +177,7 @@ void CLevel::ClientReceive() {
                 if ( ( Level().timeServer() + Ping ) < P->timeReceive ) {
 #ifdef DEBUG
                     //					Msg("! TimeServer[%d] <
-                    //TimeReceive[%d]", Level().timeServer(), P->timeReceive);
+                    // TimeReceive[%d]", Level().timeServer(), P->timeReceive);
 #endif
                     dTime = Ping;
                 } else
@@ -357,7 +357,7 @@ void CLevel::ClientReceive() {
                 } else {
                     const char* m_SO = m_caServerOptions.c_str();
                     //					const char* m_CO =
-                    //m_caClientOptions.c_str();
+                    // m_caClientOptions.c_str();
 
                     m_SO = strchr( m_SO, '/' );
                     if ( m_SO )

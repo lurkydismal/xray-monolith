@@ -138,11 +138,13 @@ public:
         // fp, non-array versions
         ICF void				set		(R_constant* C,
 const Fmatrix& A)		{ if (C->destination&1)		{ a_pixel.set
-(C,C->ps,A); a_pixel.b_dirty=TRUE;		} if (C->destination&2) { a_vertex.set	(C,C->vs,A); a_vertex.b_dirty=TRUE;		}
+(C,C->ps,A); a_pixel.b_dirty=TRUE;		} if (C->destination&2) {
+a_vertex.set	(C,C->vs,A); a_vertex.b_dirty=TRUE;		}
         }
         ICF void				set		(R_constant* C,
 const Fvector4& A)		{ if (C->destination&1)		{ a_pixel.set
-(C,C->ps,A); a_pixel.b_dirty=TRUE;		} if (C->destination&2) { a_vertex.set	(C,C->vs,A); a_vertex.b_dirty=TRUE;		}
+(C,C->ps,A); a_pixel.b_dirty=TRUE;		} if (C->destination&2) {
+a_vertex.set	(C,C->vs,A); a_vertex.b_dirty=TRUE;		}
         }
         ICF void				set		(R_constant* C,
 float x, float y, float z, float w)	{ Fvector4 data;

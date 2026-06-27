@@ -28,7 +28,9 @@ void CEatableItemObject::Load( LPCSTR section ) {
 // void CEatableItemObject::Hit(float P, Fvector &dir,
 //						 CObject* who, s16 element,
 //						 Fvector
-//position_in_object_space, 						 float impulse, 						 ALife::EHitType hit_type)
+// position_in_object_space, 						 float
+// impulse, 						 ALife::EHitType
+// hit_type)
 void CEatableItemObject::Hit( SHit* pHDS ) {
     /*
     CPhysicItem::Hit			(

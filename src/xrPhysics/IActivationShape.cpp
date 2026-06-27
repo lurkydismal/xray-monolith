@@ -50,7 +50,8 @@ void ActivateShapePhysShellHolder( IPhysicsShellHolder* obj,
 
 #ifdef DEBUG
     if ( !valid_pos( out_pos, phBoundaries ) ) {
-        Msg( "not valid position	%f,%f,%f", out_pos.x, out_pos.y, out_pos.z );
+        Msg( "not valid position	%f,%f,%f", out_pos.x, out_pos.y,
+             out_pos.z );
         Msg( "size	%f,%f,%f", in_size.x, in_size.y, in_size.z );
         Msg( "Object: %s", obj->ObjectName() );
         Msg( "Visual: %s", obj->ObjectNameVisual() );

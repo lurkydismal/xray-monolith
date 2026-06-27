@@ -325,7 +325,7 @@ CRenderTarget::CRenderTarget() {
         //	Igor: for volumetric lights
         // rt_Generic_2.create
         // (r2_RT_generic2,w,h,D3DFMT_A8R8G8B8		); 	temp: for higher
-        //quality blends
+        // quality blends
         if ( RImplementation.o.advancedpp )
             rt_Generic_2.create( r2_RT_generic2, w, h, D3DFMT_A16B16G16R16F );
 

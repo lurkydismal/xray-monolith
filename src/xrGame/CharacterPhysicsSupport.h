@@ -116,7 +116,7 @@ public:
         m_flags.set( fl_use_hit_anims, ( BOOL )v );
     }
     //////////////////base hierarchi
-    ///methods///////////////////////////////////////////////////
+    /// methods///////////////////////////////////////////////////
     void CreateCharacterSafe();
     void CreateCharacter();
     bool CollisionCorrectObjPos();
@@ -156,7 +156,7 @@ private:
 
 public:
     //		void
-    //on_active_weapon_shell_activate();
+    // on_active_weapon_shell_activate();
     bool has_shell_collision_place( const CPhysicsShellHolder* obj ) const;
     virtual void on_child_shell_activate( CPhysicsShellHolder* obj );
     /////////////////////////////////////////////////////////////////

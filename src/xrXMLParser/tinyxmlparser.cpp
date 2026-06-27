@@ -987,7 +987,8 @@ TiXmlNode* TiXmlNode::Identify( const char* p, TiXmlEncoding encoding ) {
 //				const char* tagloc = tag->c_str() + tagIndex;
 //				TiXmlNode* node = Identify( tagloc,
 // TIXML_DEFAULT_ENCODING ); 				if ( !node )
-// return; 				node->StreamIn( in, tag ); 				delete node;
+// return; 				node->StreamIn( in, tag );
+// delete node;
 //				node = 0;
 //
 //				// No return: go around from the beginning:

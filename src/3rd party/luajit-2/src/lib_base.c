@@ -65,14 +65,14 @@ LJLIB_PUSH( top - 9 ) /* userdata */
 LJLIB_PUSH( "number" )
 LJLIB_ASM_( type )
 LJLIB_REC(.)
-    /* Recycle the lj_lib_checkany(L, 1) from assert. */
+/* Recycle the lj_lib_checkany(L, 1) from assert. */
 
-    /* -- Base library: iterators ---------------------------------------------
-     */
+/* -- Base library: iterators ---------------------------------------------
+ */
 
-    /* This solves a circular dependency problem -- change FF_next_N as needed.
-     */
-    LJ_STATIC_ASSERT( ( int )FF_next == FF_next_N );
+/* This solves a circular dependency problem -- change FF_next_N as needed.
+ */
+LJ_STATIC_ASSERT( ( int )FF_next == FF_next_N );
 
 LJLIB_ASM( next ) {
     lj_lib_checktab( L, 1 );
@@ -122,9 +122,9 @@ LJLIB_ASM( ipairs ) LJLIB_REC(.) {
 
 LJLIB_ASM_( getmetatable )
 LJLIB_REC(.)
-    /* Recycle the lj_lib_checkany(L, 1) from assert. */
+/* Recycle the lj_lib_checkany(L, 1) from assert. */
 
-    LJLIB_ASM( setmetatable ) LJLIB_REC(.) {
+LJLIB_ASM( setmetatable ) LJLIB_REC(.) {
     GCtab* t = lj_lib_checktab( L, 1 );
     GCtab* mt = lj_lib_checktabornil( L, 2 );
     if ( !tvisnil( lj_meta_lookup( L, L->base, MM_metatable ) ) )
@@ -356,10 +356,10 @@ LJLIB_ASM( pcall ) LJLIB_REC(.) {
 LJLIB_ASM_( xpcall )
 LJLIB_REC(.)
 
-    /* -- Base library: load Lua code -----------------------------------------
-     */
+/* -- Base library: load Lua code -----------------------------------------
+ */
 
-    static int load_aux( lua_State* L, int status, int envarg ) {
+static int load_aux( lua_State* L, int status, int envarg ) {
     if ( status == 0 ) {
         if ( tvistab( L->base + envarg - 1 ) ) {
             GCfunc* fn = funcV( L->top - 1 );

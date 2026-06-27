@@ -4,7 +4,7 @@
 //	Modified	:	19.12.2007
 //	Autor		:	Alexander Maniluk
 //	Description	:	Artefact object for Capture The Artefact game
-//mode
+// mode
 ////////////////////////////////////////////////////////////////////////////////
 #include "cta_game_artefact_activation.h"
 

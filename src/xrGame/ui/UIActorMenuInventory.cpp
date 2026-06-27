@@ -685,7 +685,8 @@ bool CUIActorMenu::ToSlot( CUICellItem* itm, bool force_place, u16 slot_id ) {
         // else if (slot_id == KNIFE_SLOT)
         // {
         // 	if (m_pActorInvOwner->inventory().CanPutInSlot(iitem,
-        // INV_SLOT_2)) 		return ToSlot(itm, force_place, INV_SLOT_2);
+        // INV_SLOT_2)) 		return ToSlot(itm, force_place,
+        // INV_SLOT_2);
         // }
 
         CUIDragDropListEx* slot_list;
@@ -887,7 +888,7 @@ bool CUIActorMenu::ToBelt( CUICellItem* itm, bool b_use_cursor_pos ) {
             return false;
 
         //		PIItem	_iitem =
-        //m_pActorInvOwner->inventory().ItemFromSlot(slot_id);
+        // m_pActorInvOwner->inventory().ItemFromSlot(slot_id);
 
         CUICellItem* slot_cell = belt_list->GetCellAt( belt_cell_pos ).m_item;
         //		VERIFY
@@ -1205,7 +1206,7 @@ void CUIActorMenu::PropertiesBoxForAddon( PIItem item, bool& b_show ) {
                                         INVENTORY_ATTACH_ADDON );
             //			m_UIPropertiesBox->AddItem(
             //"st_attach_scope_to_pistol",  (void*)item_in_slot_2,
-            //INVENTORY_ATTACH_ADDON );
+            // INVENTORY_ATTACH_ADDON );
             b_show = true;
         }
         if ( item_in_slot_3 && item_in_slot_3->CanAttach( pScope ) ) {
@@ -1216,7 +1217,7 @@ void CUIActorMenu::PropertiesBoxForAddon( PIItem item, bool& b_show ) {
                                         INVENTORY_ATTACH_ADDON );
             //			m_UIPropertiesBox->AddItem(
             //"st_attach_scope_to_rifle",  (void*)item_in_slot_3,
-            //INVENTORY_ATTACH_ADDON );
+            // INVENTORY_ATTACH_ADDON );
             b_show = true;
         }
         return;
@@ -1231,7 +1232,7 @@ void CUIActorMenu::PropertiesBoxForAddon( PIItem item, bool& b_show ) {
                                         INVENTORY_ATTACH_ADDON );
             //			m_UIPropertiesBox->AddItem(
             //"st_attach_silencer_to_pistol",  (void*)item_in_slot_2,
-            //INVENTORY_ATTACH_ADDON );
+            // INVENTORY_ATTACH_ADDON );
             b_show = true;
         }
         if ( item_in_slot_3 && item_in_slot_3->CanAttach( pSilencer ) ) {
@@ -1242,7 +1243,7 @@ void CUIActorMenu::PropertiesBoxForAddon( PIItem item, bool& b_show ) {
                                         INVENTORY_ATTACH_ADDON );
             //			m_UIPropertiesBox->AddItem(
             //"st_attach_silencer_to_rifle",  (void*)item_in_slot_3,
-            //INVENTORY_ATTACH_ADDON );
+            // INVENTORY_ATTACH_ADDON );
             b_show = true;
         }
         return;
@@ -1257,7 +1258,7 @@ void CUIActorMenu::PropertiesBoxForAddon( PIItem item, bool& b_show ) {
                                         INVENTORY_ATTACH_ADDON );
             //			m_UIPropertiesBox->AddItem(
             //"st_attach_gl_to_pistol",  (void*)item_in_slot_2,
-            //INVENTORY_ATTACH_ADDON );
+            // INVENTORY_ATTACH_ADDON );
             b_show = true;
         }
         if ( item_in_slot_3 && item_in_slot_3->CanAttach( pGrenadeLauncher ) ) {
@@ -1268,7 +1269,7 @@ void CUIActorMenu::PropertiesBoxForAddon( PIItem item, bool& b_show ) {
                                         INVENTORY_ATTACH_ADDON );
             //			m_UIPropertiesBox->AddItem(
             //"st_attach_gl_to_rifle",  (void*)item_in_slot_3,
-            //INVENTORY_ATTACH_ADDON );
+            // INVENTORY_ATTACH_ADDON );
             b_show = true;
         }
     }

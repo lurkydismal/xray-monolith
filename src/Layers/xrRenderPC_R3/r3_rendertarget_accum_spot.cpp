@@ -198,7 +198,7 @@ void CRenderTarget::accum_spot( light* L ) {
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET4  MAKEFOURCC('G','E','T','4')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
         //		}
 
         if ( !RImplementation.o.dx10_msaa ) {
@@ -241,7 +241,7 @@ void CRenderTarget::accum_spot( light* L ) {
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET1  MAKEFOURCC('G','E','T','1')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
         //		}
     }
 
@@ -548,7 +548,7 @@ void CRenderTarget::accum_volumetric( light* L ) {
                        m_Lmap._42 );
         RCache.set_c( "vMinBounds", aabb.x1, aabb.y1, aabb.z1, 0 );
         //	Increase camera-space aabb z size to compensate decrease of
-        //slices number
+        // slices number
         RCache.set_c( "vMaxBounds", aabb.x2, aabb.y2,
                       aabb.z1 + ( aabb.z2 - aabb.z1 ) / fQuality, 0 );
 
@@ -614,7 +614,7 @@ void CRenderTarget::accum_volumetric( light* L ) {
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET4  MAKEFOURCC('G','E','T','4')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
         //		}
 
         RCache.set_ColorWriteEnable( D3DCOLORWRITEENABLE_RED |
@@ -623,7 +623,7 @@ void CRenderTarget::accum_volumetric( light* L ) {
 
         RCache.set_Geometry( g_accum_volumetric );
         //	Igor: no need to do it per sub-sample. Plain AA will go just
-        //fine.
+        // fine.
         RCache.Render( D3DPT_TRIANGLELIST, 0, 0, VOLUMETRIC_SLICES * 4, 0,
                        VOLUMETRIC_SLICES * 2 );
 
@@ -667,7 +667,7 @@ void CRenderTarget::accum_volumetric( light* L ) {
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET1  MAKEFOURCC('G','E','T','1')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
         //		}
 
         //	Restore clip planes

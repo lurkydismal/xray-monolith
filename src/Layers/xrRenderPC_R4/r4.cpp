@@ -160,8 +160,8 @@ static class cl_meatchunks_stuff : public R_constant_setup {
 } binder_meatchunks_stuff;
 
 extern ENGINE_API BOOL r2_sun_static;
-extern ENGINE_API BOOL
-    r2_advanced_pp; //	advanced post process and effects
+extern ENGINE_API BOOL r2_advanced_pp; //	advanced post process and
+                                       //effects
 //////////////////////////////////////////////////////////////////////////
 // Just two static storage
 void CRender::create() {
@@ -1182,22 +1182,22 @@ static HRESULT create_shader( LPCSTR const pTarget,
     //		SCS* scs_result = (SCS*)result;
     // #ifdef USE_DX11
     //		_result			=
-    //HW.pDevice->CreateComputeShader(buffer, buffer_size, 0, &scs_result->sh);
+    // HW.pDevice->CreateComputeShader(buffer, buffer_size, 0, &scs_result->sh);
     // #else // #ifdef USE_DX11
     //		_result			=
-    //HW.pDevice->CreateComputeShader(buffer, buffer_size, &scs_result->sh);
+    // HW.pDevice->CreateComputeShader(buffer, buffer_size, &scs_result->sh);
     // #endif // #ifdef USE_DX11
     //		if ( !SUCCEEDED(_result) ) {
     //			Log			("! CS: ", file_name);
     //			Msg			("! CreateComputeShaderhr ==
-    //0x%08x", _result); 			return		E_FAIL;
+    // 0x%08x", _result); 			return		E_FAIL;
     //		}
     //
     //		ID3DShaderReflection *pReflection = 0;
     //
     // #ifdef USE_DX11
     //		_result			= D3DReflect( buffer, buffer_size,
-    //IID_ID3DShaderReflection, (void**)&pReflection); #else 		_result
+    // IID_ID3DShaderReflection, (void**)&pReflection); #else 		_result
     //= D3D10ReflectShader( buffer, buffer_size, &pReflection); #endif
     //
     //		//	Parse constant, texture, sampler binding

@@ -198,14 +198,14 @@ void CUIMpTradeWnd::Init( const shared_str& sectionName,
 
     //	AddCallback
     //("btn_pistol_ammo",	BUTTON_CLICKED,
-    //CUIWndCallback::void_function	(this,
+    // CUIWndCallback::void_function	(this,
     //&CUIMpTradeWnd::OnBtnPistolAmmoClicked		));
     AddCallback( m_btn_pistol_silencer, BUTTON_CLICKED,
                  CUIWndCallback::void_function(
                      this, &CUIMpTradeWnd::OnBtnPistolSilencerClicked ) );
     //	AddCallback
     //("btn_rifle_ammo",	BUTTON_CLICKED,
-    //CUIWndCallback::void_function	(this,
+    // CUIWndCallback::void_function	(this,
     //&CUIMpTradeWnd::OnBtnRifleAmmoClicked		));
     AddCallback( m_btn_rifle_silencer, BUTTON_CLICKED,
                  CUIWndCallback::void_function(
@@ -218,7 +218,7 @@ void CUIMpTradeWnd::Init( const shared_str& sectionName,
                      this, &CUIMpTradeWnd::OnBtnRifleGLClicked ) );
     //	AddCallback
     //("btn_rifle_ammo2",	BUTTON_CLICKED,
-    //CUIWndCallback::void_function	(this,
+    // CUIWndCallback::void_function	(this,
     //&CUIMpTradeWnd::OnBtnRifleAmmo2Clicked		));
 
     m_static_player_money =

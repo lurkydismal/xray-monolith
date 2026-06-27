@@ -118,7 +118,7 @@ void CRT::create( LPCSTR Name, u32 w, u32 h, D3DFORMAT f, u32 SampleCount )
     // Try to create texture/surface
     DEV->Evict();
     //_hr = HW.pDevice->CreateTexture		(w, h, 1, usage, f,
-    //D3DPOOL_DEFAULT, &pSurface,NULL); if (FAILED(_hr) || (0==pSurface))
+    // D3DPOOL_DEFAULT, &pSurface,NULL); if (FAILED(_hr) || (0==pSurface))
     // return;
     // Create the render target texture
     D3D_TEXTURE2D_DESC desc;

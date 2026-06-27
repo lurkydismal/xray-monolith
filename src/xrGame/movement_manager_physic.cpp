@@ -122,7 +122,7 @@ Fvector CMovementManager::path_position( const float& velocity,
     // Вычислить пройденную дистанцию, определить целевую позицию на маршруте,
     //			 изменить detail().m_current_travel_point
 
-    float desirable_speed = velocity; // желаемая скорость объекта
+    float desirable_speed = velocity;    // желаемая скорость объекта
     dist = desirable_speed * time_delta; // пройденное расстояние в
                                          // соостветствие с желаемой скоростью
 
@@ -160,14 +160,14 @@ Fvector CMovementManager::path_position( const float& velocity,
 
         if ( current_travel_point + 1 >= detail().path().size() ) {
             //			VERIFY				(dist <=
-            //dist_to_target);
+            // dist_to_target);
             return ( dest_position );
         }
 
         ++current_travel_point;
         if ( ( current_travel_point + 1 ) >= detail().path().size() ) {
             //			VERIFY				(dist <=
-            //dist_to_target);
+            // dist_to_target);
             dist = 0.f;
             return ( dest_position );
         }
@@ -233,13 +233,13 @@ void CMovementManager::move_along_path( CPHMovementControl* movement_control,
         // проверка на хит
         apply_collision_hit( movement_control );
         //		Msg				("[%6d][%s] no move,
-        //curr_tp=%d",Device.dwFrame,*object().cName(),detail().m_current_travel_point);
+        // curr_tp=%d",Device.dwFrame,*object().cName(),detail().m_current_travel_point);
         return;
     }
 
     //. 	VERIFY2(movement_control->CharacterExist() ||
-    //object().animation_movement_controlled() , "! Can not move - physics
-    //movement shell does not exist. Try to move in wonded state?" );
+    // object().animation_movement_controlled() , "! Can not move - physics
+    // movement shell does not exist. Try to move in wonded state?" );
     if ( !movement_control->CharacterExist() )
         return;
 
@@ -286,7 +286,7 @@ void CMovementManager::move_along_path( CPHMovementControl* movement_control,
         return;
     }
     //	Msg					("[%6d][%s]
-    //curr_tp=%d",Device.dwFrame,*object().cName(),detail().m_current_travel_point);
+    // curr_tp=%d",Device.dwFrame,*object().cName(),detail().m_current_travel_point);
 
     // Физика устанавливает новую позицию
     Device.Statistic->Physics.Begin();
@@ -317,7 +317,7 @@ void CMovementManager::move_along_path( CPHMovementControl* movement_control,
         velocity.y = 0.8f;
     if ( velocity.y < -0.9f )
         velocity.y = -0.8f;
-    velocity.normalize_safe(); // как не странно, mdir - не нормирован
+    velocity.normalize_safe();       // как не странно, mdir - не нормирован
     velocity.mul( desirable_speed ); //*1.25f
 
     if ( !movement_control->PhysicsOnlyMode() )

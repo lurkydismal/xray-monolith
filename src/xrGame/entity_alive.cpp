@@ -214,12 +214,12 @@ void CEntityAlive::shedule_Update( u32 dt ) {
     if ( Local() && !g_Alive() && !AlreadyDie() ) {
         if ( conditions().GetWhoHitLastTime() ) {
             //			Msg			("%6d : KillEntity from
-            //CEntityAlive (using who hit last time) for object
+            // CEntityAlive (using who hit last time) for object
             //%s",Device.dwTimeGlobal,*cName());
             KillEntity( conditions().GetWhoHitLastTimeID() );
         } else {
             //			Msg			("%6d : KillEntity from
-            //CEntityAlive for object %s",Device.dwTimeGlobal,*cName());
+            // CEntityAlive for object %s",Device.dwTimeGlobal,*cName());
             KillEntity( ID() );
         }
     }
@@ -256,7 +256,7 @@ void CEntityAlive::HitImpulse( float /**amount/**/,
                                Fvector& /**vWorldDir/**/,
                                Fvector& /**vLocalDir/**/ ) {
     //	float Q					=
-    //2*float(amount)/m_PhysicMovementControl->GetMass();
+    // 2*float(amount)/m_PhysicMovementControl->GetMass();
     //	m_PhysicMovementControl->vExternalImpulse.mad	(vWorldDir,Q);
 }
 
@@ -448,7 +448,7 @@ void CEntityAlive::PlaceBloodWallmark( const Fvector& dir,
         {
             // добавить отметку на материале
             //::Render->add_StaticWallmark(wallmarkShader, end_point,
-            //:wallmark_size, pTri, pVerts);
+            //: wallmark_size, pTri, pVerts);
             ::Render->add_StaticWallmark( pwallmarks_vector, end_point,
                                           wallmark_size, pTri, pVerts );
         }

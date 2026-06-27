@@ -41,7 +41,7 @@ bool CWeapon::install_upgrade_ammo_class( LPCSTR section, bool test ) {
                                  m_APk, test );
 
     //	ammo_class = ammo_5.45x39_fmj, ammo_5.45x39_ap  // name of the
-    //ltx-section of used ammo
+    // ltx-section of used ammo
     bool result2 = process_if_exists_set( section, "ammo_class",
                                           &CInifile::r_string, str, test );
     if ( result2 && !test ) {
@@ -149,8 +149,8 @@ bool CWeapon::install_upgrade_disp( LPCSTR section, bool test ) {
 
     //	result |= process_if_exists( section, "misfire_probability",
     //&CInifile::r_float, misfireProbability,       test ); 	result |=
-    //process_if_exists( section, "misfire_condition_k", &CInifile::r_float,
-    //misfireConditionK,        test );
+    // process_if_exists( section, "misfire_condition_k", &CInifile::r_float,
+    // misfireConditionK,        test );
     result |=
         process_if_exists( section, "condition_shot_dec", &CInifile::r_float,
                            conditionDecreasePerShot, test );

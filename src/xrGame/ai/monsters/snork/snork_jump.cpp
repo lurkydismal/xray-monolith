@@ -42,7 +42,7 @@
 //	//		float h,p;
 //	//		float h2,p2;
 //	//		Fvector().sub(m_target_object->Position(),
-//m_object->Position()).getHP(h,p);
+// m_object->Position()).getHP(h,p);
 //	//		m_target_object->Direction().getHP(h2,p2);
 //	//		dir.set		(1,0,0);
 //	//		dir.setHP	(h,p2);
@@ -64,8 +64,8 @@
 // void CSnorkJump::try_to_jump(u32 velocity_mask)
 //{
 //	//CObject *target = const_cast<CEntityAlive
-//*>(m_object->EnemyMan.get_enemy()); 	CObject *target = Level().CurrentEntity();
-//	if (!target) return;
+//*>(m_object->EnemyMan.get_enemy()); 	CObject *target =
+//Level().CurrentEntity(); 	if (!target) return;
 //
 //	m_specific_jump		= false;
 //	m_target_object		= target;
@@ -108,12 +108,12 @@
 //{
 //	float			yaw, pitch;
 //	Fvector().sub	(m_target_object->Position(),
-//m_object->Position()).getHP(yaw, pitch);
+// m_object->Position()).getHP(yaw, pitch);
 //
 //	// получить вектор направления и его мир угол
 //	//// проверка на angle и на dist
 //	//if (angle_difference(m_object->movement().m_body.current.yaw, -yaw) <
-//PI_DIV_2) {
+// PI_DIV_2) {
 //	//	return;
 //	//}
 //
@@ -127,8 +127,8 @@
 //	// 4. Perform jump
 //	Fvector pos;
 //	pos.mad			(m_object->Position(),
-//m_object->Direction(), 10.f); 	pos.y += 1.5; 	m_jumper->jump	(pos,
-//m_velocity_mask);
+// m_object->Direction(), 10.f); 	pos.y += 1.5; 	m_jumper->jump	(pos,
+// m_velocity_mask);
 //
 //	m_jumper->disable_bounce();
 //
@@ -139,10 +139,10 @@
 //{
 //	MotionID			def1, def2, def3;
 //	IKinematicsAnimated	*pSkel =
-//smart_cast<IKinematicsAnimated*>(m_object->Visual());
+// smart_cast<IKinematicsAnimated*>(m_object->Visual());
 //
 //	def1				=
-//pSkel->ID_Cycle_Safe("stand_attack_2_0");		VERIFY(def1); 	def2
+// pSkel->ID_Cycle_Safe("stand_attack_2_0");		VERIFY(def1); 	def2
 //= pSkel->ID_Cycle_Safe("stand_attack_2_1");		VERIFY(def2); 	def3
 //= pSkel->ID_Cycle_Safe("stand_somersault_0");	VERIFY(def3);
 //
@@ -153,10 +153,10 @@
 //{
 //	MotionID			def1, def2, def3;
 //	IKinematicsAnimated	*pSkel =
-//smart_cast<IKinematicsAnimated*>(m_object->Visual());
+// smart_cast<IKinematicsAnimated*>(m_object->Visual());
 //
 //	def1				=
-//pSkel->ID_Cycle_Safe("stand_attack_2_0");		VERIFY(def1); 	def2
+// pSkel->ID_Cycle_Safe("stand_attack_2_0");		VERIFY(def1); 	def2
 //= pSkel->ID_Cycle_Safe("jump_rs_0");			VERIFY(def2); 	def3
 //= pSkel->ID_Cycle_Safe("stand_somersault_0");	VERIFY(def3);
 //
@@ -177,8 +177,8 @@
 //	float			trace_dist = m_object->Radius() + dist;
 //
 //	if (Level().ObjectSpace.RayPick(trace_from, m_object->Direction(),
-//trace_dist, collide::rqtStatic, l_rq)) { 		if ((l_rq.range < trace_dist))
-//ret_val = l_rq.range;
+// trace_dist, collide::rqtStatic, l_rq)) { 		if ((l_rq.range <
+// trace_dist)) ret_val = l_rq.range;
 //	}
 //
 //	m_object->setEnabled(enabled);

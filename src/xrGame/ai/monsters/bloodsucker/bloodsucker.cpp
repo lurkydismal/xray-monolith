@@ -251,7 +251,7 @@ void CAI_Bloodsucker::Load( LPCSTR section ) {
 
     // define transitions
     //	anim().AddTransition(PS_STAND,			eAnimThreaten,
-    //eAnimMiscAction_00,	false);
+    // eAnimMiscAction_00,	false);
     anim().AddTransition( eAnimStandSitDown, eAnimSleep, eAnimSitToSleep,
                           false );
     anim().AddTransition( PS_STAND, eAnimSleep, eAnimStandSitDown, true );
@@ -485,10 +485,10 @@ void CAI_Bloodsucker::LookDirection( Fvector to_dir, float bone_turn_speed ) {
     // if (angle_difference(cur_yaw,yaw) <= MAX_BONE_ANGLE) {		// bone
     // turn only 	bone_angle = dy; } else {
     // // torso & bone turn 	if (movement().IsMoveAlongPathFinished() ||
-    //!movement().enabled()) movement().m_body.target.yaw =
-    //angle_normalize(-yaw); 	if (dy / 2 < MAX_BONE_ANGLE) bone_angle = dy / 2;
-    //	else bone_angle = MAX_BONE_ANGLE;
-    // }
+    //! movement().enabled()) movement().m_body.target.yaw =
+    // angle_normalize(-yaw); 	if (dy / 2 < MAX_BONE_ANGLE) bone_angle = dy /
+    // 2; 	else bone_angle = MAX_BONE_ANGLE;
+    //  }
 
     // bone_angle /= 2;
     // if (from_right(yaw,cur_yaw)) bone_angle *= -1.f;

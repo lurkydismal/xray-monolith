@@ -93,13 +93,22 @@ private:
     //------- callbacks --------
     static u32 const operation_timeout_value;
     // static void __cdecl		created_session_cb		(const
-    // SCInterfacePtr theInterface, 												 GHTTPResult          theHttpResult, 												 SCResult
-    //theResult, 												 void *               theUserData); static void __cdecl
-    // set_intension_cb		(const SCInterfacePtr theInterface, 												 GHTTPResult
-    //theHttpResult, 												 SCResult             theResult, 												 void * theUserData); static
+    // SCInterfacePtr theInterface,
+    // GHTTPResult          theHttpResult,
+    // SCResult
+    // theResult,
+    // void *               theUserData); static void __cdecl
+    // set_intension_cb		(const SCInterfacePtr theInterface,
+    // GHTTPResult
+    // theHttpResult,
+    // SCResult             theResult,
+    // void * theUserData); static
     // void __cdecl		submitted_cb			(const
-    // SCInterfacePtr theInterface, 												 GHTTPResult          theHttpResult, 												 SCResult
-    //theResult, 												 void *               theUserData);
+    // SCInterfacePtr theInterface,
+    // GHTTPResult          theHttpResult,
+    // SCResult
+    // theResult,
+    // void *               theUserData);
 };
 } // namespace gamespy_profile
 

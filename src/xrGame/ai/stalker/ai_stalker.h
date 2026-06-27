@@ -260,8 +260,8 @@ public:
 
     // PDA && Dialogs
     //	virtual void
-    //ReceivePdaMessage					(u16 who, EPdaMsg msg,
-    //shared_str info_id);
+    // ReceivePdaMessage					(u16 who,
+    // EPdaMsg msg, shared_str info_id);
     virtual void UpdateAvailableDialogs( CPhraseDialogManager* partner );
 
     // scripts
@@ -663,27 +663,27 @@ public:
     IC u32 auto_max_queue_interval_close() const;
 
     //	IC		float
-    //pstl_queue_fire_dist_close		() const;
+    // pstl_queue_fire_dist_close		() const;
     IC float pstl_queue_fire_dist_med() const;
     IC float pstl_queue_fire_dist_far() const;
 
     //	IC		float
-    //shtg_queue_fire_dist_close		() const;
+    // shtg_queue_fire_dist_close		() const;
     IC float shtg_queue_fire_dist_med() const;
     IC float shtg_queue_fire_dist_far() const;
 
     //	IC		float
-    //snp_queue_fire_dist_close		() const;
+    // snp_queue_fire_dist_close		() const;
     IC float snp_queue_fire_dist_med() const;
     IC float snp_queue_fire_dist_far() const;
 
     //	IC		float
-    //mchg_queue_fire_dist_close		() const;
+    // mchg_queue_fire_dist_close		() const;
     IC float mchg_queue_fire_dist_med() const;
     IC float mchg_queue_fire_dist_far() const;
 
     //	IC		float
-    //auto_queue_fire_dist_close		() const;
+    // auto_queue_fire_dist_close		() const;
     IC float auto_queue_fire_dist_med() const;
     IC float auto_queue_fire_dist_far() const;
 

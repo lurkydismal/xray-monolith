@@ -179,7 +179,7 @@ int dcTriListCollider::dSortedTriBox( const dReal* triSideAx0,
     done:;
 
         ////////////////////////////////////////////////////////////// end (from
-        ///geom.cpp dCollideBP)
+        /// geom.cpp dCollideBP)
     }
 
     contact->pos[ 0 ] = pos[ 0 ];
@@ -646,7 +646,7 @@ int dcTriListCollider::dTriBox( const dReal* v0,
         // done: ;
 
         ////////////////////////////////////////////////////////////// end (from
-        ///geom.cpp dCollideBP)
+        /// geom.cpp dCollideBP)
     } else if ( code <= 9 ) {
         switch ( ( code - 1 ) % 3 ) {
             case 0:

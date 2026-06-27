@@ -56,7 +56,7 @@ void CStalkerSoundDataVisitor::visit( CStalkerSoundData* data ) {
         data->object().memory().enemy().selected() );
 
     //	const MemorySpace::CHitObject	*m =
-    //data->object().memory().hit().hit(data->object().memory().enemy().selected());
+    // data->object().memory().hit().hit(data->object().memory().enemy().selected());
     //	if (!m)
     //		return;
     //	object().memory().hit().add		(*m);

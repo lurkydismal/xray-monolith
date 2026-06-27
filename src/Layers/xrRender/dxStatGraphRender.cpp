@@ -38,7 +38,7 @@ void dxStatGraphRender::OnRender( CStatGraph& owner ) {
             } break;
             case CStatGraph::stPoint: {
                 //				TriElem +=
-                //it->elements.size()*4;
+                // it->elements.size()*4;
             } break;
         };
     };

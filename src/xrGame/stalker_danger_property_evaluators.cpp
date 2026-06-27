@@ -127,7 +127,7 @@ _value_type CStalkerPropertyEvaluatorDangerBySound::evaluate() {
 
     return ( false );
     //	return				(CDangerObject::eDangerTypeEnemySound ==
-    //m_object->memory().danger().selected()->type());
+    // m_object->memory().danger().selected()->type());
 }
 
 //////////////////////////////////////////////////////////////////////////

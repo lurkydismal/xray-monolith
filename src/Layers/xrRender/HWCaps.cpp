@@ -50,7 +50,7 @@ u32 GetNVGpuNum() {
          logicalGPUCount );
 
     //	Assume that we are running on logical GPU with most physical GPUs
-    //connected.
+    // connected.
     for ( u32 i = 0; i < logicalGPUCount; ++i ) {
         status = NvAPI_GetPhysicalGPUsFromLogicalGPU(
             logicalGPUs[ i ], physicalGPUs, &physicalGPUCount );

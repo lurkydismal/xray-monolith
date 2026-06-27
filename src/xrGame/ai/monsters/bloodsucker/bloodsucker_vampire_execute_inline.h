@@ -149,8 +149,8 @@ bool CStateBloodsuckerVampireExecuteAbstract::check_start_conditions() {
 
     // проверить дистанцию
     // 	float dist		= object->MeleeChecker.distance_to_enemy
-    // (enemy); 	if ((dist > VAMPIRE_MAX_DIST) || (dist < VAMPIRE_MIN_DIST))
-    // return false;
+    // (enemy); 	if ((dist > VAMPIRE_MAX_DIST) || (dist <
+    // VAMPIRE_MIN_DIST)) return false;
 
     if ( !object->done_enough_hits_before_vampire() )
         return false;

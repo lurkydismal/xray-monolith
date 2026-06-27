@@ -66,7 +66,7 @@ void CDetailManager::hw_Render( light* L ) {
     // Render-prepare
     //	Update timer
     //	Can't use Device.fTimeDelta since it is smoothed! Don't know why, but
-    //smoothed value looks more choppy!
+    // smoothed value looks more choppy!
     float fDelta = Device.fTimeGlobal - m_global_time_old;
     if ( ( fDelta < 0 ) || ( fDelta > 1 ) )
         fDelta = 0.03;
@@ -219,7 +219,7 @@ void CDetailManager::hw_Render_dump( const Fvector4& consts,
                 RImplementation.apply_lmaterial();
 
                 //	This could be cached in the corresponding consatant
-                //buffer 	as it is done for DX9
+                // buffer 	as it is done for DX9
                 RCache.set_c( strConsts, consts );
                 RCache.set_c( strWave, wave );
                 RCache.set_c( strDir2D, wind );
@@ -400,7 +400,7 @@ void CDetailManager::hw_Render_dump( const Fvector4& consts,
                             dwBatch = 0;
 
                             //	Remap constants to memory directly (just in case
-                            //anything goes wrong)
+                            // anything goes wrong)
                             {
                                 void* pVData;
                                 RCache.get_ConstantDirect(

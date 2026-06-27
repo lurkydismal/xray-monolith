@@ -87,7 +87,7 @@ void STextureParams::Load( IReader& F ) {
         bump_mode = ( ETBumpMode )F.r_u32();
         if ( bump_mode < STextureParams::tbmNone ) {
             bump_mode = STextureParams::tbmNone; //.. временно (до полного
-                                                 //убирания Autogen)
+                                                 // убирания Autogen)
         }
         F.r_stringZ( bump_name );
     }
@@ -222,7 +222,7 @@ void STextureParams::FillProp( LPCSTR base_name,
                                    &material_weight );
 
             //		PHelper().CreateFlag32		(items, "Flags\\Binary
-            //Alpha",		&flags,				flBinaryAlpha);
+            // Alpha",		&flags,				flBinaryAlpha);
             PHelper().CreateFlag32( items, "Flags\\Dither", &flags,
                                     flDitherColor );
             PHelper().CreateFlag32( items, "Flags\\Dither Each MIP", &flags,

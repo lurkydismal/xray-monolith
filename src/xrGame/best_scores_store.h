@@ -45,9 +45,13 @@ private:
     void init_field_names();
 
     // static void __cdecl get_my_player_scores_cb			(SAKE
-    // sake, 													 SAKERequest request, 													 SAKERequestResult result, 													 void * inputData,
+    // sake,
+    // SAKERequest request,
+    // SAKERequestResult result,
+    // void * inputData,
     //													 void
-    //* outputData, 													 void * userData);
+    //* outputData,
+    //void * userData);
 }; // best_scores_store
 } // namespace gamespy_profile
 

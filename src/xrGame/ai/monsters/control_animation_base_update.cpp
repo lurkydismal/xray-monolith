@@ -245,7 +245,8 @@ void CControlAnimationBase::SetTurnAnimation() {
 // In:	path, target_yaw, анимация
 // Out:	установить linear и angular velocities,
 //		по скорости движения выбрать финальную анимацию из
-//Velocity_Chain 		установить скорость анимации в соответствие с физ скоростью
+// Velocity_Chain 		установить скорость анимации в соответствие с
+// физ скоростью
 void CControlAnimationBase::SelectVelocities() {
     // получить скорости движения по пути
     bool b_moving = m_object->control().path_builder().is_moving_on_path();

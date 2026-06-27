@@ -200,7 +200,7 @@ void CBackend::set_ClipPlanes( u32 _enable,
 #if defined( USE_DX10 ) || defined( USE_DX11 )
         //	TODO: DX10: Implement in the corresponding vertex shaders
         //	Use this to set up location, were shader setup code will get
-        //data VERIFY(!"CBackend::set_ClipPlanes not implemented!");
+        // data VERIFY(!"CBackend::set_ClipPlanes not implemented!");
 #else  //	USE_DX10
         CHK_DX( HW.pDevice->SetRenderState( D3DRS_CLIPPLANEENABLE, FALSE ) );
 #endif //	USE_DX10

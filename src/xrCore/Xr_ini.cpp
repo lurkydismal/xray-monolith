@@ -1533,7 +1533,7 @@ CInifile::Sect& CInifile::r_section( LPCSTR S ) const {
 LPCSTR CInifile::r_string( LPCSTR S, LPCSTR L ) const {
     if ( !S || !L || !strlen( S ) ||
          !strlen( L ) ) //--#SM+#-- [fix for one of "xrDebug - Invalid handler"
-                        //error log]
+                        // error log]
     {
         Msg( "!![ERROR] CInifile::r_string: S = [%s], L = [%s]", S, L );
     }

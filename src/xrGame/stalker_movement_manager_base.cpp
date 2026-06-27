@@ -27,9 +27,9 @@
 #include "stdafx.h"
 
 #ifdef DEBUG
-#include "stalker_decision_space.h"
 #include "script_game_object.h"
 #include "stalker_combat_planner.h"
+#include "stalker_decision_space.h"
 #endif // DEBUG
 
 using namespace StalkerMovement;
@@ -220,7 +220,7 @@ void stalker_movement_manager_base::initialize() {
     restrictions().remove_all_restrictions();
     set_nearest_accessible_position();
     //	Msg						("[%6d]
-    //m_failed_to_build_path = %s
+    // m_failed_to_build_path = %s
     //(stalker_movement_manager_base::initialize)",Device.dwTimeGlobal,m_failed_to_build_path
     //? "true" : "false");
 }

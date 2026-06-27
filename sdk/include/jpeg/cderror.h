@@ -134,195 +134,223 @@ typedef enum {
                                                               "RLE output "
                                                               "must be "
                                                               "grayscale "
-                                                              "or RGB" )
+                                                              "or RGB" ) JMESSAGE( JERR_RLE_DIMENSIONS,
+                                                                                   "Image dimensions "
+                                                                                   "(%ux%u) too large for "
+                                                                                   "RLE" ) JMESSAGE( JERR_RLE_EMPTY,
+                                                                                                     "Empty "
+                                                                                                     "RLE "
+                                                                                                     "file" )
                                         JMESSAGE(
-                                            JERR_RLE_DIMENSIONS,
-                                            "Image dimensions "
-                                            "(%ux%u) too large for "
-                                            "RLE" ) JMESSAGE( JERR_RLE_EMPTY,
-                                                              "Empty "
-                                                              "RLE "
-                                                              "file" ) JMESSAGE( JERR_RLE_EOF,
-                                                                                 "Premature EOF in RLE "
-                                                                                 "header" )
+                                            JERR_RLE_EOF,
+                                            "Premature EOF in RLE "
+                                            "header" ) JMESSAGE( JERR_RLE_MEM,
+                                                                 "Insuf"
+                                                                 "ficie"
+                                                                 "nt "
+                                                                 "memor"
+                                                                 "y "
+                                                                 "for "
+                                                                 "RLE "
+                                                                 "heade"
+                                                                 "r" ) JMESSAGE( JERR_RLE_NOT,
+                                                                                 "Not an RLE "
+                                                                                 "file" )
                                             JMESSAGE(
-                                                JERR_RLE_MEM,
-                                                "Insuf"
-                                                "ficie"
-                                                "nt "
-                                                "memor"
-                                                "y "
-                                                "for "
-                                                "RLE "
-                                                "heade"
-                                                "r" ) JMESSAGE( JERR_RLE_NOT,
-                                                                "Not an RLE "
-                                                                "file" )
+                                                JERR_RLE_TOOMANYCHANNELS,
+                                                "Cannot handle %d "
+                                                "output channels for "
+                                                "RLE" ) JMESSAGE( JERR_RLE_UNSUPPORTED,
+                                                                  "Cann"
+                                                                  "ot "
+                                                                  "hand"
+                                                                  "le "
+                                                                  "this"
+                                                                  " RLE"
+                                                                  " set"
+                                                                  "up" ) JMESSAGE( JTRC_RLE,
+                                                                                   "%ux%u full-color RLE "
+                                                                                   "file" )
                                                 JMESSAGE(
-                                                    JERR_RLE_TOOMANYCHANNELS,
-                                                    "Cannot handle %d "
-                                                    "output channels for "
-                                                    "RLE" ) JMESSAGE( JERR_RLE_UNSUPPORTED,
-                                                                      "Cann"
-                                                                      "ot "
-                                                                      "hand"
-                                                                      "le "
-                                                                      "this"
-                                                                      " RLE"
-                                                                      " set"
-                                                                      "up" )
+                                                    JTRC_RLE_FULLMAP,
+                                                    "%ux"
+                                                    "%u "
+                                                    "ful"
+                                                    "l-"
+                                                    "col"
+                                                    "or "
+                                                    "RLE"
+                                                    " fi"
+                                                    "le "
+                                                    "wit"
+                                                    "h "
+                                                    "map"
+                                                    " "
+                                                    "of "
+                                                    "len"
+                                                    "gth"
+                                                    " %"
+                                                    "d" ) JMESSAGE( JTRC_RLE_GRAY,
+                                                                    "%ux%u "
+                                                                    "grayscale "
+                                                                    "RLE file" )
                                                     JMESSAGE(
-                                                        JTRC_RLE,
-                                                        "%ux%u full-color RLE "
-                                                        "file" ) JMESSAGE( JTRC_RLE_FULLMAP,
-                                                                           "%ux"
-                                                                           "%u "
-                                                                           "ful"
-                                                                           "l-"
-                                                                           "col"
-                                                                           "or "
-                                                                           "RLE"
-                                                                           " fi"
-                                                                           "le "
-                                                                           "wit"
-                                                                           "h "
-                                                                           "map"
-                                                                           " "
-                                                                           "of "
-                                                                           "len"
-                                                                           "gth"
-                                                                           " %"
-                                                                           "d" ) JMESSAGE( JTRC_RLE_GRAY,
-                                                                                           "%ux%u grayscale RLE file" )
-                                                        JMESSAGE(
-                                                            JTRC_RLE_MAPGRAY,
-                                                            "%ux%u "
-                                                            "grayscal"
-                                                            "e RLE "
-                                                            "file "
-                                                            "with "
-                                                            "map of "
-                                                            "length "
-                                                            "%d" ) JMESSAGE( JTRC_RLE_MAPPED,
-                                                                             "%"
-                                                                             "u"
-                                                                             "x"
-                                                                             "%"
-                                                                             "u"
-                                                                             " "
-                                                                             "c"
-                                                                             "o"
-                                                                             "l"
-                                                                             "o"
-                                                                             "r"
-                                                                             "m"
-                                                                             "a"
-                                                                             "p"
-                                                                             "p"
-                                                                             "e"
-                                                                             "d"
-                                                                             " "
-                                                                             "R"
-                                                                             "L"
-                                                                             "E"
-                                                                             " "
-                                                                             "f"
-                                                                             "i"
-                                                                             "l"
-                                                                             "e"
-                                                                             " "
-                                                                             "w"
-                                                                             "i"
-                                                                             "t"
-                                                                             "h"
-                                                                             " "
-                                                                             "m"
-                                                                             "a"
-                                                                             "p"
-                                                                             " "
-                                                                             "o"
-                                                                             "f"
-                                                                             " "
-                                                                             "l"
-                                                                             "e"
-                                                                             "n"
-                                                                             "g"
-                                                                             "t"
-                                                                             "h"
-                                                                             " "
-                                                                             "%"
-                                                                             "d" )
+                                                        JTRC_RLE_MAPGRAY,
+                                                        "%ux%u "
+                                                        "grayscal"
+                                                        "e RLE "
+                                                        "file "
+                                                        "with "
+                                                        "map of "
+                                                        "length "
+                                                        "%d" ) JMESSAGE( JTRC_RLE_MAPPED,
+                                                                         "%"
+                                                                         "u"
+                                                                         "x"
+                                                                         "%"
+                                                                         "u"
+                                                                         " "
+                                                                         "c"
+                                                                         "o"
+                                                                         "l"
+                                                                         "o"
+                                                                         "r"
+                                                                         "m"
+                                                                         "a"
+                                                                         "p"
+                                                                         "p"
+                                                                         "e"
+                                                                         "d"
+                                                                         " "
+                                                                         "R"
+                                                                         "L"
+                                                                         "E"
+                                                                         " "
+                                                                         "f"
+                                                                         "i"
+                                                                         "l"
+                                                                         "e"
+                                                                         " "
+                                                                         "w"
+                                                                         "i"
+                                                                         "t"
+                                                                         "h"
+                                                                         " "
+                                                                         "m"
+                                                                         "a"
+                                                                         "p"
+                                                                         " "
+                                                                         "o"
+                                                                         "f"
+                                                                         " "
+                                                                         "l"
+                                                                         "e"
+                                                                         "n"
+                                                                         "g"
+                                                                         "t"
+                                                                         "h"
+                                                                         " "
+                                                                         "%"
+                                                                         "d" )
 #endif /* RLE_SUPPORTED */
 
 #ifdef TARGA_SUPPORTED
+                                                        JMESSAGE(
+                                                            JERR_TGA_BADCMAP,
+                                                            "Unsupporte"
+                                                            "d Targa "
+                                                            "colormap "
+                                                            "format" ) JMESSAGE( JERR_TGA_BADPARMS,
+                                                                                 "Invalid or unsupported Targa file" )
                                                             JMESSAGE(
-                                                                JERR_TGA_BADCMAP,
-                                                                "Unsupporte"
-                                                                "d Targa "
-                                                                "colormap "
-                                                                "format" ) JMESSAGE( JERR_TGA_BADPARMS,
-                                                                                     "Invalid or unsupported Targa file" )
+                                                                JERR_TGA_COLORSPACE,
+                                                                "Targa "
+                                                                "output"
+                                                                " must "
+                                                                "be "
+                                                                "graysc"
+                                                                "ale "
+                                                                "or "
+                                                                "RGB" ) JMESSAGE( JTRC_TGA,
+                                                                                  "%ux%u RGB Targa image" )
                                                                 JMESSAGE(
-                                                                    JERR_TGA_COLORSPACE,
-                                                                    "Targa "
-                                                                    "output"
-                                                                    " must "
-                                                                    "be "
-                                                                    "graysc"
-                                                                    "ale "
-                                                                    "or "
-                                                                    "RGB" ) JMESSAGE( JTRC_TGA,
-                                                                                      "%ux%u RGB Targa image" )
-                                                                    JMESSAGE(
-                                                                        JTRC_TGA_GRAY,
-                                                                        "%u"
-                                                                        "x%"
-                                                                        "u "
-                                                                        "gr"
-                                                                        "ay"
-                                                                        "sc"
-                                                                        "al"
-                                                                        "e "
-                                                                        "Ta"
-                                                                        "rg"
-                                                                        "a "
-                                                                        "im"
-                                                                        "ag"
-                                                                        "e" ) JMESSAGE( JTRC_TGA_MAPPED,
-                                                                                        "%ux%u colormapped Targa image" )
+                                                                    JTRC_TGA_GRAY,
+                                                                    "%u"
+                                                                    "x%"
+                                                                    "u "
+                                                                    "gr"
+                                                                    "ay"
+                                                                    "sc"
+                                                                    "al"
+                                                                    "e "
+                                                                    "Ta"
+                                                                    "rg"
+                                                                    "a "
+                                                                    "im"
+                                                                    "ag"
+                                                                    "e" ) JMESSAGE( JTRC_TGA_MAPPED,
+                                                                                    "%ux%u colormapped Targa image" )
 #else
 JMESSAGE( JERR_TGA_NOTCOMP, "Targa support was not compiled" )
 #endif /* TARGA_SUPPORTED */
 
+                                                                    JMESSAGE(
+                                                                        JERR_BAD_CMAP_FILE,
+                                                                        "Co"
+                                                                        "lo"
+                                                                        "r "
+                                                                        "ma"
+                                                                        "p "
+                                                                        "fi"
+                                                                        "le"
+                                                                        " i"
+                                                                        "s "
+                                                                        "in"
+                                                                        "va"
+                                                                        "li"
+                                                                        "d "
+                                                                        "or"
+                                                                        " o"
+                                                                        "f "
+                                                                        "un"
+                                                                        "su"
+                                                                        "pp"
+                                                                        "or"
+                                                                        "te"
+                                                                        "d "
+                                                                        "fo"
+                                                                        "rm"
+                                                                        "a"
+                                                                        "t" )
                                                                         JMESSAGE(
-                                                                            JERR_BAD_CMAP_FILE,
-                                                                            "Co"
-                                                                            "lo"
-                                                                            "r "
-                                                                            "ma"
-                                                                            "p "
-                                                                            "fi"
-                                                                            "le"
-                                                                            " i"
-                                                                            "s "
-                                                                            "in"
-                                                                            "va"
-                                                                            "li"
-                                                                            "d "
-                                                                            "or"
-                                                                            " o"
-                                                                            "f "
-                                                                            "un"
-                                                                            "su"
-                                                                            "pp"
-                                                                            "or"
-                                                                            "te"
-                                                                            "d "
+                                                                            JERR_TOO_MANY_COLORS,
+                                                                            "Ou"
+                                                                            "tp"
+                                                                            "ut"
+                                                                            " f"
+                                                                            "il"
+                                                                            "e "
                                                                             "fo"
                                                                             "rm"
-                                                                            "a"
-                                                                            "t" ) JMESSAGE( JERR_TOO_MANY_COLORS,
-                                                                                            "Output file format cannot handle %d colormap entries" )
+                                                                            "at"
+                                                                            " c"
+                                                                            "an"
+                                                                            "no"
+                                                                            "t "
+                                                                            "ha"
+                                                                            "nd"
+                                                                            "le"
+                                                                            " %"
+                                                                            "d "
+                                                                            "co"
+                                                                            "lo"
+                                                                            "rm"
+                                                                            "ap"
+                                                                            " e"
+                                                                            "nt"
+                                                                            "ri"
+                                                                            "e"
+                                                                            "s" )
                                                                             JMESSAGE(
                                                                                 JERR_UNGETC_FAILED,
                                                                                 "ungetc failed" )
@@ -331,7 +359,7 @@ JMESSAGE( JERR_TGA_NOTCOMP, "Targa support was not compiled" )
                                                                                     JERR_UNKNOWN_FORMAT,
                                                                                     "Unrecognized input file format --- perhaps you need -targa" )
 #else
-JMESSAGE( JERR_UNKNOWN_FORMAT, "Unrecognized input file format" )
+        JMESSAGE( JERR_UNKNOWN_FORMAT, "Unrecognized input file format" )
 #endif
                                                                                     JMESSAGE(
                                                                                         JERR_UNSUPPORTED_FORMAT,

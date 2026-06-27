@@ -14,12 +14,13 @@
 #include "ESceneClassList.h"
 #include "Scene.h"
 #include "SceneObject.h"
-#include "igame_persistent.h"
 #include "environment.h"
+#include "igame_persistent.h"
 #else
-#include "../../xrEngine/igame_persistent.h"
-#include "../../xrEngine/environment.h"
 #include <xmmintrin.h>
+
+#include "../../xrEngine/environment.h"
+#include "../../xrEngine/igame_persistent.h"
 #endif
 
 const float dbgOffset = 0.f;

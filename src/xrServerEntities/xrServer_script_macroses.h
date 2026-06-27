@@ -30,13 +30,13 @@ class CALifeSmartTerrainTask;
 // #ifndef USE_WRITER_READER
 // #	define INHERIT_PURE \
 //	DEFINE_LUA_WRAPPER_METHOD_R2P1_V1	(save,
-//NET_Packet)\ 	DEFINE_LUA_WRAPPER_METHOD_R2P1_V1	(load,
-//NET_Packet) #else
+// NET_Packet)\ 	DEFINE_LUA_WRAPPER_METHOD_R2P1_V1	(load,
+// NET_Packet) #else
 // #	define INHERIT_PURE \
 //	DEFINE_LUA_WRAPPER_METHOD_R2P1_V1	(save,
-//NET_Packet)\
+// NET_Packet)\
 //	DEFINE_LUA_WRAPPER_METHOD_R2P1_V1	(load,
-//NET_Packet)\
+// NET_Packet)\
 //	DEFINE_LUA_WRAPPER_METHOD_R2P1_V1	(save, IWriter)\
 //	DEFINE_LUA_WRAPPER_METHOD_R2P1_V1	(load,			IReader)
 // #endif

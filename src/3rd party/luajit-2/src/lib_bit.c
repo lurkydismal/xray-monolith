@@ -24,7 +24,8 @@ LJLIB_ASM( bit_tobit ) LJLIB_REC( bit_unary IR_TOBIT ) {
 }
 LJLIB_ASM_( bit_bnot )
 LJLIB_REC( bit_unary IR_BNOT )
-LJLIB_ASM_( bit_bswap ) LJLIB_REC( bit_unary IR_BSWAP )
+LJLIB_ASM_( bit_bswap )
+LJLIB_REC( bit_unary IR_BSWAP )
 
     LJLIB_ASM( bit_lshift ) LJLIB_REC( bit_shift IR_BSHL ) {
     lj_lib_checknumber( L, 1 );
@@ -33,7 +34,8 @@ LJLIB_ASM_( bit_bswap ) LJLIB_REC( bit_unary IR_BSWAP )
 }
 LJLIB_ASM_( bit_rshift )
 LJLIB_REC( bit_shift IR_BSHR )
-LJLIB_ASM_( bit_arshift ) LJLIB_REC( bit_shift IR_BSAR ) LJLIB_ASM_( bit_rol )
+LJLIB_ASM_( bit_arshift )
+LJLIB_REC( bit_shift IR_BSAR ) LJLIB_ASM_( bit_rol )
     LJLIB_REC( bit_shift IR_BROL ) LJLIB_ASM_( bit_ror )
         LJLIB_REC( bit_shift IR_BROR )
 
@@ -46,7 +48,8 @@ LJLIB_ASM_( bit_arshift ) LJLIB_REC( bit_shift IR_BSAR ) LJLIB_ASM_( bit_rol )
 }
 LJLIB_ASM_( bit_bor )
 LJLIB_REC( bit_nary IR_BOR )
-LJLIB_ASM_( bit_bxor ) LJLIB_REC( bit_nary IR_BXOR )
+LJLIB_ASM_( bit_bxor )
+LJLIB_REC( bit_nary IR_BXOR )
 
     /* ------------------------------------------------------------------------
      */

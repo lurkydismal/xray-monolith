@@ -58,7 +58,7 @@ typedef struct {
 //	the euler solver to use
 // simple_jt:
 //	 indicates which variable (0,1,2) is the simple term in the rotation
-//matrix 	(ie: occurs as +/- sin(x) or +/- cos(x) without any other terms.
+// matrix 	(ie: occurs as +/- sin(x) or +/- cos(x) without any other terms.
 // simple_jt_index:
 //	indicates which entry in the rotation matrix corresponds to the
 //	sin(x) or cos(x) term described above. This entry also encodes
@@ -67,8 +67,8 @@ typedef struct {
 //      indicates whether the entry is a sin term or a cos term
 // complex_jt1
 //	indicates which variable (0,1,2) is the first complex term in the
-//rotation 	matrix. (ie: occurs as +/- sin(x)*f and +/- cos(x)*f where f is
-//either
+// rotation 	matrix. (ie: occurs as +/- sin(x)*f and +/- cos(x)*f where f is
+// either
 //      sin(simple_jt) or cos(simple_jt)
 // complex_jt1_index1:
 //      indicates which entry in the matrix jt corresponds to sin(x)*f

@@ -1,6 +1,6 @@
 // Level_Bullet_Manager.cpp:	для обеспечения полета пули по траектории
 //								все пули и
-//осколки передаются сюда
+// осколки передаются сюда
 //////////////////////////////////////////////////////////////////////
 
 #include "Level_Bullet_Manager.h"
@@ -284,7 +284,7 @@ void CBulletManager::AddBullet(
 
     VERIFY( u16( -1 ) != cartridge.bullet_material_idx );
     //	u32 CurID					=
-    //Level().CurrentControlEntity()->ID(); 	u32 OwnerID
+    // Level().CurrentControlEntity()->ID(); 	u32 OwnerID
     //= sender_id;
     xrCriticalSectionGuard guard( &m_Lock );
     SBullet& bullet = m_Bullets.emplace_back();
@@ -321,7 +321,7 @@ void CBulletManager::AddBullet(
 void CBulletManager::UpdateWorkload() {
     PROF_EVENT( "CBulletManager::UpdateWorkload" );
     //	VERIFY						( m_thread_id ==
-    //GetCurrentThreadId() );
+    // GetCurrentThreadId() );
 
     xrCriticalSectionGuard guard( &m_Lock );
     rq_storage.r_clear();
@@ -657,7 +657,7 @@ static void update_bullet_parabolic( SBullet& bullet,
     VERIFY( data.collide_time >= 0.f );
 
     //	VERIFY						(data.collide_time <=
-    //data.high_time); 	VERIFY
+    // data.high_time); 	VERIFY
     //(data.collide_time >= bullet.life_time); 	VERIFY
     //(data.collide_time <= bullet.life_time + Device.fTimeGlobal);
     clamp( data.collide_time, bullet.life_time, data.high_time );

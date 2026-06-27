@@ -510,7 +510,7 @@ void CLevelGraph::draw_game_graph() {
         return;
 
     //	Fvector					camera_position =
-    //Level().CurrentEntity()->Position(); 	CGameFont
+    // Level().CurrentEntity()->Position(); 	CGameFont
     //*font = UI().Font().pFontDI;
 
     const Fmatrix& xform = Level().CurrentEntity()->XFORM();
@@ -533,7 +533,7 @@ void CLevelGraph::draw_game_graph() {
                                       center.z - bounds.z ) );
 
     //	u32						back_color =
-    //D3DCOLOR_XRGB(0,0,0); 	RCache.dbg_DrawTRI
+    // D3DCOLOR_XRGB(0,0,0); 	RCache.dbg_DrawTRI
     //(Fidentity,vertices[0],vertices[2],vertices[1],back_color);
     //	RCache.dbg_DrawTRI
     //(Fidentity,vertices[1],vertices[2],vertices[3],back_color);

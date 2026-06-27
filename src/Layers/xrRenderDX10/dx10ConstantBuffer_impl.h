@@ -4,7 +4,7 @@
 
 IC Fvector4* dx10ConstantBuffer::Access( u16 offset ) {
     //	TODO: DX10: Implement code which will check if set actually changes
-    //code.
+    // code.
     m_bChanged = true;
 
     //	Check buffer size in client code: don't know if actual data will cross

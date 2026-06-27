@@ -60,7 +60,7 @@ public:
     bool is_known_upgrade( CInventoryItem& item, shared_str const& upgrade_id );
     bool is_known_upgrade( shared_str const& upgrade_id );
     //*			bool		is_disabled_upgrade( CInventoryItem&
-    //item, shared_str const& upgrade_id );
+    // item, shared_str const& upgrade_id );
 
     bool upgrade_install( CInventoryItem& item,
                           shared_str const& upgrade_id,

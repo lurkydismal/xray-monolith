@@ -144,7 +144,8 @@ inline Color16 toColor16( Color32 c ) {
 inline Color32 toColor32( Color16 c ) {
     Color32 color;
     //	c.u = ((col0.u << 3) & 0xf8) | ((col0.u << 5) & 0xfc00) | ((col0.u << 8)
-    //& 0xf80000); 	c.u |= (c.u >> 5) & 0x070007; 	c.u |= (c.u >> 6) & 0x000300;
+    //& 0xf80000); 	c.u |= (c.u >> 5) & 0x070007; 	c.u |= (c.u >> 6) &
+    //0x000300;
 
     color.b = ( c.b << 3 ) | ( c.b >> 2 );
     color.g = ( c.g << 2 ) | ( c.g >> 4 );

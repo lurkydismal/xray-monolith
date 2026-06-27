@@ -56,7 +56,7 @@ public:
         // switch(CollideType(obj1.collide_class_bits().flags,obj2.collide_class_bits().flags))
         // { 	case cbNCGroupObject:	return DoCollideGroup
         //(obj1,obj2)			;break; 	case 0:
-        //return DoCollideNonMatched	(obj1,obj2)			;break;
+        // return DoCollideNonMatched	(obj1,obj2)			;break;
         //	default: NODEFAULT;
         // #ifdef DEBUG
         //	return false;

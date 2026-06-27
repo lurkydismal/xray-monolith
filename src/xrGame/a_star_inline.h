@@ -4,7 +4,7 @@
 //  Modified 	: 02.03.2004
 //	Author		: Dmitriy Iassenev
 //	Description : Implementation of the A* (a-star) algorithm : inline
-//functions
+// functions
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

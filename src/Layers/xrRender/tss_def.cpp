@@ -188,7 +188,7 @@ void SimulatorStates::UpdateDesc( D3D_RASTERIZER_DESC& desc ) const {
         // (S.v1,(D3DTEXTURESTAGESTATETYPE)S.v2,S.v3));
         //	TODO: DX10: Enable
         //	VERIFY(!"DirectX 10 doesn't support texture stage states.
-        //Implement shader instead!"); 	break;
+        // Implement shader instead!"); 	break;
     }
 }
 
@@ -457,7 +457,7 @@ void SimulatorStates::UpdateDesc(
                             desc.Filter =
                                 ( D3D_FILTER )( desc.Filter | MagfilterLinear );
                             //					desc.Filter |=
-                            //MagfilterLinear;
+                            // MagfilterLinear;
                             break;
                         default:
                             NODEFAULT;

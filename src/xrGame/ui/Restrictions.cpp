@@ -2,8 +2,8 @@
 
 #include "stdafx.h"
 #ifdef DEBUG
-#include "../../xrEngine/xr_ioconsole.h"
 #include "../../xrEngine/xr_ioc_cmd.h"
+#include "../../xrEngine/xr_ioconsole.h"
 #endif // #ifdef DEBUG
 #include "../string_table.h"
 CRestrictions g_mp_restrictions;

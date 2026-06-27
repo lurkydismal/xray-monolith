@@ -144,7 +144,7 @@ void CWeaponShotEffector::Update() {
     m_prev_angle_horz = m_angle_horz;
 
     //	Msg( " <<[%d]  v=%.4f  dv=%.4f   a=%d s=%d  fr=%d", m_shot_numer,
-    //m_angle_vert, m_delta_vert, m_actived, m_first_shot, Device.dwFrame );
+    // m_angle_vert, m_delta_vert, m_actived, m_first_shot, Device.dwFrame );
 }
 
 void CWeaponShotEffector::GetDeltaAngle( Fvector& angle ) {
@@ -178,12 +178,12 @@ void CWeaponShotEffector::ChangeHP( float* pitch, float* yaw ) {
     //	}
 
     //	if ( m_cam_recoil.ReturnMode && m_cam_recoil.StopReturn && (*pitch >
-    //m_first_shot_pos + 0.1f) )
+    // m_first_shot_pos + 0.1f) )
     //	{
     //		m_actived = false;
     //	}
     //	Msg( "[%d]  pitch = %.4f   yaw = %.4f    fs=%d    a=%d  fr=%d",
-    //m_shot_numer, *pitch, *yaw, m_first_shot, m_actived, Device.dwFrame );
+    // m_shot_numer, *pitch, *yaw, m_first_shot, m_actived, Device.dwFrame );
 }
 
 //-----------------------------------------------------------------------------

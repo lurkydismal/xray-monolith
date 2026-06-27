@@ -156,10 +156,10 @@ void CRenderTarget::accum_direct( u32 sub_phase ) {
         // Fmatrix			m_TexelAdjust		=
         //{
         //	0.5f,				0.0f,
-        //0.0f,			0.0f, 	0.0f,				-0.5f,
-        //0.0f,			0.0f, 	0.0f,				0.0f,
-        //fRange,			0.0f, 	0.5f + fTexelOffs,	0.5f +
-        //fTexelOffs,	fBias,			1.0f
+        // 0.0f,			0.0f, 	0.0f,
+        // -0.5f, 0.0f,			0.0f, 	0.0f,
+        // 0.0f, fRange,			0.0f, 	0.5f + fTexelOffs,
+        // 0.5f + fTexelOffs,	fBias,			1.0f
         //};
         float fRange = ( SE_SUN_NEAR == sub_phase ) ? ps_r2_sun_depth_near_scale
                                                     : ps_r2_sun_depth_far_scale;
@@ -283,7 +283,8 @@ void CRenderTarget::accum_direct( u32 sub_phase ) {
         //		if (u_DBT_enable(zMin,zMax))	{
         // z-test always
         //			HW.pDevice->SetRenderState(D3DRS_ZFUNC,
-        //D3DCMP_ALWAYS); 			HW.pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+        // D3DCMP_ALWAYS);
+        // HW.pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
         //		}
 
         // Fetch4 : enable
@@ -291,7 +292,7 @@ void CRenderTarget::accum_direct( u32 sub_phase ) {
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET4  MAKEFOURCC('G','E','T','4')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
         //		}
 
         // setup stencil
@@ -335,7 +336,7 @@ void CRenderTarget::accum_direct( u32 sub_phase ) {
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET1  MAKEFOURCC('G','E','T','1')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
         //		}
 
         //	TODO: DX10: Check if DX10 has analog for NV DBT
@@ -492,10 +493,10 @@ void CRenderTarget::accum_direct_cascade( u32 sub_phase,
         // Fmatrix			m_TexelAdjust		=
         //{
         //	0.5f,				0.0f,
-        //0.0f,			0.0f, 	0.0f,				-0.5f,
-        //0.0f,			0.0f, 	0.0f,				0.0f,
-        //fRange,			0.0f, 	0.5f + fTexelOffs,	0.5f +
-        //fTexelOffs,	fBias,			1.0f
+        // 0.0f,			0.0f, 	0.0f,
+        // -0.5f, 0.0f,			0.0f, 	0.0f,
+        // 0.0f, fRange,			0.0f, 	0.5f + fTexelOffs,
+        // 0.5f + fTexelOffs,	fBias,			1.0f
         //};
         float fRange = ( SE_SUN_NEAR == sub_phase ) ? ps_r2_sun_depth_near_scale
                                                     : ps_r2_sun_depth_far_scale;
@@ -650,7 +651,8 @@ void CRenderTarget::accum_direct_cascade( u32 sub_phase,
         //		if (u_DBT_enable(zMin,zMax))	{
         // z-test always
         //			HW.pDevice->SetRenderState(D3DRS_ZFUNC,
-        //D3DCMP_ALWAYS); 			HW.pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+        // D3DCMP_ALWAYS);
+        // HW.pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
         //		}
 
         // Fetch4 : enable
@@ -658,7 +660,7 @@ void CRenderTarget::accum_direct_cascade( u32 sub_phase,
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET4  MAKEFOURCC('G','E','T','4')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
         //		}
 
         // Enable Z function only for near and middle cascades, the far one is
@@ -746,7 +748,7 @@ void CRenderTarget::accum_direct_cascade( u32 sub_phase,
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET1  MAKEFOURCC('G','E','T','1')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
         //		}
 
         //	TODO: DX10: Check if DX10 has analog for NV DBT
@@ -1155,7 +1157,7 @@ void CRenderTarget::accum_direct_lum() {
     Fvector2 j0, j1;
     float scale_X = float( Device.dwWidth ) / float( TEX_jitter );
     //		float	scale_Y				=
-    //float(Device.dwHeight)/ float(TEX_jitter);
+    // float(Device.dwHeight)/ float(TEX_jitter);
     float offset = ( .5f / float( TEX_jitter ) );
     j0.set( offset, offset );
     j1.set( scale_X, scale_X ).add( offset );
@@ -1332,7 +1334,7 @@ void CRenderTarget::accum_direct_volumetric( u32 sub_phase,
         RCache.set_Element( Element );
         RCache.set_CullMode( CULL_CCW );
         //		RCache.set_c				("Ldynamic_dir",
-        //L_dir.x,L_dir.y,L_dir.z,0 );
+        // L_dir.x,L_dir.y,L_dir.z,0 );
         RCache.set_c( "Ldynamic_color", L_clr.x, L_clr.y, L_clr.z, 0 );
         RCache.set_c( "m_shadow", mShadow );
         Fmatrix m_Texgen;
@@ -1344,7 +1346,7 @@ void CRenderTarget::accum_direct_volumetric( u32 sub_phase,
 
         RCache.set_c( "m_texgen", m_Texgen );
         //		RCache.set_c				("m_sunmask",
-        //m_clouds_shadow);
+        // m_clouds_shadow);
 
         // nv-DBT
         float zMin, zMax;
@@ -1373,7 +1375,8 @@ void CRenderTarget::accum_direct_volumetric( u32 sub_phase,
         //		if (u_DBT_enable(zMin,zMax))	{
         // z-test always
         //			HW.pDevice->SetRenderState(D3DRS_ZFUNC,
-        //D3DCMP_ALWAYS); 			HW.pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+        // D3DCMP_ALWAYS);
+        // HW.pDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
         //		}
         //		else
         {
@@ -1391,7 +1394,7 @@ void CRenderTarget::accum_direct_volumetric( u32 sub_phase,
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET4  MAKEFOURCC('G','E','T','4')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET4 );
         //		}
 
         // setup stencil: we have to draw to both lit and unlit pixels
@@ -1441,7 +1444,7 @@ void CRenderTarget::accum_direct_volumetric( u32 sub_phase,
         //. we hacked the shader to force smap on S0
         // #			define FOURCC_GET1  MAKEFOURCC('G','E','T','1')
         //			HW.pDevice->SetSamplerState	( 0,
-        //D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
+        // D3DSAMP_MIPMAPLODBIAS, FOURCC_GET1 );
         //		}
 
         //	TODO: DX10: Check if DX10 has analog for NV DBT

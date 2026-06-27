@@ -235,7 +235,7 @@ void dxEnvironmentRender::OnFrame( CEnvironment& env ) {
     // ******************** Environment params (setting)
 #if defined( USE_DX10 ) || defined( USE_DX11 )
     //	TODO: DX10: Implement environment parameters setting for DX10 (if
-    //necessary)
+    // necessary)
 #else //	USE_DX10
 
 #if RENDER == R_R1
@@ -269,8 +269,8 @@ void dxEnvironmentRender::RenderSky( CEnvironment& env, bool OnlyMV ) {
     //. this is the bug-fix for the case when the sky is broken
     //. for some unknown reason the geoms happen to be invalid sometimes
     //. if vTune show this in profile, please add simple cache (move-to-forward
-    //last found) . to the following functions: .
-    //CResourceManager::_CreateDecl .		CResourceManager::CreateGeom
+    // last found) . to the following functions: .
+    // CResourceManager::_CreateDecl .		CResourceManager::CreateGeom
     if ( env.bNeed_re_create_env ) {
         sh_2sky.create( &m_b_skybox, "skybox_2t" );
         sh_2geom.create( v_skybox_fvf, RCache.Vertex.Buffer(),

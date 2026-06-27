@@ -107,7 +107,7 @@ protected:
 
     //	virtual		bool				GetTeamItem_ByID
     //(WeaponDataStruct** pRes, TEAM_WPN_LIST* pWpnList, u16 ItemID); 	virtual
-    //bool				GetTeamItem_ByName
+    // bool				GetTeamItem_ByName
     //(WeaponDataStruct** pRes,TEAM_WPN_LIST* pWpnList, LPCSTR ItemName);
 
     virtual void Player_AddBonusMoney( game_PlayerState* ps,
@@ -156,7 +156,7 @@ public:
 
     virtual void OnRoundStart(); // старт раунда
     virtual void OnRoundEnd();   // round_end_reason
-                               // // конец раунда
+                                 // // конец раунда
     virtual bool OnNextMap();
     virtual void OnPrevMap();
 

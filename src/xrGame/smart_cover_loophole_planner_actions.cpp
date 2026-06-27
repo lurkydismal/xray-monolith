@@ -148,8 +148,8 @@ void loophole_action_base::process_default( bool const& change_sight ) {
     VERIFY( movement.current_params().cover_loophole() );
 
     //	smart_cover::cover const&	cover =
-    //*movement.current_params().cover(); 	smart_cover::loophole const&loophole =
-    //*movement.current_params().cover_loophole();
+    //*movement.current_params().cover(); 	smart_cover::loophole
+    //const&loophole = *movement.current_params().cover_loophole();
     object().sight().setup( CSightAction(
         SightManager::eSightTypeAnimationDirection, true, false ) );
     object().sight().update();
@@ -433,7 +433,7 @@ void loophole_fire::on_mark() {
 
     u32 const magazine_size = best_weapon->GetAmmoMagSize();
     //	Msg							( "started
-    //firing: %d", magazine_size );
+    // firing: %d", magazine_size );
     object().set_goal( eObjectActionFireNoReload, object().best_weapon(),
                        magazine_size, magazine_size );
 }

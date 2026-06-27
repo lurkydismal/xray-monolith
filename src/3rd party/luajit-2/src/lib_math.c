@@ -25,7 +25,8 @@ LJLIB_ASM( math_abs ) LJLIB_REC(.) {
 }
 LJLIB_ASM_( math_floor )
 LJLIB_REC( math_round IRFPM_FLOOR )
-LJLIB_ASM_( math_ceil ) LJLIB_REC( math_round IRFPM_CEIL )
+LJLIB_ASM_( math_ceil )
+LJLIB_REC( math_round IRFPM_CEIL )
 
     LJLIB_ASM( math_sqrt ) LJLIB_REC( math_unary IRFPM_SQRT ) {
     lj_lib_checknum( L, 1 );
@@ -33,8 +34,9 @@ LJLIB_ASM_( math_ceil ) LJLIB_REC( math_round IRFPM_CEIL )
 }
 LJLIB_ASM_( math_log10 )
 LJLIB_REC( math_unary IRFPM_LOG10 )
-LJLIB_ASM_( math_exp ) LJLIB_REC( math_unary IRFPM_EXP ) LJLIB_ASM_(
-    math_sin ) LJLIB_REC( math_unary IRFPM_SIN ) LJLIB_ASM_( math_cos )
+LJLIB_ASM_( math_exp )
+LJLIB_REC( math_unary IRFPM_EXP ) LJLIB_ASM_( math_sin ) LJLIB_REC(
+    math_unary IRFPM_SIN ) LJLIB_ASM_( math_cos )
     LJLIB_REC( math_unary IRFPM_COS ) LJLIB_ASM_( math_tan ) LJLIB_REC(
         math_unary IRFPM_TAN ) LJLIB_ASM_( math_asin )
         LJLIB_REC( math_atrig FF_math_asin ) LJLIB_ASM_( math_acos ) LJLIB_REC(
@@ -80,7 +82,7 @@ LJLIB_ASM_( math_pow )
 LJLIB_REC(.)
 LJLIB_ASM_( math_fmod )
 
-    LJLIB_ASM( math_ldexp ) LJLIB_REC(.) {
+LJLIB_ASM( math_ldexp ) LJLIB_REC(.) {
     lj_lib_checknum( L, 1 );
 #if LJ_DUALNUM && !LJ_TARGET_X86ORX64
     lj_lib_checkint( L, 2 );
@@ -101,7 +103,8 @@ LJLIB_ASM_( math_max )
 LJLIB_REC( math_minmax IR_MAX )
 
 LJLIB_PUSH( 3.14159265358979323846 )
-LJLIB_SET( pi ) LJLIB_PUSH( 1e310 ) LJLIB_SET( huge )
+LJLIB_SET( pi )
+LJLIB_PUSH( 1e310 ) LJLIB_SET( huge )
 
     /* ------------------------------------------------------------------------
      */

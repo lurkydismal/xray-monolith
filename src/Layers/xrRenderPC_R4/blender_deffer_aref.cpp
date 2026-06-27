@@ -133,7 +133,7 @@ void CBlender_deffer_aref::Compile( CBlender_Compile& C ) {
                 //			if (RImplementation.o.HW_smap)	C.r_Pass
                 //("shadow_direct_base_aref","shadow_direct_base_aref",FALSE,TRUE,TRUE,FALSE,D3DBLEND_ZERO,D3DBLEND_ONE,TRUE,220);
                 //			else
-                //C.r_Pass
+                // C.r_Pass
                 //("shadow_direct_base_aref","shadow_direct_base_aref",FALSE);
                 C.r_Pass( "shadow_direct_base_aref", "shadow_direct_base_aref",
                           FALSE, TRUE, TRUE, FALSE );

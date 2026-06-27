@@ -73,7 +73,8 @@ void CSE_ALifeObject::spawn_supplies( LPCSTR ini_string ) {
                         n = _GetItemCount( V );
                         if ( n > 0 ) {
                             string64 tmp;
-                            spawn_count = atoi( _GetItem( V, 0, tmp ) ); // count
+                            spawn_count =
+                                atoi( _GetItem( V, 0, tmp ) ); // count
                         }
 
                         if ( !spawn_count )
