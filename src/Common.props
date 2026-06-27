@@ -74,7 +74,7 @@
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrGameBinDir">
-      <Value>$(xrGameBinDir)</Value>
+      <Value>..\_build\_game\bin\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xr3rdPartyDir">
