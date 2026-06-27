@@ -85,7 +85,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(xrSdkDir)include;$(ProjectDir)..\luajit-2\src\;$(xrSdkDir)include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\sdk\include;$(ProjectDir)..\luajit-2\src\;..\..\..\sdk\include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4073;4100;4390;4714;4127;4273;4595;4996;4005;4530</DisableSpecificWarnings>
@@ -121,7 +121,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-AVX|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(xrSdkDir)include;$(ProjectDir)..\luajit-2\src\;$(xrSdkDir)include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\sdk\include;$(ProjectDir)..\luajit-2\src\;..\..\..\sdk\include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Ob3 %(AdditionalOptions)</AdditionalOptions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4073;4100;4390;4714;4127;4273;4595;4996;4005;4530</DisableSpecificWarnings>
@@ -157,7 +157,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profiled|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(xrSdkDir)include;$(ProjectDir)..\luajit-2\src\;$(xrSdkDir)include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\sdk\include;$(ProjectDir)..\luajit-2\src\;..\..\..\sdk\include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4073;4100;4390;4714;4127;4273;4595;4996;4005;4530</DisableSpecificWarnings>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
@@ -192,7 +192,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Verified|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(xrSdkDir)include;$(ProjectDir)..\luajit-2\src\;$(xrSdkDir)include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\sdk\include;$(ProjectDir)..\luajit-2\src\;..\..\..\sdk\include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4073;4100;4390;4714;4127;4273;4595;4996;4005;4530</DisableSpecificWarnings>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
@@ -228,7 +228,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11ASAN|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(xrSdkDir)include;$(ProjectDir)..\luajit-2\src\;$(xrSdkDir)include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\sdk\include;$(ProjectDir)..\luajit-2\src\;..\..\..\sdk\include\luabind;$(ProjectDir)luabind\src;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4073;4100;4390;4714;4127;4273;4595;4996;4005;4530</DisableSpecificWarnings>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>

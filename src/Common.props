@@ -13,10 +13,10 @@
     <xrGameDir>.\..\_build\_game\</xrGameDir>
     <xrGameBinDir>$(xrGameDir)bin\</xrGameBinDir>
     <xr3rdPartyDir>.\3rd party\</xr3rdPartyDir>
-    <dxSdkDir>$(xrSdkDir)include\dxsdk\</dxSdkDir>
+    <dxSdkDir>..\sdk\include\dxsdk\</dxSdkDir>
   </PropertyGroup>
   <PropertyGroup>
-    <IncludePath>.\..\src\3rd party;.\3rd party\icu\include;$(IncludePath);$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;$(xrSdkDir)include\nvapi;$(xrSdkDir)include\dxsdk</IncludePath>
+    <IncludePath>.\..\src\3rd party;.\3rd party\icu\include;$(IncludePath);..\sdk\include;..\sdk\include\OpenAutomate;..\sdk\include\nvapi;..\sdk\include\dxsdk</IncludePath>
     <OutDir>$(xrGameDir)bin_dbg\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -67,7 +67,7 @@
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrSdkDir">
-      <Value>$(xrSdkDir)</Value>
+      <Value>..\sdk\</Value>
     </BuildMacro>
     <BuildMacro Include="xrGameDir">
       <Value>$(xrGameDir)</Value>
