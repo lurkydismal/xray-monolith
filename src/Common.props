@@ -55,7 +55,7 @@
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinPlugDir">
-      <Value>$(xrBinPlugDir)</Value>
+      <Value>..\_build\bin_plugs\my\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrLibDir">
