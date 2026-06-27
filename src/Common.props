@@ -5,19 +5,19 @@
     <xrBinRootDir>.\..\_build\bin\</xrBinRootDir>
     <xrBinPlugRootDir>.\..\_build\bin_plugs\</xrBinPlugRootDir>
     <xrLibRootDir>.\..\_build\lib\</xrLibRootDir>
-    <xrBinDir>$(xrBinRootDir)$(Configuration)\</xrBinDir>
-    <xrBinPlugDir>$(xrBinPlugRootDir)$(Configuration)\</xrBinPlugDir>
-    <xrLibDir>$(xrLibRootDir)$(Configuration)\</xrLibDir>
+    <xrBinDir>./../_build/bin/$(Configuration)\</xrBinDir>
+    <xrBinPlugDir>./../_build/bin_plugs/$(Configuration)\</xrBinPlugDir>
+    <xrLibDir>./../_build/lib/$(Configuration)\</xrLibDir>
     <xrIntDir>.\..\_build\intermediate\$(Configuration)\</xrIntDir>
     <xrSdkDir>.\..\sdk\</xrSdkDir>
     <xrGameDir>.\..\_build\_game\</xrGameDir>
-    <xrGameBinDir>$(xrGameDir)bin\</xrGameBinDir>
+    <xrGameBinDir>./../_build/_game/bin\</xrGameBinDir>
     <xr3rdPartyDir>.\3rd party\</xr3rdPartyDir>
-    <dxSdkDir>$(xrSdkDir)include\dxsdk\</dxSdkDir>
+    <dxSdkDir>./../sdk/include\dxsdk\</dxSdkDir>
   </PropertyGroup>
   <PropertyGroup>
-    <IncludePath>.\..\src\3rd party;.\3rd party\icu\include;$(IncludePath);$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;$(xrSdkDir)include\nvapi;$(xrSdkDir)include\dxsdk</IncludePath>
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <IncludePath>.\..\src\3rd party;.\3rd party\icu\include;$(IncludePath);./../sdk/include;./../sdk/include\OpenAutomate;./../sdk/include\nvapi;./../sdk/include\dxsdk</IncludePath>
+    <OutDir>./../_build/_game/bin_dbg\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -39,50 +39,50 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="xrBinRootDir">
-      <Value>$(xrBinRootDir)</Value>
+      <Value>./../_build/bin/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinPlugRootDir">
-      <Value>$(xrBinPlugRootDir)</Value>
+      <Value>./../_build/bin_plugs/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrLibRootDir">
-      <Value>$(xrLibRootDir)</Value>
+      <Value>./../_build/lib/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinDir">
-      <Value>$(xrBinDir)</Value>
+      <Value>./../_build/bin/$(Configuration)/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinPlugDir">
-      <Value>$(xrBinPlugDir)</Value>
+      <Value>./../_build/bin_plugs/$(Configuration)/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrLibDir">
-      <Value>$(xrLibDir)</Value>
+      <Value>./../_build/lib/$(Configuration)/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrIntDir">
-      <Value>$(xrIntDir)</Value>
+      <Value>./../_build/intermediate/$(Configuration)/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrSdkDir">
-      <Value>$(xrSdkDir)</Value>
+      <Value>./../sdk/</Value>
     </BuildMacro>
     <BuildMacro Include="xrGameDir">
-      <Value>$(xrGameDir)</Value>
+      <Value>./../_build/_game/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrGameBinDir">
-      <Value>$(xrGameBinDir)</Value>
+      <Value>./../_build/_game/bin/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xr3rdPartyDir">
-      <Value>$(xr3rdPartyDir)</Value>
+      <Value>./3rd party/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="dxSdkDir">
-      <Value>$(dxSdkDir)</Value>
+      <Value>./../sdk/include/dxsdk/</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
   </ItemGroup>
