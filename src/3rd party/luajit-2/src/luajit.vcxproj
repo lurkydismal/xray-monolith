@@ -81,7 +81,7 @@
     <TargetName>lua51</TargetName>
     <TargetExt>.lib</TargetExt>
     <OutDir>..\..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
+    <IntDir>..\..\..\..\_build\intermediate\my\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

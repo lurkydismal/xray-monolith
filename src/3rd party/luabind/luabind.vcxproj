@@ -81,7 +81,7 @@
   <PropertyGroup>
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
+    <IntDir>..\..\..\_build\intermediate\my\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

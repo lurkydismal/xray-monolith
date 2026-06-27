@@ -63,7 +63,7 @@
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrIntDir">
-      <Value>$(xrIntDir)</Value>
+      <Value>..\_build\intermediate\my\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrSdkDir">

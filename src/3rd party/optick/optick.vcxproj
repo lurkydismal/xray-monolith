@@ -185,31 +185,31 @@
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <OutDir>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
+    <IntDir>..\..\..\_build\intermediate\my\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ProfiledDX11|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
-    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
+    <IntDir>..\..\..\_build\intermediate\my\$(ProjectName)\</IntDir>
     <OutDir>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-AVX|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <OutDir>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
+    <IntDir>..\..\..\_build\intermediate\my\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Verified|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <OutDir>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
+    <IntDir>..\..\..\_build\intermediate\my\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11ASAN|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
     <LibraryPath>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <OutDir>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
+    <IntDir>..\..\..\_build\intermediate\my\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
