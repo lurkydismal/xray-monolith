@@ -38,3 +38,4 @@ compressor/mod/
 # emacs temp file
 \#*\#
 *~
+/src/build
