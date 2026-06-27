@@ -4578,7 +4578,7 @@ source_group("Core\\Common\\ObjectFactory\\object_item_single" FILES ${Core__Com
 
 set(Core__Common__Profiler
 #    "profiler.cpp"
-    "profiler_inline.h"
+    # "profiler_inline.h"
 )
 source_group("Core\\Common\\Profiler" FILES ${Core__Common__Profiler})
 

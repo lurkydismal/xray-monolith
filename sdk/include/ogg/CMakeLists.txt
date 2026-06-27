@@ -10,7 +10,7 @@ set(include
 source_group("include" FILES ${include})
 
 set(src
-    "ogg.def"
+    # "ogg.def"
     "src/bitwise.c"
     "src/framing.c"
 )

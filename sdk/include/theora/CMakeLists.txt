@@ -34,7 +34,7 @@ set(no_group_source_files
     "lib/huffenc.h"
     "lib/huffman.h"
     "lib/idct.c"
-    "lib/idct.h"
+    # "lib/idct.h"
     "lib/info.c"
     "lib/internal.c"
     "lib/internal.h"

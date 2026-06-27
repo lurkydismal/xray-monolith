@@ -50,7 +50,7 @@ set(include
 source_group("include" FILES ${include})
 
 set(src
-    "../../vorbis.def"
+    # "../../vorbis.def"
     "lib/analysis.c"
     "lib/bitrate.c"
     "lib/block.c"
@@ -438,7 +438,7 @@ set(PROJECT_NAME libvorbisfile_static)
 ################################################################################
 set(no_group_source_files
     "lib/vorbisfile.c"
-    "vorbis/vorbisfile.h"
+    # "vorbis/vorbisfile.h"
 )
 source_group("" FILES ${no_group_source_files})
 
