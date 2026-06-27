@@ -55,9 +55,9 @@ set(no_group_source_files
     "lib/x86_vc/mmxstate.c"
     "lib/x86_vc/x86enc.c"
     "lib/x86_vc/x86state.c"
-    "theora/codec.h"
-    "theora/theora.h"
-    "theora/theoradec.h"
+    "codec.h"
+    "theora.h"
+    "theoradec.h"
 )
 source_group("" FILES ${no_group_source_files})
 
