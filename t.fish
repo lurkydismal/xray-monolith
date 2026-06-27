@@ -9,6 +9,6 @@ fd -e vcxproj -e props -e targets . | while read -l file
     # Visual Studio expects backslashes
     set rel (string replace -a / \\ $rel)
 
-    perl -pi -e "s/\\\$\\(SolutionDir\\)/$rel\\\\/g" $file
-    # echo "$file -> $rel\\"
+    # perl -pi -e "s/\\\$\\(SolutionDir\\)/$rel\\\\/g" $file
+    echo "$file -> $rel\\"
 end
