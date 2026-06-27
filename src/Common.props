@@ -82,7 +82,7 @@
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="dxSdkDir">
-      <Value>$(dxSdkDir)</Value>
+      <Value>..\sdk\include\dxsdk\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
   </ItemGroup>
