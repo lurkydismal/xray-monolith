@@ -482,22 +482,22 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 # Target name
 ################################################################################
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    TARGET_NAME_DX10             "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_DX10AVX          "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_DX11             "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_DX11AVX          "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_DX8              "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_DX8AVX           "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_DX9              "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_DX9AVX           "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_PROFILEDDX11     "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_RELEASE          "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_RELEASEAVX       "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_VERIFIED         "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_VERIFIEDDX11     "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_VERIFIEDDX11ASAN "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_VERIFIEDDX8      "${TARGET_NAME}$ENV{TargetExt}"
-    TARGET_NAME_VERIFIEDDX9      "${TARGET_NAME}$ENV{TargetExt}"
+    TARGET_NAME_DX10             "${TARGET_NAME}.lib"
+    TARGET_NAME_DX10AVX          "${TARGET_NAME}.lib"
+    TARGET_NAME_DX11             "${TARGET_NAME}.lib"
+    TARGET_NAME_DX11AVX          "${TARGET_NAME}.lib"
+    TARGET_NAME_DX8              "${TARGET_NAME}.lib"
+    TARGET_NAME_DX8AVX           "${TARGET_NAME}.lib"
+    TARGET_NAME_DX9              "${TARGET_NAME}.lib"
+    TARGET_NAME_DX9AVX           "${TARGET_NAME}.lib"
+    TARGET_NAME_PROFILEDDX11     "${TARGET_NAME}.lib"
+    TARGET_NAME_RELEASE          "${TARGET_NAME}.lib"
+    TARGET_NAME_RELEASEAVX       "${TARGET_NAME}.lib"
+    TARGET_NAME_VERIFIED         "${TARGET_NAME}.lib"
+    TARGET_NAME_VERIFIEDDX11     "${TARGET_NAME}.lib"
+    TARGET_NAME_VERIFIEDDX11ASAN "${TARGET_NAME}.lib"
+    TARGET_NAME_VERIFIEDDX8      "${TARGET_NAME}.lib"
+    TARGET_NAME_VERIFIEDDX9      "${TARGET_NAME}.lib"
 )
 ################################################################################
 # Output directory
