@@ -1,0 +1,9 @@
+Now you may run cmake like following samples:
+
+to generate:
+cmake -S "/mnt/hdd/Projects/xray-monolith/src" -B "/mnt/hdd/Projects/xray-monolith/src/build" -G "Visual Studio 15 2017 Win64"
+    or
+cmake -S "/mnt/hdd/Projects/xray-monolith/src" -B "/mnt/hdd/Projects/xray-monolith/src/build" -G "Visual Studio 16 2019" -A "x64"
+
+to build:
+cmake --build "/mnt/hdd/Projects/xray-monolith/src/build"
