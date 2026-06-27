@@ -78,7 +78,7 @@
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xr3rdPartyDir">
-      <Value>$(xr3rdPartyDir)</Value>
+      <Value>3rd party\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="dxSdkDir">
