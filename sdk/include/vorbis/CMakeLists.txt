@@ -482,22 +482,22 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 # Target name
 ################################################################################
 set_target_properties(${PROJECT_NAME} PROPERTIES
-    TARGET_NAME_DX10             "${TARGET_NAME}.lib"
-    TARGET_NAME_DX10AVX          "${TARGET_NAME}.lib"
-    TARGET_NAME_DX11             "${TARGET_NAME}.lib"
-    TARGET_NAME_DX11AVX          "${TARGET_NAME}.lib"
-    TARGET_NAME_DX8              "${TARGET_NAME}.lib"
-    TARGET_NAME_DX8AVX           "${TARGET_NAME}.lib"
-    TARGET_NAME_DX9              "${TARGET_NAME}.lib"
-    TARGET_NAME_DX9AVX           "${TARGET_NAME}.lib"
-    TARGET_NAME_PROFILEDDX11     "${TARGET_NAME}.lib"
-    TARGET_NAME_RELEASE          "${TARGET_NAME}.lib"
-    TARGET_NAME_RELEASEAVX       "${TARGET_NAME}.lib"
-    TARGET_NAME_VERIFIED         "${TARGET_NAME}.lib"
-    TARGET_NAME_VERIFIEDDX11     "${TARGET_NAME}.lib"
-    TARGET_NAME_VERIFIEDDX11ASAN "${TARGET_NAME}.lib"
-    TARGET_NAME_VERIFIEDDX8      "${TARGET_NAME}.lib"
-    TARGET_NAME_VERIFIEDDX9      "${TARGET_NAME}.lib"
+    TARGET_NAME_DX10             "${PROJECT_NAME}.lib"
+    TARGET_NAME_DX10AVX          "${PROJECT_NAME}.lib"
+    TARGET_NAME_DX11             "${PROJECT_NAME}.lib"
+    TARGET_NAME_DX11AVX          "${PROJECT_NAME}.lib"
+    TARGET_NAME_DX8              "${PROJECT_NAME}.lib"
+    TARGET_NAME_DX8AVX           "${PROJECT_NAME}.lib"
+    TARGET_NAME_DX9              "${PROJECT_NAME}.lib"
+    TARGET_NAME_DX9AVX           "${PROJECT_NAME}.lib"
+    TARGET_NAME_PROFILEDDX11     "${PROJECT_NAME}.lib"
+    TARGET_NAME_RELEASE          "${PROJECT_NAME}.lib"
+    TARGET_NAME_RELEASEAVX       "${PROJECT_NAME}.lib"
+    TARGET_NAME_VERIFIED         "${PROJECT_NAME}.lib"
+    TARGET_NAME_VERIFIEDDX11     "${PROJECT_NAME}.lib"
+    TARGET_NAME_VERIFIEDDX11ASAN "${PROJECT_NAME}.lib"
+    TARGET_NAME_VERIFIEDDX8      "${PROJECT_NAME}.lib"
+    TARGET_NAME_VERIFIEDDX9      "${PROJECT_NAME}.lib"
 )
 ################################################################################
 # Output directory
