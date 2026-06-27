@@ -312,7 +312,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR2|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STATIC_RENDERER_R2;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
@@ -338,7 +338,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -353,7 +353,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR2-AVX|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STATIC_RENDERER_R2;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
@@ -379,7 +379,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -394,7 +394,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR4|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STATIC_RENDERER_R4;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
@@ -420,7 +420,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -435,7 +435,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ProfiledDX11|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>XRCORE_PROFILER;STATIC_RENDERER_R4;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
@@ -459,7 +459,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\$(Configuration);..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\$(Configuration);..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -481,7 +481,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\giflib\;..\3rd party\luabind\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\giflib\;..\3rd party\luabind\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>XRCORE_PROFILER;USE_VERIFY_IN_RELEASE;STATIC_RENDERER_R4;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
@@ -501,7 +501,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -525,7 +525,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\giflib\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\giflib\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>XRCORE_PROFILER;USE_VERIFY_IN_RELEASE;STATIC_RENDERER_R4;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;_DISABLE_VECTOR_ANNOTATION;_DISABLE_STRING_ANNOTATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
@@ -545,7 +545,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\VerifiedDX11ASAN\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\VerifiedDX11ASAN;..\$(Platform)\VerifiedDX11ASAN;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\VerifiedDX11ASAN\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\VerifiedDX11ASAN;..\$(Platform)\VerifiedDX11ASAN;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -569,7 +569,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\giflib\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\giflib\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>XRCORE_PROFILER;USE_VERIFY_IN_RELEASE;STATIC_RENDERER_R2;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
@@ -589,7 +589,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -613,7 +613,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_VERIFY_IN_RELEASE;STATIC_RENDERER_R4;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
@@ -633,7 +633,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\$(Configuration)\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\$(Configuration);..\$(Platform)\$(Configuration);..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\$(Configuration)\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\$(Configuration);..\$(Platform)\$(Configuration);..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -650,7 +650,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR4-AVX|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STATIC_RENDERER_R4;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
@@ -676,7 +676,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -691,7 +691,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR3|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STATIC_RENDERER_R3;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
@@ -717,7 +717,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -732,7 +732,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR3-AVX|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STATIC_RENDERER_R3;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
@@ -758,7 +758,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -773,7 +773,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR1|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STATIC_RENDERER_R1;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
@@ -799,7 +799,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -814,7 +814,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX8|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\giflib\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\giflib\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -841,7 +841,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
@@ -858,7 +858,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR1-AVX|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\3rd party\imgui\;..\3rd party\luajit-2\src\;..\3rd party\luabind\;..\3rd party\giflib\;..\..\sdk\include\OpenAutomate\inc;..\..\sdk\include\libogg-1.1.4\include;..\..\sdk\include\libtheora-1.1.1\include;..\..\sdk\include;..\..\sdk\include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>STATIC_RENDERER_R1;NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;AL_LIBTYPE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ExceptionHandling>false</ExceptionHandling>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
@@ -884,7 +884,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;..\..\sdk\include\OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>

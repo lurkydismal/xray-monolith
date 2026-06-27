@@ -124,7 +124,7 @@
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;$(XRAY_16X_LIBS)OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;..\..\..\sdk\include\OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -151,7 +151,7 @@
     <Link>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(XRAY_16X_LIBS)jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;..\..\..\sdk\include\OpenAutomate\libraries;..\..\..\sdk\include\jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>true</OptimizeReferences>
@@ -177,7 +177,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;$(XRAY_16X_LIBS)OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;..\..\..\sdk\include\OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_VERIFY_IN_RELEASE;WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -198,7 +198,7 @@
     <Link>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(XRAY_16X_LIBS)jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;..\..\..\sdk\include\OpenAutomate\libraries;..\..\..\sdk\include\jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>true</OptimizeReferences>
@@ -224,7 +224,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;$(XRAY_16X_LIBS)OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;..\..\..\sdk\include\OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_VERIFY_IN_RELEASE;WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -245,7 +245,7 @@
     <Link>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(XRAY_16X_LIBS)jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;..\..\..\sdk\include\OpenAutomate\libraries;..\..\..\sdk\include\jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>true</OptimizeReferences>
@@ -264,7 +264,7 @@
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;$(XRAY_16X_LIBS)OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;..\..\..\sdk\include\OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -291,7 +291,7 @@
     <Link>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(XRAY_16X_LIBS)jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;..\..\..\sdk\include\OpenAutomate\libraries;..\..\..\sdk\include\jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>true</OptimizeReferences>
@@ -310,7 +310,7 @@
       <TypeLibraryName>$(OutDir)$(TargetName).tlb</TypeLibraryName>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;$(XRAY_16X_LIBS)OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vs2022;..;..\..\;..\..\xrServerEntities;..\..\3rd party\luajit-2\src\;..\..\3rd party\luabind\;..\..\..\sdk\include;..\..\..\sdk\include\OpenAutomate\inc;..\..\3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -337,7 +337,7 @@
     <Link>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(XRAY_16X_LIBS)jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\3rd party\luajit-2\src\;..\..\..\sdk\libraries;..\..\..\_build\lib\my\;..\..\..\sdk\include\OpenAutomate\libraries;..\..\..\sdk\include\jpeg\libraries\Release;..\..\..\_build\_game\bin_dbg;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>true</OptimizeReferences>
