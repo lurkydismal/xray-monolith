@@ -80,7 +80,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

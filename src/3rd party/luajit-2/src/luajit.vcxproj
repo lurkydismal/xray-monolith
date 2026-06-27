@@ -80,7 +80,7 @@
   <PropertyGroup>
     <TargetName>lua51</TargetName>
     <TargetExt>.lib</TargetExt>
-    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>..\..\..\..\_build\_game\bin_dbg\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup>

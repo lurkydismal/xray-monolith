@@ -227,85 +227,85 @@
     <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR2|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX9</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR2-AVX|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX9AVX</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR4|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX11</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ProfiledDX11|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX11</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>VerifiedDX11</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11ASAN|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>VerifiedDX11</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX9|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>VerifiedDX9</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Verified|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>VerifiedDX11</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR4-AVX|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX11AVX</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR3|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX10</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR3-AVX|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX10AVX</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR1|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX8</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX8|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX8</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseR1-AVX|x64'">
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\..\_build\_game\bin_dbg\</OutDir>
     <TargetName>AnomalyDX8AVX</TargetName>
     <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
     <LinkIncremental>false</LinkIncremental>

@@ -11,13 +11,13 @@
     <xrIntDir>.\..\_build\intermediate\$(Configuration)\</xrIntDir>
     <xrSdkDir>.\..\sdk\</xrSdkDir>
     <xrGameDir>.\..\_build\_game\</xrGameDir>
-    <xrGameBinDir>$(xrGameDir)bin\</xrGameBinDir>
+    <xrGameBinDir>..\_build\_game\bin\</xrGameBinDir>
     <xr3rdPartyDir>.\3rd party\</xr3rdPartyDir>
     <dxSdkDir>..\sdk\include\dxsdk\</dxSdkDir>
   </PropertyGroup>
   <PropertyGroup>
     <IncludePath>.\..\src\3rd party;.\3rd party\icu\include;$(IncludePath);..\sdk\include;..\sdk\include\OpenAutomate;..\sdk\include\nvapi;..\sdk\include\dxsdk</IncludePath>
-    <OutDir>$(xrGameDir)bin_dbg\</OutDir>
+    <OutDir>..\_build\_game\bin_dbg\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -70,7 +70,7 @@
       <Value>..\sdk\</Value>
     </BuildMacro>
     <BuildMacro Include="xrGameDir">
-      <Value>$(xrGameDir)</Value>
+      <Value>..\_build\_game\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrGameBinDir">
