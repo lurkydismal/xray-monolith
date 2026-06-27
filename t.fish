@@ -2,13 +2,13 @@
 
 set slndir (realpath src)
 
-fd -e vcxproj -e props -e targets . | while read -l file
+fd -e vcxproj -e props -e targets | while read -l file
     set dir (dirname (realpath $file))
-    set rel (realpath --relative-to $dir $slndir)
+    set rel (realpath --relative-to "$dir" "$slndir")
+    set rel (string replace -a / \\ "$rel")
 
-    # Visual Studio expects backslashes
-    set rel (string replace -a / \\ $rel)
+    set rel (string replace -a / \\ "$rel")
+    set rel_escaped (string replace -a \\ \\\\ "$rel")
 
-    # perl -pi -e "s/\\\$\\(SolutionDir\\)/$rel\\\\/g" $file
-    echo "$file -> $rel\\"
+    sed -i "s|\$(SolutionDir)|$rel_escaped\\\\|g" "$file"
 end
