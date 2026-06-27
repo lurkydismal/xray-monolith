@@ -59,7 +59,7 @@
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrLibDir">
-      <Value>$(xrLibDir)</Value>
+      <Value>..\_build\lib\my\</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrIntDir">

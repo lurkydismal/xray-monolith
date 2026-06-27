@@ -338,9 +338,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
@@ -379,9 +379,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
@@ -420,9 +420,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
@@ -459,9 +459,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\$(Configuration);..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\$(Configuration);..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>false</OptimizeReferences>
@@ -501,9 +501,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
@@ -545,9 +545,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\VerifiedDX11ASAN\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\VerifiedDX11ASAN;..\$(Platform)\VerifiedDX11ASAN;..\..\sdk\libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\VerifiedDX11ASAN\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\VerifiedDX11ASAN;..\$(Platform)\VerifiedDX11ASAN;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
@@ -589,9 +589,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
@@ -633,9 +633,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\$(Configuration)\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\$(Configuration);..\$(Platform)\$(Configuration);..\..\sdk\libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\$(Configuration)\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\$(Configuration);..\$(Platform)\$(Configuration);..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
@@ -676,9 +676,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
@@ -717,9 +717,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
@@ -758,9 +758,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
@@ -799,9 +799,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
@@ -841,9 +841,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Verified\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Verified;..\$(Platform)\Verified;..\..\sdk\libraries\x64;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
@@ -884,9 +884,9 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;winmm.lib;OpenAL32.lib;giflib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)$(Platform)\Release-AVX\;..\3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;..\..\lib\$(Platform)\Release;..\$(Platform)\Release;..\..\sdk\libraries\x64.old;..\..\_build\lib\my\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>..\..\_build\lib\my\$(TargetName).lib</ImportLibrary>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
