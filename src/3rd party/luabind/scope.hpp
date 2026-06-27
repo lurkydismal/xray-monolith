@@ -22,146 +22,129 @@
 
 #pragma once
 
-#include <luabind/prefix.hpp>
 #include <luabind/config.hpp>
 #include <luabind/lua_include.hpp>
-
-namespace luabind { 
-    
-    struct scope; 
-
-} // namespace luabind
-
-namespace luabind::detail
- {
-    struct LUABIND_API registration
-    {
-        registration();
-        registration(const registration&) = delete;
-        virtual ~registration();
-
-        friend struct scope;
-        registration* m_next;
-
-        virtual void register_(lua_State*) const = 0;
-    };
-}
+#include <luabind/prefix.hpp>
 
 namespace luabind {
 
-    struct LUABIND_API scope
-    {
-        scope() noexcept;
-        explicit scope(detail::registration* reg) noexcept;
-        scope(scope const& other_) = delete;
-        scope& operator= (const scope&) = delete;
+struct scope;
 
-        scope(scope&& other_) noexcept
-            : m_chain(other_.m_chain)
-        {
-            other_.m_chain = nullptr;
-        }
+} // namespace luabind
 
-        scope& operator= (scope&& that) noexcept
-        {
-            std::swap(m_chain, that.m_chain);
-            return *this;
-        }
+namespace luabind::detail {
+struct LUABIND_API registration {
+    registration();
+    registration( const registration& ) = delete;
+    virtual ~registration();
 
-        ~scope();
+    friend struct scope;
+    registration* m_next;
 
-        scope&& operator,(scope&& s) &&;
+    virtual void register_( lua_State* ) const = 0;
+};
+} // namespace luabind::detail
 
-        void register_(lua_State* L) const;
+namespace luabind {
 
-    private:
-        detail::registration* m_chain;
-    };
+struct LUABIND_API scope {
+    scope() noexcept;
+    explicit scope( detail::registration* reg ) noexcept;
+    scope( scope const& other_ ) = delete;
+    scope& operator=( const scope& ) = delete;
 
-    class LUABIND_API namespace_ : public scope
-    {
-    public:
-        explicit namespace_(char const* name);
-        namespace_(const namespace_&) = delete;
-
-        namespace_(namespace_&& that) noexcept
-            : scope(std::move(that)),
-              m_registration(that.m_registration)
-        {
-            that.m_registration = nullptr;
-        }
-
-        namespace_&& operator[](scope&& s) &&;
-
-        namespace_& operator= (const namespace_&) = delete;
-
-        namespace_& operator= (namespace_&& that) noexcept
-        {
-            scope::operator= (std::move(that));
-            std::swap(m_registration, that.m_registration);
-            return *this;
-        }
-
-    private:
-        struct registration_;
-
-        namespace_(registration_*);
-
-        registration_* m_registration;
-    };
-
-	namespace
-	{
-		struct lua_pop_stack
-		{
-			lua_pop_stack(lua_State* L) : m_state(L) {}
-			~lua_pop_stack() { lua_pop(m_state, 1); }
-			lua_State* m_state;
-		};
-	} // namespace
-
-	class LUABIND_API module_
-    {
-    public:
-        module_(lua_State* L_, char const* name);
-
-		template <typename... Args> void operator[](Args&&... args)
-		{
-			push_global_table();
-			lua_pop_stack guard(m_state);
-			(std::forward<Args>(args).register_(m_state), ...);
-		}
-
-        module_(const module_&) = delete;
-
-        module_(module_&& that) noexcept
-            : m_state(that.m_state),
-              m_name(that.m_name)
-        {
-            that.m_state = nullptr;
-            that.m_name = nullptr;
-        }
-
-        module_& operator= (const module_&) = delete;
-
-        module_& operator= (module_&& that) noexcept
-        {
-            m_state = that.m_state;
-            m_name = that.m_name;
-            that.m_state = nullptr;
-            that.m_name = nullptr;
-            return *this;
-        }
-
-    private:
-        lua_State* m_state;
-        char const* m_name;
-		void push_global_table();
-	};
-
-    inline module_ module(lua_State* L, char const* name = 0)
-    {
-        return module_(L, name);
+    scope( scope&& other_ ) noexcept : m_chain( other_.m_chain ) {
+        other_.m_chain = nullptr;
     }
+
+    scope& operator=( scope&& that ) noexcept {
+        std::swap( m_chain, that.m_chain );
+        return *this;
+    }
+
+    ~scope();
+
+    scope&& operator,( scope&& s ) &&;
+
+    void register_( lua_State* L ) const;
+
+private:
+    detail::registration* m_chain;
+};
+
+class LUABIND_API namespace_ : public scope {
+public:
+    explicit namespace_( char const* name );
+    namespace_( const namespace_& ) = delete;
+
+    namespace_( namespace_&& that ) noexcept
+        : scope( std::move( that ) ), m_registration( that.m_registration ) {
+        that.m_registration = nullptr;
+    }
+
+    namespace_&& operator[]( scope&& s ) &&;
+
+    namespace_& operator=( const namespace_& ) = delete;
+
+    namespace_& operator=( namespace_&& that ) noexcept {
+        scope::operator=( std::move( that ) );
+        std::swap( m_registration, that.m_registration );
+        return *this;
+    }
+
+private:
+    struct registration_;
+
+    namespace_( registration_* );
+
+    registration_* m_registration;
+};
+
+namespace {
+struct lua_pop_stack {
+    lua_pop_stack( lua_State* L ) : m_state( L ) {}
+    ~lua_pop_stack() { lua_pop( m_state, 1 ); }
+    lua_State* m_state;
+};
+} // namespace
+
+class LUABIND_API module_ {
+public:
+    module_( lua_State* L_, char const* name );
+
+    template < typename... Args >
+    void operator[]( Args&&... args ) {
+        push_global_table();
+        lua_pop_stack guard( m_state );
+        ( std::forward< Args >( args ).register_( m_state ), ... );
+    }
+
+    module_( const module_& ) = delete;
+
+    module_( module_&& that ) noexcept
+        : m_state( that.m_state ), m_name( that.m_name ) {
+        that.m_state = nullptr;
+        that.m_name = nullptr;
+    }
+
+    module_& operator=( const module_& ) = delete;
+
+    module_& operator=( module_&& that ) noexcept {
+        m_state = that.m_state;
+        m_name = that.m_name;
+        that.m_state = nullptr;
+        that.m_name = nullptr;
+        return *this;
+    }
+
+private:
+    lua_State* m_state;
+    char const* m_name;
+    void push_global_table();
+};
+
+inline module_ module( lua_State* L, char const* name = 0 ) {
+    return module_( L, name );
+}
 
 } // namespace luabind

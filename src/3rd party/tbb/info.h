@@ -24,27 +24,28 @@
 #include <vector>
 
 namespace tbb {
-    namespace internal {
-        namespace numa_topology {
-            unsigned nodes_count();
-            void fill(int* indexes_array);
-            int default_concurrency(int node_id);
-        } //namespace numa_topology
-    } // namespace internal
+namespace internal {
+namespace numa_topology {
+unsigned nodes_count();
+void fill( int* indexes_array );
+int default_concurrency( int node_id );
+} // namespace numa_topology
+} // namespace internal
 
-    typedef int numa_node_id;
+typedef int numa_node_id;
 
-    namespace info {
-        inline std::vector<numa_node_id> numa_nodes() {
-            std::vector<numa_node_id> nodes_indexes(tbb::internal::numa_topology::nodes_count());
-            internal::numa_topology::fill(&nodes_indexes.front());
-            return nodes_indexes;
-        }
+namespace info {
+inline std::vector< numa_node_id > numa_nodes() {
+    std::vector< numa_node_id > nodes_indexes(
+        tbb::internal::numa_topology::nodes_count() );
+    internal::numa_topology::fill( &nodes_indexes.front() );
+    return nodes_indexes;
+}
 
-        inline int default_concurrency(numa_node_id id = -1) {
-            return internal::numa_topology::default_concurrency(id);
-        }
-    } // namespace info
+inline int default_concurrency( numa_node_id id = -1 ) {
+    return internal::numa_topology::default_concurrency( id );
+}
+} // namespace info
 } // namespace tbb
 
 #endif /*__TBB_NUMA_SUPPORT*/

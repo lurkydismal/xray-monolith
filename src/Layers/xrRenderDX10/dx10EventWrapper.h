@@ -1,10 +1,9 @@
 #pragma once
 
-#define PIX_EVENT(Name) dxPixEventWrapper pixEvent##Name(L#Name)
+#define PIX_EVENT( Name ) dxPixEventWrapper pixEvent##Name( L#Name )
 
-class dxPixEventWrapper
-{
+class dxPixEventWrapper {
 public:
-    dxPixEventWrapper(LPCWSTR wszName);
+    dxPixEventWrapper( LPCWSTR wszName );
     ~dxPixEventWrapper();
-}; 
+};

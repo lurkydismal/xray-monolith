@@ -11,19 +11,19 @@
 class CStalkerAnimationData;
 class IKinematicsAnimated;
 
-class CStalkerAnimationDataStorage
-{
+class CStalkerAnimationDataStorage {
 public:
-	typedef std::pair<IKinematicsAnimated*, CStalkerAnimationData*> OBJECT;
-	typedef xr_vector<OBJECT> OBJECTS;
+    typedef std::pair< IKinematicsAnimated*, CStalkerAnimationData* > OBJECT;
+    typedef xr_vector< OBJECT > OBJECTS;
 
 private:
-	OBJECTS m_objects;
+    OBJECTS m_objects;
 
 public:
-	virtual ~CStalkerAnimationDataStorage();
-	const CStalkerAnimationData* object(IKinematicsAnimated* skeleton_animated);
-	void clear();
+    virtual ~CStalkerAnimationDataStorage();
+    const CStalkerAnimationData* object(
+        IKinematicsAnimated* skeleton_animated );
+    void clear();
 };
 
 IC CStalkerAnimationDataStorage& stalker_animation_data_storage();

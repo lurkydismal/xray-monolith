@@ -23,7 +23,6 @@
 #define NONEWIC
 #define NOBITMAP
 #include <mmreg.h>
-
 #include <vorbis/codec.h>
 #include <vorbis/vorbisfile.h>
 
@@ -32,12 +31,11 @@
 
 #define ENGINE_API
 
+#include "../xrCore/profiler.h"
 #include "../xrCore/xr_resource.h"
 
-#include "../xrCore/profiler.h"
-
 #ifdef _EDITOR
-# 	include "ETools.h"
+#include "ETools.h"
 #endif
 
 #endif

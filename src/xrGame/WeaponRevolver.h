@@ -1,18 +1,17 @@
 #pragma once
 #include "weaponcustompistol.h"
 
-class CWeaponRevolver :
-	public CWeaponCustomPistol
-{
-	typedef CWeaponCustomPistol inherited;
-public:
-	CWeaponRevolver();
-	virtual ~CWeaponRevolver();
+class CWeaponRevolver : public CWeaponCustomPistol {
+    typedef CWeaponCustomPistol inherited;
 
-	virtual void Load(LPCSTR section);
-	virtual void PlayAnimReload();
+public:
+    CWeaponRevolver();
+    virtual ~CWeaponRevolver();
+
+    virtual void Load( LPCSTR section );
+    virtual void PlayAnimReload();
 
 protected:
-	virtual bool AllowFireWhileWorking() { return true; }
-	ESoundTypes m_eSoundClose;
+    virtual bool AllowFireWhileWorking() { return true; }
+    ESoundTypes m_eSoundClose;
 };

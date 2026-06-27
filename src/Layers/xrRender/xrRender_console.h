@@ -96,10 +96,9 @@ extern ECORE_API float ps_r__ssaHZBvsTEX;
 extern ECORE_API int ps_r__tf_Anisotropic;
 extern ECORE_API float ps_r__tf_Mipbias;
 
-enum
-{
-	RFLAG_NO_RAM_TEXTURES = (1 << 0),
-	RFLAG_HOM_DYNAMIC = (1 << 1),
+enum {
+    RFLAG_NO_RAM_TEXTURES = ( 1 << 0 ),
+    RFLAG_HOM_DYNAMIC = ( 1 << 1 ),
 };
 
 extern ECORE_API Flags32 ps_r__common_flags;
@@ -114,14 +113,13 @@ extern ECORE_API float ps_r1_pps_v;
 
 // R1-specific
 extern ECORE_API int ps_r1_GlowsPerFrame; // r1-only
-extern ECORE_API Flags32 ps_r1_flags; // r1-only
+extern ECORE_API Flags32 ps_r1_flags;     // r1-only
 
-extern ECORE_API float ps_r1_fog_luminance; //1.f r1-only
+extern ECORE_API float ps_r1_fog_luminance;  // 1.f r1-only
 extern ECORE_API int ps_r1_SoftwareSkinning; // r1-only
 
-enum
-{
-	R1FLAG_DLIGHTS = (1 << 0),
+enum {
+    R1FLAG_DLIGHTS = ( 1 << 0 ),
 };
 
 // R2
@@ -133,52 +131,52 @@ extern ECORE_API BOOL ps_r2_particle_dt;
 extern ECORE_API Flags32 ps_r2_ls_flags; // r2-only
 extern ECORE_API Flags32 ps_r2_ls_flags_ext;
 extern ECORE_API Flags32 ps_r2_anomaly_flags;
-extern ECORE_API float ps_r2_df_parallax_h; // r2-only
-extern ECORE_API float ps_r2_df_parallax_range; // r2-only
-extern ECORE_API float ps_r2_gmaterial; // r2-only
-extern ECORE_API float ps_r2_tonemap_middlegray; // r2-only
-extern ECORE_API float ps_r2_tonemap_adaptation; // r2-only
-extern ECORE_API float ps_r2_tonemap_low_lum; // r2-only
-extern ECORE_API float ps_r2_tonemap_amount; // r2-only
+extern ECORE_API float ps_r2_df_parallax_h;         // r2-only
+extern ECORE_API float ps_r2_df_parallax_range;     // r2-only
+extern ECORE_API float ps_r2_gmaterial;             // r2-only
+extern ECORE_API float ps_r2_tonemap_middlegray;    // r2-only
+extern ECORE_API float ps_r2_tonemap_adaptation;    // r2-only
+extern ECORE_API float ps_r2_tonemap_low_lum;       // r2-only
+extern ECORE_API float ps_r2_tonemap_amount;        // r2-only
 extern ECORE_API float ps_r2_ls_bloom_kernel_scale; // r2-only	// gauss
-extern ECORE_API float ps_r2_ls_bloom_kernel_g; // r2-only	// gauss
-extern ECORE_API float ps_r2_ls_bloom_kernel_b; // r2-only	// bilinear
-extern ECORE_API float ps_r2_ls_bloom_threshold; // r2-only
-extern ECORE_API float ps_r2_ls_bloom_speed; // r2-only
-extern ECORE_API float ps_r2_ls_dsm_kernel; // r2-only
-extern ECORE_API float ps_r2_ls_psm_kernel; // r2-only
-extern ECORE_API float ps_r2_ls_ssm_kernel; // r2-only
-extern ECORE_API Fvector ps_r2_aa_barier; // r2-only
-extern ECORE_API Fvector ps_r2_aa_weight; // r2-only
-extern ECORE_API float ps_r2_aa_kernel; // r2-only
-extern ECORE_API float ps_r2_mblur; // .5f
-extern ECORE_API int ps_r2_GI_depth; // 1..5
-extern ECORE_API int ps_r2_GI_photons; // 8..256
-extern ECORE_API float ps_r2_GI_clip; // EPS
-extern ECORE_API float ps_r2_GI_refl; // .9f
-extern ECORE_API float ps_r2_ls_depth_scale; // 1.0f
-extern ECORE_API float ps_r2_ls_depth_bias; // -0.0001f
-extern ECORE_API float ps_r2_ls_squality; // 1.0f
-extern ECORE_API float ps_r2_sun_near; // 10.0f
-extern ECORE_API float ps_r2_sun_near_border; // 1.0f
-extern ECORE_API float ps_r2_sun_tsm_projection; // 0.2f
-extern ECORE_API float ps_r2_sun_tsm_bias; // 0.0001f
-extern ECORE_API float ps_r2_sun_depth_far_scale; // 1.00001f
-extern ECORE_API float ps_r2_sun_depth_far_bias; // -0.0001f
-extern ECORE_API float ps_r2_sun_depth_near_scale; // 1.00001f
-extern ECORE_API float ps_r2_sun_depth_near_bias; // -0.0001f
-extern ECORE_API float ps_r2_sun_lumscale; // 0.5f
-extern ECORE_API float ps_r2_sun_lumscale_hemi; // 1.0f
-extern ECORE_API float ps_r2_sun_lumscale_amb; // 1.0f
+extern ECORE_API float ps_r2_ls_bloom_kernel_g;     // r2-only	// gauss
+extern ECORE_API float ps_r2_ls_bloom_kernel_b;     // r2-only	// bilinear
+extern ECORE_API float ps_r2_ls_bloom_threshold;    // r2-only
+extern ECORE_API float ps_r2_ls_bloom_speed;        // r2-only
+extern ECORE_API float ps_r2_ls_dsm_kernel;         // r2-only
+extern ECORE_API float ps_r2_ls_psm_kernel;         // r2-only
+extern ECORE_API float ps_r2_ls_ssm_kernel;         // r2-only
+extern ECORE_API Fvector ps_r2_aa_barier;           // r2-only
+extern ECORE_API Fvector ps_r2_aa_weight;           // r2-only
+extern ECORE_API float ps_r2_aa_kernel;             // r2-only
+extern ECORE_API float ps_r2_mblur;                 // .5f
+extern ECORE_API int ps_r2_GI_depth;                // 1..5
+extern ECORE_API int ps_r2_GI_photons;              // 8..256
+extern ECORE_API float ps_r2_GI_clip;               // EPS
+extern ECORE_API float ps_r2_GI_refl;               // .9f
+extern ECORE_API float ps_r2_ls_depth_scale;        // 1.0f
+extern ECORE_API float ps_r2_ls_depth_bias;         // -0.0001f
+extern ECORE_API float ps_r2_ls_squality;           // 1.0f
+extern ECORE_API float ps_r2_sun_near;              // 10.0f
+extern ECORE_API float ps_r2_sun_near_border;       // 1.0f
+extern ECORE_API float ps_r2_sun_tsm_projection;    // 0.2f
+extern ECORE_API float ps_r2_sun_tsm_bias;          // 0.0001f
+extern ECORE_API float ps_r2_sun_depth_far_scale;   // 1.00001f
+extern ECORE_API float ps_r2_sun_depth_far_bias;    // -0.0001f
+extern ECORE_API float ps_r2_sun_depth_near_scale;  // 1.00001f
+extern ECORE_API float ps_r2_sun_depth_near_bias;   // -0.0001f
+extern ECORE_API float ps_r2_sun_lumscale;          // 0.5f
+extern ECORE_API float ps_r2_sun_lumscale_hemi;     // 1.0f
+extern ECORE_API float ps_r2_sun_lumscale_amb;      // 1.0f
 extern ECORE_API Fvector3 ps_r2_sun_lumscale_color;
 extern ECORE_API float ps_r2_zfill; // .1f
 
-extern ECORE_API float ps_r2_dhemi_sky_scale; // 1.5f
+extern ECORE_API float ps_r2_dhemi_sky_scale;   // 1.5f
 extern ECORE_API float ps_r2_dhemi_light_scale; // 1.f
-extern ECORE_API float ps_r2_dhemi_light_flow; // .1f
-extern ECORE_API int ps_r2_dhemi_count; // 5
+extern ECORE_API float ps_r2_dhemi_light_flow;  // .1f
+extern ECORE_API int ps_r2_dhemi_count;         // 5
 extern ECORE_API int ps_r2_shadow_omnipart_vischeck;
-extern ECORE_API float ps_r2_slight_fade; // 1.f
+extern ECORE_API float ps_r2_slight_fade;    // 1.f
 extern ECORE_API float ps_r2_shadow_lod_min; // 1.f
 extern ECORE_API int ps_r2_wait_sleep;
 extern ECORE_API int ps_r2_qsync;
@@ -186,12 +184,13 @@ extern ECORE_API int ps_r2_qsync;
 extern ECORE_API Fvector4 ps_r2_mask_control; // r2-only
 extern ECORE_API Fvector ps_r2_drops_control; // r2-only
 extern ECORE_API int ps_r2_nightvision;
-extern ECORE_API int scope_fake_enabled; //crookr
-extern ECORE_API int scope_3D_fake_enabled; // Redotix99: for 3D Shader Based Scopes
-extern ECORE_API int ps_r2_heatvision;			//--DSR-- HeatVision
-extern ECORE_API int heat_vision_cooldown;		//--DSR-- HeatVision
-extern ECORE_API float heat_vision_cooldown_time;	//--DSR-- HeatVision
-extern ECORE_API int heat_vision_zombie_cold;	//--DSR-- HeatVision
+extern ECORE_API int scope_fake_enabled; // crookr
+extern ECORE_API int
+    scope_3D_fake_enabled;             // Redotix99: for 3D Shader Based Scopes
+extern ECORE_API int ps_r2_heatvision; //--DSR-- HeatVision
+extern ECORE_API int heat_vision_cooldown;        //--DSR-- HeatVision
+extern ECORE_API float heat_vision_cooldown_time; //--DSR-- HeatVision
+extern ECORE_API int heat_vision_zombie_cold;     //--DSR-- HeatVision
 extern ECORE_API float ps_r2_ss_sunshafts_length;
 extern ECORE_API float ps_r2_ss_sunshafts_radius;
 extern u32 ps_sunshafts_mode;
@@ -209,68 +208,69 @@ extern ECORE_API Fvector dsr_test;
 extern ECORE_API Fvector dsr_test1;
 extern ECORE_API Fvector dsr_test2;
 
-extern ECORE_API float ps_r2_tnmp_a; // r2-only
-extern ECORE_API float ps_r2_tnmp_b; // r2-only
-extern ECORE_API float ps_r2_tnmp_c; // r2-only
-extern ECORE_API float ps_r2_tnmp_d; // r2-only
-extern ECORE_API float ps_r2_tnmp_e; // r2-only
-extern ECORE_API float ps_r2_tnmp_f; // r2-only
-extern ECORE_API float ps_r2_tnmp_w; // r2-only
+extern ECORE_API float ps_r2_tnmp_a;        // r2-only
+extern ECORE_API float ps_r2_tnmp_b;        // r2-only
+extern ECORE_API float ps_r2_tnmp_c;        // r2-only
+extern ECORE_API float ps_r2_tnmp_d;        // r2-only
+extern ECORE_API float ps_r2_tnmp_e;        // r2-only
+extern ECORE_API float ps_r2_tnmp_f;        // r2-only
+extern ECORE_API float ps_r2_tnmp_w;        // r2-only
 extern ECORE_API float ps_r2_tnmp_exposure; // r2-only
-extern ECORE_API float ps_r2_tnmp_gamma; // r2-only
-extern ECORE_API float ps_r2_tnmp_onoff; // r2-only
+extern ECORE_API float ps_r2_tnmp_gamma;    // r2-only
+extern ECORE_API float ps_r2_tnmp_onoff;    // r2-only
 
 /* --- HDR10 parameters --- */
 extern ECORE_API float ps_r4_hdr10_whitepoint_nits; // r4-only
-extern ECORE_API float ps_r4_hdr10_ui_nits; 		// r4-only
-extern ECORE_API int   ps_r4_hdr10_pda;  			// r4-only (NOTE: this is a hack to not double HDR tonemap the 3D PDA)
-extern ECORE_API int   ps_r4_hdr10_on; 			  	// r4-only
-extern ECORE_API float ps_r4_hdr10_pda_intensity; 	// r4-only
+extern ECORE_API float ps_r4_hdr10_ui_nits;         // r4-only
+extern ECORE_API int ps_r4_hdr10_pda; // r4-only (NOTE: this is a hack to not
+                                      // double HDR tonemap the 3D PDA)
+extern ECORE_API int ps_r4_hdr10_on;  // r4-only
+extern ECORE_API float ps_r4_hdr10_pda_intensity; // r4-only
 
-extern ECORE_API int   ps_r4_hdr10_tonemapper;    		 // r4-only
-extern ECORE_API int   ps_r4_hdr10_tonemap_mode;  		 // r4-only
-extern ECORE_API float ps_r4_hdr10_exposure;      		 // r4-only
-extern ECORE_API float ps_r4_hdr10_contrast;      		 // r4-only
+extern ECORE_API int ps_r4_hdr10_tonemapper;             // r4-only
+extern ECORE_API int ps_r4_hdr10_tonemap_mode;           // r4-only
+extern ECORE_API float ps_r4_hdr10_exposure;             // r4-only
+extern ECORE_API float ps_r4_hdr10_contrast;             // r4-only
 extern ECORE_API float ps_r4_hdr10_contrast_middle_gray; // r4-only
-extern ECORE_API float ps_r4_hdr10_saturation;    		 // r4-only
-extern ECORE_API float ps_r4_hdr10_brightness;			 // r4-only
-extern ECORE_API float ps_r4_hdr10_gamma;				 // r4-only
-extern ECORE_API float ps_r4_hdr10_ui_saturation;		 // r4-only
+extern ECORE_API float ps_r4_hdr10_saturation;           // r4-only
+extern ECORE_API float ps_r4_hdr10_brightness;           // r4-only
+extern ECORE_API float ps_r4_hdr10_gamma;                // r4-only
+extern ECORE_API float ps_r4_hdr10_ui_saturation;        // r4-only
 
-extern ECORE_API int   ps_r4_hdr10_bloom_on;		  // r4-only
-extern ECORE_API int   ps_r4_hdr10_bloom_blur_passes; // r4-only
-extern ECORE_API float ps_r4_hdr10_bloom_blur_scale;       // r4-only
-extern ECORE_API float ps_r4_hdr10_bloom_intensity;   // r4-only
+extern ECORE_API int ps_r4_hdr10_bloom_on;           // r4-only
+extern ECORE_API int ps_r4_hdr10_bloom_blur_passes;  // r4-only
+extern ECORE_API float ps_r4_hdr10_bloom_blur_scale; // r4-only
+extern ECORE_API float ps_r4_hdr10_bloom_intensity;  // r4-only
 
-extern ECORE_API int      ps_r4_hdr10_flare_on; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_threshold; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_power; // r4-only
-extern ECORE_API int      ps_r4_hdr10_flare_ghosts; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_ghost_dispersal; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_center_falloff; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_halo_scale; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_halo_ca; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_ghost_ca; // r4-only
-extern ECORE_API int      ps_r4_hdr10_flare_blur_passes; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_blur_scale; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_ghost_intensity; // r4-only
-extern ECORE_API float    ps_r4_hdr10_flare_halo_intensity; // r4-only
-extern ECORE_API Fvector3 ps_r4_hdr10_flare_lens_color; // r4-only
+extern ECORE_API int ps_r4_hdr10_flare_on;                // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_threshold;       // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_power;           // r4-only
+extern ECORE_API int ps_r4_hdr10_flare_ghosts;            // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_ghost_dispersal; // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_center_falloff;  // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_halo_scale;      // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_halo_ca;         // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_ghost_ca;        // r4-only
+extern ECORE_API int ps_r4_hdr10_flare_blur_passes;       // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_blur_scale;      // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_ghost_intensity; // r4-only
+extern ECORE_API float ps_r4_hdr10_flare_halo_intensity;  // r4-only
+extern ECORE_API Fvector3 ps_r4_hdr10_flare_lens_color;   // r4-only
 
-extern ECORE_API int   ps_r4_hdr10_sun_on; // r4-only
-extern ECORE_API float ps_r4_hdr10_sun_intensity;  // r4-only
+extern ECORE_API int ps_r4_hdr10_sun_on;             // r4-only
+extern ECORE_API float ps_r4_hdr10_sun_intensity;    // r4-only
 extern ECORE_API float ps_r4_hdr10_sun_inner_radius; // r4-only
 extern ECORE_API float ps_r4_hdr10_sun_outer_radius; // r4-only
-extern ECORE_API float ps_r4_hdr10_sun_dawn_begin; // r4-only
-extern ECORE_API float ps_r4_hdr10_sun_dawn_end;   // r4-only
-extern ECORE_API float ps_r4_hdr10_sun_dusk_begin; // r4-only
-extern ECORE_API float ps_r4_hdr10_sun_dusk_end;   // r4-only
+extern ECORE_API float ps_r4_hdr10_sun_dawn_begin;   // r4-only
+extern ECORE_API float ps_r4_hdr10_sun_dawn_end;     // r4-only
+extern ECORE_API float ps_r4_hdr10_sun_dusk_begin;   // r4-only
+extern ECORE_API float ps_r4_hdr10_sun_dusk_end;     // r4-only
 /* --- HDR10 parameters --- */
 
-extern ECORE_API float ps_r2_img_exposure; // r2-only
-extern ECORE_API float ps_r2_img_gamma; // r2-only
+extern ECORE_API float ps_r2_img_exposure;   // r2-only
+extern ECORE_API float ps_r2_img_gamma;      // r2-only
 extern ECORE_API float ps_r2_img_saturation; // r2-only
-extern ECORE_API Fvector ps_r2_img_cg; // r2-only
+extern ECORE_API Fvector ps_r2_img_cg;       // r2-only
 
 ////
 
@@ -280,7 +280,7 @@ extern ECORE_API float ps_r2_dof_sky; //	distance to sky
 extern ECORE_API float ps_r2_dof_kernel_size;
 
 extern ECORE_API float ps_r3_dyn_wet_surf_near; // 10.0f
-extern ECORE_API float ps_r3_dyn_wet_surf_far; // 30.0f
+extern ECORE_API float ps_r3_dyn_wet_surf_far;  // 30.0f
 extern ECORE_API int ps_r3_dyn_wet_surf_sm_res; // 256
 
 extern ECORE_API int opt_static;
@@ -288,92 +288,87 @@ extern ECORE_API int opt_dynamic;
 extern ECORE_API int ps_pfx_volumetric_mode;
 extern ECORE_API int ps_r__portal_traverse_stats;
 
-enum : u64
-{
-	R2FLAG_SUN = (1ull << 0),
-	R2FLAG_SUN_FOCUS = (1ull << 1),
-	R2FLAG_SUN_TSM = (1ull << 2),
-	R2FLAG_SUN_DETAILS = (1ull << 3),
-	R2FLAG_TONEMAP = (1ull << 4),
-	R2FLAG_AA = (1ull << 5),
-	R2FLAG_GI = (1ull << 6),
-	R2FLAG_FASTBLOOM = (1ull << 7),
-	R2FLAG_GLOBALMATERIAL = (1ull << 8),
-	R2FLAG_ZFILL = (1ull << 9),
-	R2FLAG_R1LIGHTS = (1ull << 10),
-	R2FLAG_SUN_IGNORE_PORTALS = (1ull << 11),
+enum : u64 {
+    R2FLAG_SUN = ( 1ull << 0 ),
+    R2FLAG_SUN_FOCUS = ( 1ull << 1 ),
+    R2FLAG_SUN_TSM = ( 1ull << 2 ),
+    R2FLAG_SUN_DETAILS = ( 1ull << 3 ),
+    R2FLAG_TONEMAP = ( 1ull << 4 ),
+    R2FLAG_AA = ( 1ull << 5 ),
+    R2FLAG_GI = ( 1ull << 6 ),
+    R2FLAG_FASTBLOOM = ( 1ull << 7 ),
+    R2FLAG_GLOBALMATERIAL = ( 1ull << 8 ),
+    R2FLAG_ZFILL = ( 1ull << 9 ),
+    R2FLAG_R1LIGHTS = ( 1ull << 10 ),
+    R2FLAG_SUN_IGNORE_PORTALS = ( 1ull << 11 ),
 
-	R2FLAG_EXP_SPLIT_SCENE = (1ull << 12),
-	R2FLAG_EXP_DONT_TEST_UNSHADOWED = (1ull << 13),
-	R2FLAG_EXP_DONT_TEST_SHADOWED = (1ull << 14),
+    R2FLAG_EXP_SPLIT_SCENE = ( 1ull << 12 ),
+    R2FLAG_EXP_DONT_TEST_UNSHADOWED = ( 1ull << 13 ),
+    R2FLAG_EXP_DONT_TEST_SHADOWED = ( 1ull << 14 ),
 
-	R2FLAG_USE_NVDBT = (1ull << 15),
-	R2FLAG_USE_NVSTENCIL = (1ull << 16),
+    R2FLAG_USE_NVDBT = ( 1ull << 15 ),
+    R2FLAG_USE_NVSTENCIL = ( 1ull << 16 ),
 
-	R2FLAG_EXP_MT_CALC = (1ull << 17),
+    R2FLAG_EXP_MT_CALC = ( 1ull << 17 ),
 
-	R2FLAG_SOFT_WATER = (1ull << 18),
-	//	Igor: need restart
-	R2FLAG_SOFT_PARTICLES = (1ull << 19),
-	//	Igor: need restart
-	R2FLAG_VOLUMETRIC_LIGHTS = (1ull << 20),
-	R2FLAG_STEEP_PARALLAX = (1ull << 21),
-	R2FLAG_DOF = (1ull << 22),
+    R2FLAG_SOFT_WATER = ( 1ull << 18 ),
+    //	Igor: need restart
+    R2FLAG_SOFT_PARTICLES = ( 1ull << 19 ),
+    //	Igor: need restart
+    R2FLAG_VOLUMETRIC_LIGHTS = ( 1ull << 20 ),
+    R2FLAG_STEEP_PARALLAX = ( 1ull << 21 ),
+    R2FLAG_DOF = ( 1ull << 22 ),
 
-	R1FLAG_DETAIL_TEXTURES = (1ull << 23),
+    R1FLAG_DETAIL_TEXTURES = ( 1ull << 23 ),
 
-	R2FLAG_DETAIL_BUMP = (1ull << 24),
+    R2FLAG_DETAIL_BUMP = ( 1ull << 24 ),
 
-	R3FLAG_DYN_WET_SURF = (1ull << 25),
-	R3FLAG_VOLUMETRIC_SMOKE = (1ull << 26),
+    R3FLAG_DYN_WET_SURF = ( 1ull << 25 ),
+    R3FLAG_VOLUMETRIC_SMOKE = ( 1ull << 26 ),
 
-	//R3FLAG_MSAA					= (1ull<<28),
-	R3FLAG_MSAA_HYBRID = (1ull << 27),
-	R3FLAG_MSAA_OPT = (1ull << 28),
-	R2FLAG_TERRAIN_PREPASS = (1ull << 29),
-	R3FLAG_USE_DX10_1 = (1ull << 30),
-	R2FLAG_LIGHTS_DETAILS	= (1ull<<31),
-	R2FLAG_FAST_DETAILS_UPDATE = (1ull<<32)
-	//R3FLAG_MSAA_ALPHATEST		= (1ull<<31),
+    // R3FLAG_MSAA					= (1ull<<28),
+    R3FLAG_MSAA_HYBRID = ( 1ull << 27 ),
+    R3FLAG_MSAA_OPT = ( 1ull << 28 ),
+    R2FLAG_TERRAIN_PREPASS = ( 1ull << 29 ),
+    R3FLAG_USE_DX10_1 = ( 1ull << 30 ),
+    R2FLAG_LIGHTS_DETAILS = ( 1ull << 31 ),
+    R2FLAG_FAST_DETAILS_UPDATE = ( 1ull << 32 )
+    // R3FLAG_MSAA_ALPHATEST		= (1ull<<31),
 };
 
-enum: u64
-{
-	R2FLAGEXT_SSAO_BLUR = (1ull << 0),
-	R2FLAGEXT_SSAO_OPT_DATA = (1ull << 1),
-	R2FLAGEXT_SSAO_HALF_DATA = (1ull << 2),
-	R2FLAGEXT_SSAO_HBAO = (1ull << 3),
-	R2FLAGEXT_SSAO_HDAO = (1ull << 4),
-	R2FLAGEXT_ENABLE_TESSELLATION = (1ull << 5),
-	R2FLAGEXT_WIREFRAME = (1ull << 6),
-	R_FLAGEXT_HOM_DEPTH_DRAW = (1ull << 7),
-	R2FLAGEXT_SUN_ZCULLING = (1ull << 8),
-	R2FLAGEXT_SUN_OLD = (1ull << 9),
+enum : u64 {
+    R2FLAGEXT_SSAO_BLUR = ( 1ull << 0 ),
+    R2FLAGEXT_SSAO_OPT_DATA = ( 1ull << 1 ),
+    R2FLAGEXT_SSAO_HALF_DATA = ( 1ull << 2 ),
+    R2FLAGEXT_SSAO_HBAO = ( 1ull << 3 ),
+    R2FLAGEXT_SSAO_HDAO = ( 1ull << 4 ),
+    R2FLAGEXT_ENABLE_TESSELLATION = ( 1ull << 5 ),
+    R2FLAGEXT_WIREFRAME = ( 1ull << 6 ),
+    R_FLAGEXT_HOM_DEPTH_DRAW = ( 1ull << 7 ),
+    R2FLAGEXT_SUN_ZCULLING = ( 1ull << 8 ),
+    R2FLAGEXT_SUN_OLD = ( 1ull << 9 ),
 };
 
-enum
-{
-	R2SS_VOLUMETRIC = 1,
-	R2SS_SCREEN_SPACE,
-	R2SS_COMBINE_SUNSHAFTS,
+enum {
+    R2SS_VOLUMETRIC = 1,
+    R2SS_SCREEN_SPACE,
+    R2SS_COMBINE_SUNSHAFTS,
 };
 
-enum
-{
-	R2_AN_FLAG_WATER_REFLECTIONS = (1 << 0),
-	R2_AN_FLAG_MBLUR = (1 << 1),
-	R2_AN_FLAG_FLARES = (1 << 2),
+enum {
+    R2_AN_FLAG_WATER_REFLECTIONS = ( 1 << 0 ),
+    R2_AN_FLAG_MBLUR = ( 1 << 1 ),
+    R2_AN_FLAG_FLARES = ( 1 << 2 ),
 };
 
-//Rezy: cleanup flags
+// Rezy: cleanup flags
 extern Flags32 psDeviceFlags2;
 
-//Swartz: actor shadow
+// Swartz: actor shadow
 extern ECORE_API Flags32 ps_actor_shadow_flags;
 
-enum
-{
-	RFLAG_ACTOR_SHADOW = (1 << 0),
+enum {
+    RFLAG_ACTOR_SHADOW = ( 1 << 0 ),
 };
 
 //-Swartz

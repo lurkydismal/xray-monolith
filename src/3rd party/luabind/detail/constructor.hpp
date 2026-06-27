@@ -23,74 +23,75 @@
 #pragma once
 
 #include <luabind/config.hpp>
-#include <luabind/wrapper_base.hpp>
+#include <luabind/detail/call_member.hpp>
 #include <luabind/detail/policy.hpp>
 #include <luabind/detail/signature_match.hpp>
-#include <luabind/detail/call_member.hpp>
-#include <luabind/wrapper_base.hpp>
 #include <luabind/weak_ref.hpp>
+#include <luabind/wrapper_base.hpp>
 
-namespace luabind { namespace detail
-{
-    template<typename T, typename... Policies>
-    struct construct_class
-    {
-    private:
+namespace luabind {
+namespace detail {
+template < typename T, typename... Policies >
+struct construct_class {
+private:
+    template < typename U, size_t Index >
+    static decltype( auto ) applyArg( lua_State* L ) {
+        using converter_policy =
+            typename find_conversion_policy< Index + 1, Policies... >::type;
+        using c_t = typename converter_policy::template generate_converter<
+            U, Direction::lua_to_cpp >::type;
+        typename converter_policy::template generate_converter<
+            U, Direction::lua_to_cpp >::type c;
 
-        template <typename U, size_t Index>
-        static decltype(auto) applyArg(lua_State* L)
-        {
-            using converter_policy = typename find_conversion_policy<Index + 1, Policies...>::type;
-            using c_t = typename converter_policy::template generate_converter<U, Direction::lua_to_cpp>::type;
-            typename converter_policy::template generate_converter<U, Direction::lua_to_cpp>::type c;
+        return c.c_t::apply( L, decorated_type< U >::get(), Index + 2 );
+    }
 
-            return c.c_t::apply(L, decorated_type<U>::get(), Index + 2);
-        }
+    template < typename... ConstructorArgs, size_t... Indices >
+    static T* applyImpl( lua_State* L, std::index_sequence< Indices... > ) {
+        return luabind::luabind_new< T >(
+            applyArg< ConstructorArgs, Indices >( L )... );
+    }
 
-        template <typename... ConstructorArgs, size_t... Indices>
-        static T* applyImpl(lua_State* L, std::index_sequence<Indices...>)
-        {
-            return luabind::luabind_new<T>(applyArg<ConstructorArgs, Indices>(L)...);
-        }
+public:
+    template < typename... ConstructorArgs >
+    static void* apply( lua_State* L, weak_ref const& ) {
+        return applyImpl< ConstructorArgs... >(
+            L, std::make_index_sequence< sizeof...( ConstructorArgs ) >() );
+    }
+};
 
-    public:
+template < typename T, typename W, typename... Policies >
+struct construct_wrapped_class {
+private:
+    template < typename U, size_t Index >
+    static decltype( auto ) applyArg( lua_State* L ) {
+        using converter_policy =
+            typename find_conversion_policy< Index + 1, Policies... >::type;
+        using c_t = typename converter_policy::template generate_converter<
+            U, Direction::lua_to_cpp >::type;
+        typename converter_policy::template generate_converter<
+            U, Direction::lua_to_cpp >::type c;
 
-        template <typename... ConstructorArgs>
-        static void* apply(lua_State* L, weak_ref const&)
-        {
-            return applyImpl<ConstructorArgs...>(L, std::make_index_sequence<sizeof...(ConstructorArgs)>());
-        }
-    };
+        return c.c_t::apply( L, decorated_type< U >::get(), Index + 2 );
+    }
 
-    template<typename T, typename W, typename... Policies>
-    struct construct_wrapped_class
-    {
-    private:
+    template < typename... ConstructorArgs, size_t... Indices >
+    static T* applyImpl( lua_State* L,
+                         weak_ref const& ref,
+                         std::index_sequence< Indices... > ) {
+        W* pResult = luabind::luabind_new< W >(
+            applyArg< ConstructorArgs, Indices >( L )... );
+        static_cast< weak_ref& >( wrap_access::ref( *pResult ) ) = ref;
+        return pResult;
+    }
 
-        template <typename U, size_t Index>
-        static decltype(auto) applyArg(lua_State* L)
-        {
-            using converter_policy = typename find_conversion_policy<Index + 1, Policies...>::type;
-            using c_t = typename converter_policy::template generate_converter<U, Direction::lua_to_cpp>::type;
-            typename converter_policy::template generate_converter<U, Direction::lua_to_cpp>::type c;
-
-            return c.c_t::apply(L, decorated_type<U>::get(), Index + 2);
-        }
-
-        template <typename... ConstructorArgs, size_t... Indices>
-        static T* applyImpl(lua_State* L, weak_ref const& ref, std::index_sequence<Indices...>)
-        {
-            W* pResult = luabind::luabind_new<W>(applyArg<ConstructorArgs, Indices>(L)...);
-            static_cast<weak_ref&>(wrap_access::ref(*pResult)) = ref;
-            return pResult;
-        }
-
-    public:
-
-        template <typename... ConstructorArgs>
-        static void* apply(lua_State* L, weak_ref const& ref)
-        {
-            return applyImpl<ConstructorArgs...>(L, ref, std::make_index_sequence<sizeof...(ConstructorArgs)>());
-        }
-    };
-}}
+public:
+    template < typename... ConstructorArgs >
+    static void* apply( lua_State* L, weak_ref const& ref ) {
+        return applyImpl< ConstructorArgs... >(
+            L, ref,
+            std::make_index_sequence< sizeof...( ConstructorArgs ) >() );
+    }
+};
+} // namespace detail
+} // namespace luabind

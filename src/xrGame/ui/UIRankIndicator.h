@@ -5,18 +5,19 @@ class CUIStatic;
 class CUIXml;
 class CUIStatic;
 
-class CUIRankIndicator : public CUIWindow
-{
-	enum { max_rank=10, };
+class CUIRankIndicator : public CUIWindow {
+    enum {
+        max_rank = 10,
+    };
 
-	CUIStatic* m_ranks[max_rank];
-	u8 m_current;
+    CUIStatic* m_ranks[ max_rank ];
+    u8 m_current;
+
 public:
+    CUIRankIndicator();
+    virtual ~CUIRankIndicator();
+    void InitFromXml( CUIXml& xml_doc );
+    void SetRank( u8 team, u8 rank );
 
-	CUIRankIndicator();
-	virtual ~CUIRankIndicator();
-	void InitFromXml(CUIXml& xml_doc);
-	void SetRank(u8 team, u8 rank);
-
-	virtual CUIWindow* ui_cast_window() { return this; }
+    virtual CUIWindow* ui_cast_window() { return this; }
 };

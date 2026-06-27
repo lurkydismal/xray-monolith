@@ -19,7 +19,8 @@
 
 /**
  * \file
- * \brief C++ API: Appendable class: Sink for Unicode code points and 16-bit code units (char16_ts).
+ * \brief C++ API: Appendable class: Sink for Unicode code points and 16-bit
+ * code units (char16_ts).
  */
 
 #include "unicode/utypes.h"
@@ -33,12 +34,12 @@ U_NAMESPACE_BEGIN
 class UnicodeString;
 
 /**
- * Base class for objects to which Unicode characters and strings can be appended.
- * Combines elements of Java Appendable and ICU4C ByteSink.
+ * Base class for objects to which Unicode characters and strings can be
+ * appended. Combines elements of Java Appendable and ICU4C ByteSink.
  *
- * This class can be used in APIs where it does not matter whether the actual destination is
- * a UnicodeString, a char16_t[] array, a UnicodeSet, or any other object
- * that receives and processes characters and/or strings.
+ * This class can be used in APIs where it does not matter whether the actual
+ * destination is a UnicodeString, a char16_t[] array, a UnicodeSet, or any
+ * other object that receives and processes characters and/or strings.
  *
  * Implementation classes must implement at least appendCodeUnit(char16_t).
  * The base class provides default implementations for the other methods.
@@ -65,7 +66,7 @@ public:
      * @return TRUE if the operation succeeded
      * @stable ICU 4.8
      */
-    virtual UBool appendCodeUnit(char16_t c) = 0;
+    virtual UBool appendCodeUnit( char16_t c ) = 0;
 
     /**
      * Appends a code point.
@@ -74,17 +75,18 @@ public:
      * @return TRUE if the operation succeeded
      * @stable ICU 4.8
      */
-    virtual UBool appendCodePoint(UChar32 c);
+    virtual UBool appendCodePoint( UChar32 c );
 
     /**
      * Appends a string.
-     * The default implementation calls appendCodeUnit(char16_t) for each code unit.
+     * The default implementation calls appendCodeUnit(char16_t) for each code
+     * unit.
      * @param s string, must not be NULL if length!=0
      * @param length string length, or -1 if NUL-terminated
      * @return TRUE if the operation succeeded
      * @stable ICU 4.8
      */
-    virtual UBool appendString(const char16_t *s, int32_t length);
+    virtual UBool appendString( const char16_t* s, int32_t length );
 
     /**
      * Tells the object that the caller is going to append roughly
@@ -95,20 +97,20 @@ public:
      * @return TRUE if the operation succeeded
      * @stable ICU 4.8
      */
-    virtual UBool reserveAppendCapacity(int32_t appendCapacity);
+    virtual UBool reserveAppendCapacity( int32_t appendCapacity );
 
     /**
-     * Returns a writable buffer for appending and writes the buffer's capacity to
-     * *resultCapacity. Guarantees *resultCapacity>=minCapacity.
-     * May return a pointer to the caller-owned scratch buffer which must have
+     * Returns a writable buffer for appending and writes the buffer's capacity
+     * to *resultCapacity. Guarantees *resultCapacity>=minCapacity. May return a
+     * pointer to the caller-owned scratch buffer which must have
      * scratchCapacity>=minCapacity.
      * The returned buffer is only valid until the next operation
      * on this Appendable.
      *
-     * After writing at most *resultCapacity char16_ts, call appendString() with the
-     * pointer returned from this function and the number of char16_ts written.
-     * Many appendString() implementations will avoid copying char16_ts if this function
-     * returned an internal buffer.
+     * After writing at most *resultCapacity char16_ts, call appendString() with
+     * the pointer returned from this function and the number of char16_ts
+     * written. Many appendString() implementations will avoid copying char16_ts
+     * if this function returned an internal buffer.
      *
      * Partial usage example:
      * \code
@@ -117,12 +119,13 @@ public:
      *  ... Write n char16_ts into buffer, with n <= capacity.
      *  app.appendString(buffer, n);
      * \endcode
-     * In many implementations, that call to append will avoid copying char16_ts.
+     * In many implementations, that call to append will avoid copying
+     * char16_ts.
      *
-     * If the Appendable allocates or reallocates an internal buffer, it should use
-     * the desiredCapacityHint if appropriate.
-     * If a caller cannot provide a reasonable guess at the desired capacity,
-     * it should pass desiredCapacityHint=0.
+     * If the Appendable allocates or reallocates an internal buffer, it should
+     * use the desiredCapacityHint if appropriate. If a caller cannot provide a
+     * reasonable guess at the desired capacity, it should pass
+     * desiredCapacityHint=0.
      *
      * If a non-scratch buffer is returned, the caller may only pass
      * a prefix to it to appendString().
@@ -141,10 +144,11 @@ public:
      * @return a buffer with *resultCapacity>=minCapacity
      * @stable ICU 4.8
      */
-    virtual char16_t *getAppendBuffer(int32_t minCapacity,
-                                   int32_t desiredCapacityHint,
-                                   char16_t *scratch, int32_t scratchCapacity,
-                                   int32_t *resultCapacity);
+    virtual char16_t* getAppendBuffer( int32_t minCapacity,
+                                       int32_t desiredCapacityHint,
+                                       char16_t* scratch,
+                                       int32_t scratchCapacity,
+                                       int32_t* resultCapacity );
 };
 
 /**
@@ -160,7 +164,7 @@ public:
      * @param s The UnicodeString to which this Appendable will write.
      * @stable ICU 4.8
      */
-    explicit UnicodeStringAppendable(UnicodeString &s) : str(s) {}
+    explicit UnicodeStringAppendable( UnicodeString& s ) : str( s ) {}
 
     /**
      * Destructor.
@@ -174,7 +178,7 @@ public:
      * @return TRUE if the operation succeeded
      * @stable ICU 4.8
      */
-    virtual UBool appendCodeUnit(char16_t c);
+    virtual UBool appendCodeUnit( char16_t c );
 
     /**
      * Appends a code point to the string.
@@ -182,7 +186,7 @@ public:
      * @return TRUE if the operation succeeded
      * @stable ICU 4.8
      */
-    virtual UBool appendCodePoint(UChar32 c);
+    virtual UBool appendCodePoint( UChar32 c );
 
     /**
      * Appends a string to the UnicodeString.
@@ -191,7 +195,7 @@ public:
      * @return TRUE if the operation succeeded
      * @stable ICU 4.8
      */
-    virtual UBool appendString(const char16_t *s, int32_t length);
+    virtual UBool appendString( const char16_t* s, int32_t length );
 
     /**
      * Tells the UnicodeString that the caller is going to append roughly
@@ -200,12 +204,12 @@ public:
      * @return TRUE if the operation succeeded
      * @stable ICU 4.8
      */
-    virtual UBool reserveAppendCapacity(int32_t appendCapacity);
+    virtual UBool reserveAppendCapacity( int32_t appendCapacity );
 
     /**
-     * Returns a writable buffer for appending and writes the buffer's capacity to
-     * *resultCapacity. Guarantees *resultCapacity>=minCapacity.
-     * May return a pointer to the caller-owned scratch buffer which must have
+     * Returns a writable buffer for appending and writes the buffer's capacity
+     * to *resultCapacity. Guarantees *resultCapacity>=minCapacity. May return a
+     * pointer to the caller-owned scratch buffer which must have
      * scratchCapacity>=minCapacity.
      * The returned buffer is only valid until the next write operation
      * on the UnicodeString.
@@ -223,17 +227,18 @@ public:
      * @return a buffer with *resultCapacity>=minCapacity
      * @stable ICU 4.8
      */
-    virtual char16_t *getAppendBuffer(int32_t minCapacity,
-                                   int32_t desiredCapacityHint,
-                                   char16_t *scratch, int32_t scratchCapacity,
-                                   int32_t *resultCapacity);
+    virtual char16_t* getAppendBuffer( int32_t minCapacity,
+                                       int32_t desiredCapacityHint,
+                                       char16_t* scratch,
+                                       int32_t scratchCapacity,
+                                       int32_t* resultCapacity );
 
 private:
-    UnicodeString &str;
+    UnicodeString& str;
 };
 
 U_NAMESPACE_END
 
 #endif /* U_SHOW_CPLUSPLUS_API */
 
-#endif  // __APPENDABLE_H__
+#endif // __APPENDABLE_H__

@@ -13,9 +13,8 @@
 * break the connection.
 \*=========================================================================*/
 #include "luasocket.h"
-
-#include "timeout.h"
 #include "socket.h"
+#include "timeout.h"
 
 #define UDP_DATAGRAMSIZE 8192
 
@@ -24,13 +23,13 @@ typedef struct t_udp_ {
     t_timeout tm;
     int family;
 } t_udp;
-typedef t_udp *p_udp;
+typedef t_udp* p_udp;
 
 #ifndef _WIN32
-#pragma GCC visibility push(hidden)
+#pragma GCC visibility push( hidden )
 #endif
 
-int udp_open(lua_State *L);
+int udp_open( lua_State* L );
 
 #ifndef _WIN32
 #pragma GCC visibility pop

@@ -23,11 +23,11 @@
 
 #if !UCONFIG_NO_TRANSLITERATION
 
-#include "unicode/uobject.h"
-#include "unicode/unistr.h"
 #include "unicode/parseerr.h"
-#include "unicode/utrans.h" // UTransPosition, UTransDirection
 #include "unicode/strenum.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
+#include "unicode/utrans.h" // UTransPosition, UTransDirection
 
 U_NAMESPACE_BEGIN
 
@@ -251,11 +251,13 @@ class TransliteratorIDParser;
  * bidirectional forward-reverse rules may be specified for
  * symmetrical transformations.
  *
- * <p>Note: Another description of the Transliterator rule syntax is available in
- * <a href="https://www.unicode.org/reports/tr35/tr35-general.html#Transform_Rules_Syntax">section
+ * <p>Note: Another description of the Transliterator rule syntax is available
+ * in <a
+ * href="https://www.unicode.org/reports/tr35/tr35-general.html#Transform_Rules_Syntax">section
  * Transform Rules Syntax of UTS #35: Unicode LDML</a>.
  * The rules are shown there using arrow symbols ← and → and ↔.
- * ICU supports both those and the equivalent ASCII symbols &lt; and &gt; and &lt;&gt;.
+ * ICU supports both those and the equivalent ASCII symbols &lt; and &gt; and
+ * &lt;&gt;.
  *
  * <p>Rule statements take one of the following forms:
  *
@@ -270,9 +272,10 @@ class TransliteratorIDParser;
  *         underscores. Case is significant. Duplicate names cause
  *         an exception to be thrown, that is, variables cannot be
  *         redefined. The right hand side may contain well-formed
- *         text of any length, including no text at all (&quot;<code>$empty=;</code>&quot;).
- *         The right hand side may contain embedded <code>UnicodeSet</code>
- *         patterns, for example, &quot;<code>$softvowel=[eiyEIY]</code>&quot;.</dd>
+ *         text of any length, including no text at all
+ * (&quot;<code>$empty=;</code>&quot;). The right hand side may contain embedded
+ * <code>UnicodeSet</code> patterns, for example,
+ * &quot;<code>$softvowel=[eiyEIY]</code>&quot;.</dd>
  *     <dt><code>ai&gt;$alefmadda;</code></dt>
  *     <dd><strong>Forward translation rule.</strong> This rule
  *         states that the string on the left will be changed to the
@@ -306,9 +309,10 @@ class TransliteratorIDParser;
  * If there is a successful match, &quot;<code>def</code>&quot; will
  * be replaced, but not &quot;<code>abc</code>&quot;. The final '<code>}</code>'
  * is optional, so &quot;<code>abc{def</code>&quot; is equivalent to
- * &quot;<code>abc{def}</code>&quot;. Another example is &quot;<code>{123}456</code>&quot;
- * (or &quot;<code>123}456</code>&quot;) in which the literal
- * pattern &quot;<code>123</code>&quot; must be followed by &quot;<code>456</code>&quot;.
+ * &quot;<code>abc{def}</code>&quot;. Another example is
+ * &quot;<code>{123}456</code>&quot; (or &quot;<code>123}456</code>&quot;) in
+ * which the literal pattern &quot;<code>123</code>&quot; must be followed by
+ * &quot;<code>456</code>&quot;.
  *
  * <p>The output string of a forward or reverse rule consists of
  * characters to replace the literal pattern characters. If the
@@ -330,8 +334,9 @@ class TransliteratorIDParser;
  * <p><code>UnicodeSet</code> patterns may appear anywhere that
  * makes sense. They may appear in variable definitions.
  * Contrariwise, <code>UnicodeSet</code> patterns may themselves
- * contain variable references, such as &quot;<code>$a=[a-z];$not_a=[^$a]</code>&quot;,
- * or &quot;<code>$range=a-z;$ll=[$range]</code>&quot;.
+ * contain variable references, such as
+ * &quot;<code>$a=[a-z];$not_a=[^$a]</code>&quot;, or
+ * &quot;<code>$range=a-z;$ll=[$range]</code>&quot;.
  *
  * <p><code>UnicodeSet</code> patterns may also be embedded directly
  * into rule strings. Thus, the following two rules are equivalent:
@@ -357,32 +362,35 @@ class TransliteratorIDParser;
  * <p>The segment of the input string to be copied is delimited by
  * &quot;<code>(</code>&quot; and &quot;<code>)</code>&quot;. Up to
  * nine segments may be defined. Segments may not overlap. In the
- * output string, &quot;<code>$1</code>&quot; through &quot;<code>$9</code>&quot;
- * represent the input string segments, in left-to-right order of
- * definition.
+ * output string, &quot;<code>$1</code>&quot; through
+ * &quot;<code>$9</code>&quot; represent the input string segments, in
+ * left-to-right order of definition.
  *
  * <p><b>Anchors</b>
  *
- * <p>Patterns can be anchored to the beginning or the end of the text. This is done with the
- * special characters '<code>^</code>' and '<code>$</code>'. For example:
+ * <p>Patterns can be anchored to the beginning or the end of the text. This is
+ * done with the special characters '<code>^</code>' and '<code>$</code>'. For
+ * example:
  *
  * <pre>
  *   ^ a&nbsp;&nbsp; &gt; 'BEG_A'; &nbsp;&nbsp;# match 'a' at start of text
  *   &nbsp; a&nbsp;&nbsp; &gt; 'A'; # match other instances of 'a'
  *   &nbsp; z $ &gt; 'END_Z'; &nbsp;&nbsp;# match 'z' at end of text
- *   &nbsp; z&nbsp;&nbsp; &gt; 'Z';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # match other instances of 'z'
+ *   &nbsp; z&nbsp;&nbsp; &gt; 'Z';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # match
+ * other instances of 'z'
  * </pre>
  *
- * <p>It is also possible to match the beginning or the end of the text using a <code>UnicodeSet</code>.
- * This is done by including a virtual anchor character '<code>$</code>' at the end of the
- * set pattern. Although this is usually the match chafacter for the end anchor, the set will
- * match either the beginning or the end of the text, depending on its placement. For
- * example:
+ * <p>It is also possible to match the beginning or the end of the text using a
+ * <code>UnicodeSet</code>. This is done by including a virtual anchor character
+ * '<code>$</code>' at the end of the set pattern. Although this is usually the
+ * match chafacter for the end anchor, the set will match either the beginning
+ * or the end of the text, depending on its placement. For example:
  *
  * <pre>
  *   $x = [a-z$]; &nbsp;&nbsp;# match 'a' through 'z' OR anchor
- *   $x 1&nbsp;&nbsp;&nbsp; &gt; 2;&nbsp;&nbsp; # match '1' after a-z or at the start
- *   &nbsp;&nbsp; 3 $x &gt; 4; &nbsp;&nbsp;# match '3' before a-z or at the end
+ *   $x 1&nbsp;&nbsp;&nbsp; &gt; 2;&nbsp;&nbsp; # match '1' after a-z or at the
+ * start &nbsp;&nbsp; 3 $x &gt; 4; &nbsp;&nbsp;# match '3' before a-z or at the
+ * end
  * </pre>
  *
  * <p><b>Example</b>
@@ -393,15 +401,18 @@ class TransliteratorIDParser;
  * <table border="0" cellpadding="4">
  *     <tr>
  *         <td style="vertical-align: top;">Rule 1.</td>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>abc{def}&gt;x|y</code></td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>abc{def}&gt;x|y</code></td>
  *     </tr>
  *     <tr>
  *         <td style="vertical-align: top;">Rule 2.</td>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>xyz&gt;r</code></td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>xyz&gt;r</code></td>
  *     </tr>
  *     <tr>
  *         <td style="vertical-align: top;">Rule 3.</td>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>yz&gt;q</code></td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>yz&gt;q</code></td>
  *     </tr>
  * </table>
  *
@@ -410,54 +421,60 @@ class TransliteratorIDParser;
  *
  * <table border="0" cellpadding="4">
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>|adefabcdefz</code></td>
- *         <td style="vertical-align: top;">Initial state, no rules match. Advance
- *         cursor.</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>|adefabcdefz</code></td> <td style="vertical-align:
+ * top;">Initial state, no rules match. Advance cursor.</td>
  *     </tr>
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>a|defabcdefz</code></td>
- *         <td style="vertical-align: top;">Still no match. Rule 1 does not match
- *         because the preceding context is not present.</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>a|defabcdefz</code></td> <td style="vertical-align:
+ * top;">Still no match. Rule 1 does not match because the preceding context is
+ * not present.</td>
  *     </tr>
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>ad|efabcdefz</code></td>
- *         <td style="vertical-align: top;">Still no match. Keep advancing until
- *         there is a match...</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>ad|efabcdefz</code></td> <td style="vertical-align:
+ * top;">Still no match. Keep advancing until there is a match...</td>
  *     </tr>
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>ade|fabcdefz</code></td>
- *         <td style="vertical-align: top;">...</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>ade|fabcdefz</code></td> <td style="vertical-align:
+ * top;">...</td>
  *     </tr>
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>adef|abcdefz</code></td>
- *         <td style="vertical-align: top;">...</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>adef|abcdefz</code></td> <td style="vertical-align:
+ * top;">...</td>
  *     </tr>
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>adefa|bcdefz</code></td>
- *         <td style="vertical-align: top;">...</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>adefa|bcdefz</code></td> <td style="vertical-align:
+ * top;">...</td>
  *     </tr>
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>adefab|cdefz</code></td>
- *         <td style="vertical-align: top;">...</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>adefab|cdefz</code></td> <td style="vertical-align:
+ * top;">...</td>
  *     </tr>
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>adefabc|defz</code></td>
- *         <td style="vertical-align: top;">Rule 1 matches; replace &quot;<code>def</code>&quot;
- *         with &quot;<code>xy</code>&quot; and back up the cursor
- *         to before the '<code>y</code>'.</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>adefabc|defz</code></td> <td style="vertical-align: top;">Rule
+ * 1 matches; replace &quot;<code>def</code>&quot; with
+ * &quot;<code>xy</code>&quot; and back up the cursor to before the
+ * '<code>y</code>'.</td>
  *     </tr>
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>adefabcx|yz</code></td>
- *         <td style="vertical-align: top;">Although &quot;<code>xyz</code>&quot; is
- *         present, rule 2 does not match because the cursor is
- *         before the '<code>y</code>', not before the '<code>x</code>'.
- *         Rule 3 does match. Replace &quot;<code>yz</code>&quot;
- *         with &quot;<code>q</code>&quot;.</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>adefabcx|yz</code></td> <td style="vertical-align:
+ * top;">Although &quot;<code>xyz</code>&quot; is present, rule 2 does not match
+ * because the cursor is before the '<code>y</code>', not before the
+ * '<code>x</code>'. Rule 3 does match. Replace &quot;<code>yz</code>&quot; with
+ * &quot;<code>q</code>&quot;.</td>
  *     </tr>
  *     <tr>
- *         <td style="vertical-align: top; write-space: nowrap;"><code>adefabcxq|</code></td>
- *         <td style="vertical-align: top;">The cursor is at the end;
- *         transliteration is complete.</td>
+ *         <td style="vertical-align: top; write-space:
+ * nowrap;"><code>adefabcxq|</code></td> <td style="vertical-align: top;">The
+ * cursor is at the end; transliteration is complete.</td>
  *     </tr>
  * </table>
  *
@@ -472,7 +489,8 @@ class TransliteratorIDParser;
  * digit or letter. To specify a single quote itself, inside or
  * outside of quotes, use two single quotes in a row. For example,
  * the rule &quot;<code>'&gt;'&gt;o''clock</code>&quot; changes the
- * string &quot;<code>&gt;</code>&quot; to the string &quot;<code>o'clock</code>&quot;.
+ * string &quot;<code>&gt;</code>&quot; to the string
+ * &quot;<code>o'clock</code>&quot;.
  *
  * <p><b>Notes</b>
  *
@@ -488,9 +506,7 @@ class TransliteratorIDParser;
  * @stable ICU 2.0
  */
 class U_I18N_API Transliterator : public UObject {
-
 private:
-
     /**
      * Programmatic name, e.g., "Latin-Arabic".
      */
@@ -506,8 +522,7 @@ private:
 
     int32_t maximumContextLength;
 
- public:
-
+public:
     /**
      * A context integer or pointer for a factory function, passed by
      * value.
@@ -523,7 +538,7 @@ private:
          * This token, interpreted as a native pointer.
          * @stable ICU 2.4
          */
-        void*   pointer;
+        void* pointer;
     };
 
 #ifndef U_HIDE_INTERNAL_API
@@ -532,15 +547,15 @@ private:
      * @return a token containing an integer.
      * @internal
      */
-    inline static Token integerToken(int32_t);
+    inline static Token integerToken( int32_t );
 
     /**
      * Return a token containing a pointer.
      * @return a token containing a pointer.
      * @internal
      */
-    inline static Token pointerToken(void*);
-#endif  /* U_HIDE_INTERNAL_API */
+    inline static Token pointerToken( void* );
+#endif /* U_HIDE_INTERNAL_API */
 
     /**
      * A function that creates and returns a Transliterator.  When
@@ -554,13 +569,14 @@ private:
      * @param ID      the string identifier for this transliterator
      * @param context a context pointer that will be stored and
      *                later passed to the factory function when an ID matching
-     *                the registration ID is being instantiated with this factory.
+     *                the registration ID is being instantiated with this
+     * factory.
      * @stable ICU 2.4
      */
-    typedef Transliterator* (U_EXPORT2 *Factory)(const UnicodeString& ID, Token context);
+    typedef Transliterator*( U_EXPORT2* Factory )( const UnicodeString& ID,
+                                                   Token context );
 
 protected:
-
     /**
      * Default constructor.
      * @param ID the string identifier for this transliterator
@@ -570,19 +586,19 @@ protected:
      * <tt>null</tt> then no filtering is applied.
      * @stable ICU 2.4
      */
-    Transliterator(const UnicodeString& ID, UnicodeFilter* adoptedFilter);
+    Transliterator( const UnicodeString& ID, UnicodeFilter* adoptedFilter );
 
     /**
      * Copy constructor.
      * @stable ICU 2.4
      */
-    Transliterator(const Transliterator&);
+    Transliterator( const Transliterator& );
 
     /**
      * Assignment operator.
      * @stable ICU 2.4
      */
-    Transliterator& operator=(const Transliterator&);
+    Transliterator& operator=( const Transliterator& );
 
     /**
      * Create a transliterator from a basic ID.  This is an ID
@@ -595,15 +611,14 @@ protected:
      * invalid.
      * @stable ICU 2.4
      */
-    static Transliterator* createBasicInstance(const UnicodeString& id,
-                                               const UnicodeString* canon);
+    static Transliterator* createBasicInstance( const UnicodeString& id,
+                                                const UnicodeString* canon );
 
-    friend class TransliteratorParser; // for parseID()
+    friend class TransliteratorParser;   // for parseID()
     friend class TransliteratorIDParser; // for createBasicInstance()
-    friend class TransliteratorAlias; // for setID()
+    friend class TransliteratorAlias;    // for setID()
 
 public:
-
     /**
      * Destructor.
      * @stable ICU 2.0
@@ -635,21 +650,23 @@ public:
      * @param limit the ending index, exclusive; <code>start <= limit
      * <= text.length()</code>.
      * @return The new limit index.  The text previously occupying <code>[start,
-     * limit)</code> has been transliterated, possibly to a string of a different
-     * length, at <code>[start, </code><em>new-limit</em><code>)</code>, where
-     * <em>new-limit</em> is the return value. If the input offsets are out of bounds,
-     * the returned value is -1 and the input string remains unchanged.
+     * limit)</code> has been transliterated, possibly to a string of a
+     * different length, at <code>[start,
+     * </code><em>new-limit</em><code>)</code>, where <em>new-limit</em> is the
+     * return value. If the input offsets are out of bounds, the returned value
+     * is -1 and the input string remains unchanged.
      * @stable ICU 2.0
      */
-    virtual int32_t transliterate(Replaceable& text,
-                                  int32_t start, int32_t limit) const;
+    virtual int32_t transliterate( Replaceable& text,
+                                   int32_t start,
+                                   int32_t limit ) const;
 
     /**
      * Transliterates an entire string in place. Convenience method.
      * @param text the string to be transliterated
      * @stable ICU 2.0
      */
-    virtual void transliterate(Replaceable& text) const;
+    virtual void transliterate( Replaceable& text ) const;
 
     /**
      * Transliterates the portion of the text buffer that can be
@@ -715,9 +732,10 @@ public:
      * @see UTransPosition
      * @stable ICU 2.0
      */
-    virtual void transliterate(Replaceable& text, UTransPosition& index,
-                               const UnicodeString& insertion,
-                               UErrorCode& status) const;
+    virtual void transliterate( Replaceable& text,
+                                UTransPosition& index,
+                                const UnicodeString& insertion,
+                                UErrorCode& status ) const;
 
     /**
      * Transliterates the portion of the text buffer that can be
@@ -731,28 +749,32 @@ public:
      * transliterated into the translation buffer at
      * <code>index.limit</code>.
      * @param status    Output param to filled in with a success or an error.
-     * @see #transliterate(Replaceable&, UTransPosition&, const UnicodeString&, UErrorCode&) const
+     * @see #transliterate(Replaceable&, UTransPosition&, const UnicodeString&,
+     * UErrorCode&) const
      * @stable ICU 2.0
      */
-    virtual void transliterate(Replaceable& text, UTransPosition& index,
-                               UChar32 insertion,
-                               UErrorCode& status) const;
+    virtual void transliterate( Replaceable& text,
+                                UTransPosition& index,
+                                UChar32 insertion,
+                                UErrorCode& status ) const;
 
     /**
      * Transliterates the portion of the text buffer that can be
      * transliterated unambiguosly.  This is a convenience method; see
      * {@link
-     * #transliterate(Replaceable&, UTransPosition&, const UnicodeString&, UErrorCode&) const }
-     * for details.
+     * #transliterate(Replaceable&, UTransPosition&, const UnicodeString&,
+     * UErrorCode&) const } for details.
      * @param text the buffer holding transliterated and
      * untransliterated text
      * @param index an array of three integers.
      * @param status    Output param to filled in with a success or an error.
-     * @see #transliterate(Replaceable&, UTransPosition&, const UnicodeString&, UErrorCode &) const
+     * @see #transliterate(Replaceable&, UTransPosition&, const UnicodeString&,
+     * UErrorCode &) const
      * @stable ICU 2.0
      */
-    virtual void transliterate(Replaceable& text, UTransPosition& index,
-                               UErrorCode& status) const;
+    virtual void transliterate( Replaceable& text,
+                                UTransPosition& index,
+                                UErrorCode& status ) const;
 
     /**
      * Finishes any pending transliterations that were waiting for
@@ -765,11 +787,10 @@ public:
      * #transliterate }
      * @stable ICU 2.0
      */
-    virtual void finishTransliteration(Replaceable& text,
-                                       UTransPosition& index) const;
+    virtual void finishTransliteration( Replaceable& text,
+                                        UTransPosition& index ) const;
 
 private:
-
     /**
      * This internal method does incremental transliteration.  If the
      * 'insertion' is non-null then we append it to 'text' before
@@ -785,13 +806,12 @@ private:
      * <code>index.limit</code>.
      * @param status    Output param to filled in with a success or an error.
      */
-    void _transliterate(Replaceable& text,
-                        UTransPosition& index,
-                        const UnicodeString* insertion,
-                        UErrorCode &status) const;
+    void _transliterate( Replaceable& text,
+                         UTransPosition& index,
+                         const UnicodeString* insertion,
+                         UErrorCode& status ) const;
 
 protected:
-
     /**
      * Abstract method that concrete subclasses define to implement
      * their transliteration algorithm.  This method handles both
@@ -871,9 +891,9 @@ protected:
      * @see #transliterate
      * @stable ICU 2.4
      */
-    virtual void handleTransliterate(Replaceable& text,
-                                     UTransPosition& pos,
-                                     UBool incremental) const = 0;
+    virtual void handleTransliterate( Replaceable& text,
+                                      UTransPosition& pos,
+                                      UBool incremental ) const = 0;
 
 public:
     /**
@@ -887,12 +907,11 @@ public:
      * characters
      * @stable ICU 2.4
      */
-    virtual void filteredTransliterate(Replaceable& text,
-                                       UTransPosition& index,
-                                       UBool incremental) const;
+    virtual void filteredTransliterate( Replaceable& text,
+                                        UTransPosition& index,
+                                        UBool incremental ) const;
 
 private:
-
     /**
      * Top-level transliteration method, handling filtering, incremental and
      * non-incremental transliteration, and rollback.  All transliteration
@@ -920,40 +939,37 @@ private:
      * transliterations where necessary.  If incremental is FALSE then this
      * parameter is ignored.
      */
-    virtual void filteredTransliterate(Replaceable& text,
-                                       UTransPosition& index,
-                                       UBool incremental,
-                                       UBool rollback) const;
+    virtual void filteredTransliterate( Replaceable& text,
+                                        UTransPosition& index,
+                                        UBool incremental,
+                                        UBool rollback ) const;
 
 public:
-
     /**
-     * Returns the length of the longest context required by this transliterator.
-     * This is <em>preceding</em> context.  The default implementation supplied
-     * by <code>Transliterator</code> returns zero; subclasses
-     * that use preceding context should override this method to return the
-     * correct value.  For example, if a transliterator translates "ddd" (where
-     * d is any digit) to "555" when preceded by "(ddd)", then the preceding
-     * context length is 5, the length of "(ddd)".
+     * Returns the length of the longest context required by this
+     * transliterator. This is <em>preceding</em> context.  The default
+     * implementation supplied by <code>Transliterator</code> returns zero;
+     * subclasses that use preceding context should override this method to
+     * return the correct value.  For example, if a transliterator translates
+     * "ddd" (where d is any digit) to "555" when preceded by "(ddd)", then the
+     * preceding context length is 5, the length of "(ddd)".
      *
      * @return The maximum number of preceding context characters this
      * transliterator needs to examine
      * @stable ICU 2.0
      */
-    int32_t getMaximumContextLength(void) const;
+    int32_t getMaximumContextLength( void ) const;
 
 protected:
-
     /**
      * Method for subclasses to use to set the maximum context length.
      * @param maxContextLength the new value to be set.
      * @see #getMaximumContextLength
      * @stable ICU 2.4
      */
-    void setMaximumContextLength(int32_t maxContextLength);
+    void setMaximumContextLength( int32_t maxContextLength );
 
 public:
-
     /**
      * Returns a programmatic identifier for this transliterator.
      * If this identifier is passed to <code>createInstance()</code>, it
@@ -964,7 +980,7 @@ public:
      * @see #getAvailableIDs
      * @stable ICU 2.0
      */
-    virtual const UnicodeString& getID(void) const;
+    virtual const UnicodeString& getID( void ) const;
 
     /**
      * Returns a name for this transliterator that is appropriate for
@@ -975,8 +991,8 @@ public:
      * @return       A reference to 'result'.
      * @stable ICU 2.0
      */
-    static UnicodeString& U_EXPORT2 getDisplayName(const UnicodeString& ID,
-                                         UnicodeString& result);
+    static UnicodeString& U_EXPORT2 getDisplayName( const UnicodeString& ID,
+                                                    UnicodeString& result );
 
     /**
      * Returns a name for this transliterator that is appropriate for
@@ -999,9 +1015,9 @@ public:
      * @return         A reference to 'result'.
      * @stable ICU 2.0
      */
-    static UnicodeString& U_EXPORT2 getDisplayName(const UnicodeString& ID,
-                                         const Locale& inLocale,
-                                         UnicodeString& result);
+    static UnicodeString& U_EXPORT2 getDisplayName( const UnicodeString& ID,
+                                                    const Locale& inLocale,
+                                                    UnicodeString& result );
 
     /**
      * Returns the filter used by this transliterator, or <tt>NULL</tt>
@@ -1010,7 +1026,7 @@ public:
      *         if this transliterator uses no filter.
      * @stable ICU 2.0
      */
-    const UnicodeFilter* getFilter(void) const;
+    const UnicodeFilter* getFilter( void ) const;
 
     /**
      * Returns the filter used by this transliterator, or <tt>NULL</tt> if this
@@ -1021,7 +1037,7 @@ public:
      *         transliterator uses no filter.
      * @stable ICU 2.4
      */
-    UnicodeFilter* orphanFilter(void);
+    UnicodeFilter* orphanFilter( void );
 
     /**
      * Changes the filter used by this transliterator.  If the filter
@@ -1033,7 +1049,7 @@ public:
      * @param adoptedFilter the new filter to be adopted.
      * @stable ICU 2.0
      */
-    void adoptFilter(UnicodeFilter* adoptedFilter);
+    void adoptFilter( UnicodeFilter* adoptedFilter );
 
     /**
      * Returns this transliterator's inverse.  See the class
@@ -1054,7 +1070,7 @@ public:
      * @see #registerInstance
      * @stable ICU 2.0
      */
-    Transliterator* createInverse(UErrorCode& status) const;
+    Transliterator* createInverse( UErrorCode& status ) const;
 
     /**
      * Returns a <code>Transliterator</code> object given its ID.
@@ -1072,10 +1088,10 @@ public:
      * @see #getID
      * @stable ICU 2.0
      */
-    static Transliterator* U_EXPORT2 createInstance(const UnicodeString& ID,
-                                          UTransDirection dir,
-                                          UParseError& parseError,
-                                          UErrorCode& status);
+    static Transliterator* U_EXPORT2 createInstance( const UnicodeString& ID,
+                                                     UTransDirection dir,
+                                                     UParseError& parseError,
+                                                     UErrorCode& status );
 
     /**
      * Returns a <code>Transliterator</code> object given its ID.
@@ -1087,9 +1103,9 @@ public:
      * @return A <code>Transliterator</code> object with the given ID
      * @stable ICU 2.0
      */
-    static Transliterator* U_EXPORT2 createInstance(const UnicodeString& ID,
-                                          UTransDirection dir,
-                                          UErrorCode& status);
+    static Transliterator* U_EXPORT2 createInstance( const UnicodeString& ID,
+                                                     UTransDirection dir,
+                                                     UErrorCode& status );
 
     /**
      * Returns a <code>Transliterator</code> object constructed from
@@ -1108,11 +1124,12 @@ public:
      * @return a newly created Transliterator
      * @stable ICU 2.0
      */
-    static Transliterator* U_EXPORT2 createFromRules(const UnicodeString& ID,
-                                           const UnicodeString& rules,
-                                           UTransDirection dir,
-                                           UParseError& parseError,
-                                           UErrorCode& status);
+    static Transliterator* U_EXPORT2
+    createFromRules( const UnicodeString& ID,
+                     const UnicodeString& rules,
+                     UTransDirection dir,
+                     UParseError& parseError,
+                     UErrorCode& status );
 
     /**
      * Create a rule string that can be passed to createFromRules()
@@ -1125,8 +1142,8 @@ public:
      * U+000A, U+0020..U+007E.
      * @stable ICU 2.0
      */
-    virtual UnicodeString& toRules(UnicodeString& result,
-                                   UBool escapeUnprintable) const;
+    virtual UnicodeString& toRules( UnicodeString& result,
+                                    UBool escapeUnprintable ) const;
 
     /**
      * Return the number of elements that make up this transliterator.
@@ -1161,7 +1178,7 @@ public:
      * an index of 0
      * @stable ICU 3.0
      */
-    const Transliterator& getElement(int32_t index, UErrorCode& ec) const;
+    const Transliterator& getElement( int32_t index, UErrorCode& ec ) const;
 
     /**
      * Returns the set of all characters that may be modified in the
@@ -1178,7 +1195,7 @@ public:
      * @see #handleGetSourceSet
      * @stable ICU 2.4
      */
-    UnicodeSet& getSourceSet(UnicodeSet& result) const;
+    UnicodeSet& getSourceSet( UnicodeSet& result ) const;
 
     /**
      * Framework method that returns the set of all characters that
@@ -1194,7 +1211,7 @@ public:
      * @see #getTargetSet
      * @stable ICU 2.4
      */
-    virtual void handleGetSourceSet(UnicodeSet& result) const;
+    virtual void handleGetSourceSet( UnicodeSet& result ) const;
 
     /**
      * Returns the set of all characters that may be generated as
@@ -1209,10 +1226,9 @@ public:
      * @see #getTargetSet
      * @stable ICU 2.4
      */
-    virtual UnicodeSet& getTargetSet(UnicodeSet& result) const;
+    virtual UnicodeSet& getTargetSet( UnicodeSet& result ) const;
 
 public:
-
     /**
      * Registers a factory function that creates transliterators of
      * a given ID.
@@ -1229,9 +1245,9 @@ public:
      * the registration ID is being instantiated with this factory.
      * @stable ICU 2.0
      */
-    static void U_EXPORT2 registerFactory(const UnicodeString& id,
-                                Factory factory,
-                                Token context);
+    static void U_EXPORT2 registerFactory( const UnicodeString& id,
+                                           Factory factory,
+                                           Token context );
 
     /**
      * Registers an instance <tt>obj</tt> of a subclass of
@@ -1254,7 +1270,7 @@ public:
      * @see #unregister
      * @stable ICU 2.0
      */
-    static void U_EXPORT2 registerInstance(Transliterator* adoptedObj);
+    static void U_EXPORT2 registerInstance( Transliterator* adoptedObj );
 
     /**
      * Registers an ID string as an alias of another ID string.
@@ -1270,11 +1286,10 @@ public:
      * the framework, although this isn't checked.
      * @stable ICU 3.6
      */
-     static void U_EXPORT2 registerAlias(const UnicodeString& aliasID,
-                                         const UnicodeString& realID);
+    static void U_EXPORT2 registerAlias( const UnicodeString& aliasID,
+                                         const UnicodeString& realID );
 
 protected:
-
 #ifndef U_HIDE_INTERNAL_API
     /**
      * @param id the ID being registered
@@ -1285,19 +1300,20 @@ protected:
      * the registration ID is being instantiated with this factory.
      * @internal
      */
-    static void _registerFactory(const UnicodeString& id,
-                                 Factory factory,
-                                 Token context);
+    static void _registerFactory( const UnicodeString& id,
+                                  Factory factory,
+                                  Token context );
 
     /**
      * @internal
      */
-    static void _registerInstance(Transliterator* adoptedObj);
+    static void _registerInstance( Transliterator* adoptedObj );
 
     /**
      * @internal
      */
-    static void _registerAlias(const UnicodeString& aliasID, const UnicodeString& realID);
+    static void _registerAlias( const UnicodeString& aliasID,
+                                const UnicodeString& realID );
 
     /**
      * Register two targets as being inverses of one another.  For
@@ -1332,13 +1348,12 @@ protected:
      * as well, that is, Any-inverseTarget.getInverse() => Any-target
      * @internal
      */
-    static void _registerSpecialInverse(const UnicodeString& target,
-                                        const UnicodeString& inverseTarget,
-                                        UBool bidirectional);
-#endif  /* U_HIDE_INTERNAL_API */
+    static void _registerSpecialInverse( const UnicodeString& target,
+                                         const UnicodeString& inverseTarget,
+                                         UBool bidirectional );
+#endif /* U_HIDE_INTERNAL_API */
 
 public:
-
     /**
      * Unregisters a transliterator or class.  This may be either
      * a system transliterator or a user transliterator or class.
@@ -1356,10 +1371,9 @@ public:
      * @see #registerFactory
      * @stable ICU 2.0
      */
-    static void U_EXPORT2 unregister(const UnicodeString& ID);
+    static void U_EXPORT2 unregister( const UnicodeString& ID );
 
 public:
-
     /**
      * Return a StringEnumeration over the IDs available at the time of the
      * call, including user-registered IDs.
@@ -1369,14 +1383,14 @@ public:
      * when done using it.
      * @stable ICU 3.0
      */
-    static StringEnumeration* U_EXPORT2 getAvailableIDs(UErrorCode& ec);
+    static StringEnumeration* U_EXPORT2 getAvailableIDs( UErrorCode& ec );
 
     /**
      * Return the number of registered source specifiers.
      * @return the number of registered source specifiers.
      * @stable ICU 2.0
      */
-    static int32_t U_EXPORT2 countAvailableSources(void);
+    static int32_t U_EXPORT2 countAvailableSources( void );
 
     /**
      * Return a registered source specifier.
@@ -1387,8 +1401,8 @@ public:
      * @return reference to result
      * @stable ICU 2.0
      */
-    static UnicodeString& U_EXPORT2 getAvailableSource(int32_t index,
-                                             UnicodeString& result);
+    static UnicodeString& U_EXPORT2 getAvailableSource( int32_t index,
+                                                        UnicodeString& result );
 
     /**
      * Return the number of registered target specifiers for a given
@@ -1398,7 +1412,8 @@ public:
      *         source specifier.
      * @stable ICU 2.0
      */
-    static int32_t U_EXPORT2 countAvailableTargets(const UnicodeString& source);
+    static int32_t U_EXPORT2
+    countAvailableTargets( const UnicodeString& source );
 
     /**
      * Return a registered target specifier for a given source.
@@ -1411,9 +1426,10 @@ public:
      * @return reference to result
      * @stable ICU 2.0
      */
-    static UnicodeString& U_EXPORT2 getAvailableTarget(int32_t index,
-                                             const UnicodeString& source,
-                                             UnicodeString& result);
+    static UnicodeString& U_EXPORT2
+    getAvailableTarget( int32_t index,
+                        const UnicodeString& source,
+                        UnicodeString& result );
 
     /**
      * Return the number of registered variant specifiers for a given
@@ -1422,8 +1438,9 @@ public:
      * @param target    the target specifiers.
      * @stable ICU 2.0
      */
-    static int32_t U_EXPORT2 countAvailableVariants(const UnicodeString& source,
-                                          const UnicodeString& target);
+    static int32_t U_EXPORT2
+    countAvailableVariants( const UnicodeString& source,
+                            const UnicodeString& target );
 
     /**
      * Return a registered variant specifier for a given source-target
@@ -1438,70 +1455,68 @@ public:
      * @return reference to result
      * @stable ICU 2.0
      */
-    static UnicodeString& U_EXPORT2 getAvailableVariant(int32_t index,
-                                              const UnicodeString& source,
-                                              const UnicodeString& target,
-                                              UnicodeString& result);
+    static UnicodeString& U_EXPORT2
+    getAvailableVariant( int32_t index,
+                         const UnicodeString& source,
+                         const UnicodeString& target,
+                         UnicodeString& result );
 
 protected:
-
 #ifndef U_HIDE_INTERNAL_API
     /**
      * Non-mutexed internal method
      * @internal
      */
-    static int32_t _countAvailableSources(void);
+    static int32_t _countAvailableSources( void );
 
     /**
      * Non-mutexed internal method
      * @internal
      */
-    static UnicodeString& _getAvailableSource(int32_t index,
-                                              UnicodeString& result);
+    static UnicodeString& _getAvailableSource( int32_t index,
+                                               UnicodeString& result );
 
     /**
      * Non-mutexed internal method
      * @internal
      */
-    static int32_t _countAvailableTargets(const UnicodeString& source);
+    static int32_t _countAvailableTargets( const UnicodeString& source );
 
     /**
      * Non-mutexed internal method
      * @internal
      */
-    static UnicodeString& _getAvailableTarget(int32_t index,
-                                              const UnicodeString& source,
-                                              UnicodeString& result);
-
-    /**
-     * Non-mutexed internal method
-     * @internal
-     */
-    static int32_t _countAvailableVariants(const UnicodeString& source,
-                                           const UnicodeString& target);
-
-    /**
-     * Non-mutexed internal method
-     * @internal
-     */
-    static UnicodeString& _getAvailableVariant(int32_t index,
+    static UnicodeString& _getAvailableTarget( int32_t index,
                                                const UnicodeString& source,
-                                               const UnicodeString& target,
-                                               UnicodeString& result);
-#endif  /* U_HIDE_INTERNAL_API */
+                                               UnicodeString& result );
+
+    /**
+     * Non-mutexed internal method
+     * @internal
+     */
+    static int32_t _countAvailableVariants( const UnicodeString& source,
+                                            const UnicodeString& target );
+
+    /**
+     * Non-mutexed internal method
+     * @internal
+     */
+    static UnicodeString& _getAvailableVariant( int32_t index,
+                                                const UnicodeString& source,
+                                                const UnicodeString& target,
+                                                UnicodeString& result );
+#endif /* U_HIDE_INTERNAL_API */
 
 protected:
-
     /**
      * Set the ID of this transliterators.  Subclasses shouldn't do
      * this, unless the underlying script behavior has changed.
      * @param id the new id t to be set.
      * @stable ICU 2.4
      */
-    void setID(const UnicodeString& id);
+    void setID( const UnicodeString& id );
 
 public:
-
     /**
      * Return the class ID for this class.  This is useful only for
      * comparing to a return value from getDynamicClassID().
@@ -1512,7 +1527,7 @@ public:
      * @return       The class ID for class Transliterator.
      * @stable ICU 2.0
      */
-    static UClassID U_EXPORT2 getStaticClassID(void);
+    static UClassID U_EXPORT2 getStaticClassID( void );
 
     /**
      * Returns a unique class ID <b>polymorphically</b>.  This method
@@ -1529,10 +1544,10 @@ public:
      * different class IDs.
      * @stable ICU 2.0
      */
-    virtual UClassID getDynamicClassID(void) const = 0;
+    virtual UClassID getDynamicClassID( void ) const = 0;
 
 private:
-    static UBool initializeRegistry(UErrorCode &status);
+    static UBool initializeRegistry( UErrorCode& status );
 
 public:
 #ifndef U_HIDE_OBSOLETE_API
@@ -1543,7 +1558,7 @@ public:
      * @return the number of IDs currently registered with the system.
      * @obsolete ICU 3.4 use getAvailableIDs() instead
      */
-    static int32_t U_EXPORT2 countAvailableIDs(void);
+    static int32_t U_EXPORT2 countAvailableIDs( void );
 
     /**
      * Return the index-th available ID.  index must be between 0
@@ -1557,34 +1572,34 @@ public:
      * is not thread safe, since it returns a reference to storage that
      * may become invalid if another thread calls unregister
      */
-    static const UnicodeString& U_EXPORT2 getAvailableID(int32_t index);
-#endif  /* U_HIDE_OBSOLETE_API */
+    static const UnicodeString& U_EXPORT2 getAvailableID( int32_t index );
+#endif /* U_HIDE_OBSOLETE_API */
 };
 
-inline int32_t Transliterator::getMaximumContextLength(void) const {
+inline int32_t Transliterator::getMaximumContextLength( void ) const {
     return maximumContextLength;
 }
 
-inline void Transliterator::setID(const UnicodeString& id) {
+inline void Transliterator::setID( const UnicodeString& id ) {
     ID = id;
     // NUL-terminate the ID string, which is a non-aliased copy.
-    ID.append((char16_t)0);
-    ID.truncate(ID.length()-1);
+    ID.append( ( char16_t )0 );
+    ID.truncate( ID.length() - 1 );
 }
 
 #ifndef U_HIDE_INTERNAL_API
-inline Transliterator::Token Transliterator::integerToken(int32_t i) {
+inline Transliterator::Token Transliterator::integerToken( int32_t i ) {
     Token t;
     t.integer = i;
     return t;
 }
 
-inline Transliterator::Token Transliterator::pointerToken(void* p) {
+inline Transliterator::Token Transliterator::pointerToken( void* p ) {
     Token t;
     t.pointer = p;
     return t;
 }
-#endif  /* U_HIDE_INTERNAL_API */
+#endif /* U_HIDE_INTERNAL_API */
 
 U_NAMESPACE_END
 

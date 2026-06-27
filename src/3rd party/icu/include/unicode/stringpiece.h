@@ -23,7 +23,7 @@
 #define __STRINGPIECE_H__
 
 /**
- * \file 
+ * \file
  * \brief C++ API: StringPiece: Read-only byte string wrapper class.
  */
 
@@ -34,8 +34,8 @@
 #include <cstddef>
 #include <type_traits>
 
-#include "unicode/uobject.h"
 #include "unicode/std_string.h"
+#include "unicode/uobject.h"
 
 // Arghh!  I wish C++ literals were "string".
 
@@ -58,177 +58,187 @@ U_NAMESPACE_BEGIN
  * @stable ICU 4.2
  */
 class U_COMMON_API StringPiece : public UMemory {
- private:
-  const char*   ptr_;
-  int32_t       length_;
+private:
+    const char* ptr_;
+    int32_t length_;
 
- public:
-  /**
-   * Default constructor, creates an empty StringPiece.
-   * @stable ICU 4.2
-   */
-  StringPiece() : ptr_(NULL), length_(0) { }
-  /**
-   * Constructs from a NUL-terminated const char * pointer.
-   * @param str a NUL-terminated const char * pointer
-   * @stable ICU 4.2
-   */
-  StringPiece(const char* str);
-  /**
-   * Constructs from a std::string.
-   * @stable ICU 4.2
-   */
-  StringPiece(const std::string& str)
-    : ptr_(str.data()), length_(static_cast<int32_t>(str.size())) { }
+public:
+    /**
+     * Default constructor, creates an empty StringPiece.
+     * @stable ICU 4.2
+     */
+    StringPiece() : ptr_( NULL ), length_( 0 ) {}
+    /**
+     * Constructs from a NUL-terminated const char * pointer.
+     * @param str a NUL-terminated const char * pointer
+     * @stable ICU 4.2
+     */
+    StringPiece( const char* str );
+    /**
+     * Constructs from a std::string.
+     * @stable ICU 4.2
+     */
+    StringPiece( const std::string& str )
+        : ptr_( str.data() ), length_( static_cast< int32_t >( str.size() ) ) {}
 #ifndef U_HIDE_DRAFT_API
-  /**
-   * Constructs from some other implementation of a string piece class, from any
-   * C++ record type that has these two methods:
-   *
-   * \code{.cpp}
-   *
-   *   struct OtherStringPieceClass {
-   *     const char* data();
-   *     size_t size();
-   *   };
-   *
-   * \endcode
-   *
-   * The other string piece class will typically be std::string_view from C++17
-   * or absl::string_view from Abseil.
-   *
-   * @param str the other string piece
-   * @draft ICU 65
-   */
-  template <typename T,
-            typename = typename std::enable_if<
-                std::is_same<decltype(T().data()), const char*>::value &&
-                std::is_same<decltype(T().size()), size_t>::value>::type>
-  StringPiece(T str)
-      : ptr_(str.data()), length_(static_cast<int32_t>(str.size())) {}
-#endif  // U_HIDE_DRAFT_API
-  /**
-   * Constructs from a const char * pointer and a specified length.
-   * @param offset a const char * pointer (need not be terminated)
-   * @param len the length of the string; must be non-negative
-   * @stable ICU 4.2
-   */
-  StringPiece(const char* offset, int32_t len) : ptr_(offset), length_(len) { }
-  /**
-   * Substring of another StringPiece.
-   * @param x the other StringPiece
-   * @param pos start position in x; must be non-negative and <= x.length().
-   * @stable ICU 4.2
-   */
-  StringPiece(const StringPiece& x, int32_t pos);
-  /**
-   * Substring of another StringPiece.
-   * @param x the other StringPiece
-   * @param pos start position in x; must be non-negative and <= x.length().
-   * @param len length of the substring;
-   *            must be non-negative and will be pinned to at most x.length() - pos.
-   * @stable ICU 4.2
-   */
-  StringPiece(const StringPiece& x, int32_t pos, int32_t len);
+    /**
+     * Constructs from some other implementation of a string piece class, from
+     * any C++ record type that has these two methods:
+     *
+     * \code{.cpp}
+     *
+     *   struct OtherStringPieceClass {
+     *     const char* data();
+     *     size_t size();
+     *   };
+     *
+     * \endcode
+     *
+     * The other string piece class will typically be std::string_view from
+     * C++17 or absl::string_view from Abseil.
+     *
+     * @param str the other string piece
+     * @draft ICU 65
+     */
+    template <
+        typename T,
+        typename = typename std::enable_if<
+            std::is_same< decltype( T().data() ), const char* >::value &&
+            std::is_same< decltype( T().size() ), size_t >::value >::type >
+    StringPiece( T str )
+        : ptr_( str.data() ), length_( static_cast< int32_t >( str.size() ) ) {}
+#endif // U_HIDE_DRAFT_API
+    /**
+     * Constructs from a const char * pointer and a specified length.
+     * @param offset a const char * pointer (need not be terminated)
+     * @param len the length of the string; must be non-negative
+     * @stable ICU 4.2
+     */
+    StringPiece( const char* offset, int32_t len )
+        : ptr_( offset ), length_( len ) {}
+    /**
+     * Substring of another StringPiece.
+     * @param x the other StringPiece
+     * @param pos start position in x; must be non-negative and <= x.length().
+     * @stable ICU 4.2
+     */
+    StringPiece( const StringPiece& x, int32_t pos );
+    /**
+     * Substring of another StringPiece.
+     * @param x the other StringPiece
+     * @param pos start position in x; must be non-negative and <= x.length().
+     * @param len length of the substring;
+     *            must be non-negative and will be pinned to at most x.length()
+     * - pos.
+     * @stable ICU 4.2
+     */
+    StringPiece( const StringPiece& x, int32_t pos, int32_t len );
 
-  /**
-   * Returns the string pointer. May be NULL if it is empty.
-   *
-   * data() may return a pointer to a buffer with embedded NULs, and the
-   * returned buffer may or may not be null terminated.  Therefore it is
-   * typically a mistake to pass data() to a routine that expects a NUL
-   * terminated string.
-   * @return the string pointer
-   * @stable ICU 4.2
-   */
-  const char* data() const { return ptr_; }
-  /**
-   * Returns the string length. Same as length().
-   * @return the string length
-   * @stable ICU 4.2
-   */
-  int32_t size() const { return length_; }
-  /**
-   * Returns the string length. Same as size().
-   * @return the string length
-   * @stable ICU 4.2
-   */
-  int32_t length() const { return length_; }
-  /**
-   * Returns whether the string is empty.
-   * @return TRUE if the string is empty
-   * @stable ICU 4.2
-   */
-  UBool empty() const { return length_ == 0; }
+    /**
+     * Returns the string pointer. May be NULL if it is empty.
+     *
+     * data() may return a pointer to a buffer with embedded NULs, and the
+     * returned buffer may or may not be null terminated.  Therefore it is
+     * typically a mistake to pass data() to a routine that expects a NUL
+     * terminated string.
+     * @return the string pointer
+     * @stable ICU 4.2
+     */
+    const char* data() const { return ptr_; }
+    /**
+     * Returns the string length. Same as length().
+     * @return the string length
+     * @stable ICU 4.2
+     */
+    int32_t size() const { return length_; }
+    /**
+     * Returns the string length. Same as size().
+     * @return the string length
+     * @stable ICU 4.2
+     */
+    int32_t length() const { return length_; }
+    /**
+     * Returns whether the string is empty.
+     * @return TRUE if the string is empty
+     * @stable ICU 4.2
+     */
+    UBool empty() const { return length_ == 0; }
 
-  /**
-   * Sets to an empty string.
-   * @stable ICU 4.2
-   */
-  void clear() { ptr_ = NULL; length_ = 0; }
-
-  /**
-   * Reset the stringpiece to refer to new data.
-   * @param xdata pointer the new string data.  Need not be nul terminated.
-   * @param len the length of the new data
-   * @stable ICU 4.8
-   */
-  void set(const char* xdata, int32_t len) { ptr_ = xdata; length_ = len; }
-
-  /**
-   * Reset the stringpiece to refer to new data.
-   * @param str a pointer to a NUL-terminated string. 
-   * @stable ICU 4.8
-   */
-  void set(const char* str);
-
-  /**
-   * Removes the first n string units.
-   * @param n prefix length, must be non-negative and <=length()
-   * @stable ICU 4.2
-   */
-  void remove_prefix(int32_t n) {
-    if (n >= 0) {
-      if (n > length_) {
-        n = length_;
-      }
-      ptr_ += n;
-      length_ -= n;
-    }
-  }
-
-  /**
-   * Removes the last n string units.
-   * @param n suffix length, must be non-negative and <=length()
-   * @stable ICU 4.2
-   */
-  void remove_suffix(int32_t n) {
-    if (n >= 0) {
-      if (n <= length_) {
-        length_ -= n;
-      } else {
+    /**
+     * Sets to an empty string.
+     * @stable ICU 4.2
+     */
+    void clear() {
+        ptr_ = NULL;
         length_ = 0;
-      }
     }
-  }
 
-  /**
-   * Maximum integer, used as a default value for substring methods.
-   * @stable ICU 4.2
-   */
-  static const int32_t npos; // = 0x7fffffff;
+    /**
+     * Reset the stringpiece to refer to new data.
+     * @param xdata pointer the new string data.  Need not be nul terminated.
+     * @param len the length of the new data
+     * @stable ICU 4.8
+     */
+    void set( const char* xdata, int32_t len ) {
+        ptr_ = xdata;
+        length_ = len;
+    }
 
-  /**
-   * Returns a substring of this StringPiece.
-   * @param pos start position; must be non-negative and <= length().
-   * @param len length of the substring;
-   *            must be non-negative and will be pinned to at most length() - pos.
-   * @return the substring StringPiece
-   * @stable ICU 4.2
-   */
-  StringPiece substr(int32_t pos, int32_t len = npos) const {
-    return StringPiece(*this, pos, len);
-  }
+    /**
+     * Reset the stringpiece to refer to new data.
+     * @param str a pointer to a NUL-terminated string.
+     * @stable ICU 4.8
+     */
+    void set( const char* str );
+
+    /**
+     * Removes the first n string units.
+     * @param n prefix length, must be non-negative and <=length()
+     * @stable ICU 4.2
+     */
+    void remove_prefix( int32_t n ) {
+        if ( n >= 0 ) {
+            if ( n > length_ ) {
+                n = length_;
+            }
+            ptr_ += n;
+            length_ -= n;
+        }
+    }
+
+    /**
+     * Removes the last n string units.
+     * @param n suffix length, must be non-negative and <=length()
+     * @stable ICU 4.2
+     */
+    void remove_suffix( int32_t n ) {
+        if ( n >= 0 ) {
+            if ( n <= length_ ) {
+                length_ -= n;
+            } else {
+                length_ = 0;
+            }
+        }
+    }
+
+    /**
+     * Maximum integer, used as a default value for substring methods.
+     * @stable ICU 4.2
+     */
+    static const int32_t npos; // = 0x7fffffff;
+
+    /**
+     * Returns a substring of this StringPiece.
+     * @param pos start position; must be non-negative and <= length().
+     * @param len length of the substring;
+     *            must be non-negative and will be pinned to at most length() -
+     * pos.
+     * @return the substring StringPiece
+     * @stable ICU 4.2
+     */
+    StringPiece substr( int32_t pos, int32_t len = npos ) const {
+        return StringPiece( *this, pos, len );
+    }
 };
 
 /**
@@ -238,8 +248,8 @@ class U_COMMON_API StringPiece : public UMemory {
  * @return TRUE if the string data is equal
  * @stable ICU 4.8
  */
-U_EXPORT UBool U_EXPORT2 
-operator==(const StringPiece& x, const StringPiece& y);
+U_EXPORT UBool U_EXPORT2 operator==( const StringPiece& x,
+                                     const StringPiece& y );
 
 /**
  * Global operator != for StringPiece
@@ -248,12 +258,12 @@ operator==(const StringPiece& x, const StringPiece& y);
  * @return TRUE if the string data is not equal
  * @stable ICU 4.8
  */
-inline UBool operator!=(const StringPiece& x, const StringPiece& y) {
-  return !(x == y);
+inline UBool operator!=( const StringPiece& x, const StringPiece& y ) {
+    return !( x == y );
 }
 
 U_NAMESPACE_END
 
 #endif /* U_SHOW_CPLUSPLUS_API */
 
-#endif  // __STRINGPIECE_H__
+#endif // __STRINGPIECE_H__

@@ -19,10 +19,10 @@
 #include "unicode/uobject.h"
 
 /**
- * \file 
+ * \file
  * \brief C++ API: Unicode Functor
  */
- 
+
 U_NAMESPACE_BEGIN
 
 class UnicodeMatcher;
@@ -36,9 +36,7 @@ class TransliterationRuleData;
  * @stable ICU 2.4
  */
 class U_COMMON_API UnicodeFunctor : public UObject {
-
 public:
-
     /**
      * Destructor
      * @stable ICU 2.4
@@ -83,7 +81,7 @@ public:
      * @return          The class ID for all objects of this class.
      * @stable ICU 2.0
      */
-    static UClassID U_EXPORT2 getStaticClassID(void);
+    static UClassID U_EXPORT2 getStaticClassID( void );
 
     /**
      * Returns a unique class ID <b>polymorphically</b>.  This method
@@ -100,7 +98,7 @@ public:
      * different class IDs.
      * @stable ICU 2.4
      */
-    virtual UClassID getDynamicClassID(void) const = 0;
+    virtual UClassID getDynamicClassID( void ) const = 0;
 
     /**
      * Set the data object associated with this functor.  The data
@@ -110,17 +108,15 @@ public:
      * changed to pass data object pointers through the API.
      * @internal ICU 2.1
      */
-    virtual void setData(const TransliterationRuleData*) = 0;
+    virtual void setData( const TransliterationRuleData* ) = 0;
 
 protected:
-
     /**
      * Since this class has pure virtual functions,
      * a constructor can't be used.
      * @stable ICU 2.0
      */
     /*UnicodeFunctor();*/
-
 };
 
 /*inline UnicodeFunctor::UnicodeFunctor() {}*/

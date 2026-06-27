@@ -1,10 +1,8 @@
-#include "config.h"
-
 #include "globals.h"
 
+#include "config.h"
 
 bool eax_g_is_enabled = true;
-
 
 const char eax1_ext_name[] = "EAX";
 const char eax2_ext_name[] = "EAX2.0";

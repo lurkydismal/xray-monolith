@@ -9,7 +9,6 @@
 ******************************************************************************
 */
 
-
 /**
  * \file
  * \brief C API: access to ICU Data Version number
@@ -32,12 +31,14 @@
 
 /**
  * Retrieves the data version from icuver and stores it in dataVersionFillin.
- * 
- * @param dataVersionFillin icuver data version information to be filled in if not-null
+ *
+ * @param dataVersionFillin icuver data version information to be filled in if
+ * not-null
  * @param status stores the error code from the calls to resource bundle
- * 
+ *
  * @stable ICU 49
  */
-U_STABLE void U_EXPORT2 u_getDataVersion(UVersionInfo dataVersionFillin, UErrorCode *status);
+U_STABLE void U_EXPORT2 u_getDataVersion( UVersionInfo dataVersionFillin,
+                                          UErrorCode* status );
 
 #endif

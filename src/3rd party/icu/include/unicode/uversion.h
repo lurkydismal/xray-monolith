@@ -18,7 +18,7 @@
 
 /**
  * \file
- * \brief C API: API for accessing ICU version numbers. 
+ * \brief C API: API for accessing ICU version numbers.
  */
 /*===========================================================================*/
 /* Main ICU version information                                              */
@@ -35,7 +35,7 @@
 /** Maximum length of the copyright string.
  *  @stable ICU 2.4
  */
-#define U_COPYRIGHT_STRING_LENGTH  128
+#define U_COPYRIGHT_STRING_LENGTH 128
 
 /** An ICU version consists of up to 4 numbers from 0..255.
  *  @stable ICU 2.4
@@ -56,7 +56,7 @@
  *  To compare two versions, use memcmp(v1,v2,sizeof(UVersionInfo)).
  *  @stable ICU 2.4
  */
-typedef uint8_t UVersionInfo[U_MAX_VERSION_LENGTH];
+typedef uint8_t UVersionInfo[ U_MAX_VERSION_LENGTH ];
 
 /*===========================================================================*/
 /* C++ namespace if supported. Versioned unless versioning is disabled.      */
@@ -98,32 +98,33 @@ typedef uint8_t UVersionInfo[U_MAX_VERSION_LENGTH];
  * @stable ICU 2.4
  */
 
-#   if U_DISABLE_RENAMING
-#       define U_ICU_NAMESPACE icu
-        namespace U_ICU_NAMESPACE { }
-#   else
-#       define U_ICU_NAMESPACE U_ICU_ENTRY_POINT_RENAME(icu)
-        namespace U_ICU_NAMESPACE { }
-        namespace icu = U_ICU_NAMESPACE;
-#   endif
+#if U_DISABLE_RENAMING
+#define U_ICU_NAMESPACE icu
+namespace U_ICU_NAMESPACE {}
+#else
+#define U_ICU_NAMESPACE U_ICU_ENTRY_POINT_RENAME( icu )
+namespace U_ICU_NAMESPACE {}
+namespace icu = U_ICU_NAMESPACE;
+#endif
 
-#   define U_NAMESPACE_BEGIN namespace U_ICU_NAMESPACE {
-#   define U_NAMESPACE_END }
-#   define U_NAMESPACE_USE using namespace U_ICU_NAMESPACE;
-#   define U_NAMESPACE_QUALIFIER U_ICU_NAMESPACE::
+#define U_NAMESPACE_BEGIN namespace U_ICU_NAMESPACE {
+#define U_NAMESPACE_END }
+#define U_NAMESPACE_USE using namespace U_ICU_NAMESPACE;
+#define U_NAMESPACE_QUALIFIER U_ICU_NAMESPACE::
 
-#   ifndef U_USING_ICU_NAMESPACE
-#       if defined(U_COMBINED_IMPLEMENTATION) || defined(U_COMMON_IMPLEMENTATION) || \
-                defined(U_I18N_IMPLEMENTATION) || defined(U_IO_IMPLEMENTATION) || \
-                defined(U_LAYOUTEX_IMPLEMENTATION) || defined(U_TOOLUTIL_IMPLEMENTATION)
-#           define U_USING_ICU_NAMESPACE 0
-#       else
-#           define U_USING_ICU_NAMESPACE 0
-#       endif
-#   endif
-#   if U_USING_ICU_NAMESPACE
-        U_NAMESPACE_USE
-#   endif
+#ifndef U_USING_ICU_NAMESPACE
+#if defined( U_COMBINED_IMPLEMENTATION ) ||                                   \
+    defined( U_COMMON_IMPLEMENTATION ) || defined( U_I18N_IMPLEMENTATION ) || \
+    defined( U_IO_IMPLEMENTATION ) || defined( U_LAYOUTEX_IMPLEMENTATION ) || \
+    defined( U_TOOLUTIL_IMPLEMENTATION )
+#define U_USING_ICU_NAMESPACE 0
+#else
+#define U_USING_ICU_NAMESPACE 0
+#endif
+#endif
+#if U_USING_ICU_NAMESPACE
+U_NAMESPACE_USE
+#endif
 #endif /* __cplusplus */
 
 /*===========================================================================*/
@@ -141,8 +142,8 @@ typedef uint8_t UVersionInfo[U_MAX_VERSION_LENGTH];
  *                      values of up to 255 each.
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
-u_versionFromString(UVersionInfo versionArray, const char *versionString);
+U_STABLE void U_EXPORT2 u_versionFromString( UVersionInfo versionArray,
+                                             const char* versionString );
 
 /**
  * Parse a Unicode string with dotted-decimal version information and
@@ -155,9 +156,8 @@ u_versionFromString(UVersionInfo versionArray, const char *versionString);
  *                      fields with values of up to 255 each.
  * @stable ICU 4.2
  */
-U_STABLE void U_EXPORT2
-u_versionFromUString(UVersionInfo versionArray, const UChar *versionString);
-
+U_STABLE void U_EXPORT2 u_versionFromUString( UVersionInfo versionArray,
+                                              const UChar* versionString );
 
 /**
  * Write a string with dotted-decimal version information according
@@ -168,20 +168,20 @@ u_versionFromUString(UVersionInfo versionArray, const UChar *versionString);
  * @param versionString A string buffer that will be filled in with
  *                      a string corresponding to the numeric version
  *                      information in versionArray.
- *                      The buffer size must be at least U_MAX_VERSION_STRING_LENGTH.
+ *                      The buffer size must be at least
+ * U_MAX_VERSION_STRING_LENGTH.
  * @stable ICU 2.4
  */
-U_STABLE void U_EXPORT2
-u_versionToString(const UVersionInfo versionArray, char *versionString);
+U_STABLE void U_EXPORT2 u_versionToString( const UVersionInfo versionArray,
+                                           char* versionString );
 
 /**
- * Gets the ICU release version.  The version array stores the version information
- * for ICU.  For example, release "1.3.31.2" is then represented as 0x01031F02.
- * Definition of this function lives in putil.c
+ * Gets the ICU release version.  The version array stores the version
+ * information for ICU.  For example, release "1.3.31.2" is then represented as
+ * 0x01031F02. Definition of this function lives in putil.c
  *
  * @param versionArray the version # information, the result will be filled in
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2
-u_getVersion(UVersionInfo versionArray);
+U_STABLE void U_EXPORT2 u_getVersion( UVersionInfo versionArray );
 #endif

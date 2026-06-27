@@ -30,8 +30,10 @@ namespace luabind {
 //    sizeof(T*) = sizeof(T)
 //    sizeof(T&) = sizeof(T)
 //    sizeof(T)  = sizeof(T)
-template <typename T>
-struct pointee_sizeof : public std::integral_constant<size_t, sizeof(std::remove_pointer_t<std::remove_reference_t<T>>)> {
-};
+template < typename T >
+struct pointee_sizeof
+    : public std::integral_constant<
+          size_t,
+          sizeof( std::remove_pointer_t< std::remove_reference_t< T > > ) > {};
 
 } // namespace luabind

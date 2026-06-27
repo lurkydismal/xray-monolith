@@ -17,47 +17,58 @@ struct EffectSlot;
 struct MixParams;
 struct RealMixParams;
 
-
 /** Target gain for the reverb decay feedback reaching the decay time. */
-constexpr float ReverbDecayGain{0.001f}; /* -60 dB */
+constexpr float ReverbDecayGain{ 0.001f }; /* -60 dB */
 
-constexpr float ReverbMaxReflectionsDelay{0.3f};
-constexpr float ReverbMaxLateReverbDelay{0.1f};
+constexpr float ReverbMaxReflectionsDelay{ 0.3f };
+constexpr float ReverbMaxLateReverbDelay{ 0.1f };
 
-enum class ChorusWaveform {
-    Sinusoid,
-    Triangle
-};
+enum class ChorusWaveform { Sinusoid, Triangle };
 
-constexpr float ChorusMaxDelay{0.016f};
-constexpr float FlangerMaxDelay{0.004f};
+constexpr float ChorusMaxDelay{ 0.016f };
+constexpr float FlangerMaxDelay{ 0.004f };
 
-constexpr float EchoMaxDelay{0.207f};
-constexpr float EchoMaxLRDelay{0.404f};
+constexpr float EchoMaxDelay{ 0.207f };
+constexpr float EchoMaxLRDelay{ 0.404f };
 
-enum class FShifterDirection {
-    Down,
-    Up,
-    Off
-};
+enum class FShifterDirection { Down, Up, Off };
 
-enum class ModulatorWaveform {
-    Sinusoid,
-    Sawtooth,
-    Square
-};
+enum class ModulatorWaveform { Sinusoid, Sawtooth, Square };
 
 enum class VMorpherPhenome {
-    A, E, I, O, U,
-    AA, AE, AH, AO, EH, ER, IH, IY, UH, UW,
-    B, D, F, G, J, K, L, M, N, P, R, S, T, V, Z
+    A,
+    E,
+    I,
+    O,
+    U,
+    AA,
+    AE,
+    AH,
+    AO,
+    EH,
+    ER,
+    IH,
+    IY,
+    UH,
+    UW,
+    B,
+    D,
+    F,
+    G,
+    J,
+    K,
+    L,
+    M,
+    N,
+    P,
+    R,
+    S,
+    T,
+    V,
+    Z
 };
 
-enum class VMorpherWaveform {
-    Sinusoid,
-    Triangle,
-    Sawtooth
-};
+enum class VMorpherWaveform { Sinusoid, Triangle, Sawtooth };
 
 union EffectProps {
     struct {
@@ -71,10 +82,10 @@ union EffectProps {
         float DecayLFRatio;
         float ReflectionsGain;
         float ReflectionsDelay;
-        float ReflectionsPan[3];
+        float ReflectionsPan[ 3 ];
         float LateReverbGain;
         float LateReverbDelay;
-        float LateReverbPan[3];
+        float LateReverbPan[ 3 ];
         float EchoTime;
         float EchoDepth;
         float ModulationTime;
@@ -168,30 +179,31 @@ union EffectProps {
     } Dedicated;
 };
 
-
 struct EffectTarget {
-    MixParams *Main;
-    RealMixParams *RealOut;
+    MixParams* Main;
+    RealMixParams* RealOut;
 };
 
-struct EffectState : public al::intrusive_ref<EffectState> {
-    al::span<FloatBufferLine> mOutTarget;
-
+struct EffectState : public al::intrusive_ref< EffectState > {
+    al::span< FloatBufferLine > mOutTarget;
 
     virtual ~EffectState() = default;
 
-    virtual void deviceUpdate(const DeviceBase *device, const BufferStorage *buffer) = 0;
-    virtual void update(const ContextBase *context, const EffectSlot *slot,
-        const EffectProps *props, const EffectTarget target) = 0;
-    virtual void process(const size_t samplesToDo, const al::span<const FloatBufferLine> samplesIn,
-        const al::span<FloatBufferLine> samplesOut) = 0;
+    virtual void deviceUpdate( const DeviceBase* device,
+                               const BufferStorage* buffer ) = 0;
+    virtual void update( const ContextBase* context,
+                         const EffectSlot* slot,
+                         const EffectProps* props,
+                         const EffectTarget target ) = 0;
+    virtual void process( const size_t samplesToDo,
+                          const al::span< const FloatBufferLine > samplesIn,
+                          const al::span< FloatBufferLine > samplesOut ) = 0;
 };
-
 
 struct EffectStateFactory {
     virtual ~EffectStateFactory() = default;
 
-    virtual al::intrusive_ptr<EffectState> create() = 0;
+    virtual al::intrusive_ptr< EffectState > create() = 0;
 };
 
 #endif /* CORE_EFFECTS_BASE_H */

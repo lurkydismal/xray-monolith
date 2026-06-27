@@ -9,9 +9,9 @@
  * more memory and are harder on cache, while smaller values may need more
  * iterations for mixing.
  */
-constexpr int BufferLineSize{1024};
+constexpr int BufferLineSize{ 1024 };
 
-using FloatBufferLine = std::array<float,BufferLineSize>;
-using FloatBufferSpan = al::span<float,BufferLineSize>;
+using FloatBufferLine = std::array< float, BufferLineSize >;
+using FloatBufferSpan = al::span< float, BufferLineSize >;
 
 #endif /* CORE_BUFFERLINE_H */

@@ -1,16 +1,11 @@
-#include "stdafx.h"
 #include "FryupZone.h"
 
-CFryupZone::CFryupZone()
-{
-}
+#include "stdafx.h"
 
-CFryupZone::~CFryupZone()
-{
-}
+CFryupZone::CFryupZone() {}
+
+CFryupZone::~CFryupZone() {}
 
 #ifdef DEBUG
-void CFryupZone::OnRender()
-{
-}
+void CFryupZone::OnRender() {}
 #endif

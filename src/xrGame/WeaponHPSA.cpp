@@ -1,11 +1,7 @@
-#include "pch_script.h"
-
 #include "WeaponHPSA.h"
 
-CWeaponHPSA::CWeaponHPSA() : CWeaponPistol()
-{
-}
+#include "pch_script.h"
 
-CWeaponHPSA::~CWeaponHPSA()
-{
-}
+CWeaponHPSA::CWeaponHPSA() : CWeaponPistol() {}
+
+CWeaponHPSA::~CWeaponHPSA() {}

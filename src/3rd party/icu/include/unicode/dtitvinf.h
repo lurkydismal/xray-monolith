@@ -25,10 +25,10 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/udat.h"
+#include "unicode/dtptngen.h"
 #include "unicode/locid.h"
 #include "unicode/ucal.h"
-#include "unicode/dtptngen.h"
+#include "unicode/udat.h"
 
 U_NAMESPACE_BEGIN
 
@@ -82,22 +82,23 @@ U_NAMESPACE_BEGIN
  * The largest different calendar fields between 2 calendars is the
  * first different calendar field in above order.
  *
- * For example: the largest different calendar fields between &quot;Jan 10, 2007&quot;
- * and &quot;Feb 20, 2008&quot; is year.
+ * For example: the largest different calendar fields between &quot;Jan 10,
+ * 2007&quot; and &quot;Feb 20, 2008&quot; is year.
  *
  * <P>
  * There is a set of pre-defined static skeleton strings.
  * There are pre-defined interval patterns for those pre-defined skeletons
  * in locales' resource files.
- * For example, for a skeleton UDAT_YEAR_ABBR_MONTH_DAY, which is  &quot;yMMMd&quot;,
- * in  en_US, if the largest different calendar field between date1 and date2
- * is &quot;year&quot;, the date interval pattern  is &quot;MMM d, yyyy - MMM d, yyyy&quot;,
- * such as &quot;Jan 10, 2007 - Jan 10, 2008&quot;.
- * If the largest different calendar field between date1 and date2 is &quot;month&quot;,
- * the date interval pattern is &quot;MMM d - MMM d, yyyy&quot;,
- * such as &quot;Jan 10 - Feb 10, 2007&quot;.
- * If the largest different calendar field between date1 and date2 is &quot;day&quot;,
- * the date interval pattern is &quot;MMM d-d, yyyy&quot;, such as &quot;Jan 10-20, 2007&quot;.
+ * For example, for a skeleton UDAT_YEAR_ABBR_MONTH_DAY, which is
+ * &quot;yMMMd&quot;, in  en_US, if the largest different calendar field between
+ * date1 and date2 is &quot;year&quot;, the date interval pattern  is &quot;MMM
+ * d, yyyy - MMM d, yyyy&quot;, such as &quot;Jan 10, 2007 - Jan 10, 2008&quot;.
+ * If the largest different calendar field between date1 and date2 is
+ * &quot;month&quot;, the date interval pattern is &quot;MMM d - MMM d,
+ * yyyy&quot;, such as &quot;Jan 10 - Feb 10, 2007&quot;. If the largest
+ * different calendar field between date1 and date2 is &quot;day&quot;, the date
+ * interval pattern is &quot;MMM d-d, yyyy&quot;, such as &quot;Jan 10-20,
+ * 2007&quot;.
  *
  * For date skeleton, the interval patterns when year, or month, or date is
  * different are defined in resource files.
@@ -112,15 +113,15 @@ U_NAMESPACE_BEGIN
  * We use fallback format for the default order for the locale.
  * For example, if the fallback format is &quot;{0} - {1}&quot;, it means
  * the first date in the interval pattern for this locale is earlier date.
- * If the fallback format is &quot;{1} - {0}&quot;, it means the first date is the
- * later date.
- * For a particular interval pattern, the default order can be overriden
- * by prefixing &quot;latestFirst:&quot; or &quot;earliestFirst:&quot; to the interval pattern.
- * For example, if the fallback format is &quot;{0}-{1}&quot;,
- * but for skeleton &quot;yMMMd&quot;, the interval pattern when day is different is
- * &quot;latestFirst:d-d MMM yy&quot;, it means by default, the first date in interval
- * pattern is the earlier date. But for skeleton &quot;yMMMd&quot;, when day is different,
- * the first date in &quot;d-d MMM yy&quot; is the later date.
+ * If the fallback format is &quot;{1} - {0}&quot;, it means the first date is
+ * the later date. For a particular interval pattern, the default order can be
+ * overriden by prefixing &quot;latestFirst:&quot; or &quot;earliestFirst:&quot;
+ * to the interval pattern. For example, if the fallback format is
+ * &quot;{0}-{1}&quot;, but for skeleton &quot;yMMMd&quot;, the interval pattern
+ * when day is different is &quot;latestFirst:d-d MMM yy&quot;, it means by
+ * default, the first date in interval pattern is the earlier date. But for
+ * skeleton &quot;yMMMd&quot;, when day is different, the first date in
+ * &quot;d-d MMM yy&quot; is the later date.
  *
  * <P>
  * The recommended way to create a DateIntervalFormat object is to pass in
@@ -150,7 +151,7 @@ U_NAMESPACE_BEGIN
  * Through ICU 4.4, date interval patterns are only supported in the Gregorian
  * calendar; non-Gregorian calendars are supported from ICU 4.4.1.
  * @stable ICU 4.0
-**/
+ **/
 class U_I18N_API DateIntervalInfo U_FINAL : public UObject {
 public:
     /**
@@ -166,30 +167,28 @@ public:
      * @param status   output param set to success/failure code on exit
      * @internal ICU 4.0
      */
-    DateIntervalInfo(UErrorCode& status);
-
+    DateIntervalInfo( UErrorCode& status );
 
     /**
      * Construct DateIntervalInfo for the given locale,
-     * @param locale  the interval patterns are loaded from the appropriate calendar
-     *                data (specified calendar or default calendar) in this locale.
+     * @param locale  the interval patterns are loaded from the appropriate
+     * calendar data (specified calendar or default calendar) in this locale.
      * @param status  output param set to success/failure code on exit
      * @stable ICU 4.0
      */
-    DateIntervalInfo(const Locale& locale, UErrorCode& status);
-
+    DateIntervalInfo( const Locale& locale, UErrorCode& status );
 
     /**
      * Copy constructor.
      * @stable ICU 4.0
      */
-    DateIntervalInfo(const DateIntervalInfo&);
+    DateIntervalInfo( const DateIntervalInfo& );
 
     /**
      * Assignment operator
      * @stable ICU 4.0
      */
-    DateIntervalInfo& operator=(const DateIntervalInfo&);
+    DateIntervalInfo& operator=( const DateIntervalInfo& );
 
     /**
      * Clone this object polymorphically.
@@ -206,7 +205,6 @@ public:
      */
     virtual ~DateIntervalInfo();
 
-
     /**
      * Return true if another object is semantically equal to this one.
      *
@@ -214,7 +212,7 @@ public:
      * @return         true if other is semantically equal to this.
      * @stable ICU 4.0
      */
-    virtual UBool operator==(const DateIntervalInfo& other) const;
+    virtual UBool operator==( const DateIntervalInfo& other ) const;
 
     /**
      * Return true if another object is semantically unequal to this one.
@@ -223,9 +221,7 @@ public:
      * @return         true if other is semantically unequal to this.
      * @stable ICU 4.0
      */
-    UBool operator!=(const DateIntervalInfo& other) const;
-
-
+    UBool operator!=( const DateIntervalInfo& other ) const;
 
     /**
      * Provides a way for client to build interval patterns.
@@ -237,9 +233,11 @@ public:
      * UErrorCode status = U_ZERO_ERROR;
      * DateIntervalInfo dIntervalInfo = new DateIntervalInfo();
      * dIntervalInfo->setFallbackIntervalPattern("{0} ~ {1}");
-     * dIntervalInfo->setIntervalPattern("yMd", UCAL_YEAR, "'from' yyyy-M-d 'to' yyyy-M-d", status);
-     * dIntervalInfo->setIntervalPattern("yMMMd", UCAL_MONTH, "'from' yyyy MMM d 'to' MMM d", status);
-     * dIntervalInfo->setIntervalPattern("yMMMd", UCAL_DAY, "yyyy MMM d-d", status, status);
+     * dIntervalInfo->setIntervalPattern("yMd", UCAL_YEAR, "'from' yyyy-M-d 'to'
+     * yyyy-M-d", status); dIntervalInfo->setIntervalPattern("yMMMd",
+     * UCAL_MONTH, "'from' yyyy MMM d 'to' MMM d", status);
+     * dIntervalInfo->setIntervalPattern("yMMMd", UCAL_DAY, "yyyy MMM d-d",
+     * status, status);
      * </pre>
      *
      * Restriction:
@@ -259,10 +257,10 @@ public:
      * @param status           output param set to success/failure code on exit
      * @stable ICU 4.0
      */
-    void setIntervalPattern(const UnicodeString& skeleton,
-                            UCalendarDateFields lrgDiffCalUnit,
-                            const UnicodeString& intervalPattern,
-                            UErrorCode& status);
+    void setIntervalPattern( const UnicodeString& skeleton,
+                             UCalendarDateFields lrgDiffCalUnit,
+                             const UnicodeString& intervalPattern,
+                             UErrorCode& status );
 
     /**
      * Get the interval pattern given skeleton and
@@ -274,10 +272,10 @@ public:
      * @return a reference to 'result'
      * @stable ICU 4.0
      */
-    UnicodeString& getIntervalPattern(const UnicodeString& skeleton,
-                                      UCalendarDateFields field,
-                                      UnicodeString& result,
-                                      UErrorCode& status) const;
+    UnicodeString& getIntervalPattern( const UnicodeString& skeleton,
+                                       UCalendarDateFields field,
+                                       UnicodeString& result,
+                                       UErrorCode& status ) const;
 
     /**
      * Get the fallback interval pattern.
@@ -285,8 +283,7 @@ public:
      * @return a reference to 'result'
      * @stable ICU 4.0
      */
-    UnicodeString& getFallbackIntervalPattern(UnicodeString& result) const;
-
+    UnicodeString& getFallbackIntervalPattern( UnicodeString& result ) const;
 
     /**
      * Re-set the fallback interval pattern.
@@ -301,9 +298,8 @@ public:
      * @param status           output param set to success/failure code on exit
      * @stable ICU 4.0
      */
-    void setFallbackIntervalPattern(const UnicodeString& fallbackPattern,
-                                    UErrorCode& status);
-
+    void setFallbackIntervalPattern( const UnicodeString& fallbackPattern,
+                                     UErrorCode& status );
 
     /** Get default order -- whether the first date in pattern is later date
                              or not.
@@ -312,7 +308,6 @@ public:
      * @stable ICU 4.0
      */
     UBool getDefaultOrder() const;
-
 
     /**
      * ICU "poor man's RTTI", returns a UClassID for the actual class.
@@ -327,7 +322,6 @@ public:
      * @stable ICU 4.0
      */
     static UClassID U_EXPORT2 getStaticClassID();
-
 
 private:
     /**
@@ -350,8 +344,7 @@ private:
      * We only support interval patterns on
      * ERA, YEAR, MONTH, DAY, AM_PM, HOUR, and MINUTE
      */
-    enum IntervalPatternIndex
-    {
+    enum IntervalPatternIndex {
         kIPI_ERA,
         kIPI_YEAR,
         kIPI_MONTH,
@@ -362,26 +355,22 @@ private:
         kIPI_SECOND,
         kIPI_MAX_INDEX
     };
+
 public:
 #ifndef U_HIDE_INTERNAL_API
     /**
      * Max index for stored interval patterns
      * @internal ICU 4.4
      */
-     enum {
-         kMaxIntervalPatternIndex = kIPI_MAX_INDEX
-     };
-#endif  /* U_HIDE_INTERNAL_API */
+    enum { kMaxIntervalPatternIndex = kIPI_MAX_INDEX };
+#endif /* U_HIDE_INTERNAL_API */
 private:
-
-
     /**
      * Initialize the DateIntervalInfo from locale
      * @param locale   the given locale.
      * @param status   output param set to success/failure code on exit
      */
-    void initializeData(const Locale& locale, UErrorCode& status);
-
+    void initializeData( const Locale& locale, UErrorCode& status );
 
     /* Set Interval pattern.
      *
@@ -393,11 +382,10 @@ private:
      *                         calendar unit.
      * @param status           output param set to success/failure code on exit
      */
-    void setIntervalPatternInternally(const UnicodeString& skeleton,
-                                      UCalendarDateFields lrgDiffCalUnit,
-                                      const UnicodeString& intervalPattern,
-                                      UErrorCode& status);
-
+    void setIntervalPatternInternally( const UnicodeString& skeleton,
+                                       UCalendarDateFields lrgDiffCalUnit,
+                                       const UnicodeString& intervalPattern,
+                                       UErrorCode& status );
 
     /**given an input skeleton, get the best match skeleton
      * which has pre-defined interval pattern in resource file.
@@ -417,9 +405,8 @@ private:
      *            the best match and the input skeleton
      * @return                        best match skeleton
      */
-    const UnicodeString* getBestSkeleton(const UnicodeString& skeleton,
-                                         int8_t& bestMatchDistanceInfo) const;
-
+    const UnicodeString* getBestSkeleton( const UnicodeString& skeleton,
+                                          int8_t& bestMatchDistanceInfo ) const;
 
     /**
      * Parse skeleton, save each field's width.
@@ -428,9 +415,8 @@ private:
      * @param skeleton            skeleton to be parsed
      * @param skeletonFieldWidth  parsed skeleton field width
      */
-    static void U_EXPORT2 parseSkeleton(const UnicodeString& skeleton,
-                                        int32_t* skeletonFieldWidth);
-
+    static void U_EXPORT2 parseSkeleton( const UnicodeString& skeleton,
+                                         int32_t* skeletonFieldWidth );
 
     /**
      * Check whether one field width is numeric while the other is string.
@@ -443,10 +429,9 @@ private:
      * @return true if one field width is numeric and the other is string,
      *         false otherwise.
      */
-    static UBool U_EXPORT2 stringNumeric(int32_t fieldWidth,
-                                         int32_t anotherFieldWidth,
-                                         char patternLetter);
-
+    static UBool U_EXPORT2 stringNumeric( int32_t fieldWidth,
+                                          int32_t anotherFieldWidth,
+                                          char patternLetter );
 
     /**
      * Convert calendar field to the interval pattern index in
@@ -461,18 +446,16 @@ private:
      * @param status   output param set to success/failure code on exit
      * @return  interval pattern index in hash table
      */
-    static IntervalPatternIndex U_EXPORT2 calendarFieldToIntervalIndex(
-                                                      UCalendarDateFields field,
-                                                      UErrorCode& status);
-
+    static IntervalPatternIndex U_EXPORT2
+    calendarFieldToIntervalIndex( UCalendarDateFields field,
+                                  UErrorCode& status );
 
     /**
      * delete hash table (of type fIntervalPatterns).
      *
      * @param hTable  hash table to be deleted
      */
-    void deleteHash(Hashtable* hTable);
-
+    void deleteHash( Hashtable* hTable );
 
     /**
      * initialize hash table (of type fIntervalPatterns).
@@ -480,9 +463,7 @@ private:
      * @param status   output param set to success/failure code on exit
      * @return         hash table initialized
      */
-    Hashtable* initHash(UErrorCode& status);
-
-
+    Hashtable* initHash( UErrorCode& status );
 
     /**
      * copy hash table (of type fIntervalPatterns).
@@ -491,8 +472,9 @@ private:
      * @param target   the target to copy to
      * @param status   output param set to success/failure code on exit
      */
-    void copyHash(const Hashtable* source, Hashtable* target, UErrorCode& status);
-
+    void copyHash( const Hashtable* source,
+                   Hashtable* target,
+                   UErrorCode& status );
 
     // data members
     // fallback interval pattern
@@ -504,14 +486,12 @@ private:
     // HashMap( skeleton, pattern[largest_different_field] )
     Hashtable* fIntervalPatterns;
 
-};// end class DateIntervalInfo
+}; // end class DateIntervalInfo
 
-
-inline UBool
-DateIntervalInfo::operator!=(const DateIntervalInfo& other) const {
-    return !operator==(other);
+inline UBool DateIntervalInfo::operator!=(
+    const DateIntervalInfo& other ) const {
+    return !operator==( other );
 }
-
 
 U_NAMESPACE_END
 
@@ -520,4 +500,3 @@ U_NAMESPACE_END
 #endif /* U_SHOW_CPLUSPLUS_API */
 
 #endif
-

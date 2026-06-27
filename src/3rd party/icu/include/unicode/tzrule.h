@@ -10,7 +10,7 @@
 #define TZRULE_H
 
 /**
- * \file 
+ * \file
  * \brief C++ API: Time zone rule classes
  */
 
@@ -20,17 +20,18 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/uobject.h"
-#include "unicode/unistr.h"
 #include "unicode/dtrule.h"
+#include "unicode/unistr.h"
+#include "unicode/uobject.h"
 
 U_NAMESPACE_BEGIN
 
 /**
  * <code>TimeZoneRule</code> is a class representing a rule for time zone.
- * <code>TimeZoneRule</code> has a set of time zone attributes, such as zone name,
- * raw offset (UTC offset for standard time) and daylight saving time offset.
- * 
+ * <code>TimeZoneRule</code> has a set of time zone attributes, such as zone
+ * name, raw offset (UTC offset for standard time) and daylight saving time
+ * offset.
+ *
  * @stable ICU 3.8
  */
 class U_I18N_API TimeZoneRule : public UObject {
@@ -42,30 +43,34 @@ public:
     virtual ~TimeZoneRule();
 
     /**
-     * Clone this TimeZoneRule object polymorphically. The caller owns the result and
-     * should delete it when done.
+     * Clone this TimeZoneRule object polymorphically. The caller owns the
+     * result and should delete it when done.
      * @return  A copy of the object.
      * @stable ICU 3.8
      */
     virtual TimeZoneRule* clone() const = 0;
 
     /**
-     * Return true if the given <code>TimeZoneRule</code> objects are semantically equal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given <code>TimeZoneRule</code> objects are
+     * semantically equal. Objects of different subclasses are considered
+     * unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given <code>TimeZoneRule</code> objects are semantically equal.
+     * @return  true if the given <code>TimeZoneRule</code> objects are
+     * semantically equal.
      * @stable ICU 3.8
      */
-    virtual UBool operator==(const TimeZoneRule& that) const;
+    virtual UBool operator==( const TimeZoneRule& that ) const;
 
     /**
-     * Return true if the given <code>TimeZoneRule</code> objects are semantically unequal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given <code>TimeZoneRule</code> objects are
+     * semantically unequal. Objects of different subclasses are considered
+     * unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given <code>TimeZoneRule</code> objects are semantically unequal.
+     * @return  true if the given <code>TimeZoneRule</code> objects are
+     * semantically unequal.
      * @stable ICU 3.8
      */
-    virtual UBool operator!=(const TimeZoneRule& that) const;
+    virtual UBool operator!=( const TimeZoneRule& that ) const;
 
     /**
      * Fills in "name" with the name of this time zone.
@@ -73,14 +78,14 @@ public:
      * @return  A reference to "name"
      * @stable ICU 3.8
      */
-    UnicodeString& getName(UnicodeString& name) const;
+    UnicodeString& getName( UnicodeString& name ) const;
 
     /**
      * Gets the standard time offset.
      * @return  The standard time offset from UTC in milliseconds.
      * @stable ICU 3.8
      */
-    int32_t getRawOffset(void) const;
+    int32_t getRawOffset( void ) const;
 
     /**
      * Gets the amount of daylight saving delta time from the standard time.
@@ -88,104 +93,122 @@ public:
      *          in milliseconds.
      * @stable ICU 3.8
      */
-    int32_t getDSTSavings(void) const;
+    int32_t getDSTSavings( void ) const;
 
     /**
      * Returns if this rule represents the same rule and offsets as another.
-     * When two <code>TimeZoneRule</code> objects differ only its names, this method
-     * returns true.
+     * When two <code>TimeZoneRule</code> objects differ only its names, this
+     * method returns true.
      * @param other The <code>TimeZoneRule</code> object to be compared with.
-     * @return  true if the other <code>TimeZoneRule</code> is the same as this one.
+     * @return  true if the other <code>TimeZoneRule</code> is the same as this
+     * one.
      * @stable ICU 3.8
      */
-    virtual UBool isEquivalentTo(const TimeZoneRule& other) const;
+    virtual UBool isEquivalentTo( const TimeZoneRule& other ) const;
 
     /**
      * Gets the very first time when this rule takes effect.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
-     * @param result            Receives the very first time when this rule takes effect.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives the very first time when this rule
+     * takes effect.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getFirstStart(int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const = 0;
+    virtual UBool getFirstStart( int32_t prevRawOffset,
+                                 int32_t prevDSTSavings,
+                                 UDate& result ) const = 0;
 
     /**
      * Gets the final time when this rule takes effect.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
-     * @param result            Receives the final time when this rule takes effect.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives the final time when this rule takes
+     * effect.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getFinalStart(int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const = 0;
+    virtual UBool getFinalStart( int32_t prevRawOffset,
+                                 int32_t prevDSTSavings,
+                                 UDate& result ) const = 0;
 
     /**
      * Gets the first time when this rule takes effect after the specified time.
-     * @param base              The first start time after this base time will be returned.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param base              The first start time after this base time will
+     * be returned.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param inclusive         Whether the base time is inclusive or not.
-     * @param result            Receives The first time when this rule takes effect after
-     *                          the specified base time.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives The first time when this rule takes
+     * effect after the specified base time.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getNextStart(UDate base, int32_t prevRawOffset, int32_t prevDSTSavings,
-        UBool inclusive, UDate& result) const = 0;
+    virtual UBool getNextStart( UDate base,
+                                int32_t prevRawOffset,
+                                int32_t prevDSTSavings,
+                                UBool inclusive,
+                                UDate& result ) const = 0;
 
     /**
-     * Gets the most recent time when this rule takes effect before the specified time.
-     * @param base              The most recent time before this base time will be returned.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * Gets the most recent time when this rule takes effect before the
+     * specified time.
+     * @param base              The most recent time before this base time will
+     * be returned.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param inclusive         Whether the base time is inclusive or not.
-     * @param result            Receives The most recent time when this rule takes effect before
-     *                          the specified base time.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives The most recent time when this rule
+     * takes effect before the specified base time.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getPreviousStart(UDate base, int32_t prevRawOffset, int32_t prevDSTSavings,
-        UBool inclusive, UDate& result) const = 0;
+    virtual UBool getPreviousStart( UDate base,
+                                    int32_t prevRawOffset,
+                                    int32_t prevDSTSavings,
+                                    UBool inclusive,
+                                    UDate& result ) const = 0;
 
 protected:
-
     /**
-     * Constructs a <code>TimeZoneRule</code> with the name, the GMT offset of its
-     * standard time and the amount of daylight saving offset adjustment.
+     * Constructs a <code>TimeZoneRule</code> with the name, the GMT offset of
+     * its standard time and the amount of daylight saving offset adjustment.
      * @param name          The time zone name.
      * @param rawOffset     The UTC offset of its standard time in milliseconds.
-     * @param dstSavings    The amount of daylight saving offset adjustment in milliseconds.
-     *                      If this ia a rule for standard time, the value of this argument is 0.
+     * @param dstSavings    The amount of daylight saving offset adjustment in
+     * milliseconds. If this ia a rule for standard time, the value of this
+     * argument is 0.
      * @stable ICU 3.8
      */
-    TimeZoneRule(const UnicodeString& name, int32_t rawOffset, int32_t dstSavings);
+    TimeZoneRule( const UnicodeString& name,
+                  int32_t rawOffset,
+                  int32_t dstSavings );
 
     /**
      * Copy constructor.
      * @param source    The TimeZoneRule object to be copied.
      * @stable ICU 3.8
      */
-    TimeZoneRule(const TimeZoneRule& source);
+    TimeZoneRule( const TimeZoneRule& source );
 
     /**
      * Assignment operator.
      * @param right The object to be copied.
      * @stable ICU 3.8
      */
-    TimeZoneRule& operator=(const TimeZoneRule& right);
+    TimeZoneRule& operator=( const TimeZoneRule& right );
 
 private:
     UnicodeString fName; // time name
@@ -202,22 +225,26 @@ private:
 class U_I18N_API InitialTimeZoneRule : public TimeZoneRule {
 public:
     /**
-     * Constructs an <code>InitialTimeZoneRule</code> with the name, the GMT offset of its
-     * standard time and the amount of daylight saving offset adjustment.
+     * Constructs an <code>InitialTimeZoneRule</code> with the name, the GMT
+     * offset of its standard time and the amount of daylight saving offset
+     * adjustment.
      * @param name          The time zone name.
      * @param rawOffset     The UTC offset of its standard time in milliseconds.
-     * @param dstSavings    The amount of daylight saving offset adjustment in milliseconds.
-     *                      If this ia a rule for standard time, the value of this argument is 0.
+     * @param dstSavings    The amount of daylight saving offset adjustment in
+     * milliseconds. If this ia a rule for standard time, the value of this
+     * argument is 0.
      * @stable ICU 3.8
      */
-    InitialTimeZoneRule(const UnicodeString& name, int32_t rawOffset, int32_t dstSavings);
+    InitialTimeZoneRule( const UnicodeString& name,
+                         int32_t rawOffset,
+                         int32_t dstSavings );
 
     /**
      * Copy constructor.
      * @param source    The InitialTimeZoneRule object to be copied.
      * @stable ICU 3.8
      */
-    InitialTimeZoneRule(const InitialTimeZoneRule& source);
+    InitialTimeZoneRule( const InitialTimeZoneRule& source );
 
     /**
      * Destructor.
@@ -226,8 +253,8 @@ public:
     virtual ~InitialTimeZoneRule();
 
     /**
-     * Clone this InitialTimeZoneRule object polymorphically. The caller owns the result and
-     * should delete it when done.
+     * Clone this InitialTimeZoneRule object polymorphically. The caller owns
+     * the result and should delete it when done.
      * @return    A copy of the object.
      * @stable ICU 3.8
      */
@@ -238,109 +265,133 @@ public:
      * @param right The object to be copied.
      * @stable ICU 3.8
      */
-    InitialTimeZoneRule& operator=(const InitialTimeZoneRule& right);
+    InitialTimeZoneRule& operator=( const InitialTimeZoneRule& right );
 
     /**
-     * Return true if the given <code>TimeZoneRule</code> objects are semantically equal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given <code>TimeZoneRule</code> objects are
+     * semantically equal. Objects of different subclasses are considered
+     * unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given <code>TimeZoneRule</code> objects are semantically equal.
+     * @return  true if the given <code>TimeZoneRule</code> objects are
+     * semantically equal.
      * @stable ICU 3.8
      */
-    virtual UBool operator==(const TimeZoneRule& that) const;
+    virtual UBool operator==( const TimeZoneRule& that ) const;
 
     /**
-     * Return true if the given <code>TimeZoneRule</code> objects are semantically unequal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given <code>TimeZoneRule</code> objects are
+     * semantically unequal. Objects of different subclasses are considered
+     * unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given <code>TimeZoneRule</code> objects are semantically unequal.
+     * @return  true if the given <code>TimeZoneRule</code> objects are
+     * semantically unequal.
      * @stable ICU 3.8
      */
-    virtual UBool operator!=(const TimeZoneRule& that) const;
+    virtual UBool operator!=( const TimeZoneRule& that ) const;
 
     /**
      * Gets the time when this rule takes effect in the given year.
-     * @param year              The Gregorian year, with 0 == 1 BCE, -1 == 2 BCE, etc.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param year              The Gregorian year, with 0 == 1 BCE, -1 == 2
+     * BCE, etc.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param result            Receives the start time in the year.
-     * @return  true if this rule takes effect in the year and the result is set to
-     *          "result".
+     * @return  true if this rule takes effect in the year and the result is set
+     * to "result".
      * @stable ICU 3.8
      */
-    UBool getStartInYear(int32_t year, int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const;
+    UBool getStartInYear( int32_t year,
+                          int32_t prevRawOffset,
+                          int32_t prevDSTSavings,
+                          UDate& result ) const;
 
     /**
      * Returns if this rule represents the same rule and offsets as another.
-     * When two <code>TimeZoneRule</code> objects differ only its names, this method
-     * returns true.
+     * When two <code>TimeZoneRule</code> objects differ only its names, this
+     * method returns true.
      * @param that  The <code>TimeZoneRule</code> object to be compared with.
-     * @return  true if the other <code>TimeZoneRule</code> is equivalent to this one.
+     * @return  true if the other <code>TimeZoneRule</code> is equivalent to
+     * this one.
      * @stable ICU 3.8
      */
-    virtual UBool isEquivalentTo(const TimeZoneRule& that) const;
+    virtual UBool isEquivalentTo( const TimeZoneRule& that ) const;
 
     /**
      * Gets the very first time when this rule takes effect.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
-     * @param result            Receives the very first time when this rule takes effect.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives the very first time when this rule
+     * takes effect.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getFirstStart(int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const;
+    virtual UBool getFirstStart( int32_t prevRawOffset,
+                                 int32_t prevDSTSavings,
+                                 UDate& result ) const;
 
     /**
      * Gets the final time when this rule takes effect.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
-     * @param result            Receives the final time when this rule takes effect.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives the final time when this rule takes
+     * effect.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getFinalStart(int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const;
+    virtual UBool getFinalStart( int32_t prevRawOffset,
+                                 int32_t prevDSTSavings,
+                                 UDate& result ) const;
 
     /**
      * Gets the first time when this rule takes effect after the specified time.
-     * @param base              The first start time after this base time will be returned.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param base              The first start time after this base time will
+     * be returned.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param inclusive         Whether the base time is inclusive or not.
-     * @param result            Receives The first time when this rule takes effect after
-     *                          the specified base time.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives The first time when this rule takes
+     * effect after the specified base time.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getNextStart(UDate base, int32_t prevRawOffset, int32_t prevDSTSavings,
-        UBool inclusive, UDate& result) const;
+    virtual UBool getNextStart( UDate base,
+                                int32_t prevRawOffset,
+                                int32_t prevDSTSavings,
+                                UBool inclusive,
+                                UDate& result ) const;
 
     /**
-     * Gets the most recent time when this rule takes effect before the specified time.
-     * @param base              The most recent time before this base time will be returned.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * Gets the most recent time when this rule takes effect before the
+     * specified time.
+     * @param base              The most recent time before this base time will
+     * be returned.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param inclusive         Whether the base time is inclusive or not.
-     * @param result            Receives The most recent time when this rule takes effect before
-     *                          the specified base time.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives The most recent time when this rule
+     * takes effect before the specified base time.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getPreviousStart(UDate base, int32_t prevRawOffset, int32_t prevDSTSavings,
-        UBool inclusive, UDate& result) const;
+    virtual UBool getPreviousStart( UDate base,
+                                    int32_t prevRawOffset,
+                                    int32_t prevDSTSavings,
+                                    UBool inclusive,
+                                    UDate& result ) const;
 
 public:
     /**
@@ -354,7 +405,7 @@ public:
      * @return          The class ID for all objects of this class.
      * @stable ICU 3.8
      */
-    static UClassID U_EXPORT2 getStaticClassID(void);
+    static UClassID U_EXPORT2 getStaticClassID( void );
 
     /**
      * Returns a unique class ID POLYMORPHICALLY. Pure virtual override. This
@@ -367,14 +418,14 @@ public:
      *                  other classes have different class IDs.
      * @stable ICU 3.8
      */
-    virtual UClassID getDynamicClassID(void) const;
+    virtual UClassID getDynamicClassID( void ) const;
 };
 
 /**
  * <code>AnnualTimeZoneRule</code> is a class used for representing a time zone
  * rule which takes effect annually.  The calenday system used for the rule is
  * is based on Gregorian calendar
- * 
+ *
  * @stable ICU 3.8
  */
 class U_I18N_API AnnualTimeZoneRule : public TimeZoneRule {
@@ -386,10 +437,11 @@ public:
     static const int32_t MAX_YEAR;
 
     /**
-     * Constructs a <code>AnnualTimeZoneRule</code> with the name, the GMT offset of its
-     * standard time, the amount of daylight saving offset adjustment, the annual start
-     * time rule and the start/until years.  The input DateTimeRule is copied by this
-     * constructor, so the caller remains responsible for deleting the object.
+     * Constructs a <code>AnnualTimeZoneRule</code> with the name, the GMT
+     * offset of its standard time, the amount of daylight saving offset
+     * adjustment, the annual start time rule and the start/until years.  The
+     * input DateTimeRule is copied by this constructor, so the caller remains
+     * responsible for deleting the object.
      * @param name          The time zone name.
      * @param rawOffset     The GMT offset of its standard time in milliseconds.
      * @param dstSavings    The amount of daylight saving offset adjustment in
@@ -398,17 +450,23 @@ public:
      * @param dateTimeRule  The start date/time rule repeated annually.
      * @param startYear     The first year when this rule takes effect.
      * @param endYear       The last year when this rule takes effect.  If this
-     *                      rule is effective forever in future, specify MAX_YEAR.
+     *                      rule is effective forever in future, specify
+     * MAX_YEAR.
      * @stable ICU 3.8
      */
-    AnnualTimeZoneRule(const UnicodeString& name, int32_t rawOffset, int32_t dstSavings,
-            const DateTimeRule& dateTimeRule, int32_t startYear, int32_t endYear);
+    AnnualTimeZoneRule( const UnicodeString& name,
+                        int32_t rawOffset,
+                        int32_t dstSavings,
+                        const DateTimeRule& dateTimeRule,
+                        int32_t startYear,
+                        int32_t endYear );
 
     /**
-     * Constructs a <code>AnnualTimeZoneRule</code> with the name, the GMT offset of its
-     * standard time, the amount of daylight saving offset adjustment, the annual start
-     * time rule and the start/until years.  The input DateTimeRule object is adopted
-     * by this object, therefore, the caller must not delete the object.
+     * Constructs a <code>AnnualTimeZoneRule</code> with the name, the GMT
+     * offset of its standard time, the amount of daylight saving offset
+     * adjustment, the annual start time rule and the start/until years.  The
+     * input DateTimeRule object is adopted by this object, therefore, the
+     * caller must not delete the object.
      * @param name          The time zone name.
      * @param rawOffset     The GMT offset of its standard time in milliseconds.
      * @param dstSavings    The amount of daylight saving offset adjustment in
@@ -417,18 +475,23 @@ public:
      * @param dateTimeRule  The start date/time rule repeated annually.
      * @param startYear     The first year when this rule takes effect.
      * @param endYear       The last year when this rule takes effect.  If this
-     *                      rule is effective forever in future, specify MAX_YEAR.
+     *                      rule is effective forever in future, specify
+     * MAX_YEAR.
      * @stable ICU 3.8
      */
-    AnnualTimeZoneRule(const UnicodeString& name, int32_t rawOffset, int32_t dstSavings,
-            DateTimeRule* dateTimeRule, int32_t startYear, int32_t endYear);
+    AnnualTimeZoneRule( const UnicodeString& name,
+                        int32_t rawOffset,
+                        int32_t dstSavings,
+                        DateTimeRule* dateTimeRule,
+                        int32_t startYear,
+                        int32_t endYear );
 
     /**
      * Copy constructor.
      * @param source    The AnnualTimeZoneRule object to be copied.
      * @stable ICU 3.8
      */
-    AnnualTimeZoneRule(const AnnualTimeZoneRule& source);
+    AnnualTimeZoneRule( const AnnualTimeZoneRule& source );
 
     /**
      * Destructor.
@@ -437,8 +500,8 @@ public:
     virtual ~AnnualTimeZoneRule();
 
     /**
-     * Clone this AnnualTimeZoneRule object polymorphically. The caller owns the result and
-     * should delete it when done.
+     * Clone this AnnualTimeZoneRule object polymorphically. The caller owns the
+     * result and should delete it when done.
      * @return    A copy of the object.
      * @stable ICU 3.8
      */
@@ -449,33 +512,37 @@ public:
      * @param right The object to be copied.
      * @stable ICU 3.8
      */
-    AnnualTimeZoneRule& operator=(const AnnualTimeZoneRule& right);
+    AnnualTimeZoneRule& operator=( const AnnualTimeZoneRule& right );
 
     /**
-     * Return true if the given <code>TimeZoneRule</code> objects are semantically equal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given <code>TimeZoneRule</code> objects are
+     * semantically equal. Objects of different subclasses are considered
+     * unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given <code>TimeZoneRule</code> objects are semantically equal.
+     * @return  true if the given <code>TimeZoneRule</code> objects are
+     * semantically equal.
      * @stable ICU 3.8
      */
-    virtual UBool operator==(const TimeZoneRule& that) const;
+    virtual UBool operator==( const TimeZoneRule& that ) const;
 
     /**
-     * Return true if the given <code>TimeZoneRule</code> objects are semantically unequal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given <code>TimeZoneRule</code> objects are
+     * semantically unequal. Objects of different subclasses are considered
+     * unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given <code>TimeZoneRule</code> objects are semantically unequal.
+     * @return  true if the given <code>TimeZoneRule</code> objects are
+     * semantically unequal.
      * @stable ICU 3.8
      */
-    virtual UBool operator!=(const TimeZoneRule& that) const;
+    virtual UBool operator!=( const TimeZoneRule& that ) const;
 
     /**
      * Gets the start date/time rule used by this rule.
-     * @return  The <code>AnnualDateTimeRule</code> which represents the start date/time
-     *          rule used by this time zone rule.
+     * @return  The <code>AnnualDateTimeRule</code> which represents the start
+     * date/time rule used by this time zone rule.
      * @stable ICU 3.8
      */
-    const DateTimeRule* getRule(void) const;
+    const DateTimeRule* getRule( void ) const;
 
     /**
      * Gets the first year when this rule takes effect.
@@ -483,100 +550,119 @@ public:
      *          with 0 == 1 BCE, -1 == 2 BCE, etc.
      * @stable ICU 3.8
      */
-    int32_t getStartYear(void) const;
+    int32_t getStartYear( void ) const;
 
     /**
      * Gets the end year when this rule takes effect.
-     * @return  The end year of this rule (inclusive). The year is in Gregorian calendar
-     *          with 0 == 1 BCE, -1 == 2 BCE, etc.
+     * @return  The end year of this rule (inclusive). The year is in Gregorian
+     * calendar with 0 == 1 BCE, -1 == 2 BCE, etc.
      * @stable ICU 3.8
      */
-    int32_t getEndYear(void) const;
+    int32_t getEndYear( void ) const;
 
     /**
      * Gets the time when this rule takes effect in the given year.
-     * @param year              The Gregorian year, with 0 == 1 BCE, -1 == 2 BCE, etc.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param year              The Gregorian year, with 0 == 1 BCE, -1 == 2
+     * BCE, etc.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param result            Receives the start time in the year.
-     * @return  true if this rule takes effect in the year and the result is set to
-     *          "result".
+     * @return  true if this rule takes effect in the year and the result is set
+     * to "result".
      * @stable ICU 3.8
      */
-    UBool getStartInYear(int32_t year, int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const;
+    UBool getStartInYear( int32_t year,
+                          int32_t prevRawOffset,
+                          int32_t prevDSTSavings,
+                          UDate& result ) const;
 
     /**
      * Returns if this rule represents the same rule and offsets as another.
-     * When two <code>TimeZoneRule</code> objects differ only its names, this method
-     * returns true.
+     * When two <code>TimeZoneRule</code> objects differ only its names, this
+     * method returns true.
      * @param that  The <code>TimeZoneRule</code> object to be compared with.
-     * @return  true if the other <code>TimeZoneRule</code> is equivalent to this one.
+     * @return  true if the other <code>TimeZoneRule</code> is equivalent to
+     * this one.
      * @stable ICU 3.8
      */
-    virtual UBool isEquivalentTo(const TimeZoneRule& that) const;
+    virtual UBool isEquivalentTo( const TimeZoneRule& that ) const;
 
     /**
      * Gets the very first time when this rule takes effect.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
-     * @param result            Receives the very first time when this rule takes effect.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives the very first time when this rule
+     * takes effect.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getFirstStart(int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const;
+    virtual UBool getFirstStart( int32_t prevRawOffset,
+                                 int32_t prevDSTSavings,
+                                 UDate& result ) const;
 
     /**
      * Gets the final time when this rule takes effect.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
-     * @param result            Receives the final time when this rule takes effect.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives the final time when this rule takes
+     * effect.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getFinalStart(int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const;
+    virtual UBool getFinalStart( int32_t prevRawOffset,
+                                 int32_t prevDSTSavings,
+                                 UDate& result ) const;
 
     /**
      * Gets the first time when this rule takes effect after the specified time.
-     * @param base              The first start time after this base time will be returned.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param base              The first start time after this base time will
+     * be returned.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param inclusive         Whether the base time is inclusive or not.
-     * @param result            Receives The first time when this rule takes effect after
-     *                          the specified base time.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives The first time when this rule takes
+     * effect after the specified base time.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getNextStart(UDate base, int32_t prevRawOffset, int32_t prevDSTSavings,
-        UBool inclusive, UDate& result) const;
+    virtual UBool getNextStart( UDate base,
+                                int32_t prevRawOffset,
+                                int32_t prevDSTSavings,
+                                UBool inclusive,
+                                UDate& result ) const;
 
     /**
-     * Gets the most recent time when this rule takes effect before the specified time.
-     * @param base              The most recent time before this base time will be returned.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * Gets the most recent time when this rule takes effect before the
+     * specified time.
+     * @param base              The most recent time before this base time will
+     * be returned.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param inclusive         Whether the base time is inclusive or not.
-     * @param result            Receives The most recent time when this rule takes effect before
-     *                          the specified base time.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives The most recent time when this rule
+     * takes effect before the specified base time.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getPreviousStart(UDate base, int32_t prevRawOffset, int32_t prevDSTSavings,
-        UBool inclusive, UDate& result) const;
-
+    virtual UBool getPreviousStart( UDate base,
+                                    int32_t prevRawOffset,
+                                    int32_t prevDSTSavings,
+                                    UBool inclusive,
+                                    UDate& result ) const;
 
 private:
     DateTimeRule* fDateTimeRule;
@@ -595,7 +681,7 @@ public:
      * @return          The class ID for all objects of this class.
      * @stable ICU 3.8
      */
-    static UClassID U_EXPORT2 getStaticClassID(void);
+    static UClassID U_EXPORT2 getStaticClassID( void );
 
     /**
      * Returns a unique class ID POLYMORPHICALLY. Pure virtual override. This
@@ -608,43 +694,47 @@ public:
      *                  other classes have different class IDs.
      * @stable ICU 3.8
      */
-    virtual UClassID getDynamicClassID(void) const;
+    virtual UClassID getDynamicClassID( void ) const;
 };
 
 /**
- * <code>TimeArrayTimeZoneRule</code> represents a time zone rule whose start times are
- * defined by an array of milliseconds since the standard base time.
- * 
+ * <code>TimeArrayTimeZoneRule</code> represents a time zone rule whose start
+ * times are defined by an array of milliseconds since the standard base time.
+ *
  * @stable ICU 3.8
  */
 class U_I18N_API TimeArrayTimeZoneRule : public TimeZoneRule {
 public:
     /**
-     * Constructs a <code>TimeArrayTimeZoneRule</code> with the name, the GMT offset of its
-     * standard time, the amount of daylight saving offset adjustment and
-     * the array of times when this rule takes effect.
+     * Constructs a <code>TimeArrayTimeZoneRule</code> with the name, the GMT
+     * offset of its standard time, the amount of daylight saving offset
+     * adjustment and the array of times when this rule takes effect.
      * @param name          The time zone name.
      * @param rawOffset     The UTC offset of its standard time in milliseconds.
      * @param dstSavings    The amount of daylight saving offset adjustment in
      *                      milliseconds.  If this ia a rule for standard time,
      *                      the value of this argument is 0.
-     * @param startTimes    The array start times in milliseconds since the base time
-     *                      (January 1, 1970, 00:00:00).
+     * @param startTimes    The array start times in milliseconds since the base
+     * time (January 1, 1970, 00:00:00).
      * @param numStartTimes The number of elements in the parameter "startTimes"
      * @param timeRuleType  The time type of the start times, which is one of
-     *                      <code>DataTimeRule::WALL_TIME</code>, <code>STANDARD_TIME</code>
-     *                      and <code>UTC_TIME</code>.
+     *                      <code>DataTimeRule::WALL_TIME</code>,
+     * <code>STANDARD_TIME</code> and <code>UTC_TIME</code>.
      * @stable ICU 3.8
      */
-    TimeArrayTimeZoneRule(const UnicodeString& name, int32_t rawOffset, int32_t dstSavings,
-        const UDate* startTimes, int32_t numStartTimes, DateTimeRule::TimeRuleType timeRuleType);
+    TimeArrayTimeZoneRule( const UnicodeString& name,
+                           int32_t rawOffset,
+                           int32_t dstSavings,
+                           const UDate* startTimes,
+                           int32_t numStartTimes,
+                           DateTimeRule::TimeRuleType timeRuleType );
 
     /**
      * Copy constructor.
      * @param source    The TimeArrayTimeZoneRule object to be copied.
      * @stable ICU 3.8
      */
-    TimeArrayTimeZoneRule(const TimeArrayTimeZoneRule& source);
+    TimeArrayTimeZoneRule( const TimeArrayTimeZoneRule& source );
 
     /**
      * Destructor.
@@ -653,8 +743,8 @@ public:
     virtual ~TimeArrayTimeZoneRule();
 
     /**
-     * Clone this TimeArrayTimeZoneRule object polymorphically. The caller owns the result and
-     * should delete it when done.
+     * Clone this TimeArrayTimeZoneRule object polymorphically. The caller owns
+     * the result and should delete it when done.
      * @return    A copy of the object.
      * @stable ICU 3.8
      */
@@ -665,35 +755,39 @@ public:
      * @param right The object to be copied.
      * @stable ICU 3.8
      */
-    TimeArrayTimeZoneRule& operator=(const TimeArrayTimeZoneRule& right);
+    TimeArrayTimeZoneRule& operator=( const TimeArrayTimeZoneRule& right );
 
     /**
-     * Return true if the given <code>TimeZoneRule</code> objects are semantically equal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given <code>TimeZoneRule</code> objects are
+     * semantically equal. Objects of different subclasses are considered
+     * unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given <code>TimeZoneRule</code> objects are semantically equal.
+     * @return  true if the given <code>TimeZoneRule</code> objects are
+     * semantically equal.
      * @stable ICU 3.8
      */
-    virtual UBool operator==(const TimeZoneRule& that) const;
+    virtual UBool operator==( const TimeZoneRule& that ) const;
 
     /**
-     * Return true if the given <code>TimeZoneRule</code> objects are semantically unequal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given <code>TimeZoneRule</code> objects are
+     * semantically unequal. Objects of different subclasses are considered
+     * unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given <code>TimeZoneRule</code> objects are semantically unequal.
+     * @return  true if the given <code>TimeZoneRule</code> objects are
+     * semantically unequal.
      * @stable ICU 3.8
      */
-    virtual UBool operator!=(const TimeZoneRule& that) const;
+    virtual UBool operator!=( const TimeZoneRule& that ) const;
 
     /**
-     * Gets the time type of the start times used by this rule.  The return value
-     * is either <code>DateTimeRule::WALL_TIME</code> or <code>STANDARD_TIME</code>
-     * or <code>UTC_TIME</code>.
-     * 
+     * Gets the time type of the start times used by this rule.  The return
+     * value is either <code>DateTimeRule::WALL_TIME</code> or
+     * <code>STANDARD_TIME</code> or <code>UTC_TIME</code>.
+     *
      * @return The time type used of the start times used by this rule.
      * @stable ICU 3.8
      */
-    DateTimeRule::TimeRuleType getTimeType(void) const;
+    DateTimeRule::TimeRuleType getTimeType( void ) const;
 
     /**
      * Gets a start time at the index stored in this rule.
@@ -704,95 +798,110 @@ public:
      *          parameger "result" is unchanged.
      * @stable ICU 3.8
      */
-    UBool getStartTimeAt(int32_t index, UDate& result) const;
+    UBool getStartTimeAt( int32_t index, UDate& result ) const;
 
     /**
      * Returns the number of start times stored in this rule
      * @return The number of start times.
      * @stable ICU 3.8
      */
-    int32_t countStartTimes(void) const;
+    int32_t countStartTimes( void ) const;
 
     /**
      * Returns if this rule represents the same rule and offsets as another.
-     * When two <code>TimeZoneRule</code> objects differ only its names, this method
-     * returns true.
+     * When two <code>TimeZoneRule</code> objects differ only its names, this
+     * method returns true.
      * @param that  The <code>TimeZoneRule</code> object to be compared with.
-     * @return  true if the other <code>TimeZoneRule</code> is equivalent to this one.
+     * @return  true if the other <code>TimeZoneRule</code> is equivalent to
+     * this one.
      * @stable ICU 3.8
      */
-    virtual UBool isEquivalentTo(const TimeZoneRule& that) const;
+    virtual UBool isEquivalentTo( const TimeZoneRule& that ) const;
 
     /**
      * Gets the very first time when this rule takes effect.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
-     * @param result            Receives the very first time when this rule takes effect.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives the very first time when this rule
+     * takes effect.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getFirstStart(int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const;
+    virtual UBool getFirstStart( int32_t prevRawOffset,
+                                 int32_t prevDSTSavings,
+                                 UDate& result ) const;
 
     /**
      * Gets the final time when this rule takes effect.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
-     * @param result            Receives the final time when this rule takes effect.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives the final time when this rule takes
+     * effect.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getFinalStart(int32_t prevRawOffset, int32_t prevDSTSavings, UDate& result) const;
+    virtual UBool getFinalStart( int32_t prevRawOffset,
+                                 int32_t prevDSTSavings,
+                                 UDate& result ) const;
 
     /**
      * Gets the first time when this rule takes effect after the specified time.
-     * @param base              The first start time after this base time will be returned.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * @param base              The first start time after this base time will
+     * be returned.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param inclusive         Whether the base time is inclusive or not.
-     * @param result            Receives The first time when this rule takes effect after
-     *                          the specified base time.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives The first time when this rule takes
+     * effect after the specified base time.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getNextStart(UDate base, int32_t prevRawOffset, int32_t prevDSTSavings,
-        UBool inclusive, UDate& result) const;
+    virtual UBool getNextStart( UDate base,
+                                int32_t prevRawOffset,
+                                int32_t prevDSTSavings,
+                                UBool inclusive,
+                                UDate& result ) const;
 
     /**
-     * Gets the most recent time when this rule takes effect before the specified time.
-     * @param base              The most recent time before this base time will be returned.
-     * @param prevRawOffset     The standard time offset from UTC before this rule
-     *                          takes effect in milliseconds.
+     * Gets the most recent time when this rule takes effect before the
+     * specified time.
+     * @param base              The most recent time before this base time will
+     * be returned.
+     * @param prevRawOffset     The standard time offset from UTC before this
+     * rule takes effect in milliseconds.
      * @param prevDSTSavings    The amount of daylight saving offset from the
      *                          standard time.
      * @param inclusive         Whether the base time is inclusive or not.
-     * @param result            Receives The most recent time when this rule takes effect before
-     *                          the specified base time.
-     * @return  true if the start time is available.  When false is returned, output parameter
-     *          "result" is unchanged.
+     * @param result            Receives The most recent time when this rule
+     * takes effect before the specified base time.
+     * @return  true if the start time is available.  When false is returned,
+     * output parameter "result" is unchanged.
      * @stable ICU 3.8
      */
-    virtual UBool getPreviousStart(UDate base, int32_t prevRawOffset, int32_t prevDSTSavings,
-        UBool inclusive, UDate& result) const;
-
+    virtual UBool getPreviousStart( UDate base,
+                                    int32_t prevRawOffset,
+                                    int32_t prevDSTSavings,
+                                    UBool inclusive,
+                                    UDate& result ) const;
 
 private:
     enum { TIMEARRAY_STACK_BUFFER_SIZE = 32 };
-    UBool initStartTimes(const UDate source[], int32_t size, UErrorCode& ec);
-    UDate getUTC(UDate time, int32_t raw, int32_t dst) const;
+    UBool initStartTimes( const UDate source[], int32_t size, UErrorCode& ec );
+    UDate getUTC( UDate time, int32_t raw, int32_t dst ) const;
 
-    DateTimeRule::TimeRuleType  fTimeRuleType;
+    DateTimeRule::TimeRuleType fTimeRuleType;
     int32_t fNumStartTimes;
-    UDate*  fStartTimes;
-    UDate   fLocalStartTimes[TIMEARRAY_STACK_BUFFER_SIZE];
+    UDate* fStartTimes;
+    UDate fLocalStartTimes[ TIMEARRAY_STACK_BUFFER_SIZE ];
 
 public:
     /**
@@ -806,7 +915,7 @@ public:
      * @return          The class ID for all objects of this class.
      * @stable ICU 3.8
      */
-    static UClassID U_EXPORT2 getStaticClassID(void);
+    static UClassID U_EXPORT2 getStaticClassID( void );
 
     /**
      * Returns a unique class ID POLYMORPHICALLY. Pure virtual override. This
@@ -819,9 +928,8 @@ public:
      *                  other classes have different class IDs.
      * @stable ICU 3.8
      */
-    virtual UClassID getDynamicClassID(void) const;
+    virtual UClassID getDynamicClassID( void ) const;
 };
-
 
 U_NAMESPACE_END
 
@@ -831,4 +939,4 @@ U_NAMESPACE_END
 
 #endif // TZRULE_H
 
-//eof
+// eof

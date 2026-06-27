@@ -16,14 +16,14 @@
 
 #if U_SHOW_CPLUSPLUS_API
 
-#include "unicode/uobject.h"
 #include "unicode/unistr.h"
+#include "unicode/uobject.h"
 
 /**
- * \file 
+ * \file
  * \brief C++ API: String Enumeration
  */
- 
+
 U_NAMESPACE_BEGIN
 
 /**
@@ -56,9 +56,9 @@ U_NAMESPACE_BEGIN
  * ICU 2.8 adds some default implementations and helper functions
  * for subclasses.
  *
- * @stable ICU 2.4 
+ * @stable ICU 2.4
  */
-class U_COMMON_API StringEnumeration : public UObject { 
+class U_COMMON_API StringEnumeration : public UObject {
 public:
     /**
      * Destructor.
@@ -78,7 +78,7 @@ public:
      * @see getDynamicClassID
      * @stable ICU 2.8
      */
-    virtual StringEnumeration *clone() const;
+    virtual StringEnumeration* clone() const;
 
     /**
      * <p>Return the number of elements that the iterator traverses.  If
@@ -97,7 +97,7 @@ public:
      * @return number of elements in the iterator.
      *
      * @stable ICU 2.4 */
-    virtual int32_t count(UErrorCode& status) const = 0;
+    virtual int32_t count( UErrorCode& status ) const = 0;
 
     /**
      * <p>Returns the next element as a NUL-terminated char*.  If there
@@ -127,9 +127,9 @@ public:
      * @param resultLength a pointer to receive the length, can be NULL.
      * @return a pointer to the string, or NULL.
      *
-     * @stable ICU 2.4 
+     * @stable ICU 2.4
      */
-    virtual const char* next(int32_t *resultLength, UErrorCode& status);
+    virtual const char* next( int32_t* resultLength, UErrorCode& status );
 
     /**
      * <p>Returns the next element as a NUL-terminated char16_t*.  If there
@@ -152,9 +152,9 @@ public:
      * @param resultLength a ponter to receive the length, can be NULL.
      * @return a pointer to the string, or NULL.
      *
-     * @stable ICU 2.4 
+     * @stable ICU 2.4
      */
-    virtual const char16_t* unext(int32_t *resultLength, UErrorCode& status);
+    virtual const char16_t* unext( int32_t* resultLength, UErrorCode& status );
 
     /**
      * <p>Returns the next element a UnicodeString*.  If there are no
@@ -174,9 +174,9 @@ public:
      * @param status the error code.
      * @return a pointer to the string, or NULL.
      *
-     * @stable ICU 2.4 
+     * @stable ICU 2.4
      */
-    virtual const UnicodeString* snext(UErrorCode& status);
+    virtual const UnicodeString* snext( UErrorCode& status );
 
     /**
      * <p>Resets the iterator.  This re-establishes sync with the
@@ -188,26 +188,26 @@ public:
      *
      * @param status the error code.
      *
-     * @stable ICU 2.4 
+     * @stable ICU 2.4
      */
-    virtual void reset(UErrorCode& status) = 0;
+    virtual void reset( UErrorCode& status ) = 0;
 
     /**
      * Compares this enumeration to other to check if both are equal
      *
      * @param that The other string enumeration to compare this object to
      * @return TRUE if the enumerations are equal. FALSE if not.
-     * @stable ICU 3.6 
+     * @stable ICU 3.6
      */
-    virtual UBool operator==(const StringEnumeration& that)const;
+    virtual UBool operator==( const StringEnumeration& that ) const;
     /**
      * Compares this enumeration to other to check if both are not equal
      *
      * @param that The other string enumeration to compare this object to
      * @return TRUE if the enumerations are equal. FALSE if not.
-     * @stable ICU 3.6 
+     * @stable ICU 3.6
      */
-    virtual UBool operator!=(const StringEnumeration& that)const;
+    virtual UBool operator!=( const StringEnumeration& that ) const;
 
 protected:
     /**
@@ -216,16 +216,17 @@ protected:
      */
     UnicodeString unistr;
     /**
-     * char * default buffer for use with default implementations and subclasses.
+     * char * default buffer for use with default implementations and
+     * subclasses.
      * @stable ICU 2.8
      */
-    char charsBuffer[32];
+    char charsBuffer[ 32 ];
     /**
      * char * buffer for use with default implementations and subclasses.
      * Allocated in constructor and in ensureCharsCapacity().
      * @stable ICU 2.8
      */
-    char *chars;
+    char* chars;
     /**
      * Capacity of chars, for use with default implementations and subclasses.
      * @stable ICU 2.8
@@ -246,14 +247,15 @@ protected:
      * @param status ICU in/out error code.
      * @stable ICU 2.8
      */
-    void ensureCharsCapacity(int32_t capacity, UErrorCode &status);
+    void ensureCharsCapacity( int32_t capacity, UErrorCode& status );
 
     /**
      * Converts s to Unicode and sets unistr to the result.
      * For use with default implementations and subclasses,
      * especially for implementations of snext() in terms of next().
-     * This is provided with a helper function instead of a default implementation
-     * of snext() to avoid potential infinite loops between next() and snext().
+     * This is provided with a helper function instead of a default
+     * implementation of snext() to avoid potential infinite loops between
+     * next() and snext().
      *
      * For example:
      * \code
@@ -270,7 +272,9 @@ protected:
      * @return A pointer to unistr.
      * @stable ICU 2.8
      */
-    UnicodeString *setChars(const char *s, int32_t length, UErrorCode &status);
+    UnicodeString* setChars( const char* s,
+                             int32_t length,
+                             UErrorCode& status );
 };
 
 U_NAMESPACE_END

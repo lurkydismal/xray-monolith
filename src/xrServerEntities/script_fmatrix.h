@@ -10,4 +10,4 @@
 
 #include "script_export_space.h"
 
-typedef class_exporter<Fmatrix> CScriptFmatrix;
+typedef class_exporter< Fmatrix > CScriptFmatrix;

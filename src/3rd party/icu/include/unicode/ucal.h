@@ -10,10 +10,10 @@
 #ifndef UCAL_H
 #define UCAL_H
 
-#include "unicode/utypes.h"
+#include "unicode/localpointer.h"
 #include "unicode/uenum.h"
 #include "unicode/uloc.h"
-#include "unicode/localpointer.h"
+#include "unicode/utypes.h"
 
 #if !UCONFIG_NO_FORMATTING
 
@@ -24,11 +24,11 @@
  * <h2>Calendar C API</h2>
  *
  * UCalendar C API is used  for converting between a <code>UDate</code> object
- * and a set of integer fields such as <code>UCAL_YEAR</code>, <code>UCAL_MONTH</code>,
- * <code>UCAL_DAY</code>, <code>UCAL_HOUR</code>, and so on.
- * (A <code>UDate</code> object represents a specific instant in
- * time with millisecond precision. See UDate
- * for information about the <code>UDate</code> .)
+ * and a set of integer fields such as <code>UCAL_YEAR</code>,
+ * <code>UCAL_MONTH</code>, <code>UCAL_DAY</code>, <code>UCAL_HOUR</code>, and
+ * so on. (A <code>UDate</code> object represents a specific instant in time
+ * with millisecond precision. See UDate for information about the
+ * <code>UDate</code> .)
  *
  * <p>
  * Types of <code>UCalendar</code> interpret a <code>UDate</code>
@@ -60,8 +60,8 @@
  * and calendar style (for example, Japanese-Gregorian, Japanese-Traditional).
  *
  * <p>
- * When computing a <code>UDate</code> from time fields, two special circumstances
- * may arise: there may be insufficient information to compute the
+ * When computing a <code>UDate</code> from time fields, two special
+ * circumstances may arise: there may be insufficient information to compute the
  * <code>UDate</code> (such as only year and month but no day in the month),
  * or there may be inconsistent information (such as "Tuesday, July 15, 1996"
  * -- July 15, 1996 is actually a Monday).
@@ -70,7 +70,8 @@
  * <strong>Insufficient information.</strong> The calendar will use default
  * information to specify the missing fields. This may vary by calendar; for
  * the Gregorian calendar, the default for a field is the same as that of the
- * start of the epoch: i.e., UCAL_YEAR = 1970, UCAL_MONTH = JANUARY, UCAL_DATE = 1, etc.
+ * start of the epoch: i.e., UCAL_YEAR = 1970, UCAL_MONTH = JANUARY, UCAL_DATE =
+ * 1, etc.
  *
  * <p>
  * <strong>Inconsistent information.</strong> If fields conflict, the calendar
@@ -114,7 +115,8 @@
  * following ways:
  * <ol>
  *     <li> 24:00:00 "belongs" to the following day. That is,
- *          23:59 on Dec 31, 1969 &lt; 24:00 on Jan 1, 1970 &lt; 24:01:00 on Jan 1, 1970
+ *          23:59 on Dec 31, 1969 &lt; 24:00 on Jan 1, 1970 &lt; 24:01:00 on Jan
+ * 1, 1970
  *
  *     <li> Although historically not precise, midnight also belongs to "am",
  *          and noon belongs to "pm", so on the same day,
@@ -168,323 +170,325 @@
  */
 typedef void* UCalendar;
 
-/** Possible types of UCalendars 
+/** Possible types of UCalendars
  * @stable ICU 2.0
  */
 enum UCalendarType {
-  /**
-   * Despite the name, UCAL_TRADITIONAL designates the locale's default calendar,
-   * which may be the Gregorian calendar or some other calendar.
-   * @stable ICU 2.0
-   */
-  UCAL_TRADITIONAL,
-  /**
-   * A better name for UCAL_TRADITIONAL.
-   * @stable ICU 4.2
-   */
-  UCAL_DEFAULT = UCAL_TRADITIONAL,
-  /**
-   * Unambiguously designates the Gregorian calendar for the locale.
-   * @stable ICU 2.0
-   */
-  UCAL_GREGORIAN
+    /**
+     * Despite the name, UCAL_TRADITIONAL designates the locale's default
+     * calendar, which may be the Gregorian calendar or some other calendar.
+     * @stable ICU 2.0
+     */
+    UCAL_TRADITIONAL,
+    /**
+     * A better name for UCAL_TRADITIONAL.
+     * @stable ICU 4.2
+     */
+    UCAL_DEFAULT = UCAL_TRADITIONAL,
+    /**
+     * Unambiguously designates the Gregorian calendar for the locale.
+     * @stable ICU 2.0
+     */
+    UCAL_GREGORIAN
 };
 
 /** @stable ICU 2.0 */
 typedef enum UCalendarType UCalendarType;
 
-/** Possible fields in a UCalendar 
+/** Possible fields in a UCalendar
  * @stable ICU 2.0
  */
 enum UCalendarDateFields {
-  /** 
-   * Field number indicating the era, e.g., AD or BC in the Gregorian (Julian) calendar. 
-   * This is a calendar-specific value.
-   * @stable ICU 2.6 
-   */
-  UCAL_ERA,
+    /**
+     * Field number indicating the era, e.g., AD or BC in the Gregorian (Julian)
+     * calendar. This is a calendar-specific value.
+     * @stable ICU 2.6
+     */
+    UCAL_ERA,
 
-  /**
-   * Field number indicating the year. This is a calendar-specific value.
-   * @stable ICU 2.6 
-   */
-  UCAL_YEAR,
+    /**
+     * Field number indicating the year. This is a calendar-specific value.
+     * @stable ICU 2.6
+     */
+    UCAL_YEAR,
 
-  /**
-   * Field number indicating the month. This is a calendar-specific value. 
-   * The first month of the year is
-   * <code>JANUARY</code>; the last depends on the number of months in a year.
-   * @see #UCAL_JANUARY
-   * @see #UCAL_FEBRUARY
-   * @see #UCAL_MARCH
-   * @see #UCAL_APRIL
-   * @see #UCAL_MAY
-   * @see #UCAL_JUNE
-   * @see #UCAL_JULY
-   * @see #UCAL_AUGUST
-   * @see #UCAL_SEPTEMBER
-   * @see #UCAL_OCTOBER
-   * @see #UCAL_NOVEMBER
-   * @see #UCAL_DECEMBER
-   * @see #UCAL_UNDECIMBER
-   * @stable ICU 2.6 
-   */
-  UCAL_MONTH,
+    /**
+     * Field number indicating the month. This is a calendar-specific value.
+     * The first month of the year is
+     * <code>JANUARY</code>; the last depends on the number of months in a year.
+     * @see #UCAL_JANUARY
+     * @see #UCAL_FEBRUARY
+     * @see #UCAL_MARCH
+     * @see #UCAL_APRIL
+     * @see #UCAL_MAY
+     * @see #UCAL_JUNE
+     * @see #UCAL_JULY
+     * @see #UCAL_AUGUST
+     * @see #UCAL_SEPTEMBER
+     * @see #UCAL_OCTOBER
+     * @see #UCAL_NOVEMBER
+     * @see #UCAL_DECEMBER
+     * @see #UCAL_UNDECIMBER
+     * @stable ICU 2.6
+     */
+    UCAL_MONTH,
 
-  /**
-   * Field number indicating the
-   * week number within the current year.  The first week of the year, as
-   * defined by <code>UCAL_FIRST_DAY_OF_WEEK</code> and <code>UCAL_MINIMAL_DAYS_IN_FIRST_WEEK</code>
-   * attributes, has value 1.  Subclasses define
-   * the value of <code>UCAL_WEEK_OF_YEAR</code> for days before the first week of
-   * the year.
-   * @see ucal_getAttribute
-   * @see ucal_setAttribute
-   * @stable ICU 2.6 
-   */
-  UCAL_WEEK_OF_YEAR,
+    /**
+     * Field number indicating the
+     * week number within the current year.  The first week of the year, as
+     * defined by <code>UCAL_FIRST_DAY_OF_WEEK</code> and
+     * <code>UCAL_MINIMAL_DAYS_IN_FIRST_WEEK</code> attributes, has value 1.
+     * Subclasses define the value of <code>UCAL_WEEK_OF_YEAR</code> for days
+     * before the first week of the year.
+     * @see ucal_getAttribute
+     * @see ucal_setAttribute
+     * @stable ICU 2.6
+     */
+    UCAL_WEEK_OF_YEAR,
 
- /**
-   * Field number indicating the
-   * week number within the current month.  The first week of the month, as
-   * defined by <code>UCAL_FIRST_DAY_OF_WEEK</code> and <code>UCAL_MINIMAL_DAYS_IN_FIRST_WEEK</code>
-   * attributes, has value 1.  Subclasses define
-   * the value of <code>WEEK_OF_MONTH</code> for days before the first week of
-   * the month.
-   * @see ucal_getAttribute
-   * @see ucal_setAttribute
-   * @see #UCAL_FIRST_DAY_OF_WEEK
-   * @see #UCAL_MINIMAL_DAYS_IN_FIRST_WEEK
-   * @stable ICU 2.6 
-   */
-  UCAL_WEEK_OF_MONTH,
+    /**
+     * Field number indicating the
+     * week number within the current month.  The first week of the month, as
+     * defined by <code>UCAL_FIRST_DAY_OF_WEEK</code> and
+     * <code>UCAL_MINIMAL_DAYS_IN_FIRST_WEEK</code> attributes, has value 1.
+     * Subclasses define the value of <code>WEEK_OF_MONTH</code> for days before
+     * the first week of the month.
+     * @see ucal_getAttribute
+     * @see ucal_setAttribute
+     * @see #UCAL_FIRST_DAY_OF_WEEK
+     * @see #UCAL_MINIMAL_DAYS_IN_FIRST_WEEK
+     * @stable ICU 2.6
+     */
+    UCAL_WEEK_OF_MONTH,
 
- /**
-   * Field number indicating the
-   * day of the month. This is a synonym for <code>DAY_OF_MONTH</code>.
-   * The first day of the month has value 1.
-   * @see #UCAL_DAY_OF_MONTH
-   * @stable ICU 2.6 
-   */
-  UCAL_DATE,
+    /**
+     * Field number indicating the
+     * day of the month. This is a synonym for <code>DAY_OF_MONTH</code>.
+     * The first day of the month has value 1.
+     * @see #UCAL_DAY_OF_MONTH
+     * @stable ICU 2.6
+     */
+    UCAL_DATE,
 
- /**
-   * Field number indicating the day
-   * number within the current year.  The first day of the year has value 1.
-   * @stable ICU 2.6 
-   */
-  UCAL_DAY_OF_YEAR,
+    /**
+     * Field number indicating the day
+     * number within the current year.  The first day of the year has value 1.
+     * @stable ICU 2.6
+     */
+    UCAL_DAY_OF_YEAR,
 
- /**
-   * Field number indicating the day
-   * of the week.  This field takes values <code>SUNDAY</code>,
-   * <code>MONDAY</code>, <code>TUESDAY</code>, <code>WEDNESDAY</code>,
-   * <code>THURSDAY</code>, <code>FRIDAY</code>, and <code>SATURDAY</code>.
-   * @see #UCAL_SUNDAY
-   * @see #UCAL_MONDAY
-   * @see #UCAL_TUESDAY
-   * @see #UCAL_WEDNESDAY
-   * @see #UCAL_THURSDAY
-   * @see #UCAL_FRIDAY
-   * @see #UCAL_SATURDAY
-   * @stable ICU 2.6 
-   */
-  UCAL_DAY_OF_WEEK,
+    /**
+     * Field number indicating the day
+     * of the week.  This field takes values <code>SUNDAY</code>,
+     * <code>MONDAY</code>, <code>TUESDAY</code>, <code>WEDNESDAY</code>,
+     * <code>THURSDAY</code>, <code>FRIDAY</code>, and <code>SATURDAY</code>.
+     * @see #UCAL_SUNDAY
+     * @see #UCAL_MONDAY
+     * @see #UCAL_TUESDAY
+     * @see #UCAL_WEDNESDAY
+     * @see #UCAL_THURSDAY
+     * @see #UCAL_FRIDAY
+     * @see #UCAL_SATURDAY
+     * @stable ICU 2.6
+     */
+    UCAL_DAY_OF_WEEK,
 
- /**
-   * Field number indicating the
-   * ordinal number of the day of the week within the current month. Together
-   * with the <code>DAY_OF_WEEK</code> field, this uniquely specifies a day
-   * within a month.  Unlike <code>WEEK_OF_MONTH</code> and
-   * <code>WEEK_OF_YEAR</code>, this field's value does <em>not</em> depend on
-   * <code>getFirstDayOfWeek()</code> or
-   * <code>getMinimalDaysInFirstWeek()</code>.  <code>DAY_OF_MONTH 1</code>
-   * through <code>7</code> always correspond to <code>DAY_OF_WEEK_IN_MONTH
-   * 1</code>; <code>8</code> through <code>15</code> correspond to
-   * <code>DAY_OF_WEEK_IN_MONTH 2</code>, and so on.
-   * <code>DAY_OF_WEEK_IN_MONTH 0</code> indicates the week before
-   * <code>DAY_OF_WEEK_IN_MONTH 1</code>.  Negative values count back from the
-   * end of the month, so the last Sunday of a month is specified as
-   * <code>DAY_OF_WEEK = SUNDAY, DAY_OF_WEEK_IN_MONTH = -1</code>.  Because
-   * negative values count backward they will usually be aligned differently
-   * within the month than positive values.  For example, if a month has 31
-   * days, <code>DAY_OF_WEEK_IN_MONTH -1</code> will overlap
-   * <code>DAY_OF_WEEK_IN_MONTH 5</code> and the end of <code>4</code>.
-   * @see #UCAL_DAY_OF_WEEK
-   * @see #UCAL_WEEK_OF_MONTH
-   * @stable ICU 2.6 
-   */
-  UCAL_DAY_OF_WEEK_IN_MONTH,
+    /**
+     * Field number indicating the
+     * ordinal number of the day of the week within the current month. Together
+     * with the <code>DAY_OF_WEEK</code> field, this uniquely specifies a day
+     * within a month.  Unlike <code>WEEK_OF_MONTH</code> and
+     * <code>WEEK_OF_YEAR</code>, this field's value does <em>not</em> depend on
+     * <code>getFirstDayOfWeek()</code> or
+     * <code>getMinimalDaysInFirstWeek()</code>.  <code>DAY_OF_MONTH 1</code>
+     * through <code>7</code> always correspond to <code>DAY_OF_WEEK_IN_MONTH
+     * 1</code>; <code>8</code> through <code>15</code> correspond to
+     * <code>DAY_OF_WEEK_IN_MONTH 2</code>, and so on.
+     * <code>DAY_OF_WEEK_IN_MONTH 0</code> indicates the week before
+     * <code>DAY_OF_WEEK_IN_MONTH 1</code>.  Negative values count back from the
+     * end of the month, so the last Sunday of a month is specified as
+     * <code>DAY_OF_WEEK = SUNDAY, DAY_OF_WEEK_IN_MONTH = -1</code>.  Because
+     * negative values count backward they will usually be aligned differently
+     * within the month than positive values.  For example, if a month has 31
+     * days, <code>DAY_OF_WEEK_IN_MONTH -1</code> will overlap
+     * <code>DAY_OF_WEEK_IN_MONTH 5</code> and the end of <code>4</code>.
+     * @see #UCAL_DAY_OF_WEEK
+     * @see #UCAL_WEEK_OF_MONTH
+     * @stable ICU 2.6
+     */
+    UCAL_DAY_OF_WEEK_IN_MONTH,
 
- /**
-   * Field number indicating
-   * whether the <code>HOUR</code> is before or after noon.
-   * E.g., at 10:04:15.250 PM the <code>AM_PM</code> is <code>PM</code>.
-   * @see #UCAL_AM
-   * @see #UCAL_PM
-   * @see #UCAL_HOUR
-   * @stable ICU 2.6 
-   */
-  UCAL_AM_PM,
+    /**
+     * Field number indicating
+     * whether the <code>HOUR</code> is before or after noon.
+     * E.g., at 10:04:15.250 PM the <code>AM_PM</code> is <code>PM</code>.
+     * @see #UCAL_AM
+     * @see #UCAL_PM
+     * @see #UCAL_HOUR
+     * @stable ICU 2.6
+     */
+    UCAL_AM_PM,
 
- /**
-   * Field number indicating the
-   * hour of the morning or afternoon. <code>HOUR</code> is used for the 12-hour
-   * clock.
-   * E.g., at 10:04:15.250 PM the <code>HOUR</code> is 10.
-   * @see #UCAL_AM_PM
-   * @see #UCAL_HOUR_OF_DAY
-   * @stable ICU 2.6 
-   */
-  UCAL_HOUR,
+    /**
+     * Field number indicating the
+     * hour of the morning or afternoon. <code>HOUR</code> is used for the
+     * 12-hour clock. E.g., at 10:04:15.250 PM the <code>HOUR</code> is 10.
+     * @see #UCAL_AM_PM
+     * @see #UCAL_HOUR_OF_DAY
+     * @stable ICU 2.6
+     */
+    UCAL_HOUR,
 
- /**
-   * Field number indicating the
-   * hour of the day. <code>HOUR_OF_DAY</code> is used for the 24-hour clock.
-   * E.g., at 10:04:15.250 PM the <code>HOUR_OF_DAY</code> is 22.
-   * @see #UCAL_HOUR
-   * @stable ICU 2.6 
-   */
-  UCAL_HOUR_OF_DAY,
+    /**
+     * Field number indicating the
+     * hour of the day. <code>HOUR_OF_DAY</code> is used for the 24-hour clock.
+     * E.g., at 10:04:15.250 PM the <code>HOUR_OF_DAY</code> is 22.
+     * @see #UCAL_HOUR
+     * @stable ICU 2.6
+     */
+    UCAL_HOUR_OF_DAY,
 
- /**
-   * Field number indicating the
-   * minute within the hour.
-   * E.g., at 10:04:15.250 PM the <code>UCAL_MINUTE</code> is 4.
-   * @stable ICU 2.6 
-   */
-  UCAL_MINUTE,
+    /**
+     * Field number indicating the
+     * minute within the hour.
+     * E.g., at 10:04:15.250 PM the <code>UCAL_MINUTE</code> is 4.
+     * @stable ICU 2.6
+     */
+    UCAL_MINUTE,
 
- /**
-   * Field number indicating the
-   * second within the minute.
-   * E.g., at 10:04:15.250 PM the <code>UCAL_SECOND</code> is 15.
-   * @stable ICU 2.6 
-   */
-  UCAL_SECOND,
+    /**
+     * Field number indicating the
+     * second within the minute.
+     * E.g., at 10:04:15.250 PM the <code>UCAL_SECOND</code> is 15.
+     * @stable ICU 2.6
+     */
+    UCAL_SECOND,
 
- /**
-   * Field number indicating the
-   * millisecond within the second.
-   * E.g., at 10:04:15.250 PM the <code>UCAL_MILLISECOND</code> is 250.
-   * @stable ICU 2.6 
-   */
-  UCAL_MILLISECOND,
+    /**
+     * Field number indicating the
+     * millisecond within the second.
+     * E.g., at 10:04:15.250 PM the <code>UCAL_MILLISECOND</code> is 250.
+     * @stable ICU 2.6
+     */
+    UCAL_MILLISECOND,
 
- /**
-   * Field number indicating the
-   * raw offset from GMT in milliseconds.
-   * @stable ICU 2.6 
-   */
-  UCAL_ZONE_OFFSET,
+    /**
+     * Field number indicating the
+     * raw offset from GMT in milliseconds.
+     * @stable ICU 2.6
+     */
+    UCAL_ZONE_OFFSET,
 
- /**
-   * Field number indicating the
-   * daylight savings offset in milliseconds.
-   * @stable ICU 2.6 
-   */
-  UCAL_DST_OFFSET,
-  
- /**
-   * Field number 
-   * indicating the extended year corresponding to the
-   * <code>UCAL_WEEK_OF_YEAR</code> field.  This may be one greater or less
-   * than the value of <code>UCAL_EXTENDED_YEAR</code>.
-   * @stable ICU 2.6
-   */
-  UCAL_YEAR_WOY,
+    /**
+     * Field number indicating the
+     * daylight savings offset in milliseconds.
+     * @stable ICU 2.6
+     */
+    UCAL_DST_OFFSET,
 
- /**
-   * Field number 
-   * indicating the localized day of week.  This will be a value from 1
-   * to 7 inclusive, with 1 being the localized first day of the week.
-   * @stable ICU 2.6
-   */
-  UCAL_DOW_LOCAL,
+    /**
+     * Field number
+     * indicating the extended year corresponding to the
+     * <code>UCAL_WEEK_OF_YEAR</code> field.  This may be one greater or less
+     * than the value of <code>UCAL_EXTENDED_YEAR</code>.
+     * @stable ICU 2.6
+     */
+    UCAL_YEAR_WOY,
 
-  /**
-   * Year of this calendar system, encompassing all supra-year fields. For example, 
-   * in Gregorian/Julian calendars, positive Extended Year values indicate years AD,
-   *  1 BC = 0 extended, 2 BC = -1 extended, and so on. 
-   * @stable ICU 2.8 
-   */
-  UCAL_EXTENDED_YEAR,
+    /**
+     * Field number
+     * indicating the localized day of week.  This will be a value from 1
+     * to 7 inclusive, with 1 being the localized first day of the week.
+     * @stable ICU 2.6
+     */
+    UCAL_DOW_LOCAL,
 
- /**
-   * Field number 
-   * indicating the modified Julian day number.  This is different from
-   * the conventional Julian day number in two regards.  First, it
-   * demarcates days at local zone midnight, rather than noon GMT.
-   * Second, it is a local number; that is, it depends on the local time
-   * zone.  It can be thought of as a single number that encompasses all
-   * the date-related fields.
-   * @stable ICU 2.8
-   */
-  UCAL_JULIAN_DAY, 
+    /**
+     * Year of this calendar system, encompassing all supra-year fields. For
+     * example, in Gregorian/Julian calendars, positive Extended Year values
+     * indicate years AD, 1 BC = 0 extended, 2 BC = -1 extended, and so on.
+     * @stable ICU 2.8
+     */
+    UCAL_EXTENDED_YEAR,
 
-  /**
-   * Ranges from 0 to 23:59:59.999 (regardless of DST).  This field behaves <em>exactly</em> 
-   * like a composite of all time-related fields, not including the zone fields.  As such, 
-   * it also reflects discontinuities of those fields on DST transition days.  On a day
-   * of DST onset, it will jump forward.  On a day of DST cessation, it will jump 
-   * backward.  This reflects the fact that it must be combined with the DST_OFFSET field
-   * to obtain a unique local time value.
-   * @stable ICU 2.8
-   */
-  UCAL_MILLISECONDS_IN_DAY,
+    /**
+     * Field number
+     * indicating the modified Julian day number.  This is different from
+     * the conventional Julian day number in two regards.  First, it
+     * demarcates days at local zone midnight, rather than noon GMT.
+     * Second, it is a local number; that is, it depends on the local time
+     * zone.  It can be thought of as a single number that encompasses all
+     * the date-related fields.
+     * @stable ICU 2.8
+     */
+    UCAL_JULIAN_DAY,
 
-  /**
-   * Whether or not the current month is a leap month (0 or 1). See the Chinese calendar for
-   * an example of this.
-   */
-  UCAL_IS_LEAP_MONTH,
+    /**
+     * Ranges from 0 to 23:59:59.999 (regardless of DST).  This field behaves
+     * <em>exactly</em> like a composite of all time-related fields, not
+     * including the zone fields.  As such, it also reflects discontinuities of
+     * those fields on DST transition days.  On a day of DST onset, it will jump
+     * forward.  On a day of DST cessation, it will jump backward.  This
+     * reflects the fact that it must be combined with the DST_OFFSET field to
+     * obtain a unique local time value.
+     * @stable ICU 2.8
+     */
+    UCAL_MILLISECONDS_IN_DAY,
 
-    /* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
-     * it is needed for layout of Calendar, DateFormat, and other objects */
+    /**
+     * Whether or not the current month is a leap month (0 or 1). See the
+     * Chinese calendar for an example of this.
+     */
+    UCAL_IS_LEAP_MONTH,
+
+/* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
+ * it is needed for layout of Calendar, DateFormat, and other objects */
 #ifndef U_FORCE_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UCalendarDateFields value.
-     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
+     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket
+     * #12420.
      */
     UCAL_FIELD_COUNT,
-#endif  // U_FORCE_HIDE_DEPRECATED_API
+#endif // U_FORCE_HIDE_DEPRECATED_API
 
- /**
-   * Field number indicating the
-   * day of the month. This is a synonym for <code>UCAL_DATE</code>.
-   * The first day of the month has value 1.
-   * @see #UCAL_DATE
-   * Synonym for UCAL_DATE
-   * @stable ICU 2.8
-   **/
-  UCAL_DAY_OF_MONTH=UCAL_DATE
+    /**
+     * Field number indicating the
+     * day of the month. This is a synonym for <code>UCAL_DATE</code>.
+     * The first day of the month has value 1.
+     * @see #UCAL_DATE
+     * Synonym for UCAL_DATE
+     * @stable ICU 2.8
+     **/
+    UCAL_DAY_OF_MONTH = UCAL_DATE
 };
 
 /** @stable ICU 2.0 */
 typedef enum UCalendarDateFields UCalendarDateFields;
-    /**
-     * Useful constant for days of week. Note: Calendar day-of-week is 1-based. Clients
-     * who create locale resources for the field of first-day-of-week should be aware of
-     * this. For instance, in US locale, first-day-of-week is set to 1, i.e., UCAL_SUNDAY.
-     */
-/** Possible days of the week in a UCalendar 
+/**
+ * Useful constant for days of week. Note: Calendar day-of-week is 1-based.
+ * Clients who create locale resources for the field of first-day-of-week should
+ * be aware of this. For instance, in US locale, first-day-of-week is set to 1,
+ * i.e., UCAL_SUNDAY.
+ */
+/** Possible days of the week in a UCalendar
  * @stable ICU 2.0
  */
 enum UCalendarDaysOfWeek {
-  /** Sunday */
-  UCAL_SUNDAY = 1,
-  /** Monday */
-  UCAL_MONDAY,
-  /** Tuesday */
-  UCAL_TUESDAY,
-  /** Wednesday */
-  UCAL_WEDNESDAY,
-  /** Thursday */
-  UCAL_THURSDAY,
-  /** Friday */
-  UCAL_FRIDAY,
-  /** Saturday */
-  UCAL_SATURDAY
+    /** Sunday */
+    UCAL_SUNDAY = 1,
+    /** Monday */
+    UCAL_MONDAY,
+    /** Tuesday */
+    UCAL_TUESDAY,
+    /** Wednesday */
+    UCAL_WEDNESDAY,
+    /** Thursday */
+    UCAL_THURSDAY,
+    /** Friday */
+    UCAL_FRIDAY,
+    /** Saturday */
+    UCAL_SATURDAY
 };
 
 /** @stable ICU 2.0 */
@@ -494,48 +498,48 @@ typedef enum UCalendarDaysOfWeek UCalendarDaysOfWeek;
  * @stable ICU 2.0
  */
 enum UCalendarMonths {
-  /** January */
-  UCAL_JANUARY,
-  /** February */
-  UCAL_FEBRUARY,
-  /** March */
-  UCAL_MARCH,
-  /** April */
-  UCAL_APRIL,
-  /** May */
-  UCAL_MAY,
-  /** June */
-  UCAL_JUNE,
-  /** July */
-  UCAL_JULY,
-  /** August */
-  UCAL_AUGUST,
-  /** September */
-  UCAL_SEPTEMBER,
-  /** October */
-  UCAL_OCTOBER,
-  /** November */
-  UCAL_NOVEMBER,
-  /** December */
-  UCAL_DECEMBER,
-  /** Value of the <code>UCAL_MONTH</code> field indicating the
-    * thirteenth month of the year. Although the Gregorian calendar
-    * does not use this value, lunar calendars do.
-    */
-  UCAL_UNDECIMBER
+    /** January */
+    UCAL_JANUARY,
+    /** February */
+    UCAL_FEBRUARY,
+    /** March */
+    UCAL_MARCH,
+    /** April */
+    UCAL_APRIL,
+    /** May */
+    UCAL_MAY,
+    /** June */
+    UCAL_JUNE,
+    /** July */
+    UCAL_JULY,
+    /** August */
+    UCAL_AUGUST,
+    /** September */
+    UCAL_SEPTEMBER,
+    /** October */
+    UCAL_OCTOBER,
+    /** November */
+    UCAL_NOVEMBER,
+    /** December */
+    UCAL_DECEMBER,
+    /** Value of the <code>UCAL_MONTH</code> field indicating the
+     * thirteenth month of the year. Although the Gregorian calendar
+     * does not use this value, lunar calendars do.
+     */
+    UCAL_UNDECIMBER
 };
 
 /** @stable ICU 2.0 */
 typedef enum UCalendarMonths UCalendarMonths;
 
-/** Possible AM/PM values in a UCalendar 
+/** Possible AM/PM values in a UCalendar
  * @stable ICU 2.0
  */
 enum UCalendarAMPMs {
     /** AM */
-  UCAL_AM,
-  /** PM */
-  UCAL_PM
+    UCAL_AM,
+    /** PM */
+    UCAL_PM
 };
 
 /** @stable ICU 2.0 */
@@ -568,13 +572,13 @@ enum USystemTimeZoneType {
 /** @stable ICU 4.8 */
 typedef enum USystemTimeZoneType USystemTimeZoneType;
 
-/** 
+/**
  * Create an enumeration over system time zone IDs with the given
- * filter conditions. 
+ * filter conditions.
  * @param zoneType  The system time zone type.
  * @param region    The ISO 3166 two-letter country code or UN M.49
  *                  three-digit area code.  When NULL, no filtering
- *                  done by region. 
+ *                  done by region.
  * @param rawOffset An offset from GMT in milliseconds, ignoring the
  *                  effect of daylight savings time, if any. When NULL,
  *                  no filtering done by zone offset.
@@ -583,10 +587,12 @@ typedef enum USystemTimeZoneType USystemTimeZoneType;
  *          using enum_close(), or NULL upon failure. In case of failure,
  *          *ec will indicate the error.
  * @stable ICU 4.8
- */ 
+ */
 U_STABLE UEnumeration* U_EXPORT2
-ucal_openTimeZoneIDEnumeration(USystemTimeZoneType zoneType, const char* region,
-                                const int32_t* rawOffset, UErrorCode* ec);
+ucal_openTimeZoneIDEnumeration( USystemTimeZoneType zoneType,
+                                const char* region,
+                                const int32_t* rawOffset,
+                                UErrorCode* ec );
 
 /**
  * Create an enumeration over all time zones.
@@ -599,8 +605,7 @@ ucal_openTimeZoneIDEnumeration(USystemTimeZoneType zoneType, const char* region,
  *
  * @stable ICU 2.6
  */
-U_STABLE UEnumeration* U_EXPORT2
-ucal_openTimeZones(UErrorCode* ec);
+U_STABLE UEnumeration* U_EXPORT2 ucal_openTimeZones( UErrorCode* ec );
 
 /**
  * Create an enumeration over all time zones associated with the given
@@ -618,8 +623,8 @@ ucal_openTimeZones(UErrorCode* ec);
  *
  * @stable ICU 2.6
  */
-U_STABLE UEnumeration* U_EXPORT2
-ucal_openCountryTimeZones(const char* country, UErrorCode* ec);
+U_STABLE UEnumeration* U_EXPORT2 ucal_openCountryTimeZones( const char* country,
+                                                            UErrorCode* ec );
 
 /**
  * Return the default time zone. The default is determined initially
@@ -627,7 +632,7 @@ ucal_openCountryTimeZones(const char* country, UErrorCode* ec);
  * routines fail, or if they specify a TimeZone or TimeZone offset
  * which is not recognized, then the special TimeZone "Etc/Unknown"
  * is returned.
- * 
+ *
  * The default may be changed with `ucal_setDefaultTimeZone()` or with
  * the C++ TimeZone API, `TimeZone::adoptDefault(TimeZone*)`.
  *
@@ -639,13 +644,14 @@ ucal_openCountryTimeZones(const char* country, UErrorCode* ec);
  *
  * @return The result string length, not including the terminating
  * null
- * 
+ *
  * @see #UCAL_UNKNOWN_ZONE_ID
- * 
+ *
  * @stable ICU 2.6
  */
-U_STABLE int32_t U_EXPORT2
-ucal_getDefaultTimeZone(UChar* result, int32_t resultCapacity, UErrorCode* ec);
+U_STABLE int32_t U_EXPORT2 ucal_getDefaultTimeZone( UChar* result,
+                                                    int32_t resultCapacity,
+                                                    UErrorCode* ec );
 
 /**
  * Set the default time zone.
@@ -656,8 +662,8 @@ ucal_getDefaultTimeZone(UChar* result, int32_t resultCapacity, UErrorCode* ec);
  *
  * @stable ICU 2.6
  */
-U_STABLE void U_EXPORT2
-ucal_setDefaultTimeZone(const UChar* zoneID, UErrorCode* ec);
+U_STABLE void U_EXPORT2 ucal_setDefaultTimeZone( const UChar* zoneID,
+                                                 UErrorCode* ec );
 
 #ifndef U_HIDE_DRAFT_API
 
@@ -667,31 +673,32 @@ ucal_setDefaultTimeZone(const UChar* zoneID, UErrorCode* ec);
  * system. If the host system detection routines fail, or if they specify
  * a TimeZone or TimeZone offset which is not recognized, then the special
  * TimeZone "Etc/Unknown" is returned.
- * 
+ *
  * Note that host time zone and the ICU default time zone can be different.
- * 
+ *
  * The ICU default time zone does not change once initialized unless modified
  * by calling `ucal_setDefaultTimeZone()` or with the C++ TimeZone API,
  * `TimeZone::adoptDefault(TimeZone*)`.
- * 
+ *
  * If the host operating system configuration has changed since ICU has
  * initialized then the returned value can be different than the ICU default
  * time zone, even if the default has not changed.
  *
  * <p>This function is not thread safe.</p>
- * 
+ *
  * @param result A buffer to receive the result, or NULL
  * @param resultCapacity The capacity of the result buffer
  * @param ec input/output error code
  * @return The result string length, not including the terminating
  * null
- * 
+ *
  * @see #UCAL_UNKNOWN_ZONE_ID
- * 
+ *
  * @draft ICU 65
  */
-U_DRAFT int32_t U_EXPORT2
-ucal_getHostTimeZone(UChar *result, int32_t resultCapacity, UErrorCode *ec);
+U_DRAFT int32_t U_EXPORT2 ucal_getHostTimeZone( UChar* result,
+                                                int32_t resultCapacity,
+                                                UErrorCode* ec );
 
 #endif // U_HIDE_DRAFT_API
 
@@ -711,8 +718,8 @@ ucal_getHostTimeZone(UChar *result, int32_t resultCapacity, UErrorCode *ec);
  *
  * @stable ICU 2.6
  */
-U_STABLE int32_t U_EXPORT2
-ucal_getDSTSavings(const UChar* zoneID, UErrorCode* ec);
+U_STABLE int32_t U_EXPORT2 ucal_getDSTSavings( const UChar* zoneID,
+                                               UErrorCode* ec );
 
 /**
  * Get the current date and time.
@@ -720,38 +727,38 @@ ucal_getDSTSavings(const UChar* zoneID, UErrorCode* ec);
  * @return The current date and time.
  * @stable ICU 2.0
  */
-U_STABLE UDate U_EXPORT2 
-ucal_getNow(void);
+U_STABLE UDate U_EXPORT2 ucal_getNow( void );
 
 /**
  * Open a UCalendar.
  * A UCalendar may be used to convert a millisecond value to a year,
  * month, and day.
  * <p>
- * Note: When unknown TimeZone ID is specified or if the TimeZone ID specified is "Etc/Unknown",
- * the UCalendar returned by the function is initialized with GMT zone with TimeZone ID
- * <code>UCAL_UNKNOWN_ZONE_ID</code> ("Etc/Unknown") without any errors/warnings.  If you want
- * to check if a TimeZone ID is valid prior to this function, use <code>ucal_getCanonicalTimeZoneID</code>.
- * 
+ * Note: When unknown TimeZone ID is specified or if the TimeZone ID specified
+ * is "Etc/Unknown", the UCalendar returned by the function is initialized with
+ * GMT zone with TimeZone ID <code>UCAL_UNKNOWN_ZONE_ID</code> ("Etc/Unknown")
+ * without any errors/warnings.  If you want to check if a TimeZone ID is valid
+ * prior to this function, use <code>ucal_getCanonicalTimeZoneID</code>.
+ *
  * @param zoneID The desired TimeZone ID.  If 0, use the default time zone.
  * @param len The length of zoneID, or -1 if null-terminated.
  * @param locale The desired locale
- * @param type The type of UCalendar to open. This can be UCAL_GREGORIAN to open the Gregorian
- * calendar for the locale, or UCAL_DEFAULT to open the default calendar for the locale (the
- * default calendar may also be Gregorian). To open a specific non-Gregorian calendar for the
- * locale, use uloc_setKeywordValue to set the value of the calendar keyword for the locale
- * and then pass the locale to ucal_open with UCAL_DEFAULT as the type.
+ * @param type The type of UCalendar to open. This can be UCAL_GREGORIAN to open
+ * the Gregorian calendar for the locale, or UCAL_DEFAULT to open the default
+ * calendar for the locale (the default calendar may also be Gregorian). To open
+ * a specific non-Gregorian calendar for the locale, use uloc_setKeywordValue to
+ * set the value of the calendar keyword for the locale and then pass the locale
+ * to ucal_open with UCAL_DEFAULT as the type.
  * @param status A pointer to an UErrorCode to receive any errors
  * @return A pointer to a UCalendar, or 0 if an error occurred.
  * @see #UCAL_UNKNOWN_ZONE_ID
  * @stable ICU 2.0
  */
-U_STABLE UCalendar* U_EXPORT2 
-ucal_open(const UChar*   zoneID,
-          int32_t        len,
-          const char*    locale,
-          UCalendarType  type,
-          UErrorCode*    status);
+U_STABLE UCalendar* U_EXPORT2 ucal_open( const UChar* zoneID,
+                                         int32_t len,
+                                         const char* locale,
+                                         UCalendarType type,
+                                         UErrorCode* status );
 
 /**
  * Close a UCalendar.
@@ -759,8 +766,7 @@ ucal_open(const UChar*   zoneID,
  * @param cal The UCalendar to close.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_close(UCalendar *cal);
+U_STABLE void U_EXPORT2 ucal_close( UCalendar* cal );
 
 #if U_SHOW_CPLUSPLUS_API
 
@@ -775,7 +781,7 @@ U_NAMESPACE_BEGIN
  * @see LocalPointer
  * @stable ICU 4.4
  */
-U_DEFINE_LOCAL_OPEN_POINTER(LocalUCalendarPointer, UCalendar, ucal_close);
+U_DEFINE_LOCAL_OPEN_POINTER( LocalUCalendarPointer, UCalendar, ucal_close );
 
 U_NAMESPACE_END
 
@@ -789,9 +795,8 @@ U_NAMESPACE_END
  * @return A pointer to a UCalendar identical to cal.
  * @stable ICU 4.0
  */
-U_STABLE UCalendar* U_EXPORT2 
-ucal_clone(const UCalendar* cal,
-           UErrorCode*      status);
+U_STABLE UCalendar* U_EXPORT2 ucal_clone( const UCalendar* cal,
+                                          UErrorCode* status );
 
 /**
  * Set the TimeZone used by a UCalendar.
@@ -802,41 +807,40 @@ ucal_clone(const UCalendar* cal,
  * @param status A pointer to an UErrorCode to receive any errors.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_setTimeZone(UCalendar*    cal,
-                 const UChar*  zoneID,
-                 int32_t       len,
-                 UErrorCode*   status);
-
-/** 
- * Get the ID of the UCalendar's time zone. 
- * 
- * @param cal           The UCalendar to query. 
- * @param result        Receives the UCalendar's time zone ID. 
- * @param resultLength  The maximum size of result. 
- * @param status        Receives the status. 
- * @return              The total buffer size needed; if greater than resultLength, the output was truncated. 
- * @stable ICU 51 
- */ 
-U_STABLE int32_t U_EXPORT2 
-ucal_getTimeZoneID(const UCalendar *cal,
-                   UChar *result,
-                   int32_t resultLength,
-                   UErrorCode *status);
+U_STABLE void U_EXPORT2 ucal_setTimeZone( UCalendar* cal,
+                                          const UChar* zoneID,
+                                          int32_t len,
+                                          UErrorCode* status );
 
 /**
- * Possible formats for a UCalendar's display name 
+ * Get the ID of the UCalendar's time zone.
+ *
+ * @param cal           The UCalendar to query.
+ * @param result        Receives the UCalendar's time zone ID.
+ * @param resultLength  The maximum size of result.
+ * @param status        Receives the status.
+ * @return              The total buffer size needed; if greater than
+ * resultLength, the output was truncated.
+ * @stable ICU 51
+ */
+U_STABLE int32_t U_EXPORT2 ucal_getTimeZoneID( const UCalendar* cal,
+                                               UChar* result,
+                                               int32_t resultLength,
+                                               UErrorCode* status );
+
+/**
+ * Possible formats for a UCalendar's display name
  * @stable ICU 2.0
  */
 enum UCalendarDisplayNameType {
-  /** Standard display name */
-  UCAL_STANDARD,
-  /** Short standard display name */
-  UCAL_SHORT_STANDARD,
-  /** Daylight savings display name */
-  UCAL_DST,
-  /** Short daylight savings display name */
-  UCAL_SHORT_DST
+    /** Standard display name */
+    UCAL_STANDARD,
+    /** Short standard display name */
+    UCAL_SHORT_STANDARD,
+    /** Daylight savings display name */
+    UCAL_DST,
+    /** Short daylight savings display name */
+    UCAL_SHORT_DST
 };
 
 /** @stable ICU 2.0 */
@@ -846,22 +850,23 @@ typedef enum UCalendarDisplayNameType UCalendarDisplayNameType;
  * Get the display name for a UCalendar's TimeZone.
  * A display name is suitable for presentation to a user.
  * @param cal          The UCalendar to query.
- * @param type         The desired display name format; one of UCAL_STANDARD, UCAL_SHORT_STANDARD,
- *                     UCAL_DST, UCAL_SHORT_DST
+ * @param type         The desired display name format; one of UCAL_STANDARD,
+ * UCAL_SHORT_STANDARD, UCAL_DST, UCAL_SHORT_DST
  * @param locale       The desired locale for the display name.
  * @param result       A pointer to a buffer to receive the formatted number.
  * @param resultLength The maximum size of result.
  * @param status       A pointer to an UErrorCode to receive any errors
- * @return             The total buffer size needed; if greater than resultLength, the output was truncated.
+ * @return             The total buffer size needed; if greater than
+ * resultLength, the output was truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-ucal_getTimeZoneDisplayName(const UCalendar*          cal,
-                            UCalendarDisplayNameType  type,
-                            const char*               locale,
-                            UChar*                    result,
-                            int32_t                   resultLength,
-                            UErrorCode*               status);
+U_STABLE int32_t U_EXPORT2
+ucal_getTimeZoneDisplayName( const UCalendar* cal,
+                             UCalendarDisplayNameType type,
+                             const char* locale,
+                             UChar* result,
+                             int32_t resultLength,
+                             UErrorCode* status );
 
 /**
  * Determine if a UCalendar is currently in daylight savings time.
@@ -871,14 +876,13 @@ ucal_getTimeZoneDisplayName(const UCalendar*          cal,
  * @return TRUE if cal is currently in daylight savings time, FALSE otherwise
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2 
-ucal_inDaylightTime(const UCalendar*  cal,
-                    UErrorCode*       status );
+U_STABLE UBool U_EXPORT2 ucal_inDaylightTime( const UCalendar* cal,
+                                              UErrorCode* status );
 
 /**
- * Sets the GregorianCalendar change date. This is the point when the switch from
- * Julian dates to Gregorian dates occurred. Default is 00:00:00 local time, October
- * 15, 1582. Previous to this time and date will be Julian dates.
+ * Sets the GregorianCalendar change date. This is the point when the switch
+ * from Julian dates to Gregorian dates occurred. Default is 00:00:00 local
+ * time, October 15, 1582. Previous to this time and date will be Julian dates.
  *
  * This function works only for Gregorian calendars. If the UCalendar is not
  * an instance of a Gregorian calendar, then a U_UNSUPPORTED_ERROR
@@ -895,13 +899,14 @@ ucal_inDaylightTime(const UCalendar*  cal,
  * @see ucal_getGregorianChange
  * @stable ICU 3.6
  */
-U_STABLE void U_EXPORT2
-ucal_setGregorianChange(UCalendar *cal, UDate date, UErrorCode *pErrorCode);
+U_STABLE void U_EXPORT2 ucal_setGregorianChange( UCalendar* cal,
+                                                 UDate date,
+                                                 UErrorCode* pErrorCode );
 
 /**
- * Gets the Gregorian Calendar change date. This is the point when the switch from
- * Julian dates to Gregorian dates occurred. Default is 00:00:00 local time, October
- * 15, 1582. Previous to this time and date will be Julian dates.
+ * Gets the Gregorian Calendar change date. This is the point when the switch
+ * from Julian dates to Gregorian dates occurred. Default is 00:00:00 local
+ * time, October 15, 1582. Previous to this time and date will be Julian dates.
  *
  * This function works only for Gregorian calendars. If the UCalendar is not
  * an instance of a Gregorian calendar, then a U_UNSUPPORTED_ERROR
@@ -918,41 +923,41 @@ ucal_setGregorianChange(UCalendar *cal, UDate date, UErrorCode *pErrorCode);
  * @see ucal_setGregorianChange
  * @stable ICU 3.6
  */
-U_STABLE UDate U_EXPORT2
-ucal_getGregorianChange(const UCalendar *cal, UErrorCode *pErrorCode);
+U_STABLE UDate U_EXPORT2 ucal_getGregorianChange( const UCalendar* cal,
+                                                  UErrorCode* pErrorCode );
 
 /**
- * Types of UCalendar attributes 
+ * Types of UCalendar attributes
  * @stable ICU 2.0
  */
 enum UCalendarAttribute {
-  /**
-   * Lenient parsing
-   * @stable ICU 2.0
-   */
-  UCAL_LENIENT,
-  /**
-   * First day of week
-   * @stable ICU 2.0
-   */
-  UCAL_FIRST_DAY_OF_WEEK,
-  /**
-   * Minimum number of days in first week
-   * @stable ICU 2.0
-   */
-  UCAL_MINIMAL_DAYS_IN_FIRST_WEEK,
-  /**
-   * The behavior for handling wall time repeating multiple times
-   * at negative time zone offset transitions
-   * @stable ICU 49
-   */
-  UCAL_REPEATED_WALL_TIME,
-  /**
-   * The behavior for handling skipped wall time at positive time
-   * zone offset transitions.
-   * @stable ICU 49
-   */
-  UCAL_SKIPPED_WALL_TIME
+    /**
+     * Lenient parsing
+     * @stable ICU 2.0
+     */
+    UCAL_LENIENT,
+    /**
+     * First day of week
+     * @stable ICU 2.0
+     */
+    UCAL_FIRST_DAY_OF_WEEK,
+    /**
+     * Minimum number of days in first week
+     * @stable ICU 2.0
+     */
+    UCAL_MINIMAL_DAYS_IN_FIRST_WEEK,
+    /**
+     * The behavior for handling wall time repeating multiple times
+     * at negative time zone offset transitions
+     * @stable ICU 49
+     */
+    UCAL_REPEATED_WALL_TIME,
+    /**
+     * The behavior for handling skipped wall time at positive time
+     * zone offset transitions.
+     * @stable ICU 49
+     */
+    UCAL_SKIPPED_WALL_TIME
 };
 
 /** @stable ICU 2.0 */
@@ -993,31 +998,31 @@ typedef enum UCalendarWallTimeOption UCalendarWallTimeOption;
  * Numeric attributes include the first day of the week, or the minimal numbers
  * of days in the first week of the month.
  * @param cal The UCalendar to query.
- * @param attr The desired attribute; one of UCAL_LENIENT, UCAL_FIRST_DAY_OF_WEEK,
- * UCAL_MINIMAL_DAYS_IN_FIRST_WEEK, UCAL_REPEATED_WALL_TIME or UCAL_SKIPPED_WALL_TIME
+ * @param attr The desired attribute; one of UCAL_LENIENT,
+ * UCAL_FIRST_DAY_OF_WEEK, UCAL_MINIMAL_DAYS_IN_FIRST_WEEK,
+ * UCAL_REPEATED_WALL_TIME or UCAL_SKIPPED_WALL_TIME
  * @return The value of attr.
  * @see ucal_setAttribute
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-ucal_getAttribute(const UCalendar*    cal,
-                  UCalendarAttribute  attr);
+U_STABLE int32_t U_EXPORT2 ucal_getAttribute( const UCalendar* cal,
+                                              UCalendarAttribute attr );
 
 /**
  * Set a numeric attribute associated with a UCalendar.
  * Numeric attributes include the first day of the week, or the minimal numbers
  * of days in the first week of the month.
  * @param cal The UCalendar to set.
- * @param attr The desired attribute; one of UCAL_LENIENT, UCAL_FIRST_DAY_OF_WEEK,
- * UCAL_MINIMAL_DAYS_IN_FIRST_WEEK, UCAL_REPEATED_WALL_TIME or UCAL_SKIPPED_WALL_TIME
+ * @param attr The desired attribute; one of UCAL_LENIENT,
+ * UCAL_FIRST_DAY_OF_WEEK, UCAL_MINIMAL_DAYS_IN_FIRST_WEEK,
+ * UCAL_REPEATED_WALL_TIME or UCAL_SKIPPED_WALL_TIME
  * @param newValue The new value of attr.
  * @see ucal_getAttribute
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_setAttribute(UCalendar*          cal,
-                  UCalendarAttribute  attr,
-                  int32_t             newValue);
+U_STABLE void U_EXPORT2 ucal_setAttribute( UCalendar* cal,
+                                           UCalendarAttribute attr,
+                                           int32_t newValue );
 
 /**
  * Get a locale for which calendars are available.
@@ -1028,8 +1033,7 @@ ucal_setAttribute(UCalendar*          cal,
  * @see ucal_countAvailable
  * @stable ICU 2.0
  */
-U_STABLE const char* U_EXPORT2 
-ucal_getAvailable(int32_t localeIndex);
+U_STABLE const char* U_EXPORT2 ucal_getAvailable( int32_t localeIndex );
 
 /**
  * Determine how many locales have calendars available.
@@ -1039,8 +1043,7 @@ ucal_getAvailable(int32_t localeIndex);
  * @see ucal_getAvailable
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-ucal_countAvailable(void);
+U_STABLE int32_t U_EXPORT2 ucal_countAvailable( void );
 
 /**
  * Get a UCalendar's current time in millis.
@@ -1053,9 +1056,8 @@ ucal_countAvailable(void);
  * @see ucal_setDateTime
  * @stable ICU 2.0
  */
-U_STABLE UDate U_EXPORT2 
-ucal_getMillis(const UCalendar*  cal,
-               UErrorCode*       status);
+U_STABLE UDate U_EXPORT2 ucal_getMillis( const UCalendar* cal,
+                                         UErrorCode* status );
 
 /**
  * Set a UCalendar's current time in millis.
@@ -1068,18 +1070,18 @@ ucal_getMillis(const UCalendar*  cal,
  * @see ucal_setDateTime
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_setMillis(UCalendar*   cal,
-               UDate        dateTime,
-               UErrorCode*  status );
+U_STABLE void U_EXPORT2 ucal_setMillis( UCalendar* cal,
+                                        UDate dateTime,
+                                        UErrorCode* status );
 
 /**
  * Set a UCalendar's current date.
  * The date is represented as a series of 32-bit integers.
  * @param cal The UCalendar to set.
  * @param year The desired year.
- * @param month The desired month; one of UCAL_JANUARY, UCAL_FEBRUARY, UCAL_MARCH, UCAL_APRIL, UCAL_MAY,
- * UCAL_JUNE, UCAL_JULY, UCAL_AUGUST, UCAL_SEPTEMBER, UCAL_OCTOBER, UCAL_NOVEMBER, UCAL_DECEMBER, UCAL_UNDECIMBER
+ * @param month The desired month; one of UCAL_JANUARY, UCAL_FEBRUARY,
+ * UCAL_MARCH, UCAL_APRIL, UCAL_MAY, UCAL_JUNE, UCAL_JULY, UCAL_AUGUST,
+ * UCAL_SEPTEMBER, UCAL_OCTOBER, UCAL_NOVEMBER, UCAL_DECEMBER, UCAL_UNDECIMBER
  * @param date The desired day of the month.
  * @param status A pointer to an UErrorCode to receive any errors
  * @see ucal_getMillis
@@ -1087,20 +1089,20 @@ ucal_setMillis(UCalendar*   cal,
  * @see ucal_setDateTime
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_setDate(UCalendar*   cal,
-             int32_t      year,
-             int32_t      month,
-             int32_t      date,
-             UErrorCode*  status);
+U_STABLE void U_EXPORT2 ucal_setDate( UCalendar* cal,
+                                      int32_t year,
+                                      int32_t month,
+                                      int32_t date,
+                                      UErrorCode* status );
 
 /**
  * Set a UCalendar's current date.
  * The date is represented as a series of 32-bit integers.
  * @param cal The UCalendar to set.
  * @param year The desired year.
- * @param month The desired month; one of UCAL_JANUARY, UCAL_FEBRUARY, UCAL_MARCH, UCAL_APRIL, UCAL_MAY,
- * UCAL_JUNE, UCAL_JULY, UCAL_AUGUST, UCAL_SEPTEMBER, UCAL_OCTOBER, UCAL_NOVEMBER, UCAL_DECEMBER, UCAL_UNDECIMBER
+ * @param month The desired month; one of UCAL_JANUARY, UCAL_FEBRUARY,
+ * UCAL_MARCH, UCAL_APRIL, UCAL_MAY, UCAL_JUNE, UCAL_JULY, UCAL_AUGUST,
+ * UCAL_SEPTEMBER, UCAL_OCTOBER, UCAL_NOVEMBER, UCAL_DECEMBER, UCAL_UNDECIMBER
  * @param date The desired day of the month.
  * @param hour The desired hour of day.
  * @param minute The desired minute.
@@ -1111,15 +1113,14 @@ ucal_setDate(UCalendar*   cal,
  * @see ucal_setDate
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_setDateTime(UCalendar*   cal,
-                 int32_t      year,
-                 int32_t      month,
-                 int32_t      date,
-                 int32_t      hour,
-                 int32_t      minute,
-                 int32_t      second,
-                 UErrorCode*  status);
+U_STABLE void U_EXPORT2 ucal_setDateTime( UCalendar* cal,
+                                          int32_t year,
+                                          int32_t month,
+                                          int32_t date,
+                                          int32_t hour,
+                                          int32_t minute,
+                                          int32_t second,
+                                          UErrorCode* status );
 
 /**
  * Returns TRUE if two UCalendars are equivalent.  Equivalent
@@ -1130,72 +1131,75 @@ ucal_setDateTime(UCalendar*   cal,
  * @return TRUE if cal1 and cal2 are equivalent, FALSE otherwise.
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2 
-ucal_equivalentTo(const UCalendar*  cal1,
-                  const UCalendar*  cal2);
+U_STABLE UBool U_EXPORT2 ucal_equivalentTo( const UCalendar* cal1,
+                                            const UCalendar* cal2 );
 
 /**
  * Add a specified signed amount to a particular field in a UCalendar.
  * This can modify more significant fields in the calendar.
- * Adding a positive value always means moving forward in time, so for the Gregorian calendar,
- * starting with 100 BC and adding +1 to year results in 99 BC (even though this actually reduces
- * the numeric value of the field itself).
+ * Adding a positive value always means moving forward in time, so for the
+ * Gregorian calendar, starting with 100 BC and adding +1 to year results in 99
+ * BC (even though this actually reduces the numeric value of the field itself).
  * @param cal The UCalendar to which to add.
- * @param field The field to which to add the signed value; one of UCAL_ERA, UCAL_YEAR, UCAL_MONTH,
- * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK,
- * UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND,
- * UCAL_MILLISECOND, UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
- * @param amount The signed amount to add to field. If the amount causes the value
- * to exceed to maximum or minimum values for that field, other fields are modified
- * to preserve the magnitude of the change.
+ * @param field The field to which to add the signed value; one of UCAL_ERA,
+ * UCAL_YEAR, UCAL_MONTH, UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE,
+ * UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK, UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM,
+ * UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND, UCAL_MILLISECOND,
+ * UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
+ * @param amount The signed amount to add to field. If the amount causes the
+ * value to exceed to maximum or minimum values for that field, other fields are
+ * modified to preserve the magnitude of the change.
  * @param status A pointer to an UErrorCode to receive any errors
  * @see ucal_roll
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_add(UCalendar*           cal,
-         UCalendarDateFields  field,
-         int32_t              amount,
-         UErrorCode*          status);
+U_STABLE void U_EXPORT2 ucal_add( UCalendar* cal,
+                                  UCalendarDateFields field,
+                                  int32_t amount,
+                                  UErrorCode* status );
 
 /**
  * Add a specified signed amount to a particular field in a UCalendar.
  * This will not modify more significant fields in the calendar.
- * Rolling by a positive value always means moving forward in time (unless the limit of the
- * field is reached, in which case it may pin or wrap), so for Gregorian calendar,
- * starting with 100 BC and rolling the year by +1 results in 99 BC.
- * When eras have a definite beginning and end (as in the Chinese calendar, or as in most eras in the
- * Japanese calendar) then rolling the year past either limit of the era will cause the year to wrap around.
- * When eras only have a limit at one end, then attempting to roll the year past that limit will result in
- * pinning the year at that limit. Note that for most calendars in which era 0 years move forward in time
- * (such as Buddhist, Hebrew, or Islamic), it is possible for add or roll to result in negative years for
- * era 0 (that is the only way to represent years before the calendar epoch).
+ * Rolling by a positive value always means moving forward in time (unless the
+ * limit of the field is reached, in which case it may pin or wrap), so for
+ * Gregorian calendar, starting with 100 BC and rolling the year by +1 results
+ * in 99 BC. When eras have a definite beginning and end (as in the Chinese
+ * calendar, or as in most eras in the Japanese calendar) then rolling the year
+ * past either limit of the era will cause the year to wrap around. When eras
+ * only have a limit at one end, then attempting to roll the year past that
+ * limit will result in pinning the year at that limit. Note that for most
+ * calendars in which era 0 years move forward in time (such as Buddhist,
+ * Hebrew, or Islamic), it is possible for add or roll to result in negative
+ * years for era 0 (that is the only way to represent years before the calendar
+ * epoch).
  * @param cal The UCalendar to which to add.
- * @param field The field to which to add the signed value; one of UCAL_ERA, UCAL_YEAR, UCAL_MONTH,
- * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK,
- * UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND,
- * UCAL_MILLISECOND, UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
- * @param amount The signed amount to add to field. If the amount causes the value
- * to exceed to maximum or minimum values for that field, the field is pinned to a permissible
- * value.
+ * @param field The field to which to add the signed value; one of UCAL_ERA,
+ * UCAL_YEAR, UCAL_MONTH, UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE,
+ * UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK, UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM,
+ * UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND, UCAL_MILLISECOND,
+ * UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
+ * @param amount The signed amount to add to field. If the amount causes the
+ * value to exceed to maximum or minimum values for that field, the field is
+ * pinned to a permissible value.
  * @param status A pointer to an UErrorCode to receive any errors
  * @see ucal_add
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_roll(UCalendar*           cal,
-          UCalendarDateFields  field,
-          int32_t              amount,
-          UErrorCode*          status);
+U_STABLE void U_EXPORT2 ucal_roll( UCalendar* cal,
+                                   UCalendarDateFields field,
+                                   int32_t amount,
+                                   UErrorCode* status );
 
 /**
  * Get the current value of a field from a UCalendar.
  * All fields are represented as 32-bit integers.
  * @param cal The UCalendar to query.
  * @param field The desired field; one of UCAL_ERA, UCAL_YEAR, UCAL_MONTH,
- * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK,
- * UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND,
- * UCAL_MILLISECOND, UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
+ * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR,
+ * UCAL_DAY_OF_WEEK, UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR,
+ * UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND, UCAL_MILLISECOND,
+ * UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
  * @param status A pointer to an UErrorCode to receive any errors
  * @return The value of the desired field.
  * @see ucal_set
@@ -1204,19 +1208,19 @@ ucal_roll(UCalendar*           cal,
  * @see ucal_clear
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-ucal_get(const UCalendar*     cal,
-         UCalendarDateFields  field,
-         UErrorCode*          status );
+U_STABLE int32_t U_EXPORT2 ucal_get( const UCalendar* cal,
+                                     UCalendarDateFields field,
+                                     UErrorCode* status );
 
 /**
  * Set the value of a field in a UCalendar.
  * All fields are represented as 32-bit integers.
  * @param cal The UCalendar to set.
  * @param field The field to set; one of UCAL_ERA, UCAL_YEAR, UCAL_MONTH,
- * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK,
- * UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND,
- * UCAL_MILLISECOND, UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
+ * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR,
+ * UCAL_DAY_OF_WEEK, UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR,
+ * UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND, UCAL_MILLISECOND,
+ * UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
  * @param value The desired value of field.
  * @see ucal_get
  * @see ucal_isSet
@@ -1224,19 +1228,19 @@ ucal_get(const UCalendar*     cal,
  * @see ucal_clear
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_set(UCalendar*           cal,
-         UCalendarDateFields  field,
-         int32_t              value);
+U_STABLE void U_EXPORT2 ucal_set( UCalendar* cal,
+                                  UCalendarDateFields field,
+                                  int32_t value );
 
 /**
  * Determine if a field in a UCalendar is set.
  * All fields are represented as 32-bit integers.
  * @param cal The UCalendar to query.
  * @param field The desired field; one of UCAL_ERA, UCAL_YEAR, UCAL_MONTH,
- * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK,
- * UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND,
- * UCAL_MILLISECOND, UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
+ * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR,
+ * UCAL_DAY_OF_WEEK, UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR,
+ * UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND, UCAL_MILLISECOND,
+ * UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
  * @return TRUE if field is set, FALSE otherwise.
  * @see ucal_get
  * @see ucal_set
@@ -1244,27 +1248,26 @@ ucal_set(UCalendar*           cal,
  * @see ucal_clear
  * @stable ICU 2.0
  */
-U_STABLE UBool U_EXPORT2 
-ucal_isSet(const UCalendar*     cal,
-           UCalendarDateFields  field);
+U_STABLE UBool U_EXPORT2 ucal_isSet( const UCalendar* cal,
+                                     UCalendarDateFields field );
 
 /**
  * Clear a field in a UCalendar.
  * All fields are represented as 32-bit integers.
  * @param cal The UCalendar containing the field to clear.
  * @param field The field to clear; one of UCAL_ERA, UCAL_YEAR, UCAL_MONTH,
- * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK,
- * UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND,
- * UCAL_MILLISECOND, UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
+ * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR,
+ * UCAL_DAY_OF_WEEK, UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR,
+ * UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND, UCAL_MILLISECOND,
+ * UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
  * @see ucal_get
  * @see ucal_set
  * @see ucal_isSet
  * @see ucal_clear
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_clearField(UCalendar*           cal,
-                UCalendarDateFields  field);
+U_STABLE void U_EXPORT2 ucal_clearField( UCalendar* cal,
+                                         UCalendarDateFields field );
 
 /**
  * Clear all fields in a UCalendar.
@@ -1276,26 +1279,25 @@ ucal_clearField(UCalendar*           cal,
  * @see ucal_clearField
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-ucal_clear(UCalendar* calendar);
+U_STABLE void U_EXPORT2 ucal_clear( UCalendar* calendar );
 
 /**
- * Possible limit values for a UCalendar 
+ * Possible limit values for a UCalendar
  * @stable ICU 2.0
  */
 enum UCalendarLimitType {
-  /** Minimum value */
-  UCAL_MINIMUM,
-  /** Maximum value */
-  UCAL_MAXIMUM,
-  /** Greatest minimum value */
-  UCAL_GREATEST_MINIMUM,
-  /** Leaest maximum value */
-  UCAL_LEAST_MAXIMUM,
-  /** Actual minimum value */
-  UCAL_ACTUAL_MINIMUM,
-  /** Actual maximum value */
-  UCAL_ACTUAL_MAXIMUM
+    /** Minimum value */
+    UCAL_MINIMUM,
+    /** Maximum value */
+    UCAL_MAXIMUM,
+    /** Greatest minimum value */
+    UCAL_GREATEST_MINIMUM,
+    /** Leaest maximum value */
+    UCAL_LEAST_MAXIMUM,
+    /** Actual minimum value */
+    UCAL_ACTUAL_MINIMUM,
+    /** Actual maximum value */
+    UCAL_ACTUAL_MAXIMUM
 };
 
 /** @stable ICU 2.0 */
@@ -1306,30 +1308,33 @@ typedef enum UCalendarLimitType UCalendarLimitType;
  * A limit is a maximum or minimum value for a field.
  * @param cal The UCalendar to query.
  * @param field The desired field; one of UCAL_ERA, UCAL_YEAR, UCAL_MONTH,
- * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK,
- * UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND,
- * UCAL_MILLISECOND, UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
- * @param type The desired critical point; one of UCAL_MINIMUM, UCAL_MAXIMUM, UCAL_GREATEST_MINIMUM,
- * UCAL_LEAST_MAXIMUM, UCAL_ACTUAL_MINIMUM, UCAL_ACTUAL_MAXIMUM
+ * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR,
+ * UCAL_DAY_OF_WEEK, UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR,
+ * UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND, UCAL_MILLISECOND,
+ * UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
+ * @param type The desired critical point; one of UCAL_MINIMUM, UCAL_MAXIMUM,
+ * UCAL_GREATEST_MINIMUM, UCAL_LEAST_MAXIMUM, UCAL_ACTUAL_MINIMUM,
+ * UCAL_ACTUAL_MAXIMUM
  * @param status A pointer to an UErrorCode to receive any errors.
  * @return The requested value.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-ucal_getLimit(const UCalendar*     cal,
-              UCalendarDateFields  field,
-              UCalendarLimitType   type,
-              UErrorCode*          status);
+U_STABLE int32_t U_EXPORT2 ucal_getLimit( const UCalendar* cal,
+                                          UCalendarDateFields field,
+                                          UCalendarLimitType type,
+                                          UErrorCode* status );
 
-/** Get the locale for this calendar object. You can choose between valid and actual locale.
+/** Get the locale for this calendar object. You can choose between valid and
+ * actual locale.
  *  @param cal The calendar object
- *  @param type type of the locale we're looking for (valid or actual) 
+ *  @param type type of the locale we're looking for (valid or actual)
  *  @param status error code for the operation
  *  @return the locale name
  *  @stable ICU 2.8
  */
-U_STABLE const char * U_EXPORT2
-ucal_getLocaleByType(const UCalendar *cal, ULocDataLocaleType type, UErrorCode* status);
+U_STABLE const char* U_EXPORT2 ucal_getLocaleByType( const UCalendar* cal,
+                                                     ULocDataLocaleType type,
+                                                     UErrorCode* status );
 
 /**
  * Returns the timezone data version currently used by ICU.
@@ -1337,8 +1342,7 @@ ucal_getLocaleByType(const UCalendar *cal, ULocDataLocaleType type, UErrorCode* 
  * @return the version string, such as "2007f"
  * @stable ICU 3.8
  */
-U_STABLE const char * U_EXPORT2
-ucal_getTZDataVersion(UErrorCode* status);
+U_STABLE const char* U_EXPORT2 ucal_getTZDataVersion( UErrorCode* status );
 
 /**
  * Returns the canonical system timezone ID or the normalized
@@ -1349,7 +1353,7 @@ ucal_getTZDataVersion(UErrorCode* status);
  *                  or the custom timezone ID in normalized format.
  * @param resultCapacity    The capacity of the result buffer.
  * @param isSystemID        Receives if the given ID is a known system
-     *                      timezone ID.
+ *                      timezone ID.
  * @param status    Receives the status.  When the given timezone ID
  *                  is neither a known system time zone ID nor a
  *                  valid custom timezone ID, U_ILLEGAL_ARGUMENT_ERROR
@@ -1358,68 +1362,74 @@ ucal_getTZDataVersion(UErrorCode* status);
  *                  null.
  * @stable ICU 4.0
  */
-U_STABLE int32_t U_EXPORT2
-ucal_getCanonicalTimeZoneID(const UChar* id, int32_t len,
-                            UChar* result, int32_t resultCapacity, UBool *isSystemID, UErrorCode* status);
+U_STABLE int32_t U_EXPORT2 ucal_getCanonicalTimeZoneID( const UChar* id,
+                                                        int32_t len,
+                                                        UChar* result,
+                                                        int32_t resultCapacity,
+                                                        UBool* isSystemID,
+                                                        UErrorCode* status );
 /**
- * Get the resource keyword value string designating the calendar type for the UCalendar.
+ * Get the resource keyword value string designating the calendar type for the
+ * UCalendar.
  * @param cal The UCalendar to query.
  * @param status The error code for the operation.
  * @return The resource keyword value string.
  * @stable ICU 4.2
  */
-U_STABLE const char * U_EXPORT2
-ucal_getType(const UCalendar *cal, UErrorCode* status);
+U_STABLE const char* U_EXPORT2 ucal_getType( const UCalendar* cal,
+                                             UErrorCode* status );
 
 /**
  * Given a key and a locale, returns an array of string values in a preferred
  * order that would make a difference. These are all and only those values where
- * the open (creation) of the service with the locale formed from the input locale
- * plus input keyword and that value has different behavior than creation with the
- * input locale alone.
- * @param key           one of the keys supported by this service.  For now, only
- *                      "calendar" is supported.
+ * the open (creation) of the service with the locale formed from the input
+ * locale plus input keyword and that value has different behavior than creation
+ * with the input locale alone.
+ * @param key           one of the keys supported by this service.  For now,
+ * only "calendar" is supported.
  * @param locale        the locale
  * @param commonlyUsed  if set to true it will return only commonly used values
  *                      with the given locale in preferred order.  Otherwise,
  *                      it will return all the available values for the locale.
  * @param status error status
- * @return a string enumeration over keyword values for the given key and the locale.
+ * @return a string enumeration over keyword values for the given key and the
+ * locale.
  * @stable ICU 4.2
  */
 U_STABLE UEnumeration* U_EXPORT2
-ucal_getKeywordValuesForLocale(const char* key,
-                               const char* locale,
-                               UBool commonlyUsed,
-                               UErrorCode* status);
-
+ucal_getKeywordValuesForLocale( const char* key,
+                                const char* locale,
+                                UBool commonlyUsed,
+                                UErrorCode* status );
 
 /** Weekday types, as returned by ucal_getDayOfWeekType().
  * @stable ICU 4.4
  */
 enum UCalendarWeekdayType {
-  /**
-   * Designates a full weekday (no part of the day is included in the weekend).
-   * @stable ICU 4.4 
-   */
-  UCAL_WEEKDAY,
-  /**
-   * Designates a full weekend day (the entire day is included in the weekend).
-   * @stable ICU 4.4 
-   */
-  UCAL_WEEKEND,
-  /**
-   * Designates a day that starts as a weekday and transitions to the weekend.
-   * Call ucal_getWeekendTransition() to get the time of transition.
-   * @stable ICU 4.4 
-   */
-  UCAL_WEEKEND_ONSET,
-  /**
-   * Designates a day that starts as the weekend and transitions to a weekday.
-   * Call ucal_getWeekendTransition() to get the time of transition.
-   * @stable ICU 4.4 
-   */
-  UCAL_WEEKEND_CEASE
+    /**
+     * Designates a full weekday (no part of the day is included in the
+     * weekend).
+     * @stable ICU 4.4
+     */
+    UCAL_WEEKDAY,
+    /**
+     * Designates a full weekend day (the entire day is included in the
+     * weekend).
+     * @stable ICU 4.4
+     */
+    UCAL_WEEKEND,
+    /**
+     * Designates a day that starts as a weekday and transitions to the weekend.
+     * Call ucal_getWeekendTransition() to get the time of transition.
+     * @stable ICU 4.4
+     */
+    UCAL_WEEKEND_ONSET,
+    /**
+     * Designates a day that starts as the weekend and transitions to a weekday.
+     * Call ucal_getWeekendTransition() to get the time of transition.
+     * @stable ICU 4.4
+     */
+    UCAL_WEEKEND_CEASE
 };
 
 /** @stable ICU 4.4 */
@@ -1437,22 +1447,25 @@ typedef enum UCalendarWeekdayType UCalendarWeekdayType;
  * function ucal_getWeekendTransition() will return the point of
  * transition.
  * @param cal The UCalendar to query.
- * @param dayOfWeek The day of the week whose type is desired (UCAL_SUNDAY..UCAL_SATURDAY).
+ * @param dayOfWeek The day of the week whose type is desired
+ * (UCAL_SUNDAY..UCAL_SATURDAY).
  * @param status The error code for the operation.
  * @return The UCalendarWeekdayType for the day of the week.
  * @stable ICU 4.4
  */
 U_STABLE UCalendarWeekdayType U_EXPORT2
-ucal_getDayOfWeekType(const UCalendar *cal, UCalendarDaysOfWeek dayOfWeek, UErrorCode* status);
+ucal_getDayOfWeekType( const UCalendar* cal,
+                       UCalendarDaysOfWeek dayOfWeek,
+                       UErrorCode* status );
 
 /**
  * Returns the time during the day at which the weekend begins or ends in
  * this calendar system.  If ucal_getDayOfWeekType() returns UCAL_WEEKEND_ONSET
  * for the specified dayOfWeek, return the time at which the weekend begins.
- * If ucal_getDayOfWeekType() returns UCAL_WEEKEND_CEASE for the specified dayOfWeek,
- * return the time at which the weekend ends. If ucal_getDayOfWeekType() returns
- * some other UCalendarWeekdayType for the specified dayOfWeek, is it an error condition
- * (U_ILLEGAL_ARGUMENT_ERROR).
+ * If ucal_getDayOfWeekType() returns UCAL_WEEKEND_CEASE for the specified
+ * dayOfWeek, return the time at which the weekend ends. If
+ * ucal_getDayOfWeekType() returns some other UCalendarWeekdayType for the
+ * specified dayOfWeek, is it an error condition (U_ILLEGAL_ARGUMENT_ERROR).
  * @param cal The UCalendar to query.
  * @param dayOfWeek The day of the week for which the weekend transition time is
  * desired (UCAL_SUNDAY..UCAL_SATURDAY).
@@ -1461,7 +1474,9 @@ ucal_getDayOfWeekType(const UCalendar *cal, UCalendarDaysOfWeek dayOfWeek, UErro
  * @stable ICU 4.4
  */
 U_STABLE int32_t U_EXPORT2
-ucal_getWeekendTransition(const UCalendar *cal, UCalendarDaysOfWeek dayOfWeek, UErrorCode *status);
+ucal_getWeekendTransition( const UCalendar* cal,
+                           UCalendarDaysOfWeek dayOfWeek,
+                           UErrorCode* status );
 
 /**
  * Returns TRUE if the given UDate is in the weekend in
@@ -1473,38 +1488,41 @@ ucal_getWeekendTransition(const UCalendar *cal, UCalendarDaysOfWeek dayOfWeek, U
  * this calendar system, FALSE otherwise.
  * @stable ICU 4.4
  */
-U_STABLE UBool U_EXPORT2
-ucal_isWeekend(const UCalendar *cal, UDate date, UErrorCode *status);
+U_STABLE UBool U_EXPORT2 ucal_isWeekend( const UCalendar* cal,
+                                         UDate date,
+                                         UErrorCode* status );
 
 /**
- * Return the difference between the target time and the time this calendar object is currently set to.
- * If the target time is after the current calendar setting, the the returned value will be positive.
- * The field parameter specifies the units of the return value. For example, if field is UCAL_MONTH
- * and ucal_getFieldDifference returns 3, then the target time is 3 to less than 4 months after the
- * current calendar setting.
+ * Return the difference between the target time and the time this calendar
+ * object is currently set to. If the target time is after the current calendar
+ * setting, the the returned value will be positive. The field parameter
+ * specifies the units of the return value. For example, if field is UCAL_MONTH
+ * and ucal_getFieldDifference returns 3, then the target time is 3 to less than
+ * 4 months after the current calendar setting.
  *
- * As a side effect of this call, this calendar is advanced toward target by the given amount. That is,
- * calling this function has the side effect of calling ucal_add on this calendar with the specified
- * field and an amount equal to the return value from this function.
+ * As a side effect of this call, this calendar is advanced toward target by the
+ * given amount. That is, calling this function has the side effect of calling
+ * ucal_add on this calendar with the specified field and an amount equal to the
+ * return value from this function.
  *
- * A typical way of using this function is to call it first with the largest field of interest, then
- * with progressively smaller fields.
- * 
+ * A typical way of using this function is to call it first with the largest
+ * field of interest, then with progressively smaller fields.
+ *
  * @param cal The UCalendar to compare and update.
  * @param target The target date to compare to the current calendar setting.
  * @param field The field to compare; one of UCAL_ERA, UCAL_YEAR, UCAL_MONTH,
- * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR, UCAL_DAY_OF_WEEK,
- * UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR, UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND,
- * UCAL_MILLISECOND, UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
+ * UCAL_WEEK_OF_YEAR, UCAL_WEEK_OF_MONTH, UCAL_DATE, UCAL_DAY_OF_YEAR,
+ * UCAL_DAY_OF_WEEK, UCAL_DAY_OF_WEEK_IN_MONTH, UCAL_AM_PM, UCAL_HOUR,
+ * UCAL_HOUR_OF_DAY, UCAL_MINUTE, UCAL_SECOND, UCAL_MILLISECOND,
+ * UCAL_ZONE_OFFSET, UCAL_DST_OFFSET.
  * @param status A pointer to an UErrorCode to receive any errors
  * @return The date difference for the specified field.
  * @stable ICU 4.8
  */
-U_STABLE int32_t U_EXPORT2 
-ucal_getFieldDifference(UCalendar* cal,
-                        UDate target,
-                        UCalendarDateFields field,
-                        UErrorCode* status);
+U_STABLE int32_t U_EXPORT2 ucal_getFieldDifference( UCalendar* cal,
+                                                    UDate target,
+                                                    UCalendarDateFields field,
+                                                    UErrorCode* status );
 
 /**
  * Time zone transition types for ucal_getTimeZoneTransitionDate
@@ -1537,86 +1555,103 @@ enum UTimeZoneTransitionType {
     UCAL_TZ_TRANSITION_PREVIOUS_INCLUSIVE
 };
 
-typedef enum UTimeZoneTransitionType UTimeZoneTransitionType; /**< @stable ICU 50 */
+typedef enum UTimeZoneTransitionType
+    UTimeZoneTransitionType; /**< @stable ICU 50 */
 
 /**
-* Get the UDate for the next/previous time zone transition relative to
-* the calendar's current date, in the time zone to which the calendar
-* is currently set. If there is no known time zone transition of the
-* requested type relative to the calendar's date, the function returns
-* FALSE.
-* @param cal The UCalendar to query.
-* @param type The type of transition desired.
-* @param transition A pointer to a UDate to be set to the transition time.
-*         If the function returns FALSE, the value set is unspecified.
-* @param status A pointer to a UErrorCode to receive any errors.
-* @return TRUE if a valid transition time is set in *transition, FALSE
-*         otherwise.
-* @stable ICU 50
-*/
-U_STABLE UBool U_EXPORT2 
-ucal_getTimeZoneTransitionDate(const UCalendar* cal, UTimeZoneTransitionType type,
-                               UDate* transition, UErrorCode* status);
+ * Get the UDate for the next/previous time zone transition relative to
+ * the calendar's current date, in the time zone to which the calendar
+ * is currently set. If there is no known time zone transition of the
+ * requested type relative to the calendar's date, the function returns
+ * FALSE.
+ * @param cal The UCalendar to query.
+ * @param type The type of transition desired.
+ * @param transition A pointer to a UDate to be set to the transition time.
+ *         If the function returns FALSE, the value set is unspecified.
+ * @param status A pointer to a UErrorCode to receive any errors.
+ * @return TRUE if a valid transition time is set in *transition, FALSE
+ *         otherwise.
+ * @stable ICU 50
+ */
+U_STABLE UBool U_EXPORT2
+ucal_getTimeZoneTransitionDate( const UCalendar* cal,
+                                UTimeZoneTransitionType type,
+                                UDate* transition,
+                                UErrorCode* status );
 
 /**
-* Converts a system time zone ID to an equivalent Windows time zone ID. For example,
-* Windows time zone ID "Pacific Standard Time" is returned for input "America/Los_Angeles".
-*
-* <p>There are system time zones that cannot be mapped to Windows zones. When the input
-* system time zone ID is unknown or unmappable to a Windows time zone, then this
-* function returns 0 as the result length, but the operation itself remains successful
-* (no error status set on return).
-*
-* <p>This implementation utilizes <a href="http://unicode.org/cldr/charts/supplemental/zone_tzid.html">
-* Zone-Tzid mapping data</a>. The mapping data is updated time to time. To get the latest changes,
-* please read the ICU user guide section <a href="http://userguide.icu-project.org/datetime/timezone#TOC-Updating-the-Time-Zone-Data">
-* Updating the Time Zone Data</a>.
-*
-* @param id            A system time zone ID.
-* @param len           The length of <code>id</code>, or -1 if null-terminated.
-* @param winid         A buffer to receive a Windows time zone ID.
-* @param winidCapacity The capacity of the result buffer <code>winid</code>.
-* @param status        Receives the status.
-* @return              The result string length, not including the terminating null.
-* @see ucal_getTimeZoneIDForWindowsID
-*
-* @stable ICU 52
-*/
-U_STABLE int32_t U_EXPORT2
-ucal_getWindowsTimeZoneID(const UChar* id, int32_t len,
-                            UChar* winid, int32_t winidCapacity, UErrorCode* status);
+ * Converts a system time zone ID to an equivalent Windows time zone ID. For
+ * example, Windows time zone ID "Pacific Standard Time" is returned for input
+ * "America/Los_Angeles".
+ *
+ * <p>There are system time zones that cannot be mapped to Windows zones. When
+ * the input system time zone ID is unknown or unmappable to a Windows time
+ * zone, then this function returns 0 as the result length, but the operation
+ * itself remains successful (no error status set on return).
+ *
+ * <p>This implementation utilizes <a
+ * href="http://unicode.org/cldr/charts/supplemental/zone_tzid.html"> Zone-Tzid
+ * mapping data</a>. The mapping data is updated time to time. To get the latest
+ * changes, please read the ICU user guide section <a
+ * href="http://userguide.icu-project.org/datetime/timezone#TOC-Updating-the-Time-Zone-Data">
+ * Updating the Time Zone Data</a>.
+ *
+ * @param id            A system time zone ID.
+ * @param len           The length of <code>id</code>, or -1 if null-terminated.
+ * @param winid         A buffer to receive a Windows time zone ID.
+ * @param winidCapacity The capacity of the result buffer <code>winid</code>.
+ * @param status        Receives the status.
+ * @return              The result string length, not including the terminating
+ * null.
+ * @see ucal_getTimeZoneIDForWindowsID
+ *
+ * @stable ICU 52
+ */
+U_STABLE int32_t U_EXPORT2 ucal_getWindowsTimeZoneID( const UChar* id,
+                                                      int32_t len,
+                                                      UChar* winid,
+                                                      int32_t winidCapacity,
+                                                      UErrorCode* status );
 
 /**
-* Converts a Windows time zone ID to an equivalent system time zone ID
-* for a region. For example, system time zone ID "America/Los_Angeles" is returned
-* for input Windows ID "Pacific Standard Time" and region "US" (or <code>null</code>),
-* "America/Vancouver" is returned for the same Windows ID "Pacific Standard Time" and
-* region "CA".
-*
-* <p>Not all Windows time zones can be mapped to system time zones. When the input
-* Windows time zone ID is unknown or unmappable to a system time zone, then this
-* function returns 0 as the result length, but the operation itself remains successful
-* (no error status set on return).
-*
-* <p>This implementation utilizes <a href="http://unicode.org/cldr/charts/supplemental/zone_tzid.html">
-* Zone-Tzid mapping data</a>. The mapping data is updated time to time. To get the latest changes,
-* please read the ICU user guide section <a href="http://userguide.icu-project.org/datetime/timezone#TOC-Updating-the-Time-Zone-Data">
-* Updating the Time Zone Data</a>.
-*
-* @param winid         A Windows time zone ID.
-* @param len           The length of <code>winid</code>, or -1 if null-terminated.
-* @param region        A null-terminated region code, or <code>NULL</code> if no regional preference.
-* @param id            A buffer to receive a system time zone ID.
-* @param idCapacity    The capacity of the result buffer <code>id</code>.
-* @param status        Receives the status.
-* @return              The result string length, not including the terminating null.
-* @see ucal_getWindowsTimeZoneID
-*
-* @stable ICU 52
-*/
-U_STABLE int32_t U_EXPORT2
-ucal_getTimeZoneIDForWindowsID(const UChar* winid, int32_t len, const char* region,
-                                UChar* id, int32_t idCapacity, UErrorCode* status);
+ * Converts a Windows time zone ID to an equivalent system time zone ID
+ * for a region. For example, system time zone ID "America/Los_Angeles" is
+ * returned for input Windows ID "Pacific Standard Time" and region "US" (or
+ * <code>null</code>), "America/Vancouver" is returned for the same Windows ID
+ * "Pacific Standard Time" and region "CA".
+ *
+ * <p>Not all Windows time zones can be mapped to system time zones. When the
+ * input Windows time zone ID is unknown or unmappable to a system time zone,
+ * then this function returns 0 as the result length, but the operation itself
+ * remains successful (no error status set on return).
+ *
+ * <p>This implementation utilizes <a
+ * href="http://unicode.org/cldr/charts/supplemental/zone_tzid.html"> Zone-Tzid
+ * mapping data</a>. The mapping data is updated time to time. To get the latest
+ * changes, please read the ICU user guide section <a
+ * href="http://userguide.icu-project.org/datetime/timezone#TOC-Updating-the-Time-Zone-Data">
+ * Updating the Time Zone Data</a>.
+ *
+ * @param winid         A Windows time zone ID.
+ * @param len           The length of <code>winid</code>, or -1 if
+ * null-terminated.
+ * @param region        A null-terminated region code, or <code>NULL</code> if
+ * no regional preference.
+ * @param id            A buffer to receive a system time zone ID.
+ * @param idCapacity    The capacity of the result buffer <code>id</code>.
+ * @param status        Receives the status.
+ * @return              The result string length, not including the terminating
+ * null.
+ * @see ucal_getWindowsTimeZoneID
+ *
+ * @stable ICU 52
+ */
+U_STABLE int32_t U_EXPORT2 ucal_getTimeZoneIDForWindowsID( const UChar* winid,
+                                                           int32_t len,
+                                                           const char* region,
+                                                           UChar* id,
+                                                           int32_t idCapacity,
+                                                           UErrorCode* status );
 
 #endif /* #if !UCONFIG_NO_FORMATTING */
 

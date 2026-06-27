@@ -3,10 +3,8 @@
 
 #include "AL/al.h"
 #include "AL/efx.h"
-
 #include "al/effects/effects.h"
 #include "alc/effects/base.h"
-
 
 enum {
     EAXREVERB_EFFECT = 0,
@@ -27,36 +25,35 @@ enum {
 
     MAX_EFFECTS
 };
-extern bool DisabledEffects[MAX_EFFECTS];
+extern bool DisabledEffects[ MAX_EFFECTS ];
 
 extern float ReverbBoost;
 
 struct EffectList {
-    const char name[16];
+    const char name[ 16 ];
     int type;
     ALenum val;
 };
-extern const EffectList gEffectList[16];
-
+extern const EffectList gEffectList[ 16 ];
 
 struct ALeffect {
     // Effect type (AL_EFFECT_NULL, ...)
-    ALenum type{AL_EFFECT_NULL};
+    ALenum type{ AL_EFFECT_NULL };
 
     EffectProps Props{};
 
-    const EffectVtable *vtab{nullptr};
+    const EffectVtable* vtab{ nullptr };
 
     /* Self ID */
-    ALuint id{0u};
+    ALuint id{ 0u };
 
     DISABLE_ALLOC()
 };
 
-void InitEffect(ALeffect *effect);
+void InitEffect( ALeffect* effect );
 
-void LoadReverbPreset(const char *name, ALeffect *effect);
+void LoadReverbPreset( const char* name, ALeffect* effect );
 
-bool IsValidEffectType(ALenum type) noexcept;
+bool IsValidEffectType( ALenum type ) noexcept;
 
 #endif

@@ -32,28 +32,25 @@
 
 #include <luabind/config.hpp>
 
-namespace luabind
-{
-	template<class T>
-	struct other
-	{
-		typedef T type;
-	};
-}
+namespace luabind {
+template < class T >
+struct other {
+    typedef T type;
+};
+} // namespace luabind
 
-namespace luabind { namespace detail
-{
-	template<typename T>
-	class unwrap_other
-	{
-	public:
-			typedef T type;
-	};
+namespace luabind {
+namespace detail {
+template < typename T >
+class unwrap_other {
+public:
+    typedef T type;
+};
 
-	template<typename T>
-	class unwrap_other<other<T> >
-	{
-	public:
-			typedef T type;
-	};
-}} // namespace luabind::detail
+template < typename T >
+class unwrap_other< other< T > > {
+public:
+    typedef T type;
+};
+} // namespace detail
+} // namespace luabind

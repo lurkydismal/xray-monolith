@@ -7,43 +7,45 @@ class CUIFrameWindow;
 class CUIStatic;
 class CBinocularsVision;
 
-class CWeaponBinoculars : public CWeaponCustomPistol
-{
+class CWeaponBinoculars : public CWeaponCustomPistol {
 private:
-	typedef CWeaponCustomPistol inherited;
+    typedef CWeaponCustomPistol inherited;
+
 protected:
-	bool m_bVision;
+    bool m_bVision;
+
 public:
-	CWeaponBinoculars();
-	virtual ~CWeaponBinoculars();
+    CWeaponBinoculars();
+    virtual ~CWeaponBinoculars();
 
-	void Load(LPCSTR section);
+    void Load( LPCSTR section );
 
-	virtual bool NeedBlendAnm();
-	virtual bool MovingAnimAllowedNow();
+    virtual bool NeedBlendAnm();
+    virtual bool MovingAnimAllowedNow();
 
-	virtual Fmatrix RayTransform();
+    virtual Fmatrix RayTransform();
 
-	virtual void OnZoomIn();
-	virtual void OnZoomOut();
-	virtual void ZoomInc();
-	virtual void ZoomDec();
-	virtual void net_Destroy();
-	virtual BOOL net_Spawn(CSE_Abstract* DC);
-	bool can_kill() const;
-	virtual void save(NET_Packet& output_packet);
-	virtual void load(IReader& input_packet);
+    virtual void OnZoomIn();
+    virtual void OnZoomOut();
+    virtual void ZoomInc();
+    virtual void ZoomDec();
+    virtual void net_Destroy();
+    virtual BOOL net_Spawn( CSE_Abstract* DC );
+    bool can_kill() const;
+    virtual void save( NET_Packet& output_packet );
+    virtual void load( IReader& input_packet );
 
-	virtual bool Action(u16 cmd, u32 flags);
-	virtual void UpdateCL();
-	virtual void render_item_ui();
-	virtual bool render_item_ui_query();
-	virtual bool use_crosshair() const { return false; }
-	virtual CWeaponBinoculars* cast_weapon_binoculars() { return this; }
-	virtual bool GetBriefInfo(II_BriefInfo& info);
-	virtual void net_Relcase(CObject* object);
+    virtual bool Action( u16 cmd, u32 flags );
+    virtual void UpdateCL();
+    virtual void render_item_ui();
+    virtual bool render_item_ui_query();
+    virtual bool use_crosshair() const { return false; }
+    virtual CWeaponBinoculars* cast_weapon_binoculars() { return this; }
+    virtual bool GetBriefInfo( II_BriefInfo& info );
+    virtual void net_Relcase( CObject* object );
+
 protected:
-	CBinocularsVision* m_binoc_vision;
+    CBinocularsVision* m_binoc_vision;
 
-DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

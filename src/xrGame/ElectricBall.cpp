@@ -3,27 +3,22 @@
 // ElectricBall - артефакт электрический шар
 ///////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
 #include "ElectricBall.h"
+
 #include "../xrphysics/PhysicsShell.h"
+#include "stdafx.h"
 
+CElectricBall::CElectricBall( void ) {}
 
-CElectricBall::CElectricBall(void)
-{
+CElectricBall::~CElectricBall( void ) {}
+
+void CElectricBall::Load( LPCSTR section ) {
+    inherited::Load( section );
 }
 
-CElectricBall::~CElectricBall(void)
-{
-}
+void CElectricBall::UpdateCLChild() {
+    inherited::UpdateCLChild();
 
-void CElectricBall::Load(LPCSTR section)
-{
-	inherited::Load(section);
-}
-
-void CElectricBall::UpdateCLChild()
-{
-	inherited::UpdateCLChild();
-
-	if (H_Parent() && IsHidden()) XFORM().set(H_Parent()->XFORM());
+    if ( H_Parent() && IsHidden() )
+        XFORM().set( H_Parent()->XFORM() );
 };

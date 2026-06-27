@@ -15,7 +15,6 @@
 
 #include "unicode/utypes.h"
 
-
 /**
  * \file
  * \brief C API: Parse Error Information
@@ -23,7 +22,7 @@
 /**
  * The capacity of the context strings in UParseError.
  * @stable ICU 2.0
- */ 
+ */
 enum { U_PARSE_CONTEXT_LEN = 16 };
 
 /**
@@ -52,11 +51,10 @@ enum { U_PARSE_CONTEXT_LEN = 16 };
  * <p>Examples of engines which use UParseError (or may use it in the
  * future) are Transliterator, RuleBasedBreakIterator, and
  * RegexPattern.
- * 
+ *
  * @stable ICU 2.0
  */
 typedef struct UParseError {
-
     /**
      * The line on which the error occurred.  If the parser uses this
      * field, it sets it to the line number of the source text line on
@@ -64,7 +62,7 @@ typedef struct UParseError {
      * parse does not support line numbers, the value will be <= 0.
      * @stable ICU 2.0
      */
-    int32_t        line;
+    int32_t line;
 
     /**
      * The character offset to the error.  If the line field is >= 1,
@@ -73,21 +71,21 @@ typedef struct UParseError {
      * does not support this field, it will have a value < 0.
      * @stable ICU 2.0
      */
-    int32_t        offset;
+    int32_t offset;
 
     /**
      * Textual context before the error.  Null-terminated.  The empty
      * string if not supported by parser.
-     * @stable ICU 2.0   
+     * @stable ICU 2.0
      */
-    UChar          preContext[U_PARSE_CONTEXT_LEN];
+    UChar preContext[ U_PARSE_CONTEXT_LEN ];
 
     /**
      * The error itself and/or textual context after the error.
      * Null-terminated.  The empty string if not supported by parser.
-     * @stable ICU 2.0   
+     * @stable ICU 2.0
      */
-    UChar          postContext[U_PARSE_CONTEXT_LEN];
+    UChar postContext[ U_PARSE_CONTEXT_LEN ];
 
 } UParseError;
 

@@ -14,11 +14,10 @@
 * tcp objects either connected to some address or returned by the accept
 * method of a server object.
 \*=========================================================================*/
-#include "luasocket.h"
-
 #include "buffer.h"
-#include "timeout.h"
+#include "luasocket.h"
 #include "socket.h"
+#include "timeout.h"
 
 typedef struct t_tcp_ {
     t_socket sock;
@@ -28,13 +27,13 @@ typedef struct t_tcp_ {
     int family;
 } t_tcp;
 
-typedef t_tcp *p_tcp;
+typedef t_tcp* p_tcp;
 
 #ifndef _WIN32
-#pragma GCC visibility push(hidden)
+#pragma GCC visibility push( hidden )
 #endif
 
-int tcp_open(lua_State *L);
+int tcp_open( lua_State* L );
 
 #ifndef _WIN32
 #pragma GCC visibility pop

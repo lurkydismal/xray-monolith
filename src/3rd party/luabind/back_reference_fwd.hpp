@@ -24,6 +24,7 @@
 
 namespace luabind {
 
-   template<typename T> struct back_reference;
+template < typename T >
+struct back_reference;
 
 } // namespace luabind

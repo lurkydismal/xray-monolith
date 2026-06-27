@@ -18,10 +18,10 @@
 #ifndef UBIDITRANSFORM_H
 #define UBIDITRANSFORM_H
 
-#include "unicode/utypes.h"
+#include "unicode/localpointer.h"
 #include "unicode/ubidi.h"
 #include "unicode/uchar.h"
-#include "unicode/localpointer.h"
+#include "unicode/utypes.h"
 
 /**
  * \file
@@ -35,11 +35,10 @@
  * total) of input and output text order:
  *
  *   - <logical input, visual output>: unless the output direction is RTL, this
- *     corresponds to a normal operation of the Bidi algorithm as described in the
- *     Unicode Technical Report and implemented by `UBiDi` when the
- *     reordering mode is set to `UBIDI_REORDER_DEFAULT`. Visual RTL
- *     mode is not supported by `UBiDi` and is accomplished through
- *     reversing a visual LTR string,
+ *     corresponds to a normal operation of the Bidi algorithm as described in
+ * the Unicode Technical Report and implemented by `UBiDi` when the reordering
+ * mode is set to `UBIDI_REORDER_DEFAULT`. Visual RTL mode is not supported by
+ * `UBiDi` and is accomplished through reversing a visual LTR string,
  *
  *   - <visual input, logical output>: unless the input direction is RTL, this
  *     corresponds to an "inverse bidi algorithm" in `UBiDi` with the
@@ -51,8 +50,8 @@
  *     mismatch, this corresponds to the `UBiDi` implementation with the
  *     reordering mode set to `UBIDI_REORDER_RUNS_ONLY`; and if the
  *     input and output base directions are identical, the transformation engine
- *     will only handle character mirroring and Arabic shaping operations without
- *     reordering,
+ *     will only handle character mirroring and Arabic shaping operations
+ * without reordering,
  *
  *   - <visual input, visual output>: this reordering mode is not supported by
  *     the `UBiDi` engine; it implies character mirroring, Arabic
@@ -67,14 +66,14 @@
  */
 typedef enum {
     /** 0: Constant indicating a logical order.
-      * This is the default for input text.
-      * @stable ICU 58
-      */
+     * This is the default for input text.
+     * @stable ICU 58
+     */
     UBIDI_LOGICAL = 0,
     /** 1: Constant indicating a visual order.
-      * This is a default for output text.
-      * @stable ICU 58
-      */
+     * This is a default for output text.
+     * @stable ICU 58
+     */
     UBIDI_VISUAL
 } UBiDiOrder;
 
@@ -90,17 +89,17 @@ typedef enum {
  */
 typedef enum {
     /** 0: Constant indicating that character mirroring should not be
-      * performed.
-      * This is the default.
-      * @stable ICU 58
-      */
+     * performed.
+     * This is the default.
+     * @stable ICU 58
+     */
     UBIDI_MIRRORING_OFF = 0,
     /** 1: Constant indicating that character mirroring should be performed.
-      * This corresponds to calling <code>ubidi_writeReordered</code> or
-      * <code>ubidi_writeReverse</code> with the
-      * <code>UBIDI_DO_MIRRORING</code> option bit set.
-      * @stable ICU 58
-      */
+     * This corresponds to calling <code>ubidi_writeReordered</code> or
+     * <code>ubidi_writeReverse</code> with the
+     * <code>UBIDI_DO_MIRRORING</code> option bit set.
+     * @stable ICU 58
+     */
     UBIDI_MIRRORING_ON
 } UBiDiMirroring;
 
@@ -246,13 +245,18 @@ typedef struct UBiDiTransform UBiDiTransform;
  * @stable ICU 58
  */
 U_STABLE uint32_t U_EXPORT2
-ubiditransform_transform(UBiDiTransform *pBiDiTransform,
-            const UChar *src, int32_t srcLength,
-            UChar *dest, int32_t destSize,
-            UBiDiLevel inParaLevel, UBiDiOrder inOrder,
-            UBiDiLevel outParaLevel, UBiDiOrder outOrder,
-            UBiDiMirroring doMirroring, uint32_t shapingOptions,
-            UErrorCode *pErrorCode);
+ubiditransform_transform( UBiDiTransform* pBiDiTransform,
+                          const UChar* src,
+                          int32_t srcLength,
+                          UChar* dest,
+                          int32_t destSize,
+                          UBiDiLevel inParaLevel,
+                          UBiDiOrder inOrder,
+                          UBiDiLevel outParaLevel,
+                          UBiDiOrder outOrder,
+                          UBiDiMirroring doMirroring,
+                          uint32_t shapingOptions,
+                          UErrorCode* pErrorCode );
 
 /**
  * Allocates a <code>UBiDiTransform</code> object. This object can be reused,
@@ -292,14 +296,13 @@ ubiditransform_transform(UBiDiTransform *pBiDiTransform,
  * @stable ICU 58
  */
 U_STABLE UBiDiTransform* U_EXPORT2
-ubiditransform_open(UErrorCode *pErrorCode);
+ubiditransform_open( UErrorCode* pErrorCode );
 
 /**
  * Deallocates the given <code>UBiDiTransform</code> object.
  * @stable ICU 58
  */
-U_STABLE void U_EXPORT2
-ubiditransform_close(UBiDiTransform *pBidiTransform);
+U_STABLE void U_EXPORT2 ubiditransform_close( UBiDiTransform* pBidiTransform );
 
 #if U_SHOW_CPLUSPLUS_API
 
@@ -314,7 +317,9 @@ U_NAMESPACE_BEGIN
  * @see LocalPointer
  * @stable ICU 58
  */
-U_DEFINE_LOCAL_OPEN_POINTER(LocalUBiDiTransformPointer, UBiDiTransform, ubiditransform_close);
+U_DEFINE_LOCAL_OPEN_POINTER( LocalUBiDiTransformPointer,
+                             UBiDiTransform,
+                             ubiditransform_close );
 
 U_NAMESPACE_END
 

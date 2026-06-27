@@ -1,80 +1,78 @@
-#include "stdafx.h"
 #include "HUDManager.h"
-#include "hudtarget.h"
-#include "actor.h"
+
+#include "../xrEngine/gamemtllib.h"
 #include "../xrEngine/igame_level.h"
 #include "../xrEngine/xr_input.h"
-#include "../xrEngine/gamemtllib.h"
-#include "MainMenu.h"
-#include "grenade.h"
-#include "spectator.h"
 #include "Car.h"
-#include "UIGameCustom.h"
+#include "MainMenu.h"
 #include "UICursor.h"
-#include "string_table.h"
+#include "UIGameCustom.h"
+#include "actor.h"
 #include "game_cl_base.h"
-#ifdef	DEBUG
+#include "grenade.h"
+#include "hudtarget.h"
+#include "spectator.h"
+#include "stdafx.h"
+#include "string_table.h"
+#ifdef DEBUG
 #include "phdebug.h"
 #endif
 
 #include "Flashlight.h"
+#include "GametaskManager.h"
 #include "Inventory.h"
 #include "map_manager.h"
 #include "player_hud.h"
 #include "script_attachment_manager.h"
 
-#include "GametaskManager.h"
-
-extern CUIGameCustom* CurrentGameUI()
-{
-	return g_hud ? HUD().GetGameUI() : nullptr;
+extern CUIGameCustom* CurrentGameUI() {
+    return g_hud ? HUD().GetGameUI() : nullptr;
 }
 
-CFontManager::CFontManager()
-{
-	Device.seqDeviceReset.Add(this, REG_PRIORITY_HIGH);
+CFontManager::CFontManager() {
+    Device.seqDeviceReset.Add( this, REG_PRIORITY_HIGH );
 
-	m_all_fonts.push_back(&pFontMedium); // used cpp
-	m_all_fonts.push_back(&pFontDI); // used cpp
-	m_all_fonts.push_back(&pFontArial14); // used xml
-	m_all_fonts.push_back(&pFontGraffiti19Russian);
-	m_all_fonts.push_back(&pFontGraffiti22Russian);
-	m_all_fonts.push_back(&pFontLetterica16Russian);
-	m_all_fonts.push_back(&pFontLetterica18Russian);
-	m_all_fonts.push_back(&pFontGraffiti32Russian);
-	m_all_fonts.push_back(&pFontGraffiti50Russian);
-	m_all_fonts.push_back(&pFontLetterica25);
-	m_all_fonts.push_back(&pFontStat);
+    m_all_fonts.push_back( &pFontMedium );  // used cpp
+    m_all_fonts.push_back( &pFontDI );      // used cpp
+    m_all_fonts.push_back( &pFontArial14 ); // used xml
+    m_all_fonts.push_back( &pFontGraffiti19Russian );
+    m_all_fonts.push_back( &pFontGraffiti22Russian );
+    m_all_fonts.push_back( &pFontLetterica16Russian );
+    m_all_fonts.push_back( &pFontLetterica18Russian );
+    m_all_fonts.push_back( &pFontGraffiti32Russian );
+    m_all_fonts.push_back( &pFontGraffiti50Russian );
+    m_all_fonts.push_back( &pFontLetterica25 );
+    m_all_fonts.push_back( &pFontStat );
 
-	FONTS_VEC_IT it = m_all_fonts.begin();
-	FONTS_VEC_IT it_e = m_all_fonts.end();
-	for (; it != it_e; ++it)
-		(**it) = NULL;
+    FONTS_VEC_IT it = m_all_fonts.begin();
+    FONTS_VEC_IT it_e = m_all_fonts.end();
+    for ( ; it != it_e; ++it )
+        ( **it ) = NULL;
 
-	InitializeFonts();
+    InitializeFonts();
 }
 
-void CFontManager::InitializeFonts()
-{
-	InitializeFont(pFontMedium, "hud_font_medium");
-	InitializeFont(pFontDI, "hud_font_di", CGameFont::fsGradient | CGameFont::fsDeviceIndependent);
-	InitializeFont(pFontArial14, "ui_font_arial_14");
-	InitializeFont(pFontGraffiti19Russian, "ui_font_graffiti19_russian");
-	InitializeFont(pFontGraffiti22Russian, "ui_font_graffiti22_russian");
-	InitializeFont(pFontLetterica16Russian, "ui_font_letterica16_russian");
-	InitializeFont(pFontLetterica18Russian, "ui_font_letterica18_russian");
-	InitializeFont(pFontGraffiti32Russian, "ui_font_graff_32");
-	InitializeFont(pFontGraffiti50Russian, "ui_font_graff_50");
-	InitializeFont(pFontLetterica25, "ui_font_letter_25");
-	InitializeFont(pFontStat, "stat_font", CGameFont::fsDeviceIndependent);
-	pFontStat->SetInterval(0.75f, 1.0f);
+void CFontManager::InitializeFonts() {
+    InitializeFont( pFontMedium, "hud_font_medium" );
+    InitializeFont( pFontDI, "hud_font_di",
+                    CGameFont::fsGradient | CGameFont::fsDeviceIndependent );
+    InitializeFont( pFontArial14, "ui_font_arial_14" );
+    InitializeFont( pFontGraffiti19Russian, "ui_font_graffiti19_russian" );
+    InitializeFont( pFontGraffiti22Russian, "ui_font_graffiti22_russian" );
+    InitializeFont( pFontLetterica16Russian, "ui_font_letterica16_russian" );
+    InitializeFont( pFontLetterica18Russian, "ui_font_letterica18_russian" );
+    InitializeFont( pFontGraffiti32Russian, "ui_font_graff_32" );
+    InitializeFont( pFontGraffiti50Russian, "ui_font_graff_50" );
+    InitializeFont( pFontLetterica25, "ui_font_letter_25" );
+    InitializeFont( pFontStat, "stat_font", CGameFont::fsDeviceIndependent );
+    pFontStat->SetInterval( 0.75f, 1.0f );
 }
 
-LPCSTR CFontManager::GetFontTexName(LPCSTR section)
-{
-	static char* tex_names[] = {"texture800", "texture", "texture1600", "texture2160"};
-	int def_idx = 1; //default 1024x768
-	int idx = def_idx;
+LPCSTR CFontManager::GetFontTexName( LPCSTR section ) {
+    static char* tex_names[] = { "texture800", "texture", "texture1600",
+                                 "texture2160" };
+    int def_idx = 1; // default 1024x768
+    int idx = def_idx;
 #if 0
     u32 w = Device.dwWidth;
 
@@ -82,402 +80,378 @@ LPCSTR CFontManager::GetFontTexName(LPCSTR section)
     else if(w<=1280)idx = 1;
     else 			idx = 2;
 #else
-	u32 h = Device.dwHeight;
+    u32 h = Device.dwHeight;
 
-	if (h <= 600) idx = 0;
-	else if (h < 1024) idx = 1;
-	else if (h < 1440) idx = 2;
-	else idx = 3;
+    if ( h <= 600 )
+        idx = 0;
+    else if ( h < 1024 )
+        idx = 1;
+    else if ( h < 1440 )
+        idx = 2;
+    else
+        idx = 3;
 #endif
 
-	while (idx >= 0)
-	{
-		if (pSettings->line_exist(section, tex_names[idx]))
-			return pSettings->r_string(section, tex_names[idx]);
-		--idx;
-	}
-	return pSettings->r_string(section, tex_names[def_idx]);
+    while ( idx >= 0 ) {
+        if ( pSettings->line_exist( section, tex_names[ idx ] ) )
+            return pSettings->r_string( section, tex_names[ idx ] );
+        --idx;
+    }
+    return pSettings->r_string( section, tex_names[ def_idx ] );
 }
 
-void CFontManager::InitializeFont(CGameFont*& F, LPCSTR section, u32 flags)
-{
-	LPCSTR font_tex_name = GetFontTexName(section);
-	R_ASSERT(font_tex_name);
-	LPCSTR sh_name = pSettings->r_string(section, "shader");
-	if (!F)
-		F = xr_new<CGameFont>(sh_name, font_tex_name, flags);
-	else
-		F->Initialize(sh_name, font_tex_name);
+void CFontManager::InitializeFont( CGameFont*& F, LPCSTR section, u32 flags ) {
+    LPCSTR font_tex_name = GetFontTexName( section );
+    R_ASSERT( font_tex_name );
+    LPCSTR sh_name = pSettings->r_string( section, "shader" );
+    if ( !F )
+        F = xr_new< CGameFont >( sh_name, font_tex_name, flags );
+    else
+        F->Initialize( sh_name, font_tex_name );
 
 #ifdef DEBUG
     F->m_font_name = section;
 #endif
 }
 
-CFontManager::~CFontManager()
-{
-	Device.seqDeviceReset.Remove(this);
-	FONTS_VEC_IT it = m_all_fonts.begin();
-	FONTS_VEC_IT it_e = m_all_fonts.end();
-	for (; it != it_e; ++it)
-		xr_delete(**it);
+CFontManager::~CFontManager() {
+    Device.seqDeviceReset.Remove( this );
+    FONTS_VEC_IT it = m_all_fonts.begin();
+    FONTS_VEC_IT it_e = m_all_fonts.end();
+    for ( ; it != it_e; ++it )
+        xr_delete( **it );
 }
 
-void CFontManager::Render()
-{
-	FONTS_VEC_IT it = m_all_fonts.begin();
-	FONTS_VEC_IT it_e = m_all_fonts.end();
-	for (; it != it_e; ++it)
-		(**it)->OnRender();
+void CFontManager::Render() {
+    FONTS_VEC_IT it = m_all_fonts.begin();
+    FONTS_VEC_IT it_e = m_all_fonts.end();
+    for ( ; it != it_e; ++it )
+        ( **it )->OnRender();
 }
 
-void CFontManager::OnDeviceReset()
-{
-	InitializeFonts();
+void CFontManager::OnDeviceReset() {
+    InitializeFonts();
 }
 
 //--------------------------------------------------------------------
-CHUDManager::CHUDManager() : pUIGame(NULL), m_pHUDTarget(xr_new<CHUDTarget>()), b_online(false)
-{
-}
+CHUDManager::CHUDManager()
+    : pUIGame( NULL ),
+      m_pHUDTarget( xr_new< CHUDTarget >() ),
+      b_online( false ) {}
 
 //--------------------------------------------------------------------
-CHUDManager::~CHUDManager()
-{
-	OnDisconnected();
+CHUDManager::~CHUDManager() {
+    OnDisconnected();
 
-	if (pUIGame)
-		pUIGame->UnLoad();
+    if ( pUIGame )
+        pUIGame->UnLoad();
 
-	xr_delete(pUIGame);
-	xr_delete(m_pHUDTarget);
+    xr_delete( pUIGame );
+    xr_delete( m_pHUDTarget );
 }
 
 //--------------------------------------------------------------------
 BOOL mt_ui = FALSE;
-void CHUDManager::OnFrame()
-{
-	PROF_EVENT("CHUDManager::OnFrame");
-	if (!psHUD_Flags.is(HUD_DRAW_RT2))
-		return;
+void CHUDManager::OnFrame() {
+    PROF_EVENT( "CHUDManager::OnFrame" );
+    if ( !psHUD_Flags.is( HUD_DRAW_RT2 ) )
+        return;
 
-	if (!b_online)
-		return;
+    if ( !b_online )
+        return;
 
-    if (!mt_ui)
-    {
-        if (pUIGame)
+    if ( !mt_ui ) {
+        if ( pUIGame )
             pUIGame->OnFrame();
     }
 
-	PP.CameraPick();
-	g_player_hud->OnFrame();
-	DoPick(PP);
+    PP.CameraPick();
+    g_player_hud->OnFrame();
+    DoPick( PP );
 }
 
 xrCriticalSection ui_lock;
 extern BOOL mt_TaskManager;
-void CHUDManager::OnFrameMT()
-{
-    if (!b_online)
+void CHUDManager::OnFrameMT() {
+    if ( !b_online )
         return;
 
-	PROF_EVENT("CHUDManager::OnFrameMT");
+    PROF_EVENT( "CHUDManager::OnFrameMT" );
 
-	if (mt_TaskManager && Device.dwPrecacheFrame == 0)
-		Level().GameTaskManager().UpdateTasks();
+    if ( mt_TaskManager && Device.dwPrecacheFrame == 0 )
+        Level().GameTaskManager().UpdateTasks();
 
-    if (!psHUD_Flags.is(HUD_DRAW_RT2))
+    if ( !psHUD_Flags.is( HUD_DRAW_RT2 ) )
         return;
 
-    if (mt_ui)
-    {
-        xrCriticalSectionGuard guard(&ui_lock);
-        if (pUIGame)
+    if ( mt_ui ) {
+        xrCriticalSectionGuard guard( &ui_lock );
+        if ( pUIGame )
             pUIGame->OnFrame();
     }
 }
 
 //--------------------------------------------------------------------
-//R1 Actor Shadow
-void CHUDManager::Render_First(IDSGraphManager* DM)
-{
-	if (!psHUD_Flags.is(HUD_WEAPON | HUD_WEAPON_RT | HUD_WEAPON_RT2 | HUD_DRAW_RT2))return;
-	if (0 == pUIGame) return;
-	CObject* O = g_pGameLevel->CurrentViewEntity();
-	if (0 == O) return;
-	CActor* A = smart_cast<CActor*>(O);
-	if (!A) return;
-	if (A && !A->HUDview()) return;
+// R1 Actor Shadow
+void CHUDManager::Render_First( IDSGraphManager* DM ) {
+    if ( !psHUD_Flags.is( HUD_WEAPON | HUD_WEAPON_RT | HUD_WEAPON_RT2 |
+                          HUD_DRAW_RT2 ) )
+        return;
+    if ( 0 == pUIGame )
+        return;
+    CObject* O = g_pGameLevel->CurrentViewEntity();
+    if ( 0 == O )
+        return;
+    CActor* A = smart_cast< CActor* >( O );
+    if ( !A )
+        return;
+    if ( A && !A->HUDview() )
+        return;
 
-	// only shadow
-	DM->set_Invisible(true);
-	DM->set_Object(O->H_Root());
+    // only shadow
+    DM->set_Invisible( true );
+    DM->set_Object( O->H_Root() );
 
-	O->renderable_Render(DM);
+    O->renderable_Render( DM );
 
-	DM->set_Invisible();
+    DM->set_Invisible();
 }
 
-bool need_render_hud()
-{
-	CObject* O = g_pGameLevel ? g_pGameLevel->CurrentViewEntity() : NULL;
-	if (0 == O)
-		return false;
+bool need_render_hud() {
+    CObject* O = g_pGameLevel ? g_pGameLevel->CurrentViewEntity() : NULL;
+    if ( 0 == O )
+        return false;
 
-	CActor* A = smart_cast<CActor*>(O);
-	if (A && (!A->HUDview() || !A->g_Alive()))
-		return false;
+    CActor* A = smart_cast< CActor* >( O );
+    if ( A && ( !A->HUDview() || !A->g_Alive() ) )
+        return false;
 
-	if (smart_cast<CCar*>(O) || smart_cast<CSpectator*>(O))
-		return false;
+    if ( smart_cast< CCar* >( O ) || smart_cast< CSpectator* >( O ) )
+        return false;
 
-	return true;
+    return true;
 }
 
-void CHUDManager::Render_Last(IDSGraphManager* DM)
-{
-	if (0 == pUIGame) return;
-	if (g_actor) g_actor->RenderCamAttached(DM);
-	if (!psHUD_Flags.is(HUD_WEAPON | HUD_WEAPON_RT | HUD_WEAPON_RT2 | HUD_DRAW_RT2))return;
-	if (!need_render_hud()) return;
+void CHUDManager::Render_Last( IDSGraphManager* DM ) {
+    if ( 0 == pUIGame )
+        return;
+    if ( g_actor )
+        g_actor->RenderCamAttached( DM );
+    if ( !psHUD_Flags.is( HUD_WEAPON | HUD_WEAPON_RT | HUD_WEAPON_RT2 |
+                          HUD_DRAW_RT2 ) )
+        return;
+    if ( !need_render_hud() )
+        return;
 
-	CObject* O = g_pGameLevel->CurrentViewEntity();
-	// hud itself
-	DM->set_HUD(true);
-	DM->set_Object(O->H_Root());
-	O->OnHUDDraw(this, DM);
-	DM->set_HUD();
+    CObject* O = g_pGameLevel->CurrentViewEntity();
+    // hud itself
+    DM->set_HUD( true );
+    DM->set_Object( O->H_Root() );
+    O->OnHUDDraw( this, DM );
+    DM->set_HUD();
 }
 
-void CHUDManager::Render_R1_Attachment_UI()
-{
-	for (auto att : g_pGamePersistent->AttachmentUIsToRender)
-		att->RenderUI();
+void CHUDManager::Render_R1_Attachment_UI() {
+    for ( auto att : g_pGamePersistent->AttachmentUIsToRender )
+        att->RenderUI();
 
-	g_pGamePersistent->AttachmentUIsToRender.clear_not_free();
+    g_pGamePersistent->AttachmentUIsToRender.clear_not_free();
 }
 
+bool CHUDManager::RenderActiveItemUIQuery() {
+    if ( !psHUD_Flags.is( HUD_DRAW_RT2 ) )
+        return false;
 
-bool CHUDManager::RenderActiveItemUIQuery()
-{
-	if (!psHUD_Flags.is(HUD_DRAW_RT2))
-		return false;
+    if ( !psHUD_Flags.is( HUD_WEAPON | HUD_WEAPON_RT | HUD_WEAPON_RT2 ) )
+        return false;
 
-	if (!psHUD_Flags.is(HUD_WEAPON | HUD_WEAPON_RT | HUD_WEAPON_RT2))return false;
+    if ( !need_render_hud() )
+        return false;
 
-	if (!need_render_hud()) return false;
-
-	return (g_player_hud && g_player_hud->render_item_ui_query());
+    return ( g_player_hud && g_player_hud->render_item_ui_query() );
 }
 
-bool CHUDManager::RenderCamAttachedUIQuery()
-{
-	if (!g_actor) return false;
+bool CHUDManager::RenderCamAttachedUIQuery() {
+    if ( !g_actor )
+        return false;
 
-	for (auto& pair : *g_actor->GetAttachments())
-	{
-		script_attachment* att = pair.second;
-		if (att->GetType() == eSA_CamAttached)
-			return true;
-	}
-	return false;
+    for ( auto& pair : *g_actor->GetAttachments() ) {
+        script_attachment* att = pair.second;
+        if ( att->GetType() == eSA_CamAttached )
+            return true;
+    }
+    return false;
 }
 
-void CHUDManager::RenderActiveItemUI()
-{
-	if (!psHUD_Flags.is(HUD_DRAW_RT2))
-		return;
+void CHUDManager::RenderActiveItemUI() {
+    if ( !psHUD_Flags.is( HUD_DRAW_RT2 ) )
+        return;
 
-	g_player_hud->render_item_ui();
+    g_player_hud->render_item_ui();
 }
 
-void CHUDManager::RenderCamAttachedUI()
-{
-	for (auto& pair : *g_actor->GetAttachments())
-	{
-		script_attachment* att = pair.second;
-		if (att->GetType() == eSA_CamAttached)
-			att->RenderUI();
-	}
+void CHUDManager::RenderCamAttachedUI() {
+    for ( auto& pair : *g_actor->GetAttachments() ) {
+        script_attachment* att = pair.second;
+        if ( att->GetType() == eSA_CamAttached )
+            att->RenderUI();
+    }
 }
 
 extern ENGINE_API BOOL bShowPauseString;
-//отрисовка элементов интерфейса
-void CHUDManager::RenderUI()
-{
-	PROF_EVENT("CHUDManager::RenderUI");
-	if (!psHUD_Flags.is(HUD_DRAW_RT2))
-		return;
+// отрисовка элементов интерфейса
+void CHUDManager::RenderUI() {
+    PROF_EVENT( "CHUDManager::RenderUI" );
+    if ( !psHUD_Flags.is( HUD_DRAW_RT2 ) )
+        return;
 
-	if (!b_online) return;
+    if ( !b_online )
+        return;
 
-	if (true /*|| psHUD_Flags.is(HUD_DRAW | HUD_DRAW_RT)*/)
-	{
-		HitMarker.Render();
-		if (pUIGame)
-		{
-			xrCriticalSectionGuard guard(&ui_lock);
-			pUIGame->Render();
-		}
+    if ( true /*|| psHUD_Flags.is(HUD_DRAW | HUD_DRAW_RT)*/ ) {
+        HitMarker.Render();
+        if ( pUIGame ) {
+            xrCriticalSectionGuard guard( &ui_lock );
+            pUIGame->Render();
+        }
 
-		UI().RenderFont();
-	}
+        UI().RenderFont();
+    }
 
-	m_pHUDTarget->Render();
+    m_pHUDTarget->Render();
 
-	if (Device.Paused() && bShowPauseString)
-	{
-		CGameFont* pFont = UI().Font().pFontGraffiti50Russian;
-		pFont->SetColor(0x80FF0000);
-		LPCSTR _str = CStringTable().translate("st_game_paused").c_str();
+    if ( Device.Paused() && bShowPauseString ) {
+        CGameFont* pFont = UI().Font().pFontGraffiti50Russian;
+        pFont->SetColor( 0x80FF0000 );
+        LPCSTR _str = CStringTable().translate( "st_game_paused" ).c_str();
 
-		Fvector2 _pos;
-		_pos.set(UI_BASE_WIDTH / 2.0f, UI_BASE_HEIGHT / 2.0f);
-		UI().ClientToScreenScaled(_pos);
-		pFont->SetAligment(CGameFont::alCenter);
-		pFont->Out(_pos.x, _pos.y, _str);
-		pFont->OnRender();
-	}
+        Fvector2 _pos;
+        _pos.set( UI_BASE_WIDTH / 2.0f, UI_BASE_HEIGHT / 2.0f );
+        UI().ClientToScreenScaled( _pos );
+        pFont->SetAligment( CGameFont::alCenter );
+        pFont->Out( _pos.x, _pos.y, _str );
+        pFont->OnRender();
+    }
 }
 
-void CHUDManager::OnEvent(EVENT E, u64 P1, u64 P2)
-{
+void CHUDManager::OnEvent( EVENT E, u64 P1, u64 P2 ) {}
+
+bool CHUDManager::FireposActive() {
+    // If we have an actor...
+    CActor* pActor = smart_cast< CActor* >( Level().CurrentEntity() );
+    if ( !pActor )
+        return psActorFlags.test( AF_FIREPOS );
+
+    // And a weapon...
+    CWeapon* pWeapon =
+        smart_cast< CWeapon* >( pActor->inventory().ActiveItem() );
+    if ( !pWeapon )
+        return psActorFlags.test( AF_FIREPOS );
+
+    if ( !pWeapon->GetFirepos() )
+        return false;
+
+    // Firepos is active if a setting matches its respective zoom state
+    float zFac = pWeapon->GetZRotatingFactor();
+    return ( psActorFlags.test( AF_FIREPOS ) && zFac < 1.f ) ||
+           ( psActorFlags.test( AF_FIREPOS_ZOOM ) && zFac >= 1.f );
 }
 
-bool CHUDManager::FireposActive()
-{
-	// If we have an actor...
-	CActor* pActor = smart_cast<CActor*>(Level().CurrentEntity());
-	if (!pActor)
-		return psActorFlags.test(AF_FIREPOS);
+bool CHUDManager::AimposActive() {
+    // If we have an actor...
+    CActor* pActor = smart_cast< CActor* >( Level().CurrentEntity() );
+    if ( !pActor )
+        return psActorFlags.test( AF_AIMPOS );
 
-	// And a weapon...
-	CWeapon* pWeapon = smart_cast<CWeapon*>(pActor->inventory().ActiveItem());
-	if (!pWeapon)
-		return psActorFlags.test(AF_FIREPOS);
+    // And a weapon...
+    CWeapon* pWeapon =
+        smart_cast< CWeapon* >( pActor->inventory().ActiveItem() );
+    if ( !pWeapon )
+        return psActorFlags.test( AF_AIMPOS );
 
-	if (!pWeapon->GetFirepos())
-		return false;
+    if ( !pWeapon->GetAimpos() )
+        return false;
 
-	// Firepos is active if a setting matches its respective zoom state
-	float zFac = pWeapon->GetZRotatingFactor();
-	return (psActorFlags.test(AF_FIREPOS) && zFac < 1.f)
-		|| (psActorFlags.test(AF_FIREPOS_ZOOM) && zFac >= 1.f);
+    // Firepos is active if a setting matches its respective zoom state
+    float zFac = pWeapon->GetZRotatingFactor();
+    return ( psActorFlags.test( AF_AIMPOS ) && zFac < 1.f ) ||
+           ( psActorFlags.test( AF_AIMPOS_ZOOM ) && zFac >= 1.f );
 }
 
-bool CHUDManager::AimposActive()
-{
-	// If we have an actor...
-	CActor* pActor = smart_cast<CActor*>(Level().CurrentEntity());
-	if (!pActor)
-		return psActorFlags.test(AF_AIMPOS);
+ICF static BOOL pick_trace_callback( collide::rq_result& result,
+                                     LPVOID params ) {
+    SPickParam* pp = ( SPickParam* )params;
+    //	collide::rq_result* RQ	= pp->RQ;
+    ++pp->pass;
 
-	// And a weapon...
-	CWeapon* pWeapon = smart_cast<CWeapon*>(pActor->inventory().ActiveItem());
-	if (!pWeapon)
-		return psActorFlags.test(AF_AIMPOS);
+    if ( result.O ) {
+        pp->result = result;
+        return FALSE;
+    } else {
+        // получить треугольник и узнать его материал
+        CDB::TRI* T = Level().ObjectSpace.GetStaticTris() + result.element;
 
-	if (!pWeapon->GetAimpos())
-		return false;
-
-	// Firepos is active if a setting matches its respective zoom state
-	float zFac = pWeapon->GetZRotatingFactor();
-	return (psActorFlags.test(AF_AIMPOS) && zFac < 1.f)
-		|| (psActorFlags.test(AF_AIMPOS_ZOOM) && zFac >= 1.f);
+        SGameMtl* mtl = GMLib.GetMaterialByIdx( T->material );
+        pp->power *= mtl->fVisTransparencyFactor;
+        if ( pp->power > 0.34f ) {
+            return TRUE;
+        }
+        //.		if (mtl->Flags.is(SGameMtl::flPassable))
+        //.			return TRUE;
+    }
+    pp->result = result;
+    return FALSE;
 }
 
-ICF static BOOL pick_trace_callback(collide::rq_result& result, LPVOID params)
-{
-	SPickParam* pp = (SPickParam*)params;
-	//	collide::rq_result* RQ	= pp->RQ;
-	++pp->pass;
+bool CHUDManager::DoPick( SPickParam& pp ) {
+    VERIFY( !fis_zero( pp.defs.dir.square_magnitude() ) );
 
-	if (result.O)
-	{
-		pp->result = result;
-		return FALSE;
-	}
-	else
-	{
-		//получить треугольник и узнать его материал
-		CDB::TRI* T = Level().ObjectSpace.GetStaticTris() + result.element;
+    pp.result.set( NULL, pp.defs.range, -1 );
+    pp.power = 1.0f;
+    pp.pass = 0;
 
-		SGameMtl* mtl = GMLib.GetMaterialByIdx(T->material);
-		pp->power *= mtl->fVisTransparencyFactor;
-		if (pp->power > 0.34f)
-		{
-			return TRUE;
-		}
-		//.		if (mtl->Flags.is(SGameMtl::flPassable)) 
-		//.			return TRUE;
-	}
-	pp->result = result;
-	return FALSE;
+    collide::rq_results rqr;
+    rqr.r_clear();
+    return Level().ObjectSpace.RayQuery( rqr, pp.defs, pick_trace_callback, &pp,
+                                         NULL, Level().CurrentEntity() );
 }
 
-bool CHUDManager::DoPick(SPickParam& pp)
-{
-	VERIFY(!fis_zero(pp.defs.dir.square_magnitude()));
-
-	pp.result.set(NULL, pp.defs.range, -1);
-	pp.power = 1.0f;
-	pp.pass = 0;
-
-	collide::rq_results rqr;
-	rqr.r_clear();
-	return Level().ObjectSpace.RayQuery(
-		rqr,
-		pp.defs,
-		pick_trace_callback,
-		&pp,
-		NULL,
-		Level().CurrentEntity()
-	);
-}
-
-void CHUDManager::SetCrosshairDisp(float dispf, float disps)
-{
-	m_pHUDTarget->SetDispersion(psHUD_Flags.test(HUD_CROSSHAIR_DYNAMIC) ? dispf : disps);
+void CHUDManager::SetCrosshairDisp( float dispf, float disps ) {
+    m_pHUDTarget->SetDispersion(
+        psHUD_Flags.test( HUD_CROSSHAIR_DYNAMIC ) ? dispf : disps );
 }
 
 #ifdef DEBUG
-void CHUDManager::SetFirstBulletCrosshairDisp(float fbdispf)
-{
-    m_pHUDTarget->GetHUDCrosshair().SetFirstBulletDispertion(fbdispf);
+void CHUDManager::SetFirstBulletCrosshairDisp( float fbdispf ) {
+    m_pHUDTarget->GetHUDCrosshair().SetFirstBulletDispertion( fbdispf );
 }
 #endif
 
-void CHUDManager::ShowCrosshair(bool show)
-{
-	m_pHUDTarget->ShowCrosshair(show);
+void CHUDManager::ShowCrosshair( bool show ) {
+    m_pHUDTarget->ShowCrosshair( show );
 }
 
-void CHUDManager::HitMarked(int idx, float power, const Fvector& dir)
-{
-	HitMarker.Hit(dir);
-	clamp(power, 0.0f, 1.0f);
-	pInput->feedback(u16(iFloor(u16(-1) * power)), u16(iFloor(u16(-1) * power)), 0.5f);
+void CHUDManager::HitMarked( int idx, float power, const Fvector& dir ) {
+    HitMarker.Hit( dir );
+    clamp( power, 0.0f, 1.0f );
+    pInput->feedback( u16( iFloor( u16( -1 ) * power ) ),
+                      u16( iFloor( u16( -1 ) * power ) ), 0.5f );
 }
 
-bool CHUDManager::AddGrenade_ForMark(CGrenade* grn)
-{
-	return HitMarker.AddGrenade_ForMark(grn);
+bool CHUDManager::AddGrenade_ForMark( CGrenade* grn ) {
+    return HitMarker.AddGrenade_ForMark( grn );
 }
 
-void CHUDManager::Update_GrenadeView(Fvector& pos_actor)
-{
-	HitMarker.Update_GrenadeView(pos_actor);
+void CHUDManager::Update_GrenadeView( Fvector& pos_actor ) {
+    HitMarker.Update_GrenadeView( pos_actor );
 }
 
-void CHUDManager::SetHitmarkType(LPCSTR tex_name)
-{
-	HitMarker.InitShader(tex_name);
+void CHUDManager::SetHitmarkType( LPCSTR tex_name ) {
+    HitMarker.InitShader( tex_name );
 }
 
-void CHUDManager::SetGrenadeMarkType(LPCSTR tex_name)
-{
-	HitMarker.InitShader_Grenade(tex_name);
+void CHUDManager::SetGrenadeMarkType( LPCSTR tex_name ) {
+    HitMarker.InitShader_Grenade( tex_name );
 }
 
 // ------------------------------------------------------------------------------------
@@ -486,75 +460,68 @@ void CHUDManager::SetGrenadeMarkType(LPCSTR tex_name)
 extern CUIXml* pWpnScopeXml;
 extern CUIXml* g_uiSpotXml;
 
-void CHUDManager::Load()
-{
-	if (!pUIGame)
-	{
-		pUIGame = Game().createGameUI();
-	}
-	else
-	{
-		pUIGame->SetClGame(&Game());
-	}
+void CHUDManager::Load() {
+    if ( !pUIGame ) {
+        pUIGame = Game().createGameUI();
+    } else {
+        pUIGame->SetClGame( &Game() );
+    }
 }
 
-void CHUDManager::OnScreenResolutionChanged()
-{
-	pUIGame->HideShownDialogs();
+void CHUDManager::OnScreenResolutionChanged() {
+    pUIGame->HideShownDialogs();
 
-	xr_delete(pWpnScopeXml);
-	xr_delete(g_uiSpotXml);
+    xr_delete( pWpnScopeXml );
+    xr_delete( g_uiSpotXml );
 
-	pUIGame->UnLoad();
+    pUIGame->UnLoad();
 
-	Level().MapManager().ReloadSpots();
+    Level().MapManager().ReloadSpots();
 
-	pUIGame->Load();
+    pUIGame->Load();
 
-	pUIGame->OnConnected();
+    pUIGame->OnConnected();
 
-	::luabind::functor<bool> funct;
-	if (ai().script_engine().functor("_G.CHUDManager_OnScreenResolutionChanged", funct))
-		funct();
+    ::luabind::functor< bool > funct;
+    if ( ai().script_engine().functor(
+             "_G.CHUDManager_OnScreenResolutionChanged", funct ) )
+        funct();
 }
 
 BOOL hud_frequent_updates = TRUE;
-void CHUDManager::OnDisconnected()
-{
-	b_online = false;
-	if (hud_frequent_updates)
-		if (pUIGame)
-			Device.seqFrame.Remove(pUIGame);
+void CHUDManager::OnDisconnected() {
+    b_online = false;
+    if ( hud_frequent_updates )
+        if ( pUIGame )
+            Device.seqFrame.Remove( pUIGame );
 }
 
-void CHUDManager::OnConnected()
-{
-	if (b_online) return;
-	b_online = true;
-	if (hud_frequent_updates)
-		if (pUIGame)
-			Device.seqFrame.Add(pUIGame, REG_PRIORITY_LOW - 1000);
+void CHUDManager::OnConnected() {
+    if ( b_online )
+        return;
+    b_online = true;
+    if ( hud_frequent_updates )
+        if ( pUIGame )
+            Device.seqFrame.Add( pUIGame, REG_PRIORITY_LOW - 1000 );
 }
 
-void CHUDManager::net_Relcase(CObject* obj)
-{
-	if (PP.result.O == obj)
-		PP.result.O = NULL;
+void CHUDManager::net_Relcase( CObject* obj ) {
+    if ( PP.result.O == obj )
+        PP.result.O = NULL;
 
-	HitMarker.net_Relcase(obj);
+    HitMarker.net_Relcase( obj );
 
-    if (g_player_hud)
-	    g_player_hud->net_Relcase(obj);
+    if ( g_player_hud )
+        g_player_hud->net_Relcase( obj );
 
-#ifdef	DEBUG
+#ifdef DEBUG
     DBG_PH_NetRelcase( obj );
 #endif
 }
 
-CDialogHolder* CurrentDialogHolder()
-{
-	if (MainMenu()->IsActive())
-		return MainMenu();
-	else
-		return HUD().GetGameUI();
+CDialogHolder* CurrentDialogHolder() {
+    if ( MainMenu()->IsActive() )
+        return MainMenu();
+    else
+        return HUD().GetGameUI();
 }

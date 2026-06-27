@@ -1,7 +1,7 @@
-#include "stdafx.h"
 #include "dxPixEventWrapper.h"
 
-#ifdef	DEBUG
+#include "stdafx.h"
 
+#ifdef DEBUG
 
-#endif	//	DEBUG
+#endif //	DEBUG

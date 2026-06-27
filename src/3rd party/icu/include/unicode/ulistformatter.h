@@ -21,10 +21,9 @@
  * \file
  * \brief C API: Format a list in a locale-appropriate way.
  *
- * A UListFormatter is used to format a list of items in a locale-appropriate way, 
- * using data from CLDR.
- * Example: Input data ["Alice", "Bob", "Charlie", "Delta"] will be formatted
- * as "Alice, Bob, Charlie, and Delta" in English.
+ * A UListFormatter is used to format a list of items in a locale-appropriate
+ * way, using data from CLDR. Example: Input data ["Alice", "Bob", "Charlie",
+ * "Delta"] will be formatted as "Alice, Bob, Charlie, and Delta" in English.
  */
 
 /**
@@ -32,7 +31,8 @@
  * @stable ICU 55
  */
 struct UListFormatter;
-typedef struct UListFormatter UListFormatter;  /**< C typedef for struct UListFormatter. @stable ICU 55 */
+typedef struct UListFormatter
+    UListFormatter; /**< C typedef for struct UListFormatter. @stable ICU 55 */
 
 #ifndef U_HIDE_DRAFT_API
 struct UFormattedList;
@@ -41,7 +41,7 @@ struct UFormattedList;
  * @draft ICU 64
  */
 typedef struct UFormattedList UFormattedList;
-#endif  /* U_HIDE_DRAFT_API */
+#endif /* U_HIDE_DRAFT_API */
 
 #ifndef U_HIDE_DRAFT_API
 /**
@@ -79,9 +79,8 @@ typedef enum UListFormatterField {
  *            or NULL if an error occurred.
  * @stable ICU 55
  */
-U_CAPI UListFormatter* U_EXPORT2
-ulistfmt_open(const char*  locale,
-              UErrorCode*  status);
+U_CAPI UListFormatter* U_EXPORT2 ulistfmt_open( const char* locale,
+                                                UErrorCode* status );
 
 /**
  * Close a UListFormatter object. Once closed it may no longer be used.
@@ -89,8 +88,7 @@ ulistfmt_open(const char*  locale,
  *            The UListFormatter object to close.
  * @stable ICU 55
  */
-U_CAPI void U_EXPORT2
-ulistfmt_close(UListFormatter *listfmt);
+U_CAPI void U_EXPORT2 ulistfmt_close( UListFormatter* listfmt );
 
 #ifndef U_HIDE_DRAFT_API
 /**
@@ -102,8 +100,7 @@ ulistfmt_close(UListFormatter *listfmt);
  * @return A pointer needing ownership.
  * @draft ICU 64
  */
-U_CAPI UFormattedList* U_EXPORT2
-ulistfmt_openResult(UErrorCode* ec);
+U_CAPI UFormattedList* U_EXPORT2 ulistfmt_openResult( UErrorCode* ec );
 
 /**
  * Returns a representation of a UFormattedList as a UFormattedValue,
@@ -127,7 +124,7 @@ ulistfmt_openResult(UErrorCode* ec);
  * @draft ICU 64
  */
 U_CAPI const UFormattedValue* U_EXPORT2
-ulistfmt_resultAsValue(const UFormattedList* uresult, UErrorCode* ec);
+ulistfmt_resultAsValue( const UFormattedList* uresult, UErrorCode* ec );
 
 /**
  * Releases the UFormattedList created by ulistfmt_openResult().
@@ -135,10 +132,8 @@ ulistfmt_resultAsValue(const UFormattedList* uresult, UErrorCode* ec);
  * @param uresult The object to release.
  * @draft ICU 64
  */
-U_CAPI void U_EXPORT2
-ulistfmt_closeResult(UFormattedList* uresult);
+U_CAPI void U_EXPORT2 ulistfmt_closeResult( UFormattedList* uresult );
 #endif /* U_HIDE_DRAFT_API */
-
 
 #if U_SHOW_CPLUSPLUS_API
 
@@ -153,7 +148,9 @@ U_NAMESPACE_BEGIN
  * @see LocalPointer
  * @stable ICU 55
  */
-U_DEFINE_LOCAL_OPEN_POINTER(LocalUListFormatterPointer, UListFormatter, ulistfmt_close);
+U_DEFINE_LOCAL_OPEN_POINTER( LocalUListFormatterPointer,
+                             UListFormatter,
+                             ulistfmt_close );
 
 #ifndef U_HIDE_DRAFT_API
 /**
@@ -165,7 +162,9 @@ U_DEFINE_LOCAL_OPEN_POINTER(LocalUListFormatterPointer, UListFormatter, ulistfmt
  * @see LocalPointer
  * @draft ICU 64
  */
-U_DEFINE_LOCAL_OPEN_POINTER(LocalUFormattedListPointer, UFormattedList, ulistfmt_closeResult);
+U_DEFINE_LOCAL_OPEN_POINTER( LocalUFormattedListPointer,
+                             UFormattedList,
+                             ulistfmt_closeResult );
 #endif /* U_HIDE_DRAFT_API */
 
 U_NAMESPACE_END
@@ -206,14 +205,13 @@ U_NAMESPACE_END
  *            total buffer size needed (e.g. for illegal arguments).
  * @stable ICU 55
  */
-U_CAPI int32_t U_EXPORT2
-ulistfmt_format(const UListFormatter* listfmt,
-                const UChar* const strings[],
-                const int32_t *    stringLengths,
-                int32_t            stringCount,
-                UChar*             result,
-                int32_t            resultCapacity,
-                UErrorCode*        status);
+U_CAPI int32_t U_EXPORT2 ulistfmt_format( const UListFormatter* listfmt,
+                                          const UChar* const strings[],
+                                          const int32_t* stringLengths,
+                                          int32_t stringCount,
+                                          UChar* result,
+                                          int32_t resultCapacity,
+                                          UErrorCode* status );
 
 #ifndef U_HIDE_DRAFT_API
 /**
@@ -243,13 +241,12 @@ ulistfmt_format(const UListFormatter* listfmt,
  * @draft ICU 64
  */
 U_CAPI void U_EXPORT2
-ulistfmt_formatStringsToResult(
-                const UListFormatter* listfmt,
-                const UChar* const strings[],
-                const int32_t *    stringLengths,
-                int32_t            stringCount,
-                UFormattedList*    uresult,
-                UErrorCode*        status);
+ulistfmt_formatStringsToResult( const UListFormatter* listfmt,
+                                const UChar* const strings[],
+                                const int32_t* stringLengths,
+                                int32_t stringCount,
+                                UFormattedList* uresult,
+                                UErrorCode* status );
 #endif /* U_HIDE_DRAFT_API */
 
 #endif /* #if !UCONFIG_NO_FORMATTING */

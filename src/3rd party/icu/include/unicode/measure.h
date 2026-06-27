@@ -18,10 +18,10 @@
 #if U_SHOW_CPLUSPLUS_API
 
 /**
- * \file 
+ * \file
  * \brief C++ API: MeasureUnit object.
  */
- 
+
 #if !UCONFIG_NO_FORMATTING
 
 #include "unicode/fmtable.h"
@@ -42,8 +42,8 @@ class MeasureUnit;
  * @author Alan Liu
  * @stable ICU 3.0
  */
-class U_I18N_API Measure: public UObject {
- public:
+class U_I18N_API Measure : public UObject {
+public:
     /**
      * Construct an object with the given numeric amount and the given
      * unit.  After this call, the caller must not delete the given
@@ -54,20 +54,21 @@ class U_I18N_API Measure: public UObject {
      * is invalid, then this will be set to a failing value.
      * @stable ICU 3.0
      */
-    Measure(const Formattable& number, MeasureUnit* adoptedUnit,
-            UErrorCode& ec);
+    Measure( const Formattable& number,
+             MeasureUnit* adoptedUnit,
+             UErrorCode& ec );
 
     /**
      * Copy constructor
      * @stable ICU 3.0
      */
-    Measure(const Measure& other);
+    Measure( const Measure& other );
 
     /**
      * Assignment operator
      * @stable ICU 3.0
      */
-    Measure& operator=(const Measure& other);
+    Measure& operator=( const Measure& other );
 
     /**
      * Return a polymorphic clone of this object.  The result will
@@ -81,13 +82,13 @@ class U_I18N_API Measure: public UObject {
      * @stable ICU 3.0
      */
     virtual ~Measure();
-    
+
     /**
      * Equality operator.  Return true if this object is equal
      * to the given object.
      * @stable ICU 3.0
      */
-    UBool operator==(const UObject& other) const;
+    UBool operator==( const UObject& other ) const;
 
     /**
      * Return a reference to the numeric value of this object.  The
@@ -114,7 +115,7 @@ class U_I18N_API Measure: public UObject {
      * @return          The class ID for all objects of this class.
      * @stable ICU 53
      */
-    static UClassID U_EXPORT2 getStaticClassID(void);
+    static UClassID U_EXPORT2 getStaticClassID( void );
 
     /**
      * Returns a unique class ID POLYMORPHICALLY. Pure virtual override. This
@@ -127,16 +128,16 @@ class U_I18N_API Measure: public UObject {
      *                  other classes have different class IDs.
      * @stable ICU 53
      */
-    virtual UClassID getDynamicClassID(void) const;
+    virtual UClassID getDynamicClassID( void ) const;
 
- protected:
+protected:
     /**
      * Default constructor.
      * @stable ICU 3.0
      */
     Measure();
 
- private:
+private:
     /**
      * The numeric value of this object, e.g. 2.54 or 100.
      */

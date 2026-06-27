@@ -1,9 +1,7 @@
 #ifndef EAX_GLOBALS_INCLUDED
 #define EAX_GLOBALS_INCLUDED
 
-
 extern bool eax_g_is_enabled;
-
 
 extern const char eax1_ext_name[];
 extern const char eax2_ext_name[];

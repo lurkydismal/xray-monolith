@@ -20,153 +20,123 @@
 // ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
+#include <luabind/detail/stack_utils.hpp>
+#include <luabind/error.hpp>
+#include <luabind/lua_include.hpp>
+#include <luabind/scope.hpp>
+
 #include <cassert>
 
-#include <luabind/lua_include.hpp>
-#include <luabind/error.hpp>
-#include <luabind/scope.hpp>
-#include <luabind/detail/stack_utils.hpp>
+namespace luabind {
+namespace detail {
 
-namespace luabind { namespace detail {
+registration::registration() : m_next( nullptr ) {}
 
-    registration::registration()
-        : m_next(nullptr)
-    {
+registration::~registration() {
+    luabind_delete( m_next );
+}
+
+} // namespace detail
+
+scope::scope() noexcept : m_chain( nullptr ) {}
+
+scope::scope( detail::registration* reg ) noexcept : m_chain( reg ) {}
+
+scope::~scope() {
+    luabind_delete( m_chain );
+}
+
+scope &&scope::operator,( scope&& s ) && {
+    if ( !m_chain ) {
+        m_chain = s.m_chain;
+        s.m_chain = nullptr;
+        return std::move( *this );
     }
 
-    registration::~registration()
-    {
-        luabind_delete	(m_next);
-    }
-
-    } // namespace detail
-    
-    scope::scope() noexcept
-        : m_chain(nullptr)
-    {
-    }
-    
-    scope::scope(detail::registration* reg) noexcept
-        : m_chain(reg)
-    {
-    }
-
-    scope::~scope()
-    {
-        luabind_delete	(m_chain);
-    }
-    
-    scope&& scope::operator,(scope&& s) &&
-    {
-        if (!m_chain) 
-        {
-            m_chain = s.m_chain;
+    for ( detail::registration* c = m_chain;; c = c->m_next ) {
+        if ( !c->m_next ) {
+            c->m_next = s.m_chain;
             s.m_chain = nullptr;
-            return std::move(*this);
+            break;
         }
-        
-        for (detail::registration* c = m_chain;; c = c->m_next)
-        {
-            if (!c->m_next)
-            {
-                c->m_next = s.m_chain;
-                s.m_chain = nullptr;
-                break;
-            }
-        }
-
-        return std::move(*this);
     }
 
-    void scope::register_(lua_State* L) const
-    {
-		if (::luabind::get_pregister_callback()) ::luabind::get_pregister_callback()(L, true);
+    return std::move( *this );
+}
 
-        for (detail::registration* r = m_chain; r != nullptr; r = r->m_next)
-            r->register_(L);
+void scope::register_( lua_State* L ) const {
+    if ( ::luabind::get_pregister_callback() )
+        ::luabind::get_pregister_callback()( L, true );
 
-        if (::luabind::get_pregister_callback()) ::luabind::get_pregister_callback()(L, false);
-    }
+    for ( detail::registration* r = m_chain; r != nullptr; r = r->m_next )
+        r->register_( L );
+
+    if ( ::luabind::get_pregister_callback() )
+        ::luabind::get_pregister_callback()( L, false );
+}
 
 } // namespace luabind
 
 namespace luabind {
-    
-    module_::module_(lua_State* L, char const* name = 0)
-        : m_state(L)
-        , m_name(name)
-    {
+
+module_::module_( lua_State* L, char const* name = 0 )
+    : m_state( L ), m_name( name ) {}
+
+void module_::push_global_table() {
+    if ( m_name ) {
+        lua_pushstring( m_state, m_name );
+        lua_gettable( m_state, LUA_GLOBALSINDEX );
+
+        if ( !lua_istable( m_state, -1 ) ) {
+            lua_pop( m_state, 1 );
+
+            lua_newtable( m_state );
+            lua_pushstring( m_state, m_name );
+            lua_pushvalue( m_state, -2 );
+            lua_settable( m_state, LUA_GLOBALSINDEX );
+        }
+    } else {
+        lua_pushvalue( m_state, LUA_GLOBALSINDEX );
     }
+}
 
-    void module_::push_global_table()
-    {
-        if (m_name)
-        {
-            lua_pushstring(m_state, m_name);
-            lua_gettable(m_state, LUA_GLOBALSINDEX);
+struct namespace_::registration_ : detail::registration {
+    registration_( char const* name ) : m_name( name ) {}
 
-            if (!lua_istable(m_state, -1))
-            {
-                lua_pop(m_state, 1);
+    void register_( lua_State* L ) const {
+        assert( lua_gettop( L ) >= 1 );
 
-                lua_newtable(m_state);
-                lua_pushstring(m_state, m_name);
-                lua_pushvalue(m_state, -2);
-                lua_settable(m_state, LUA_GLOBALSINDEX);
-            }
-        }
-		else { lua_pushvalue(m_state, LUA_GLOBALSINDEX); }
-	}
+        lua_pushstring( L, m_name );
+        lua_gettable( L, -2 );
 
-    struct namespace_::registration_ : detail::registration
-    {
-        registration_(char const* name)
-            : m_name(name)
-        {
-        }
+        detail::stack_pop p( L, 1 ); // pops the table on exit
 
-        void register_(lua_State* L) const
-        {
-            assert(lua_gettop(L) >= 1);
+        if ( !lua_istable( L, -1 ) ) {
+            lua_pop( L, 1 );
 
-            lua_pushstring(L, m_name);
-            lua_gettable(L, -2);
-
-			detail::stack_pop p(L, 1); // pops the table on exit
-
-            if (!lua_istable(L, -1))
-            {
-                lua_pop(L, 1);
-
-                lua_newtable(L);
-                lua_pushstring(L, m_name);
-                lua_pushvalue(L, -2);
-                lua_settable(L, -4);
-            }
-
-            m_scope.register_(L);
+            lua_newtable( L );
+            lua_pushstring( L, m_name );
+            lua_pushvalue( L, -2 );
+            lua_settable( L, -4 );
         }
 
-        char const* m_name;
-        scope m_scope;
-    };
-
-    namespace_::namespace_(char const* name)
-        : namespace_(luabind_new<registration_>(name))
-    {
+        m_scope.register_( L );
     }
 
-    namespace_::namespace_(registration_* reg)
-        : scope(reg),
-          m_registration(reg)
-    {
-    }
+    char const* m_name;
+    scope m_scope;
+};
 
-    namespace_&& namespace_::operator[](scope&& s) &&
-    {
-        m_registration->m_scope = std::move(m_registration->m_scope).operator,(std::move(s));
-        return std::move(*this);
-    }
+namespace_::namespace_( char const* name )
+    : namespace_( luabind_new< registration_ >( name ) ) {}
+
+namespace_::namespace_( registration_* reg )
+    : scope( reg ), m_registration( reg ) {}
+
+namespace_&& namespace_::operator[]( scope&& s ) && {
+    m_registration->m_scope = std::move( m_registration->m_scope ).operator,(
+        std::move( s ) );
+    return std::move( *this );
+}
 
 } // namespace luabind
-

@@ -1,9 +1,10 @@
 #include "stdafx_.h"
 #if 0
-#include "BugSlayerUtil.h"
 #include <stdio.h>
 
-#define MAX_STACK_TRACE	100
+#include "BugSlayerUtil.h"
+
+#define MAX_STACK_TRACE 100
 
 char g_stackTrace[MAX_STACK_TRACE][4096];
 int g_stackTraceCount = 0;
@@ -40,7 +41,7 @@ void BuildStackTrace	(struct _EXCEPTION_POINTERS *g_BlackBoxUIExPtrs)
 }
 
 #ifdef _EDITOR
-#	pragma auto_inline(off)
+#pragma auto_inline( off )
 	DWORD_PTR program_counter()
 	{
 		DWORD_PTR programcounter;
@@ -52,18 +53,18 @@ void BuildStackTrace	(struct _EXCEPTION_POINTERS *g_BlackBoxUIExPtrs)
 
 		return programcounter;
 	}
-#	pragma auto_inline(on)
+#pragma auto_inline( on )
 #else // _EDITOR
 	extern "C" void * _ReturnAddress(void);
 
-#   pragma intrinsic(_ReturnAddress)
+#pragma intrinsic( _ReturnAddress )
 
-#	pragma auto_inline(off)
+#pragma auto_inline( off )
 	DWORD_PTR program_counter()
 	{
 		return (DWORD_PTR)_ReturnAddress();
 	}
-#	pragma auto_inline(on)
+#pragma auto_inline( on )
 #endif // _EDITOR
 
 void BuildStackTrace	()
@@ -83,7 +84,7 @@ void BuildStackTrace	()
 #ifndef _EDITOR
 	__asm					mov context.Ebp, ebp
 	__asm					mov context.Esp, esp
-#else // _EDITOR
+#else  // _EDITOR
 	__asm					mov EBP, ebp
 	__asm					mov ESP, esp
 #endif // _EDITOR

@@ -2,7 +2,7 @@
 // License & terms of use: http://www.unicode.org/copyright.html
 /*
 *******************************************************************************
-* Copyright (C) 2007-2008, International Business Machines Corporation and         *
+* Copyright (C) 2007-2008, International Business Machines Corporation and    *
 * others. All Rights Reserved.                                                *
 *******************************************************************************
 */
@@ -10,7 +10,7 @@
 #define TZTRANS_H
 
 /**
- * \file 
+ * \file
  * \brief C++ API: Time zone transition
  */
 
@@ -28,22 +28,25 @@ U_NAMESPACE_BEGIN
 class TimeZoneRule;
 
 /**
- * <code>TimeZoneTransition</code> is a class representing a time zone transition.
- * An instance has a time of transition and rules for both before and after the transition.
+ * <code>TimeZoneTransition</code> is a class representing a time zone
+ * transition. An instance has a time of transition and rules for both before
+ * and after the transition.
  * @stable ICU 3.8
  */
 class U_I18N_API TimeZoneTransition : public UObject {
 public:
     /**
-     * Constructs a <code>TimeZoneTransition</code> with the time and the rules before/after
-     * the transition.
-     * 
+     * Constructs a <code>TimeZoneTransition</code> with the time and the rules
+     * before/after the transition.
+     *
      * @param time  The time of transition in milliseconds since the base time.
      * @param from  The time zone rule used before the transition.
      * @param to    The time zone rule used after the transition.
      * @stable ICU 3.8
      */
-    TimeZoneTransition(UDate time, const TimeZoneRule& from, const TimeZoneRule& to);
+    TimeZoneTransition( UDate time,
+                        const TimeZoneRule& from,
+                        const TimeZoneRule& to );
 
     /**
      * Constructs an empty <code>TimeZoneTransition</code>
@@ -56,7 +59,7 @@ public:
      * @param source    The TimeZoneTransition object to be copied.
      * @stable ICU 3.8
      */
-    TimeZoneTransition(const TimeZoneTransition& source);
+    TimeZoneTransition( const TimeZoneTransition& source );
 
     /**
      * Destructor.
@@ -65,8 +68,8 @@ public:
     ~TimeZoneTransition();
 
     /**
-     * Clone this TimeZoneTransition object polymorphically. The caller owns the result and
-     * should delete it when done.
+     * Clone this TimeZoneTransition object polymorphically. The caller owns the
+     * result and should delete it when done.
      * @return  A copy of the object.
      * @stable ICU 3.8
      */
@@ -77,46 +80,50 @@ public:
      * @param right The object to be copied.
      * @stable ICU 3.8
      */
-    TimeZoneTransition& operator=(const TimeZoneTransition& right);
+    TimeZoneTransition& operator=( const TimeZoneTransition& right );
 
     /**
-     * Return true if the given TimeZoneTransition objects are semantically equal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given TimeZoneTransition objects are semantically
+     * equal. Objects of different subclasses are considered unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given TimeZoneTransition objects are semantically equal.
+     * @return  true if the given TimeZoneTransition objects are semantically
+     * equal.
      * @stable ICU 3.8
      */
-    UBool operator==(const TimeZoneTransition& that) const;
+    UBool operator==( const TimeZoneTransition& that ) const;
 
     /**
-     * Return true if the given TimeZoneTransition objects are semantically unequal. Objects
-     * of different subclasses are considered unequal.
+     * Return true if the given TimeZoneTransition objects are semantically
+     * unequal. Objects of different subclasses are considered unequal.
      * @param that  The object to be compared with.
-     * @return  true if the given TimeZoneTransition objects are semantically unequal.
+     * @return  true if the given TimeZoneTransition objects are semantically
+     * unequal.
      * @stable ICU 3.8
      */
-    UBool operator!=(const TimeZoneTransition& that) const;
+    UBool operator!=( const TimeZoneTransition& that ) const;
 
     /**
      * Returns the time of transition in milliseconds.
-     * @return The time of the transition in milliseconds since the 1970 Jan 1 epoch time.
+     * @return The time of the transition in milliseconds since the 1970 Jan 1
+     * epoch time.
      * @stable ICU 3.8
      */
-    UDate getTime(void) const;
+    UDate getTime( void ) const;
 
     /**
      * Sets the time of transition in milliseconds.
-     * @param time The time of the transition in milliseconds since the 1970 Jan 1 epoch time.
+     * @param time The time of the transition in milliseconds since the 1970 Jan
+     * 1 epoch time.
      * @stable ICU 3.8
      */
-    void setTime(UDate time);
+    void setTime( UDate time );
 
     /**
      * Returns the rule used before the transition.
      * @return The time zone rule used after the transition.
      * @stable ICU 3.8
      */
-    const TimeZoneRule* getFrom(void) const;
+    const TimeZoneRule* getFrom( void ) const;
 
     /**
      * Sets the rule used before the transition.  The caller remains
@@ -124,7 +131,7 @@ public:
      * @param from The time zone rule used before the transition.
      * @stable ICU 3.8
      */
-    void setFrom(const TimeZoneRule& from);
+    void setFrom( const TimeZoneRule& from );
 
     /**
      * Adopts the rule used before the transition.  The caller must
@@ -132,7 +139,7 @@ public:
      * @param from The time zone rule used before the transition.
      * @stable ICU 3.8
      */
-    void adoptFrom(TimeZoneRule* from);
+    void adoptFrom( TimeZoneRule* from );
 
     /**
      * Sets the rule used after the transition.  The caller remains
@@ -140,7 +147,7 @@ public:
      * @param to The time zone rule used after the transition.
      * @stable ICU 3.8
      */
-    void setTo(const TimeZoneRule& to);
+    void setTo( const TimeZoneRule& to );
 
     /**
      * Adopts the rule used after the transition.  The caller must
@@ -148,19 +155,19 @@ public:
      * @param to The time zone rule used after the transition.
      * @stable ICU 3.8
      */
-    void adoptTo(TimeZoneRule* to);
+    void adoptTo( TimeZoneRule* to );
 
     /**
      * Returns the rule used after the transition.
      * @return The time zone rule used after the transition.
      * @stable ICU 3.8
      */
-    const TimeZoneRule* getTo(void) const;
+    const TimeZoneRule* getTo( void ) const;
 
 private:
-    UDate   fTime;
-    TimeZoneRule*   fFrom;
-    TimeZoneRule*   fTo;
+    UDate fTime;
+    TimeZoneRule* fFrom;
+    TimeZoneRule* fTo;
 
 public:
     /**
@@ -174,7 +181,7 @@ public:
      * @return          The class ID for all objects of this class.
      * @stable ICU 3.8
      */
-    static UClassID U_EXPORT2 getStaticClassID(void);
+    static UClassID U_EXPORT2 getStaticClassID( void );
 
     /**
      * Returns a unique class ID POLYMORPHICALLY. Pure virtual override. This
@@ -187,7 +194,7 @@ public:
      *                  other classes have different class IDs.
      * @stable ICU 3.8
      */
-    virtual UClassID getDynamicClassID(void) const;
+    virtual UClassID getDynamicClassID( void ) const;
 };
 
 U_NAMESPACE_END
@@ -198,4 +205,4 @@ U_NAMESPACE_END
 
 #endif // TZTRANS_H
 
-//eof
+// eof

@@ -1,9 +1,10 @@
 #pragma once
 
-#include "ffi.h"
 #include "event.h"
+#include "ffi.h"
 #ifdef _WIN32
 #include <Windows.h>
+
 #include <dxgi.h>
 #endif
 
@@ -211,15 +212,15 @@ using DateTime = char const*;
 
 class User final {
 public:
-    void SetId(UserId id);
+    void SetId( UserId id );
     UserId GetId() const;
-    void SetUsername(char const* username);
+    void SetUsername( char const* username );
     char const* GetUsername() const;
-    void SetDiscriminator(char const* discriminator);
+    void SetDiscriminator( char const* discriminator );
     char const* GetDiscriminator() const;
-    void SetAvatar(char const* avatar);
+    void SetAvatar( char const* avatar );
     char const* GetAvatar() const;
-    void SetBot(bool bot);
+    void SetBot( bool bot );
     bool GetBot() const;
 
 private:
@@ -228,11 +229,11 @@ private:
 
 class OAuth2Token final {
 public:
-    void SetAccessToken(char const* accessToken);
+    void SetAccessToken( char const* accessToken );
     char const* GetAccessToken() const;
-    void SetScopes(char const* scopes);
+    void SetScopes( char const* scopes );
     char const* GetScopes() const;
-    void SetExpires(Timestamp expires);
+    void SetExpires( Timestamp expires );
     Timestamp GetExpires() const;
 
 private:
@@ -241,11 +242,11 @@ private:
 
 class ImageHandle final {
 public:
-    void SetType(ImageType type);
+    void SetType( ImageType type );
     ImageType GetType() const;
-    void SetId(std::int64_t id);
+    void SetId( std::int64_t id );
     std::int64_t GetId() const;
-    void SetSize(std::uint32_t size);
+    void SetSize( std::uint32_t size );
     std::uint32_t GetSize() const;
 
 private:
@@ -254,9 +255,9 @@ private:
 
 class ImageDimensions final {
 public:
-    void SetWidth(std::uint32_t width);
+    void SetWidth( std::uint32_t width );
     std::uint32_t GetWidth() const;
-    void SetHeight(std::uint32_t height);
+    void SetHeight( std::uint32_t height );
     std::uint32_t GetHeight() const;
 
 private:
@@ -265,9 +266,9 @@ private:
 
 class ActivityTimestamps final {
 public:
-    void SetStart(Timestamp start);
+    void SetStart( Timestamp start );
     Timestamp GetStart() const;
-    void SetEnd(Timestamp end);
+    void SetEnd( Timestamp end );
     Timestamp GetEnd() const;
 
 private:
@@ -276,13 +277,13 @@ private:
 
 class ActivityAssets final {
 public:
-    void SetLargeImage(char const* largeImage);
+    void SetLargeImage( char const* largeImage );
     char const* GetLargeImage() const;
-    void SetLargeText(char const* largeText);
+    void SetLargeText( char const* largeText );
     char const* GetLargeText() const;
-    void SetSmallImage(char const* smallImage);
+    void SetSmallImage( char const* smallImage );
     char const* GetSmallImage() const;
-    void SetSmallText(char const* smallText);
+    void SetSmallText( char const* smallText );
     char const* GetSmallText() const;
 
 private:
@@ -291,9 +292,9 @@ private:
 
 class PartySize final {
 public:
-    void SetCurrentSize(std::int32_t currentSize);
+    void SetCurrentSize( std::int32_t currentSize );
     std::int32_t GetCurrentSize() const;
-    void SetMaxSize(std::int32_t maxSize);
+    void SetMaxSize( std::int32_t maxSize );
     std::int32_t GetMaxSize() const;
 
 private:
@@ -302,7 +303,7 @@ private:
 
 class ActivityParty final {
 public:
-    void SetId(char const* id);
+    void SetId( char const* id );
     char const* GetId() const;
     PartySize& GetSize();
     PartySize const& GetSize() const;
@@ -313,11 +314,11 @@ private:
 
 class ActivitySecrets final {
 public:
-    void SetMatch(char const* match);
+    void SetMatch( char const* match );
     char const* GetMatch() const;
-    void SetJoin(char const* join);
+    void SetJoin( char const* join );
     char const* GetJoin() const;
-    void SetSpectate(char const* spectate);
+    void SetSpectate( char const* spectate );
     char const* GetSpectate() const;
 
 private:
@@ -326,15 +327,15 @@ private:
 
 class Activity final {
 public:
-    void SetType(ActivityType type);
+    void SetType( ActivityType type );
     ActivityType GetType() const;
-    void SetApplicationId(std::int64_t applicationId);
+    void SetApplicationId( std::int64_t applicationId );
     std::int64_t GetApplicationId() const;
-    void SetName(char const* name);
+    void SetName( char const* name );
     char const* GetName() const;
-    void SetState(char const* state);
+    void SetState( char const* state );
     char const* GetState() const;
-    void SetDetails(char const* details);
+    void SetDetails( char const* details );
     char const* GetDetails() const;
     ActivityTimestamps& GetTimestamps();
     ActivityTimestamps const& GetTimestamps() const;
@@ -344,7 +345,7 @@ public:
     ActivityParty const& GetParty() const;
     ActivitySecrets& GetSecrets();
     ActivitySecrets const& GetSecrets() const;
-    void SetInstance(bool instance);
+    void SetInstance( bool instance );
     bool GetInstance() const;
 
 private:
@@ -353,7 +354,7 @@ private:
 
 class Presence final {
 public:
-    void SetStatus(Status status);
+    void SetStatus( Status status );
     Status GetStatus() const;
     Activity& GetActivity();
     Activity const& GetActivity() const;
@@ -364,7 +365,7 @@ private:
 
 class Relationship final {
 public:
-    void SetType(RelationshipType type);
+    void SetType( RelationshipType type );
     RelationshipType GetType() const;
     User& GetUser();
     User const& GetUser() const;
@@ -377,17 +378,17 @@ private:
 
 class Lobby final {
 public:
-    void SetId(LobbyId id);
+    void SetId( LobbyId id );
     LobbyId GetId() const;
-    void SetType(LobbyType type);
+    void SetType( LobbyType type );
     LobbyType GetType() const;
-    void SetOwnerId(UserId ownerId);
+    void SetOwnerId( UserId ownerId );
     UserId GetOwnerId() const;
-    void SetSecret(LobbySecret secret);
+    void SetSecret( LobbySecret secret );
     LobbySecret GetSecret() const;
-    void SetCapacity(std::uint32_t capacity);
+    void SetCapacity( std::uint32_t capacity );
     std::uint32_t GetCapacity() const;
-    void SetLocked(bool locked);
+    void SetLocked( bool locked );
     bool GetLocked() const;
 
 private:
@@ -396,15 +397,15 @@ private:
 
 class ImeUnderline final {
 public:
-    void SetFrom(std::int32_t from);
+    void SetFrom( std::int32_t from );
     std::int32_t GetFrom() const;
-    void SetTo(std::int32_t to);
+    void SetTo( std::int32_t to );
     std::int32_t GetTo() const;
-    void SetColor(std::uint32_t color);
+    void SetColor( std::uint32_t color );
     std::uint32_t GetColor() const;
-    void SetBackgroundColor(std::uint32_t backgroundColor);
+    void SetBackgroundColor( std::uint32_t backgroundColor );
     std::uint32_t GetBackgroundColor() const;
-    void SetThick(bool thick);
+    void SetThick( bool thick );
     bool GetThick() const;
 
 private:
@@ -413,13 +414,13 @@ private:
 
 class Rect final {
 public:
-    void SetLeft(std::int32_t left);
+    void SetLeft( std::int32_t left );
     std::int32_t GetLeft() const;
-    void SetTop(std::int32_t top);
+    void SetTop( std::int32_t top );
     std::int32_t GetTop() const;
-    void SetRight(std::int32_t right);
+    void SetRight( std::int32_t right );
     std::int32_t GetRight() const;
-    void SetBottom(std::int32_t bottom);
+    void SetBottom( std::int32_t bottom );
     std::int32_t GetBottom() const;
 
 private:
@@ -428,11 +429,11 @@ private:
 
 class FileStat final {
 public:
-    void SetFilename(char const* filename);
+    void SetFilename( char const* filename );
     char const* GetFilename() const;
-    void SetSize(std::uint64_t size);
+    void SetSize( std::uint64_t size );
     std::uint64_t GetSize() const;
-    void SetLastModified(std::uint64_t lastModified);
+    void SetLastModified( std::uint64_t lastModified );
     std::uint64_t GetLastModified() const;
 
 private:
@@ -441,11 +442,11 @@ private:
 
 class Entitlement final {
 public:
-    void SetId(Snowflake id);
+    void SetId( Snowflake id );
     Snowflake GetId() const;
-    void SetType(EntitlementType type);
+    void SetType( EntitlementType type );
     EntitlementType GetType() const;
-    void SetSkuId(Snowflake skuId);
+    void SetSkuId( Snowflake skuId );
     Snowflake GetSkuId() const;
 
 private:
@@ -454,9 +455,9 @@ private:
 
 class SkuPrice final {
 public:
-    void SetAmount(std::uint32_t amount);
+    void SetAmount( std::uint32_t amount );
     std::uint32_t GetAmount() const;
-    void SetCurrency(char const* currency);
+    void SetCurrency( char const* currency );
     char const* GetCurrency() const;
 
 private:
@@ -465,11 +466,11 @@ private:
 
 class Sku final {
 public:
-    void SetId(Snowflake id);
+    void SetId( Snowflake id );
     Snowflake GetId() const;
-    void SetType(SkuType type);
+    void SetType( SkuType type );
     SkuType GetType() const;
-    void SetName(char const* name);
+    void SetName( char const* name );
     char const* GetName() const;
     SkuPrice& GetPrice();
     SkuPrice const& GetPrice() const;
@@ -480,9 +481,9 @@ private:
 
 class InputMode final {
 public:
-    void SetType(InputModeType type);
+    void SetType( InputModeType type );
     InputModeType GetType() const;
-    void SetShortcut(char const* shortcut);
+    void SetShortcut( char const* shortcut );
     char const* GetShortcut() const;
 
 private:
@@ -491,13 +492,13 @@ private:
 
 class UserAchievement final {
 public:
-    void SetUserId(Snowflake userId);
+    void SetUserId( Snowflake userId );
     Snowflake GetUserId() const;
-    void SetAchievementId(Snowflake achievementId);
+    void SetAchievementId( Snowflake achievementId );
     Snowflake GetAchievementId() const;
-    void SetPercentComplete(std::uint8_t percentComplete);
+    void SetPercentComplete( std::uint8_t percentComplete );
     std::uint8_t GetPercentComplete() const;
-    void SetUnlockedAt(DateTime unlockedAt);
+    void SetUnlockedAt( DateTime unlockedAt );
     DateTime GetUnlockedAt() const;
 
 private:
@@ -506,12 +507,12 @@ private:
 
 class LobbyTransaction final {
 public:
-    Result SetType(LobbyType type);
-    Result SetOwner(UserId ownerId);
-    Result SetCapacity(std::uint32_t capacity);
-    Result SetMetadata(MetadataKey key, MetadataValue value);
-    Result DeleteMetadata(MetadataKey key);
-    Result SetLocked(bool locked);
+    Result SetType( LobbyType type );
+    Result SetOwner( UserId ownerId );
+    Result SetCapacity( std::uint32_t capacity );
+    Result SetMetadata( MetadataKey key, MetadataValue value );
+    Result DeleteMetadata( MetadataKey key );
+    Result SetLocked( bool locked );
 
     IDiscordLobbyTransaction** Receive() { return &internal_; }
     IDiscordLobbyTransaction* Internal() { return internal_; }
@@ -522,8 +523,8 @@ private:
 
 class LobbyMemberTransaction final {
 public:
-    Result SetMetadata(MetadataKey key, MetadataValue value);
-    Result DeleteMetadata(MetadataKey key);
+    Result SetMetadata( MetadataKey key, MetadataValue value );
+    Result DeleteMetadata( MetadataKey key );
 
     IDiscordLobbyMemberTransaction** Receive() { return &internal_; }
     IDiscordLobbyMemberTransaction* Internal() { return internal_; }
@@ -534,13 +535,13 @@ private:
 
 class LobbySearchQuery final {
 public:
-    Result Filter(MetadataKey key,
-                  LobbySearchComparison comparison,
-                  LobbySearchCast cast,
-                  MetadataValue value);
-    Result Sort(MetadataKey key, LobbySearchCast cast, MetadataValue value);
-    Result Limit(std::uint32_t limit);
-    Result Distance(LobbySearchDistance distance);
+    Result Filter( MetadataKey key,
+                   LobbySearchComparison comparison,
+                   LobbySearchCast cast,
+                   MetadataValue value );
+    Result Sort( MetadataKey key, LobbySearchCast cast, MetadataValue value );
+    Result Limit( std::uint32_t limit );
+    Result Distance( LobbySearchDistance distance );
 
     IDiscordLobbySearchQuery** Receive() { return &internal_; }
     IDiscordLobbySearchQuery* Internal() { return internal_; }

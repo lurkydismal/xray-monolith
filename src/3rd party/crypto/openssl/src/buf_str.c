@@ -7,7 +7,7 @@
  * are met:
  *
  * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
+ *    notice, this list of conditions and the following disclaimer.
  *
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in
@@ -53,64 +53,60 @@
  *
  */
 
-#include <stdio.h>
-#include "cryptlib.h"
 #include <openssl/buffer.h>
+#include <stdio.h>
 
-char *BUF_strdup(const char *str)
-	{
-	if (str == NULL) return(NULL);
-	return BUF_strndup(str, strlen(str));
-	}
+#include "cryptlib.h"
 
-char *BUF_strndup(const char *str, size_t siz)
-	{
-	char *ret;
+char* BUF_strdup( const char* str ) {
+    if ( str == NULL )
+        return ( NULL );
+    return BUF_strndup( str, strlen( str ) );
+}
 
-	if (str == NULL) return(NULL);
+char* BUF_strndup( const char* str, size_t siz ) {
+    char* ret;
 
-	ret=OPENSSL_malloc(siz+1);
-	if (ret == NULL) 
-		{
-		BUFerr(BUF_F_BUF_STRNDUP,ERR_R_MALLOC_FAILURE);
-		return(NULL);
-		}
-	BUF_strlcpy(ret,str,siz+1);
-	return(ret);
-	}
+    if ( str == NULL )
+        return ( NULL );
 
-void *BUF_memdup(const void *data, size_t siz)
-	{
-	void *ret;
+    ret = OPENSSL_malloc( siz + 1 );
+    if ( ret == NULL ) {
+        BUFerr( BUF_F_BUF_STRNDUP, ERR_R_MALLOC_FAILURE );
+        return ( NULL );
+    }
+    BUF_strlcpy( ret, str, siz + 1 );
+    return ( ret );
+}
 
-	if (data == NULL) return(NULL);
+void* BUF_memdup( const void* data, size_t siz ) {
+    void* ret;
 
-	ret=OPENSSL_malloc(siz);
-	if (ret == NULL) 
-		{
-		BUFerr(BUF_F_BUF_MEMDUP,ERR_R_MALLOC_FAILURE);
-		return(NULL);
-		}
-	return memcpy(ret, data, siz);
-	}	
+    if ( data == NULL )
+        return ( NULL );
 
-size_t BUF_strlcpy(char *dst, const char *src, size_t size)
-	{
-	size_t l = 0;
-	for(; size > 1 && *src; size--)
-		{
-		*dst++ = *src++;
-		l++;
-		}
-	if (size)
-		*dst = '\0';
-	return l + strlen(src);
-	}
+    ret = OPENSSL_malloc( siz );
+    if ( ret == NULL ) {
+        BUFerr( BUF_F_BUF_MEMDUP, ERR_R_MALLOC_FAILURE );
+        return ( NULL );
+    }
+    return memcpy( ret, data, siz );
+}
 
-size_t BUF_strlcat(char *dst, const char *src, size_t size)
-	{
-	size_t l = 0;
-	for(; size > 0 && *dst; size--, dst++)
-		l++;
-	return l + BUF_strlcpy(dst, src, size);
-	}
+size_t BUF_strlcpy( char* dst, const char* src, size_t size ) {
+    size_t l = 0;
+    for ( ; size > 1 && *src; size-- ) {
+        *dst++ = *src++;
+        l++;
+    }
+    if ( size )
+        *dst = '\0';
+    return l + strlen( src );
+}
+
+size_t BUF_strlcat( char* dst, const char* src, size_t size ) {
+    size_t l = 0;
+    for ( ; size > 0 && *dst; size--, dst++ )
+        l++;
+    return l + BUF_strlcpy( dst, src, size );
+}

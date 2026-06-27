@@ -45,6 +45,6 @@ public:
     static const bool is_fair_mutex = true;
 };
 
-}
+} // namespace tbb
 
 #endif /* __TBB_null_mutex_H */

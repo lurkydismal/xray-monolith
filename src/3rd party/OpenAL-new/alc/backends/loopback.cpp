@@ -18,61 +18,57 @@
  * Or go to http://www.gnu.org/copyleft/lgpl.html
  */
 
-#include "config.h"
-
 #include "loopback.h"
 
+#include "config.h"
 #include "core/device.h"
-
 
 namespace {
 
 struct LoopbackBackend final : public BackendBase {
-    LoopbackBackend(DeviceBase *device) noexcept : BackendBase{device} { }
+    LoopbackBackend( DeviceBase* device ) noexcept : BackendBase{ device } {}
 
-    void open(const char *name) override;
+    void open( const char* name ) override;
     bool reset() override;
     void start() override;
     void stop() override;
 
-    DEF_NEWDEL(LoopbackBackend)
+    DEF_NEWDEL( LoopbackBackend )
 };
 
-
-void LoopbackBackend::open(const char *name)
-{
+void LoopbackBackend::open( const char* name ) {
     mDevice->DeviceName = name;
 }
 
-bool LoopbackBackend::reset()
-{
+bool LoopbackBackend::reset() {
     setDefaultWFXChannelOrder();
     return true;
 }
 
-void LoopbackBackend::start()
-{ }
+void LoopbackBackend::start() {}
 
-void LoopbackBackend::stop()
-{ }
+void LoopbackBackend::stop() {}
 
 } // namespace
 
+bool LoopbackBackendFactory::init() {
+    return true;
+}
 
-bool LoopbackBackendFactory::init()
-{ return true; }
+bool LoopbackBackendFactory::querySupport( BackendType ) {
+    return true;
+}
 
-bool LoopbackBackendFactory::querySupport(BackendType)
-{ return true; }
+std::string LoopbackBackendFactory::probe( BackendType ) {
+    return std::string{};
+}
 
-std::string LoopbackBackendFactory::probe(BackendType)
-{ return std::string{}; }
+BackendPtr LoopbackBackendFactory::createBackend( DeviceBase* device,
+                                                  BackendType ) {
+    return BackendPtr{ new LoopbackBackend{ device } };
+}
 
-BackendPtr LoopbackBackendFactory::createBackend(DeviceBase *device, BackendType)
-{ return BackendPtr{new LoopbackBackend{device}}; }
-
-BackendFactory &LoopbackBackendFactory::getFactory()
-{
+BackendFactory& LoopbackBackendFactory::getFactory() {
     static LoopbackBackendFactory factory{};
     return factory;
 }

@@ -21,64 +21,58 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
-extern "C"
-{
-#	include <luajit-2/src/lua.h>
+extern "C" {
+#include <luajit-2/src/lua.h>
 }
 
 #include <luabind/config.hpp>
+
 #include <functional>
 
-namespace luabind::detail
-{
-	// this class represents a specific overload of a member-function.
-	struct LUABIND_API overload_rep_base
-	{
-#if !defined(LUABIND_NO_ERROR_CHECKING)
-		overload_rep_base(): m_get_signature_fun(nullptr), m_arity(-1), m_match_fun(nullptr) 
-        {
-        }
+namespace luabind::detail {
+// this class represents a specific overload of a member-function.
+struct LUABIND_API overload_rep_base {
+#if !defined( LUABIND_NO_ERROR_CHECKING )
+    overload_rep_base()
+        : m_get_signature_fun( nullptr ),
+          m_arity( -1 ),
+          m_match_fun( nullptr ) {}
 #else
-        overload_rep_base(): m_match_fun(), m_arity(-1) {}
+    overload_rep_base() : m_match_fun(), m_arity( -1 ) {}
 #endif
 
-        overload_rep_base(const overload_rep_base&) = default;
-        overload_rep_base(overload_rep_base&&) = default;
+    overload_rep_base( const overload_rep_base& ) = default;
+    overload_rep_base( overload_rep_base&& ) = default;
 
-        overload_rep_base& operator= (const overload_rep_base&) = default;
-        overload_rep_base& operator= (overload_rep_base&&) = default;
+    overload_rep_base& operator=( const overload_rep_base& ) = default;
+    overload_rep_base& operator=( overload_rep_base&& ) = default;
 
-        using match_fun_t = std::function<int(lua_State*)>;
-		typedef void(*get_sig_ptr)(lua_State*, string_class&);
+    using match_fun_t = std::function< int( lua_State* ) >;
+    typedef void ( *get_sig_ptr )( lua_State*, string_class& );
 
-		int match(lua_State* L, const int num_params) const
-		{
-			if (num_params != m_arity) return -1;
-			return m_match_fun(L);
-		}
+    int match( lua_State* L, const int num_params ) const {
+        if ( num_params != m_arity )
+            return -1;
+        return m_match_fun( L );
+    }
 
-        template <typename T>
-		void set_match_fun(T&& fn) 
-		{
-			m_match_fun = std::forward<T>(fn);
-		}
+    template < typename T >
+    void set_match_fun( T&& fn ) {
+        m_match_fun = std::forward< T >( fn );
+    }
 
 #ifndef LUABIND_NO_ERROR_CHECKING
-		void get_signature(lua_State* L, string_class& s) const 
-		{ 
-			m_get_signature_fun(L, s); 
-		}
+    void get_signature( lua_State* L, string_class& s ) const {
+        m_get_signature_fun( L, s );
+    }
 
-		void set_sig_fun(get_sig_ptr f) 
-		{ 
-			m_get_signature_fun = f; 
-		}
+    void set_sig_fun( get_sig_ptr f ) { m_get_signature_fun = f; }
 
-		get_sig_ptr m_get_signature_fun;
+    get_sig_ptr m_get_signature_fun;
 #endif
 
-		match_fun_t m_match_fun;
-		int m_arity;
-	};
+    match_fun_t m_match_fun;
+    int m_arity;
+};
 
 } // namespace luabind::detail

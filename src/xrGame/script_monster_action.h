@@ -8,26 +8,26 @@
 
 #pragma once
 
+#include "ai_monster_space.h"
 #include "script_abstract_action.h"
 #include "script_export_space.h"
-#include "ai_monster_space.h"
 
 class CScriptGameObject;
 
-class CScriptMonsterAction : public CScriptAbstractAction
-{
+class CScriptMonsterAction : public CScriptAbstractAction {
 public:
-	MonsterSpace::EScriptMonsterGlobalAction m_tAction;
-	CObject* m_tObject;
+    MonsterSpace::EScriptMonsterGlobalAction m_tAction;
+    CObject* m_tObject;
 
 public:
-	IC CScriptMonsterAction();
-	IC CScriptMonsterAction(MonsterSpace::EScriptMonsterGlobalAction action);
-	IC CScriptMonsterAction(MonsterSpace::EScriptMonsterGlobalAction action, CScriptGameObject* tObj);
-	virtual ~CScriptMonsterAction();
-	void SetObject(CScriptGameObject* tObj);
+    IC CScriptMonsterAction();
+    IC CScriptMonsterAction( MonsterSpace::EScriptMonsterGlobalAction action );
+    IC CScriptMonsterAction( MonsterSpace::EScriptMonsterGlobalAction action,
+                             CScriptGameObject* tObj );
+    virtual ~CScriptMonsterAction();
+    void SetObject( CScriptGameObject* tObj );
 
-DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };
 
 #include "script_monster_action_inline.h"

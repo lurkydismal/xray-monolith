@@ -20,10 +20,7 @@
  *                                                                       *
  *************************************************************************/
 
-
 /* per-machine configuration */
-
-
 
 #ifndef _ODE_CONFIG_H_
 
@@ -35,31 +32,31 @@ extern "C" {
 
 #endif
 
-
-
-#include <stdio.h>
-
+#include <malloc.h> // for alloca under windows
+#include <math.h>
 #include <stdarg.h>
-
-#include <malloc.h>		// for alloca under windows
-
+#include <stdio.h>
 #include <string.h>
 
-#include <math.h>
+#if defined( WIN32 ) && ( defined( MSVC ) || defined( MINGW ) )
 
-#if defined(WIN32) && (defined(MSVC) || defined(MINGW))
+static union {
+    unsigned char __c[ 4 ];
+    float __f;
+} __ode_huge_valf =
 
-static union { unsigned char __c[4]; float __f; } __ode_huge_valf =
+    { { 0, 0, 0x80, 0x7f } };
 
-  {{0,0,0x80,0x7f}};
+#define _INFINITY4 ( __ode_huge_valf.__f )
 
-#define _INFINITY4 (__ode_huge_valf.__f)
+static union {
+    unsigned char __c[ 8 ];
+    double __d;
+} __ode_huge_val =
 
-static union { unsigned char __c[8]; double __d; } __ode_huge_val =
+    { { 0, 0, 0, 0, 0, 0, 0xf0, 0x7f } };
 
-  {{0,0,0,0,0,0,0xf0,0x7f }};
-
-#define _INFINITY8 (__ode_huge_val.__d)
+#define _INFINITY8 ( __ode_huge_val.__d )
 
 #else
 
@@ -69,7 +66,7 @@ static union { unsigned char __c[8]; double __d; } __ode_huge_val =
 
 #endif
 
-#if defined(dSINGLE)
+#if defined( dSINGLE )
 
 #define dInfinity _INFINITY4
 
@@ -79,35 +76,27 @@ static union { unsigned char __c[8]; double __d; } __ode_huge_val =
 
 #endif
 
-
-
 #define SHAREDLIBIMPORT
-	//__declspec (dllimport)
+//__declspec (dllimport)
 
 #define SHAREDLIBEXPORT
-	//__declspec (dllexport)
-
-
+//__declspec (dllexport)
 
 /* some types. assume `int' >= 32 bits */
 
-typedef unsigned int    uint;
+typedef unsigned int uint;
 
-typedef int             int32;
+typedef int int32;
 
-typedef unsigned int    uint32;
+typedef unsigned int uint32;
 
-typedef short           int16;
+typedef short int16;
 
-typedef unsigned short  uint16;
+typedef unsigned short uint16;
 
-typedef char            int8;
+typedef char int8;
 
-typedef unsigned char   uint8;
-
-
-
-
+typedef unsigned char uint8;
 
 /* an integer type that we can safely cast a pointer to and from without
 
@@ -116,10 +105,6 @@ typedef unsigned char   uint8;
  */
 
 typedef uintptr_t intP;
-
-
-
-
 
 /* if we're compiling on a pentium, we may need to know the clock rate so
 
@@ -133,21 +118,15 @@ typedef uintptr_t intP;
 
  */
 
-
-
 #ifdef PENTIUM
 
 #ifndef PENTIUM_HZ
 
-#define PENTIUM_HZ (496.318983e6)
+#define PENTIUM_HZ ( 496.318983e6 )
 
 #endif
 
 #endif
-
-
-
-
 
 /* the efficient alignment. most platforms align data structures to some
 
@@ -165,13 +144,7 @@ typedef uintptr_t intP;
 
  */
 
-
-
 #define EFFICIENT_ALIGNMENT 16
-
-
-
-
 
 /* for unix, define this if your system supports anonymous memory maps
 
@@ -179,21 +152,11 @@ typedef uintptr_t intP;
 
  */
 
-
-
 #define MMAP_ANONYMOUS
 
-
-
-
-
 #ifdef __cplusplus
-
 }
 
 #endif
 
-
-
 #endif
-

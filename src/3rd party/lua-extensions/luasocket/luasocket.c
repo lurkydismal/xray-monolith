@@ -13,57 +13,54 @@
 \*=========================================================================*/
 
 #include "luasocket.h"
+
 #include "auxiliar.h"
-#include "except.h"
-#include "timeout.h"
 #include "buffer.h"
+#include "except.h"
 #include "inet.h"
-#include "tcp.h"
-#include "udp.h"
 #include "select.h"
+#include "tcp.h"
+#include "timeout.h"
+#include "udp.h"
 
 /*-------------------------------------------------------------------------*\
 * Internal function prototypes
 \*-------------------------------------------------------------------------*/
-static int global_skip(lua_State *L);
-static int global_unload(lua_State *L);
-static int base_open(lua_State *L);
+static int global_skip( lua_State* L );
+static int global_unload( lua_State* L );
+static int base_open( lua_State* L );
 
 /*-------------------------------------------------------------------------*\
 * Modules and functions
 \*-------------------------------------------------------------------------*/
-static const luaL_Reg mod[] = {
-    {"auxiliar", auxiliar_open},
-    {"except", except_open},
-    {"timeout", timeout_open},
-    {"buffer", buffer_open},
-    {"inet", inet_open},
-    {"tcp", tcp_open},
-    {"udp", udp_open},
-    {"select", select_open},
-    {NULL, NULL}
-};
+static const luaL_Reg mod[] = { { "auxiliar", auxiliar_open },
+                                { "except", except_open },
+                                { "timeout", timeout_open },
+                                { "buffer", buffer_open },
+                                { "inet", inet_open },
+                                { "tcp", tcp_open },
+                                { "udp", udp_open },
+                                { "select", select_open },
+                                { NULL, NULL } };
 
-static luaL_Reg func[] = {
-    {"skip",      global_skip},
-    {"__unload",  global_unload},
-    {NULL,        NULL}
-};
+static luaL_Reg func[] = { { "skip", global_skip },
+                           { "__unload", global_unload },
+                           { NULL, NULL } };
 
 /*-------------------------------------------------------------------------*\
 * Skip a few arguments
 \*-------------------------------------------------------------------------*/
-static int global_skip(lua_State *L) {
-    int amount = (int) luaL_checkinteger(L, 1);
-    int ret = lua_gettop(L) - amount - 1;
+static int global_skip( lua_State* L ) {
+    int amount = ( int )luaL_checkinteger( L, 1 );
+    int ret = lua_gettop( L ) - amount - 1;
     return ret >= 0 ? ret : 0;
 }
 
 /*-------------------------------------------------------------------------*\
 * Unloads the library
 \*-------------------------------------------------------------------------*/
-static int global_unload(lua_State *L) {
-    (void) L;
+static int global_unload( lua_State* L ) {
+    ( void )L;
     socket_close();
     return 0;
 }
@@ -71,24 +68,24 @@ static int global_unload(lua_State *L) {
 /*-------------------------------------------------------------------------*\
 * Setup basic stuff.
 \*-------------------------------------------------------------------------*/
-static int base_open(lua_State *L) {
-    if (socket_open()) {
+static int base_open( lua_State* L ) {
+    if ( socket_open() ) {
         /* export functions (and leave namespace table on top of stack) */
-        lua_newtable(L);
-        luaL_setfuncs(L, func, 0);
+        lua_newtable( L );
+        luaL_setfuncs( L, func, 0 );
 #ifdef LUASOCKET_DEBUG
-        lua_pushstring(L, "_DEBUG");
-        lua_pushboolean(L, 1);
-        lua_rawset(L, -3);
+        lua_pushstring( L, "_DEBUG" );
+        lua_pushboolean( L, 1 );
+        lua_rawset( L, -3 );
 #endif
         /* make version string available to scripts */
-        lua_pushstring(L, "_VERSION");
-        lua_pushstring(L, LUASOCKET_VERSION);
-        lua_rawset(L, -3);
+        lua_pushstring( L, "_VERSION" );
+        lua_pushstring( L, LUASOCKET_VERSION );
+        lua_rawset( L, -3 );
         return 1;
     } else {
-        lua_pushstring(L, "unable to initialize library");
-        lua_error(L);
+        lua_pushstring( L, "unable to initialize library" );
+        lua_error( L );
         return 0;
     }
 }
@@ -96,31 +93,29 @@ static int base_open(lua_State *L) {
 /*-------------------------------------------------------------------------*\
 * Initializes all library modules.
 \*-------------------------------------------------------------------------*/
-void luaL_pushmodule(lua_State* L, const char* modname, int sizehint)
-{
-    luaL_findtable(L, LUA_REGISTRYINDEX, "_LOADED", 16);
-    lua_getfield(L, -1, modname);
-    if (!lua_istable(L, -1)) 
-    {
-        lua_pop(L, 1);
-        luaL_findtable(L, LUA_GLOBALSINDEX, modname, sizehint);
-        lua_pushvalue(L, -1);
-        lua_setfield(L, -3, modname);
+void luaL_pushmodule( lua_State* L, const char* modname, int sizehint ) {
+    luaL_findtable( L, LUA_REGISTRYINDEX, "_LOADED", 16 );
+    lua_getfield( L, -1, modname );
+    if ( !lua_istable( L, -1 ) ) {
+        lua_pop( L, 1 );
+        luaL_findtable( L, LUA_GLOBALSINDEX, modname, sizehint );
+        lua_pushvalue( L, -1 );
+        lua_setfield( L, -3, modname );
     }
-    lua_remove(L, -2);
+    lua_remove( L, -2 );
 }
 
-LUASOCKET_API int luaopen_socket_core(lua_State* L)
-{
+LUASOCKET_API int luaopen_socket_core( lua_State* L ) {
     {
         int i;
-        lua_newtable(L);
-        if (!base_open(L))
+        lua_newtable( L );
+        if ( !base_open( L ) )
             return 0;
-        for (i = 0; mod[i].name; i++) mod[i].func(L);
-        lua_setfield(L, -2, "core");
-        lua_setglobal(L, "socket");
+        for ( i = 0; mod[ i ].name; i++ )
+            mod[ i ].func( L );
+        lua_setfield( L, -2, "core" );
+        lua_setglobal( L, "socket" );
     }
-    luaL_pushmodule(L, "socket.core", 0);
+    luaL_pushmodule( L, "socket.core", 0 );
     return 1;
 }

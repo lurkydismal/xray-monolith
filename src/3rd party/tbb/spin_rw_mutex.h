@@ -17,17 +17,19 @@
 #ifndef __TBB_spin_rw_mutex_H
 #define __TBB_spin_rw_mutex_H
 
-#include "tbb_stddef.h"
+#include "internal/_mutex_padding.h"
 #include "tbb_machine.h"
 #include "tbb_profiling.h"
-#include "internal/_mutex_padding.h"
+#include "tbb_stddef.h"
 
 namespace tbb {
 
 #if __TBB_TSX_AVAILABLE
-namespace interface8 { namespace internal {
-    class x86_rtm_rw_mutex;
-}}
+namespace interface8 {
+namespace internal {
+class x86_rtm_rw_mutex;
+}
+} // namespace interface8
 #endif
 
 class spin_rw_mutex_v3;
@@ -42,7 +44,8 @@ class spin_rw_mutex_v3 : internal::mutex_copy_deprecated_and_disabled {
     bool __TBB_EXPORTED_METHOD internal_acquire_writer();
 
     //! Out of line code for releasing a write lock.
-    /** This code has debug checking and instrumentation for Intel(R) Thread Checker and Intel(R) Thread Profiler. */
+    /** This code has debug checking and instrumentation for Intel(R) Thread
+     * Checker and Intel(R) Thread Profiler. */
     void __TBB_EXPORTED_METHOD internal_release_writer();
 
     //! Internal acquire read lock.
@@ -52,7 +55,8 @@ class spin_rw_mutex_v3 : internal::mutex_copy_deprecated_and_disabled {
     bool __TBB_EXPORTED_METHOD internal_upgrade();
 
     //! Out of line code for downgrading a writer to a reader.
-    /** This code has debug checking and instrumentation for Intel(R) Thread Checker and Intel(R) Thread Profiler. */
+    /** This code has debug checking and instrumentation for Intel(R) Thread
+     * Checker and Intel(R) Thread Profiler. */
     void __TBB_EXPORTED_METHOD internal_downgrade();
 
     //! Internal release read lock.
@@ -67,7 +71,7 @@ class spin_rw_mutex_v3 : internal::mutex_copy_deprecated_and_disabled {
     //! @endcond
 public:
     //! Construct unacquired mutex.
-    spin_rw_mutex_v3() : state(0) {
+    spin_rw_mutex_v3() : state( 0 ) {
 #if TBB_USE_THREADING_TOOLS
         internal_construct();
 #endif
@@ -76,7 +80,7 @@ public:
 #if TBB_USE_ASSERT
     //! Destructor asserts if the mutex is acquired, i.e. state is zero.
     ~spin_rw_mutex_v3() {
-        __TBB_ASSERT( !state, "destruction of an acquired mutex");
+        __TBB_ASSERT( !state, "destruction of an acquired mutex" );
     };
 #endif /* TBB_USE_ASSERT */
 
@@ -90,16 +94,17 @@ public:
     public:
         //! Construct lock that has not acquired a mutex.
         /** Equivalent to zero-initialization of *this. */
-        scoped_lock() : mutex(NULL), is_writer(false) {}
+        scoped_lock() : mutex( NULL ), is_writer( false ) {}
 
         //! Acquire lock on given mutex.
-        scoped_lock( spin_rw_mutex& m, bool write = true ) : mutex(NULL) {
-            acquire(m, write);
+        scoped_lock( spin_rw_mutex& m, bool write = true ) : mutex( NULL ) {
+            acquire( m, write );
         }
 
         //! Release lock (if lock is held).
         ~scoped_lock() {
-            if( mutex ) release();
+            if ( mutex )
+                release();
         }
 
         //! Acquire lock on given mutex.
@@ -107,15 +112,19 @@ public:
             __TBB_ASSERT( !mutex, "holding mutex already" );
             is_writer = write;
             mutex = &m;
-            if( write ) mutex->internal_acquire_writer();
-            else        mutex->internal_acquire_reader();
+            if ( write )
+                mutex->internal_acquire_writer();
+            else
+                mutex->internal_acquire_reader();
         }
 
         //! Upgrade reader to become a writer.
-        /** Returns whether the upgrade happened without releasing and re-acquiring the lock */
+        /** Returns whether the upgrade happened without releasing and
+         * re-acquiring the lock */
         bool upgrade_to_writer() {
             __TBB_ASSERT( mutex, "mutex is not acquired" );
-            if (is_writer) return true; // Already a writer
+            if ( is_writer )
+                return true; // Already a writer
             is_writer = true;
             return mutex->internal_upgrade();
         }
@@ -123,25 +132,31 @@ public:
         //! Release lock.
         void release() {
             __TBB_ASSERT( mutex, "mutex is not acquired" );
-            spin_rw_mutex *m = mutex;
+            spin_rw_mutex* m = mutex;
             mutex = NULL;
-#if TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT
-            if( is_writer ) m->internal_release_writer();
-            else            m->internal_release_reader();
+#if TBB_USE_THREADING_TOOLS || TBB_USE_ASSERT
+            if ( is_writer )
+                m->internal_release_writer();
+            else
+                m->internal_release_reader();
 #else
-            if( is_writer ) __TBB_AtomicAND( &m->state, READERS );
-            else            __TBB_FetchAndAddWrelease( &m->state, -(intptr_t)ONE_READER);
+            if ( is_writer )
+                __TBB_AtomicAND( &m->state, READERS );
+            else
+                __TBB_FetchAndAddWrelease( &m->state, -( intptr_t )ONE_READER );
 #endif /* TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT */
         }
 
         //! Downgrade writer to become a reader.
         bool downgrade_to_reader() {
             __TBB_ASSERT( mutex, "mutex is not acquired" );
-            if (!is_writer) return true; // Already a reader
-#if TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT
+            if ( !is_writer )
+                return true; // Already a reader
+#if TBB_USE_THREADING_TOOLS || TBB_USE_ASSERT
             mutex->internal_downgrade();
 #else
-            __TBB_FetchAndAddW( &mutex->state, ((intptr_t)ONE_READER-WRITER));
+            __TBB_FetchAndAddW( &mutex->state,
+                                ( ( intptr_t )ONE_READER - WRITER ) );
 #endif /* TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT */
             is_writer = false;
             return true;
@@ -152,19 +167,20 @@ public:
             __TBB_ASSERT( !mutex, "holding mutex already" );
             bool result;
             is_writer = write;
-            result = write? m.internal_try_acquire_writer()
-                          : m.internal_try_acquire_reader();
-            if( result )
+            result = write ? m.internal_try_acquire_writer()
+                           : m.internal_try_acquire_reader();
+            if ( result )
                 mutex = &m;
             return result;
         }
 
     protected:
-
-        //! The pointer to the current mutex that is held, or NULL if no mutex is held.
+        //! The pointer to the current mutex that is held, or NULL if no mutex
+        //! is held.
         spin_rw_mutex* mutex;
 
-        //! If mutex!=NULL, then is_writer is true if holding a writer lock, false if holding a reader lock.
+        //! If mutex!=NULL, then is_writer is true if holding a writer lock,
+        //! false if holding a reader lock.
         /** Not defined if not holding a lock. */
         bool is_writer;
     };
@@ -177,37 +193,41 @@ public:
     // ISO C++0x compatibility methods
 
     //! Acquire writer lock
-    void lock() {internal_acquire_writer();}
+    void lock() { internal_acquire_writer(); }
 
     //! Try acquiring writer lock (non-blocking)
     /** Return true if lock acquired; false otherwise. */
-    bool try_lock() {return internal_try_acquire_writer();}
+    bool try_lock() { return internal_try_acquire_writer(); }
 
     //! Release lock
     void unlock() {
-#if TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT
-        if( state&WRITER ) internal_release_writer();
-        else               internal_release_reader();
+#if TBB_USE_THREADING_TOOLS || TBB_USE_ASSERT
+        if ( state & WRITER )
+            internal_release_writer();
+        else
+            internal_release_reader();
 #else
-        if( state&WRITER ) __TBB_AtomicAND( &state, READERS );
-        else               __TBB_FetchAndAddWrelease( &state, -(intptr_t)ONE_READER);
+        if ( state & WRITER )
+            __TBB_AtomicAND( &state, READERS );
+        else
+            __TBB_FetchAndAddWrelease( &state, -( intptr_t )ONE_READER );
 #endif /* TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT */
     }
 
     // Methods for reader locks that resemble ISO C++0x compatibility methods.
 
     //! Acquire reader lock
-    void lock_read() {internal_acquire_reader();}
+    void lock_read() { internal_acquire_reader(); }
 
     //! Try acquiring reader lock (non-blocking)
     /** Return true if reader lock acquired; false otherwise. */
-    bool try_lock_read() {return internal_try_acquire_reader();}
+    bool try_lock_read() { return internal_try_acquire_reader(); }
 
 protected:
     typedef intptr_t state_t;
     static const state_t WRITER = 1;
     static const state_t WRITER_PENDING = 2;
-    static const state_t READERS = ~(WRITER | WRITER_PENDING);
+    static const state_t READERS = ~( WRITER | WRITER_PENDING );
     static const state_t ONE_READER = 4;
     static const state_t BUSY = WRITER | READERS;
     //! State of lock
@@ -220,7 +240,7 @@ private:
     void __TBB_EXPORTED_METHOD internal_construct();
 };
 
-__TBB_DEFINE_PROFILING_SET_NAME(spin_rw_mutex)
+__TBB_DEFINE_PROFILING_SET_NAME( spin_rw_mutex )
 
 } // namespace tbb
 
@@ -240,13 +260,16 @@ namespace interface8 {
     contended but the data it protects are not.
     @ingroup synchronization */
 #if __TBB_TSX_AVAILABLE
-typedef interface7::internal::padded_mutex<tbb::interface8::internal::x86_rtm_rw_mutex,true> speculative_spin_rw_mutex;
+typedef interface7::internal::
+    padded_mutex< tbb::interface8::internal::x86_rtm_rw_mutex, true >
+        speculative_spin_rw_mutex;
 #else
-typedef interface7::internal::padded_mutex<tbb::spin_rw_mutex,true> speculative_spin_rw_mutex;
+typedef interface7::internal::padded_mutex< tbb::spin_rw_mutex, true >
+    speculative_spin_rw_mutex;
 #endif
-}  // namespace interface8
+} // namespace interface8
 
 using interface8::speculative_spin_rw_mutex;
-__TBB_DEFINE_PROFILING_SET_NAME(speculative_spin_rw_mutex)
+__TBB_DEFINE_PROFILING_SET_NAME( speculative_spin_rw_mutex )
 } // namespace tbb
 #endif /* __TBB_spin_rw_mutex_H */

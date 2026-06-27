@@ -14,18 +14,20 @@
     limitations under the License.
 */
 
-//! To disable use of exceptions, include this header before any other header file from the library.
+//! To disable use of exceptions, include this header before any other header
+//! file from the library.
 
 //! The macro that prevents use of exceptions in the library files
-#undef  TBB_USE_EXCEPTIONS
+#undef TBB_USE_EXCEPTIONS
 #define TBB_USE_EXCEPTIONS 0
 
 //! Prevent compilers from issuing exception related warnings.
-/** Note that the warnings are suppressed for all the code after this header is included. */
+/** Note that the warnings are suppressed for all the code after this header is
+ * included. */
 #if _MSC_VER
 #if __INTEL_COMPILER
-    #pragma warning (disable: 583)
+#pragma warning( disable : 583 )
 #else
-    #pragma warning (disable: 4530 4577)
+#pragma warning( disable : 4530 4577 )
 #endif
 #endif

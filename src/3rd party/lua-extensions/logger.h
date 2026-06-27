@@ -1,8 +1,8 @@
 #include <lua.hpp>
+
+#include <ctime>
+#include <fstream>
+
 #include "xrCore.h"
 
-#include <fstream>
-#include <ctime>
-
-
-int open_log(lua_State *L);
+int open_log( lua_State* L );

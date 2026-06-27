@@ -6,40 +6,39 @@
 //	Description : Miscellanious functions for all the biting monsters
 ////////////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
-#include "base_monster.h"
 #include "../../../entitycondition.h"
+#include "base_monster.h"
+#include "stdafx.h"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Входные воздействия 
+// Входные воздействия
 // Зрение, слух, вероятность победы, выгодность противника
-void CBaseMonster::UpdateMemory()
-{
-	// Обновить память
-	EnemyMemory.update();
-	SoundMemory.UpdateHearing();
-	CorpseMemory.update();
-	HitMemory.update();
+void CBaseMonster::UpdateMemory() {
+    // Обновить память
+    EnemyMemory.update();
+    SoundMemory.UpdateHearing();
+    CorpseMemory.update();
+    HitMemory.update();
 
-	// обновить менеджеры врагов и трупов
-	EnemyMan.update();
-	CorpseMan.update();
+    // обновить менеджеры врагов и трупов
+    EnemyMan.update();
+    CorpseMan.update();
 
-	// remove hit info from objects that are corpses
+    // remove hit info from objects that are corpses
 
+    hear_dangerous_sound = hear_interesting_sound = false;
+    SoundElem se;
 
-	hear_dangerous_sound = hear_interesting_sound = false;
-	SoundElem se;
+    if ( SoundMemory.IsRememberSound() ) {
+        SoundMemory.GetSound( se, hear_dangerous_sound );
+        hear_interesting_sound = !hear_dangerous_sound;
+    }
 
-	if (SoundMemory.IsRememberSound())
-	{
-		SoundMemory.GetSound(se, hear_dangerous_sound);
-		hear_interesting_sound = !hear_dangerous_sound;
-	}
+    // Setup is own additional flags
+    m_bDamaged =
+        ( ( conditions().GetHealth() < db().m_fDamagedThreshold ) ? true
+                                                                  : false );
 
-	// Setup is own additional flags
-	m_bDamaged = ((conditions().GetHealth() < db().m_fDamagedThreshold) ? true : false);
-
-	m_bAggressive = hear_dangerous_sound || (EnemyMan.get_enemies_count() > 0) ||
-		HitMemory.is_hit();
+    m_bAggressive = hear_dangerous_sound ||
+                    ( EnemyMan.get_enemies_count() > 0 ) || HitMemory.is_hit();
 }

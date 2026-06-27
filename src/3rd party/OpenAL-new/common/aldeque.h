@@ -5,11 +5,10 @@
 
 #include "almalloc.h"
 
-
 namespace al {
 
-template<typename T>
-using deque = std::deque<T, al::allocator<T>>;
+template < typename T >
+using deque = std::deque< T, al::allocator< T > >;
 
 } // namespace al
 

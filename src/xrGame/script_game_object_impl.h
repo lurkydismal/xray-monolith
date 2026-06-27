@@ -8,6 +8,6 @@
 
 #pragma once
 
-#include "gameobject.h"
 #include "ai_space.h"
+#include "gameobject.h"
 #include "script_engine.h"

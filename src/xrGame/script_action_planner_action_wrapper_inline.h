@@ -9,12 +9,6 @@
 #pragma once
 
 IC CScriptActionPlannerActionWrapper::CScriptActionPlannerActionWrapper(
-	CScriptGameObject* object,
-	LPCSTR action_name
-) :
-	inherited(
-		object,
-		action_name
-	)
-{
-}
+    CScriptGameObject* object,
+    LPCSTR action_name )
+    : inherited( object, action_name ) {}

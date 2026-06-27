@@ -18,10 +18,10 @@
 #define __TBB_queuing_mutex_H
 
 #define __TBB_queuing_mutex_H_include_area
-#include "internal/_warning_suppress_enable_notice.h"
-
 #include <cstring>
+
 #include "atomic.h"
+#include "internal/_warning_suppress_enable_notice.h"
 #include "tbb_profiling.h"
 
 namespace tbb {
@@ -41,30 +41,31 @@ public:
     //! The scoped locking pattern
     /** It helps to avoid the common problem of forgetting to release lock.
         It also nicely provides the "node" for queuing locks. */
-    class scoped_lock: internal::no_copy {
+    class scoped_lock : internal::no_copy {
         //! Initialize fields to mean "no lock held".
         void initialize() {
             mutex = NULL;
             going = 0;
 #if TBB_USE_ASSERT
-            internal::poison_pointer(next);
+            internal::poison_pointer( next );
 #endif /* TBB_USE_ASSERT */
         }
 
     public:
         //! Construct lock that has not acquired a mutex.
         /** Equivalent to zero-initialization of *this. */
-        scoped_lock() {initialize();}
+        scoped_lock() { initialize(); }
 
         //! Acquire lock on given mutex.
         scoped_lock( queuing_mutex& m ) {
             initialize();
-            acquire(m);
+            acquire( m );
         }
 
         //! Release lock (if lock is held).
         ~scoped_lock() {
-            if( mutex ) release();
+            if ( mutex )
+                release();
         }
 
         //! Acquire lock on given mutex.
@@ -81,7 +82,7 @@ public:
         queuing_mutex* mutex;
 
         //! The pointer to the next competitor for a mutex
-        scoped_lock *next;
+        scoped_lock* next;
 
         //! The local spin-wait variable
         /** Inverted (0 - blocked, 1 - acquired the mutex) for the sake of
@@ -99,11 +100,10 @@ public:
 
 private:
     //! The last competitor requesting the lock
-    atomic<scoped_lock*> q_tail;
-
+    atomic< scoped_lock* > q_tail;
 };
 
-__TBB_DEFINE_PROFILING_SET_NAME(queuing_mutex)
+__TBB_DEFINE_PROFILING_SET_NAME( queuing_mutex )
 
 } // namespace tbb
 

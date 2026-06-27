@@ -11,6 +11,6 @@
 
 #include <cs/config.h>
 
-#pragma comment(lib, CS_LIBRARY_NAME( lua_studio_backend, lib ) )
+#pragma comment( lib, CS_LIBRARY_NAME( lua_studio_backend, lib ) )
 
 #endif // #ifndef CS_LUA_STUDIO_BACKEND_LIBRARY_LINKAGE_H_INCLUDED

@@ -1,5 +1,6 @@
 #include <windows.h>
-#include <process.h>
-#include <lua.hpp>
 
-int open_kb(lua_State *L);
+#include <lua.hpp>
+#include <process.h>
+
+int open_kb( lua_State* L );

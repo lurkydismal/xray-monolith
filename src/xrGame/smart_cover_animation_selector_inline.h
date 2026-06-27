@@ -8,17 +8,14 @@
 #ifndef SMART_COVER_ANIMATION_SELECTOR_INLINE_H_INCLUDED
 #define SMART_COVER_ANIMATION_SELECTOR_INLINE_H_INCLUDED
 
-namespace smart_cover
-{
-	IC CPropertyStorage* animation_selector::property_storage()
-	{
-		return (m_storage);
-	}
+namespace smart_cover {
+IC CPropertyStorage* animation_selector::property_storage() {
+    return ( m_storage );
+}
 
-	IC animation_planner& animation_selector::planner()
-	{
-		return (*m_planner);
-	}
+IC animation_planner& animation_selector::planner() {
+    return ( *m_planner );
+}
 } // namespace smart_cover
 
 #endif // SMART_COVER_ANIMATION_SELECTOR_INLINE_H_INCLUDED

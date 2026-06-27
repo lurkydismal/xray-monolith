@@ -2,7 +2,6 @@
 #define AL_EFFECTS_EFFECTS_H
 
 #include "AL/al.h"
-
 #include "core/except.h"
 
 #ifdef ALSOFT_EAX
@@ -11,43 +10,50 @@
 
 union EffectProps;
 
-
 class effect_exception final : public al::base_exception {
     ALenum mErrorCode;
 
 public:
 #ifdef __USE_MINGW_ANSI_STDIO
-    [[gnu::format(gnu_printf, 3, 4)]]
+    [[gnu::format( gnu_printf, 3, 4 )]]
 #else
-    [[gnu::format(printf, 3, 4)]]
+    [[gnu::format( printf, 3, 4 )]]
 #endif
-    effect_exception(ALenum code, const char *msg, ...);
+    effect_exception( ALenum code, const char* msg, ... );
     ~effect_exception() override;
 
     ALenum errorCode() const noexcept { return mErrorCode; }
 };
 
-
 struct EffectVtable {
-    void (*const setParami)(EffectProps *props, ALenum param, int val);
-    void (*const setParamiv)(EffectProps *props, ALenum param, const int *vals);
-    void (*const setParamf)(EffectProps *props, ALenum param, float val);
-    void (*const setParamfv)(EffectProps *props, ALenum param, const float *vals);
+    void ( *const setParami )( EffectProps* props, ALenum param, int val );
+    void ( *const setParamiv )( EffectProps* props,
+                                ALenum param,
+                                const int* vals );
+    void ( *const setParamf )( EffectProps* props, ALenum param, float val );
+    void ( *const setParamfv )( EffectProps* props,
+                                ALenum param,
+                                const float* vals );
 
-    void (*const getParami)(const EffectProps *props, ALenum param, int *val);
-    void (*const getParamiv)(const EffectProps *props, ALenum param, int *vals);
-    void (*const getParamf)(const EffectProps *props, ALenum param, float *val);
-    void (*const getParamfv)(const EffectProps *props, ALenum param, float *vals);
+    void ( *const getParami )( const EffectProps* props,
+                               ALenum param,
+                               int* val );
+    void ( *const getParamiv )( const EffectProps* props,
+                                ALenum param,
+                                int* vals );
+    void ( *const getParamf )( const EffectProps* props,
+                               ALenum param,
+                               float* val );
+    void ( *const getParamfv )( const EffectProps* props,
+                                ALenum param,
+                                float* vals );
 };
 
-#define DEFINE_ALEFFECT_VTABLE(T)           \
-const EffectVtable T##EffectVtable = {      \
-    T##_setParami, T##_setParamiv,          \
-    T##_setParamf, T##_setParamfv,          \
-    T##_getParami, T##_getParamiv,          \
-    T##_getParamf, T##_getParamfv,          \
-}
-
+#define DEFINE_ALEFFECT_VTABLE( T )                                   \
+    const EffectVtable T##EffectVtable = {                            \
+        T##_setParami, T##_setParamiv, T##_setParamf, T##_setParamfv, \
+        T##_getParami, T##_getParamiv, T##_getParamf, T##_getParamfv, \
+    }
 
 /* Default properties for the given effect types. */
 extern const EffectProps NullEffectProps;

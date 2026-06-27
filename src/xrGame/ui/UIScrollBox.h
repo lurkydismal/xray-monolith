@@ -1,13 +1,13 @@
 #pragma once
 #include "uiFrameLineWnd.h"
 
-class CUIScrollBox : public CUIFrameLineWnd
-{
-	typedef CUIFrameLineWnd inherited;
+class CUIScrollBox : public CUIFrameLineWnd {
+    typedef CUIFrameLineWnd inherited;
+
 public:
-	CUIScrollBox();
+    CUIScrollBox();
 
-	virtual bool OnMouseAction(float x, float y, EUIMessages mouse_action);
+    virtual bool OnMouseAction( float x, float y, EUIMessages mouse_action );
 
-	virtual CUIWindow* ui_cast_window() { return this; }
+    virtual CUIWindow* ui_cast_window() { return this; }
 };

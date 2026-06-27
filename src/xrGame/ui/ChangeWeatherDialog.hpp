@@ -9,78 +9,72 @@ class CUIKickPlayer;
 class CUIChangeMap;
 class CUIXml;
 
-class ButtonListDialog : public CUIDialogWnd
-{
+class ButtonListDialog : public CUIDialogWnd {
 protected:
-	struct NamedButton
-	{
-		CUI3tButton* Button;
-		CUITextWnd* Text;
-	};
+    struct NamedButton {
+        CUI3tButton* Button;
+        CUITextWnd* Text;
+    };
 
-	CUITextWnd* Header;
-	CUIStatic* Background;
-	CUI3tButton* CancelButton;
+    CUITextWnd* Header;
+    CUIStatic* Background;
+    CUI3tButton* CancelButton;
 
 private:
-	xr_vector<NamedButton> buttons;
+    xr_vector< NamedButton > buttons;
 
 protected:
-	ButtonListDialog();
+    ButtonListDialog();
 
-	virtual ~ButtonListDialog()
-	{
-	}
+    virtual ~ButtonListDialog() {}
 
-	void Initialize(int buttonCount);
-	const NamedButton& GetButton(int i) const;
-	// CUIDialogWnd
-	virtual bool OnKeyboardAction(int dik, EUIMessages keyboardAction) override;
-	// ~CUIDialogWnd
-	// CUIWindow
-	virtual void SendMessage(CUIWindow* wnd, s16 msg, void* data = nullptr) override;
-	// ~CUIWindow
-	virtual void OnButtonClick(int i)
-	{
-	}
+    void Initialize( int buttonCount );
+    const NamedButton& GetButton( int i ) const;
+    // CUIDialogWnd
+    virtual bool OnKeyboardAction( int dik,
+                                   EUIMessages keyboardAction ) override;
+    // ~CUIDialogWnd
+    // CUIWindow
+    virtual void SendMessage( CUIWindow* wnd,
+                              s16 msg,
+                              void* data = nullptr ) override;
+    // ~CUIWindow
+    virtual void OnButtonClick( int i ) {}
 
-	virtual void OnCancel();
+    virtual void OnCancel();
 };
 
-class ChangeWeatherDialog : public ButtonListDialog
-{
+class ChangeWeatherDialog : public ButtonListDialog {
 private:
-	struct WeatherDesc
-	{
-		shared_str Name;
-		shared_str Time;
-	};
+    struct WeatherDesc {
+        shared_str Name;
+        shared_str Time;
+    };
 
-	xr_vector<WeatherDesc> weathers;
+    xr_vector< WeatherDesc > weathers;
 
 public:
-	void InitChangeWeather(CUIXml& xmlDoc);
-	// ButtonListDialog
-	virtual void OnButtonClick(int i) override;
-	// ~ButtonListDialog
+    void InitChangeWeather( CUIXml& xmlDoc );
+    // ButtonListDialog
+    virtual void OnButtonClick( int i ) override;
+    // ~ButtonListDialog
 
-	virtual CUIWindow* ui_cast_window() { return this; }
+    virtual CUIWindow* ui_cast_window() { return this; }
 
 private:
-	void ParseWeather();
+    void ParseWeather();
 };
 
 // XXX nitrocaster: move to separate file
-class ChangeGameTypeDialog : public ButtonListDialog
-{
+class ChangeGameTypeDialog : public ButtonListDialog {
 private:
-	xr_vector<shared_str> gameTypes;
+    xr_vector< shared_str > gameTypes;
 
 public:
-	void InitChangeGameType(CUIXml& xmlDoc);
-	// ButtonListDialog
-	virtual void OnButtonClick(int i) override;
-	// ~ButtonListDialog
+    void InitChangeGameType( CUIXml& xmlDoc );
+    // ButtonListDialog
+    virtual void OnButtonClick( int i ) override;
+    // ~ButtonListDialog
 
-	virtual CUIWindow* ui_cast_window() { return this; }
+    virtual CUIWindow* ui_cast_window() { return this; }
 };

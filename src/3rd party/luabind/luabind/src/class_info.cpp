@@ -19,55 +19,48 @@
 // ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
-#include "luabind_api.h"
-#include <luabind/lua_include.hpp>
-
-#include <luabind/luabind.hpp>
-#include <luabind/detail/decorate_type.hpp>
 #include <luabind/class_info.hpp>
+#include <luabind/detail/decorate_type.hpp>
+#include <luabind/lua_include.hpp>
+#include <luabind/luabind.hpp>
 
-namespace luabind
-{
-	class_info get_class_info(const object& o)
-	{
-		lua_State* L = o.lua_state();
-	
-		class_info ciResult(L);
-	
-		o.pushvalue();
-		detail::object_rep* obj = static_cast<detail::object_rep*>(lua_touserdata(L, -1));
-		lua_pop(L, 1);
+#include "luabind_api.h"
 
-		ciResult.name = obj->crep()->name();
-		obj->crep()->get_table(L);
-		ciResult.methods.set();
+namespace luabind {
+class_info get_class_info( const object& o ) {
+    lua_State* L = o.lua_state();
 
-		ciResult.attributes = newtable(L);
+    class_info ciResult( L );
 
-		typedef detail::class_rep::property_map map_type;
-		
-		unsigned int index = 1;
-		
-		for (map_type::const_iterator i = obj->crep()->properties().begin();
-				i != obj->crep()->properties().end(); ++i)
-		{
-			ciResult.attributes[index] = i->first;
-		}
+    o.pushvalue();
+    detail::object_rep* obj =
+        static_cast< detail::object_rep* >( lua_touserdata( L, -1 ) );
+    lua_pop( L, 1 );
 
-		return ciResult;
-	}
+    ciResult.name = obj->crep()->name();
+    obj->crep()->get_table( L );
+    ciResult.methods.set();
 
-	void bind_class_info(lua_State* L)
-	{
-		module(L)
-		[
-			class_<class_info>("class_info_data")
-				.def_readonly("name", &class_info::name)
-				.def_readonly("methods", &class_info::methods)
-				.def_readonly("attributes", &class_info::attributes),
-		
-			def("class_info", &get_class_info)
-		];
-	}
+    ciResult.attributes = newtable( L );
+
+    typedef detail::class_rep::property_map map_type;
+
+    unsigned int index = 1;
+
+    for ( map_type::const_iterator i = obj->crep()->properties().begin();
+          i != obj->crep()->properties().end(); ++i ) {
+        ciResult.attributes[ index ] = i->first;
+    }
+
+    return ciResult;
 }
 
+void bind_class_info( lua_State* L ) {
+    module( L )[ class_< class_info >( "class_info_data" )
+                     .def_readonly( "name", &class_info::name )
+                     .def_readonly( "methods", &class_info::methods )
+                     .def_readonly( "attributes", &class_info::attributes ),
+
+                 def( "class_info", &get_class_info ) ];
+}
+} // namespace luabind

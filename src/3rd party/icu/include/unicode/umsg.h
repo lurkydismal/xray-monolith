@@ -1,10 +1,10 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
- * COPYRIGHT: 
+ * COPYRIGHT:
  * Copyright (c) 1997-2011, International Business Machines Corporation and
  * others. All Rights Reserved.
- * Copyright (C) 2010 , Yahoo! Inc. 
+ * Copyright (C) 2010 , Yahoo! Inc.
  ********************************************************************
  *
  *   file name:  umsg.h
@@ -24,10 +24,11 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/localpointer.h"
-#include "unicode/uloc.h"
-#include "unicode/parseerr.h"
 #include <stdarg.h>
+
+#include "unicode/localpointer.h"
+#include "unicode/parseerr.h"
+#include "unicode/uloc.h"
 
 /**
  * \file
@@ -48,7 +49,8 @@
  *
  * <p>For details about the pattern syntax and behavior,
  * especially about the ASCII apostrophe vs. the
- * real apostrophe (single quote) character \htmlonly&#x2019;\endhtmlonly (U+2019),
+ * real apostrophe (single quote) character \htmlonly&#x2019;\endhtmlonly
+ (U+2019),
  * see the C++ MessageFormat class documentation.
  *
  * <p>Here are some examples of C API usage:
@@ -70,17 +72,22 @@
  *     cal=ucal_open(tzID, u_strlen(tzID), "en_US", UCAL_TRADITIONAL, &status);
  *     ucal_setDateTime(cal, 1999, UCAL_MARCH, 18, 0, 0, 0, &status);
  *     d1=ucal_getMillis(cal, &status);
- *     u_uastrcpy(pattern, "On {0, date, long}, there was a {1} on planet {2,number,integer}");
+ *     u_uastrcpy(pattern, "On {0, date, long}, there was a {1} on planet
+ {2,number,integer}");
  *     resultlength=0;
- *     resultLengthOut=u_formatMessage( "en_US", pattern, u_strlen(pattern), NULL, resultlength, &status, d1, str, 7);
+ *     resultLengthOut=u_formatMessage( "en_US", pattern, u_strlen(pattern),
+ NULL, resultlength, &status, d1, str, 7);
  *     if(status==U_BUFFER_OVERFLOW_ERROR){
  *         status=U_ZERO_ERROR;
  *         resultlength=resultLengthOut+1;
  *         result=(UChar*)realloc(result, sizeof(UChar) * resultlength);
- *         u_formatMessage( "en_US", pattern, u_strlen(pattern), result, resultlength, &status, d1, str, 7);
+ *         u_formatMessage( "en_US", pattern, u_strlen(pattern), result,
+ resultlength, &status, d1, str, 7);
  *     }
- *     printf("%s\n", austrdup(result) );//austrdup( a function used to convert UChar* to char*)
- *     //output>: "On March 18, 1999, there was a disturbance in force on planet 7
+ *     printf("%s\n", austrdup(result) );//austrdup( a function used to convert
+ UChar* to char*)
+ *     //output>: "On March 18, 1999, there was a disturbance in force on planet
+ 7
  * \endcode
  * </pre>
  * Typically, the message format will come from resources, and the
@@ -98,17 +105,21 @@
  *
  *     str=(UChar*)malloc(sizeof(UChar) * 10);
  *     u_uastrcpy(str, "MyDisk");
- *     u_uastrcpy(pattern, "The disk {1} contains {0,choice,0#no files|1#one file|1<{0,number,integer} files}");
+ *     u_uastrcpy(pattern, "The disk {1} contains {0,choice,0#no files|1#one
+ file|1<{0,number,integer} files}");
  *     for(i=0; i<3; i++){
- *       resultlength=0; 
- *       resultLengthOut=u_formatMessage( "en_US", pattern, u_strlen(pattern), NULL, resultlength, &status, testArgs[i], str); 
+ *       resultlength=0;
+ *       resultLengthOut=u_formatMessage( "en_US", pattern, u_strlen(pattern),
+ NULL, resultlength, &status, testArgs[i], str);
  *       if(status==U_BUFFER_OVERFLOW_ERROR){
  *         status=U_ZERO_ERROR;
  *         resultlength=resultLengthOut+1;
  *         result=(UChar*)malloc(sizeof(UChar) * resultlength);
- *         u_formatMessage( "en_US", pattern, u_strlen(pattern), result, resultlength, &status, testArgs[i], str);
+ *         u_formatMessage( "en_US", pattern, u_strlen(pattern), result,
+ resultlength, &status, testArgs[i], str);
  *       }
- *       printf("%s\n", austrdup(result) );  //austrdup( a function used to convert UChar* to char*)
+ *       printf("%s\n", austrdup(result) );  //austrdup( a function used to
+ convert UChar* to char*)
  *       free(result);
  *     }
  *     // output, with different testArgs:
@@ -135,20 +146,24 @@
  * str1=(UChar*)malloc(sizeof(UChar) * 25);
  * u_uastrcpy(str1, "female");
  * log_verbose("Testing message format with Select test #1\n:");
- * u_uastrcpy(pattern, "{0} est {1, select, female {all\\u00E9e} other {all\\u00E9}} \\u00E0 Paris.");
+ * u_uastrcpy(pattern, "{0} est {1, select, female {all\\u00E9e} other
+ {all\\u00E9}} \\u00E0 Paris.");
  * u_uastrcpy(expected, "Kirti est all\\u00E9e \\u00E0 Paris.");
  * resultlength=0;
- * resultLengthOut=u_formatMessage( "fr", pattern, u_strlen(pattern), NULL, resultlength, &status, str , str1);
+ * resultLengthOut=u_formatMessage( "fr", pattern, u_strlen(pattern), NULL,
+ resultlength, &status, str , str1);
  * if(status==U_BUFFER_OVERFLOW_ERROR)
  *  {
  *      status=U_ZERO_ERROR;
  *      resultlength=resultLengthOut+1;
  *      result=(UChar*)malloc(sizeof(UChar) * resultlength);
- *      u_formatMessage( "fr", pattern, u_strlen(pattern), result, resultlength, &status, str , str1);
+ *      u_formatMessage( "fr", pattern, u_strlen(pattern), result, resultlength,
+ &status, str , str1);
  *      if(u_strcmp(result, expected)==0)
  *          log_verbose("PASS: MessagFormat successful on Select test#1\n");
  *      else{
- *          log_err("FAIL: Error in MessageFormat on Select test#1\n GOT %s EXPECTED %s\n", austrdup(result),
+ *          log_err("FAIL: Error in MessageFormat on Select test#1\n GOT %s
+ EXPECTED %s\n", austrdup(result),
  *          austrdup(expected) );
  *      }
  *      free(result);
@@ -175,14 +190,13 @@
  * @see u_parseMessage
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-u_formatMessage(const char  *locale,
-                 const UChar *pattern,
-                int32_t     patternLength,
-                UChar       *result,
-                int32_t     resultLength,
-                UErrorCode  *status,
-                ...);
+U_STABLE int32_t U_EXPORT2 u_formatMessage( const char* locale,
+                                            const UChar* pattern,
+                                            int32_t patternLength,
+                                            UChar* result,
+                                            int32_t resultLength,
+                                            UErrorCode* status,
+                                            ... );
 
 /**
  * Format a message for a locale.
@@ -202,14 +216,13 @@ u_formatMessage(const char  *locale,
  * @see u_parseMessage
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-u_vformatMessage(   const char  *locale,
-                    const UChar *pattern,
-                    int32_t     patternLength,
-                    UChar       *result,
-                    int32_t     resultLength,
-                    va_list     ap,
-                    UErrorCode  *status);
+U_STABLE int32_t U_EXPORT2 u_vformatMessage( const char* locale,
+                                             const UChar* pattern,
+                                             int32_t patternLength,
+                                             UChar* result,
+                                             int32_t resultLength,
+                                             va_list ap,
+                                             UErrorCode* status );
 
 /**
  * Parse a message.
@@ -227,14 +240,13 @@ u_vformatMessage(   const char  *locale,
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-u_parseMessage( const char   *locale,
-                const UChar  *pattern,
-                int32_t      patternLength,
-                const UChar  *source,
-                int32_t      sourceLength,
-                UErrorCode   *status,
-                ...);
+U_STABLE void U_EXPORT2 u_parseMessage( const char* locale,
+                                        const UChar* pattern,
+                                        int32_t patternLength,
+                                        const UChar* source,
+                                        int32_t sourceLength,
+                                        UErrorCode* status,
+                                        ... );
 
 /**
  * Parse a message.
@@ -252,14 +264,13 @@ u_parseMessage( const char   *locale,
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-u_vparseMessage(const char  *locale,
-                const UChar *pattern,
-                int32_t     patternLength,
-                const UChar *source,
-                int32_t     sourceLength,
-                va_list     ap,
-                UErrorCode  *status);
+U_STABLE void U_EXPORT2 u_vparseMessage( const char* locale,
+                                         const UChar* pattern,
+                                         int32_t patternLength,
+                                         const UChar* source,
+                                         int32_t sourceLength,
+                                         va_list ap,
+                                         UErrorCode* status );
 
 /**
  * Format a message for a locale.
@@ -274,22 +285,21 @@ u_vparseMessage(const char  *locale,
  * @param status A pointer to an UErrorCode to receive any errors
  * @param ... A variable-length argument list containing the arguments specified
  * in pattern.
- * @param parseError  A pointer to UParseError to receive information about errors
- *                     occurred during parsing.
+ * @param parseError  A pointer to UParseError to receive information about
+ * errors occurred during parsing.
  * @return The total buffer size needed; if greater than resultLength, the
  * output was truncated.
  * @see u_parseMessage
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-u_formatMessageWithError(   const char    *locale,
-                            const UChar   *pattern,
-                            int32_t       patternLength,
-                            UChar         *result,
-                            int32_t       resultLength,
-                            UParseError   *parseError,
-                            UErrorCode    *status,
-                            ...);
+U_STABLE int32_t U_EXPORT2 u_formatMessageWithError( const char* locale,
+                                                     const UChar* pattern,
+                                                     int32_t patternLength,
+                                                     UChar* result,
+                                                     int32_t resultLength,
+                                                     UParseError* parseError,
+                                                     UErrorCode* status,
+                                                     ... );
 
 /**
  * Format a message for a locale.
@@ -301,8 +311,8 @@ u_formatMessageWithError(   const char    *locale,
  * @param patternLength The length of pattern
  * @param result A pointer to a buffer to receive the formatted message.
  * @param resultLength The maximum size of result.
- * @param parseError  A pointer to UParseError to receive information about errors
- *                    occurred during parsing.
+ * @param parseError  A pointer to UParseError to receive information about
+ * errors occurred during parsing.
  * @param ap A variable-length argument list containing the arguments specified
  * @param status A pointer to an UErrorCode to receive any errors
  * in pattern.
@@ -310,15 +320,14 @@ u_formatMessageWithError(   const char    *locale,
  * output was truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-u_vformatMessageWithError(  const char   *locale,
-                            const UChar  *pattern,
-                            int32_t      patternLength,
-                            UChar        *result,
-                            int32_t      resultLength,
-                            UParseError* parseError,
-                            va_list      ap,
-                            UErrorCode   *status);
+U_STABLE int32_t U_EXPORT2 u_vformatMessageWithError( const char* locale,
+                                                      const UChar* pattern,
+                                                      int32_t patternLength,
+                                                      UChar* result,
+                                                      int32_t resultLength,
+                                                      UParseError* parseError,
+                                                      va_list ap,
+                                                      UErrorCode* status );
 
 /**
  * Parse a message.
@@ -330,23 +339,22 @@ u_vformatMessageWithError(  const char   *locale,
  * @param patternLength The length of pattern
  * @param source The text to parse.
  * @param sourceLength The length of source, or -1 if null-terminated.
- * @param parseError  A pointer to UParseError to receive information about errors
- *                     occurred during parsing.
+ * @param parseError  A pointer to UParseError to receive information about
+ * errors occurred during parsing.
  * @param status A pointer to an UErrorCode to receive any errors
  * @param ... A variable-length argument list containing the arguments
  * specified in pattern.
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-u_parseMessageWithError(const char  *locale,
-                        const UChar *pattern,
-                        int32_t     patternLength,
-                        const UChar *source,
-                        int32_t     sourceLength,
-                        UParseError *parseError,
-                        UErrorCode  *status,
-                        ...);
+U_STABLE void U_EXPORT2 u_parseMessageWithError( const char* locale,
+                                                 const UChar* pattern,
+                                                 int32_t patternLength,
+                                                 const UChar* source,
+                                                 int32_t sourceLength,
+                                                 UParseError* parseError,
+                                                 UErrorCode* status,
+                                                 ... );
 
 /**
  * Parse a message.
@@ -359,49 +367,46 @@ u_parseMessageWithError(const char  *locale,
  * @param source The text to parse.
  * @param sourceLength The length of source, or -1 if null-terminated.
  * @param ap A variable-length argument list containing the arguments
- * @param parseError  A pointer to UParseError to receive information about errors
- *                     occurred during parsing.
+ * @param parseError  A pointer to UParseError to receive information about
+ * errors occurred during parsing.
  * @param status A pointer to an UErrorCode to receive any errors
  * specified in pattern.
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-u_vparseMessageWithError(const char  *locale,
-                         const UChar *pattern,
-                         int32_t     patternLength,
-                         const UChar *source,
-                         int32_t     sourceLength,
-                         va_list     ap,
-                         UParseError *parseError,
-                         UErrorCode* status);
+U_STABLE void U_EXPORT2 u_vparseMessageWithError( const char* locale,
+                                                  const UChar* pattern,
+                                                  int32_t patternLength,
+                                                  const UChar* source,
+                                                  int32_t sourceLength,
+                                                  va_list ap,
+                                                  UParseError* parseError,
+                                                  UErrorCode* status );
 
 /*----------------------- New experimental API --------------------------- */
-/** 
+/**
  * The message format object
  * @stable ICU 2.0
  */
 typedef void* UMessageFormat;
-
 
 /**
  * Open a message formatter with given pattern and for the given locale.
  * @param pattern       A pattern specifying the format to use.
  * @param patternLength Length of the pattern to use
  * @param locale        The locale for which the messages are formatted.
- * @param parseError    A pointer to UParseError struct to receive any errors 
+ * @param parseError    A pointer to UParseError struct to receive any errors
  *                      occured during parsing. Can be NULL.
  * @param status        A pointer to an UErrorCode to receive any errors.
- * @return              A pointer to a UMessageFormat to use for formatting 
- *                      messages, or 0 if an error occurred. 
+ * @return              A pointer to a UMessageFormat to use for formatting
+ *                      messages, or 0 if an error occurred.
  * @stable ICU 2.0
  */
-U_STABLE UMessageFormat* U_EXPORT2 
-umsg_open(  const UChar     *pattern,
-            int32_t         patternLength,
-            const  char     *locale,
-            UParseError     *parseError,
-            UErrorCode      *status);
+U_STABLE UMessageFormat* U_EXPORT2 umsg_open( const UChar* pattern,
+                                              int32_t patternLength,
+                                              const char* locale,
+                                              UParseError* parseError,
+                                              UErrorCode* status );
 
 /**
  * Close a UMessageFormat.
@@ -409,8 +414,7 @@ umsg_open(  const UChar     *pattern,
  * @param format The formatter to close.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-umsg_close(UMessageFormat* format);
+U_STABLE void U_EXPORT2 umsg_close( UMessageFormat* format );
 
 #if U_SHOW_CPLUSPLUS_API
 
@@ -425,7 +429,9 @@ U_NAMESPACE_BEGIN
  * @see LocalPointer
  * @stable ICU 4.4
  */
-U_DEFINE_LOCAL_OPEN_POINTER(LocalUMessageFormatPointer, UMessageFormat, umsg_close);
+U_DEFINE_LOCAL_OPEN_POINTER( LocalUMessageFormatPointer,
+                             UMessageFormat,
+                             umsg_close );
 
 U_NAMESPACE_END
 
@@ -439,9 +445,8 @@ U_NAMESPACE_END
  * @return A pointer to a UDateFormat identical to fmt.
  * @stable ICU 2.0
  */
-U_STABLE UMessageFormat U_EXPORT2 
-umsg_clone(const UMessageFormat *fmt,
-           UErrorCode *status);
+U_STABLE UMessageFormat U_EXPORT2 umsg_clone( const UMessageFormat* fmt,
+                                              UErrorCode* status );
 
 /**
  * Sets the locale. This locale is used for fetching default number or date
@@ -450,9 +455,8 @@ umsg_clone(const UMessageFormat *fmt,
  * @param locale The locale the formatter should use.
  * @stable ICU 2.0
  */
-U_STABLE void  U_EXPORT2 
-umsg_setLocale(UMessageFormat *fmt,
-               const char* locale);
+U_STABLE void U_EXPORT2 umsg_setLocale( UMessageFormat* fmt,
+                                        const char* locale );
 
 /**
  * Gets the locale. This locale is used for fetching default number or date
@@ -461,27 +465,25 @@ umsg_setLocale(UMessageFormat *fmt,
  * @return the locale.
  * @stable ICU 2.0
  */
-U_STABLE const char*  U_EXPORT2 
-umsg_getLocale(const UMessageFormat *fmt);
+U_STABLE const char* U_EXPORT2 umsg_getLocale( const UMessageFormat* fmt );
 
 /**
  * Sets the pattern.
  * @param fmt           The formatter to use
  * @param pattern       The pattern to be applied.
  * @param patternLength Length of the pattern to use
- * @param parseError    Struct to receive information on position 
+ * @param parseError    Struct to receive information on position
  *                      of error if an error is encountered.Can be NULL.
  * @param status        Output param set to success/failure code on
  *                      exit. If the pattern is invalid, this will be
  *                      set to a failure result.
  * @stable ICU 2.0
  */
-U_STABLE void  U_EXPORT2 
-umsg_applyPattern( UMessageFormat *fmt,
-                   const UChar* pattern,
-                   int32_t patternLength,
-                   UParseError* parseError,
-                   UErrorCode* status);
+U_STABLE void U_EXPORT2 umsg_applyPattern( UMessageFormat* fmt,
+                                           const UChar* pattern,
+                                           int32_t patternLength,
+                                           UParseError* parseError,
+                                           UErrorCode* status );
 
 /**
  * Gets the pattern.
@@ -490,15 +492,14 @@ umsg_applyPattern( UMessageFormat *fmt,
  * @param resultLength The maximum size of result.
  * @param status       Output param set to success/failure code on
  *                     exit. If the pattern is invalid, this will be
- *                     set to a failure result.  
+ *                     set to a failure result.
  * @return the pattern of the format
  * @stable ICU 2.0
  */
-U_STABLE int32_t  U_EXPORT2 
-umsg_toPattern(const UMessageFormat *fmt,
-               UChar* result, 
-               int32_t resultLength,
-               UErrorCode* status);
+U_STABLE int32_t U_EXPORT2 umsg_toPattern( const UMessageFormat* fmt,
+                                           UChar* result,
+                                           int32_t resultLength,
+                                           UErrorCode* status );
 
 /**
  * Format a message for a locale.
@@ -509,47 +510,45 @@ umsg_toPattern(const UMessageFormat *fmt,
  * @param result        A pointer to a buffer to receive the formatted message.
  * @param resultLength  The maximum size of result.
  * @param status        A pointer to an UErrorCode to receive any errors
- * @param ...           A variable-length argument list containing the arguments 
+ * @param ...           A variable-length argument list containing the arguments
  *                      specified in pattern.
- * @return              The total buffer size needed; if greater than resultLength, 
- *                      the output was truncated.
+ * @return              The total buffer size needed; if greater than
+ * resultLength, the output was truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-umsg_format(    const UMessageFormat *fmt,
-                UChar          *result,
-                int32_t        resultLength,
-                UErrorCode     *status,
-                ...);
+U_STABLE int32_t U_EXPORT2 umsg_format( const UMessageFormat* fmt,
+                                        UChar* result,
+                                        int32_t resultLength,
+                                        UErrorCode* status,
+                                        ... );
 
 /**
  * Format a message for a locale.
  * This function may perform re-ordering of the arguments depending on the
  * locale. For all numeric arguments, double is assumed unless the type is
  * explicitly integer.  All choice format arguments must be of type double.
- * @param fmt          The formatter to use 
+ * @param fmt          The formatter to use
  * @param result       A pointer to a buffer to receive the formatted message.
  * @param resultLength The maximum size of result.
- * @param ap           A variable-length argument list containing the arguments 
+ * @param ap           A variable-length argument list containing the arguments
  * @param status       A pointer to an UErrorCode to receive any errors
  *                     specified in pattern.
- * @return             The total buffer size needed; if greater than resultLength, 
- *                     the output was truncated.
+ * @return             The total buffer size needed; if greater than
+ * resultLength, the output was truncated.
  * @stable ICU 2.0
  */
-U_STABLE int32_t U_EXPORT2 
-umsg_vformat(   const UMessageFormat *fmt,
-                UChar          *result,
-                int32_t        resultLength,
-                va_list        ap,
-                UErrorCode     *status);
+U_STABLE int32_t U_EXPORT2 umsg_vformat( const UMessageFormat* fmt,
+                                         UChar* result,
+                                         int32_t resultLength,
+                                         va_list ap,
+                                         UErrorCode* status );
 
 /**
  * Parse a message.
  * For numeric arguments, this function will always use doubles.  Integer types
  * should not be passed.
  * This function is not able to parse all output from {@link #umsg_format }.
- * @param fmt           The formatter to use 
+ * @param fmt           The formatter to use
  * @param source        The text to parse.
  * @param sourceLength  The length of source, or -1 if null-terminated.
  * @param count         Output param to receive number of elements returned.
@@ -558,20 +557,19 @@ umsg_vformat(   const UMessageFormat *fmt,
  *                      specified in pattern.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-umsg_parse( const UMessageFormat *fmt,
-            const UChar    *source,
-            int32_t        sourceLength,
-            int32_t        *count,
-            UErrorCode     *status,
-            ...);
+U_STABLE void U_EXPORT2 umsg_parse( const UMessageFormat* fmt,
+                                    const UChar* source,
+                                    int32_t sourceLength,
+                                    int32_t* count,
+                                    UErrorCode* status,
+                                    ... );
 
 /**
  * Parse a message.
  * For numeric arguments, this function will always use doubles.  Integer types
  * should not be passed.
  * This function is not able to parse all output from {@link #umsg_format }.
- * @param fmt           The formatter to use 
+ * @param fmt           The formatter to use
  * @param source        The text to parse.
  * @param sourceLength  The length of source, or -1 if null-terminated.
  * @param count         Output param to receive number of elements returned.
@@ -581,19 +579,17 @@ umsg_parse( const UMessageFormat *fmt,
  * @see u_formatMessage
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 
-umsg_vparse(const UMessageFormat *fmt,
-            const UChar    *source,
-            int32_t        sourceLength,
-            int32_t        *count,
-            va_list        ap,
-            UErrorCode     *status);
-
+U_STABLE void U_EXPORT2 umsg_vparse( const UMessageFormat* fmt,
+                                     const UChar* source,
+                                     int32_t sourceLength,
+                                     int32_t* count,
+                                     va_list ap,
+                                     UErrorCode* status );
 
 /**
  * Convert an 'apostrophe-friendly' pattern into a standard
  * pattern.  Standard patterns treat all apostrophes as
- * quotes, which is problematic in some languages, e.g. 
+ * quotes, which is problematic in some languages, e.g.
  * French, where apostrophe is commonly used.  This utility
  * assumes that only an unpaired apostrophe immediately before
  * a brace is a true quote.  Other unpaired apostrophes are paired,
@@ -604,7 +600,8 @@ umsg_vparse(const UMessageFormat *fmt,
  * between patterns having different quoting semantics.
  *
  * @param pattern the 'apostrophe-friendly' patttern to convert
- * @param patternLength the length of pattern, or -1 if unknown and pattern is null-terminated
+ * @param patternLength the length of pattern, or -1 if unknown and pattern is
+ * null-terminated
  * @param dest the buffer for the result, or NULL if preflight only
  * @param destCapacity the length of the buffer, or 0 if preflighting
  * @param ec the error code
@@ -613,12 +610,11 @@ umsg_vparse(const UMessageFormat *fmt,
  *        not
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2 
-umsg_autoQuoteApostrophe(const UChar* pattern, 
-                         int32_t patternLength,
-                         UChar* dest,
-                         int32_t destCapacity,
-                         UErrorCode* ec);
+U_STABLE int32_t U_EXPORT2 umsg_autoQuoteApostrophe( const UChar* pattern,
+                                                     int32_t patternLength,
+                                                     UChar* dest,
+                                                     int32_t destCapacity,
+                                                     UErrorCode* ec );
 
 #endif /* #if !UCONFIG_NO_FORMATTING */
 

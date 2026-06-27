@@ -18,15 +18,15 @@
 #define __TBB_spin_mutex_H
 
 #define __TBB_spin_mutex_H_include_area
-#include "internal/_warning_suppress_enable_notice.h"
-
 #include <cstddef>
 #include <new>
+
 #include "aligned_space.h"
-#include "tbb_stddef.h"
+#include "internal/_mutex_padding.h"
+#include "internal/_warning_suppress_enable_notice.h"
 #include "tbb_machine.h"
 #include "tbb_profiling.h"
-#include "internal/_mutex_padding.h"
+#include "tbb_stddef.h"
 
 namespace tbb {
 
@@ -43,7 +43,7 @@ class spin_mutex : internal::mutex_copy_deprecated_and_disabled {
 public:
     //! Construct unacquired lock.
     /** Equivalent to zero-initialization of *this. */
-    spin_mutex() : flag(0) {
+    spin_mutex() : flag( 0 ) {
 #if TBB_USE_THREADING_TOOLS
         internal_construct();
 #endif
@@ -74,38 +74,38 @@ public:
 
     public:
         //! Construct without acquiring a mutex.
-        scoped_lock() : my_mutex(NULL), my_unlock_value(0) {}
+        scoped_lock() : my_mutex( NULL ), my_unlock_value( 0 ) {}
 
         //! Construct and acquire lock on a mutex.
-        scoped_lock( spin_mutex& m ) : my_unlock_value(0) {
-            internal::suppress_unused_warning(my_unlock_value);
-#if TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT
-            my_mutex=NULL;
-            internal_acquire(m);
+        scoped_lock( spin_mutex& m ) : my_unlock_value( 0 ) {
+            internal::suppress_unused_warning( my_unlock_value );
+#if TBB_USE_THREADING_TOOLS || TBB_USE_ASSERT
+            my_mutex = NULL;
+            internal_acquire( m );
 #else
-            my_mutex=&m;
-            __TBB_LockByte(m.flag);
+            my_mutex = &m;
+            __TBB_LockByte( m.flag );
 #endif /* TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT*/
         }
 
         //! Acquire lock.
         void acquire( spin_mutex& m ) {
-#if TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT
-            internal_acquire(m);
+#if TBB_USE_THREADING_TOOLS || TBB_USE_ASSERT
+            internal_acquire( m );
 #else
             my_mutex = &m;
-            __TBB_LockByte(m.flag);
+            __TBB_LockByte( m.flag );
 #endif /* TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT*/
         }
 
         //! Try acquiring lock (non-blocking)
         /** Return true if lock acquired; false otherwise. */
         bool try_acquire( spin_mutex& m ) {
-#if TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT
-            return internal_try_acquire(m);
+#if TBB_USE_THREADING_TOOLS || TBB_USE_ASSERT
+            return internal_try_acquire( m );
 #else
-            bool result = __TBB_TryLockByte(m.flag);
-            if( result )
+            bool result = __TBB_TryLockByte( m.flag );
+            if ( result )
                 my_mutex = &m;
             return result;
 #endif /* TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT*/
@@ -113,21 +113,21 @@ public:
 
         //! Release lock
         void release() {
-#if TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT
+#if TBB_USE_THREADING_TOOLS || TBB_USE_ASSERT
             internal_release();
 #else
-            __TBB_UnlockByte(my_mutex->flag);
+            __TBB_UnlockByte( my_mutex->flag );
             my_mutex = NULL;
 #endif /* TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT */
         }
 
         //! Destroy lock.  If holding a lock, releases the lock first.
         ~scoped_lock() {
-            if( my_mutex ) {
-#if TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT
+            if ( my_mutex ) {
+#if TBB_USE_THREADING_TOOLS || TBB_USE_ASSERT
                 internal_release();
 #else
-                __TBB_UnlockByte(my_mutex->flag);
+                __TBB_UnlockByte( my_mutex->flag );
 #endif /* TBB_USE_THREADING_TOOLS||TBB_USE_ASSERT */
             }
         }
@@ -146,10 +146,10 @@ public:
     //! Acquire lock
     void lock() {
 #if TBB_USE_THREADING_TOOLS
-        aligned_space<scoped_lock> tmp;
-        new(tmp.begin()) scoped_lock(*this);
+        aligned_space< scoped_lock > tmp;
+        new ( tmp.begin() ) scoped_lock( *this );
 #else
-        __TBB_LockByte(flag);
+        __TBB_LockByte( flag );
 #endif /* TBB_USE_THREADING_TOOLS*/
     }
 
@@ -157,29 +157,30 @@ public:
     /** Return true if lock acquired; false otherwise. */
     bool try_lock() {
 #if TBB_USE_THREADING_TOOLS
-        aligned_space<scoped_lock> tmp;
-        return (new(tmp.begin()) scoped_lock)->internal_try_acquire(*this);
+        aligned_space< scoped_lock > tmp;
+        return ( new ( tmp.begin() ) scoped_lock )
+            ->internal_try_acquire( *this );
 #else
-        return __TBB_TryLockByte(flag);
+        return __TBB_TryLockByte( flag );
 #endif /* TBB_USE_THREADING_TOOLS*/
     }
 
     //! Release lock
     void unlock() {
 #if TBB_USE_THREADING_TOOLS
-        aligned_space<scoped_lock> tmp;
+        aligned_space< scoped_lock > tmp;
         scoped_lock& s = *tmp.begin();
         s.my_mutex = this;
         s.internal_release();
 #else
-        __TBB_UnlockByte(flag);
+        __TBB_UnlockByte( flag );
 #endif /* TBB_USE_THREADING_TOOLS */
     }
 
     friend class scoped_lock;
 }; // end of spin_mutex
 
-__TBB_DEFINE_PROFILING_SET_NAME(spin_mutex)
+__TBB_DEFINE_PROFILING_SET_NAME( spin_mutex )
 
 } // namespace tbb
 
@@ -200,11 +201,14 @@ namespace tbb {
     @ingroup synchronization */
 
 #if ( __TBB_x86_32 || __TBB_x86_64 )
-typedef interface7::internal::padded_mutex<interface7::internal::x86_eliding_mutex,false> speculative_spin_mutex;
+typedef interface7::internal::
+    padded_mutex< interface7::internal::x86_eliding_mutex, false >
+        speculative_spin_mutex;
 #else
-typedef interface7::internal::padded_mutex<spin_mutex,false> speculative_spin_mutex;
+typedef interface7::internal::padded_mutex< spin_mutex, false >
+    speculative_spin_mutex;
 #endif
-__TBB_DEFINE_PROFILING_SET_NAME(speculative_spin_mutex)
+__TBB_DEFINE_PROFILING_SET_NAME( speculative_spin_mutex )
 
 } // namespace tbb
 

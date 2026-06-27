@@ -8,7 +8,7 @@ Copyright (c) 1997-2000 John Robbins -- All rights reserved.
 
 #ifdef __cplusplus
 extern "C" {
-#endif  //__cplusplus
+#endif //__cplusplus
 
 /*//////////////////////////////////////////////////////////////////////
                             Type Definitions
@@ -82,10 +82,10 @@ RETURNS         :
                           values.
     GLMA_FAILURE        - There was a major problem.
 ----------------------------------------------------------------------*/
-#define GLMA_SUCCESS        1
-#define GLMA_BADPARAM       -1
-#define GLMA_BUFFTOOSMALL   -2
-#define GLMA_FAILURE        0
+#define GLMA_SUCCESS 1
+#define GLMA_BADPARAM -1
+#define GLMA_BUFFTOOSMALL -2
+#define GLMA_FAILURE 0
 int  __stdcall
                GetLimitModulesArray ( HMODULE * pahMod , UINT uiSize ) ;
 
@@ -151,10 +151,10 @@ RETURNS         :
     !NULL - The requested stack trace string.
     NULL  - There was a problem.
 ----------------------------------------------------------------------*/
-#define GSTSO_PARAMS    0x01
-#define GSTSO_MODULE    0x02
-#define GSTSO_SYMBOL    0x04
-#define GSTSO_SRCLINE   0x08
+#define GSTSO_PARAMS 0x01
+#define GSTSO_MODULE 0x02
+#define GSTSO_SYMBOL 0x04
+#define GSTSO_SRCLINE 0x08
 LPCTSTR  __stdcall
              GetFirstStackTraceString ( DWORD                dwOpts  ,
                                         EXCEPTION_POINTERS * pExPtrs  );
@@ -232,6 +232,6 @@ BOOL  __stdcall
 
 #ifdef __cplusplus
 }
-#endif  //__cplusplus
+#endif //__cplusplus
 
-#endif  // _CRASHHANDLER_H
+#endif // _CRASHHANDLER_H

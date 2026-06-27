@@ -1,7 +1,7 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /********************************************************************
- * COPYRIGHT: 
+ * COPYRIGHT:
  * Copyright (c) 1997-2012, International Business Machines Corporation and
  * others. All Rights Reserved.
  *
@@ -22,31 +22,30 @@
 /*! \mainpage
  *
  * \section API API Reference Usage
- * 
+ *
  * <h3>C++ Programmers:</h3>
- * <p>Use <a href="hierarchy.html">Class Hierarchy</a> or <a href="classes.html"> Alphabetical List </a>
- * or <a href="annotated.html"> Compound List</a>
- * to find the class you are interested in. For example, to find BreakIterator,
- * you can go to the <a href="classes.html"> Alphabetical List</a>, then click on
- * "BreakIterator". Once you are at the class, you will find an inheritance
- * chart, a list of the public members, a detailed description of the class,
- * then detailed member descriptions.</p>
- * 
+ * <p>Use <a href="hierarchy.html">Class Hierarchy</a> or <a
+ * href="classes.html"> Alphabetical List </a> or <a href="annotated.html">
+ * Compound List</a> to find the class you are interested in. For example, to
+ * find BreakIterator, you can go to the <a href="classes.html"> Alphabetical
+ * List</a>, then click on "BreakIterator". Once you are at the class, you will
+ * find an inheritance chart, a list of the public members, a detailed
+ * description of the class, then detailed member descriptions.</p>
+ *
  * <h3>C Programmers:</h3>
- * <p>Use <a href="#Module">Module List</a> or <a href="globals_u.html">File Members</a>
- * to find a list of all the functions and constants.
- * For example, to find BreakIterator functions you would click on
- * <a href="files.html"> File List</a>,
- * then find "ubrk.h" and click on it. You will find descriptions of Defines,
- * Typedefs, Enumerations, and Functions, with detailed descriptions below.
- * If you want to find a specific function, such as ubrk_next(), then click
- * first on <a href="globals.html"> File Members</a>, then use your browser
- * Find dialog to search for "ubrk_next()".</p>
+ * <p>Use <a href="#Module">Module List</a> or <a href="globals_u.html">File
+ * Members</a> to find a list of all the functions and constants. For example,
+ * to find BreakIterator functions you would click on <a href="files.html"> File
+ * List</a>, then find "ubrk.h" and click on it. You will find descriptions of
+ * Defines, Typedefs, Enumerations, and Functions, with detailed descriptions
+ * below. If you want to find a specific function, such as ubrk_next(), then
+ * click first on <a href="globals.html"> File Members</a>, then use your
+ * browser Find dialog to search for "ubrk_next()".</p>
  *
  *
  * <h3>API References for Previous Releases</h3>
  * <p>The API References for each release of ICU are also available as
- * a zip file from the ICU 
+ * a zip file from the ICU
  * <a href="http://site.icu-project.org/download">download page</a>.</p>
  *
  * <hr>
@@ -54,9 +53,11 @@
  * <h2>Architecture (User's Guide)</h2>
  * <ul>
  *   <li><a href="http://userguide.icu-project.org/">Introduction</a></li>
- *   <li><a href="http://userguide.icu-project.org/i18n">Internationalization</a></li>
- *   <li><a href="http://userguide.icu-project.org/design">Locale Model, Multithreading, Error Handling, etc.</a></li>
- *   <li><a href="http://userguide.icu-project.org/conversion">Conversion</a></li>
+ *   <li><a
+ * href="http://userguide.icu-project.org/i18n">Internationalization</a></li>
+ *   <li><a href="http://userguide.icu-project.org/design">Locale Model,
+ * Multithreading, Error Handling, etc.</a></li> <li><a
+ * href="http://userguide.icu-project.org/conversion">Conversion</a></li>
  * </ul>
  *
  * <hr>
@@ -75,7 +76,8 @@
  *   <tr>
  *     <td>Strings and Character Iteration</td>
  *     <td>ustring.h, utf8.h, utf16.h, UText, UCharIterator</td>
- *     <td>icu::UnicodeString, icu::CharacterIterator, icu::Appendable, icu::StringPiece,icu::ByteSink</td>
+ *     <td>icu::UnicodeString, icu::CharacterIterator, icu::Appendable,
+ * icu::StringPiece,icu::ByteSink</td>
  *   </tr>
  *   <tr>
  *     <td>Unicode Character<br/>Properties and Names</td>
@@ -145,7 +147,8 @@
  *   <tr>
  *     <td>Number Formatting<br/>(includes currency and unit formatting)</td>
  *     <td>unumberformatter.h, unum.h</td>
- *     <td>icu::number::NumberFormatter (ICU 60+) or icu::NumberFormat (older versions)</td>
+ *     <td>icu::number::NumberFormatter (ICU 60+) or icu::NumberFormat (older
+ * versions)</td>
  *   </tr>
  *   <tr>
  *     <td>Number Range Formatting<br />(includes currency and unit ranges)</td>

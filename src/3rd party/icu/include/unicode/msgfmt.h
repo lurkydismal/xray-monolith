@@ -1,20 +1,20 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /*
-* Copyright (C) 2007-2013, International Business Machines Corporation and
-* others. All Rights Reserved.
-********************************************************************************
-*
-* File MSGFMT.H
-*
-* Modification History:
-*
-*   Date        Name        Description
-*   02/19/97    aliu        Converted from java.
-*   03/20/97    helena      Finished first cut of implementation.
-*   07/22/98    stephen     Removed operator!= (defined in Format)
-*   08/19/2002  srl         Removing Javaisms
-*******************************************************************************/
+ * Copyright (C) 2007-2013, International Business Machines Corporation and
+ * others. All Rights Reserved.
+ ********************************************************************************
+ *
+ * File MSGFMT.H
+ *
+ * Modification History:
+ *
+ *   Date        Name        Description
+ *   02/19/97    aliu        Converted from java.
+ *   03/20/97    helena      Finished first cut of implementation.
+ *   07/22/98    stephen     Removed operator!= (defined in Format)
+ *   08/19/2002  srl         Removing Javaisms
+ *******************************************************************************/
 
 #ifndef MSGFMT_H
 #define MSGFMT_H
@@ -66,20 +66,22 @@ class NumberFormat;
  * behavior is defined by the pattern that you provide and the
  * subformats used for inserted arguments.
  *
- * <p>Arguments can be named (using identifiers) or numbered (using small ASCII-digit integers).
- * Some of the API methods work only with argument numbers and throw an exception
- * if the pattern has named arguments (see {@link #usesNamedArguments()}).
+ * <p>Arguments can be named (using identifiers) or numbered (using small
+ * ASCII-digit integers). Some of the API methods work only with argument
+ * numbers and throw an exception if the pattern has named arguments (see {@link
+ * #usesNamedArguments()}).
  *
  * <p>An argument might not specify any format type. In this case,
  * a numeric value is formatted with a default (for the locale) NumberFormat,
- * and a date/time value is formatted with a default (for the locale) DateFormat.
+ * and a date/time value is formatted with a default (for the locale)
+ * DateFormat.
  *
  * <p>An argument might specify a "simple" type for which the specified
  * Format object is created, cached and used.
  *
- * <p>An argument might have a "complex" type with nested MessageFormat sub-patterns.
- * During formatting, one of these sub-messages is selected according to the argument value
- * and recursively formatted.
+ * <p>An argument might have a "complex" type with nested MessageFormat
+ * sub-patterns. During formatting, one of these sub-messages is selected
+ * according to the argument value and recursively formatted.
  *
  * <p>After construction, a custom Format object can be set for
  * a top-level argument, overriding the default formatting and parsing behavior
@@ -92,14 +94,14 @@ class NumberFormat;
  * and writes an output string.
  * The argument values may be passed as an array
  * (when the pattern contains only numbered arguments)
- * or as an array of names and and an array of arguments (which works for both named
- * and numbered arguments).
+ * or as an array of names and and an array of arguments (which works for both
+ * named and numbered arguments).
  *
- * <p>Each argument is matched with one of the input values by array index or argument name
- * and formatted according to its pattern specification
- * (or using a custom Format object if one was set).
- * A numbered pattern argument is matched with an argument name that contains that number
- * as an ASCII-decimal-digit string (without leading zero).
+ * <p>Each argument is matched with one of the input values by array index or
+ * argument name and formatted according to its pattern specification (or using
+ * a custom Format object if one was set). A numbered pattern argument is
+ * matched with an argument name that contains that number as an
+ * ASCII-decimal-digit string (without leading zero).
  *
  * <h4><a name="patterns">Patterns and Their Interpretation</a></h4>
  *
@@ -114,7 +116,8 @@ class NumberFormat;
  * choiceArg = '{' argNameOrNumber ',' "choice" ',' choiceStyle '}'
  * pluralArg = '{' argNameOrNumber ',' "plural" ',' pluralStyle '}'
  * selectArg = '{' argNameOrNumber ',' "select" ',' selectStyle '}'
- * selectordinalArg = '{' argNameOrNumber ',' "selectordinal" ',' pluralStyle '}'
+ * selectordinalArg = '{' argNameOrNumber ',' "selectordinal" ',' pluralStyle
+ * '}'
  *
  * choiceStyle: see {@link ChoiceFormat}
  * pluralStyle: see {@link PluralFormat}
@@ -125,21 +128,22 @@ class NumberFormat;
  * argNumber = '0' | ('1'..'9' ('0'..'9')*)
  *
  * argType = "number" | "date" | "time" | "spellout" | "ordinal" | "duration"
- * argStyle = "short" | "medium" | "long" | "full" | "integer" | "currency" | "percent" | argStyleText | "::" argSkeletonText
+ * argStyle = "short" | "medium" | "long" | "full" | "integer" | "currency" |
+ * "percent" | argStyleText | "::" argSkeletonText
  * </pre>
  *
  * <ul>
- *   <li>messageText can contain quoted literal strings including syntax characters.
- *       A quoted literal string begins with an ASCII apostrophe and a syntax character
- *       (usually a {curly brace}) and continues until the next single apostrophe.
- *       A double ASCII apostrohpe inside or outside of a quoted string represents
- *       one literal apostrophe.
- *   <li>Quotable syntax characters are the {curly braces} in all messageText parts,
- *       plus the '#' sign in a messageText immediately inside a pluralStyle,
- *       and the '|' symbol in a messageText immediately inside a choiceStyle.
- *   <li>See also {@link #UMessagePatternApostropheMode}
- *   <li>In argStyleText, every single ASCII apostrophe begins and ends quoted literal text,
- *       and unquoted {curly braces} must occur in matched pairs.
+ *   <li>messageText can contain quoted literal strings including syntax
+ * characters. A quoted literal string begins with an ASCII apostrophe and a
+ * syntax character (usually a {curly brace}) and continues until the next
+ * single apostrophe. A double ASCII apostrohpe inside or outside of a quoted
+ * string represents one literal apostrophe. <li>Quotable syntax characters are
+ * the {curly braces} in all messageText parts, plus the '#' sign in a
+ * messageText immediately inside a pluralStyle, and the '|' symbol in a
+ * messageText immediately inside a choiceStyle. <li>See also {@link
+ * #UMessagePatternApostropheMode} <li>In argStyleText, every single ASCII
+ * apostrophe begins and ends quoted literal text, and unquoted {curly braces}
+ * must occur in matched pairs.
  * </ul>
  *
  * <p>Recommendation: Use the real apostrophe (single quote) character
@@ -150,10 +154,11 @@ class NumberFormat;
  *
  * <p>The <code>choice</code> argument type is deprecated.
  * Use <code>plural</code> arguments for proper plural selection,
- * and <code>select</code> arguments for simple selection among a fixed set of choices.
+ * and <code>select</code> arguments for simple selection among a fixed set of
+ * choices.
  *
- * <p>The <code>argType</code> and <code>argStyle</code> values are used to create
- * a <code>Format</code> instance for the format element. The following
+ * <p>The <code>argType</code> and <code>argStyle</code> values are used to
+ * create a <code>Format</code> instance for the format element. The following
  * table shows how the values map to Format instances. Combinations not
  * shown in the table are illegal. Any <code>argStyleText</code> must
  * be a valid pattern string for the Format subclass used.
@@ -172,75 +177,56 @@ class NumberFormat;
  *       <td><code>NumberFormat.createInstance(getLocale(), status)</code>
  *    <tr>
  *       <td><code>integer</code>
- *       <td><code>NumberFormat.createInstance(getLocale(), kNumberStyle, status)</code>
- *    <tr>
- *       <td><code>currency</code>
- *       <td><code>NumberFormat.createCurrencyInstance(getLocale(), status)</code>
- *    <tr>
- *       <td><code>percent</code>
- *       <td><code>NumberFormat.createPercentInstance(getLocale(), status)</code>
- *    <tr>
- *       <td><i>argStyleText</i>
- *       <td><code>new DecimalFormat(argStyleText, new DecimalFormatSymbols(getLocale(), status), status)</code>
- *    <tr>
+ *       <td><code>NumberFormat.createInstance(getLocale(), kNumberStyle,
+ * status)</code> <tr> <td><code>currency</code>
+ *       <td><code>NumberFormat.createCurrencyInstance(getLocale(),
+ * status)</code> <tr> <td><code>percent</code>
+ *       <td><code>NumberFormat.createPercentInstance(getLocale(),
+ * status)</code> <tr> <td><i>argStyleText</i> <td><code>new
+ * DecimalFormat(argStyleText, new DecimalFormatSymbols(getLocale(), status),
+ * status)</code> <tr> <td><i>argSkeletonText</i>
+ *       <td><code>NumberFormatter::forSkeleton(argSkeletonText,
+ * status).locale(getLocale()).toFormat(status)</code> <tr> <td
+ * rowspan=7><code>date</code> <td><i>(none)</i>
+ *       <td><code>DateFormat.createDateInstance(kDefault, getLocale(),
+ * status)</code> <tr> <td><code>short</code>
+ *       <td><code>DateFormat.createDateInstance(kShort, getLocale(),
+ * status)</code> <tr> <td><code>medium</code>
+ *       <td><code>DateFormat.createDateInstance(kDefault, getLocale(),
+ * status)</code> <tr> <td><code>long</code>
+ *       <td><code>DateFormat.createDateInstance(kLong, getLocale(),
+ * status)</code> <tr> <td><code>full</code>
+ *       <td><code>DateFormat.createDateInstance(kFull, getLocale(),
+ * status)</code> <tr> <td><i>argStyleText</i> <td><code>new
+ * SimpleDateFormat(argStyleText, getLocale(), status)</code> <tr>
  *       <td><i>argSkeletonText</i>
- *       <td><code>NumberFormatter::forSkeleton(argSkeletonText, status).locale(getLocale()).toFormat(status)</code>
- *    <tr>
- *       <td rowspan=7><code>date</code>
+ *       <td><code>DateFormat::createInstanceForSkeleton(argSkeletonText,
+ * getLocale(), status)</code> <tr> <td rowspan=6><code>time</code>
  *       <td><i>(none)</i>
- *       <td><code>DateFormat.createDateInstance(kDefault, getLocale(), status)</code>
- *    <tr>
- *       <td><code>short</code>
- *       <td><code>DateFormat.createDateInstance(kShort, getLocale(), status)</code>
- *    <tr>
- *       <td><code>medium</code>
- *       <td><code>DateFormat.createDateInstance(kDefault, getLocale(), status)</code>
- *    <tr>
- *       <td><code>long</code>
- *       <td><code>DateFormat.createDateInstance(kLong, getLocale(), status)</code>
- *    <tr>
- *       <td><code>full</code>
- *       <td><code>DateFormat.createDateInstance(kFull, getLocale(), status)</code>
- *    <tr>
- *       <td><i>argStyleText</i>
- *       <td><code>new SimpleDateFormat(argStyleText, getLocale(), status)</code>
- *    <tr>
- *       <td><i>argSkeletonText</i>
- *       <td><code>DateFormat::createInstanceForSkeleton(argSkeletonText, getLocale(), status)</code>
- *    <tr>
- *       <td rowspan=6><code>time</code>
- *       <td><i>(none)</i>
- *       <td><code>DateFormat.createTimeInstance(kDefault, getLocale(), status)</code>
- *    <tr>
- *       <td><code>short</code>
- *       <td><code>DateFormat.createTimeInstance(kShort, getLocale(), status)</code>
- *    <tr>
- *       <td><code>medium</code>
- *       <td><code>DateFormat.createTimeInstance(kDefault, getLocale(), status)</code>
- *    <tr>
- *       <td><code>long</code>
- *       <td><code>DateFormat.createTimeInstance(kLong, getLocale(), status)</code>
- *    <tr>
- *       <td><code>full</code>
- *       <td><code>DateFormat.createTimeInstance(kFull, getLocale(), status)</code>
- *    <tr>
- *       <td><i>argStyleText</i>
- *       <td><code>new SimpleDateFormat(argStyleText, getLocale(), status)</code>
- *    <tr>
+ *       <td><code>DateFormat.createTimeInstance(kDefault, getLocale(),
+ * status)</code> <tr> <td><code>short</code>
+ *       <td><code>DateFormat.createTimeInstance(kShort, getLocale(),
+ * status)</code> <tr> <td><code>medium</code>
+ *       <td><code>DateFormat.createTimeInstance(kDefault, getLocale(),
+ * status)</code> <tr> <td><code>long</code>
+ *       <td><code>DateFormat.createTimeInstance(kLong, getLocale(),
+ * status)</code> <tr> <td><code>full</code>
+ *       <td><code>DateFormat.createTimeInstance(kFull, getLocale(),
+ * status)</code> <tr> <td><i>argStyleText</i> <td><code>new
+ * SimpleDateFormat(argStyleText, getLocale(), status)</code> <tr>
  *       <td><code>spellout</code>
  *       <td><i>argStyleText (optional)</i>
- *       <td><code>new RuleBasedNumberFormat(URBNF_SPELLOUT, getLocale(), status)
- *           <br/>&nbsp;&nbsp;&nbsp;&nbsp;.setDefaultRuleset(argStyleText, status);</code>
- *    <tr>
- *       <td><code>ordinal</code>
- *       <td><i>argStyleText (optional)</i>
- *       <td><code>new RuleBasedNumberFormat(URBNF_ORDINAL, getLocale(), status)
- *           <br/>&nbsp;&nbsp;&nbsp;&nbsp;.setDefaultRuleset(argStyleText, status);</code>
- *    <tr>
- *       <td><code>duration</code>
- *       <td><i>argStyleText (optional)</i>
- *       <td><code>new RuleBasedNumberFormat(URBNF_DURATION, getLocale(), status)
- *           <br/>&nbsp;&nbsp;&nbsp;&nbsp;.setDefaultRuleset(argStyleText, status);</code>
+ *       <td><code>new RuleBasedNumberFormat(URBNF_SPELLOUT, getLocale(),
+ * status) <br/>&nbsp;&nbsp;&nbsp;&nbsp;.setDefaultRuleset(argStyleText,
+ * status);</code> <tr> <td><code>ordinal</code> <td><i>argStyleText
+ * (optional)</i> <td><code>new RuleBasedNumberFormat(URBNF_ORDINAL,
+ * getLocale(), status)
+ *           <br/>&nbsp;&nbsp;&nbsp;&nbsp;.setDefaultRuleset(argStyleText,
+ * status);</code> <tr> <td><code>duration</code> <td><i>argStyleText
+ * (optional)</i> <td><code>new RuleBasedNumberFormat(URBNF_DURATION,
+ * getLocale(), status)
+ *           <br/>&nbsp;&nbsp;&nbsp;&nbsp;.setDefaultRuleset(argStyleText,
+ * status);</code>
  * </table>
  * <p>
  *
@@ -255,7 +241,8 @@ class NumberFormat;
  * or preformatted values, but not pattern strings or custom format objects.</p>
  *
  * <p>For more details, see the
- * <a href="http://userguide.icu-project.org/formatparse/messages">ICU User Guide</a>.</p>
+ * <a href="http://userguide.icu-project.org/formatparse/messages">ICU User
+ * Guide</a>.</p>
  *
  * <h4>Usage Information</h4>
  *
@@ -274,8 +261,8 @@ class NumberFormat;
  *
  *     UnicodeString result;
  *     MessageFormat::format(
- *          "At {1,time,::jmm} on {1,date,::dMMMM}, there was {2} on planet {0,number}.",
- *          arguments, 3, result, success );
+ *          "At {1,time,::jmm} on {1,date,::dMMMM}, there was {2} on planet
+ * {0,number}.", arguments, 3, result, success );
  *
  *     cout << "result: " << result << endl;
  *     //<output>: At 4:34 PM on March 23, there was a disturbance
@@ -298,7 +285,8 @@ class NumberFormat;
  *
  *     UnicodeString string;
  *     FieldPosition fpos = 0;
- *     cout << "format: " << form.format(testArgs, 2, string, fpos, success ) << endl;
+ *     cout << "format: " << form.format(testArgs, 2, string, fpos, success ) <<
+ * endl;
  *
  *     // output, with different testArgs:
  *     // output: The disk "MyDisk" contains 0 file(s).
@@ -358,7 +346,7 @@ public:
          */
         kMaxFormat = 10
     };
-#endif  /* U_HIDE_OBSOLETE_API */
+#endif /* U_HIDE_OBSOLETE_API */
 
     /**
      * Constructs a new MessageFormat using the given pattern and the
@@ -369,8 +357,7 @@ public:
      *                  pattern cannot be parsed, set to failure code.
      * @stable ICU 2.0
      */
-    MessageFormat(const UnicodeString& pattern,
-                  UErrorCode &status);
+    MessageFormat( const UnicodeString& pattern, UErrorCode& status );
 
     /**
      * Constructs a new MessageFormat using the given pattern and locale.
@@ -380,9 +367,9 @@ public:
      *                  pattern cannot be parsed, set to failure code.
      * @stable ICU 2.0
      */
-    MessageFormat(const UnicodeString& pattern,
-                  const Locale& newLocale,
-                        UErrorCode& status);
+    MessageFormat( const UnicodeString& pattern,
+                   const Locale& newLocale,
+                   UErrorCode& status );
     /**
      * Constructs a new MessageFormat using the given pattern and locale.
      * @param pattern   Pattern used to construct object.
@@ -393,21 +380,21 @@ public:
      *                  pattern cannot be parsed, set to failure code.
      * @stable ICU 2.0
      */
-    MessageFormat(const UnicodeString& pattern,
-                  const Locale& newLocale,
-                  UParseError& parseError,
-                  UErrorCode& status);
+    MessageFormat( const UnicodeString& pattern,
+                   const Locale& newLocale,
+                   UParseError& parseError,
+                   UErrorCode& status );
     /**
      * Constructs a new MessageFormat from an existing one.
      * @stable ICU 2.0
      */
-    MessageFormat(const MessageFormat&);
+    MessageFormat( const MessageFormat& );
 
     /**
      * Assignment operator.
      * @stable ICU 2.0
      */
-    const MessageFormat& operator=(const MessageFormat&);
+    const MessageFormat& operator=( const MessageFormat& );
 
     /**
      * Destructor.
@@ -429,14 +416,14 @@ public:
      * @return       true if the given Format objects are semantically equal.
      * @stable ICU 2.0
      */
-    virtual UBool operator==(const Format& other) const;
+    virtual UBool operator==( const Format& other ) const;
 
     /**
      * Sets the locale to be used for creating argument Format objects.
      * @param theLocale    the new locale value to be set.
      * @stable ICU 2.0
      */
-    virtual void setLocale(const Locale& theLocale);
+    virtual void setLocale( const Locale& theLocale );
 
     /**
      * Gets the locale used for creating argument Format objects.
@@ -444,7 +431,7 @@ public:
      * @return    the locale of the object.
      * @stable ICU 2.0
      */
-    virtual const Locale& getLocale(void) const;
+    virtual const Locale& getLocale( void ) const;
 
     /**
      * Applies the given pattern string to this message format.
@@ -454,8 +441,8 @@ public:
      *                  pattern cannot be parsed, set to failure code.
      * @stable ICU 2.0
      */
-    virtual void applyPattern(const UnicodeString& pattern,
-                              UErrorCode& status);
+    virtual void applyPattern( const UnicodeString& pattern,
+                               UErrorCode& status );
     /**
      * Applies the given pattern string to this message format.
      *
@@ -466,18 +453,18 @@ public:
      *                  pattern cannot be parsed, set to failure code.
      * @stable ICU 2.0
      */
-    virtual void applyPattern(const UnicodeString& pattern,
-                             UParseError& parseError,
-                             UErrorCode& status);
+    virtual void applyPattern( const UnicodeString& pattern,
+                               UParseError& parseError,
+                               UErrorCode& status );
 
     /**
-     * Sets the UMessagePatternApostropheMode and the pattern used by this message format.
-     * Parses the pattern and caches Format objects for simple argument types.
-     * Patterns and their interpretation are specified in the
-     * <a href="#patterns">class description</a>.
-     * <p>
-     * This method is best used only once on a given object to avoid confusion about the mode,
-     * and after constructing the object with an empty pattern string to minimize overhead.
+     * Sets the UMessagePatternApostropheMode and the pattern used by this
+     * message format. Parses the pattern and caches Format objects for simple
+     * argument types. Patterns and their interpretation are specified in the <a
+     * href="#patterns">class description</a>. <p> This method is best used only
+     * once on a given object to avoid confusion about the mode, and after
+     * constructing the object with an empty pattern string to minimize
+     * overhead.
      *
      * @param pattern    The pattern to be applied.
      * @param aposMode   The new apostrophe mode.
@@ -488,10 +475,10 @@ public:
      *                  pattern cannot be parsed, set to failure code.
      * @stable ICU 4.8
      */
-    virtual void applyPattern(const UnicodeString& pattern,
-                              UMessagePatternApostropheMode aposMode,
-                              UParseError* parseError,
-                              UErrorCode& status);
+    virtual void applyPattern( const UnicodeString& pattern,
+                               UMessagePatternApostropheMode aposMode,
+                               UParseError* parseError,
+                               UErrorCode& status );
 
     /**
      * @return this instance's UMessagePatternApostropheMode.
@@ -509,7 +496,7 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.0
      */
-    virtual UnicodeString& toPattern(UnicodeString& appendTo) const;
+    virtual UnicodeString& toPattern( UnicodeString& appendTo ) const;
 
     /**
      * Sets subformats.
@@ -527,7 +514,7 @@ public:
      * @param formatsToAdopt    the format to be adopted.
      * @param count             the size of the array.
      */
-    virtual void adoptFormats(Format** formatsToAdopt, int32_t count);
+    virtual void adoptFormats( Format** formatsToAdopt, int32_t count );
 
     /**
      * Sets subformats.
@@ -543,8 +530,7 @@ public:
      * @param newFormats the new format to be set.
      * @param cnt        the size of the array.
      */
-    virtual void setFormats(const Format** newFormats, int32_t cnt);
-
+    virtual void setFormats( const Format** newFormats, int32_t cnt );
 
     /**
      * Sets one subformat.
@@ -560,7 +546,7 @@ public:
      * @param formatNumber     index of the subformat.
      * @param formatToAdopt    the format to be adopted.
      */
-    virtual void adoptFormat(int32_t formatNumber, Format* formatToAdopt);
+    virtual void adoptFormat( int32_t formatNumber, Format* formatToAdopt );
 
     /**
      * Sets one subformat.
@@ -571,17 +557,17 @@ public:
      * @param format    the format to be set.
      * @stable ICU 2.0
      */
-    virtual void setFormat(int32_t formatNumber, const Format& format);
+    virtual void setFormat( int32_t formatNumber, const Format& format );
 
     /**
-     * Gets format names. This function returns formatNames in StringEnumerations
-     * which can be used with getFormat() and setFormat() to export formattable
-     * array from current MessageFormat to another.  It is the caller's responsibility
-     * to delete the returned formatNames.
+     * Gets format names. This function returns formatNames in
+     * StringEnumerations which can be used with getFormat() and setFormat() to
+     * export formattable array from current MessageFormat to another.  It is
+     * the caller's responsibility to delete the returned formatNames.
      * @param status  output param set to success/failure code.
      * @stable ICU 4.0
      */
-    virtual StringEnumeration* getFormatNames(UErrorCode& status);
+    virtual StringEnumeration* getFormatNames( UErrorCode& status );
 
     /**
      * Gets subformat pointer for given format name.
@@ -596,7 +582,8 @@ public:
      * @param status  output param set to success/failure code.
      * @stable ICU 4.0
      */
-    virtual Format* getFormat(const UnicodeString& formatName, UErrorCode& status);
+    virtual Format* getFormat( const UnicodeString& formatName,
+                               UErrorCode& status );
 
     /**
      * Sets one subformat for given format name.
@@ -611,7 +598,9 @@ public:
      * @param status  output param set to success/failure code.
      * @stable ICU 4.0
      */
-    virtual void setFormat(const UnicodeString& formatName, const Format& format, UErrorCode& status);
+    virtual void setFormat( const UnicodeString& formatName,
+                            const Format& format,
+                            UErrorCode& status );
 
     /**
      * Sets one subformat for given format name.
@@ -627,7 +616,9 @@ public:
      * @param status      output param set to success/failure code.
      * @stable ICU 4.0
      */
-    virtual void adoptFormat(const UnicodeString& formatName, Format* formatToAdopt, UErrorCode& status);
+    virtual void adoptFormat( const UnicodeString& formatName,
+                              Format* formatToAdopt,
+                              UErrorCode& status );
 
     /**
      * Gets an array of subformats of this object.  The returned array
@@ -641,8 +632,7 @@ public:
      * memory.  Any or all of the array elements may be NULL.
      * @stable ICU 2.0
      */
-    virtual const Format** getFormats(int32_t& count) const;
-
+    virtual const Format** getFormats( int32_t& count ) const;
 
     using Format::format;
 
@@ -663,11 +653,11 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.0
      */
-    UnicodeString& format(const Formattable* source,
-                          int32_t count,
-                          UnicodeString& appendTo,
-                          FieldPosition& ignore,
-                          UErrorCode& status) const;
+    UnicodeString& format( const Formattable* source,
+                           int32_t count,
+                           UnicodeString& appendTo,
+                           FieldPosition& ignore,
+                           UErrorCode& status ) const;
 
     /**
      * Formats the given array of arguments into a user-readable string
@@ -686,11 +676,11 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.0
      */
-    static UnicodeString& format(const UnicodeString& pattern,
-                                 const Formattable* arguments,
-                                 int32_t count,
-                                 UnicodeString& appendTo,
-                                 UErrorCode& status);
+    static UnicodeString& format( const UnicodeString& pattern,
+                                  const Formattable* arguments,
+                                  int32_t count,
+                                  UnicodeString& appendTo,
+                                  UErrorCode& status );
 
     /**
      * Formats the given array of arguments into a user-readable
@@ -712,10 +702,10 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.0
      */
-    virtual UnicodeString& format(const Formattable& obj,
-                                  UnicodeString& appendTo,
-                                  FieldPosition& pos,
-                                  UErrorCode& status) const;
+    virtual UnicodeString& format( const Formattable& obj,
+                                   UnicodeString& appendTo,
+                                   FieldPosition& pos,
+                                   UErrorCode& status ) const;
 
     /**
      * Formats the given array of arguments into a user-defined argument name
@@ -735,11 +725,11 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 4.0
      */
-    UnicodeString& format(const UnicodeString* argumentNames,
-                          const Formattable* arguments,
-                          int32_t count,
-                          UnicodeString& appendTo,
-                          UErrorCode& status) const;
+    UnicodeString& format( const UnicodeString* argumentNames,
+                           const Formattable* arguments,
+                           int32_t count,
+                           UnicodeString& appendTo,
+                           UErrorCode& status ) const;
     /**
      * Parses the given string into an array of output arguments.
      *
@@ -753,9 +743,9 @@ public:
      * the array and its contents.
      * @stable ICU 2.0
      */
-    virtual Formattable* parse(const UnicodeString& source,
-                               ParsePosition& pos,
-                               int32_t& count) const;
+    virtual Formattable* parse( const UnicodeString& source,
+                                ParsePosition& pos,
+                                int32_t& count ) const;
 
     /**
      * Parses the given string into an array of output arguments.
@@ -772,9 +762,9 @@ public:
      *
      * @stable ICU 2.0
      */
-    virtual Formattable* parse(const UnicodeString& source,
-                               int32_t& count,
-                               UErrorCode& status) const;
+    virtual Formattable* parse( const UnicodeString& source,
+                                int32_t& count,
+                                UErrorCode& status ) const;
 
     /**
      * Parses the given string into an array of output arguments
@@ -788,9 +778,9 @@ public:
      *                  fails.
      * @stable ICU 2.0
      */
-    virtual void parseObject(const UnicodeString& source,
-                             Formattable& result,
-                             ParsePosition& pos) const;
+    virtual void parseObject( const UnicodeString& source,
+                              Formattable& result,
+                              ParsePosition& pos ) const;
 
     /**
      * Convert an 'apostrophe-friendly' pattern into a standard
@@ -811,9 +801,8 @@ public:
      * @return the standard equivalent of the original pattern
      * @stable ICU 3.4
      */
-    static UnicodeString autoQuoteApostrophe(const UnicodeString& pattern,
-        UErrorCode& status);
-
+    static UnicodeString autoQuoteApostrophe( const UnicodeString& pattern,
+                                              UErrorCode& status );
 
     /**
      * Returns true if this MessageFormat uses named arguments,
@@ -823,7 +812,6 @@ public:
      * @stable ICU 4.0
      */
     UBool usesNamedArguments() const;
-
 
 #ifndef U_HIDE_INTERNAL_API
     /**
@@ -837,7 +825,7 @@ public:
      * @internal
      */
     int32_t getArgTypeCount() const;
-#endif  /* U_HIDE_INTERNAL_API */
+#endif /* U_HIDE_INTERNAL_API */
 
     /**
      * Returns a unique class ID POLYMORPHICALLY.  Pure virtual override.
@@ -850,7 +838,7 @@ public:
      *                  other classes have different class IDs.
      * @stable ICU 2.0
      */
-    virtual UClassID getDynamicClassID(void) const;
+    virtual UClassID getDynamicClassID( void ) const;
 
     /**
      * Return the class ID for this class.  This is useful only for
@@ -863,7 +851,7 @@ public:
      * @return          The class ID for all objects of this class.
      * @stable ICU 2.0
      */
-    static UClassID U_EXPORT2 getStaticClassID(void);
+    static UClassID U_EXPORT2 getStaticClassID( void );
 
 #ifndef U_HIDE_INTERNAL_API
     /**
@@ -876,33 +864,36 @@ public:
      * @return whether the two objects are the same
      * @internal
      */
-    static UBool equalFormats(const void* left, const void* right);
-#endif  /* U_HIDE_INTERNAL_API */
+    static UBool equalFormats( const void* left, const void* right );
+#endif /* U_HIDE_INTERNAL_API */
 
 private:
-
-    Locale              fLocale;
-    MessagePattern      msgPattern;
-    Format**            formatAliases; // see getFormats
-    int32_t             formatAliasesCapacity;
+    Locale fLocale;
+    MessagePattern msgPattern;
+    Format** formatAliases; // see getFormats
+    int32_t formatAliasesCapacity;
 
     MessageFormat(); // default constructor not implemented
 
-     /**
-      * This provider helps defer instantiation of a PluralRules object
-      * until we actually need to select a keyword.
-      * For example, if the number matches an explicit-value selector like "=1"
-      * we do not need any PluralRules.
-      */
-    class U_I18N_API PluralSelectorProvider : public PluralFormat::PluralSelector {
+    /**
+     * This provider helps defer instantiation of a PluralRules object
+     * until we actually need to select a keyword.
+     * For example, if the number matches an explicit-value selector like "=1"
+     * we do not need any PluralRules.
+     */
+    class U_I18N_API PluralSelectorProvider
+        : public PluralFormat::PluralSelector {
     public:
-        PluralSelectorProvider(const MessageFormat &mf, UPluralType type);
+        PluralSelectorProvider( const MessageFormat& mf, UPluralType type );
         virtual ~PluralSelectorProvider();
-        virtual UnicodeString select(void *ctx, double number, UErrorCode& ec) const;
+        virtual UnicodeString select( void* ctx,
+                                      double number,
+                                      UErrorCode& ec ) const;
 
         void reset();
+
     private:
-        const MessageFormat &msgFormat;
+        const MessageFormat& msgFormat;
         PluralRules* rules;
         UPluralType type;
     };
@@ -916,18 +907,19 @@ private:
      * modified.
      */
     Formattable::Type* argTypes;
-    int32_t            argTypeCount;
-    int32_t            argTypeCapacity;
+    int32_t argTypeCount;
+    int32_t argTypeCapacity;
 
     /**
      * TRUE if there are different argTypes for the same argument.
-     * This only matters when the MessageFormat is used in the plain C (umsg_xxx) API
-     * where the pattern argTypes determine how the va_arg list is read.
+     * This only matters when the MessageFormat is used in the plain C
+     * (umsg_xxx) API where the pattern argTypes determine how the va_arg list
+     * is read.
      */
     UBool hasArgTypeConflicts;
 
     // Variable-size array management
-    UBool allocateArgTypes(int32_t capacity, UErrorCode& status);
+    UBool allocateArgTypes( int32_t capacity, UErrorCode& status );
 
     /**
      * Default Format objects used when no format is specified and a
@@ -937,7 +929,7 @@ private:
      * operator==().
      */
     NumberFormat* defaultNumberFormat;
-    DateFormat*   defaultDateFormat;
+    DateFormat* defaultDateFormat;
 
     UHashtable* cachedFormatters;
     UHashtable* customFormatArgStarts;
@@ -949,8 +941,8 @@ private:
      * Method to retrieve default formats (or NULL on failure).
      * These are semantically const, but may modify *this.
      */
-    const NumberFormat* getDefaultNumberFormat(UErrorCode&) const;
-    const DateFormat*   getDefaultDateFormat(UErrorCode&) const;
+    const NumberFormat* getDefaultNumberFormat( UErrorCode& ) const;
+    const DateFormat* getDefaultDateFormat( UErrorCode& ) const;
 
     /**
      * Finds the word s, in the keyword list and returns the located index.
@@ -959,111 +951,123 @@ private:
      * @return the index of the list which matches the keyword s.
      */
     static int32_t findKeyword( const UnicodeString& s,
-                                const char16_t * const *list);
+                                const char16_t* const* list );
 
     /**
      * Thin wrapper around the format(... AppendableWrapper ...) variant.
      * Wraps the destination UnicodeString into an AppendableWrapper and
      * supplies default values for some other parameters.
      */
-    UnicodeString& format(const Formattable* arguments,
-                          const UnicodeString *argumentNames,
-                          int32_t cnt,
-                          UnicodeString& appendTo,
-                          FieldPosition* pos,
-                          UErrorCode& status) const;
+    UnicodeString& format( const Formattable* arguments,
+                           const UnicodeString* argumentNames,
+                           int32_t cnt,
+                           UnicodeString& appendTo,
+                           FieldPosition* pos,
+                           UErrorCode& status ) const;
 
     /**
      * Formats the arguments and writes the result into the
      * AppendableWrapper, updates the field position.
      *
      * @param msgStart      Index to msgPattern part to start formatting from.
-     * @param plNumber      NULL except when formatting a plural argument sub-message
-     *                      where a '#' is replaced by the format string for this number.
+     * @param plNumber      NULL except when formatting a plural argument
+     * sub-message where a '#' is replaced by the format string for this number.
      * @param arguments     The formattable objects array. (Must not be NULL.)
      * @param argumentNames NULL if numbered values are used. Otherwise the same
-     *                      length as "arguments", and each entry is the name of the
-     *                      corresponding argument in "arguments".
-     * @param cnt           The length of arguments (and of argumentNames if that is not NULL).
+     *                      length as "arguments", and each entry is the name of
+     * the corresponding argument in "arguments".
+     * @param cnt           The length of arguments (and of argumentNames if
+     * that is not NULL).
      * @param appendTo      Output parameter to receive the result.
      *                      The result string is appended to existing contents.
      * @param pos           Field position status.
      * @param success       The error code status.
      */
-    void format(int32_t msgStart,
-                const void *plNumber,
-                const Formattable* arguments,
-                const UnicodeString *argumentNames,
-                int32_t cnt,
-                AppendableWrapper& appendTo,
-                FieldPosition* pos,
-                UErrorCode& success) const;
+    void format( int32_t msgStart,
+                 const void* plNumber,
+                 const Formattable* arguments,
+                 const UnicodeString* argumentNames,
+                 int32_t cnt,
+                 AppendableWrapper& appendTo,
+                 FieldPosition* pos,
+                 UErrorCode& success ) const;
 
-    UnicodeString getArgName(int32_t partIndex);
+    UnicodeString getArgName( int32_t partIndex );
 
-    void setArgStartFormat(int32_t argStart, Format* formatter, UErrorCode& status);
+    void setArgStartFormat( int32_t argStart,
+                            Format* formatter,
+                            UErrorCode& status );
 
-    void setCustomArgStartFormat(int32_t argStart, Format* formatter, UErrorCode& status);
+    void setCustomArgStartFormat( int32_t argStart,
+                                  Format* formatter,
+                                  UErrorCode& status );
 
-    int32_t nextTopLevelArgStart(int32_t partIndex) const;
+    int32_t nextTopLevelArgStart( int32_t partIndex ) const;
 
-    UBool argNameMatches(int32_t partIndex, const UnicodeString& argName, int32_t argNumber);
+    UBool argNameMatches( int32_t partIndex,
+                          const UnicodeString& argName,
+                          int32_t argNumber );
 
-    void cacheExplicitFormats(UErrorCode& status);
+    void cacheExplicitFormats( UErrorCode& status );
 
-    int32_t skipLeadingSpaces(UnicodeString& style);
+    int32_t skipLeadingSpaces( UnicodeString& style );
 
-    Format* createAppropriateFormat(UnicodeString& type,
-                                    UnicodeString& style,
-                                    Formattable::Type& formattableType,
-                                    UParseError& parseError,
-                                    UErrorCode& ec);
+    Format* createAppropriateFormat( UnicodeString& type,
+                                     UnicodeString& style,
+                                     Formattable::Type& formattableType,
+                                     UParseError& parseError,
+                                     UErrorCode& ec );
 
-    const Formattable* getArgFromListByName(const Formattable* arguments,
-                                            const UnicodeString *argumentNames,
-                                            int32_t cnt, UnicodeString& name) const;
+    const Formattable* getArgFromListByName( const Formattable* arguments,
+                                             const UnicodeString* argumentNames,
+                                             int32_t cnt,
+                                             UnicodeString& name ) const;
 
-    Formattable* parse(int32_t msgStart,
-                       const UnicodeString& source,
-                       ParsePosition& pos,
-                       int32_t& count,
-                       UErrorCode& ec) const;
+    Formattable* parse( int32_t msgStart,
+                        const UnicodeString& source,
+                        ParsePosition& pos,
+                        int32_t& count,
+                        UErrorCode& ec ) const;
 
-    FieldPosition* updateMetaData(AppendableWrapper& dest, int32_t prevLength,
-                                  FieldPosition* fp, const Formattable* argId) const;
+    FieldPosition* updateMetaData( AppendableWrapper& dest,
+                                   int32_t prevLength,
+                                   FieldPosition* fp,
+                                   const Formattable* argId ) const;
 
     /**
      * Finds the "other" sub-message.
      * @param partIndex the index of the first PluralFormat argument style part.
      * @return the "other" sub-message start part index.
      */
-    int32_t findOtherSubMessage(int32_t partIndex) const;
+    int32_t findOtherSubMessage( int32_t partIndex ) const;
 
     /**
-     * Returns the ARG_START index of the first occurrence of the plural number in a sub-message.
-     * Returns -1 if it is a REPLACE_NUMBER.
-     * Returns 0 if there is neither.
+     * Returns the ARG_START index of the first occurrence of the plural number
+     * in a sub-message. Returns -1 if it is a REPLACE_NUMBER. Returns 0 if
+     * there is neither.
      */
-    int32_t findFirstPluralNumberArg(int32_t msgStart, const UnicodeString &argName) const;
+    int32_t findFirstPluralNumberArg( int32_t msgStart,
+                                      const UnicodeString& argName ) const;
 
-    Format* getCachedFormatter(int32_t argumentNumber) const;
+    Format* getCachedFormatter( int32_t argumentNumber ) const;
 
-    UnicodeString getLiteralStringUntilNextArgument(int32_t from) const;
+    UnicodeString getLiteralStringUntilNextArgument( int32_t from ) const;
 
-    void copyObjects(const MessageFormat& that, UErrorCode& ec);
+    void copyObjects( const MessageFormat& that, UErrorCode& ec );
 
-    void formatComplexSubMessage(int32_t msgStart,
-                                 const void *plNumber,
-                                 const Formattable* arguments,
-                                 const UnicodeString *argumentNames,
-                                 int32_t cnt,
-                                 AppendableWrapper& appendTo,
-                                 UErrorCode& success) const;
+    void formatComplexSubMessage( int32_t msgStart,
+                                  const void* plNumber,
+                                  const Formattable* arguments,
+                                  const UnicodeString* argumentNames,
+                                  int32_t cnt,
+                                  AppendableWrapper& appendTo,
+                                  UErrorCode& success ) const;
 
     /**
      * Convenience method that ought to be in NumberFormat
      */
-    NumberFormat* createIntegerFormat(const Locale& locale, UErrorCode& status) const;
+    NumberFormat* createIntegerFormat( const Locale& locale,
+                                       UErrorCode& status ) const;
 
     /**
      * Returns array of argument types in the parsed pattern
@@ -1072,7 +1076,7 @@ private:
      * @param listCount  Output parameter to receive the size of array
      * @return           The array of formattable types in the pattern
      */
-    const Formattable::Type* getArgTypeList(int32_t& listCount) const {
+    const Formattable::Type* getArgTypeList( int32_t& listCount ) const {
         listCount = argTypeCount;
         return argTypes;
     }
@@ -1088,22 +1092,22 @@ private:
      */
     class U_I18N_API DummyFormat : public Format {
     public:
-        virtual UBool operator==(const Format&) const;
+        virtual UBool operator==( const Format& ) const;
         virtual DummyFormat* clone() const;
-        virtual UnicodeString& format(const Formattable& obj,
-                              UnicodeString& appendTo,
-                              UErrorCode& status) const;
-        virtual UnicodeString& format(const Formattable&,
-                                      UnicodeString& appendTo,
-                                      FieldPosition&,
-                                      UErrorCode& status) const;
-        virtual UnicodeString& format(const Formattable& obj,
-                                      UnicodeString& appendTo,
-                                      FieldPositionIterator* posIter,
-                                      UErrorCode& status) const;
-        virtual void parseObject(const UnicodeString&,
-                                 Formattable&,
-                                 ParsePosition&) const;
+        virtual UnicodeString& format( const Formattable& obj,
+                                       UnicodeString& appendTo,
+                                       UErrorCode& status ) const;
+        virtual UnicodeString& format( const Formattable&,
+                                       UnicodeString& appendTo,
+                                       FieldPosition&,
+                                       UErrorCode& status ) const;
+        virtual UnicodeString& format( const Formattable& obj,
+                                       UnicodeString& appendTo,
+                                       FieldPositionIterator* posIter,
+                                       UErrorCode& status ) const;
+        virtual void parseObject( const UnicodeString&,
+                                  Formattable&,
+                                  ParsePosition& ) const;
     };
 
     friend class MessageFormatAdapter; // getFormatTypeList() access
@@ -1116,4 +1120,4 @@ U_NAMESPACE_END
 #endif /* U_SHOW_CPLUSPLUS_API */
 
 #endif // _MSGFMT
-//eof
+// eof

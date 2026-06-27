@@ -4,14 +4,14 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define HAVE_PROTOTYPES 
-#define HAVE_UNSIGNED_CHAR 
-#define HAVE_UNSIGNED_SHORT 
+#define HAVE_PROTOTYPES
+#define HAVE_UNSIGNED_CHAR
+#define HAVE_UNSIGNED_SHORT
 #undef void
 #undef const
 #undef CHAR_IS_UNSIGNED
-#define HAVE_STDDEF_H 
-#define HAVE_STDLIB_H 
+#define HAVE_STDDEF_H
+#define HAVE_STDLIB_H
 #undef NEED_BSD_STRINGS
 #undef NEED_SYS_TYPES_H
 #undef NEED_FAR_POINTERS
@@ -31,11 +31,11 @@
 
 #ifdef JPEG_CJPEG_DJPEG
 
-#undef BMP_SUPPORTED		/* BMP image file format */
-#undef GIF_SUPPORTED		/* GIF image file format */
-#undef PPM_SUPPORTED		/* PBMPLUS PPM/PGM image file format */
-#undef RLE_SUPPORTED		/* Utah RLE image file format */
-#undef TARGA_SUPPORTED		/* Targa image file format */
+#undef BMP_SUPPORTED   /* BMP image file format */
+#undef GIF_SUPPORTED   /* GIF image file format */
+#undef PPM_SUPPORTED   /* PBMPLUS PPM/PGM image file format */
+#undef RLE_SUPPORTED   /* Utah RLE image file format */
+#undef TARGA_SUPPORTED /* Targa image file format */
 
 #undef TWO_FILE_COMMANDLINE
 #undef NEED_SIGNAL_CATCHER

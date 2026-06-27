@@ -18,11 +18,11 @@
 
 #if U_SHOW_CPLUSPLUS_API
 
-#include "unicode/uobject.h"
-#include "unicode/udisplaycontext.h"
-#include "unicode/ureldatefmt.h"
-#include "unicode/locid.h"
 #include "unicode/formattedvalue.h"
+#include "unicode/locid.h"
+#include "unicode/udisplaycontext.h"
+#include "unicode/uobject.h"
+#include "unicode/ureldatefmt.h"
 
 /**
  * \file
@@ -83,10 +83,11 @@ typedef enum UDateRelativeUnit {
 #ifndef U_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UDateRelativeUnit value.
-     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
+     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket
+     * #12420.
      */
     UDAT_RELATIVE_UNIT_COUNT
-#endif  // U_HIDE_DEPRECATED_API
+#endif // U_HIDE_DEPRECATED_API
 } UDateRelativeUnit;
 
 /**
@@ -192,10 +193,11 @@ typedef enum UDateAbsoluteUnit {
 #ifndef U_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UDateAbsoluteUnit value.
-     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
+     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket
+     * #12420.
      */
     UDAT_ABSOLUTE_UNIT_COUNT = UDAT_ABSOLUTE_NOW + 4
-#endif  // U_HIDE_DEPRECATED_API
+#endif // U_HIDE_DEPRECATED_API
 } UDateAbsoluteUnit;
 
 /**
@@ -244,10 +246,11 @@ typedef enum UDateDirection {
 #ifndef U_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UDateDirection value.
-     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
+     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket
+     * #12420.
      */
     UDAT_DIRECTION_COUNT
-#endif  // U_HIDE_DEPRECATED_API
+#endif // U_HIDE_DEPRECATED_API
 } UDateDirection;
 
 #if !UCONFIG_NO_BREAK_ITERATION
@@ -266,7 +269,8 @@ class FormattedRelativeDateTimeData;
 
 #ifndef U_HIDE_DRAFT_API
 /**
- * An immutable class containing the result of a relative datetime formatting operation.
+ * An immutable class containing the result of a relative datetime formatting
+ * operation.
  *
  * Instances of this class are immutable and thread-safe.
  *
@@ -274,19 +278,22 @@ class FormattedRelativeDateTimeData;
  *
  * @draft ICU 64
  */
-class U_I18N_API FormattedRelativeDateTime : public UMemory, public FormattedValue {
-  public:
+class U_I18N_API FormattedRelativeDateTime : public UMemory,
+                                             public FormattedValue {
+public:
     /**
      * Default constructor; makes an empty FormattedRelativeDateTime.
      * @draft ICU 64
      */
-    FormattedRelativeDateTime() : fData(nullptr), fErrorCode(U_INVALID_STATE_ERROR) {}
+    FormattedRelativeDateTime()
+        : fData( nullptr ), fErrorCode( U_INVALID_STATE_ERROR ) {}
 
     /**
-     * Move constructor: Leaves the source FormattedRelativeDateTime in an undefined state.
+     * Move constructor: Leaves the source FormattedRelativeDateTime in an
+     * undefined state.
      * @draft ICU 64
      */
-    FormattedRelativeDateTime(FormattedRelativeDateTime&& src) U_NOEXCEPT;
+    FormattedRelativeDateTime( FormattedRelativeDateTime&& src ) U_NOEXCEPT;
 
     /**
      * Destruct an instance of FormattedRelativeDateTime.
@@ -295,39 +302,44 @@ class U_I18N_API FormattedRelativeDateTime : public UMemory, public FormattedVal
     virtual ~FormattedRelativeDateTime() U_OVERRIDE;
 
     /** Copying not supported; use move constructor instead. */
-    FormattedRelativeDateTime(const FormattedRelativeDateTime&) = delete;
+    FormattedRelativeDateTime( const FormattedRelativeDateTime& ) = delete;
 
     /** Copying not supported; use move assignment instead. */
-    FormattedRelativeDateTime& operator=(const FormattedRelativeDateTime&) = delete;
+    FormattedRelativeDateTime& operator=( const FormattedRelativeDateTime& ) =
+        delete;
 
     /**
-     * Move assignment: Leaves the source FormattedRelativeDateTime in an undefined state.
+     * Move assignment: Leaves the source FormattedRelativeDateTime in an
+     * undefined state.
      * @draft ICU 64
      */
-    FormattedRelativeDateTime& operator=(FormattedRelativeDateTime&& src) U_NOEXCEPT;
+    FormattedRelativeDateTime& operator=( FormattedRelativeDateTime&& src )
+        U_NOEXCEPT;
 
     /** @copydoc FormattedValue::toString() */
-    UnicodeString toString(UErrorCode& status) const U_OVERRIDE;
+    UnicodeString toString( UErrorCode& status ) const U_OVERRIDE;
 
     /** @copydoc FormattedValue::toTempString() */
-    UnicodeString toTempString(UErrorCode& status) const U_OVERRIDE;
+    UnicodeString toTempString( UErrorCode& status ) const U_OVERRIDE;
 
     /** @copydoc FormattedValue::appendTo() */
-    Appendable &appendTo(Appendable& appendable, UErrorCode& status) const U_OVERRIDE;
+    Appendable& appendTo( Appendable& appendable,
+                          UErrorCode& status ) const U_OVERRIDE;
 
     /** @copydoc FormattedValue::nextPosition() */
-    UBool nextPosition(ConstrainedFieldPosition& cfpos, UErrorCode& status) const U_OVERRIDE;
+    UBool nextPosition( ConstrainedFieldPosition& cfpos,
+                        UErrorCode& status ) const U_OVERRIDE;
 
-  private:
-    FormattedRelativeDateTimeData *fData;
+private:
+    FormattedRelativeDateTimeData* fData;
     UErrorCode fErrorCode;
-    explicit FormattedRelativeDateTime(FormattedRelativeDateTimeData *results)
-        : fData(results), fErrorCode(U_ZERO_ERROR) {}
-    explicit FormattedRelativeDateTime(UErrorCode errorCode)
-        : fData(nullptr), fErrorCode(errorCode) {}
+    explicit FormattedRelativeDateTime( FormattedRelativeDateTimeData* results )
+        : fData( results ), fErrorCode( U_ZERO_ERROR ) {}
+    explicit FormattedRelativeDateTime( UErrorCode errorCode )
+        : fData( nullptr ), fErrorCode( errorCode ) {}
     friend class RelativeDateTimeFormatter;
 };
-#endif  /* U_HIDE_DRAFT_API */
+#endif /* U_HIDE_DRAFT_API */
 
 /**
  * Formats simple relative dates. There are two types of relative dates that
@@ -399,18 +411,17 @@ class U_I18N_API FormattedRelativeDateTime : public UMemory, public FormattedVal
  */
 class U_I18N_API RelativeDateTimeFormatter : public UObject {
 public:
-
     /**
      * Create RelativeDateTimeFormatter with default locale.
      * @stable ICU 53
      */
-    RelativeDateTimeFormatter(UErrorCode& status);
+    RelativeDateTimeFormatter( UErrorCode& status );
 
     /**
      * Create RelativeDateTimeFormatter with given locale.
      * @stable ICU 53
      */
-    RelativeDateTimeFormatter(const Locale& locale, UErrorCode& status);
+    RelativeDateTimeFormatter( const Locale& locale, UErrorCode& status );
 
     /**
      * Create RelativeDateTimeFormatter with given locale and NumberFormat.
@@ -422,8 +433,9 @@ public:
      * @param status Any error is returned here.
      * @stable ICU 53
      */
-    RelativeDateTimeFormatter(
-        const Locale& locale, NumberFormat *nfToAdopt, UErrorCode& status);
+    RelativeDateTimeFormatter( const Locale& locale,
+                               NumberFormat* nfToAdopt,
+                               UErrorCode& status );
 
     /**
      * Create RelativeDateTimeFormatter with given locale, NumberFormat,
@@ -435,30 +447,29 @@ public:
      *   contents after calling this constructor. Caller may pass NULL for
      *   this argument if they want default number format behavior.
      * @param style the format style. The UDAT_RELATIVE bit field has no effect.
-     * @param capitalizationContext A value from UDisplayContext that pertains to
-     * capitalization.
+     * @param capitalizationContext A value from UDisplayContext that pertains
+     * to capitalization.
      * @param status Any error is returned here.
      * @stable ICU 54
      */
-    RelativeDateTimeFormatter(
-            const Locale& locale,
-            NumberFormat *nfToAdopt,
-            UDateRelativeDateTimeFormatterStyle style,
-            UDisplayContext capitalizationContext,
-            UErrorCode& status);
+    RelativeDateTimeFormatter( const Locale& locale,
+                               NumberFormat* nfToAdopt,
+                               UDateRelativeDateTimeFormatterStyle style,
+                               UDisplayContext capitalizationContext,
+                               UErrorCode& status );
 
     /**
      * Copy constructor.
      * @stable ICU 53
      */
-    RelativeDateTimeFormatter(const RelativeDateTimeFormatter& other);
+    RelativeDateTimeFormatter( const RelativeDateTimeFormatter& other );
 
     /**
      * Assignment operator.
      * @stable ICU 53
      */
     RelativeDateTimeFormatter& operator=(
-            const RelativeDateTimeFormatter& other);
+        const RelativeDateTimeFormatter& other );
 
     /**
      * Destructor.
@@ -485,12 +496,11 @@ public:
      * @return appendTo
      * @stable ICU 53
      */
-    UnicodeString& format(
-            double quantity,
-            UDateDirection direction,
-            UDateRelativeUnit unit,
-            UnicodeString& appendTo,
-            UErrorCode& status) const;
+    UnicodeString& format( double quantity,
+                           UDateDirection direction,
+                           UDateRelativeUnit unit,
+                           UnicodeString& appendTo,
+                           UErrorCode& status ) const;
 
 #ifndef U_HIDE_DRAFT_API
     /**
@@ -510,12 +520,11 @@ public:
      * @return The formatted relative datetime
      * @draft ICU 64
      */
-    FormattedRelativeDateTime formatToValue(
-            double quantity,
-            UDateDirection direction,
-            UDateRelativeUnit unit,
-            UErrorCode& status) const;
-#endif  /* U_HIDE_DRAFT_API */
+    FormattedRelativeDateTime formatToValue( double quantity,
+                                             UDateDirection direction,
+                                             UDateRelativeUnit unit,
+                                             UErrorCode& status ) const;
+#endif /* U_HIDE_DRAFT_API */
 
     /**
      * Formats a relative date without a quantity.
@@ -533,11 +542,10 @@ public:
      * @return appendTo
      * @stable ICU 53
      */
-    UnicodeString& format(
-            UDateDirection direction,
-            UDateAbsoluteUnit unit,
-            UnicodeString& appendTo,
-            UErrorCode& status) const;
+    UnicodeString& format( UDateDirection direction,
+                           UDateAbsoluteUnit unit,
+                           UnicodeString& appendTo,
+                           UErrorCode& status ) const;
 
 #ifndef U_HIDE_DRAFT_API
     /**
@@ -555,11 +563,10 @@ public:
      * @return The formatted relative datetime
      * @draft ICU 64
      */
-    FormattedRelativeDateTime formatToValue(
-            UDateDirection direction,
-            UDateAbsoluteUnit unit,
-            UErrorCode& status) const;
-#endif  /* U_HIDE_DRAFT_API */
+    FormattedRelativeDateTime formatToValue( UDateDirection direction,
+                                             UDateAbsoluteUnit unit,
+                                             UErrorCode& status ) const;
+#endif /* U_HIDE_DRAFT_API */
 
     /**
      * Format a combination of URelativeDateTimeUnit and numeric offset
@@ -568,7 +575,7 @@ public:
      *
      * This method returns a String. To get more information about the
      * formatting result, use formatNumericToValue().
-     * 
+     *
      * @param offset    The signed offset for the specified unit. This
      *                  will be formatted according to this object's
      *                  NumberFormat object.
@@ -581,11 +588,10 @@ public:
      * @return          appendTo
      * @stable ICU 57
      */
-    UnicodeString& formatNumeric(
-            double offset,
-            URelativeDateTimeUnit unit,
-            UnicodeString& appendTo,
-            UErrorCode& status) const;
+    UnicodeString& formatNumeric( double offset,
+                                  URelativeDateTimeUnit unit,
+                                  UnicodeString& appendTo,
+                                  UErrorCode& status ) const;
 
 #ifndef U_HIDE_DRAFT_API
     /**
@@ -595,7 +601,7 @@ public:
      *
      * This method returns a FormattedRelativeDateTime, which exposes more
      * information than the String returned by formatNumeric().
-     * 
+     *
      * @param offset    The signed offset for the specified unit. This
      *                  will be formatted according to this object's
      *                  NumberFormat object.
@@ -606,11 +612,10 @@ public:
      * @return          The formatted relative datetime
      * @draft ICU 64
      */
-    FormattedRelativeDateTime formatNumericToValue(
-            double offset,
-            URelativeDateTimeUnit unit,
-            UErrorCode& status) const;
-#endif  /* U_HIDE_DRAFT_API */
+    FormattedRelativeDateTime formatNumericToValue( double offset,
+                                                    URelativeDateTimeUnit unit,
+                                                    UErrorCode& status ) const;
+#endif /* U_HIDE_DRAFT_API */
 
     /**
      * Format a combination of URelativeDateTimeUnit and numeric offset
@@ -632,11 +637,10 @@ public:
      * @return          appendTo
      * @stable ICU 57
      */
-    UnicodeString& format(
-            double offset,
-            URelativeDateTimeUnit unit,
-            UnicodeString& appendTo,
-            UErrorCode& status) const;
+    UnicodeString& format( double offset,
+                           URelativeDateTimeUnit unit,
+                           UnicodeString& appendTo,
+                           UErrorCode& status ) const;
 
 #ifndef U_HIDE_DRAFT_API
     /**
@@ -657,11 +661,10 @@ public:
      * @return          The formatted relative datetime
      * @draft ICU 64
      */
-    FormattedRelativeDateTime formatToValue(
-            double offset,
-            URelativeDateTimeUnit unit,
-            UErrorCode& status) const;
-#endif  /* U_HIDE_DRAFT_API */
+    FormattedRelativeDateTime formatToValue( double offset,
+                                             URelativeDateTimeUnit unit,
+                                             UErrorCode& status ) const;
+#endif /* U_HIDE_DRAFT_API */
 
     /**
      * Combines a relative date string and a time string in this object's
@@ -675,11 +678,10 @@ public:
      * @return appendTo
      * @stable ICU 53
      */
-    UnicodeString& combineDateAndTime(
-            const UnicodeString& relativeDateString,
-            const UnicodeString& timeString,
-            UnicodeString& appendTo,
-            UErrorCode& status) const;
+    UnicodeString& combineDateAndTime( const UnicodeString& relativeDateString,
+                                       const UnicodeString& timeString,
+                                       UnicodeString& appendTo,
+                                       UErrorCode& status ) const;
 
     /**
      * Returns the NumberFormat this object is using.
@@ -704,55 +706,48 @@ public:
 
 private:
     const RelativeDateTimeCacheData* fCache;
-    const SharedNumberFormat *fNumberFormat;
-    const SharedPluralRules *fPluralRules;
+    const SharedNumberFormat* fNumberFormat;
+    const SharedPluralRules* fPluralRules;
     UDateRelativeDateTimeFormatterStyle fStyle;
     UDisplayContext fContext;
-    const SharedBreakIterator *fOptBreakIterator;
+    const SharedBreakIterator* fOptBreakIterator;
     Locale fLocale;
-    void init(
-            NumberFormat *nfToAdopt,
-            BreakIterator *brkIter,
-            UErrorCode &status);
-    UnicodeString& adjustForContext(UnicodeString &) const;
-    UBool checkNoAdjustForContext(UErrorCode& status) const;
+    void init( NumberFormat* nfToAdopt,
+               BreakIterator* brkIter,
+               UErrorCode& status );
+    UnicodeString& adjustForContext( UnicodeString& ) const;
+    UBool checkNoAdjustForContext( UErrorCode& status ) const;
 
-    template<typename F, typename... Args>
-    UnicodeString& doFormat(
-            F callback,
-            UnicodeString& appendTo,
-            UErrorCode& status,
-            Args... args) const;
+    template < typename F, typename... Args >
+    UnicodeString& doFormat( F callback,
+                             UnicodeString& appendTo,
+                             UErrorCode& status,
+                             Args... args ) const;
 
-#ifndef U_HIDE_DRAFT_API  // for FormattedRelativeDateTime
-    template<typename F, typename... Args>
-    FormattedRelativeDateTime doFormatToValue(
-            F callback,
-            UErrorCode& status,
-            Args... args) const;
-#endif  // U_HIDE_DRAFT_API
+#ifndef U_HIDE_DRAFT_API // for FormattedRelativeDateTime
+    template < typename F, typename... Args >
+    FormattedRelativeDateTime doFormatToValue( F callback,
+                                               UErrorCode& status,
+                                               Args... args ) const;
+#endif // U_HIDE_DRAFT_API
 
-    void formatImpl(
-            double quantity,
-            UDateDirection direction,
-            UDateRelativeUnit unit,
-            FormattedRelativeDateTimeData& output,
-            UErrorCode& status) const;
-    void formatAbsoluteImpl(
-            UDateDirection direction,
-            UDateAbsoluteUnit unit,
-            FormattedRelativeDateTimeData& output,
-            UErrorCode& status) const;
-    void formatNumericImpl(
-            double offset,
-            URelativeDateTimeUnit unit,
-            FormattedRelativeDateTimeData& output,
-            UErrorCode& status) const;
-    void formatRelativeImpl(
-            double offset,
-            URelativeDateTimeUnit unit,
-            FormattedRelativeDateTimeData& output,
-            UErrorCode& status) const;
+    void formatImpl( double quantity,
+                     UDateDirection direction,
+                     UDateRelativeUnit unit,
+                     FormattedRelativeDateTimeData& output,
+                     UErrorCode& status ) const;
+    void formatAbsoluteImpl( UDateDirection direction,
+                             UDateAbsoluteUnit unit,
+                             FormattedRelativeDateTimeData& output,
+                             UErrorCode& status ) const;
+    void formatNumericImpl( double offset,
+                            URelativeDateTimeUnit unit,
+                            FormattedRelativeDateTimeData& output,
+                            UErrorCode& status ) const;
+    void formatRelativeImpl( double offset,
+                             URelativeDateTimeUnit unit,
+                             FormattedRelativeDateTimeData& output,
+                             UErrorCode& status ) const;
 };
 
 U_NAMESPACE_END

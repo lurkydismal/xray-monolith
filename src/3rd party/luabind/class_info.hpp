@@ -22,24 +22,20 @@
 
 #pragma once
 
-#include <luabind/prefix.hpp>
 #include <luabind/lua_include.hpp>
 #include <luabind/luabind.hpp>
+#include <luabind/prefix.hpp>
 
-namespace luabind
-{
-	struct class_info
-	{
-		class_info(lua_State* L)
-			: methods(L)
-		{}
-		
-		string_class name;
-		object methods;
-		object attributes;
-	};
+namespace luabind {
+struct class_info {
+    class_info( lua_State* L ) : methods( L ) {}
 
-	class_info get_class_info(const object&);
+    string_class name;
+    object methods;
+    object attributes;
+};
 
-	LUABIND_API void bind_class_info(lua_State*);
-}
+class_info get_class_info( const object& );
+
+LUABIND_API void bind_class_info( lua_State* );
+} // namespace luabind

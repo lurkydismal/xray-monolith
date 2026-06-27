@@ -22,10 +22,10 @@
 #include "unicode/measunit.h"
 
 /**
- * \file 
+ * \file
  * \brief C++ API: Currency Unit Information.
  */
- 
+
 U_NAMESPACE_BEGIN
 
 /**
@@ -36,8 +36,8 @@ U_NAMESPACE_BEGIN
  * @author Alan Liu
  * @stable ICU 3.0
  */
-class U_I18N_API CurrencyUnit: public MeasureUnit {
- public:
+class U_I18N_API CurrencyUnit : public MeasureUnit {
+public:
     /**
      * Default constructor.  Initializes currency code to "XXX" (no currency).
      * @stable ICU 60
@@ -54,7 +54,7 @@ class U_I18N_API CurrencyUnit: public MeasureUnit {
      * then this will be set to a failing value.
      * @stable ICU 3.0
      */
-    CurrencyUnit(ConstChar16Ptr isoCode, UErrorCode &ec);
+    CurrencyUnit( ConstChar16Ptr isoCode, UErrorCode& ec );
 
 #ifndef U_HIDE_DRAFT_API
     /**
@@ -66,14 +66,14 @@ class U_I18N_API CurrencyUnit: public MeasureUnit {
      * then this will be set to a failing value.
      * @draft ICU 64
      */
-    CurrencyUnit(StringPiece isoCode, UErrorCode &ec);
-#endif  /* U_HIDE_DRAFT_API */
+    CurrencyUnit( StringPiece isoCode, UErrorCode& ec );
+#endif /* U_HIDE_DRAFT_API */
 
     /**
      * Copy constructor
      * @stable ICU 3.0
      */
-    CurrencyUnit(const CurrencyUnit& other);
+    CurrencyUnit( const CurrencyUnit& other );
 
     /**
      * Copy constructor from MeasureUnit. This constructor allows you to
@@ -83,13 +83,13 @@ class U_I18N_API CurrencyUnit: public MeasureUnit {
      * @param ec Set to a failing value if the MeasureUnit is not a currency.
      * @stable ICU 60
      */
-    CurrencyUnit(const MeasureUnit& measureUnit, UErrorCode &ec);
+    CurrencyUnit( const MeasureUnit& measureUnit, UErrorCode& ec );
 
     /**
      * Assignment operator
      * @stable ICU 3.0
      */
-    CurrencyUnit& operator=(const CurrencyUnit& other);
+    CurrencyUnit& operator=( const CurrencyUnit& other );
 
     /**
      * Return a polymorphic clone of this object.  The result will
@@ -128,11 +128,11 @@ class U_I18N_API CurrencyUnit: public MeasureUnit {
      */
     inline const char16_t* getISOCurrency() const;
 
- private:
+private:
     /**
      * The ISO 4217 code of this object.
      */
-    char16_t isoCode[4];
+    char16_t isoCode[ 4 ];
 };
 
 inline const char16_t* CurrencyUnit::getISOCurrency() const {

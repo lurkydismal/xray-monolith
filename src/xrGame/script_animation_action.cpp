@@ -6,9 +6,8 @@
 //	Description : Script animation action class
 ////////////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
 #include "script_animation_action.h"
 
-CScriptAnimationAction::~CScriptAnimationAction()
-{
-}
+#include "stdafx.h"
+
+CScriptAnimationAction::~CScriptAnimationAction() {}

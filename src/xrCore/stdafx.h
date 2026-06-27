@@ -6,11 +6,11 @@
 #define stdafxH
 #pragma once
 
-#pragma warning (disable:4661)
+#pragma warning( disable : 4661 )
 
+#include "profiler.h"
 #include "xrCore.h"
 #include "xrCore_platform.h"
-#include "profiler.h"
 //.#include "../../Include/xrAPI/xrAPI.h"
 #endif
 

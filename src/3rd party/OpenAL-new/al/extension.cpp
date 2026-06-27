@@ -18,45 +18,41 @@
  * Or go to http://www.gnu.org/copyleft/lgpl.html
  */
 
-#include "config.h"
-
 #include <cctype>
 #include <cstdlib>
 #include <cstring>
 
 #include "AL/al.h"
 #include "AL/alc.h"
-
 #include "alc/context.h"
 #include "alstring.h"
+#include "config.h"
 #include "core/except.h"
 #include "opthelpers.h"
 
+AL_API ALboolean AL_APIENTRY alIsExtensionPresent( const ALchar* extName )
+    START_API_FUNC {
+    ContextRef context{ GetContextRef() };
+    if ( !context )
+        UNLIKELY return AL_FALSE;
 
-AL_API ALboolean AL_APIENTRY alIsExtensionPresent(const ALchar *extName)
-START_API_FUNC
-{
-    ContextRef context{GetContextRef()};
-    if(!context) UNLIKELY return AL_FALSE;
+    if ( !extName )
+        UNLIKELY {
+            context->setError( AL_INVALID_VALUE, "NULL pointer" );
+            return AL_FALSE;
+        }
 
-    if(!extName) UNLIKELY
-    {
-        context->setError(AL_INVALID_VALUE, "NULL pointer");
-        return AL_FALSE;
-    }
-
-    size_t len{strlen(extName)};
-    const char *ptr{context->mExtensionList};
-    while(ptr && *ptr)
-    {
-        if(al::strncasecmp(ptr, extName, len) == 0 && (ptr[len] == '\0' || isspace(ptr[len])))
+    size_t len{ strlen( extName ) };
+    const char* ptr{ context->mExtensionList };
+    while ( ptr && *ptr ) {
+        if ( al::strncasecmp( ptr, extName, len ) == 0 &&
+             ( ptr[ len ] == '\0' || isspace( ptr[ len ] ) ) )
             return AL_TRUE;
 
-        if((ptr=strchr(ptr, ' ')) != nullptr)
-        {
+        if ( ( ptr = strchr( ptr, ' ' ) ) != nullptr ) {
             do {
                 ++ptr;
-            } while(isspace(*ptr));
+            } while ( isspace( *ptr ) );
         }
     }
 
@@ -64,19 +60,18 @@ START_API_FUNC
 }
 END_API_FUNC
 
-
-AL_API ALvoid* AL_APIENTRY alGetProcAddress(const ALchar *funcName)
-START_API_FUNC
-{
-    if(!funcName) return nullptr;
-    return alcGetProcAddress(nullptr, funcName);
+AL_API ALvoid* AL_APIENTRY alGetProcAddress( const ALchar* funcName )
+    START_API_FUNC {
+    if ( !funcName )
+        return nullptr;
+    return alcGetProcAddress( nullptr, funcName );
 }
 END_API_FUNC
 
-AL_API ALenum AL_APIENTRY alGetEnumValue(const ALchar *enumName)
-START_API_FUNC
-{
-    if(!enumName) return static_cast<ALenum>(0);
-    return alcGetEnumValue(nullptr, enumName);
+AL_API ALenum AL_APIENTRY alGetEnumValue( const ALchar* enumName )
+    START_API_FUNC {
+    if ( !enumName )
+        return static_cast< ALenum >( 0 );
+    return alcGetEnumValue( nullptr, enumName );
 }
 END_API_FUNC

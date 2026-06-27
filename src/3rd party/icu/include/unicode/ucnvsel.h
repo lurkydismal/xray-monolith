@@ -25,11 +25,11 @@
 
 #if !UCONFIG_NO_CONVERSION
 
+#include "unicode/localpointer.h"
+#include "unicode/ucnv.h"
+#include "unicode/uenum.h"
 #include "unicode/uset.h"
 #include "unicode/utf16.h"
-#include "unicode/uenum.h"
-#include "unicode/ucnv.h"
-#include "unicode/localpointer.h"
 
 /**
  * \file
@@ -55,16 +55,17 @@ typedef struct UConverterSelector UConverterSelector;
  * If converterListSize is 0, build for all available converters.
  * If excludedCodePoints is NULL, don't exclude any code points.
  *
- * @param converterList a pointer to encoding names needed to be involved. 
+ * @param converterList a pointer to encoding names needed to be involved.
  *                      Can be NULL if converterListSize==0.
  *                      The list and the names will be cloned, and the caller
  *                      retains ownership of the original.
  * @param converterListSize number of encodings in above list.
- *                          If 0, builds a selector for all available converters.
- * @param excludedCodePoints a set of code points to be excluded from consideration.
- *                           That is, excluded code points in a string do not change
- *                           the selection result. (They might be handled by a callback.)
- *                           Use NULL to exclude nothing.
+ *                          If 0, builds a selector for all available
+ * converters.
+ * @param excludedCodePoints a set of code points to be excluded from
+ * consideration. That is, excluded code points in a string do not change the
+ * selection result. (They might be handled by a callback.) Use NULL to exclude
+ * nothing.
  * @param whichSet what converter set to use? Use this to determine whether
  *                 to consider only roundtrip mappings or also fallbacks.
  * @param status an in/out ICU UErrorCode
@@ -73,9 +74,11 @@ typedef struct UConverterSelector UConverterSelector;
  * @stable ICU 4.2
  */
 U_STABLE UConverterSelector* U_EXPORT2
-ucnvsel_open(const char* const*  converterList, int32_t converterListSize,
-             const USet* excludedCodePoints,
-             const UConverterUnicodeSet whichSet, UErrorCode* status);
+ucnvsel_open( const char* const* converterList,
+              int32_t converterListSize,
+              const USet* excludedCodePoints,
+              const UConverterUnicodeSet whichSet,
+              UErrorCode* status );
 
 /**
  * Closes a selector.
@@ -90,8 +93,7 @@ ucnvsel_open(const char* const*  converterList, int32_t converterListSize,
  *
  * @stable ICU 4.2
  */
-U_STABLE void U_EXPORT2
-ucnvsel_close(UConverterSelector *sel);
+U_STABLE void U_EXPORT2 ucnvsel_close( UConverterSelector* sel );
 
 #if U_SHOW_CPLUSPLUS_API
 
@@ -106,7 +108,9 @@ U_NAMESPACE_BEGIN
  * @see LocalPointer
  * @stable ICU 4.4
  */
-U_DEFINE_LOCAL_OPEN_POINTER(LocalUConverterSelectorPointer, UConverterSelector, ucnvsel_close);
+U_DEFINE_LOCAL_OPEN_POINTER( LocalUConverterSelectorPointer,
+                             UConverterSelector,
+                             ucnvsel_close );
 
 U_NAMESPACE_END
 
@@ -116,7 +120,8 @@ U_NAMESPACE_END
  * Open a selector from its serialized form.
  * The buffer must remain valid and unchanged for the lifetime of the selector.
  * This is much faster than creating a selector from scratch.
- * Using a serialized form from a different machine (endianness/charset) is supported.
+ * Using a serialized form from a different machine (endianness/charset) is
+ * supported.
  *
  * @param buffer pointer to the serialized form of a converter selector;
  *               must be 32-bit-aligned
@@ -128,7 +133,9 @@ U_NAMESPACE_END
  * @stable ICU 4.2
  */
 U_STABLE UConverterSelector* U_EXPORT2
-ucnvsel_openFromSerialized(const void* buffer, int32_t length, UErrorCode* status);
+ucnvsel_openFromSerialized( const void* buffer,
+                            int32_t length,
+                            UErrorCode* status );
 
 /**
  * Serialize a selector into a linear buffer.
@@ -139,14 +146,15 @@ ucnvsel_openFromSerialized(const void* buffer, int32_t length, UErrorCode* statu
  *               serialized form of this converter selector
  * @param bufferCapacity the capacity of this buffer
  * @param status an in/out ICU UErrorCode
- * @return the required buffer capacity to hold serialize data (even if the call fails
- *         with a U_BUFFER_OVERFLOW_ERROR, it will return the required capacity)
+ * @return the required buffer capacity to hold serialize data (even if the call
+ * fails with a U_BUFFER_OVERFLOW_ERROR, it will return the required capacity)
  *
  * @stable ICU 4.2
  */
-U_STABLE int32_t U_EXPORT2
-ucnvsel_serialize(const UConverterSelector* sel,
-                  void* buffer, int32_t bufferCapacity, UErrorCode* status);
+U_STABLE int32_t U_EXPORT2 ucnvsel_serialize( const UConverterSelector* sel,
+                                              void* buffer,
+                                              int32_t bufferCapacity,
+                                              UErrorCode* status );
 
 /**
  * Select converters that can map all characters in a UTF-16 string,
@@ -162,9 +170,11 @@ ucnvsel_serialize(const UConverterSelector* sel,
  *
  * @stable ICU 4.2
  */
-U_STABLE UEnumeration * U_EXPORT2
-ucnvsel_selectForString(const UConverterSelector* sel,
-                        const UChar *s, int32_t length, UErrorCode *status);
+U_STABLE UEnumeration* U_EXPORT2
+ucnvsel_selectForString( const UConverterSelector* sel,
+                         const UChar* s,
+                         int32_t length,
+                         UErrorCode* status );
 
 /**
  * Select converters that can map all characters in a UTF-8 string,
@@ -180,10 +190,12 @@ ucnvsel_selectForString(const UConverterSelector* sel,
  *
  * @stable ICU 4.2
  */
-U_STABLE UEnumeration * U_EXPORT2
-ucnvsel_selectForUTF8(const UConverterSelector* sel,
-                      const char *s, int32_t length, UErrorCode *status);
+U_STABLE UEnumeration* U_EXPORT2
+ucnvsel_selectForUTF8( const UConverterSelector* sel,
+                       const char* s,
+                       int32_t length,
+                       UErrorCode* status );
 
-#endif  /* !UCONFIG_NO_CONVERSION */
+#endif /* !UCONFIG_NO_CONVERSION */
 
-#endif  /* __ICU_UCNV_SEL_H__ */
+#endif /* __ICU_UCNV_SEL_H__ */

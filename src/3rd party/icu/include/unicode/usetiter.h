@@ -13,12 +13,13 @@
 
 #if U_SHOW_CPLUSPLUS_API
 
-#include "unicode/uobject.h"
 #include "unicode/unistr.h"
+#include "unicode/uobject.h"
 
 /**
- * \file 
- * \brief C++ API: UnicodeSetIterator iterates over the contents of a UnicodeSet.
+ * \file
+ * \brief C++ API: UnicodeSetIterator iterates over the contents of a
+ * UnicodeSet.
  */
 
 U_NAMESPACE_BEGIN
@@ -64,9 +65,7 @@ class UnicodeString;
  * @stable ICU 2.4
  */
 class U_COMMON_API UnicodeSetIterator : public UObject {
-
- protected:
-
+protected:
     /**
      * Value of <tt>codepoint</tt> if the iterator points to a string.
      * If <tt>codepoint == IS_STRING</tt>, then examine
@@ -101,15 +100,14 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      */
     const UnicodeString* string;
 
- public:
-
+public:
     /**
      * Create an iterator over the given set.  The iterator is valid
      * only so long as <tt>set</tt> is valid.
      * @param set set to iterate over
      * @stable ICU 2.4
      */
-    UnicodeSetIterator(const UnicodeSet& set);
+    UnicodeSetIterator( const UnicodeSet& set );
 
     /**
      * Create an iterator over nothing.  <tt>next()</tt> and
@@ -165,14 +163,14 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * Ownership of the returned string remains with the iterator.
      * The string is guaranteed to remain valid only until the iterator is
      *   advanced to the next item, or until the iterator is deleted.
-     * 
+     *
      * @stable ICU 2.4
      */
     const UnicodeString& getString();
 
     /**
-     * Advances the iteration position to the next element in the set, 
-     * which can be either a single code point or a string.  
+     * Advances the iteration position to the next element in the set,
+     * which can be either a single code point or a string.
      * If there are no more elements in the set, return false.
      *
      * <p>
@@ -198,15 +196,15 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * Returns the next element in the set, either a code point range
      * or a string.  If there are no more elements in the set, return
      * false.  If <tt>isString() == TRUE</tt>, the value is a
-     * string and can be accessed with <tt>getString()</tt>.  Otherwise the value is a
-     * range of one or more code points from <tt>getCodepoint()</tt> to
-     * <tt>getCodepointeEnd()</tt> inclusive.
+     * string and can be accessed with <tt>getString()</tt>.  Otherwise the
+     * value is a range of one or more code points from <tt>getCodepoint()</tt>
+     * to <tt>getCodepointeEnd()</tt> inclusive.
      *
      * <p>The order of iteration is all code points ranges in sorted
      * order, followed by all strings sorted order.  Ranges are
-     * disjoint and non-contiguous.  The value returned from <tt>getString()</tt>
-     * is undefined unless <tt>isString() == TRUE</tt>.  Do not mix calls to
-     * <tt>next()</tt> and <tt>nextRange()</tt> without calling
+     * disjoint and non-contiguous.  The value returned from
+     * <tt>getString()</tt> is undefined unless <tt>isString() == TRUE</tt>.  Do
+     * not mix calls to <tt>next()</tt> and <tt>nextRange()</tt> without calling
      * <tt>reset()</tt> between them.  The results of doing so are
      * undefined.
      *
@@ -222,7 +220,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * @param set the set to iterate over.
      * @stable ICU 2.4
      */
-    void reset(const UnicodeSet& set);
+    void reset( const UnicodeSet& set );
 
     /**
      * Resets this iterator to the start of the set.
@@ -246,8 +244,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
 
     // ======================= PRIVATES ===========================
 
- protected:
-
+protected:
     // endElement and nextElements are really UChar32's, but we keep
     // them as signed int32_t's so we can do comparisons with
     // endElement set to -1.  Leave them as int32_t's.
@@ -271,7 +268,7 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      * @stable ICU 2.4
      */
     int32_t nextElement;
-    //UBool abbreviated;
+    // UBool abbreviated;
     /** Next string
      * @stable ICU 2.4
      */
@@ -286,27 +283,26 @@ class U_COMMON_API UnicodeSetIterator : public UObject {
      *  string and the current iteration item is a code point, not a string.
      *  @internal
      */
-    UnicodeString *cpString;
+    UnicodeString* cpString;
 
     /** Copy constructor. Disallowed.
      * @stable ICU 2.4
      */
-    UnicodeSetIterator(const UnicodeSetIterator&); // disallow
+    UnicodeSetIterator( const UnicodeSetIterator& ); // disallow
 
     /** Assignment operator. Disallowed.
      * @stable ICU 2.4
      */
-    UnicodeSetIterator& operator=(const UnicodeSetIterator&); // disallow
+    UnicodeSetIterator& operator=( const UnicodeSetIterator& ); // disallow
 
     /** Load range
      * @stable ICU 2.4
      */
-    virtual void loadRange(int32_t range);
-
+    virtual void loadRange( int32_t range );
 };
 
 inline UBool UnicodeSetIterator::isString() const {
-    return codepoint == (UChar32)IS_STRING;
+    return codepoint == ( UChar32 )IS_STRING;
 }
 
 inline UChar32 UnicodeSetIterator::getCodepoint() const {
@@ -316,7 +312,6 @@ inline UChar32 UnicodeSetIterator::getCodepoint() const {
 inline UChar32 UnicodeSetIterator::getCodepointEnd() const {
     return codepointEnd;
 }
-
 
 U_NAMESPACE_END
 

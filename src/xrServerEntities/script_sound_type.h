@@ -12,4 +12,4 @@
 
 enum ESoundTypes;
 
-typedef enum_exporter<ESoundTypes> CScriptSoundType;
+typedef enum_exporter< ESoundTypes > CScriptSoundType;

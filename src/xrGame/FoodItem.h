@@ -3,13 +3,12 @@
 #include "eatable_item_object.h"
 #include "script_export_space.h"
 
-class CFoodItem : public CEatableItemObject
-{
+class CFoodItem : public CEatableItemObject {
 public:
-	CFoodItem();
-	virtual ~CFoodItem();
+    CFoodItem();
+    virtual ~CFoodItem();
 
-	virtual CFoodItem* cast_food_item() { return this; }
+    virtual CFoodItem* cast_food_item() { return this; }
 
-	DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

@@ -19,11 +19,11 @@
 #include "unicode/uobject.h"
 
 /**
- * \file 
+ * \file
  * \brief C++ API: An interface that defines both lookup protocol and parsing of
  * symbolic names.
  */
- 
+
 U_NAMESPACE_BEGIN
 
 class ParsePosition;
@@ -56,9 +56,10 @@ class UnicodeString;
  *
  * @stable ICU 2.8
  */
-class U_COMMON_API SymbolTable /* not : public UObject because this is an interface/mixin class */ {
+class U_COMMON_API SymbolTable /* not : public UObject because this is an
+                                  interface/mixin class */
+{
 public:
-
     /**
      * The character preceding a symbol reference name.
      * @stable ICU 2.8
@@ -80,7 +81,7 @@ public:
      * there is no mapping for s.
      * @stable ICU 2.8
      */
-    virtual const UnicodeString* lookup(const UnicodeString& s) const = 0;
+    virtual const UnicodeString* lookup( const UnicodeString& s ) const = 0;
 
     /**
      * Lookup the UnicodeMatcher associated with the given character, and
@@ -90,7 +91,7 @@ public:
      * character, or NULL if there is no mapping for ch.
      * @stable ICU 2.8
      */
-    virtual const UnicodeFunctor* lookupMatcher(UChar32 ch) const = 0;
+    virtual const UnicodeFunctor* lookupMatcher( UChar32 ch ) const = 0;
 
     /**
      * Parse a symbol reference name from the given string, starting
@@ -109,8 +110,9 @@ public:
      * valid symbolic name at the given position.
      * @stable ICU 2.8
      */
-    virtual UnicodeString parseReference(const UnicodeString& text,
-                                         ParsePosition& pos, int32_t limit) const = 0;
+    virtual UnicodeString parseReference( const UnicodeString& text,
+                                          ParsePosition& pos,
+                                          int32_t limit ) const = 0;
 };
 U_NAMESPACE_END
 
