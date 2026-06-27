@@ -120,43 +120,43 @@
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ProfiledDX11|x64'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11|x64'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Verified|x64'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11ASAN|x64'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-AVX|x64'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -202,7 +202,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <ImportLibrary>./../_build/lib/$(Configuration)/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
       <Message>Performing registration</Message>
@@ -251,7 +251,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <ImportLibrary>./../_build/lib/$(Configuration)/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
       <Message>Performing registration</Message>
@@ -301,7 +301,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <ImportLibrary>./../_build/lib/$(Configuration)/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
       <Message>Performing registration</Message>
@@ -352,7 +352,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <ImportLibrary>./../_build/lib/$(Configuration)/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
       <Message>Performing registration</Message>
@@ -403,7 +403,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <ImportLibrary>./../_build/lib/$(Configuration)/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
       <Message>Performing registration</Message>
@@ -454,7 +454,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <ImportLibrary>./../_build/lib/$(Configuration)/$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(xrLibDir)$(TargetName).lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
       <Message>Performing registration</Message>

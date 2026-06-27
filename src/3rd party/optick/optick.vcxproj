@@ -183,33 +183,33 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <LibraryPath>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ProfiledDX11|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <LibraryPath>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-AVX|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <LibraryPath>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Verified|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <LibraryPath>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11ASAN|x64'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <LibraryPath>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

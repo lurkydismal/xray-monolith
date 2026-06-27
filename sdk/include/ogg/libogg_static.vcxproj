@@ -132,55 +132,55 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\src\..\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ProfiledDX11|x64'">
     <OutDir>..\..\..\src\..\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11|x64'">
     <OutDir>..\..\..\src\..\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Verified|x64'">
     <OutDir>..\..\..\src\..\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11ASAN|x64'">
     <OutDir>..\..\..\src\..\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-AVX|x64'">
     <OutDir>..\..\..\src\..\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>./../_build/intermediate/$(Configuration)/$(ProjectName)\</IntDir>
+    <IntDir>$(xrIntDir)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>libogg_static</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ProfiledDX11|x64'">
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>libogg_static</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11|x64'">
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>libogg_static</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Verified|x64'">
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>libogg_static</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='VerifiedDX11ASAN|x64'">
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>libogg_static</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-AVX|x64'">
-    <OutDir>./../_build/_game/bin_dbg\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(xrGameDir)bin_dbg\$(Platform)\$(Configuration)\</OutDir>
     <TargetExt>.lib</TargetExt>
     <TargetName>libogg_static</TargetName>
   </PropertyGroup>
