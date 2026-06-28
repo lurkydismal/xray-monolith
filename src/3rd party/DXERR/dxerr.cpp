@@ -91,7 +91,7 @@
 #define CHK_ERR_WIN32A( hrchk )        \
     case HRESULT_FROM_WIN32b( hrchk ): \
     case hrchk:                        \
-        return L#hrchk;
+        return WIDEN( #hrchk );
 
 #define CHK_ERR_WIN32_ONLY( hrchk, strOut ) \
     case HRESULT_FROM_WIN32b( hrchk ):      \
@@ -3455,10 +3455,10 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
         // -------------------------------------------------------------
         // xaudio2.h error codes
         // -------------------------------------------------------------
-        CHK_ERRA( XAUDIO2_E_INVALID_CALL )
-        CHK_ERRA( XAUDIO2_E_XMA_DECODER_ERROR )
-        CHK_ERRA( XAUDIO2_E_XAPO_CREATION_FAILED )
-        CHK_ERRA( XAUDIO2_E_DEVICE_INVALIDATED )
+        CHK_ERRA( static_cast< HRESULT >( XAUDIO2_E_INVALID_CALL ) )
+        CHK_ERRA( static_cast< HRESULT >( XAUDIO2_E_XMA_DECODER_ERROR ) )
+        CHK_ERRA( static_cast< HRESULT >( XAUDIO2_E_XAPO_CREATION_FAILED ) )
+        CHK_ERRA( static_cast< HRESULT >( XAUDIO2_E_DEVICE_INVALIDATED ) )
 
         // -------------------------------------------------------------
         // xapo.h error codes
@@ -3477,9 +3477,9 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
 #undef CHK_ERR_WIN32A
 #undef CHK_ERR_WIN32_ONLY
 
-#define CHK_ERRA( hrchk )                 \
-    case hrchk:                           \
-        wcscpy_s( desc, count, L#hrchk ); \
+#define CHK_ERRA( hrchk )                         \
+    case hrchk:                                   \
+        wcscpy_s( desc, count, WIDEN( #hrchk ) ); \
         break;
 
 #define CHK_ERR( hrchk, strOut )            \
@@ -4372,12 +4372,13 @@ void WINAPI DXGetErrorDescriptionW( _In_ HRESULT hr,
         // -------------------------------------------------------------
         // xaudio2.h error codes
         // -------------------------------------------------------------
-        CHK_ERR( XAUDIO2_E_INVALID_CALL,
+        CHK_ERR( static_cast< HRESULT >( XAUDIO2_E_INVALID_CALL ),
                  "Invalid XAudio2 API call or arguments" )
-        CHK_ERR( XAUDIO2_E_XMA_DECODER_ERROR, "Hardware XMA decoder error" )
-        CHK_ERR( XAUDIO2_E_XAPO_CREATION_FAILED,
+        CHK_ERR( static_cast< HRESULT >( XAUDIO2_E_XMA_DECODER_ERROR ),
+                 "Hardware XMA decoder error" )
+        CHK_ERR( static_cast< HRESULT >( XAUDIO2_E_XAPO_CREATION_FAILED ),
                  "Failed to create an audio effect" )
-        CHK_ERR( XAUDIO2_E_DEVICE_INVALIDATED,
+        CHK_ERR( static_cast< HRESULT >( XAUDIO2_E_DEVICE_INVALIDATED ),
                  "Device invalidated (unplugged, disabled, etc)" )
 
         // -------------------------------------------------------------
