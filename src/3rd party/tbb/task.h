@@ -382,7 +382,7 @@ private:
     };
 
 public:
-    enum kind_type { isolated, bound };
+    enum kind_type { isolated, bound, bond_oob, bond_oob2, bond_oob3 };
 
     enum traits_type {
         exact_exception = 0x0001ul << traits_offset,
@@ -615,9 +615,9 @@ private:
     friend class internal::allocate_root_with_context_proxy;
 
     static const kind_type binding_required = bound;
-    static const kind_type binding_completed = kind_type( bound + 1 );
-    static const kind_type detached = kind_type( binding_completed + 1 );
-    static const kind_type dying = kind_type( detached + 1 );
+    static const kind_type binding_completed = ( kind_type )( bound + 1 );
+    static const kind_type detached = ( kind_type )( binding_completed + 1 );
+    static const kind_type dying = ( kind_type )( detached + 1 );
 
     //! Propagates any state change detected to *this, and as an optimisation
     //! possibly also upward along the heritage line.

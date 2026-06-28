@@ -70,35 +70,6 @@ using tbb::improper_lock;
 
 } // namespace Concurrency
 
-namespace concurrency {
-
-#if __TBB_TASK_GROUP_CONTEXT
-using tbb::invalid_multiple_scheduling;
-using tbb::make_task;
-using tbb::missing_wait;
-using tbb::structured_task_group;
-using tbb::task_group;
-using tbb::task_group_status;
-using tbb::task_handle;
-
-using tbb::canceled;
-using tbb::complete;
-using tbb::not_complete;
-
-using tbb::is_current_task_group_canceling;
-#endif /* __TBB_TASK_GROUP_CONTEXT */
-
-using tbb::combinable;
-using tbb::critical_section;
-using tbb::parallel_for_each;
-using tbb::parallel_invoke;
-using tbb::reader_writer_lock;
-using tbb::strict_ppl::parallel_for;
-
-using tbb::improper_lock;
-
-} // namespace concurrency
-
 #include "../internal/_warning_suppress_disable_notice.h"
 #undef __TBB_ppl_H_include_area
 
