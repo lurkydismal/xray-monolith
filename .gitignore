@@ -39,3 +39,4 @@ compressor/mod/
 \#*\#
 *~
 /src/build
+/broken.txt
