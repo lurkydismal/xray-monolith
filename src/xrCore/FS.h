@@ -8,6 +8,8 @@
 #define CFS_CompressMark ( 1ul << 31ul )
 #define CFS_HeaderChunkID ( 666 )
 
+#include "_compressed_normal.h"
+
 XRCORE_API void VerifyPath( LPCSTR path );
 
 // #define FS_DEBUG

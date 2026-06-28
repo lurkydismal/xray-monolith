@@ -10,11 +10,11 @@
 #include "pure.h"
 // #include "hw.h"
 #include "../xrcore/ftimer.h"
-#include "stats.h"
+#include "Stats.h"
 // #include "shader.h"
 // #include "R_Backend.h"
-
 #include "../build_config_defines.h"
+#include "_thread_types.h"
 
 #define VIEWPORT_NEAR Device.ViewportNear // 0.2f
 #define R_VIEWPORT_NEAR 0.005f
@@ -31,6 +31,8 @@
 #ifdef INGAME_EDITOR
 #include "../Include/editor/interfaces.hpp"
 #endif // #ifdef INGAME_EDITOR
+
+using xr_task_group = concurrency::task_group;
 
 class engine_impl;
 

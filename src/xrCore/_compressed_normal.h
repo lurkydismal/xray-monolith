@@ -1,6 +1,8 @@
 #ifndef _COMPR_NORMAL_
 #define _COMPR_NORMAL_
 
+#include "_vector3d.h"
+
 // A Unit Vector to 16-bit word conversion algorithm
 // based on work of Rafael Baptista (rafael@oroboro.com)
 // Accuracy improved by O.D. (punkfloyd@rocketmail.com)
