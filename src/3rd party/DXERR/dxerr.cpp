@@ -182,35 +182,35 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
         CHK_ERRA( DV_E_DVASPECT )
         CHK_ERRA( DV_E_DVTARGETDEVICE_SIZE )
         CHK_ERRA( DV_E_NOIVIEWOBJECT )
-        CHK_ERRA( DRAGDROP_E_FIRST )
-        CHK_ERRA( DRAGDROP_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( DRAGDROP_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( DRAGDROP_E_LAST ) )
         CHK_ERRA( DRAGDROP_S_FIRST )
         CHK_ERRA( DRAGDROP_S_LAST )
         //        CHK_ERRA(DRAGDROP_E_NOTREGISTERED)
         CHK_ERRA( DRAGDROP_E_ALREADYREGISTERED )
         CHK_ERRA( DRAGDROP_E_INVALIDHWND )
-        CHK_ERRA( CLASSFACTORY_E_FIRST )
-        CHK_ERRA( CLASSFACTORY_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( CLASSFACTORY_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( CLASSFACTORY_E_LAST ) )
         CHK_ERRA( CLASSFACTORY_S_FIRST )
         CHK_ERRA( CLASSFACTORY_S_LAST )
         //        CHK_ERRA(CLASS_E_NOAGGREGATION)
         CHK_ERRA( CLASS_E_CLASSNOTAVAILABLE )
         CHK_ERRA( CLASS_E_NOTLICENSED )
-        CHK_ERRA( MARSHAL_E_FIRST )
-        CHK_ERRA( MARSHAL_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( MARSHAL_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( MARSHAL_E_LAST ) )
         CHK_ERRA( MARSHAL_S_FIRST )
         CHK_ERRA( MARSHAL_S_LAST )
-        CHK_ERRA( DATA_E_FIRST )
-        CHK_ERRA( DATA_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( DATA_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( DATA_E_LAST ) )
         CHK_ERRA( DATA_S_FIRST )
         CHK_ERRA( DATA_S_LAST )
-        CHK_ERRA( VIEW_E_FIRST )
-        CHK_ERRA( VIEW_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( VIEW_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( VIEW_E_LAST ) )
         CHK_ERRA( VIEW_S_FIRST )
         CHK_ERRA( VIEW_S_LAST )
         //        CHK_ERRA(VIEW_E_DRAW)
-        CHK_ERRA( REGDB_E_FIRST )
-        CHK_ERRA( REGDB_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( REGDB_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( REGDB_E_LAST ) )
         CHK_ERRA( REGDB_S_FIRST )
         CHK_ERRA( REGDB_S_LAST )
         //        CHK_ERRA(REGDB_E_READREGDB)
@@ -219,12 +219,12 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
         CHK_ERRA( REGDB_E_INVALIDVALUE )
         CHK_ERRA( REGDB_E_CLASSNOTREG )
         CHK_ERRA( REGDB_E_IIDNOTREG )
-        CHK_ERRA( CAT_E_FIRST )
-        CHK_ERRA( CAT_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( CAT_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( CAT_E_LAST ) )
         //        CHK_ERRA(CAT_E_CATIDNOEXIST)
         //        CHK_ERRA(CAT_E_NODESCRIPTION)
-        CHK_ERRA( CS_E_FIRST )
-        CHK_ERRA( CS_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( CS_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( CS_E_LAST ) )
         //        CHK_ERRA(CS_E_PACKAGE_NOTFOUND)
         CHK_ERRA( CS_E_NOT_DELETABLE )
         CHK_ERRA( CS_E_CLASS_NOTFOUND )
@@ -237,33 +237,33 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
         CHK_ERRA( CS_E_ADMIN_LIMIT_EXCEEDED )
         CHK_ERRA( CS_E_SCHEMA_MISMATCH )
         //        CHK_ERRA(CS_E_INTERNAL_ERROR)
-        CHK_ERRA( CACHE_E_FIRST )
-        CHK_ERRA( CACHE_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( CACHE_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( CACHE_E_LAST ) )
         CHK_ERRA( CACHE_S_FIRST )
         CHK_ERRA( CACHE_S_LAST )
         //        CHK_ERRA(CACHE_E_NOCACHE_UPDATED)
-        CHK_ERRA( OLEOBJ_E_FIRST )
-        CHK_ERRA( OLEOBJ_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( OLEOBJ_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( OLEOBJ_E_LAST ) )
         CHK_ERRA( OLEOBJ_S_FIRST )
         CHK_ERRA( OLEOBJ_S_LAST )
         //        CHK_ERRA(OLEOBJ_E_NOVERBS)
         CHK_ERRA( OLEOBJ_E_INVALIDVERB )
-        CHK_ERRA( CLIENTSITE_E_FIRST )
-        CHK_ERRA( CLIENTSITE_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( CLIENTSITE_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( CLIENTSITE_E_LAST ) )
         CHK_ERRA( CLIENTSITE_S_FIRST )
         CHK_ERRA( CLIENTSITE_S_LAST )
         CHK_ERRA( INPLACE_E_NOTUNDOABLE )
         CHK_ERRA( INPLACE_E_NOTOOLSPACE )
         //        CHK_ERRA(INPLACE_E_FIRST)
-        CHK_ERRA( INPLACE_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( INPLACE_E_LAST ) )
         CHK_ERRA( INPLACE_S_FIRST )
         CHK_ERRA( INPLACE_S_LAST )
-        CHK_ERRA( ENUM_E_FIRST )
-        CHK_ERRA( ENUM_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( ENUM_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( ENUM_E_LAST ) )
         CHK_ERRA( ENUM_S_FIRST )
         CHK_ERRA( ENUM_S_LAST )
-        CHK_ERRA( CONVERT10_E_FIRST )
-        CHK_ERRA( CONVERT10_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( CONVERT10_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( CONVERT10_E_LAST ) )
         CHK_ERRA( CONVERT10_S_FIRST )
         CHK_ERRA( CONVERT10_S_LAST )
         //        CHK_ERRA(CONVERT10_E_OLESTREAM_GET)
@@ -273,8 +273,8 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
         CHK_ERRA( CONVERT10_E_STG_FMT )
         CHK_ERRA( CONVERT10_E_STG_NO_STD_STREAM )
         CHK_ERRA( CONVERT10_E_STG_DIB_TO_BITMAP )
-        CHK_ERRA( CLIPBRD_E_FIRST )
-        CHK_ERRA( CLIPBRD_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( CLIPBRD_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( CLIPBRD_E_LAST ) )
         CHK_ERRA( CLIPBRD_S_FIRST )
         CHK_ERRA( CLIPBRD_S_LAST )
         //        CHK_ERRA(CLIPBRD_E_CANT_OPEN)
@@ -282,8 +282,8 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
         CHK_ERRA( CLIPBRD_E_CANT_SET )
         CHK_ERRA( CLIPBRD_E_BAD_DATA )
         CHK_ERRA( CLIPBRD_E_CANT_CLOSE )
-        CHK_ERRA( MK_E_FIRST )
-        CHK_ERRA( MK_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( MK_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( MK_E_LAST ) )
         CHK_ERRA( MK_S_FIRST )
         CHK_ERRA( MK_S_LAST )
         //        CHK_ERRA(MK_E_CONNECTMANUALLY)
@@ -2144,8 +2144,8 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
         //        CHK_ERRA(EVENT_E_CANT_MODIFY_OR_DELETE_CONFIGURED_OBJECT)
         //        CHK_ERRA(EVENT_E_INVALID_EVENT_CLASS_PARTITION)
         //        CHK_ERRA(EVENT_E_PER_USER_SID_NOT_LOGGED_ON)
-        CHK_ERRA( CONTEXT_E_FIRST )
-        CHK_ERRA( CONTEXT_E_LAST )
+        CHK_ERRA( static_cast< HRESULT >( CONTEXT_E_FIRST ) )
+        CHK_ERRA( static_cast< HRESULT >( CONTEXT_E_LAST ) )
         CHK_ERRA( CONTEXT_S_FIRST )
         CHK_ERRA( CONTEXT_S_LAST )
         CHK_ERRA( CONTEXT_E_ABORTED )
@@ -3165,32 +3165,35 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
         //      CHK_ERRA(DI_TRUNCATED)
         //      CHK_ERRA(DI_TRUNCATEDANDRESTARTED)
         //      CHK_ERRA(DI_WRITEPROTECT)
-        CHK_ERR( DIERR_INSUFFICIENTPRIVS,
+        CHK_ERR( static_cast< HRESULT >( DIERR_INSUFFICIENTPRIVS ),
                  "DIERR_INSUFFICIENTPRIVS & VFW_E_INVALIDMEDIATYPE" )
-        CHK_ERR( DIERR_DEVICEFULL,
+        CHK_ERR( static_cast< HRESULT >( DIERR_DEVICEFULL ),
                  "DIERR_DEVICEFULL & VFW_E_INVALIDSUBTYPE & "
                  "DMO_E_INVALIDSTREAMINDEX" )
-        CHK_ERR( DIERR_MOREDATA,
+        CHK_ERR( static_cast< HRESULT >( DIERR_MOREDATA ),
                  "DIERR_MOREDATA & VFW_E_NEED_OWNER & DMO_E_INVALIDTYPE" )
-        CHK_ERR( DIERR_NOTDOWNLOADED,
+        CHK_ERR( static_cast< HRESULT >( DIERR_NOTDOWNLOADED ),
                  "DIERR_NOTDOWNLOADED & VFW_E_ENUM_OUT_OF_SYNC & "
                  "DMO_E_TYPE_NOT_SET" )
         CHK_ERR(
-            DIERR_HASEFFECTS,
+            static_cast< HRESULT >( DIERR_HASEFFECTS ),
             "DIERR_HASEFFECTS & VFW_E_ALREADY_CONNECTED & DMO_E_NOTACCEPTING" )
-        CHK_ERR( DIERR_NOTEXCLUSIVEACQUIRED,
+        CHK_ERR( static_cast< HRESULT >( DIERR_NOTEXCLUSIVEACQUIRED ),
                  "DIERR_NOTEXCLUSIVEACQUIRED & VFW_E_FILTER_ACTIVE & "
                  "DMO_E_TYPE_NOT_ACCEPTED" )
         CHK_ERR(
-            DIERR_INCOMPLETEEFFECT,
+            static_cast< HRESULT >( DIERR_INCOMPLETEEFFECT ),
             "DIERR_INCOMPLETEEFFECT & VFW_E_NO_TYPES & DMO_E_NO_MORE_ITEMS" )
-        CHK_ERR( DIERR_NOTBUFFERED,
+        CHK_ERR( static_cast< HRESULT >( DIERR_NOTBUFFERED ),
                  "DIERR_NOTBUFFERED & VFW_E_NO_ACCEPTABLE_TYPES" )
-        CHK_ERR( DIERR_EFFECTPLAYING,
+        CHK_ERR( static_cast< HRESULT >( DIERR_EFFECTPLAYING ),
                  "DIERR_EFFECTPLAYING & VFW_E_INVALID_DIRECTION" )
-        CHK_ERR( DIERR_UNPLUGGED, "DIERR_UNPLUGGED & VFW_E_NOT_CONNECTED" )
-        CHK_ERR( DIERR_REPORTFULL, "DIERR_REPORTFULL & VFW_E_NO_ALLOCATOR" )
-        CHK_ERR( DIERR_MAPFILEFAIL, "DIERR_MAPFILEFAIL & VFW_E_RUNTIME_ERROR" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_UNPLUGGED ),
+                 "DIERR_UNPLUGGED & VFW_E_NOT_CONNECTED" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_REPORTFULL ),
+                 "DIERR_REPORTFULL & VFW_E_NO_ALLOCATOR" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_MAPFILEFAIL ),
+                 "DIERR_MAPFILEFAIL & VFW_E_RUNTIME_ERROR" )
         //      CHK_ERRA(DIERR_OLDDIRECTINPUTVERSION)
         //      CHK_ERRA(DIERR_GENERIC)
         //      CHK_ERRA(DIERR_OLDDIRECTINPUTVERSION)
@@ -3218,16 +3221,23 @@ const WCHAR* WINAPI DXGetErrorStringW( _In_ HRESULT hr ) {
         // dinputd.h error
         // -------------------------------------------------------------
         //        CHK_ERRA(DIERR_NOMOREITEMS)
-        CHK_ERRA( DIERR_DRIVERFIRST )
-        CHK_ERR( DIERR_DRIVERFIRST + 1, "DIERR_DRIVERFIRST+1" )
-        CHK_ERR( DIERR_DRIVERFIRST + 2, "DIERR_DRIVERFIRST+2" )
-        CHK_ERR( DIERR_DRIVERFIRST + 3, "DIERR_DRIVERFIRST+3" )
-        CHK_ERR( DIERR_DRIVERFIRST + 4, "DIERR_DRIVERFIRST+4" )
-        CHK_ERR( DIERR_DRIVERFIRST + 5, "DIERR_DRIVERFIRST+5" )
-        CHK_ERRA( DIERR_DRIVERLAST )
-        CHK_ERR( DIERR_INVALIDCLASSINSTALLER, "DIERR_INVALIDCLASSINSTALLER" )
-        CHK_ERR( DIERR_CANCELLED, "DIERR_CANCELLED & MS_E_SAMPLEALLOC" )
-        CHK_ERRA( DIERR_BADINF )
+        CHK_ERRA( static_cast< HRESULT >( DIERR_DRIVERFIRST ) )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 1,
+                 "DIERR_DRIVERFIRST+1" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 2,
+                 "DIERR_DRIVERFIRST+2" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 3,
+                 "DIERR_DRIVERFIRST+3" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 4,
+                 "DIERR_DRIVERFIRST+4" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 5,
+                 "DIERR_DRIVERFIRST+5" )
+        CHK_ERRA( static_cast< HRESULT >( DIERR_DRIVERLAST ) )
+        CHK_ERR( static_cast< HRESULT >( DIERR_INVALIDCLASSINSTALLER ),
+                 "DIERR_INVALIDCLASSINSTALLER" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_CANCELLED ),
+                 "DIERR_CANCELLED & MS_E_SAMPLEALLOC" )
+        CHK_ERRA( static_cast< HRESULT >( DIERR_BADINF ) )
 
         // -------------------------------------------------------------
         // d3d9.h error codes
@@ -3896,59 +3906,59 @@ void WINAPI DXGetErrorDescriptionW( _In_ HRESULT hr,
         //      CHK_ERR(DIERR_READONLY, "DIERR_READONLY")
         //      CHK_ERR(DIERR_HANDLEEXISTS, "DIERR_HANDLEEXISTS")
         CHK_ERR(
-            DIERR_INSUFFICIENTPRIVS,
+            static_cast< HRESULT >( DIERR_INSUFFICIENTPRIVS ),
             "Unable to IDirectInputJoyConfig_Acquire because the user does not "
             "have sufficient privileges to change the joystick configuration. "
             "& An invalid media type was specified" )
         CHK_ERR(
-            DIERR_DEVICEFULL,
+            static_cast< HRESULT >( DIERR_DEVICEFULL ),
             "The device is full. & An invalid media subtype was specified." )
         CHK_ERR(
-            DIERR_MOREDATA,
+            static_cast< HRESULT >( DIERR_MOREDATA ),
             "Not all the requested information fit into the buffer. & This "
             "object can only be created as an aggregated object." )
-        CHK_ERR( DIERR_NOTDOWNLOADED,
+        CHK_ERR( static_cast< HRESULT >( DIERR_NOTDOWNLOADED ),
                  "The effect is not downloaded. & The enumerator has become "
                  "invalid." )
         CHK_ERR(
-            DIERR_HASEFFECTS,
+            static_cast< HRESULT >( DIERR_HASEFFECTS ),
             "The device cannot be reinitialized because there are still "
             "effects attached to it. & At least one of the pins involved in "
             "the operation is already connected." )
         CHK_ERR(
-            DIERR_NOTEXCLUSIVEACQUIRED,
+            static_cast< HRESULT >( DIERR_NOTEXCLUSIVEACQUIRED ),
             "The operation cannot be performed unless the device is acquired "
             "in DISCL_EXCLUSIVE mode. & This operation cannot be performed "
             "because the filter is active." )
         CHK_ERR(
-            DIERR_INCOMPLETEEFFECT,
+            static_cast< HRESULT >( DIERR_INCOMPLETEEFFECT ),
             "The effect could not be downloaded because essential information "
             "is missing.  For example, no axes have been associated with the "
             "effect, or no type-specific information has been created. & One "
             "of the specified pins supports no media types." )
         CHK_ERR(
-            DIERR_NOTBUFFERED,
+            static_cast< HRESULT >( DIERR_NOTBUFFERED ),
             "Attempted to read buffered device data from a device that is not "
             "buffered. & There is no common media type between these pins." )
         CHK_ERR(
-            DIERR_EFFECTPLAYING,
+            static_cast< HRESULT >( DIERR_EFFECTPLAYING ),
             "An attempt was made to modify parameters of an effect while it is "
             "playing.  Not all hardware devices support altering the "
             "parameters of an effect while it is playing. & Two pins of the "
             "same direction cannot be connected together." )
-        CHK_ERR( DIERR_UNPLUGGED,
+        CHK_ERR( static_cast< HRESULT >( DIERR_UNPLUGGED ),
                  "The operation could not be completed because the "
                  "device is not plugged in. & The operation cannot "
                  "be performed because the pins are not connected." )
         CHK_ERR(
-            DIERR_REPORTFULL,
+            static_cast< HRESULT >( DIERR_REPORTFULL ),
             "SendDeviceData failed because more information was requested to "
             "be sent than can be sent to the device.  Some devices have "
             "restrictions on how much data can be sent to them.  (For example, "
             "there might be a limit on the number of buttons that can be "
             "pressed at once.) & No sample buffer allocator is available." )
         CHK_ERR(
-            DIERR_MAPFILEFAIL,
+            static_cast< HRESULT >( DIERR_MAPFILEFAIL ),
             "A mapper file function failed because reading or writing the user "
             "or IHV settings file failed. & A run-time error occurred." )
 
@@ -3957,25 +3967,31 @@ void WINAPI DXGetErrorDescriptionW( _In_ HRESULT hr,
         // -------------------------------------------------------------
         CHK_ERR( DIERR_NOMOREITEMS, "No more items." )
         CHK_ERR(
-            DIERR_DRIVERFIRST,
+            static_cast< HRESULT >( DIERR_DRIVERFIRST ),
             "Device driver-specific codes. Unless the specific driver has been "
             "precisely identified, no meaning should be attributed to these "
             "values other than that the driver originated the error." )
-        CHK_ERR( DIERR_DRIVERFIRST + 1, "DIERR_DRIVERFIRST+1" )
-        CHK_ERR( DIERR_DRIVERFIRST + 2, "DIERR_DRIVERFIRST+2" )
-        CHK_ERR( DIERR_DRIVERFIRST + 3, "DIERR_DRIVERFIRST+3" )
-        CHK_ERR( DIERR_DRIVERFIRST + 4, "DIERR_DRIVERFIRST+4" )
-        CHK_ERR( DIERR_DRIVERFIRST + 5, "DIERR_DRIVERFIRST+5" )
-        CHK_ERR( DIERR_DRIVERLAST, "Device installer errors." )
-        CHK_ERR( DIERR_INVALIDCLASSINSTALLER,
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 1,
+                 "DIERR_DRIVERFIRST+1" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 2,
+                 "DIERR_DRIVERFIRST+2" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 3,
+                 "DIERR_DRIVERFIRST+3" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 4,
+                 "DIERR_DRIVERFIRST+4" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERFIRST ) + 5,
+                 "DIERR_DRIVERFIRST+5" )
+        CHK_ERR( static_cast< HRESULT >( DIERR_DRIVERLAST ),
+                 "Device installer errors." )
+        CHK_ERR( static_cast< HRESULT >( DIERR_INVALIDCLASSINSTALLER ),
                  "Registry entry or DLL for class installer invalid or class "
                  "installer not found." )
-        CHK_ERR( DIERR_CANCELLED,
+        CHK_ERR( static_cast< HRESULT >( DIERR_CANCELLED ),
                  "The user cancelled the install operation. & The stream "
                  "already has "
                  "allocated samples and the surface doesn't match the sample "
                  "format." )
-        CHK_ERR( DIERR_BADINF,
+        CHK_ERR( static_cast< HRESULT >( DIERR_BADINF ),
                  "The INF file for the selected device could not be found or "
                  "is invalid "
                  "or is damaged. & The specified purpose ID can't be used for "
