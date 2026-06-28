@@ -1,5 +1,10 @@
+#pragma once
+
 #ifndef xr_trimsH
 #define xr_trimsH
+
+using SStringVec = xr_vector< xr_string >;
+using SStringVecIt = SStringVec::iterator;
 
 // refs
 struct xr_token;

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "client_id.h"
+#include "vector.h"
 
 #pragma pack( push, 1 )
 

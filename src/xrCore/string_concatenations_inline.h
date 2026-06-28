@@ -1,3 +1,7 @@
+#pragma once
+
+#include "xrstring.h"
+
 namespace xray {
 namespace core {
 namespace detail {
