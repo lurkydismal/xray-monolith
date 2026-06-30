@@ -1,7 +1,7 @@
 #ifndef __STACKWALKER_H__
 #define __STACKWALKER_H__
 
-#if defined( _MSC_VER )
+#if defined( __WIN32 )
 
 /**********************************************************************
  *
@@ -46,7 +46,9 @@
 #include <windows.h>
 
 // special defines for VC5/6 (if no actual PSDK is installed):
-#if _MSC_VER < 1300
+// FIX: Not defined
+// #if _MSC_VER < 1300
+#if 0
 typedef unsigned __int64 DWORD64, *PDWORD64;
 #if defined( _WIN64 )
 typedef unsigned __int64 SIZE_T, *PSIZE_T;
@@ -58,13 +60,13 @@ typedef unsigned long SIZE_T, *PSIZE_T;
 class StackWalkerInternal; // forward
 class StackWalker {
 public:
-    typedef enum ExceptType {
+    using ExceptType = enum ExceptType {
         NonExcept = 0, // RtlCaptureContext
         AfterExcept = 1,
         AfterCatch = 2, // get_current_exception_context
-    } ExceptType;
+    };
 
-    typedef enum StackWalkOptions {
+    using StackWalkOptions = enum StackWalkOptions {
         // No addition info will be retrieved
         // (only the address is available)
         RetrieveNone = 0,
@@ -95,7 +97,7 @@ public:
 
         // Contains all options (default)
         OptionsAll = 0x3F
-    } StackWalkOptions;
+    };
 
     StackWalker( ExceptType extype,
                  int options = OptionsAll,
@@ -126,7 +128,7 @@ private:
                PEXCEPTION_POINTERS exp = NULL );
 
 public:
-    typedef BOOL( __stdcall* PReadProcessMemoryRoutine )(
+    using PReadProcessMemoryRoutine = BOOL( __stdcall* )(
         HANDLE hProcess,
         DWORD64 qwBaseAddress,
         PVOID lpBuffer,
@@ -147,7 +149,9 @@ public:
 
     BOOL ShowObject( LPVOID pObject );
 
-#if _MSC_VER >= 1300
+// FIX: Not defined
+// #if _MSC_VER >= 1300
+#if 1
     // due to some reasons, the "STACKWALK_MAX_NAMELEN" must be declared as
     // "public" in older compilers in order to use it... starting with VC7 we
     // can declare it as "protected"
@@ -157,7 +161,7 @@ protected:
 
 protected:
     // Entry for each Callstack-Entry
-    typedef struct CallstackEntry {
+    using CallstackEntry = struct CallstackEntry {
         DWORD64 offset; // if 0, we have no valid entry
         CHAR name[ STACKWALK_MAX_NAMELEN ];
         CHAR undName[ STACKWALK_MAX_NAMELEN ];
@@ -171,13 +175,13 @@ protected:
         CHAR moduleName[ STACKWALK_MAX_NAMELEN ];
         DWORD64 baseOfImage;
         CHAR loadedImageName[ STACKWALK_MAX_NAMELEN ];
-    } CallstackEntry;
+    };
 
-    typedef enum CallstackEntryType {
+    using CallstackEntryType = enum CallstackEntryType {
         firstEntry,
         nextEntry,
         lastEntry
-    } CallstackEntryType;
+    };
 
     virtual void OnSymInit( LPCSTR szSearchPath,
                             DWORD symOptions,
