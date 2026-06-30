@@ -1139,7 +1139,8 @@ float CxImage::KernelBlackman( const float x ) {
 float CxImage::KernelBessel_J1( const float x ) {
     double p, q;
 
-    register long i;
+    // NOTE: Removed register
+    long i;
 
     static const double Pone[] = { 0.581199354001606143928050809e+21,
                                    -0.6672106568924916298020941484e+20,
@@ -1172,7 +1173,8 @@ float CxImage::KernelBessel_J1( const float x ) {
 float CxImage::KernelBessel_P1( const float x ) {
     double p, q;
 
-    register long i;
+    // NOTE: Removed register
+    long i;
 
     static const double Pone[] = { 0.352246649133679798341724373e+5,
                                    0.62758845247161281269005675e+5,
@@ -1199,7 +1201,8 @@ float CxImage::KernelBessel_P1( const float x ) {
 float CxImage::KernelBessel_Q1( const float x ) {
     double p, q;
 
-    register long i;
+    // NOTE: Removed register
+    long i;
 
     static const double Pone[] = { 0.3511751914303552822533318e+3,
                                    0.7210391804904475039280863e+3,

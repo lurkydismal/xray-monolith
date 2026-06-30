@@ -1,5 +1,9 @@
+#pragma once
+
 #if !defined( __ximaCFG_h )
 #define __ximaCFG_h
+
+#include <cstddef>
 
 extern "C" void* cxalloc( size_t size );
 extern "C" void cxfree( void* ptr );

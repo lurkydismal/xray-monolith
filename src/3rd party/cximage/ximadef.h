@@ -64,6 +64,15 @@
 #define CXIMAGE_SUPPORT_WINDOWS 0
 #endif
 
+#if defined( WIN32 ) || defined( _WIN32_WCE )
+#include <windows.h>
+
+#include <tchar.h>
+#endif
+
+#include <math.h>
+#include <stdio.h>
+
 #ifndef min
 #define min( a, b ) ( ( ( a ) < ( b ) ) ? ( a ) : ( b ) )
 #endif
@@ -74,15 +83,6 @@
 #ifndef PI
 #define PI 3.141592653589793f
 #endif
-
-#if defined( WIN32 ) || defined( _WIN32_WCE )
-#include <windows.h>
-
-#include <tchar.h>
-#endif
-
-#include <math.h>
-#include <stdio.h>
 
 #ifdef __BORLANDC__
 
