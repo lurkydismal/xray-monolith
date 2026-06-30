@@ -1,4 +1,4 @@
-﻿//                      FastDelegate.hpp
+//                      FastDelegate.hpp
 //  Efficient delegates in C++ that generate only two lines of asm code!
 //  Documentation is found at http://www.codeproject.com/cpp/FastDelegate.asp
 //
@@ -76,9 +76,7 @@
 
 #ifndef FASTDELEGATE_HPP
 #define FASTDELEGATE_HPP
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 #include <cstring> // to allow <,> comparisons
 
