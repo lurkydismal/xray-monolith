@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 #pragma once
-#if defined( _MSC_VER )
+#if defined( __WIN32__ )
 
 #include "optick.config.h"
 
@@ -1461,7 +1461,7 @@ Trace* Platform::CreateTrace() {
 #define USE_DBG_HELP ( OPTICK_PC )
 
 #if USE_DBG_HELP
-#include <DbgHelp.h>
+#include <dbghelp.h>
 #pragma comment( lib, "DbgHelp.Lib" )
 #endif
 
