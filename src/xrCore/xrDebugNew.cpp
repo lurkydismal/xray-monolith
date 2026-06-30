@@ -14,6 +14,7 @@
 #pragma warning( pop )
 
 #include "../build_config_defines.h"
+#include "try_except.h"
 
 extern bool shared_str_initialized;
 
@@ -79,7 +80,7 @@ void save() {
 } // namespace crash_saving
 
 // demonized: print stack trace
-#include <Windows.h>
+#include <windows.h>
 
 #include "../3rd party/stackwalker/include/StackWalker.h"
 #include "mezz_stringbuffer.h"
@@ -779,14 +780,23 @@ void save_mini_dump( _EXCEPTION_POINTERS* pExceptionInfo ) {
             xr_strcat( szDumpPath, t_stemp );
             xr_strcat( szDumpPath, ".mdmp" );
 
-            __try {
-                if ( FS.path_exist( "$logs$" ) )
-                    FS.update_path( szDumpPath, "$logs$", szDumpPath );
-            } __except ( EXCEPTION_EXECUTE_HANDLER ) {
-                string_path temp;
-                xr_strcpy( temp, szDumpPath );
+            // NOTE: LD
+            auto l_fallback = [ & ]() -> void {
+                string_path l_temp;
+                xr_strcpy( l_temp, szDumpPath );
                 xr_strcpy( szDumpPath, "logs/" );
-                xr_strcat( szDumpPath, temp );
+                xr_strcat( szDumpPath, l_temp );
+            };
+
+            TRY {
+                if ( FS.path_exist( "$logs$" ) ) {
+                    if ( !FS.update_path( szDumpPath, "$logs$", szDumpPath ) ) {
+                        l_fallback();
+                    }
+                }
+            }
+            EXCEPT( EXCEPTION_EXECUTE_HANDLER ) {
+                l_fallback();
             }
 
             // create the file
