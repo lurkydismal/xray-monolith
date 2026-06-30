@@ -146,7 +146,7 @@
 #ifdef __BORLANDC__
 #define NODEFAULT
 #else
-#define NODEFAULT __assume( 0 )
+#define NODEFAULT __builtin_unreachable()
 #endif
 #ifdef USE_VERIFY_IN_RELEASE
 #define VERIFY( expr )                              \
