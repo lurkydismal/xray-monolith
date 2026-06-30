@@ -9,6 +9,8 @@ SPDX-License-Identifier: MIT
 #ifndef _GIF_LIB_PRIVATE_H
 #define _GIF_LIB_PRIVATE_H
 
+#include <stdio.h>
+
 #include "gif_hash.h"
 #include "gif_lib.h"
 
