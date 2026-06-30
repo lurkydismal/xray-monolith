@@ -7,8 +7,8 @@
 // "Software"), to deal 	in the Software without restriction, including
 // without limitation the rights 	to use, copy, modify, merge, publish,
 // distribute, sublicense, and/or sell 	copies of the Software, and to permit
-// persons to whom the Software is 	furnished to do so, subject to the following
-// conditions:
+// persons to whom the Software is 	furnished to do so, subject to the
+// following conditions:
 //
 //  The above copyright notice and this permission notice shall be included in
 // 	all copies or substantial portions of the Software.
@@ -21,7 +21,7 @@
 // FROM, 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN 	THE SOFTWARE.
 
-#include <MTConfig.h>
+#include "../../MTConfig.h"
 
 #if MT_PLATFORM_WINDOWS
 
@@ -43,7 +43,7 @@
 
 //
 // Here we will check that the MicroWindows.h is fully compatible with the
-// standard Windows.h
+// standard windows.h
 //
 
 // Check types

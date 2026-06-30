@@ -3,7 +3,7 @@
 #include "event.h"
 #include "ffi.h"
 #ifdef _WIN32
-#include <Windows.h>
+#include <windows.h>
 
 #include <dxgi.h>
 #endif
