@@ -530,6 +530,7 @@ if(MSVC)
         >
         /permissive-;
         /std:c++latest;
+        /EHsc
         /Gm-;
         /W4;
         /wd4065;
