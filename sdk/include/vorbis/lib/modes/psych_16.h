@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -14,6 +15,8 @@
  last mod: $Id: psych_16.h 16227 2009-07-08 06:58:46Z xiphmont $
 
  ********************************************************************/
+
+#include "../shared.h"
 
 /* stereo mode by base quality level */
 static const adj_stereo _psy_stereo_modes_16[ 4 ] = {

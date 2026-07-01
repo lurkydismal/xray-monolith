@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -17,6 +18,8 @@
 
 #ifndef _V_MASKING_H_
 #define _V_MASKING_H_
+
+#include "vorbis/lib/shared.h"
 
 /* more detailed ATH; the bass if flat to save stressing the floor
    overly for only a bin or two of savings. */

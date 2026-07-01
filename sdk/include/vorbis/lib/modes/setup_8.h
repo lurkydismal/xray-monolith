@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -15,6 +16,8 @@
 
  ********************************************************************/
 
+#include "floor_all.h"
+#include "psych_44.h"
 #include "psych_8.h"
 #include "residue_8.h"
 

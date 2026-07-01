@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -14,6 +15,10 @@
  last mod: $Id: setup_22.h 16227 2009-07-08 06:58:46Z xiphmont $
 
  ********************************************************************/
+
+#include "../shared.h"
+#include "setup_16.h"
+#include "setup_8.h"
 
 static const double rate_mapping_22[ 4 ] = { 15000., 20000., 44000., 86000. };
 

@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -15,8 +16,9 @@
 
  ********************************************************************/
 
-#include "backends.h"
-#include "books/coupled/res_books_stereo.h"
+#include "../backends.h"
+#include "../books/coupled/res_books_stereo.h"
+#include "../shared.h"
 #include "vorbis/codec.h"
 
 /***** residue backends *********************************************/

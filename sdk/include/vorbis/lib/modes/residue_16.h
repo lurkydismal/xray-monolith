@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * This FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -16,6 +17,12 @@
  ********************************************************************/
 
 /***** residue backends *********************************************/
+
+#include "../books/coupled/res_books_stereo.h"
+#include "../books/uncoupled/res_books_uncoupled.h"
+#include "../shared.h"
+#include "residue_44.h"
+#include "residue_44u.h"
 
 static const static_bookblock _resbook_16s_0 = {
     { { 0 },

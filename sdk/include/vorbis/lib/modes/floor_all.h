@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -15,8 +16,8 @@
 
  ********************************************************************/
 
-#include "backends.h"
-#include "books/floor/floor_books.h"
+#include "../backends.h"
+#include "../books/floor/floor_books.h"
 #include "vorbis/codec.h"
 
 static const static_codebook* const _floor_128x4_books[] = {

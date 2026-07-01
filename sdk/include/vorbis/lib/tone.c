@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "os.h"
+
 void usage() {
     fprintf( stderr,
              "tone <frequency_Hz>,[<amplitude>] "
@@ -18,8 +20,8 @@ int main( int argc, char* argv[] ) {
     if ( argc < 2 )
         usage();
 
-    f = alloca( sizeof( *f ) * ( argc - 1 ) );
-    amp = alloca( sizeof( *amp ) * ( argc - 1 ) );
+    f = _alloca( sizeof( *f ) * ( argc - 1 ) );
+    amp = _alloca( sizeof( *amp ) * ( argc - 1 ) );
 
     i = 0;
     while ( argv[ i + 1 ] ) {

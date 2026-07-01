@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -15,8 +16,9 @@
 
  ********************************************************************/
 
-#include "backends.h"
-#include "books/uncoupled/res_books_uncoupled.h"
+#include "../backends.h"
+#include "../books/uncoupled/res_books_uncoupled.h"
+#include "../shared.h"
 #include "vorbis/codec.h"
 
 /***** residue backends *********************************************/
@@ -59,7 +61,8 @@ static const vorbis_info_residue0 _residue_44_hi_un = {
 /* mapping conventions:
    only one submap (this would change for efficient 5.1 support for example)*/
 /* Four psychoacoustic profiles are used, one for each blocktype */
-static const vorbis_info_mapping0 _map_nominal_u[ 2 ] = {
+// NOTE: LD / removed static
+const vorbis_info_mapping0 _map_nominal_u[ 2 ] = {
     { 1, { 0, 0 }, { 0 }, { 0 }, 0, { 0 }, { 0 } },
     { 1, { 0, 0 }, { 1 }, { 1 }, 0, { 0 }, { 0 } } };
 

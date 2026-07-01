@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -16,6 +17,8 @@
  ********************************************************************/
 
 /* preecho trigger settings *****************************************/
+
+#include "../shared.h"
 
 static const vorbis_info_psy_global _psy_global_44[ 5 ] = {
 

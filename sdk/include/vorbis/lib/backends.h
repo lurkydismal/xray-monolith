@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -59,29 +60,6 @@ typedef struct {
 #define VIF_POSIT 63
 #define VIF_CLASS 16
 #define VIF_PARTS 31
-typedef struct {
-    int partitions;                  /* 0 to 31 */
-    int partitionclass[ VIF_PARTS ]; /* 0 to 15 */
-
-    int class_dim[ VIF_CLASS ];          /* 1 to 8 */
-    int class_subs[ VIF_CLASS ];         /* 0,1,2,3 (bits: 1<<n poss) */
-    int class_book[ VIF_CLASS ];         /* subs ^ dim entries */
-    int class_subbook[ VIF_CLASS ][ 8 ]; /* [VIF_CLASS][subs] */
-
-    int mult;                      /* 1 2 3 or 4 */
-    int postlist[ VIF_POSIT + 2 ]; /* first two implicit */
-
-    /* encode side analysis parameters */
-    float maxover;
-    float maxunder;
-    float maxerr;
-
-    float twofitweight;
-    float twofitatten;
-
-    int n;
-
-} vorbis_info_floor1;
 
 /* Residue backend generic *****************************************/
 typedef struct {
@@ -110,22 +88,6 @@ typedef struct {
                       int );
 } vorbis_func_residue;
 
-typedef struct vorbis_info_residue0 {
-    /* block-partitioned VQ coded straight residue */
-    long begin;
-    long end;
-
-    /* first stage (lossless partitioning) */
-    int grouping;           /* group n vectors per partition */
-    int partitions;         /* possible codebooks for a partition */
-    int groupbook;          /* huffbook for partitioning */
-    int secondstages[ 64 ]; /* expanded out to pointers in lookup */
-    int booklist[ 256 ];    /* list of second stage books */
-
-    const float classmetric1[ 64 ];
-    const float classmetric2[ 64 ];
-} vorbis_info_residue0;
-
 /* Mapping backend generic *****************************************/
 typedef struct {
     void ( *pack )( vorbis_info*, vorbis_info_mapping*, oggpack_buffer* );
@@ -134,18 +96,5 @@ typedef struct {
     int ( *forward )( struct vorbis_block* vb );
     int ( *inverse )( struct vorbis_block* vb, vorbis_info_mapping* );
 } vorbis_func_mapping;
-
-typedef struct vorbis_info_mapping0 {
-    int submaps;          /* <= 16 */
-    int chmuxlist[ 256 ]; /* up to 256 channels in a Vorbis stream */
-
-    int floorsubmap[ 16 ];   /* [mux] submap to floors */
-    int residuesubmap[ 16 ]; /* [mux] submap to residue */
-
-    int coupling_steps;
-    int coupling_mag[ 256 ];
-    int coupling_ang[ 256 ];
-
-} vorbis_info_mapping0;
 
 #endif

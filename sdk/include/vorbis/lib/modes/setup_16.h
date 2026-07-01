@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -15,7 +16,10 @@
 
  ********************************************************************/
 
+#include "floor_all.h"
 #include "psych_16.h"
+#include "psych_44.h"
+#include "psych_8.h"
 #include "residue_16.h"
 
 static const int blocksize_16_short[ 3 ] = { 1024, 512, 512 };

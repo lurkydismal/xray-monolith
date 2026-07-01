@@ -174,7 +174,7 @@
 #define _MCW_EM MCW_EM
 #else
 #define ALIGN( a ) __declspec( align( a ) )
-#include <utime.h>
+#include <sys/utime.h>
 #define MODULE_NAME "xrCore.dll"
 #endif
 

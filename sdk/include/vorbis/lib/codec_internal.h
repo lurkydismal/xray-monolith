@@ -20,6 +20,9 @@
 
 #include "codebook.h"
 #include "envelope.h"
+#include "shared.h"
+
+#define VIF_POSIT 63
 
 #define BLOCKTYPE_IMPULSE 0
 #define BLOCKTYPE_PADDING 1

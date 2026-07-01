@@ -21,41 +21,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "backends.h"
 #include "codec_internal.h"
 #include "misc.h"
 #include "os.h"
+#include "shared.h"
 #include "vorbis/codec.h"
-
-/* careful with this; it's using static array sizing to make managing
-   all the modes a little less annoying.  If we use a residue backend
-   with > 12 partition types, or a different division of iteration,
-   this needs to be updated. */
-typedef struct {
-    const static_codebook* books[ 12 ][ 3 ];
-} static_bookblock;
-
-typedef struct {
-    int res_type;
-    int limit_type; /* 0 lowpass limited, 1 point stereo limited */
-    const vorbis_info_residue0* res;
-    const static_codebook* book_aux;
-    const static_codebook* book_aux_managed;
-    const static_bookblock* books_base;
-    const static_bookblock* books_base_managed;
-} vorbis_residue_template;
-
-typedef struct {
-    const vorbis_info_mapping0* map;
-    const vorbis_residue_template* res;
-} vorbis_mapping_template;
-
-typedef struct vp_adjblock {
-    int block[ P_BANDS ];
-} vp_adjblock;
-
-typedef struct {
-    int data[ NOISE_COMPAND_LEVELS ];
-} compandblock;
 
 /* high level configuration information for setting things up
    step-by-step with the detailed vorbis_encode_ctl interface.
@@ -65,86 +36,15 @@ typedef struct {
    setup, then flushed out to the real codec setup structs later. */
 
 typedef struct {
-    int att[ P_NOISECURVES ];
-    float boost;
-    float decay;
-} att3;
-typedef struct {
     int data[ P_NOISECURVES ];
 } adj3;
-
-typedef struct {
-    int pre[ PACKETBLOBS ];
-    int post[ PACKETBLOBS ];
-    float kHz[ PACKETBLOBS ];
-    float lowpasskHz[ PACKETBLOBS ];
-} adj_stereo;
-
-typedef struct {
-    int lo;
-    int hi;
-    int fixed;
-} noiseguard;
-typedef struct {
-    int data[ P_NOISECURVES ][ 17 ];
-} noise3;
-
-typedef struct {
-    int mappings;
-    const double* rate_mapping;
-    const double* quality_mapping;
-    int coupling_restriction;
-    long samplerate_min_restriction;
-    long samplerate_max_restriction;
-
-    const int* blocksize_short;
-    const int* blocksize_long;
-
-    const att3* psy_tone_masteratt;
-    const int* psy_tone_0dB;
-    const int* psy_tone_dBsuppress;
-
-    const vp_adjblock* psy_tone_adj_impulse;
-    const vp_adjblock* psy_tone_adj_long;
-    const vp_adjblock* psy_tone_adj_other;
-
-    const noiseguard* psy_noiseguards;
-    const noise3* psy_noise_bias_impulse;
-    const noise3* psy_noise_bias_padding;
-    const noise3* psy_noise_bias_trans;
-    const noise3* psy_noise_bias_long;
-    const int* psy_noise_dBsuppress;
-
-    const compandblock* psy_noise_compand;
-    const double* psy_noise_compand_short_mapping;
-    const double* psy_noise_compand_long_mapping;
-
-    const int* psy_noise_normal_start[ 2 ];
-    const int* psy_noise_normal_partition[ 2 ];
-    const double* psy_noise_normal_thresh;
-
-    const int* psy_ath_float;
-    const int* psy_ath_abs;
-
-    const double* psy_lowpass;
-
-    const vorbis_info_psy_global* global_params;
-    const double* global_mapping;
-    const adj_stereo* stereo_modes;
-
-    const static_codebook* const* const* const floor_books;
-    const vorbis_info_floor1* floor_params;
-    const int* floor_short_mapping;
-    const int* floor_long_mapping;
-
-    const vorbis_mapping_template* maps;
-} ve_setup_data_template;
 
 /* a few static coder conventions */
 static const vorbis_info_mode _mode_template[ 2 ] = { { 0, 0, 0, 0 },
                                                       { 1, 0, 0, 1 } };
 
-static const vorbis_info_mapping0 _map_nominal[ 2 ] = {
+// NOTE: LD / removed static
+const vorbis_info_mapping0 _map_nominal[ 2 ] = {
     { 1, { 0, 0 }, { 0 }, { 0 }, 1, { 0 }, { 1 } },
     { 1, { 0, 0 }, { 1 }, { 1 }, 1, { 0 }, { 1 } } };
 

@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -15,7 +16,9 @@
 
  ********************************************************************/
 
-#include "modes/residue_44u.h"
+#include "../shared.h"
+#include "residue_44u.h"
+#include "setup_44.h"
 
 static const double rate_mapping_44_un[ 12 ] = {
     32000., 48000.,  60000.,  70000.,  80000.,  86000.,

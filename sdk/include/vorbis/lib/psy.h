@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -17,13 +18,17 @@
 
 #ifndef _V_PSY_H_
 #define _V_PSY_H_
-#include "backends.h"
+// #include "backends.h"
+
 #include "envelope.h"
+#include "shared.h"
 #include "smallft.h"
 
 #ifndef EHMER_MAX
 #define EHMER_MAX 56
 #endif
+
+#define PACKETBLOBS 15
 
 /* psychoacoustic setup ********************************************/
 #define P_BANDS 17    /* 62Hz to 16kHz */
@@ -62,26 +67,6 @@ typedef struct vorbis_info_psy {
     int normal_partition;
     double normal_thresh;
 } vorbis_info_psy;
-
-typedef struct {
-    int eighth_octave_lines;
-
-    /* for block long/short tuning; encode only */
-    float preecho_thresh[ VE_BANDS ];
-    float postecho_thresh[ VE_BANDS ];
-    float stretch_penalty;
-    float preecho_minenergy;
-
-    float ampmax_att_per_sec;
-
-    /* channel coupling config */
-    int coupling_pkHz[ PACKETBLOBS ];
-    int coupling_pointlimit[ 2 ][ PACKETBLOBS ];
-    int coupling_prepointamp[ PACKETBLOBS ];
-    int coupling_postpointamp[ PACKETBLOBS ];
-    int sliding_lowpass[ 2 ][ PACKETBLOBS ];
-
-} vorbis_info_psy_global;
 
 typedef struct {
     float ampmax;

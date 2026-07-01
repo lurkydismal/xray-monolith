@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -15,7 +16,7 @@
 
  ********************************************************************/
 
-#include "codebook.h"
+#include "../../codebook.h"
 static const long _vq_quantlist__16u0__p1_0[] = {
     1,
     0,

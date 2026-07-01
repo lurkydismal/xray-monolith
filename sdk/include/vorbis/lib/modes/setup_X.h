@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -14,6 +15,11 @@
  last mod: $Id: setup_X.h 16227 2009-07-08 06:58:46Z xiphmont $
 
  ********************************************************************/
+
+#include "../shared.h"
+#include "residue_44u.h"
+#include "setup_44.h"
+#include "setup_8.h"
 
 static const double rate_mapping_X[ 12 ] = { -1., -1., -1., -1., -1., -1.,
                                              -1., -1., -1., -1., -1., -1. };

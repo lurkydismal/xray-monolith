@@ -1,3 +1,4 @@
+#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -14,6 +15,8 @@
  last mod: $Id: psych_11.h 16227 2009-07-08 06:58:46Z xiphmont $
 
  ********************************************************************/
+
+#include "../shared.h"
 
 static const double _psy_lowpass_11[ 3 ] = {
     4.5,
