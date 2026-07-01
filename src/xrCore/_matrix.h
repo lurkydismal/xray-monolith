@@ -1,6 +1,8 @@
 #ifndef __M__
 #define __M__
 
+#include "../xrEngine/device.h"
+
 /*
  * DirectX-compliant, ie row-column order, ie m[Row][Col].
  * Same as:
