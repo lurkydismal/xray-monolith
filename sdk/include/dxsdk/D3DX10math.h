@@ -16,8 +16,7 @@
 #define __D3DX9MATH_H__
 
 #include <math.h>
-// #if _MSC_VER >= 1200
-#if 1
+#if _MSC_VER >= 1200
 #pragma warning( push )
 #endif
 #pragma warning( disable : 4201 ) // anonymous unions warning

@@ -23,8 +23,6 @@
 #define DXGI_FORMAT_FROM_FILE ( ( DXGI_FORMAT ) - 3 )
 
 #ifndef D3DX10INLINE
-#define D3DX10INLINE [[gnu::always_inline]] inline
-#if 0
 #ifdef _MSC_VER
 #if ( _MSC_VER >= 1200 )
 #define D3DX10INLINE __forceinline
@@ -36,7 +34,6 @@
 #define D3DX10INLINE inline
 #else
 #define D3DX10INLINE
-#endif
 #endif
 #endif
 #endif
