@@ -105,9 +105,7 @@ static Counts& counts() {
 #define ROBIN_HOOD_UNUSED( identifier )
 
 // bitness
-// FIX: Check does not pass
-// #if SIZE_MAX == UINT32_MAX
-#if 1
+#if SIZE_MAX == UINT32_MAX
 #define ROBIN_HOOD_PRIVATE_DEFINITION_BITNESS() 32
 #elif SIZE_MAX == UINT64_MAX
 #define ROBIN_HOOD_PRIVATE_DEFINITION_BITNESS() 64
@@ -116,7 +114,7 @@ static Counts& counts() {
 #endif
 
 // endianess
-#ifdef __WIN32
+#ifdef _MSC_VER
 #define ROBIN_HOOD_PRIVATE_DEFINITION_LITTLE_ENDIAN() 1
 #define ROBIN_HOOD_PRIVATE_DEFINITION_BIG_ENDIAN() 0
 #else
@@ -127,7 +125,7 @@ static Counts& counts() {
 #endif
 
 // inline
-#ifdef __WIN32
+#ifdef _MSC_VER
 #define ROBIN_HOOD_PRIVATE_DEFINITION_NOINLINE() __declspec( noinline )
 #else
 #define ROBIN_HOOD_PRIVATE_DEFINITION_NOINLINE() __attribute__( ( noinline ) )
@@ -143,7 +141,7 @@ static Counts& counts() {
 
 // count leading/trailing bits
 #if !defined( ROBIN_HOOD_DISABLE_INTRINSICS )
-#ifdef __WIN32
+#ifdef _MSC_VER
 #if ROBIN_HOOD( BITNESS ) == 32
 #define ROBIN_HOOD_PRIVATE_DEFINITION_BITSCANFORWARD() _BitScanForward
 #else
@@ -186,7 +184,7 @@ static Counts& counts() {
 #endif
 
 // likely/unlikely
-#ifdef __WIN32
+#ifdef _MSC_VER
 #define ROBIN_HOOD_LIKELY( condition ) condition
 #define ROBIN_HOOD_UNLIKELY( condition ) condition
 #else
@@ -195,7 +193,7 @@ static Counts& counts() {
 #endif
 
 // detect if native wchar_t type is availiable in MSVC
-#ifdef __WIN32
+#ifdef _MSC_VER
 #ifdef _NATIVE_WCHAR_T_DEFINED
 #define ROBIN_HOOD_PRIVATE_DEFINITION_HAS_NATIVE_WCHART() 1
 #else
@@ -207,10 +205,8 @@ static Counts& counts() {
 
 // detect if MSVC supports the pair(std::piecewise_construct_t,...) consructor
 // being constexpr
-#ifdef __WIN32
-// FIX: Is not defined
-// #if _MSC_VER <= 1900
-#if 0
+#ifdef _MSC_VER
+#if _MSC_VER <= 1900
 #define ROBIN_HOOD_PRIVATE_DEFINITION_BROKEN_CONSTEXPR() 1
 #else
 #define ROBIN_HOOD_PRIVATE_DEFINITION_BROKEN_CONSTEXPR() 0
