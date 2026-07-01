@@ -14,7 +14,6 @@
 #pragma warning( pop )
 
 #include "../build_config_defines.h"
-#include "try_except.h"
 
 extern bool shared_str_initialized;
 
@@ -780,23 +779,14 @@ void save_mini_dump( _EXCEPTION_POINTERS* pExceptionInfo ) {
             xr_strcat( szDumpPath, t_stemp );
             xr_strcat( szDumpPath, ".mdmp" );
 
-            // NOTE: LD
-            auto l_fallback = [ & ]() -> void {
-                string_path l_temp;
-                xr_strcpy( l_temp, szDumpPath );
+            __try {
+                if ( FS.path_exist( "$logs$" ) )
+                    FS.update_path( szDumpPath, "$logs$", szDumpPath );
+            } __except ( EXCEPTION_EXECUTE_HANDLER ) {
+                string_path temp;
+                xr_strcpy( temp, szDumpPath );
                 xr_strcpy( szDumpPath, "logs/" );
-                xr_strcat( szDumpPath, l_temp );
-            };
-
-            TRY {
-                if ( FS.path_exist( "$logs$" ) ) {
-                    if ( !FS.update_path( szDumpPath, "$logs$", szDumpPath ) ) {
-                        l_fallback();
-                    }
-                }
-            }
-            EXCEPT( EXCEPTION_EXECUTE_HANDLER ) {
-                l_fallback();
+                xr_strcat( szDumpPath, temp );
             }
 
             // create the file

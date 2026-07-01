@@ -18,7 +18,6 @@
 #include "../xrCore/mezz_stringbuffer.h"
 #include "pch_script.h"
 #include "script_thread.h"
-#include "try_except.h"
 
 #if !defined( DEBUG ) && defined( USE_LUAJIT_ONE )
 #include "opt.lua.h"
@@ -710,7 +709,7 @@ bool CScriptStorage::load_buffer( lua_State* L,
         LPSTR script = 0;
         bool dynamic_allocation = false;
 
-        TRY {
+        __try {
             if ( total_size < 768 * 1024 )
                 script = ( LPSTR )_alloca( total_size );
             else {
@@ -722,8 +721,7 @@ bool CScriptStorage::load_buffer( lua_State* L,
 #endif //-DEBUG
                 dynamic_allocation = true;
             }
-        }
-        EXCEPT( GetExceptionCode() == STATUS_STACK_OVERFLOW ) {
+        } __except ( GetExceptionCode() == STATUS_STACK_OVERFLOW ) {
             int errcode = _resetstkoflw();
             R_ASSERT2( errcode,
                        "Could not reset the stack after \"Stack overflow\" "
