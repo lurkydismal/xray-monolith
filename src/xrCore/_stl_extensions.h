@@ -17,6 +17,8 @@ using std::swap;
 #include <vector>
 
 #include "_type_traits.h"
+#include "_types.h"
+#include "_vector3d.h"
 
 #ifdef __BORLANDC__
 #define M_NOSTDCONTAINERS_EXT
