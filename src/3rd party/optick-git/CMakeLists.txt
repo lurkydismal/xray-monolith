@@ -10,7 +10,7 @@ set(CMAKE_CXX_EXTENSIONS ON)
 
 
 # hacks for standalone builds with visual studio
-if(MY_MSVC AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_LIST_DIR)
+if(MSVC AND CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_LIST_DIR)
 	message(STATUS "Standalone build")
 	list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/Build")
 	set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
@@ -76,7 +76,7 @@ else()
 	target_compile_definitions(OptickCore PRIVATE OPTICK_ENABLE_GPU=0)
 endif()
 
-if(MY_MSVC)
+if(MSVC)
 	# temporary solution to unblock C++17 users
 	target_compile_definitions(OptickCore PRIVATE _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS)
 endif()
@@ -88,7 +88,7 @@ endif()
 
 
 # Gui App
-if(MY_MSVC AND OPTICK_BUILD_GUI_APP)
+if(MSVC AND OPTICK_BUILD_GUI_APP)
 	add_subdirectory(gui)
 endif()
 

@@ -8,11 +8,6 @@ set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
-message(STATUS "Compiler ID: ${CMAKE_CXX_COMPILER_ID}")
-message(STATUS "Frontend: ${CMAKE_CXX_COMPILER_FRONTEND_VARIANT}")
-
-set(MY_MSVC TRUE)
-
 ################################################################################
 # Set target arch type if empty. Visual studio solution generator provides it.
 ################################################################################
@@ -51,7 +46,7 @@ set(CMAKE_CONFIGURATION_TYPES
 ################################################################################
 # Global compiler options
 ################################################################################
-if(MY_MSVC)
+if(MSVC)
     # remove default flags provided with CMake for MSVC
     set(CMAKE_C_FLAGS "")
     set(CMAKE_C_FLAGS_DX10 "")
@@ -92,7 +87,7 @@ endif()
 ################################################################################
 # Global linker options
 ################################################################################
-if(MY_MSVC)
+if(MSVC)
     # remove default flags provided with CMake for MSVC
     set(CMAKE_EXE_LINKER_FLAGS "")
     set(CMAKE_MODULE_LINKER_FLAGS "")
