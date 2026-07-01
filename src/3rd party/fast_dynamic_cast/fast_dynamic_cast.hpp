@@ -52,9 +52,7 @@
 
 // Only works with Visual Studio 2013 and upwards (Could work in MSVC2010, but
 // yet untested)
-// FIX: _MSC_VER not defined
-// #if FAST_DYNAMIC_CAST_ENABLED && defined( _MSC_VER ) && ( _MSC_VER >= 1800 )
-#if FAST_DYNAMIC_CAST_ENABLED
+#if FAST_DYNAMIC_CAST_ENABLED && defined( _MSC_VER ) && ( _MSC_VER >= 1800 )
 
 // Include memory header for std::dynamic_pointer_cast. You can replace this
 // with your own memory include.
