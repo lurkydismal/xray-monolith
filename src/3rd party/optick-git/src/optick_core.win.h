@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 #pragma once
-#if defined( __WIN32__ )
+#if defined( _MSC_VER )
 
 #include "optick.config.h"
 

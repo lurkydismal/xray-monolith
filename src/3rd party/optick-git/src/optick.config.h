@@ -57,7 +57,7 @@
 
 // D3D12
 #if !defined( OPTICK_ENABLE_GPU_D3D12 )
-#if defined( __WIN32__ )
+#if defined( _MSC_VER )
 #define OPTICK_ENABLE_GPU_D3D12 ( OPTICK_ENABLE_GPU /*&& 0*/ )
 #else
 #define OPTICK_ENABLE_GPU_D3D12 ( 0 )

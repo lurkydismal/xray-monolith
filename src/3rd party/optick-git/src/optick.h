@@ -30,7 +30,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#if defined( __WIN32__ )
+#if defined( _MSC_VER )
 #define OPTICK_MSVC ( 1 )
 #define OPTICK_64BIT ( 1 )
 #if defined( _DURANGO )
@@ -68,7 +68,7 @@
 #if defined( OPTICK_GCC )
 #define OPTICK_FUNC __PRETTY_FUNCTION__
 #elif defined( OPTICK_MSVC )
-#define OPTICK_FUNC __PRETTY_FUNCTION__
+#define OPTICK_FUNC __FUNCSIG__
 #else
 #error Compiler not supported
 #endif
