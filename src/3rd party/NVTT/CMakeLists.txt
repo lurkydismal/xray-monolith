@@ -444,7 +444,7 @@ if(MY_MSVC)
             /W3;
             /ZI
         >
-        /std:c++17;
+        /std:c++latest;
         /wd4005
     )
     target_link_options(${PROJECT_NAME} PRIVATE

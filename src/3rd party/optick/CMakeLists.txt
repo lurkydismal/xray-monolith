@@ -336,7 +336,7 @@ if(MY_MSVC)
             ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
         >
         /permissive-;
-        /std:c++17;
+        /std:c++latest;
         /sdl;
         /W3;
         ${DEFAULT_CXX_EXCEPTION_HANDLING}

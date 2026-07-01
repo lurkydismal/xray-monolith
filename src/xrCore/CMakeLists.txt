@@ -724,7 +724,7 @@ if(MY_MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++17;
+        /std:c++latest;
         /Zc:__cplusplus
     )
     string(CONCAT FILE_CL_OPTIONS

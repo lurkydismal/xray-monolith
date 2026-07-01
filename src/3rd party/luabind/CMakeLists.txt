@@ -410,7 +410,7 @@ if(MY_MSVC)
             /ZI
         >
         /MP;
-        /std:c++17;
+        /std:c++latest;
         /wd4073;
         /wd4100;
         /wd4390;

@@ -539,7 +539,7 @@ if(MY_MSVC)
             /W4;
             /ZI
         >
-        /std:c++17;
+        /std:c++latest;
         /wd4005;
         /wd4996
     )

@@ -355,7 +355,7 @@ if(MY_MSVC)
             /TC;
             /Y-
         >
-        /std:c++17;
+        /std:c++latest;
         /wd4244
     )
 endif()
