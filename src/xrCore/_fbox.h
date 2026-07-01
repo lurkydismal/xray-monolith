@@ -1,6 +1,8 @@
 #ifndef __FBOX
 #define __FBOX
 
+#include "_matrix.h"
+
 template < class T >
 class _box3 {
 public:

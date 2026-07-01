@@ -1,6 +1,8 @@
 #ifndef __FBOX2
 #define __FBOX2
 
+#include "_vector2.h"
+
 template < class T >
 class _box2 {
 public:
