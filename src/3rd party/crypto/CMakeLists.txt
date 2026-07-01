@@ -50,7 +50,7 @@ set(Header_Files
     "openssl/openssl/pem.h"
     "openssl/openssl/pem2.h"
     "openssl/openssl/pkcs12.h"
-    "openssl/openssl/pkcs7.h"
+   "openssl/openssl/pkcs7.h"
     "openssl/openssl/pq_compat.h"
     "openssl/openssl/pqueue.h"
     "openssl/openssl/rand.h"
@@ -362,7 +362,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 ################################################################################
 # Compile and link options
 ################################################################################
-if(MSVC)
+if(MY_MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
             /GL;
