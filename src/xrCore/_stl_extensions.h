@@ -215,7 +215,8 @@ public:
     }
 
     // demonized: Swap and Pop, does NOT preserve order
-    iterator erase_fast( iterator it ) {
+    // NOTE: LD / auto
+    auto erase_fast( iterator it ) {
         iterator prev = std::prev( end() );
         if ( it != prev ) {
             if constexpr ( std::is_trivially_move_assignable_v< T > )
@@ -230,7 +231,8 @@ public:
         return it;
     }
 
-    iterator erase_fast( const_iterator cit ) {
+    // NOTE: LD / auto
+    auto erase_fast( const_iterator cit ) {
         return erase_fast(
             std::next( begin(), std::distance( cbegin(), cit ) ) );
     }
