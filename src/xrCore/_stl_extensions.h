@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef _STL_EXT_internal
 #define _STL_EXT_internal
 
@@ -1009,7 +1011,8 @@ class xr_hash_multimap
 public:
     u32 size() const { return ( u32 ) __super::size(); }
 };
-#else
+// NOTE: LD / disabled
+#elif 0
 template < typename K,
            class V,
            class _Traits = stdext::hash_compare< K, std::less< K > >,
@@ -1017,6 +1020,20 @@ template < typename K,
 class xr_hash_map : public stdext::hash_map< K, V, _Traits, allocator > {
 public:
     u32 size() const { return ( u32 ) __super::size(); }
+};
+// NOTE: LD / new
+#else
+template < typename K,
+           typename V,
+           typename Hash = std::hash< K >,
+           typename KeyEqual = std::equal_to< K >,
+           typename Allocator = xalloc< std::pair< const K, V > > >
+class xr_hash_map
+    : public std::unordered_map< K, V, Hash, KeyEqual, Allocator > {
+public:
+    [[nodiscard]] auto size() const -> u32 {
+        return static_cast< u32 >( __super::size() );
+    }
 };
 #endif // #ifdef STLPORT
 
