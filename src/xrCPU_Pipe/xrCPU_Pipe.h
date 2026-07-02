@@ -3,6 +3,7 @@
 #ifndef xrCPU_PipeH
 #define xrCPU_PipeH
 
+#include "_vector3d.h"
 #include "cpuid.h"
 
 // Forward references
