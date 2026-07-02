@@ -6,6 +6,10 @@
 #define IC __forceinline
 #endif
 
+#include "../xrEngine/device.h"
+#include "_random.h"
+#include "vector.h"
+
 template < class T >
 struct _vector3 {
 public:
