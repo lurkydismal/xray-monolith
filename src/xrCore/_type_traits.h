@@ -1,6 +1,7 @@
+#pragma once
+
 #ifndef _STL_EXT_type_traits
 #define _STL_EXT_type_traits
-#pragma once
 
 // 1. class or not class
 template < typename T >
