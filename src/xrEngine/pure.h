@@ -12,9 +12,6 @@
 #define REG_PRIORITY_CAPTURE 0x7ffffffful
 #define REG_PRIORITY_INVALID 0xfffffffful
 
-#define WIDEN2( x ) L##x
-#define WIDEN( x ) WIDEN2( x )
-
 typedef void __fastcall RP_FUNC( void* obj );
 #define DECLARE_MESSAGE_CL( name, calling )        \
     extern ENGINE_API RP_FUNC rp_##name;           \
@@ -29,21 +26,53 @@ typedef void __fastcall RP_FUNC( void* obj );
         ( ( pure##name* )p )->On##name();  \
     }
 
-DECLARE_MESSAGE_CL( Frame, _BCL );
+extern RP_FUNC rp_Frame;
+class pureFrame {
+public:
+    virtual void __stdcall OnFrame( void ) = 0;
+};
 
-DECLARE_MESSAGE( Render );
+extern RP_FUNC rp_Render;
+class pureRender {
+public:
+    virtual void OnRender( void ) = 0;
+};
 
-DECLARE_MESSAGE( AppActivate );
+extern RP_FUNC rp_AppActivate;
+class pureAppActivate {
+public:
+    virtual void OnAppActivate( void ) = 0;
+};
 
-DECLARE_MESSAGE( AppDeactivate );
+extern RP_FUNC rp_AppDeactivate;
+class pureAppDeactivate {
+public:
+    virtual void OnAppDeactivate( void ) = 0;
+};
 
-DECLARE_MESSAGE( AppStart );
+extern RP_FUNC rp_AppStart;
+class pureAppStart {
+public:
+    virtual void OnAppStart( void ) = 0;
+};
 
-DECLARE_MESSAGE( AppEnd );
+extern RP_FUNC rp_AppEnd;
+class pureAppEnd {
+public:
+    virtual void OnAppEnd( void ) = 0;
+};
 
-DECLARE_MESSAGE( DeviceReset );
+extern RP_FUNC rp_DeviceReset;
+class pureDeviceReset {
+public:
+    virtual void OnDeviceReset( void ) = 0;
+};
 
-DECLARE_MESSAGE( ScreenResolutionChanged );
+extern RP_FUNC rp_ScreenResolutionChanged;
+class pureScreenResolutionChanged {
+public:
+    virtual void OnScreenResolutionChanged( void ) = 0;
+};
 
 //-----------------------------------------------------------------------------
 struct _REG_INFO {
