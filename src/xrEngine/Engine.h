@@ -7,8 +7,8 @@
 #pragma once
 
 #include "../xrCPU_Pipe/xrCPU_Pipe.h"
-#include "engineAPI.h"
-#include "eventAPI.h"
+#include "EngineAPI.h"
+#include "EventAPI.h"
 #include "xrSheduler.h"
 
 class ENGINE_API CEngine {
