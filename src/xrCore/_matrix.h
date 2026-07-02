@@ -3,6 +3,7 @@
 
 #include "../xrEngine/device.h"
 #include "_vector2.h"
+#include "_vector3d.h"
 #include "_vector4.h"
 
 /*
