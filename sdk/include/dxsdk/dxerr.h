@@ -65,7 +65,7 @@ HRESULT WINAPI DXTraceW( _In_z_ const WCHAR* strFile,
                          _In_ DWORD dwLine,
                          _In_ HRESULT hr,
                          _In_opt_ const WCHAR* strMsg,
-                         _In_ bool bPopMsgBox );
+                         _In_ _Bool bPopMsgBox );
 
 #define DXTrace DXTraceW
 
