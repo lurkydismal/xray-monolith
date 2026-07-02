@@ -1,6 +1,8 @@
 #ifndef DefinesH
 #define DefinesH
 
+#include "_flags.h"
+
 #ifdef DEBUG
 ENGINE_API extern BOOL bDebug;
 #else
