@@ -25,6 +25,7 @@
 
 #include "../Include/xrRender/FactoryPtr.h"
 #include "../Include/xrRender/RenderDeviceRender.h"
+#include "_matrix.h"
 #include "imgui_base.h"
 
 #ifdef INGAME_EDITOR
