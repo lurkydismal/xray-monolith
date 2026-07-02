@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../xrCore/_std_extensions.h"
+#include "../xrCore/_stl_extensions.h"
 #include "../xrCore/xrSyncronize.h"
 
 class ENGINE_API CEvent;
