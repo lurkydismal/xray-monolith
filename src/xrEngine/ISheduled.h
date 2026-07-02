@@ -1,5 +1,9 @@
+#pragma once
+
 #ifndef XRENGINE_ISHEDULED_H_INCLUDED
 #define XRENGINE_ISHEDULED_H_INCLUDED
+
+#include "xrstring.h"
 
 class ENGINE_API ISheduled {
 public:
@@ -23,7 +27,9 @@ public:
 
     virtual float shedule_Scale() = 0;
     virtual void shedule_Update( u32 dt );
-    virtual shared_str shedule_Name() const { return shared_str( "unknown" ); };
+    [[nodiscard]] virtual auto shedule_Name() const -> shared_str {
+        return { "unknown" };
+    };
     virtual bool shedule_Needed() = 0;
 };
 
