@@ -1,7 +1,6 @@
 #pragma once
 
 //////////////////////////////////////////////////////////////////////////
-#include <cstdlib>
 using str_c = const char*;
 
 #include <string>
@@ -71,13 +70,6 @@ public:
     static xr_string Join( xrStringVector::iterator beginIter,
                            xrStringVector::iterator endIter,
                            const char delimeter = '\0' );
-
-    [[nodiscard]] inline auto size() const -> size_t {
-        fprintf( stderr, "xr_string size() WAS CALLED\n" );
-        std::abort();
-
-        return 0;
-    }
 };
 
 using SStringVec = xr_vector< xr_string >;
