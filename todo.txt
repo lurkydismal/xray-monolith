@@ -1,4 +1,6 @@
 fix dxsdk
 fix vorbis/psytune
 
-fix autoexp.data and stdext uses
+fix stdext uses
+
+fix icu
