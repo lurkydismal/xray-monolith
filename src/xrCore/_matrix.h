@@ -2,6 +2,8 @@
 #define __M__
 
 #include "../xrEngine/device.h"
+#include "_vector2.h"
+#include "_vector4.h"
 
 /*
  * DirectX-compliant, ie row-column order, ie m[Row][Col].
