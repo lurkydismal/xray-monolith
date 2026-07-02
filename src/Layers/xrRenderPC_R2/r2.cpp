@@ -2,9 +2,11 @@
 
 #include "../../xrCore/ShaderSourceCRC.h"
 #include "../../xrEngine/CustomHUD.h"
+#include "../../xrEngine/Render.h"
 #include "../../xrEngine/environment.h"
 #include "../../xrEngine/igame_persistent.h"
 #include "../../xrEngine/xr_object.h"
+#include "../xrEngine/Environment.h"
 #include "../xrRender/LightTrack.h"
 #include "../xrRender/SkeletonCustom.h"
 #include "../xrRender/dxRenderDeviceRender.h"
@@ -130,7 +132,7 @@ static class cl_meatchunks_stuff : public R_constant_setup {
 
 extern ENGINE_API BOOL r2_sun_static;
 extern ENGINE_API BOOL r2_advanced_pp; //	advanced post process and
-                                       //effects
+                                       // effects
 //////////////////////////////////////////////////////////////////////////
 // Just two static storage
 void CRender::create() {

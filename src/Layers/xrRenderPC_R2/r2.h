@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../xrEngine/Render.h"
 #include "../../xrEngine/fmesh.h"
 #include "../../xrEngine/irenderable.h"
 #include "../xrRender/LightTrack.h"
