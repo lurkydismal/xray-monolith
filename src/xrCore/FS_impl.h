@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef FS_IMPL_H_INCLUDED
 #define FS_IMPL_H_INCLUDED
 
