@@ -1,5 +1,9 @@
+#pragma once
+
 #ifndef _PURE_H_AAA_
 #define _PURE_H_AAA_
+
+#include "stdafx.h"
 
 // messages
 #define REG_PRIORITY_LOW 0x11111111ul
@@ -7,6 +11,9 @@
 #define REG_PRIORITY_HIGH 0x33333333ul
 #define REG_PRIORITY_CAPTURE 0x7ffffffful
 #define REG_PRIORITY_INVALID 0xfffffffful
+
+#define WIDEN2( x ) L##x
+#define WIDEN( x ) WIDEN2( x )
 
 typedef void __fastcall RP_FUNC( void* obj );
 #define DECLARE_MESSAGE_CL( name, calling )        \
