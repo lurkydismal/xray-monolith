@@ -1,6 +1,9 @@
+#pragma once
+
 #ifndef xrCPU_PipeH
 #define xrCPU_PipeH
-#pragma once
+
+#include "cpuid.h"
 
 // Forward references
 struct ENGINE_API vertRender;
