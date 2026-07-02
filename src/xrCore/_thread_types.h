@@ -10,6 +10,7 @@
 #include <iterator>
 #include <type_traits>
 
+#include "_stl_extensions.h"
 #include "tbb/concurrent_unordered_map.h"
 #include "tbb/concurrent_vector.h"
 #include "tbb/parallel_for.h"
