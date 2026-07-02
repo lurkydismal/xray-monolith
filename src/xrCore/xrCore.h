@@ -209,10 +209,10 @@
 #include <vector>
 
 #ifndef _EDITOR
-// NOTE: LD / commented
-// #include <hash_map>
-// NOTE: LD / commented
-// #include <hash_set>
+// NOTE: LD / ash_map
+#include <unordered_map>
+// NOTE: LD / hash_set
+#include <unordered_set>
 #endif
 
 #include <string>
