@@ -10,6 +10,7 @@
 #include "../xrEngine/xr_object.h"
 #include "Hit.h"
 #include "UsableScriptObject.h"
+#include "_flags.h"
 #include "alife_space.h"
 #include "game_object_space.h"
 #include "script_binder.h"
