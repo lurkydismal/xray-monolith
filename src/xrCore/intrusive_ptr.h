@@ -170,11 +170,11 @@ using intrusive_base_strict_nonatomic =
 #define TEMPLATE_SPECIALIZATION template < typename object_type >
 #define _intrusive_ptr intrusive_ptr< object_type >
 
-TEMPLATE_SPECIALIZATION
+template < typename object_type >
 class intrusive_ptr {
 public:
     typedef object_type object_type;
-    typedef _intrusive_ptr self_type;
+    typedef intrusive_ptr< object_type > self_type;
 
 private:
     static constexpr DeletionPolicy deletion_policy =
@@ -246,7 +246,7 @@ public:
 
     // Boolean Conversion
     // Replaces the old "unspecified_bool_type" hack with modern standard
-    explicit IC operator bool() const noexcept { return m_object != nullptr; }
+    IC operator bool() const noexcept { return m_object != nullptr; }
 
     // Legacy support for !ptr checks
     IC bool operator!() const noexcept { return m_object == nullptr; }
@@ -261,85 +261,94 @@ public:
     IC object_type* get() const noexcept;
 };
 
-TEMPLATE_SPECIALIZATION
-IC bool operator==( _intrusive_ptr const& a, _intrusive_ptr const& b ) noexcept;
+template < typename object_type >
+IC bool operator==( intrusive_ptr< object_type > const& a,
+                    _intrusive_ptr const& b ) noexcept;
 
-TEMPLATE_SPECIALIZATION
-IC bool operator!=( _intrusive_ptr const& a, _intrusive_ptr const& b ) noexcept;
+template < typename object_type >
+IC bool operator!=( intrusive_ptr< object_type > const& a,
+                    _intrusive_ptr const& b ) noexcept;
 
-TEMPLATE_SPECIALIZATION
-IC bool operator<( _intrusive_ptr const& a, _intrusive_ptr const& b ) noexcept;
+template < typename object_type >
+IC bool operator<( intrusive_ptr< object_type > const& a,
+                   _intrusive_ptr const& b ) noexcept;
 
-TEMPLATE_SPECIALIZATION
-IC bool operator>( _intrusive_ptr const& a, _intrusive_ptr const& b ) noexcept;
+template < typename object_type >
+IC bool operator>( intrusive_ptr< object_type > const& a,
+                   _intrusive_ptr const& b ) noexcept;
 
 // Modern nullptr comparisons
-TEMPLATE_SPECIALIZATION
-IC bool operator==( _intrusive_ptr const& a, std::nullptr_t ) noexcept {
+template < typename object_type >
+IC bool operator==( intrusive_ptr< object_type > const& a,
+                    std::nullptr_t ) noexcept {
     return !a;
 }
 
-TEMPLATE_SPECIALIZATION
-IC bool operator==( std::nullptr_t, _intrusive_ptr const& a ) noexcept {
+template < typename object_type >
+IC bool operator==( std::nullptr_t,
+                    intrusive_ptr< object_type > const& a ) noexcept {
     return !a;
 }
 
-TEMPLATE_SPECIALIZATION
-IC bool operator!=( _intrusive_ptr const& a, std::nullptr_t ) noexcept {
+template < typename object_type >
+IC bool operator!=( intrusive_ptr< object_type > const& a,
+                    std::nullptr_t ) noexcept {
     return ( bool )a;
 }
 
-TEMPLATE_SPECIALIZATION
-IC bool operator!=( std::nullptr_t, _intrusive_ptr const& a ) noexcept {
+template < typename object_type >
+IC bool operator!=( std::nullptr_t,
+                    intrusive_ptr< object_type > const& a ) noexcept {
     return ( bool )a;
 }
 
-TEMPLATE_SPECIALIZATION
-IC void swap( _intrusive_ptr& lhs, _intrusive_ptr& rhs ) noexcept;
+template < typename object_type >
+IC void swap( intrusive_ptr< object_type >& lhs, _intrusive_ptr& rhs ) noexcept;
 
 // Implementation
 
-TEMPLATE_SPECIALIZATION
-IC _intrusive_ptr::intrusive_ptr() noexcept {
+template < typename object_type >
+IC intrusive_ptr< object_type >::intrusive_ptr() noexcept {
     m_object = nullptr;
 }
 
-TEMPLATE_SPECIALIZATION
-IC _intrusive_ptr::intrusive_ptr( object_type* rhs ) {
+template < typename object_type >
+IC intrusive_ptr< object_type >::intrusive_ptr( object_type* rhs ) {
     m_object = nullptr;
     set( rhs );
 }
 
-TEMPLATE_SPECIALIZATION
-IC _intrusive_ptr::intrusive_ptr( self_type const& rhs ) {
+template < typename object_type >
+IC intrusive_ptr< object_type >::intrusive_ptr( self_type const& rhs ) {
     m_object = nullptr;
     set( rhs );
 }
 
 // Move Constructor
-TEMPLATE_SPECIALIZATION
-IC _intrusive_ptr::intrusive_ptr( self_type&& rhs ) noexcept
+template < typename object_type >
+IC intrusive_ptr< object_type >::intrusive_ptr( self_type&& rhs ) noexcept
     : m_object( rhs.m_object ) {
     rhs.m_object = nullptr;
 }
 
 // Generalized Constructor (Derived -> Base)
-TEMPLATE_SPECIALIZATION
+template < typename object_type >
 template < typename other_type,
            std::enable_if_t< std::is_convertible_v< other_type*, object_type* >,
                              int > >
-IC _intrusive_ptr::intrusive_ptr( intrusive_ptr< other_type > const& rhs ) {
+IC intrusive_ptr< object_type >::intrusive_ptr(
+    intrusive_ptr< other_type > const& rhs ) {
     m_object = nullptr;
     set( rhs.get() );
 }
 
-TEMPLATE_SPECIALIZATION
-IC _intrusive_ptr::~intrusive_ptr() {
+template < typename object_type >
+IC intrusive_ptr< object_type >::~intrusive_ptr() {
     dec();
 }
 
-TEMPLATE_SPECIALIZATION
-IC void _intrusive_ptr::dec() {
+template < typename object_type >
+IC void intrusive_ptr< object_type >::dec() {
     if ( m_object ) {
         object_type* temp = m_object;
         m_object = nullptr;
@@ -347,23 +356,23 @@ IC void _intrusive_ptr::dec() {
     }
 }
 
-TEMPLATE_SPECIALIZATION
-IC typename _intrusive_ptr::self_type& _intrusive_ptr::operator=(
+template < typename object_type >
+IC typename intrusive_ptr< object_type >::self_type& _intrusive_ptr::operator=(
     object_type* rhs ) {
     set( rhs );
     return ( *this );
 }
 
-TEMPLATE_SPECIALIZATION
-IC typename _intrusive_ptr::self_type& _intrusive_ptr::operator=(
+template < typename object_type >
+IC typename intrusive_ptr< object_type >::self_type& _intrusive_ptr::operator=(
     self_type const& rhs ) {
     set( rhs );
     return ( *this );
 }
 
 // Move Assignment
-TEMPLATE_SPECIALIZATION
-IC typename _intrusive_ptr::self_type& _intrusive_ptr::operator=(
+template < typename object_type >
+IC typename intrusive_ptr< object_type >::self_type& _intrusive_ptr::operator=(
     self_type&& rhs ) noexcept {
     if ( this != &rhs ) {
         dec();
@@ -374,40 +383,43 @@ IC typename _intrusive_ptr::self_type& _intrusive_ptr::operator=(
 }
 
 // Generalized Assignment
-TEMPLATE_SPECIALIZATION
+template < typename object_type >
 template < typename other_type,
            std::enable_if_t< std::is_convertible_v< other_type*, object_type* >,
                              int > >
-IC typename _intrusive_ptr::self_type& _intrusive_ptr::operator=(
+IC typename intrusive_ptr< object_type >::self_type& _intrusive_ptr::operator=(
     intrusive_ptr< other_type > const& rhs ) {
     set( rhs.get() );
     return *this;
 }
 
-TEMPLATE_SPECIALIZATION
-IC typename _intrusive_ptr::object_type& _intrusive_ptr::operator*() const {
+template < typename object_type >
+IC typename intrusive_ptr< object_type >::object_type&
+_intrusive_ptr::operator*() const {
     VERIFY( m_object );
     return ( *m_object );
 }
 
-TEMPLATE_SPECIALIZATION
-IC typename _intrusive_ptr::object_type* _intrusive_ptr::operator->() const {
+template < typename object_type >
+IC typename intrusive_ptr< object_type >::object_type*
+_intrusive_ptr::operator->() const {
     VERIFY( m_object );
     return ( m_object );
 }
 
-TEMPLATE_SPECIALIZATION
-IC void _intrusive_ptr::swap( self_type& rhs ) noexcept {
+template < typename object_type >
+IC void intrusive_ptr< object_type >::swap( self_type& rhs ) noexcept {
     std::swap( m_object, rhs.m_object );
 }
 
-TEMPLATE_SPECIALIZATION
-IC bool _intrusive_ptr::equal( const self_type& rhs ) const noexcept {
+template < typename object_type >
+IC bool intrusive_ptr< object_type >::equal(
+    const self_type& rhs ) const noexcept {
     return ( m_object == rhs.m_object );
 }
 
-TEMPLATE_SPECIALIZATION
-IC void _intrusive_ptr::set( object_type* rhs ) {
+template < typename object_type >
+IC void intrusive_ptr< object_type >::set( object_type* rhs ) {
     if ( rhs )
         rhs->intrusive_ref_add();
 
@@ -418,47 +430,51 @@ IC void _intrusive_ptr::set( object_type* rhs ) {
         old->intrusive_release( old );
 }
 
-TEMPLATE_SPECIALIZATION
-IC void _intrusive_ptr::set( self_type const& rhs ) {
+template < typename object_type >
+IC void intrusive_ptr< object_type >::set( self_type const& rhs ) {
     set( rhs.m_object );
 }
 
-TEMPLATE_SPECIALIZATION
-IC typename _intrusive_ptr::object_type* _intrusive_ptr::get() const noexcept {
+template < typename object_type >
+IC typename intrusive_ptr< object_type >::object_type* _intrusive_ptr::get()
+    const noexcept {
     return ( m_object );
 }
 
-TEMPLATE_SPECIALIZATION
-IC u32 _intrusive_ptr::size() {
+template < typename object_type >
+IC u32 intrusive_ptr< object_type >::size() {
     return m_object ? m_object->intrusive_ref_count() : 0;
 }
 
 // Operator Implementations
 
-TEMPLATE_SPECIALIZATION
-IC bool operator==( _intrusive_ptr const& a,
-                    _intrusive_ptr const& b ) noexcept {
+template < typename object_type >
+IC bool operator==( intrusive_ptr< object_type > const& a,
+                    intrusive_ptr< object_type > const& b ) noexcept {
     return ( a.get() == b.get() );
 }
 
-TEMPLATE_SPECIALIZATION
-IC bool operator!=( _intrusive_ptr const& a,
-                    _intrusive_ptr const& b ) noexcept {
+template < typename object_type >
+IC bool operator!=( intrusive_ptr< object_type > const& a,
+                    intrusive_ptr< object_type > const& b ) noexcept {
     return ( a.get() != b.get() );
 }
 
-TEMPLATE_SPECIALIZATION
-IC bool operator<( _intrusive_ptr const& a, _intrusive_ptr const& b ) noexcept {
+template < typename object_type >
+IC bool operator<( intrusive_ptr< object_type > const& a,
+                   _intrusive_ptr const& b ) noexcept {
     return ( a.get() < b.get() );
 }
 
-TEMPLATE_SPECIALIZATION
-IC bool operator>( _intrusive_ptr const& a, _intrusive_ptr const& b ) noexcept {
+template < typename object_type >
+IC bool operator>( intrusive_ptr< object_type > const& a,
+                   _intrusive_ptr const& b ) noexcept {
     return ( a.get() > b.get() );
 }
 
-TEMPLATE_SPECIALIZATION
-IC void swap( _intrusive_ptr& lhs, _intrusive_ptr& rhs ) noexcept {
+template < typename object_type >
+IC void swap( intrusive_ptr< object_type >& lhs,
+              _intrusive_ptr& rhs ) noexcept {
     lhs.swap( rhs );
 }
 
@@ -467,5 +483,5 @@ IC intrusive_ptr< T > make_intrusive( Args&&... args ) {
     return intrusive_ptr< T >( xr_new< T >( std::forward< Args >( args )... ) );
 }
 
-#undef TEMPLATE_SPECIALIZATION
-#undef _intrusive_ptr
+#undef template < typename object_type>
+#undef intrusive_ptr < object_type>
