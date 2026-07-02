@@ -1,6 +1,7 @@
 #include "gamepersistent.h"
 
 #include "../Include/xrRender/Kinematics.h"
+#include "../xrEngine/device.h"
 #include "../xrEngine/fmesh.h"
 #include "../xrEngine/gamemtllib.h"
 #include "../xrEngine/xrSASH.h"
