@@ -15,8 +15,6 @@
 extern "C" {
 #endif
 
-#include "dplay8.h"
-
 /****************************************************************************
  *
  * DirectPlay8Address CLSIDs
@@ -264,6 +262,7 @@ typedef struct sockaddr SOCKADDR;
 //
 #undef INTERFACE // External COM Implementation
 #define INTERFACE IDirectPlay8Address
+
 DECLARE_INTERFACE_( IDirectPlay8Address, IUnknown ) {
     /*** IUnknown methods ***/
     STDMETHOD( QueryInterface )( THIS_ DPNAREFIID, LPVOID* ) PURE;
@@ -306,6 +305,7 @@ DECLARE_INTERFACE_( IDirectPlay8Address, IUnknown ) {
 //
 #undef INTERFACE // External COM Implementation
 #define INTERFACE IDirectPlay8AddressIP
+
 DECLARE_INTERFACE_( IDirectPlay8AddressIP, IUnknown ) {
     /*** IUnknown methods ***/
     STDMETHOD( QueryInterface )( THIS_ DPNAREFIID, PVOID* ) PURE;

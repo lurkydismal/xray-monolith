@@ -12,8 +12,6 @@
 
 #include <ole2.h> // for DECLARE_INTERFACE_ and HRESULT
 
-#include "dpaddr.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -1063,6 +1061,7 @@ typedef struct _DPNMSG_NAT_RESOLVER_QUERY {
 //
 #undef INTERFACE // External COM Implementation
 #define INTERFACE IDirectPlay8Client
+
 DECLARE_INTERFACE_( IDirectPlay8Client, IUnknown ) {
     /*** IUnknown methods ***/
     STDMETHOD( QueryInterface )( THIS_ DP8REFIID riid, LPVOID * ppvObj ) PURE;
@@ -1144,6 +1143,7 @@ DECLARE_INTERFACE_( IDirectPlay8Client, IUnknown ) {
 //
 #undef INTERFACE // External COM Implementation
 #define INTERFACE IDirectPlay8Server
+
 DECLARE_INTERFACE_( IDirectPlay8Server, IUnknown ) {
     /*** IUnknown methods ***/
     STDMETHOD( QueryInterface )( THIS_ DP8REFIID riid, LPVOID * ppvObj ) PURE;
@@ -1257,6 +1257,7 @@ DECLARE_INTERFACE_( IDirectPlay8Server, IUnknown ) {
 //
 #undef INTERFACE // External COM Implementation
 #define INTERFACE IDirectPlay8Peer
+
 DECLARE_INTERFACE_( IDirectPlay8Peer, IUnknown ) {
     /*** IUnknown methods ***/
     STDMETHOD( QueryInterface )( THIS_ DP8REFIID riid, LPVOID * ppvObj ) PURE;
@@ -1390,6 +1391,7 @@ DECLARE_INTERFACE_( IDirectPlay8Peer, IUnknown ) {
 //
 #undef INTERFACE // External COM Implementation
 #define INTERFACE IDirectPlay8ThreadPool
+
 DECLARE_INTERFACE_( IDirectPlay8ThreadPool, IUnknown ) {
     /*** IUnknown methods ***/
     STDMETHOD( QueryInterface )( THIS_ DP8REFIID riid, LPVOID * ppvObj ) PURE;
@@ -1415,6 +1417,7 @@ DECLARE_INTERFACE_( IDirectPlay8ThreadPool, IUnknown ) {
 //
 #undef INTERFACE // External COM Implementation
 #define INTERFACE IDirectPlay8NATResolver
+
 DECLARE_INTERFACE_( IDirectPlay8NATResolver, IUnknown ) {
     /*** IUnknown methods ***/
     STDMETHOD( QueryInterface )( THIS_ DP8REFIID riid, LPVOID * ppvObj ) PURE;
