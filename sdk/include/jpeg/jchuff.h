@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * jchuff.h
  *
@@ -46,6 +44,5 @@ jpeg_make_c_derived_tbl JPP(
 
 /* Generate an optimal table definition given the specified counts */
 EXTERN( void )
-jpeg_gen_optimal_table JPP( ( j_compress_ptr cinfo,
-                              JHUFF_TBL* htbl,
-                              long freq[] ) );
+jpeg_gen_optimal_table
+    JPP( ( j_compress_ptr cinfo, JHUFF_TBL* htbl, long freq[] ) );

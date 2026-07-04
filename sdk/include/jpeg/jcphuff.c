@@ -12,10 +12,12 @@
  * suspension.
  */
 
+// clang-format off
 #define JPEG_INTERNALS
-#include "jchuff.h" /* Declarations shared with jchuff.c */
 #include "jinclude.h"
 #include "jpeglib.h"
+#include "jchuff.h"		/* Declarations shared with jchuff.c */
+// clang-format on
 
 #ifdef C_PROGRESSIVE_SUPPORTED
 

@@ -14,11 +14,12 @@
  * permanent JPEG objects only upon successful completion of an MCU.
  */
 
+// clang-format off
 #define JPEG_INTERNALS
-#include "jchuff.h" /* Declarations shared with jcphuff.c */
-
 #include "jinclude.h"
 #include "jpeglib.h"
+#include "jchuff.h"		/* Declarations shared with jcphuff.c */
+// clang-format on
 
 /* Expanded entropy encoder object for Huffman encoding.
  *

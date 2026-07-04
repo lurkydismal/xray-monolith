@@ -15,10 +15,12 @@
  * Note that the max_memory_to_use option is ignored by this implementation.
  */
 
+// clang-format off
 #define JPEG_INTERNALS
 #include "jinclude.h"
-#include "jmemsys.h" /* import the system-dependent declarations */
 #include "jpeglib.h"
+#include "jmemsys.h"		/* import the system-dependent declarations */
+// clang-format on
 
 #ifndef HAVE_STDLIB_H /* <stdlib.h> should declare malloc(),free() */
 extern void* malloc JPP( ( size_t size ) );

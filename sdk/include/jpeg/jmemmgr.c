@@ -24,11 +24,13 @@
  * memory then you shouldn't care about a little bit of unused code...)
  */
 
+// clang-format off
 #define JPEG_INTERNALS
-#define AM_MEMORY_MANAGER /* we define jvirt_Xarray_control structs */
+#define AM_MEMORY_MANAGER	/* we define jvirt_Xarray_control structs */
 #include "jinclude.h"
-#include "jmemsys.h" /* import the system-dependent declarations */
 #include "jpeglib.h"
+#include "jmemsys.h"		/* import the system-dependent declarations */
+// clang-format on
 
 #ifndef NO_GETENV
 #ifndef HAVE_STDLIB_H /* <stdlib.h> should declare getenv() */

@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * jdhuff.h
  *
@@ -186,36 +184,35 @@ jpeg_fill_bit_buffer JPP( ( bitread_working_state * state,
  * 3. jpeg_huff_decode returns -1 if forced to suspend.
  */
 
-#define HUFF_DECODE( result, state, htbl, failaction, slowlabel ) \
-    {                                                             \
-        // NOTE: LD / removed register
-int nb, look;
-if ( bits_left < HUFF_LOOKAHEAD ) {
-    if ( !jpeg_fill_bit_buffer( &state, get_buffer, bits_left, 0 ) ) {
-        failaction;
+#define HUFF_DECODE( result, state, htbl, failaction, slowlabel )              \
+    {                                                                          \
+        int nb, look;                                                          \
+        if ( bits_left < HUFF_LOOKAHEAD ) {                                    \
+            if ( !jpeg_fill_bit_buffer( &state, get_buffer, bits_left, 0 ) ) { \
+                failaction;                                                    \
+            }                                                                  \
+            get_buffer = state.get_buffer;                                     \
+            bits_left = state.bits_left;                                       \
+            if ( bits_left < HUFF_LOOKAHEAD ) {                                \
+                nb = 1;                                                        \
+                goto slowlabel;                                                \
+            }                                                                  \
+        }                                                                      \
+        look = PEEK_BITS( HUFF_LOOKAHEAD );                                    \
+        if ( ( nb = htbl->look_nbits[ look ] ) != 0 ) {                        \
+            DROP_BITS( nb );                                                   \
+            result = htbl->look_sym[ look ];                                   \
+        } else {                                                               \
+            nb = HUFF_LOOKAHEAD + 1;                                           \
+        slowlabel:                                                             \
+            if ( ( result = jpeg_huff_decode( &state, get_buffer, bits_left,   \
+                                              htbl, nb ) ) < 0 ) {             \
+                failaction;                                                    \
+            }                                                                  \
+            get_buffer = state.get_buffer;                                     \
+            bits_left = state.bits_left;                                       \
+        }                                                                      \
     }
-    get_buffer = state.get_buffer;
-    bits_left = state.bits_left;
-    if ( bits_left < HUFF_LOOKAHEAD ) {
-        nb = 1;
-        goto slowlabel;
-    }
-}
-look = PEEK_BITS( HUFF_LOOKAHEAD );
-if ( ( nb = htbl->look_nbits[ look ] ) != 0 ) {
-    DROP_BITS( nb );
-    result = htbl->look_sym[ look ];
-} else {
-    nb = HUFF_LOOKAHEAD + 1;
-slowlabel:
-    if ( ( result = jpeg_huff_decode( &state, get_buffer, bits_left, htbl,
-                                      nb ) ) < 0 ) {
-        failaction;
-    }
-    get_buffer = state.get_buffer;
-    bits_left = state.bits_left;
-}
-}
 
 /* Out-of-line case for Huffman code fetching */
 EXTERN( int )

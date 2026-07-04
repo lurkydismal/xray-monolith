@@ -14,10 +14,12 @@
  * storage only upon successful completion of an MCU.
  */
 
+// clang-format off
 #define JPEG_INTERNALS
-#include "jdhuff.h" /* Declarations shared with jdhuff.c */
 #include "jinclude.h"
 #include "jpeglib.h"
+#include "jdhuff.h"		/* Declarations shared with jdhuff.c */
+// clang-format on
 
 #ifdef D_PROGRESSIVE_SUPPORTED
 

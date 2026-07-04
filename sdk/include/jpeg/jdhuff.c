@@ -14,11 +14,12 @@
  * storage only upon successful completion of an MCU.
  */
 
+// clang-format off
 #define JPEG_INTERNALS
-#include "jdhuff.h" /* Declarations shared with jdphuff.c */
-
 #include "jinclude.h"
 #include "jpeglib.h"
+#include "jdhuff.h"		/* Declarations shared with jdphuff.c */
+// clang-format on
 
 /*
  * Expanded entropy decoder object for Huffman decoding.

@@ -22,7 +22,9 @@
 #ifdef JPEG_INTERNALS
 
 #undef RIGHT_SHIFT_IS_UNSIGNED
+#ifndef INLINE
 #define INLINE __inline
+#endif
 /* These are for configuring the JPEG memory manager. */
 #undef DEFAULT_MAX_MEM
 #undef NO_MKTEMP
