@@ -92,7 +92,7 @@
 #include <luabind/prefix.hpp>
 #include <luabind/raw_policy.hpp>
 #include <luabind/scope.hpp>
-#include <sm_boost/boost_legacy.h>
+#include <sm_boost/boost_legacy.hpp>
 #include <sm_boost/typelist.hpp>
 
 #include <cassert>

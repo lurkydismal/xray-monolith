@@ -23,7 +23,7 @@
 #pragma once
 #include <luabind/config.hpp>
 #include <luabind/detail/policy.hpp>
-#include <sm_boost/boost_legacy.h>
+#include <sm_boost/boost_legacy.hpp>
 
 namespace luabind {
 namespace detail {
