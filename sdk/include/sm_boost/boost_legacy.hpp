@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 namespace boost_legacy {
 class no_copyable {
 public:
