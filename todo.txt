@@ -1,6 +1,4 @@
 fix vorbis/psytune
 
-fix stdext uses
-
 fix icu
 fix nvapi
