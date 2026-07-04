@@ -22,7 +22,8 @@ text_getc( FILE* file )
 /* Read next char, skipping over any comments (# to end of line) */
 /* A comment/newline sequence is returned as a newline */
 {
-    register int ch;
+    // NOTE: LD / removed register
+    int ch;
 
     ch = getc( file );
     if ( ch == '#' ) {
@@ -38,8 +39,10 @@ read_text_integer( FILE* file, long* result, int* termchar )
 /* Read an unsigned decimal integer from a file, store it in result */
 /* Reads one trailing character after the integer; returns it in termchar */
 {
-    register int ch;
-    register long val;
+    // NOTE: LD / removed register
+    int ch;
+    // NOTE: LD / removed register
+    long val;
 
     /* Skip any leading whitespace, detect EOF */
     do {
@@ -132,7 +135,8 @@ read_scan_integer( FILE* file, long* result, int* termchar )
  * this simplifies parsing of punctuation in scan scripts.
  */
 {
-    register int ch;
+    // NOTE: LD / removed register
+    int ch;
 
     if ( !read_text_integer( file, result, termchar ) )
         return FALSE;

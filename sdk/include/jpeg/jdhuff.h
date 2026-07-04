@@ -100,9 +100,9 @@ typedef struct { /* Bitreading working state within an MCU */
 } bitread_working_state;
 
 /* Macros to declare and load/save bitread local variables. */
-#define BITREAD_STATE_VARS            \
-    register bit_buf_type get_buffer; \
-    register int bits_left;           \
+#define BITREAD_STATE_VARS   \
+    bit_buf_type get_buffer; \
+    int bits_left;           \
     bitread_working_state br_state
 
 #define BITREAD_LOAD_STATE( cinfop, permstate )              \
@@ -161,8 +161,10 @@ typedef struct { /* Bitreading working state within an MCU */
 /* Load up the bit buffer to a depth of at least nbits */
 EXTERN( boolean )
 jpeg_fill_bit_buffer JPP( ( bitread_working_state * state,
-                            register bit_buf_type get_buffer,
-                            register int bits_left,
+                            // NOTE: LD / removed register
+                            bit_buf_type get_buffer,
+                            // NOTE: LD / removed register
+                            int bits_left,
                             int nbits ) );
 
 /*
@@ -182,40 +184,43 @@ jpeg_fill_bit_buffer JPP( ( bitread_working_state * state,
  * 3. jpeg_huff_decode returns -1 if forced to suspend.
  */
 
-#define HUFF_DECODE( result, state, htbl, failaction, slowlabel )              \
-    {                                                                          \
-        register int nb, look;                                                 \
-        if ( bits_left < HUFF_LOOKAHEAD ) {                                    \
-            if ( !jpeg_fill_bit_buffer( &state, get_buffer, bits_left, 0 ) ) { \
-                failaction;                                                    \
-            }                                                                  \
-            get_buffer = state.get_buffer;                                     \
-            bits_left = state.bits_left;                                       \
-            if ( bits_left < HUFF_LOOKAHEAD ) {                                \
-                nb = 1;                                                        \
-                goto slowlabel;                                                \
-            }                                                                  \
-        }                                                                      \
-        look = PEEK_BITS( HUFF_LOOKAHEAD );                                    \
-        if ( ( nb = htbl->look_nbits[ look ] ) != 0 ) {                        \
-            DROP_BITS( nb );                                                   \
-            result = htbl->look_sym[ look ];                                   \
-        } else {                                                               \
-            nb = HUFF_LOOKAHEAD + 1;                                           \
-        slowlabel:                                                             \
-            if ( ( result = jpeg_huff_decode( &state, get_buffer, bits_left,   \
-                                              htbl, nb ) ) < 0 ) {             \
-                failaction;                                                    \
-            }                                                                  \
-            get_buffer = state.get_buffer;                                     \
-            bits_left = state.bits_left;                                       \
-        }                                                                      \
+#define HUFF_DECODE( result, state, htbl, failaction, slowlabel ) \
+    {                                                             \
+        // NOTE: LD / removed register
+int nb, look;
+if ( bits_left < HUFF_LOOKAHEAD ) {
+    if ( !jpeg_fill_bit_buffer( &state, get_buffer, bits_left, 0 ) ) {
+        failaction;
     }
+    get_buffer = state.get_buffer;
+    bits_left = state.bits_left;
+    if ( bits_left < HUFF_LOOKAHEAD ) {
+        nb = 1;
+        goto slowlabel;
+    }
+}
+look = PEEK_BITS( HUFF_LOOKAHEAD );
+if ( ( nb = htbl->look_nbits[ look ] ) != 0 ) {
+    DROP_BITS( nb );
+    result = htbl->look_sym[ look ];
+} else {
+    nb = HUFF_LOOKAHEAD + 1;
+slowlabel:
+    if ( ( result = jpeg_huff_decode( &state, get_buffer, bits_left, htbl,
+                                      nb ) ) < 0 ) {
+        failaction;
+    }
+    get_buffer = state.get_buffer;
+    bits_left = state.bits_left;
+}
+}
 
 /* Out-of-line case for Huffman code fetching */
 EXTERN( int )
 jpeg_huff_decode JPP( ( bitread_working_state * state,
-                        register bit_buf_type get_buffer,
-                        register int bits_left,
+                        // NOTE: LD / removed register
+                        bit_buf_type get_buffer,
+                        // NOTE: LD / removed register
+                        int bits_left,
                         d_derived_tbl* htbl,
                         int min_bits ) );
