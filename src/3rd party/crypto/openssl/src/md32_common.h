@@ -166,7 +166,7 @@
     defined( __x86_64__ )
 #define ROTATE( a, n )                                                 \
     ( {                                                                \
-        register unsigned int ret;                                     \
+        unsigned int ret;                                              \
         asm( "roll %1,%0" : "=r"( ret ) : "I"( n ), "0"( a ) : "cc" ); \
         ret;                                                           \
     } )
@@ -174,14 +174,14 @@
     defined( __powerpc ) || defined( __ppc__ ) || defined( __powerpc64__ )
 #define ROTATE( a, n )                                                    \
     ( {                                                                   \
-        register unsigned int ret;                                        \
+        unsigned int ret;                                                 \
         asm( "rlwinm %0,%1,%2,0,31" : "=r"( ret ) : "r"( a ), "I"( n ) ); \
         ret;                                                              \
     } )
 #elif defined( __s390x__ )
 #define ROTATE( a, n )                                            \
     ( {                                                           \
-        register unsigned int ret;                                \
+        unsigned int ret;                                         \
         asm( "rll %0,%1,%2" : "=r"( ret ) : "r"( a ), "I"( n ) ); \
         ret;                                                      \
     } )

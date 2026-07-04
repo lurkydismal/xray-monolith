@@ -194,9 +194,12 @@ forward_DCT( j_compress_ptr cinfo,
     for ( bi = 0; bi < num_blocks; bi++, start_col += DCTSIZE ) {
         /* Load data into workspace, applying unsigned->signed conversion */
         {
-            register DCTELEM* workspaceptr;
-            register JSAMPROW elemptr;
-            register int elemr;
+            // NOTE: LD / removed register
+            DCTELEM* workspaceptr;
+            // NOTE: LD / removed register
+            JSAMPROW elemptr;
+            // NOTE: LD / removed register
+            int elemr;
 
             workspaceptr = workspace;
             for ( elemr = 0; elemr < DCTSIZE; elemr++ ) {
@@ -212,7 +215,8 @@ forward_DCT( j_compress_ptr cinfo,
                 *workspaceptr++ = GETJSAMPLE( *elemptr++ ) - CENTERJSAMPLE;
 #else
                 {
-                    register int elemc;
+                    // NOTE: LD / removed register
+                    int elemc;
                     for ( elemc = DCTSIZE; elemc > 0; elemc-- ) {
                         *workspaceptr++ =
                             GETJSAMPLE( *elemptr++ ) - CENTERJSAMPLE;
@@ -227,9 +231,12 @@ forward_DCT( j_compress_ptr cinfo,
 
         /* Quantize/descale the coefficients, and store into coef_blocks[] */
         {
-            register DCTELEM temp, qval;
-            register int i;
-            register JCOEFPTR output_ptr = coef_blocks[ bi ];
+            // NOTE: LD / removed register
+            DCTELEM temp, qval;
+            // NOTE: LD / removed register
+            int i;
+            // NOTE: LD / removed register
+            JCOEFPTR output_ptr = coef_blocks[ bi ];
 
             for ( i = 0; i < DCTSIZE2; i++ ) {
                 qval = divisors[ i ];
@@ -296,9 +303,12 @@ forward_DCT_float( j_compress_ptr cinfo,
     for ( bi = 0; bi < num_blocks; bi++, start_col += DCTSIZE ) {
         /* Load data into workspace, applying unsigned->signed conversion */
         {
-            register FAST_FLOAT* workspaceptr;
-            register JSAMPROW elemptr;
-            register int elemr;
+            // NOTE: LD / removed register
+            FAST_FLOAT* workspaceptr;
+            // NOTE: LD / removed register
+            JSAMPROW elemptr;
+            // NOTE: LD / removed register
+            int elemr;
 
             workspaceptr = workspace;
             for ( elemr = 0; elemr < DCTSIZE; elemr++ ) {
@@ -322,7 +332,8 @@ forward_DCT_float( j_compress_ptr cinfo,
                     ( FAST_FLOAT )( GETJSAMPLE( *elemptr++ ) - CENTERJSAMPLE );
 #else
                 {
-                    register int elemc;
+                    // NOTE: LD / removed register
+                    int elemc;
                     for ( elemc = DCTSIZE; elemc > 0; elemc-- ) {
                         *workspaceptr++ =
                             ( FAST_FLOAT )( GETJSAMPLE( *elemptr++ ) -
@@ -338,9 +349,12 @@ forward_DCT_float( j_compress_ptr cinfo,
 
         /* Quantize/descale the coefficients, and store into coef_blocks[] */
         {
-            register FAST_FLOAT temp;
-            register int i;
-            register JCOEFPTR output_ptr = coef_blocks[ bi ];
+            // NOTE: LD / removed register
+            FAST_FLOAT temp;
+            // NOTE: LD / removed register
+            int i;
+            // NOTE: LD / removed register
+            JCOEFPTR output_ptr = coef_blocks[ bi ];
 
             for ( i = 0; i < DCTSIZE2; i++ ) {
                 /* Apply the quantization and scaling factor */

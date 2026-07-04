@@ -193,9 +193,12 @@ int_upsample( j_decompress_ptr cinfo,
               JSAMPARRAY* output_data_ptr ) {
     my_upsample_ptr upsample = ( my_upsample_ptr )cinfo->upsample;
     JSAMPARRAY output_data = *output_data_ptr;
-    register JSAMPROW inptr, outptr;
-    register JSAMPLE invalue;
-    register int h;
+    // NOTE: LD / removed register
+    JSAMPROW inptr, outptr;
+    // NOTE: LD / removed register
+    JSAMPLE invalue;
+    // NOTE: LD / removed register
+    int h;
     JSAMPROW outend;
     int h_expand, v_expand;
     int inrow, outrow;
@@ -236,8 +239,10 @@ h2v1_upsample( j_decompress_ptr cinfo,
                JSAMPARRAY input_data,
                JSAMPARRAY* output_data_ptr ) {
     JSAMPARRAY output_data = *output_data_ptr;
-    register JSAMPROW inptr, outptr;
-    register JSAMPLE invalue;
+    // NOTE: LD / removed register
+    JSAMPROW inptr, outptr;
+    // NOTE: LD / removed register
+    JSAMPLE invalue;
     JSAMPROW outend;
     int inrow;
 
@@ -264,8 +269,10 @@ h2v2_upsample( j_decompress_ptr cinfo,
                JSAMPARRAY input_data,
                JSAMPARRAY* output_data_ptr ) {
     JSAMPARRAY output_data = *output_data_ptr;
-    register JSAMPROW inptr, outptr;
-    register JSAMPLE invalue;
+    // NOTE: LD / removed register
+    JSAMPROW inptr, outptr;
+    // NOTE: LD / removed register
+    JSAMPLE invalue;
     JSAMPROW outend;
     int inrow, outrow;
 
@@ -307,9 +314,12 @@ h2v1_fancy_upsample( j_decompress_ptr cinfo,
                      JSAMPARRAY input_data,
                      JSAMPARRAY* output_data_ptr ) {
     JSAMPARRAY output_data = *output_data_ptr;
-    register JSAMPROW inptr, outptr;
-    register int invalue;
-    register JDIMENSION colctr;
+    // NOTE: LD / removed register
+    JSAMPROW inptr, outptr;
+    // NOTE: LD / removed register
+    int invalue;
+    // NOTE: LD / removed register
+    JDIMENSION colctr;
     int inrow;
 
     for ( inrow = 0; inrow < cinfo->max_v_samp_factor; inrow++ ) {
@@ -352,13 +362,17 @@ h2v2_fancy_upsample( j_decompress_ptr cinfo,
                      JSAMPARRAY input_data,
                      JSAMPARRAY* output_data_ptr ) {
     JSAMPARRAY output_data = *output_data_ptr;
-    register JSAMPROW inptr0, inptr1, outptr;
+    // NOTE: LD / removed register
+    JSAMPROW inptr0, inptr1, outptr;
 #if BITS_IN_JSAMPLE == 8
-    register int thiscolsum, lastcolsum, nextcolsum;
+    // NOTE: LD / removed register
+    int thiscolsum, lastcolsum, nextcolsum;
 #else
-    register INT32 thiscolsum, lastcolsum, nextcolsum;
+    // NOTE: LD / removed register
+    INT32 thiscolsum, lastcolsum, nextcolsum;
 #endif
-    register JDIMENSION colctr;
+    // NOTE: LD / removed register
+    JDIMENSION colctr;
     int inrow, outrow, v;
 
     inrow = outrow = 0;

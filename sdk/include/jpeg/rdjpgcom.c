@@ -411,8 +411,10 @@ static int keymatch( char* arg, const char* keyword, int minchars )
 /* keyword is the constant keyword (must be lower case already), */
 /* minchars is length of minimum legal abbreviation. */
 {
-    register int ca, ck;
-    register int nmatched = 0;
+    // NOTE: LD / removed register
+    int ca, ck;
+    // NOTE: LD / removed register
+    int nmatched = 0;
 
     while ( ( ca = *arg++ ) != '\0' ) {
         if ( ( ck = *keyword++ ) == '\0' )

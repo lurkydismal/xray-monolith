@@ -81,6 +81,7 @@ typedef huff_entropy_decoder* huff_entropy_ptr;
  */
 
 METHODDEF( void )
+
 start_pass_huff_decoder( j_decompress_ptr cinfo ) {
     huff_entropy_ptr entropy = ( huff_entropy_ptr )cinfo->entropy;
     int ci, blkn, dctbl, actbl;
@@ -144,6 +145,7 @@ start_pass_huff_decoder( j_decompress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jpeg_make_d_derived_tbl( j_decompress_ptr cinfo,
                          boolean isDC,
                          int tblno,
@@ -289,15 +291,20 @@ jpeg_make_d_derived_tbl( j_decompress_ptr cinfo,
 #endif
 
 GLOBAL( boolean )
+
 jpeg_fill_bit_buffer( bitread_working_state* state,
-                      register bit_buf_type get_buffer,
-                      register int bits_left,
+                      // NOTE: LD / removed register
+                      bit_buf_type get_buffer,
+                      // NOTE: LD / removed register
+                      int bits_left,
                       int nbits )
 /* Load up the bit buffer to a depth of at least nbits */
 {
     /* Copy heavily used state fields into locals (hopefully registers) */
-    register const JOCTET* next_input_byte = state->next_input_byte;
-    register size_t bytes_in_buffer = state->bytes_in_buffer;
+    // NOTE: LD / removed register
+    const JOCTET* next_input_byte = state->next_input_byte;
+    // NOTE: LD / removed register
+    size_t bytes_in_buffer = state->bytes_in_buffer;
     j_decompress_ptr cinfo = state->cinfo;
 
     /* Attempt to load at least MIN_GET_BITS bits into get_buffer. */
@@ -306,7 +313,8 @@ jpeg_fill_bit_buffer( bitread_working_state* state,
 
     if ( cinfo->unread_marker == 0 ) { /* cannot advance past a marker */
         while ( bits_left < MIN_GET_BITS ) {
-            register int c;
+            // NOTE: LD / removed register
+            int c;
 
             /* Attempt to read a byte */
             if ( bytes_in_buffer == 0 ) {
@@ -397,13 +405,18 @@ jpeg_fill_bit_buffer( bitread_working_state* state,
  */
 
 GLOBAL( int )
+
 jpeg_huff_decode( bitread_working_state* state,
-                  register bit_buf_type get_buffer,
-                  register int bits_left,
+                  // NOTE: LD / removed register
+                  bit_buf_type get_buffer,
+                  // NOTE: LD / removed register
+                  int bits_left,
                   d_derived_tbl* htbl,
                   int min_bits ) {
-    register int l = min_bits;
-    register INT32 code;
+    // NOTE: LD / removed register
+    int l = min_bits;
+    // NOTE: LD / removed register
+    INT32 code;
 
     /* HUFF_DECODE has determined that the code is at least min_bits */
     /* bits long, so fetch that many bits in one swoop. */
@@ -481,6 +494,7 @@ static const int extend_offset[ 16 ] = /* entry n is (-1 << n) + 1 */
  */
 
 LOCAL( boolean )
+
 process_restart( j_decompress_ptr cinfo ) {
     huff_entropy_ptr entropy = ( huff_entropy_ptr )cinfo->entropy;
     int ci;
@@ -528,6 +542,7 @@ process_restart( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( boolean )
+
 decode_mcu( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
     huff_entropy_ptr entropy = ( huff_entropy_ptr )cinfo->entropy;
     int blkn;
@@ -555,7 +570,8 @@ decode_mcu( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
             JBLOCKROW block = MCU_data[ blkn ];
             d_derived_tbl* dctbl = entropy->dc_cur_tbls[ blkn ];
             d_derived_tbl* actbl = entropy->ac_cur_tbls[ blkn ];
-            register int s, k, r;
+            // NOTE: LD / removed register
+            int s, k, r;
 
             /* Decode a single block's worth of coefficients */
 
@@ -643,6 +659,7 @@ decode_mcu( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
  */
 
 GLOBAL( void )
+
 jinit_huff_decoder( j_decompress_ptr cinfo ) {
     huff_entropy_ptr entropy;
     int i;

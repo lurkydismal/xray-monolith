@@ -314,8 +314,10 @@ put_pixel_rows( j_decompress_ptr cinfo,
                 djpeg_dest_ptr dinfo,
                 JDIMENSION rows_supplied ) {
     gif_dest_ptr dest = ( gif_dest_ptr )dinfo;
-    register JSAMPROW ptr;
-    register JDIMENSION col;
+    // NOTE: LD / removed register
+    JSAMPROW ptr;
+    // NOTE: LD / removed register
+    JDIMENSION col;
 
     ptr = dest->pub.buffer[ 0 ];
     for ( col = cinfo->output_width; col > 0; col-- ) {

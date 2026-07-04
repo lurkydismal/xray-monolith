@@ -426,8 +426,10 @@ char* argv[];
 
 /* Skip over space and comments, in either direction. */
 char* skipspace( p, dir )
-register char* p;
-register int dir; /* 1 for forward, -1 for backward */
+// NOTE: LD / removed register
+char* p;
+// NOTE: LD / removed register
+int dir; /* 1 for forward, -1 for backward */
 {
     for ( ;; ) {
         while ( is_space( *p ) )
@@ -478,7 +480,8 @@ char* end;
 int test1( buf )
 char* buf;
 {
-    register char* p = buf;
+    // NOTE: LD / removed register
+    char* p = buf;
     char* bend;
     char* endfn;
     int contin;
@@ -540,7 +543,8 @@ int header;          /* Boolean */
 int convert_varargs; /* Boolean */
 {
     char* endfn;
-    register char* p;
+    // NOTE: LD / removed register
+    char* p;
     char** breaks;
     unsigned num_breaks = 2; /* for testing */
     char** btop;

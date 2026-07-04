@@ -76,8 +76,10 @@ put_pixel_rows( j_decompress_ptr cinfo,
 {
     bmp_dest_ptr dest = ( bmp_dest_ptr )dinfo;
     JSAMPARRAY image_ptr;
-    register JSAMPROW inptr, outptr;
-    register JDIMENSION col;
+    // NOTE: LD / removed register
+    JSAMPROW inptr, outptr;
+    // NOTE: LD / removed register
+    JDIMENSION col;
     int pad;
 
     /* Access next row in virtual array */
@@ -112,8 +114,10 @@ put_gray_rows( j_decompress_ptr cinfo,
 {
     bmp_dest_ptr dest = ( bmp_dest_ptr )dinfo;
     JSAMPARRAY image_ptr;
-    register JSAMPROW inptr, outptr;
-    register JDIMENSION col;
+    // NOTE: LD / removed register
+    JSAMPROW inptr, outptr;
+    // NOTE: LD / removed register
+    JDIMENSION col;
     int pad;
 
     /* Access next row in virtual array */
@@ -345,11 +349,14 @@ write_colormap( j_decompress_ptr cinfo,
 METHODDEF( void )
 finish_output_bmp( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     bmp_dest_ptr dest = ( bmp_dest_ptr )dinfo;
-    register FILE* outfile = dest->pub.output_file;
+    // NOTE: LD / removed register
+    FILE* outfile = dest->pub.output_file;
     JSAMPARRAY image_ptr;
-    register JSAMPROW data_ptr;
+    // NOTE: LD / removed register
+    JSAMPROW data_ptr;
     JDIMENSION row;
-    register JDIMENSION col;
+    // NOTE: LD / removed register
+    JDIMENSION col;
     cd_progress_ptr progress = ( cd_progress_ptr )cinfo->progress;
 
     /* Write the header and colormap */

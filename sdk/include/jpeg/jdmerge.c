@@ -228,13 +228,16 @@ h2v1_merged_upsample( j_decompress_ptr cinfo,
                       JDIMENSION in_row_group_ctr,
                       JSAMPARRAY output_buf ) {
     my_upsample_ptr upsample = ( my_upsample_ptr )cinfo->upsample;
-    register int y, cred, cgreen, cblue;
+    // NOTE: LD / removed register
+    int y, cred, cgreen, cblue;
     int cb, cr;
-    register JSAMPROW outptr;
+    // NOTE: LD / removed register
+    JSAMPROW outptr;
     JSAMPROW inptr0, inptr1, inptr2;
     JDIMENSION col;
     /* copy these pointers into registers if possible */
-    register JSAMPLE* range_limit = cinfo->sample_range_limit;
+    // NOTE: LD / removed register
+    JSAMPLE* range_limit = cinfo->sample_range_limit;
     int* Crrtab = upsample->Cr_r_tab;
     int* Cbbtab = upsample->Cb_b_tab;
     INT32* Crgtab = upsample->Cr_g_tab;
@@ -289,13 +292,16 @@ h2v2_merged_upsample( j_decompress_ptr cinfo,
                       JDIMENSION in_row_group_ctr,
                       JSAMPARRAY output_buf ) {
     my_upsample_ptr upsample = ( my_upsample_ptr )cinfo->upsample;
-    register int y, cred, cgreen, cblue;
+    // NOTE: LD / removed register
+    int y, cred, cgreen, cblue;
     int cb, cr;
-    register JSAMPROW outptr0, outptr1;
+    // NOTE: LD / removed register
+    JSAMPROW outptr0, outptr1;
     JSAMPROW inptr00, inptr01, inptr1, inptr2;
     JDIMENSION col;
     /* copy these pointers into registers if possible */
-    register JSAMPLE* range_limit = cinfo->sample_range_limit;
+    // NOTE: LD / removed register
+    JSAMPLE* range_limit = cinfo->sample_range_limit;
     int* Crrtab = upsample->Cr_r_tab;
     int* Cbbtab = upsample->Cb_b_tab;
     INT32* Crgtab = upsample->Cr_g_tab;

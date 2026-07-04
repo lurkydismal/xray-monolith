@@ -114,13 +114,17 @@ jcopy_sample_rows( JSAMPARRAY input_array,
  * The source and destination arrays must be at least as wide as num_cols.
  */
 {
-    register JSAMPROW inptr, outptr;
+    // NOTE: LD / removed register
+    JSAMPROW inptr, outptr;
 #ifdef FMEMCOPY
-    register size_t count = ( size_t )( num_cols * SIZEOF( JSAMPLE ) );
+    // NOTE: LD / removed register
+    size_t count = ( size_t )( num_cols * SIZEOF( JSAMPLE ) );
 #else
-    register JDIMENSION count;
+    // NOTE: LD / removed register
+    JDIMENSION count;
 #endif
-    register int row;
+    // NOTE: LD / removed register
+    int row;
 
     input_array += source_row;
     output_array += dest_row;
@@ -147,8 +151,10 @@ jcopy_block_row( JBLOCKROW input_row,
     FMEMCOPY( output_row, input_row,
               num_blocks * ( DCTSIZE2 * SIZEOF( JCOEF ) ) );
 #else
-    register JCOEFPTR inptr, outptr;
-    register long count;
+    // NOTE: LD / removed register
+    JCOEFPTR inptr, outptr;
+    // NOTE: LD / removed register
+    long count;
 
     inptr = ( JCOEFPTR )input_row;
     outptr = ( JCOEFPTR )output_row;
@@ -166,8 +172,10 @@ jzero_far( void FAR* target, size_t bytestozero )
 #ifdef FMEMZERO
     FMEMZERO( target, bytestozero );
 #else
-    register char FAR* ptr = ( char FAR* )target;
-    register size_t count;
+    // NOTE: LD / removed register
+    char FAR* ptr = ( char FAR* )target;
+    // NOTE: LD / removed register
+    size_t count;
 
     for ( count = bytestozero; count > 0; count-- ) {
         *ptr++ = 0;

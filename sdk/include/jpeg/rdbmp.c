@@ -65,8 +65,10 @@ LOCAL( int )
 read_byte( bmp_source_ptr sinfo )
 /* Read next byte from BMP file */
 {
-    register FILE* infile = sinfo->pub.input_file;
-    register int c;
+    // NOTE: LD / removed register
+    FILE* infile = sinfo->pub.input_file;
+    // NOTE: LD / removed register
+    int c;
 
     if ( ( c = getc( infile ) ) == EOF )
         ERREXIT( sinfo->cinfo, JERR_INPUT_EOF );
@@ -115,11 +117,15 @@ get_8bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading 8-bit colormap indexes */
 {
     bmp_source_ptr source = ( bmp_source_ptr )sinfo;
-    register JSAMPARRAY colormap = source->colormap;
+    // NOTE: LD / removed register
+    JSAMPARRAY colormap = source->colormap;
     JSAMPARRAY image_ptr;
-    register int t;
-    register JSAMPROW inptr, outptr;
-    register JDIMENSION col;
+    // NOTE: LD / removed register
+    int t;
+    // NOTE: LD / removed register
+    JSAMPROW inptr, outptr;
+    // NOTE: LD / removed register
+    JDIMENSION col;
 
     /* Fetch next row from virtual array */
     source->source_row--;
@@ -146,8 +152,10 @@ get_24bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 {
     bmp_source_ptr source = ( bmp_source_ptr )sinfo;
     JSAMPARRAY image_ptr;
-    register JSAMPROW inptr, outptr;
-    register JDIMENSION col;
+    // NOTE: LD / removed register
+    JSAMPROW inptr, outptr;
+    // NOTE: LD / removed register
+    JDIMENSION col;
 
     /* Fetch next row from virtual array */
     source->source_row--;
@@ -179,9 +187,12 @@ get_24bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 METHODDEF( JDIMENSION )
 preload_image( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     bmp_source_ptr source = ( bmp_source_ptr )sinfo;
-    register FILE* infile = source->pub.input_file;
-    register int c;
-    register JSAMPROW out_ptr;
+    // NOTE: LD / removed register
+    FILE* infile = source->pub.input_file;
+    // NOTE: LD / removed register
+    int c;
+    // NOTE: LD / removed register
+    JSAMPROW out_ptr;
     JSAMPARRAY image_ptr;
     JDIMENSION row, col;
     cd_progress_ptr progress = ( cd_progress_ptr )cinfo->progress;

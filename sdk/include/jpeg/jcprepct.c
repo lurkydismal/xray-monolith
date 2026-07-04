@@ -101,7 +101,8 @@ expand_bottom_edge( JSAMPARRAY image_data,
                     JDIMENSION num_cols,
                     int input_rows,
                     int output_rows ) {
-    register int row;
+    // NOTE: LD / removed register
+    int row;
 
     for ( row = input_rows; row < output_rows; row++ ) {
         jcopy_sample_rows( image_data, input_rows - 1, image_data, row, 1,
