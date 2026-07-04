@@ -2,6 +2,8 @@
 #if !defined( _modedec_H )
 #define _modedec_H ( 1 )
 
+#include "ogg/os_types.h"
+
 #if defined( OC_COLLECT_METRICS )
 typedef struct oc_mode_metrics oc_mode_metrics;
 #endif
