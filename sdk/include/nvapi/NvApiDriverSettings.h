@@ -40,6 +40,10 @@
 #ifndef _NVAPI_DRIVER_SETTINGS_H_
 #define _NVAPI_DRIVER_SETTINGS_H_
 
+#include <wchar.h>
+
+#include "nvapi_lite_common.h"
+
 #define OGL_AA_LINE_GAMMA_STRING L"Antialiasing - Line gamma"
 #define OGL_DEEP_COLOR_SCANOUT_STRING L"Deep color for 3D applications"
 #define OGL_DEFAULT_SWAP_INTERVAL_STRING                                       \
