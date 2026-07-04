@@ -7,7 +7,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-#include "d3dx10.h"
+#include "D3DX10.h"
+#include "D3DX10core.h"
 
 #ifndef __D3DX10TEX_H__
 #define __D3DX10TEX_H__

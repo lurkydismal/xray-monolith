@@ -10,6 +10,9 @@
 #ifndef __D3DX9MATH_INL__
 #define __D3DX9MATH_INL__
 
+#include "d3dx9.h"
+#include "d3dx9math.h"
+
 //===========================================================================
 //
 // Inline Class Methods

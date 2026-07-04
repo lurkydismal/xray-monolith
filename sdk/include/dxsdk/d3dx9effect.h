@@ -9,6 +9,9 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "d3dx9.h"
+#include "d3dx9core.h"
+#include "d3dx9math.h"
+#include "d3dx9shader.h"
 
 #ifndef __D3DX9EFFECT_H__
 #define __D3DX9EFFECT_H__

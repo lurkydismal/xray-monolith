@@ -1932,7 +1932,10 @@ HRESULT WINAPI D3DXSHProjectCubeMap( UINT uOrder,
 }
 #endif
 
+#if 0
+// NOTE: Do not include here
 #include "d3dx9math.inl"
+#endif
 
 #if _MSC_VER >= 1200
 #pragma warning( pop )

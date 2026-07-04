@@ -11,7 +11,9 @@
 #ifndef __D3DX11ASYNC_H__
 #define __D3DX11ASYNC_H__
 
-#include "d3dx11.h"
+#include "D3DX11.h"
+#include "D3DX11core.h"
+#include "D3DX11tex.h"
 
 #ifdef __cplusplus
 extern "C" {

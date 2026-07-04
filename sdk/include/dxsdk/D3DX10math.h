@@ -2011,7 +2011,10 @@ D3DX_CPU_OPTIMIZATION WINAPI D3DXCpuOptimizations( BOOL Enable );
 }
 #endif
 
+// FIX: No such file
+#if 0
 #include "D3DX10math.inl"
+#endif
 
 #if _MSC_VER >= 1200
 #pragma warning( pop )

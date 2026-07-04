@@ -8,6 +8,8 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include "d3dx9.h"
+#include "d3dx9core.h"
+#include "d3dx9math.h"
 
 #ifndef __D3DX9SHADER_H__
 #define __D3DX9SHADER_H__

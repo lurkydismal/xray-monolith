@@ -10,6 +10,10 @@
 #ifndef __D3DX9ANIM_H__
 #define __D3DX9ANIM_H__
 
+#include <guiddef.h>
+
+#include "d3dx9mesh.h"
+
 // {698CFB3F-9289-4d95-9A57-33A94B5A65F9}
 DEFINE_GUID( IID_ID3DXAnimationSet,
              0x698cfb3f,

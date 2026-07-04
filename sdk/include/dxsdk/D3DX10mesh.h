@@ -7,7 +7,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
-#include "d3dx10.h"
+#include "D3DX10.h"
+#include "D3DX10math.h"
 
 #ifndef __D3DX10MESH_H__
 #define __D3DX10MESH_H__

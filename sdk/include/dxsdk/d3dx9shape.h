@@ -8,6 +8,8 @@
 ///////////////////////////////////////////////////////////////////////////
 
 #include "d3dx9.h"
+#include "d3dx9core.h"
+#include "d3dx9mesh.h"
 
 #ifndef __D3DX9SHAPES_H__
 #define __D3DX9SHAPES_H__

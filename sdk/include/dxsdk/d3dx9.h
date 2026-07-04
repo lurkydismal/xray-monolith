@@ -41,6 +41,8 @@
 
 // Includes
 #include "d3d9.h"
+#if 0
+// NOTE: Include manually
 #include "d3dx9anim.h"
 #include "d3dx9core.h"
 #include "d3dx9effect.h"
@@ -50,6 +52,7 @@
 #include "d3dx9shape.h"
 #include "d3dx9tex.h"
 #include "d3dx9xof.h"
+#endif
 
 // Errors
 #define _FACDD 0x876

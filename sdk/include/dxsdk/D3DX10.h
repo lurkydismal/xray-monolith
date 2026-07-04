@@ -39,13 +39,16 @@
 #endif
 
 // Includes
-#include "d3d10.h"
+#if 0
 #include "d3dx10.h"
 #include "d3dx10async.h"
 #include "d3dx10core.h"
 #include "d3dx10math.h"
 #include "d3dx10mesh.h"
 #include "d3dx10tex.h"
+#endif
+
+#include "d3d10.h"
 
 // Errors
 #define _FACDD 0x876
