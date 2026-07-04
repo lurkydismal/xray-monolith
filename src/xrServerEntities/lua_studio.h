@@ -13,7 +13,10 @@
 #define CS_LUA_DEBUGGER_USE_DEBUG_LIBRARY
 #endif // #ifdef DEBUG
 
-#include <cs/lua_studio_backend/interfaces.h>
+#include <cs/lua_studio_backend/backend.hpp>
+#include <cs/lua_studio_backend/engine.hpp>
+#include <cs/lua_studio_backend/interfaces.hpp>
+#include <cs/lua_studio_backend/world.hpp>
 
 namespace luabind {
 namespace detail {
