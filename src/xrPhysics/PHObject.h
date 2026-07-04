@@ -55,22 +55,32 @@ protected:
     virtual dGeomID dSpacedGeom() = 0;
     virtual void get_spatial_params() = 0;
     virtual void spatial_register();
+
     void SetRayMotions() { m_flags.set( fl_ray_motions, TRUE ); }
+
     void UnsetRayMotions() { m_flags.set( fl_ray_motions, FALSE ); }
 
     void SetPrefereExactIntegration() { m_island.SetPrefereExactIntegration(); }
+
     void SetForceExactIntegration() { m_island.SetForceExactIntegration(); }
 
     CPHObject* SelfPointer() { return this; }
 
 public:
     IC BOOL IsRayMotion() { return m_flags.test( fl_ray_motions ); }
+
     void IslandReinit() { m_island.Unmerge(); }
+
     void IslandStep( dReal step ) { m_island.Step( step ); }
+
     void MergeIsland( CPHObject* obj ) { m_island.Merge( &obj->m_island ); }
+
     CPHIsland& Island() { return m_island; }
+
     dWorldID DActiveWorld() { return m_island.DActiveWorld(); }
+
     CPHIsland* DActiveIsland() { return m_island.DActiveIsland(); }
+
     dWorldID DWorld() { return m_island.DWorld(); }
 
     virtual void FreezeContent();
@@ -93,32 +103,45 @@ public:
 
     void Freeze();
     void UnFreeze();
+
     IC bool IsFreezed() { return !!( m_flags.test( st_freezed ) ); }
+
     void NetInterpolationON() { m_flags.set( st_net_interpolation, TRUE ); }
+
     void NetInterpolationOFF() { m_flags.set( st_net_interpolation, TRUE ); }
+
     bool NetInterpolation() {
         return !!( m_flags.test( st_net_interpolation ) );
     }
+
     virtual u16 get_elements_number() = 0;
     virtual CPHSynchronize* get_element_sync( u16 element ) = 0;
     // virtual void StepFrameUpdate(dReal step)=0;
 
     CPHObject();
     void activate();
+
     IC bool is_active() const {
         return !!m_flags.test( st_activated ) /*b_activated*/;
     }
+
     void deactivate();
     void put_in_recently_deactivated();
     void remove_from_recently_deactivated();
     void check_recently_deactivated();
     void collision_disable();
     void collision_enable();
+
     virtual void ClearRecentlyDeactivated() { ; }
+
     virtual void Collide();
+
     virtual void near_callback( CPHObject* obj ) { ; }
+
     virtual void RMotionsQuery( qResultVec& res ) { ; }
+
     virtual CPHMoveStorage* MoveStorage() { return NULL; }
+
     virtual ECastType CastType() { return tpNotDefinite; }
 
     void SetDeadBody() { m_flags.set( is_deadbody, TRUE ); }
@@ -132,14 +155,19 @@ public:
 #endif
 
     IC CLBits& collide_bits() { return m_collide_bits; }
+
     IC _flags< CLClassBits >& collide_class_bits() {
         return m_collide_class_bits;
     }
+
     IC const CLBits& collide_bits() const { return m_collide_bits; }
+
     IC const _flags< CLClassBits >& collide_class_bits() const {
         return m_collide_class_bits;
     }
+
     void CollideDynamics();
+
     virtual CPHObject* dcast_CPHObject() override { return this; }
 };
 

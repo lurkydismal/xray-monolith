@@ -34,6 +34,7 @@ U_NAMESPACE_BEGIN
 
 class BytesTrieElement;
 class CharString;
+
 /**
  * Builder class for BytesTrie.
  *
@@ -160,9 +161,11 @@ private:
     virtual int32_t getMaxBranchLinearSubNodeLength() const {
         return BytesTrie::kMaxBranchLinearSubNodeLength;
     }
+
     virtual int32_t getMinLinearMatch() const {
         return BytesTrie::kMinLinearMatch;
     }
+
     virtual int32_t getMaxLinearMatchLength() const {
         return BytesTrie::kMaxLinearMatchLength;
     }

@@ -45,6 +45,7 @@ struct CVertexManagerHashFixed {
         typedef typename CGraphVertex::_index_type _index_type;
 
 #pragma pack( push, 1 )
+
         template < typename _path_id_type >
         struct SGraphIndexVertex
             : public _index_vertex< CGraphVertex,
@@ -55,6 +56,7 @@ struct CVertexManagerHashFixed {
             u32 m_hash;
             _path_id_type m_path_id;
         };
+
 #pragma pack( pop )
 
         typedef _path_id_type _path_id_type;

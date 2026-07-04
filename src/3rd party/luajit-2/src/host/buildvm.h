@@ -42,10 +42,12 @@ struct dasm_State;
     _( elfasm )                                                       \
     _( coffasm )                                                      \
     _( machasm )                                                      \
-    _( peobj ) _( raw ) _( bcdef ) _( ffdef ) _( libdef ) _( recdef ) \
-        _( vmdef ) _( folddef )
+    _( peobj )                                                        \
+    _( raw ) _( bcdef ) _( ffdef ) _( libdef ) _( recdef ) _( vmdef ) \
+        _( folddef )
 
 typedef enum {
+
 #define BUILDENUM( name ) BUILD_##name,
     BUILDDEF( BUILDENUM )
 #undef BUILDENUM

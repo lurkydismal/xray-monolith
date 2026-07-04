@@ -200,11 +200,14 @@ typedef unsigned long long ImU64; // 64-bit unsigned integer (post C++11)
 // 2D vector (often used to store positions, sizes, etc.)
 struct ImVec2 {
     float x, y;
+
     ImVec2() { x = y = 0.0f; }
+
     ImVec2( float _x, float _y ) {
         x = _x;
         y = _y;
     }
+
     float operator[]( size_t i ) const {
         IM_ASSERT( i <= 1 );
         return ( &x )[ i ];
@@ -219,7 +222,9 @@ struct ImVec2 {
 // 4D vector (often used to store floating-point colors)
 struct ImVec4 {
     float x, y, z, w;
+
     ImVec4() { x = y = z = w = 0.0f; }
+
     ImVec4( float _x, float _y, float _z, float _w ) {
         x = _x;
         y = _y;
@@ -2578,6 +2583,7 @@ struct ImGuiIO {
     IMGUI_API void AddInputCharactersUTF8(
         const char* utf8_chars ); // Add new characters into InputCharacters[]
                                   // from an UTF-8 string
+
     inline void ClearInputCharacters() {
         InputCharacters[ 0 ] = 0;
     } // Clear the text input buffer manually
@@ -2683,6 +2689,7 @@ namespace ImGui {
 static inline bool IsItemDeactivatedAfterChange() {
     return IsItemDeactivatedAfterEdit();
 }
+
 // OBSOLETED in 1.61 (from Apr 2018)
 IMGUI_API bool InputFloat( const char* label,
                            float* v,
@@ -2704,13 +2711,16 @@ IMGUI_API bool InputFloat4( const char* label,
                             float v[ 4 ],
                             int decimal_precision,
                             ImGuiInputTextFlags extra_flags = 0 );
+
 // OBSOLETED in 1.60 (from Dec 2017)
 static inline bool IsAnyWindowFocused() {
     return IsWindowFocused( ImGuiFocusedFlags_AnyWindow );
 }
+
 static inline bool IsAnyWindowHovered() {
     return IsWindowHovered( ImGuiHoveredFlags_AnyWindow );
 }
+
 static inline ImVec2 CalcItemRectClosestPoint( const ImVec2& pos,
                                                bool on_edge = false,
                                                float outward = 0.f ) {
@@ -2719,22 +2729,28 @@ static inline ImVec2 CalcItemRectClosestPoint( const ImVec2& pos,
     IM_ASSERT( 0 );
     return pos;
 }
+
 // OBSOLETED in 1.53 (between Oct 2017 and Dec 2017)
 static inline void ShowTestWindow() {
     return ShowDemoWindow();
 }
+
 static inline bool IsRootWindowFocused() {
     return IsWindowFocused( ImGuiFocusedFlags_RootWindow );
 }
+
 static inline bool IsRootWindowOrAnyChildFocused() {
     return IsWindowFocused( ImGuiFocusedFlags_RootAndChildWindows );
 }
+
 static inline void SetNextWindowContentWidth( float w ) {
     SetNextWindowContentSize( ImVec2( w, 0.0f ) );
 }
+
 static inline float GetItemsLineHeightWithSpacing() {
     return GetFrameHeightWithSpacing();
 }
+
 // OBSOLETED in 1.52 (between Aug 2017 and Oct 2017)
 IMGUI_API bool Begin(
     const char* name,
@@ -2744,30 +2760,37 @@ IMGUI_API bool Begin(
     ImGuiWindowFlags flags =
         0 ); // Use SetNextWindowSize(size, ImGuiCond_FirstUseEver) +
              // SetNextWindowBgAlpha() instead.
+
 static inline bool IsRootWindowOrAnyChildHovered() {
     return IsWindowHovered( ImGuiHoveredFlags_RootAndChildWindows );
 }
+
 static inline void AlignFirstTextHeightToWidgets() {
     AlignTextToFramePadding();
 }
+
 static inline void SetNextWindowPosCenter( ImGuiCond c = 0 ) {
     ImGuiIO& io = GetIO();
     SetNextWindowPos(
         ImVec2( io.DisplaySize.x * 0.5f, io.DisplaySize.y * 0.5f ), c,
         ImVec2( 0.5f, 0.5f ) );
 }
+
 // OBSOLETED in 1.51 (between Jun 2017 and Aug 2017)
 static inline bool IsItemHoveredRect() {
     return IsItemHovered( ImGuiHoveredFlags_RectOnly );
 }
+
 static inline bool IsPosHoveringAnyWindow( const ImVec2& ) {
     IM_ASSERT( 0 );
     return false;
 } // This was misleading and partly broken. You probably want to use the
   // ImGui::GetIO().WantCaptureMouse flag instead.
+
 static inline bool IsMouseHoveringAnyWindow() {
     return IsWindowHovered( ImGuiHoveredFlags_AnyWindow );
 }
+
 static inline bool IsMouseHoveringWindow() {
     return IsWindowHovered( ImGuiHoveredFlags_AllowWhenBlockedByPopup |
                             ImGuiHoveredFlags_AllowWhenBlockedByActiveItem );
@@ -2800,15 +2823,18 @@ public:
         Size = Capacity = 0;
         Data = NULL;
     }
+
     inline ~ImVector() {
         if ( Data )
             ImGui::MemFree( Data );
     }
+
     inline ImVector( const ImVector< T >& src ) {
         Size = Capacity = 0;
         Data = NULL;
         operator=( src );
     }
+
     inline ImVector& operator=( const ImVector< T >& src ) {
         clear();
         resize( src.Size );
@@ -2817,12 +2843,16 @@ public:
     }
 
     inline bool empty() const { return Size == 0; }
+
     inline int size() const { return Size; }
+
     inline int capacity() const { return Capacity; }
+
     inline value_type& operator[]( int i ) {
         IM_ASSERT( i < Size );
         return Data[ i ];
     }
+
     inline const value_type& operator[]( int i ) const {
         IM_ASSERT( i < Size );
         return Data[ i ];
@@ -2835,26 +2865,35 @@ public:
             Data = NULL;
         }
     }
+
     inline iterator begin() { return Data; }
+
     inline const_iterator begin() const { return Data; }
+
     inline iterator end() { return Data + Size; }
+
     inline const_iterator end() const { return Data + Size; }
+
     inline value_type& front() {
         IM_ASSERT( Size > 0 );
         return Data[ 0 ];
     }
+
     inline const value_type& front() const {
         IM_ASSERT( Size > 0 );
         return Data[ 0 ];
     }
+
     inline value_type& back() {
         IM_ASSERT( Size > 0 );
         return Data[ Size - 1 ];
     }
+
     inline const value_type& back() const {
         IM_ASSERT( Size > 0 );
         return Data[ Size - 1 ];
     }
+
     inline void swap( ImVector< value_type >& rhs ) {
         int rhs_size = rhs.Size;
         rhs.Size = Size;
@@ -2871,11 +2910,13 @@ public:
         int new_capacity = Capacity ? ( Capacity + Capacity / 2 ) : 8;
         return new_capacity > sz ? new_capacity : sz;
     }
+
     inline void resize( int new_size ) {
         if ( new_size > Capacity )
             reserve( _grow_capacity( new_size ) );
         Size = new_size;
     }
+
     inline void resize( int new_size, const value_type& v ) {
         if ( new_size > Capacity )
             reserve( _grow_capacity( new_size ) );
@@ -2884,6 +2925,7 @@ public:
                 memcpy( &Data[ n ], &v, sizeof( v ) );
         Size = new_size;
     }
+
     inline void reserve( int new_capacity ) {
         if ( new_capacity <= Capacity )
             return;
@@ -2906,16 +2948,19 @@ public:
         memcpy( &Data[ Size ], &v, sizeof( v ) );
         Size++;
     }
+
     inline void pop_back() {
         IM_ASSERT( Size > 0 );
         Size--;
     }
+
     inline void push_front( const value_type& v ) {
         if ( Size == 0 )
             push_back( v );
         else
             insert( Data, v );
     }
+
     inline iterator erase( const_iterator it ) {
         IM_ASSERT( it >= Data && it < Data + Size );
         const ptrdiff_t off = it - Data;
@@ -2925,6 +2970,7 @@ public:
         Size--;
         return Data + off;
     }
+
     inline iterator erase( const_iterator it, const_iterator it_last ) {
         IM_ASSERT( it >= Data && it < Data + Size && it_last > it &&
                    it_last <= Data + Size );
@@ -2936,6 +2982,7 @@ public:
         Size -= ( int )count;
         return Data + off;
     }
+
     inline iterator erase_unsorted( const_iterator it ) {
         IM_ASSERT( it >= Data && it < Data + Size );
         const ptrdiff_t off = it - Data;
@@ -2944,6 +2991,7 @@ public:
         Size--;
         return Data + off;
     }
+
     inline iterator insert( const_iterator it, const value_type& v ) {
         IM_ASSERT( it >= Data && it <= Data + Size );
         const ptrdiff_t off = it - Data;
@@ -2957,6 +3005,7 @@ public:
         Size++;
         return Data + off;
     }
+
     inline bool contains( const value_type& v ) const {
         const T* data = Data;
         const T* data_end = Data + Size;
@@ -2965,6 +3014,7 @@ public:
                 return true;
         return false;
     }
+
     inline int index_from_pointer( const_iterator it ) const {
         IM_ASSERT( it >= Data && it <= Data + Size );
         const ptrdiff_t off = it - Data;
@@ -2978,14 +3028,18 @@ public:
 // custom placement new() with a dummy parameter allows us to bypass including
 // <new> which on some platforms complains when user has disabled exceptions.
 struct ImNewDummy {};
+
 inline void* operator new( size_t, ImNewDummy, void* ptr ) {
     return ptr;
 }
+
 inline void operator delete( void*, ImNewDummy, void* ) {
 } // This is only required so we can use the symetrical new()
+
 #define IM_PLACEMENT_NEW( _PTR ) new ( ImNewDummy(), _PTR )
 #define IM_NEW( _TYPE ) \
     new ( ImNewDummy(), ImGui::MemAlloc( sizeof( _TYPE ) ) ) _TYPE
+
 template < typename T >
 void IM_DELETE( T* p ) {
     if ( p ) {
@@ -3000,7 +3054,9 @@ void IM_DELETE( T* p ) {
 // ImGui::Text("This will be called only once per frame");
 struct ImGuiOnceUponAFrame {
     ImGuiOnceUponAFrame() { RefFrame = -1; }
+
     mutable int RefFrame;
+
     operator bool() const {
         int current_frame = ImGui::GetFrameCount();
         if ( RefFrame == current_frame )
@@ -3027,10 +3083,12 @@ struct ImGuiTextFilter {
     IMGUI_API bool PassFilter( const char* text,
                                const char* text_end = NULL ) const;
     IMGUI_API void Build();
+
     void Clear() {
         InputBuf[ 0 ] = 0;
         Build();
     }
+
     bool IsActive() const { return !Filters.empty(); }
 
     // [Internal]
@@ -3039,16 +3097,22 @@ struct ImGuiTextFilter {
         const char* e;
 
         TextRange() { b = e = NULL; }
+
         TextRange( const char* _b, const char* _e ) {
             b = _b;
             e = _e;
         }
+
         const char* begin() const { return b; }
+
         const char* end() const { return e; }
+
         bool empty() const { return b == e; }
+
         IMGUI_API void split( char separator,
                               ImVector< TextRange >* out ) const;
     };
+
     char InputBuf[ 256 ];
     ImVector< TextRange > Filters;
     int CountGrep;
@@ -3059,19 +3123,28 @@ struct ImGuiTextBuffer {
     ImVector< char > Buf;
 
     ImGuiTextBuffer() { Buf.push_back( 0 ); }
+
     inline char operator[]( int i ) { return Buf.Data[ i ]; }
+
     const char* begin() const { return &Buf.front(); }
+
     const char* end() const {
         return &Buf.back();
     } // Buf is zero-terminated, so end() will point on the zero-terminator
+
     int size() const { return Buf.Size - 1; }
+
     bool empty() { return Buf.Size <= 1; }
+
     void clear() {
         Buf.clear();
         Buf.push_back( 0 );
     }
+
     void reserve( int capacity ) { Buf.reserve( capacity ); }
+
     const char* c_str() const { return Buf.Data; }
+
     IMGUI_API void appendf( const char* fmt, ... ) IM_FMTARGS( 2 );
     IMGUI_API void appendfv( const char* fmt, va_list args ) IM_FMTLIST( 2 );
 };
@@ -3092,24 +3165,29 @@ struct ImGuiTextBuffer {
 struct ImGuiStorage {
     struct Pair {
         ImGuiID key;
+
         union {
             int val_i;
             float val_f;
             void* val_p;
         };
+
         Pair( ImGuiID _key, int _val_i ) {
             key = _key;
             val_i = _val_i;
         }
+
         Pair( ImGuiID _key, float _val_f ) {
             key = _key;
             val_f = _val_f;
         }
+
         Pair( ImGuiID _key, void* _val_p ) {
             key = _key;
             val_p = _val_p;
         }
     };
+
     ImVector< Pair > Data;
 
     // - Get***() functions find pair, never add/allocate. Pairs are sorted so a
@@ -3118,6 +3196,7 @@ struct ImGuiStorage {
     // - Sorted insertion is costly, paid once. A typical frame shouldn't need
     // to insert any new pair.
     void Clear() { Data.clear(); }
+
     IMGUI_API int GetInt( ImGuiID key, int default_val = 0 ) const;
     IMGUI_API void SetInt( ImGuiID key, int val );
     IMGUI_API bool GetBool( ImGuiID key, bool default_val = false ) const;
@@ -3215,6 +3294,7 @@ struct ImGuiInputTextCallbackData {
     IMGUI_API void InsertChars( int pos,
                                 const char* text,
                                 const char* text_end = NULL );
+
     bool HasSelection() const { return SelectionStart != SelectionEnd; }
 };
 
@@ -3256,6 +3336,7 @@ struct ImGuiPayload {
                    // button is released over the target item.
 
     ImGuiPayload() { Clear(); }
+
     void Clear() {
         SourceId = SourceParentId = 0;
         Data = NULL;
@@ -3264,10 +3345,13 @@ struct ImGuiPayload {
         DataFrameCount = -1;
         Preview = Delivery = false;
     }
+
     bool IsDataType( const char* type ) const {
         return DataFrameCount != -1 && strcmp( type, DataType ) == 0;
     }
+
     bool IsPreview() const { return Preview; }
+
     bool IsDelivery() const { return Delivery; }
 };
 
@@ -3308,6 +3392,7 @@ struct ImColor {
     ImVec4 Value;
 
     ImColor() { Value.x = Value.y = Value.z = Value.w = 0.0f; }
+
     ImColor( int r, int g, int b, int a = 255 ) {
         float sc = 1.0f / 255.0f;
         Value.x = ( float )r * sc;
@@ -3315,6 +3400,7 @@ struct ImColor {
         Value.z = ( float )b * sc;
         Value.w = ( float )a * sc;
     }
+
     ImColor( ImU32 rgba ) {
         float sc = 1.0f / 255.0f;
         Value.x = ( float )( ( rgba >> IM_COL32_R_SHIFT ) & 0xFF ) * sc;
@@ -3322,16 +3408,20 @@ struct ImColor {
         Value.z = ( float )( ( rgba >> IM_COL32_B_SHIFT ) & 0xFF ) * sc;
         Value.w = ( float )( ( rgba >> IM_COL32_A_SHIFT ) & 0xFF ) * sc;
     }
+
     ImColor( float r, float g, float b, float a = 1.0f ) {
         Value.x = r;
         Value.y = g;
         Value.z = b;
         Value.w = a;
     }
+
     ImColor( const ImVec4& col ) { Value = col; }
+
     inline operator ImU32() const {
         return ImGui::ColorConvertFloat4ToU32( Value );
     }
+
     inline operator ImVec4() const { return Value; }
 
     // FIXME-OBSOLETE: May need to obsolete/cleanup those helpers.
@@ -3339,6 +3429,7 @@ struct ImColor {
         ImGui::ColorConvertHSVtoRGB( h, s, v, Value.x, Value.y, Value.z );
         Value.w = a;
     }
+
     static ImColor HSV( float h, float s, float v, float a = 1.0f ) {
         float r, g, b;
         ImGui::ColorConvertHSVtoRGB( h, s, v, r, g, b );
@@ -3388,6 +3479,7 @@ struct ImGuiListClipper {
         Begin( items_count, items_height );
     } // NB: Begin() initialize every fields (as we allow user to call Begin/End
       // multiple times on a same instance if they want).
+
     ~ImGuiListClipper() {
         IM_ASSERT( ItemsCount == -1 );
     } // Assert if user forgot to call End() or Step() until false.
@@ -3560,7 +3652,9 @@ struct ImDrawList {
         _OwnerName = NULL;
         Clear();
     }
+
     ~ImDrawList() { ClearFreeMemory(); }
+
     IMGUI_API void PushClipRect(
         ImVec2 clip_rect_min,
         ImVec2 clip_rect_max,
@@ -3574,10 +3668,12 @@ struct ImDrawList {
     IMGUI_API void PopClipRect();
     IMGUI_API void PushTextureID( ImTextureID texture_id );
     IMGUI_API void PopTextureID();
+
     inline ImVec2 GetClipRectMin() const {
         const ImVec4& cr = _ClipRectStack.back();
         return ImVec2( cr.x, cr.y );
     }
+
     inline ImVec2 GetClipRectMax() const {
         const ImVec4& cr = _ClipRectStack.back();
         return ImVec2( cr.z, cr.w );
@@ -3697,20 +3793,25 @@ struct ImDrawList {
     // Stateful path API, add points then finish with PathFillConvex() or
     // PathStroke()
     inline void PathClear() { _Path.resize( 0 ); }
+
     inline void PathLineTo( const ImVec2& pos ) { _Path.push_back( pos ); }
+
     inline void PathLineToMergeDuplicate( const ImVec2& pos ) {
         if ( _Path.Size == 0 ||
              memcmp( &_Path[ _Path.Size - 1 ], &pos, 8 ) != 0 )
             _Path.push_back( pos );
     }
+
     inline void PathFillConvex( ImU32 col ) {
         AddConvexPolyFilled( _Path.Data, _Path.Size, col );
         PathClear();
     } // Note: Anti-aliased filling requires points to be in clockwise order.
+
     inline void PathStroke( ImU32 col, bool closed, float thickness = 1.0f ) {
         AddPolyline( _Path.Data, _Path.Size, col, closed, thickness );
         PathClear();
     }
+
     IMGUI_API void PathArcTo( const ImVec2& centre,
                               float radius,
                               float a_min,
@@ -3779,6 +3880,7 @@ struct ImDrawList {
                                const ImVec2& uv_c,
                                const ImVec2& uv_d,
                                ImU32 col );
+
     inline void PrimWriteVtx( const ImVec2& pos, const ImVec2& uv, ImU32 col ) {
         _VtxWritePtr->pos = pos;
         _VtxWritePtr->uv = uv;
@@ -3786,14 +3888,17 @@ struct ImDrawList {
         _VtxWritePtr++;
         _VtxCurrentIdx++;
     }
+
     inline void PrimWriteIdx( ImDrawIdx idx ) {
         *_IdxWritePtr = idx;
         _IdxWritePtr++;
     }
+
     inline void PrimVtx( const ImVec2& pos, const ImVec2& uv, ImU32 col ) {
         PrimWriteIdx( ( ImDrawIdx )_VtxCurrentIdx );
         PrimWriteVtx( pos, uv, col );
     }
+
     IMGUI_API void UpdateClipRect();
     IMGUI_API void UpdateTextureID();
 };
@@ -3824,13 +3929,16 @@ struct ImDrawData {
         Valid = false;
         Clear();
     }
+
     ~ImDrawData() { Clear(); }
+
     void Clear() {
         Valid = false;
         CmdLists = NULL;
         CmdListsCount = TotalVtxCount = TotalIdxCount = 0;
         DisplayPos = DisplaySize = ImVec2( 0.f, 0.f );
     } // The ImDrawList are owned by ImGuiContext!
+
     IMGUI_API void
     DeIndexAllBuffers(); // Helper to convert all buffers from indexed to
                          // non-indexed, in case you cannot render indexed.
@@ -3997,10 +4105,12 @@ struct ImFontAtlas {
     // emitted will always be white (~75% of memory/bandwidth waste.
     IMGUI_API bool Build(); // Build pixels data. This is called automatically
                             // for you by the GetTexData*** functions.
+
     IMGUI_API bool IsBuilt() {
         return Fonts.Size > 0 &&
                ( TexPixelsAlpha8 != NULL || TexPixelsRGBA32 != NULL );
     }
+
     IMGUI_API void GetTexDataAsAlpha8(
         unsigned char** out_pixels,
         int* out_width,
@@ -4011,6 +4121,7 @@ struct ImFontAtlas {
         int* out_width,
         int* out_height,
         int* out_bytes_per_pixel = NULL ); // 4 bytes-per-pixel
+
     void SetTexID( ImTextureID id ) { TexID = id; }
 
     //-------------------------------------------
@@ -4048,17 +4159,22 @@ struct ImFontAtlas {
     struct GlyphRangesBuilder {
         ImVector< unsigned char >
             UsedChars; // Store 1-bit per Unicode code point (0=unused, 1=used)
+
         GlyphRangesBuilder() {
             UsedChars.resize( 0x10000 / 8 );
             memset( UsedChars.Data, 0, 0x10000 / 8 );
         }
+
         bool GetBit( int n ) const {
             return ( UsedChars[ n >> 3 ] & ( 1 << ( n & 7 ) ) ) != 0;
         }
+
         void SetBit( int n ) {
             UsedChars[ n >> 3 ] |= 1 << ( n & 7 );
         } // Set bit 'c' in the array
+
         void AddChar( ImWchar c ) { SetBit( c ); } // Add character
+
         IMGUI_API void AddText(
             const char* text,
             const char* text_end = NULL ); // Add string (each character of the
@@ -4093,6 +4209,7 @@ struct ImFontAtlas {
                                       // (ID<0x10000): glyph display offset
         ImFont* Font; // Input    // For custom font glyphs only (ID<0x10000):
                       // target font
+
         CustomRect() {
             ID = 0xFFFFFFFF;
             Width = Height = 0;
@@ -4101,6 +4218,7 @@ struct ImFontAtlas {
             GlyphOffset = ImVec2( 0, 0 );
             Font = NULL;
         }
+
         bool IsPacked() const { return X != 0xFFFF; }
     };
 
@@ -4118,6 +4236,7 @@ struct ImFontAtlas {
         const ImVec2& offset =
             ImVec2( 0, 0 ) ); // Id needs to be < 0x10000 to register a
                               // rectangle to map into a specific font.
+
     const CustomRect* GetCustomRectByIndex( int index ) const {
         if ( index < 0 )
             return NULL;
@@ -4224,11 +4343,14 @@ struct ImFont {
     IMGUI_API const ImFontGlyph* FindGlyph( ImWchar c ) const;
     IMGUI_API const ImFontGlyph* FindGlyphNoFallback( ImWchar c ) const;
     IMGUI_API void SetFallbackChar( ImWchar c );
+
     float GetCharAdvance( ImWchar c ) const {
         return ( ( int )c < IndexAdvanceX.Size ) ? IndexAdvanceX[ ( int )c ]
                                                  : FallbackAdvanceX;
     }
+
     bool IsLoaded() const { return ContainerAtlas != NULL; }
+
     const char* GetDebugName() const {
         return ConfigData ? ConfigData->Name : "<unknown>";
     }

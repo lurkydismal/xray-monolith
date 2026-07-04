@@ -817,6 +817,7 @@ ures_getUTF8StringByKey( const UResourceBundle* resB,
 #include "unicode/unistr.h"
 
 U_NAMESPACE_BEGIN
+
 /**
  * Returns the string value from a string resource bundle.
  *

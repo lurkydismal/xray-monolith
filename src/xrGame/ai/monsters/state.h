@@ -28,6 +28,7 @@ public:
     virtual void reset();
 
     virtual bool check_completion() { return false; }
+
     virtual bool check_start_conditions() { return true; }
 
     virtual void reselect_state() {}

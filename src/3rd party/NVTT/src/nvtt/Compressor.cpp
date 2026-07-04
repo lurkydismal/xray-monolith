@@ -93,6 +93,7 @@ namespace nvtt {
 // - a floating point image.
 struct Mipmap {
     Mipmap() : m_inputImage( NULL ) {}
+
     ~Mipmap() {}
 
     // Reference input image.

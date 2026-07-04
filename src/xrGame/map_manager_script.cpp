@@ -5,6 +5,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CMapManager::script_register( lua_State* L ) {
     module(
         L )[ class_< CMapManager >( "CMapManager" )

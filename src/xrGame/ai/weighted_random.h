@@ -20,6 +20,7 @@ struct weighted_random {
                      float cp );
 
     bool is_const() { return b_weight == -1 && c_weight == -1; }
+
     float generate();
 };
 

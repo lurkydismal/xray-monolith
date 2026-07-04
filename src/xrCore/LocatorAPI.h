@@ -153,14 +153,20 @@ public:
 
     CStreamReader* rs_open( LPCSTR initial, LPCSTR N );
     IReader* r_open( LPCSTR initial, LPCSTR N );
+
     IC IReader* r_open( LPCSTR N ) { return r_open( 0, N ); }
+
     void r_close( IReader*& S );
     void r_close( CStreamReader*& fs );
 
     IWriter* w_open( LPCSTR initial, LPCSTR N );
+
     IC IWriter* w_open( LPCSTR N ) { return w_open( 0, N ); }
+
     IWriter* w_open_ex( LPCSTR initial, LPCSTR N );
+
     IC IWriter* w_open_ex( LPCSTR N ) { return w_open_ex( 0, N ); }
+
     void w_close( IWriter*& S );
 
     const file* exist( LPCSTR N );
@@ -174,11 +180,15 @@ public:
     BOOL can_modify_file( LPCSTR path, LPCSTR name );
 
     BOOL dir_delete( LPCSTR path, LPCSTR nm, BOOL remove_files );
+
     BOOL dir_delete( LPCSTR full_path, BOOL remove_files ) {
         return dir_delete( 0, full_path, remove_files );
     }
+
     void file_delete( LPCSTR path, LPCSTR nm );
+
     void file_delete( LPCSTR full_path ) { file_delete( 0, full_path ); }
+
     void file_copy( LPCSTR src, LPCSTR dest );
     void file_rename( LPCSTR src, LPCSTR dest, bool bOwerwrite = true );
     int file_length( LPCSTR src );

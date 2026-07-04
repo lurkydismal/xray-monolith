@@ -22,6 +22,7 @@ uint BytesFromDevFmt( DevFmtType type ) noexcept {
     }
     return 0;
 }
+
 uint ChannelsFromDevFmt( DevFmtChannels chans, uint ambiorder ) noexcept {
     switch ( chans ) {
         case DevFmtMono:
@@ -65,6 +66,7 @@ const char* DevFmtTypeString( DevFmtType type ) noexcept {
     }
     return "(unknown type)";
 }
+
 const char* DevFmtChannelsString( DevFmtChannels chans ) noexcept {
     switch ( chans ) {
         case DevFmtMono:

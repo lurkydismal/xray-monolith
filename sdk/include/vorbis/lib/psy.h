@@ -37,6 +37,7 @@
 #define P_NOISECURVES 3
 
 #define NOISE_COMPAND_LEVELS 40
+
 typedef struct vorbis_info_psy {
     int blockflag;
 

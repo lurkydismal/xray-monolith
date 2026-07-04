@@ -61,7 +61,9 @@ private:
     void pivot_mb( It k );
     void move_to_front( It j );
     float max_excess( It t, It i, It& pivot ) const;
+
     float abs( float r ) const { return ( r > 0 ) ? r : ( -r ); }
+
     float sqr( float r ) const { return r * r; }
 
 public:

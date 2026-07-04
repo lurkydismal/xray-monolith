@@ -85,8 +85,10 @@ ACCCHK_ASSERT( sizeof( lzo_xint ) == sizeof( lzo_uint32 ) ||
 ************************************************************************/
 
 LZO_PUBLIC( int )
+
 _lzo_config_check( void ) {
     lzo_bool r = 1;
+
     union {
         unsigned char c[ 2 * sizeof( lzo_xint ) ];
         lzo_xint l[ 2 ];
@@ -124,6 +126,7 @@ _lzo_config_check( void ) {
 int __lzo_init_done = 0;
 
 LZO_PUBLIC( int )
+
 __lzo_init_v2( unsigned v,
                int s1,
                int s2,

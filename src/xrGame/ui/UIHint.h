@@ -24,9 +24,11 @@ public:
     virtual ~UIHint() {};
 
     IC void set_visible( bool status = true ) { m_visible = status; }
+
     IC bool is_visible() const { return m_visible; }
 
     IC void set_rect( Frect const& rect ) { m_rect.set( rect ); }
+
     IC Frect const& get_rect() const { return m_rect; }
 
     void init_from_xml( CUIXml& xml, LPCSTR path );
@@ -65,9 +67,11 @@ public:
     virtual void Show( bool status );
 
     IC void set_hint_wnd( UIHint* hint_wnd ) { m_hint_wnd = hint_wnd; }
+
     IC UIHint* get_hint_wnd() const { return m_hint_wnd; }
 
     IC void set_hint_delay( u32 delay ) { m_hint_delay = delay; }
+
     IC u32 get_hint_delay() const { return m_hint_delay; }
 
     void disable_hint();
@@ -78,6 +82,7 @@ public:
     virtual CUIWindow* ui_cast_window() { return this; }
 
     void set_hint_text_script( LPCSTR text ) { set_hint_text( text ); };
+
     LPCSTR get_hint_text_script() { return m_hint_text.c_str(); };
 
 private:

@@ -47,6 +47,7 @@ void* __TBB_EXPORTED_FUNC NFS_Allocate( size_t n_element,
     @ingroup memory_allocation */
 void __TBB_EXPORTED_FUNC NFS_Free( void* );
 } // namespace internal
+
 //! @endcond
 
 #if _MSC_VER && !defined( __INTEL_COMPILER )
@@ -70,16 +71,21 @@ public:
     typedef const value_type& const_reference;
     typedef size_t size_type;
     typedef ptrdiff_t difference_type;
+
     template < typename U >
     struct rebind {
         typedef cache_aligned_allocator< U > other;
     };
+
     cache_aligned_allocator() throw() {}
+
     cache_aligned_allocator( const cache_aligned_allocator& ) throw() {}
+
     template < typename U >
     cache_aligned_allocator( const cache_aligned_allocator< U >& ) throw() {}
 
     pointer address( reference x ) const { return &x; }
+
     const_pointer address( const_reference x ) const { return &x; }
 
     //! Allocate space for n objects, starting on a cache/sector line.
@@ -133,6 +139,7 @@ public:
     typedef void* pointer;
     typedef const void* const_pointer;
     typedef void value_type;
+
     template < typename U >
     struct rebind {
         typedef cache_aligned_allocator< U > other;
@@ -158,6 +165,7 @@ class cache_aligned_resource : public std::pmr::memory_resource {
 public:
     cache_aligned_resource()
         : cache_aligned_resource( std::pmr::get_default_resource() ) {}
+
     explicit cache_aligned_resource( std::pmr::memory_resource* upstream )
         : m_upstream( upstream ) {}
 

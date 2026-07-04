@@ -2,6 +2,7 @@
 #pragma hdrstop
 
 #pragma warning( disable : 4995 )
+
 void __stdcall xrMemCopy_x86( LPVOID dest, const void* src, u32 n ) {
     memcpy( dest, src, n );
 }
@@ -29,6 +30,7 @@ void __stdcall xrMemCopy_MMX( LPVOID dest, const void* src, u32 n ) {
     infinity           // no limit for movq/movntq w/block
                        // prefetch
 #define CACHEBLOCK 80h // #of 64-byte blocks (cache lines)for block prefetch
+
 // For the largest size blocks,a special technique called Block Prefetch
 // can be used to accelerate the read operations.Block Prefetch reads
 // one address per cache line,for a series of cache lines,in a short loop.

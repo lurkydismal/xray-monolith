@@ -56,7 +56,9 @@ private:
     CFunctionGraph m_dbg_torque_rpm;
     CStatGraph* m_dbg_dynamic_plot;
     bool b_plots;
+
     float _stdcall TorqueRpmFun( float rpm ) { return Parabola( rpm ) / rpm; }
+
     void InitDebug();
     void DbgSheduleUpdate();
     void DbgUbdateCl();
@@ -90,14 +92,18 @@ private:
     virtual void PhTune( float step );
     /////////////////////////////////////////////////////////////////////////
     virtual void ApplyDamage( u16 level );
+
     virtual float Health() { return GetfHealth(); }
+
     virtual void ChangeCondition( float fDeltaCondition );
 
     virtual void StartTimerEffects() {};
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     virtual CPhysicsShellHolder* PPhysicsShellHolder() {
         return static_cast< CPhysicsShellHolder* >( this );
     }
+
     virtual ICollisionDamageReceiver* PHCollisionDamageReceiver() {
         return this;
     }
@@ -470,9 +476,11 @@ private:
     float EnginePower();
     float EngineDriveSpeed();
     float DriveWheelsMeanAngleRate();
+
     IC float EngineRpmFromWheels() {
         return _abs( DriveWheelsMeanAngleRate() * m_current_gear_ratio );
     }
+
     /////////////////////////////////////////////////////////////////////////
     void SteerRight();
     void SteerLeft();
@@ -481,7 +489,9 @@ private:
     void CircleSwitchTransmission();
     void TransmissionUp();
     void TransmissionDown();
+
     IC size_t CurrentTransmission() { return m_current_transmission_num; }
+
     void PressRight();
     void PressLeft();
     void PressForward();
@@ -540,7 +550,9 @@ private:
     }
 
     bool isActiveEngine();
+
     float GetRPM() { return m_current_rpm; }
+
     void SetRPM( float val ) { m_current_rpm = val; }
 #endif
     //-Alundaio
@@ -561,10 +573,13 @@ private:
 
 public:
     virtual bool allowWeapon() const { return true; };
+
     virtual bool HUDView() const;
     virtual Fvector ExitPosition();
     virtual Fvector ExitVelocity();
+
     void GetVelocity( Fvector& vel ) { m_pPhysicsShell->get_LinearVel( vel ); }
+
     void cam_Update( float dt, float fov );
     void detach_Actor();
     bool attach_Actor( CGameObject* actor );
@@ -596,9 +611,11 @@ public:
     // Network
     virtual void net_Export( NET_Packet& P ); // export to server
     virtual void net_Import( NET_Packet& P ); // import from server
+
     virtual BOOL net_Relevant() {
         return getLocal();
     }; // relevant for export to server
+
     virtual BOOL UsedAI_Locations();
     virtual void net_Relcase( CObject* O );
     // Input
@@ -632,10 +649,15 @@ public:
     // wheel-ground friction multiplier (SWheelCollisionParams::mu_factor)
     float GetWheelFriction();
     void SetWheelFriction( float mu_factor );
+
     bool IsSpeedGoverned() const { return m_speed_governed; }
+
     float ThrottleFactor() const { return m_throttle; }
+
     float DriveRefSpeed();
+
     virtual float GetfHealth() const { return CEntity::GetfHealth(); };
+
     virtual float SetfHealth( float value ) {
         return CEntity::SetfHealth( value );
     };
@@ -658,10 +680,13 @@ public:
     virtual void OnHUDDraw( CCustomHUD* hud, IDSGraphManager* DM );
 
     CCameraBase* Camera() { return active_camera; }
+
     void SetExplodeTime( u32 et );
     u32 ExplodeTime();
+
     // Inventory for the car
     CInventory* GetInventory() { return inventory; }
+
     void VisualUpdate( float fov = 90.0f );
 
 protected:
@@ -681,13 +706,21 @@ public:
 
 public:
     virtual CEntity* cast_entity() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CExplosive* cast_explosive() { return this; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CParticlesPlayer* cast_particles_player() { return this; }
+
     virtual CScriptEntity* cast_script_entity() { return this; }
+
     virtual IDamageSource* cast_IDamageSource() { return this; }
+
     virtual CHolderCustom* cast_holder_custom() { return this; }
+
     virtual CCar* cast_car() { return this; }
 
 private:
@@ -789,7 +822,9 @@ private:
 
 public:
     virtual bool is_ai_obstacle() const;
+
     u16 GetType() { return m_type; }
+
     void SetUseAction( LPCSTR txt );
 
     enum eCarType {
@@ -802,16 +837,19 @@ public:
         eControlEle_UP,
         eControlEle_DW,
     };
+
     enum eControlYaw {
         eControlYaw_NA = 0,
         eControlYaw_RS,
         eControlYaw_LS,
     };
+
     enum eControlPit {
         eControlPit_NA = 0,
         eControlPit_FS,
         eControlPit_BS,
     };
+
     enum eControlRol {
         eControlRol_NA = 0,
         eControlRol_RS,
@@ -819,26 +857,44 @@ public:
     };
 
     u16 GetControlEle() { return m_control_ele; };
+
     u16 GetControlYaw() { return m_control_yaw; };
+
     u16 GetControlPit() { return m_control_pit; };
+
     u16 GetControlRol() { return m_control_rol; };
+
     void SetControlEle( u16 val ) { m_control_ele = val; };
+
     void SetControlYaw( u16 val ) { m_control_yaw = val; };
+
     void SetControlPit( u16 val ) { m_control_pit = val; };
+
     void SetControlRol( u16 val ) { m_control_rol = val; };
+
     float GetControlEleScale() { return m_control_ele_max; };
+
     float GetControlYawScale() { return m_control_yaw_max; };
+
     float GetControlPitScale() { return m_control_pit_max; };
+
     float GetControlRolScale() { return m_control_rol_max; };
+
     void SetControlEleScale( float val ) { m_control_ele_max = val; };
+
     void SetControlYawScale( float val ) { m_control_yaw_max = val; };
+
     void SetControlPitScale( float val ) { m_control_pit_max = val; };
+
     void SetControlRolScale( float val ) { m_control_rol_max = val; };
 
     void ControlReset();
     bool IsCameraZoom();
+
     bool IsRemoteControl() { return m_remote_control; };
+
     float GetFlyWeightAdd() { return m_fly_weight_add; };
+
     void SetFlyWeightAdd( float val );
 #endif
 

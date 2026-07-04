@@ -659,7 +659,7 @@ void CGameObject::setup_parent_ai_locations( bool assign_position ) {
         validate_ai_locations( false );
     //	VERIFY2
     //(l_tpGameObject->UsedAI_Locations(),*l_tpGameObject->cNameSect());
-    //VERIFY2
+    // VERIFY2
     //(ai().level_graph().valid_vertex_id(l_tpGameObject->ai_location().level_vertex_id()),*cNameSect());
     //	ai_location().level_vertex
     //(l_tpGameObject->ai_location().level_vertex_id());

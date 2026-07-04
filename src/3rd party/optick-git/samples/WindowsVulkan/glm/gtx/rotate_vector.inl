@@ -38,6 +38,7 @@ GLM_FUNC_QUALIFIER vec< 3, T, P > rotate( vec< 3, T, P > const& v,
                                           vec< 3, T, P > const& normal ) {
     return mat< 3, 3, T, P >( glm::rotate( angle, normal ) ) * v;
 }
+
 /*
 template<typename T, precision P>
 GLM_FUNC_QUALIFIER vec<3, T, P> rotateGTX(

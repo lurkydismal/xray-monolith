@@ -631,6 +631,7 @@ void CResourceManager::DeleteGeom( const SGeometry* Geom ) {
 
 //--------------------------------------------------------------------------------------------------------------
 xr_task_group textures_load_tasks;
+
 CTexture* CResourceManager::_CreateTexture( LPCSTR _Name ) {
     PROF_EVENT( "_CreateTexture" );
     // DBG_VerifyTextures	();

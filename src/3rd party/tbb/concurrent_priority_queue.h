@@ -49,6 +49,7 @@ template < typename T, bool C = std::is_copy_constructible< T >::value >
 struct use_element_copy_constructor {
     typedef tbb::internal::true_type type;
 };
+
 template < typename T >
 struct use_element_copy_constructor< T, false > {
     typedef tbb::internal::false_type type;
@@ -374,17 +375,21 @@ public:
 
 private:
     enum operation_type { INVALID_OP, PUSH_OP, POP_OP, PUSH_RVALUE_OP };
+
     enum operation_status { WAIT = 0, SUCCEEDED, FAILED };
 
     class cpq_operation : public aggregated_operation< cpq_operation > {
     public:
         operation_type type;
+
         union {
             value_type* elem;
             size_type sz;
         };
+
         cpq_operation( const_reference e, operation_type t )
             : type( t ), elem( const_cast< value_type* >( &e ) ) {}
+
         cpq_operation( operation_type t ) : type( t ) {}
     };
 
@@ -393,8 +398,10 @@ private:
 
     public:
         my_functor_t() {}
+
         my_functor_t( concurrent_priority_queue< T, Compare, A >* cpq_ )
             : cpq( cpq_ ) {}
+
         void operator()( cpq_operation* op_list ) {
             cpq->handle_operations( op_list );
         }

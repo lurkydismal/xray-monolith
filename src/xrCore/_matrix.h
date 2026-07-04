@@ -255,6 +255,7 @@ public:
         mul( A, B );
         return *this;
     };
+
     IC SelfRef mulB_44( const Self& B ) // mul before
     {
         Self A;
@@ -262,6 +263,7 @@ public:
         mul( A, B );
         return *this;
     };
+
     ICF SelfRef mulA_43( const Self& A ) // mul after (no projection)
     {
         Self B;
@@ -269,6 +271,7 @@ public:
         mul_43( A, B );
         return *this;
     };
+
     ICF SelfRef mulB_43( const Self& B ) // mul before (no projection)
     {
         Self A;
@@ -276,6 +279,7 @@ public:
         mul_43( A, B );
         return *this;
     };
+
     IC SelfRef
     invert( const Self& a ) // important: this is 4x3 invert, not the 4x4 one
     {
@@ -953,13 +957,17 @@ public:
     }
 
     IC SelfRef setXYZ( T x, T y, T z ) { return setHPB( y, x, z ); }
+
     IC SelfRef setXYZ( Tvector const& xyz ) {
         return setHPB( xyz.y, xyz.x, xyz.z );
     }
+
     IC SelfRef setXYZi( T x, T y, T z ) { return setHPB( -y, -x, -z ); }
+
     IC SelfRef setXYZi( Tvector const& xyz ) {
         return setHPB( -xyz.y, -xyz.x, -xyz.z );
     }
+
     //
     IC void getHPB( T& h, T& p, T& b ) const {
         T cy = _sqrt( j.y * j.y + i.y * i.y );
@@ -975,8 +983,11 @@ public:
     }
 
     IC void getHPB( Tvector& hpb ) const { getHPB( hpb.x, hpb.y, hpb.z ); }
+
     IC void getXYZ( T& x, T& y, T& z ) const { getHPB( y, x, z ); }
+
     IC void getXYZ( Tvector& xyz ) const { getXYZ( xyz.x, xyz.y, xyz.z ); }
+
     IC void getXYZi( T& x, T& y, T& z ) const {
         getHPB( y, x, z );
         x *= -1.f;

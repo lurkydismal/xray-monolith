@@ -18,8 +18,11 @@ void fill_render_mode_list();
 void free_render_mode_list();
 #else
 void fill_vid_mode_list( CHW* _hw ) {}
+
 void free_vid_mode_list() {}
+
 void fill_render_mode_list() {}
+
 void free_render_mode_list() {}
 #endif
 
@@ -114,6 +117,7 @@ void CHW::Reset( HWND hwnd ) {
 // xr_token*				vid_mode_token = NULL;
 // extern xr_token*		vid_mode_token;
 #include "../../Include/xrAPI/xrAPI.h"
+
 // xr_token*				vid_quality_token = NULL;
 
 void CHW::CreateD3D() {
@@ -202,6 +206,7 @@ void CHW::DestroyDevice() {
 
 extern void GetMonitorResolution( u32& horizontal, u32& vertical );
 extern void GetMonitorPosition( int& x, int& y );
+
 void CHW::selectResolution( u32& dwWidth, u32& dwHeight, BOOL bWindowed ) {
     fill_vid_mode_list( this );
 #ifndef _EDITOR
@@ -665,6 +670,7 @@ struct _uniq_mode {
     _uniq_mode( LPCSTR v ) : _val( v ) {}
 
     LPCSTR _val;
+
     bool operator()( LPCSTR _other ) { return !stricmp( _val, _other ); }
 };
 

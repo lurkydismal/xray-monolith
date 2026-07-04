@@ -45,16 +45,27 @@ enum operator_id {
 };
 
 struct op_add_tag {};
+
 struct op_sub_tag {};
+
 struct op_mul_tag {};
+
 struct op_div_tag {};
+
 struct op_pow_tag {};
+
 struct op_lt_tag {};
+
 struct op_le_tag {};
+
 struct op_eq_tag {};
+
 struct op_call_tag {};
+
 struct op_unm_tag {};
+
 struct op_tostring_tag {};
+
 struct op_concat_tag {};
 
 inline const char* get_operator_name( int i ) {

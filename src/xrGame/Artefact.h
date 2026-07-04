@@ -32,25 +32,37 @@ public:
     virtual bool CanTake() const;
 
     virtual BOOL renderable_ShadowGenerate() { return FALSE; }
+
     virtual BOOL renderable_ShadowReceive() { return TRUE; }
+
     virtual void create_physic_shell();
 
     virtual CArtefact* cast_artefact() { return this; }
 
     float GetHealthPower() { return m_fHealthRestoreSpeed; }
+
     float GetRadiationPower() { return m_fRadiationRestoreSpeed; }
+
     float GetSatietyPower() { return m_fSatietyRestoreSpeed; }
+
     float GetPowerPower() { return m_fPowerRestoreSpeed; }
+
     float GetBleedingPower() { return m_fBleedingRestoreSpeed; }
+
     float GetImmunity( ALife::EHitType hit_type ) {
         return m_ArtefactHitImmunities.GetHitImmunity( hit_type );
     }
 
     void SetHealthPower( float value ) { m_fHealthRestoreSpeed = value; }
+
     void SetRadiationPower( float value ) { m_fRadiationRestoreSpeed = value; }
+
     void SetSatietyPower( float value ) { m_fSatietyRestoreSpeed = value; }
+
     void SetPowerPower( float value ) { m_fPowerRestoreSpeed = value; }
+
     void SetBleedingPower( float value ) { m_fBleedingRestoreSpeed = value; }
+
     void SetImmunity( ALife::EHitType hit_type, float val ) {
         m_ArtefactHitImmunities.SetHitImmunity( hit_type, val );
     }
@@ -75,7 +87,9 @@ protected:
 
 public:
     IC u8 GetAfRank() const { return m_af_rank; }
+
     IC bool CanBeActivated() { return m_bCanSpawnZone; };
+
     void ActivateArtefact();
     void FollowByPath( LPCSTR path_name, int start_idx, Fvector magic_force );
     bool CanBeInvisible();
@@ -92,6 +106,7 @@ public:
     float m_additional_weight;
 
     float AdditionalInventoryWeight() const { return m_additional_weight; }
+
     bool m_bCanSpawnZone;
     float m_fHealthRestoreSpeed;
     float m_fRadiationRestoreSpeed;
@@ -119,11 +134,13 @@ public:
     virtual bool Action( u16 cmd, u32 flags );
     virtual void OnStateSwitch( u32 S, u32 oldState );
     virtual void OnAnimationEnd( u32 state );
+
     virtual bool IsHidden() const { return GetState() == eHidden; }
 
     // optimization FAST/SLOW mode
     u32 o_render_frame;
     BOOL o_fastmode;
+
     IC void o_switch_2_fast() {
         if ( o_fastmode )
             return;

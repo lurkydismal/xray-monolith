@@ -85,6 +85,7 @@ private:
 }; // class next_weapon_searcher
 
 static u32 const exception_items_clear_time = 2000; // 2 seconds
+
 PIItem CInventory::GetNextItemInActiveSlot( u8 const priority_value,
                                             bool ignore_ammo ) {
     if ( m_next_item_iteration_time + exception_items_clear_time <=

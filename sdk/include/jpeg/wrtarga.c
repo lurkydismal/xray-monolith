@@ -49,6 +49,7 @@ Sorry, this code only copes with 8 -
 typedef tga_dest_struct* tga_dest_ptr;
 
 LOCAL( void )
+
 write_header( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo, int num_colors )
 /* Create and write a Targa header */
 {
@@ -93,6 +94,7 @@ write_header( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo, int num_colors )
  */
 
 METHODDEF( void )
+
 put_pixel_rows( j_decompress_ptr cinfo,
                 djpeg_dest_ptr dinfo,
                 JDIMENSION rows_supplied )
@@ -119,6 +121,7 @@ put_pixel_rows( j_decompress_ptr cinfo,
 }
 
 METHODDEF( void )
+
 put_gray_rows( j_decompress_ptr cinfo,
                djpeg_dest_ptr dinfo,
                JDIMENSION rows_supplied )
@@ -147,6 +150,7 @@ put_gray_rows( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 put_demapped_gray( j_decompress_ptr cinfo,
                    djpeg_dest_ptr dinfo,
                    JDIMENSION rows_supplied ) {
@@ -174,6 +178,7 @@ put_demapped_gray( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 start_output_tga( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     tga_dest_ptr dest = ( tga_dest_ptr )dinfo;
     int num_colors, i;
@@ -216,6 +221,7 @@ start_output_tga( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 METHODDEF( void )
+
 finish_output_tga( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     /* Make sure we wrote the output file OK */
     fflush( dinfo->output_file );
@@ -228,6 +234,7 @@ finish_output_tga( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 GLOBAL( djpeg_dest_ptr )
+
 jinit_write_targa( j_decompress_ptr cinfo ) {
     tga_dest_ptr dest;
 

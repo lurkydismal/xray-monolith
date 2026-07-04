@@ -80,49 +80,60 @@ public:
 #endif
         return s;
     }
+
     friend Stream& operator<<( Stream& s, char& c ) {
         nvStaticCheck( sizeof( char ) == 1 );
         s.serialize( &c, 1 );
         return s;
     }
+
     friend Stream& operator<<( Stream& s, uint8& c ) {
         nvStaticCheck( sizeof( uint8 ) == 1 );
         s.serialize( &c, 1 );
         return s;
     }
+
     friend Stream& operator<<( Stream& s, int8& c ) {
         nvStaticCheck( sizeof( int8 ) == 1 );
         s.serialize( &c, 1 );
         return s;
     }
+
     friend Stream& operator<<( Stream& s, uint16& c ) {
         nvStaticCheck( sizeof( uint16 ) == 2 );
         return s.byteOrderSerialize( &c, 2 );
     }
+
     friend Stream& operator<<( Stream& s, int16& c ) {
         nvStaticCheck( sizeof( int16 ) == 2 );
         return s.byteOrderSerialize( &c, 2 );
     }
+
     friend Stream& operator<<( Stream& s, uint32& c ) {
         nvStaticCheck( sizeof( uint32 ) == 4 );
         return s.byteOrderSerialize( &c, 4 );
     }
+
     friend Stream& operator<<( Stream& s, int32& c ) {
         nvStaticCheck( sizeof( int32 ) == 4 );
         return s.byteOrderSerialize( &c, 4 );
     }
+
     friend Stream& operator<<( Stream& s, uint64& c ) {
         nvStaticCheck( sizeof( uint64 ) == 8 );
         return s.byteOrderSerialize( &c, 8 );
     }
+
     friend Stream& operator<<( Stream& s, int64& c ) {
         nvStaticCheck( sizeof( int64 ) == 8 );
         return s.byteOrderSerialize( &c, 8 );
     }
+
     friend Stream& operator<<( Stream& s, float& c ) {
         nvStaticCheck( sizeof( float ) == 4 );
         return s.byteOrderSerialize( &c, 4 );
     }
+
     friend Stream& operator<<( Stream& s, double& c ) {
         nvStaticCheck( sizeof( double ) == 8 );
         return s.byteOrderSerialize( &c, 8 );

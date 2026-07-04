@@ -222,6 +222,7 @@ static BIGNUM* BN_mod_inverse_no_branch( BIGNUM* in,
                                          const BIGNUM* a,
                                          const BIGNUM* n,
                                          BN_CTX* ctx );
+
 BIGNUM* BN_mod_inverse( BIGNUM* in,
                         const BIGNUM* a,
                         const BIGNUM* n,

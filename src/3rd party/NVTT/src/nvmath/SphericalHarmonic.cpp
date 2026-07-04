@@ -86,6 +86,7 @@ template <>
 float legendre< 1, 0 >( float x ) {
     return x;
 }
+
 template <>
 float legendre< 1, 1 >( float x ) {
     return -sqrtf( 1 - x * x );
@@ -95,10 +96,12 @@ template <>
 float legendre< 2, 0 >( float x ) {
     return -0.5f + ( 3 * x * x ) / 2;
 }
+
 template <>
 float legendre< 2, 1 >( float x ) {
     return -3 * x * sqrtf( 1 - x * x );
 }
+
 template <>
 float legendre< 2, 2 >( float x ) {
     return -3 * ( -1 + x * x );
@@ -108,14 +111,17 @@ template <>
 float legendre< 3, 0 >( float x ) {
     return -( 3 * x ) / 2 + ( 5 * x * x * x ) / 2;
 }
+
 template <>
 float legendre< 3, 1 >( float x ) {
     return -3 * sqrtf( 1 - x * x ) / 2 * ( -1 + 5 * x * x );
 }
+
 template <>
 float legendre< 3, 2 >( float x ) {
     return -15 * ( -x + x * x * x );
 }
+
 template <>
 float legendre< 3, 3 >( float x ) {
     return -15 * powf( 1 - x * x, 1.5f );
@@ -125,18 +131,22 @@ template <>
 float legendre< 4, 0 >( float x ) {
     return 0.125f * ( 3.0f - 30.0f * x * x + 35.0f * x * x * x * x );
 }
+
 template <>
 float legendre< 4, 1 >( float x ) {
     return -2.5f * x * sqrtf( 1.0f - x * x ) * ( 7.0f * x * x - 3.0f );
 }
+
 template <>
 float legendre< 4, 2 >( float x ) {
     return -7.5f * ( 1.0f - 8.0f * x * x + 7.0f * x * x * x * x );
 }
+
 template <>
 float legendre< 4, 3 >( float x ) {
     return -105.0f * x * powf( 1 - x * x, 1.5f );
 }
+
 template <>
 float legendre< 4, 4 >( float x ) {
     return 105.0f * ( x * x - 1.0f ) * ( x * x - 1.0f );

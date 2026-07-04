@@ -8,22 +8,24 @@
 
 /* -- Registers IDs ------------------------------------------------------- */
 
-#define GPRDEF( _ )                                                           \
-    _( R0 )                                                                   \
-    _( SP )                                                                   \
-    _( SYS1 )                                                                 \
-    _( R3 ) _( R4 ) _( R5 ) _( R6 ) _( R7 ) _( R8 ) _( R9 ) _( R10 ) _( R11 ) \
-        _( R12 ) _( SYS2 ) _( R14 ) _( R15 ) _( R16 ) _( R17 ) _( R18 )       \
-            _( R19 ) _( R20 ) _( R21 ) _( R22 ) _( R23 ) _( R24 ) _( R25 )    \
-                _( R26 ) _( R27 ) _( R28 ) _( R29 ) _( R30 ) _( R31 )
-#define FPRDEF( _ )                                                           \
-    _( F0 )                                                                   \
-    _( F1 )                                                                   \
-    _( F2 )                                                                   \
-    _( F3 ) _( F4 ) _( F5 ) _( F6 ) _( F7 ) _( F8 ) _( F9 ) _( F10 ) _( F11 ) \
-        _( F12 ) _( F13 ) _( F14 ) _( F15 ) _( F16 ) _( F17 ) _( F18 )        \
-            _( F19 ) _( F20 ) _( F21 ) _( F22 ) _( F23 ) _( F24 ) _( F25 )    \
-                _( F26 ) _( F27 ) _( F28 ) _( F29 ) _( F30 ) _( F31 )
+#define GPRDEF( _ )                                                            \
+    _( R0 )                                                                    \
+    _( SP )                                                                    \
+    _( SYS1 )                                                                  \
+    _( R3 )                                                                    \
+    _( R4 ) _( R5 ) _( R6 ) _( R7 ) _( R8 ) _( R9 ) _( R10 ) _( R11 ) _( R12 ) \
+        _( SYS2 ) _( R14 ) _( R15 ) _( R16 ) _( R17 ) _( R18 ) _( R19 )        \
+            _( R20 ) _( R21 ) _( R22 ) _( R23 ) _( R24 ) _( R25 ) _( R26 )     \
+                _( R27 ) _( R28 ) _( R29 ) _( R30 ) _( R31 )
+#define FPRDEF( _ )                                                            \
+    _( F0 )                                                                    \
+    _( F1 )                                                                    \
+    _( F2 )                                                                    \
+    _( F3 )                                                                    \
+    _( F4 ) _( F5 ) _( F6 ) _( F7 ) _( F8 ) _( F9 ) _( F10 ) _( F11 ) _( F12 ) \
+        _( F13 ) _( F14 ) _( F15 ) _( F16 ) _( F17 ) _( F18 ) _( F19 )         \
+            _( F20 ) _( F21 ) _( F22 ) _( F23 ) _( F24 ) _( F25 ) _( F26 )     \
+                _( F27 ) _( F28 ) _( F29 ) _( F30 ) _( F31 )
 #define VRIDDEF( _ )
 
 #define RIDENUM( name ) RID_##name,
@@ -124,6 +126,7 @@ static LJ_AINLINE uint32_t* exitstub_trace_addr_( uint32_t* p,
         p++; /* Skip PPCI_NOP. */
     return p + 3 + exitno;
 }
+
 /* Avoid dependence on lj_jit.h if only including lj_target.h. */
 #define exitstub_trace_addr( T, exitno ) \
     exitstub_trace_addr_(                \

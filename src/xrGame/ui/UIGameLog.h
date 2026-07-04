@@ -27,9 +27,11 @@ public:
     virtual void Update();
 
     void SetTextAtrib( CGameFont* pFont, u32 color );
+
     u32 GetTextColor() { return txt_color; }
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIScrollView* ui_cast_scroll_view() { return this; }
 
 private:

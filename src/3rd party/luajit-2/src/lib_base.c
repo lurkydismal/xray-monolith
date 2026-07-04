@@ -103,6 +103,7 @@ static int ffh_pairs( lua_State* L, MMS mm ) {
 #endif
 
 LJLIB_PUSH( lastcl )
+
 LJLIB_ASM( pairs ) {
     return ffh_pairs( L, MM_pairs );
 }
@@ -114,6 +115,7 @@ LJLIB_NOREGUV LJLIB_ASM( ipairs_aux ) LJLIB_REC(.) {
 }
 
 LJLIB_PUSH( lastcl )
+
 LJLIB_ASM( ipairs ) LJLIB_REC(.) {
     return ffh_pairs( L, MM_ipairs );
 }
@@ -122,6 +124,7 @@ LJLIB_ASM( ipairs ) LJLIB_REC(.) {
 
 LJLIB_ASM_( getmetatable )
 LJLIB_REC(.)
+
 /* Recycle the lj_lib_checkany(L, 1) from assert. */
 
 LJLIB_ASM( setmetatable ) LJLIB_REC(.) {
@@ -307,6 +310,7 @@ LJLIB_ASM( tonumber ) LJLIB_REC(.) {
 LJLIB_PUSH( "nil" )
 LJLIB_PUSH( "false" )
 LJLIB_PUSH( "true" )
+
 LJLIB_ASM( tostring ) LJLIB_REC(.) {
     TValue* o = lj_lib_checkany( L, 1 );
     cTValue* mo;
@@ -465,6 +469,7 @@ LJLIB_CF( collectgarbage ) {
 /* -- Base library: miscellaneous functions ------------------------------- */
 
 LJLIB_PUSH( top - 2 ) /* Upvalue holds weak table. */
+
 LJLIB_CF( newproxy ) {
     lua_settop( L, 1 );
     lua_newuserdata( L, 0 );
@@ -491,6 +496,7 @@ LJLIB_CF( newproxy ) {
 }
 
 LJLIB_PUSH( "tostring" )
+
 LJLIB_CF( print ) {
     ptrdiff_t i, nargs = L->top - L->base;
     cTValue* tv =

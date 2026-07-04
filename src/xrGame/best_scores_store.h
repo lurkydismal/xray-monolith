@@ -29,6 +29,7 @@ public:
     best_fields_names_t const& get_field_names() const {
         return m_field_names_store;
     }
+
     // void
     // process_scores_out_response	(SAKEGetMyRecordsOutput* tmp_out, int
     // const out_fields_count);
@@ -51,7 +52,7 @@ private:
     // void * inputData,
     //													 void
     //* outputData,
-    //void * userData);
+    // void * userData);
 }; // best_scores_store
 } // namespace gamespy_profile
 

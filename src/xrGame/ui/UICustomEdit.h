@@ -33,6 +33,7 @@ public:
     virtual void Show( bool status );
 
     void CaptureFocus( bool bCapture );
+
     void SetNextFocusCapturer( CUICustomEdit* next_capturer ) {
         m_next_focus_capturer = next_capturer;
     };
@@ -46,6 +47,7 @@ public:
     void SetPasswordMode( bool mode = true );
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
 
 protected:

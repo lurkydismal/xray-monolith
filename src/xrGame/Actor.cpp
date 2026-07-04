@@ -2072,6 +2072,7 @@ void CActor::RenderCamAttached( IDSGraphManager* DM ) {
 extern xr_unordered_set< CDemoRecord* > pDemoRecords;
 extern Flags32 ps_actor_shadow_flags;
 BOOL r__actor_shadow_in_demo_record = TRUE;
+
 bool CActor::AllowActorShadow() {
     if ( !r__actor_shadow_in_demo_record && !pDemoRecords.empty() )
         return false;
@@ -2976,6 +2977,7 @@ void CActor::removeFPCam() {
 }
 
 float GetActorLuminosity();
+
 float CActor::GetUILuminosity() {
     return GetActorLuminosity();
 }

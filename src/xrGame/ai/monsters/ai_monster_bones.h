@@ -19,6 +19,7 @@ struct bonesBone {
     u8 axis;
 
     bonesBone() { bone = 0; }
+
     void Set( CBoneInstance* b, u8 a, float ty, float cy, float r_s );
     bool NeedTurn();     // необходим поворот по оси p_axis?
     void Turn( u32 dt ); // выполнить поворот по оси p_axis
@@ -48,7 +49,9 @@ public:
                     u32 t );
 
     void Update( CBoneInstance* bone, u32 cur_time );
+
     bool IsActive() { return bActive; }
+
     bool IsReturn() { return in_return_state; }
 
     bonesAxis& GetBoneParams( CBoneInstance* bone, u8 axis_used );

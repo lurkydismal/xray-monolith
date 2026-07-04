@@ -23,19 +23,25 @@ public:
     virtual void net_Destroy();
     virtual void net_Relcase( CObject* O );
     void AddAvailableItems( TIItemContainer& items_container ) const;
+
     IC bool IsEmpty() const { return m_items.empty(); }
+
     virtual void UpdateCL();
 
     IC void set_in_use( bool status ) { m_in_use = status; }
+
     IC bool in_use() const { return m_in_use; }
 
     void set_can_take( bool status );
+
     IC bool can_take() const { return m_can_take; }
 
     void set_closed( bool status, LPCSTR reason );
+
     IC bool closed() const { return m_closed; }
 
     virtual CInventoryBox* cast_inventory_box() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
 
 protected:

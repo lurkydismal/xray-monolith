@@ -210,9 +210,9 @@ void CPhysicsShellHolder::correct_spawn_pos() {
     ///(valid_pos(activation_shape.Position(),phBoundaries));
     //	if (!valid_pos(activation_shape.Position(),phBoundaries)) {
     //		CPHActivationShape activation_shape;
-    //activation_shape.Create (c,size,this);
-    //activation_shape.set_rotation	(XFORM()); 		activation_shape.Activate
-    //(size,1,1.f,M_PI/8.f);
+    // activation_shape.Create (c,size,this);
+    // activation_shape.set_rotation	(XFORM());
+    // activation_shape.Activate (size,1,1.f,M_PI/8.f);
     ////		VERIFY
     ///(valid_pos(activation_shape.Position(),phBoundaries));
     //	}

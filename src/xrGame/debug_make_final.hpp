@@ -16,6 +16,7 @@ namespace detail {
 template < typename T1, typename T2 >
 class make_final {
     make_final() {}
+
     friend T1;
     friend T2;
 }; // class make_final

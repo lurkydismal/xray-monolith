@@ -48,10 +48,12 @@ public:
     void RemoveDialogToRender( CUIWindow* pDialog );
     void SetMainInputReceiver( CUIDialogWnd* ir, bool _find_remove );
     virtual void _BCL OnFrame();
+
     virtual bool UseIndicators() { return true; }
 
     virtual void StartDialog( CUIDialogWnd* pDialog, bool bDoHideIndicators );
     virtual void StopDialog( CUIDialogWnd* pDialog );
+
     virtual bool IgnorePause() { return false; }
 
     virtual bool IR_UIOnKeyboardPress( int dik );

@@ -341,6 +341,7 @@ struct __declspec( novtable ) api_object {
                           &res );
         return reinterpret_cast< T* >( static_cast< uintptr_t >( res ) );
     }
+
     /// <summary>
     /// Allocates user-defined data and stores it in the object.
     /// </summary>
@@ -352,6 +353,7 @@ struct __declspec( novtable ) api_object {
                           res );
         return reinterpret_cast< T* >( static_cast< uintptr_t >( res ) );
     }
+
     /// <summary>
     /// Frees user-defined data that was previously allocated via <see
     /// cref="create_private_data"/>.
@@ -633,6 +635,7 @@ struct __declspec( novtable ) device : public api_object {
                                     descriptor_table* out_table ) {
         return allocate_descriptor_tables( 1, layout, param, out_table );
     }
+
     /// <summary>
     /// Allocates one or more descriptor tables from an internal descriptor
     /// heap.
@@ -651,6 +654,7 @@ struct __declspec( novtable ) device : public api_object {
                                              pipeline_layout layout,
                                              uint32_t param,
                                              descriptor_table* out_tables ) = 0;
+
     /// <summary>
     /// Frees a descriptor table that was previously allocated via <see
     /// cref="allocate_descriptor_table"/>.
@@ -658,6 +662,7 @@ struct __declspec( novtable ) device : public api_object {
     void free_descriptor_table( descriptor_table table ) {
         free_descriptor_tables( 1, &table );
     }
+
     /// <summary>
     /// Frees one or more descriptor tables that were previously allocated via
     /// <see cref="allocate_descriptor_tables"/>.
@@ -690,6 +695,7 @@ struct __declspec( novtable ) device : public api_object {
     void copy_descriptors( const descriptor_table_copy& copy ) {
         copy_descriptor_tables( 1, &copy );
     }
+
     /// <summary>
     /// Copies the contents between multiple descriptor tables.
     /// </summary>
@@ -699,6 +705,7 @@ struct __declspec( novtable ) device : public api_object {
     virtual void copy_descriptor_tables(
         uint32_t count,
         const descriptor_table_copy* copies ) = 0;
+
     /// <summary>
     /// Updates the contents of a descriptor table with the specified
     /// descriptors.
@@ -707,6 +714,7 @@ struct __declspec( novtable ) device : public api_object {
     void update_descriptors( const descriptor_table_update& update ) {
         update_descriptor_tables( 1, &update );
     }
+
     /// <summary>
     /// Updates the contents of multiple descriptor tables with the specified
     /// descriptors.
@@ -942,6 +950,7 @@ struct __declspec( novtable ) command_list : public device_object {
                   resource_usage new_state ) {
         barrier( 1, &resource, &old_state, &new_state );
     }
+
     /// <summary>
     /// Adds a barrier for the specified <paramref name="resources"/> to the
     /// command stream.
@@ -1000,6 +1009,7 @@ struct __declspec( novtable ) command_list : public device_object {
     /// pipeline state object.</param> <param name="pipeline">Pipeline state
     /// object to bind.</param>
     virtual void bind_pipeline( pipeline_stage stages, pipeline pipeline ) = 0;
+
     /// <summary>
     /// Updates the specfified pipeline <paramref name="state"/> to the
     /// specified <paramref name="value"/>. This is only valid for states that
@@ -1012,6 +1022,7 @@ struct __declspec( novtable ) command_list : public device_object {
     void bind_pipeline_state( dynamic_state state, uint32_t value ) {
         bind_pipeline_states( 1, &state, &value );
     }
+
     /// <summary>
     /// Updates the specfified pipeline <paramref name="states"/> to the
     /// specified <paramref name="values"/>. This is only valid for states that
@@ -1093,6 +1104,7 @@ struct __declspec( novtable ) command_list : public device_object {
                                    pipeline_layout layout,
                                    uint32_t param,
                                    const descriptor_table_update& update ) = 0;
+
     /// <summary>
     /// Binds a single descriptor table.
     /// </summary>
@@ -1108,6 +1120,7 @@ struct __declspec( novtable ) command_list : public device_object {
                                 descriptor_table table ) {
         bind_descriptor_tables( stages, layout, param, 1, &table );
     }
+
     /// <summary>
     /// Binds an array of descriptor tables.
     /// </summary>
@@ -1137,6 +1150,7 @@ struct __declspec( novtable ) command_list : public device_object {
     virtual void bind_index_buffer( resource buffer,
                                     uint64_t offset,
                                     uint32_t index_size ) = 0;
+
     /// <summary>
     /// Binds a single vertex buffer to the input-assembler stage.
     /// </summary>
@@ -1154,6 +1168,7 @@ struct __declspec( novtable ) command_list : public device_object {
                              uint32_t stride ) {
         bind_vertex_buffers( index, 1, &buffer, &offset, &stride );
     }
+
     /// <summary>
     /// Binds an array of vertex buffers to the input-assembler stage.
     /// </summary>
@@ -1897,6 +1912,7 @@ struct __declspec( novtable ) swapchain : public device_object {
     resource get_current_back_buffer() {
         return get_back_buffer( get_current_back_buffer_index() );
     }
+
     /// <summary>
     /// Gets the index of the back buffer resource that can currently be
     /// rendered into.

@@ -14,6 +14,7 @@ class CBlender_Particle : public IBlender {
 
 public:
     virtual LPCSTR getComment() { return "particles"; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Save( IWriter& fs );

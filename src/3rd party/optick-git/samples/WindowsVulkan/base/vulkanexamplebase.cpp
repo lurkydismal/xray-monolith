@@ -1522,6 +1522,7 @@ void* VulkanExampleBase::setupWindow( void* view ) {
     VulkanExampleBase* self = reinterpret_cast< VulkanExampleBase* >( data );
     self->pointerMotion( pointer, time, sx, sy );
 }
+
 void VulkanExampleBase::pointerMotion( wl_pointer* pointer,
                                        uint32_t time,
                                        wl_fixed_t sx,

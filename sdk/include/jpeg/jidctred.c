@@ -275,6 +275,7 @@ Sorry, this code only copes with 8x8 DCTs./* deliberate syntax err */
  */
 
 GLOBAL( void )
+
 jpeg_idct_2x2( j_decompress_ptr cinfo,
                jpeg_component_info* compptr,
                JCOEFPTR coef_block,
@@ -396,6 +397,7 @@ jpeg_idct_2x2( j_decompress_ptr cinfo,
  */
 
 GLOBAL( void )
+
 jpeg_idct_1x1( j_decompress_ptr cinfo,
                jpeg_component_info* compptr,
                JCOEFPTR coef_block,

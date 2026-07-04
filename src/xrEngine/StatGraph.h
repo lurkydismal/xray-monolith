@@ -130,6 +130,7 @@ public:
         while ( it->elements.size() > max_item_count )
             it->elements.pop_front();
     };
+
     IC u32 AppendSubGraph( EStyle S ) {
         subgraphs.push_back( SSubGraph( S ) );
         return subgraphs.size() - 1;
@@ -155,6 +156,7 @@ public:
         SMarker& pMarker = m_Markers[ ID ];
         pMarker.m_fPos = NewPos;
     };
+
     IC void ClearMarkers() { m_Markers.clear(); }
 
     IC void RemoveMarker( u32 ID ) {

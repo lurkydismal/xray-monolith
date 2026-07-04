@@ -54,6 +54,7 @@ struct EchoState final : public EffectState {
     struct {
         size_t delay{ 0u };
     } mTap[ 2 ];
+
     size_t mOffset{ 0u };
 
     /* The panning gains for the two taps */

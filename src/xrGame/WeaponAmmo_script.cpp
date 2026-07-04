@@ -5,6 +5,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CWeaponAmmo::script_register( lua_State* L ) {
     module(
         L )[ class_< CWeaponAmmo, CGameObject >( "CWeaponAmmo" )

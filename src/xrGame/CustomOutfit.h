@@ -35,6 +35,7 @@ public:
     virtual void OnMoveToSlot( const SInvItemPlace& prev );
     virtual void OnMoveToRuck( const SInvItemPlace& previous_place );
     virtual void OnH_A_Chield();
+
     virtual float GetControlInertionFactor() const {
         return m_fControlInertionFactor;
     };
@@ -75,7 +76,9 @@ public:
     virtual u32 ef_equipment_type() const;
     virtual BOOL BonePassBullet( int boneID );
     float get_HitFracActor() const;
+
     const shared_str& GetFullIconName() const { return m_full_icon_name; }
+
     u32 get_artefact_count() const;
 
     virtual BOOL net_Spawn( CSE_Abstract* DC );

@@ -23,6 +23,7 @@ public:
 
     // access operators
     ICF T& operator[]( int i ) { return *( ( T* )this + i ); }
+
     ICF T& operator[]( int i ) const { return *( ( T* )this + i ); }
 
     ICF SelfRef set( T _x, T _y, T _z ) {
@@ -31,24 +32,28 @@ public:
         z = _z;
         return *this;
     };
+
     ICF SelfRef set( const _vector3< float >& v ) {
         x = T( v.x );
         y = T( v.y );
         z = T( v.z );
         return *this;
     };
+
     ICF SelfRef set( const _vector3< double >& v ) {
         x = T( v.x );
         y = T( v.y );
         z = T( v.z );
         return *this;
     };
+
     ICF SelfRef set( float* p ) {
         x = p[ 0 ];
         y = p[ 1 ];
         z = p[ 2 ];
         return *this;
     };
+
     ICF SelfRef set( double* p ) {
         x = p[ 0 ];
         y = p[ 1 ];
@@ -62,24 +67,28 @@ public:
         z += v.z;
         return *this;
     };
+
     ICF SelfRef add( T s ) {
         x += s;
         y += s;
         z += s;
         return *this;
     };
+
     ICF SelfRef add( T _x, T _y, T _z ) {
         x += _x;
         y += _y;
         z += _z;
         return *this;
     };
+
     ICF SelfRef add( const Self& a, const Self& v ) {
         x = a.x + v.x;
         y = a.y + v.y;
         z = a.z + v.z;
         return *this;
     };
+
     ICF SelfRef add( const Self& a, T s ) {
         x = a.x + s;
         y = a.y + s;
@@ -93,24 +102,28 @@ public:
         z -= v.z;
         return *this;
     };
+
     ICF SelfRef sub( T s ) {
         x -= s;
         y -= s;
         z -= s;
         return *this;
     };
+
     ICF SelfRef sub( T _x, T _y, T _z ) {
         x -= _x;
         y -= _y;
         z -= _z;
         return *this;
     };
+
     ICF SelfRef sub( const Self& a, const Self& v ) {
         x = a.x - v.x;
         y = a.y - v.y;
         z = a.z - v.z;
         return *this;
     };
+
     ICF SelfRef sub( const Self& a, T s ) {
         x = a.x - s;
         y = a.y - s;
@@ -124,24 +137,28 @@ public:
         z *= v.z;
         return *this;
     };
+
     ICF SelfRef mul( T s ) {
         x *= s;
         y *= s;
         z *= s;
         return *this;
     };
+
     ICF SelfRef mul( T _x, T _y, T _z ) {
         x *= _x;
         y *= _y;
         z *= _z;
         return *this;
     };
+
     ICF SelfRef mul( const Self& a, const Self& v ) {
         x = a.x * v.x;
         y = a.y * v.y;
         z = a.z * v.z;
         return *this;
     };
+
     ICF SelfRef mul( const Self& a, T s ) {
         x = a.x * s;
         y = a.y * s;
@@ -155,24 +172,28 @@ public:
         z /= v.z;
         return *this;
     };
+
     ICF SelfRef div( T s ) {
         x /= s;
         y /= s;
         z /= s;
         return *this;
     };
+
     ICF SelfRef div( T _x, T _y, T _z ) {
         x /= _x;
         y /= _y;
         z /= _z;
         return *this;
     };
+
     ICF SelfRef div( const Self& a, const Self& v ) {
         x = a.x / v.x;
         y = a.y / v.y;
         z = a.z / v.z;
         return *this;
     };
+
     ICF SelfRef div( const Self& a, T s ) {
         x = a.x / s;
         y = a.y / s;
@@ -413,6 +434,7 @@ public:
         y = r * sa;
         return *this;
     };
+
     IC SelfRef random_dir( const Self& ConeAxis,
                            float ConeAngle,
                            CRandom& R = ::Random ) {
@@ -512,11 +534,13 @@ public:
         crossproduct( v01, v12 );
         return *this;
     };
+
     IC SelfRef mknormal( const Self& p0, const Self& p1, const Self& p2 ) {
         mknormal_non_normalized( p0, p1, p2 );
         normalize_safe();
         return *this;
     };
+
     IC SelfRef setHP( T h, T p ) {
         T _ch = _cos( h ), _cp = _cos( p ), _sh = _sin( h ), _sp = _sin( p );
         x = -_cp * _sh;
@@ -706,9 +730,11 @@ BOOL _valid( const _vector3< T >& v ) {
 //////////////////////////////////////////////////////////////////////////
 #pragma warning( push )
 #pragma warning( disable : 4244 )
+
 ICF double rsqrt( double v ) {
     return 1.0 / _sqrt( v );
 }
+
 IC BOOL exact_normalize( float* a ) {
     double sqr_magnitude = a[ 0 ] * a[ 0 ] + a[ 1 ] * a[ 1 ] + a[ 2 ] * a[ 2 ];
     double epsilon = 1.192092896e-05F;
@@ -771,6 +797,7 @@ IC BOOL exact_normalize( float* a ) {
 IC BOOL exact_normalize( Fvector3& a ) {
     return exact_normalize( &a.x );
 }
+
 #pragma warning( pop )
 
 ICF u32 GetFvectorHash( const Fvector& pos ) {

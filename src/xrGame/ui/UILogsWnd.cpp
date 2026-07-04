@@ -86,6 +86,7 @@ void CUILogsWnd::Update() {
                 return a->receive_time > b->receive_time;
             }
         } sortNewsDesc;
+
         std::sort( m_items_ready.begin(), m_items_ready.end(), sortNewsDesc );
 
         WINDOW_LIST::iterator it = m_items_ready.begin();
@@ -213,6 +214,7 @@ void CUILogsWnd::ReLoadNews() {
             return a.receive_time < b.receive_time;
         }
     } sortNewsDesc;
+
     std::sort( news_vector.begin(), news_vector.end(), sortNewsDesc );
 
     //	u32 currentNews = 0;

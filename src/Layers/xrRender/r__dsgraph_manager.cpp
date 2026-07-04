@@ -98,16 +98,20 @@ void CDSGraphManager::fade_portal( CPortal* _p, float ssa ) {
         f_portals.insert( _p, ssa );
     }
 }
+
 void CDSGraphManager::initialize() {
     f_shader.create( "portal" );
     f_geom.create( FVF::F_L, RCache.Vertex.Buffer(), 0 );
 }
+
 void CDSGraphManager::destroy() {
     f_geom.destroy();
     f_shader.destroy();
 }
+
 extern float r_ssaDISCARD;
 extern float r_ssaLOD_A, r_ssaLOD_B;
+
 void CDSGraphManager::fade_render() {
     xrCriticalSectionGuard guard( &P_CS );
     if ( !f_portals.size() )

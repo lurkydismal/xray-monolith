@@ -84,6 +84,7 @@ private:
 
 public:
     script_attachment( LPCSTR name, LPCSTR model_name );
+
     ~script_attachment() {
         spatial_unregister();
         ::Render->model_Delete( renderable.visual );
@@ -96,6 +97,7 @@ public:
     virtual void spatial_register();
     virtual void spatial_unregister();
     virtual void spatial_move();
+
     virtual IRenderable* dcast_Renderable() { return this; }
 
     virtual void renderable_Render( IDSGraphManager* DM );
@@ -107,31 +109,43 @@ public:
     void AttachLight( AttachmentScriptLight* light );
     AttachmentScriptLight* DetachLight();
     AttachmentScriptLight* GetLight();
+
     void SetScriptLightBone( u16 bone ) { m_script_light_bone = bone; }
+
     void SetScriptLightBone( LPCSTR bone ) {
         m_script_light_bone = bone_id( bone );
     }
+
     u16 GetScriptLightBone() { return m_script_light_bone; }
 
     void RecalcOffset();
 
     void SetPosition( Fvector pos ) { SetPosition( pos.x, pos.y, pos.z ); }
+
     void SetPosition( float x, float y, float z );
+
     Fvector GetPosition() { return m_attachment_offset[ 0 ]; }
 
     void SetRotation( Fvector rot ) { SetRotation( rot.x, rot.y, rot.z ); }
+
     void SetRotation( float x, float y, float z );
+
     Fvector GetRotation() { return m_attachment_offset[ 1 ]; }
 
     void SetScale( Fvector scale ) { SetScale( scale.x, scale.y, scale.z ); }
+
     void SetScale( float x, float y, float z );
+
     void SetScale( float scale ) {
         SetScale( Fvector().set( scale, scale, scale ) );
     }
+
     Fvector GetScale() { return m_attachment_offset[ 2 ]; }
 
     void SetOrigin( Fvector org ) { SetOrigin( org.x, org.y, org.z ); }
+
     void SetOrigin( float x, float y, float z );
+
     Fvector GetOrigin() { return m_attachment_offset[ 3 ]; }
 
     void SetParent( script_attachment* att );
@@ -141,19 +155,24 @@ public:
     ::luabind::object GetParent();
 
     void SetParentBone( u16 bone_id ) { m_parent_bone = bone_id; }
+
     void SetParentBone( LPCSTR bone );
+
     u16 GetParentBone() { return m_parent_bone; }
 
     void LoadModel( LPCSTR model_name, bool keep_bc = false );
+
     LPCSTR GetModelScript() { return *m_model_name; }
 
     void SetName( LPCSTR name );
+
     LPCSTR GetName() { return *m_name; }
 
     const ::luabind::object& GetUserdata() const;
     void SetUserdata( ::luabind::object obj );
 
     void SetScriptUI( LPCSTR ui_func );
+
     LPCSTR GetScriptUI() { return m_script_ui_func; }
 
     void RecalcScriptUIOffset();
@@ -161,33 +180,45 @@ public:
     void SetScriptUIPosition( Fvector pos ) {
         SetScriptUIPosition( pos.x, pos.y, pos.z );
     }
+
     void SetScriptUIPosition( float x, float y, float z );
+
     Fvector GetScriptUIPosition() { return m_script_ui_offset[ 0 ]; }
 
     void SetScriptUIRotation( Fvector rot ) {
         SetScriptUIRotation( rot.x, rot.y, rot.z );
     }
+
     void SetScriptUIRotation( float x, float y, float z );
+
     Fvector GetScriptUIRotation() { return m_script_ui_offset[ 1 ]; }
 
     void SetScriptUIScale( Fvector rot ) {
         SetScriptUIScale( rot.x, rot.y, rot.z );
     }
+
     void SetScriptUIScale( float x, float y, float z );
+
     Fvector GetScriptUIScale() { return m_script_ui_offset[ 2 ]; }
 
     void SetScriptUIOrigin( Fvector rot ) {
         SetScriptUIOrigin( rot.x, rot.y, rot.z );
     }
+
     void SetScriptUIOrigin( float x, float y, float z );
+
     Fvector GetScriptUIOrigin() { return m_script_ui_offset[ 3 ]; }
 
     void SetScriptUIBone( u16 bone ) { m_script_ui_bone = bone; }
+
     void SetScriptUIBone( LPCSTR bone ) { m_script_ui_bone = bone_id( bone ); }
+
     u16 GetScriptUIBone() { return m_script_ui_bone; }
 
     script_attachment* AddAttachment( LPCSTR name, LPCSTR model_name );
+
     void RemoveAttachment( LPCSTR name ) { RemoveChild( name, true ); }
+
     void RemoveAttachment( script_attachment* child );
     script_attachment* AddChild( LPCSTR name, script_attachment* att );
     script_attachment* GetChild( LPCSTR name );
@@ -195,6 +226,7 @@ public:
     void IterateAttachments( ::luabind::functor< bool > functor );
 
     void SetType( u16 type );
+
     u16 GetType() { return m_type; }
 
     u32 PlayMotion( LPCSTR name, bool mixin = true, float speed = 1.f );
@@ -204,6 +236,7 @@ public:
     LPCSTR bone_name( u16 bone_id );
 
     bool GetBoneVisible( u16 bone_id );
+
     bool GetBoneVisible( LPCSTR bone_name ) {
         return GetBoneVisible( bone_id( bone_name ) );
     }
@@ -211,6 +244,7 @@ public:
     void SetBoneVisible( u16 bone_id,
                          bool bVisibility,
                          bool bRecursive = true );
+
     void SetBoneVisible( LPCSTR bone_name,
                          bool bVisibility,
                          bool bRecursive = true ) {
@@ -218,21 +252,25 @@ public:
     }
 
     Fmatrix bone_transform( u16 bone_id );
+
     Fmatrix bone_transform( LPCSTR bone_name ) {
         return bone_transform( bone_id( bone_name ) );
     }
 
     Fvector bone_position( u16 bone_id );
+
     Fvector bone_position( LPCSTR bone_name ) {
         return bone_position( bone_id( bone_name ) );
     }
 
     Fvector bone_direction( u16 bone_id );
+
     Fvector bone_direction( LPCSTR bone_name ) {
         return bone_direction( bone_id( bone_name ) );
     }
 
     u16 bone_parent( u16 bone_id );
+
     u16 bone_parent( LPCSTR bone_name ) {
         return bone_parent( bone_id( bone_name ) );
     }
@@ -251,28 +289,36 @@ public:
     void SetBoneCallback( u16 bone,
                           LPCSTR parent_bone,
                           bool overwrite = false );
+
     void SetBoneCallback( LPCSTR bone,
                           u16 parent_bone,
                           bool overwrite = false ) {
         SetBoneCallback( bone_id( bone ), parent_bone, overwrite );
     }
+
     void SetBoneCallback( u16 bone_id,
                           const ::luabind::functor< Fmatrix >& func,
                           bool overwrite = false );
+
     void SetBoneCallback( LPCSTR bone,
                           const ::luabind::functor< Fmatrix >& func,
                           bool overwrite = false ) {
         SetBoneCallback( bone_id( bone ), func, overwrite );
     }
+
     void RemoveBoneCallback( u16 bone_id );
+
     void RemoveBoneCallback( LPCSTR bone ) {
         RemoveBoneCallback( bone_id( bone ) );
     }
 
     Fmatrix GetTransform() { return renderable.xform; }
+
     Fmatrix GetOffset() { return m_offset; }
+
     Fvector GetCenter();
     const Fbox& Box();
+
     xr_map< shared_str, script_attachment* >* GetAttachments() {
         return &m_children;
     }

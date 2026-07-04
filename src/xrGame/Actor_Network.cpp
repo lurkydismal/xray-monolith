@@ -92,6 +92,7 @@ void CActor::ConvState( u32 mstate_rl, string128* buf ) {
     if ( m_bJumpKeyPressed )
         xr_strcat( *buf, "+Jumping " );
 };
+
 //--------------------------------------------------------------------
 void CActor::net_Export( NET_Packet& P ) // export to server
 {
@@ -923,8 +924,8 @@ void ACTOR_DEFS::net_update::lerp( ACTOR_DEFS::net_update& A,
     //(A.p_velocity,B.p_velocity,f); 	mstate			=
     //(f<0.5f)?A.mstate:B.mstate; 	weapon			=
     //(f<0.5f)?A.weapon:B.weapon; 	fHealth			=
-    //invf*A.fHealth+f*B.fHealth; 	fArmor			=
-    //invf*A.fArmor+f*B.fArmor; 	weapon			=
+    // invf*A.fHealth+f*B.fHealth; 	fArmor			=
+    // invf*A.fArmor+f*B.fArmor; 	weapon			=
     //(f<0.5f)?A.weapon:B.weapon;
 }
 
@@ -1062,6 +1063,7 @@ void CActor::PH_A_CrPr() {
     mstate_wishful = mstate_real = NET_Last.mstate;
     CalculateInterpolationParams();
 };
+
 extern float g_cl_lvInterp;
 
 void CActor::CalculateInterpolationParams() {
@@ -1432,6 +1434,7 @@ void CActor::load( IReader& input_packet ) {
 #ifdef DEBUG
 
 extern Flags32 dbg_net_Draw_Flags;
+
 void dbg_draw_piramid( Fvector pos,
                        Fvector dir,
                        float size,

@@ -610,6 +610,7 @@ alife_object_iterator alife_object_iter( const CALifeSimulator* self ) {
     const CALifeObjectRegistry& objects = self->objects();
     return alife_object_iterator( &objects.objects() );
 }
+
 // demonized: iterate alife objects without actor, for loop
 alife_object_without_actor_iterator alife_object_without_actor_iter(
     const CALifeSimulator* self ) {
@@ -673,6 +674,7 @@ xr_vector< u16 >& get_children( const CALifeSimulator* self,
 }
 
 #pragma optimize( "s", on )
+
 void CALifeSimulator::script_register( lua_State* L ) {
     module( L )
         [ class_< alife_object_iterator >( "alife_object_iterator" )

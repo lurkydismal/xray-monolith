@@ -68,6 +68,7 @@ template < typename T >
 T or_return_values( T&& t ) {
     return t;
 }
+
 template < typename T, typename... Rest >
 T or_return_values( T&& t, Rest&&... rest ) {
     return t | or_return_values( std::forward< Rest >( rest )... );
@@ -99,9 +100,12 @@ class streaming_device_with_key {
 public:
     // TODO: investigate why default constructor is required
     streaming_device_with_key() {}
+
     streaming_device_with_key( const Device& d, Key k )
         : my_device( d ), my_key( k ) {}
+
     Key key() const { return my_key; }
+
     const Device& device() const { return my_device; }
 };
 
@@ -143,6 +147,7 @@ struct convert_and_call_impl< A1, Args1... > {
         convert_and_call_impl< A1, Args1... >::doit_impl(
             typename is_port_ref< A1 >::type(), f, t, a1, args1..., args2... );
     }
+
     template < typename F, typename Tuple, typename... Args2 >
     static void doit_impl( std::false_type,
                            F& f,
@@ -152,6 +157,7 @@ struct convert_and_call_impl< A1, Args1... > {
                            Args2&... args2 ) {
         convert_and_call_impl< Args1... >::doit( f, t, args1..., args2..., a1 );
     }
+
     template < typename F, typename Tuple, int N1, int N2, typename... Args2 >
     static void doit_impl( std::true_type x,
                            F& f,
@@ -166,6 +172,7 @@ struct convert_and_call_impl< A1, Args1... > {
                                                       std::get< N1 + my_delta >(
                                                           t ) );
     }
+
     template < typename F, typename Tuple, int N, typename... Args2 >
     static void doit_impl( std::true_type,
                            F& f,
@@ -186,6 +193,7 @@ struct convert_and_call_impl< A1, Args1... > {
                            Args2&... args2 ) {
         doit_impl( x, f, t, fn(), args1..., args2... );
     }
+
     template < typename F, typename Tuple, int N, typename... Args2 >
     static void doit_impl( std::true_type x,
                            F& f,
@@ -204,6 +212,7 @@ struct convert_and_call_impl<> {
         f( args2... );
     }
 };
+
 // ------------------------------------------- //
 
 template < typename JP, typename StreamFactory, typename... Ports >
@@ -264,6 +273,7 @@ class kernel_executor_helper< StreamFactory,
     struct range_wrapper {
         virtual range_type get_range( const kernel_input_tuple& ip ) const = 0;
         virtual range_wrapper* clone() const = 0;
+
         virtual ~range_wrapper() {}
     };
 
@@ -463,6 +473,7 @@ private:
             const indexer_node_output_type& v,
             typename device_selector_node::output_ports_type& op ) = 0;
         virtual device_selector_base* clone( streaming_node& n ) const = 0;
+
         virtual ~device_selector_base() {}
     };
 
@@ -566,6 +577,7 @@ private:
         struct epoch_desc {
             epoch_desc( device_type d )
                 : my_device( d ), my_request_number( 0 ) {}
+
             device_type my_device;
             size_t my_request_number;
         };
@@ -605,6 +617,7 @@ private:
                               const streaming_node& n ) = 0;
         virtual void send( device_type d ) = 0;
         virtual args_storage_base* clone() const = 0;
+
         virtual ~args_storage_base() {}
 
     protected:

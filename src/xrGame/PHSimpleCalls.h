@@ -13,7 +13,9 @@ public:
     CPHCallOnStepCondition();
     virtual bool obsolete() const;
     virtual bool is_true();
+
     IC void set_step( u64 step ) { m_step = step; }
+
     void set_steps_interval( u64 steps );
     void set_time_interval( u32 time );
     void set_time_interval( float time );
@@ -30,6 +32,7 @@ private:
 class CPHExpireOnStepCondition : public CPHCallOnStepCondition {
 public:
     virtual bool is_true() { return true; }
+
     DECLARE_SCRIPT_REGISTER_FUNCTION
 };
 
@@ -43,6 +46,7 @@ public:
     virtual bool compare( const CPhysicsShell* shl ) const {
         return shl == m_shell;
     }
+
     virtual bool obsolete() const;
 };
 
@@ -56,6 +60,7 @@ public:
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool compare( const CPhysicsShell* shl ) const {
         return CPHShellBasedAction::compare( shl );
     }
@@ -70,6 +75,7 @@ class CPHReqComparerHasShell : public CPHReqComparerV {
 
 public:
     CPHReqComparerHasShell( CPhysicsShell* shl );
+
     virtual bool compare( const CPHConstForceAction* v ) const {
         return v->compare( m_shell );
     }

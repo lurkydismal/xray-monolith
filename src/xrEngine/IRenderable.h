@@ -20,12 +20,16 @@ public:
     IRender_ObjectSpecific* renderable_ROS();
     BENCH_SEC_SCRAMBLEVTBL2
     virtual void renderable_Render( IDSGraphManager* DM ) = 0;
+
     virtual BOOL renderable_ShadowGenerate() { return FALSE; };
+
     virtual BOOL renderable_ShadowReceive() { return FALSE; };
 
-    virtual float GetHotness() { return 0.0; }      //--DSR-- HeatVision
+    virtual float GetHotness() { return 0.0; } //--DSR-- HeatVision
+
     virtual float GetTransparency() { return 0.0; } //--DSR-- HeatVision
-    virtual float GetGlowing() { return 0.0; }      //--DSR-- SilencerOverheat
+
+    virtual float GetGlowing() { return 0.0; } //--DSR-- SilencerOverheat
 
     virtual IRenderable* dcast_Renderable() override { return this; }
 };

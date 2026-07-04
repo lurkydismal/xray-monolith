@@ -14,6 +14,7 @@ RGBQUAD CxImage::GetTransColor() {
         return GetPaletteColor( ( BYTE )info.nBkgndIndex );
     return info.nBkgndColor;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Gets the index used for transparency. Returns -1 for no transparancy.
@@ -21,6 +22,7 @@ RGBQUAD CxImage::GetTransColor() {
 long CxImage::GetTransIndex() const {
     return info.nBkgndIndex;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets the index used for transparency with 1, 4 and 8 bpp images. Set to -1 to
@@ -32,6 +34,7 @@ void CxImage::SetTransIndex( long idx ) {
     else
         info.nBkgndIndex = 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets the color used for transparency with 24 bpp images.
@@ -42,10 +45,12 @@ void CxImage::SetTransColor( RGBQUAD rgb ) {
     rgb.rgbReserved = 0;
     info.nBkgndColor = rgb;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::IsTransparent() const {
     return info.nBkgndIndex >= 0; // <vho>
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns true if the image has 256 colors or less.
@@ -53,6 +58,7 @@ bool CxImage::IsTransparent() const {
 bool CxImage::IsIndexed() const {
     return head.biClrUsed != 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return 1 = indexed, 2 = RGB, 4 = RGBA
@@ -66,6 +72,7 @@ BYTE CxImage::GetColorType() {
 #endif // CXIMAGE_SUPPORT_ALPHA
     return b;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return Resolution for TIFF, JPEG, PNG and BMP formats.
@@ -73,6 +80,7 @@ BYTE CxImage::GetColorType() {
 long CxImage::GetXDPI() const {
     return info.xDPI;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return Resolution for TIFF, JPEG, PNG and BMP formats.
@@ -80,6 +88,7 @@ long CxImage::GetXDPI() const {
 long CxImage::GetYDPI() const {
     return info.yDPI;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Set resolution for TIFF, JPEG, PNG and BMP formats.
@@ -92,6 +101,7 @@ void CxImage::SetXDPI( long dpi ) {
     if ( pDib )
         ( ( BITMAPINFOHEADER* )pDib )->biXPelsPerMeter = head.biXPelsPerMeter;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Set resolution for TIFF, JPEG, PNG and BMP formats.
@@ -104,6 +114,7 @@ void CxImage::SetYDPI( long dpi ) {
     if ( pDib )
         ( ( BITMAPINFOHEADER* )pDib )->biYPelsPerMeter = head.biYPelsPerMeter;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \sa SetFlags
@@ -111,6 +122,7 @@ void CxImage::SetYDPI( long dpi ) {
 DWORD CxImage::GetFlags() const {
     return info.dwFlags;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Image flags, for future use
@@ -127,6 +139,7 @@ void CxImage::SetFlags( DWORD flags, bool bLockReservedFlags ) {
     else
         info.dwFlags = flags;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \sa SetCodecOption
@@ -138,6 +151,7 @@ DWORD CxImage::GetCodecOption( DWORD imagetype ) {
     }
     return info.dwCodecOpt[ imagetype ];
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Encode option for GIF, TIF and JPG.
@@ -159,6 +173,7 @@ bool CxImage::SetCodecOption( DWORD opt, DWORD imagetype ) {
     info.dwCodecOpt[ imagetype ] = opt;
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return internal hDib object..
@@ -166,14 +181,17 @@ bool CxImage::SetCodecOption( DWORD opt, DWORD imagetype ) {
 void* CxImage::GetDIB() const {
     return pDib;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 DWORD CxImage::GetHeight() const {
     return head.biHeight;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 DWORD CxImage::GetWidth() const {
     return head.biWidth;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return DWORD aligned width of the image.
@@ -181,6 +199,7 @@ DWORD CxImage::GetWidth() const {
 DWORD CxImage::GetEffWidth() const {
     return info.dwEffWidth;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return 2, 16, 256; 0 for RGB images.
@@ -188,6 +207,7 @@ DWORD CxImage::GetEffWidth() const {
 DWORD CxImage::GetNumColors() const {
     return head.biClrUsed;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return: 1, 4, 8, 24.
@@ -195,6 +215,7 @@ DWORD CxImage::GetNumColors() const {
 WORD CxImage::GetBpp() const {
     return head.biBitCount;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return original image format
@@ -203,6 +224,7 @@ WORD CxImage::GetBpp() const {
 DWORD CxImage::GetType() const {
     return info.dwType;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * change image format identifier
@@ -273,10 +295,12 @@ bool CxImage::SetType( DWORD type ) {
     info.dwType = CXIMAGE_FORMAT_UNKNOWN;
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 DWORD CxImage::GetNumTypes() {
     return CMAX_IMAGE_FORMATS - 1;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 DWORD CxImage::GetTypeIdFromName( const TCHAR* ext ) {
 #if CXIMAGE_SUPPORT_BMP
@@ -382,6 +406,7 @@ DWORD CxImage::GetTypeIdFromName( const TCHAR* ext ) {
 
     return CXIMAGE_FORMAT_UNKNOWN;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 DWORD CxImage::GetTypeIdFromIndex( const DWORD index ) {
     DWORD n;
@@ -487,6 +512,7 @@ DWORD CxImage::GetTypeIdFromIndex( const DWORD index ) {
 
     return CXIMAGE_FORMAT_UNKNOWN;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 DWORD CxImage::GetTypeIndexFromId( const DWORD id ) {
     DWORD n;
@@ -592,6 +618,7 @@ DWORD CxImage::GetTypeIndexFromId( const DWORD id ) {
 
     return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return current frame delay in milliseconds. Only for GIF and MNG formats.
@@ -599,6 +626,7 @@ DWORD CxImage::GetTypeIndexFromId( const DWORD id ) {
 DWORD CxImage::GetFrameDelay() const {
     return info.dwFrameDelay;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets current frame delay. Only for GIF format.
@@ -607,16 +635,19 @@ DWORD CxImage::GetFrameDelay() const {
 void CxImage::SetFrameDelay( DWORD d ) {
     info.dwFrameDelay = d;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::GetOffset( long* x, long* y ) {
     *x = info.xOffset;
     *y = info.yOffset;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetOffset( long x, long y ) {
     info.xOffset = x;
     info.yOffset = y;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \sa SetJpegQuality, GetJpegQualityF
@@ -625,6 +656,7 @@ void CxImage::SetOffset( long x, long y ) {
 BYTE CxImage::GetJpegQuality() const {
     return ( BYTE )( info.fQuality + 0.5f );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \sa SetJpegQuality, GetJpegQuality
@@ -633,6 +665,7 @@ BYTE CxImage::GetJpegQuality() const {
 float CxImage::GetJpegQualityF() const {
     return info.fQuality;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * quality level for JPEG and JPEG2000
@@ -642,6 +675,7 @@ float CxImage::GetJpegQualityF() const {
 void CxImage::SetJpegQuality( BYTE q ) {
     info.fQuality = ( float )q;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * quality level for JPEG and JPEG2000
@@ -655,6 +689,7 @@ void CxImage::SetJpegQualityF( float q ) {
     else
         info.fQuality = 0.0f;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \sa SetJpegScale
@@ -662,6 +697,7 @@ void CxImage::SetJpegQualityF( float q ) {
 BYTE CxImage::GetJpegScale() const {
     return info.nJpegScale;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * scaling down during JPEG decoding valid numbers are 1, 2, 4, 8
@@ -670,6 +706,7 @@ BYTE CxImage::GetJpegScale() const {
 void CxImage::SetJpegScale( BYTE q ) {
     info.nJpegScale = q;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Used to monitor the slow loops.
@@ -679,6 +716,7 @@ void CxImage::SetJpegScale( BYTE q ) {
 long CxImage::GetProgress() const {
     return info.nProgress;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return the escape code.
@@ -687,6 +725,7 @@ long CxImage::GetProgress() const {
 long CxImage::GetEscape() const {
     return info.nEscape;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Forces the value of the internal progress variable.
@@ -696,6 +735,7 @@ long CxImage::GetEscape() const {
 void CxImage::SetProgress( long p ) {
     info.nProgress = p;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Used to quit the slow loops or the codecs.
@@ -705,6 +745,7 @@ void CxImage::SetProgress( long p ) {
 void CxImage::SetEscape( long i ) {
     info.nEscape = i;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Checks if the image is correctly initializated.
@@ -712,6 +753,7 @@ void CxImage::SetEscape( long i ) {
 bool CxImage::IsValid() const {
     return pDib != 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * True if the image is enabled for painting.
@@ -719,6 +761,7 @@ bool CxImage::IsValid() const {
 bool CxImage::IsEnabled() const {
     return info.bEnabled;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Enables/disables the image.
@@ -726,6 +769,7 @@ bool CxImage::IsEnabled() const {
 void CxImage::Enable( bool enable ) {
     info.bEnabled = enable;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * This function must be used after a Decode() / Load() call.
@@ -736,6 +780,7 @@ void CxImage::Enable( bool enable ) {
 long CxImage::GetNumFrames() const {
     return info.nNumFrames;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return the current selected image (zero-based index).
@@ -743,6 +788,7 @@ long CxImage::GetNumFrames() const {
 long CxImage::GetFrame() const {
     return info.nFrame;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets the image number that the next Decode() / Load() call will load
@@ -750,6 +796,7 @@ long CxImage::GetFrame() const {
 void CxImage::SetFrame( long nFrame ) {
     info.nFrame = nFrame;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets the method for drawing the frame related to others
@@ -758,6 +805,7 @@ void CxImage::SetFrame( long nFrame ) {
 void CxImage::SetDisposalMethod( BYTE dm ) {
     info.dispmeth = dm;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Gets the method for drawing the frame related to others
@@ -775,14 +823,17 @@ void CxImage::SetDisposalMethod( BYTE dm ) {
 BYTE CxImage::GetDisposalMethod() const {
     return info.dispmeth;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::GetRetreiveAllFrames() const {
     return info.bGetAllFrames;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetRetreiveAllFrames( bool flag ) {
     info.bGetAllFrames = flag;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 CxImage* CxImage::GetFrame( long nFrame ) const {
     if ( ppFrames == NULL )
@@ -795,12 +846,14 @@ CxImage* CxImage::GetFrame( long nFrame ) const {
         nFrame = info.nNumFrames - 1;
     return ppFrames[ nFrame ];
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 short CxImage::ntohs( const short word ) {
     if ( info.bLittleEndianHost )
         return word;
     return ( ( word & 0xff ) << 8 ) | ( ( word >> 8 ) & 0xff );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 long CxImage::ntohl( const long dword ) {
     if ( info.bLittleEndianHost )
@@ -808,6 +861,7 @@ long CxImage::ntohl( const long dword ) {
     return ( ( dword & 0xff ) << 24 ) | ( ( dword & 0xff00 ) << 8 ) |
            ( ( dword >> 8 ) & 0xff00 ) | ( ( dword >> 24 ) & 0xff );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::bihtoh( BITMAPINFOHEADER* bih ) {
     bih->biSize = ntohl( bih->biSize );
@@ -822,6 +876,7 @@ void CxImage::bihtoh( BITMAPINFOHEADER* bih ) {
     bih->biClrUsed = ntohl( bih->biClrUsed );
     bih->biClrImportant = ntohl( bih->biClrImportant );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns the last reported error.
@@ -829,6 +884,7 @@ void CxImage::bihtoh( BITMAPINFOHEADER* bih ) {
 const char* CxImage::GetLastError() {
     return info.szLastError;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 DWORD CxImage::DumpSize() {
     DWORD n;
@@ -864,6 +920,7 @@ DWORD CxImage::DumpSize() {
 
     return n;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 DWORD CxImage::Dump( BYTE* dst ) {
     if ( !dst )
@@ -918,6 +975,7 @@ DWORD CxImage::Dump( BYTE* dst ) {
 
     return DumpSize();
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 DWORD CxImage::UnDump( const BYTE* src ) {
     if ( !src )
@@ -975,6 +1033,7 @@ DWORD CxImage::UnDump( const BYTE* src ) {
 
     return n;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return A.BBCCCDDDD
@@ -986,9 +1045,11 @@ DWORD CxImage::UnDump( const BYTE* src ) {
 const float CxImage::GetVersionNumber() {
     return 6.000000015f;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 const TCHAR* CxImage::GetVersion() {
     static const TCHAR CxImageVersion[] = _T("CxImage 6.0.0");
     return ( CxImageVersion );
 }
+
 ////////////////////////////////////////////////////////////////////////////////

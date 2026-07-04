@@ -21,12 +21,15 @@ public:
     virtual ~CPHScriptCondition();
     virtual bool is_true();
     virtual bool obsolete() const;
+
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool compare( const CPHScriptCondition* v ) const {
         return *m_lua_function == *( v->m_lua_function );
     }
+
     /// virtual bool			is_equal
     /// (CPHReqBase* v)							;
     // virtual bool			is_relative
@@ -43,9 +46,11 @@ public:
     virtual ~CPHScriptAction();
     virtual void run();
     virtual bool obsolete() const;
+
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool compare( const CPHScriptAction* v ) const {
         return *m_lua_function == *( v->m_lua_function );
     }
@@ -62,12 +67,15 @@ public:
     virtual ~CPHScriptObjectCondition();
     virtual bool is_true();
     virtual bool obsolete() const;
+
     virtual bool compare( const ::luabind::object* v ) const {
         return *m_lua_object == *v;
     }
+
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool compare( const CPHScriptObjectCondition* v ) const;
 };
 
@@ -82,12 +90,15 @@ public:
     virtual ~CPHScriptObjectAction();
     virtual void run();
     virtual bool obsolete() const;
+
     virtual bool compare( const ::luabind::object* v ) const {
         return *m_lua_object == *v;
     }
+
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool compare( const CPHScriptObjectAction* v ) const;
 };
 
@@ -102,12 +113,15 @@ public:
     virtual ~CPHScriptObjectConditionN();
     virtual bool is_true();
     virtual bool obsolete() const;
+
     virtual bool compare( const ::luabind::object* v ) const {
         return m_callback == ( *v );
     }
+
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool compare( const CPHScriptObjectConditionN* v ) const {
         return m_callback == v->m_callback;
     }
@@ -123,12 +137,15 @@ public:
     virtual ~CPHScriptObjectActionN();
     virtual void run();
     virtual bool obsolete() const;
+
     virtual bool compare( const ::luabind::object* v ) const {
         return m_callback == *v;
     }
+
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool compare( const CPHScriptObjectActionN* v ) const {
         return m_callback == v->m_callback;
     }
@@ -155,9 +172,11 @@ public:
     virtual bool compare( const CObject* v ) const {
         return m_obj->ID() == v->ID();
     }
+
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool obsolete() const { return b_obsolete; }
 };
 
@@ -175,6 +194,7 @@ public:
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool compare( const CObject* v ) const {
         return m_obj->ID() == v->ID();
     }
@@ -193,15 +213,19 @@ public:
     }
 
     virtual ~CPHSriptReqObjComparer() { xr_delete( m_lua_object ); }
+
     virtual bool compare( const CPHScriptObjectCondition* v ) const {
         return v->compare( m_lua_object );
     }
+
     virtual bool compare( const CPHScriptObjectAction* v ) const {
         return v->compare( m_lua_object );
     }
+
     virtual bool compare( const CPHScriptObjectConditionN* v ) const {
         return v->compare( m_lua_object );
     }
+
     virtual bool compare( const CPHScriptObjectActionN* v ) const {
         return v->compare( m_lua_object );
     }
@@ -212,9 +236,11 @@ class CPHSriptReqGObjComparer : public CPHReqComparerV {
 
 public:
     CPHSriptReqGObjComparer( CObject* object ) { m_object = object; }
+
     virtual bool compare( const CPHScriptGameObjectAction* v ) const {
         return v->compare( m_object );
     }
+
     virtual bool compare( const CPHScriptGameObjectCondition* v ) const {
         return v->compare( m_object );
     }

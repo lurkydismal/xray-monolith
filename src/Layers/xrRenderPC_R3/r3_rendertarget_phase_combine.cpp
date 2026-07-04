@@ -467,6 +467,7 @@ void CRenderTarget::phase_combine() {
 
     if ( 1 ) {
         PIX_EVENT( combine_2 );
+
         //
         struct v_aa {
             Fvector4 p;

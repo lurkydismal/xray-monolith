@@ -50,6 +50,7 @@ protected:
                                // frame
     Fvector2 m_position_on_map; // last position on parent map, actual time only
                                 // current frame
+
     struct SCachedValues {
         u32 m_updatedFrame;
         GameGraph::_GRAPH_ID m_graphID;
@@ -77,36 +78,54 @@ public:
     virtual void destroy();
 
     IC bool HintEnabled() { return !!m_flags.test( eHintEnabled ); }
+
     LPCSTR GetHint();
     void SetHint( const shared_str& hint );
+
     CComplexMapSpot* complex_spot() { return m_complex_spot; }
+
     const CMapSpot* LevelMapSpot() { return m_level_spot; }
+
     CMapSpot* LevelMapSpotNC() { return m_level_spot; }
+
     const CMiniMapSpot* MiniMapSpot() { return m_minimap_spot; }
+
     CMiniMapSpot* MiniMapSpotNC() { return m_minimap_spot; }
 
     IC bool PointerEnabled() {
         return SpotEnabled() && !!m_flags.test( ePointerEnabled );
     };
+
     IC void EnablePointer() { m_flags.set( ePointerEnabled, TRUE ); };
+
     IC void DisablePointer() { m_flags.set( ePointerEnabled, FALSE ); };
 
     IC bool Collidable() const { return !!m_flags.test( eCollidable ); }
+
     IC bool SpotEnabled() { return !!m_flags.test( eSpotEnabled ); };
+
     void EnableSpot() { m_flags.set( eSpotEnabled, TRUE ); };
+
     void DisableSpot() { m_flags.set( eSpotEnabled, FALSE ); };
+
     virtual void UpdateMiniMap( CUICustomMap* map );
     virtual void UpdateLevelMap( CUICustomMap* map );
 
     void CalcPosition();
     const Fvector2& CalcDirection();
+
     IC const shared_str& GetLevelName() { return m_cached.m_LevelName; }
+
     const Fvector2& GetPosition() { return m_cached.m_Position; }
 
     u16 ObjectID() { return m_objectID; }
+
     virtual bool Update();
+
     Fvector GetLastPosition() { return m_position_global; };
+
     bool Serializable() const { return !!m_flags.test( eSerailizable ); }
+
     void SetSerializable( bool b ) { m_flags.set( eSerailizable, b ); }
 
     virtual void save( IWriter& stream );

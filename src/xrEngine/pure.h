@@ -27,48 +27,56 @@ typedef void __fastcall RP_FUNC( void* obj );
     }
 
 extern RP_FUNC rp_Frame;
+
 class pureFrame {
 public:
     virtual void __stdcall OnFrame( void ) = 0;
 };
 
 extern RP_FUNC rp_Render;
+
 class pureRender {
 public:
     virtual void OnRender( void ) = 0;
 };
 
 extern RP_FUNC rp_AppActivate;
+
 class pureAppActivate {
 public:
     virtual void OnAppActivate( void ) = 0;
 };
 
 extern RP_FUNC rp_AppDeactivate;
+
 class pureAppDeactivate {
 public:
     virtual void OnAppDeactivate( void ) = 0;
 };
 
 extern RP_FUNC rp_AppStart;
+
 class pureAppStart {
 public:
     virtual void OnAppStart( void ) = 0;
 };
 
 extern RP_FUNC rp_AppEnd;
+
 class pureAppEnd {
 public:
     virtual void OnAppEnd( void ) = 0;
 };
 
 extern RP_FUNC rp_DeviceReset;
+
 class pureDeviceReset {
 public:
     virtual void OnDeviceReset( void ) = 0;
 };
 
 extern RP_FUNC rp_ScreenResolutionChanged;
+
 class pureScreenResolutionChanged {
 public:
     virtual void OnScreenResolutionChanged( void ) = 0;

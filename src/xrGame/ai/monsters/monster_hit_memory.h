@@ -18,6 +18,7 @@ public:
 
     // -----------------------------------------------------
     bool is_hit() { return !m_hits.empty(); }
+
     bool is_hit( CObject* pO );
 
     // Lain: added

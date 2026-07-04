@@ -81,6 +81,7 @@ namespace internal {
 template < typename F >
 class task_handle_task : public task {
     task_handle< F >& my_handle;
+
     task* execute() __TBB_override {
         my_handle();
         return NULL;
@@ -100,6 +101,7 @@ class task_group_base : internal::no_copy {
         ref_count_guard( task& t ) : my_task( t ) {
             my_task.increment_ref_count();
         }
+
         ~ref_count_guard() { my_task.decrement_ref_count(); }
     };
 
@@ -258,6 +260,7 @@ using interface7::internal::isolate_within_arena;
 
 class spawn_delegate : public delegate_base {
     task* task_to_spawn;
+
     void operator()() const __TBB_override { task::spawn( *task_to_spawn ); }
 
 public:
@@ -279,6 +282,7 @@ public:
 template < typename F >
 class run_wait_delegate : public wait_delegate {
     F& func;
+
     void operator()() const __TBB_override { status = tg.run_and_wait( func ); }
 
 public:

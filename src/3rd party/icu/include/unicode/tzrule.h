@@ -895,6 +895,7 @@ public:
 
 private:
     enum { TIMEARRAY_STACK_BUFFER_SIZE = 32 };
+
     UBool initStartTimes( const UDate source[], int32_t size, UErrorCode& ec );
     UDate getUTC( UDate time, int32_t raw, int32_t dst ) const;
 

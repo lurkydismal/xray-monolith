@@ -44,26 +44,37 @@ public:
 
 public:
     IC u16 get_id() const { return m_id; }
+
     float ObjShiftDown( float current_shift, const SCalculateData& cd ) const;
     IC Fmatrix& ref_bone_to_foot( Fmatrix& ref_bone ) const;
+
     IC IKinematics* Kinematics() const { return m_foot.Kinematics(); }
+
     IC IKinematicsAnimated* KinematicsAnimated() const { return m_K; }
+
     IC u16 ref_bone() const { return m_foot.ref_bone(); }
+
     Fmatrix& transform( Fmatrix& m, u16 bone0, u16 bone1 ) const;
+
     float time_to_footstep() const { return state_predict.time_to_footstep; }
+
     float footstep_shift() const { return state_predict.footstep_shift; }
+
     void step_predict(
         CGameObject* O,
         const CBlend* b,
         ik_limb_state_predict& state,
         const extrapolation::points& object_pose_extrapolation ); // const;
+
     bool foot_step() const { return sv_state.foot_step(); }
+
     u16 foot_matrix_predict( Fmatrix& foot,
                              Fmatrix& toe,
                              float time,
                              IKinematicsAnimated* K ) const;
 #ifdef DEBUG
     u16 dbg_ref_bone_id() const { return m_bones[ m_foot.ref_bone() ]; }
+
     const CIKFoot& dbg_ik_foot() const { return m_foot; }
 #endif
 private:

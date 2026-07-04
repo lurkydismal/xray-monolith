@@ -15,9 +15,11 @@ using uint = unsigned int;
  * order has 9, third-order has 16, and fourth-order has 25.
  */
 constexpr uint8_t MaxAmbiOrder{ 3 };
+
 constexpr inline size_t AmbiChannelsFromOrder( size_t order ) noexcept {
     return ( order + 1 ) * ( order + 1 );
 }
+
 constexpr size_t MaxAmbiChannels{ AmbiChannelsFromOrder( MaxAmbiOrder ) };
 
 /* A bitmask of ambisonic channels for 0 to 4th order. This only specifies up
@@ -43,6 +45,7 @@ constexpr uint AmbiPeriphonicMask{ 0xfe7ce4 };
 constexpr inline size_t Ambi2DChannelsFromOrder( size_t order ) noexcept {
     return order * 2 + 1;
 }
+
 constexpr size_t MaxAmbi2DChannels{ Ambi2DChannelsFromOrder( MaxAmbiOrder ) };
 
 /* NOTE: These are scale factors as applied to Ambisonics content. Decoder
@@ -55,6 +58,7 @@ struct AmbiScale {
               1.0f, 1.0f, 1.0f, 1.0f, 1.0f } };
         return ret;
     }
+
     static auto& FromSN3D() noexcept {
         static constexpr const std::array< float, MaxAmbiChannels > ret{ {
             1.000000000f, /* ACN  0, sqrt(1) */
@@ -76,6 +80,7 @@ struct AmbiScale {
         } };
         return ret;
     }
+
     static auto& FromFuMa() noexcept {
         static constexpr const std::array< float, MaxAmbiChannels > ret{ {
             1.414213562f, /* ACN  0 (W), sqrt(2) */
@@ -97,6 +102,7 @@ struct AmbiScale {
         } };
         return ret;
     }
+
     static auto& FromUHJ() noexcept {
         static constexpr const std::array< float, MaxAmbiChannels > ret{ {
             1.000000000f, /* ACN  0 (W), sqrt(1) */
@@ -165,6 +171,7 @@ struct AmbiIndex {
         } };
         return ret;
     }
+
     static auto& FromFuMa2D() noexcept {
         static constexpr const std::array< uint8_t, MaxAmbi2DChannels > ret{ {
             0,  /* W */
@@ -183,6 +190,7 @@ struct AmbiIndex {
             { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 } };
         return ret;
     }
+
     static auto& FromACN2D() noexcept {
         static constexpr const std::array< uint8_t, MaxAmbi2DChannels > ret{
             { 0, 1, 3, 4, 8, 9, 15 } };
@@ -210,6 +218,7 @@ struct AmbiIndex {
         } };
         return ret;
     }
+
     static auto& OrderFrom2DChannel() noexcept {
         static constexpr const std::array< uint8_t, MaxAmbi2DChannels > ret{ {
             0,

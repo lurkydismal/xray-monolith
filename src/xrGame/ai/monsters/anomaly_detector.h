@@ -42,5 +42,6 @@ public:
     void on_contact( CObject* obj );
 
     void activate() { m_active = true; }
+
     void deactivate() { m_active = false; }
 };

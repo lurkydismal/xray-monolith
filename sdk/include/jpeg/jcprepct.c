@@ -71,6 +71,7 @@ typedef my_prep_controller* my_prep_ptr;
  */
 
 METHODDEF( void )
+
 start_pass_prep( j_compress_ptr cinfo, J_BUF_MODE pass_mode ) {
     my_prep_ptr prep = ( my_prep_ptr )cinfo->prep;
 
@@ -97,6 +98,7 @@ start_pass_prep( j_compress_ptr cinfo, J_BUF_MODE pass_mode ) {
  */
 
 LOCAL( void )
+
 expand_bottom_edge( JSAMPARRAY image_data,
                     JDIMENSION num_cols,
                     int input_rows,
@@ -120,6 +122,7 @@ expand_bottom_edge( JSAMPARRAY image_data,
  */
 
 METHODDEF( void )
+
 pre_process_data( j_compress_ptr cinfo,
                   JSAMPARRAY input_buf,
                   JDIMENSION* in_row_ctr,
@@ -188,6 +191,7 @@ pre_process_data( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 pre_process_context( j_compress_ptr cinfo,
                      JSAMPARRAY input_buf,
                      JDIMENSION* in_row_ctr,
@@ -260,6 +264,7 @@ pre_process_context( j_compress_ptr cinfo,
  */
 
 LOCAL( void )
+
 create_context_buffer( j_compress_ptr cinfo ) {
     my_prep_ptr prep = ( my_prep_ptr )cinfo->prep;
     int rgroup_height = cinfo->max_v_samp_factor;
@@ -308,6 +313,7 @@ create_context_buffer( j_compress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jinit_c_prep_controller( j_compress_ptr cinfo, boolean need_full_buffer ) {
     my_prep_ptr prep;
     int ci;

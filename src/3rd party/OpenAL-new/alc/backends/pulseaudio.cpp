@@ -242,14 +242,17 @@ constexpr pa_stream_flags_t operator|( pa_stream_flags_t lhs,
                                        pa_stream_flags_t rhs ) {
     return pa_stream_flags_t( lhs | al::to_underlying( rhs ) );
 }
+
 constexpr pa_stream_flags_t& operator|=( pa_stream_flags_t& lhs,
                                          pa_stream_flags_t rhs ) {
     lhs = lhs | rhs;
     return lhs;
 }
+
 constexpr pa_stream_flags_t operator~( pa_stream_flags_t flag ) {
     return pa_stream_flags_t( ~al::to_underlying( flag ) );
 }
+
 constexpr pa_stream_flags_t& operator&=( pa_stream_flags_t& lhs,
                                          pa_stream_flags_t rhs ) {
     lhs = pa_stream_flags_t( al::to_underlying( lhs ) & rhs );
@@ -260,6 +263,7 @@ constexpr pa_context_flags_t operator|( pa_context_flags_t lhs,
                                         pa_context_flags_t rhs ) {
     return pa_context_flags_t( lhs | al::to_underlying( rhs ) );
 }
+
 constexpr pa_context_flags_t& operator|=( pa_context_flags_t& lhs,
                                           pa_context_flags_t rhs ) {
     lhs = lhs | rhs;
@@ -291,21 +295,26 @@ class PulseMainloop {
 public:
     PulseMainloop() = default;
     PulseMainloop( const PulseMainloop& ) = delete;
+
     PulseMainloop( PulseMainloop&& rhs ) noexcept : mLoop{ rhs.mLoop } {
         rhs.mLoop = nullptr;
     }
+
     explicit PulseMainloop( pa_threaded_mainloop* loop ) noexcept
         : mLoop{ loop } {}
+
     ~PulseMainloop() {
         if ( mLoop )
             pa_threaded_mainloop_free( mLoop );
     }
 
     PulseMainloop& operator=( const PulseMainloop& ) = delete;
+
     PulseMainloop& operator=( PulseMainloop&& rhs ) noexcept {
         std::swap( mLoop, rhs.mLoop );
         return *this;
     }
+
     PulseMainloop& operator=( std::nullptr_t ) noexcept {
         if ( mLoop )
             pa_threaded_mainloop_free( mLoop );
@@ -316,11 +325,13 @@ public:
     explicit operator bool() const noexcept { return mLoop != nullptr; }
 
     auto start() const { return pa_threaded_mainloop_start( mLoop ); }
+
     auto stop() const { return pa_threaded_mainloop_stop( mLoop ); }
 
     auto getApi() const { return pa_threaded_mainloop_get_api( mLoop ); }
 
     auto lock() const { return pa_threaded_mainloop_lock( mLoop ); }
+
     auto unlock() const { return pa_threaded_mainloop_unlock( mLoop ); }
 
     auto signal( bool wait = false ) const {
@@ -330,6 +341,7 @@ public:
     static auto Create() { return PulseMainloop{ pa_threaded_mainloop_new() }; }
 
     void streamSuccessCallback( pa_stream*, int ) noexcept { signal(); }
+
     static void streamSuccessCallbackC( pa_stream* stream,
                                         int success,
                                         void* pdata ) noexcept {
@@ -412,6 +424,7 @@ public:
 
     friend struct MainloopUniqueLock;
 };
+
 struct MainloopUniqueLock : public std::unique_lock< PulseMainloop > {
     using std::unique_lock< PulseMainloop >::unique_lock;
     MainloopUniqueLock& operator=( MainloopUniqueLock&& ) = default;
@@ -454,6 +467,7 @@ struct MainloopUniqueLock : public std::unique_lock< PulseMainloop > {
                               pa_channel_map* chanmap,
                               BackendType type );
 };
+
 using MainloopLockGuard = std::lock_guard< PulseMainloop >;
 
 pa_context* MainloopUniqueLock::connectContext() {
@@ -631,6 +645,7 @@ PulseMainloop gGlobalMainloop;
 
 struct PulsePlayback final : public BackendBase {
     PulsePlayback( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~PulsePlayback() override;
 
     void bufferAttrCallback( pa_stream* stream ) noexcept;
@@ -729,6 +744,7 @@ void PulsePlayback::sinkInfoCallback( pa_context*,
         pa_channel_map map;
         bool is_51rear;
     };
+
     static constexpr std::array< ChannelMap, 8 > chanmaps{
         { { DevFmtX714, X714ChanMap, false },
           { DevFmtX71, X71ChanMap, false },
@@ -1092,6 +1108,7 @@ ClockLatency PulsePlayback::getClockLatency() {
 
 struct PulseCapture final : public BackendBase {
     PulseCapture( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~PulseCapture() override;
 
     void streamStateCallback( pa_stream* stream ) noexcept;

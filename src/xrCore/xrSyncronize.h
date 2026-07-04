@@ -62,10 +62,13 @@ private:
 
 public:
     void Enter() { critical_section->Enter(); }
+
     void Leave() { critical_section->Leave(); }
+
     xrCriticalSectionGuard( xrCriticalSection* cs ) : critical_section( cs ) {
         Enter();
     }
+
     xrCriticalSectionGuard( xrCriticalSection& cs ) : critical_section( &cs ) {
         Enter();
     }
@@ -86,6 +89,7 @@ private:
 public:
     xrCriticalSectionTryGuard( xrCriticalSection* cs )
         : critical_section( cs ), owned( cs->TryEnter() != FALSE ) {}
+
     xrCriticalSectionTryGuard( xrCriticalSection& cs )
         : critical_section( &cs ), owned( cs.TryEnter() != FALSE ) {}
 
@@ -116,6 +120,7 @@ public:
     BOOL TryAcquireExclusive();
     BOOL TryAcquireShared();
 };
+
 // Write functions guard: lock.AcquireExclusive(); ... lock.ReleaseExclusive();
 // Read functions guard: lock.AcquireShared(); ... lock.ReleaseShared();
 
@@ -129,6 +134,7 @@ private:
     xrSRWLock* lock;
     bool shared;
 };
+
 // Write functions guard: xrSRWLockGuard guard(lock); ...
 // Read functions guard: xrSRWLockGuard guard(lock, true); ...
 
@@ -138,6 +144,7 @@ class XRCORE_API xrSpinWait {
 
 public:
     xrSpinWait( u32 spin_count = 16 ) : spin_count( spin_count ) {};
+
     ICF void operator()() {
         // Phase 1: Spin briefly (fast reaction if it finishes instantly)
         if ( current_count < spin_count ) {

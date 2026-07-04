@@ -95,6 +95,7 @@ namespace nv {
 inline float toRadian( float degree ) {
     return degree * ( PI / 180.0f );
 }
+
 inline float toDegree( float radian ) {
     return radian * ( 180.0f / PI );
 }

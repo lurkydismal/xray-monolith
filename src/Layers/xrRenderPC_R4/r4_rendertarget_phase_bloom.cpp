@@ -3,6 +3,7 @@
 #include "stdafx.h"
 
 #pragma pack( push, 4 )
+
 struct v_build {
     Fvector4 p;
     Fvector2 uv0;
@@ -22,6 +23,7 @@ struct v_filter {
     Fvector4 uv6;
     Fvector4 uv7;
 };
+
 #pragma pack( pop )
 
 // Gauss filtering coeffs

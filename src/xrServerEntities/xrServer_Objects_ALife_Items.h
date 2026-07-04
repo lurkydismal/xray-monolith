@@ -55,12 +55,15 @@ virtual ~CSE_ALifeInventoryItem();
 virtual CSE_Abstract* base() = 0;
 virtual const CSE_Abstract* base() const = 0;
 virtual CSE_Abstract* init();
+
 virtual CSE_Abstract* cast_abstract() {
     return 0;
 };
+
 virtual CSE_ALifeInventoryItem* cast_inventory_item() {
     return this;
 };
+
 virtual u32 update_rate() const;
 virtual BOOL Net_Relevant();
 
@@ -100,12 +103,15 @@ virtual ~CSE_ALifeItem();
 virtual CSE_Abstract* base();
 virtual const CSE_Abstract* base() const;
 virtual CSE_Abstract* init();
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 };
+
 virtual CSE_ALifeInventoryItem* cast_inventory_item() {
     return this;
 };
+
 virtual BOOL Net_Relevant();
 virtual void OnEvent( NET_Packet& tNetPacket,
                       u16 type,
@@ -137,9 +143,11 @@ u16 m_boxSize;
 
 CSE_ALifeItemAmmo( LPCSTR caSection );
 virtual ~CSE_ALifeItemAmmo();
+
 virtual CSE_ALifeItemAmmo* cast_item_ammo() {
     return this;
 };
+
 virtual bool can_switch_online() const;
 virtual bool can_switch_offline() const;
 SERVER_ENTITY_DECLARE_END
@@ -180,6 +188,7 @@ struct grenade_count_t {
         grenades_count = b & 0x3f; // 111111
     }
 }; // struct grenade_count_t
+
 grenade_count_t a_elapsed_grenades;
 
 float m_fHitPower;
@@ -211,6 +220,7 @@ virtual BOOL Net_Relevant();
 virtual CSE_ALifeItemWeapon* cast_item_weapon() {
     return this;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifeItemWeaponMagazined, CSE_ALifeItemWeapon )
@@ -221,6 +231,7 @@ virtual ~CSE_ALifeItemWeaponMagazined();
 virtual CSE_ALifeItemWeapon* cast_item_weapon() {
     return this;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifeItemWeaponMagazinedWGL,
@@ -232,6 +243,7 @@ virtual ~CSE_ALifeItemWeaponMagazinedWGL();
 virtual CSE_ALifeItemWeapon* cast_item_weapon() {
     return this;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifeItemWeaponShotGun,
@@ -243,6 +255,7 @@ virtual ~CSE_ALifeItemWeaponShotGun();
 virtual CSE_ALifeItemWeapon* cast_item_weapon() {
     return this;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifeItemWeaponAutoShotGun,
@@ -253,6 +266,7 @@ virtual ~CSE_ALifeItemWeaponAutoShotGun();
 virtual CSE_ALifeItemWeapon* cast_item_weapon() {
     return this;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifeItemDetector, CSE_ALifeItem )
@@ -260,9 +274,11 @@ u32 m_ef_detector_type;
 CSE_ALifeItemDetector( LPCSTR caSection );
 virtual ~CSE_ALifeItemDetector();
 virtual u32 ef_detector_type() const;
+
 virtual CSE_ALifeItemDetector* cast_item_detector() {
     return this;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifeItemArtefact, CSE_ALifeItem )
@@ -279,9 +295,11 @@ shared_str m_info_portion;
 
 CSE_ALifeItemPDA( LPCSTR caSection );
 virtual ~CSE_ALifeItemPDA();
+
 virtual CSE_ALifeItemPDA* cast_item_pda() {
     return this;
 };
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifeItemDocument, CSE_ALifeItem )

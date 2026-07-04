@@ -50,6 +50,7 @@ struct indexer_helper {
         indexer_helper< TupleTypes, N - 1 >::template set_indexer_node_pointer<
             IndexerNodeBaseType, PortTuple >( my_input, p, g );
     }
+
     template < typename InputTuple >
     static inline void reset_inputs( InputTuple& my_input, reset_flags f ) {
         indexer_helper< TupleTypes, N - 1 >::reset_inputs( my_input, f );
@@ -75,6 +76,7 @@ struct indexer_helper< TupleTypes, 1 > {
             do_try_put< IndexerNodeBaseType, T, 0 >;
         tbb::flow::get< 0 >( my_input ).set_up( p, indexer_node_put_task, g );
     }
+
     template < typename InputTuple >
     static inline void reset_inputs( InputTuple& my_input, reset_flags f ) {
         tbb::flow::get< 0 >( my_input ).reset_receiver( f );
@@ -104,6 +106,7 @@ private:
 public:
 #if TBB_DEPRECATED_FLOW_NODE_EXTRACTION
     indexer_input_port() : my_pred_mutex(), my_graph( NULL ) {}
+
     indexer_input_port( const indexer_input_port& other )
         : receiver< T >(), my_pred_mutex(), my_graph( other.my_graph ) {}
 #endif /* TBB_DEPRECATED_FLOW_NODE_EXTRACTION */
@@ -124,15 +127,18 @@ public:
         spin_mutex::scoped_lock l( my_pred_mutex );
         return my_built_predecessors.edge_count();
     }
+
     void internal_add_built_predecessor( predecessor_type& p ) __TBB_override {
         spin_mutex::scoped_lock l( my_pred_mutex );
         my_built_predecessors.add_edge( p );
     }
+
     void internal_delete_built_predecessor( predecessor_type& p )
         __TBB_override {
         spin_mutex::scoped_lock l( my_pred_mutex );
         my_built_predecessors.delete_edge( p );
     }
+
     void copy_predecessors( predecessor_list_type& v ) __TBB_override {
         spin_mutex::scoped_lock l( my_pred_mutex );
         my_built_predecessors.copy_edges( v );
@@ -145,6 +151,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     task* try_put_task( const T& v ) __TBB_override {
         return my_try_put_task( v, my_indexer_ptr );
     }
@@ -227,6 +234,7 @@ private:
         : public aggregated_operation< indexer_node_base_operation > {
     public:
         char type;
+
         union {
             output_type const* my_arg;
             successor_type* my_succ;
@@ -236,11 +244,14 @@ private:
             successor_list_type* succv;
 #endif
         };
+
         indexer_node_base_operation( const output_type* e, op_type t )
             : type( char( t ) ), my_arg( e ) {}
+
         indexer_node_base_operation( const successor_type& s, op_type t )
             : type( char( t ) ),
               my_succ( const_cast< successor_type* >( &s ) ) {}
+
         indexer_node_base_operation( op_type t ) : type( char( t ) ) {}
     };
 
@@ -296,6 +307,7 @@ private:
             }
         }
     }
+
     // ---------- end aggregator -----------
 public:
     indexer_node_base( graph& g ) : graph_node( g ), input_ports_type() {
@@ -361,6 +373,7 @@ public:
         op_data.succv = &v;
         my_aggregator.execute( &op_data );
     }
+
     void extract() __TBB_override {
         my_successors.built_successors().sender_extract( *this );
         indexer_helper< StructTypes, N >::extract( this->my_inputs );
@@ -574,6 +587,7 @@ private:
 
 public:
     unfolded_indexer_node( graph& g ) : base_type( g ) {}
+
     unfolded_indexer_node( const unfolded_indexer_node& other )
         : base_type( other ) {}
 };

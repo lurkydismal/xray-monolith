@@ -33,28 +33,36 @@ int g_sv_ah_iReinforcementTime =
 BOOL g_sv_ah_bBearerCantSprint = FALSE;
 BOOL g_sv_ah_bShildedBases = TRUE;
 BOOL g_sv_ah_bAfReturnPlayersToBases = TRUE;
+
 //-------------------------------------------------------
 int game_sv_ArtefactHunt::Get_ArtefactsCount() {
     return g_sv_ah_dwArtefactsNum;
 };
+
 u32 game_sv_ArtefactHunt::Get_ArtefactsRespawnDelta() {
     return g_sv_ah_dwArtefactRespawnDelta;
 };
+
 u32 game_sv_ArtefactHunt::Get_ArtefactsStayTime() {
     return g_sv_ah_dwArtefactStayTime;
 };
+
 int game_sv_ArtefactHunt::Get_ReinforcementTime() {
     return g_sv_ah_iReinforcementTime;
 };
+
 BOOL game_sv_ArtefactHunt::Get_BearerCantSprint() {
     return g_sv_ah_bBearerCantSprint;
 }
+
 BOOL game_sv_ArtefactHunt::Get_ShieldedBases() {
     return g_sv_ah_bShildedBases;
 };
+
 BOOL game_sv_ArtefactHunt::Get_ReturnPlayers() {
     return g_sv_ah_bAfReturnPlayersToBases;
 };
+
 //-------------------------------------------------------
 void game_sv_ArtefactHunt::Create( shared_str& options ) {
     g_SV_Force_Artefact_Spawn = FALSE;
@@ -313,6 +321,7 @@ bool game_sv_ArtefactHunt::assign_rp_tmp( game_PlayerState* ps_who,
             }
         }
     };
+
     dest.clear();
 
     rpoints_blocker tmp_blocker;
@@ -542,6 +551,7 @@ BOOL game_sv_ArtefactHunt::OnTouch( u16 eid_who, u16 eid_what, BOOL bForced ) {
                                                     "af_first_take_all", 0 ) );
                             }
                         };
+
                         experience_adder exp_adder;
                         exp_adder.m_owner = this;
                         exp_adder.ps_who = ps_who;
@@ -703,6 +713,7 @@ void game_sv_ArtefactHunt::OnArtefactOnBase( ClientID id_who ) {
                 m_owner->Player_ExperienceFin( pstate );
             }
         };
+
         money_for_team_adder tmp_functor;
         tmp_functor.m_owner = this;
         tmp_functor.ps = ps;
@@ -857,6 +868,7 @@ void game_sv_ArtefactHunt::Update() {
 bool game_sv_ArtefactHunt::ArtefactSpawn_Allowed() {
     if ( g_SV_Force_Artefact_Spawn )
         return true;
+
     ///	return true;
     // Check if all players ready
     struct all_players_ready_cond {
@@ -887,6 +899,7 @@ bool game_sv_ArtefactHunt::ArtefactSpawn_Allowed() {
             }
         }
     };
+
     all_players_ready_cond tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
     if ( tmp_functor.TeamAlived[ 0 ] == 0 || tmp_functor.TeamAlived[ 1 ] == 0 )
@@ -1062,6 +1075,7 @@ void game_sv_ArtefactHunt::RespawnAllNotAlivePlayers() {
             };
         }
     };
+
     not_alive_players_respawner tmp_functor;
     tmp_functor.m_owner = this;
 
@@ -1085,6 +1099,7 @@ void game_sv_ArtefactHunt::CheckForAnyAlivePlayer() {
             return true;
         }
     };
+
     alife_player_searcher tmp_predicate;
     IClient* tmp_client = m_server->FindClient( tmp_predicate );
     if ( tmp_client )
@@ -1122,6 +1137,7 @@ bool game_sv_ArtefactHunt::CheckAlivePlayersInTeam( s16 Team ) {
             cnt_alive++;
         };
     };
+
     alife_players_counter_in_team tmp_functor;
     tmp_functor.Team = Team;
     m_server->ForEachClientDo( tmp_functor );
@@ -1186,6 +1202,7 @@ void game_sv_ArtefactHunt::MoveAllAlivePlayers() {
             l_pC->net_LastMoveUpdateTime = Level().timeServer();
         }
     };
+
     alife_players_teleporter tmp_functor;
     tmp_functor.m_server = m_server;
     tmp_functor.m_owner = this;
@@ -1219,6 +1236,7 @@ void game_sv_ArtefactHunt::UpdatePlayersNotSendedMoveRespond() {
             return true;
         }
     };
+
     player_not_sended_move_resp tmp_functor;
     xrClientData* l_pC =
         static_cast< xrClientData* >( m_server->FindClient( tmp_functor ) );
@@ -1263,6 +1281,7 @@ void game_sv_ArtefactHunt::ReplicatePlayersStateToPlayer( ClientID CID ) {
             AliveCount++;
         };
     };
+
     player_replicator tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
 
@@ -1305,6 +1324,7 @@ void game_sv_ArtefactHunt::CheckForTeamElimination() {
                 m_owner->Player_AddMoney( pstate, pWTeam->m_iM_RivalsWipedOut );
             };
         };
+
         money_adder tmp_functor;
         tmp_functor.m_owner = this;
         tmp_functor.pWTeam = pWTeam;

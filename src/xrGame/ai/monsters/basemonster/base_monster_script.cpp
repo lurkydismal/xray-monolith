@@ -284,8 +284,8 @@ bool CBaseMonster::bfAssignMovement( CScriptEntityAction* tpEntityAction ) {
         case CScriptMovementAction::eGoalTypeJumpToPosition: {
             //			control().deactivate
             //(ControlCom::eControlRunAttack);
-            //control().deactivate (ControlCom::eControlRunAttack);
-            //control().deactivate (ControlCom::eControlRunAttack);
+            // control().deactivate (ControlCom::eControlRunAttack);
+            // control().deactivate (ControlCom::eControlRunAttack);
             com_man().script_jump( l_tMovementAction.m_tDestinationPosition,
                                    l_tMovementAction.m_fDistToEnd );
             break;

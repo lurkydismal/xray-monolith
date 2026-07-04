@@ -72,6 +72,7 @@ void CTextConsole::CreateConsoleWnd() {
     //---------------------------------------------------------------------------
     R_ASSERT2( m_hConsoleWnd, "Unable to Create TextConsole Window!" );
 };
+
 //-------------------------------------------------------------------------------------------
 LRESULT CALLBACK TextConsole_LogWndProc( HWND hWnd,
                                          UINT uMsg,

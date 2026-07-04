@@ -556,6 +556,7 @@ static void SOR_LCP( int m,
         }
     }
 }
+
 /*
 static void SOR_LCP (int m, int nb, dRealMutablePtr J, int *jb, dxBody * const
 *body, dRealPtr invI, dRealMutablePtr lambda, dRealMutablePtr fc,

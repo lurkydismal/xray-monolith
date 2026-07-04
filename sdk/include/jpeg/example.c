@@ -65,6 +65,7 @@ extern int image_width;       /* Number of columns in image */
  */
 
 GLOBAL( void )
+
 write_JPEG_file( char* filename, int quality ) {
     /* This struct contains the JPEG compression parameters and pointers to
      * working space (which is allocated as needed by the JPEG library).
@@ -252,6 +253,7 @@ typedef struct my_error_mgr* my_error_ptr;
  */
 
 METHODDEF( void )
+
 my_error_exit( j_common_ptr cinfo ) {
     /* cinfo->err really points to a my_error_mgr struct, so coerce pointer */
     my_error_ptr myerr = ( my_error_ptr )cinfo->err;
@@ -270,6 +272,7 @@ my_error_exit( j_common_ptr cinfo ) {
  */
 
 GLOBAL( int )
+
 read_JPEG_file( char* filename ) {
     /* This struct contains the JPEG decompression parameters and pointers to
      * working space (which is allocated as needed by the JPEG library).

@@ -32,6 +32,7 @@
 /// \cond
 struct UHashtable;
 typedef struct UHashtable UHashtable;
+
 /// \endcond
 
 /**
@@ -225,16 +226,21 @@ protected:
     class Node : public UObject {
     public:
         Node( int32_t initialHash ) : hash( initialHash ), offset( 0 ) {}
+
         inline int32_t hashCode() const { return hash; }
+
         // Handles node==NULL.
         static inline int32_t hashCode( const Node* node ) {
             return node == NULL ? 0 : node->hashCode();
         }
+
         // Base class operator==() compares the actual class types.
         virtual UBool operator==( const Node& other ) const;
+
         inline UBool operator!=( const Node& other ) const {
             return !operator==( other );
         }
+
         /**
          * Traverses the Node graph and numbers branch edges, with rightmost
          * edges first. This is to avoid writing a duplicate node twice.
@@ -267,6 +273,7 @@ protected:
         virtual int32_t markRightEdgesFirst( int32_t edgeNumber );
         // write() must set the offset to a positive value.
         virtual void write( StringTrieBuilder& builder ) = 0;
+
         // See markRightEdgesFirst.
         inline void writeUnlessInsideRightEdge( int32_t firstRight,
                                                 int32_t lastRight,
@@ -280,6 +287,7 @@ protected:
                 write( builder );
             }
         }
+
         inline int32_t getOffset() const { return offset; }
 
     protected:
@@ -298,6 +306,7 @@ protected:
     class FinalValueNode : public Node {
     public:
         FinalValueNode( int32_t v ) : Node( 0x111111u * 37u + v ), value( v ) {}
+
         virtual UBool operator==( const Node& other ) const;
         virtual void write( StringTrieBuilder& builder );
 
@@ -315,7 +324,9 @@ protected:
     public:
         ValueNode( int32_t initialHash )
             : Node( initialHash ), hasValue( FALSE ), value( 0 ) {}
+
         virtual UBool operator==( const Node& other ) const;
+
         void setValue( int32_t v ) {
             hasValue = TRUE;
             value = v;
@@ -338,6 +349,7 @@ protected:
               next( nextNode ) {
             setValue( v );
         }
+
         virtual UBool operator==( const Node& other ) const;
         virtual int32_t markRightEdgesFirst( int32_t edgeNumber );
         virtual void write( StringTrieBuilder& builder );
@@ -359,6 +371,7 @@ protected:
                          hashCode( nextNode ) ),
               length( len ),
               next( nextNode ) {}
+
         virtual UBool operator==( const Node& other ) const;
         virtual int32_t markRightEdgesFirst( int32_t edgeNumber );
 
@@ -385,9 +398,11 @@ protected:
     class ListBranchNode : public BranchNode {
     public:
         ListBranchNode() : BranchNode( 0x444444 ), length( 0 ) {}
+
         virtual UBool operator==( const Node& other ) const;
         virtual int32_t markRightEdgesFirst( int32_t edgeNumber );
         virtual void write( StringTrieBuilder& builder );
+
         // Adds a unit with a final value.
         void add( int32_t c, int32_t value ) {
             units[ length ] = ( char16_t )c;
@@ -396,6 +411,7 @@ protected:
             ++length;
             hash = ( hash * 37u + c ) * 37u + value;
         }
+
         // Adds a unit which leads to another match node.
         void add( int32_t c, Node* node ) {
             units[ length ] = ( char16_t )c;
@@ -428,6 +444,7 @@ protected:
               unit( middleUnit ),
               lessThan( lessThanNode ),
               greaterOrEqual( greaterOrEqualNode ) {}
+
         virtual UBool operator==( const Node& other ) const;
         virtual int32_t markRightEdgesFirst( int32_t edgeNumber );
         virtual void write( StringTrieBuilder& builder );
@@ -447,6 +464,7 @@ protected:
                          hashCode( subNode ) ),
               length( len ),
               next( subNode ) {}
+
         virtual UBool operator==( const Node& other ) const;
         virtual int32_t markRightEdgesFirst( int32_t edgeNumber );
         virtual void write( StringTrieBuilder& builder );

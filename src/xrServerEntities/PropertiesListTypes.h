@@ -79,6 +79,7 @@ public:
     virtual xr_string GetDrawText( TOnDrawTextEvent OnDrawText ) = 0;
     virtual void ResetValue() = 0;
     virtual bool Equal( PropValue* prop ) = 0;
+
     IC PropItem* Owner() { return m_Owner; }
 };
 
@@ -111,6 +112,7 @@ public:
         set_value( value, val );
         set_value( init_value, *val );
     };
+
     virtual xr_string GetDrawText( TOnDrawTextEvent OnDrawText ) { return ""; }
 
     virtual bool Equal( PropValue* val ) {
@@ -119,6 +121,7 @@ public:
     }
 
     virtual const T& GetValue() { return *value; }
+
     virtual void ResetValue() { set_value( *value, init_value ); }
 
     bool ApplyValue( const T& val ) {
@@ -184,6 +187,7 @@ public:
         for ( PropValueIt it = values.begin(); values.end() != it; ++it )
             xr_delete( *it );
     };
+
     IC TProperties* Owner() { return m_Owner; }
 
     void SetName( const shared_str& name ) { key = name; }
@@ -258,17 +262,22 @@ public:
     }
 
     IC PropValueVec& Values() { return values; }
+
     IC PropValue* GetFrontValue() {
         VERIFY( !values.empty() );
         return values.front();
     };
+
     IC EPropType Type() { return type; }
 #ifdef __BORLANDC__
     IC TElTreeItem* Item() { return ( TElTreeItem* )item; }
 #endif
     IC LPCSTR Key() { return key.c_str(); }
+
     IC void Enable( BOOL val ) { m_Flags.set( flDisabled, !val ); }
+
     IC BOOL Enabled() { return !m_Flags.is( flDisabled ); }
+
     IC void OnChange() {
         for ( PropValueIt it = values.begin(); values.end() != it; ++it )
             if ( !( *it )->OnChangeEvent.empty() )
@@ -295,10 +304,13 @@ class CaptionValue : public PropValue {
 
 public:
     CaptionValue( const shared_str& val ) { value = val; }
+
     virtual xr_string GetDrawText( TOnDrawTextEvent ) {
         return value.c_str() ? value.c_str() : "";
     }
+
     virtual void ResetValue() { ; }
+
     virtual bool Equal( PropValue* val ) {
         return ( value == ( ( CaptionValue* )val )->value );
     }
@@ -329,9 +341,11 @@ public:
         : OnDrawCanvasEvent( 0 ), OnTestEqual( 0 ), height( h ) {
         value = val;
     }
+
     virtual xr_string GetDrawText( TOnDrawTextEvent ) {
         return value.c_str() ? value.c_str() : "";
     }
+
     virtual void ResetValue() { ; }
 
     virtual bool Equal( PropValue* val ) {
@@ -372,6 +386,7 @@ public:
     }
 
     virtual void ResetValue() { ; }
+
     virtual bool Equal( PropValue* val ) { return true; }
 
     bool OnBtnClick( bool& bSafe ) {
@@ -481,6 +496,7 @@ public:
     }
 
     LPSTR GetValue() { return value; }
+
     virtual void ResetValue() {
         xr_strcpy( value, init_value.size() + 1, init_value.c_str() );
     }
@@ -499,6 +515,7 @@ public:
     TOnChooseValueFill OnChooseFillEvent;
     TOnDrawThumbnail OnDrawThumbnailEvent;
     void* m_FillParam;
+
     // utils
     void AppendChooseItem( LPCSTR name, LPCSTR hint ) {
         VERIFY( m_Items );
@@ -524,6 +541,7 @@ public:
 };
 
 typedef CustomValue< BOOL > BOOLValue;
+
 //------------------------------------------------------------------------------
 
 IC bool operator==( const WaveForm& A, const WaveForm& B ) {
@@ -533,6 +551,7 @@ IC bool operator==( const WaveForm& A, const WaveForm& B ) {
 class WaveValue : public CustomValue< WaveForm > {
 public:
     WaveValue( TYPE* val ) : CustomValue< WaveForm >( val ) {};
+
     virtual xr_string GetDrawText( TOnDrawTextEvent ) { return "[Wave]"; }
 };
 
@@ -683,6 +702,7 @@ public:
     virtual bool HaveCaption() {
         return caption[ 0 ].size() && caption[ 1 ].size();
     }
+
     virtual bool GetValueEx() = 0;
 };
 
@@ -713,8 +733,11 @@ public:
     virtual bool Equal( PropValue* val ) {
         return !!value->equal( *( ( FlagValue< T >* )val )->value, mask );
     }
+
     virtual const T& GetValue() { return *value; }
+
     virtual void ResetValue() { value->set( mask, init_value.is( mask ) ); }
+
     virtual bool GetValueEx() { return !!value->is( mask ); }
 
     bool ApplyValue( const T& val ) {
@@ -730,6 +753,7 @@ public:
 typedef FlagValue< Flags8 > Flag8Value;
 typedef FlagValue< Flags16 > Flag16Value;
 typedef FlagValue< Flags32 > Flag32Value;
+
 //------------------------------------------------------------------------------
 template < class T >
 bool operator==( _flags< T > const& A, _flags< T > const& B ) {
@@ -741,6 +765,7 @@ bool operator==( _flags< T > const& A, _flags< T > const& B ) {
 class TokenValueCustom {
 public:
     xr_token* token;
+
     TokenValueCustom( xr_token* _token ) : token( _token ) { ; }
 };
 
@@ -773,6 +798,7 @@ class RTokenValueCustom {
 public:
     xr_rtoken* token;
     u32 token_count;
+
     RTokenValueCustom( xr_rtoken* _token, u32 _t_cnt )
         : token( _token ), token_count( _t_cnt ) {
         ;

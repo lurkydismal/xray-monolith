@@ -44,11 +44,16 @@ public:
     bool at_min_home( const Fvector& pos );
     bool at_mid_home( const Fvector& pos );
     Fvector get_home_point();
+
     float get_min_radius() { return m_radius_min; }
+
     float get_mid_radius() { return m_radius_middle; }
+
     float get_max_radius() { return m_radius_max; };
+
     IC bool has_home() {
         return ( m_path != 0 ) && ( m_level_vertex_id != u32( -1 ) );
     }
+
     IC bool is_aggressive() { return m_aggressive; }
 };

@@ -963,7 +963,7 @@ CRenderTarget::CRenderTarget() {
             //	t_noise[it]					=
             // dxRenderDeviceRender::Instance().Resources->_CreateTexture
             //(name); 	t_noise[it]->surface_set	(t_noise_surf[it]);
-            //R_CHK (t_noise_surf[it]->LockRect	(0,&R[it],0,0));
+            // R_CHK (t_noise_surf[it]->LockRect	(0,&R[it],0,0));
             // }
             //	Use DXGI_FORMAT_R8G8B8A8_SNORM
 

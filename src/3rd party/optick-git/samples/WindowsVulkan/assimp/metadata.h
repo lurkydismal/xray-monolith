@@ -96,18 +96,23 @@ struct aiMetadataEntry {
 inline aiMetadataType GetAiType( bool ) {
     return AI_BOOL;
 }
+
 inline aiMetadataType GetAiType( int ) {
     return AI_INT;
 }
+
 inline aiMetadataType GetAiType( uint64_t ) {
     return AI_UINT64;
 }
+
 inline aiMetadataType GetAiType( float ) {
     return AI_FLOAT;
 }
+
 inline aiMetadataType GetAiType( aiString ) {
     return AI_AISTRING;
 }
+
 inline aiMetadataType GetAiType( aiVector3D ) {
     return AI_AIVECTOR3D;
 }

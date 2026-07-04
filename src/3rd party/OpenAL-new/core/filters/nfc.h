@@ -10,16 +10,19 @@ struct NfcFilter1 {
     float b1, a1;
     float z[ 1 ];
 };
+
 struct NfcFilter2 {
     float base_gain, gain;
     float b1, b2, a1, a2;
     float z[ 2 ];
 };
+
 struct NfcFilter3 {
     float base_gain, gain;
     float b1, b2, b3, a1, a2, a3;
     float z[ 3 ];
 };
+
 struct NfcFilter4 {
     float base_gain, gain;
     float b1, b2, b3, b4, a1, a2, a3, a4;

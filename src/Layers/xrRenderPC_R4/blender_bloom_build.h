@@ -3,7 +3,9 @@
 class CBlender_bloom_build : public IBlender {
 public:
     virtual LPCSTR getComment() { return "INTERNAL: combine to bloom target"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );
@@ -17,7 +19,9 @@ public:
     virtual LPCSTR getComment() {
         return "INTERNAL: combine to bloom target msaa";
     }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );
@@ -31,7 +35,9 @@ public:
     virtual LPCSTR getComment() {
         return "INTERNAL: combine to bloom target msaa";
     }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );
@@ -43,7 +49,9 @@ public:
 class CBlender_ssfx_bloom_build : public IBlender {
 public:
     virtual LPCSTR getComment() { return "SSFX Bloom"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );
@@ -55,7 +63,9 @@ public:
 class CBlender_ssfx_bloom_lens : public IBlender {
 public:
     virtual LPCSTR getComment() { return "SSFX Bloom Lens"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );
@@ -67,7 +77,9 @@ public:
 class CBlender_ssfx_bloom_downsample : public IBlender {
 public:
     virtual LPCSTR getComment() { return "SSFX Bloom Downsample"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );
@@ -79,7 +91,9 @@ public:
 class CBlender_ssfx_bloom_upsample : public IBlender {
 public:
     virtual LPCSTR getComment() { return "SSFX Bloom Upsample"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );

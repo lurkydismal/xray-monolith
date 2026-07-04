@@ -166,7 +166,7 @@ void CCoverEvaluatorFarFromEnemy::evaluate_cover(
     //	direction.sub
     //(m_enemy_position,cover_point->position()); 	direction.getHP
     //(y,p); 	y						=
-    //angle_normalize(y); 	float					cover_value =
+    // angle_normalize(y); 	float cover_value =
     // ai().level_graph().cover_in_direction(y,cover_point->level_vertex_id());
     if ( enemy_distance <= -m_best_value )
         return;

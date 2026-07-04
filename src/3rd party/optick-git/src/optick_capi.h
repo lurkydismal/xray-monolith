@@ -78,11 +78,13 @@ OPTICK_API void OptickAPI_AttachTag_Point( uint64_t inEventDescription,
 #else
 
 #define OPTICK_CAPI_UNUSED( x ) ( void )( x )
+
 inline void OptickAPI_RegisterThread( const char* inThreadName,
                                       uint16_t inThreadNameLength ) {
     OPTICK_CAPI_UNUSED( inThreadName );
     OPTICK_CAPI_UNUSED( inThreadNameLength );
 }
+
 inline uint64_t OptickAPI_CreateEventDescription( const char* inFunctionName,
                                                   uint16_t inFunctionLength,
                                                   const char* inFileName,
@@ -95,20 +97,26 @@ inline uint64_t OptickAPI_CreateEventDescription( const char* inFunctionName,
     OPTICK_CAPI_UNUSED( inFileLine );
     return 0;
 }
+
 inline uint64_t OptickAPI_PushEvent( uint64_t inEventDescription ) {
     OPTICK_CAPI_UNUSED( inEventDescription );
     return 0;
 }
+
 inline void OptickAPI_PopEvent( uint64_t inEventData ) {
     OPTICK_CAPI_UNUSED( inEventData );
 }
+
 inline void OptickAPI_NextFrame() {}
+
 inline void OptickAPI_StartCapture() {}
+
 inline void OptickAPI_StopCapture( const char* inFileName,
                                    uint16_t inFileNameLength ) {
     OPTICK_CAPI_UNUSED( inFileName );
     OPTICK_CAPI_UNUSED( inFileNameLength );
 }
+
 inline void OptickAPI_AttachTag_String( uint64_t inEventDescription,
                                         const char* inValue,
                                         uint16_t intValueLength ) {
@@ -116,26 +124,31 @@ inline void OptickAPI_AttachTag_String( uint64_t inEventDescription,
     OPTICK_CAPI_UNUSED( inValue );
     OPTICK_CAPI_UNUSED( intValueLength );
 }
+
 inline void OptickAPI_AttachTag_Int( uint64_t inEventDescription,
                                      int inValue ) {
     OPTICK_CAPI_UNUSED( inEventDescription );
     OPTICK_CAPI_UNUSED( inValue );
 }
+
 inline void OptickAPI_AttachTag_Float( uint64_t inEventDescription,
                                        float inValue ) {
     OPTICK_CAPI_UNUSED( inEventDescription );
     OPTICK_CAPI_UNUSED( inValue );
 }
+
 inline void OptickAPI_AttachTag_Int32( uint64_t inEventDescription,
                                        uint32_t inValue ) {
     OPTICK_CAPI_UNUSED( inEventDescription );
     OPTICK_CAPI_UNUSED( inValue );
 }
+
 inline void OptickAPI_AttachTag_UInt64( uint64_t inEventDescription,
                                         uint64_t inValue ) {
     OPTICK_CAPI_UNUSED( inEventDescription );
     OPTICK_CAPI_UNUSED( inValue );
 }
+
 inline void OptickAPI_AttachTag_Point( uint64_t inEventDescription,
                                        float x,
                                        float y,

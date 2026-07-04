@@ -73,6 +73,7 @@ void execute_console_command_deferred( CConsole* c, LPCSTR string_to_execute ) {
 }
 
 #pragma optimize( "s", on )
+
 void console_registrator::script_register( lua_State* L ) {
     module( L )[ def( "get_console", &console ),
 

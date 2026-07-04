@@ -30,10 +30,15 @@ public:
     class scoped_lock : internal::no_copy {
     public:
         scoped_lock() {}
+
         scoped_lock( null_mutex& ) {}
+
         ~scoped_lock() {}
+
         void acquire( null_mutex& ) {}
+
         bool try_acquire( null_mutex& ) { return true; }
+
         void release() {}
     };
 

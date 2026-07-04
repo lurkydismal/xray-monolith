@@ -56,6 +56,7 @@ void Autowah_setParamf( EffectProps* props, ALenum param, float val ) {
                                     param };
     }
 }
+
 void Autowah_setParamfv( EffectProps* props, ALenum param, const float* vals ) {
     Autowah_setParamf( props, param, vals[ 0 ] );
 }
@@ -64,6 +65,7 @@ void Autowah_setParami( EffectProps*, ALenum param, int ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid autowah integer property 0x%04x", param };
 }
+
 void Autowah_setParamiv( EffectProps*, ALenum param, const int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid autowah integer vector property 0x%04x",
@@ -94,6 +96,7 @@ void Autowah_getParamf( const EffectProps* props, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void Autowah_getParamfv( const EffectProps* props, ALenum param, float* vals ) {
     Autowah_getParamf( props, param, vals );
 }
@@ -102,6 +105,7 @@ void Autowah_getParami( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid autowah integer property 0x%04x", param };
 }
+
 void Autowah_getParamiv( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid autowah integer vector property 0x%04x",

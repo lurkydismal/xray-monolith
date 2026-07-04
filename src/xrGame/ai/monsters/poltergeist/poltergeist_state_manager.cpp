@@ -79,7 +79,7 @@ void CStateManagerPoltergeist::execute() {
     //		if
     //(object->CorpseMan.get_corpse()->Position().distance_to(object->Position())
     //< 5.f) { 			if (object->is_hidden()) {
-    //object->CEnergyHolder::deactivate();
+    // object->CEnergyHolder::deactivate();
     //			}
     //
     //			object->DisableHide();

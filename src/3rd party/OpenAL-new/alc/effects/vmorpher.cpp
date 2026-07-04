@@ -105,6 +105,7 @@ struct FormantFilter {
     float mS2{ 0.0f };
 
     FormantFilter() = default;
+
     FormantFilter( float f0norm, float gain )
         : mCoeff{ std::tan( al::numbers::pi_v< float > * f0norm ) },
           mGain{ gain } {}

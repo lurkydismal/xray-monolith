@@ -22,6 +22,7 @@
 
 enum {
     TK_OFS = 256,
+
 #define TKENUM1( name ) TK_##name,
 #define TKENUM2( name, sym ) TK_##name,
     TKDEF( TKENUM1, TKENUM2 )

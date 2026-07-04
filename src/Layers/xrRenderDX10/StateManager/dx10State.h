@@ -21,6 +21,7 @@ public:
 
     //	DX10 specific
     void UpdateStencilRef( UINT Ref ) { m_uiStencilRef = Ref; }
+
     void UpdateAlphaRef( UINT Ref ) { m_uiAlphaRef = Ref; }
 
     //	User restricted interface

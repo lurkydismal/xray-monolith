@@ -44,7 +44,9 @@ public:
     virtual void net_Destroy();
     virtual void shedule_Update( u32 dt ); // Called by sheduler
     virtual void UpdateCL();
+
     virtual BOOL renderable_ShadowGenerate() { return FALSE; }
+
     virtual BOOL renderable_ShadowReceive() { return TRUE; }
 
     virtual void Hit( SHit* pHDS );
@@ -72,6 +74,7 @@ private:
     virtual ICollisionDamageReceiver* PHCollisionDamageReceiver() {
         return ( this );
     }
+
     virtual void CollisionHit( u16 source_id,
                                u16 bone_id,
                                float power,

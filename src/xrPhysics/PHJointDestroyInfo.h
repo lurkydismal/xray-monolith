@@ -16,9 +16,11 @@ class CPHJointDestroyInfo {
 
 public:
     CPHJointDestroyInfo( float break_force, float break_torque );
+
     IC dJointFeedback* JointFeedback() { return &m_joint_feedback; }
 
     IC bool Breaked() { return m_breaked; };
+
     bool Update();
 };
 

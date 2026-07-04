@@ -31,9 +31,11 @@ public:
         void Construct();
         float ContactVelocity() const;
         void HitDir( Fvector& dir ) const;
+
         IC const Fvector& HitPos() const {
             return cast_fv( m_damege_contact.geom.pos );
         }
+
         void Reinit();
         dContact m_damege_contact;
         ICollisionHitCallback* m_hit_callback;
@@ -134,6 +136,7 @@ protected:
 
 public:
     CPHSimpleCharacter();
+
     virtual ~CPHSimpleCharacter() { Destroy(); }
 
     /////////////////CPHObject//////////////////////////////////////////////
@@ -143,8 +146,11 @@ public:
                               bool& do_collide,
                               u16 /*material_idx_1*/,
                               u16 /*material_idx_2*/ );
+
     virtual dSpaceID dSpace() { return m_space; }
+
     virtual dGeomID dSpacedGeom() { return ( dGeomID )m_space; }
+
     virtual void get_spatial_params();
     /////////////////CPHCharacter////////////////////////////////////////////
 public:
@@ -161,33 +167,43 @@ public:
 
     virtual EEnvironment CheckInvironment();
     virtual void GroundNormal( Fvector& norm );
+
     virtual const ICollisionDamageInfo* CollisionDamageInfo() const {
         return this;
     }
+
     virtual ICollisionDamageInfo* CollisionDamageInfo() { return this; }
 
 private:
     virtual float ContactVelocity() const {
         return m_collision_damage_info.ContactVelocity();
     }
+
     virtual void HitDir( Fvector& dir ) const {
         return m_collision_damage_info.HitDir( dir );
     }
+
     virtual const Fvector& HitPos() const {
         return m_collision_damage_info.HitPos();
     }
+
     virtual u16 DamageInitiatorID() const;
     virtual CObject* DamageInitiator() const;
+
     virtual ALife::EHitType HitType() const {
         return m_collision_damage_info.m_hit_type;
     };
+
     virtual void SetInitiated();
     virtual bool IsInitiated() const;
     virtual bool GetAndResetInitiated();
+
     virtual void SetHitType( ALife::EHitType type ) {
         m_collision_damage_info.m_hit_type = type;
     };
+
     virtual ICollisionHitCallback* HitCallback() const;
+
     virtual void Reinit() { m_collision_damage_info.Reinit(); };
 
 public:
@@ -219,24 +235,33 @@ public:
     virtual void SwitchOFFInitContact();
     virtual void SwitchInInitContact();
     virtual void SetAcceleration( Fvector accel );
+
     virtual Fvector GetAcceleration() { return m_acceleration; };
+
     virtual void SetCamDir( const Fvector& cam_dir );
+
     virtual const Fvector& CamDir() const { return m_cam_dir; }
+
     virtual void SetMaterial( u16 material );
     virtual void SetPosition( const Fvector& pos );
     virtual void GetVelocity( Fvector& vvel ) const;
     virtual void GetSmothedVelocity( Fvector& vvel );
     virtual void SetVelocity( Fvector vel );
+
     virtual void SetAirControlFactor( float factor ) {
         m_air_control_factor = factor;
     }
+
     virtual void SetElevator( IClimableObject* climable ) {
         m_elevator_state.SetElevator( climable );
     };
+
     virtual CElevatorState* ElevatorState();
+
     virtual void SetCollisionDamageFactor( float f ) {
         m_collision_damage_factor = f;
     }
+
     virtual void GetPosition( Fvector& vpos );
     virtual void GetPreviousPosition( Fvector& pos );
     virtual float FootRadius();
@@ -248,18 +273,27 @@ public:
     virtual void ApplyForce( const Fvector& dir, float force );
     virtual void ApplyForce( float x, float y, float z );
     virtual void AddControlVel( const Fvector& vel );
+
     virtual void SetMaximumVelocity( dReal vel ) { m_max_velocity = vel; }
+
     virtual dReal GetMaximumVelocity() { return m_max_velocity; }
+
     virtual void SetJupmUpVelocity( dReal velocity ) {
         jump_up_velocity = velocity;
     }
 
     virtual bool JumpState() { return b_jumping || b_jump; };
+
     virtual const Fvector& ControlAccel() const { return m_acceleration; }
+
     virtual bool TouchRestrictor( ERestrictionType rttype );
+
     virtual float& FrictionFactor() { return m_friction_factor; }
+
     virtual void SetMas( dReal mass );
+
     virtual float Mass() { return m_mass; };
+
     virtual void SetPhysicsRefObject( IPhysicsShellHolder* ref_object );
     virtual void SetNonInteractive( bool v );
 
@@ -316,10 +350,15 @@ private:
 
 private:
     virtual void Freeze() { CPHObject::Freeze(); }
+
     virtual void UnFreeze() { CPHObject::UnFreeze(); }
+
     virtual void step( float dt ) { CPHObject::step( dt ); }
+
     virtual void collision_disable() { CPHObject::collision_disable(); }
+
     virtual void collision_enable() { CPHObject::collision_enable(); }
+
     virtual void NetRelcase( IPhysicsShellHolder* O );
 
 protected:

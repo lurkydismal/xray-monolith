@@ -94,7 +94,7 @@ void CUIPdaWnd::Init() {
         //-		pUIFactionWarWnd				=
         // xr_new<CUIFactionWarWnd>(); -
         // pUIFactionWarWnd->hint_wnd = m_hint_wnd; -
-        //pUIFactionWarWnd->Init
+        // pUIFactionWarWnd->Init
         //();
 
         pUIRankingWnd = xr_new< CUIRankingWnd >();

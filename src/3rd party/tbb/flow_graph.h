@@ -66,6 +66,7 @@
 // use the VC10 or gcc version of tuple if it is available.
 #if __TBB_CPP11_TUPLE_PRESENT
 #include <tuple>
+
 namespace tbb {
 namespace flow {
 using std::get;
@@ -654,6 +655,7 @@ protected:
 
     template < typename TT, typename M >
     friend class internal::successor_cache;
+
     virtual bool is_continue_receiver() { return false; }
 
 #if __TBB_PREVIEW_OPENCL_NODE
@@ -718,6 +720,7 @@ public:
         built_predecessors_type;
     __TBB_DEPRECATED typedef built_predecessors_type::edge_list_type
         predecessor_list_type;
+
     built_predecessors_type& built_predecessors() __TBB_override {
         return my_built_predecessors;
     }
@@ -754,6 +757,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     // execute body is supposed to be too small to create a task for.
     task* try_put_task( const input_type& ) __TBB_override {
         {
@@ -798,6 +802,7 @@ protected:
     virtual task* execute() = 0;
     template < typename TT, typename M >
     friend class internal::successor_cache;
+
     bool is_continue_receiver() __TBB_override { return true; }
 
 }; // class continue_receiver
@@ -1299,6 +1304,7 @@ private:
     }
 
     friend class internal::source_task_bypass< source_node< output_type > >;
+
     //! Applies the body.  Returning SUCCESSFULLY_ENQUEUED okay;
     //! forward_task_bypass will handle it.
     task* apply_body_bypass() {
@@ -1660,6 +1666,7 @@ protected:
         return internal::emit_element< N >::emit_this( this->my_graph, t,
                                                        output_ports() );
     }
+
     void reset_node( reset_flags f ) __TBB_override {
         if ( f & rf_clear_edges )
             internal::clear_element< N >::clear_this( my_output_ports );
@@ -1669,7 +1676,9 @@ protected:
                 internal::clear_element< N >::this_empty( my_output_ports ),
             "split_node reset failed" );
     }
+
     void reset_receiver( reset_flags /*f*/ ) __TBB_override {}
+
     graph& graph_reference() const __TBB_override { return my_graph; }
 #if TBB_DEPRECATED_FLOW_NODE_EXTRACTION
 private: //! split_node doesn't use this "predecessors" functionality; so, we
@@ -1865,6 +1874,7 @@ protected:
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
     using input_impl_type::try_put_task;
+
     internal::broadcast_cache< output_type >& successors() __TBB_override {
         return fOutput_type::my_successors;
     }
@@ -2009,6 +2019,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     //! build a task to run the successor if possible.  Default is old behavior.
     task* try_put_task( const T& t ) __TBB_override {
         task* new_task = my_successors.try_put_task( t );
@@ -2090,6 +2101,7 @@ protected:
         char type;
 #if TBB_DEPRECATED_FLOW_NODE_EXTRACTION
         task* ltask;
+
         union {
             input_type* elem;
             successor_type* r;
@@ -2116,6 +2128,7 @@ protected:
 #endif
         {
         }
+
         buffer_operation( op_type t ) : type( char( t ) ), ltask( NULL ) {}
     };
 
@@ -2567,6 +2580,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     //! receive an item, return a task *if possible
     task* try_put_task( const T& t ) __TBB_override {
         buffer_operation op_data( t, put_item );
@@ -2653,6 +2667,7 @@ protected:
             __TBB_store_with_release( op->status, internal::SUCCEEDED );
         }
     }
+
     void internal_reserve( queue_operation* op ) __TBB_override {
         if ( this->my_reserved || !this->my_item_valid( this->my_head ) ) {
             __TBB_store_with_release( op->status, internal::FAILED );
@@ -2661,6 +2676,7 @@ protected:
             __TBB_store_with_release( op->status, internal::SUCCEEDED );
         }
     }
+
     void internal_consume( queue_operation* op ) __TBB_override {
         this->consume_front();
         __TBB_store_with_release( op->status, internal::SUCCEEDED );
@@ -3254,6 +3270,7 @@ public:
     built_successors_type& built_successors() __TBB_override {
         return my_successors.built_successors();
     }
+
     built_predecessors_type& built_predecessors() __TBB_override {
         return my_predecessors.built_predecessors();
     }
@@ -3328,6 +3345,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     //! Puts an item to this receiver
     task* try_put_task( const T& t ) __TBB_override {
         {
@@ -3403,6 +3421,7 @@ private:
 public:
     typedef OutputTuple output_type;
     typedef typename unfolded_type::input_ports_type input_ports_type;
+
     __TBB_NOINLINE_SYM explicit join_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_JOIN_NODE_RESERVING, &this->my_graph,
@@ -3450,6 +3469,7 @@ private:
 public:
     typedef OutputTuple output_type;
     typedef typename unfolded_type::input_ports_type input_ports_type;
+
     __TBB_NOINLINE_SYM explicit join_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_JOIN_NODE_QUEUEING, &this->my_graph,
@@ -3525,6 +3545,7 @@ public:
             &this->my_graph, this->input_ports(),
             static_cast< sender< output_type >* >( this ) );
     }
+
     template < typename __TBB_B0, typename __TBB_B1, typename __TBB_B2 >
     __TBB_NOINLINE_SYM join_node( graph& g,
                                   __TBB_B0 b0,
@@ -3536,6 +3557,7 @@ public:
             &this->my_graph, this->input_ports(),
             static_cast< sender< output_type >* >( this ) );
     }
+
     template < typename __TBB_B0,
                typename __TBB_B1,
                typename __TBB_B2,
@@ -3551,6 +3573,7 @@ public:
             &this->my_graph, this->input_ports(),
             static_cast< sender< output_type >* >( this ) );
     }
+
     template < typename __TBB_B0,
                typename __TBB_B1,
                typename __TBB_B2,
@@ -3746,6 +3769,7 @@ public:
     typedef typename internal::tagged_msg< size_t, T0 > output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     __TBB_NOINLINE_SYM indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -3788,6 +3812,7 @@ public:
     typedef typename internal::tagged_msg< size_t, T0, T1 > output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     __TBB_NOINLINE_SYM indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -3830,6 +3855,7 @@ public:
     typedef typename internal::tagged_msg< size_t, T0, T1, T2 > output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     __TBB_NOINLINE_SYM indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -3872,6 +3898,7 @@ public:
     typedef typename internal::tagged_msg< size_t, T0, T1, T2, T3 > output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     __TBB_NOINLINE_SYM indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -3915,6 +3942,7 @@ public:
         output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     __TBB_NOINLINE_SYM indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -3965,6 +3993,7 @@ public:
         output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     __TBB_NOINLINE_SYM indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -4017,6 +4046,7 @@ public:
         output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     __TBB_NOINLINE_SYM indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -4071,6 +4101,7 @@ public:
             output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -4125,6 +4156,7 @@ public:
             output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     __TBB_NOINLINE_SYM indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -4181,6 +4213,7 @@ public:
             output_type;
     typedef typename internal::unfolded_indexer_node< InputTuple >
         unfolded_type;
+
     __TBB_NOINLINE_SYM indexer_node( graph& g ) : unfolded_type( g ) {
         tbb::internal::fgt_multiinput_node< N >(
             CODEPTR(), tbb::internal::FLOW_INDEXER_NODE, &this->my_graph,
@@ -4350,6 +4383,7 @@ template < typename T, typename R, typename = typename T::output_ports_type >
 inline void remove_edge( T& output, receiver< R >& input ) {
     remove_edge( get< 0 >( output.output_ports() ), input );
 }
+
 // Removes an edge between a sender and port 0 of a multi-input successor.
 template < typename S, typename V, typename = typename V::input_ports_type >
 inline void remove_edge( sender< S >& output, V& input ) {
@@ -4643,6 +4677,7 @@ public:
     typedef Gateway gateway_type;
 
     async_body_base( gateway_type* gateway ) : my_gateway( gateway ) {}
+
     void set_gateway( gateway_type* gateway ) { my_gateway = gateway; }
 
 protected:
@@ -4671,6 +4706,7 @@ private:
 } // namespace internal
 
 } // namespace interface11
+
 namespace interface11 {
 
 //! Implements async node
@@ -4708,14 +4744,17 @@ private:
         // thread.
         const Output* value;
         bool result;
+
         try_put_functor( output_port_type& p, const Output& v )
             : port( &p ), value( &v ), result( false ) {}
+
         void operator()() { result = port->try_put( *value ); }
     };
 
     class receiver_gateway_impl : public receiver_gateway< Output > {
     public:
         receiver_gateway_impl( async_node* node ) : my_node( node ) {}
+
         void reserve_wait() __TBB_override {
             tbb::internal::fgt_async_reserve(
                 static_cast< typename async_node::receiver_type* >( my_node ),
@@ -4888,6 +4927,7 @@ public:
     typedef typename internal::edge_container< successor_type >
         built_successors_type;
     typedef typename built_successors_type::edge_list_type successor_list_type;
+
     built_successors_type& built_successors() __TBB_override {
         return internal::output_port< 0 >( *this ).built_successors();
     }
@@ -5018,6 +5058,7 @@ public:
     built_predecessors_type& built_predecessors() __TBB_override {
         return my_built_predecessors;
     }
+
     built_successors_type& built_successors() __TBB_override {
         return my_successors.built_successors();
     }
@@ -5106,6 +5147,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     task* try_put_task( const input_type& v ) __TBB_override {
         spin_mutex::scoped_lock l( my_mutex );
         return try_put_task_impl( v );
@@ -5147,6 +5189,7 @@ protected:
 #endif
     input_type my_buffer;
     bool my_buffer_is_valid;
+
     void reset_receiver( reset_flags /*f*/ ) __TBB_override {}
 
     void reset_node( reset_flags f ) __TBB_override {
@@ -5204,6 +5247,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     task* try_put_task( const T& v ) __TBB_override {
         spin_mutex::scoped_lock l( this->my_mutex );
         return this->my_buffer_is_valid ? NULL : this->try_put_task_impl( v );

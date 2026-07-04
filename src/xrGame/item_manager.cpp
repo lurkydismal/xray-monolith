@@ -30,8 +30,10 @@ CItemManager::CItemManager( CCustomMonster* object ) {
 bool CItemManager::is_useful( const CGameObject* object ) const {
     return ( m_object->useful( this, object ) );
 }
+
 #include "enemy_manager.h"
 #include "memory_manager.h"
+
 bool CItemManager::useful( const CGameObject* object ) const {
     if ( object->getDestroy() )
         return false;

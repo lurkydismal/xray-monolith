@@ -300,6 +300,7 @@ void CDetailManager::Unload() {
 extern ECORE_API float r_ssaDISCARD;
 extern float ps_r__ssaDISCARD_exp;
 extern float ps_r__ssaDISCARD_fade_k;
+
 void CDetailManager::UpdateVisibleM() {
     Fvector EYE = RDEVICE.vCameraPosition_saved;
 

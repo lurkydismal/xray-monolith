@@ -23,10 +23,15 @@ private:
 
 public:
     virtual CEntityAlive* cast_entity_alive() { return this; }
+
     virtual CActor* cast_actor() { return nullptr; }
+
     virtual CAI_Stalker* cast_stalker() { return nullptr; }
+
     virtual CEntity* cast_entity() { return this; }
+
     virtual CInventoryOwner* cast_inventory_owner() { return nullptr; }
+
     virtual CGameObject* cast_game_object() { return this; }
 
 public:
@@ -177,6 +182,7 @@ protected:
 
 public:
     IC CEntityCondition& conditions() const;
+
     IC CMaterialManager& material() const {
         VERIFY( m_material_manager );
         return ( *m_material_manager );
@@ -203,6 +209,7 @@ public:
     }; // вызывается если entity умрет от радиации
 
     virtual CVisualMemoryManager* visual_memory() const { return ( 0 ); }
+
     virtual void net_Relcase( CObject* O );
 
 public:

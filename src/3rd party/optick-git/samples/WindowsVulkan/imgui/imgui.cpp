@@ -1490,6 +1490,7 @@ static void* MallocWrapper( size_t size, void* user_data ) {
     ( void )user_data;
     return malloc( size );
 }
+
 static void FreeWrapper( void* ptr, void* user_data ) {
     ( void )user_data;
     free( ptr );
@@ -1501,6 +1502,7 @@ static void* MallocWrapper( size_t size, void* user_data ) {
     IM_ASSERT( 0 );
     return NULL;
 }
+
 static void FreeWrapper( void* ptr, void* user_data ) {
     ( void )user_data;
     ( void )ptr;
@@ -2376,6 +2378,7 @@ void ImGuiStorage::BuildSortByKey() {
             return 0;
         }
     };
+
     if ( Data.Size > 1 )
         ImQsort( Data.Data, ( size_t )Data.Size, sizeof( Pair ),
                  StaticFunc::PairCompareByID );
@@ -6837,6 +6840,7 @@ struct ImGuiStyleVarInfo {
     ImGuiDataType Type;
     ImU32 Count;
     ImU32 Offset;
+
     void* GetVarPtr( ImGuiStyle* style ) const {
         return ( void* )( ( unsigned char* )style + Offset );
     }

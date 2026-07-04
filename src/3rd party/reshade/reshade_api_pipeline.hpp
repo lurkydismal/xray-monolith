@@ -199,6 +199,7 @@ struct descriptor_range {
     /// </summary>
     descriptor_type type = descriptor_type::sampler;
 };
+
 struct descriptor_range_with_static_samplers : public descriptor_range {
     /// <summary>
     /// Optional array of sampler descriptions to statically embed into the
@@ -214,21 +215,26 @@ struct descriptor_range_with_static_samplers : public descriptor_range {
 /// </summary>
 struct pipeline_layout_param {
     constexpr pipeline_layout_param() : push_descriptors() {}
+
     constexpr pipeline_layout_param( const constant_range& push_constants )
         : type( pipeline_layout_param_type::push_constants ),
           push_constants( push_constants ) {}
+
     constexpr pipeline_layout_param( const descriptor_range& push_descriptors )
         : type( pipeline_layout_param_type::push_descriptors ),
           push_descriptors( push_descriptors ) {}
+
     constexpr pipeline_layout_param(
         const descriptor_range_with_static_samplers& push_descriptors )
         : type( pipeline_layout_param_type::
                     push_descriptors_with_static_samplers ),
           descriptor_table_with_static_samplers( { 1, &push_descriptors } ) {}
+
     constexpr pipeline_layout_param( uint32_t count,
                                      const descriptor_range* ranges )
         : type( pipeline_layout_param_type::descriptor_table ),
           descriptor_table( { count, ranges } ) {}
+
     constexpr pipeline_layout_param(
         uint32_t count,
         const descriptor_range_with_static_samplers* ranges )
@@ -489,6 +495,7 @@ enum class shader_group_type {
 /// </summary>
 struct shader_group {
     shader_group() : hit_group() {}
+
     shader_group( shader_group_type type,
                   uint32_t closest_hit_shader_index,
                   uint32_t any_hit_shader_index = UINT32_MAX,
@@ -1434,6 +1441,7 @@ struct rect {
     int32_t bottom = 0;
 
     constexpr uint32_t width() const { return right - left; }
+
     constexpr uint32_t height() const { return bottom - top; }
 };
 

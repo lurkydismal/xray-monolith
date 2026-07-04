@@ -20,6 +20,7 @@ namespace gamespy_gp {
 class account_manager;
 class login_manager;
 } // namespace gamespy_gp
+
 namespace gamespy_profile {
 class profile_store;
 class stats_submitter;
@@ -34,8 +35,11 @@ struct Patch_Dawnload_Progress {
     shared_str FileName;
 
     bool GetInProgress() { return IsInProgress; };
+
     float GetProgress() { return Progress; };
+
     LPCSTR GetStatus() { return Status.c_str(); };
+
     LPCSTR GetFlieName() { return FileName.c_str(); };
 };
 
@@ -102,7 +106,9 @@ public:
     };
 
     Patch_Dawnload_Progress m_sPDProgress;
+
     Patch_Dawnload_Progress* GetPatchProgress() { return &m_sPDProgress; }
+
     void CancelDownload();
 
     // CGameSpy_Full*						GetGS
@@ -170,7 +176,9 @@ public:
     void UnregisterPPDraw( CUIWindow* w );
 
     void SetErrorDialog( EErrorDlg ErrDlg );
+
     EErrorDlg GetErrorDialogType() const { return m_NeedErrDialog; };
+
     void CheckForErrorDlg();
     void SwitchToMultiplayerMenu();
     void OnNewPatchFound( LPCSTR VersionName, LPCSTR URL );

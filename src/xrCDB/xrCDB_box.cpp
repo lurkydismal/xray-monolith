@@ -166,6 +166,7 @@ public:
             return false;
         return true;
     };
+
     ICF bool _tri() {
         // move everything so that the boxcenter is in (0,0,0)
         Point v0, v1, v2;

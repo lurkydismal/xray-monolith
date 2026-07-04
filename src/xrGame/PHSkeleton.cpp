@@ -358,6 +358,7 @@ void CPHSkeleton::SetAutoRemove(
 }
 
 static bool removable; // for RecursiveBonesCheck
+
 void CPHSkeleton::RecursiveBonesCheck( u16 id ) {
     if ( !removable )
         return;

@@ -108,6 +108,7 @@ struct allocator {
     };
 
     constexpr explicit allocator() noexcept = default;
+
     template < typename U, std::size_t N >
     constexpr explicit allocator( const allocator< U, N >& ) noexcept {}
 
@@ -118,13 +119,16 @@ struct allocator {
             return static_cast< T* >( p );
         throw std::bad_alloc();
     }
+
     void deallocate( T* p, std::size_t ) noexcept { al_free( p ); }
 };
+
 template < typename T, std::size_t N, typename U, std::size_t M >
 constexpr bool operator==( const allocator< T, N >&,
                            const allocator< U, M >& ) noexcept {
     return true;
 }
+
 template < typename T, std::size_t N, typename U, std::size_t M >
 constexpr bool operator!=( const allocator< T, N >&,
                            const allocator< U, M >& ) noexcept {
@@ -158,6 +162,7 @@ constexpr std::enable_if_t< !std::is_array< T >::value > destroy_at(
     T* ptr ) noexcept( std::is_nothrow_destructible< T >::value ) {
     ptr->~T();
 }
+
 DIAGNOSTIC_POP
 template < typename T >
 constexpr std::enable_if_t< std::is_array< T >::value >
@@ -217,6 +222,7 @@ template < typename T,
            bool = std::is_trivially_destructible< T >::value >
 struct FlexArrayStorage {
     const size_t mSize;
+
     union {
         char mDummy;
         alignas( alignment ) T mArray[ 1 ];
@@ -232,6 +238,7 @@ struct FlexArrayStorage {
     FlexArrayStorage( size_t size ) : mSize{ size } {
         al::uninitialized_default_construct_n( mArray, mSize );
     }
+
     ~FlexArrayStorage() = default;
 
     FlexArrayStorage( const FlexArrayStorage& ) = delete;
@@ -241,6 +248,7 @@ struct FlexArrayStorage {
 template < typename T, size_t alignment >
 struct FlexArrayStorage< T, alignment, false > {
     const size_t mSize;
+
     union {
         char mDummy;
         alignas( alignment ) T mArray[ 1 ];
@@ -256,6 +264,7 @@ struct FlexArrayStorage< T, alignment, false > {
     FlexArrayStorage( size_t size ) : mSize{ size } {
         al::uninitialized_default_construct_n( mArray, mSize );
     }
+
     ~FlexArrayStorage() { al::destroy_n( mArray, mSize ); }
 
     FlexArrayStorage( const FlexArrayStorage& ) = delete;
@@ -291,6 +300,7 @@ struct FlexArray {
                                         index_type base = 0u ) noexcept {
         return Storage_t_::Sizeof( count, base );
     }
+
     static std::unique_ptr< FlexArray > Create( index_type count ) {
         void* ptr{ al_calloc( alignof( FlexArray ), Sizeof( count ) ) };
         return std::unique_ptr< FlexArray >{
@@ -298,41 +308,57 @@ struct FlexArray {
     }
 
     FlexArray( index_type size ) : mStore{ size } {}
+
     ~FlexArray() = default;
 
     index_type size() const noexcept { return mStore.mSize; }
+
     bool empty() const noexcept { return mStore.mSize == 0; }
 
     pointer data() noexcept { return mStore.mArray; }
+
     const_pointer data() const noexcept { return mStore.mArray; }
 
     reference operator[]( index_type i ) noexcept { return mStore.mArray[ i ]; }
+
     const_reference operator[]( index_type i ) const noexcept {
         return mStore.mArray[ i ];
     }
 
     reference front() noexcept { return mStore.mArray[ 0 ]; }
+
     const_reference front() const noexcept { return mStore.mArray[ 0 ]; }
 
     reference back() noexcept { return mStore.mArray[ mStore.mSize - 1 ]; }
+
     const_reference back() const noexcept {
         return mStore.mArray[ mStore.mSize - 1 ];
     }
 
     iterator begin() noexcept { return mStore.mArray; }
+
     const_iterator begin() const noexcept { return mStore.mArray; }
+
     const_iterator cbegin() const noexcept { return mStore.mArray; }
+
     iterator end() noexcept { return mStore.mArray + mStore.mSize; }
+
     const_iterator end() const noexcept { return mStore.mArray + mStore.mSize; }
+
     const_iterator cend() const noexcept {
         return mStore.mArray + mStore.mSize;
     }
 
     reverse_iterator rbegin() noexcept { return end(); }
+
     const_reverse_iterator rbegin() const noexcept { return end(); }
+
     const_reverse_iterator crbegin() const noexcept { return cend(); }
+
     reverse_iterator rend() noexcept { return begin(); }
+
     const_reverse_iterator rend() const noexcept { return begin(); }
+
     const_reverse_iterator crend() const noexcept { return cbegin(); }
 
     DEF_PLACE_NEWDEL()

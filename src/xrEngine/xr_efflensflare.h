@@ -17,6 +17,7 @@ public:
         shared_str texture;
         shared_str shader;
         FactoryPtr< IFlareRender > m_pRender;
+
         // ref_shader hShader;
         SFlare() { fOpacity = fRadius = fPosition = 0; }
     };

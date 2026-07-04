@@ -68,6 +68,7 @@ struct Windower {
         }
     }
 };
+
 const Windower gWindow{};
 
 struct FshifterState final : public EffectState {

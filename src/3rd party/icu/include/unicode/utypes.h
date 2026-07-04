@@ -802,6 +802,7 @@ typedef enum UErrorCode {
 static inline UBool U_SUCCESS( UErrorCode code ) {
     return ( UBool )( code <= U_ZERO_ERROR );
 }
+
 /**
  * Does the error code indicate a failure?
  * @stable ICU 2.0

@@ -298,6 +298,7 @@ struct machine_load_store_relaxed< T, 8 > {
         /*(no compiler fence)*/ /*(cr0 not affected)*/
     }
 };
+
 #define __TBB_machine_load_store_relaxed_8
 
 #endif /* __TBB_WORDSIZE==4 && __TBB_64BIT_ATOMICS */
@@ -328,6 +329,7 @@ static inline intptr_t __TBB_machine_lg( uintptr_t x ) {
     return 31 - static_cast< intptr_t >( x );
 #endif
 }
+
 #define __TBB_Log2( V ) __TBB_machine_lg( V )
 
 // Assumes implicit alignment for any 32-bit value
@@ -337,4 +339,5 @@ typedef uint32_t __TBB_Flag;
 inline bool __TBB_machine_trylockbyte( __TBB_atomic __TBB_Flag& flag ) {
     return __TBB_machine_cmpswp4( &flag, 1, 0 ) == 0;
 }
+
 #define __TBB_TryLockByte( P ) __TBB_machine_trylockbyte( P )

@@ -54,6 +54,7 @@ OptickAPI_CreateEventDescription( const char* inFunctionName,
         name.data, file.data, inFileLine, nullptr, Optick::Category::None,
         flags );
 }
+
 OPTICK_API uint64_t OptickAPI_PushEvent( uint64_t inEventDescription ) {
     return ( uint64_t )Optick::Event::Start(
         *( ( Optick::EventDescription* )inEventDescription ) );

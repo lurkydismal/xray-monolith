@@ -135,6 +135,7 @@ void CAI_Stalker::UpdateAvailableDialogs( CPhraseDialogManager* partner ) {
 }
 
 extern BOOL g_ai_die_in_anomaly;
+
 void CAI_Stalker::feel_touch_new( CObject* O ) {
     //	Msg					("FEEL_TOUCH::NEW :
     //%s",*O->cName());

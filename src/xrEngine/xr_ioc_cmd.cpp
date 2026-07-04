@@ -27,6 +27,7 @@ xr_token vid_bpp_token[] = { { "16", 16 }, { "32", 32 }, { 0, 0 } };
 extern float r_wallmarks_ssa_k;
 extern BOOL r_wallmarks_static;
 extern BOOL r_wallmarks_dynamic;
+
 //-----------------------------------------------------------------------
 
 void IConsole_Command::add_to_LRU( shared_str const& arg ) {
@@ -72,6 +73,7 @@ public:
     CCC_MemStat( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = TRUE;
     };
+
     virtual void Execute( LPCSTR args ) {
         string_path fn;
         if ( args && args[ 0 ] )
@@ -91,6 +93,7 @@ public:
     CCC_DbgMemCheck( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = TRUE;
     };
+
     virtual void Execute( LPCSTR args ) {
         if ( Memory.debug_mode ) {
             Memory.dbg_check();
@@ -106,6 +109,7 @@ public:
     CCC_DbgStrCheck( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = TRUE;
     };
+
     virtual void Execute( LPCSTR args ) { g_pStringContainer->verify(); }
 };
 
@@ -114,6 +118,7 @@ public:
     CCC_DbgStrDump( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = TRUE;
     };
+
     virtual void Execute( LPCSTR args ) { g_pStringContainer->dump(); }
 };
 
@@ -578,6 +583,7 @@ public:
         ClipCursor( &winRect );
     }
 };
+
 //-----------------------------------------------------------------------
 class CCC_SND_Restart : public IConsole_Command {
 public:
@@ -609,6 +615,7 @@ public:
 };
 
 extern void updateCurrentScope();
+
 class CCC_ScopeFactor : public CCC_Float {
 public:
     CCC_ScopeFactor( LPCSTR N, float* V ) : CCC_Float( N, V, 0.01f, 1.0f ) {}
@@ -908,6 +915,7 @@ public:
     CCC_Editor( pcstr name ) : IConsole_Command( name ) {
         bEmptyArgsHandled = true;
     }
+
     void Execute( pcstr args ) override { Device.imgui().Show( true ); }
 };
 

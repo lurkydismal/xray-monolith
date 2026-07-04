@@ -36,6 +36,7 @@
 #if _M_X64
 #define __TBB_r( reg_name ) r##reg_name
 #define __TBB_W( name ) name##64
+
 namespace tbb {
 namespace internal {
 namespace msvc_intrinsics {
@@ -46,6 +47,7 @@ typedef __int64 word;
 #else
 #define __TBB_r( reg_name ) e##reg_name
 #define __TBB_W( name ) name
+
 namespace tbb {
 namespace internal {
 namespace msvc_intrinsics {
@@ -102,6 +104,7 @@ __TBB_MACHINE_DEFINE_ATOMICS( 8, 64, __int64, __int64 )
 
 #if ( _MSC_VER >= 1300 ) || ( __INTEL_COMPILER )
 #pragma intrinsic( _mm_pause )
+
 namespace tbb {
 namespace internal {
 namespace msvc_intrinsics {
@@ -112,6 +115,7 @@ static inline void pause( uintptr_t delay ) {
 } // namespace msvc_intrinsics
 } // namespace internal
 } // namespace tbb
+
 #define __TBB_Pause( V ) tbb::internal::msvc_intrinsics::pause( V )
 #define __TBB_SINGLE_PAUSE _mm_pause()
 #else
@@ -142,6 +146,7 @@ namespace msvc_inline_asm static inline void pause( uintptr_t delay ) {
 // MSVC did not have this intrinsic prior to VC8.
 // ICL 11.1 fails to compile a TBB example if __TBB_Log2 uses the intrinsic.
 #pragma intrinsic( __TBB_W( _BitScanReverse ) )
+
 namespace tbb {
 namespace internal {
 namespace msvc_intrinsics {
@@ -153,6 +158,7 @@ static inline uintptr_t lg_bsr( uintptr_t i ) {
 } // namespace msvc_intrinsics
 } // namespace internal
 } // namespace tbb
+
 #define __TBB_Log2( V ) tbb::internal::msvc_intrinsics::lg_bsr( V )
 #else
 #if !__TBB_X86_MSVC_INLINE_ASM_AVAILABLE
@@ -173,24 +179,28 @@ static inline uintptr_t lg_bsr( uintptr_t i ) {
 }
 }
 }
+
 #define __TBB_Log2( V ) tbb::internal::msvc_inline_asm::lg_bsr( V )
 #endif
 
 #if _MSC_VER >= 1400
 #pragma intrinsic( __TBB_W( _InterlockedOr ) )
 #pragma intrinsic( __TBB_W( _InterlockedAnd ) )
+
 namespace tbb {
 namespace internal {
 namespace msvc_intrinsics {
 static inline void lock_or( volatile void* operand, intptr_t addend ) {
     __TBB_W( _InterlockedOr )( ( volatile word* )operand, addend );
 }
+
 static inline void lock_and( volatile void* operand, intptr_t addend ) {
     __TBB_W( _InterlockedAnd )( ( volatile word* )operand, addend );
 }
 } // namespace msvc_intrinsics
 } // namespace internal
 } // namespace tbb
+
 #define __TBB_AtomicOR( P, V ) tbb::internal::msvc_intrinsics::lock_or( P, V )
 #define __TBB_AtomicAND( P, V ) tbb::internal::msvc_intrinsics::lock_and( P, V )
 #else
@@ -208,6 +218,7 @@ static inline void lock_or( volatile void* operand, __int32 addend ) {
                 lock or [edx], eax
     }
 }
+
 static inline void lock_and( volatile void* operand, __int32 addend ) {
     __asm
     {
@@ -219,19 +230,23 @@ static inline void lock_and( volatile void* operand, __int32 addend ) {
 }
 }
 }
+
 #define __TBB_AtomicOR( P, V ) tbb::internal::msvc_inline_asm::lock_or( P, V )
 #define __TBB_AtomicAND( P, V ) tbb::internal::msvc_inline_asm::lock_and( P, V )
 #endif
 
 #pragma intrinsic( __rdtsc )
+
 namespace tbb {
 namespace internal {
 typedef uint64_t machine_tsc_t;
 }
 } // namespace tbb
+
 static inline tbb::internal::machine_tsc_t __TBB_machine_time_stamp() {
     return __rdtsc();
 }
+
 #define __TBB_time_stamp() __TBB_machine_time_stamp()
 
 // API to retrieve/update FPU control setting
@@ -250,6 +265,7 @@ inline void __TBB_get_cpu_ctl_env( tbb::internal::cpu_ctl_env* ctl ) {
             __asm fstcw   [__TBB_r(ax)+4]
     }
 }
+
 inline void __TBB_set_cpu_ctl_env( const tbb::internal::cpu_ctl_env* ctl ) {
     __asm {
             __asm mov     __TBB_r(ax), ctl
@@ -277,10 +293,12 @@ public:
     bool operator!=( const cpu_ctl_env& ctl ) const {
         return mxcsr != ctl.mxcsr || x87cw != ctl.x87cw;
     }
+
     void get_env() {
         __TBB_get_cpu_ctl_env( this );
         mxcsr &= MXCSR_CONTROL_MASK;
     }
+
     void set_env() const { __TBB_set_cpu_ctl_env( this ); }
 };
 } // namespace internal

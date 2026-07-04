@@ -21,8 +21,11 @@ public:
     int len;
     int len_full;
     int pos;
+
     IC int last_symbol() { return pos + len - 1; }
+
     IC int last_space() { return pos + len_full - 1; }
+
     IC bool exist() { return len > 0; }
 };
 
@@ -31,7 +34,9 @@ public:
     Word word_1;
     Word word_2;
     u32 curr_subline;
+
     u32 slash_n_size() { return 2; }
+
     IC bool is_separated() {
         return ( 0 == word_2.pos ) || ( word_1.pos >= word_2.pos );
     }
@@ -55,6 +60,7 @@ public:
     void ProcessNewLines();
 
     void Draw( CGameFont* pFont, float x, float y ) const;
+
     bool IsEmpty() { return m_subLines.empty(); }
 
     int GetSize();

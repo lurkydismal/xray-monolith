@@ -75,7 +75,9 @@ struct TargetCrosshair {
     ~TargetCrosshair() {};
 
     bool Is( u32 mask ) const { return settings.flags.is( mask ); };
+
     void Load() { crosshair.Load(); };
+
     void Update( const SPickParam& pp, bool is_far );
     void IntegratePosition( const SPickParam& pp, float dist, bool is_far );
     void IntegrateOpacity( const SPickParam& pp, float opacity_target );

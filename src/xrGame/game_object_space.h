@@ -53,6 +53,7 @@ enum ECallbackType {
     eWeaponNoAmmoAvailable,
     // Alundaio: added defines
     eActorHudAnimationEnd,
+
 // AVO: custom callbacks
 #ifdef INPUT_CALLBACKS
     // input

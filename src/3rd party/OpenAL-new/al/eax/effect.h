@@ -13,6 +13,7 @@ struct EaxEffectErrorMessages {
     static constexpr auto unknown_property_id() noexcept {
         return "Unknown property id.";
     }
+
     static constexpr auto unknown_version() noexcept {
         return "Unknown version.";
     }
@@ -34,8 +35,10 @@ enum class EaxEffectType {
     PitchShifter,
     VocalMorpher
 };
+
 struct EaxEffectProps {
     EaxEffectType mType;
+
     union {
         EAXREVERBPROPERTIES mReverb;
         EAXCHORUSPROPERTIES mChorus;
@@ -94,6 +97,7 @@ struct EaxReverbCommitter {
     EffectProps& mAlProps;
 
     [[noreturn]] static void fail( const char* message );
+
     [[noreturn]] static void fail_unknown_property_id() {
         fail( EaxEffectErrorMessages::unknown_property_id() );
     }
@@ -176,6 +180,7 @@ struct EaxCommitter {
     }
 
     [[noreturn]] static void fail( const char* message );
+
     [[noreturn]] static void fail_unknown_property_id() {
         fail( EaxEffectErrorMessages::unknown_property_id() );
     }
@@ -190,39 +195,50 @@ struct EaxCommitter {
 struct EaxAutowahCommitter : public EaxCommitter< EaxAutowahCommitter > {
     using EaxCommitter< EaxAutowahCommitter >::EaxCommitter;
 };
+
 struct EaxChorusCommitter : public EaxCommitter< EaxChorusCommitter > {
     using EaxCommitter< EaxChorusCommitter >::EaxCommitter;
 };
+
 struct EaxCompressorCommitter : public EaxCommitter< EaxCompressorCommitter > {
     using EaxCommitter< EaxCompressorCommitter >::EaxCommitter;
 };
+
 struct EaxDistortionCommitter : public EaxCommitter< EaxDistortionCommitter > {
     using EaxCommitter< EaxDistortionCommitter >::EaxCommitter;
 };
+
 struct EaxEchoCommitter : public EaxCommitter< EaxEchoCommitter > {
     using EaxCommitter< EaxEchoCommitter >::EaxCommitter;
 };
+
 struct EaxEqualizerCommitter : public EaxCommitter< EaxEqualizerCommitter > {
     using EaxCommitter< EaxEqualizerCommitter >::EaxCommitter;
 };
+
 struct EaxFlangerCommitter : public EaxCommitter< EaxFlangerCommitter > {
     using EaxCommitter< EaxFlangerCommitter >::EaxCommitter;
 };
+
 struct EaxFrequencyShifterCommitter
     : public EaxCommitter< EaxFrequencyShifterCommitter > {
     using EaxCommitter< EaxFrequencyShifterCommitter >::EaxCommitter;
 };
+
 struct EaxModulatorCommitter : public EaxCommitter< EaxModulatorCommitter > {
     using EaxCommitter< EaxModulatorCommitter >::EaxCommitter;
 };
+
 struct EaxPitchShifterCommitter
     : public EaxCommitter< EaxPitchShifterCommitter > {
     using EaxCommitter< EaxPitchShifterCommitter >::EaxCommitter;
 };
+
 struct EaxVocalMorpherCommitter
     : public EaxCommitter< EaxVocalMorpherCommitter > {
     using EaxCommitter< EaxVocalMorpherCommitter >::EaxCommitter;
 };
+
 struct EaxNullCommitter : public EaxCommitter< EaxNullCommitter > {
     using EaxCommitter< EaxNullCommitter >::EaxCommitter;
 };
@@ -467,6 +483,7 @@ public:
         al_effect_type_ = EnumFromEaxEffectType( props_ );
         return ret;
     }
+
 #undef EAXCALL
 }; // EaxEffect
 

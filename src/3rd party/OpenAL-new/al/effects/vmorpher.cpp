@@ -57,6 +57,7 @@ al::optional< VMorpherPhenome > PhenomeFromEnum( ALenum val ) {
     return al::nullopt;
 #undef HANDLE_PHENOME
 }
+
 ALenum EnumFromPhenome( VMorpherPhenome phenome ) {
 #define HANDLE_PHENOME( x )  \
     case VMorpherPhenome::x: \
@@ -109,6 +110,7 @@ al::optional< VMorpherWaveform > WaveformFromEmum( ALenum value ) {
     }
     return al::nullopt;
 }
+
 ALenum EnumFromWaveform( VMorpherWaveform type ) {
     switch ( type ) {
         case VMorpherWaveform::Sinusoid:
@@ -175,11 +177,13 @@ void Vmorpher_setParami( EffectProps* props, ALenum param, int val ) {
                 "Invalid vocal morpher integer property 0x%04x", param };
     }
 }
+
 void Vmorpher_setParamiv( EffectProps*, ALenum param, const int* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid vocal morpher integer-vector property 0x%04x",
         param };
 }
+
 void Vmorpher_setParamf( EffectProps* props, ALenum param, float val ) {
     switch ( param ) {
         case AL_VOCAL_MORPHER_RATE:
@@ -196,6 +200,7 @@ void Vmorpher_setParamf( EffectProps* props, ALenum param, float val ) {
                 param };
     }
 }
+
 void Vmorpher_setParamfv( EffectProps* props,
                           ALenum param,
                           const float* vals ) {
@@ -230,11 +235,13 @@ void Vmorpher_getParami( const EffectProps* props, ALenum param, int* val ) {
                 "Invalid vocal morpher integer property 0x%04x", param };
     }
 }
+
 void Vmorpher_getParamiv( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid vocal morpher integer-vector property 0x%04x",
         param };
 }
+
 void Vmorpher_getParamf( const EffectProps* props, ALenum param, float* val ) {
     switch ( param ) {
         case AL_VOCAL_MORPHER_RATE:
@@ -247,6 +254,7 @@ void Vmorpher_getParamf( const EffectProps* props, ALenum param, float* val ) {
                 param };
     }
 }
+
 void Vmorpher_getParamfv( const EffectProps* props,
                           ALenum param,
                           float* vals ) {

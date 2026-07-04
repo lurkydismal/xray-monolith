@@ -47,21 +47,28 @@ public:
     virtual void Set_ShowPlayerNames( bool Show ) {
         m_bShowPlayersNames = Show;
     };
+
     virtual bool Get_ShowPlayerNames() { return m_bShowPlayersNames; };
+
     virtual s16 ModifyTeam( s16 Team ) {
         return ( Team != -1 ) ? Team - 1 : Team;
     };
+
     virtual bool Get_ShowPlayerNamesEnabled() { return m_bFriendlyNames; };
 
     virtual bool IsPlayerInTeam( game_PlayerState* ps, ETeam team );
     virtual LPCSTR GetGameScore( string32& score_dest );
+
     s32 GetGreenTeamScore() const { return teams[ 0 ].score; };
+
     s32 GetBlueTeamScore() const { return teams[ 1 ].score; };
+
     // from UIGameTDM
 protected:
     virtual const shared_str GetBaseCostSect() {
         return "teamdeathmatch_base_cost";
     }
+
     virtual const shared_str GetTeamMenu( s16 team );
     //	CUISpawnWnd* pUITeamSelectWnd;
 
@@ -88,6 +95,7 @@ protected:
     virtual void OnSwitchPhase_InProgress();
 
     virtual u8 GetTeamCount() { return 2; };
+
     virtual void OnConnected();
 };
 

@@ -14,6 +14,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CActor::script_register( lua_State* L ) {
     CActorCondition::script_register( L );
 

@@ -14,6 +14,7 @@ int ROL( int a, int n ) {
     t2 = a >> ( sizeof( a ) * 8 - n );
     return t1 | t2;
 }
+
 int ROR( int a, int n ) {
     int t1, t2;
     n = n % ( sizeof( a ) * 8 );
@@ -111,6 +112,7 @@ int open_bit( lua_State* L ) {
     luaL_register( L, "bit", bit_funcs );
     return 0;
 }
+
 /******************** BIT END ********************/
 
 /******************** STRING ********************/
@@ -176,6 +178,7 @@ int open_string( lua_State* L ) {
     luaL_openlib( L, LUA_STRLIBNAME, strlib, 0 );
     return 0;
 }
+
 /******************** STRING END ********************/
 
 /******************** MATH ********************/
@@ -239,6 +242,7 @@ int open_math( lua_State* L ) {
     luaL_openlib( L, LUA_MATHLIBNAME, mathlib, 0 );
     return 0;
 }
+
 /******************** MATH END ********************/
 
 /******************** TABLE ********************/
@@ -316,6 +320,7 @@ int open_table( lua_State* L ) {
     luaL_openlib( L, LUA_TABLIBNAME, tab_funcs, 0 );
     return 0;
 }
+
 /******************** TABLE END ********************/
 void open_additional_libs( lua_State* L ) {
 #ifdef USE_LUAJIT_ONE

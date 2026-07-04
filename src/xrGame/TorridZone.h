@@ -17,8 +17,10 @@ public:
     virtual void net_Destroy();
 
     virtual bool IsVisibleForZones() { return true; }
+
     virtual bool Enable();
     virtual bool Disable();
+
     virtual bool register_schedule() const { return false; }
 
     // Lain: added

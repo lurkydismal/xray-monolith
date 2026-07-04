@@ -3,6 +3,7 @@
 #pragma once
 
 #pragma pack( push, 4 )
+
 struct WaveForm {
     enum EFunction {
         fCONSTANT = 0,
@@ -15,6 +16,7 @@ struct WaveForm {
     };
 
     IC float signf( float t ) { return t / _abs( t ); }
+
     IC float Func( float t ) {
         switch ( F ) {
             case fCONSTANT:

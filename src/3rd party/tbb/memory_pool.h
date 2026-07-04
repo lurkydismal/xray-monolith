@@ -72,6 +72,7 @@ protected:
 };
 
 } // namespace internal
+
 //! @endcond
 
 #if _MSC_VER && !defined( __INTEL_COMPILER )
@@ -105,6 +106,7 @@ public:
     typedef const value_type& const_reference;
     typedef size_t size_type;
     typedef ptrdiff_t difference_type;
+
     template < typename U >
     struct rebind {
         typedef memory_pool_allocator< U, P > other;
@@ -112,13 +114,16 @@ public:
 
     explicit memory_pool_allocator( pool_type& pool ) throw()
         : my_pool( &pool ) {}
+
     memory_pool_allocator( const memory_pool_allocator& src ) throw()
         : my_pool( src.my_pool ) {}
+
     template < typename U >
     memory_pool_allocator( const memory_pool_allocator< U, P >& src ) throw()
         : my_pool( src.my_pool ) {}
 
     pointer address( reference x ) const { return &x; }
+
     const_pointer address( const_reference x ) const { return &x; }
 
     //! Allocate space for n objects.
@@ -129,13 +134,16 @@ public:
             tbb::internal::throw_exception( std::bad_alloc() );
         return p;
     }
+
     //! Free previously allocated block of memory.
     void deallocate( pointer p, size_type ) { my_pool->free( p ); }
+
     //! Largest value for which method allocate might succeed.
     size_type max_size() const throw() {
         size_type max = static_cast< size_type >( -1 ) / sizeof( value_type );
         return ( max > 0 ? max : 1 );
     }
+
     //! Copy-construct value at location pointed to by p.
 #if __TBB_ALLOCATOR_CONSTRUCT_VARIADIC
     template < typename U, typename... Args >
@@ -171,6 +179,7 @@ public:
     typedef void* pointer;
     typedef const void* const_pointer;
     typedef void value_type;
+
     template < typename U >
     struct rebind {
         typedef memory_pool_allocator< U, P > other;
@@ -178,8 +187,10 @@ public:
 
     explicit memory_pool_allocator( pool_type& pool ) throw()
         : my_pool( &pool ) {}
+
     memory_pool_allocator( const memory_pool_allocator& src ) throw()
         : my_pool( src.my_pool ) {}
+
     template < typename U >
     memory_pool_allocator( const memory_pool_allocator< U, P >& src ) throw()
         : my_pool( src.my_pool ) {}
@@ -233,6 +244,7 @@ class fixed_pool : public internal::pool_base {
 public:
     //! construct pool with underlying allocator
     inline fixed_pool( void* buf, size_t size );
+
     //! destroy pool
     ~fixed_pool() { destroy(); }
 };
@@ -249,6 +261,7 @@ memory_pool< Alloc >::memory_pool( const Alloc& src ) : my_alloc( src ) {
         tbb::internal::throw_exception(
             std::runtime_error( "Can't create pool" ) );
 }
+
 template < typename Alloc >
 void* memory_pool< Alloc >::allocate_request( intptr_t pool_id,
                                               size_t& bytes ) {
@@ -300,6 +313,7 @@ inline fixed_pool::fixed_pool( void* buf, size_t size )
         tbb::internal::throw_exception(
             std::runtime_error( "Can't create pool" ) );
 }
+
 inline void* fixed_pool::allocate_request( intptr_t pool_id, size_t& bytes ) {
     fixed_pool& self = *reinterpret_cast< fixed_pool* >( pool_id );
     __TBBMALLOC_ASSERT( 0 != self.my_size,
@@ -310,6 +324,7 @@ inline void* fixed_pool::allocate_request( intptr_t pool_id, size_t& bytes ) {
 }
 
 } // namespace interface6
+
 using interface6::fixed_pool;
 using interface6::memory_pool;
 using interface6::memory_pool_allocator;

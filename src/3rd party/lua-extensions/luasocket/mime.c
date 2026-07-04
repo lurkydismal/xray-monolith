@@ -777,6 +777,7 @@ static int mime_global_qpwrp( lua_State* L ) {
 * last is the previous character
 \*-------------------------------------------------------------------------*/
 #define eolcandidate( c ) ( c == '\r' || c == '\n' )
+
 static int eolprocess( int c,
                        int last,
                        const char* marker,

@@ -40,6 +40,7 @@ template < typename T, typename A = cache_aligned_allocator< T > >
 class item_buffer {
 public:
     typedef T item_type;
+
     enum buffer_item_state { no_item = 0, has_item = 1, reserved_item = 2 };
 
 protected:
@@ -85,6 +86,7 @@ protected:
         return ( i < my_tail ) && ( i >= my_head ) &&
                ( item( i ).second != no_item );
     }
+
     bool my_item_reserved( size_type i ) const {
         return item( i ).second == reserved_item;
     }
@@ -173,6 +175,7 @@ protected:
                       "item cannot be reserved" );
         item( i ).second = reserved_item;
     }
+
     void release_item( size_type i ) {
         __TBB_ASSERT( my_item_reserved( i ), "item is not reserved" );
         item( i ).second = has_item;
@@ -182,6 +185,7 @@ protected:
         destroy_item( my_head );
         ++my_head;
     }
+
     void destroy_back() {
         destroy_item( my_tail - 1 );
         --my_tail;
@@ -193,7 +197,9 @@ protected:
     size_type size( size_t new_tail = 0 ) {
         return ( new_tail ? new_tail : my_tail ) - my_head;
     }
+
     size_type capacity() { return my_array_size; }
+
     // sequencer_node does not use this method, so we don't
     // need a version that passes in the new_tail value.
     bool buffer_full() { return size() >= capacity(); }
@@ -300,6 +306,7 @@ protected:
 
 public:
     reservable_item_buffer() : item_buffer< T, A >(), my_reserved( false ) {}
+
     void reset() {
         my_reserved = false;
         item_buffer< T, A >::reset();

@@ -58,6 +58,7 @@ typedef struct PEsym {
         char name[ 8 ];
         uint32_t nameref[ 2 ];
     } n;
+
     uint32_t value;
     int16_t sect;
     uint16_t type;
@@ -181,6 +182,7 @@ void emit_peobj( BuildCtx* ctx ) {
     PEsection pesect[ PEOBJ_NSECTIONS ];
     uint32_t sofs;
     int i, nrsym;
+
     union {
         uint8_t b;
         uint32_t u;

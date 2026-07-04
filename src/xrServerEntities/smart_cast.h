@@ -288,6 +288,7 @@ inline constexpr bool is_smart_ptr_v =
 
 #pragma warning( push )
 #pragma warning( disable : 4702 )
+
 template < typename _To, typename _From >
 __forceinline _To smart_cast( _From* ptr ) {
     // Try dedicated cast function if available
@@ -296,6 +297,7 @@ __forceinline _To smart_cast( _From* ptr ) {
     else
         return fast_dynamic_cast< _To >( ptr );
 };
+
 #pragma warning( pop )
 
 // const T*
@@ -356,6 +358,7 @@ template < typename _To, typename _From >
 __forceinline intrusive_ptr< _To > smart_cast( intrusive_ptr< _From >& ptr ) {
     return intrusive_ptr< _To >( smart_cast< _To* >( ptr.get() ) );
 }
+
 template < typename _To, typename _From >
 __forceinline intrusive_ptr< _To > smart_cast(
     const intrusive_ptr< _From >& ptr ) {

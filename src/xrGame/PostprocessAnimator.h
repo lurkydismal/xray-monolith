@@ -81,10 +81,12 @@ public:
     virtual void delete_value( float time );
     virtual void update_value( float time, float value, int index = 0 );
     virtual void get_value( float time, float& valueb, int index = 0 );
+
     virtual float get_key_time( size_t index ) {
         VERIFY( index < get_keys_count() );
         return m_Value.keys[ index ]->time;
     }
+
     virtual void clear_all_keys();
 #endif /*_PP_EDITOR_*/
 };
@@ -123,10 +125,12 @@ public:
     virtual void delete_value( float time );
     virtual void update_value( float time, float value, int index = 0 );
     virtual void get_value( float time, float& value, int index = 0 );
+
     virtual float get_key_time( size_t index ) {
         VERIFY( index < get_keys_count() );
         return m_Red.keys[ index ]->time;
     }
+
     virtual void clear_all_keys();
 #endif /*_PP_EDITOR_*/
 };
@@ -157,12 +161,17 @@ public:
     virtual ~CPostprocessAnimator();
     void Clear();
     void Load( LPCSTR name );
+
     IC LPCSTR Name() { return *m_Name; }
+
     virtual void Stop( float speed );
     void SetDesiredFactor( float f, float sp );
     void SetCurrentFactor( float f );
+
     void SetCyclic( bool b ) { m_bCyclic = b; }
+
     float GetLength();
+
     SPPInfo& PPinfo() { return m_EffectorParams; }
 #ifndef _PP_EDITOR_
     virtual BOOL Valid();
@@ -185,6 +194,7 @@ protected:
 
 public:
     void SetFactorFunc( xr_delegate< float() > f ) { m_get_factor_func = f; }
+
     virtual BOOL Process( SPPInfo& PPInfo );
 };
 
@@ -194,7 +204,9 @@ protected:
 
 public:
     CPostprocessAnimatorLerpConst() { m_power = 1.0f; }
+
     void SetPower( float val ) { m_power = val; }
+
     virtual BOOL Process( SPPInfo& PPInfo );
 };
 

@@ -31,6 +31,7 @@ public:
         al::byte* buf;
         size_t len;
     };
+
     using DataPair = std::pair< Data, Data >;
 
     RingBuffer( const size_t count ) : mBuffer{ count } {}
@@ -71,6 +72,7 @@ public:
      * elements into `dest'. Returns the actual number of elements copied.
      */
     size_t peek( void* dest, size_t cnt ) const noexcept;
+
     /** Advance the read pointer `cnt' places. */
     void readAdvance( size_t cnt ) noexcept {
         mReadPtr.fetch_add( cnt, std::memory_order_acq_rel );
@@ -92,6 +94,7 @@ public:
      * the actual number of elements copied.
      */
     size_t write( const void* src, size_t cnt ) noexcept;
+
     /** Advance the write pointer `cnt' places. */
     void writeAdvance( size_t cnt ) noexcept {
         mWritePtr.fetch_add( cnt, std::memory_order_acq_rel );
@@ -111,6 +114,7 @@ public:
 
     DEF_FAM_NEWDEL( RingBuffer, mBuffer )
 };
+
 using RingBufferPtr = std::unique_ptr< RingBuffer >;
 
 #endif /* RINGBUFFER_H */

@@ -36,6 +36,7 @@ public:
     //! Relative time interval.
     class interval_t {
         long long value;
+
         explicit interval_t( long long value_ ) : value( value_ ) {}
 
     public:

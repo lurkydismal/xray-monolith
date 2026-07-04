@@ -70,21 +70,29 @@ public:
     IC bool get_key_state( key_state mask ) const {
         return ( mask ) ? !!( m_key_state.test( mask ) ) : true;
     }
+
     IC void set_key_state( key_state mask, bool value ) {
         m_key_state.set( mask, value );
     }
 
     IC bool cursor_view() const { return m_cursor_view; }
+
     IC bool need_update() const { return m_need_update; }
 
     IC LPCSTR str_edit() const { return m_edit_str; }
+
     IC LPCSTR str_before_cursor() const { return m_buf0; }
+
     IC LPCSTR str_before_mark() const { return m_buf1; }
+
     IC LPCSTR str_mark() const { return m_buf2; }
+
     IC LPCSTR str_after_mark() const { return m_buf3; }
 
     void set_edit( LPCSTR str );
+
     void set_selected_mode( bool status ) { m_unselected_mode = !status; }
+
     bool get_selected_mode() const { return !m_unselected_mode; }
 
 private:

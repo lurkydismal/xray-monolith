@@ -461,6 +461,7 @@ void CBackend::set_Textures( STextureList* _T ) {
 void CBackend::set_ClipPlanes( u32 _enable,
                                Fmatrix* _xform /*=NULL */,
                                u32 fmask /* =0xff */ ) {}
+
 void CBackend::set_Textures( STextureList* _T ) {}
 
 #endif

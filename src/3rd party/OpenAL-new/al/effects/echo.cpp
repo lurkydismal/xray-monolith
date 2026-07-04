@@ -21,10 +21,12 @@ void Echo_setParami( EffectProps*, ALenum param, int ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid echo integer property 0x%04x", param };
 }
+
 void Echo_setParamiv( EffectProps*, ALenum param, const int* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid echo integer-vector property 0x%04x", param };
 }
+
 void Echo_setParamf( EffectProps* props, ALenum param, float val ) {
     switch ( param ) {
         case AL_ECHO_DELAY:
@@ -68,6 +70,7 @@ void Echo_setParamf( EffectProps* props, ALenum param, float val ) {
                 AL_INVALID_ENUM, "Invalid echo float property 0x%04x", param };
     }
 }
+
 void Echo_setParamfv( EffectProps* props, ALenum param, const float* vals ) {
     Echo_setParamf( props, param, vals[ 0 ] );
 }
@@ -76,10 +79,12 @@ void Echo_getParami( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid echo integer property 0x%04x", param };
 }
+
 void Echo_getParamiv( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid echo integer-vector property 0x%04x", param };
 }
+
 void Echo_getParamf( const EffectProps* props, ALenum param, float* val ) {
     switch ( param ) {
         case AL_ECHO_DELAY:
@@ -107,6 +112,7 @@ void Echo_getParamf( const EffectProps* props, ALenum param, float* val ) {
                 AL_INVALID_ENUM, "Invalid echo float property 0x%04x", param };
     }
 }
+
 void Echo_getParamfv( const EffectProps* props, ALenum param, float* vals ) {
     Echo_getParamf( props, param, vals );
 }

@@ -84,6 +84,7 @@ public:
     typedef typename Solist::reference reference;
 
     flist_iterator() : my_node_ptr( 0 ) {}
+
     flist_iterator(
         const flist_iterator< Solist, typename Solist::value_type >& other )
         : my_node_ptr( other.my_node_ptr ) {}
@@ -95,6 +96,7 @@ public:
     }
 
     reference operator*() const { return my_node_ptr->my_element; }
+
     pointer operator->() const { return &**this; }
 
     flist_iterator& operator++() {
@@ -110,6 +112,7 @@ public:
 
 protected:
     flist_iterator( nodeptr_t pnode ) : my_node_ptr( pnode ) {}
+
     nodeptr_t get_node_ptr() const { return my_node_ptr; }
 
     nodeptr_t my_node_ptr;
@@ -127,6 +130,7 @@ bool operator==( const flist_iterator< Solist, T >& i,
                  const flist_iterator< Solist, U >& j ) {
     return i.my_node_ptr == j.my_node_ptr;
 }
+
 template < typename Solist, typename T, typename U >
 bool operator!=( const flist_iterator< Solist, T >& i,
                  const flist_iterator< Solist, U >& j ) {
@@ -153,6 +157,7 @@ class solist_iterator : public flist_iterator< Solist, Value > {
                             const solist_iterator< M, U >& j );
 
     const Solist* my_list_ptr;
+
     solist_iterator( nodeptr_t pnode, const Solist* plist )
         : base_type( pnode ), my_list_ptr( plist ) {}
 
@@ -163,6 +168,7 @@ public:
     typedef typename Solist::reference reference;
 
     solist_iterator() {}
+
     solist_iterator(
         const solist_iterator< Solist, typename Solist::value_type >& other )
         : base_type( other ), my_list_ptr( other.my_list_ptr ) {}
@@ -201,6 +207,7 @@ bool operator==( const solist_iterator< Solist, T >& i,
                  const solist_iterator< Solist, U >& j ) {
     return i.my_node_ptr == j.my_node_ptr && i.my_list_ptr == j.my_list_ptr;
 }
+
 template < typename Solist, typename T, typename U >
 bool operator!=( const solist_iterator< Solist, T >& i,
                  const solist_iterator< Solist, U >& j ) {
@@ -698,6 +705,7 @@ private:
         tbb::internal::suppress_unused_warning( first, last );
 #endif
     }
+
     void check_range() {
 #if TBB_USE_ASSERT
         check_range( raw_begin(), raw_end() );
@@ -776,9 +784,12 @@ private:
 
     struct call_internal_clear_on_exit {
         concurrent_unordered_base* my_instance;
+
         call_internal_clear_on_exit( concurrent_unordered_base* instance )
             : my_instance( instance ) {}
+
         void dismiss() { my_instance = NULL; }
+
         ~call_internal_clear_on_exit() {
             if ( my_instance ) {
                 my_instance->internal_clear();
@@ -1031,6 +1042,7 @@ public:
 
         //! True if range can be partitioned into two subranges.
         bool is_divisible() const { return my_midpoint_node != my_end_node; }
+
         //! Split range.
         const_range_type( const_range_type& r, split )
             : my_table( r.my_table ), my_end_node( r.my_end_node ) {
@@ -1042,6 +1054,7 @@ public:
             set_midpoint();
             r.set_midpoint();
         }
+
         //! Init range with container and grainsize specified
         const_range_type( const concurrent_unordered_base& a_table )
             : my_table( a_table ),
@@ -1049,12 +1062,15 @@ public:
               my_end_node( a_table.my_solist.end() ) {
             set_midpoint();
         }
+
         iterator begin() const {
             return my_table.my_solist.get_iterator( my_begin_node );
         }
+
         iterator end() const {
             return my_table.my_solist.get_iterator( my_end_node );
         }
+
         //! The grain size for this range.
         size_type grainsize() const { return 1; }
 
@@ -1098,8 +1114,10 @@ public:
     class range_type : public const_range_type {
     public:
         typedef typename concurrent_unordered_base::iterator iterator;
+
         //! Split range.
         range_type( range_type& r, split ) : const_range_type( r, split() ) {}
+
         //! Init range with container and grainsize specified
         range_type( const concurrent_unordered_base& a_table )
             : const_range_type( a_table ) {}
@@ -1107,6 +1125,7 @@ public:
         iterator begin() const {
             return solist_t::get_iterator( const_range_type::begin() );
         }
+
         iterator end() const {
             return solist_t::get_iterator( const_range_type::end() );
         }
@@ -1749,6 +1768,7 @@ private:
 #endif
 
 } // namespace internal
+
 //! @endcond
 } // namespace interface5
 } // namespace tbb

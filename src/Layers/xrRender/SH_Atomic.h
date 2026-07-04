@@ -19,6 +19,7 @@ struct ECORE_API SInputSignature : public xr_resource_flagged {
     SInputSignature( ID3DBlob* pBlob );
     ~SInputSignature();
 };
+
 typedef resptr_core< SInputSignature, resptr_base< SInputSignature > >
     ref_input_sign;
 #endif //	USE_DX10
@@ -51,6 +52,7 @@ struct ECORE_API SGS : public xr_resource_named {
     R_constant_table constants;
     ~SGS();
 };
+
 typedef resptr_core< SGS, resptr_base< SGS > > ref_gs;
 #endif //	USE_DX10
 
@@ -61,6 +63,7 @@ struct ECORE_API SHS : public xr_resource_named {
     R_constant_table constants;
     ~SHS();
 };
+
 typedef resptr_core< SHS, resptr_base< SHS > > ref_hs;
 
 struct ECORE_API SDS : public xr_resource_named {
@@ -68,6 +71,7 @@ struct ECORE_API SDS : public xr_resource_named {
     R_constant_table constants;
     ~SDS();
 };
+
 typedef resptr_core< SDS, resptr_base< SDS > > ref_ds;
 
 struct ECORE_API SCS : public xr_resource_named {
@@ -75,6 +79,7 @@ struct ECORE_API SCS : public xr_resource_named {
     R_constant_table constants;
     ~SCS();
 };
+
 typedef resptr_core< SCS, resptr_base< SCS > > ref_cs;
 
 #endif

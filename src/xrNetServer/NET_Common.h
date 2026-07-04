@@ -1,6 +1,7 @@
 #if !defined _INCDEF_NETCOMMON_H_
 #define _INCDEF_NETCOMMON_H_
 #pragma once
+
 //==============================================================================
 
 struct GameDescriptionData {

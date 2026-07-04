@@ -88,6 +88,7 @@ unsigned char* SHA256( const unsigned char* d, size_t n, unsigned char* md ) {
 int SHA224_Update( SHA256_CTX* c, const void* data, size_t len ) {
     return SHA256_Update( c, data, len );
 }
+
 int SHA224_Final( unsigned char* md, SHA256_CTX* c ) {
     return SHA256_Final( md, c );
 }
@@ -270,6 +271,7 @@ static void sha256_block_data_order( SHA256_CTX* ctx,
     SHA_LONG X[ 16 ];
     int i;
     const unsigned char* data = in;
+
     const union {
         long one;
         char little;

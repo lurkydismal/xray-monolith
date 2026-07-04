@@ -219,6 +219,7 @@ void CRenderTarget::phase_heatvision() {
                                dest_rt->pTexture->surface_get() );
 #endif
 };
+
 //--DSR-- HeatVision_start
 
 #if defined( USE_DX11 ) //  Redotix99: for 3D Shader Based Scopes

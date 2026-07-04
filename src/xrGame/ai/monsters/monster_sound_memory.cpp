@@ -184,6 +184,7 @@ bool CMonsterSoundMemory::get_sound_from_object( const CObject* obj,
 
 struct pred_remove_relcase {
     CObject* obj;
+
     pred_remove_relcase( CObject* o ) { obj = o; }
 
     bool operator()( const SoundElem& x ) const {

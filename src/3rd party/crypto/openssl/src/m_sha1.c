@@ -106,9 +106,11 @@ const EVP_MD* EVP_sha1( void ) {
 static int init224( EVP_MD_CTX* ctx ) {
     return SHA224_Init( ctx->md_data );
 }
+
 static int init256( EVP_MD_CTX* ctx ) {
     return SHA256_Init( ctx->md_data );
 }
+
 /*
  * Even though there're separate SHA224_[Update|Final], we call
  * SHA256 functions even in SHA224 context. This is what happens
@@ -117,6 +119,7 @@ static int init256( EVP_MD_CTX* ctx ) {
 static int update256( EVP_MD_CTX* ctx, const void* data, size_t count ) {
     return SHA256_Update( ctx->md_data, data, count );
 }
+
 static int final256( EVP_MD_CTX* ctx, unsigned char* md ) {
     return SHA256_Final( md, ctx->md_data );
 }
@@ -164,13 +167,16 @@ const EVP_MD* EVP_sha256( void ) {
 static int init384( EVP_MD_CTX* ctx ) {
     return SHA384_Init( ctx->md_data );
 }
+
 static int init512( EVP_MD_CTX* ctx ) {
     return SHA512_Init( ctx->md_data );
 }
+
 /* See comment in SHA224/256 section */
 static int update512( EVP_MD_CTX* ctx, const void* data, size_t count ) {
     return SHA512_Update( ctx->md_data, data, count );
 }
+
 static int final512( EVP_MD_CTX* ctx, unsigned char* md ) {
     return SHA512_Final( md, ctx->md_data );
 }

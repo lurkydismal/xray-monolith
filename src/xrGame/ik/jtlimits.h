@@ -142,9 +142,11 @@ public:
     }
 
     float Low() { return limits.Low(); }
+
     float High() { return limits.High(); }
 
     void SetLow( float v ) { limits.SetLow( v ); }
+
     void SetHigh( float v ) { limits.SetHigh( v ); }
 
     int InRange( float t ) { return limits.InRange( t ); }
@@ -351,6 +353,7 @@ public:
                  float psi_2[ 2 ] ) const;
 
     float Low() const { return limits.Low(); }
+
     float High() const { return limits.High(); }
 
     AngleInt& Limits() { return limits; }

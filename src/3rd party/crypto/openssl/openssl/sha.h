@@ -177,10 +177,12 @@ void SHA256_Transform( SHA256_CTX* c, const unsigned char* data );
 typedef struct SHA512state_st {
     SHA_LONG64 h[ 8 ];
     SHA_LONG64 Nl, Nh;
+
     union {
         SHA_LONG64 d[ SHA_LBLOCK ];
         unsigned char p[ SHA512_CBLOCK ];
     } u;
+
     unsigned int num, md_len;
 } SHA512_CTX;
 #endif

@@ -31,6 +31,7 @@ private:
     float calculate_min_run_distance() const;
 
     typedef CState< Object > inherited;
+
     virtual void remove_links( CObject* object ) {
         inherited::remove_links( object );
     }

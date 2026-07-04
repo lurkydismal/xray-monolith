@@ -289,6 +289,7 @@ void CSheduler::Pop() {
 int SchedulerBatchSize = 256;
 BOOL SchedulerLog = FALSE;
 extern ENGINE_API IGame_Level* g_pGameLevel;
+
 void CSheduler::ProcessStep() {
     // Normal priority
     u32 dwTime = Device.dwTimeGlobal;

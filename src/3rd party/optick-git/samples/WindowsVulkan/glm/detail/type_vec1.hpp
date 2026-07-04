@@ -67,6 +67,7 @@ struct vec< 1, T, P > {
     union {
         T x, r, s;
     };
+
 /*
 #			if GLM_SWIZZLE == GLM_SWIZZLE_ENABLED
                                 GLM_SWIZZLE_GEN_VEC_FROM_VEC1(T, P, tvec2,
@@ -77,6 +78,7 @@ tvec2, tvec3, tvec4) #			endif//GLM_SWIZZLE*/
 
     /// Return the count of components of the vector
     typedef length_t length_type;
+
     GLM_FUNC_DECL static length_type length() { return 1; }
 
     GLM_FUNC_DECL T& operator[]( length_type i );

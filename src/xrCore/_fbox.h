@@ -35,16 +35,19 @@ public:
         max.set( _max );
         return *this;
     };
+
     IC SelfRef set( T x1, T y1, T z1, T x2, T y2, T z2 ) {
         min.set( x1, y1, z1 );
         max.set( x2, y2, z2 );
         return *this;
     };
+
     IC SelfRef set( SelfCRef b ) {
         min.set( b.min );
         max.set( b.max );
         return *this;
     };
+
     IC SelfRef setb( const Tvector& center, const Tvector& dim ) {
         min.sub( center, dim );
         max.add( center, dim );
@@ -56,11 +59,13 @@ public:
         max.set( 0, 0, 0 );
         return *this;
     };
+
     IC SelfRef identity() {
         min.set( -0.5, -0.5, -0.5 );
         max.set( 0.5, 0.5, 0.5 );
         return *this;
     };
+
     IC SelfRef invalidate() {
         min.set( type_max( T ), type_max( T ), type_max( T ) );
         max.set( type_min( T ), type_min( T ), type_min( T ) );
@@ -72,16 +77,19 @@ public:
         max.sub( s );
         return *this;
     };
+
     IC SelfRef shrink( const Tvector& s ) {
         min.add( s );
         max.sub( s );
         return *this;
     };
+
     IC SelfRef grow( T s ) {
         min.sub( s );
         max.add( s );
         return *this;
     };
+
     IC SelfRef grow( const Tvector& s ) {
         min.sub( s );
         max.add( s );
@@ -93,16 +101,19 @@ public:
         max.add( p );
         return *this;
     };
+
     IC SelfRef sub( const Tvector& p ) {
         min.sub( p );
         max.sub( p );
         return *this;
     };
+
     IC SelfRef offset( const Tvector& p ) {
         min.add( p );
         max.add( p );
         return *this;
     };
+
     IC SelfRef add( SelfCRef b, const Tvector& p ) {
         min.add( b.min, p );
         max.add( b.max, p );
@@ -113,9 +124,11 @@ public:
         return ( x >= x1 ) && ( x <= x2 ) && ( y >= y1 ) && ( y <= y2 ) &&
                ( z >= z1 ) && ( z <= z2 );
     };
+
     ICF BOOL contains( const Tvector& p ) const {
         return contains( p.x, p.y, p.z );
     };
+
     ICF BOOL contains( SelfCRef b ) const {
         return contains( b.min ) && contains( b.max );
     };
@@ -140,6 +153,7 @@ public:
         modify( b.max );
         return *this;
     };
+
     IC SelfRef merge( SelfCRef b1, SelfCRef b2 ) {
         invalidate();
         merge( b1 );
@@ -207,26 +221,31 @@ public:
     }
 
     IC void getsize( Tvector& R ) const { R.sub( max, min ); };
+
     IC void getradius( Tvector& R ) const {
         getsize( R );
         R.mul( 0.5f );
     };
+
     IC T getradius() const {
         Tvector R;
         getradius( R );
         return R.magnitude();
     };
+
     IC T getvolume() const {
         Tvector sz;
         getsize( sz );
         return sz.x * sz.y * sz.z;
     };
+
     IC SelfCRef getcenter( Tvector& C ) const {
         C.x = ( min.x + max.x ) * 0.5f;
         C.y = ( min.y + max.y ) * 0.5f;
         C.z = ( min.z + max.z ) * 0.5f;
         return *this;
     };
+
     IC SelfCRef get_CD( Tvector& bc, Tvector& bd ) const // center + dimensions
     {
         bd.sub( max, min ).mul( .5f );
@@ -476,6 +495,7 @@ public:
                 break;
         }
     };
+
     IC void getpoints( Tvector* result ) {
         result[ 0 ].set( min.x, min.y, min.z );
         result[ 1 ].set( min.x, min.y, max.z );

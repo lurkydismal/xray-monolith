@@ -64,6 +64,7 @@ public:
             m_pC->i_dx10Address( m_SI, D3DTADDRESS_CLAMP );
         return *this;
     }
+
     //	adopt_sampler&			_wrap			()
     //{ if (C) C->i_Address	(stage,D3DTADDRESS_WRAP);
     // return *this;	} 	adopt_sampler&			_mirror
@@ -130,6 +131,7 @@ index public: adopt_dx10texture	(CBlender_Compile*	C, u32 TextureIndex)
 
 #pragma warning( push )
 #pragma warning( disable : 4512 )
+
 // wrapper
 class adopt_compiler {
     CBlender_Compile* C;
@@ -264,6 +266,7 @@ public:
 
     adopt_dx10options _dx10Options() { return adopt_dx10options(); };
 };
+
 #pragma warning( pop )
 
 class adopt_blend {

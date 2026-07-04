@@ -43,12 +43,14 @@ struct PseudoIndexWrapper {
         nvStaticCheck( sizeof( typename T::PseudoIndex ) <= sizeof( memory ) );
         new ( memory ) typename T::PseudoIndex( container.start() );
     }
+
     // PseudoIndex cannot have a dtor!
 
     template < typename T >
     typename T::PseudoIndex& operator()( const T* container ) {
         return *reinterpret_cast< typename T::PseudoIndex* >( memory );
     }
+
     template < typename T >
     const typename T::PseudoIndex& operator()( const T* container ) const {
         return *reinterpret_cast< const typename T::PseudoIndex* >( memory );
@@ -120,10 +122,12 @@ struct hash {
 
     uint operator()( const Key& k ) { return sdbm_hash( &k, sizeof( Key ) ); }
 };
+
 template <>
 struct hash< int > {
     uint operator()( int x ) const { return x; }
 };
+
 template <>
 struct hash< uint > {
     uint operator()( uint x ) const { return x; }
@@ -254,7 +258,9 @@ public:
             new ( m_buffer + new_size - 1 ) T( val );
         }
     }
+
     void pushBack( const T& val ) { push_back( val ); }
+
     void append( const T& val ) { push_back( val ); }
 
     /// Qt like push operator.
@@ -268,6 +274,7 @@ public:
         nvDebugCheck( m_size > 0 );
         resize( m_size - 1 );
     }
+
     void popBack() { pop_back(); }
 
     /// Get back element.
@@ -495,10 +502,12 @@ public:
     typedef uint PseudoIndex;
 
     PseudoIndex start() const { return 0; }
+
     bool isDone( const PseudoIndex& i ) const {
         nvDebugCheck( i <= this->m_size );
         return i == this->m_size;
     };
+
     void advance( PseudoIndex& i ) const {
         nvDebugCheck( i <= this->m_size );
         i++;
@@ -508,6 +517,7 @@ public:
     T& operator[]( const PseudoIndexWrapper& i ) {
         return m_buffer[ i( this ) ];
     }
+
     const T& operator[]( const PseudoIndexWrapper& i ) const {
         return m_buffer[ i( this ) ];
     }
@@ -786,14 +796,18 @@ public:
         U value;
 
         Entry() : next_in_chain( -2 ) {}
+
         Entry( const Entry& e )
             : next_in_chain( e.next_in_chain ),
               hash_value( e.hash_value ),
               key( e.key ),
               value( e.value ) {}
+
         Entry( const T& k, const U& v, int next, int hash )
             : next_in_chain( next ), hash_value( hash ), key( k ), value( v ) {}
+
         bool isEmpty() const { return next_in_chain == -2; }
+
         bool isEndOfChain() const { return next_in_chain == -1; }
 
         void clear() {
@@ -805,15 +819,18 @@ public:
 
     // HashMap enumerator.
     typedef int PseudoIndex;
+
     PseudoIndex start() const {
         PseudoIndex i = 0;
         findNext( i );
         return i;
     }
+
     bool isDone( const PseudoIndex& i ) const {
         nvDebugCheck( i <= size_mask + 1 );
         return i == size_mask + 1;
     };
+
     void advance( PseudoIndex& i ) const {
         nvDebugCheck( i <= size_mask + 1 );
         i++;
@@ -822,9 +839,11 @@ public:
 
 #if NV_CC_GNUC
     Entry& operator[]( const PseudoIndex& i ) { return E( i ); }
+
     const Entry& operator[]( const PseudoIndex& i ) const { return E( i ); }
 #elif NV_CC_MSVC
     Entry& operator[]( const PseudoIndexWrapper& i ) { return E( i( this ) ); }
+
     const Entry& operator[]( const PseudoIndexWrapper& i ) const {
         return E( i( this ) );
     }
@@ -875,6 +894,7 @@ private:
         nvDebugCheck( index >= 0 && index <= size_mask );
         return table[ index ];
     }
+
     const Entry& E( int index ) const {
         nvDebugCheck( table != NULL );
         nvDebugCheck( index >= 0 && index <= size_mask );

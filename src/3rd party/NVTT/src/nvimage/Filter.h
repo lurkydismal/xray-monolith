@@ -16,6 +16,7 @@ public:
     virtual ~Filter();
 
     float width() const { return m_width; }
+
     float sampleDelta( float x, float scale ) const;
     float sampleBox( float x, float scale, int samples ) const;
     float sampleTriangle( float x, float scale, int samples ) const;

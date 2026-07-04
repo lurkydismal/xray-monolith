@@ -39,6 +39,7 @@ public:
             : index( idx ), offset( offs ) {
             ;
         }
+
         SParticlesInfo* AppendParticles( CObject* object,
                                          const shared_str& ps_name );
         void StopParticles( const shared_str& ps_name, bool bDestroy );
@@ -121,6 +122,7 @@ public:
                             const Fvector& offset,
                             Fvector& result );
     u16 GetNearestBone( IKinematics* K, u16 bone_id );
+
     IC u16 GetRandomBone() {
         u16 l_PBCount = u16( m_Bones.size() );
         if ( l_PBCount )
@@ -132,5 +134,6 @@ public:
     void SetParentVel( const Fvector& vel ) { parent_vel = vel; }
 
     bool IsPlaying() { return m_bActiveBones; }
+
     virtual CParticlesPlayer* cast_particles_player() { return this; }
 };

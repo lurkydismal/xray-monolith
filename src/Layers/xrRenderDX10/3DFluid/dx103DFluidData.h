@@ -56,10 +56,13 @@ public:
     }
 
     const Fmatrix& GetTransform() const { return m_Transform; }
+
     const xr_vector< Fmatrix >& GetObstaclesList() const { return m_Obstacles; }
+
     const xr_vector< dx103DFluidEmitters::CEmitter >& GetEmittersList() const {
         return m_Emitters;
     }
+
     const Settings& GetSettings() const { return m_Settings; }
 
     //	Allow real-time config reload

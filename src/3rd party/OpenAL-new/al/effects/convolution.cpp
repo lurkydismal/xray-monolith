@@ -17,6 +17,7 @@ void Convolution_setParami( EffectProps* /*props*/,
                 param };
     }
 }
+
 void Convolution_setParamiv( EffectProps* props,
                              ALenum param,
                              const int* vals ) {
@@ -25,6 +26,7 @@ void Convolution_setParamiv( EffectProps* props,
             Convolution_setParami( props, param, vals[ 0 ] );
     }
 }
+
 void Convolution_setParamf( EffectProps* /*props*/,
                             ALenum param,
                             float /*val*/ ) {
@@ -35,6 +37,7 @@ void Convolution_setParamf( EffectProps* /*props*/,
                                     param };
     }
 }
+
 void Convolution_setParamfv( EffectProps* props,
                              ALenum param,
                              const float* vals ) {
@@ -54,6 +57,7 @@ void Convolution_getParami( const EffectProps* /*props*/,
                 param };
     }
 }
+
 void Convolution_getParamiv( const EffectProps* props,
                              ALenum param,
                              int* vals ) {
@@ -62,6 +66,7 @@ void Convolution_getParamiv( const EffectProps* props,
             Convolution_getParami( props, param, vals );
     }
 }
+
 void Convolution_getParamf( const EffectProps* /*props*/,
                             ALenum param,
                             float* /*val*/ ) {
@@ -72,6 +77,7 @@ void Convolution_getParamf( const EffectProps* /*props*/,
                                     param };
     }
 }
+
 void Convolution_getParamfv( const EffectProps* props,
                              ALenum param,
                              float* vals ) {

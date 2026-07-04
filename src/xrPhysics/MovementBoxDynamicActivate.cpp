@@ -213,11 +213,15 @@ public:
     }
 
     float mf_slf() { return m_max_force_self; }
+
     float mf_othrs() { return m_max_force_others; }
+
     float mt_slf() { return m_max_torque_self; }
+
     float mt_othrs() { return m_max_torque_others; }
 
     float mf_slf_y() { return m_max_force_self_y; }
+
     float mf_slf_sd() { return m_max_force_self_sd; }
 
 protected:

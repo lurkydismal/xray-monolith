@@ -89,7 +89,9 @@ class OPCODE_API AABBCollisionNode {
     inline_ float GetVolume() const {
         return mAABB.mExtents.x * mAABB.mExtents.y * mAABB.mExtents.z;
     }
+
     inline_ float GetSize() const { return mAABB.mExtents.SquareMagnitude(); }
+
     inline_ udword GetRadius() const {
         udword* Bits = ( udword* )&mAABB.mExtents.x;
         udword Max = Bits[ 0 ];

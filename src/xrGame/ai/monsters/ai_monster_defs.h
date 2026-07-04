@@ -385,6 +385,7 @@ struct SCurrentAnimationInfo {
         }
 
         IC float _get_current() { return current; }
+
         IC float _get_target() { return target; }
 
     private:
@@ -396,6 +397,7 @@ struct SCurrentAnimationInfo {
     CBlend* blend;
 
     void set_motion( EMotionAnim new_motion );
+
     EMotionAnim get_motion() const { return motion; }
 
 private:

@@ -29,6 +29,7 @@ void _destroy_item_data_vector_cont( T_VECTOR* vec );
 #define CSXML_IdToIndex CXML_IdToIndex< T_INIT >
 
 TEMPLATE_SPECIALIZATION
+
 class CXML_IdToIndex {
 public:
 private:

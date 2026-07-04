@@ -19,7 +19,9 @@ public:
     void Init();
     void SetServerLogo( u8 const* data_ptr, u32 const data_size );
     void SetServerRules( u8 const* data_ptr, u32 const data_size );
+
     bool HasInfo() { return m_dds_file_created; };
+
     virtual bool OnKeyboardAction( int dik, EUIMessages keyboard_action );
 
     virtual CUIWindow* ui_cast_window() { return this; }

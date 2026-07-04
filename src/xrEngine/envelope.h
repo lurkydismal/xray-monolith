@@ -34,6 +34,7 @@ the envelopes.
 #define BEH_LINEAR 5
 
 #pragma pack( push, 1 )
+
 struct st_Key {
     enum {
         ktStepped = 1 << 0,
@@ -113,6 +114,7 @@ struct st_Key {
         }
     }
 };
+
 #pragma pack( pop )
 
 DEFINE_VECTOR( st_Key*, KeyVec, KeyIt );

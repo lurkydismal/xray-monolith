@@ -30,6 +30,7 @@ public:
     virtual ~CSoundRender_Target();
 
     CSoundRender_Emitter* get_emitter() const { return m_pEmitter; }
+
     BOOL get_Rendering() const { return rendering; }
 
     virtual BOOL _initialize() = 0;

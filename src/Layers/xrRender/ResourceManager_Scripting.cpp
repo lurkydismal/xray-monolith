@@ -39,6 +39,7 @@ public:
         if ( u32( -1 ) == stage )
             C = 0;
     }
+
     adopt_sampler( const adopt_sampler& _C ) : C( _C.C ), stage( _C.stage ) {
         if ( u32( -1 ) == stage )
             C = 0;

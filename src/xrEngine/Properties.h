@@ -71,6 +71,7 @@ struct xrP_TOKEN {
 struct xrP_CLSID {
     CLASS_ID Selected;
     u32 Count;
+
     //--- elements: (...)
 
     xrP_CLSID() : Selected( 0 ), Count( 0 ) {}

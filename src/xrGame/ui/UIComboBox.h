@@ -31,9 +31,11 @@ public:
     void SetText( LPCSTR text );
 
     void SetListLength( int length );
+
     void SetVertScroll( bool bVScroll = true ) {
         m_list_box.SetFixedScrollBar( bVScroll );
     };
+
     CUIListBoxItem* AddItem_( LPCSTR str, int _data );
     void InitComboBox( Fvector2 pos, float width );
     void SetItemIDX( int idx );
@@ -43,7 +45,9 @@ public:
     virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData = 0 );
     virtual void OnFocusLost();
     virtual void OnFocusReceive();
+
     int CurrentID() { return m_itoken_id; }
+
     void disable_id( int id );
     void enable_id( int id );
 
@@ -75,7 +79,9 @@ protected:
 
 public:
     CUIListBox m_list_box;
+
     void SetTextColor( u32 color ) { m_textColor[ 0 ] = color; };
+
     void SetTextColorD( u32 color ) { m_textColor[ 1 ] = color; };
 
 protected:

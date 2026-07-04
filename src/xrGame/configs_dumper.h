@@ -29,10 +29,13 @@ public:
     virtual ~configs_dumper();
 
     virtual float shedule_Scale() { return 1.0f; };
+
     virtual void shedule_Update( u32 dt );
+
     virtual shared_str shedule_Name() const {
         return shared_str( "configs_dumper" );
     };
+
     virtual bool shedule_Needed() { return true; };
 
     void dump_config( complete_callback_t complete_cb );

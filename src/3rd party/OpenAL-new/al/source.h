@@ -111,6 +111,7 @@ struct ALsource {
         float GainLF;
         float LFReference;
     } Direct;
+
     struct SendData {
         ALeffectslot* Slot;
         float Gain;
@@ -119,6 +120,7 @@ struct ALsource {
         float GainLF;
         float LFReference;
     };
+
     std::array< SendData, MAX_SENDS > Send;
 
     /**
@@ -160,6 +162,7 @@ public:
     void eaxInitialize( ALCcontext* context ) noexcept;
     void eaxDispatch( const EaxCall& call );
     void eaxCommit();
+
     void eaxMarkAsChanged() noexcept { mEaxChanged = true; }
 
     static ALsource* EaxLookupSource( ALCcontext& al_context,
@@ -192,18 +195,21 @@ private:
     using EaxSends = std::array< EAXSOURCEALLSENDPROPERTIES, EAX_MAX_FXSLOTS >;
 
     using Eax1Props = EAXBUFFER_REVERBPROPERTIES;
+
     struct Eax1State {
         Eax1Props i; // Immediate.
         Eax1Props d; // Deferred.
     };
 
     using Eax2Props = EAX20BUFFERPROPERTIES;
+
     struct Eax2State {
         Eax2Props i; // Immediate.
         Eax2Props d; // Deferred.
     };
 
     using Eax3Props = EAX30SOURCEPROPERTIES;
+
     struct Eax3State {
         Eax3Props i; // Immediate.
         Eax3Props d; // Deferred.
@@ -575,6 +581,7 @@ private:
 
     struct Eax4SendValidator
         : EaxSendValidator< Eax4SendReceivingFxSlotIdValidator > {};
+
     struct Eax5SendValidator
         : EaxSendValidator< Eax5SendReceivingFxSlotIdValidator > {};
 
@@ -593,6 +600,7 @@ private:
 
     struct Eax4OcclusionSendValidator
         : EaxOcclusionSendValidator< Eax4SendReceivingFxSlotIdValidator > {};
+
     struct Eax5OcclusionSendValidator
         : EaxOcclusionSendValidator< Eax5SendReceivingFxSlotIdValidator > {};
 
@@ -607,6 +615,7 @@ private:
 
     struct Eax4ExclusionSendValidator
         : EaxExclusionSendValidator< Eax4SendReceivingFxSlotIdValidator > {};
+
     struct Eax5ExclusionSendValidator
         : EaxExclusionSendValidator< Eax5SendReceivingFxSlotIdValidator > {};
 
@@ -629,6 +638,7 @@ private:
 
     struct Eax4AllSendValidator
         : EaxAllSendValidator< Eax4SendReceivingFxSlotIdValidator > {};
+
     struct Eax5AllSendValidator
         : EaxAllSendValidator< Eax5SendReceivingFxSlotIdValidator > {};
 

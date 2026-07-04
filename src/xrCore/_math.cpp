@@ -75,22 +75,27 @@ XRCORE_API void m24() {
     u16 p = _24;
     __asm fldcw p;
 }
+
 XRCORE_API void m24r() {
     u16 p = _24r;
     __asm fldcw p;
 }
+
 XRCORE_API void m53() {
     u16 p = _53;
     __asm fldcw p;
 }
+
 XRCORE_API void m53r() {
     u16 p = _53r;
     __asm fldcw p;
 }
+
 XRCORE_API void m64() {
     u16 p = _64;
     __asm fldcw p;
 }
+
 XRCORE_API void m64r() {
     u16 p = _64r;
     __asm fldcw p;
@@ -317,6 +322,7 @@ void _initialize_cpu_thread() {
 #endif
 // threading API
 #pragma pack( push, 8 )
+
 struct THREAD_NAME {
     DWORD dwType;
     LPCSTR szName;
@@ -336,6 +342,7 @@ void thread_name( const char* name ) {
     } __except ( EXCEPTION_CONTINUE_EXECUTION ) {
     }
 }
+
 #pragma pack( pop )
 
 struct THREAD_STARTUP {

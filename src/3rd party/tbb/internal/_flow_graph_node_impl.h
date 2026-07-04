@@ -223,6 +223,7 @@ private:
     class operation_type : public aggregated_operation< operation_type > {
     public:
         char type;
+
         union {
             input_type* elem;
             predecessor_type* r;
@@ -231,9 +232,12 @@ private:
             predecessor_list_type* predv;
 #endif /* TBB_DEPRECATED_FLOW_NODE_EXTRACTION */
         };
+
         tbb::task* bypass_t;
+
         operation_type( const input_type& e, op_type t )
             : type( char( t ) ), elem( const_cast< input_type* >( &e ) ) {}
+
         operation_type( op_type t ) : type( char( t ) ), r( NULL ) {}
     };
 
@@ -261,6 +265,7 @@ private:
         }
         return new_task;
     }
+
     void handle_operations( operation_type* op_list ) {
         operation_type* tmp;
         while ( op_list ) {
@@ -570,6 +575,7 @@ struct clear_element {
         ( void )tbb::flow::get< N - 1 >( p ).successors().clear();
         clear_element< N - 1 >::clear_this( p );
     }
+
     template < typename P >
     static bool this_empty( P& p ) {
         if ( tbb::flow::get< N - 1 >( p ).successors().empty() )
@@ -584,6 +590,7 @@ struct clear_element< 1 > {
     static void clear_this( P& p ) {
         ( void )tbb::flow::get< 0 >( p ).successors().clear();
     }
+
     template < typename P >
     static bool this_empty( P& p ) {
         return tbb::flow::get< 0 >( p ).successors().empty();
@@ -1012,6 +1019,7 @@ public:
     function_output( graph& g ) : my_graph_ref( g ) {
         my_successors.set_owner( this );
     }
+
     function_output( const function_output& other )
         : sender< output_type >(), my_graph_ref( other.my_graph_ref ) {
         my_successors.set_owner( this );
@@ -1083,6 +1091,7 @@ public:
     multifunction_output( graph& g ) : base_type( g ) {
         my_successors.set_owner( this );
     }
+
     multifunction_output( const multifunction_output& other )
         : base_type( other.my_graph_ref ) {
         my_successors.set_owner( this );

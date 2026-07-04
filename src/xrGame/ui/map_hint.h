@@ -27,8 +27,11 @@ public:
     void SetInfoTask( CGameTask* task );
 
     virtual void Draw() { return; };
+
     void Draw_();
+
     void SetOwner( CUIWindow* w ) { m_owner = w; }
+
     CUIWindow* GetOwner() { return m_owner; }
 
 private:

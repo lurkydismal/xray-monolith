@@ -202,6 +202,7 @@ struct machine_load_store {
     static T load_with_acquire( const volatile T& location ) {
         return __TBB_machine_atomic_load< T, __ATOMIC_ACQUIRE >( location );
     }
+
     static void store_with_release( volatile T& location, T value ) {
         __TBB_machine_atomic_store< T, __ATOMIC_RELEASE >( location, value );
     }
@@ -212,6 +213,7 @@ struct machine_load_store_relaxed {
     static inline T load( const volatile T& location ) {
         return __TBB_machine_atomic_load< T, __ATOMIC_RELAXED >( location );
     }
+
     static inline void store( volatile T& location, T value ) {
         __TBB_machine_atomic_store< T, __ATOMIC_RELAXED >( location, value );
     }
@@ -222,6 +224,7 @@ struct machine_load_store_seq_cst {
     static T load( const volatile T& location ) {
         return __TBB_machine_atomic_load< T, __ATOMIC_SEQ_CST >( location );
     }
+
     static void store( volatile T& location, T value ) {
         __TBB_machine_atomic_store< T, __ATOMIC_SEQ_CST >( location, value );
     }
@@ -246,15 +249,18 @@ namespace gcc_builtins {
 inline int clz( unsigned int x ) {
     return __builtin_clz( x );
 }
+
 inline int clz( unsigned long int x ) {
     return __builtin_clzl( x );
 }
+
 inline int clz( unsigned long long int x ) {
     return __builtin_clzll( x );
 }
 } // namespace gcc_builtins
 } // namespace internal
 } // namespace tbb
+
 // logarithm is the index of the most significant non-zero bit
 static inline intptr_t __TBB_machine_lg( uintptr_t x ) {
     // If P is a power of 2 and x<P, then (P-1)-x == (P-1) XOR x

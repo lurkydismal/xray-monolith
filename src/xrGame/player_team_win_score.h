@@ -12,8 +12,11 @@ public:
     virtual ~player_team_win_score() {};
 
     virtual void update() {};
+
     virtual u32 const get_u32_param() { return m_win_score; };
+
     virtual float const get_float_param() { return 0.0f; };
+
     virtual void reset_game();
 
     virtual void OnRoundEnd();
@@ -36,7 +39,9 @@ public:
     virtual ~player_enemy_team_score() {};
 
     virtual u32 const get_u32_param() { return m_enemy_team_score; };
+
     virtual float const get_float_param() { return 0.0f; };
+
     virtual void reset_game();
 
     virtual void OnRoundEnd();

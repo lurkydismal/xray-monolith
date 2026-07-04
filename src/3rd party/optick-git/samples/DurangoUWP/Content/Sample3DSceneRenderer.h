@@ -18,6 +18,7 @@ public:
     void StartTracking();
     void TrackingUpdate( float positionX );
     void StopTracking();
+
     bool IsTracking() { return m_tracking; }
 
 private:

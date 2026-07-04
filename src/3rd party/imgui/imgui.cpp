@@ -2403,6 +2403,7 @@ static void* MallocWrapper( size_t size, void* user_data ) {
     IM_UNUSED( user_data );
     return malloc( size );
 }
+
 static void FreeWrapper( void* ptr, void* user_data ) {
     IM_UNUSED( user_data );
     free( ptr );
@@ -2414,6 +2415,7 @@ static void* MallocWrapper( size_t size, void* user_data ) {
     IM_ASSERT( 0 );
     return NULL;
 }
+
 static void FreeWrapper( void* ptr, void* user_data ) {
     IM_UNUSED( user_data );
     IM_UNUSED( ptr );
@@ -3727,6 +3729,7 @@ ImFileHandle ImFileOpen( const char* filename, const char* mode ) {
 bool ImFileClose( ImFileHandle f ) {
     return fclose( f ) == 0;
 }
+
 ImU64 ImFileGetSize( ImFileHandle f ) {
     long off = 0, sz = 0;
     return ( ( off = ftell( f ) ) != -1 && !fseek( f, 0, SEEK_END ) &&
@@ -3734,9 +3737,11 @@ ImU64 ImFileGetSize( ImFileHandle f ) {
                ? ( ImU64 )sz
                : ( ImU64 )-1;
 }
+
 ImU64 ImFileRead( void* data, ImU64 sz, ImU64 count, ImFileHandle f ) {
     return fread( data, ( size_t )sz, ( size_t )count, f );
 }
+
 ImU64 ImFileWrite( const void* data, ImU64 sz, ImU64 count, ImFileHandle f ) {
     return fwrite( data, ( size_t )sz, ( size_t )count, f );
 }
@@ -4256,6 +4261,7 @@ void ImGuiStorage::SetAllInt( int v ) {
     for ( int i = 0; i < Data.Size; i++ )
         Data[ i ].val_i = v;
 }
+
 IM_MSVC_RUNTIME_CHECKS_RESTORE
 
 //-----------------------------------------------------------------------------
@@ -8936,6 +8942,7 @@ struct ImGuiResizeGripDef {
     ImVec2 InnerDir;
     int AngleMin12, AngleMax12;
 };
+
 static const ImGuiResizeGripDef resize_grip_def[ 4 ] = {
     { ImVec2( 1, 1 ), ImVec2( -1, -1 ), 0, 3 }, // Lower-right
     { ImVec2( 0, 1 ), ImVec2( +1, -1 ), 3, 6 }, // Lower-left
@@ -8949,6 +8956,7 @@ struct ImGuiResizeBorderDef {
     ImVec2 SegmentN1, SegmentN2; // End positions, normalized (0,0: upper left)
     float OuterAngle;            // Angle toward outside
 };
+
 static const ImGuiResizeBorderDef resize_border_def[ 4 ] = {
     { ImVec2( +1, 0 ), ImVec2( 0, 1 ), ImVec2( 0, 0 ), IM_PI * 1.00f }, // Left
     { ImVec2( -1, 0 ), ImVec2( 1, 0 ), ImVec2( 1, 1 ), IM_PI * 0.00f }, // Right
@@ -12221,6 +12229,7 @@ ImGuiID ImGui::GetID( int int_id ) {
     ImGuiWindow* window = GImGui->CurrentWindow;
     return window->GetID( int_id );
 }
+
 IM_MSVC_RUNTIME_CHECKS_RESTORE
 
 //-----------------------------------------------------------------------------
@@ -13684,12 +13693,14 @@ static const char* GetInputSourceName( ImGuiInputSource source ) {
                source >= 0 && source < ImGuiInputSource_COUNT );
     return input_source_names[ source ];
 }
+
 static const char* GetMouseSourceName( ImGuiMouseSource source ) {
     const char* mouse_source_names[] = { "Mouse", "TouchScreen", "Pen" };
     IM_ASSERT( IM_ARRAYSIZE( mouse_source_names ) == ImGuiMouseSource_COUNT &&
                source >= 0 && source < ImGuiMouseSource_COUNT );
     return mouse_source_names[ source ];
 }
+
 static void DebugPrintInputEvent( const char* prefix,
                                   const ImGuiInputEvent* e ) {
     ImGuiContext& g = *GImGui;
@@ -14874,6 +14885,7 @@ bool ImGui::ItemAdd( const ImRect& bb,
         g.LastItemData.StatusFlags |= ImGuiItemStatusFlags_HoveredRect;
     return true;
 }
+
 IM_MSVC_RUNTIME_CHECKS_RESTORE
 
 //-----------------------------------------------------------------------------
@@ -14965,6 +14977,7 @@ void ImGui::ItemSize( const ImVec2& size, float text_baseline_y ) {
     if ( window->DC.LayoutType == ImGuiLayoutType_Horizontal )
         SameLine();
 }
+
 IM_MSVC_RUNTIME_CHECKS_RESTORE
 
 // Gets back to previous line and continue with horizontal layout
@@ -21547,6 +21560,7 @@ struct ImGuiDockNodeSettings {
     ImVec2ih Pos;
     ImVec2ih Size;
     ImVec2ih SizeRef;
+
     ImGuiDockNodeSettings() {
         memset( this, 0, sizeof( *this ) );
         SplitAxis = ImGuiAxis_None;
@@ -21634,12 +21648,14 @@ static bool DockNodeCalcDropRectsAndTestMousePos( const ImRect& parent,
                                                   ImRect& out_draw,
                                                   bool outer_docking,
                                                   ImVec2* test_mouse_pos );
+
 static const char* DockNodeGetHostWindowTitle( ImGuiDockNode* node,
                                                char* buf,
                                                int buf_size ) {
     ImFormatString( buf, buf_size, "##DockNode_%02X", node->ID );
     return buf;
 }
+
 static int DockNodeGetTabOrder( ImGuiWindow* window );
 
 // ImGuiDockNode tree manipulations
@@ -21949,6 +21965,7 @@ static int IMGUI_CDECL DockNodeComparerDepthMostFirst( const void* lhs,
 struct ImGuiDockContextPruneNodeData {
     int CountWindows, CountChildWindows, CountChildNodes;
     ImGuiID RootId;
+
     ImGuiDockContextPruneNodeData() {
         CountWindows = CountChildWindows = CountChildNodes = 0;
         RootId = 0;
@@ -22754,6 +22771,7 @@ struct ImGuiDockNodeTreeInfo {
     ImGuiDockNode* CentralNode;
     ImGuiDockNode* FirstNodeWithWindows;
     int CountNodesWithWindows;
+
     // ImGuiWindowClass  WindowClassForMerges;
 
     ImGuiDockNodeTreeInfo() { memset( this, 0, sizeof( *this ) ); }
@@ -25589,11 +25607,13 @@ void ImGui::DockBuilderCopyDockSpace(
     struct DockRemainingWindowTask {
         ImGuiWindow* Window;
         ImGuiID DockId;
+
         DockRemainingWindowTask( ImGuiWindow* window, ImGuiID dock_id ) {
             Window = window;
             DockId = dock_id;
         }
     };
+
     ImVector< DockRemainingWindowTask > dock_remaining_windows;
     for ( int dock_remap_n = 0; dock_remap_n < node_remap_pairs.Size;
           dock_remap_n += 2 )
@@ -26500,6 +26520,7 @@ static bool Platform_OpenInShellFn_DefaultImpl( ImGuiContext*,
 #else
 #include <sys/wait.h>
 #include <unistd.h>
+
 static bool Platform_OpenInShellFn_DefaultImpl( ImGuiContext*,
                                                 const char* path ) {
 #if defined( __APPLE__ )
@@ -26724,6 +26745,7 @@ void ImGui::DebugRenderKeyboardPreview( ImDrawList* draw_list ) {
         const char* Label;
         ImGuiKey Key;
     };
+
     const KeyLayoutData keys_to_display[] = {
         { 0, 0, "", ImGuiKey_Tab },       { 0, 1, "Q", ImGuiKey_Q },
         { 0, 2, "W", ImGuiKey_W },        { 0, 3, "E", ImGuiKey_E },
@@ -26849,6 +26871,7 @@ static const char* FormatTextureIDForDebugDisplay( char* buf,
         void* ptr;
         int integer;
     } tex_id_opaque;
+
     memcpy( &tex_id_opaque, &tex_id,
             ImMin( sizeof( void* ), sizeof( tex_id ) ) );
     if ( sizeof( tex_id ) >= sizeof( void* ) )
@@ -26944,9 +26967,11 @@ void ImGui::ShowMetricsWindow( bool* p_open ) {
         WRT_ContentRegionRect,
         WRT_Count
     }; // Windows Rect Type
+
     const char* wrt_rects_names[ WRT_Count ] = {
         "OuterRect", "OuterRectClipped", "InnerRect",    "InnerClipRect",
         "WorkRect",  "Content",          "ContentIdeal", "ContentRegionRect" };
+
     enum {
         TRT_OuterRect,
         TRT_InnerRect,
@@ -26963,6 +26988,7 @@ void ImGui::ShowMetricsWindow( bool* p_open ) {
         TRT_ColumnsContentUnfrozen,
         TRT_Count
     }; // Tables Rect Type
+
     const char* trt_rects_names[ TRT_Count ] = { "OuterRect",
                                                  "InnerRect",
                                                  "WorkRect",
@@ -27235,6 +27261,7 @@ void ImGui::ShowMetricsWindow( bool* p_open ) {
             for ( ImGuiWindow* window : g.Windows )
                 if ( window->LastFrameActive + 1 >= g.FrameCount )
                     temp_buffer.push_back( window );
+
             struct Func {
                 static int IMGUI_CDECL
                 WindowComparerByBeginOrder( const void* lhs, const void* rhs ) {
@@ -27244,6 +27271,7 @@ void ImGui::ShowMetricsWindow( bool* p_open ) {
                                  ->BeginOrderWithinContext );
                 }
             };
+
             ImQsort( temp_buffer.Data, ( size_t )temp_buffer.Size,
                      sizeof( ImGuiWindow* ), Func::WindowComparerByBeginOrder );
             DebugNodeWindowsListByBeginStackParent( temp_buffer.Data,
@@ -29363,28 +29391,42 @@ void ImGui::ShowIDStackToolWindow( bool* p_open ) {
 #else
 
 void ImGui::ShowMetricsWindow( bool* ) {}
+
 void ImGui::ShowFontAtlas( ImFontAtlas* ) {}
+
 void ImGui::DebugNodeColumns( ImGuiOldColumns* ) {}
+
 void ImGui::DebugNodeDrawList( ImGuiWindow*,
                                ImGuiViewportP*,
                                const ImDrawList*,
                                const char* ) {}
+
 void ImGui::DebugNodeDrawCmdShowMeshAndBoundingBox( ImDrawList*,
                                                     const ImDrawList*,
                                                     const ImDrawCmd*,
                                                     bool,
                                                     bool ) {}
+
 void ImGui::DebugNodeFont( ImFont* ) {}
+
 void ImGui::DebugNodeStorage( ImGuiStorage*, const char* ) {}
+
 void ImGui::DebugNodeTabBar( ImGuiTabBar*, const char* ) {}
+
 void ImGui::DebugNodeWindow( ImGuiWindow*, const char* ) {}
+
 void ImGui::DebugNodeWindowSettings( ImGuiWindowSettings* ) {}
+
 void ImGui::DebugNodeWindowsList( ImVector< ImGuiWindow* >*, const char* ) {}
+
 void ImGui::DebugNodeViewport( ImGuiViewportP* ) {}
 
 void ImGui::ShowDebugLogWindow( bool* ) {}
+
 void ImGui::ShowIDStackToolWindow( bool* ) {}
+
 void ImGui::DebugStartItemPicker() {}
+
 void ImGui::DebugHookIdInfo( ImGuiID,
                              ImGuiDataType,
                              const void*,

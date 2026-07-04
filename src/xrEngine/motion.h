@@ -75,9 +75,13 @@ public:
     }
 
     LPCSTR Name() { return name.c_str(); }
+
     int FrameStart() { return iFrameStart; }
+
     int FrameEnd() { return iFrameEnd; }
+
     float FPS() { return fFPS; }
+
     int Length() { return iFrameEnd - iFrameStart + 1; }
 
     void SetParam( int s, int e, float fps ) {
@@ -127,7 +131,9 @@ public:
     void DeleteKey( float t );
     void NormalizeKeys();
     int KeyCount();
+
     CEnvelope* Envelope( EChannelType et = ctPositionX ) { return envs[ et ]; }
+
     BOOL ScaleKeys( float from_time, float to_time, float scale_factor );
     BOOL NormalizeKeys( float from_time, float to_time, float speed );
     float GetLength( float* mn = 0, float* mx = 0 );
@@ -175,10 +181,13 @@ public:
     void CopyMotion( CSMotion* src );
 
     st_BoneMotion* FindBoneMotion( shared_str name );
+
     BoneMotionVec& BoneMotions() { return bone_mots; }
+
     Flags8 GetMotionFlags( int bone_idx ) {
         return bone_mots[ bone_idx ].m_Flags;
     }
+
     void add_empty_motion( shared_str const& bone_id );
 
     virtual void Save( IWriter& F );
@@ -217,7 +226,9 @@ public:
 
     void Set( CCustomMotion* M );
     void Set( float start_frame, float end_frame, float fps );
+
     float Frame() { return t_current; }
+
     void Update( float dt, float speed, bool loop );
 
     void Play() {

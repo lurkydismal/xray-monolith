@@ -181,6 +181,7 @@ private:
     char lastMsg[ MAX_LOG_MESSAGE_LENGTH * 2 ];
     size_t lastLen;
 };
+
 // ------------------------------------------------------------------------------------
 
 } // Namespace Assimp

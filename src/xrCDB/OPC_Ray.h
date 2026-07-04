@@ -47,6 +47,7 @@ public:
     inline_ ~Segment() {}
 
     inline_ const Point& GetOrigin() const { return mP0; }
+
     inline_ Point ComputeDirection() const { return mP1 - mP0; }
 
     inline_ void SetOriginDirection( const Point& origin,

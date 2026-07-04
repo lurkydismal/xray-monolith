@@ -53,6 +53,7 @@ typedef struct t_io_ {
     p_recv recv;   /* receive function pointer */
     p_error error; /* strerror function */
 } t_io;
+
 typedef t_io* p_io;
 
 #ifndef _WIN32

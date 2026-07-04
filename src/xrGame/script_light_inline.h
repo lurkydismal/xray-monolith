@@ -27,22 +27,35 @@ public:
     }
 
     virtual ~ScriptGlow() { m_glow.destroy(); }
+
     IC void Enable( bool state ) { m_glow->set_active( state ); }
+
     IC const bool IsEnabled() const { return m_glow->get_active(); }
+
     IC const float GetRange() const { return fRange; }
+
     IC void SetPosition( Fvector pos ) { m_glow->set_position( pos ); }
+
     IC void SetPosition( float x, float y, float z ) {
         m_glow->set_position( Fvector{ x, y, z } );
     }
+
     IC void SetDirection( Fvector dir ) { m_glow->set_direction( dir ); }
+
     IC void SetDirection( float x, float y, float z ) {
         m_glow->set_direction( Fvector{ x, y, z } );
     }
+
     IC const Fcolor GetColor() const { return color; }
+
     IC const LPCSTR GetTexture() const { return texture; }
+
     IC void SetBrightness( float val ) { fBrightness = val; }
+
     IC const float GetBrightness() const { return fBrightness; }
+
     IC void SetLanim( LPCSTR name ) { m_light_anim = LALib.FindItem( name ); }
+
     IC LPCSTR GetLanim() const {
         return m_light_anim != nullptr ? *m_light_anim->cName : nullptr;
     }
@@ -121,38 +134,59 @@ public:
     virtual ~ScriptLight() { m_light.destroy(); }
 
     IC void SetLanim( LPCSTR name ) { m_light_anim = LALib.FindItem( name ); }
+
     IC LPCSTR GetLanim() const {
         return m_light_anim != nullptr ? *m_light_anim->cName : nullptr;
     }
+
     IC void SetPosition( Fvector pos ) { m_light->set_position( pos ); }
+
     IC void SetPosition( float x, float y, float z ) {
         m_light->set_position( Fvector{ x, y, z } );
     }
+
     IC void SetDirection( Fvector dir ) {
         m_light->set_rotation( dir, Fvector().set( 1, 0, 0 ) );
     }
+
     IC void SetDirection( float x, float y, float z ) {
         m_light->set_rotation( Fvector{ x, y, z }, Fvector().set( 1, 0, 0 ) );
     }
+
     IC void SetDirection( Fvector dir, Fvector right ) {
         m_light->set_rotation( dir, right );
     }
+
     IC void SetCone( float angle ) { m_light->set_cone( angle ); }
+
     IC void Enable( bool state ) { m_light->set_active( state ); }
+
     IC const bool IsEnabled() const { return m_light->get_active(); }
+
     IC void SetHudMode( bool b ) { m_light->set_hud_mode( b ); }
+
     IC const bool GetHudMode() const { return m_light->get_hud_mode(); }
 
     IC void SetBrightness( float br ) { fBrightness = br; }
+
     IC const float GetBrightness() const { return fBrightness; }
+
     IC const bool GetVolumetric() const { return bVolEnable; }
+
     IC const float GetVolumetricDistance() const { return fVolDistance; }
+
     IC const float GetVolumetricIntensity() const { return fVolIntensity; }
+
     IC const float GetVolumetricQuality() const { return fVolQuality; }
+
     IC const bool GetShadow() const { return bShadow; }
+
     IC const float GetRange() const { return fRange; }
+
     IC const Fcolor GetColor() const { return color; }
+
     IC const LPCSTR GetTexture() const { return texture; }
+
     IC const int GetType() const { return iType; }
 
     IC void SetShadow( bool state ) {
@@ -233,20 +267,25 @@ public:
     virtual ~AttachmentScriptLight() {}
 
     IC void SetPosition( Fvector pos ) { m_offset.translate_over( pos ); }
+
     IC void SetPosition( float x, float y, float z ) {
         m_offset.translate_over( x, y, z );
     }
+
     IC void SetDirection( Fvector dir ) {
         Fvector pos = m_offset.c;
         m_offset.setHPB( dir.x, dir.y, dir.z );
         m_offset.c = pos;
     }
+
     IC void SetDirection( float x, float y, float z ) {
         Fvector pos = m_offset.c;
         m_offset.setHPB( x, y, z );
         m_offset.c = pos;
     }
+
     IC void SetDirection( Fvector dir, Fvector right ) { SetDirection( dir ); }
+
     IC void SetXFORM( Fmatrix& mat ) {
         mat.mulB_43( m_offset );
         m_light->set_position( mat.c );

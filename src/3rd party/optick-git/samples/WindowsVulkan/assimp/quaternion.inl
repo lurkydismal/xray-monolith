@@ -170,6 +170,7 @@ inline aiQuaterniont< TReal >::aiQuaterniont( aiVector3t< TReal > axis,
     z = axis.z * sin_a;
     w = cos_a;
 }
+
 // ---------------------------------------------------------------------------
 // Construction from am existing, normalized quaternion
 template < typename TReal >

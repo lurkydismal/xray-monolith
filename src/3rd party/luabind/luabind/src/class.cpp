@@ -27,6 +27,7 @@
 #include <cstring>
 
 #include "luabind_api.h"
+
 // #include <iostream>
 
 namespace luabind {
@@ -34,9 +35,11 @@ namespace detail {
 
 struct method_name {
     method_name( char const* n ) : name( n ) {}
+
     bool operator()( method_rep const& o ) const {
         return std::strcmp( o.name, name ) == 0;
     }
+
     char const* name;
 };
 

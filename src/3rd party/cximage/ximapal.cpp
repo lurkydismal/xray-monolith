@@ -12,6 +12,7 @@
 DWORD CxImage::GetPaletteSize() {
     return ( head.biClrUsed * sizeof( RGBQUAD ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetPaletteColor( BYTE idx, BYTE r, BYTE g, BYTE b, BYTE alpha ) {
     if ( ( pDib ) && ( head.biClrUsed ) ) {
@@ -26,6 +27,7 @@ void CxImage::SetPaletteColor( BYTE idx, BYTE r, BYTE g, BYTE b, BYTE alpha ) {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetPaletteColor( BYTE idx, RGBQUAD c ) {
     if ( ( pDib ) && ( head.biClrUsed ) ) {
@@ -40,6 +42,7 @@ void CxImage::SetPaletteColor( BYTE idx, RGBQUAD c ) {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetPaletteColor( BYTE idx, COLORREF cr ) {
     if ( ( pDib ) && ( head.biClrUsed ) ) {
@@ -54,6 +57,7 @@ void CxImage::SetPaletteColor( BYTE idx, COLORREF cr ) {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * returns the pointer to the first palette index
@@ -63,6 +67,7 @@ RGBQUAD* CxImage::GetPalette() const {
         return ( RGBQUAD* )( ( BYTE* )pDib + sizeof( BITMAPINFOHEADER ) );
     return NULL;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns the color of the specified index.
@@ -81,6 +86,7 @@ RGBQUAD CxImage::GetPaletteColor( BYTE idx ) {
     }
     return rgb;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns the palette index of the specified pixel.
@@ -114,6 +120,7 @@ BYTE CxImage::GetPixelIndex( long x, long y ) {
     }
     return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 BYTE CxImage::BlindGetPixelIndex( const long x, const long y ) {
 #ifdef _DEBUG
@@ -143,6 +150,7 @@ BYTE CxImage::BlindGetPixelIndex( const long x, const long y ) {
     }
     return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 RGBQUAD CxImage::GetPixelColor( long x, long y, bool bGetAlpha ) {
     //	RGBQUAD rgb={0,0,0,0};
@@ -175,6 +183,7 @@ RGBQUAD CxImage::GetPixelColor( long x, long y, bool bGetAlpha ) {
 #endif // CXIMAGE_SUPPORT_ALPHA
     return rgb;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * This is (a bit) faster version of GetPixelColor.
@@ -218,11 +227,13 @@ RGBQUAD CxImage::BlindGetPixelColor( const long x,
 #endif // CXIMAGE_SUPPORT_ALPHA
     return rgb;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 BYTE CxImage::GetPixelGray( long x, long y ) {
     RGBQUAD color = GetPixelColor( x, y );
     return ( BYTE )RGB2GRAY( color.rgbRed, color.rgbGreen, color.rgbBlue );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::BlindSetPixelIndex( long x, long y, BYTE i ) {
 #ifdef _DEBUG
@@ -255,6 +266,7 @@ void CxImage::BlindSetPixelIndex( long x, long y, BYTE i ) {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetPixelIndex( long x, long y, BYTE i ) {
     if ( ( pDib == NULL ) || ( head.biClrUsed == 0 ) || ( x < 0 ) ||
@@ -281,10 +293,12 @@ void CxImage::SetPixelIndex( long x, long y, BYTE i ) {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetPixelColor( long x, long y, COLORREF cr ) {
     SetPixelColor( x, y, RGBtoRGBQUAD( cr ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::BlindSetPixelColor( long x, long y, RGBQUAD c, bool bSetAlpha ) {
 #ifdef _DEBUG
@@ -309,6 +323,7 @@ void CxImage::BlindSetPixelColor( long x, long y, RGBQUAD c, bool bSetAlpha ) {
         AlphaSet( x, y, c.rgbReserved );
 #endif // CXIMAGE_SUPPORT_ALPHA
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetPixelColor( long x, long y, RGBQUAD c, bool bSetAlpha ) {
     if ( ( pDib == NULL ) || ( x < 0 ) || ( y < 0 ) || ( x >= head.biWidth ) ||
@@ -327,6 +342,7 @@ void CxImage::SetPixelColor( long x, long y, RGBQUAD c, bool bSetAlpha ) {
         AlphaSet( x, y, c.rgbReserved );
 #endif // CXIMAGE_SUPPORT_ALPHA
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Blends the current pixel color with a new color.
@@ -366,6 +382,7 @@ void CxImage::BlendPixelColor( long x,
 #endif // CXIMAGE_SUPPORT_ALPHA
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns the best palette index that matches a specified color.
@@ -404,6 +421,7 @@ BYTE CxImage::GetNearestIndex( RGBQUAD c ) {
     info.last_c_index = ( BYTE )j;
     return ( BYTE )j;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * swaps the blue and red components (for RGB images)
@@ -422,6 +440,7 @@ void CxImage::RGBtoBGR( BYTE* buffer, int length ) {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 RGBQUAD CxImage::RGBtoRGBQUAD( COLORREF cr ) {
     RGBQUAD c;
@@ -431,10 +450,12 @@ RGBQUAD CxImage::RGBtoRGBQUAD( COLORREF cr ) {
     c.rgbReserved = 0;
     return c;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 COLORREF CxImage::RGBQUADtoRGB( RGBQUAD c ) {
     return RGB( c.rgbRed, c.rgbGreen, c.rgbBlue );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns the color of the specified index.
@@ -451,6 +472,7 @@ bool CxImage::GetPaletteColor( BYTE i, BYTE* r, BYTE* g, BYTE* b ) {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetPalette( DWORD n, BYTE* r, BYTE* g, BYTE* b ) {
     if ( ( !r ) || ( pDib == NULL ) || ( head.biClrUsed == 0 ) )
@@ -468,6 +490,7 @@ void CxImage::SetPalette( DWORD n, BYTE* r, BYTE* g, BYTE* b ) {
     }
     info.last_c_isvalid = false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetPalette( rgb_color* rgb, DWORD nColors ) {
     if ( ( !rgb ) || ( pDib == NULL ) || ( head.biClrUsed == 0 ) )
@@ -481,6 +504,7 @@ void CxImage::SetPalette( rgb_color* rgb, DWORD nColors ) {
     }
     info.last_c_isvalid = false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::SetPalette( RGBQUAD* pPal, DWORD nColors ) {
     if ( ( pPal == NULL ) || ( pDib == NULL ) || ( head.biClrUsed == 0 ) )
@@ -489,6 +513,7 @@ void CxImage::SetPalette( RGBQUAD* pPal, DWORD nColors ) {
             min( GetPaletteSize(), nColors * sizeof( RGBQUAD ) ) );
     info.last_c_isvalid = false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets (or replaces) the palette to gray scale palette.
@@ -503,6 +528,7 @@ void CxImage::SetGrayPalette() {
         pal[ ni ].rgbBlue = pal[ ni ].rgbGreen = pal[ ni ].rgbRed =
             ( BYTE )( ni * ( 255 / ( head.biClrUsed - 1 ) ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Colorize the palette.
@@ -529,6 +555,7 @@ void CxImage::BlendPalette( COLORREF cr, long perc ) {
             ( BYTE )( ( pPal[ i ].rgbRed * ( 100 - perc ) + r * perc ) / 100 );
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns true if the image has 256 colors and a linear grey scale palette.
@@ -544,6 +571,7 @@ bool CxImage::IsGrayScale() {
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * swap two indexes in the image and their colors in the palette
@@ -568,6 +596,7 @@ void CxImage::SwapIndex( BYTE idx1, BYTE idx2 ) {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * swap Red and Blue colors
@@ -592,6 +621,7 @@ void CxImage::SwapRGB2BGR() {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::IsTransparent( long x, long y ) {
     if ( !pDib )
@@ -616,6 +646,7 @@ bool CxImage::IsTransparent( long x, long y ) {
 
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::GetTransparentMask( CxImage* iDst ) {
     if ( !pDib )
@@ -641,6 +672,7 @@ bool CxImage::GetTransparentMask( CxImage* iDst ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Checks if image has the same palette, if any.
@@ -668,6 +700,7 @@ bool CxImage::IsSamePalette( CxImage& img, bool bCheckAlpha ) {
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \sa SetClrImportant
@@ -675,6 +708,7 @@ bool CxImage::IsSamePalette( CxImage& img, bool bCheckAlpha ) {
 DWORD CxImage::GetClrImportant() const {
     return head.biClrImportant;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * sets the maximum number of colors that some functions like
@@ -701,6 +735,7 @@ void CxImage::SetClrImportant( DWORD ncolors ) {
     }
     return;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns pointer to pixel. Currently implemented only for truecolor images.
@@ -725,6 +760,7 @@ void* CxImage::BlindGetPixelPointer( const long x, const long y ) {
     else
         return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::DrawLine( int StartX,
                         int EndX,
@@ -733,6 +769,7 @@ void CxImage::DrawLine( int StartX,
                         COLORREF cr ) {
     DrawLine( StartX, EndX, StartY, EndY, RGBtoRGBQUAD( cr ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::DrawLine( int StartX,
                         int EndX,
@@ -809,6 +846,7 @@ void CxImage::DrawLine( int StartX,
         y += yinc2; // Change the y as appropriate
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets a palette with standard colors for 1, 4 and 8 bpp images.
@@ -920,4 +958,5 @@ void CxImage::SetStdPalette() {
     info.last_c_isvalid = false;
     return;
 }
+
 ////////////////////////////////////////////////////////////////////////////////

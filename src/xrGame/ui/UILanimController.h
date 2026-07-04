@@ -138,6 +138,7 @@ public:
     virtual void ColorAnimationSetTextColor( u32 color, bool only_alpha );
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUILightAnimColorConroller* ui_cast_light_anim_color_controller() {
         return this;
     }

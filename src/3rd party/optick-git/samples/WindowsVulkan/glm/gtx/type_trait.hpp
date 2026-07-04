@@ -56,6 +56,7 @@ struct type< vec< L, T, P > > {
     static bool const is_vec = true;
     static bool const is_mat = false;
     static bool const is_quat = false;
+
     enum { components = L };
 };
 
@@ -64,6 +65,7 @@ struct type< mat< 2, 2, T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = true;
     static bool const is_quat = false;
+
     enum { components = 2, cols = 2, rows = 2 };
 };
 
@@ -72,6 +74,7 @@ struct type< mat< 2, 3, T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = true;
     static bool const is_quat = false;
+
     enum { components = 2, cols = 2, rows = 3 };
 };
 
@@ -80,6 +83,7 @@ struct type< mat< 2, 4, T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = true;
     static bool const is_quat = false;
+
     enum { components = 2, cols = 2, rows = 4 };
 };
 
@@ -88,6 +92,7 @@ struct type< mat< 3, 2, T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = true;
     static bool const is_quat = false;
+
     enum { components = 3, cols = 3, rows = 2 };
 };
 
@@ -96,6 +101,7 @@ struct type< mat< 3, 3, T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = true;
     static bool const is_quat = false;
+
     enum { components = 3, cols = 3, rows = 3 };
 };
 
@@ -104,6 +110,7 @@ struct type< mat< 3, 4, T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = true;
     static bool const is_quat = false;
+
     enum { components = 3, cols = 3, rows = 4 };
 };
 
@@ -112,6 +119,7 @@ struct type< mat< 4, 2, T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = true;
     static bool const is_quat = false;
+
     enum { components = 4, cols = 4, rows = 2 };
 };
 
@@ -120,6 +128,7 @@ struct type< mat< 4, 3, T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = true;
     static bool const is_quat = false;
+
     enum { components = 4, cols = 4, rows = 3 };
 };
 
@@ -128,6 +137,7 @@ struct type< mat< 4, 4, T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = true;
     static bool const is_quat = false;
+
     enum { components = 4, cols = 4, rows = 4 };
 };
 
@@ -136,6 +146,7 @@ struct type< tquat< T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = false;
     static bool const is_quat = true;
+
     enum { components = 4 };
 };
 
@@ -144,6 +155,7 @@ struct type< tdualquat< T, P > > {
     static bool const is_vec = false;
     static bool const is_mat = false;
     static bool const is_quat = true;
+
     enum { components = 8 };
 };
 

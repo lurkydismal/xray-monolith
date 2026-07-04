@@ -77,6 +77,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
     resource get_current_back_buffer() {
         return get_back_buffer( get_current_back_buffer_index() );
     }
+
     /// <summary>
     /// Gets the index of the back buffer resource that can currently be
     /// rendered into.
@@ -213,6 +214,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
                             effect_uniform_variable variable,
                             void* user_data ),
         void* user_data ) = 0;
+
     /// <summary>
     /// Enumerates all uniform variables of loaded effects and calls the
     /// specified callback function with a handle for each one.
@@ -283,6 +285,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
     virtual void get_uniform_variable_name( effect_uniform_variable variable,
                                             char* name,
                                             size_t* name_size ) const = 0;
+
     template < size_t SIZE >
     void get_uniform_variable_name( effect_uniform_variable variable,
                                     char ( &name )[ SIZE ] ) const {
@@ -383,6 +386,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         const char* name,
         char* value,
         size_t* value_size ) const = 0;
+
     template < size_t SIZE >
     bool get_annotation_string_from_uniform_variable(
         effect_uniform_variable variable,
@@ -469,6 +473,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
                                          const bool* values,
                                          size_t count,
                                          size_t array_index = 0 ) = 0;
+
     /// <summary>
     /// Sets the value of the specified uniform <paramref name="variable"/> as a
     /// vector of boolean values.
@@ -489,6 +494,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         const bool values[ 4 ] = { x, y, z, w };
         set_uniform_value_bool( variable, values, 4 );
     }
+
     /// <summary>
     /// Sets the value of the specified uniform <paramref name="variable"/> as
     /// floating-point values.
@@ -508,6 +514,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
                                           const float* values,
                                           size_t count,
                                           size_t array_index = 0 ) = 0;
+
     /// <summary>
     /// Sets the value of the specified uniform <paramref name="variable"/> as a
     /// vector of floating-point values.
@@ -528,6 +535,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         const float values[ 4 ] = { x, y, z, w };
         set_uniform_value_float( variable, values, 4 );
     }
+
     /// <summary>
     /// Sets the value of the specified uniform <paramref name="variable"/> as
     /// signed integer values.
@@ -547,6 +555,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
                                         const int32_t* values,
                                         size_t count,
                                         size_t array_index = 0 ) = 0;
+
     /// <summary>
     /// Sets the value of the specified uniform <paramref name="variable"/> as a
     /// vector of signed integer values.
@@ -567,6 +576,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         const int32_t values[ 4 ] = { x, y, z, w };
         set_uniform_value_int( variable, values, 4 );
     }
+
     /// <summary>
     /// Sets the value of the specified uniform <paramref name="variable"/> as
     /// unsigned integer values.
@@ -586,6 +596,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
                                          const uint32_t* values,
                                          size_t count,
                                          size_t array_index = 0 ) = 0;
+
     /// <summary>
     /// Sets the value of the specified uniform <paramref name="variable"/> as a
     /// vector of unsigned integer values.
@@ -623,6 +634,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
                             effect_texture_variable variable,
                             void* user_data ),
         void* user_data ) = 0;
+
     /// <summary>
     /// Enumerates all texture variables of loaded effects and calls the
     /// specified callback function with a handle for each one.
@@ -667,6 +679,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
     virtual void get_texture_variable_name( effect_texture_variable variable,
                                             char* name,
                                             size_t* name_size ) const = 0;
+
     template < size_t SIZE >
     void get_texture_variable_name( effect_texture_variable variable,
                                     char ( &name )[ SIZE ] ) const {
@@ -767,6 +780,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         const char* name,
         char* value,
         size_t* value_size ) const = 0;
+
     template < size_t SIZE >
     bool get_annotation_string_from_texture_variable(
         effect_texture_variable variable,
@@ -840,6 +854,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
                             effect_technique technique,
                             void* user_data ),
         void* user_data ) = 0;
+
     /// <summary>
     /// Enumerates all techniques of loaded effects and calls the specified
     /// callback function with a handle for each one.
@@ -884,6 +899,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
     virtual void get_technique_name( effect_technique technique,
                                      char* name,
                                      size_t* name_size ) const = 0;
+
     template < size_t SIZE >
     void get_technique_name( effect_technique technique,
                              char ( &name )[ SIZE ] ) const {
@@ -984,6 +1000,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         const char* name,
         char* value,
         size_t* value_size ) const = 0;
+
     template < size_t SIZE >
     bool get_annotation_string_from_technique( effect_technique technique,
                                                const char* name,
@@ -1023,12 +1040,14 @@ struct __declspec( novtable ) effect_runtime : public device_object {
     virtual bool get_preprocessor_definition( const char* name,
                                               char* value,
                                               size_t* value_size ) const = 0;
+
     template < size_t SIZE >
     bool get_preprocessor_definition( const char* name,
                                       char ( &value )[ SIZE ] ) const {
         size_t value_size = SIZE;
         return get_preprocessor_definition( name, value, &value_size );
     }
+
     /// <summary>
     /// Defines a preprocessor definition to the specified <paramref
     /// name="value"/>.
@@ -1085,11 +1104,13 @@ struct __declspec( novtable ) effect_runtime : public device_object {
     /// length of the string, including the null-terminator.</param>
     virtual void get_current_preset_path( char* path,
                                           size_t* path_size ) const = 0;
+
     template < size_t SIZE >
     void get_current_preset_path( char ( &path )[ SIZE ] ) const {
         size_t path_size = SIZE;
         get_current_preset_path( path, &path_size );
     }
+
     /// <summary>
     /// Saves the currently active preset and then switches to the specified new
     /// preset.
@@ -1139,6 +1160,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         effect_uniform_variable variable,
         char* effect_name,
         size_t* effect_name_size ) const = 0;
+
     template < size_t SIZE >
     void get_uniform_variable_effect_name(
         effect_uniform_variable variable,
@@ -1162,6 +1184,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         effect_texture_variable variable,
         char* effect_name,
         size_t* effect_name_size ) const = 0;
+
     template < size_t SIZE >
     void get_texture_variable_effect_name(
         effect_texture_variable variable,
@@ -1184,6 +1207,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         effect_technique technique,
         char* effect_name,
         size_t* effect_name_size ) const = 0;
+
     template < size_t SIZE >
     void get_technique_effect_name( effect_technique technique,
                                     char ( &effect_name )[ SIZE ] ) const {
@@ -1215,6 +1239,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         const char* name,
         char* value,
         size_t* value_size ) const = 0;
+
     template < size_t SIZE >
     bool get_preprocessor_definition_for_effect(
         const char* effect_name,
@@ -1224,6 +1249,7 @@ struct __declspec( novtable ) effect_runtime : public device_object {
         return get_preprocessor_definition_for_effect( effect_name, name, value,
                                                        &value_size );
     }
+
     /// <summary>
     /// Defines a preprocessor definition for the specified effect to the
     /// specified <paramref name="value"/>.

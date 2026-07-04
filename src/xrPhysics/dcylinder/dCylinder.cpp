@@ -1149,6 +1149,7 @@ extern "C" int dCylCyl( const dVector3 p1,
 }
 
 #pragma todo( optimize factor == 0.f )
+
 //****************************************************************************
 
 int dCollideCylS( dxGeom* o1,

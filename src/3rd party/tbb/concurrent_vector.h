@@ -100,30 +100,37 @@ protected:
     };
 
     struct segment_not_used {};
+
     struct segment_allocated {};
+
     struct segment_allocation_failed {};
 
     class segment_t;
+
     class segment_value_t {
         void* array;
 
     private:
         // TODO: More elegant way to grant access to selected functions _only_?
         friend class segment_t;
+
         explicit segment_value_t( void* an_array ) : array( an_array ) {}
 
     public:
         friend bool operator==( segment_value_t const& lhs, segment_not_used ) {
             return lhs.array == 0;
         }
+
         friend bool operator==( segment_value_t const& lhs,
                                 segment_allocated ) {
             return lhs.array > internal::vector_allocation_error_flag;
         }
+
         friend bool operator==( segment_value_t const& lhs,
                                 segment_allocation_failed ) {
             return lhs.array == internal::vector_allocation_error_flag;
         }
+
         template < typename argument_type >
         friend bool operator!=( segment_value_t const& lhs,
                                 argument_type arg ) {
@@ -150,6 +157,7 @@ protected:
 
     public:
         segment_t() { store< relaxed >( segment_not_used() ); }
+
         // Copy ctor and assignment operator are defined to ease using of stl
         // algorithms. These algorithms usually not a synchronization point, so,
         // semantic is intentionally relaxed here.
@@ -200,6 +208,7 @@ protected:
         }
 #endif /* TBB_USE_ASSERT */
     };
+
     friend void swap( segment_t&, segment_t& ) __TBB_NOEXCEPT( true );
 
     // Data fields
@@ -430,19 +439,23 @@ public:
     vector_iterator operator+( ptrdiff_t offset ) const {
         return vector_iterator( *my_vector, my_index + offset );
     }
+
     vector_iterator& operator+=( ptrdiff_t offset ) {
         my_index += offset;
         my_item = NULL;
         return *this;
     }
+
     vector_iterator operator-( ptrdiff_t offset ) const {
         return vector_iterator( *my_vector, my_index - offset );
     }
+
     vector_iterator& operator-=( ptrdiff_t offset ) {
         my_index -= offset;
         my_item = NULL;
         return *this;
     }
+
     Value& operator*() const {
         Value* item = my_item;
         if ( !item ) {
@@ -452,9 +465,11 @@ public:
                       "corrupt cache" );
         return *item;
     }
+
     Value& operator[]( ptrdiff_t k ) const {
         return my_vector->internal_subscript( my_index + k );
     }
+
     Value* operator->() const { return &operator*(); }
 
     //! Pre increment
@@ -574,11 +589,13 @@ public:
     typedef
         typename tbb::internal::allocator_rebind< A, T >::type allocator_type;
     allocator_type my_allocator;
+
     allocator_base( const allocator_type& a = allocator_type() )
         : my_allocator( a ) {}
 };
 
 } // namespace internal
+
 //! @endcond
 
 //! Concurrent vector container
@@ -675,11 +692,14 @@ private:
         typedef const T& const_reference;
         typedef I iterator;
         typedef ptrdiff_t difference_type;
+
         generic_range_type( I begin_, I end_, size_t grainsize_ = 1 )
             : blocked_range< I >( begin_, end_, grainsize_ ) {}
+
         template < typename U >
         generic_range_type( const generic_range_type< U >& r )
             : blocked_range< I >( r.begin(), r.end(), r.grainsize() ) {}
+
         generic_range_type( generic_range_type& r, split )
             : blocked_range< I >( r, split() ) {}
     };
@@ -1122,36 +1142,48 @@ public:
 
     //! start iterator
     iterator begin() { return iterator( *this, 0 ); }
+
     //! end iterator
     iterator end() { return iterator( *this, size() ); }
+
     //! start const iterator
     const_iterator begin() const { return const_iterator( *this, 0 ); }
+
     //! end const iterator
     const_iterator end() const { return const_iterator( *this, size() ); }
+
     //! start const iterator
     const_iterator cbegin() const { return const_iterator( *this, 0 ); }
+
     //! end const iterator
     const_iterator cend() const { return const_iterator( *this, size() ); }
+
     //! reverse start iterator
     reverse_iterator rbegin() { return reverse_iterator( end() ); }
+
     //! reverse end iterator
     reverse_iterator rend() { return reverse_iterator( begin() ); }
+
     //! reverse start const iterator
     const_reverse_iterator rbegin() const {
         return const_reverse_iterator( end() );
     }
+
     //! reverse end const iterator
     const_reverse_iterator rend() const {
         return const_reverse_iterator( begin() );
     }
+
     //! reverse start const iterator
     const_reverse_iterator crbegin() const {
         return const_reverse_iterator( end() );
     }
+
     //! reverse end const iterator
     const_reverse_iterator crend() const {
         return const_reverse_iterator( begin() );
     }
+
     //! the first item
     reference front() {
         __TBB_ASSERT( size() > 0, NULL );
@@ -1159,6 +1191,7 @@ public:
             my_segment[ 0 ].template load< relaxed >();
         return ( segment_value.template pointer< T >() )[ 0 ];
     }
+
     //! the first item const
     const_reference front() const {
         __TBB_ASSERT( size() > 0, NULL );
@@ -1166,16 +1199,19 @@ public:
             my_segment[ 0 ].template load< relaxed >();
         return ( segment_value.template pointer< const T >() )[ 0 ];
     }
+
     //! the last item
     reference back() {
         __TBB_ASSERT( size() > 0, NULL );
         return internal_subscript( size() - 1 );
     }
+
     //! the last item const
     const_reference back() const {
         __TBB_ASSERT( size() > 0, NULL );
         return internal_subscript( size() - 1 );
     }
+
     //! return allocator object
     allocator_type get_allocator() const { return this->my_allocator; }
 
@@ -1243,6 +1279,7 @@ private:
         return static_cast< concurrent_vector< T, A >& >( vb )
             .my_allocator.allocate( k );
     }
+
     //! Free k segments from table
     void internal_free_segments( segment_t table[],
                                  segment_index_t k,
@@ -1278,6 +1315,7 @@ private:
         internal_assign_n( static_cast< size_type >( first ),
                            &static_cast< T& >( last ) );
     }
+
     //! inline proxy assign by iterators
     template < class I >
     void internal_assign_range( I first, I last, is_integer_tag< false >* ) {
@@ -1353,24 +1391,29 @@ private:
         static const T* as_const_pointer( const void* ptr ) {
             return static_cast< const T* >( ptr );
         }
+
         static T* as_pointer( const void* src ) {
             return static_cast< T* >( const_cast< void* >( src ) );
         }
 
         internal_loop_guide( size_type ntrials, void* ptr )
             : array( as_pointer( ptr ) ), n( ntrials ), i( 0 ) {}
+
         void init() {
             for ( ; i < n; ++i )
                 new ( &array[ i ] ) T();
         }
+
         void init( const void* src ) {
             for ( ; i < n; ++i )
                 new ( &array[ i ] ) T( *as_const_pointer( src ) );
         }
+
         void copy( const void* src ) {
             for ( ; i < n; ++i )
                 new ( &array[ i ] ) T( as_const_pointer( src )[ i ] );
         }
+
         void assign( const void* src ) {
             for ( ; i < n; ++i )
                 array[ i ] = as_const_pointer( src )[ i ];
@@ -1380,6 +1423,7 @@ private:
             for ( ; i < n; ++i )
                 array[ i ] = std::move( as_pointer( src )[ i ] );
         }
+
         void move_construct( const void* src ) {
             for ( ; i < n; ++i )
                 new ( &array[ i ] ) T( std::move( as_pointer( src )[ i ] ) );
@@ -1399,6 +1443,7 @@ private:
             for ( ; i < n; ++i, ++src )
                 new ( &array[ i ] ) T( *src );
         }
+
         ~internal_loop_guide() {
             if ( i < n ) { // if an exception was raised, fill the rest of items
                            // with zeros
@@ -1413,7 +1458,9 @@ private:
 
             element_construction_guard( pointer an_element )
                 : element( an_element ) {}
+
             void dismiss() { element = NULL; }
+
             ~element_construction_guard() {
                 if ( element ) {
                     internal::handle_unconstructed_elements( element, 1 );
@@ -1431,6 +1478,7 @@ private:
         }
 
         pointer internal_push_back_result() { return g.element; }
+
         iterator return_iterator_and_dismiss() {
             pointer ptr = g.element;
             g.dismiss();
@@ -1629,6 +1677,7 @@ void concurrent_vector< T, A >::move_array( void* dst,
     internal_loop_guide loop( n, dst );
     loop.move_construct( src );
 }
+
 template < typename T, class A >
 void concurrent_vector< T, A >::move_assign_array( void* dst,
                                                    const void* src,

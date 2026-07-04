@@ -42,10 +42,12 @@ message_type);
 
 #pragma pack( push )
 #pragma pack( 1 )
+
 struct MultipacketHeader {
     u8 tag;
     u16 unpacked_size;
 };
+
 #pragma pack( pop )
 
 //==============================================================================

@@ -31,6 +31,7 @@ namespace tbb {
 /** @ingroup algorithms */
 struct pre_scan_tag {
     static bool is_final_scan() { return false; }
+
     operator bool() { return is_final_scan(); }
 };
 
@@ -38,6 +39,7 @@ struct pre_scan_tag {
 /** @ingroup algorithms */
 struct final_scan_tag {
     static bool is_final_scan() { return true; }
+
     operator bool() { return is_final_scan(); }
 };
 
@@ -60,7 +62,9 @@ public:
     final_sum( Body& body_ ) : my_body( body_, split() ) {
         poison_pointer( my_stuff_last );
     }
+
     ~final_sum() { my_range.begin()->~Range(); }
+
     void finish_construction( const Range& range_, Body* stuff_last_ ) {
         new ( my_range.begin() ) Range( range_ );
         my_stuff_last = stuff_last_;
@@ -92,6 +96,7 @@ private:
     sum_node* my_right;
     bool my_left_is_final;
     Range my_range;
+
     sum_node( const Range range_, bool left_is_final_ )
         : my_stuff_last( NULL ),
           my_left_sum( NULL ),
@@ -103,6 +108,7 @@ private:
         poison_pointer( my_body );
         poison_pointer( my_incoming );
     }
+
     task* create_child( const Range& range_,
                         final_sum_type& f,
                         sum_node* n,
@@ -119,6 +125,7 @@ private:
             return n;
         }
     }
+
     task* execute() __TBB_override {
         if ( my_body ) {
             if ( my_incoming )
@@ -370,6 +377,7 @@ public:
     Value result() const { return my_sum; }
 };
 } // namespace internal
+
 //! @endcond
 
 // Requirements on Range concept are documented in blocked_range.h

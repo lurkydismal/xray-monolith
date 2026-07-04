@@ -90,6 +90,7 @@ extern "C" {
    The player can continue to display the current frame, as the contents of the
     decoded frame buffer have not changed.*/
 #define TH_DUPFRAME ( 1 )
+
 /*@}*/
 
 /**The currently defined color space tags.

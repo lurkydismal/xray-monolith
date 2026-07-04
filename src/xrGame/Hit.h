@@ -16,6 +16,7 @@ struct SHit {
     SHit();
     bool is_valide() const;
     void invalidate();
+
     IC float damage() const {
         VERIFY( is_valide() );
         return power;

@@ -487,6 +487,7 @@ void CGameMtlLibrary::Load() {
 
 #ifdef GM_NON_GAME
 SGameMtlPair::~SGameMtlPair() {}
+
 void SGameMtlPair::Load( IReader& fs ) {
     shared_str buf;
 

@@ -16,24 +16,28 @@ public:
         : m_width( w ), m_height( h ), m_bitArray( w * h ) {}
 
     const uint width() const { return m_width; }
+
     const uint height() const { return m_height; }
 
     bool bitAt( uint x, uint y ) const {
         nvDebugCheck( x < m_width && y < m_height );
         return m_bitArray.bitAt( y * m_width + x );
     }
+
     bool bitAt( uint idx ) const { return m_bitArray.bitAt( idx ); }
 
     void setBitAt( uint x, uint y ) {
         nvDebugCheck( x < m_width && y < m_height );
         m_bitArray.setBitAt( y * m_width + x );
     }
+
     void setBitAt( uint idx ) { m_bitArray.setBitAt( idx ); }
 
     void clearBitAt( uint x, uint y ) {
         nvDebugCheck( x < m_width && y < m_height );
         m_bitArray.clearBitAt( y * m_width + x );
     }
+
     void clearBitAt( uint idx ) { m_bitArray.clearBitAt( idx ); }
 
     void clearAll() { m_bitArray.clearAll(); }

@@ -204,6 +204,7 @@ bool CWeaponMagazinedWGrenade::SwitchMode( bool force ) {
 
 extern BOOL useSeparateUBGLKeybind;
 extern BOOL g_launcher_dynamic_range_zoom;
+
 void CWeaponMagazinedWGrenade::PerformSwitchGL() {
     m_bGrenadeMode = !m_bGrenadeMode;
 

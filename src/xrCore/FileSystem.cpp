@@ -10,6 +10,7 @@
 #include "vfw.h"
 
 EFS_Utils* xr_EFS = NULL;
+
 //----------------------------------------------------
 EFS_Utils::EFS_Utils() {}
 

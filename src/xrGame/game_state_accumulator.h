@@ -32,9 +32,13 @@ public:
     u16 get_active_weapon_of_player( game_PlayerState* player );
     CWeapon* get_active_weapon( game_PlayerState* player );
     CActor* get_players_actor( u16 game_id );
+
     game_PlayerState* get_local_player() const { return m_local_player; };
+
     hits_store& get_hits_store() { return m_hits; };
+
     kills_store& get_kills_store() { return m_kills; };
+
     bool is_enemies( u16 left_pid, u16 right_pid ) const;
     bool is_enemies( game_PlayerState const* left_player,
                      game_PlayerState const* right_player ) const;

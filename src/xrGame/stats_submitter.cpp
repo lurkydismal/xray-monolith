@@ -102,6 +102,7 @@ void __stdcall stats_submitter::onlylog_operation( bool const result,
 }
 
 u32 const stats_submitter::operation_timeout_value = 60000; // 60 seconds
+
 void stats_submitter::begin_session() {
     // VERIFY(m_last_operation_profile && m_last_operation_cb);
     // SCResult tmp_result = m_atlas_obj->CreateSession(
@@ -145,7 +146,7 @@ void stats_submitter::begin_session() {
 // CGameSpy_ATLAS::TryToTranslate(theResult).c_str());
 // my_inst->terminate_session
 //(); 		Engine.Sheduler.Unregister		(my_inst);
-//return;
+// return;
 //	}
 //	SCResult tmp_result = my_inst->m_atlas_obj->SetReportIntention(
 //		NULL,
@@ -190,11 +191,11 @@ void stats_submitter::begin_session() {
 // CGameSpy_ATLAS::TryToTranslate(theResult).c_str());
 // my_inst->terminate_session
 //(); 		Engine.Sheduler.Unregister		(my_inst);
-//return;
+// return;
 //	}
 //	char const * tmp_connection_id =
 // my_inst->m_atlas_obj->GetConnectionId(); 	VERIFY(tmp_connection_id);
-// xr_strcpy( 		static_cast<char*>((void*)my_inst->m_atlas_connection_id),
+// xr_strcpy( static_cast<char*>((void*)my_inst->m_atlas_connection_id),
 //		sizeof(my_inst->m_atlas_connection_id),
 //		tmp_connection_id
 //	);
@@ -203,7 +204,8 @@ void stats_submitter::begin_session() {
 //	{
 //		my_inst->m_last_operation_cb	(false,
 //"mp_failed_to_create_report"); 		my_inst->terminate_session
-//(); 		Engine.Sheduler.Unregister		(my_inst); 		return;
+//(); 		Engine.Sheduler.Unregister		(my_inst);
+//return;
 //	}
 //
 //	SCResult tmp_result = my_inst->m_atlas_obj->SubmitReport(
@@ -247,7 +249,7 @@ void stats_submitter::begin_session() {
 // CGameSpy_ATLAS::TryToTranslate(theResult).c_str());
 // my_inst->terminate_session
 //(); 		Engine.Sheduler.Unregister		(my_inst);
-//return;
+// return;
 //	}
 //
 //	my_inst->m_last_operation_cb	(true, "");

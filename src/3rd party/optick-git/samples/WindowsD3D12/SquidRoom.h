@@ -36,6 +36,7 @@ struct TextureResource {
     UINT Height;
     UINT MipLevels;
     DXGI_FORMAT Format;
+
     struct DataProperties {
         UINT Offset;
         UINT Size;

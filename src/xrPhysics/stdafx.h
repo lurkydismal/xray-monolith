@@ -30,6 +30,7 @@
 //	return *g_pGameLevel;
 // }
 class CGameMtlLibrary;
+
 IC CGameMtlLibrary& GMLibrary() {
     VERIFY( PGMLib );
     return *PGMLib;

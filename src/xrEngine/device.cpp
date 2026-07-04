@@ -283,6 +283,7 @@ extern int ps_framelimiter;
 extern u32 g_screenmode;
 
 CTimer FreezeTimer;
+
 void mt_FreezeThread( void* ptr ) {
     float freezetime = 0.f;
     float repeatcheck = 500.f;

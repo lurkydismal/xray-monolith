@@ -49,6 +49,7 @@ public:
     void DecompressFrame( u32* dst, u32 _width, int& count );
 
     void Play( BOOL _looped, u32 _time );
+
     void Pause( BOOL _pause ) { playing = !_pause; }
 
     void Stop() {

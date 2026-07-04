@@ -7,6 +7,7 @@
 class IObjectSpaceRender {
 public:
     virtual ~IObjectSpaceRender() { ; }
+
     virtual void Copy( IObjectSpaceRender& _in ) = 0;
 
     virtual void dbgRender() = 0;

@@ -74,9 +74,11 @@ virtual void __stdcall on_render( CDUInterface* du,
                                   const Fmatrix& parent,
                                   int priority,
                                   bool strictB2F );
+
 virtual visual_data* __stdcall visual_collection() const {
     return &*m_visuals.begin();
 }
+
 virtual u32 __stdcall visual_collection_size() const {
     return m_visuals.size();
 }

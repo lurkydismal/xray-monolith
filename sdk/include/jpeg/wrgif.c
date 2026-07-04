@@ -76,6 +76,7 @@ typedef gif_dest_struct* gif_dest_ptr;
  */
 
 LOCAL( void )
+
 flush_packet( gif_dest_ptr dinfo )
 /* flush any accumulated data */
 {
@@ -99,6 +100,7 @@ flush_packet( gif_dest_ptr dinfo )
 /* Routine to convert variable-width codes into a byte stream */
 
 LOCAL( void )
+
 output( gif_dest_ptr dinfo, int code )
 /* Emit a code of n_bits bits */
 /* Uses cur_accum and cur_bits to reblock into 8-bit bytes */
@@ -136,6 +138,7 @@ output( gif_dest_ptr dinfo, int code )
  */
 
 LOCAL( void )
+
 compress_init( gif_dest_ptr dinfo, int i_bits )
 /* Initialize pseudo-compressor */
 {
@@ -154,6 +157,7 @@ compress_init( gif_dest_ptr dinfo, int i_bits )
 }
 
 LOCAL( void )
+
 compress_pixel( gif_dest_ptr dinfo, int c )
 /* Accept and "compress" one pixel value.
  * The given value must be less than n_bits wide.
@@ -173,6 +177,7 @@ compress_pixel( gif_dest_ptr dinfo, int c )
 }
 
 LOCAL( void )
+
 compress_term( gif_dest_ptr dinfo )
 /* Clean up at end */
 {
@@ -189,6 +194,7 @@ compress_term( gif_dest_ptr dinfo )
 /* GIF header construction */
 
 LOCAL( void )
+
 put_word( gif_dest_ptr dinfo, unsigned int w )
 /* Emit a 16-bit word, LSB first */
 {
@@ -197,6 +203,7 @@ put_word( gif_dest_ptr dinfo, unsigned int w )
 }
 
 LOCAL( void )
+
 put_3bytes( gif_dest_ptr dinfo, int val )
 /* Emit 3 copies of same byte value --- handy subr for colormap construction */
 {
@@ -206,6 +213,7 @@ put_3bytes( gif_dest_ptr dinfo, int val )
 }
 
 LOCAL( void )
+
 emit_header( gif_dest_ptr dinfo, int num_colors, JSAMPARRAY colormap )
 /* Output the GIF file header, including color map */
 /* If colormap==NULL, synthesize a gray-scale colormap */
@@ -295,6 +303,7 @@ emit_header( gif_dest_ptr dinfo, int num_colors, JSAMPARRAY colormap )
  */
 
 METHODDEF( void )
+
 start_output_gif( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     gif_dest_ptr dest = ( gif_dest_ptr )dinfo;
 
@@ -310,6 +319,7 @@ start_output_gif( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 METHODDEF( void )
+
 put_pixel_rows( j_decompress_ptr cinfo,
                 djpeg_dest_ptr dinfo,
                 JDIMENSION rows_supplied ) {
@@ -330,6 +340,7 @@ put_pixel_rows( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 finish_output_gif( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     gif_dest_ptr dest = ( gif_dest_ptr )dinfo;
 
@@ -350,6 +361,7 @@ finish_output_gif( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 GLOBAL( djpeg_dest_ptr )
+
 jinit_write_gif( j_decompress_ptr cinfo ) {
     gif_dest_ptr dest;
 

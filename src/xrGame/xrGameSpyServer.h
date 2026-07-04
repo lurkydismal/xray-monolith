@@ -74,6 +74,7 @@ public:
 
     virtual void Assign_ServerType( string512& res );
     virtual void GetServerInfo( CServerInfo* si );
+
     bool IsPublicServer() const { return m_iReportToMasterServer != 0; };
 
 public:

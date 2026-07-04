@@ -182,6 +182,7 @@ public:
     bool CheckTransition( EMotionAnim from, EMotionAnim to );
 
     void SetSpecParams( u32 param ) { spec_params |= param; }
+
     void SetCurAnim( EMotionAnim a );
 
     EMotionAnim GetCurAnim() { return cur_anim_info().get_motion(); }
@@ -246,6 +247,7 @@ public:
     void accel_load( LPCSTR section );
 
     void accel_activate( EAccelType type );
+
     IC void accel_deactivate() {
         m_accel.active = false;
         m_accel.enable_braking = false;
@@ -285,6 +287,7 @@ public:
 public:
     // информация о текущей анимации
     SCurrentAnimationInfo m_cur_anim;
+
     SCurrentAnimationInfo& cur_anim_info() { return m_cur_anim; }
 
     void select_animation( bool anim_end = false );
@@ -307,7 +310,9 @@ public:
                                         u32 index = -1 );
     void set_override_animation( pcstr name );
     void clear_override_animation();
+
     EMotionAnim get_override_animation() const { return m_override_animation; }
+
     bool has_override_animation() const {
         return get_override_animation() != eAnimUndefined;
     }

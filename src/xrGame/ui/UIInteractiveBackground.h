@@ -35,6 +35,7 @@ public:
 
     void InitIB( Fvector2 pos, Fvector2 size );
     void InitIB( LPCSTR texture_e, Fvector2 pos, Fvector2 size );
+
     T* Get( IBState state ) { return m_states[ state ]; };
 
     void InitState( IBState state, LPCSTR texture );

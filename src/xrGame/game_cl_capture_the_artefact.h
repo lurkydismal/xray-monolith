@@ -104,13 +104,17 @@ public:
 
     virtual void OnSpawn( CObject* pObj );
     virtual BOOL CanCallBuyMenu();
+
     virtual BOOL CanCallSkinMenu() { return TRUE; };
+
     virtual BOOL CanCallTeamSelectMenu();
     virtual BOOL CanCallInventoryMenu();
     bool LocalPlayerCanBuyItem( shared_str const& name_sect );
 
     void Set_ShowPlayerNames( bool Show ) { m_bShowPlayersNames = Show; };
+
     bool Get_ShowPlayerNames() { return m_bShowPlayersNames; };
+
     bool Get_ShowPlayerNamesEnabled() { return m_bFriendlyNames; };
 
     // ui part
@@ -143,10 +147,12 @@ public:
     virtual char* getTeamSection( int Team );
 
     virtual s16 ModifyTeam( s16 Team ) { return Team; };
+
     virtual bool PlayerCanSprint( CActor* pActor );
 
     // very bad... need to fix problem with team indexes...
     virtual void OnSpeechMessage( NET_Packet& P );
+
     virtual u8 GetTeamCount() { return 2; };
 
     virtual void OnSwitchPhase( u32 old_phase, u32 new_phase );
@@ -162,11 +168,15 @@ public:
     bool CanActivateArtefact() const;
 
     bool InWarmUp() const;
+
     virtual bool Is_Rewarding_Allowed() const { return !InWarmUp(); };
+
     bool HasTimeLimit() const;
 
     virtual LPCSTR GetGameScore( string32& score_dest );
     virtual void OnConnected();
+
     s32 GetGreenTeamScore() const { return greenTeamScore; };
+
     s32 GetBlueTeamScore() const { return blueTeamScore; };
 };

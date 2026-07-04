@@ -83,6 +83,7 @@ effect_exception::effect_exception( ALenum code, const char* msg, ... )
     setMessage( msg, args );
     va_end( args );
 }
+
 effect_exception::~effect_exception() = default;
 
 namespace {
@@ -92,6 +93,7 @@ struct EffectPropsItem {
     const EffectProps& DefaultProps;
     const EffectVtable& Vtable;
 };
+
 constexpr EffectPropsItem EffectPropsList[] = {
     { AL_EFFECT_NULL, NullEffectProps, NullEffectVtable },
     { AL_EFFECT_EAXREVERB, ReverbEffectProps, ReverbEffectVtable },
@@ -118,12 +120,15 @@ constexpr EffectPropsItem EffectPropsList[] = {
 void ALeffect_setParami( ALeffect* effect, ALenum param, int value ) {
     effect->vtab->setParami( &effect->Props, param, value );
 }
+
 void ALeffect_setParamiv( ALeffect* effect, ALenum param, const int* values ) {
     effect->vtab->setParamiv( &effect->Props, param, values );
 }
+
 void ALeffect_setParamf( ALeffect* effect, ALenum param, float value ) {
     effect->vtab->setParamf( &effect->Props, param, value );
 }
+
 void ALeffect_setParamfv( ALeffect* effect,
                           ALenum param,
                           const float* values ) {
@@ -133,12 +138,15 @@ void ALeffect_setParamfv( ALeffect* effect,
 void ALeffect_getParami( const ALeffect* effect, ALenum param, int* value ) {
     effect->vtab->getParami( &effect->Props, param, value );
 }
+
 void ALeffect_getParamiv( const ALeffect* effect, ALenum param, int* values ) {
     effect->vtab->getParamiv( &effect->Props, param, values );
 }
+
 void ALeffect_getParamf( const ALeffect* effect, ALenum param, float* value ) {
     effect->vtab->getParamf( &effect->Props, param, value );
 }
+
 void ALeffect_getParamfv( const ALeffect* effect,
                           ALenum param,
                           float* values ) {
@@ -282,6 +290,7 @@ AL_API void AL_APIENTRY alGenEffects( ALsizei n,
         std::copy( ids.cbegin(), ids.cend(), effects );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alDeleteEffects( ALsizei n, const ALuint* effects )
@@ -321,6 +330,7 @@ AL_API void AL_APIENTRY alDeleteEffects( ALsizei n, const ALuint* effects )
     };
     std::for_each( effects, effects_end, delete_effect );
 }
+
 END_API_FUNC
 
 AL_API ALboolean AL_APIENTRY alIsEffect( ALuint effect ) START_API_FUNC {
@@ -334,6 +344,7 @@ AL_API ALboolean AL_APIENTRY alIsEffect( ALuint effect ) START_API_FUNC {
         }
     return AL_FALSE;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alEffecti( ALuint effect,
@@ -375,6 +386,7 @@ AL_API void AL_APIENTRY alEffecti( ALuint effect,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alEffectiv( ALuint effect,
@@ -404,6 +416,7 @@ AL_API void AL_APIENTRY alEffectiv( ALuint effect,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alEffectf( ALuint effect,
@@ -427,6 +440,7 @@ AL_API void AL_APIENTRY alEffectf( ALuint effect,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alEffectfv( ALuint effect,
@@ -450,6 +464,7 @@ AL_API void AL_APIENTRY alEffectfv( ALuint effect,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetEffecti( ALuint effect,
@@ -474,6 +489,7 @@ AL_API void AL_APIENTRY alGetEffecti( ALuint effect,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetEffectiv( ALuint effect,
@@ -503,6 +519,7 @@ AL_API void AL_APIENTRY alGetEffectiv( ALuint effect,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetEffectf( ALuint effect,
@@ -526,6 +543,7 @@ AL_API void AL_APIENTRY alGetEffectf( ALuint effect,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetEffectfv( ALuint effect,
@@ -549,6 +567,7 @@ AL_API void AL_APIENTRY alGetEffectfv( ALuint effect,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 void InitEffect( ALeffect* effect ) {
@@ -568,6 +587,7 @@ EffectSubList::~EffectSubList() {
 }
 
 #define DECL( x ) { #x, EFX_REVERB_PRESET_##x }
+
 static const struct {
     const char name[ 32 ];
     EFXEAXREVERBPROPERTIES props;
@@ -699,6 +719,7 @@ static const struct {
     DECL( CHAPEL ),
     DECL( SMALLWATERROOM ),
 };
+
 #undef DECL
 
 void LoadReverbPreset( const char* name, ALeffect* effect ) {

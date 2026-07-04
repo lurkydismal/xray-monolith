@@ -1012,6 +1012,7 @@ public:
     CCC_Fog_Reload( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = TRUE;
     };
+
     virtual void Execute( LPCSTR args ) { FluidManager.UpdateProfiles(); }
 };
 #endif //	DEBUG
@@ -1171,7 +1172,7 @@ void xrRender_initconsole() {
     //	CMD3(CCC_Mask,		"r2_sun_static",		&ps_r2_ls_flags,
     // R2FLAG_SUN_STATIC); 	CMD3(CCC_Mask,		"r2_exp_splitscene",
     //&ps_r2_ls_flags,			R2FLAG_EXP_SPLIT_SCENE);
-    //CMD3(CCC_Mask, "r2_exp_donttest_uns",	&ps_r2_ls_flags,
+    // CMD3(CCC_Mask, "r2_exp_donttest_uns",	&ps_r2_ls_flags,
     // R2FLAG_EXP_DONT_TEST_UNSHADOWED);
     CMD3( CCC_Mask, "r2_exp_donttest_shad", &ps_r2_ls_flags,
           R2FLAG_EXP_DONT_TEST_SHADOWED );

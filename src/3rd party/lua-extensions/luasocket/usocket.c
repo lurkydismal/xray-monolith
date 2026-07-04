@@ -22,6 +22,7 @@
 #define WAITFD_R POLLIN
 #define WAITFD_W POLLOUT
 #define WAITFD_C ( POLLIN | POLLOUT )
+
 int socket_waitfd( p_socket ps, int sw, p_timeout tm ) {
     int ret;
     struct pollfd pfd;

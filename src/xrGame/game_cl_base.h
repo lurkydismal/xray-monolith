@@ -57,7 +57,9 @@ protected:
     virtual shared_str shedule_Name() const {
         return shared_str( "game_cl_GameState" );
     };
+
     virtual float shedule_Scale() { return 1.0f; };
+
     virtual bool shedule_Needed() { return true; };
 
     void sv_GameEventGen( NET_Packet& P );
@@ -66,7 +68,9 @@ protected:
 public:
     game_cl_GameState();
     virtual ~game_cl_GameState();
+
     LPCSTR type_name() const { return *m_game_type_name; };
+
     void set_type_name( LPCSTR s );
 
     virtual void Init() {};
@@ -86,7 +90,9 @@ public:
     game_PlayerState* GetPlayerByGameID( u32 GameID );
     game_PlayerState* GetPlayerByOrderID( u32 id );
     ClientID GetClientIDByOrderID( u32 id );
+
     u32 GetPlayersCount() const { return players.size(); };
+
     virtual CUIGameCustom* createGameUI() { return NULL; };
 
     virtual void SetGameUI( CUIGameCustom* ) {};
@@ -107,9 +113,11 @@ public:
     virtual void OnRadminMessage( u16 type, NET_Packet* P ) {};
 
     virtual bool IsVotingEnabled() { return m_u16VotingEnabled != 0; };
+
     virtual bool IsVotingEnabled( u16 flag ) {
         return ( m_u16VotingEnabled & flag ) != 0;
     };
+
     virtual bool IsVotingActive() { return false; };
 
     virtual void SetVotingActive( bool Active ) {};
@@ -125,11 +133,15 @@ public:
     virtual void OnVoteStop( NET_Packet& P ) {};
 
     virtual void OnRender() {};
+
     virtual bool IsServerControlHits() { return m_bServerControlHits; };
+
     virtual bool IsEnemy( game_PlayerState* ps ) { return false; };
+
     virtual bool IsEnemy( CEntityAlive* ea1, CEntityAlive* ea2 ) {
         return false;
     };
+
     virtual bool PlayerCanSprint( CActor* pActor ) { return true; };
 
     virtual void OnSpawn( CObject* pObj ) {};
@@ -146,5 +158,6 @@ public:
     virtual bool IsPlayerInTeam( game_PlayerState* ps, ETeam team ) {
         return ps->team == team;
     };
+
     virtual void OnConnected();
 };

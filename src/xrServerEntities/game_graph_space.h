@@ -129,6 +129,7 @@ public:
     IC void save( IWriter* reader );
     friend class CGameGraph;
 };
+
 #pragma pack( pop )
 
 #ifdef AI_COMPILER

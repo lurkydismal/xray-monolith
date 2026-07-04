@@ -22,11 +22,17 @@ public:
     svector( iterator p, int c ) { assign( p, c ); }
 
     IC iterator begin() { return array; }
+
     IC iterator end() { return array + count; }
+
     IC const_iterator begin() const { return array; }
+
     IC const_iterator end() const { return array + count; }
+
     IC u32 size() const { return count; }
+
     IC void clear() { count = 0; }
+
     IC void resize( int c ) {
         VERIFY( c <= dim );
         count = c;
@@ -55,20 +61,25 @@ public:
     }
 
     IC reference front() { return array[ 0 ]; }
+
     IC reference back() { return array[ count - 1 ]; }
+
     IC reference last() {
         VERIFY( count < dim );
         return array[ count ];
     }
 
     IC const_reference front() const { return array[ 0 ]; }
+
     IC const_reference back() const { return array[ count - 1 ]; }
+
     IC const_reference last() const {
         VERIFY( count < dim );
         return array[ count ];
     }
 
     IC void inc() { count++; }
+
     IC bool empty() const { return 0 == count; }
 
     IC void erase( u32 id ) {

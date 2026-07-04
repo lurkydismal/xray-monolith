@@ -68,6 +68,7 @@ typedef my_upsampler* my_upsample_ptr;
  */
 
 METHODDEF( void )
+
 start_pass_upsample( j_decompress_ptr cinfo ) {
     my_upsample_ptr upsample = ( my_upsample_ptr )cinfo->upsample;
 
@@ -86,6 +87,7 @@ start_pass_upsample( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 sep_upsample( j_decompress_ptr cinfo,
               JSAMPIMAGE input_buf,
               JDIMENSION* in_row_group_ctr,
@@ -155,6 +157,7 @@ sep_upsample( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 fullsize_upsample( j_decompress_ptr cinfo,
                    jpeg_component_info* compptr,
                    JSAMPARRAY input_data,
@@ -168,6 +171,7 @@ fullsize_upsample( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 noop_upsample( j_decompress_ptr cinfo,
                jpeg_component_info* compptr,
                JSAMPARRAY input_data,
@@ -187,6 +191,7 @@ noop_upsample( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 int_upsample( j_decompress_ptr cinfo,
               jpeg_component_info* compptr,
               JSAMPARRAY input_data,
@@ -234,6 +239,7 @@ int_upsample( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 h2v1_upsample( j_decompress_ptr cinfo,
                jpeg_component_info* compptr,
                JSAMPARRAY input_data,
@@ -264,6 +270,7 @@ h2v1_upsample( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 h2v2_upsample( j_decompress_ptr cinfo,
                jpeg_component_info* compptr,
                JSAMPARRAY input_data,
@@ -309,6 +316,7 @@ h2v2_upsample( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 h2v1_fancy_upsample( j_decompress_ptr cinfo,
                      jpeg_component_info* compptr,
                      JSAMPARRAY input_data,
@@ -357,6 +365,7 @@ h2v1_fancy_upsample( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 h2v2_fancy_upsample( j_decompress_ptr cinfo,
                      jpeg_component_info* compptr,
                      JSAMPARRAY input_data,
@@ -423,6 +432,7 @@ h2v2_fancy_upsample( j_decompress_ptr cinfo,
  */
 
 GLOBAL( void )
+
 jinit_upsampler( j_decompress_ptr cinfo ) {
     my_upsample_ptr upsample;
     int ci;

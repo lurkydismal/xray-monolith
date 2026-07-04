@@ -56,7 +56,9 @@ public:
     virtual ~CUITaskWnd();
     virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData );
     void Init();
+
     CUIMapWnd* GetMapWnd() const { return m_pMapWnd; }
+
     virtual void Update();
     virtual void Draw();
     void DrawHint();
@@ -68,8 +70,11 @@ public:
     void Switch_ShowMapLegend();
 
     bool IsTreasuresEnabled() { return m_bTreasuresEnabled; };
+
     bool IsQuestNpcsEnabled() { return m_bQuestNpcsEnabled; };
+
     bool IsSecondaryTasksEnabled() { return m_bSecondaryTasksEnabled; };
+
     bool IsPrimaryObjectsEnabled() { return m_bPrimaryObjectsEnabled; };
 
     void TreasuresEnabled( bool enable ) {
@@ -131,6 +136,7 @@ public:
 
     void Init( CUIXml& uiXml, LPCSTR path );
     void InitTask( CGameTask* task );
+
     CGameTask* OwnerTask() { return m_owner; }
 
     virtual CUIWindow* ui_cast_window() { return this; }

@@ -57,6 +57,7 @@ aiVector2t< TReal >::operator aiVector2t< TOther >() const {
     return aiVector2t< TOther >( static_cast< TOther >( x ),
                                  static_cast< TOther >( y ) );
 }
+
 // ------------------------------------------------------------------------------------------------
 template < typename TReal >
 void aiVector2t< TReal >::Set( TReal pX, TReal pY ) {

@@ -208,11 +208,13 @@ EC_GROUP* EC_GROUP_new_curve_GF2m( const BIGNUM* p,
 /* EC_GROUP_new_by_curve_name() creates a EC_GROUP structure
  * specified by a curve name (in form of a NID) */
 EC_GROUP* EC_GROUP_new_by_curve_name( int nid );
+
 /* handling of internal curves */
 typedef struct {
     int nid;
     const char* comment;
 } EC_builtin_curve;
+
 /* EC_builtin_curves(EC_builtin_curve *r, size_t size) returns number
  * of all available curves or zero if a error occurred.
  * In case r ist not zero nitems EC_builtin_curve structures

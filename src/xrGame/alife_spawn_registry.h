@@ -93,7 +93,9 @@ public:
                                       CSE_ALifeDynamicObject* object ) const;
     IC const ALife::_SPAWN_ID& spawn_id(
         const ALife::_SPAWN_STORY_ID& spawn_story_id ) const;
+
     shared_str const& get_spawn_name() const { return m_spawn_name; }
+
     IReader* get_spawn_file() const { return m_file; }
 };
 

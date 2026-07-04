@@ -62,6 +62,7 @@
  */
 
 LOCAL( void )
+
 do_flip_h( j_decompress_ptr srcinfo,
            j_compress_ptr dstinfo,
            jvirt_barray_ptr* src_coef_arrays )
@@ -113,6 +114,7 @@ do_flip_h( j_decompress_ptr srcinfo,
 }
 
 LOCAL( void )
+
 do_flip_v( j_decompress_ptr srcinfo,
            j_compress_ptr dstinfo,
            jvirt_barray_ptr* src_coef_arrays,
@@ -188,6 +190,7 @@ do_flip_v( j_decompress_ptr srcinfo,
 }
 
 LOCAL( void )
+
 do_transpose( j_decompress_ptr srcinfo,
               j_compress_ptr dstinfo,
               jvirt_barray_ptr* src_coef_arrays,
@@ -238,6 +241,7 @@ do_transpose( j_decompress_ptr srcinfo,
 }
 
 LOCAL( void )
+
 do_rot_90( j_decompress_ptr srcinfo,
            j_compress_ptr dstinfo,
            jvirt_barray_ptr* src_coef_arrays,
@@ -311,6 +315,7 @@ do_rot_90( j_decompress_ptr srcinfo,
 }
 
 LOCAL( void )
+
 do_rot_270( j_decompress_ptr srcinfo,
             j_compress_ptr dstinfo,
             jvirt_barray_ptr* src_coef_arrays,
@@ -384,6 +389,7 @@ do_rot_270( j_decompress_ptr srcinfo,
 }
 
 LOCAL( void )
+
 do_rot_180( j_decompress_ptr srcinfo,
             j_compress_ptr dstinfo,
             jvirt_barray_ptr* src_coef_arrays,
@@ -492,6 +498,7 @@ do_rot_180( j_decompress_ptr srcinfo,
 }
 
 LOCAL( void )
+
 do_transverse( j_decompress_ptr srcinfo,
                j_compress_ptr dstinfo,
                jvirt_barray_ptr* src_coef_arrays,
@@ -621,6 +628,7 @@ do_transverse( j_decompress_ptr srcinfo,
  */
 
 GLOBAL( void )
+
 jtransform_request_workspace( j_decompress_ptr srcinfo,
                               jpeg_transform_info* info ) {
     jvirt_barray_ptr* coef_arrays = NULL;
@@ -692,6 +700,7 @@ jtransform_request_workspace( j_decompress_ptr srcinfo,
 /* Transpose destination image parameters */
 
 LOCAL( void )
+
 transpose_critical_parameters( j_compress_ptr dstinfo ) {
     int tblno, i, j, ci, itemp;
     jpeg_component_info* compptr;
@@ -731,6 +740,7 @@ transpose_critical_parameters( j_compress_ptr dstinfo ) {
 /* Trim off any partial iMCUs on the indicated destination edge */
 
 LOCAL( void )
+
 trim_right_edge( j_compress_ptr dstinfo ) {
     int ci, max_h_samp_factor;
     JDIMENSION MCU_cols;
@@ -750,6 +760,7 @@ trim_right_edge( j_compress_ptr dstinfo ) {
 }
 
 LOCAL( void )
+
 trim_bottom_edge( j_compress_ptr dstinfo ) {
     int ci, max_v_samp_factor;
     JDIMENSION MCU_rows;
@@ -780,6 +791,7 @@ trim_bottom_edge( j_compress_ptr dstinfo ) {
  */
 
 GLOBAL( jvirt_barray_ptr* )
+
 jtransform_adjust_parameters( j_decompress_ptr srcinfo,
                               j_compress_ptr dstinfo,
                               jvirt_barray_ptr* src_coef_arrays,
@@ -866,6 +878,7 @@ jtransform_adjust_parameters( j_decompress_ptr srcinfo,
  */
 
 GLOBAL( void )
+
 jtransform_execute_transformation( j_decompress_ptr srcinfo,
                                    j_compress_ptr dstinfo,
                                    jvirt_barray_ptr* src_coef_arrays,
@@ -906,6 +919,7 @@ jtransform_execute_transformation( j_decompress_ptr srcinfo,
  */
 
 GLOBAL( void )
+
 jcopy_markers_setup( j_decompress_ptr srcinfo, JCOPY_OPTION option ) {
 #ifdef SAVE_MARKERS_SUPPORTED
     int m;
@@ -930,6 +944,7 @@ jcopy_markers_setup( j_decompress_ptr srcinfo, JCOPY_OPTION option ) {
  */
 
 GLOBAL( void )
+
 jcopy_markers_execute( j_decompress_ptr srcinfo,
                        j_compress_ptr dstinfo,
                        JCOPY_OPTION option ) {

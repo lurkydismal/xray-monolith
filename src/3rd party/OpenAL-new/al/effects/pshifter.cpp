@@ -17,6 +17,7 @@ void Pshifter_setParamf( EffectProps*, ALenum param, float ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid pitch shifter float property 0x%04x", param };
 }
+
 void Pshifter_setParamfv( EffectProps*, ALenum param, const float* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid pitch shifter float-vector property 0x%04x",
@@ -48,6 +49,7 @@ void Pshifter_setParami( EffectProps* props, ALenum param, int val ) {
                 "Invalid pitch shifter integer property 0x%04x", param };
     }
 }
+
 void Pshifter_setParamiv( EffectProps* props, ALenum param, const int* vals ) {
     Pshifter_setParami( props, param, vals[ 0 ] );
 }
@@ -67,6 +69,7 @@ void Pshifter_getParami( const EffectProps* props, ALenum param, int* val ) {
                 "Invalid pitch shifter integer property 0x%04x", param };
     }
 }
+
 void Pshifter_getParamiv( const EffectProps* props, ALenum param, int* vals ) {
     Pshifter_getParami( props, param, vals );
 }
@@ -75,6 +78,7 @@ void Pshifter_getParamf( const EffectProps*, ALenum param, float* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid pitch shifter float property 0x%04x", param };
 }
+
 void Pshifter_getParamfv( const EffectProps*, ALenum param, float* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid pitch shifter float vector-property 0x%04x",

@@ -73,6 +73,7 @@ post_process_2pass JPP( ( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 start_pass_dpost( j_decompress_ptr cinfo, J_BUF_MODE pass_mode ) {
     my_post_ptr post = ( my_post_ptr )cinfo->post;
 
@@ -125,6 +126,7 @@ start_pass_dpost( j_decompress_ptr cinfo, J_BUF_MODE pass_mode ) {
  */
 
 METHODDEF( void )
+
 post_process_1pass( j_decompress_ptr cinfo,
                     JSAMPIMAGE input_buf,
                     JDIMENSION* in_row_group_ctr,
@@ -157,6 +159,7 @@ post_process_1pass( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 post_process_prepass( j_decompress_ptr cinfo,
                       JSAMPIMAGE input_buf,
                       JDIMENSION* in_row_group_ctr,
@@ -202,6 +205,7 @@ post_process_prepass( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 post_process_2pass( j_decompress_ptr cinfo,
                     JSAMPIMAGE input_buf,
                     JDIMENSION* in_row_group_ctr,
@@ -250,6 +254,7 @@ post_process_2pass( j_decompress_ptr cinfo,
  */
 
 GLOBAL( void )
+
 jinit_d_post_controller( j_decompress_ptr cinfo, boolean need_full_buffer ) {
     my_post_ptr post;
 

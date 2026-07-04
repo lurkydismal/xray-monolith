@@ -445,6 +445,7 @@ GLM_FUNC_QUALIFIER vecType< L, T, P > sign( vecType< L, T, P > const& x ) {
 
 // floor
 using ::std::floor;
+
 template < length_t L,
            typename T,
            precision P,
@@ -530,6 +531,7 @@ GLM_FUNC_QUALIFIER vecType< L, T, P > roundEven( vecType< L, T, P > const& x ) {
 
 // ceil
 using ::std::ceil;
+
 template < length_t L,
            typename T,
            precision P,

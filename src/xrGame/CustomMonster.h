@@ -134,6 +134,7 @@ public:
 
 public:
     virtual CEntityAlive* cast_entity_alive() { return this; }
+
     virtual CEntity* cast_entity() { return this; }
 
 public:
@@ -173,33 +174,43 @@ public:
 
 public:
     virtual float ffGetFov() const { return eye_fov; }
+
     virtual float ffGetRange() const { return eye_range; }
+
     void set_fov( float new_fov );
     void set_range( float new_range );
     //	virtual	void				feel_touch_new
     //(CObject	*O);
     virtual BOOL feel_visible_isRelevant( CObject* O );
+
     virtual Feel::Sound* dcast_FeelSound() { return this; }
+
     virtual void Hit( SHit* pHDS );
 
     virtual void OnEvent( NET_Packet& P, u16 type );
     virtual void net_Destroy();
     virtual BOOL UsedAI_Locations();
+
     ///////////////////////////////////////////////////////////////////////
     virtual u16 PHGetSyncItemsNumber() {
         return inherited::PHGetSyncItemsNumber();
     }
+
     virtual CPHSynchronize* PHGetSyncItem( u16 item ) {
         return inherited::PHGetSyncItem( item );
     }
+
     virtual void PHUnFreeze() { return inherited::PHUnFreeze(); }
+
     virtual void PHFreeze() { return inherited::PHFreeze(); }
+
     ///////////////////////////////////////////////////////////////////////
 public:
     virtual void Load( LPCSTR section );
     virtual void reinit();
     virtual void reload( LPCSTR section );
     virtual const SRotation Orientation() const;
+
     virtual float get_custom_pitch_speed( float def_speed ) {
         return def_speed;
     }
@@ -210,22 +221,29 @@ public:
 
     virtual void save( NET_Packet& output_packet );
     virtual void load( IReader& input_packet );
+
     virtual BOOL net_SaveRelevant() { return inherited::net_SaveRelevant(); }
 
     virtual const MonsterSpace::SBoneRotation& head_orientation() const;
 
     virtual void UpdatePositionAnimation();
     virtual void set_ready_to_save();
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CParticlesPlayer* cast_particles_player() { return this; }
+
     virtual CCustomMonster* cast_custom_monster() { return this; }
+
     virtual CScriptEntity* cast_script_entity() { return this; }
 
     void load_killer_clsids( LPCSTR section );
     bool is_special_killer( CObject* obj );
 
     IC CMemoryManager& memory() const;
+
     IC CMemoryManager* memoryPtr() const { return m_memory_manager; }
+
     virtual float feel_vision_mtl_transp( CObject* O, u32 element );
     virtual void feel_sound_new( CObject* who,
                                  int type,
@@ -280,6 +298,7 @@ public:
     virtual void on_restrictions_change();
 
     virtual bool should_wait_to_use_corspe_visual() { return true; }
+
     virtual LPCSTR visual_name( CSE_Abstract* server_entity );
 
 private:
@@ -287,9 +306,11 @@ private:
 
 public:
     IC const bool& already_dead() const { return ( m_already_dead ); };
+
     virtual bool use_simplified_visual() const {
         return false;
     } //(already_dead());};
+
     virtual void on_enemy_change( const CEntityAlive* enemy );
     virtual CVisualMemoryManager* visual_memory() const;
 

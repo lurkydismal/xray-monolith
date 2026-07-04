@@ -13,6 +13,7 @@ public:
         enter();
         in_mode = true;
     }
+
     ~FPUCtl() {
         if ( in_mode )
             leave();

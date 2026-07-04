@@ -43,6 +43,7 @@ namespace internal {
 class arena;
 class task_scheduler_observer_v3;
 } // namespace internal
+
 //! @endcond
 
 namespace interface7 {
@@ -55,6 +56,7 @@ using namespace tbb::internal; // e.g. function_task from task.h
 class delegate_base : no_assign {
 public:
     virtual void operator()() const = 0;
+
     virtual ~delegate_base() {}
 };
 
@@ -74,6 +76,7 @@ template < typename F, typename R >
 class delegated_function : public delegate_base {
     F& my_func;
     tbb::aligned_space< R > my_return_storage;
+
     // The function should be called only once.
     void operator()() const __TBB_override {
         new ( my_return_storage.begin() ) R( my_func() );
@@ -81,20 +84,24 @@ class delegated_function : public delegate_base {
 
 public:
     delegated_function( F& f ) : my_func( f ) {}
+
     // The function can be called only after operator() and only once.
     R consume_result() const {
         return tbb::internal::move( *( my_return_storage.begin() ) );
     }
+
     ~delegated_function() { my_return_storage.begin()->~R(); }
 };
 
 template < typename F >
 class delegated_function< F, void > : public delegate_base {
     F& my_func;
+
     void operator()() const __TBB_override { my_func(); }
 
 public:
     delegated_function( F& f ) : my_func( f ) {}
+
     void consume_result() const {}
 
     friend class task_arena_base;
@@ -109,6 +116,7 @@ public:
         constraints( numa_node_id id = automatic,
                      int maximal_concurrency = automatic )
             : numa_id( id ), max_concurrency( maximal_concurrency ) {}
+
         numa_node_id numa_id;
         int max_concurrency;
     };
@@ -239,6 +247,7 @@ R isolate_impl( F& f ) {
 }
 #endif /* __TBB_TASK_ISOLATION */
 } // namespace internal
+
 //! @endcond
 
 /** 1-to-1 proxy representation class of scheduler's arena
@@ -257,6 +266,7 @@ class task_arena : public internal::task_arena_base {
 #endif
     );
     friend int tbb::this_task_arena::max_concurrency();
+
     void mark_initialized() {
         __TBB_ASSERT( my_arena, "task_arena initialization is incomplete" );
 #if __TBB_TASK_GROUP_CONTEXT

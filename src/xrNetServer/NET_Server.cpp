@@ -658,6 +658,7 @@ void IPureServer::SendBroadcast_LL( ClientID exclude,
             return true;
         }
     };
+
     struct ClientSenderFunctor {
         IPureServer* m_owner;
         void* m_data;
@@ -677,6 +678,7 @@ void IPureServer::SendBroadcast_LL( ClientID exclude,
             m_owner->SendTo_LL( client->ID, m_data, m_size, m_dwFlags );
         }
     };
+
     ClientSenderFunctor temp_functor( this, data, size, dwFlags );
     net_players.ForFoundClientsDo( ClientExcluderPredicate( exclude ),
                                    temp_functor );
@@ -772,9 +774,11 @@ void IPureServer::UpdateClientStatistic( IClient* C ) {
 
 void IPureServer::ClearStatistic() {
     stats.clear();
+
     struct StatsClearFunctor {
         static void Clear( IClient* client ) { client->stats.Clear(); }
     };
+
     net_players.ForEachClientDo( StatsClearFunctor::Clear );
 };
 
@@ -802,6 +806,7 @@ bool IPureServer::DisconnectAddress( const ip_address& Address,
     u32 players_count = net_players.ClientsCount();
     buffer_vector< IClient* > PlayersToDisconnect(
         _alloca( players_count * sizeof( IClient* ) ), players_count );
+
     struct ToDisconnectFillerFunctor {
         IPureServer* m_owner;
         buffer_vector< IClient* >* dest;
@@ -822,6 +827,7 @@ bool IPureServer::DisconnectAddress( const ip_address& Address,
             };
         }
     };
+
     ToDisconnectFillerFunctor tmp_functor( this, &PlayersToDisconnect,
                                            &Address );
     net_players.ForEachClientDo( tmp_functor );

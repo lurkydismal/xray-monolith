@@ -187,6 +187,7 @@ typedef my_marker_reader* my_marker_ptr;
  */
 
 LOCAL( boolean )
+
 get_soi( j_decompress_ptr cinfo )
 /* Process an SOI marker */
 {
@@ -226,6 +227,7 @@ get_soi( j_decompress_ptr cinfo )
 }
 
 LOCAL( boolean )
+
 get_sof( j_decompress_ptr cinfo, boolean is_prog, boolean is_arith )
 /* Process a SOFn marker */
 {
@@ -290,6 +292,7 @@ get_sof( j_decompress_ptr cinfo, boolean is_prog, boolean is_arith )
 }
 
 LOCAL( boolean )
+
 get_sos( j_decompress_ptr cinfo )
 /* Process a SOS marker */
 {
@@ -361,6 +364,7 @@ get_sos( j_decompress_ptr cinfo )
 #ifdef D_ARITH_CODING_SUPPORTED
 
 LOCAL( boolean )
+
 get_dac( j_decompress_ptr cinfo )
 /* Process a DAC marker */
 {
@@ -406,6 +410,7 @@ get_dac( j_decompress_ptr cinfo )
 #endif /* D_ARITH_CODING_SUPPORTED */
 
 LOCAL( boolean )
+
 get_dht( j_decompress_ptr cinfo )
 /* Process a DHT marker */
 {
@@ -475,6 +480,7 @@ get_dht( j_decompress_ptr cinfo )
 }
 
 LOCAL( boolean )
+
 get_dqt( j_decompress_ptr cinfo )
 /* Process a DQT marker */
 {
@@ -535,6 +541,7 @@ get_dqt( j_decompress_ptr cinfo )
 }
 
 LOCAL( boolean )
+
 get_dri( j_decompress_ptr cinfo )
 /* Process a DRI marker */
 {
@@ -569,6 +576,7 @@ get_dri( j_decompress_ptr cinfo )
 #define APPN_DATA_LEN 14  /* Must be the largest of the above!! */
 
 LOCAL( void )
+
 examine_app0( j_decompress_ptr cinfo,
               JOCTET FAR* data,
               unsigned int datalen,
@@ -644,6 +652,7 @@ examine_app0( j_decompress_ptr cinfo,
 }
 
 LOCAL( void )
+
 examine_app14( j_decompress_ptr cinfo,
                JOCTET FAR* data,
                unsigned int datalen,
@@ -673,6 +682,7 @@ examine_app14( j_decompress_ptr cinfo,
 }
 
 METHODDEF( boolean )
+
 get_interesting_appn( j_decompress_ptr cinfo )
 /* Process an APP0 or APP14 marker without saving it */
 {
@@ -721,6 +731,7 @@ get_interesting_appn( j_decompress_ptr cinfo )
 #ifdef SAVE_MARKERS_SUPPORTED
 
 METHODDEF( boolean )
+
 save_marker( j_decompress_ptr cinfo )
 /* Save an APPn or COM marker into the marker list */
 {
@@ -827,6 +838,7 @@ save_marker( j_decompress_ptr cinfo )
 #endif /* SAVE_MARKERS_SUPPORTED */
 
 METHODDEF( boolean )
+
 skip_variable( j_decompress_ptr cinfo )
 /* Skip over an unknown or uninteresting variable-length marker */
 {
@@ -855,6 +867,7 @@ skip_variable( j_decompress_ptr cinfo )
  */
 
 LOCAL( boolean )
+
 next_marker( j_decompress_ptr cinfo ) {
     int c;
     INPUT_VARS( cinfo );
@@ -901,6 +914,7 @@ next_marker( j_decompress_ptr cinfo ) {
 }
 
 LOCAL( boolean )
+
 first_marker( j_decompress_ptr cinfo )
 /* Like next_marker, but used to obtain the initial SOI marker. */
 /* For this marker, we do not allow preceding garbage or fill; otherwise,
@@ -931,6 +945,7 @@ first_marker( j_decompress_ptr cinfo )
  */
 
 METHODDEF( int )
+
 read_markers( j_decompress_ptr cinfo ) {
     /* Outer loop repeats once for each marker. */
     for ( ;; ) {
@@ -1094,6 +1109,7 @@ read_markers( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( boolean )
+
 read_restart_marker( j_decompress_ptr cinfo ) {
     /* Obtain a marker unless we already did. */
     /* Note that next_marker will complain if it skips any data. */
@@ -1173,6 +1189,7 @@ read_restart_marker( j_decompress_ptr cinfo ) {
  */
 
 GLOBAL( boolean )
+
 jpeg_resync_to_restart( j_decompress_ptr cinfo, int desired ) {
     int marker = cinfo->unread_marker;
     int action = 1;
@@ -1222,6 +1239,7 @@ jpeg_resync_to_restart( j_decompress_ptr cinfo, int desired ) {
  */
 
 METHODDEF( void )
+
 reset_marker_reader( j_decompress_ptr cinfo ) {
     my_marker_ptr marker = ( my_marker_ptr )cinfo->marker;
 
@@ -1240,6 +1258,7 @@ reset_marker_reader( j_decompress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jinit_marker_reader( j_decompress_ptr cinfo ) {
     my_marker_ptr marker;
     int i;
@@ -1275,6 +1294,7 @@ jinit_marker_reader( j_decompress_ptr cinfo ) {
 #ifdef SAVE_MARKERS_SUPPORTED
 
 GLOBAL( void )
+
 jpeg_save_markers( j_decompress_ptr cinfo,
                    int marker_code,
                    unsigned int length_limit ) {
@@ -1326,6 +1346,7 @@ jpeg_save_markers( j_decompress_ptr cinfo,
  */
 
 GLOBAL( void )
+
 jpeg_set_marker_processor( j_decompress_ptr cinfo,
                            int marker_code,
                            jpeg_marker_parser_method routine ) {

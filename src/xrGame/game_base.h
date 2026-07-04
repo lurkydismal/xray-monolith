@@ -104,11 +104,14 @@ struct game_PlayerState {
     bool testFlag( u16 f ) const;
     void setFlag( u16 f );
     void resetFlag( u16 f );
+
     LPCSTR getName() const { return m_account.name().c_str(); }
+
     // void	setName					(LPCSTR
     // s){xr_strcpy(name,s);}
     void SetGameID( u16 NewID );
     bool HasOldID( u16 ID );
+
     bool IsSkip() const { return testFlag( GAME_PLAYER_FLAG_SKIP ); }
 
     s16 frags() const { return m_iRivalKills - m_iSelfKills - m_iTeamKills; }
@@ -169,12 +172,17 @@ public:
     virtual ~game_GameState() {}
 
     IC EGameIDs const& Type() const { return m_type; };
+
     u16 Phase() const { return m_phase; };
+
     s32 Round() const { return m_round; };
+
     u32 StartTime() const { return m_start_time; };
 
     virtual void Create( shared_str& options ) {};
+
     virtual LPCSTR type_name() const { return "base game"; };
+
     // for scripting enhancement
     static CLASS_ID getCLASS_ID( LPCSTR game_type_name, bool bServer );
 

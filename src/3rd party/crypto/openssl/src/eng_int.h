@@ -99,6 +99,7 @@ extern "C" {
  * order. NB: both the "add" functions assume CRYPTO_LOCK_ENGINE to already be
  * held (in "write" mode). */
 typedef void( ENGINE_CLEANUP_CB )( void );
+
 typedef struct st_engine_cleanup_item {
     ENGINE_CLEANUP_CB* cb;
 } ENGINE_CLEANUP_ITEM;

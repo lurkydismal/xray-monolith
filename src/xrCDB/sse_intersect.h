@@ -14,6 +14,7 @@
 struct _MM_ALIGN16 vec_t : public Fvector3 {
     float pad;
 };
+
 // static vec_t	vec_c	( float _x, float _y, float _z)	{ vec_t v;
 // v.x=_x;v.y=_y;v.z=_z;v.pad=0; return v; }
 
@@ -21,11 +22,13 @@ struct _MM_ALIGN16 aabb_t {
     vec_t min;
     vec_t max;
 };
+
 struct _MM_ALIGN16 ray_t {
     vec_t pos;
     vec_t inv_dir;
     vec_t fwd_dir;
 };
+
 struct ray_segment_t {
     float t_near, t_far;
 };
@@ -33,6 +36,7 @@ struct ray_segment_t {
 ICF u32& uf( float& x ) {
     return ( u32& )x;
 }
+
 ICF BOOL isect_fpu( const Fvector& min,
                     const Fvector& max,
                     const ray_t& ray,
@@ -215,6 +219,7 @@ ICF BOOL _box_fpu( ray_t& ray,
             n_C.y + n_vR, n_C.z + n_vR );
     return isect_fpu( BB.min, BB.max, ray, coord );
 }
+
 ICF BOOL _box_fpu( ray_t& ray,
                    const Fvector& bCenter,
                    const Fvector& bExtents,
@@ -248,6 +253,7 @@ ICF BOOL _box_sse( ray_t& ray,
 
     return isect_sse( box, ray, dist );
 }
+
 ICF BOOL _box_sse( ray_t& ray,
                    const Fvector& bCenter,
                    const Fvector& bExtents,

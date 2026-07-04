@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "xrGameSpyServer.h"
 #include "xrMessages.h"
+
 /////////////////////// QR2 ///////////////////////////////////////
 // void			xrGameSpyServer::QR2_Init			(u32
 // PortID)

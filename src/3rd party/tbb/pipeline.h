@@ -334,6 +334,7 @@ class concrete_filter;
 //! input_filter control to signal end-of-input for parallel_pipeline
 class flow_control {
     bool is_pipeline_stopped;
+
     flow_control() { is_pipeline_stopped = false; }
     template < typename T, typename U, typename Body >
     friend class internal::concrete_filter;
@@ -357,66 +358,82 @@ template < typename T >
 struct tbb_trivially_copyable {
     enum { value = false };
 };
+
 template < typename T >
 struct tbb_trivially_copyable< T* > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< bool > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< char > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< signed char > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< unsigned char > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< short > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< unsigned short > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< int > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< unsigned int > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< long > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< unsigned long > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< long long > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< unsigned long long > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< float > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< double > {
     enum { value = true };
 };
+
 template <>
 struct tbb_trivially_copyable< long double > {
     enum { value = true };
@@ -458,9 +475,13 @@ public:
         pointer output_t = allocator().allocate( 1 );
         return new ( output_t ) T( tbb::internal::move( source ) );
     }
+
     static value_type& token( pointer& t ) { return *t; }
+
     static void* cast_to_void_ptr( pointer ref ) { return ( void* )ref; }
+
     static pointer cast_from_void_ptr( void* ref ) { return ( pointer )ref; }
+
     static void destroy_token( pointer token ) {
         allocator().destroy( token );
         allocator().deallocate( token, 1 );
@@ -473,10 +494,15 @@ class token_helper< T*, false > {
 public:
     typedef T* pointer;
     typedef T* value_type;
+
     static pointer create_token( const value_type& source ) { return source; }
+
     static value_type& token( pointer& t ) { return t; }
+
     static void* cast_to_void_ptr( pointer ref ) { return ( void* )ref; }
+
     static pointer cast_from_void_ptr( void* ref ) { return ( pointer )ref; }
+
     static void destroy_token( pointer /*token*/ ) {}
 };
 
@@ -491,19 +517,24 @@ class token_helper< T, false > {
 public:
     typedef T pointer; // not really a pointer in this case.
     typedef T value_type;
+
     static pointer create_token( const value_type& source ) { return source; }
+
     static value_type& token( pointer& t ) { return t; }
+
     static void* cast_to_void_ptr( pointer ref ) {
         type_to_void_ptr_map mymap;
         mymap.void_overlay = NULL;
         mymap.actual_value = ref;
         return mymap.void_overlay;
     }
+
     static pointer cast_from_void_ptr( void* ref ) {
         type_to_void_ptr_map mymap;
         mymap.void_overlay = ref;
         return mymap.actual_value;
     }
+
     static void destroy_token( pointer /*token*/ ) {}
 };
 
@@ -572,6 +603,7 @@ class concrete_filter< T, void, Body > : public filter {
         t_helper::destroy_token( temp_input );
         return NULL;
     }
+
     void finalize( void* input ) __TBB_override {
         t_pointer temp_input = t_helper::cast_from_void_ptr( input );
         t_helper::destroy_token( temp_input );
@@ -607,10 +639,12 @@ class pipeline_proxy {
 
 public:
     pipeline_proxy( const filter_t< void, void >& filter_chain );
+
     ~pipeline_proxy() {
         while ( filter* f = my_pipe.filter_list )
             delete f; // filter destructor removes it from the pipeline
     }
+
     tbb::pipeline* operator->() { return &my_pipe; }
 };
 
@@ -634,14 +668,17 @@ protected:
 public:
     //! Add concrete_filter to pipeline
     virtual void add_to( pipeline& ) = 0;
+
     //! Increment reference count
     void add_ref() { ++ref_count; }
+
     //! Decrement reference count and delete if it becomes zero.
     void remove_ref() {
         __TBB_ASSERT( ref_count > 0, "ref_count underflow" );
         if ( --ref_count == 0 )
             delete this;
     }
+
     virtual ~filter_node() {
 #ifdef __TBB_TEST_FILTER_NODE_COUNT
         --( __TBB_TEST_FILTER_NODE_COUNT );
@@ -654,6 +691,7 @@ template < typename T, typename U, typename Body >
 class filter_node_leaf : public filter_node {
     const tbb::filter::mode mode;
     const Body body;
+
     void add_to( pipeline& p ) __TBB_override {
         concrete_filter< T, U, Body >* f =
             new concrete_filter< T, U, Body >( mode, body );
@@ -670,10 +708,12 @@ class filter_node_join : public filter_node {
     friend class filter_node; // to suppress GCC 3.2 warnings
     filter_node& left;
     filter_node& right;
+
     ~filter_node_join() {
         left.remove_ref();
         right.remove_ref();
     }
+
     void add_to( pipeline& p ) __TBB_override {
         left.add_to( p );
         right.add_to( p );
@@ -687,6 +727,7 @@ public:
 };
 
 } // namespace internal
+
 //! @endcond
 
 //! Create a filter to participate in parallel_pipeline
@@ -712,6 +753,7 @@ template < typename T, typename U >
 class filter_t {
     typedef internal::filter_node filter_node;
     filter_node* root;
+
     filter_t( filter_node* root_ ) : root( root_ ) { root->add_ref(); }
     friend class internal::pipeline_proxy;
     template < typename T_, typename U_, typename Body >
@@ -724,10 +766,12 @@ public:
     // TODO: add move-constructors, move-assignment, etc. where C++11 is
     // available.
     filter_t() : root( NULL ) {}
+
     filter_t( const filter_t< T, U >& rhs ) : root( rhs.root ) {
         if ( root )
             root->add_ref();
     }
+
     template < typename Body >
     filter_t( tbb::filter::mode mode, const Body& body )
         : root( new internal::filter_node_leaf< T, U, Body >( mode, body ) ) {
@@ -744,10 +788,12 @@ public:
         if ( old )
             old->remove_ref();
     }
+
     ~filter_t() {
         if ( root )
             root->remove_ref();
     }
+
     void clear() {
         // Like operator= with filter_t() on right side.
         if ( root ) {

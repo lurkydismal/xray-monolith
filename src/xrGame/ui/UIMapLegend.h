@@ -53,6 +53,7 @@ public:
     virtual ~UIMapLegendItem();
 
     void init_from_xml( CUIXml& xml, int index );
+
     //	virtual void	Update				();
 
     virtual CUIWindow* ui_cast_window() { return this; }

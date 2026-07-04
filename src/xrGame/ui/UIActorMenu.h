@@ -177,11 +177,16 @@ public:
 
 public:
     void SetMenuMode( EMenuMode mode );
+
     EMenuMode GetMenuMode() { return m_currMenuMode; };
+
     void SetActor( CInventoryOwner* io );
     void SetPartner( CInventoryOwner* io );
+
     CInventoryOwner* GetPartner() { return m_pPartnerInvOwner; };
+
     void SetInvBox( CInventoryBox* box );
+
     CInventoryBox* GetInvBox() { return m_pInvBox; };
 
     virtual CUIWindow* ui_cast_window() { return this; }

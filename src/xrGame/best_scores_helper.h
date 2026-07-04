@@ -29,13 +29,17 @@ public:
                                u16 const bone ) {
         return false;
     };
+
     virtual bool OnArtefactSpawned() { return false; };
+
     virtual bool OnPlayerTakeArtefact( game_PlayerState const* ps ) {
         return false;
     };
+
     virtual bool OnPlayerDropArtefact( game_PlayerState const* ps ) {
         return false;
     };
+
     virtual bool OnPlayerBringArtefact( game_PlayerState const* ps );
     virtual bool OnPlayerSpawned( game_PlayerState const* ps );
     virtual bool OnPlayerKilled(
@@ -43,9 +47,13 @@ public:
         u16 target_id,
         u16 weapon_id,
         std::pair< KILL_TYPE, SPECIAL_KILL_TYPE > kill_type );
+
     virtual bool OnPlayerChangeTeam( s8 team ) { return false; };
+
     virtual bool OnRoundEnd() { return false; };
+
     virtual bool OnRoundStart();
+
     virtual bool OnPlayerRankChanged() { return false; };
 
     void fill_best_results( gamespy_profile::all_best_scores_t& dest_br );

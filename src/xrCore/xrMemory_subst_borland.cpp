@@ -3,6 +3,7 @@
 
 #ifdef __BORLANDC__
 MEMPOOL mem_pools[ mem_pools_count ];
+
 // Borland doesn't support marked aligned allocs ???
 void* xrMemory::mem_alloc( size_t size ) {
     if ( 0 == size )
@@ -13,9 +14,11 @@ void* xrMemory::mem_alloc( size_t size ) {
                      size / 1024 );
     return data;
 }
+
 void xrMemory::mem_free( void* P ) {
     free( P );
 }
+
 void* xrMemory::mem_realloc( void* P, size_t size ) {
     void* data = realloc( P, size );
     if ( size && ( 0 == data ) )

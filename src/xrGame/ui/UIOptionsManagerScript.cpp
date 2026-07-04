@@ -49,6 +49,7 @@ LPCSTR CUIOptionsManagerScript::GetRendererName( int index ) {
 }
 
 #pragma optimize( "s", on )
+
 void CUIOptionsManagerScript::script_register( lua_State* L ) {
     module( L )[ class_< CUIOptionsManagerScript >( "COptionsManager" )
                      .def( constructor<>() )

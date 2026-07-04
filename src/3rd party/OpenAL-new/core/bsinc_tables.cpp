@@ -258,6 +258,7 @@ struct BSincFilterArray {
     }
 
     constexpr const BSincHeader& getHeader() const noexcept { return hdr; }
+
     constexpr const float* getTable() const noexcept { return &mTable.front(); }
 };
 

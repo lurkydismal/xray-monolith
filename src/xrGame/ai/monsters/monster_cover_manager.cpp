@@ -55,6 +55,7 @@ class CCoverPredicate {
 public:
     // setup internals here
     CCoverPredicate();
+
     // called from cover_manager for every cover (for suitable cover)
     bool operator()( const CCoverPoint* cover ) const { return true; }
 

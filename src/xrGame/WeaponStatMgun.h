@@ -73,7 +73,9 @@ struct SStmBarrel {
     BOOL net_Spawn( CSE_Abstract* DC );
     void net_Export( NET_Packet& P );
     void net_Import( NET_Packet& P );
+
     LPCSTR Name() { return m_name.c_str(); };
+
     void UpdateEx();
     void StartParticles( CParticlesObject*& pParticles,
                          LPCSTR particles_name,
@@ -123,6 +125,7 @@ private:
         eCamChase,
         eCamSize,
     };
+
     CCameraBase* camera[ eCamSize ];
     CCameraBase* active_camera;
 #else
@@ -139,7 +142,9 @@ private:
     // casts
 public:
     virtual CHolderCustom* cast_holder_custom() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CWeaponStatMgun* cast_weapon_stat_mgun() { return this; }
 
     // general
@@ -201,6 +206,7 @@ protected:
                             const float& cur_val,
                             const float& lim_min,
                             const float& lim_max );
+
     virtual bool IsHudModeNow() { return false; };
 
     // HolderCustom
@@ -231,8 +237,11 @@ public:
 
     virtual bool attach_Actor( CGameObject* actor );
     virtual void detach_Actor();
+
     virtual bool allowWeapon() const { return false; };
+
     virtual bool HUDView() const { return true; };
+
     virtual Fvector ExitPosition();
 
 #ifdef STATIONARYMGUN_NEW
@@ -270,11 +279,13 @@ private:
             eAnimLegs,
             eAnimSize,
         };
+
         shared_str m_idle[ eAnimSize ];
         SStmAnimActor();
         LPCSTR GetAnimation( u8 id );
         void SetAnimation( u8 id, LPCSTR anim );
     };
+
     SStmAnimActor m_animation;
 
     float fireDispersionOwnerScale;
@@ -284,9 +295,11 @@ private:
     void CreateSkeleton( CSE_Abstract* po );
     virtual void PhDataUpdate( float step ) {};
     virtual void PhTune( float step ) {};
+
     virtual CPhysicsShellHolder* PPhysicsShellHolder() {
         return static_cast< CPhysicsShellHolder* >( this );
     }
+
     static void IgnoreOwnerCallback( bool& do_colide,
                                      bool bo1,
                                      dContact& c,
@@ -314,22 +327,31 @@ public:
         eWpnDesiredAng,
         eWpnReload,
     };
+
     virtual void SetParam( int id, Fvector val );
+
     IC BOOL IsWorking() { return CShootingObject::IsWorking(); }
+
     virtual void UpdateEx( float fov );
     virtual void shedule_Update( u32 dt );
 
     virtual BOOL AlwaysTheCrow();
     virtual bool is_ai_obstacle() const;
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
 
     IC bool IsActive() { return m_bActive; }
+
     CScriptGameObject* GetOwner() {
         return ( Owner() ) ? Owner()->lua_game_object() : nullptr;
     }
+
     Fvector GetFirePos() { return m_fire_pos; }
+
     Fvector GetFireDir() { return m_fire_dir; }
+
     float FireDispersionBase() { return fireDispersionBase; }
+
     bool IsCameraZoom();
     void SetFeelVisionIgnore( bool enable );
     void UpdateAnimation();
@@ -337,9 +359,13 @@ public:
     void SetTraverseLimitHorz( Fvector2 vec );
     Fvector2 GetTraverseLimitVert();
     void SetTraverseLimitVert( Fvector2 vec );
+
     Fvector GetActorOffsets() { return m_actor_offsets; }
+
     void SetActorOffsets( Fvector vec ) { m_actor_offsets.set( vec ); }
+
     LPCSTR GetAnimation( int id ) { return m_animation.GetAnimation( id ); }
+
     void SetAnimation( int id, LPCSTR anim ) {
         m_animation.SetAnimation( id, anim );
     }
@@ -362,6 +388,7 @@ public:
             eStmAnimWeapon_chamber,
             eStmAnimWeapon_size
         };
+
         CWeaponStatMgun* m_stm;
         xr_vector< MotionID > m_anims[ eStmAnimWeapon_size ];
         u8 m_current_anm;
@@ -409,6 +436,7 @@ public:
 		void DetachMagazine(u16 id);
 #endif
     } m_anim_weapon;
+
     virtual void OnEvent( NET_Packet& P, u16 type );
 
     /*----------------------------------------------------------------------------------------------------
@@ -432,6 +460,7 @@ public:
         SStmSound();
         ~SStmSound();
     } m_sound_mgr;
+
     void UpdateSound();
 
     /*----------------------------------------------------------------------------------------------------
@@ -440,7 +469,9 @@ public:
 private:
     bool m_unlimited_ammo;
     LPCSTR m_reload_consume_callback;
+
     bool IsUnlimitedAmmo() { return m_unlimited_ammo; }
+
     bool IsReloadConsume();
 
     u16 m_state_index;
@@ -461,8 +492,11 @@ public:
 
 protected:
     virtual void OnShot( SStmBarrel& B );
+
     IC u16 GetState() const { return m_state_index; }
+
     IC float GetStateDelay() const { return m_state_delay; }
+
     virtual void SwitchState( u16 new_tate );
     virtual void switch2_Idle();
     virtual void switch2_Fire();
@@ -476,10 +510,15 @@ public:
         enum {
             undefined = u8( -1 ),
         };
+
         u8 m_ammo_type;
+
         u8 get() { return m_ammo_type; }
+
         void set( u8 ammo_type ) { m_ammo_type = ammo_type; }
+
         void reset() { m_ammo_type = undefined; }
+
         bool valid() { return m_ammo_type != undefined; }
     } m_next_ammoType_on_reload;
 
@@ -518,10 +557,13 @@ public:
     IC int GetAmmoMagSize() const { return iMagazineSize; }
 
     IC int GetAmmoElapsed() const { return iAmmoElapsed; }
+
     void SetAmmoElapsed( int ammo_count );
 
     IC u8 HasAmmoType( u8 type ) const { return type < m_ammoTypes.size(); }
+
     IC u8 GetAmmoType() const { return m_ammoType; }
+
     void SetAmmoType( u8 type );
 
     int GetAmmoCount_forType( shared_str const& ammo_type );

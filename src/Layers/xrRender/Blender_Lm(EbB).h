@@ -15,6 +15,7 @@ public:
 
 public:
     virtual LPCSTR getComment() { return "LEVEL: lmap*(env^base)"; }
+
     virtual BOOL canBeLMAPped() { return TRUE; }
 
     virtual void Save( IWriter& fs );

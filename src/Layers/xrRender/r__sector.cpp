@@ -54,6 +54,7 @@ CSector::~CSector() {}
 //
 extern float r_ssaDISCARD;
 extern float r_ssaLOD_A, r_ssaLOD_B;
+
 IC CFrustum CreateFrustumFromPortal( sPoly* poly,
                                      Fvector& vBase,
                                      Fmatrix& mFullXFORM ) {

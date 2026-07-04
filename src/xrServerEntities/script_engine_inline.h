@@ -50,6 +50,7 @@ IC void CScriptEngine::parse_script_namespace( LPCSTR function_to_call,
 #ifdef USE_LUA_FUNCTOR_CACHE
 extern BOOL lua_use_functor_cache;
 extern BOOL g_bootComplete;
+
 IC void CScriptEngine::invalidate_functor_cache() {
     m_functor_cache.clear();
     m_cache_valid = false;

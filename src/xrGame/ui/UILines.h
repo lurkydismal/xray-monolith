@@ -18,16 +18,24 @@ public:
     LPCSTR GetText();
     //--
     void SetTextColor( u32 color );
+
     u32 GetTextColor() { return m_dwTextColor; }
+
     void SetFont( CGameFont* pFont );
+
     CGameFont* GetFont() { return m_pFont; }
+
     void SetTextAlignment( ETextAlignment al ) { m_eTextAlign = al; }
+
     ETextAlignment GetTextAlignment() { return m_eTextAlign; }
+
     void SetVTextAlignment( EVTextAlignment al ) { m_eVTextAlign = al; }
+
     EVTextAlignment GetVTextAlignment() { return m_eVTextAlign; }
 
     void SetTextComplexMode( bool mode = true );
     void SetPasswordMode( bool mode = true );
+
     bool IsPasswordMode() { return !!uFlags.test( flPasswordMode ); };
 
     void SetColoringMode( bool mode );

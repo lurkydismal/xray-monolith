@@ -39,6 +39,7 @@ struct SPHDBGDrawAbsract {
     virtual void render() = 0;
     virtual ~SPHDBGDrawAbsract() {};
 };
+
 DEFINE_VECTOR( SPHDBGDrawAbsract*, PHABS_DBG_V, PHABS_DBG_I );
 extern PHABS_DBG_V dbg_draw_abstruct0;
 extern PHABS_DBG_V dbg_draw_abstruct1;
@@ -121,12 +122,15 @@ public:
     bool IsActive();
     void AddMarker( CStatGraph::EStyle Style, float pos, u32 Color );
     void UpdateMarker( u32 ID, float M1 );
+
     IC float ScaleX( float x ) {
         VERIFY( IsActive() );
         return ( x - x_min ) / s;
     }
+
     void ScaleMarkerPos( u32 ID, float& p );
     void ScaleMarkerPos( CStatGraph::EStyle Style, float& p );
+
     IC float ResolutionX() {
         VERIFY( IsActive() );
         return s;

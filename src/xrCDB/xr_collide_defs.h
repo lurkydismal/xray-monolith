@@ -101,6 +101,7 @@ struct rq_result {
     CObject* O;  // if NULL - static
     float range; // range to intersection
     int element; // номер кости/номер треугольника
+
     IC rq_result& set( CObject* _O, float _range, int _element ) {
         O = _O;
         range = _range;
@@ -140,6 +141,7 @@ DEFINE_VECTOR( rq_result, rqVec, rqIt );
 class rq_results {
 protected:
     rqVec results;
+
     static bool r_sort_pred( const rq_result& a, const rq_result& b ) {
         return a.range < b.range;
     }
@@ -174,12 +176,17 @@ public:
     }
 
     IC int r_count() { return results.size(); }
+
     IC rq_result* r_begin() { return &*results.begin(); }
+
     IC rq_result* r_end() { return &*results.end(); }
+
     IC void r_clear() { results.clear_not_free(); }
+
     IC void r_sort() {
         std::sort( results.begin(), results.end(), r_sort_pred );
     }
+
     IC rqVec& r_results() { return results; }
 };
 

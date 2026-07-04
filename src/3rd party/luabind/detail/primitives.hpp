@@ -33,12 +33,16 @@ enum class Direction : unsigned { lua_to_cpp, cpp_to_lua };
 
 template < class T >
 struct by_value {};
+
 template < class T >
 struct by_reference {};
+
 template < class T >
 struct by_const_reference {};
+
 template < class T >
 struct by_pointer {};
+
 template < class T >
 struct by_const_pointer {};
 
@@ -47,9 +51,11 @@ struct converter_policy_tag {};
 struct ltstr {
 #pragma warning( push )
 #pragma warning( disable : 4995 )
+
     bool operator()( const char* s1, const char* s2 ) const {
         return std::strcmp( s1, s2 ) < 0;
     }
+
 #pragma warning( pop )
 };
 

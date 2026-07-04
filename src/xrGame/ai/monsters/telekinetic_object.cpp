@@ -116,6 +116,7 @@ void CTelekineticObject::switch_state( ETelekineticState new_state ) {
 }
 
 extern BOOL g_telekinetic_objects_include_corpses;
+
 void CTelekineticObject::raise( float step ) {
     if ( !object || !object->m_pPhysicsShell ||
          !object->m_pPhysicsShell->isActive() )

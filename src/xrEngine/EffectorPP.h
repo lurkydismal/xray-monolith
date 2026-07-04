@@ -21,10 +21,15 @@ public:
     virtual ~CEffectorPP();
     BENCH_SEC_SCRAMBLEVTBL1
     virtual BOOL Process( SPPInfo& PPInfo );
+
     virtual BOOL Valid() { return fLifeTime > 0.0f; }
+
     IC EEffectorPPType Type() const { return eType; }
+
     IC bool FreeOnRemove() const { return bFreeOnRemove; }
+
     IC void SetType( EEffectorPPType t ) { eType = t; }
+
     virtual void Stop( float speed ) { fLifeTime = 0.0f; };
 
     bool bOverlap;

@@ -2,6 +2,7 @@
 #pragma hdrstop
 
 #include "StatGraph.h"
+
 //---------------------------------------------
 
 CStatGraph::CStatGraph() {

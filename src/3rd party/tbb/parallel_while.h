@@ -41,10 +41,12 @@ template < typename Body >
 class while_iteration_task : public task {
     const Body& my_body;
     typename Body::argument_type my_value;
+
     task* execute() __TBB_override {
         my_body( my_value );
         return NULL;
     }
+
     while_iteration_task( const typename Body::argument_type& value,
                           const Body& body )
         : my_body( body ), my_value( value ) {}
@@ -62,7 +64,9 @@ class while_group_task : public task {
     const Body& my_body;
     size_t size;
     typename Body::argument_type my_arg[ max_arg_size ];
+
     while_group_task( const Body& body ) : my_body( body ), size( 0 ) {}
+
     task* execute() __TBB_override {
         typedef while_iteration_task< Body > iteration_type;
         __TBB_ASSERT( size > 0, NULL );
@@ -93,6 +97,7 @@ class while_task : public task {
     Stream& my_stream;
     const Body& my_body;
     empty_task& my_barrier;
+
     task* execute() __TBB_override {
         typedef while_group_task< Body > block_type;
         block_type& t = *new ( allocate_additional_child_of( my_barrier ) )
@@ -113,12 +118,14 @@ class while_task : public task {
             return &t;
         }
     }
+
     while_task( Stream& stream, const Body& body, empty_task& barrier )
         : my_stream( stream ), my_body( body ), my_barrier( barrier ) {}
     friend class tbb::parallel_while< Body >;
 };
 
 } // namespace internal
+
 //! @endcond
 
 //! Parallel iteration over a stream, with optional addition of more work.

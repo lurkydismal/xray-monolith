@@ -325,6 +325,7 @@ void CWallmarksEngine::AddWallmark_internal( CDB::TRI* pTri,
 
 BOOL r_wallmarks_static = TRUE;
 BOOL r_wallmarks_dynamic = TRUE;
+
 void CWallmarksEngine::AddStaticWallmark( CDB::TRI* pTri,
                                           const Fvector* pVerts,
                                           const Fvector& contact_point,
@@ -392,6 +393,7 @@ void CWallmarksEngine::AddSkeletonWallmark(
 }
 
 extern float r_ssaDISCARD;
+
 ICF void BeginStream( ref_geom hGeom,
                       u32& w_offset,
                       FVF::LIT*& w_verts,
@@ -486,6 +488,7 @@ void CWallmarksEngine::UpdateWallmarks() {
 }
 
 float r_wallmarks_ssa_k = 0.5f;
+
 void CWallmarksEngine::Render() {
     //	if (marks.empty())			return;
     // Projection and xform

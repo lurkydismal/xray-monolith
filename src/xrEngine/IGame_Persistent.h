@@ -37,6 +37,7 @@ public:
         };
 
         string256 m_params[ 4 ];
+
         params() { reset(); }
 
         void reset() {
@@ -140,14 +141,18 @@ public:
 #ifndef _EDITOR
     IGame_ObjectPool ObjectPool;
     CEnvironment* pEnvironment;
+
     CEnvironment& Environment() { return *pEnvironment; };
+
     void Prefetch();
 #endif
     IMainMenu* m_pMainMenu;
     ScriptWallmarksManager* m_pWallmarksManager;
+
     IC ScriptWallmarksManager& GetWallmarksManager() const {
         return *m_pWallmarksManager;
     }
+
     ShadersExternalData* m_pGShaderConstants; //--#SM+#--
     xr_vector< script_attachment* > AttachmentUIsToRender;
 
@@ -156,6 +161,7 @@ public:
     virtual bool OnRenderPPUI_query() {
         return FALSE;
     }; // should return true if we want to have second function called
+
     virtual void OnRenderPPUI_main() {};
 
     virtual void OnRenderPPUI_PP() {};
@@ -172,6 +178,7 @@ public:
     virtual void OnGameEnd();
 
     virtual void UpdateGameType() {};
+
     virtual void GetCurrentDof( Fvector3& dof ) {
         dof.set( -1.4f, 0.0f, 250.f );
     };
@@ -208,6 +215,7 @@ public:
     virtual ~IGame_Persistent();
 
     ICF u32 GameType() { return m_game_params.m_e_game_type; };
+
     virtual void Statistics( CGameFont* F )
 #ifndef _EDITOR
         = 0;

@@ -86,6 +86,7 @@ decode_mcu_AC_refine JPP( ( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) );
  */
 
 METHODDEF( void )
+
 start_pass_phuff_decoder( j_decompress_ptr cinfo ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     boolean is_DC_band, bad;
@@ -237,6 +238,7 @@ static const int extend_offset[ 16 ] = /* entry n is (-1 << n) + 1 */
  */
 
 LOCAL( boolean )
+
 process_restart( j_decompress_ptr cinfo ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     int ci;
@@ -293,6 +295,7 @@ process_restart( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( boolean )
+
 decode_mcu_DC_first( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     int Al = cinfo->Al;
@@ -363,6 +366,7 @@ decode_mcu_DC_first( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
  */
 
 METHODDEF( boolean )
+
 decode_mcu_AC_first( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     int Se = cinfo->Se;
@@ -448,6 +452,7 @@ decode_mcu_AC_first( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
  */
 
 METHODDEF( boolean )
+
 decode_mcu_DC_refine( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     int p1 = 1 << cinfo->Al; /* 1 in the bit position being coded */
@@ -496,6 +501,7 @@ decode_mcu_DC_refine( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
  */
 
 METHODDEF( boolean )
+
 decode_mcu_AC_refine( j_decompress_ptr cinfo, JBLOCKROW* MCU_data ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     int Se = cinfo->Se;
@@ -650,6 +656,7 @@ undoit:
  */
 
 GLOBAL( void )
+
 jinit_phuff_decoder( j_decompress_ptr cinfo ) {
     phuff_entropy_ptr entropy;
     int* coef_bit_ptr;

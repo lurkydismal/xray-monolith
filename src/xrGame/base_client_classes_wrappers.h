@@ -23,10 +23,12 @@
 
 #pragma warning( push )
 #pragma warning( disable : 4584 )
+
 template < typename Base, typename LuabindBase = xr_empty >
 class DLL_PureWrapper : public Base, public LuabindBase {
 public:
     IC DLL_PureWrapper() {}
+
     virtual ~DLL_PureWrapper() {}
 
     virtual DLL_Pure* _construct() {
@@ -156,7 +158,7 @@ public:
 ///**
 //	virtual BOOL			Ready				();
 //	virtual CObject*		H_SetParent (CObject* O); 	virtual
-//void Center				(Fvector& C) const; 	virtual float
+// void Center				(Fvector& C) const; 	virtual float
 // Radius				() const; 	virtual const Fbox&
 // BoundingBox			() const; 	virtual void
 // Load (LPCSTR section); 	virtual void			UpdateCL

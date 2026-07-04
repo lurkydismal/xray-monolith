@@ -142,6 +142,7 @@ private:
 
 public:
     static void InvalidateCache( LPCSTR path = nullptr );
+
     static void GetCacheStats( u64& files_cached,
                                u64& total_bytes,
                                u64& section_count ) {
@@ -194,6 +195,7 @@ private:
     xr_unordered_flat_map< shared_str, RStringVec > OverrideParentDataMap;
     xr_unordered_flat_map< shared_str, Sect > OverrideData;
     xr_unordered_flat_map< shared_str, Items > OverrideModifyListData;
+
     struct EvaluationsContext {
         xr_unordered_flat_map< shared_str, Items > ResolvedCache; // "Black" Set
         RStringVec RecursionStack;                                // "Gray" Set
@@ -214,10 +216,14 @@ private:
             return result;
         }
     };
+
     void InsertIntoDATA(
         xr_unordered_flat_map< shared_str, Items >& FinalData );
+
     enum InsertType { Override, Base, Parent };
+
     enum ModifyListType : char { Insert = '>', Remove = '<' };
+
     void LTXLoad( IReader* F,
                   LPCSTR path,
                   BOOL bIsRootFile,
@@ -254,8 +260,11 @@ private:
 
 public:
     void save_as( IWriter& writer, bool bcheck = false ) const;
+
     void set_override_names( BOOL b ) { m_flags.set( eOverrideNames, b ); }
+
     void save_at_end( BOOL b ) { m_flags.set( eSaveAtEnd, b ); }
+
     LPCSTR fname() const { return m_file_name; };
 
     Sect& r_section( LPCSTR S ) const;
@@ -267,75 +276,115 @@ public:
     u32 section_count() const;
     BOOL section_exist( LPCSTR S ) const;
     BOOL section_exist( const shared_str& S ) const;
+
     Root& sections() { return DATA; }
+
     Root const& sections() const { return DATA; }
 
     CLASS_ID r_clsid( LPCSTR S, LPCSTR L ) const;
+
     CLASS_ID r_clsid( const shared_str& S, LPCSTR L ) const {
         return r_clsid( *S, L );
     }
+
     LPCSTR r_string( LPCSTR S, LPCSTR L ) const; // оставляет кавычки
+
     LPCSTR r_string( const shared_str& S, LPCSTR L ) const {
         return r_string( *S, L );
     } // оставляет кавычки
+
     shared_str r_string_wb( LPCSTR S, LPCSTR L ) const; // убирает кавычки
+
     shared_str r_string_wb( const shared_str& S, LPCSTR L ) const {
         return r_string_wb( *S, L );
     } // убирает кавычки
+
     u8 r_u8( LPCSTR S, LPCSTR L ) const;
+
     u8 r_u8( const shared_str& S, LPCSTR L ) const { return r_u8( *S, L ); }
+
     u16 r_u16( LPCSTR S, LPCSTR L ) const;
+
     u16 r_u16( const shared_str& S, LPCSTR L ) const { return r_u16( *S, L ); }
+
     u32 r_u32( LPCSTR S, LPCSTR L ) const;
+
     u32 r_u32( const shared_str& S, LPCSTR L ) const { return r_u32( *S, L ); }
+
     u64 r_u64( LPCSTR S, LPCSTR L ) const;
     s8 r_s8( LPCSTR S, LPCSTR L ) const;
+
     s8 r_s8( const shared_str& S, LPCSTR L ) const { return r_s8( *S, L ); }
+
     s16 r_s16( LPCSTR S, LPCSTR L ) const;
+
     s16 r_s16( const shared_str& S, LPCSTR L ) const { return r_s16( *S, L ); }
+
     s32 r_s32( LPCSTR S, LPCSTR L ) const;
+
     s32 r_s32( const shared_str& S, LPCSTR L ) const { return r_s32( *S, L ); }
+
     s64 r_s64( LPCSTR S, LPCSTR L ) const;
     float r_float( LPCSTR S, LPCSTR L ) const;
+
     float r_float( const shared_str& S, LPCSTR L ) const {
         return r_float( *S, L );
     }
+
     Fcolor r_fcolor( LPCSTR S, LPCSTR L ) const;
+
     Fcolor r_fcolor( const shared_str& S, LPCSTR L ) const {
         return r_fcolor( *S, L );
     }
+
     u32 r_color( LPCSTR S, LPCSTR L ) const;
+
     u32 r_color( const shared_str& S, LPCSTR L ) const {
         return r_color( *S, L );
     }
+
     Ivector2 r_ivector2( LPCSTR S, LPCSTR L ) const;
+
     Ivector2 r_ivector2( const shared_str& S, LPCSTR L ) const {
         return r_ivector2( *S, L );
     }
+
     Ivector3 r_ivector3( LPCSTR S, LPCSTR L ) const;
+
     Ivector3 r_ivector3( const shared_str& S, LPCSTR L ) const {
         return r_ivector3( *S, L );
     }
+
     Ivector4 r_ivector4( LPCSTR S, LPCSTR L ) const;
+
     Ivector4 r_ivector4( const shared_str& S, LPCSTR L ) const {
         return r_ivector4( *S, L );
     }
+
     Fvector2 r_fvector2( LPCSTR S, LPCSTR L ) const;
+
     Fvector2 r_fvector2( const shared_str& S, LPCSTR L ) const {
         return r_fvector2( *S, L );
     }
+
     Fvector3 r_fvector3( LPCSTR S, LPCSTR L ) const;
+
     Fvector3 r_fvector3( const shared_str& S, LPCSTR L ) const {
         return r_fvector3( *S, L );
     }
+
     Fvector4 r_fvector4( LPCSTR S, LPCSTR L ) const;
+
     Fvector4 r_fvector4( const shared_str& S, LPCSTR L ) const {
         return r_fvector4( *S, L );
     }
+
     BOOL r_bool( LPCSTR S, LPCSTR L ) const;
+
     BOOL r_bool( const shared_str& S, LPCSTR L ) const {
         return r_bool( *S, L );
     }
+
     int r_token( LPCSTR S, LPCSTR L, const xr_token* token_list ) const;
     BOOL r_line( LPCSTR S, int L, LPCSTR* N, LPCSTR* V ) const;
     BOOL r_line( const shared_str& S, int L, LPCSTR* N, LPCSTR* V ) const;

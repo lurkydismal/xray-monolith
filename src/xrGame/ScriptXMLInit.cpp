@@ -330,6 +330,7 @@ CUIEditBox* CScriptXmlInit::InitMPPlayerName( LPCSTR path, CUIWindow* parent ) {
 }
 
 #pragma optimize( "s", on )
+
 void CScriptXmlInit::script_register( lua_State* L ) {
     module(
         L )[ class_< CScriptXmlInit >( "CScriptXmlInit" )

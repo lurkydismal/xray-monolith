@@ -339,7 +339,7 @@ void CStalkerActionGetReadyToKill::initialize() {
     m_body_state = object().movement().body_state();
     //	m_movement_type
     //= Random.randI(2) ? eMovementTypeRun : eMovementTypeWalk;
-    //m_movement_type = eMovementTypeRun;
+    // m_movement_type = eMovementTypeRun;
 
     object().movement().set_desired_direction( 0 );
     object().movement().set_path_type( MovementManager::ePathTypeLevelPath );

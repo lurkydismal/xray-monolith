@@ -44,6 +44,7 @@ class MiniScheduler {
         }
 
         Context() : worker( std::thread( &Context::Update, this ) ) {}
+
         ~Context() {
             if ( worker.joinable() ) {
                 destroying = true;

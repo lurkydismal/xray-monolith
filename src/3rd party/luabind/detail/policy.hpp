@@ -42,6 +42,7 @@ namespace luabind {
 
 template < class T >
 struct back_reference;
+
 namespace detail {
 struct conversion_policy_base {};
 } // namespace detail
@@ -166,8 +167,10 @@ LUABIND_INTEGER_TYPE( long long )
 
 template <>
 struct is_primitive< signed char > : std::true_type {};
+
 template <>
 struct is_primitive< signed char const > : std::true_type {};
+
 template <>
 struct is_primitive< signed char const& > : std::true_type {};
 
@@ -175,56 +178,74 @@ struct is_primitive< signed char const& > : std::true_type {};
 
 template <>
 struct is_primitive< luabind::object > : std::true_type {};
+
 template <>
 struct is_primitive< const luabind::object > : std::true_type {};
+
 template <>
 struct is_primitive< const luabind::object& > : std::true_type {};
 
 template <>
 struct is_primitive< luabind::weak_ref > : std::true_type {};
+
 template <>
 struct is_primitive< const luabind::weak_ref > : std::true_type {};
+
 template <>
 struct is_primitive< const luabind::weak_ref& > : std::true_type {};
 
 template <>
 struct is_primitive< float > : std::true_type {};
+
 template <>
 struct is_primitive< double > : std::true_type {};
+
 template <>
 struct is_primitive< long double > : std::true_type {};
+
 template <>
 struct is_primitive< char* > : std::true_type {};
+
 template <>
 struct is_primitive< bool > : std::true_type {};
 
 template <>
 struct is_primitive< const float > : std::true_type {};
+
 template <>
 struct is_primitive< const double > : std::true_type {};
+
 template <>
 struct is_primitive< const long double > : std::true_type {};
+
 template <>
 struct is_primitive< const char* > : std::true_type {};
+
 template <>
 struct is_primitive< const char* const > : std::true_type {};
+
 template <>
 struct is_primitive< const bool > : std::true_type {};
 
 // TODO: add more
 template <>
 struct is_primitive< const float& > : std::true_type {};
+
 template <>
 struct is_primitive< const double& > : std::true_type {};
+
 template <>
 struct is_primitive< const long double& > : std::true_type {};
+
 template <>
 struct is_primitive< const bool& > : std::true_type {};
 
 template <>
 struct is_primitive< const string_class& > : std::true_type {};
+
 template <>
 struct is_primitive< string_class > : std::true_type {};
+
 template <>
 struct is_primitive< const string_class > : std::true_type {};
 
@@ -247,43 +268,59 @@ struct primitive_converter< Direction::cpp_to_lua > {
                 "or a value from one lua state into another" );
         v.pushvalue();
     }
+
     void apply( lua_State* L, int v ) { lua_pushnumber( L, ( lua_Number )v ); }
+
     void apply( lua_State* L, short v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, char v ) { lua_pushnumber( L, ( lua_Number )v ); }
+
     void apply( lua_State* L, long v ) { lua_pushnumber( L, ( lua_Number )v ); }
+
     void apply( lua_State* L, unsigned int v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, unsigned short v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, unsigned char v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, unsigned long v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, unsigned long long v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, long long v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, float v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, double v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, long double v ) {
         lua_pushnumber( L, ( lua_Number )v );
     }
+
     void apply( lua_State* L, const char* v ) { lua_pushstring( L, v ); }
+
     void apply( lua_State* L, const string_class& v ) {
         lua_pushlstring( L, v.data(), v.size() );
     }
+
     void apply( lua_State* L, bool b ) { lua_pushboolean( L, b ); }
 };
 
@@ -319,6 +356,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return lua_toboolean( L, index ) == 1;
     }
+
     PRIMITIVE_MATCHER( bool ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -355,6 +393,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< unsigned int >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( unsigned int ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -390,6 +429,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< char >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( char ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -406,6 +446,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< char >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( signed char ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -422,6 +463,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< unsigned char >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( unsigned char ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -439,6 +481,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
 
         return static_cast< short >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( short ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -455,6 +498,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< unsigned short >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( unsigned short ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -471,6 +515,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< long >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( long ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -487,6 +532,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< unsigned long >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( unsigned long ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -503,6 +549,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< unsigned long long >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( unsigned long long ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -519,6 +566,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< float >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( float ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -535,6 +583,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
         }
         return static_cast< double >( lua_tonumber( L, index ) );
     }
+
     PRIMITIVE_MATCHER( double ) {
         if ( lua_isnil( L, index ) ) {
             return 0;
@@ -548,6 +597,7 @@ struct primitive_converter< Direction::lua_to_cpp > {
     PRIMITIVE_CONVERTER( string_class ) {
         return string_class( lua_tostring( L, index ), lua_strlen( L, index ) );
     }
+
     PRIMITIVE_MATCHER( string_class ) {
         if ( lua_type( L, index ) == LUA_TSTRING )
             return 0;
@@ -585,17 +635,20 @@ struct primitive_converter< Direction::lua_to_cpp > {
                        int index ) {
         return static_cast< const char* >( lua_tostring( L, index ) );
     }
+
     const char* apply( lua_State* L,
                        detail::by_const_pointer< const char >,
                        int index ) {
         return static_cast< const char* >( lua_tostring( L, index ) );
     }
+
     static int match( lua_State* L, by_const_pointer< char >, int index ) {
         if ( lua_type( L, index ) == LUA_TSTRING )
             return 0;
         else
             return -1;
     }
+
     static int match( lua_State* L,
                       by_const_pointer< const char >,
                       int index ) {
@@ -824,6 +877,7 @@ template < class T >
 struct destruct_guard {
     T* ptr;
     bool dismiss;
+
     destruct_guard( T* p ) : ptr( p ), dismiss( false ) {}
 
     ~destruct_guard() noexcept( std::is_nothrow_destructible_v< T > ) {

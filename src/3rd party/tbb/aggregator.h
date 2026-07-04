@@ -40,16 +40,21 @@ class aggregator_operation {
 
 public:
     enum aggregator_operation_status { agg_waiting = 0, agg_finished };
+
     aggregator_operation() : status( agg_waiting ), my_next( NULL ) {}
+
     /// Call start before handling this operation
     void start() { call_itt_notify( acquired, &status ); }
+
     /// Call finish when done handling this operation
     /** The operation will be released to its originating thread, and possibly
      * deleted. */
     void finish() {
         itt_store_word_with_release( status, uintptr_t( agg_finished ) );
     }
+
     aggregator_operation* next() { return itt_hide_load_word( my_next ); }
+
     void set_next( aggregator_operation* n ) {
         itt_hide_store_word( my_next, n );
     }
@@ -63,12 +68,14 @@ class basic_operation_base : public aggregator_operation {
 
 public:
     basic_operation_base() : aggregator_operation() {}
+
     virtual ~basic_operation_base() {}
 };
 
 template < typename Body >
 class basic_operation : public basic_operation_base, no_assign {
     const Body& my_body;
+
     void apply_body() __TBB_override { my_body(); }
 
 public:
@@ -78,6 +85,7 @@ public:
 class basic_handler {
 public:
     basic_handler() {}
+
     void operator()( aggregator_operation* op_list ) const {
         while ( op_list ) {
             // ITT note: &(op_list->status) tag is used to cover accesses to the
@@ -203,6 +211,7 @@ public:
     aggregator()
         : aggregator_ext< internal::basic_handler >(
               internal::basic_handler() ) {}
+
     //! BASIC INTERFACE: Enter a function for exclusive execution by the
     //! aggregator.
     /** The calling thread stores the function object in a basic_operation and

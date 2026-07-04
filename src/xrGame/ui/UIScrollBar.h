@@ -38,6 +38,7 @@ protected:
     u32 ScrollSize() {
         return _max( 1, m_iMaxPos - m_iMinPos - m_iPageSize + 1 );
     }
+
     virtual void ClampByViewRect();
     virtual void SetPosScrollFromView( float view_pos,
                                        float view_width,
@@ -57,6 +58,7 @@ public:
     }
 
     bool GetEnabled() { return m_b_enabled; }
+
     virtual void Show( bool b );
     virtual void Enable( bool b );
     virtual void InitScrollBar( Fvector2 pos,
@@ -79,7 +81,9 @@ public:
     virtual void Reset();
     void Refresh();
     void SetStepSize( int step );
+
     IC int GetStepSize() { return m_iStepSize; }
+
     void SetRange( int iMin, int iMax );
 
     void GetRange( int& iMin, int& iMax ) {
@@ -88,6 +92,7 @@ public:
     }
 
     int GetMaxRange() { return m_iMaxPos; }
+
     int GetMinRange() { return m_iMinPos; }
 
     void SetPageSize( int iPage ) {

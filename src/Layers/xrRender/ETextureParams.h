@@ -2,6 +2,7 @@
 #define ETextureParamsH
 
 #pragma pack( push, 1 )
+
 struct ECORE_API STextureParams {
     enum ETType {
         ttImage = 0,
@@ -174,6 +175,7 @@ struct ECORE_API STextureParams {
 
 #endif
 };
+
 #pragma pack( pop )
 
 struct xr_token;

@@ -183,15 +183,19 @@ IMGUI_API void* ImFileLoadToMemory( const char* filename,
                                     size_t* out_file_size = NULL,
                                     int padding_bytes = 0 );
 IMGUI_API FILE* ImFileOpen( const char* filename, const char* file_open_mode );
+
 static inline bool ImCharIsBlankA( char c ) {
     return c == ' ' || c == '\t';
 }
+
 static inline bool ImCharIsBlankW( unsigned int c ) {
     return c == ' ' || c == '\t' || c == 0x3000;
 }
+
 static inline bool ImIsPowerOfTwo( int v ) {
     return v != 0 && ( v & ( v - 1 ) ) == 0;
 }
+
 static inline int ImUpperPowerOfTwo( int v ) {
     v--;
     v |= v >> 1;
@@ -202,6 +206,7 @@ static inline int ImUpperPowerOfTwo( int v ) {
     v++;
     return v;
 }
+
 #define ImQsort qsort
 
 // Helpers: Geometry
@@ -265,47 +270,59 @@ IMGUI_API int ImParseFormatPrecision( const char* format, int default_value );
 static inline ImVec2 operator*( const ImVec2& lhs, const float rhs ) {
     return ImVec2( lhs.x * rhs, lhs.y * rhs );
 }
+
 static inline ImVec2 operator/( const ImVec2& lhs, const float rhs ) {
     return ImVec2( lhs.x / rhs, lhs.y / rhs );
 }
+
 static inline ImVec2 operator+( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x + rhs.x, lhs.y + rhs.y );
 }
+
 static inline ImVec2 operator-( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x - rhs.x, lhs.y - rhs.y );
 }
+
 static inline ImVec2 operator*( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x * rhs.x, lhs.y * rhs.y );
 }
+
 static inline ImVec2 operator/( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x / rhs.x, lhs.y / rhs.y );
 }
+
 static inline ImVec2& operator+=( ImVec2& lhs, const ImVec2& rhs ) {
     lhs.x += rhs.x;
     lhs.y += rhs.y;
     return lhs;
 }
+
 static inline ImVec2& operator-=( ImVec2& lhs, const ImVec2& rhs ) {
     lhs.x -= rhs.x;
     lhs.y -= rhs.y;
     return lhs;
 }
+
 static inline ImVec2& operator*=( ImVec2& lhs, const float rhs ) {
     lhs.x *= rhs;
     lhs.y *= rhs;
     return lhs;
 }
+
 static inline ImVec2& operator/=( ImVec2& lhs, const float rhs ) {
     lhs.x /= rhs;
     lhs.y /= rhs;
     return lhs;
 }
+
 static inline ImVec4 operator+( const ImVec4& lhs, const ImVec4& rhs ) {
     return ImVec4( lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w );
 }
+
 static inline ImVec4 operator-( const ImVec4& lhs, const ImVec4& rhs ) {
     return ImVec4( lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w );
 }
+
 static inline ImVec4 operator*( const ImVec4& lhs, const ImVec4& rhs ) {
     return ImVec4( lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z, lhs.w * rhs.w );
 }
@@ -318,40 +335,52 @@ static inline ImVec4 operator*( const ImVec4& lhs, const ImVec4& rhs ) {
 static inline float ImFabs( float x ) {
     return fabsf( x );
 }
+
 static inline float ImSqrt( float x ) {
     return sqrtf( x );
 }
+
 static inline float ImPow( float x, float y ) {
     return powf( x, y );
 }
+
 static inline double ImPow( double x, double y ) {
     return pow( x, y );
 }
+
 static inline float ImFmod( float x, float y ) {
     return fmodf( x, y );
 }
+
 static inline double ImFmod( double x, double y ) {
     return fmod( x, y );
 }
+
 static inline float ImCos( float x ) {
     return cosf( x );
 }
+
 static inline float ImSin( float x ) {
     return sinf( x );
 }
+
 static inline float ImAcos( float x ) {
     return acosf( x );
 }
+
 static inline float ImAtan2( float y, float x ) {
     return atan2f( y, x );
 }
+
 static inline double ImAtof( const char* s ) {
     return atof( s );
 }
+
 static inline float ImFloorStd( float x ) {
     return floorf( x );
 } // we already uses our own ImFloor() { return (float)(int)v } internally so
   // the standard one wrapper is named differently (it's used by stb_truetype)
+
 static inline float ImCeil( float x ) {
     return ceilf( x );
 }
@@ -363,33 +392,40 @@ template < typename T >
 static inline T ImMin( T lhs, T rhs ) {
     return lhs < rhs ? lhs : rhs;
 }
+
 template < typename T >
 static inline T ImMax( T lhs, T rhs ) {
     return lhs >= rhs ? lhs : rhs;
 }
+
 template < typename T >
 static inline T ImClamp( T v, T mn, T mx ) {
     return ( v < mn ) ? mn : ( v > mx ) ? mx : v;
 }
+
 template < typename T >
 static inline T ImLerp( T a, T b, float t ) {
     return ( T )( a + ( b - a ) * t );
 }
+
 template < typename T >
 static inline void ImSwap( T& a, T& b ) {
     T tmp = a;
     a = b;
     b = tmp;
 }
+
 // - Misc maths helpers
 static inline ImVec2 ImMin( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x < rhs.x ? lhs.x : rhs.x,
                    lhs.y < rhs.y ? lhs.y : rhs.y );
 }
+
 static inline ImVec2 ImMax( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x >= rhs.x ? lhs.x : rhs.x,
                    lhs.y >= rhs.y ? lhs.y : rhs.y );
 }
+
 static inline ImVec2 ImClamp( const ImVec2& v, const ImVec2& mn, ImVec2 mx ) {
     return ImVec2( ( v.x < mn.x )   ? mn.x
                    : ( v.x > mx.x ) ? mx.x
@@ -398,45 +434,57 @@ static inline ImVec2 ImClamp( const ImVec2& v, const ImVec2& mn, ImVec2 mx ) {
                    : ( v.y > mx.y ) ? mx.y
                                     : v.y );
 }
+
 static inline ImVec2 ImLerp( const ImVec2& a, const ImVec2& b, float t ) {
     return ImVec2( a.x + ( b.x - a.x ) * t, a.y + ( b.y - a.y ) * t );
 }
+
 static inline ImVec2 ImLerp( const ImVec2& a,
                              const ImVec2& b,
                              const ImVec2& t ) {
     return ImVec2( a.x + ( b.x - a.x ) * t.x, a.y + ( b.y - a.y ) * t.y );
 }
+
 static inline ImVec4 ImLerp( const ImVec4& a, const ImVec4& b, float t ) {
     return ImVec4( a.x + ( b.x - a.x ) * t, a.y + ( b.y - a.y ) * t,
                    a.z + ( b.z - a.z ) * t, a.w + ( b.w - a.w ) * t );
 }
+
 static inline float ImSaturate( float f ) {
     return ( f < 0.0f ) ? 0.0f : ( f > 1.0f ) ? 1.0f : f;
 }
+
 static inline float ImLengthSqr( const ImVec2& lhs ) {
     return lhs.x * lhs.x + lhs.y * lhs.y;
 }
+
 static inline float ImLengthSqr( const ImVec4& lhs ) {
     return lhs.x * lhs.x + lhs.y * lhs.y + lhs.z * lhs.z + lhs.w * lhs.w;
 }
+
 static inline float ImInvLength( const ImVec2& lhs, float fail_value ) {
     float d = lhs.x * lhs.x + lhs.y * lhs.y;
     if ( d > 0.0f )
         return 1.0f / ImSqrt( d );
     return fail_value;
 }
+
 static inline float ImFloor( float f ) {
     return ( float )( int )f;
 }
+
 static inline ImVec2 ImFloor( const ImVec2& v ) {
     return ImVec2( ( float )( int )v.x, ( float )( int )v.y );
 }
+
 static inline float ImDot( const ImVec2& a, const ImVec2& b ) {
     return a.x * b.x + a.y * b.y;
 }
+
 static inline ImVec2 ImRotate( const ImVec2& v, float cos_a, float sin_a ) {
     return ImVec2( v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a );
 }
+
 static inline float ImLinearSweep( float current, float target, float speed ) {
     if ( current < target )
         return ImMin( current + speed, target );
@@ -444,6 +492,7 @@ static inline float ImLinearSweep( float current, float target, float speed ) {
         return ImMax( current - speed, target );
     return current;
 }
+
 static inline ImVec2 ImMul( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x * rhs.x, lhs.y * rhs.y );
 }
@@ -456,7 +505,9 @@ static inline ImVec2 ImMul( const ImVec2& lhs, const ImVec2& rhs ) {
 // and 2D and maintenance of some patches)
 struct ImVec1 {
     float x;
+
     ImVec1() { x = 0.0f; }
+
     ImVec1( float _x ) { x = _x; }
 };
 
@@ -628,32 +679,46 @@ struct IMGUI_API ImRect {
     ImVec2 Max; // Lower-right
 
     ImRect() : Min( FLT_MAX, FLT_MAX ), Max( -FLT_MAX, -FLT_MAX ) {}
+
     ImRect( const ImVec2& min, const ImVec2& max ) : Min( min ), Max( max ) {}
+
     ImRect( const ImVec4& v ) : Min( v.x, v.y ), Max( v.z, v.w ) {}
+
     ImRect( float x1, float y1, float x2, float y2 )
         : Min( x1, y1 ), Max( x2, y2 ) {}
 
     ImVec2 GetCenter() const {
         return ImVec2( ( Min.x + Max.x ) * 0.5f, ( Min.y + Max.y ) * 0.5f );
     }
+
     ImVec2 GetSize() const { return ImVec2( Max.x - Min.x, Max.y - Min.y ); }
+
     float GetWidth() const { return Max.x - Min.x; }
+
     float GetHeight() const { return Max.y - Min.y; }
-    ImVec2 GetTL() const { return Min; }                    // Top-left
+
+    ImVec2 GetTL() const { return Min; } // Top-left
+
     ImVec2 GetTR() const { return ImVec2( Max.x, Min.y ); } // Top-right
+
     ImVec2 GetBL() const { return ImVec2( Min.x, Max.y ); } // Bottom-left
-    ImVec2 GetBR() const { return Max; }                    // Bottom-right
+
+    ImVec2 GetBR() const { return Max; } // Bottom-right
+
     bool Contains( const ImVec2& p ) const {
         return p.x >= Min.x && p.y >= Min.y && p.x < Max.x && p.y < Max.y;
     }
+
     bool Contains( const ImRect& r ) const {
         return r.Min.x >= Min.x && r.Min.y >= Min.y && r.Max.x <= Max.x &&
                r.Max.y <= Max.y;
     }
+
     bool Overlaps( const ImRect& r ) const {
         return r.Min.y < Max.y && r.Max.y > Min.y && r.Min.x < Max.x &&
                r.Max.x > Min.x;
     }
+
     void Add( const ImVec2& p ) {
         if ( Min.x > p.x )
             Min.x = p.x;
@@ -664,6 +729,7 @@ struct IMGUI_API ImRect {
         if ( Max.y < p.y )
             Max.y = p.y;
     }
+
     void Add( const ImRect& r ) {
         if ( Min.x > r.Min.x )
             Min.x = r.Min.x;
@@ -674,47 +740,56 @@ struct IMGUI_API ImRect {
         if ( Max.y < r.Max.y )
             Max.y = r.Max.y;
     }
+
     void Expand( const float amount ) {
         Min.x -= amount;
         Min.y -= amount;
         Max.x += amount;
         Max.y += amount;
     }
+
     void Expand( const ImVec2& amount ) {
         Min.x -= amount.x;
         Min.y -= amount.y;
         Max.x += amount.x;
         Max.y += amount.y;
     }
+
     void Translate( const ImVec2& d ) {
         Min.x += d.x;
         Min.y += d.y;
         Max.x += d.x;
         Max.y += d.y;
     }
+
     void TranslateX( float dx ) {
         Min.x += dx;
         Max.x += dx;
     }
+
     void TranslateY( float dy ) {
         Min.y += dy;
         Max.y += dy;
     }
+
     void ClipWith( const ImRect& r ) {
         Min = ImMax( Min, r.Min );
         Max = ImMin( Max, r.Max );
     } // Simple version, may lead to an inverted rectangle, which is fine for
       // Contains/Overlaps test but not for display.
+
     void ClipWithFull( const ImRect& r ) {
         Min = ImClamp( Min, r.Min, r.Max );
         Max = ImClamp( Max, r.Min, r.Max );
     } // Full version, ensure both points are fully clipped.
+
     void Floor() {
         Min.x = ( float )( int )Min.x;
         Min.y = ( float )( int )Min.y;
         Max.x = ( float )( int )Max.x;
         Max.y = ( float )( int )Max.y;
     }
+
     bool IsInverted() const { return Min.x > Max.x || Min.y > Max.y; }
 };
 
@@ -728,18 +803,22 @@ struct ImGuiColorMod {
 // type inferred from the variable.
 struct ImGuiStyleMod {
     ImGuiStyleVar VarIdx;
+
     union {
         int BackupInt[ 2 ];
         float BackupFloat[ 2 ];
     };
+
     ImGuiStyleMod( ImGuiStyleVar idx, int v ) {
         VarIdx = idx;
         BackupInt[ 0 ] = v;
     }
+
     ImGuiStyleMod( ImGuiStyleVar idx, float v ) {
         VarIdx = idx;
         BackupFloat[ 0 ] = v;
     }
+
     ImGuiStyleMod( ImGuiStyleVar idx, ImVec2 v ) {
         VarIdx = idx;
         BackupFloat[ 0 ] = v.x;
@@ -800,25 +879,31 @@ struct IMGUI_API ImGuiInputTextState {
     void* UserCallbackData;
 
     ImGuiInputTextState() { memset( this, 0, sizeof( *this ) ); }
+
     void CursorAnimReset() {
         CursorAnim = -0.30f;
     } // After a user-input the cursor stays on for a while without blinking
+
     void CursorClamp() {
         StbState.cursor = ImMin( StbState.cursor, CurLenW );
         StbState.select_start = ImMin( StbState.select_start, CurLenW );
         StbState.select_end = ImMin( StbState.select_end, CurLenW );
     }
+
     bool HasSelection() const {
         return StbState.select_start != StbState.select_end;
     }
+
     void ClearSelection() {
         StbState.select_start = StbState.select_end = StbState.cursor;
     }
+
     void SelectAll() {
         StbState.select_start = 0;
         StbState.cursor = StbState.select_end = CurLenW;
         StbState.has_preferred_x = false;
     }
+
     void OnKeyPressed( int key ); // Cannot be inline because we call in code in
                                   // stb_textedit.h implementation
 };
@@ -905,6 +990,7 @@ struct ImGuiColumnsSet {
     ImVector< ImGuiColumnData > Columns;
 
     ImGuiColumnsSet() { Clear(); }
+
     void Clear() {
         ID = 0;
         Flags = 0;
@@ -944,10 +1030,12 @@ struct ImDrawDataBuilder {
         for ( int n = 0; n < IM_ARRAYSIZE( Layers ); n++ )
             Layers[ n ].resize( 0 );
     }
+
     void ClearFreeMemory() {
         for ( int n = 0; n < IM_ARRAYSIZE( Layers ); n++ )
             Layers[ n ].clear();
     }
+
     IMGUI_API void FlattenIntoSingleLayer();
 };
 
@@ -960,6 +1048,7 @@ struct ImGuiNavMoveResult {
     ImRect RectRel; // Best candidate bounding box in window relative space
 
     ImGuiNavMoveResult() { Clear(); }
+
     void Clear() {
         ID = 0;
         Window = NULL;
@@ -1647,24 +1736,29 @@ public:
     ImRect Rect() const {
         return ImRect( Pos.x, Pos.y, Pos.x + Size.x, Pos.y + Size.y );
     }
+
     float CalcFontSize() const {
         return GImGui->FontBaseSize * FontWindowScale;
     }
+
     float TitleBarHeight() const {
         return ( Flags & ImGuiWindowFlags_NoTitleBar )
                    ? 0.0f
                    : CalcFontSize() + GImGui->Style.FramePadding.y * 2.0f;
     }
+
     ImRect TitleBarRect() const {
         return ImRect( Pos,
                        ImVec2( Pos.x + SizeFull.x, Pos.y + TitleBarHeight() ) );
     }
+
     float MenuBarHeight() const {
         return ( Flags & ImGuiWindowFlags_MenuBar )
                    ? DC.MenuBarOffset.y + CalcFontSize() +
                          GImGui->Style.FramePadding.y * 2.0f
                    : 0.0f;
     }
+
     ImRect MenuBarRect() const {
         float y1 = Pos.y + TitleBarHeight();
         return ImRect( Pos.x, y1, Pos.x + SizeFull.x, y1 + MenuBarHeight() );
@@ -1680,6 +1774,7 @@ struct ImGuiItemHoveredDataBackup {
     ImRect LastItemDisplayRect;
 
     ImGuiItemHoveredDataBackup() { Backup(); }
+
     void Backup() {
         ImGuiWindow* window = GImGui->CurrentWindow;
         LastItemId = window->DC.LastItemId;
@@ -1687,6 +1782,7 @@ struct ImGuiItemHoveredDataBackup {
         LastItemRect = window->DC.LastItemRect;
         LastItemDisplayRect = window->DC.LastItemDisplayRect;
     }
+
     void Restore() const {
         ImGuiWindow* window = GImGui->CurrentWindow;
         window->DC.LastItemId = LastItemId;
@@ -1712,11 +1808,13 @@ inline ImGuiWindow* GetCurrentWindowRead() {
     ImGuiContext& g = *GImGui;
     return g.CurrentWindow;
 }
+
 inline ImGuiWindow* GetCurrentWindow() {
     ImGuiContext& g = *GImGui;
     g.CurrentWindow->WriteAccessed = true;
     return g.CurrentWindow;
 }
+
 IMGUI_API ImGuiWindow* FindWindowByName( const char* name );
 IMGUI_API void FocusWindow( ImGuiWindow* window );
 IMGUI_API void FocusFrontMostActiveWindowIgnoringOne(
@@ -1734,6 +1832,7 @@ IMGUI_API void SetWindowScrollX( ImGuiWindow* window, float new_scroll_x );
 IMGUI_API void SetWindowScrollY( ImGuiWindow* window, float new_scroll_y );
 IMGUI_API ImRect GetWindowAllowedExtentRect( ImGuiWindow* window );
 IMGUI_API void SetCurrentFont( ImFont* font );
+
 inline ImFont* GetDefaultFont() {
     ImGuiContext& g = *GImGui;
     return g.IO.FontDefault ? g.IO.FontDefault : g.IO.Fonts->Fonts[ 0 ];
@@ -1763,14 +1862,17 @@ inline ImGuiID GetItemID() {
     ImGuiContext& g = *GImGui;
     return g.CurrentWindow->DC.LastItemId;
 }
+
 inline ImGuiID GetActiveID() {
     ImGuiContext& g = *GImGui;
     return g.ActiveId;
 }
+
 inline ImGuiID GetFocusID() {
     ImGuiContext& g = *GImGui;
     return g.NavId;
 }
+
 IMGUI_API void SetActiveID( ImGuiID id, ImGuiWindow* window );
 IMGUI_API void SetFocusID( ImGuiID id, ImGuiWindow* window );
 IMGUI_API void ClearActiveID();
@@ -1852,12 +1954,15 @@ inline bool IsKeyPressedMap( ImGuiKey key, bool repeat = true ) {
     const int key_index = GImGui->IO.KeyMap[ key ];
     return ( key_index >= 0 ) ? IsKeyPressed( key_index, repeat ) : false;
 }
+
 inline bool IsNavInputDown( ImGuiNavInput n ) {
     return GImGui->IO.NavInputs[ n ] > 0.0f;
 }
+
 inline bool IsNavInputPressed( ImGuiNavInput n, ImGuiInputReadMode mode ) {
     return GetNavInputAmount( n, mode ) > 0.0f;
 }
+
 inline bool IsNavInputPressedAnyOfTwo( ImGuiNavInput n1,
                                        ImGuiNavInput n2,
                                        ImGuiInputReadMode mode ) {

@@ -27,6 +27,7 @@ typedef union {
 
 typedef union {
     double value;
+
     struct {
         glm::detail::int32 lsw;
         glm::detail::int32 msw;

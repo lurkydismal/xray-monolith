@@ -21,7 +21,9 @@ public:
     virtual ~DBG_ScriptObject() {}
 
     virtual DBG_ScriptSphere* cast_dbg_sphere() { return nullptr; }
+
     virtual DBG_ScriptBox* cast_dbg_box() { return nullptr; }
+
     virtual DBG_ScriptLine* cast_dbg_line() { return nullptr; }
 
     virtual void Render() {}

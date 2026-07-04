@@ -84,6 +84,7 @@ struct is_value_type : std::false_type {};
 
 template <>
 struct is_value_type< value > : std::true_type {};
+
 template <>
 struct is_value_type< value_vector > : std::true_type {};
 

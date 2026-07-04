@@ -73,6 +73,7 @@ IC void xr_delete( T*& ptr ) {
         ptr = nullptr;
     }
 }
+
 template < class T >
 IC void xr_delete( T* const& ptr ) {
     if ( ptr ) {
@@ -93,11 +94,14 @@ template < typename T >
 struct xr_allocator_shared_helper {
     using value_type = T;
     xr_allocator_shared_helper() = default;
+
     template < class U >
     xr_allocator_shared_helper( const xr_allocator_shared_helper< U >& ) {}
+
     T* allocate( std::size_t n ) {
         return static_cast< T* >( Memory.mem_alloc( n * sizeof( T ) ) );
     }
+
     void deallocate( T* p, std::size_t ) noexcept { Memory.mem_free( p ); }
 };
 

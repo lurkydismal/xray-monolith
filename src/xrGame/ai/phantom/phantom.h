@@ -23,7 +23,9 @@ private:
     EState m_TgtState;
 
     void SwitchToState_internal( EState new_state );
+
     void SwitchToState( EState new_state ) { m_TgtState = new_state; }
+
     void __stdcall OnIdleState();
     void __stdcall OnFlyState();
     void __stdcall OnDeadState();
@@ -94,11 +96,13 @@ public:
     virtual void Hit( SHit* pHDS );
 
     virtual BOOL IsVisibleForHUD() { return false; }
+
     virtual bool IsVisibleForZones() { return false; }
 
     virtual BOOL UsedAI_Locations() { return false; }
 
     virtual CEntity* cast_entity() { return this; }
+
     virtual CPhantom* cast_phantom() { return this; }
 
     void SetEnemy( CObject* enemy ) { m_enemy = enemy; } // Alundaio

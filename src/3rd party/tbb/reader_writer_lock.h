@@ -48,6 +48,7 @@ class __TBB_DEPRECATED_VERBOSE_MSG(
 public:
     friend class scoped_lock;
     friend class scoped_lock_read;
+
     //! Status type for nodes associated with lock instances
     /** waiting_nonblocking: the wait state for nonblocking lock
           instances; for writes, these transition straight to active
@@ -109,6 +110,7 @@ public:
         void* operator new( size_t s ) {
             return tbb::internal::allocate_via_handler_v3( s );
         }
+
         void operator delete( void* p ) {
             tbb::internal::deallocate_via_handler_v3( p );
         }
@@ -145,6 +147,7 @@ public:
         void* operator new( size_t s ) {
             return tbb::internal::allocate_via_handler_v3( s );
         }
+
         void operator delete( void* p ) {
             tbb::internal::deallocate_via_handler_v3( p );
         }

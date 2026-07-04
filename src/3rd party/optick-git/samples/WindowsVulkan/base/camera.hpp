@@ -42,6 +42,7 @@ private:
 
 public:
     enum CameraType { lookat, firstperson };
+
     CameraType type = CameraType::lookat;
 
     glm::vec3 rotation = glm::vec3();

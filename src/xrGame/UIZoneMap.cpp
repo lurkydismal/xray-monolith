@@ -13,6 +13,7 @@
 #include "ui/UIInventoryUtilities.h"
 #include "ui/UIMap.h"
 #include "ui/UIXmlInit.h"
+
 //////////////////////////////////////////////////////////////////////////
 
 CUIZoneMap::CUIZoneMap() : m_current_map_idx( u8( -1 ) ), visible( true ) {

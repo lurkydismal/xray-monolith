@@ -148,6 +148,7 @@ GLM_FUNC_QUALIFIER T perlin( vec< 3, T, P > const& Position ) {
     T n_xyz = mix( n_yz.x, n_yz.y, fade_xyz.x );
     return T( 2.2 ) * n_xyz;
 }
+
 /*
 // Classic Perlin noise
 template<typename T, precision P>

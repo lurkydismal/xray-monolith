@@ -46,6 +46,7 @@ GameGraph::LEVEL_MAP const& get_levels( CGameGraph const* graph ) {
 }
 
 #pragma optimize( "s", on )
+
 void CGameGraph::script_register( lua_State* L ) {
     module(
         L )[ class_< GameGraph::LEVEL_MAP::value_type >(

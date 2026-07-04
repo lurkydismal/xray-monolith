@@ -14,6 +14,7 @@ public:
     void init_from_xml( CUIXml& xml, LPCSTR path, CUIWindow* parent );
     void SetNewValue( float new_value );
     void SetPos( float pos );
+
     IC float GetPos() { return m_pos; }
 
 private:

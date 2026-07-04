@@ -36,6 +36,7 @@ namespace internal {
 //! Enables one or the other code branches
 template < bool Condition, typename T = void >
 struct enable_if {};
+
 template < typename T >
 struct enable_if< true, T > {
     typedef T type;
@@ -46,34 +47,42 @@ template < typename T >
 struct strip {
     typedef T type;
 };
+
 template < typename T >
 struct strip< const T > {
     typedef T type;
 };
+
 template < typename T >
 struct strip< volatile T > {
     typedef T type;
 };
+
 template < typename T >
 struct strip< const volatile T > {
     typedef T type;
 };
+
 template < typename T >
 struct strip< T& > {
     typedef T type;
 };
+
 template < typename T >
 struct strip< const T& > {
     typedef T type;
 };
+
 template < typename T >
 struct strip< volatile T& > {
     typedef T type;
 };
+
 template < typename T >
 struct strip< const volatile T& > {
     typedef T type;
 };
+
 //! Specialization for function pointers
 template < typename T >
 struct strip< T ( & )() > {
@@ -84,14 +93,17 @@ template < typename T >
 struct strip< T&& > {
     typedef T type;
 };
+
 template < typename T >
 struct strip< const T&& > {
     typedef T type;
 };
+
 template < typename T >
 struct strip< volatile T&& > {
     typedef T type;
 };
+
 template < typename T >
 struct strip< const volatile T&& > {
     typedef T type;
@@ -102,14 +114,17 @@ template < typename T, std::size_t N >
 struct strip< T ( & )[ N ] > {
     typedef T* type;
 };
+
 template < typename T, std::size_t N >
 struct strip< const T ( & )[ N ] > {
     typedef const T* type;
 };
+
 template < typename T, std::size_t N >
 struct strip< volatile T ( & )[ N ] > {
     typedef volatile T* type;
 };
+
 template < typename T, std::size_t N >
 struct strip< const volatile T ( & )[ N ] > {
     typedef const volatile T* type;
@@ -120,6 +135,7 @@ template < class U, class V >
 struct is_same_type {
     static const bool value = false;
 };
+
 template < class W >
 struct is_same_type< W, W > {
     static const bool value = true;
@@ -129,6 +145,7 @@ template < typename T >
 struct is_ref {
     static const bool value = false;
 };
+
 template < typename U >
 struct is_ref< U& > {
     static const bool value = true;
@@ -139,10 +156,12 @@ template < typename T >
 struct is_integral_impl {
     static const bool value = false;
 };
+
 template <>
 struct is_integral_impl< bool > {
     static const bool value = true;
 };
+
 template <>
 struct is_integral_impl< char > {
     static const bool value = true;
@@ -152,6 +171,7 @@ template <>
 struct is_integral_impl< char16_t > {
     static const bool value = true;
 };
+
 template <>
 struct is_integral_impl< char32_t > {
     static const bool value = true;
@@ -161,18 +181,22 @@ template <>
 struct is_integral_impl< wchar_t > {
     static const bool value = true;
 };
+
 template <>
 struct is_integral_impl< short > {
     static const bool value = true;
 };
+
 template <>
 struct is_integral_impl< int > {
     static const bool value = true;
 };
+
 template <>
 struct is_integral_impl< long > {
     static const bool value = true;
 };
+
 template <>
 struct is_integral_impl< long long > {
     static const bool value = true;
@@ -199,6 +223,7 @@ template < typename T, typename, template < typename > class... Checks >
 struct supports_impl {
     typedef std::false_type type;
 };
+
 template < typename T, template < typename > class... Checks >
 struct supports_impl< T, typename void_t< Checks< T >... >::type, Checks... > {
     typedef std::true_type type;
@@ -220,6 +245,7 @@ struct stored_pack;
 template <>
 struct stored_pack<> {
     typedef stored_pack<> pack_type;
+
     stored_pack() {}
 
     // Friend front-end functions
@@ -235,6 +261,7 @@ protected:
     static Ret call( F&& f, const pack_type& /*pack*/, Preceding&&... params ) {
         return std::forward< F >( f )( std::forward< Preceding >( params )... );
     }
+
     template < typename Ret, typename F, typename... Preceding >
     static Ret call( F&& f, pack_type&& /*pack*/, Preceding&&... params ) {
         return std::forward< F >( f )( std::forward< Preceding >( params )... );
@@ -269,6 +296,7 @@ protected:
             std::forward< F >( f ), static_cast< pack_remainder& >( pack ),
             std::forward< Preceding >( params )..., pack.leftmost_value );
     }
+
     template < typename Ret, typename F, typename... Preceding >
     static Ret call( F&& f, const pack_type& pack, Preceding&&... params ) {
         return pack_remainder::template call< Ret >(
@@ -276,6 +304,7 @@ protected:
             static_cast< const pack_remainder& >( pack ),
             std::forward< Preceding >( params )..., pack.leftmost_value );
     }
+
     template < typename Ret, typename F, typename... Preceding >
     static Ret call( F&& f, pack_type&& pack, Preceding&&... params ) {
         return pack_remainder::template call< Ret >(

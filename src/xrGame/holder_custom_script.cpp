@@ -6,6 +6,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CHolderCustom::script_register( lua_State* L ) {
     module(
         L )[ class_< CHolderCustom >( "holder" )

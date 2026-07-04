@@ -190,6 +190,7 @@ static void memcpy_endian( void* dst, void* src, size_t n ) {
         uint8_t b;
         uint32_t u;
     } host_endian;
+
     host_endian.u = 1;
     if ( host_endian.b == LJ_ENDIAN_SELECT( 1, 0 ) ) {
         memcpy( dst, src, n );

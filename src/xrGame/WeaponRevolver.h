@@ -13,5 +13,6 @@ public:
 
 protected:
     virtual bool AllowFireWhileWorking() { return true; }
+
     ESoundTypes m_eSoundClose;
 };

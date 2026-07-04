@@ -2916,6 +2916,7 @@ float CScriptGameObject::GetActorWalkAccel() const {
     }
     return ( pActor->m_fWalkAccel );
 }
+
 void CScriptGameObject::SetActorWalkAccel( float val ) {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -2943,6 +2944,7 @@ float CScriptGameObject::GetActorWalkBackCoef() const {
     }
     return ( pActor->m_fWalkBackFactor );
 }
+
 void CScriptGameObject::SetActorWalkBackCoef( float val ) {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -2984,6 +2986,7 @@ float CScriptGameObject::GetActorLookoutCoef() const {
     }
     return ( pActor->m_fLookoutFactor );
 }
+
 void CScriptGameObject::SetActorLookoutCoef( float val ) {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -3012,6 +3015,7 @@ float CScriptGameObject::GetActorCrouchCoef() const {
     }
     return ( pActor->m_fCrouchFactor );
 }
+
 void CScriptGameObject::SetActorCrouchCoef( float val ) {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -3025,6 +3029,7 @@ void CScriptGameObject::SetActorCrouchCoef( float val ) {
     }
     pActor->m_fCrouchFactor = val;
 }
+
 float CScriptGameObject::GetActorClimbCoef() const {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -3038,6 +3043,7 @@ float CScriptGameObject::GetActorClimbCoef() const {
     }
     return ( pActor->m_fClimbFactor );
 }
+
 void CScriptGameObject::SetActorClimbCoef( float val ) {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -3051,6 +3057,7 @@ void CScriptGameObject::SetActorClimbCoef( float val ) {
     }
     pActor->m_fClimbFactor = val;
 }
+
 float CScriptGameObject::GetActorWalkStrafeCoef() const {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -3064,6 +3071,7 @@ float CScriptGameObject::GetActorWalkStrafeCoef() const {
     }
     return ( pActor->m_fWalk_StrafeFactor );
 }
+
 void CScriptGameObject::SetActorWalkStrafeCoef( float val ) {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -3077,6 +3085,7 @@ void CScriptGameObject::SetActorWalkStrafeCoef( float val ) {
     }
     pActor->m_fWalk_StrafeFactor = val;
 }
+
 float CScriptGameObject::GetActorRunStrafeCoef() const {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -3090,6 +3099,7 @@ float CScriptGameObject::GetActorRunStrafeCoef() const {
     }
     return ( pActor->m_fRun_StrafeFactor );
 }
+
 void CScriptGameObject::SetActorRunStrafeCoef( float val ) {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -3103,6 +3113,7 @@ void CScriptGameObject::SetActorRunStrafeCoef( float val ) {
     }
     pActor->m_fRun_StrafeFactor = val;
 }
+
 float CScriptGameObject::GetActorSprintStrafeCoef() const {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {
@@ -3116,6 +3127,7 @@ float CScriptGameObject::GetActorSprintStrafeCoef() const {
     }
     return ( pActor->m_fSprint_StrafeFactor );
 }
+
 void CScriptGameObject::SetActorSprintStrafeCoef( float val ) {
     CActor* pActor = smart_cast< CActor* >( &object() );
     if ( !pActor ) {

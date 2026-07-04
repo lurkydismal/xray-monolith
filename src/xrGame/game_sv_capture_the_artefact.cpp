@@ -56,25 +56,32 @@ extern int g_sv_ah_iReinforcementTime;
 extern BOOL g_sv_ah_bBearerCantSprint;
 extern int g_sv_ah_dwArtefactsNum;
 extern BOOL g_sv_ah_bBearerCantSprint;
+
 //-------------------------------------------------------
 BOOL game_sv_CaptureTheArtefact::isAnomaliesEnabled() {
     return g_sv_dm_bAnomaliesEnabled;
 };
+
 BOOL game_sv_CaptureTheArtefact::isPDAHuntEnabled() {
     return g_sv_dm_bPDAHunt;
 };
+
 u32 game_sv_CaptureTheArtefact::Get_InvincibilityTime_msec() {
     return g_sv_cta_dwInvincibleTime * 1000;
 };
+
 u32 game_sv_CaptureTheArtefact::Get_AnomalySetLengthTime_msec() {
     return g_sv_dm_dwAnomalySetLengthTime * 60 * 1000;
 };
+
 u32 game_sv_CaptureTheArtefact::Get_ArtefactReturningTime_msec() {
     return g_sv_cta_artefactReturningTime * 1000;
 };
+
 u32 game_sv_CaptureTheArtefact::Get_ActivatedArtefactRet() {
     return g_sv_cta_activatedArtefactRet;
 };
+
 u32 game_sv_CaptureTheArtefact::Get_PlayerScoresDelayTime_msec() {
     return g_sv_cta_PlayerScoresDelayTime * 1000;
 };
@@ -88,15 +95,19 @@ float game_sv_CaptureTheArtefact::GetFriendlyFire() {
                ? g_sv_tdm_fFriendlyFireModifier
                : 0.0f;
 };
+
 int game_sv_CaptureTheArtefact::Get_TeamKillLimit() {
     return g_sv_tdm_iTeamKillLimit;
 };
+
 BOOL game_sv_CaptureTheArtefact::Get_TeamKillPunishment() {
     return g_sv_tdm_bTeamKillPunishment;
 };
+
 BOOL game_sv_CaptureTheArtefact::Get_FriendlyIndicators() {
     return g_sv_tdm_bFriendlyIndicators;
 };
+
 BOOL game_sv_CaptureTheArtefact::Get_FriendlyNames() {
     return g_sv_tdm_bFriendlyNames;
 };
@@ -105,15 +116,19 @@ int game_sv_CaptureTheArtefact::Get_ReinforcementTime_msec() {
     return g_sv_ah_iReinforcementTime ? g_sv_ah_iReinforcementTime * 1000
                                       : 1000;
 };
+
 s32 game_sv_CaptureTheArtefact::Get_ScoreLimit() {
     return g_sv_ah_dwArtefactsNum;
 };
+
 BOOL game_sv_CaptureTheArtefact::Get_BearerCanSprint() {
     return !g_sv_ah_bBearerCantSprint;
 };
+
 u32 game_sv_CaptureTheArtefact::GetWarmUpTime() {
     return g_sv_dm_dwWarmUp_MaxTime;
 };
+
 s32 game_sv_CaptureTheArtefact::GetTimeLimit() {
     return g_sv_dm_dwTimeLimit;
 };
@@ -362,6 +377,7 @@ void game_sv_CaptureTheArtefact::net_Export_Update( NET_Packet& P,
 BOOL game_sv_CaptureTheArtefact::CheckForAllPlayersReady() {
     if ( !m_server->GetServerClient() )
         return FALSE;
+
     // Check if all players ready
     struct ready_checker {
         ClientID serverID;
@@ -387,6 +403,7 @@ BOOL game_sv_CaptureTheArtefact::CheckForAllPlayersReady() {
                 ++ready;
         }
     };
+
     ready_checker tmp_functor;
     tmp_functor.serverID = m_server->GetServerClient()->ID;
     tmp_functor.ready = 0;
@@ -632,6 +649,7 @@ void game_sv_CaptureTheArtefact::OnRoundStart() {
             m_owner->SpawnPlayer( client->ID, "spectator" );
         }
     };
+
     spectator_spawner tmp_functor;
     tmp_functor.m_owner = this;
     m_server->ForEachClientDoSender( tmp_functor );
@@ -673,6 +691,7 @@ void game_sv_CaptureTheArtefact::SwapTeams() {
             }
         }
     };
+
     team_swaper tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
     teams_swaped = true;
@@ -682,8 +701,10 @@ void game_sv_CaptureTheArtefact::BalanceTeams() {
     // calc team count
     s16 MinTeam, MaxTeam;
     u32 NumToMove;
+
     struct team_counter {
         u32 l_teams[ 2 ]; // etGreenTeam , etBlueTeam
+
         team_counter() {
             l_teams[ 0 ] = 0;
             l_teams[ 1 ] = 0;
@@ -705,6 +726,7 @@ void game_sv_CaptureTheArtefact::BalanceTeams() {
             ++( l_teams[ ps->team ] );
         };
     };
+
     team_counter tmp_team_counter;
     m_server->ForEachClientDo( tmp_team_counter );
 
@@ -758,6 +780,7 @@ void game_sv_CaptureTheArtefact::BalanceTeams() {
                 }
             }
         };
+
         lowest_player_searcher tmp_functor;
         tmp_functor.MaxTeam = MaxTeam;
         m_server->ForEachClientDo( tmp_functor );
@@ -787,6 +810,7 @@ void game_sv_CaptureTheArtefact::Money_SetStart( game_PlayerState* ps ) {
 
 void game_sv_CaptureTheArtefact::OnRoundEnd() {
     roundStarted = FALSE;
+
     struct spectator_spawner {
         game_sv_CaptureTheArtefact* m_owner;
         xrServer* m_server;
@@ -806,6 +830,7 @@ void game_sv_CaptureTheArtefact::OnRoundEnd() {
             m_owner->SpawnPlayer( l_pC->ID, "spectator" );
         };
     };
+
     spectator_spawner spawner;
     spawner.m_owner = this;
     spawner.m_server = m_server;
@@ -1369,6 +1394,7 @@ bool game_sv_CaptureTheArtefact::OnKillResult( KILL_RES KillResult,
                             return true;
                         }
                     };
+
                     killer_searcher tmp_predicate;
                     tmp_predicate.pKiller = pKiller;
                     tmp_predicate.ServerClient = m_server->GetServerClient();
@@ -2067,6 +2093,7 @@ void game_sv_CaptureTheArtefact::MoveLifeActors() {
             ++lifeActors;
         }
     };
+
     players_teleporter tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
 
@@ -2123,6 +2150,7 @@ void game_sv_CaptureTheArtefact::RespawnDeadPlayers() {
                 m_owner->RespawnClient( l_pC );
         }
     };
+
     deadplayers_respawner tmp_functor;
     tmp_functor.m_owner = this;
     m_server->ForEachClientDoSender( tmp_functor );
@@ -2228,6 +2256,7 @@ void game_sv_CaptureTheArtefact::ActorDeliverArtefactOnBase(
             }
         }
     };
+
     bonusmoney_adder tmp_functor;
     tmp_functor.m_owner = this;
     tmp_functor.ps = ps;
@@ -2611,6 +2640,7 @@ void game_sv_CaptureTheArtefact::ClearReadyFlagFromAll() {
                                        GAME_PLAYER_FLAG_VERY_VERY_DEAD );
         }
     };
+
     readyclearer_from_all tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
 }

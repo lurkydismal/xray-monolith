@@ -50,6 +50,7 @@ class CPHElement : public CPhysicsElement,
     // //->to shell ??		//aux u32
     // push_untill;				//->to shell ??		//st
     Flags8 m_flags; //
+
     enum {
         flActive = 1 << 0,
         flActivating = 1 << 1,
@@ -94,14 +95,20 @@ public:
     virtual void add_Shape( const SBoneShape& shape ); // aux
     virtual void add_Shape( const SBoneShape& shape,
                             const Fmatrix& offset ); // aux
+
     virtual CODEGeom* last_geom() { return CPHGeometryOwner::last_geom(); }
+
     virtual CODEGeom* geometry( u16 i ) { return CPHGeometryOwner::Geom( i ); }
+
     virtual const IPhysicsGeometry* geometry( u16 i ) const {
         return CPHGeometryOwner::Geom( i );
     };
+
     virtual void add_geom( CODEGeom* g );
     virtual void remove_geom( CODEGeom* g );
+
     virtual bool has_geoms() { return CPHGeometryOwner::has_geoms(); }
+
     virtual void set_ContactCallback(
         ContactCallbackFun* callback ); // aux (may not be)
     virtual void set_ObjectContactCallback(
@@ -116,25 +123,34 @@ public:
     virtual void* get_CallbackData();
     virtual ObjectContactCallbackFun* get_ObjectContactCallback();
     virtual void set_PhysicsRefObject( IPhysicsShellHolder* ref_object ); // aux
+
     virtual IPhysicsShellHolder* PhysicsRefObject() {
         return m_phys_ref_object;
     } // aux
+
     virtual void SetMaterial( u16 m ); // aux
+
     virtual void SetMaterial( LPCSTR m ) {
         CPHGeometryOwner::SetMaterial( m );
     } // aux
+
     virtual u16 numberOfGeoms() const; // aux
+
     virtual const Fvector& local_mass_Center() {
         return CPHGeometryOwner::local_mass_Center();
     } // aux
+
     virtual float getVolume() { return CPHGeometryOwner::get_volume(); } // aux
+
     virtual void get_Extensions( const Fvector& axis,
                                  float center_prg,
                                  float& lo_ext,
                                  float& hi_ext ) const; // aux
+
     virtual void get_MaxAreaDir( Fvector& dir ) {
         CPHGeometryOwner::get_MaxAreaDir( dir );
     }
+
     virtual float getRadius();
     virtual void GetPointVel( Fvector& res_vel, const Fvector& point ) const;
     ////////////////////////////////////////////////////Mass/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -149,9 +165,11 @@ private:
 public:                                                                   //
     virtual const Fvector& mass_Center() const;                           // aux
     virtual void setDensity( float M );                                   // aux
-    virtual float getDensity() { return m_mass.mass / m_volume; }         // aux
-    virtual void setMassMC( float M, const Fvector& mass_center );        // aux
-    virtual void setDensityMC( float M, const Fvector& mass_center );     // aux
+
+    virtual float getDensity() { return m_mass.mass / m_volume; } // aux
+
+    virtual void setMassMC( float M, const Fvector& mass_center );    // aux
+    virtual void setDensityMC( float M, const Fvector& mass_center ); // aux
     virtual void set_local_mass_center( const Fvector& mc );
     virtual void setInertia( const dMass& M ); // aux
     virtual void addInertia( const dMass& M );
@@ -162,8 +180,10 @@ public:                                                                   //
                            CPHFracture* fracture = NULL );   // aux
     virtual void set_BoxMass( const Fobb& box, float mass ); // aux
     virtual void setMass( float M );                         // aux
-    virtual float getMass() { return m_mass.mass; }          // aux
-    virtual dMass* getMassTensor();                          // aux
+
+    virtual float getMass() { return m_mass.mass; } // aux
+
+    virtual dMass* getMassTensor(); // aux
     void ReAdjustMassPositions( const Fmatrix& shift_pivot,
                                 float density ); // aux
     void ResetMass( float density );             // aux
@@ -178,18 +198,24 @@ public:  //
     virtual void Disable();  //
     virtual void ReEnable(); //
     void Enable();           // aux
+
     virtual bool isEnabled() const {
         return isActive() && dBodyIsEnabled( m_body );
     }
+
     virtual bool isFullActive() const {
         return isActive() && !m_flags.test( flActivating );
     }
+
     virtual bool isActive() const { return !!m_flags.test( flActive ); }
+
     virtual void Freeze();   //
     virtual void UnFreeze(); //
+
     virtual bool EnabledStateOnStep() {
         return dBodyIsEnabled( m_body ) || m_flags.test( flEnabledOnStep );
     } //
+
     ////////////////////////////////////////////////Updates///////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     bool AnimToVel( float dt, float l_limit, float a_limit );
@@ -218,6 +244,7 @@ public:  //
     void PhDataUpdate( dReal step ); // ph update
     void PhTune( dReal step );       // ph update
     virtual void Update();           // called update CL visual influence
+
     //////////////////////////////////////////////////Dynamics////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     virtual void SetAirResistance(
@@ -228,6 +255,7 @@ public:  //
         k_w = angular; //
         k_l = linear;  //
     } //
+
     virtual void GetAirResistance( float& linear, float& angular ) //
     {
         //
@@ -251,7 +279,9 @@ public:  //
     virtual void Fix();
     virtual void SetAnimated( bool v );
     virtual void ReleaseFixed();
+
     virtual bool isFixed() { return !!( m_flags.test( flFixed ) ); }
+
     virtual void applyForce( const Fvector& dir, float val ); // aux
     virtual void applyForce( float x, float y, float z );
 
@@ -318,23 +348,29 @@ public:  //
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     virtual CPhysicsShell* PhysicsShell(); // aux
     CPHShell* PHShell();
+
     virtual void set_ParentElement( CPhysicsElement* p ) {
         m_parent_element = ( CPHElement* )p;
     } // aux
 #ifdef DEBUG
     CPhysicsElement* parent_element() { return m_parent_element; }
 #endif
-    void SetShell( CPHShell* p );                                  // aux
-    virtual dBodyID get_body() { return m_body; }                  // aux
+    void SetShell( CPHShell* p ); // aux
+
+    virtual dBodyID get_body() { return m_body; } // aux
+
     virtual const dBodyID get_bodyConst() const { return m_body; } // aux
+
     //////////////////////////////////////////////////////Breakable//////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     IC CPHFracturesHolder* FracturesHolder() {
         return m_fratures_holder;
     } // aux
+
     IC const CPHFracturesHolder* constFracturesHolder() const {
         return m_fratures_holder;
     } // aux
+
     void DeleteFracturesHolder();                            //
     virtual bool isBreakable();                              // aux
     virtual u16 setGeomFracturable( CPHFracture& fracture ); // aux
@@ -386,9 +422,11 @@ public:
 IC CPHElement* cast_PHElement( CPhysicsElement* e ) {
     return static_cast< CPHElement* >( static_cast< CPhysicsElement* >( e ) );
 }
+
 IC CPHElement* cast_PHElement( void* e ) {
     return static_cast< CPHElement* >( static_cast< CPhysicsElement* >( e ) );
 }
+
 IC CPhysicsElement* cast_PhysicsElement( CPHElement* e ) {
     return static_cast< CPhysicsElement* >( static_cast< CPHElement* >( e ) );
 }

@@ -70,6 +70,7 @@ Token::Token( const char* str, int len ) : m_str( str ), m_len( len ) {}
 bool Token::operator==( const char* str ) const {
     return strncmp( m_str, str, m_len ) == 0;
 }
+
 bool Token::operator!=( const char* str ) const {
     return strncmp( m_str, str, m_len ) != 0;
 }

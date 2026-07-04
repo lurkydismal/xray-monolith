@@ -139,6 +139,7 @@ void Voice::InitMixer( al::optional< std::string > resampler ) {
             const char name[ 16 ];
             const Resampler resampler;
         };
+
         constexpr ResamplerEntry ResamplerList[]{
             { "none", Resampler::Point },
             { "point", Resampler::Point },

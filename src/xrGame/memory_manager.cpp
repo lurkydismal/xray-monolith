@@ -356,7 +356,7 @@ void CMemoryManager::make_object_visible_somewhen( const CEntityAlive* enemy ) {
     //	if (obj) {
     //		Msg
     //("------------------------------------------------------");
-    //Msg
+    // Msg
     //("[%6d] make_object_visible_somewhen [%s] =
     //%x",Device.dwTimeGlobal,*enemy->cName(),obj->m_squad_mask.get());
     //	}

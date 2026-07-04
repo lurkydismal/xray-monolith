@@ -24,6 +24,7 @@ struct jpg_error_mgr {
     jmp_buf setjmp_buffer;     /* for return to caller */
     char* buffer;              /* error message <CSC>*/
 };
+
 typedef jpg_error_mgr* jpg_error_ptr;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,6 +39,7 @@ static void ima_jpeg_error_exit( j_common_ptr cinfo ) {
     /* Return control to the setjmp point */
     longjmp( myerr->setjmp_buffer, 1 );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 CxImageJPG::CxImageJPG() : CxImage( CXIMAGE_FORMAT_JPG ) {
 #if CXIMAGEJPG_SUPPORT_EXIF
@@ -45,6 +47,7 @@ CxImageJPG::CxImageJPG() : CxImage( CXIMAGE_FORMAT_JPG ) {
     memset( &m_exifinfo, 0, sizeof( EXIFINFO ) );
 #endif
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 CxImageJPG::~CxImageJPG() {
 #if CXIMAGEJPG_SUPPORT_EXIF
@@ -52,6 +55,7 @@ CxImageJPG::~CxImageJPG() {
         delete m_exif;
 #endif
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 #if CXIMAGEJPG_SUPPORT_EXIF
 bool CxImageJPG::DecodeExif( CxFile* hFile ) {
@@ -291,6 +295,7 @@ bool CxImageJPG::Decode( CxFile* hFile ) {
     /* And we're done! */
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 #endif // CXIMAGE_SUPPORT_DECODE
 ////////////////////////////////////////////////////////////////////////////////
@@ -529,6 +534,7 @@ bool CxImageJPG::Encode( CxFile* hFile ) {
     /* And we're done! */
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 #endif // CXIMAGE_SUPPORT_ENCODE
 ////////////////////////////////////////////////////////////////////////////////

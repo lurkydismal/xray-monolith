@@ -34,6 +34,7 @@ typedef struct CPValue {
         int32_t i32;  /* Value for CTID_INT32. */
         uint32_t u32; /* Value for CTID_UINT32. */
     };
+
     CTypeID id; /* C Type ID of the value. */
 } CPValue;
 

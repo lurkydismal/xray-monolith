@@ -243,6 +243,7 @@ static int internal_find( STACK* st, char* data, int ret_val_options ) {
 int sk_find( STACK* st, char* data ) {
     return internal_find( st, data, OBJ_BSEARCH_FIRST_VALUE_ON_MATCH );
 }
+
 int sk_find_ex( STACK* st, char* data ) {
     return internal_find( st, data, OBJ_BSEARCH_VALUE_ON_NOMATCH );
 }

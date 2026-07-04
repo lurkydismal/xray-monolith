@@ -30,6 +30,7 @@ void CxImage::Startup( DWORD imagetype ) {
     short test = 1;
     info.bLittleEndianHost = ( *( ( char* )&test ) == 1 );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Empty image constructor
@@ -38,6 +39,7 @@ void CxImage::Startup( DWORD imagetype ) {
 CxImage::CxImage( DWORD imagetype ) {
     Startup( imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Call this function to destroy image pixels, alpha channel, selection and sub
@@ -73,6 +75,7 @@ bool CxImage::Destroy() {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::DestroyFrames() {
     if ( info.pGhost == NULL ) {
@@ -88,6 +91,7 @@ bool CxImage::DestroyFrames() {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sized image constructor
@@ -100,6 +104,7 @@ CxImage::CxImage( DWORD dwWidth, DWORD dwHeight, DWORD wBpp, DWORD imagetype ) {
     Startup( imagetype );
     Create( dwWidth, dwHeight, wBpp, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * image constructor from existing source
@@ -116,6 +121,7 @@ CxImage::CxImage( const CxImage& src,
     Startup( src.GetType() );
     Copy( src, copypixels, copyselection, copyalpha );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Copies the image from an exsisting source
@@ -160,6 +166,7 @@ void CxImage::Copy( const CxImage& src,
         memcpy( pAlpha, src.pAlpha, nSize );
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Copies the image attributes from an existing image.
@@ -170,6 +177,7 @@ void CxImage::CopyInfo( const CxImage& src ) {
     if ( pDib == NULL )
         memcpy( &info, &src.info, sizeof( CXIMAGEINFO ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \sa Copy
@@ -179,6 +187,7 @@ CxImage& CxImage::operator=( const CxImage& isrc ) {
         Copy( isrc );
     return *this;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Initializes or rebuilds the image.
@@ -284,6 +293,7 @@ void* CxImage::Create( DWORD dwWidth,
 
     return pDib; // return handle to the DIB
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return pointer to the image pixels. <b> USE CAREFULLY </b>
@@ -303,6 +313,7 @@ BYTE* CxImage::GetBits( DWORD row ) {
     }
     return NULL;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return the size in bytes of the internal pDib object
@@ -310,6 +321,7 @@ BYTE* CxImage::GetBits( DWORD row ) {
 long CxImage::GetSize() {
     return head.biSize + head.biSizeImage + GetPaletteSize();
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Checks if the coordinates are inside the image
@@ -318,6 +330,7 @@ long CxImage::GetSize() {
 bool CxImage::IsInside( long x, long y ) {
     return ( 0 <= y && y < head.biHeight && 0 <= x && x < head.biWidth );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets the image bits to the specified value
@@ -338,6 +351,7 @@ void CxImage::Clear( BYTE bval ) {
 
     memset( info.pImage, bval, head.biSizeImage );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Transfers the image from an existing source image. The source becomes empty.
@@ -368,6 +382,7 @@ bool CxImage::Transfer( CxImage& from, bool bTransferFrames /*=true*/ ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * (this) points to the same pDib owned by (*from), the image remains in (*from)
@@ -385,6 +400,7 @@ void CxImage::Ghost( const CxImage* from ) {
         info.pGhost = ( CxImage* )from;
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * turns a 16 or 32 bit bitfield image into a RGB image
@@ -462,6 +478,7 @@ void CxImage::Bitfield2RGB( BYTE* src,
     }
     return;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Creates an image from a generic buffer
@@ -521,6 +538,7 @@ bool CxImage::CreateFromArray( BYTE* pArray,
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \sa CreateFromArray
@@ -574,6 +592,7 @@ bool CxImage::CreateFromMatrix( BYTE** ppMatrix,
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * \return lightness difference between elem1 and elem2
@@ -587,6 +606,7 @@ int CxImage::CompareColors( const void* elem1, const void* elem2 ) {
 
     return ( g1 - g2 );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * simply calls "if (memblock) free(memblock);".
@@ -599,5 +619,6 @@ void CxImage::FreeMemory( void* memblock ) {
     if ( memblock )
         cxfree( memblock ); // free(memblock);
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 // EOF

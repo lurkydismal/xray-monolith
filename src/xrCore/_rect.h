@@ -35,6 +35,7 @@ public:
         y2 = _y2;
         return *this;
     };
+
     IC SelfRef set( const Tvector& mn, const Tvector& mx ) {
         x1 = mn.x;
         y1 = mn.y;
@@ -42,6 +43,7 @@ public:
         y2 = mx.y;
         return *this;
     };
+
     IC SelfRef set( const Self& r ) {
         x1 = r.x1;
         y1 = r.y1;
@@ -49,6 +51,7 @@ public:
         y2 = r.y2;
         return *this;
     };
+
     IC SelfRef null() {
         x1 = T( 0 );
         y1 = T( 0 );
@@ -64,9 +67,13 @@ public:
         rb.y = type_min( T );
         return *this;
     };
+
     IC bool valide() { return lt.x1 < rb.x && lt.y < rb.y; }
+
     IC SelfRef set_empty() { return invalidate(); }
+
     IC bool is_empty() { return !valide(); }
+
     IC SelfRef add( T x, T y ) {
         x1 += x;
         y1 += y;
@@ -74,6 +81,7 @@ public:
         y2 += y;
         return *this;
     };
+
     IC SelfRef sub( T x, T y ) {
         x1 -= x;
         y1 -= y;
@@ -81,6 +89,7 @@ public:
         y2 -= y;
         return *this;
     };
+
     IC SelfRef mul( T x, T y ) {
         x1 *= x;
         y1 *= y;
@@ -88,6 +97,7 @@ public:
         y2 *= y;
         return *this;
     };
+
     IC SelfRef div( T x, T y ) {
         x1 /= x;
         y1 /= y;
@@ -103,6 +113,7 @@ public:
         y2 = r.y2 + y;
         return *this;
     };
+
     IC SelfRef sub( const Self& r, T x, T y ) {
         x1 = r.x1 - x;
         y1 = r.y1 - y;
@@ -110,6 +121,7 @@ public:
         y2 = r.y2 - y;
         return *this;
     };
+
     IC SelfRef mul( const Self& r, T x, T y ) {
         x1 = r.x1 * x;
         y1 = r.y1 * y;
@@ -117,6 +129,7 @@ public:
         y2 = r.y2 * y;
         return *this;
     };
+
     IC SelfRef div( const Self& r, T x, T y ) {
         x1 = r.x1 / x;
         y1 = r.y1 / y;
@@ -128,12 +141,15 @@ public:
     IC BOOL in( T x, T y ) const {
         return ( x >= x1 ) && ( x <= x2 ) && ( y >= y1 ) && ( y <= y2 );
     };
+
     IC BOOL in( Tvector& p ) const {
         return ( p.x >= x1 ) && ( p.x <= x2 ) && ( p.y >= y1 ) && ( p.y <= y2 );
     };
+
     IC BOOL cmp( _rect< int >& r ) {
         return x1 == r.x1 && y1 == r.y1 && x2 == r.x2 && y2 == r.y2;
     };
+
     IC BOOL cmp( _rect< float >& r ) {
         return fsimilar( x1, r.x1 ) && fsimilar( y1, r.y1 ) &&
                fsimilar( x2, r.x2 ) && fsimilar( y2, r.y2 );
@@ -147,6 +163,7 @@ public:
     IC void getsize( Tvector& sz ) const { sz.sub( rb, lt ); }
 
     IC T width() const { return rb.x - lt.x; }
+
     IC T height() const { return rb.y - lt.y; }
 
     IC SelfRef shrink( T x, T y ) {
@@ -156,6 +173,7 @@ public:
         rb.y -= y;
         return *this;
     };
+
     IC SelfRef grow( T x, T y ) {
         lt.x -= x;
         lt.y -= y;

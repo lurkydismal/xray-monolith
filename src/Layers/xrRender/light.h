@@ -114,12 +114,14 @@ public:
             s32 minY, maxY;
             BOOL transluent;
         } D;
+
         struct _P {
             Fmatrix world;
             Fmatrix view;
             Fmatrix project;
             Fmatrix combine;
         } P;
+
         struct _S {
             Fmatrix view;
             Fmatrix project;
@@ -135,8 +137,11 @@ public:
 
 public:
     virtual void set_type( LT type ) { flags.type = type; }
+
     virtual LT get_type() { return ( LT )flags.type; }
+
     virtual void set_active( bool b );
+
     virtual bool get_active() { return flags.bActive; }
 
 #if RENDER != R_R1 && !XRCPU_PIPE_EXPORTS
@@ -147,6 +152,7 @@ public:
 #endif //	RENDER!=R_R1
 
     virtual void set_shadow( bool b );
+
     virtual void set_volumetric( bool b ) {
         if ( ps_ssfx_volumetric.x > 0 )
             b = true;
@@ -157,9 +163,11 @@ public:
     virtual void set_volumetric_quality( float fValue ) {
         m_volumetric_quality = fValue;
     }
+
     virtual void set_volumetric_intensity( float fValue ) {
         m_volumetric_intensity = ps_ssfx_volumetric.y;
     }
+
     virtual void set_volumetric_distance( float fValue ) {
         m_volumetric_distance = 1.0f;
     }
@@ -174,22 +182,29 @@ public:
     virtual void set_virtual_size( float R ) { virtual_size = R; };
 
     virtual void set_color( const Fcolor& C ) { color.set( C ); }
+
     virtual void set_color( float r, float g, float b ) {
         color.set( r, g, b, 1 );
     }
+
     virtual void set_texture( LPCSTR name );
+
     virtual void set_hud_mode( bool b ) { flags.bHudMode = b; }
+
     virtual bool get_hud_mode() { return flags.bHudMode; };
 
     virtual void set_occq_mode( bool b ) { flags.bOccq = b; }
+
     virtual bool get_occq_mode() { return flags.bOccq; }
 
     virtual void set_ignore_object( CObject* O ) { ignore_object = O; };
+
     virtual CObject* get_ignore_object() { return ignore_object; };
 
     virtual void set_decor_object( CObject* O, int index = 0 ) {
         decor_object[ index ] = O;
     };
+
     virtual CObject* get_decor_object( int index = 0 ) {
         return decor_object[ index ];
     };

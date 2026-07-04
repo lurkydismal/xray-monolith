@@ -46,6 +46,7 @@ GLM_FUNC_QUALIFIER T lerp( T x, T y, T a ) {
 } //!< \brief Returns x * (1.0 - a) + y * a, i.e., the linear blend of x and y
   //!< using the floating-point value a. The value for a is not restricted to
   //!< the range [0, 1]. (From GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 2, T, P > lerp( const vec< 2, T, P >& x,
                                         const vec< 2, T, P >& y,
@@ -63,6 +64,7 @@ GLM_FUNC_QUALIFIER vec< 3, T, P > lerp( const vec< 3, T, P >& x,
 } //!< \brief Returns x * (1.0 - a) + y * a, i.e., the linear blend of x and y
   //!< using the floating-point value a. The value for a is not restricted to
   //!< the range [0, 1]. (From GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 4, T, P > lerp( const vec< 4, T, P >& x,
                                         const vec< 4, T, P >& y,
@@ -71,6 +73,7 @@ GLM_FUNC_QUALIFIER vec< 4, T, P > lerp( const vec< 4, T, P >& x,
 } //!< \brief Returns x * (1.0 - a) + y * a, i.e., the linear blend of x and y
   //!< using the floating-point value a. The value for a is not restricted to
   //!< the range [0, 1]. (From GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 2, T, P > lerp( const vec< 2, T, P >& x,
                                         const vec< 2, T, P >& y,
@@ -79,6 +82,7 @@ GLM_FUNC_QUALIFIER vec< 2, T, P > lerp( const vec< 2, T, P >& x,
 } //!< \brief Returns the component-wise result of x * (1.0 - a) + y * a, i.e.,
   //!< the linear blend of x and y using vector a. The value for a is not
   //!< restricted to the range [0, 1]. (From GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 3, T, P > lerp( const vec< 3, T, P >& x,
                                         const vec< 3, T, P >& y,
@@ -87,6 +91,7 @@ GLM_FUNC_QUALIFIER vec< 3, T, P > lerp( const vec< 3, T, P >& x,
 } //!< \brief Returns the component-wise result of x * (1.0 - a) + y * a, i.e.,
   //!< the linear blend of x and y using vector a. The value for a is not
   //!< restricted to the range [0, 1]. (From GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 4, T, P > lerp( const vec< 4, T, P >& x,
                                         const vec< 4, T, P >& y,
@@ -101,16 +106,19 @@ GLM_FUNC_QUALIFIER T saturate( T x ) {
     return clamp( x, T( 0 ), T( 1 ) );
 } //!< \brief Returns clamp(x, 0, 1) for each component in x. (From
   //!< GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 2, T, P > saturate( const vec< 2, T, P >& x ) {
     return clamp( x, T( 0 ), T( 1 ) );
 } //!< \brief Returns clamp(x, 0, 1) for each component in x. (From
   //!< GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 3, T, P > saturate( const vec< 3, T, P >& x ) {
     return clamp( x, T( 0 ), T( 1 ) );
 } //!< \brief Returns clamp(x, 0, 1) for each component in x. (From
   //!< GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 4, T, P > saturate( const vec< 4, T, P >& x ) {
     return clamp( x, T( 0 ), T( 1 ) );
@@ -124,6 +132,7 @@ GLM_FUNC_QUALIFIER T atan2( T x, T y ) {
   //!< and y are used to determine what quadrant the angle is in. The range of
   //!< values returned by this function is [-PI, PI]. Results are undefined if x
   //!< and y are both 0. (From GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 2, T, P > atan2( const vec< 2, T, P >& x,
                                          const vec< 2, T, P >& y ) {
@@ -132,6 +141,7 @@ GLM_FUNC_QUALIFIER vec< 2, T, P > atan2( const vec< 2, T, P >& x,
   //!< and y are used to determine what quadrant the angle is in. The range of
   //!< values returned by this function is [-PI, PI]. Results are undefined if x
   //!< and y are both 0. (From GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 3, T, P > atan2( const vec< 3, T, P >& x,
                                          const vec< 3, T, P >& y ) {
@@ -140,6 +150,7 @@ GLM_FUNC_QUALIFIER vec< 3, T, P > atan2( const vec< 3, T, P >& x,
   //!< and y are used to determine what quadrant the angle is in. The range of
   //!< values returned by this function is [-PI, PI]. Results are undefined if x
   //!< and y are both 0. (From GLM_GTX_compatibility)
+
 template < typename T, precision P >
 GLM_FUNC_QUALIFIER vec< 4, T, P > atan2( const vec< 4, T, P >& x,
                                          const vec< 4, T, P >& y ) {

@@ -26,6 +26,7 @@
     CIni_IdToIndex< ITEM_REC_NUM, ITEM_DATA, T_ID, T_INDEX, T_INIT >
 
 TEMPLATE_SPECIALIZATION
+
 class CIni_IdToIndex {
 public:
     typedef T_INDEX index_type;

@@ -736,6 +736,7 @@ static int stb_textedit_move_to_word_previous( IMSTB_TEXTEDIT_STRING* str,
 
     return c;
 }
+
 #define STB_TEXTEDIT_MOVEWORDLEFT stb_textedit_move_to_word_previous
 #endif
 
@@ -751,6 +752,7 @@ static int stb_textedit_move_to_word_next( IMSTB_TEXTEDIT_STRING* str, int c ) {
 
     return c;
 }
+
 #define STB_TEXTEDIT_MOVEWORDRIGHT stb_textedit_move_to_word_next
 #endif
 

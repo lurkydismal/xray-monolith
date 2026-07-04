@@ -6,6 +6,7 @@
 
 using namespace luabind;
 #pragma optimize( "s", on )
+
 void ScriptImGui::script_register( ::lua_State* L ) {
     module( L, "ImGui" )
         [ def( "GetVersion", &ImGui_GetVersion ),

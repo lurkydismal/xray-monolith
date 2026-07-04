@@ -245,6 +245,7 @@ void CScriptEngine::lua_error( lua_State* L ) {
 }
 
 extern BOOL lua_busy_hands_debug;
+
 void CScriptEngine::lua_error_not_crash( lua_State* L ) {
     if ( !lua_busy_hands_debug )
         return;
@@ -337,6 +338,7 @@ void CScriptEngine::setup_callbacks() {
 
 #ifdef DEBUG
 #include "script_thread.h"
+
 void CScriptEngine::lua_hook_call( lua_State* L, lua_Debug* dbg ) {
     if ( ai().script_engine().current_thread() )
         ai().script_engine().current_thread()->script_hook( L, dbg );

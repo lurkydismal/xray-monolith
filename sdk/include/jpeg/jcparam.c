@@ -19,6 +19,7 @@
  */
 
 GLOBAL( void )
+
 jpeg_add_quant_table( j_compress_ptr cinfo,
                       int which_tbl,
                       const unsigned int* basic_table,
@@ -63,6 +64,7 @@ jpeg_add_quant_table( j_compress_ptr cinfo,
 }
 
 GLOBAL( void )
+
 jpeg_set_linear_quality( j_compress_ptr cinfo,
                          int scale_factor,
                          boolean force_baseline )
@@ -95,6 +97,7 @@ jpeg_set_linear_quality( j_compress_ptr cinfo,
 }
 
 GLOBAL( int )
+
 jpeg_quality_scaling( int quality )
 /* Convert a user-specified quality rating to a percentage scaling factor
  * for an underlying quantization table, using our recommended scaling curve.
@@ -123,6 +126,7 @@ jpeg_quality_scaling( int quality )
 }
 
 GLOBAL( void )
+
 jpeg_set_quality( j_compress_ptr cinfo, int quality, boolean force_baseline )
 /* Set or change the 'quality' (quantization) setting, using default tables.
  * This is the standard quality-adjusting entry point for typical user
@@ -142,6 +146,7 @@ jpeg_set_quality( j_compress_ptr cinfo, int quality, boolean force_baseline )
  */
 
 LOCAL( void )
+
 add_huff_table( j_compress_ptr cinfo,
                 JHUFF_TBL** htblptr,
                 const UINT8* bits,
@@ -173,6 +178,7 @@ add_huff_table( j_compress_ptr cinfo,
 }
 
 LOCAL( void )
+
 std_huff_tables( j_compress_ptr cinfo )
 /* Set up the standard Huffman tables (cf. JPEG standard section K.3) */
 /* IMPORTANT: these are only valid for 8-bit data precision! */
@@ -304,6 +310,7 @@ std_huff_tables( j_compress_ptr cinfo )
  */
 
 GLOBAL( void )
+
 jpeg_set_defaults( j_compress_ptr cinfo ) {
     int i;
 
@@ -393,6 +400,7 @@ jpeg_set_defaults( j_compress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jpeg_default_colorspace( j_compress_ptr cinfo ) {
     switch ( cinfo->in_color_space ) {
         case JCS_GRAYSCALE:
@@ -424,6 +432,7 @@ jpeg_default_colorspace( j_compress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jpeg_set_colorspace( j_compress_ptr cinfo, J_COLOR_SPACE colorspace ) {
     jpeg_component_info* compptr;
     int ci;
@@ -507,6 +516,7 @@ jpeg_set_colorspace( j_compress_ptr cinfo, J_COLOR_SPACE colorspace ) {
 #ifdef C_PROGRESSIVE_SUPPORTED
 
 LOCAL( jpeg_scan_info* )
+
 fill_a_scan( jpeg_scan_info* scanptr, int ci, int Ss, int Se, int Ah, int Al )
 /* Support routine: generate one scan for specified component */
 {
@@ -521,6 +531,7 @@ fill_a_scan( jpeg_scan_info* scanptr, int ci, int Ss, int Se, int Ah, int Al )
 }
 
 LOCAL( jpeg_scan_info* )
+
 fill_scans( jpeg_scan_info* scanptr,
             int ncomps,
             int Ss,
@@ -544,6 +555,7 @@ fill_scans( jpeg_scan_info* scanptr,
 }
 
 LOCAL( jpeg_scan_info* )
+
 fill_dc_scans( jpeg_scan_info* scanptr, int ncomps, int Ah, int Al )
 /* Support routine: generate interleaved DC scan if possible, else N scans */
 {
@@ -571,6 +583,7 @@ fill_dc_scans( jpeg_scan_info* scanptr, int ncomps, int Ah, int Al )
  */
 
 GLOBAL( void )
+
 jpeg_simple_progression( j_compress_ptr cinfo ) {
     int ncomps = cinfo->num_components;
     int nscans;

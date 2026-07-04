@@ -14,6 +14,7 @@ public:
     T x, y, z, w;
 
     IC T& operator[]( int i ) { return *( ( T* )this + i ); }
+
     IC T& operator[]( int i ) const { return *( ( T* )this + i ); }
 
     IC SelfRef set( T _x, T _y, T _z, T _w = 1 ) {
@@ -220,7 +221,9 @@ public:
     };
 
     IC T magnitude_sqr() { return x * x + y * y + z * z + w * w; }
+
     IC T magnitude() { return _sqrt( magnitude_sqr() ); }
+
     IC SelfRef normalize() { return mul( 1 / magnitude() ); }
 
     IC SelfRef normalize_as_plane() {

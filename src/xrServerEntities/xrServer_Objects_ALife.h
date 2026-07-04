@@ -61,27 +61,33 @@ virtual ~CSE_ALifeSchedulable();
 virtual CSE_Abstract* base() = 0;
 virtual const CSE_Abstract* base() const = 0;
 virtual CSE_Abstract* init();
+
 virtual CSE_ALifeSchedulable* cast_schedulable() {
     return this;
 };
+
 virtual CSE_Abstract* cast_abstract() {
     return 0;
 };
+
 // end of the virtual inheritance dependant code
 virtual bool need_update( CSE_ALifeDynamicObject* object );
 virtual u32 ef_creature_type() const;
 virtual u32 ef_anomaly_type() const;
 virtual u32 ef_weapon_type() const;
 virtual u32 ef_detector_type() const;
+
 virtual bool natural_weapon() const {
     return true;
 }
+
 virtual bool natural_detector() const {
     return true;
 }
 #ifdef XRGAME_EXPORTS
 virtual CSE_ALifeItemWeapon* tpfGetBestWeapon( ALife::EHitType& tHitType,
                                                float& fHitPower ) = 0;
+
 virtual bool bfPerformAttack() {
     return ( true );
 };
@@ -110,6 +116,7 @@ u8 m_tLocations[ GameGraph::LOCATION_TYPE_COUNT ];
 
 CSE_ALifeGraphPoint( LPCSTR caSection );
 virtual ~CSE_ALifeGraphPoint();
+
 virtual bool match_configuration() const {
     return false;
 }
@@ -164,9 +171,11 @@ virtual bool can_save() const;
 virtual bool can_switch_online() const;
 virtual bool can_switch_offline() const;
 virtual bool interactive() const;
+
 virtual CSE_ALifeObject* cast_alife_object() {
     return this;
 }
+
 bool move_offline() const;
 void can_switch_online( bool value );
 void can_switch_offline( bool value );
@@ -199,9 +208,11 @@ virtual ~CSE_ALifeGroupAbstract();
 virtual CSE_Abstract* init();
 virtual CSE_Abstract* base() = 0;
 virtual const CSE_Abstract* base() const = 0;
+
 virtual CSE_ALifeGroupAbstract* cast_group_abstract() {
     return this;
 };
+
 virtual CSE_Abstract* cast_abstract() {
     return 0;
 };
@@ -320,6 +331,7 @@ virtual void on_failed_switch_online();
 virtual CSE_ALifeDynamicObject* cast_alife_dynamic_object() {
     return this;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN2( CSE_ALifeDynamicObjectVisual,
@@ -338,6 +350,7 @@ virtual ~CSE_ALifePHSkeletonObject();
 virtual bool can_save() const;
 virtual bool used_ai_locations() const;
 virtual void load( NET_Packet& tNetPacket );
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }
@@ -378,18 +391,23 @@ virtual ~CSE_ALifeSmartZone();
 virtual CSE_Abstract* base();
 virtual const CSE_Abstract* base() const;
 virtual CSE_Abstract* init();
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 };
+
 virtual CSE_ALifeSchedulable* cast_schedulable() {
     return this;
 };
+
 virtual void update();
 virtual float detect_probability();
 virtual void smart_touch( CSE_ALifeMonsterAbstract* monster );
+
 virtual bool used_ai_locations() const {
     return true;
 };
+
 virtual CSE_ALifeSmartZone* cast_smart_zone() {
     return this;
 };
@@ -402,10 +420,12 @@ virtual ALife::EMeetActionType tfGetActionType(
     CSE_ALifeSchedulable* tpALifeSchedulable,
     int iGroupIndex,
     bool bMutualDetection );
+
 // additional functionality
 virtual bool enabled( CSE_ALifeMonsterAbstract* object ) const {
     return false;
 };
+
 virtual float suitable( CSE_ALifeMonsterAbstract* object ) const {
     return 0.f;
 };
@@ -413,6 +433,7 @@ virtual float suitable( CSE_ALifeMonsterAbstract* object ) const {
 virtual void register_npc( CSE_ALifeMonsterAbstract* object ) {};
 
 virtual void unregister_npc( CSE_ALifeMonsterAbstract* object ) {};
+
 virtual CALifeSmartTerrainTask* task( CSE_ALifeMonsterAbstract* object ) {
     return 0;
 };
@@ -430,9 +451,11 @@ virtual ~CSE_ALifeObjectPhysic();
 virtual bool used_ai_locations() const;
 virtual bool can_save() const;
 virtual void load( NET_Packet& tNetPacket );
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }
+
 //	virtual	void					load
 //(IReader& r){inherited::load(r);} 	using inherited::load(IReader&);
 private:
@@ -536,6 +559,7 @@ virtual void __stdcall on_render( CDUInterface* du,
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 #ifdef PROJECTOR_NEW
@@ -554,6 +578,7 @@ virtual bool used_ai_locations() const;
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }
+
 virtual void load( NET_Packet& tNetPacket );
 virtual bool can_save() const;
 
@@ -575,6 +600,7 @@ virtual void load( NET_Packet& tNetPacket );
 virtual bool can_save() const;
 virtual bool used_ai_locations() const;
 virtual CSE_Motion* __stdcall motion();
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }
@@ -606,6 +632,7 @@ virtual ~CSE_ALifeCar();
 virtual bool used_ai_locations() const;
 virtual void load( NET_Packet& tNetPacket );
 virtual bool can_save() const;
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }
@@ -667,6 +694,7 @@ struct SBarrel {
     void write( NET_Packet& P );
     u16 a_elapsed;
 };
+
 xr_vector< SBarrel > m_barrels;
 #endif
 
@@ -683,6 +711,7 @@ void set_ammo_type( u8 type );
 virtual bool used_ai_locations() const;
 virtual void load( NET_Packet& tNetPacket );
 virtual bool can_save() const;
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }

@@ -88,6 +88,7 @@ private:
 class MTRand : public Rand {
 public:
     enum { N = 624 }; // length of state vector
+
     enum { M = 397 };
 
     /// Constructor that uses the current time as the seed.
@@ -128,9 +129,13 @@ private:
     NVMATH_API void reload();
 
     uint hiBit( uint u ) const { return u & 0x80000000U; }
+
     uint loBit( uint u ) const { return u & 0x00000001U; }
+
     uint loBits( uint u ) const { return u & 0x7fffffffU; }
+
     uint mixBits( uint u, uint v ) const { return hiBit( u ) | loBits( v ); }
+
     uint twist( uint m, uint s0, uint s1 ) const {
         return m ^ ( mixBits( s0, s1 ) >> 1 ) ^
                ( ( ~loBit( s1 ) + 1 ) & 0x9908b0dfU );

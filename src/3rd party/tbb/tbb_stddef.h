@@ -284,6 +284,7 @@ template < class T, size_t S, size_t R >
 struct padded_base : T {
     char pad[ S - R ];
 };
+
 template < class T, size_t S >
 struct padded_base< T, S, 0 > : T {};
 
@@ -319,6 +320,7 @@ void __TBB_EXPORTED_FUNC handle_perror( int error_code, const char* aux_info );
 inline bool __TBB_false() {
     return false;
 }
+
 #define __TBB_TRY
 #define __TBB_CATCH( e ) if ( tbb::internal::__TBB_false() )
 #define __TBB_THROW( e ) tbb::internal::suppress_unused_warning( e )
@@ -449,8 +451,10 @@ inline bool is_power_of_two_at_least( argument_integer_type arg,
 //! Utility template function to prevent "unused" warnings by various compilers.
 template < typename T1 >
 void suppress_unused_warning( const T1& ) {}
+
 template < typename T1, typename T2 >
 void suppress_unused_warning( const T1&, const T2& ) {}
+
 template < typename T1, typename T2, typename T3 >
 void suppress_unused_warning( const T1&, const T2&, const T3& ) {}
 
@@ -485,6 +489,7 @@ public:
         : my_left( _left ), my_right( _right ) {}
 
     size_t left() const { return my_left; }
+
     size_t right() const { return my_right; }
 
     // used when range does not support proportional split
@@ -548,6 +553,7 @@ template < bool v >
 struct bool_constant {
     static /*constexpr*/ const bool value = v;
 };
+
 typedef bool_constant< true > true_type;
 typedef bool_constant< false > false_type;
 
@@ -576,6 +582,7 @@ template < typename T >
 T& move( T& x ) {
     return x;
 }
+
 template < typename T >
 T& forward( T& x ) {
     return x;

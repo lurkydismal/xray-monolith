@@ -38,6 +38,7 @@ inline al::optional< ChorusWaveform > WaveformFromEnum( ALenum type ) {
     }
     return al::nullopt;
 }
+
 inline ALenum EnumFromWaveform( ChorusWaveform type ) {
     switch ( type ) {
         case ChorusWaveform::Sinusoid:
@@ -72,9 +73,11 @@ void Chorus_setParami( EffectProps* props, ALenum param, int val ) {
                                     param };
     }
 }
+
 void Chorus_setParamiv( EffectProps* props, ALenum param, const int* vals ) {
     Chorus_setParami( props, param, vals[ 0 ] );
 }
+
 void Chorus_setParamf( EffectProps* props, ALenum param, float val ) {
     switch ( param ) {
         case AL_CHORUS_RATE:
@@ -112,6 +115,7 @@ void Chorus_setParamf( EffectProps* props, ALenum param, float val ) {
                                     param };
     }
 }
+
 void Chorus_setParamfv( EffectProps* props, ALenum param, const float* vals ) {
     Chorus_setParamf( props, param, vals[ 0 ] );
 }
@@ -132,9 +136,11 @@ void Chorus_getParami( const EffectProps* props, ALenum param, int* val ) {
                                     param };
     }
 }
+
 void Chorus_getParamiv( const EffectProps* props, ALenum param, int* vals ) {
     Chorus_getParami( props, param, vals );
 }
+
 void Chorus_getParamf( const EffectProps* props, ALenum param, float* val ) {
     switch ( param ) {
         case AL_CHORUS_RATE:
@@ -159,6 +165,7 @@ void Chorus_getParamf( const EffectProps* props, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void Chorus_getParamfv( const EffectProps* props, ALenum param, float* vals ) {
     Chorus_getParamf( props, param, vals );
 }
@@ -198,9 +205,11 @@ void Flanger_setParami( EffectProps* props, ALenum param, int val ) {
                                     param };
     }
 }
+
 void Flanger_setParamiv( EffectProps* props, ALenum param, const int* vals ) {
     Flanger_setParami( props, param, vals[ 0 ] );
 }
+
 void Flanger_setParamf( EffectProps* props, ALenum param, float val ) {
     switch ( param ) {
         case AL_FLANGER_RATE:
@@ -241,6 +250,7 @@ void Flanger_setParamf( EffectProps* props, ALenum param, float val ) {
                                     param };
     }
 }
+
 void Flanger_setParamfv( EffectProps* props, ALenum param, const float* vals ) {
     Flanger_setParamf( props, param, vals[ 0 ] );
 }
@@ -261,9 +271,11 @@ void Flanger_getParami( const EffectProps* props, ALenum param, int* val ) {
                                     param };
     }
 }
+
 void Flanger_getParamiv( const EffectProps* props, ALenum param, int* vals ) {
     Flanger_getParami( props, param, vals );
 }
+
 void Flanger_getParamf( const EffectProps* props, ALenum param, float* val ) {
     switch ( param ) {
         case AL_FLANGER_RATE:
@@ -288,6 +300,7 @@ void Flanger_getParamf( const EffectProps* props, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void Flanger_getParamfv( const EffectProps* props, ALenum param, float* vals ) {
     Flanger_getParamf( props, param, vals );
 }
@@ -322,71 +335,109 @@ struct EaxChorusTraits {
     static constexpr auto Field = &EaxEffectProps::mChorus;
 
     static constexpr auto eax_effect_type() { return EaxEffectType::Chorus; }
+
     static constexpr auto efx_effect() { return AL_EFFECT_CHORUS; }
 
     static constexpr auto eax_none_param_id() { return EAXCHORUS_NONE; }
+
     static constexpr auto eax_allparameters_param_id() {
         return EAXCHORUS_ALLPARAMETERS;
     }
+
     static constexpr auto eax_waveform_param_id() { return EAXCHORUS_WAVEFORM; }
+
     static constexpr auto eax_phase_param_id() { return EAXCHORUS_PHASE; }
+
     static constexpr auto eax_rate_param_id() { return EAXCHORUS_RATE; }
+
     static constexpr auto eax_depth_param_id() { return EAXCHORUS_DEPTH; }
+
     static constexpr auto eax_feedback_param_id() { return EAXCHORUS_FEEDBACK; }
+
     static constexpr auto eax_delay_param_id() { return EAXCHORUS_DELAY; }
 
     static constexpr auto eax_min_waveform() { return EAXCHORUS_MINWAVEFORM; }
+
     static constexpr auto eax_min_phase() { return EAXCHORUS_MINPHASE; }
+
     static constexpr auto eax_min_rate() { return EAXCHORUS_MINRATE; }
+
     static constexpr auto eax_min_depth() { return EAXCHORUS_MINDEPTH; }
+
     static constexpr auto eax_min_feedback() { return EAXCHORUS_MINFEEDBACK; }
+
     static constexpr auto eax_min_delay() { return EAXCHORUS_MINDELAY; }
 
     static constexpr auto eax_max_waveform() { return EAXCHORUS_MAXWAVEFORM; }
+
     static constexpr auto eax_max_phase() { return EAXCHORUS_MAXPHASE; }
+
     static constexpr auto eax_max_rate() { return EAXCHORUS_MAXRATE; }
+
     static constexpr auto eax_max_depth() { return EAXCHORUS_MAXDEPTH; }
+
     static constexpr auto eax_max_feedback() { return EAXCHORUS_MAXFEEDBACK; }
+
     static constexpr auto eax_max_delay() { return EAXCHORUS_MAXDELAY; }
 
     static constexpr auto eax_default_waveform() {
         return EAXCHORUS_DEFAULTWAVEFORM;
     }
+
     static constexpr auto eax_default_phase() { return EAXCHORUS_DEFAULTPHASE; }
+
     static constexpr auto eax_default_rate() { return EAXCHORUS_DEFAULTRATE; }
+
     static constexpr auto eax_default_depth() { return EAXCHORUS_DEFAULTDEPTH; }
+
     static constexpr auto eax_default_feedback() {
         return EAXCHORUS_DEFAULTFEEDBACK;
     }
+
     static constexpr auto eax_default_delay() { return EAXCHORUS_DEFAULTDELAY; }
 
     static constexpr auto efx_min_waveform() { return AL_CHORUS_MIN_WAVEFORM; }
+
     static constexpr auto efx_min_phase() { return AL_CHORUS_MIN_PHASE; }
+
     static constexpr auto efx_min_rate() { return AL_CHORUS_MIN_RATE; }
+
     static constexpr auto efx_min_depth() { return AL_CHORUS_MIN_DEPTH; }
+
     static constexpr auto efx_min_feedback() { return AL_CHORUS_MIN_FEEDBACK; }
+
     static constexpr auto efx_min_delay() { return AL_CHORUS_MIN_DELAY; }
 
     static constexpr auto efx_max_waveform() { return AL_CHORUS_MAX_WAVEFORM; }
+
     static constexpr auto efx_max_phase() { return AL_CHORUS_MAX_PHASE; }
+
     static constexpr auto efx_max_rate() { return AL_CHORUS_MAX_RATE; }
+
     static constexpr auto efx_max_depth() { return AL_CHORUS_MAX_DEPTH; }
+
     static constexpr auto efx_max_feedback() { return AL_CHORUS_MAX_FEEDBACK; }
+
     static constexpr auto efx_max_delay() { return AL_CHORUS_MAX_DELAY; }
 
     static constexpr auto efx_default_waveform() {
         return AL_CHORUS_DEFAULT_WAVEFORM;
     }
+
     static constexpr auto efx_default_phase() {
         return AL_CHORUS_DEFAULT_PHASE;
     }
+
     static constexpr auto efx_default_rate() { return AL_CHORUS_DEFAULT_RATE; }
+
     static constexpr auto efx_default_depth() {
         return AL_CHORUS_DEFAULT_DEPTH;
     }
+
     static constexpr auto efx_default_feedback() {
         return AL_CHORUS_DEFAULT_FEEDBACK;
     }
+
     static constexpr auto efx_default_delay() {
         return AL_CHORUS_DEFAULT_DELAY;
     }
@@ -406,81 +457,119 @@ struct EaxFlangerTraits {
     static constexpr auto Field = &EaxEffectProps::mFlanger;
 
     static constexpr auto eax_effect_type() { return EaxEffectType::Flanger; }
+
     static constexpr auto efx_effect() { return AL_EFFECT_FLANGER; }
 
     static constexpr auto eax_none_param_id() { return EAXFLANGER_NONE; }
+
     static constexpr auto eax_allparameters_param_id() {
         return EAXFLANGER_ALLPARAMETERS;
     }
+
     static constexpr auto eax_waveform_param_id() {
         return EAXFLANGER_WAVEFORM;
     }
+
     static constexpr auto eax_phase_param_id() { return EAXFLANGER_PHASE; }
+
     static constexpr auto eax_rate_param_id() { return EAXFLANGER_RATE; }
+
     static constexpr auto eax_depth_param_id() { return EAXFLANGER_DEPTH; }
+
     static constexpr auto eax_feedback_param_id() {
         return EAXFLANGER_FEEDBACK;
     }
+
     static constexpr auto eax_delay_param_id() { return EAXFLANGER_DELAY; }
 
     static constexpr auto eax_min_waveform() { return EAXFLANGER_MINWAVEFORM; }
+
     static constexpr auto eax_min_phase() { return EAXFLANGER_MINPHASE; }
+
     static constexpr auto eax_min_rate() { return EAXFLANGER_MINRATE; }
+
     static constexpr auto eax_min_depth() { return EAXFLANGER_MINDEPTH; }
+
     static constexpr auto eax_min_feedback() { return EAXFLANGER_MINFEEDBACK; }
+
     static constexpr auto eax_min_delay() { return EAXFLANGER_MINDELAY; }
 
     static constexpr auto eax_max_waveform() { return EAXFLANGER_MAXWAVEFORM; }
+
     static constexpr auto eax_max_phase() { return EAXFLANGER_MAXPHASE; }
+
     static constexpr auto eax_max_rate() { return EAXFLANGER_MAXRATE; }
+
     static constexpr auto eax_max_depth() { return EAXFLANGER_MAXDEPTH; }
+
     static constexpr auto eax_max_feedback() { return EAXFLANGER_MAXFEEDBACK; }
+
     static constexpr auto eax_max_delay() { return EAXFLANGER_MAXDELAY; }
 
     static constexpr auto eax_default_waveform() {
         return EAXFLANGER_DEFAULTWAVEFORM;
     }
+
     static constexpr auto eax_default_phase() {
         return EAXFLANGER_DEFAULTPHASE;
     }
+
     static constexpr auto eax_default_rate() { return EAXFLANGER_DEFAULTRATE; }
+
     static constexpr auto eax_default_depth() {
         return EAXFLANGER_DEFAULTDEPTH;
     }
+
     static constexpr auto eax_default_feedback() {
         return EAXFLANGER_DEFAULTFEEDBACK;
     }
+
     static constexpr auto eax_default_delay() {
         return EAXFLANGER_DEFAULTDELAY;
     }
 
     static constexpr auto efx_min_waveform() { return AL_FLANGER_MIN_WAVEFORM; }
+
     static constexpr auto efx_min_phase() { return AL_FLANGER_MIN_PHASE; }
+
     static constexpr auto efx_min_rate() { return AL_FLANGER_MIN_RATE; }
+
     static constexpr auto efx_min_depth() { return AL_FLANGER_MIN_DEPTH; }
+
     static constexpr auto efx_min_feedback() { return AL_FLANGER_MIN_FEEDBACK; }
+
     static constexpr auto efx_min_delay() { return AL_FLANGER_MIN_DELAY; }
 
     static constexpr auto efx_max_waveform() { return AL_FLANGER_MAX_WAVEFORM; }
+
     static constexpr auto efx_max_phase() { return AL_FLANGER_MAX_PHASE; }
+
     static constexpr auto efx_max_rate() { return AL_FLANGER_MAX_RATE; }
+
     static constexpr auto efx_max_depth() { return AL_FLANGER_MAX_DEPTH; }
+
     static constexpr auto efx_max_feedback() { return AL_FLANGER_MAX_FEEDBACK; }
+
     static constexpr auto efx_max_delay() { return AL_FLANGER_MAX_DELAY; }
 
     static constexpr auto efx_default_waveform() {
         return AL_FLANGER_DEFAULT_WAVEFORM;
     }
+
     static constexpr auto efx_default_phase() {
         return AL_FLANGER_DEFAULT_PHASE;
     }
+
     static constexpr auto efx_default_rate() { return AL_FLANGER_DEFAULT_RATE; }
+
     static constexpr auto efx_default_depth() {
         return AL_FLANGER_DEFAULT_DEPTH;
     }
+
     static constexpr auto efx_default_feedback() {
         return AL_FLANGER_DEFAULT_FEEDBACK;
     }
+
     static constexpr auto efx_default_delay() {
         return AL_FLANGER_DEFAULT_DELAY;
     }

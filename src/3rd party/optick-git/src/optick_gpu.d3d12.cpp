@@ -70,8 +70,10 @@ class GPUProfilerD3D12 : public GPUProfiler {
             : commandQueue( nullptr ),
               queryHeap( nullptr ),
               syncFence( nullptr ) {}
+
         ~NodePayload();
     };
+
     vector< NodePayload* > nodePayloads;
 
     ID3D12Resource* queryBuffer;

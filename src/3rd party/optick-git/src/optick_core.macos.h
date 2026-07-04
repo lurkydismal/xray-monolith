@@ -85,10 +85,13 @@ class DTrace : public Trace {
         ProcessID pid;
         ThreadID tid;
         int prio;
+
         bool IsValid() const { return tid != INVALID_THREAD_ID; }
+
         CoreState()
             : pid( INVALID_PROCESS_ID ), tid( INVALID_THREAD_ID ), prio( 0 ) {}
     };
+
     static const int MAX_CPU_CORES = 256;
     array< CoreState, MAX_CPU_CORES > cores;
 
@@ -102,19 +105,23 @@ class DTrace : public Trace {
         PARSE_TIMEOUT,
         PARSE_FAILED,
     };
+
     ParseResult Parse( const char* line );
 
 public:
     DTrace();
 
     virtual void SetPassword( const char* pwd ) override { password = pwd; }
+
     virtual CaptureStatus::Type Start( Mode::Type mode,
                                        int frequency,
                                        const ThreadList& threads ) override;
     virtual bool Stop() override;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DTrace::DTrace() : state( STATE_IDLE ), timeout( 0 ) {}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DTrace::CheckRootAccess() {
     char cmd[ 256 ] = { 0 };
@@ -122,6 +129,7 @@ bool DTrace::CheckRootAccess() {
                isSilent ? "2> /dev/null" : "" );
     return system( cmd ) == 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CaptureStatus::Type DTrace::Start( Mode::Type mode,
                                    int /*frequency*/,
@@ -138,6 +146,7 @@ CaptureStatus::Type DTrace::Start( Mode::Type mode,
 
     return CaptureStatus::OK;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DTrace::Stop() {
     if ( state != STATE_RUNNING ) {
@@ -150,6 +159,7 @@ bool DTrace::Stop() {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FILE* popen2( const char* program, const char* type, pid_t* outPid ) {
     FILE* iop;
@@ -205,6 +215,7 @@ FILE* popen2( const char* program, const char* type, pid_t* outPid ) {
 
     return ( iop );
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DTrace::Process() {
     const char* command =
@@ -231,6 +242,7 @@ void DTrace::Process() {
         OPTICK_FAILED( "Failed to open communication pipe!" );
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 DTrace::ParseResult DTrace::Parse( const char* line ) {
     if ( const char* cmd = strchr( line, '@' ) ) {
@@ -268,6 +280,7 @@ DTrace::ParseResult DTrace::Parse( const char* line ) {
     }
     return PARSE_FAILED;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void DTrace::AsyncProcess( DTrace* trace ) {
     trace->Process();
@@ -277,10 +290,12 @@ void DTrace::AsyncProcess( DTrace* trace ) {
 Trace* Platform::CreateTrace() {
     return Memory::New< DTrace >();
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 SymbolEngine* Platform::CreateSymbolEngine() {
     return nullptr;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace Optick
 #endif // OPTICK_ENABLE_TRACING

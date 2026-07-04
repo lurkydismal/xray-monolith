@@ -53,6 +53,7 @@ protected:
     enum { allow_multimapping = Allow_multimapping };
 
     concurrent_unordered_set_traits() : my_hash_compare() {}
+
     concurrent_unordered_set_traits( const hash_compare& hc )
         : my_hash_compare( hc ) {}
 

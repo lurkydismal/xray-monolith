@@ -335,7 +335,7 @@ void dx103DFluidGrid::DrawBoundaryLines( void ) {
     //	UINT offset[1] = { 0 };
     //	DrawPrimitive( D3Dxx_PRIMITIVE_TOPOLOGY_LINELIST, layout,
     //&boundaryLinesBuffer, 		stride, offset, 0,
-    //numVerticesBoundaryLines  );
+    // numVerticesBoundaryLines  );
 
     RCache.set_Geometry( m_GeomBoundaryLines );
     RCache.Render( D3DPT_TRIANGLELIST, 0, m_iNumVerticesBoundaryLines / 3 );

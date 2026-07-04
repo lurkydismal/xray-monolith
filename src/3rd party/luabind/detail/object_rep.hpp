@@ -56,11 +56,15 @@ public:
     }
 
     const class_rep* crep() const { return m_classrep; }
+
     class_rep* crep() { return m_classrep; }
+
     int flags() const { return m_flags; }
+
     void set_flags( int flags ) { m_flags = flags; }
 
     detail::lua_reference& get_lua_table() { return m_lua_table_ref; }
+
     detail::lua_reference const& get_lua_table() const {
         return m_lua_table_ref;
     }

@@ -88,6 +88,7 @@ static void __stdcall build_callback( Fvector* V,
 }
 
 xrCriticalSection lloadcs;
+
 bool IGame_Level::Load( u32 dwNum ) {
     PROF_EVENT( "IGame_Level::Load" );
     xrCriticalSectionGuard guard( &lloadcs );
@@ -362,6 +363,7 @@ void IGame_Level::SoundEvent_Dispatch() {
 // Lain: added
 void IGame_Level::SoundEvent_OnDestDestroy( Feel::Sound* obj ) {
     PROF_EVENT( "IGame_Level::SoundEvent_OnDestDestroy" );
+
     struct rem_pred {
         rem_pred( Feel::Sound* obj ) : m_obj( obj ) {}
 

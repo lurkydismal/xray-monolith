@@ -102,6 +102,7 @@ struct TL_2c3uv {
     u32 color0;
     u32 color1;
     Fvector2 uv[ 3 ];
+
     IC void set( float x,
                  float y,
                  u32 c0,

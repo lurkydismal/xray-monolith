@@ -210,6 +210,7 @@ BOOL R_constant_table::parse( void* _desc, u32 destination ) {
 #endif //	USE_DX10
 
 #include <iterator>
+
 /// !!!!!!!!FIX THIS FOR DX11!!!!!!!!!
 void R_constant_table::merge( R_constant_table* T ) {
     if ( 0 == T )

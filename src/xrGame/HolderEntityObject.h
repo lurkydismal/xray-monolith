@@ -56,11 +56,14 @@ public:
                       const Fvector& foot_pos ) {
         return !Owner();
     };
+
     virtual void OnMouseMove( int x, int y );
     virtual void OnKeyboardPress( int dik );
     virtual void OnKeyboardRelease( int dik );
     virtual void OnKeyboardHold( int dik );
+
     virtual CInventory* GetInventory() { return NULL; };
+
     virtual void cam_Update( float dt, float fov = 90.0f );
 
     virtual void renderable_Render( IDSGraphManager* DM );
@@ -70,8 +73,11 @@ public:
 
     virtual bool attach_Actor( CGameObject* actor );
     virtual void detach_Actor();
+
     virtual bool allowWeapon() const { return m_bAllowWeapon; };
+
     virtual bool HUDView() const { return true; };
+
     virtual Fvector ExitPosition() { return m_exit_position; };
 
     virtual CCameraBase* Camera() { return camera; };

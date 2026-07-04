@@ -10,6 +10,7 @@ CUIGameCustom* get_hud() {
 }
 
 #pragma optimize( "s", on )
+
 void CUIGameCustom::script_register( lua_State* L ) {
     module( L )
         [ class_< StaticDrawableWrapper >( "StaticDrawableWrapper" )

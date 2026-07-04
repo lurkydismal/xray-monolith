@@ -9,6 +9,7 @@
 // #include "phworld.h"
 #pragma warning( disable : 4995 )
 #pragma warning( disable : 4267 )
+
 ICF void GetNormal( CDB::TRI* XTri, Fvector& n, const Fvector* V_array ) {
     // VERIFY(g_pGameLevel);
     // const Fvector* V_array=inl_ph_world().ObjectSpace().GetStaticVerts();
@@ -223,5 +224,6 @@ ICF float DistToTri( Triangle* T,
 
     // return _min(_min(DistToFragmenton(pos)))
 }
+
 #pragma warning( default : 4995 )
 #pragma warning( default : 4267 )

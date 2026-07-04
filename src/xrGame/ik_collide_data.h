@@ -26,7 +26,9 @@ public:
           _side( Fvector().set( -FLT_MAX, -FLT_MAX, -FLT_MAX ) ) {}
 
     IC const Fvector& pos_toe() const { return _toe; }
+
     IC const Fvector& pos_heel() const { return _heel; }
+
     IC const Fvector& pos_side() const { return _side; }
 
 private:

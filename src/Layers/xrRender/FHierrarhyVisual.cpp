@@ -89,6 +89,7 @@ void FHierrarhyVisual::MarkAsHot( bool is_hot ) {
     for ( u32 i = 0; i < children_invisible.size(); i++ )
         children_invisible[ i ]->MarkAsHot( is_hot );
 }
+
 //--DSR-- HeatVision_end
 
 void FHierrarhyVisual::Copy( dxRender_Visual* pSrc ) {

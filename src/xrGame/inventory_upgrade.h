@@ -53,12 +53,14 @@ struct functor< void > : public functor_base< void > {
 template <>
 struct functor2< void > : public functor< void > {
     LPCSTR parameter2;
+
     IC void operator()() const { functr( parameter, parameter2 ); }
 };
 
 template <>
 struct functor3< void > : public functor2< void > {
     int parameter3;
+
     IC void operator()() const { functr( parameter, parameter2, parameter3 ); }
 };
 } // namespace detail

@@ -52,6 +52,7 @@ struct ConfigEntry {
     std::string key;
     std::string value;
 };
+
 al::vector< ConfigEntry > ConfOpts;
 
 std::string& lstrip( std::string& line ) {

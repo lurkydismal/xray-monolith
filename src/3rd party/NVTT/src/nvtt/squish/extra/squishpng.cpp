@@ -51,6 +51,7 @@ using namespace squish;
 class Error : public std::exception {
 public:
     Error( std::string const& excuse ) : m_excuse( excuse ) {}
+
     ~Error() throw() {}
 
     virtual char const* what() const throw() { return m_excuse.c_str(); }
@@ -73,6 +74,7 @@ private:
 class Mem : NonCopyable {
 public:
     explicit Mem( int size ) : m_p( new u8[ size ] ) {}
+
     ~Mem() { delete[] m_p; }
 
     u8* Get() const { return m_p; }
@@ -85,12 +87,14 @@ private:
 class File : NonCopyable {
 public:
     explicit File( FILE* fp ) : m_fp( fp ) {}
+
     ~File() {
         if ( m_fp )
             fclose( m_fp );
     }
 
     bool IsValid() const { return m_fp != 0; }
+
     FILE* Get() const { return m_fp; }
 
 private:
@@ -118,6 +122,7 @@ public:
     ~PngReadStruct() { png_destroy_read_struct( &m_png, &m_info, &m_end ); }
 
     png_structp GetPng() const { return m_png; }
+
     png_infop GetInfo() const { return m_info; }
 
 private:
@@ -144,6 +149,7 @@ public:
     ~PngWriteStruct() { png_destroy_write_struct( &m_png, &m_info ); }
 
     png_structp GetPng() const { return m_png; }
+
     png_infop GetInfo() const { return m_info; }
 
 private:
@@ -179,9 +185,13 @@ public:
     explicit PngImage( std::string const& fileName );
 
     int GetWidth() const { return m_width; }
+
     int GetHeight() const { return m_height; }
+
     int GetStride() const { return m_stride; }
+
     bool IsColour() const { return m_colour; }
+
     bool IsAlpha() const { return m_alpha; }
 
     u8 const* GetRow( int row ) const { return ( u8* )m_rows[ row ]; }

@@ -582,6 +582,7 @@ struct aiMaterialProperty {
 
 #endif
 };
+
 //! @endcond
 
 #ifdef __cplusplus

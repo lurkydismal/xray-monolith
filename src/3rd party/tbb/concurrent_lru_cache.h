@@ -50,6 +50,7 @@ private:
     struct map_value_type;
     typedef std::map< key_type, map_value_type > map_storage_type;
     typedef std::list< typename map_storage_type::iterator > lru_list_type;
+
     struct map_value_type {
         value_type my_value;
         ref_counter_type my_ref_counter;
@@ -132,9 +133,11 @@ private:
 
     public:
         handle_object() : my_cache_pointer(), my_map_record_ptr() {}
+
         handle_object( concurrent_lru_cache& cache_ref,
                        typename map_storage_type::reference value_ref )
             : my_cache_pointer( &cache_ref ), my_map_record_ptr( &value_ref ) {}
+
         operator bool() const {
             return ( my_cache_pointer && my_map_record_ptr );
         }
@@ -150,6 +153,7 @@ private:
             src.my_cache_pointer = NULL;
             src.my_map_record_ptr = NULL;
         }
+
         handle_object& operator=( handle_object&& src ) {
             __TBB_ASSERT(
                 ( src.my_cache_pointer && src.my_map_record_ptr ) ||
@@ -168,6 +172,7 @@ private:
         handle_object( handle_move_t m )
             : my_cache_pointer( &m.my_cache_ref ),
               my_map_record_ptr( &m.my_map_record_ref ) {}
+
         handle_object& operator=( handle_move_t m ) {
             if ( my_cache_pointer ) {
                 my_cache_pointer->signal_end_of_usage( *my_map_record_ptr );
@@ -176,6 +181,7 @@ private:
             my_map_record_ptr = &m.my_map_record_ref;
             return *this;
         }
+
         operator handle_move_t() { return move( *this ); }
 #endif // __TBB_CPP11_RVALUE_REF_PRESENT
         value_type& value() {
@@ -186,6 +192,7 @@ private:
                 "get value from an invalid or already moved object?" );
             return my_map_record_ptr->second.my_value;
         }
+
         ~handle_object() {
             if ( my_cache_pointer ) {
                 my_cache_pointer->signal_end_of_usage( *my_map_record_ptr );
@@ -202,6 +209,7 @@ private:
         friend handle_move_t move( handle_object& h ) {
             return handle_object::move( h );
         }
+
         // TODO: add check for double moved objects by special dedicated field
         static handle_move_t move( handle_object& h ) {
             __TBB_ASSERT( ( h.my_cache_pointer && h.my_map_record_ptr ) ||
@@ -231,11 +239,14 @@ private:
     struct aggregator_operation
         : tbb::internal::aggregated_operation< aggregator_operation > {
         enum e_op_type { op_retive, op_signal_end_of_usage };
+
         // TODO: try to use pointer to function apply_visitor here
         // TODO: try virtual functions and measure the difference
         e_op_type my_operation_type;
+
         aggregator_operation( e_op_type operation_type )
             : my_operation_type( operation_type ) {}
+
         void cast_and_handle( self_type& container ) {
             if ( my_operation_type == op_retive ) {
                 static_cast< retrieve_aggregator_operation* >( this )->handle(
@@ -246,33 +257,41 @@ private:
             }
         }
     };
+
     struct retrieve_aggregator_operation : aggregator_operation,
                                            private internal::no_assign {
         key_type my_key;
         typename map_storage_type::pointer my_result_map_record_pointer;
         bool my_is_new_value_needed;
+
         retrieve_aggregator_operation( key_type key )
             : aggregator_operation( aggregator_operation::op_retive ),
               my_key( key ),
               my_is_new_value_needed( false ) {}
+
         void handle( self_type& container ) {
             my_result_map_record_pointer =
                 &container.retrieve_serial( my_key, my_is_new_value_needed );
         }
+
         typename map_storage_type::reference result() {
             return *my_result_map_record_pointer;
         }
+
         bool is_new_value_needed() { return my_is_new_value_needed; }
     };
+
     struct signal_end_of_usage_aggregator_operation
         : aggregator_operation,
           private internal::no_assign {
         typename map_storage_type::reference my_map_record_ref;
+
         signal_end_of_usage_aggregator_operation(
             typename map_storage_type::reference map_record_ref )
             : aggregator_operation(
                   aggregator_operation::op_signal_end_of_usage ),
               my_map_record_ref( map_record_ref ) {}
+
         void handle( self_type& container ) {
             container.signal_end_of_usage_serial( my_map_record_ref );
         }

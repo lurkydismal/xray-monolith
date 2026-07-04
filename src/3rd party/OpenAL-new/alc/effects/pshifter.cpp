@@ -70,6 +70,7 @@ struct Windower {
         }
     }
 };
+
 const Windower gWindow{};
 
 struct FrequencyBin {

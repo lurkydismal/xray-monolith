@@ -137,12 +137,13 @@
     _( CALLL, L, ref, lit )                                                   \
     _( CALLS, S, ref, lit )                                                   \
     _( CALLXS, S, ref, ref )                                                  \
-    _( CARG, N, ref, ref )                                                    \
-                                                                              \
-    /* End of list. */
+    _( CARG, N, ref, ref )
+
+/* End of list. */
 
 /* IR opcodes (max. 256). */
 typedef enum {
+
 #define IRENUM( name, m, m1, m2 ) IR_##name,
     IRDEF( IRENUM )
 #undef IRENUM
@@ -174,10 +175,12 @@ LJ_STATIC_ASSERT( ( int )IR_XLOAD + IRDELTA_L2S == ( int )IR_XSTORE );
     _( CEIL )                                                          \
     _( TRUNC ) /* Must be first and in this order. */                  \
     _( SQRT )                                                          \
-    _( EXP ) _( EXP2 ) _( LOG ) _( LOG2 ) _( LOG10 ) _( SIN ) _( COS ) \
-        _( TAN ) _( OTHER )
+    _( EXP )                                                           \
+    _( EXP2 ) _( LOG ) _( LOG2 ) _( LOG10 ) _( SIN ) _( COS ) _( TAN ) \
+        _( OTHER )
 
 typedef enum {
+
 #define FPMENUM( name ) IRFPM_##name,
     IRFPMDEF( FPMENUM )
 #undef FPMENUM
@@ -205,6 +208,7 @@ typedef enum {
     _( CDATA_INT64_4, sizeof( GCcdata ) + 4 )
 
 typedef enum {
+
 #define FLENUM( name, ofs ) IRFL_##name,
     IRFLDEF( FLENUM )
 #undef FLENUM
@@ -250,6 +254,7 @@ typedef enum {
     IRMcst, /* Constant literal: i, gcr or ptr. */
     IRMnone /* Unused operand. */
 } IRMode;
+
 #define IRM___ IRMnone
 
 /* Mode bits: Commutative, {Normal/Ref, Alloc, Load, Store}, Non-weak guard. */
@@ -287,19 +292,20 @@ LJ_DATA const uint8_t lj_ir_mode[ IR__MAX + 1 ];
 ** a TValue after implicit or explicit conversion. Their types must be
 ** contiguous and next to IRT_NUM (see the typerange macros below).
 */
-#define IRTDEF( _ )                                                         \
-    _( NIL, 4 )                                                             \
-    _( FALSE, 4 )                                                           \
-    _( TRUE, 4 )                                                            \
-    _( LIGHTUD, LJ_64 ? 8 : 4 ) _( STR, 4 ) _( P32, 4 ) _( THREAD, 4 )      \
-        _( PROTO, 4 ) _( FUNC, 4 ) _( P64, 8 ) _( CDATA, 4 ) _( TAB, 4 )    \
-            _( UDATA, 4 ) _( FLOAT, 4 ) _( NUM, 8 ) _( I8, 1 ) _( U8, 1 )   \
-                _( I16, 2 ) _( U16, 2 ) _( INT, 4 ) _( U32, 4 ) _( I64, 8 ) \
-                    _( U64, 8 )                                             \
-                        _( SOFTFP, 4 ) /* There is room for 9 more types. */
+#define IRTDEF( _ )                                                       \
+    _( NIL, 4 )                                                           \
+    _( FALSE, 4 )                                                         \
+    _( TRUE, 4 )                                                          \
+    _( LIGHTUD, LJ_64 ? 8 : 4 )                                           \
+    _( STR, 4 ) _( P32, 4 ) _( THREAD, 4 ) _( PROTO, 4 ) _( FUNC, 4 )     \
+        _( P64, 8 ) _( CDATA, 4 ) _( TAB, 4 ) _( UDATA, 4 ) _( FLOAT, 4 ) \
+            _( NUM, 8 ) _( I8, 1 ) _( U8, 1 ) _( I16, 2 ) _( U16, 2 )     \
+                _( INT, 4 ) _( U32, 4 ) _( I64, 8 ) _( U64, 8 )           \
+                    _( SOFTFP, 4 ) /* There is room for 9 more types. */
 
 /* IR result type and flags (8 bit). */
 typedef enum {
+
 #define IRTENUM( name, size ) IRT_##name,
     IRTDEF( IRTENUM )
 #undef IRTENUM
@@ -524,6 +530,7 @@ typedef union IRIns {
         IROpT ot;    /* IR opcode and type (overlaps t and o). */
         IRRef1 prev; /* Previous ins in same chain (overlaps r and s). */
     };
+
     struct {
         IRRef2 op12; /* IR operand 1 and 2 (overlaps op1 and op2). */
         LJ_ENDIAN_LOHI( IRType1 t; /* IR type. */
@@ -534,6 +541,7 @@ typedef union IRIns {
                         uint8_t s; /* Spill slot allocation (overlaps prev). */
         )
     };
+
     int32_t i; /* 32 bit signed integer literal (overlaps op12). */
     GCRef gcr; /* GCobj constant (overlaps op12). */
     MRef ptr;  /* Pointer constant (overlaps op12). */

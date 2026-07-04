@@ -65,14 +65,21 @@ public:
     virtual void net_Relcase( CObject* object ) override;
 
     virtual CWeapon* cast_weapon() { return this; }
+
     virtual CWeaponBinoculars* cast_weapon_binoculars() { return nullptr; }
+
     virtual CWeaponKnife* cast_weapon_knife() { return nullptr; }
+
     virtual CWeaponMagazined* cast_weapon_magazined() { return nullptr; }
+
     virtual CWeaponMagazinedWGrenade* cast_weapon_magazined_w_grenade() {
         return nullptr;
     }
+
     virtual CWeaponBM16* cast_weapon_bm16() { return nullptr; }
+
     virtual CWeaponRPG7* cast_weapon_rpg7() { return nullptr; }
+
     virtual CWeaponRG6* cast_weapon_rg6() { return nullptr; }
 
     // serialization
@@ -82,12 +89,15 @@ public:
     virtual BOOL net_SaveRelevant() { return inherited::net_SaveRelevant(); }
 
     float CWeapon::GetSecondVPFov() const;
+
     IC float GetZRotatingFactor() const {
         return m_zoom_params.m_fZoomRotationFactor;
     }
+
     IC float GetSecondVPZoomFactor() const {
         return m_zoom_params.m_fSecondVPFovFactor;
     }
+
     IC float IsSecondVPZoomPresent() const {
         return GetSecondVPZoomFactor() > 0.005f;
     }
@@ -147,7 +157,9 @@ public:
     void set_mFirePoint( Fvector& fire_point );
     void set_mFirePoint2( Fvector& fire_point );
     void set_mShellPoint( Fvector& fire_point );
+
     Fmatrix get_mOffset() { return m_Offset; };
+
     Fmatrix get_mStrapOffset() { return m_StrapOffset; };
 
     virtual void create_physic_shell();
@@ -179,7 +191,9 @@ protected:
     ALife::_TIME_ID m_dwWeaponIndependencyTime;
 
     virtual bool IsHudModeNow();
+
     virtual bool SOParentIsActor() { return ParentIsActor(); }
+
     u8 last_idx;
 
     CAnonHudItem* m_scopeItem = NULL;
@@ -368,7 +382,9 @@ public:
     virtual void ZoomDec();
     virtual void OnZoomIn();
     virtual void OnZoomOut();
+
     IC bool IsZoomed() const { return m_zoom_params.m_bIsZoomModeNow; };
+
     CUIWindow* ZoomTexture();
 
     bool ZoomHideCrosshair();
@@ -380,6 +396,7 @@ public:
     IC void SetZoomFactor( float f ) { m_zoom_params.m_fCurrentZoomFactor = f; }
 
     virtual float CurrentZoomFactor();
+
     // ïîêàçûâàåò, ÷òî îðóæèå íàõîäèòñÿ â ñîîñòîÿíèè ïîâîðîòà äëÿ ïðèáëèæåííîãî
     // ïðèöåëèâàíèÿ
     bool IsRotatingToZoom() const {
@@ -390,36 +407,50 @@ public:
 
     // Tronex script exports
     void AmmoTypeForEach( const ::luabind::functor< bool >& funct );
+
     float GetMagazineWeightScript() const {
         return GetMagazineWeight( m_magazine );
     }
+
     int GetAmmoCount_forType_Script( LPCSTR type ) const {
         return GetAmmoCount_forType( type );
     }
+
     LPCSTR GetGrenadeLauncherNameScript() const {
         return *GetGrenadeLauncherName();
     }
+
     LPCSTR GetSilencerNameScript() const { return *GetSilencerName(); }
+
     LPCSTR GetScopeNameScript() const { return *GetScopeName(); }
+
     float GetFireDispersionScript() const { return fireDispersionBase; }
+
     float RPMScript() const { return fOneShotTime; }
+
     float RealRPMScript() const {
         return 60.0f / fOneShotTime;
     } // Return actual RPM like in configs
+
     float ModeRPMScript() const { return fModeShotTime; }
+
     float ModeRealRPMScript() const { return 60.0f / fModeShotTime; }
 
     // Setters
     void SetFireDispersionScript( float val ) { fireDispersionBase = val; }
+
     void SetRPM( float newOneShotTime ) {
         fOneShotTime = newOneShotTime;
     } // Input - time between shots like received from getter
+
     void SetRealRPM( float rpm ) {
         fOneShotTime = 60.0f / rpm;
     } // Input - actual RPM like in configs
+
     void SetModeRPM( float newOneShotTime ) {
         fModeShotTime = newOneShotTime;
     } // Input - time between shots like received from getter
+
     void SetModeRealRPM( float rpm ) {
         fModeShotTime = 60.0f / rpm;
     } // Input - actual RPM like in configs
@@ -486,7 +517,9 @@ private:
 
 public:
     bool GetFirepos() { return m_firepos; }
+
     bool GetAimpos() { return m_aimpos; }
+
     float GetTargetNearWallOffset();
     float GetTargetHudFov();
 
@@ -506,6 +539,7 @@ protected:
                             const Fvector& target,
                             const float factor ) const;
     virtual void UpdateHudAdditional( Fmatrix& trans );
+
     IC void UpdateFireDependencies() {
         if ( dwFP_Frame == Device.dwFrame )
             return;
@@ -607,52 +641,82 @@ public:
 
     // Getters
     float GetCamRelaxSpeed() { return cam_recoil.RelaxSpeed; };
+
     float GetCamRelaxSpeed_AI() { return cam_recoil.RelaxSpeed_AI; };
+
     float GetCamDispersion() { return cam_recoil.Dispersion; };
+
     float GetCamDispersionInc() { return cam_recoil.DispersionInc; };
+
     float GetCamDispersionFrac() { return cam_recoil.DispersionFrac; };
+
     float GetCamMaxAngleVert() { return cam_recoil.MaxAngleVert; };
+
     float GetCamMaxAngleHorz() { return cam_recoil.MaxAngleHorz; };
+
     float GetCamStepAngleHorz() { return cam_recoil.StepAngleHorz; };
+
     float GetZoomCamRelaxSpeed() { return zoom_cam_recoil.RelaxSpeed; };
+
     float GetZoomCamRelaxSpeed_AI() { return zoom_cam_recoil.RelaxSpeed_AI; };
+
     float GetZoomCamDispersion() { return zoom_cam_recoil.Dispersion; };
+
     float GetZoomCamDispersionInc() { return zoom_cam_recoil.DispersionInc; };
+
     float GetZoomCamDispersionFrac() { return zoom_cam_recoil.DispersionFrac; };
+
     float GetZoomCamMaxAngleVert() { return zoom_cam_recoil.MaxAngleVert; };
+
     float GetZoomCamMaxAngleHorz() { return zoom_cam_recoil.MaxAngleHorz; };
+
     float GetZoomCamStepAngleHorz() { return zoom_cam_recoil.StepAngleHorz; };
 
     // Setters
     void SetCamRelaxSpeed( float val ) { cam_recoil.RelaxSpeed = val; };
+
     void SetCamRelaxSpeed_AI( float val ) { cam_recoil.RelaxSpeed_AI = val; };
+
     void SetCamDispersion( float val ) { cam_recoil.Dispersion = val; };
+
     void SetCamDispersionInc( float val ) { cam_recoil.DispersionInc = val; };
+
     void SetCamDispersionFrac( float val ) { cam_recoil.DispersionFrac = val; };
+
     void SetCamMaxAngleVert( float val ) { cam_recoil.MaxAngleVert = val; };
+
     void SetCamMaxAngleHorz( float val ) { cam_recoil.MaxAngleHorz = val; };
+
     void SetCamStepAngleHorz( float val ) { cam_recoil.StepAngleHorz = val; };
+
     void SetZoomCamRelaxSpeed( float val ) {
         zoom_cam_recoil.RelaxSpeed = val;
     };
+
     void SetZoomCamRelaxSpeed_AI( float val ) {
         zoom_cam_recoil.RelaxSpeed_AI = val;
     };
+
     void SetZoomCamDispersion( float val ) {
         zoom_cam_recoil.Dispersion = val;
     };
+
     void SetZoomCamDispersionInc( float val ) {
         zoom_cam_recoil.DispersionInc = val;
     };
+
     void SetZoomCamDispersionFrac( float val ) {
         zoom_cam_recoil.DispersionFrac = val;
     };
+
     void SetZoomCamMaxAngleVert( float val ) {
         zoom_cam_recoil.MaxAngleVert = val;
     };
+
     void SetZoomCamMaxAngleHorz( float val ) {
         zoom_cam_recoil.MaxAngleHorz = val;
     };
+
     void SetZoomCamStepAngleHorz( float val ) {
         zoom_cam_recoil.StepAngleHorz = val;
     };
@@ -898,6 +962,7 @@ public:
 
     // momopate
     float GetZoomRotateTime() { return m_zoom_params.m_fZoomRotateTime; }
+
     virtual void SetZoomRotateTime( float val ) {
         m_zoom_params.m_fZoomRotateTime = val;
     }
@@ -942,18 +1007,23 @@ public:
     virtual bool GetSilencedTracers() { return m_bSilencedTracers; }
 
     bool unlimited_ammo();
+
     IC bool can_be_strapped() const { return m_can_be_strapped; };
 
     const decltype( m_magazine )& GetMagazine() { return m_magazine; };
+
     float GetMagazineWeight( const decltype( m_magazine )& mag ) const;
 
     virtual float GetHitPower() {
         return fvHitPower[ g_SingleGameDifficulty ];
     };
+
     virtual float GetHitPowerCritical() {
         return fvHitPowerCritical[ g_SingleGameDifficulty ];
     };
+
     virtual float GetHitImpulse() { return fHitImpulse; };
+
     virtual float GetFireDistance() { return fireDistance; };
 
     // Setters
@@ -963,13 +1033,16 @@ public:
             fvHitPower[ i ] = val;
         }
     };
+
     virtual void SetHitPowerCritical( float val ) {
         for ( int i = ESingleGameDifficulty::egdNovice;
               i < ESingleGameDifficulty::egdCount; i++ ) {
             fvHitPowerCritical[ i ] = val;
         }
     };
+
     virtual void SetHitImpulse( float val ) { fHitImpulse = val; };
+
     virtual void SetFireDistance( float val ) { fireDistance = val; };
 
     IC u8 GetZoomType() const { return m_zoomtype; }
@@ -984,12 +1057,17 @@ public:
 
     // Alundaio
     int GetAmmoCount_forType( shared_str const& ammo_type ) const;
+
     virtual void set_ef_main_weapon_type( u32 type ) {
         m_ef_main_weapon_type = type;
     };
+
     virtual void set_ef_weapon_type( u32 type ) { m_ef_weapon_type = type; };
+
     virtual void SetAmmoType( u8 type ) { m_ammoType = type; };
+
     u8 GetAmmoType() { return m_ammoType; };
+
     //-Alundaio
 
 protected:
@@ -1042,10 +1120,13 @@ public:
     void AddHUDShootingEffect();
 
     bool GetRememberActorNVisnStatus() { return m_bRememberActorNVisnStatus; };
+
     virtual void EnableActorNVisnAfterZoom();
+
     virtual float GetInertionAimFactor() {
         return 1.f - m_zoom_params.m_fZoomRotationFactor;
     };
+
     //--> [От 1.0 - Инерция от бедра, до 0.0 - Инерция при зумме] Какую инерцию
     // использовать
 

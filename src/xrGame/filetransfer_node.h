@@ -114,6 +114,7 @@ public:
     filetransfer_node& operator=( filetransfer_node const& copy ) {
         NODEFAULT;
     };
+
     ~filetransfer_node();
 
     void calculate_chunk_size( u32 peak_throughput, u32 current_throughput );
@@ -126,6 +127,7 @@ public:
     // inline	shared_str const &	get_file_name	() { return m_file_name;
     // };
     bool opened() const;
+
     // inline	IReader*			get_reader		() {
     // return m_reader; };
     inline u32 const get_chunk_size() const { return m_chunk_size; };

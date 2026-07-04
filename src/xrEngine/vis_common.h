@@ -3,6 +3,7 @@
 #pragma once
 
 #pragma pack( push, 4 )
+
 struct vis_data {
     Fsphere sphere; //
     Fbox box;       //
@@ -17,5 +18,6 @@ struct vis_data {
         hom_tested = 0;
     }
 };
+
 #pragma pack( pop )
 #endif

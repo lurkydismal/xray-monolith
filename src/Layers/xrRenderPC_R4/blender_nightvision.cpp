@@ -5,9 +5,11 @@
 CBlender_nightvision::CBlender_nightvision() {
     description.CLS = 0;
 }
+
 CBlender_fakescope::CBlender_fakescope() {
     description.CLS = 0;
 } // crookr
+
 CBlender_heatvision::CBlender_heatvision() {
     description.CLS = 0;
 } //--DSR-- Heatvision
@@ -19,6 +21,7 @@ CBlender_fakescope::~CBlender_fakescope() // crookr
 
 //--DSR-- HeatVision_start
 CBlender_heatvision::~CBlender_heatvision() {}
+
 //--DSR-- HeatVision_end
 
 void CBlender_nightvision::Compile( CBlender_Compile& C ) {
@@ -142,4 +145,5 @@ void CBlender_heatvision::Compile( CBlender_Compile& C ) {
             break;
     }
 }
+
 //--DSR-- HeatVision_end

@@ -45,6 +45,7 @@ protected:
     struct Frame {
         VkCommandBuffer commandBuffer;
         VkFence fence;
+
         Frame() : commandBuffer( VK_NULL_HANDLE ), fence( VK_NULL_HANDLE ) {}
     };
 
@@ -65,8 +66,10 @@ protected:
               queue( VK_NULL_HANDLE ),
               queryPool( VK_NULL_HANDLE ),
               commandPool( VK_NULL_HANDLE ) {}
+
         ~NodePayload();
     };
+
     vector< NodePayload* > nodePayloads;
 
     void ResolveTimestamps( VkCommandBuffer commandBuffer,
@@ -463,6 +466,7 @@ GPUProfilerVulkan::~GPUProfilerVulkan() {
 } // namespace Optick
 #else
 #include "optick_common.h"
+
 namespace Optick {
 void InitGpuVulkan( VkDevice* /*vkDevices*/,
                     VkPhysicalDevice* /*vkPhysicalDevices*/,

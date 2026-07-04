@@ -33,6 +33,7 @@
  */
 
 U_NAMESPACE_BEGIN
+
 /**
  * A concrete subclass of CharacterIterator that iterates over the
  * characters (code units or code points) in a UnicodeString.

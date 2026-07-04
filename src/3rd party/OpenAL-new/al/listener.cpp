@@ -91,6 +91,7 @@ AL_API void AL_APIENTRY alListenerf( ALenum param,
                                "Invalid listener float property" );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alListener3f( ALenum param,
@@ -131,6 +132,7 @@ AL_API void AL_APIENTRY alListener3f( ALenum param,
                                "Invalid listener 3-float property" );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alListenerfv( ALenum param,
@@ -184,6 +186,7 @@ AL_API void AL_APIENTRY alListenerfv( ALenum param,
                                "Invalid listener float-vector property" );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alListeneri( ALenum param,
@@ -199,6 +202,7 @@ AL_API void AL_APIENTRY alListeneri( ALenum param,
                                "Invalid listener integer property" );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alListener3i( ALenum param,
@@ -225,6 +229,7 @@ AL_API void AL_APIENTRY alListener3i( ALenum param,
                                "Invalid listener 3-integer property" );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alListeneriv( ALenum param,
@@ -265,6 +270,7 @@ AL_API void AL_APIENTRY alListeneriv( ALenum param,
                                "Invalid listener integer-vector property" );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetListenerf( ALenum param,
@@ -292,6 +298,7 @@ AL_API void AL_APIENTRY alGetListenerf( ALenum param,
                                    "Invalid listener float property" );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetListener3f( ALenum param,
@@ -325,6 +332,7 @@ AL_API void AL_APIENTRY alGetListener3f( ALenum param,
                                    "Invalid listener 3-float property" );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetListenerfv( ALenum param,
@@ -366,6 +374,7 @@ AL_API void AL_APIENTRY alGetListenerfv( ALenum param,
                                    "Invalid listener float-vector property" );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetListeneri( ALenum param,
@@ -384,6 +393,7 @@ AL_API void AL_APIENTRY alGetListeneri( ALenum param,
                                    "Invalid listener integer property" );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetListener3i( ALenum param,
@@ -417,6 +427,7 @@ AL_API void AL_APIENTRY alGetListener3i( ALenum param,
                                    "Invalid listener 3-integer property" );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetListeneriv( ALenum param,
@@ -453,4 +464,5 @@ AL_API void AL_APIENTRY alGetListeneriv( ALenum param,
                                    "Invalid listener integer-vector property" );
         }
 }
+
 END_API_FUNC

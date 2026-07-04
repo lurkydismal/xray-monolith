@@ -9,10 +9,14 @@ class XRPHYSICS_API CPHUpdateObject {
 
 public:
     CPHUpdateObject();
+
     virtual ~CPHUpdateObject() { Deactivate(); }
+
     void Activate();
     void Deactivate();
+
     IC bool IsActive() { return b_activated; }
+
     virtual void PhDataUpdate( float step ) = 0;
     virtual void PhTune( float step ) = 0;
 

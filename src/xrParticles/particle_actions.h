@@ -11,6 +11,7 @@ struct PARTICLES_API ParticleAction {
 
     Flags32 m_Flags;
     PActionEnum type; // Type field
+
     ParticleAction() { m_Flags.zero(); }
 
     virtual void Execute( ParticleEffect* pe,
@@ -35,10 +36,15 @@ public:
     IC void reserve( u32 capacity );
 
     IC void append( ParticleAction* pa ) { actions.push_back( pa ); }
+
     IC bool empty() { return actions.empty(); }
+
     IC PAVecIt begin() { return actions.begin(); }
+
     IC PAVecIt end() { return actions.end(); }
+
     IC int size() { return ( int )actions.size(); }
+
     IC void resize( int cnt ) { actions.resize( cnt ); }
 };
 }; // namespace PAPI

@@ -94,6 +94,7 @@ class proxy_caller {
 public:
     proxy_caller( luabind::object* o, const tuple_t& args )
         : m_obj( o ), m_args( args ), m_called( false ) {}
+
     proxy_caller( luabind::object* o, tuple_t&& args )
         : m_obj( o ), m_args( std::move( args ) ), m_called( false ) {}
 
@@ -158,6 +159,7 @@ public:
     proxy_object& operator=( const proxy_array_object& p );
 
     void swap( const proxy_object& rhs );
+
     proxy_object* operator->() { return this; }
 
     operator luabind::object();
@@ -199,12 +201,14 @@ public:
     inline object at( const T& key );
 
     bool is_valid() const { return true; }
+
     lua_State* lua_state() const;
     void pushvalue() const;
     void set() const;
 
     // this is a safe substitute for an implicit converter to bool
     typedef void ( proxy_object::*member_ptr )() const;
+
     operator member_ptr() const {
         if ( is_valid() )
             return &proxy_object::dummy;
@@ -256,6 +260,7 @@ public:
     proxy_raw_object& operator=( const proxy_raw_object& p );
     proxy_raw_object& operator=( const proxy_array_object& p );
     void swap( const proxy_raw_object& rhs );
+
     proxy_raw_object* operator->() { return this; }
 
     operator luabind::object();
@@ -273,12 +278,14 @@ public:
     inline object at( const T& key );
 
     bool is_valid() const { return true; }
+
     lua_State* lua_state() const;
     void pushvalue() const;
     void set() const;
 
     // this is a safe substitute for an implicit converter to bool
     typedef void ( proxy_raw_object::*member_ptr )() const;
+
     operator member_ptr() const {
         if ( is_valid() )
             return &proxy_raw_object::dummy;
@@ -331,6 +338,7 @@ public:
     void swap( const proxy_array_object& rhs );
 
     proxy_array_object* operator->() { return this; }
+
     operator luabind::object();
 
     int type() const {
@@ -368,12 +376,14 @@ public:
     inline object raw_at( const T& key );
 
     bool is_valid() const { return true; }
+
     lua_State* lua_state() const;
     void pushvalue() const;
     void set() const;
 
     // this is a safe substitute for an implicit converter to bool
     typedef void ( proxy_array_object::*member_ptr )() const;
+
     operator member_ptr() const {
         if ( is_valid() )
             return &proxy_array_object::dummy;
@@ -385,6 +395,7 @@ private:
 
     proxy_array_object( luabind::object* o, int key )
         : m_obj( o ), m_key( key ) {}
+
     luabind::object* m_obj;
     int m_key;
 };

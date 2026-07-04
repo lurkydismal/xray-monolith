@@ -36,6 +36,7 @@ struct compute_log2< 4, int, P, vec, false, Aligned > {
 };
 #endif // GLM_HAS_BITSCAN_WINDOWS
 } // namespace detail
+
 template < typename genType >
 GLM_FUNC_QUALIFIER int iround( genType x ) {
     GLM_STATIC_ASSERT( std::numeric_limits< genType >::is_iec559,

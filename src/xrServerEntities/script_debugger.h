@@ -22,6 +22,7 @@ struct lua_State;
 struct SBreakPoint {
     shared_str fileName;
     s32 nLine;
+
     SBreakPoint() { nLine = 0; };
 
     SBreakPoint( const SBreakPoint& other ) { operator=( other ); };

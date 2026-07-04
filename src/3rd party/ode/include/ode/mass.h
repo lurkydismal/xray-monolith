@@ -89,7 +89,9 @@ struct dMass {
 
 #ifdef __cplusplus
     dMass() { dMassSetZero( this ); }
+
     void setZero() { dMassSetZero( this ); }
+
     void setParameters( dReal themass,
                         dReal cgx,
                         dReal cgy,
@@ -103,20 +105,27 @@ struct dMass {
         dMassSetParameters( this, themass, cgx, cgy, cgz, I11, I22, I33, I12,
                             I13, I23 );
     }
+
     void setSphere( dReal density, dReal radius ) {
         dMassSetSphere( this, density, radius );
     }
+
     void setCappedCylinder( dReal density, int direction, dReal a, dReal b ) {
         dMassSetCappedCylinder( this, density, direction, a, b );
     }
+
     void setBox( dReal density, dReal lx, dReal ly, dReal lz ) {
         dMassSetBox( this, density, lx, ly, lz );
     }
+
     void adjust( dReal newmass ) { dMassAdjust( this, newmass ); }
+
     void translate( dReal x, dReal y, dReal z ) {
         dMassTranslate( this, x, y, z );
     }
+
     void rotate( const dMatrix3 R ) { dMassRotate( this, R ); }
+
     void add( const dMass* b ) { dMassAdd( this, b ); }
 #endif
 };

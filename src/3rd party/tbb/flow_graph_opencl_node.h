@@ -115,6 +115,7 @@ inline std::string platform_info< std::string >( cl_platform_id p,
 class opencl_device {
 public:
     typedef size_t device_id_type;
+
     enum : device_id_type {
         unknown = device_id_type( -2 ),
         host = device_id_type( -1 )
@@ -139,17 +140,21 @@ public:
         return platform_info< std::string >( platform_id(),
                                              CL_PLATFORM_PROFILE );
     }
+
     std::string platform_version() const {
         return platform_info< std::string >( platform_id(),
                                              CL_PLATFORM_VERSION );
     }
+
     std::string platform_name() const {
         return platform_info< std::string >( platform_id(), CL_PLATFORM_NAME );
     }
+
     std::string platform_vendor() const {
         return platform_info< std::string >( platform_id(),
                                              CL_PLATFORM_VENDOR );
     }
+
     std::string platform_extensions() const {
         return platform_info< std::string >( platform_id(),
                                              CL_PLATFORM_EXTENSIONS );
@@ -159,22 +164,26 @@ public:
     void info( cl_device_info i, T& t ) const {
         t = device_info< T >( my_cl_device_id, i );
     }
+
     std::string version() const {
         // The version string format:
         // OpenCL<space><major_version.minor_version><space><vendor-specific
         // information>
         return device_info< std::string >( my_cl_device_id, CL_DEVICE_VERSION );
     }
+
     int major_version() const {
         int major;
         std::sscanf( version().c_str(), "OpenCL %d", &major );
         return major;
     }
+
     int minor_version() const {
         int major, minor;
         std::sscanf( version().c_str(), "OpenCL %d.%d", &major, &minor );
         return minor;
     }
+
     bool out_of_order_exec_mode_on_host_present() const {
 #if CL_VERSION_2_0
         if ( major_version() >= 2 )
@@ -187,6 +196,7 @@ public:
                          my_cl_device_id, CL_DEVICE_QUEUE_PROPERTIES ) &
                      CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE ) != 0;
     }
+
     bool out_of_order_exec_mode_on_device_present() const {
 #if CL_VERSION_2_0
         if ( major_version() >= 2 )
@@ -198,14 +208,17 @@ public:
 #endif /* CL_VERSION_2_0 */
             return false;
     }
+
     std::array< size_t, 3 > max_work_item_sizes() const {
         return device_info< std::array< size_t, 3 > >(
             my_cl_device_id, CL_DEVICE_MAX_WORK_ITEM_SIZES );
     }
+
     size_t max_work_group_size() const {
         return device_info< size_t >( my_cl_device_id,
                                       CL_DEVICE_MAX_WORK_GROUP_SIZE );
     }
+
     bool built_in_kernel_available( const std::string& k ) const {
         const std::string semi = ";";
         // Added semicolumns to force an exact match (to avoid a partial match,
@@ -213,24 +226,30 @@ public:
         return ( semi + built_in_kernels() + semi ).find( semi + k + semi ) !=
                std::string::npos;
     }
+
     std::string built_in_kernels() const {
         return device_info< std::string >( my_cl_device_id,
                                            CL_DEVICE_BUILT_IN_KERNELS );
     }
+
     std::string name() const {
         return device_info< std::string >( my_cl_device_id, CL_DEVICE_NAME );
     }
+
     cl_bool available() const {
         return device_info< cl_bool >( my_cl_device_id, CL_DEVICE_AVAILABLE );
     }
+
     cl_bool compiler_available() const {
         return device_info< cl_bool >( my_cl_device_id,
                                        CL_DEVICE_COMPILER_AVAILABLE );
     }
+
     cl_bool linker_available() const {
         return device_info< cl_bool >( my_cl_device_id,
                                        CL_DEVICE_LINKER_AVAILABLE );
     }
+
     bool extension_available( const std::string& ext ) const {
         const std::string space = " ";
         // Added space to force an exact match (to avoid a partial match, e.g.
@@ -238,6 +257,7 @@ public:
         return ( space + extensions() + space ).find( space + ext + space ) !=
                std::string::npos;
     }
+
     std::string extensions() const {
         return device_info< std::string >( my_cl_device_id,
                                            CL_DEVICE_EXTENSIONS );
@@ -300,17 +320,26 @@ public:
     typedef container_type::size_type size_type;
 
     opencl_device_list() {}
+
     opencl_device_list( std::initializer_list< opencl_device > il )
         : my_container( il ) {}
 
     void add( opencl_device d ) { my_container.push_back( d ); }
+
     size_type size() const { return my_container.size(); }
+
     bool empty() const { return my_container.empty(); }
+
     iterator begin() { return my_container.begin(); }
+
     iterator end() { return my_container.end(); }
+
     const_iterator begin() const { return my_container.begin(); }
+
     const_iterator end() const { return my_container.end(); }
+
     const_iterator cbegin() const { return my_container.cbegin(); }
+
     const_iterator cend() const { return my_container.cend(); }
 
 private:
@@ -382,6 +411,7 @@ inline const opencl_device_list& available_devices() {
 class callback_base : tbb::internal::no_copy {
 public:
     virtual void call() = 0;
+
     virtual ~callback_base() {}
 };
 
@@ -492,6 +522,7 @@ public:
     }
 
     cl_event const* get_event() const { return my_is_event ? &my_event : NULL; }
+
     void set_event( cl_event e ) const {
         if ( my_is_event ) {
             cl_command_queue cq = event_info< cl_command_queue >(
@@ -529,6 +560,7 @@ public:
     }
 
     operator T&() { return data(); }
+
     operator const T&() const { return data(); }
 
 protected:
@@ -580,6 +612,7 @@ template < typename Factory >
 class opencl_memory {
 public:
     opencl_memory() {}
+
     opencl_memory( Factory& f )
         : my_host_ptr( NULL ),
           my_factory( &f ),
@@ -757,7 +790,9 @@ public:
     T& operator[]( ptrdiff_t k ) { return begin()[ k ]; }
 
     opencl_buffer() {}
+
     opencl_buffer( size_t size );
+
     opencl_buffer( Factory& f, size_t size )
         : my_impl( std::make_shared< impl_type >( size * sizeof( T ), f ) ) {}
 
@@ -776,6 +811,7 @@ public:
         else
             dependency.clear_event();
     }
+
     void receive(
         const opencl_async_msg< opencl_buffer, Factory >& dependency ) const {
         __TBB_ASSERT( dependency.data( /*wait = */ false ) == *this, NULL );
@@ -819,6 +855,7 @@ class opencl_subbuffer : public opencl_buffer< T, Factory > {
 
 public:
     opencl_subbuffer() {}
+
     opencl_subbuffer( const opencl_buffer< T, Factory >& owner,
                       size_t index,
                       size_t size )
@@ -941,6 +978,7 @@ public:
     }
 
     const nd_range_type& global_range() const { return my_global_work_size; }
+
     const nd_range_type& local_range() const { return my_local_work_size; }
 
 private:
@@ -1013,6 +1051,7 @@ public:
     typedef opencl_range range_type;
 
     opencl_factory() {}
+
     ~opencl_factory() {
         if ( my_devices.size() ) {
             for ( auto d = my_devices.begin(); d != my_devices.end(); ++d ) {
@@ -1118,6 +1157,7 @@ private:
                            std::array< cl_event, NUM_ARGS >&,
                            int&,
                            int& ) {}
+
     // ------------------------------------------- //
     template < typename T >
     void update_one_arg( cl_event, T& ) {}
@@ -1134,6 +1174,7 @@ private:
     }
 
     void update_arg_list( cl_event ) {}
+
     // ------------------------------------------- //
 public:
     template < typename... Args >
@@ -1163,6 +1204,7 @@ public:
     }
 
     void send_data( opencl_device ) {}
+
     // ------------------------------------------- //
 
 private:
@@ -1218,17 +1260,21 @@ private:
     }
 
     bool get_event_from_args( cl_event& ) { return false; }
+
     // ------------------------------------------- //
 
     struct finalize_fn : tbb::internal::no_assign {
         virtual ~finalize_fn() {}
+
         virtual void operator()() {}
     };
 
     template < typename Fn >
     struct finalize_fn_leaf : public finalize_fn {
         Fn my_fn;
+
         finalize_fn_leaf( Fn fn ) : my_fn( fn ) {}
+
         void operator()() __TBB_override { my_fn(); }
     };
 
@@ -1451,8 +1497,10 @@ public:
                     opencl_program_type type,
                     const std::string& program_name )
         : my_factory( factory ), my_type( type ), my_arg_str( program_name ) {}
+
     opencl_program( Factory& factory, const char* program_name )
         : opencl_program( factory, std::string( program_name ) ) {}
+
     opencl_program( Factory& factory, const std::string& program_name )
         : opencl_program( factory, opencl_program_type::SOURCE, program_name ) {
     }
@@ -1460,10 +1508,13 @@ public:
     opencl_program( opencl_program_type type, const std::string& program_name )
         : opencl_program( opencl_info::default_factory(), type, program_name ) {
     }
+
     opencl_program( const char* program_name )
         : opencl_program( opencl_info::default_factory(), program_name ) {}
+
     opencl_program( const std::string& program_name )
         : opencl_program( opencl_info::default_factory(), program_name ) {}
+
     opencl_program( opencl_program_type type )
         : opencl_program( opencl_info::default_factory(), type ) {}
 
@@ -1514,7 +1565,9 @@ private:
             file_descriptor.read( begin, length );
             file_descriptor.close();
         }
+
         const char* content() { return &*my_content.cbegin(); }
+
         size_t length() { return my_content.length(); }
 
     private:
@@ -1524,6 +1577,7 @@ private:
     class opencl_program_builder {
     public:
         typedef void( CL_CALLBACK* cl_callback_type )( cl_program, void* );
+
         opencl_program_builder( Factory& f,
                                 const std::string& name,
                                 cl_program program,

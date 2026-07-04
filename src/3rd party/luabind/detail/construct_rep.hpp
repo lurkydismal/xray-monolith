@@ -43,6 +43,7 @@ struct construct_rep {
         typedef void ( *get_signature_ptr )( lua_State*, string_class& );
 
         void set_constructor( construct_ptr f ) { construct_fun = f; }
+
         void set_wrapped_constructor( wrapped_construct_ptr f ) {
             wrapped_construct_fun = f;
         }
@@ -54,6 +55,7 @@ struct construct_rep {
         void* construct_wrapped( lua_State* L, weak_ref const& ref ) const {
             return wrapped_construct_fun( L, ref );
         }
+
         bool has_wrapped_construct() const {
             return wrapped_construct_fun != nullptr;
         }

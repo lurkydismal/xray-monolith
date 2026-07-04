@@ -130,6 +130,7 @@ bool player_legs_controller::ensure_model( const shared_str& sect,
 
 // clean up later
 float legs_spine_offset_y = 0.1f;
+
 void player_legs_controller::copy_bones_from_actor( CActor* actor,
                                                     bool isShadowPass ) {
     if ( !actor || !m_model )
@@ -195,6 +196,7 @@ float legs_fwd_offset = -0.5f;
 BOOL legs_attach_to_camera = TRUE;
 extern int showActorBody;
 extern xr_unordered_set< CDemoRecord* > pDemoRecords;
+
 void player_legs_controller::update( CActor* actor, bool isShadowPass ) {
     actor->XFORMShadow.set( actor->XFORM() );
 

@@ -202,6 +202,7 @@ public:
         normalize( src, result, errorCode );
         return result;
     }
+
     /**
      * Writes the normalized form of the source string to the destination string
      * (replacing its contents) and returns the destination string.

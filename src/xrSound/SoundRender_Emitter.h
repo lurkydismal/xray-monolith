@@ -37,9 +37,11 @@ public:
 #endif
 
     CSoundRender_Target* target;
+
     IC CSoundRender_Source* source() {
         return ( CSoundRender_Source* )owner_data->handle;
     };
+
     ref_sound_data_ptr owner_data;
 
     u32 get_bytes_total() const;
@@ -76,9 +78,11 @@ public:
 public:
     void Event_Propagade();
     void Event_ReleaseOwner();
+
     BOOL isPlaying( void ) { return m_current_state != stStopped; }
 
     virtual BOOL is_2D() { return b2D; }
+
     virtual void switch_to_2D();
     virtual void switch_to_Intro() override;
     virtual void switch_to_3D();
@@ -113,6 +117,7 @@ public:
     }
 
     virtual void set_priority( float p ) { priority_scale = p; }
+
     virtual const CSound_params* get_params() { return &p_source; }
 
     void fill_block( void* ptr, u32 size );

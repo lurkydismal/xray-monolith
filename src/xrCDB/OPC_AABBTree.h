@@ -63,7 +63,9 @@ class OPCODE_API AABBTreeNode {
 public:
     // Data access
     inline_ const udword* GetPrimitives() const { return mNodePrimitives; }
+
     inline_ udword GetNbPrimitives() const { return mNbPrimitives; }
+
     void destroy( AABBTreeBuilder* _tree );
 
 protected:
@@ -84,10 +86,12 @@ public:
     ~AABBTree();
     // Build
     bool Build( AABBTreeBuilder* builder );
+
     // Data access
     inline_ const udword* GetIndices() const {
         return mIndices;
     } //!< Catch the indices
+
     inline_ udword GetNbNodes() const {
         return mTotalNbNodes;
     } //!< Catch the number of nodes

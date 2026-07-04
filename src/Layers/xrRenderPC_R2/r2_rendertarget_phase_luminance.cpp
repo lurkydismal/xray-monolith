@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #pragma pack( push, 4 )
+
 struct v_build {
     Fvector4 p;
     Fvector2 uv0;
@@ -13,6 +14,7 @@ struct v_filter {
     Fvector4 p;
     Fvector4 uv[ 8 ];
 };
+
 #pragma pack( pop )
 
 void CRenderTarget::phase_luminance() {

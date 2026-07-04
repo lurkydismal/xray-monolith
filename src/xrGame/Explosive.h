@@ -48,12 +48,15 @@ public:
                           u16 type ); //{inherited::OnEvent( P, type);}
     virtual void OnAfterExplosion();
     virtual void OnBeforeExplosion();
+
     virtual void SetCurrentParentID( u16 parent_id ) {
         m_iCurrentParentID = parent_id;
     }
+
     IC u16 CurrentParentID() const { return m_iCurrentParentID; }
 
     virtual void SetInitiator( u16 id ) { SetCurrentParentID( id ); }
+
     virtual u16 Initiator();
 
     virtual void UpdateExplosionPos() {}
@@ -64,8 +67,11 @@ public:
     virtual void GenExplodeEvent( const Fvector& pos, const Fvector& normal );
     virtual void FindNormal( Fvector& normal );
     virtual CGameObject* cast_game_object() = 0;
+
     virtual CExplosive* cast_explosive() { return this; }
+
     virtual IDamageSource* cast_IDamageSource() { return this; }
+
     virtual void GetRayExplosionSourcePos( Fvector& pos );
     virtual void GetExplosionBox( Fvector& size );
     virtual void ActivateExplosionBox( const Fvector& size,
@@ -78,6 +84,7 @@ protected:
         return !!m_layered_sounds.FindSoundItem( "sndExplode", true )
                      ->playing();
     }
+
     bool IsExploded() { return !!m_explosion_flags.test( flExploded ); }
 
 public:

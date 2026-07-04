@@ -74,11 +74,13 @@ bool r_line( CScriptIniFile* self,
 
 #pragma warning( push )
 #pragma warning( disable : 4238 )
+
 CScriptIniFile* create_ini_file( LPCSTR ini_string ) {
     return ( ( CScriptIniFile* )xr_new< CInifile >(
         &IReader( ( void* )ini_string, xr_strlen( ini_string ) ),
         FS.get_path( "$game_config$" )->m_Path ) );
 }
+
 #pragma warning( pop )
 
 // demonized: get modded exes version
@@ -138,6 +140,7 @@ xr_string get_modded_exes_version_string() {
 }
 
 #pragma optimize( "s", on )
+
 void CScriptIniFile::script_register( lua_State* L ) {
     module( L )
         [ class_< CScriptIniFile >( "ini_file" )

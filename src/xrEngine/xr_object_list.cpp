@@ -14,6 +14,7 @@ class fClassEQ {
 
 public:
     fClassEQ( CLASS_ID C ) : cls( C ) {};
+
     IC bool operator()( CObject* O ) { return cls == O->CLS_ID; }
 };
 #ifdef DEBUG
@@ -198,6 +199,7 @@ void CObjectList::clear_crow_vec( Objects& o ) {
 }
 
 extern BOOL mt_Scheduler;
+
 void CObjectList::Update( bool bForce ) {
     PROF_EVENT( "CObjectList::Update" );
     if ( !Device.Paused() || bForce ) {

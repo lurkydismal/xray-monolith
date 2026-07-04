@@ -151,6 +151,7 @@ void* FileDownload( LPCSTR file_name, u32* buffer_size ) {
 }
 
 typedef char MARK[ 9 ];
+
 IC void mk_mark( MARK& M, const char* S ) {
     strncpy_s( M, sizeof( M ), S, 8 );
 }
@@ -398,6 +399,7 @@ void IReader::r( void* p, int cnt ) {
 IC BOOL is_term( char a ) {
     return ( a == 13 ) || ( a == 10 );
 };
+
 IC u32 IReader::advance_term_string() {
     u32 sz = 0;
     char* src = ( char* )data;
@@ -465,6 +467,7 @@ void IReader::skip_stringZ() {
 CTempReader::~CTempReader() {
     xr_free( data );
 };
+
 //---------------------------------------------------
 // pack stream
 CPackReader::~CPackReader() {
@@ -474,6 +477,7 @@ CPackReader::~CPackReader() {
 
     UnmapViewOfFile( base_address );
 };
+
 //---------------------------------------------------
 // file stream
 CFileReader::CFileReader( const char* name ) {
@@ -484,6 +488,7 @@ CFileReader::CFileReader( const char* name ) {
 CFileReader::~CFileReader() {
     xr_free( data );
 };
+
 //---------------------------------------------------
 // compressed stream
 CCompressedReader::CCompressedReader( const char* name, const char* sign ) {

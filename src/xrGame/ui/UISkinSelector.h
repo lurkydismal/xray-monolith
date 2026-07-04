@@ -32,7 +32,9 @@ public:
     void SetCurSkin( int skin );
 
     int GetActiveIndex();
+
     s16 GetTeam() { return m_team; };
+
     virtual void Update();
 
     virtual CUIWindow* ui_cast_window() { return this; }

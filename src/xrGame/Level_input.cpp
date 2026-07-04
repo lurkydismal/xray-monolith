@@ -534,8 +534,8 @@ void CLevel::IR_OnKeyboardPress( int key ) {
             //! Objects.FindObjectByName("localhost/dima"))
             //! return; 		if
             //(!m_bSynchronization) { 			m_bSynchronization
-            //= true; 			ai().level_graph().set_start_point(); 			m_bSynchronization
-            //= false;
+            //= true; 			ai().level_graph().set_start_point();
+            //m_bSynchronization = false;
             //		}
             //		::luabind::functor<void>	functor;
             //		ai().script_engine().functor("alife_test.set_switch_online",functor);

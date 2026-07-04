@@ -64,6 +64,7 @@ void CCustomDetector::OnH_B_Independent( bool just_before_destroy ) {
 }
 
 #include "game_base_space.h"
+
 bool CAfList::feel_touch_contact( CObject* O ) {
     TypesMapIt it = m_TypesMap.find( O->cNameSect() );
 

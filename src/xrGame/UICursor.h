@@ -24,6 +24,8 @@ public:
     virtual void OnScreenResolutionChanged();
 
     bool IsVisible() { return bVisible; }
+
     void Show() { bVisible = true; }
+
     void Hide() { bVisible = false; }
 };

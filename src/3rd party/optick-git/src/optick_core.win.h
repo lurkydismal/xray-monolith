@@ -251,6 +251,7 @@ DEFINE_GUID( /* 0811c1af-7a07-4a06-82ed-869455cdf713 */
 
 #ifndef EVENT_DESCRIPTOR_DEF
 #define EVENT_DESCRIPTOR_DEF
+
 typedef struct _EVENT_DESCRIPTOR {
     USHORT Id;
     UCHAR Version;
@@ -261,11 +262,13 @@ typedef struct _EVENT_DESCRIPTOR {
     ULONGLONG Keyword;
 
 } EVENT_DESCRIPTOR, *PEVENT_DESCRIPTOR;
+
 typedef const EVENT_DESCRIPTOR* PCEVENT_DESCRIPTOR;
 #endif
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef EVENT_HEADER_DEF
 #define EVENT_HEADER_DEF
+
 typedef struct _EVENT_HEADER {
     USHORT Size;
     USHORT HeaderType;
@@ -276,14 +279,17 @@ typedef struct _EVENT_HEADER {
     LARGE_INTEGER TimeStamp;
     GUID ProviderId;
     EVENT_DESCRIPTOR EventDescriptor;
+
     union {
         struct {
             ULONG KernelTime;
             ULONG UserTime;
         } DUMMYSTRUCTNAME;
+
         ULONG64 ProcessorTime;
 
     } DUMMYUNIONNAME;
+
     GUID ActivityId;
 
 } EVENT_HEADER, *PEVENT_HEADER;
@@ -291,14 +297,17 @@ typedef struct _EVENT_HEADER {
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef EVENT_HEADER_EXTENDED_DATA_ITEM_DEF
 #define EVENT_HEADER_EXTENDED_DATA_ITEM_DEF
+
 typedef struct _EVENT_HEADER_EXTENDED_DATA_ITEM {
     USHORT Reserved1; // Reserved for internal use
     USHORT ExtType;   // Extended info type
+
     struct {
         USHORT Linkage : 1; // Indicates additional extended
                             // data item
         USHORT Reserved2 : 15;
     };
+
     USHORT DataSize;   // Size of extended info data
     ULONGLONG DataPtr; // Pointer to extended info data
 
@@ -307,20 +316,24 @@ typedef struct _EVENT_HEADER_EXTENDED_DATA_ITEM {
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef ETW_BUFFER_CONTEXT_DEF
 #define ETW_BUFFER_CONTEXT_DEF
+
 typedef struct _ETW_BUFFER_CONTEXT {
     union {
         struct {
             UCHAR ProcessorNumber;
             UCHAR Alignment;
         } DUMMYSTRUCTNAME;
+
         USHORT ProcessorIndex;
     } DUMMYUNIONNAME;
+
     USHORT LoggerId;
 } ETW_BUFFER_CONTEXT, *PETW_BUFFER_CONTEXT;
 #endif
 ///////////////////////////////////////////////////////////////////////////////
 #ifndef EVENT_RECORD_DEF
 #define EVENT_RECORD_DEF
+
 typedef struct _EVENT_RECORD {
     EVENT_HEADER EventHeader;
     ETW_BUFFER_CONTEXT BufferContext;
@@ -344,6 +357,7 @@ typedef struct _EVENT_TRACE_PROPERTIES {
     ULONG LogFileMode;     // sequential, circular
     ULONG FlushTimer;      // buffer flush timer, in seconds
     ULONG EnableFlags;     // trace enable flags
+
     union {
         LONG AgeLimit;       // unused
         LONG FlushThreshold; // Number of buffers to fill before flushing
@@ -363,34 +377,43 @@ typedef struct _EVENT_TRACE_PROPERTIES {
 
 typedef struct _EVENT_TRACE_HEADER { // overlays WNODE_HEADER
     USHORT Size;                     // Size of entire record
+
     union {
         USHORT FieldTypeFlags; // Indicates valid fields
+
         struct {
             UCHAR HeaderType;  // Header type - internal use only
             UCHAR MarkerFlags; // Marker - internal use only
         } DUMMYSTRUCTNAME;
     } DUMMYUNIONNAME;
+
     union {
         ULONG Version;
+
         struct {
             UCHAR Type;     // event type
             UCHAR Level;    // trace instrumentation level
             USHORT Version; // version of trace record
         } Class;
     } DUMMYUNIONNAME2;
+
     ULONG ThreadId;          // Thread Id
     ULONG ProcessId;         // Process Id
     LARGE_INTEGER TimeStamp; // time when event happens
+
     union {
         GUID Guid;         // Guid that identifies event
         ULONGLONG GuidPtr; // use with WNODE_FLAG_USE_GUID_PTR
     } DUMMYUNIONNAME3;
+
     union {
         struct {
             ULONG KernelTime; // Kernel Mode CPU ticks
             ULONG UserTime;   // User mode CPU ticks
         } DUMMYSTRUCTNAME;
+
         ULONG64 ProcessorTime; // Processor Clock
+
         struct {
             ULONG ClientContext; // Reserved
             ULONG Flags;         // Event Flags
@@ -405,6 +428,7 @@ typedef struct _EVENT_TRACE {
     GUID ParentGuid;           // Parent Guid;
     PVOID MofData;             // Pointer to Variable Data
     ULONG MofLength;           // Variable Datablock Length
+
     union {
         ULONG ClientContext;
         ETW_BUFFER_CONTEXT BufferContext;
@@ -413,8 +437,10 @@ typedef struct _EVENT_TRACE {
 
 typedef struct _TRACE_LOGFILE_HEADER {
     ULONG BufferSize; // Logger buffer size in Kbytes
+
     union {
         ULONG Version; // Logger version
+
         struct {
             UCHAR MajorVersion;
             UCHAR MinorVersion;
@@ -422,6 +448,7 @@ typedef struct _TRACE_LOGFILE_HEADER {
             UCHAR SubMinorVersion;
         } VersionDetail;
     } DUMMYUNIONNAME;
+
     ULONG ProviderVersion;    // defaults to NT version
     ULONG NumberOfProcessors; // Number of Processors
     LARGE_INTEGER EndTime;    // Time when logger stops
@@ -429,8 +456,10 @@ typedef struct _TRACE_LOGFILE_HEADER {
     ULONG MaximumFileSize;    // Maximum in Mbytes
     ULONG LogFileMode;        // specify logfile mode
     ULONG BuffersWritten;     // used to file start of Circular File
+
     union {
         GUID LogInstanceGuid; // For RealTime Buffer Delivery
+
         struct {
             ULONG StartBuffers;  // Count of buffers written at start.
             ULONG PointerSize;   // Size of pointer type in bits
@@ -497,12 +526,14 @@ struct _EVENT_TRACE_LOGFILEW {
     LPWSTR LoggerName;    // LoggerName
     LONGLONG CurrentTime; // timestamp of last event
     ULONG BuffersRead;    // buffers read to date
+
     union {
         // Mode of the logfile
         ULONG LogFileMode;
         // Processing flags used on Vista and above
         ULONG ProcessTraceMode;
     } DUMMYUNIONNAME;
+
     EVENT_TRACE CurrentEvent;           // Current Event from this stream.
     TRACE_LOGFILE_HEADER LogfileHeader; // logfile header structure
     PEVENT_TRACE_BUFFER_CALLBACKW       // callback before each buffer
@@ -513,6 +544,7 @@ struct _EVENT_TRACE_LOGFILEW {
     ULONG BufferSize;
     ULONG Filled;
     ULONG EventsLost;
+
     //
     // following needs to be propaged to each buffer
     //
@@ -611,6 +643,7 @@ TraceQueryInformation( _In_ TRACEHANDLE SessionHandle,
 namespace Optick {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const int MAX_CPU_CORES = 256;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct ETWRuntime {
     array< ThreadID, MAX_CPU_CORES > activeCores;
@@ -627,6 +660,7 @@ struct ETWRuntime {
         activeThreadsIDs.clear();
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class ETW : public Trace {
     static const int ETW_BUFFER_SIZE = 1024 << 10; // 1Mb
@@ -661,6 +695,7 @@ public:
 
     DWORD GetProcessID() const { return currentProcessId; }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -846,6 +881,7 @@ struct Process_TypeGroup1 {
     int32 ExitStatus;
     // The physical address of the page table of the process.
     uint64 DirectoryTableBase;
+
     // (?) uint8 Flags;
     // object UserSID;
     // string ImageFileName;
@@ -888,28 +924,33 @@ struct SampledProfile {
 
     static const byte OPCODE = 46;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct SysCallEnter {
     uintptr_t SysCallAddress;
 
     static const byte OPCODE = 51;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct SysCallExit {
     uint32 SysCallNtStatus;
 
     static const byte OPCODE = 52;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 constexpr uint32 GuidHash( uint32 u0, uint32 u1, uint32 u2, uint32 u3 ) {
     return u0 ^ u1 ^ u2 ^ u3;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 uint32 GuidHash( GUID guid ) {
     return GuidHash( guid.Data1, ( guid.Data3 << 16 ) | guid.Data2,
                      ( ( uint32* )guid.Data4 )[ 0 ],
                      ( ( uint32* )guid.Data4 )[ 1 ] );
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #define ETW_GUID( NAME, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8 )   \
@@ -1000,6 +1041,7 @@ ETW_GUID( PerfInfoGuid,
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ETW* g_ETW;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void OnThreadEvent( PEVENT_RECORD eventRecord ) {
     ETWRuntime& runtime = g_ETW->runtime;
@@ -1046,6 +1088,7 @@ void OnThreadEvent( PEVENT_RECORD eventRecord ) {
             break;
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void OnProcessEvent( PEVENT_RECORD eventRecord ) {
     switch ( eventRecord->EventHeader.EventDescriptor.Opcode ) {
@@ -1065,6 +1108,7 @@ void OnProcessEvent( PEVENT_RECORD eventRecord ) {
             break;
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void OnStackWalkEvent( PEVENT_RECORD eventRecord ) {
     switch ( eventRecord->EventHeader.EventDescriptor.Opcode ) {
@@ -1099,6 +1143,7 @@ void OnStackWalkEvent( PEVENT_RECORD eventRecord ) {
             break;
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void OnPerfInfoEvent( PEVENT_RECORD eventRecord ) {
     ETWRuntime& runtime = g_ETW->runtime;
@@ -1148,6 +1193,7 @@ void OnPerfInfoEvent( PEVENT_RECORD eventRecord ) {
             break;
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void WINAPI OnRecordEvent( PEVENT_RECORD eventRecord ) {
     const uint32 eventHash = GuidHash( eventRecord->EventHeader.ProviderId );
@@ -1173,11 +1219,13 @@ void WINAPI OnRecordEvent( PEVENT_RECORD eventRecord ) {
             break;
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 static ULONG WINAPI OnBufferRecord( _In_ PEVENT_TRACE_LOGFILE Buffer ) {
     OPTICK_UNUSED( Buffer );
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const TRACEHANDLE INVALID_TRACEHANDLE = ( TRACEHANDLE )-1;
 
@@ -1412,6 +1460,7 @@ CaptureStatus::Type ETW::Start( Mode::Type mode,
 
     return CaptureStatus::OK;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool ETW::Stop() {
     if ( !isActive ) {
@@ -1441,6 +1490,7 @@ bool ETW::Stop() {
     return wasThreadClosed && ( closeTraceStatus == ERROR_SUCCESS ) &&
            ( controlTraceResult == ERROR_SUCCESS );
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ETW::~ETW() {
     Stop();
@@ -1448,10 +1498,12 @@ ETW::~ETW() {
     traceProperties = nullptr;
     g_ETW = nullptr;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Trace* Platform::CreateTrace() {
     return Memory::New< ETW >();
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace Optick
 
@@ -1472,11 +1524,13 @@ Trace* Platform::CreateTrace() {
 #else
 // Forward declare kernel functions
 #pragma pack( push, 8 )
+
 typedef struct _MODULEINFO {
     LPVOID lpBaseOfDll;
     DWORD SizeOfImage;
     LPVOID EntryPoint;
 } MODULEINFO, *LPMODULEINFO;
+
 #pragma pack( pop )
 #ifndef EnumProcessModulesEx
 #define EnumProcessModulesEx K32EnumProcessModulesEx
@@ -1523,6 +1577,7 @@ namespace Optick {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef array< uintptr_t, 512 > CallStackBuffer;
 typedef unordered_map< uint64, Symbol > SymbolCache;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class WinSymbolEngine : public SymbolEngine {
     HANDLE hProcess;
@@ -1551,16 +1606,19 @@ public:
     virtual const Symbol* GetSymbol( uint64 dwAddress ) override;
     virtual const vector< Module >& GetModules() override;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 WinSymbolEngine::WinSymbolEngine()
     : hProcess( GetCurrentProcess() ),
       isInitialized( false ),
       needRestorePreviousSettings( false ),
       previousOptions( 0 ) {}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 WinSymbolEngine::~WinSymbolEngine() {
     Close();
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const Symbol* WinSymbolEngine::GetSymbol( uint64 address ) {
     if ( address == 0 )
@@ -1616,6 +1674,7 @@ const Symbol* WinSymbolEngine::GetSymbol( uint64 address ) {
 
     return &symbol;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const vector< Module >& WinSymbolEngine::GetModules() {
     if ( modules.empty() ) {
@@ -1624,6 +1683,7 @@ const vector< Module >& WinSymbolEngine::GetModules() {
     }
     return modules;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // const char* USER_SYMBOL_SEARCH_PATH =
 // "http://msdl.microsoft.com/download/symbols";
@@ -1662,6 +1722,7 @@ void WinSymbolEngine::Init() {
 #endif
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef DWORD( __stdcall* pZwQuerySystemInformation )( DWORD,
                                                        LPVOID,
@@ -1686,10 +1747,12 @@ struct SYSTEM_MODULE_INFORMATION {
 
 #pragma warning( push )
 #pragma warning( disable : 4200 )
+
 struct MODULE_LIST {
     DWORD dwModules;
     SYSTEM_MODULE_INFORMATION pModulesInfo[];
 };
+
 #pragma warning( pop )
 
 void WinSymbolEngine::InitSystemModules() {
@@ -1750,6 +1813,7 @@ void WinSymbolEngine::InitSystemModules() {
         Memory::Free( pModuleList );
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void WinSymbolEngine::InitApplicationModules() {
     HANDLE processHandle = GetCurrentProcess();
@@ -1775,6 +1839,7 @@ void WinSymbolEngine::InitApplicationModules() {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void WinSymbolEngine::Close() {
     if ( isInitialized ) {
@@ -1794,10 +1859,12 @@ void WinSymbolEngine::Close() {
         isInitialized = false;
     }
 }
+
 //////////////////////////////////////////////////////////////////////////
 SymbolEngine* Platform::CreateSymbolEngine() {
     return Memory::New< WinSymbolEngine >();
 }
+
 //////////////////////////////////////////////////////////////////////////
 } // namespace Optick
 #endif // OPTICK_ENABLE_TRACING

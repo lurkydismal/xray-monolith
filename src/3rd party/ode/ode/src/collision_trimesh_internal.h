@@ -113,18 +113,21 @@ struct dxTriMesh : public dxGeom {
     struct SphereTC : public SphereCache {
         dxGeom* Geom;
     };
+
     dArray< SphereTC > SphereTCCache;
     static SphereCache defaultSphereCache;
 
     struct BoxTC : public OBBCache {
         dxGeom* Geom;
     };
+
     dArray< BoxTC > BoxTCCache;
     static OBBCache defaultBoxCache;
 
     struct CCylinderTC : public LSSCache {
         dxGeom* Geom;
     };
+
     dArray< CCylinderTC > CCylinderTCCache;
     static LSSCache defaultCCylinderCache;
 

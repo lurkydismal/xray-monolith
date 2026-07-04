@@ -22,7 +22,9 @@ class CShellSplitInfo {
     friend class CPHFracturesHolder;
     friend class CPHShellSplitterHolder;
     friend class CPHElement;
+
     IC bool HaveElements() { return m_end_el_num != m_start_el_num; }
+
     IC bool HaveJoints() { return m_start_jt_num != m_end_jt_num; }
 
 public:
@@ -60,7 +62,9 @@ class CPHFracture : public CShellSplitInfo {
 
 public:
     bool Update( CPHElement* element );
+
     IC bool Breaked() { return m_breaked; }
+
     void SetMassParts( const dMass& first, const dMass& second );
     void MassSetZerro();
     void MassAddToFirst( const dMass& m );
@@ -69,8 +73,11 @@ public:
     void MassSubFromSecond( const dMass& m );
     void MassSetFirst( const dMass& m );
     void MassSetSecond( const dMass& m );
+
     const dMass& MassFirst() { return m_firstM; }
+
     const dMass& MassSecond() { return m_secondM; }
+
     void MassUnsplitFromFirstToSecond( const dMass& m );
 };
 
@@ -98,6 +105,7 @@ public:
     void DistributeAdditionalMass( u16 geom_num, const dMass& m ); //
     void SubFractureMass( u16 fracture_num );
     void AddImpact( const Fvector& force, const Fvector& point, u16 id );
+
     PH_IMPACT_STORAGE& Impacts() { return m_impacts; }
 
     CPHFracture& LastFracture() { return m_fractures.back(); }

@@ -50,6 +50,7 @@ IC bool InterpolateAndDither( float* alpha255,
 #ifdef DEBUG
 // #include "../../Include/xrRender/DebugRender.h"
 #include "dxDebugRender.h"
+
 static void draw_obb( const Fmatrix& matrix, const u32& color ) {
     Fvector aabb[ 8 ];
     matrix.transform_tiny( aabb[ 0 ], Fvector().set( -1, -1, -1 ) ); // 0

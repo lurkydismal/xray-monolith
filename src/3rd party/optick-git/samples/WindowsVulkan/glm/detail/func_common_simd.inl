@@ -206,6 +206,7 @@ struct compute_mix_vector< 4, float, bool, P, vec, true > {
         return Result;
     }
 };
+
 /* FIXME
         template<precision P>
         struct compute_step_vector<float, P, tvec4>

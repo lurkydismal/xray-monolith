@@ -94,9 +94,11 @@ public:
     void GetAxisDirDynamic( int num, Fvector& axis ) {
         physics_impl().GetAxisDirDynamic( num, axis );
     }
+
     void GetAnchorDynamic( Fvector& anchor ) {
         physics_impl().GetAnchorDynamic( anchor );
     }
+
     bool isBreakable() { return physics_impl().isBreakable(); }
 
     DECLARE_SCRIPT_REGISTER_FUNCTION

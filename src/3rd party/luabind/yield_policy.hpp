@@ -28,6 +28,7 @@
 namespace luabind::detail {
 struct yield_policy {
     static void precall( lua_State*, const index_map& ) {}
+
     static void postcall( lua_State*, const index_map& ) {}
 };
 

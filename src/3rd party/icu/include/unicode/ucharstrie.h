@@ -379,6 +379,7 @@ public:
          * @stable ICU 4.8
          */
         const UnicodeString& getString() const { return str_; }
+
         /**
          * @return The value for the last successful next().
          * @stable ICU 4.8
@@ -451,6 +452,7 @@ private:
         }
         return value;
     }
+
     static inline const char16_t* skipValue( const char16_t* pos,
                                              int32_t leadUnit ) {
         if ( leadUnit >= kMinTwoUnitValueLead ) {
@@ -462,6 +464,7 @@ private:
         }
         return pos;
     }
+
     static inline const char16_t* skipValue( const char16_t* pos ) {
         int32_t leadUnit = *pos++;
         return skipValue( pos, leadUnit & 0x7fff );
@@ -482,6 +485,7 @@ private:
         }
         return value;
     }
+
     static inline const char16_t* skipNodeValue( const char16_t* pos,
                                                  int32_t leadUnit ) {
         // U_ASSERT(kMinValueLead<=leadUnit && leadUnit<kValueIsFinal);

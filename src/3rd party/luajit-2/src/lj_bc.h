@@ -196,6 +196,7 @@
 
 /* Bytecode opcode numbers. */
 typedef enum {
+
 #define BCENUM( name, ma, mb, mc, mt ) BC_##name,
     BCDEF( BCENUM )
 #undef BCENUM
@@ -252,6 +253,7 @@ typedef enum {
     BCMcdata,
     BCM_max
 } BCMode;
+
 #define BCM___ BCMnone
 
 #define bcmode_a( op ) ( ( BCMode )( lj_bc_mode[ op ] & 7 ) )

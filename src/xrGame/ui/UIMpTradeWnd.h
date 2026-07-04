@@ -26,6 +26,7 @@ struct SBuyItemInfo {
     CUICellItem* m_cell_item;
 
     const EItmState& GetState() const { return m_item_state; }
+
     void SetState( const EItmState& s );
     LPCSTR GetStateAsText() const;
 
@@ -130,6 +131,7 @@ public:
     virtual bool IsIgnoreMoneyAndRank();
 
     bool HasItemInGroup( shared_str const& section_name );
+
     CItemMgr const* GetItemMngr() const { return m_item_mngr; };
 
     virtual CUIWindow* ui_cast_window() { return this; }

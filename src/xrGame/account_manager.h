@@ -9,6 +9,7 @@ class CGameSpy_GP;
 
 /**/
 struct GPConnection; // HACK, FAKE STRUCT TO PRETEND GAMESPY EXISTS
+
 /**/
 
 namespace gamespy_gp {
@@ -71,6 +72,7 @@ public:
     bool verify_unique_nick( char const* unick );
     bool verify_email( char const* email );
     bool verify_password( char const* pass );
+
     char const* get_verify_error_descr() const {
         return m_verifyer_error.c_str();
     }
@@ -78,6 +80,7 @@ public:
     profiles_nicks_ptrs_t const& get_found_profiles() const {
         return m_result_profiles_ptrs;
     };
+
     suggested_nicks_ptrs_t const& get_suggested_unicks() const {
         return m_suggested_nicks_ptrs;
     };

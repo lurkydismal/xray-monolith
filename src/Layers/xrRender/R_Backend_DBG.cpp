@@ -70,6 +70,7 @@ void CBackend::dbg_Draw( D3DPRIMITIVETYPE T,
         T, 0, vcnt, pcnt, pIdx, D3DFMT_INDEX16, pVerts, sizeof( FVF::L ) ) );
 #endif //	USE_DX11
 }
+
 void CBackend::dbg_Draw( D3DPRIMITIVETYPE T, FVF::L* pVerts, int pcnt ) {
 #if defined( USE_DX10 ) || defined( USE_DX11 )
     u32 vBase;
@@ -95,6 +96,7 @@ void CBackend::dbg_Draw( D3DPRIMITIVETYPE T, FVF::L* pVerts, int pcnt ) {
 }
 
 #define RGBA_GETALPHA( rgb ) ( ( rgb ) >> 24 )
+
 void CBackend::dbg_DrawOBB( Fmatrix& T, Fvector& half_dim, u32 C ) {
     Fmatrix mL2W_Transform, mScaleTransform;
 
@@ -122,6 +124,7 @@ void CBackend::dbg_DrawOBB( Fmatrix& T, Fvector& half_dim, u32 C ) {
 #endif // !USE_DX11
     dbg_Draw( D3DPT_LINELIST, aabb, 8, aabb_id, 12 );
 }
+
 void CBackend::dbg_DrawTRI( Fmatrix& T,
                             Fvector& p1,
                             Fvector& p2,
@@ -144,6 +147,7 @@ void CBackend::dbg_DrawTRI( Fmatrix& T,
 #endif // !USE_DX11
     dbg_Draw( D3DPT_TRIANGLESTRIP, tri, 1 );
 }
+
 void CBackend::dbg_DrawLINE( Fmatrix& T, Fvector& p1, Fvector& p2, u32 C ) {
     FVF::L line[ 2 ];
     line[ 0 ].p = p1;
@@ -160,6 +164,7 @@ void CBackend::dbg_DrawLINE( Fmatrix& T, Fvector& p1, Fvector& p2, u32 C ) {
 #endif // !USE_DX11
     dbg_Draw( D3DPT_LINELIST, line, 1 );
 }
+
 void CBackend::dbg_DrawEllipse( Fmatrix& T, u32 C ) {
     constexpr float gVertices[] = {
         0.0000f,  0.0000f,  1.0000f,  0.0000f,  0.3827f,  0.9239f,  -0.1464f,

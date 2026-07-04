@@ -85,7 +85,9 @@ public:
     bool FireposActive();
     bool AimposActive();
     bool DoPick( SPickParam& pp );
+
     SPickParam& GetPick() { return PP; }
+
     collide::rq_result& GetRQ() { return GetPick().result; }
 
     // устанвка внешнего вида прицела в зависимости от текущей дисперсии

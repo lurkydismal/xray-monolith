@@ -300,6 +300,7 @@ stop:
     sec->pos = pos;
     sec->ofs = ofs;
 }
+
 #undef CK
 
 /* Pass 2: Link sections, shrink aligns, fix label offsets. */
@@ -472,6 +473,7 @@ int dasm_encode( Dst_DECL, void* buffer ) {
         return DASM_S_PHASE;
     return DASM_S_OK;
 }
+
 #undef CK
 
 /* Get PC label offset. */

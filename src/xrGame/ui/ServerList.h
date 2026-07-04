@@ -54,9 +54,11 @@ public:
     void UpdateServerInList( ServerInfo* pServerInfo, int index );
     void UpdateServerInList( ServerInfo* pServerInfo,
                              CUIListItemServer* pItem );
+
     void SetConnectionErrCb( connect_error_cb conn_err_cb ) {
         m_connect_cb = conn_err_cb;
     }
+
     void ConnectToSelected();
     void SetFilters( SServerFilters& sf );
     void SetPlayerName( LPCSTR name );

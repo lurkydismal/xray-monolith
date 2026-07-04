@@ -46,6 +46,7 @@ struct wrapped_self_t : weak_ref {
 
 struct wrap_base {
     friend struct detail::wrap_access;
+
     wrap_base() {}
 
     template < typename R, typename... Args >

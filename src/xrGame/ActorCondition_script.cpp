@@ -53,6 +53,7 @@ void WoundForEach( CActorCondition* conditions,
 }
 
 #pragma optimize( "s", on )
+
 void CActorCondition::script_register( lua_State* L ) {
     module( L )
         [ class_< SBooster >( "SBooster" )

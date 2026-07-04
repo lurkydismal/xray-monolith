@@ -96,8 +96,11 @@ public:
 
     float relative_time();
     bool in_auto_aim();
+
     float get_auto_aim_factor() const { return m_auto_aim_factor; }
+
     Fvector get_jump_start_pos() const { return m_jump_start_pos; }
+
     // process jump
     virtual void update_frame();
 
@@ -112,6 +115,7 @@ public:
     virtual void stop();
 
     float get_max_distance() const { return m_max_distance; }
+
     float get_min_distance() const { return m_min_distance; }
 
     SControlJumpData& setup_data() { return m_data; }

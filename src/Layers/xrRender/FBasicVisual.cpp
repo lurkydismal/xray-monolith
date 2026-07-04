@@ -99,6 +99,7 @@ void dxRender_Visual::MarkAsHot( bool is_hot ) {
     if ( texture )
         texture->m_is_hot = is_hot;
 }
+
 //--DSR-- HeatVision_end
 
 //--DSR-- SilencerOverheat_start
@@ -107,6 +108,7 @@ void dxRender_Visual::MarkAsGlowing( bool is_glowing ) {
     if ( texture )
         texture->m_is_glowing = is_glowing;
 }
+
 //--DSR-- SilencerOverheat_end
 
 void dxRender_Visual::SetShaderTexture( LPCSTR s_shader, LPCSTR s_texture ) {

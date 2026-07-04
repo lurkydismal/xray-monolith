@@ -17,7 +17,9 @@ public:
     string64 oA_Name;   //. задел на будущее
 public:
     virtual LPCSTR getComment() { return "LEVEL: Implicit**detail"; }
+
     virtual BOOL canBeDetailed() { return TRUE; }
+
     virtual BOOL canBeLMAPped() { return TRUE; }
 
     virtual void Save( IWriter& fs );

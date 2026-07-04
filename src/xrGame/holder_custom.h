@@ -18,7 +18,9 @@ private:
 
 protected:
     CGameObject* Owner() { return m_owner; }
+
     CActor* OwnerActor() { return m_ownerActor; }
+
     bool m_bEnterLocked;
     bool m_bExitLocked;
 
@@ -35,11 +37,15 @@ public:
     virtual void UpdateEx( float fov ) {}; // called by owner
 
     virtual CHolderCustom* cast_holder_custom() { return this; }
+
     virtual CCar* cast_car() { return nullptr; }
+
     virtual CGameObject* cast_game_object() { return nullptr; }
+
     virtual CWeaponStatMgun* cast_weapon_stat_mgun() { return nullptr; }
 
     bool Engaged() { return m_owner != NULL; }
+
     virtual void OnMouseMove( int x, int y ) = 0;
     virtual void OnKeyboardPress( int dik ) = 0;
     virtual void OnKeyboardRelease( int dik ) = 0;
@@ -50,20 +56,27 @@ public:
     virtual void cam_Update( float dt, float fov = 90.0f ) = 0;
 
     virtual bool EnterLocked() { return m_bEnterLocked; }
+
     virtual bool ExitLocked() { return m_bExitLocked; }
+
     virtual void SetEnterLocked( bool v ) { m_bEnterLocked = v; }
+
     virtual void SetExitLocked( bool v ) { m_bExitLocked = v; }
+
     virtual bool Use( const Fvector& pos,
                       const Fvector& dir,
                       const Fvector& foot_pos ) {
         return true;
     }
+
     virtual bool attach_Actor( CGameObject* actor );
     virtual void detach_Actor();
     virtual bool allowWeapon() const = 0;
     virtual bool HUDView() const = 0;
     virtual Fvector ExitPosition() = 0;
+
     virtual Fvector ExitVelocity() { return Fvector().set( 0, 0, 0 ); }
+
     virtual CCameraBase* Camera() = 0;
 
     virtual void Action( u16 id, u32 flags ) {};

@@ -21,6 +21,7 @@ class CPHJoint : public CPhysicsJoint, public cphysics_scripted {
     CPHJointDestroyInfo* m_destroy_info;
     float m_erp; // joint erp
     float m_cfm; // joint cfm
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     struct SPHAxis {
         float high;        // high limit
@@ -32,15 +33,18 @@ class CPHJoint : public CPhysicsJoint, public cphysics_scripted {
         float force;       // max force
         float velocity;    // velocity to achieve
         Fvector direction; // axis direction
+
         IC void set_limits( float h, float l ) {
             high = h;
             low = l;
         }
 
         IC void set_direction( const Fvector& v ) { direction.set( v ); }
+
         IC void set_direction( const float x, const float y, const float z ) {
             direction.set( x, y, z );
         }
+
         IC void set_param( const float e, const float c ) {
             erp = e;
             cfm = c;
@@ -88,6 +92,7 @@ class CPHJoint : public CPhysicsJoint, public cphysics_scripted {
     virtual void SetJointFudgefactorActive( float factor );
 
     virtual void SetAxis( const SPHAxis& axis, const int axis_num );
+
     virtual void SetAnchor( const Fvector& position ) {
         SetAnchor( position.x, position.y, position.z );
     }
@@ -156,10 +161,15 @@ class CPHJoint : public CPhysicsJoint, public cphysics_scripted {
 public:
     virtual CPhysicsElement* PFirst_element();
     virtual CPhysicsElement* PSecond_element();
+
     virtual u16 BoneID() { return m_bone_id; }
+
     virtual void SetBoneID( u16 bone_id ) { m_bone_id = bone_id; }
+
     IC CPHElement* PFirstElement() { return pFirst_element; }
+
     IC CPHElement* PSecondElement() { return pSecond_element; }
+
     virtual void Activate();
     virtual void Create();
     virtual void RunSimulation();
@@ -171,9 +181,13 @@ public:
     virtual void SetVelocity( const float velocity = 0.f,
                               const int axis_num = -1 );
     virtual void SetBreakable( float force, float torque );
+
     virtual bool isBreakable() { return !!m_destroy_info; }
+
     virtual dJointID GetDJoint() { return m_joint; }
+
     virtual dJointID GetDJoint1() { return m_joint1; }
+
     virtual void GetLimits( float& lo_limit, float& hi_limit, int axis_num );
     virtual void GetAxisDir( int num, Fvector& axis, eVs& vs );
     virtual void GetAxisDirDynamic( int num, Fvector& axis );
@@ -192,8 +206,11 @@ public:
     virtual float GetAxisAngleRate( int axis_num );
     virtual void Deactivate();
     void ReattachFirstElement( CPHElement* new_element );
+
     CODEGeom*& RootGeom() { return pFirstGeom; }
+
     virtual CPHJointDestroyInfo* JointDestroyInfo() { return m_destroy_info; }
+
     CPHJoint( CPhysicsJoint::enumType type,
               CPhysicsElement* first,
               CPhysicsElement* second );

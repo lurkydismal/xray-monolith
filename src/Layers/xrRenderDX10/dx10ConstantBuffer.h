@@ -11,6 +11,7 @@ public:
     ~dx10ConstantBuffer();
 
     bool Similar( dx10ConstantBuffer& _in );
+
     ID3DBuffer* GetBuffer() { return m_pBuffer; }
 
     void Flush();

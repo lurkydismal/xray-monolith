@@ -17,8 +17,11 @@ public:
     virtual void UpdateCL();
     virtual void CheckSpecParams( u32 spec_params );
     virtual void jump( const Fvector& position, float factor );
+
     virtual bool ability_jump_over_physics() { return true; }
+
     virtual bool ability_distant_feel() { return true; }
+
     virtual void HitEntityInJump( const CEntity* pEntity );
 
     bool find_geometry( Fvector& dir );
@@ -28,6 +31,7 @@ public:
 
     virtual bool check_start_conditions( ControlCom::EControlType type );
     virtual void on_activate_control( ControlCom::EControlType );
+
     virtual char* get_monster_class_name() { return "snork"; }
 
     virtual bool run_home_point_when_enemy_inaccessible() const {

@@ -76,6 +76,7 @@ typedef struct {
 typedef ppm_source_struct* ppm_source_ptr;
 
 LOCAL( int )
+
 pbm_getc( FILE* infile )
 /* Read next char, skipping over any comments */
 /* A comment/newline sequence is returned as a newline */
@@ -93,6 +94,7 @@ pbm_getc( FILE* infile )
 }
 
 LOCAL( unsigned int )
+
 read_pbm_integer( j_compress_ptr cinfo, FILE* infile )
 /* Read an unsigned decimal integer from the PPM file */
 /* Swallows one trailing character after the integer */
@@ -133,6 +135,7 @@ read_pbm_integer( j_compress_ptr cinfo, FILE* infile )
  */
 
 METHODDEF( JDIMENSION )
+
 get_text_gray_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading text-format PGM files with any maxval */
 {
@@ -152,6 +155,7 @@ get_text_gray_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_text_rgb_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading text-format PPM files with any maxval */
 {
@@ -173,6 +177,7 @@ get_text_rgb_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_scaled_gray_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading raw-byte-format PGM files with any maxval */
 {
@@ -197,6 +202,7 @@ get_scaled_gray_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_scaled_rgb_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading raw-byte-format PPM files with any maxval */
 {
@@ -223,6 +229,7 @@ get_scaled_rgb_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_raw_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading raw-byte-format files with maxval = MAXJSAMPLE.
  * In this case we just read right into the JSAMPLE buffer!
@@ -238,6 +245,7 @@ get_raw_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_word_gray_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading raw-word-format PGM files with any maxval */
 {
@@ -266,6 +274,7 @@ get_word_gray_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_word_rgb_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading raw-word-format PPM files with any maxval */
 {
@@ -304,6 +313,7 @@ get_word_rgb_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
  */
 
 METHODDEF( void )
+
 start_input_ppm( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     ppm_source_ptr source = ( ppm_source_ptr )sinfo;
     int c;
@@ -444,6 +454,7 @@ start_input_ppm( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
  */
 
 METHODDEF( void )
+
 finish_input_ppm( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     /* no work */
 }
@@ -453,6 +464,7 @@ finish_input_ppm( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
  */
 
 GLOBAL( cjpeg_source_ptr )
+
 jinit_read_ppm( j_compress_ptr cinfo ) {
     ppm_source_ptr source;
 

@@ -1231,14 +1231,17 @@ public:
     static inline Collator* fromUCollator( UCollator* uc ) {
         return reinterpret_cast< Collator* >( uc );
     }
+
     /** @internal */
     static inline const Collator* fromUCollator( const UCollator* uc ) {
         return reinterpret_cast< const Collator* >( uc );
     }
+
     /** @internal */
     inline UCollator* toUCollator() {
         return reinterpret_cast< UCollator* >( this );
     }
+
     /** @internal */
     inline const UCollator* toUCollator() const {
         return reinterpret_cast< const UCollator* >( this );

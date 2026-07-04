@@ -285,6 +285,7 @@ void CUIActorMenu::HighlightForEachInSlot(
 }
 
 #pragma optimize( "s", on )
+
 void CUIActorMenu::script_register( lua_State* L ) {
     module( L )
         [ class_< enum_exporter< EDDListType > >( "EDDListType" )

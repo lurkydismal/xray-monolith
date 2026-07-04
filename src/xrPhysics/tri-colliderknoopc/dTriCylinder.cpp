@@ -286,6 +286,7 @@ IC bool dcTriListCollider::cylinderCrossesLine( const dReal* p,
 int Check( int check ) {
     return check;
 }
+
 #define RETURN0 return Check( 0 )
 #else
 #define RETURN0 return 0

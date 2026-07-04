@@ -20,9 +20,11 @@
 LJ_FUNCA double lj_vm_sinh( double x ) {
     return sinh( x );
 }
+
 LJ_FUNCA double lj_vm_cosh( double x ) {
     return cosh( x );
 }
+
 LJ_FUNCA double lj_vm_tanh( double x ) {
     return tanh( x );
 }

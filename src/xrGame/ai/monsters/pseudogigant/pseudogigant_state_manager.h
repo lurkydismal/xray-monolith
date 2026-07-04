@@ -9,6 +9,7 @@ class CStateManagerGigant : public CMonsterStateManager< CPseudoGigant > {
 public:
     CStateManagerGigant( CPseudoGigant* monster );
     virtual void execute();
+
     virtual void remove_links( CObject* object ) {
         inherited::remove_links( object );
     }

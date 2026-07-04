@@ -467,11 +467,13 @@ static inline void fgt_node( void* /*codeptr*/,
                              string_index /*t*/,
                              void* /*g*/,
                              void* /*output_port*/ ) {}
+
 static inline void fgt_node( void* /*codeptr*/,
                              string_index /*t*/,
                              void* /*g*/,
                              void* /*input_port*/,
                              void* /*output_port*/ ) {}
+
 static inline void fgt_node( void* /*codeptr*/,
                              string_index /*t*/,
                              void* /*g*/,
@@ -484,6 +486,7 @@ static inline void fgt_node_with_body( void* /*codeptr*/,
                                        void* /*g*/,
                                        void* /*output_port*/,
                                        void* /*body*/ ) {}
+
 static inline void fgt_node_with_body( void* /*codeptr*/,
                                        string_index /*t*/,
                                        void* /*g*/,
@@ -493,17 +496,24 @@ static inline void fgt_node_with_body( void* /*codeptr*/,
 
 static inline void fgt_make_edge( void* /*output_port*/,
                                   void* /*input_port*/ ) {}
+
 static inline void fgt_remove_edge( void* /*output_port*/,
                                     void* /*input_port*/ ) {}
 
 static inline void fgt_begin_body( void* /*body*/ ) {}
+
 static inline void fgt_end_body( void* /*body*/ ) {}
 
 static inline void fgt_async_try_put_begin( void* /*node*/, void* /*port*/ ) {}
+
 static inline void fgt_async_try_put_end( void* /*node*/, void* /*port*/ ) {}
+
 static inline void fgt_async_reserve( void* /*node*/, void* /*graph*/ ) {}
+
 static inline void fgt_async_commit( void* /*node*/, void* /*graph*/ ) {}
+
 static inline void fgt_reserve_wait( void* /*graph*/ ) {}
+
 static inline void fgt_release_wait( void* /*graph*/ ) {}
 
 template < typename NodeType >

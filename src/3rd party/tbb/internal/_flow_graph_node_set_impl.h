@@ -35,7 +35,9 @@ namespace internal {
 
 namespace order {
 struct undefined {};
+
 struct following {};
+
 struct preceding {};
 } // namespace order
 
@@ -66,6 +68,7 @@ struct node_set {
     typedef Order order_type;
 
     tbb::flow::tuple< Nodes&... > nodes;
+
     node_set( Nodes&... ns ) : nodes( ns... ) {}
 
     template < typename... Nodes2 >

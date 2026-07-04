@@ -67,28 +67,43 @@ public:
     virtual const IPhysicsShell* physics_shell() const;
     virtual IPhysicsShell* physics_shell();
     virtual const IPhysicsElement* physics_character() const;
+
     virtual CPHDestroyable* ph_destroyable() { return nullptr; }
+
     virtual ICollisionDamageReceiver* PHCollisionDamageReceiver() {
         return nullptr;
     }
+
     virtual CPHSkeleton* PHSkeleton() { return nullptr; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CPhysicItem* cast_physics_item() { return nullptr; }
+
     virtual CParticlesPlayer* cast_particles_player() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual IDamageSource* cast_IDamageSource() { return nullptr; }
+
     virtual CPHSoundPlayer* ph_sound_player() { return nullptr; }
+
     virtual CCharacterPhysicsSupport* character_physics_support() {
         return nullptr;
     }
+
     virtual const CCharacterPhysicsSupport* character_physics_support() const {
         return nullptr;
     }
+
     virtual CIKLimbsController* character_ik_controller() { return nullptr; }
+
     virtual ICollisionHitCallback* get_collision_hit_callback() {
         return nullptr;
     }
+
     virtual void set_collision_hit_callback( ICollisionHitCallback* cc ) {}
+
     virtual void _BCL enable_notificate() {}
 
 public:
@@ -171,9 +186,11 @@ private: // IPhysicsShellHolder
     virtual void _BCL
     HideAllWeapons( bool v ); //(SetWeaponHideState(INV_STATE_BLOCK_ALL,true))
     virtual void _BCL MovementCollisionEnable( bool enable );
+
     virtual CPHSoundPlayer* _BCL ObjectPhSoundPlayer() {
         return ph_sound_player();
     }
+
     virtual ICollisionDamageReceiver* _BCL ObjectPhCollisionDamageReceiver();
     virtual void _BCL BonceDamagerCallback( float& damage_factor );
 #ifdef DEBUG
@@ -187,6 +204,7 @@ public:
         ICobj = ( 1 << 1 ),
         ICnpc = ( 1 << 2 ),
     };
+
     u32 m_ignore_collision_flag;
 
 public:

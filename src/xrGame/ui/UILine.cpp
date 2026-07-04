@@ -15,11 +15,14 @@
 // #define LOG_ALL_LINES
 #ifdef LOG_ALL_LINES
 int ListLinesCount = 0;
+
 struct DBGList {
     CUILine* wnd;
     int num;
 };
+
 xr_vector< DBGList > dbg_list_lines;
+
 void dump_list_lines() {
     Msg( "------Total  Lines %d", dbg_list_lines.size() );
     xr_vector< DBGList >::iterator _it = dbg_list_lines.begin();

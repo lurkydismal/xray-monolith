@@ -123,6 +123,7 @@ public:
                                            LPCSTR attrib_value );
 
     void SetLocalRoot( XML_NODE* pLocalRoot ) { m_pLocalRoot = pLocalRoot; }
+
     XML_NODE* GetLocalRoot() { return m_pLocalRoot; }
 
     XML_NODE* GetRoot() { return m_root; }

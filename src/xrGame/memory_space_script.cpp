@@ -51,6 +51,7 @@ Fvector CDangerObject__position( const CDangerObject* self ) {
 }
 
 #pragma optimize( "s", on )
+
 void CMemoryInfo::script_register( lua_State* L ) {
     module( L )[
 #if 1 // def USE_ORIENTATION

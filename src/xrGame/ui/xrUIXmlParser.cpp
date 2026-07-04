@@ -20,11 +20,14 @@ shared_str CUIXml::correct_file_name( LPCSTR path, LPCSTR fn ) {
 // #define LOG_ALL_XMLS
 #ifdef LOG_ALL_XMLS
 int ListXmlCount = 0;
+
 struct DBGList_ {
     int num;
     bool closed;
 };
+
 xr_vector< DBGList_ > dbg_list_xmls;
+
 void dump_list_xmls() {
     Msg( "------Total  xmls %d", dbg_list_xmls.size() );
     xr_vector< DBGList_ >::iterator _it = dbg_list_xmls.begin();

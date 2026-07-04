@@ -92,6 +92,7 @@ BOOL CInifile::Sect::line_exist( LPCSTR L, LPCSTR* val ) {
 BOOL dltx_use_cache = TRUE;
 xr_unordered_flat_map< xr_string, CInifile::Root > CInifile::CachedData;
 xrCriticalSection CInifile::CacheCS;
+
 void CInifile::InvalidateCache( LPCSTR path ) {
     if ( path ) {
         if ( path[ 0 ] ) {
@@ -1370,6 +1371,7 @@ void CInifile::DLTX_print( LPCSTR sec, LPCSTR line ) {
         printIniItemLine( *A );
     }
 }
+
 LPCSTR CInifile::DLTX_getFilenameOfLine( LPCSTR sec, LPCSTR line ) {
     if ( !sec ) {
         Msg( "![DLTX_getFilenameOfLine] no section provided" );
@@ -1401,6 +1403,7 @@ LPCSTR CInifile::DLTX_getFilenameOfLine( LPCSTR sec, LPCSTR line ) {
     }
     return nullptr;
 }
+
 bool CInifile::DLTX_isOverride( LPCSTR sec, LPCSTR line ) {
     auto fname = DLTX_getFilenameOfLine( sec, line );
     if ( !fname ) {
@@ -1496,12 +1499,15 @@ u32 CInifile::section_count() const {
 CInifile::Sect& CInifile::r_section( const shared_str& S ) const {
     return r_section( *S );
 }
+
 BOOL CInifile::line_exist( const shared_str& S, const shared_str& L ) const {
     return line_exist( *S, *L );
 }
+
 u32 CInifile::line_count( const shared_str& S ) const {
     return line_count( *S );
 }
+
 BOOL CInifile::section_exist( const shared_str& S ) const {
     return section_exist( *S );
 }

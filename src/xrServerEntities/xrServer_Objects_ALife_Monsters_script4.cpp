@@ -72,6 +72,7 @@ void ForceSetGoodwill( CSE_ALifeMonsterAbstract* self,
 
 #endif // #ifdef XRGAME_EXPORTS
 #pragma optimize( "s", on )
+
 void CSE_ALifeMonsterAbstract::script_register( lua_State* L ) {
     module( L )
         [ luabind_class_monster2(

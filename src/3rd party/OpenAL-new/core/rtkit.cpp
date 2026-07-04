@@ -60,6 +60,7 @@ constexpr int TypeInvalid{ '\0' };
 struct MessageDeleter {
     void operator()( DBusMessage* m ) { dbus_message_unref( m ); }
 };
+
 using MessagePtr = std::unique_ptr< DBusMessage, MessageDeleter >;
 
 } // namespace dbus

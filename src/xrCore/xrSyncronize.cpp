@@ -3,6 +3,7 @@
 
 #ifdef PROFILE_CRITICAL_SECTIONS
 static add_profile_portion_callback add_profile_portion = 0;
+
 void set_add_profile_portion( add_profile_portion_callback callback ) {
     add_profile_portion = callback;
 }

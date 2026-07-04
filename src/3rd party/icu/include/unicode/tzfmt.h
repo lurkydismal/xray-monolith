@@ -25,6 +25,7 @@
 #include "unicode/tznames.h"
 
 U_CDECL_BEGIN
+
 /**
  * Constants for time zone display format style used by format/parse APIs
  * in TimeZoneFormat.

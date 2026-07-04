@@ -35,6 +35,7 @@ protected:
 
 public:
     IC float GetfHealth() const { return m_entity_condition->GetHealth(); }
+
     IC float SetfHealth( float value ) {
         m_entity_condition->SetHealth( value );
         return value;
@@ -63,12 +64,19 @@ public:
     CEntity();
     virtual ~CEntity();
     virtual DLL_Pure* _construct();
+
     virtual CEntity* cast_entity() { return this; }
+
     virtual CActor* cast_actor() { return nullptr; }
+
     virtual CAI_Stalker* cast_stalker() { return nullptr; }
+
     virtual CEntityAlive* cast_entity_alive() { return nullptr; }
+
     virtual CInventoryOwner* cast_inventory_owner() { return nullptr; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CPhantom* cast_phantom() { return nullptr; }
 
 public:
@@ -88,6 +96,7 @@ public:
     //{ return GetfHealth();}
     /*	virtual*/
     IC float GetMaxHealth() const { return m_entity_condition->max_health(); }
+
     /*	virtual*/
     IC void SetMaxHealth( float v ) { m_entity_condition->max_health() = v; }
 
@@ -97,10 +106,13 @@ public:
 
     /*virtual*/
     IC BOOL g_Alive() const { return GetfHealth() > 0; }
+
     virtual BOOL g_State( SEntityState& ) const { return FALSE; }
 
     bool AlreadyDie() { return 0 != GetLevelDeathTime() ? true : false; }
+
     ALife::_TIME_ID GetGameDeathTime() const { return m_game_death_time; }
+
     u32 GetLevelDeathTime() const { return m_level_death_time; }
 
     virtual float CalcCondition( float hit );
@@ -109,7 +121,9 @@ public:
     virtual bool in_solid_state() { return true; }
 
     int g_Team() const { return id_Team; }
+
     int g_Squad() const { return id_Squad; }
+
     int g_Group() const { return id_Group; }
 
     // Health calculations
@@ -133,7 +147,9 @@ public:
     virtual BOOL IsVisibleForHUD() { return g_Alive(); }
 
     virtual void g_fireParams( const CHudItem*, Fvector&, Fvector& ) {};
+
     virtual bool g_stateFire() { return true; }
+
     // time of entity death
     u32 m_level_death_time;
     ALife::_TIME_ID m_game_death_time;
@@ -146,6 +162,7 @@ private:
 
 public:
     IC u16 killer_id() const { return m_killer_id; };
+
     virtual bool use_simplified_visual() const { return false; };
 
 public:

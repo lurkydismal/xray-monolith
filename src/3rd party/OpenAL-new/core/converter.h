@@ -30,6 +30,7 @@ struct SampleConverter {
     struct ChanSamples {
         alignas( 16 ) float PrevSamples[ MaxResamplerPadding ];
     };
+
     al::FlexArray< ChanSamples > mChan;
 
     SampleConverter( size_t numchans ) : mChan{ numchans } {}
@@ -42,6 +43,7 @@ struct SampleConverter {
 
     using SampleOffset =
         std::chrono::duration< int64_t, std::ratio< 1, MixerFracOne > >;
+
     SampleOffset currentInputDelay() const noexcept {
         const int64_t prep{ int64_t{ mSrcPrepCount } - MaxResamplerEdge };
         return SampleOffset{ ( prep << MixerFracBits ) + mFracOffset };
@@ -56,6 +58,7 @@ struct SampleConverter {
 
     DEF_FAM_NEWDEL( SampleConverter, mChan )
 };
+
 using SampleConverterPtr = std::unique_ptr< SampleConverter >;
 
 struct ChannelConverter {

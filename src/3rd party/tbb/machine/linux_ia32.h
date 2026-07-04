@@ -102,10 +102,12 @@ __TBB_machine_cmpswp8( volatile void* ptr, int64_t value, int64_t comparand ) {
     // TODO: look like ICC 13.0 has some issues with this code, investigate it
     // more deeply
     int64_t result;
+
     union {
         int64_t i64;
         int32_t i32[ 2 ];
     };
+
     i64 = value;
 #if __PIC__
     /* compiling position-independent code */

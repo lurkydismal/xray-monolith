@@ -66,8 +66,11 @@ public:
     virtual void Activate( bool disable = false,
                            bool not_set_bone_callbacks = false ) = 0;
     virtual void Activate( const Fmatrix& form, bool disable = false ) = 0;
+
     virtual const Fmatrix& XFORM() const { return mXFORM; }
+
     virtual void get_xform( Fmatrix& form ) const { form.set( XFORM() ); }
+
     virtual void _BCL InterpolateGlobalTransform( Fmatrix* m ) = 0;
     //	virtual		void			GetGlobalTransformDynamic
     //(Fmatrix* m) const
@@ -93,9 +96,11 @@ public:
                                  float center_prg,
                                  float& lo_ext,
                                  float& hi_ext ) const = 0;
+
     virtual void get_Box( Fvector& sz, Fvector& c ) const {
         get_box( this, mXFORM, sz, c );
     }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     virtual void applyForce( const Fvector& dir, float val ) = 0;
     virtual void applyForce( float x, float y, float z ) = 0;
@@ -228,14 +233,17 @@ public:
     virtual void Fix() = 0;
     virtual void ReleaseFixed() = 0;
     virtual bool isFixed() = 0;
+
     ////////////////////////////////////////////////////////////////IPhysicsElement////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     virtual const Fmatrix& XFORM() const { return CPhysicsBase::XFORM(); }
+
     // virtual		void		_BCL
     // CalculateBoneTransform					( Fmatrix
     // &bone_transform )const
     // = 0;
     virtual void GetPointVel( Fvector& res_vel,
                               const Fvector& point ) const = 0;
+
     //	virtual			void
     // get_LinearVel							(
     // Fvector& velocity )		const
@@ -246,6 +254,7 @@ public:
     virtual void get_Box( Fvector& sz, Fvector& c ) const {
         return CPhysicsBase::get_Box( sz, c );
     }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     virtual ~CPhysicsElement() {};
     //	DECLARE_SCRIPT_REGISTER_FUNCTION
@@ -399,11 +408,14 @@ public:
 #endif
 public:
     IC IKinematics* PKinematics() { return m_pKinematics; }
+
     ////////////////////////////////////////////////////IPhysicsShell///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     virtual const Fmatrix& XFORM() const { return CPhysicsBase::XFORM(); }
+
     virtual const IPhysicsElement& Element( u16 index ) const {
         return *get_ElementByStoreOrder( index );
     };
+
     virtual void GetGlobalTransformDynamic( Fmatrix* m ) = 0;
     // virtual			u16
     // get_ElementsNumber ( )
@@ -411,7 +423,9 @@ public:
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     virtual CPhysicsShellAnimator* PPhysicsShellAnimator() = 0;
+
     void set_Kinematics( IKinematics* p ) { m_pKinematics = p; }
+
     virtual void set_JointResistance( float force ) = 0;
     virtual void add_Element( CPhysicsElement* E ) = 0;
     virtual void add_Joint( CPhysicsJoint* E ) = 0;

@@ -17,6 +17,7 @@ int dCollideCylRay( dxGeom* o1,
 #include "../3rd party/ode/ode/src/collision_std.h"
 #pragma warning( default : 4995 )
 #pragma warning( default : 4267 )
+
 struct dxRayMotions {
     dGeomID ray;
     dGeomID ray_ownwer;

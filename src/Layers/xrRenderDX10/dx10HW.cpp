@@ -26,8 +26,11 @@ void fill_render_mode_list();
 void free_render_mode_list();
 #else
 void fill_vid_mode_list( CHW* _hw ) {}
+
 void free_vid_mode_list() {}
+
 void fill_render_mode_list() {}
+
 void free_render_mode_list() {}
 #endif
 
@@ -1230,6 +1233,7 @@ struct _uniq_mode {
     _uniq_mode( LPCSTR v ) : _val( v ) {}
 
     LPCSTR _val;
+
     bool operator()( LPCSTR _other ) { return !stricmp( _val, _other ); }
 };
 

@@ -78,6 +78,7 @@ extern "C" void pdebug_init( lua_State* L );
 #define lua_newtable( L ) lua_createtable( L, 0, 0 )
 
 struct lua_State;
+
 struct lua_Debug {
     int event;
     const char* name;             /* (n) */
@@ -96,6 +97,7 @@ struct lua_Debug {
 typedef LUA_INTEGER lua_Integer;
 typedef LUA_NUMBER lua_Number;
 typedef int ( *lua_CFunction )( lua_State* L );
+
 typedef struct luaL_Reg {
     const char* name;
     lua_CFunction func;
@@ -192,6 +194,7 @@ luaDLL_pcallk lua_pcallk;
 #define lua_tointeger( L, i ) lua_tointegerx( L, ( i ), NULL );
 
 #define PURE_API = 0
+
 namespace slua {
 struct LuaInterface {
     virtual const lua_Number* lua_version( lua_State* L ) PURE_API;
@@ -234,6 +237,7 @@ struct LuaInterface {
     virtual int lua_toboolean( lua_State* L, int index ) PURE_API;
 };
 } // namespace slua
+
 typedef slua::LuaInterface* ( *dll_GetLuaInterface )();
 dll_GetLuaInterface getInter;
 #endif // LUA_VERSION_NUM > 501

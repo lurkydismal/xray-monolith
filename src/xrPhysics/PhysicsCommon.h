@@ -51,15 +51,19 @@ struct SGameMtl;
 IC float Erp( float k_p, float k_d, float s = fixed_step ) {
     return ( ( s * ( k_p ) ) / ( ( ( s ) * ( k_p ) ) + ( k_d ) ) );
 }
+
 IC float Cfm( float k_p, float k_d, float s = fixed_step ) {
     return ( 1.f / ( ( ( s ) * ( k_p ) ) + ( k_d ) ) );
 }
+
 IC float Spring( float cfm, float erp, float s = fixed_step ) {
     return ( ( erp ) / ( cfm ) / s );
 }
+
 IC float Damping( float cfm, float erp ) {
     return ( ( 1.f - ( erp ) ) / ( cfm ) );
 }
+
 IC void MulSprDmp( float& cfm,
                    float& erp,
                    float mul_spring,

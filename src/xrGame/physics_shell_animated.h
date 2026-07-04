@@ -12,6 +12,7 @@ public:
     virtual ~physics_shell_animated();
 
     const CPhysicsShell* shell() const { return physics_shell; }
+
     CPhysicsShell* shell() { return physics_shell; }
 
 public:

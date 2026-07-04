@@ -30,6 +30,7 @@ class CUIStatic : public CUIWindow,
 private:
     typedef CUIWindow inherited;
     lanim_cont_xf m_lanim_xform;
+
     void EnableHeading_int( bool b ) { m_bHeading = b; }
 
 public:
@@ -41,17 +42,21 @@ public:
     virtual void OnFocusLost();
 
     virtual void CreateShader( LPCSTR tex, LPCSTR sh = "hud\\default" );
+
     ui_shader& GetShader() { return m_UIStaticItem.GetShader(); };
 
     virtual void SetTextureColor( u32 color ) {
         m_UIStaticItem.SetTextureColor( color );
     }
+
     virtual u32 GetTextureColor() const {
         return m_UIStaticItem.GetTextureColor();
     }
+
     virtual void SetTextureRect( const Frect& r ) {
         m_UIStaticItem.SetTextureRect( r );
     }
+
     virtual const Frect& GetTextureRect() const {
         return m_UIStaticItem.GetTextureRect();
     }
@@ -59,10 +64,13 @@ public:
     virtual void InitTexture( LPCSTR tex_name );
     virtual void InitTextureEx( LPCSTR tex_name,
                                 LPCSTR sh_name = "hud\\default" );
+
     CUIStaticItem* GetStaticItem() { return &m_UIStaticItem; }
+
     void SetTextureRect_script( Frect* pr ) {
         m_UIStaticItem.SetTextureRect( *pr );
     }
+
     const Frect* GetTextureRect_script() {
         return &m_UIStaticItem.GetTextureRect();
     }
@@ -74,11 +82,15 @@ public:
     }
 
     void ResetHeadingPivot() { m_UIStaticItem.ResetHeadingPivot(); }
+
     virtual void SetTextureOffset( float x, float y ) {
         m_TextureOffset.set( x, y );
     }
+
     Fvector2 GetTextureOffeset() const { return m_TextureOffset; }
+
     void TextureOn() { m_bTextureEnable = true; }
+
     void TextureOff() { m_bTextureEnable = false; }
 
     // own
@@ -92,6 +104,7 @@ public:
     void AdjustWidthToText();
 
     void SetShader( const ui_shader& sh );
+
     CUIStaticItem& GetUIStaticItem() { return m_UIStaticItem; }
 
     enum ETextureMode { tmNative = 0, tmStretch, tmCover };
@@ -101,6 +114,7 @@ public:
         m_UIStaticItem.SetTextureFit( m == tmCover ? CUIStaticItem::tfCover
                                                    : CUIStaticItem::tfFill );
     }
+
     ETextureMode GetTextureMode() const { return m_eTextureMode; }
 
     void SetStretchTexture( bool b ) {
@@ -109,6 +123,7 @@ public:
         else if ( m_eTextureMode == tmStretch )
             SetTextureMode( tmNative );
     }
+
     bool GetStretchTexture() { return m_eTextureMode == tmStretch; }
 
     void SetCoverTexture( bool b ) {
@@ -117,25 +132,34 @@ public:
         else if ( m_eTextureMode == tmCover )
             SetTextureMode( tmNative );
     }
+
     bool GetCoverTexture() { return m_eTextureMode == tmCover; }
 
     void SetHeading( float f ) { m_fHeading = f; };
+
     float GetHeading() { return m_fHeading; }
+
     bool Heading() { return m_bHeading; }
+
     void EnableHeading( bool b ) { m_bHeading = b; }
 
     void SetConstHeading( bool b ) { m_bConstHeading = b; };
+
     bool GetConstHeading() { return m_bConstHeading; }
 
     virtual void ColorAnimationSetTextureColor( u32 color, bool only_alpha );
     virtual void ColorAnimationSetTextColor( u32 color, bool only_alpha );
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
+
     virtual ITextureOwner* ui_cast_texture_owner() { return this; }
+
     virtual CUILightAnimColorConroller* ui_cast_light_anim_color_controller() {
         return this;
     }
+
     void SetNoShaderCache( bool v ) { m_UIStaticItem.SetNoShaderCache( v ); }
 
 protected:
@@ -174,22 +198,33 @@ public:
     void AdjustWidthToText();
 
     void SetText( LPCSTR txt ) { TextItemControl().SetText( txt ); }
+
     void SetTextST( LPCSTR txt ) { TextItemControl().SetTextST( txt ); }
+
     LPCSTR GetText() { return TextItemControl().GetText(); }
+
     void SetFont( CGameFont* F ) { TextItemControl().SetFont( F ); }
+
     CGameFont* GetFont() { return TextItemControl().GetFont(); }
+
     void SetTextColor( u32 color ) { TextItemControl().SetTextColor( color ); }
+
     u32 GetTextColor() { return TextItemControl().GetTextColor(); }
+
     void SetTextComplexMode( bool mode = true ) {
         TextItemControl().SetTextComplexMode( mode );
     }
+
     void SetTextAlignment( ETextAlignment al ) {
         TextItemControl().SetTextAlignment( al );
     }
+
     void SetVTextAlignment( EVTextAlignment al ) {
         TextItemControl().SetVTextAlignment( al );
     }
+
     void SetEllipsis( bool mode ) { TextItemControl().SetEllipsis( mode ); }
+
     void SetCutWordsMode( bool mode ) {
         TextItemControl().SetCutWordsMode( mode );
     }
@@ -202,6 +237,7 @@ public:
     virtual void ColorAnimationSetTextColor( u32 color, bool only_alpha );
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUILightAnimColorConroller* ui_cast_light_anim_color_controller() {
         return this;
     }

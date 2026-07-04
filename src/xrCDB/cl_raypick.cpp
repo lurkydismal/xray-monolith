@@ -29,6 +29,7 @@ void XRCollide::add_raypick( const raypick_info& rp_inf ) {
 IC DWORD& IR( float& x ) {
     return ( DWORD& )x;
 }
+
 IC BOOL TestAABB( const Fvector& bMax,
                   const Fvector& rP,
                   const Fvector& rD,

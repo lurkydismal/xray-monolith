@@ -52,6 +52,7 @@ public:
     static const bool is_fair_mutex = Mutex::is_fair_mutex;
 
     padded_mutex() { new ( impl() ) Mutex(); }
+
     ~padded_mutex() { impl()->~Mutex(); }
 
     //! Represents acquisition of a mutex.
@@ -60,13 +61,17 @@ public:
 
     public:
         scoped_lock() : my_scoped_lock() {}
+
         scoped_lock( padded_mutex& m ) : my_scoped_lock( *m.impl() ) {}
+
         ~scoped_lock() {}
 
         void acquire( padded_mutex& m ) { my_scoped_lock.acquire( *m.impl() ); }
+
         bool try_acquire( padded_mutex& m ) {
             return my_scoped_lock.try_acquire( *m.impl() );
         }
+
         void release() { my_scoped_lock.release(); }
     };
 };
@@ -91,6 +96,7 @@ public:
     static const bool is_fair_mutex = Mutex::is_fair_mutex;
 
     padded_mutex() { new ( impl() ) Mutex(); }
+
     ~padded_mutex() { impl()->~Mutex(); }
 
     //! Represents acquisition of a mutex.
@@ -99,20 +105,26 @@ public:
 
     public:
         scoped_lock() : my_scoped_lock() {}
+
         scoped_lock( padded_mutex& m, bool write = true )
             : my_scoped_lock( *m.impl(), write ) {}
+
         ~scoped_lock() {}
 
         void acquire( padded_mutex& m, bool write = true ) {
             my_scoped_lock.acquire( *m.impl(), write );
         }
+
         bool try_acquire( padded_mutex& m, bool write = true ) {
             return my_scoped_lock.try_acquire( *m.impl(), write );
         }
+
         bool upgrade_to_writer() { return my_scoped_lock.upgrade_to_writer(); }
+
         bool downgrade_to_reader() {
             return my_scoped_lock.downgrade_to_reader();
         }
+
         void release() { my_scoped_lock.release(); }
     };
 };

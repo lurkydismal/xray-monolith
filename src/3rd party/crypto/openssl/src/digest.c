@@ -171,6 +171,7 @@ static const EVP_MD bad_md = {
 static int do_engine_null( ENGINE* impl ) {
     return 0;
 }
+
 static int do_evp_md_engine_null( EVP_MD_CTX* ctx,
                                   const EVP_MD** ptype,
                                   ENGINE* impl ) {

@@ -103,20 +103,31 @@ public:
     virtual float GetUILuminosity();
 
     virtual CAttachmentOwner* cast_attachment_owner() { return this; }
+
     virtual CInventoryOwner* cast_inventory_owner() { return this; }
+
     virtual CActor* cast_actor() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual IInputReceiver* cast_input_receiver() { return this; }
+
     virtual CEntityAlive* cast_entity_alive() { return this; }
+
     virtual CEntity* cast_entity() { return this; }
+
     virtual CPhraseDialogManager* cast_phrase_dialog_manager() { return this; }
+
     virtual CCharacterPhysicsSupport* character_physics_support() {
         return m_pPhysics_support;
     }
+
     virtual CCharacterPhysicsSupport* character_physics_support() const {
         return m_pPhysics_support;
     }
+
     virtual CPHDestroyable* ph_destroyable();
+
     CHolderCustom* Holder() { return m_holder; }
 
 public:
@@ -141,7 +152,9 @@ public:
                                  CSound_UserDataPtr user_data,
                                  const Fvector& Position,
                                  float power );
+
     virtual Feel::Sound* dcast_FeelSound() { return this; }
+
     float m_snd_noise;
 #ifdef DEBUG
     virtual void OnRender();
@@ -162,6 +175,7 @@ public:
     struct SDefNewsMsg {
         GAME_NEWS_DATA* news_data;
         u32 time;
+
         bool operator<( const SDefNewsMsg& other ) const {
             return time > other.time;
         }
@@ -180,7 +194,9 @@ protected:
 public:
     virtual void StartTalk( CInventoryOwner* talk_partner );
     void RunTalkDialog( CInventoryOwner* talk_partner, bool disable_break );
+
     CActorStatisticMgr& StatisticMgr() { return *m_statistic_manager; }
+
     CGameNewsRegistryWrapper* game_news_registry;
     CCharacterPhysicsSupport* m_pPhysics_support;
 
@@ -291,8 +307,11 @@ public:
     bool m_bAllowDeathRemove;
 
     void SetZoomRndSeed( s32 Seed = 0 );
+
     s32 GetZoomRndSeed() { return m_ZoomRndSeed; };
+
     void SetShotRndSeed( s32 Seed = 0 );
+
     s32 GetShotRndSeed() { return m_ShotRndSeed; };
 
 public:
@@ -353,6 +372,7 @@ public:
     static void _BCL VehicleHeadCallback( CBoneInstance* );
 
     virtual const SRotation Orientation() const { return r_torso; };
+
     SRotation& Orientation() { return r_torso; };
 
     void g_SetAnimation( u32 mstate_rl );
@@ -367,6 +387,7 @@ public:
 
     // visiblity
     virtual float ffGetFov() const { return 90.f; }
+
     virtual float ffGetRange() const { return 500.f; }
 
 public:
@@ -376,11 +397,14 @@ public:
     }
 
     IC CCameraBase* cam_Active() { return cameras[ cam_active ]; }
+
     IC CCameraBase* cam_FirstEye() { return cameras[ eacFirstEye ]; }
+
     // Swartz: actor shadow
     IC EActorCameras active_cam() {
         return cam_active;
     } // KD: need to know which cam active outside actor methods
+
     virtual void cam_Set( EActorCameras style ); // Alundaio: made public
     //-Swartz
 
@@ -427,7 +451,9 @@ public:
     virtual bool feel_touch_on_contact( CObject* O );
 
     CGameObject* ObjectWeLookingAt() { return m_pObjectWeLookingAt; }
+
     CInventoryOwner* PersonWeLookingAt() { return m_pPersonWeLookingAt; }
+
     LPCSTR GetDefaultActionForObject() { return *m_sDefaultObjAction; }
 
 protected:
@@ -459,6 +485,7 @@ protected:
         bool allow_pickup;
         bool callback_handled;
     };
+
     pickup_result_t PickupModeUpdate();
     void PickupInfoDraw( CObject* object );
     void PickupModeUpdate_COD( pickup_result_t pickup_state );
@@ -494,12 +521,15 @@ public:
     bool CanSprint();
     bool CanRun();
     void StopAnyMove();
+
     void StopSprint() { mstate_wishful &= ~mcSprint; }
 
     bool AnyAction() { return ( mstate_real & mcAnyAction ) != 0; };
+
     bool AnyMove() { return ( mstate_real & mcAnyMove ) != 0; };
 
     bool is_jump();
+
     u32 MovingState() const { return mstate_real; }
 
 protected:
@@ -528,6 +558,7 @@ public:
 
 public:
     Fvector GetMovementSpeed() { return NET_SavedAccel; };
+
     //////////////////////////////////////////////////////////////////////////
     // User input/output
     //////////////////////////////////////////////////////////////////////////
@@ -546,16 +577,20 @@ public:
     virtual void g_fireParams( const CHudItem* pHudItem,
                                Fvector& P,
                                Fvector& D );
+
     virtual bool g_stateFire() {
         return !( ( mstate_wishful & mcLookout ) && !IsGameTypeSingle() );
     }
 
     virtual BOOL g_State( SEntityState& state ) const;
     virtual float GetWeaponAccuracy() const;
+
     float GetFireDispertion() const {
         return m_fdisp_controller.GetCurrentDispertion();
     }
+
     bool IsZoomAimingMode() const { return m_bZoomAimingMode; }
+
     virtual float MaxCarryWeight() const;
     float MaxWalkWeight() const;
     float get_additional_weight() const;
@@ -566,8 +601,10 @@ public:
 
 protected:
     CFireDispertionController m_fdisp_controller;
+
     // если актер целится в прицел
     void SetZoomAimingMode( bool val ) { m_bZoomAimingMode = val; }
+
     bool m_bZoomAimingMode;
 
     // настройки аккуратности стрельбы
@@ -640,10 +677,12 @@ protected:
     void net_Import_Physic( NET_Packet& P );
     void net_Import_Base_proceed();
     void net_Import_Physic_proceed();
+
     //---------------------------------------------
 
     ////////////////////////////////////////////////////////////////////////////
     virtual bool can_validate_position_on_spawn() { return false; }
+
     ///////////////////////////////////////////////////////
     // апдайт с данными физики
     xr_deque< net_update_A > NET_A;
@@ -720,9 +759,11 @@ public:
     virtual shared_str GetDefaultVisualOutfit() const {
         return m_DefaultVisualOutfit;
     };
+
     virtual void SetDefaultVisualOutfit( shared_str DefaultOutfit ) {
         m_DefaultVisualOutfit = DefaultOutfit;
     };
+
     virtual void UpdateAnimation() { g_SetAnimation( mstate_real ); };
 
     virtual void ChangeVisual( shared_str NewVisual );
@@ -742,6 +783,7 @@ public:
     //////////////////////////////////////////////////////////////////////////
 
     void set_input_external_handler( CActorInputHandler* handler );
+
     bool input_external_handler_installed() const {
         return ( m_input_external_handler != 0 );
     }
@@ -795,8 +837,11 @@ protected:
 public:
     IC CActorCondition& conditions() const;
     virtual DLL_Pure* _construct();
+
     virtual bool natural_weapon() const { return false; }
+
     virtual bool natural_detector() const { return false; }
+
     virtual bool use_center_to_aim() const;
 
 protected:
@@ -858,6 +903,7 @@ public:
     void OnDifficultyChanged();
 
     IC float HitProbability() { return m_hit_probability; }
+
     virtual CVisualMemoryManager* visual_memory() const;
 
     virtual BOOL BonePassBullet( int boneID );
@@ -884,6 +930,7 @@ private:
 
 public:
     virtual bool register_schedule() const { return false; }
+
     virtual bool is_ai_obstacle() const;
 
     float GetRestoreSpeed( ALife::EConditionRestoreType const& type );
@@ -894,11 +941,13 @@ public:
     virtual void On_LostEntity() {};
 
     void DisableHitMarks( bool disable ) { m_disabled_hitmarks = disable; };
+
     bool DisableHitMarks() { return m_disabled_hitmarks; };
 
     void set_inventory_disabled( bool is_disabled ) {
         m_inventory_disabled = is_disabled;
     }
+
     bool inventory_disabled() const { return m_inventory_disabled; }
 
 private:
@@ -907,6 +956,7 @@ private:
 private:
     bool m_disabled_hitmarks;
     bool m_inventory_disabled;
+
     // static CPhysicsShell		*actor_camera_shell;
 
     IC u32 get_state() const { return this->mstate_real; }
@@ -923,7 +973,9 @@ public:
                             bool send_event = true );
 
     bool GetNightVisionStatus() { return m_bNightVisionOn; }
+
     void SetNightVisionAllowed( bool bAllow ) { m_bNightVisionAllow = bAllow; }
+
     CNightVisionEffector* GetNightVision() { return m_night_vision; }
 
 protected:
@@ -933,6 +985,7 @@ protected:
 
 public:
     bool is_safemode() { return m_bSafemode; }
+
     void set_safemode( bool status );
 
     void RPC_UpdateFaction();

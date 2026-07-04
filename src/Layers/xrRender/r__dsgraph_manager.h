@@ -4,6 +4,7 @@
 #include "../../xrCore/FixedMap.h"
 #include "r__dsgraph_types.h"
 #include "r__sector.h"
+
 class CDSGraphManager : public IDSGraphManager {
 public:
     enum {
@@ -36,12 +37,14 @@ public:
         : i_options( options ), i_doptions( doptions ) {
         std::copy( mask, mask + 7, i_mask );
     }
+
     void initialize();
     void destroy();
     void traverse( CSector* start,
                    CFrustum& F,
                    Fvector& vBase,
                    Fmatrix& mXFORM );
+
     IC bool is_sector_visible( CSector* sector ) {
         if ( sector == i_start )
             return true;
@@ -56,10 +59,12 @@ public:
 
         return false;
     };
+
     CDSGraphManager& get_traverser_safed() {
         xrSRWLockGuard guard( &S_LC, false );
         return *this;
     };
+
     void fade_portal( CPortal* _p, float ssa );
     void fade_render();
 
@@ -91,14 +96,17 @@ public:
                                  u32 _priority,
                                  bool _clear = true,
                                  bool static_geometry = true );
+
     IC void r_dsgraph_render_graph( u32 _priority, bool _clear = true ) {
         r_dsgraph_render_static( _priority, _clear );
         r_dsgraph_render_dynamic( _priority, _clear );
     }
+
     IC void r_dsgraph_render_static( u32 _priority, bool _clear = true ) {
         PROF_EVENT( "r_dsgraph_render_static" );
         r_dsgraph_render_graph( RGraph.mapStaticPasses, _priority, _clear );
     };
+
     IC void r_dsgraph_render_dynamic( u32 _priority, bool _clear = true ) {
         PROF_EVENT( "r_dsgraph_render_dynamic" );
         r_dsgraph_render_graph( RGraph.mapDynamicPasses, _priority, _clear,

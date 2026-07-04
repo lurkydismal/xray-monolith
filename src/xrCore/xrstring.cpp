@@ -10,6 +10,7 @@
 XRCORE_API intrusive_ptr< str_container > g_pStringContainer = nullptr;
 
 str_container::str_container() {}
+
 str_container::str_container( str_container_constructor_key ) {
     auto p = xr_malloc( block_size );
     if ( !p )

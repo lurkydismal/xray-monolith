@@ -38,8 +38,11 @@ public:
                                    IKinematics* _pKinematicsC,
                                    CBlend* b );
     virtual ~animation_movement_controller();
+
     void ObjStartXform( Fmatrix& m ) const { m.set( m_startObjXForm ); }
+
     CBlend* ControlBlend() const { return m_control_blend; }
+
     void NewBlend( CBlend* B, const Fmatrix& new_matrix, bool local_animation );
     bool IsActive() const;
     void OnFrame();

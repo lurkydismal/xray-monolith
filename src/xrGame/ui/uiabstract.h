@@ -45,8 +45,11 @@ public:
     virtual void SetWndPos( const Fvector2& pos ) {
         m_wndPos.set( pos.x, pos.y );
     }
+
     IC const Fvector2& GetWndPos() const { return m_wndPos; }
+
     virtual void SetWndSize( const Fvector2& size ) { m_wndSize = size; }
+
     IC const Fvector2& GetWndSize() const { return m_wndSize; }
 
     virtual void SetWndRect( const Frect& rect ) {
@@ -55,13 +58,21 @@ public:
     }
 
     virtual void SetHeight( float height ) { m_wndSize.y = height; }
+
     virtual bool StopAnyMove() { return true; }
+
     IC float GetHeight() const { return m_wndSize.y; }
+
     virtual void SetWidth( float width ) { m_wndSize.x = width; }
+
     IC float GetWidth() const { return m_wndSize.x; }
+
     IC void SetVisible( bool vis ) { m_bShowMe = vis; }
+
     IC bool GetVisible() const { return m_bShowMe; }
+
     IC void SetAlignment( EWindowAlignment al ) { m_alignment = al; };
+
     IC EWindowAlignment GetAlignment() const { return m_alignment; };
 
     IC Frect GetWndRect() const {
@@ -109,6 +120,7 @@ public:
     CUISelectable() : m_bSelected( false ) {}
 
     bool GetSelected() const { return m_bSelected; }
+
     virtual void SetSelected( bool b ) { m_bSelected = b; };
 
     virtual CUISelectable* ui_cast_selectable() { return this; }

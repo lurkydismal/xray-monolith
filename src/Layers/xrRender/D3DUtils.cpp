@@ -742,6 +742,7 @@ void CDrawUtilities::DrawLineSphere( const Fvector& p,
 IC float _x2real( float x ) {
     return ( x + 1 ) * Device.m_RenderWidth_2;
 }
+
 IC float _y2real( float y ) {
     return ( y + 1 ) * Device.m_RenderHeight_2;
 }

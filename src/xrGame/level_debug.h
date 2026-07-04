@@ -20,13 +20,17 @@ public:
 
         struct remove_text_pred {
             LPCSTR text;
+
             remove_text_pred( LPCSTR t ) : text( t ) {}
+
             bool operator()( const T& item ) { return ( item.text == text ); }
         };
 
         struct remove_id_pred {
             u32 id;
+
             remove_id_pred( u32 i ) : id( i ) {}
+
             bool operator()( const T& item ) { return ( item.id == id ); }
         };
 
@@ -49,6 +53,7 @@ public:
 
             std::sort( m_data.begin(), m_data.end(), sort_id_pred() );
         }
+
         IC void remove_item( u32 id ) {
             ITEM_STORAGE_VEC_IT it = std::remove_if(
                 m_data.begin(), m_data.end(), remove_id_pred( id ) );
@@ -56,6 +61,7 @@ public:
 
             std::sort( m_data.begin(), m_data.end(), sort_id_pred() );
         }
+
         IC void clear() { m_data.clear(); }
 
         template < class T >
@@ -95,6 +101,7 @@ public:
         void add_item( LPCSTR text, u32 color, u32 id = u32( -1 ) );
 
         void draw_info( float x, float& y );
+
         IC void setup( const Fvector& shift = SHIFT_POS_DEFAULT,
                        float delta = DELTA_HEIGHT_DEFAULT ) {
             m_shift_pos.set( shift );

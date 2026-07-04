@@ -20,6 +20,7 @@ public:
     void Start() { thread_spawn( startup, "FS-notify", 0, this ); }
 
     virtual void Execute() = 0;
+
     void Terminate() { Terminated = TRUE; }
 };
 

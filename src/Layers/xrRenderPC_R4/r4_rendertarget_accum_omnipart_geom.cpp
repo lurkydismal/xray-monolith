@@ -20,7 +20,7 @@ void CRenderTarget::accum_omnip_geom_create() {
         //		R_CHK
         //(g_accum_omnip_vb->Lock(0,0,(void**)&pData,0)); CopyMemory
         //(pData,du_sphere_part_vertices,vCount*vSize);
-        //g_accum_omnip_vb->Unlock
+        // g_accum_omnip_vb->Unlock
         //();
 
         R_CHK( dx10BufferUtils::CreateVertexBuffer(
@@ -37,7 +37,7 @@ void CRenderTarget::accum_omnip_geom_create() {
         //		R_CHK
         //(g_accum_omnip_ib->Lock(0,0,(void**)&pData,0)); CopyMemory
         //(pData,du_sphere_part_faces,iCount*2);
-        //g_accum_omnip_ib->Unlock
+        // g_accum_omnip_ib->Unlock
         //();
 
         R_CHK( dx10BufferUtils::CreateIndexBuffer(

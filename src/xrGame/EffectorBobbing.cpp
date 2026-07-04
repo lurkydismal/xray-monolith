@@ -40,6 +40,7 @@ void CEffectorBobbing::SetState( u32 mstate, bool limping, bool ZoomMode ) {
 }
 
 extern float g_head_bob_factor;
+
 BOOL CEffectorBobbing::ProcessCam( SCamEffectorInfo& info ) {
     fTime += Device.fTimeDelta;
     if ( dwMState & ACTOR_DEFS::mcAnyMove ) {

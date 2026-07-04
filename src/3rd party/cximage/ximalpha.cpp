@@ -14,6 +14,7 @@
 BYTE CxImage::AlphaGetMax() const {
     return info.nAlphaMax;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets global Alpha (opacity) value applied to the whole image,
@@ -23,6 +24,7 @@ BYTE CxImage::AlphaGetMax() const {
 void CxImage::AlphaSetMax( BYTE nAlphaMax ) {
     info.nAlphaMax = nAlphaMax;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Checks if the image has a valid alpha channel.
@@ -30,6 +32,7 @@ void CxImage::AlphaSetMax( BYTE nAlphaMax ) {
 bool CxImage::AlphaIsValid() {
     return pAlpha != 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Enables the alpha palette, so the Draw() function changes its behavior.
@@ -37,6 +40,7 @@ bool CxImage::AlphaIsValid() {
 void CxImage::AlphaPaletteEnable( bool enable ) {
     info.bAlphaPaletteEnabled = enable;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * True if the alpha palette is enabled for painting.
@@ -44,6 +48,7 @@ void CxImage::AlphaPaletteEnable( bool enable ) {
 bool CxImage::AlphaPaletteIsEnabled() {
     return info.bAlphaPaletteEnabled;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets the alpha channel to full transparent. AlphaSet(0) has the same effect
@@ -52,6 +57,7 @@ void CxImage::AlphaClear() {
     if ( pAlpha )
         memset( pAlpha, 0, head.biWidth * head.biHeight );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets the alpha level for the whole image.
@@ -61,6 +67,7 @@ void CxImage::AlphaSet( BYTE level ) {
     if ( pAlpha )
         memset( pAlpha, level, head.biWidth * head.biHeight );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Allocates an empty (opaque) alpha channel.
@@ -75,6 +82,7 @@ bool CxImage::AlphaCreate() {
     }
     return ( pAlpha != 0 );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::AlphaDelete() {
     if ( pAlpha ) {
@@ -82,6 +90,7 @@ void CxImage::AlphaDelete() {
         pAlpha = 0;
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::AlphaInvert() {
     if ( pAlpha ) {
@@ -93,6 +102,7 @@ void CxImage::AlphaInvert() {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Imports an existing alpa channel from another image with the same width and
@@ -112,6 +122,7 @@ bool CxImage::AlphaCopy( CxImage& from ) {
     info.nAlphaMax = from.info.nAlphaMax;
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Creates the alpha channel from a gray scale image.
@@ -135,6 +146,7 @@ bool CxImage::AlphaSet( CxImage& from ) {
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets the alpha level for a single pixel
@@ -143,6 +155,7 @@ void CxImage::AlphaSet( const long x, const long y, const BYTE level ) {
     if ( pAlpha && IsInside( x, y ) )
         pAlpha[ x + y * head.biWidth ] = level;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Gets the alpha level for a single pixel
@@ -152,6 +165,7 @@ BYTE CxImage::AlphaGet( const long x, const long y ) {
         return pAlpha[ x + y * head.biWidth ];
     return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns pointer to alpha data for pixel (x,y).
@@ -163,6 +177,7 @@ BYTE* CxImage::AlphaGetPointer( const long x, const long y ) {
         return pAlpha + x + y * head.biWidth;
     return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Get alpha value without boundscheck (a bit faster). Pixel must be inside the
@@ -181,6 +196,7 @@ BYTE CxImage::BlindAlphaGet( const long x, const long y ) {
 #endif
     return pAlpha[ x + y * head.biWidth ];
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Resets the alpha palette
@@ -193,6 +209,7 @@ void CxImage::AlphaPaletteClear() {
         SetPaletteColor( ( BYTE )ip, c );
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Checks if the image has a valid alpha palette.
@@ -206,6 +223,7 @@ bool CxImage::AlphaPaletteIsValid() {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Blends the alpha channel and the alpha palette with the pixels. The result is
@@ -273,6 +291,7 @@ void CxImage::AlphaStrip() {
     }
     return;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::AlphaFlip() {
     if ( !pAlpha )
@@ -297,6 +316,7 @@ bool CxImage::AlphaFlip() {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::AlphaMirror() {
     if ( !pAlpha )
@@ -319,6 +339,7 @@ bool CxImage::AlphaMirror() {
     pAlpha = pAlpha2;
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Exports the alpha channel in a 8bpp grayscale image.
@@ -344,6 +365,7 @@ bool CxImage::AlphaSplit( CxImage* dest ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Exports the alpha palette channel in a 8bpp grayscale image.
@@ -370,6 +392,7 @@ bool CxImage::AlphaPaletteSplit( CxImage* dest ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Merge in the alpha layer the transparent color mask
@@ -390,5 +413,6 @@ bool CxImage::AlphaFromTransparency() {
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 #endif // CXIMAGE_SUPPORT_ALPHA

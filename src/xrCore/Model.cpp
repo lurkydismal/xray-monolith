@@ -39,6 +39,7 @@ inline TMP_TYPE CLAMP( const TMP_TYPE& X,
 // SEE-contexts for PPM-contexts with masked symbols
 
 #pragma pack( 1 )
+
 struct SEE2_CONTEXT {
     WORD Summ;
     BYTE Shift, Count;
@@ -70,6 +71,7 @@ struct PPM_CONTEXT {
     // Notes:
     BYTE NumStats, Flags; // 1. NumStats & NumMasked contain
     WORD SummFreq;        //  number of symbols minus 1
+
     struct STATE {
         // 2. sizeof(WORD) > sizeof(BYTE)
         BYTE Symbol, Freq;      // 3. contexts example:
@@ -93,6 +95,7 @@ struct PPM_CONTEXT {
     PPM_CONTEXT* cutOff( int Order );
     PPM_CONTEXT* removeBinConts( int Order );
     void makeSuffix();
+
     STATE& oneState() const { return ( STATE& )SummFreq; }
 
     void read( _PPMD_FILE* fp, UINT PrevSym );

@@ -666,6 +666,7 @@ typedef struct _D3DXEVENT_DESC {
     DOUBLE StartTime;
     DOUBLE Duration;
     D3DXTRANSITION_TYPE Transition;
+
     union {
         FLOAT Weight;
         FLOAT Speed;

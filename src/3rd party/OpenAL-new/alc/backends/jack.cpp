@@ -149,6 +149,7 @@ bool jack_load() {
 struct JackDeleter {
     void operator()( void* ptr ) { jack_free( ptr ); }
 };
+
 using JackPortsPtr = std::unique_ptr< const char*[], JackDeleter >;
 
 struct DeviceEntry {
@@ -283,14 +284,17 @@ void EnumerateDevices( jack_client_t* client,
 
 struct JackPlayback final : public BackendBase {
     JackPlayback( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~JackPlayback() override;
 
     int processRt( jack_nframes_t numframes ) noexcept;
+
     static int processRtC( jack_nframes_t numframes, void* arg ) noexcept {
         return static_cast< JackPlayback* >( arg )->processRt( numframes );
     }
 
     int process( jack_nframes_t numframes ) noexcept;
+
     static int processC( jack_nframes_t numframes, void* arg ) noexcept {
         return static_cast< JackPlayback* >( arg )->process( numframes );
     }

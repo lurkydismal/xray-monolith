@@ -301,7 +301,7 @@ void CRenderTarget::accum_point_geom_create() {
         //		R_CHK
         //(g_accum_point_vb->Lock(0,0,(void**)&pData,0)); CopyMemory
         //(pData,du_sphere_vertices,vCount*vSize);
-        //g_accum_point_vb->Unlock
+        // g_accum_point_vb->Unlock
         //();
 
         R_CHK( dx10BufferUtils::CreateVertexBuffer(

@@ -178,6 +178,7 @@ void CSoundRender_Core::set_geometry_som( IReader* I ) {
     // load geometry
     IReader* geom = I->open_chunk( 1 );
     VERIFY2( geom, "Corrupted SOM file" );
+
     // Load tris and merge them
     struct SOM_poly {
         Fvector3 v1;
@@ -186,6 +187,7 @@ void CSoundRender_Core::set_geometry_som( IReader* I ) {
         u32 b2sided;
         float occ;
     };
+
     // Create AABB-tree
 #ifdef _EDITOR
     CDB::Collector* CL = ETOOLS::create_collector();
@@ -535,6 +537,7 @@ void CSoundRender_Core::refresh_env_library() {
     env_load();
     env_apply();
 }
+
 void CSoundRender_Core::refresh_sources() {
     for ( u32 eit = 0; eit < s_emitters.size(); eit++ )
         s_emitters[ eit ]->stop( FALSE );
@@ -544,8 +547,10 @@ void CSoundRender_Core::refresh_sources() {
         s->load( *s->fname );
     }
 }
+
 void CSoundRender_Core::set_environment_size( CSound_environment* src_env,
                                               CSound_environment** dst_env ) {}
+
 void CSoundRender_Core::set_environment( u32 id,
                                          CSound_environment** dst_env ) {}
 #endif

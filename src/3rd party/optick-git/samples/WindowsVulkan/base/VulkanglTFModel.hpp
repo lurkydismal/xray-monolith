@@ -360,6 +360,7 @@ struct Texture {
 // TODO: Base class and inheritance
 struct Material {
     enum AlphaMode { ALPHAMODE_OPAQUE, ALPHAMODE_MASK, ALPHAMODE_BLEND };
+
     AlphaMode alphaMode = ALPHAMODE_OPAQUE;
     float alphaCutoff = 1.0f;
     float metallicFactor = 1.0f;
@@ -536,6 +537,7 @@ struct Node {
 */
 struct AnimationChannel {
     enum PathType { TRANSLATION, ROTATION, SCALE };
+
     PathType path;
     Node* node;
     uint32_t samplerIndex;
@@ -546,6 +548,7 @@ struct AnimationChannel {
 */
 struct AnimationSampler {
     enum InterpolationType { LINEAR, STEP, CUBICSPLINE };
+
     InterpolationType interpolation;
     std::vector< float > inputs;
     std::vector< glm::vec4 > outputsVec4;
@@ -582,6 +585,7 @@ struct Model {
         VkBuffer buffer;
         VkDeviceMemory memory;
     } vertices;
+
     struct Indices {
         int count;
         VkBuffer buffer;

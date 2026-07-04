@@ -62,6 +62,7 @@ public:
 
 public:
     CControllerAnimation& custom_anim() { return ( *m_custom_anim_base ); }
+
     CControllerDirection& custom_dir() { return ( *m_custom_dir_base ); }
 
 public:
@@ -100,9 +101,11 @@ public:
     void load_friend_community_overrides( LPCSTR section );
     bool is_community_friend_overrides(
         const CEntityAlive* tpEntityAlive ) const;
+
     //-------------------------------------------------------------------
     // Controller ability
     bool HasUnderControl() { return ( !m_controlled_objects.empty() ); }
+
     void TakeUnderControl( CEntity* );
     void UpdateControlled();
     void FreeFromControl();
@@ -133,6 +136,7 @@ public:
     float get_tube_min_distance() const {
         return m_tube_condition_min_distance;
     }
+
     bool tube_ready() const;
 
     //-------------------------------------------------------------------
@@ -179,5 +183,6 @@ public:
     virtual bool run_home_point_when_enemy_inaccessible() const {
         return false;
     }
+
     DECLARE_SCRIPT_REGISTER_FUNCTION
 };

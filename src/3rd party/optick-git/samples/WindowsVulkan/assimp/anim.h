@@ -77,12 +77,14 @@ struct aiVectorKey {
     bool operator==( const aiVectorKey& o ) const {
         return o.mValue == this->mValue;
     }
+
     bool operator!=( const aiVectorKey& o ) const {
         return o.mValue != this->mValue;
     }
 
     // Relational operators. For use with std::sort();
     bool operator<( const aiVectorKey& o ) const { return mTime < o.mTime; }
+
     bool operator>( const aiVectorKey& o ) const { return mTime > o.mTime; }
 #endif
 };
@@ -110,12 +112,14 @@ struct aiQuatKey {
     bool operator==( const aiQuatKey& o ) const {
         return o.mValue == this->mValue;
     }
+
     bool operator!=( const aiQuatKey& o ) const {
         return o.mValue != this->mValue;
     }
 
     // Relational operators. For use with std::sort();
     bool operator<( const aiQuatKey& o ) const { return mTime < o.mTime; }
+
     bool operator>( const aiQuatKey& o ) const { return mTime > o.mTime; }
 #endif
 };
@@ -146,12 +150,14 @@ struct aiMeshKey {
     bool operator==( const aiMeshKey& o ) const {
         return o.mValue == this->mValue;
     }
+
     bool operator!=( const aiMeshKey& o ) const {
         return o.mValue != this->mValue;
     }
 
     // Relational operators. For use with std::sort();
     bool operator<( const aiMeshKey& o ) const { return mTime < o.mTime; }
+
     bool operator>( const aiMeshKey& o ) const { return mTime > o.mTime; }
 
 #endif

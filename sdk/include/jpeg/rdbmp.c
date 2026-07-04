@@ -62,6 +62,7 @@ typedef struct _bmp_source_struct {
 } bmp_source_struct;
 
 LOCAL( int )
+
 read_byte( bmp_source_ptr sinfo )
 /* Read next byte from BMP file */
 {
@@ -76,6 +77,7 @@ read_byte( bmp_source_ptr sinfo )
 }
 
 LOCAL( void )
+
 read_colormap( bmp_source_ptr sinfo, int cmaplen, int mapentrysize )
 /* Read the colormap from a BMP file */
 {
@@ -113,6 +115,7 @@ read_colormap( bmp_source_ptr sinfo, int cmaplen, int mapentrysize )
  */
 
 METHODDEF( JDIMENSION )
+
 get_8bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading 8-bit colormap indexes */
 {
@@ -147,6 +150,7 @@ get_8bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_24bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading 24-bit pixels */
 {
@@ -185,6 +189,7 @@ get_24bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
  */
 
 METHODDEF( JDIMENSION )
+
 preload_image( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     bmp_source_ptr source = ( bmp_source_ptr )sinfo;
     // NOTE: LD / removed register
@@ -240,6 +245,7 @@ preload_image( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
  */
 
 METHODDEF( void )
+
 start_input_bmp( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     bmp_source_ptr source = ( bmp_source_ptr )sinfo;
     U_CHAR bmpfileheader[ 14 ];
@@ -419,6 +425,7 @@ start_input_bmp( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
  */
 
 METHODDEF( void )
+
 finish_input_bmp( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     /* no work */
 }
@@ -428,6 +435,7 @@ finish_input_bmp( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
  */
 
 GLOBAL( cjpeg_source_ptr )
+
 jinit_read_bmp( j_compress_ptr cinfo ) {
     bmp_source_ptr source;
 

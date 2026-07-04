@@ -114,6 +114,7 @@ public:
                                           ParsePosition& pos,
                                           int32_t limit ) const = 0;
 };
+
 U_NAMESPACE_END
 
 #endif /* U_SHOW_CPLUSPLUS_API */

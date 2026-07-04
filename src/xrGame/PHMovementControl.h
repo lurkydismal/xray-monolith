@@ -33,20 +33,26 @@ class CPHMovementControl : public IPHMovementControl {
 
 public:
     CObject* ParentObject() { return pObject; }
+
     IElevatorState* ElevatorState();
     void in_shedule_Update( u32 DT );
     void PHCaptureObject( CPhysicsShellHolder* object,
                           CPHCaptureBoneCallback* cb = 0 );
     void PHCaptureObject( CPhysicsShellHolder* object, u16 element );
     IPHCapture* PHCapture();
+
     CPHCharacter* PHCharacter() { return m_character; }
+
     const CPHCharacter* PHCharacter() const { return m_character; }
+
     const IPhysicsElement* IElement() const;
     void PHReleaseObject();
     Fvector PHCaptureGetNearestElemPos( const CPhysicsShellHolder* object );
     Fmatrix PHCaptureGetNearestElemTransform( CPhysicsShellHolder* object );
     void SetMaterial( u16 material );
+
     void SetAirControlParam( float param ) { fAirControlParam = param; }
+
     void SetActorRestrictorRadius( ERestrictionType rt, float r );
     void SetRestrictionType( ERestrictionType rt );
     void SetActorMovable( bool v );
@@ -95,6 +101,7 @@ public:
     enum CharacterType { actor, ai };
 
     bool isOutBorder() { return in_dead_area_count > 0; }
+
     void setOutBorder() { in_dead_area_count = 1; }
 
 private:
@@ -161,14 +168,21 @@ public:
 #endif
 
     void SetPLastMaterialIDX( u16* p );
+
     const Fvector& GetVelocity() { return vVelocity; }
+
     const Fvector& GetPathDir() { return _vPathDir; }
+
     void SetPathDir( const Fvector& v );
 
     void GetCharacterVelocity( Fvector& velocity );
+
     float GetVelocityMagnitude() { return vVelocity.magnitude(); }
+
     float GetVelocityActual() { return fActualVelocity; }
+
     float GetXZVelocityActual() { return dXZMag( vVelocity ); }
+
     float GetActVelProj( const Fvector& dir ) {
         return vVelocity.dotproduct( dir );
     }
@@ -184,11 +198,14 @@ public:
     }
 
     void GetSmoothedVelocity( Fvector& v );
+
     float GetContactSpeed() { return fContactSpeed; }
+
     void GroundNormal( Fvector& norm );
     CPHSynchronize* GetSyncItem();
     void Freeze();
     void UnFreeze();
+
     void SetVelocity( float x, float y, float z ) {
         SetVelocity( Fvector().set( x, y, z ) );
     }
@@ -217,11 +234,17 @@ public:
                              int num_steps = 5,
                              float resolve_depth = 0.01f );
     void InterpolateBox( DWORD id, float k );
+
     EEnvironment Environment() { return eEnvironment; }
+
     EEnvironment OldEnvironment() { return eOldEnvironment; }
+
     const Fbox& Box() { return aabb; }
+
     DWORD BoxID() const { return m_dwCurBox; }
+
     const Fbox* Boxes() { return boxes; }
+
     float FootRadius();
     void CollisionEnable( BOOL enable );
 
@@ -324,6 +347,7 @@ public:
     ~CPHMovementControl( void );
 
     CPHCharacter* character() { return m_character; };
+
     void NetRelcase( CObject* O );
 
 private:

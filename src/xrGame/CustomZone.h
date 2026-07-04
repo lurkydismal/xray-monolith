@@ -70,9 +70,11 @@ public:
     virtual void OnEvent( NET_Packet& P, u16 type );
 
     float GetMaxPower() { return m_fMaxPower; }
+
     void SetMaxPower( float p ) { m_fMaxPower = p; }
 
     float GetEffectiveRadius() { return m_fEffectiveRadius; }
+
     void SetEffectiveRadius( float p ) { m_fEffectiveRadius = p; }
 
     // вычисление силы хита в зависимости от расстояния до центра зоны
@@ -82,7 +84,9 @@ public:
     float Power( float dist, float nearest_shape_radius );
 
     virtual CCustomZone* cast_custom_zone() { return this; }
+
     virtual CSpaceRestrictor* cast_restrictor() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
 
     // различные состояния в которых может находиться зона
@@ -205,10 +209,12 @@ protected:
 
 public:
     bool IsEnabled() { return m_eZoneState != eZoneStateDisabled; };
+
     void ZoneEnable();
     void ZoneDisable();
     void ChangeIdleParticles( LPCSTR name, bool bIdleLight );
     void MoveScript( Fvector pos );
+
     EZoneState ZoneState() { return m_eZoneState; }
 
 protected:
@@ -353,6 +359,7 @@ public:
     void CalcDistanceTo( const Fvector& P, float& dist, float& radius );
     virtual u32 ef_anomaly_type() const;
     virtual u32 ef_weapon_type() const;
+
     virtual bool register_schedule() const { return true; }
 
     // optimization FAST/SLOW mode

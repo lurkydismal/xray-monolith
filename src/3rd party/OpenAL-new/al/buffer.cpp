@@ -70,6 +70,7 @@ al::optional< AmbiLayout > AmbiLayoutFromEnum( ALenum layout ) {
     }
     return al::nullopt;
 }
+
 ALenum EnumFromAmbiLayout( AmbiLayout layout ) {
     switch ( layout ) {
         case AmbiLayout::FuMa:
@@ -92,6 +93,7 @@ al::optional< AmbiScaling > AmbiScalingFromEnum( ALenum scale ) {
     }
     return al::nullopt;
 }
+
 ALenum EnumFromAmbiScaling( AmbiScaling scale ) {
     switch ( scale ) {
         case AmbiScaling::FuMa:
@@ -119,6 +121,7 @@ al::optional< EaxStorage > EaxStorageFromEnum( ALenum scale ) {
     }
     return al::nullopt;
 }
+
 ALenum EnumFromEaxStorage( EaxStorage storage ) {
     switch ( storage ) {
         case EaxStorage::Automatic:
@@ -601,12 +604,14 @@ struct DecompResult {
     FmtChannels channels;
     FmtType type;
 };
+
 al::optional< DecompResult > DecomposeUserFormat( ALenum format ) {
     struct FormatMap {
         ALenum format;
         FmtChannels channels;
         FmtType type;
     };
+
     static const std::array< FormatMap, 63 > UserFmtList{ {
         { AL_FORMAT_MONO8, FmtMono, FmtUByte },
         { AL_FORMAT_MONO16, FmtMono, FmtShort },
@@ -734,6 +739,7 @@ AL_API void AL_APIENTRY alGenBuffers( ALsizei n,
         std::copy( ids.begin(), ids.end(), buffers );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alDeleteBuffers( ALsizei n, const ALuint* buffers )
@@ -783,6 +789,7 @@ AL_API void AL_APIENTRY alDeleteBuffers( ALsizei n, const ALuint* buffers )
     };
     std::for_each( buffers, buffers_end, delete_buffer );
 }
+
 END_API_FUNC
 
 AL_API ALboolean AL_APIENTRY alIsBuffer( ALuint buffer ) START_API_FUNC {
@@ -796,6 +803,7 @@ AL_API ALboolean AL_APIENTRY alIsBuffer( ALuint buffer ) START_API_FUNC {
         }
     return AL_FALSE;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferData( ALuint buffer,
@@ -805,6 +813,7 @@ AL_API void AL_APIENTRY alBufferData( ALuint buffer,
                                       ALsizei freq ) START_API_FUNC {
     alBufferStorageSOFT( buffer, format, data, size, freq, 0 );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferStorageSOFT( ALuint buffer,
@@ -850,6 +859,7 @@ AL_API void AL_APIENTRY alBufferStorageSOFT( ALuint buffer,
         }
     }
 }
+
 END_API_FUNC
 
 void AL_APIENTRY alBufferDataStatic( const ALuint buffer,
@@ -887,6 +897,7 @@ void AL_APIENTRY alBufferDataStatic( const ALuint buffer,
                     static_cast< al::byte* >( data ),
                     static_cast< ALuint >( size ) );
 }
+
 END_API_FUNC
 
 AL_API void* AL_APIENTRY alMapBufferSOFT( ALuint buffer,
@@ -952,6 +963,7 @@ AL_API void* AL_APIENTRY alMapBufferSOFT( ALuint buffer,
 
     return nullptr;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alUnmapBufferSOFT( ALuint buffer ) START_API_FUNC {
@@ -974,6 +986,7 @@ AL_API void AL_APIENTRY alUnmapBufferSOFT( ALuint buffer ) START_API_FUNC {
         albuf->MappedSize = 0;
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alFlushMappedBufferSOFT( ALuint buffer,
@@ -1010,6 +1023,7 @@ AL_API void AL_APIENTRY alFlushMappedBufferSOFT( ALuint buffer,
         std::atomic_thread_fence( std::memory_order_seq_cst );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferSubDataSOFT( ALuint buffer,
@@ -1093,6 +1107,7 @@ AL_API void AL_APIENTRY alBufferSubDataSOFT( ALuint buffer,
     memcpy( albuf->mData.data() + offset, data,
             static_cast< ALuint >( length ) );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferSamplesSOFT( ALuint /*buffer*/,
@@ -1110,6 +1125,7 @@ AL_API void AL_APIENTRY alBufferSamplesSOFT( ALuint /*buffer*/,
     context->setError( AL_INVALID_OPERATION,
                        "alBufferSamplesSOFT not supported" );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferSubSamplesSOFT( ALuint /*buffer*/,
@@ -1126,6 +1142,7 @@ AL_API void AL_APIENTRY alBufferSubSamplesSOFT( ALuint /*buffer*/,
     context->setError( AL_INVALID_OPERATION,
                        "alBufferSubSamplesSOFT not supported" );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBufferSamplesSOFT( ALuint /*buffer*/,
@@ -1142,6 +1159,7 @@ AL_API void AL_APIENTRY alGetBufferSamplesSOFT( ALuint /*buffer*/,
     context->setError( AL_INVALID_OPERATION,
                        "alGetBufferSamplesSOFT not supported" );
 }
+
 END_API_FUNC
 
 AL_API ALboolean AL_APIENTRY alIsBufferFormatSupportedSOFT( ALenum /*format*/ )
@@ -1154,6 +1172,7 @@ AL_API ALboolean AL_APIENTRY alIsBufferFormatSupportedSOFT( ALenum /*format*/ )
                        "alIsBufferFormatSupportedSOFT not supported" );
     return AL_FALSE;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferf( ALuint buffer,
@@ -1175,6 +1194,7 @@ AL_API void AL_APIENTRY alBufferf( ALuint buffer,
                                "Invalid buffer float property 0x%04x", param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBuffer3f( ALuint buffer,
@@ -1199,6 +1219,7 @@ AL_API void AL_APIENTRY alBuffer3f( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferfv( ALuint buffer,
@@ -1223,6 +1244,7 @@ AL_API void AL_APIENTRY alBufferfv( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferi( ALuint buffer,
@@ -1296,6 +1318,7 @@ AL_API void AL_APIENTRY alBufferi( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBuffer3i( ALuint buffer,
@@ -1320,6 +1343,7 @@ AL_API void AL_APIENTRY alBuffer3i( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferiv( ALuint buffer,
@@ -1375,6 +1399,7 @@ AL_API void AL_APIENTRY alBufferiv( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBufferf( ALuint buffer,
@@ -1406,6 +1431,7 @@ AL_API void AL_APIENTRY alGetBufferf( ALuint buffer,
                                "Invalid buffer float property 0x%04x", param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBuffer3f( ALuint buffer,
@@ -1432,6 +1458,7 @@ AL_API void AL_APIENTRY alGetBuffer3f( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBufferfv( ALuint buffer,
@@ -1462,6 +1489,7 @@ AL_API void AL_APIENTRY alGetBufferfv( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBufferi( ALuint buffer,
@@ -1536,6 +1564,7 @@ AL_API void AL_APIENTRY alGetBufferi( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBuffer3i( ALuint buffer,
@@ -1561,6 +1590,7 @@ AL_API void AL_APIENTRY alGetBuffer3i( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBufferiv( ALuint buffer,
@@ -1607,6 +1637,7 @@ AL_API void AL_APIENTRY alGetBufferiv( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alBufferCallbackSOFT( ALuint buffer,
@@ -1638,6 +1669,7 @@ AL_API void AL_APIENTRY alBufferCallbackSOFT( ALuint buffer,
                               usrfmt->type, callback, userptr );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBufferPtrSOFT( ALuint buffer,
@@ -1669,6 +1701,7 @@ AL_API void AL_APIENTRY alGetBufferPtrSOFT( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBuffer3PtrSOFT( ALuint buffer,
@@ -1694,6 +1727,7 @@ AL_API void AL_APIENTRY alGetBuffer3PtrSOFT( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBufferPtrvSOFT( ALuint buffer,
@@ -1724,6 +1758,7 @@ AL_API void AL_APIENTRY alGetBufferPtrvSOFT( ALuint buffer,
                                param );
     }
 }
+
 END_API_FUNC
 
 BufferSubList::~BufferSubList() {
@@ -1847,6 +1882,7 @@ FORCE_ALIGN ALboolean AL_APIENTRY EAXSetBufferMode( ALsizei n,
 
 #undef EAX_PREFIX
 }
+
 END_API_FUNC
 
 FORCE_ALIGN ALenum AL_APIENTRY
@@ -1885,6 +1921,7 @@ EAXGetBufferMode( ALuint buffer, ALint* pReserved ) START_API_FUNC {
 
 #undef EAX_PREFIX
 }
+
 END_API_FUNC
 
 #endif // ALSOFT_EAX

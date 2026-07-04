@@ -152,7 +152,9 @@ public:
     }
 
     IC T dot( Self& p ) { return x * p.x + y * p.y; }
+
     IC T dot( const Self& p ) const { return x * p.x + y * p.y; }
+
     IC SelfRef norm( void ) {
         float m = _sqrt( x * x + y * y );
         x /= m;
@@ -172,7 +174,9 @@ public:
     IC T distance_to( const Self& p ) const {
         return _sqrt( ( x - p.x ) * ( x - p.x ) + ( y - p.y ) * ( y - p.y ) );
     }
+
     IC T square_magnitude( void ) const { return x * x + y * y; }
+
     IC T magnitude( void ) const { return _sqrt( square_magnitude() ); }
 
     IC SelfRef mad( const Self& p, const Self& d, T r ) {
@@ -217,7 +221,9 @@ public:
     }
 
     IC SelfRef normalize( void ) { return norm(); }
+
     IC SelfRef normalize_safe( void ) { return norm_safe(); }
+
     IC SelfRef normalize( const Self& v ) {
         float m = _sqrt( v.x * v.x + v.y * v.y );
         x = v.x / m;
@@ -235,7 +241,9 @@ public:
     }
 
     IC float dotproduct( const Self& p ) const { return dot( p ); }
+
     IC float crossproduct( const Self& p ) const { return y * p.x - x * p.y; }
+
     IC float getH( void ) const {
         if ( fis_zero( y ) )
             if ( fis_zero( x ) )

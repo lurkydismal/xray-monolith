@@ -81,6 +81,7 @@ typedef unsigned short stbrp_coord;
 STBRP_DEF int stbrp_pack_rects( stbrp_context* context,
                                 stbrp_rect* rects,
                                 int num_rects );
+
 // Assign packed locations to rectangles. The rectangles are of type
 // 'stbrp_rect' defined below, stored in the array 'rects', and there
 // are 'num_rects' many of them.
@@ -154,6 +155,7 @@ STBRP_DEF void stbrp_setup_allow_out_of_mem( stbrp_context* context,
 // If you call init again, this will be reset to the default (false).
 
 STBRP_DEF void stbrp_setup_heuristic( stbrp_context* context, int heuristic );
+
 // Optionally select which packing heuristic the library should use. Different
 // heuristics will produce better/worse results for different data sets.
 // If you call init again, this will be reset to the default.

@@ -574,26 +574,32 @@ SPECIFIC_CAST( CScriptGameObject::cast_WeaponMagazinedWGrenade,
                CWeaponMagazinedWGrenade );
 SPECIFIC_CAST( CScriptGameObject::cast_Missile, CMissile );
 SPECIFIC_CAST( CScriptGameObject::cast_Explosive, CExplosive );
+
 CMedkit* CScriptGameObject::cast_Medkit() {
     CInventoryItem* ii = object().cast_inventory_item();
     return ii ? smart_cast< CMedkit* >( ii ) : ( 0 );
 }
+
 CEatableItem* CScriptGameObject::cast_EatableItem() {
     CInventoryItem* ii = object().cast_inventory_item();
     return ii ? ii->cast_eatable_item() : ( 0 );
 }
+
 CAntirad* CScriptGameObject::cast_Antirad() {
     CInventoryItem* ii = object().cast_inventory_item();
     return ii ? smart_cast< CAntirad* >( ii ) : ( 0 );
 }
+
 CFoodItem* CScriptGameObject::cast_FoodItem() {
     CInventoryItem* ii = object().cast_inventory_item();
     return ii ? ii->cast_food_item() : ( 0 );
 }
+
 CBottleItem* CScriptGameObject::cast_BottleItem() {
     CInventoryItem* ii = object().cast_inventory_item();
     return ii ? smart_cast< CBottleItem* >( ii ) : ( 0 );
 }
+
 // end AVO
 
 void CScriptGameObject::memory_remove_links(

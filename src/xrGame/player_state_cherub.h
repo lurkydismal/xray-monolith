@@ -13,8 +13,11 @@ public:
     virtual ~player_state_cherub() {};
 
     virtual void update() {};
+
     virtual u32 const get_u32_param() { return m_kill_count; };
+
     virtual float const get_float_param() { return -1.0f; };
+
     virtual void reset_game();
 
     virtual void OnPlayerTakeArtefact( game_PlayerState const* ps );

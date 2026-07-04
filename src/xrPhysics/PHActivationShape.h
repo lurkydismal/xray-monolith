@@ -41,7 +41,9 @@ public:
                    bool un_freeze_later = false );
     const Fvector& Position();
     void Size( Fvector& size );
+
     dBodyID ODEBody() { return m_body; }
+
     void set_rotation( const Fmatrix& rot );
 
 private:
@@ -51,6 +53,8 @@ private:
     virtual void InitContact( dContact* c, bool& do_collide, u16, u16 );
     virtual dGeomID dSpacedGeom();
     virtual void get_spatial_params();
+
     virtual u16 get_elements_number() { return 0; }
+
     virtual CPHSynchronize* get_element_sync( u16 element ) { return NULL; }
 };

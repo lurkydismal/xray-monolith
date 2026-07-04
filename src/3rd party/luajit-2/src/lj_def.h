@@ -254,6 +254,7 @@ static LJ_AINLINE uint32_t lj_getu32( const void* p ) {
 #ifdef _M_PPC
 unsigned int _CountLeadingZeros( long );
 #pragma intrinsic( _CountLeadingZeros )
+
 static LJ_AINLINE uint32_t lj_fls( uint32_t x ) {
     return _CountLeadingZeros( x ) ^ 31;
 }
@@ -290,6 +291,7 @@ static LJ_AINLINE uint16_t lj_getu16( const void* v ) {
     const uint8_t* p = ( const uint8_t* )v;
     return ( uint16_t )( ( p[ 0 ] << 8 ) | p[ 1 ] );
 }
+
 static LJ_AINLINE uint32_t lj_getu32( const void* v ) {
     const uint8_t* p = ( const uint8_t* )v;
     return ( uint32_t )( ( p[ 0 ] << 24 ) | ( p[ 1 ] << 16 ) | ( p[ 2 ] << 8 ) |

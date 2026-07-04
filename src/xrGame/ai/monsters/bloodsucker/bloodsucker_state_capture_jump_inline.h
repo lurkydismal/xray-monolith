@@ -44,5 +44,6 @@ void CStateCaptureJumpBloodsuckerAbstract::setup_substates() {
         return;
     }
 }
+
 #undef TEMPLATE_SPECIALIZATION
 #undef CStateCaptureJumpBloodsuckerAbstract

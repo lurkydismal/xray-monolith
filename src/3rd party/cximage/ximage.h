@@ -225,10 +225,12 @@ public:
     CxImage( FILE* stream, DWORD imagetype );
     CxImage( CxFile* stream, DWORD imagetype );
     CxImage( BYTE* buffer, DWORD size, DWORD imagetype );
+
     virtual ~CxImage() {
         DestroyFrames();
         Destroy();
     };
+
     CxImage& operator=( const CxImage& );
     //@}
 
@@ -412,6 +414,7 @@ public:
         OM_REPEAT = 5,
         OM_MIRROR = 6
     };
+
     void OverflowCoordinates( float& x,
                               float& y,
                               OverflowMethod const ofMethod );
@@ -421,6 +424,7 @@ public:
         long y,
         OverflowMethod const ofMethod = OM_BACKGROUND,
         RGBQUAD* const rplColor = 0 );
+
     // interpolation methods:
     enum InterpolationMethod {
         IM_NEAREST_NEIGHBOUR = 1,
@@ -442,6 +446,7 @@ public:
         IM_HANNING = 17,
         IM_POWER = 18
     };
+
     RGBQUAD GetPixelColorInterpolated(
         float x,
         float y,
@@ -732,6 +737,7 @@ public:
     bool Dilate( long Ksize = 2 );
     bool Edge( long Ksize = 2 );
     void HuePalette( float correction = 1 );
+
     enum ImageOpType {
         OpAdd,
         OpAnd,
@@ -745,6 +751,7 @@ public:
         OpScreen,
         OpAvg
     };
+
     void Mix( CxImage& imgsrc2,
               ImageOpType op,
               long lXOffset = 0,

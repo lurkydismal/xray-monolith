@@ -28,9 +28,11 @@ public:
 
     static CGID RegisterGroup();
     static CGID LastGroupRegistred();
+
     static IC const CGID& GetGroup( const CPHObject& obj ) {
         return obj.collide_bits();
     }
+
     ////////////////////////////////////////////////////////////////////////////////
     static void InitObject( CPHObject& obj );
     static void RegisterObjToGroup( CGID group, CPHObject& obj );

@@ -8,6 +8,7 @@
 struct PathNamePair {
     std::string path, fname;
 };
+
 const PathNamePair& GetProcBinary( void );
 
 extern int RTPrioLevel;

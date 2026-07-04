@@ -40,6 +40,7 @@ public:
     void SetButtonState( E_BUTTON_STATE eBtnState ) {
         m_eButtonState = eBtnState;
     }
+
     E_BUTTON_STATE GetButtonState() const { return m_eButtonState; }
 
     // Поведение кнопки как переключателя реализовано пока только в режиме
@@ -56,6 +57,7 @@ public:
     shared_str m_hint_text;
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
 
 protected:

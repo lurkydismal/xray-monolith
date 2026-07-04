@@ -39,6 +39,7 @@ public:
     void DrawVariable( lua_State* l, const char* name, bool bOpenTable );
     void DrawTable( lua_State* l, const char* name, bool bRecursive = true );
     void DrawVariableInfo( char* );
+
     CScriptDebugger* debugger() { return m_debugger; }
 
 protected:

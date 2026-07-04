@@ -30,6 +30,7 @@ namespace detail {
 template < class T >
 struct decorated_type {
     static by_value< T > t;
+
     static by_value< T >& get() { return /*by_value<T>()*/ t; }
 };
 
@@ -39,6 +40,7 @@ by_value< T > decorated_type< T >::t;
 template < class T >
 struct decorated_type< T* > {
     static by_pointer< T > t;
+
     static by_pointer< T >& get() { return /*by_pointer<T>()*/ t; }
 };
 
@@ -48,6 +50,7 @@ by_pointer< T > decorated_type< T* >::t;
 template < class T >
 struct decorated_type< const T* > {
     static by_const_pointer< T > t;
+
     static by_const_pointer< T > get() { return /*by_const_pointer<T>()*/ t; }
 };
 
@@ -57,6 +60,7 @@ by_const_pointer< T > decorated_type< const T* >::t;
 template < class T >
 struct decorated_type< const T* const > {
     static by_const_pointer< T > t;
+
     static by_const_pointer< T >& get() { return /*by_const_pointer<T>()*/ t; }
 };
 
@@ -66,6 +70,7 @@ by_const_pointer< T > decorated_type< const T* const >::t;
 template < class T >
 struct decorated_type< T& > {
     static by_reference< T > t;
+
     static by_reference< T >& get() { return /*by_reference<T>()*/ t; }
 };
 
@@ -75,6 +80,7 @@ by_reference< T > decorated_type< T& >::t;
 template < class T >
 struct decorated_type< const T& > {
     static by_const_reference< T > t;
+
     static by_const_reference< T >& get() {
         return /*by_const_reference<T>()*/ t;
     }

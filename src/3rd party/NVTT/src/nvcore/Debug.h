@@ -106,6 +106,7 @@ namespace nv {
 /** Message handler interface. */
 struct MessageHandler {
     virtual void log( const char* str, va_list arg ) = 0;
+
     virtual ~MessageHandler() {}
 };
 
@@ -115,6 +116,7 @@ struct AssertHandler {
                         const char* file,
                         int line,
                         const char* func = 0 ) = 0;
+
     virtual ~AssertHandler() {}
 };
 

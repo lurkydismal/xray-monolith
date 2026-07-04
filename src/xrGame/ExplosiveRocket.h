@@ -23,14 +23,21 @@ public:
 
 public:
     virtual CExplosive* cast_explosive() { return this; }
+
     virtual CInventoryItem* cast_inventory_item() { return this; }
+
     virtual CAttachableItem* cast_attachable_item() { return this; }
+
     virtual CWeapon* cast_weapon() { return NULL; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual IDamageSource* cast_IDamageSource() {
         return CExplosive::cast_IDamageSource();
     }
+
     virtual CExplosiveRocket* cast_explosive_rocket() { return this; }
+
     virtual void on_activate_physic_shell();
 
 public:
@@ -50,22 +57,29 @@ public:
 
 public:
     virtual BOOL UsedAI_Locations() { return inherited::UsedAI_Locations(); }
+
     virtual void net_Import( NET_Packet& P ) { inherited::net_Import( P ); }
+
     virtual void net_Export( NET_Packet& P ) { inherited::net_Export( P ); }
 
     virtual void save( NET_Packet& output_packet ) {
         inherited::save( output_packet );
     }
+
     virtual void load( IReader& input_packet ) {
         inherited::load( input_packet );
     }
+
     virtual BOOL net_SaveRelevant() { return inherited::net_SaveRelevant(); }
 
     virtual void OnH_A_Chield() { inherited::OnH_A_Chield(); }
+
     virtual void OnH_B_Chield() { inherited::OnH_B_Chield(); }
+
     virtual void renderable_Render( IDSGraphManager* DM ) {
         inherited::renderable_Render( DM );
     }
+
     virtual void make_Interpolation();
     virtual void PH_B_CrPr(); // actions & operations before physic
                               // correction-prediction steps

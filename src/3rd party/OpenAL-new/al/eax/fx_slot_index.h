@@ -16,6 +16,7 @@ public:
         set( value );
         return *this;
     }
+
     EaxFxSlotIndex& operator=( const GUID& guid ) {
         set( guid );
         return *this;

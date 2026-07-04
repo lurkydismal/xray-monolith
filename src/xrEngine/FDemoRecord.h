@@ -87,14 +87,19 @@ public:
     void EnableReturnCtrlInputs();
     void SetCameraBoundary( float boundary );
     virtual BOOL ProcessCam( SCamEffectorInfo& info );
+
     static void SetGlobalPosition( const Fvector& p ) {
         g_position.p.set( p ), g_position.set_position = true;
     }
+
     static void GetGlobalPosition( Fvector& p ) { p.set( g_position.p ); }
+
     static void SetGlobalDirection( const Fvector& d ) {
         g_direction.d.set( d ), g_direction.set_direction = true;
     }
+
     static void GetGlobalDirection( Fvector& d ) { d.set( g_direction.d ); }
+
     BOOL m_b_redirect_input_to_level;
     virtual void OnRender();
 };

@@ -23,12 +23,15 @@ public:
     inline_ Plane( float nx, float ny, float nz, float d ) {
         Set( nx, ny, nz, d );
     }
+
     //! Constructor
     inline_ Plane( const Point& p, const Point& n ) { Set( p, n ); }
+
     //! Constructor
     inline_ Plane( const Point& p0, const Point& p1, const Point& p2 ) {
         Set( p0, p1, p2 );
     }
+
     //! Constructor
     inline_ Plane( const Point& n, float d ) {
         this->n = n;
@@ -62,6 +65,7 @@ public:
     Plane& Set( const Point& p0, const Point& p1, const Point& p2 );
 
     inline_ float Distance( const Point& p ) const { return ( p | n ) + d; }
+
     inline_ bool Belongs( const Point& p ) const {
         return _abs( Distance( p ) ) < PLANE_EPSILON;
     }
@@ -81,6 +85,7 @@ public:
 
     // Cast operators
     inline_ operator Point() const { return n; }
+
     /*		inline_			operator HPoint()
        const	{ return HPoint(n, d);
        }

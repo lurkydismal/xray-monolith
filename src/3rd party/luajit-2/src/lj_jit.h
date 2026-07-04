@@ -114,10 +114,12 @@
     /* Size of each machine code area (in KBytes). */                       \
     _(\011, sizemcode, JIT_P_sizemcode_DEFAULT )                            \
     /* Max. total size of all machine code areas (in KBytes). */            \
-    _(\010, maxmcode, 512 )                                                 \
-    /* End of list. */
+    _(\010, maxmcode, 512 )
+
+/* End of list. */
 
 enum {
+
 #define JIT_PARAMENUM( len, name, value ) JIT_P_##name,
     JIT_PARAMDEF( JIT_PARAMENUM )
 #undef JIT_PARAMENUM

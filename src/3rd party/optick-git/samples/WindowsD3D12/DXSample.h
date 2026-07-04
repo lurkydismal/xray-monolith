@@ -26,11 +26,14 @@ public:
 
     // Samples override the event handlers to handle specific messages.
     virtual void OnKeyDown( UINT8 /*key*/ ) {}
+
     virtual void OnKeyUp( UINT8 /*key*/ ) {}
 
     // Accessors.
     UINT GetWidth() const { return m_width; }
+
     UINT GetHeight() const { return m_height; }
+
     const WCHAR* GetTitle() const { return m_title.c_str(); }
 
     void ParseCommandLineArgs( _In_reads_( argc ) WCHAR* argv[], int argc );
@@ -55,6 +58,7 @@ protected:
         NVidiaAdapter,
         IntelAdapter,
     };
+
     PrefferedAdapter m_prefferedAdapter;
 
 private:

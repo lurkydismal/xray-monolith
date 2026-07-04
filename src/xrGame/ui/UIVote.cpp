@@ -58,7 +58,7 @@ void CUIVote::Init() {
         CUIXmlInit::InitTextWnd( xml_doc, path, 0, cap[ i ] );
         //		xr_sprintf
         //(path, "vote:list_back_%d", i+1);
-        //CUIXmlInit::InitFrameWindow (xml_doc, path, 0, frame[i]);
+        // CUIXmlInit::InitFrameWindow (xml_doc, path, 0, frame[i]);
         xr_sprintf( path, "vote:list_%d", i + 1 );
         CUIXmlInit::InitListBox( xml_doc, path, 0, list[ i ] );
     }

@@ -11,6 +11,7 @@ enum XRDX10SAMPLERSTATETYPE {
     XRDX10SAMP_COMPARISONFUNC,
     XRDX10SAMP_MINLOD //	integer value. 0 - the most detailed level
 };
+
 enum XRDX10RENDERSTATETYPE { XRDX10RS_ALPHATOCOVERAGE = 1024 };
 #endif //	USE_DX10
 
@@ -102,22 +103,31 @@ public:
 
 public:
     CSimulator() { Invalidate(); }
+
     IC void Invalidate() { container.clear(); }
+
     IC void SetTSS( u32 S, u32 N, u32 V ) { TSS.Set( container, S, N, V ); }
+
     IC void SetSAMP( u32 S, u32 N, u32 V ) { container.set_SAMP( S, N, V ); }
+
     IC void SetColor( u32 S, u32 a, u32 b, u32 c ) {
         TSS.SetColor( container, S, a, b, c );
     }
+
     IC void SetColor3( u32 S, u32 a, u32 b, u32 c, u32 d ) {
         TSS.SetColor3( container, S, a, b, c, d );
     }
+
     IC void SetAlpha( u32 S, u32 a, u32 b, u32 c ) {
         TSS.SetAlpha( container, S, a, b, c );
     }
+
     IC void SetAlpha3( u32 S, u32 a, u32 b, u32 c, u32 d ) {
         TSS.SetAlpha3( container, S, a, b, c, d );
     }
+
     IC void SetRS( u32 N, u32 V ) { RS.Set( container, N, V ); }
+
     IC SimulatorStates& GetContainer() { return container; }
 };
 

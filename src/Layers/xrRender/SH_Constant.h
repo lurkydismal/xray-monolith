@@ -45,6 +45,7 @@ public:
     }
 
     void Calculate();
+
     IC BOOL Similar( CConstant& C ) // comare by modes and params
     {
         if ( dwMode != C.dwMode )

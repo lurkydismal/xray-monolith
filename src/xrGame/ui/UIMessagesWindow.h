@@ -26,7 +26,9 @@ public:
     //.	void				SetChatOwner
     //(game_cl_GameState* owner);
     void PendingMode( bool const is_in_pending_mode );
+
     CUIChatWnd* GetChatWnd() { return m_pChatWnd; }
+
     virtual void Show( bool show );
 
     virtual CUIWindow* ui_cast_window() { return this; }

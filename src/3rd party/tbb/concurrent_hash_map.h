@@ -68,6 +68,7 @@ using namespace tbb::internal;
 
 //! Type of a hash code.
 typedef size_t hashcode_t;
+
 //! Node base type
 struct hash_map_node_base : tbb::internal::no_copy {
     //! Mutex type
@@ -78,12 +79,14 @@ struct hash_map_node_base : tbb::internal::no_copy {
     hash_map_node_base* next;
     mutex_t mutex;
 };
+
 //! Incompleteness flag value
 static hash_map_node_base* const rehash_req =
     reinterpret_cast< hash_map_node_base* >( size_t( 3 ) );
 //! Rehashed empty bucket flag
 static hash_map_node_base* const empty_rehashed =
     reinterpret_cast< hash_map_node_base* >( size_t( 0 ) );
+
 //! base class of concurrent_hash_map
 class hash_map_base {
 public:
@@ -95,6 +98,7 @@ public:
     typedef size_t segment_index_t;
     //! Node base type
     typedef hash_map_node_base node_base;
+
     //! Bucket type
     struct bucket : tbb::internal::no_copy {
         //! Mutex type for buckets
@@ -104,6 +108,7 @@ public:
         mutex_t mutex;
         node_base* node_list;
     };
+
     //! Count of segments in the first block
     static size_type const embedded_block = 1;
     //! Count of segments in the first block
@@ -196,8 +201,10 @@ public:
     //! Exception safety helper
     struct enable_segment_failsafe : tbb::internal::no_copy {
         segment_ptr_t* my_segment_ptr;
+
         enable_segment_failsafe( segments_table_t& table, segment_index_t k )
             : my_segment_ptr( &table[ k ] ) {}
+
         ~enable_segment_failsafe() {
             if ( my_segment_ptr )
                 *my_segment_ptr = 0; // indicate no allocation in progress
@@ -360,6 +367,7 @@ public:
         for ( size_type m = my_mask; buckets > m; m = my_mask )
             enable_segment( segment_index_of( m + 1 ), allocator, is_initial );
     }
+
     //! Swap hash_map_bases
     void internal_swap( hash_map_base& table ) {
         using std::swap;
@@ -471,6 +479,7 @@ public: // workaround
 public:
     //! Construct undefined iterator
     hash_map_iterator() : my_map(), my_index(), my_bucket(), my_node() {}
+
     hash_map_iterator(
         const hash_map_iterator< Container, typename Container::value_type >&
             other )
@@ -488,12 +497,15 @@ public:
         my_node = other.my_node;
         return *this;
     }
+
     Value& operator*() const {
         __TBB_ASSERT( hash_map_base::is_valid( my_node ),
                       "iterator uninitialized or at end of container?" );
         return my_node->value();
     }
+
     Value* operator->() const { return &operator*(); }
+
     hash_map_iterator& operator++();
 
     //! Post increment
@@ -566,6 +578,7 @@ public:
 
     //! True if range can be partitioned into two subranges.
     bool is_divisible() const { return my_midpoint != my_end; }
+
     //! Split range.
     hash_map_range( hash_map_range& r, split )
         : my_end( r.my_end ), my_grainsize( r.my_grainsize ) {
@@ -577,6 +590,7 @@ public:
         set_midpoint();
         r.set_midpoint();
     }
+
     //! type conversion
     template < typename U >
     hash_map_range( hash_map_range< U >& r )
@@ -584,6 +598,7 @@ public:
           my_end( r.my_end ),
           my_midpoint( r.my_midpoint ),
           my_grainsize( r.my_grainsize ) {}
+
     //! Init range with container and grainsize specified
     hash_map_range( const map_type& map, size_type grainsize_ = 1 )
         : my_begin( Iterator( map,
@@ -595,8 +610,11 @@ public:
         __TBB_ASSERT( grainsize_ > 0, "grainsize must be positive" );
         set_midpoint();
     }
+
     const Iterator& begin() const { return my_begin; }
+
     const Iterator& end() const { return my_end; }
+
     //! The grain size for this range.
     size_type grainsize() const { return my_grainsize; }
 };
@@ -621,6 +639,7 @@ void hash_map_range< Iterator >::set_midpoint() const {
 }
 
 } // namespace internal
+
 //! @endcond
 
 #if _MSC_VER && !defined( __INTEL_COMPILER )
@@ -704,6 +723,7 @@ protected:
 
     public:
         value_type* storage() { return my_value.begin(); }
+
         value_type& value() { return *storage(); }
     };
 
@@ -722,12 +742,14 @@ protected:
 
         node_scoped_guard( node* n, node_allocator_type& alloc )
             : my_node( n ), my_alloc( alloc ) {}
+
         ~node_scoped_guard() {
             if ( my_node ) {
                 node_allocator_traits::destroy( my_alloc, my_node );
                 node_allocator_traits::deallocate( my_alloc, my_node, 1 );
             }
         }
+
         void dismiss() { my_node = NULL; }
     };
 
@@ -818,6 +840,7 @@ protected:
                          bool writer = false ) {
             acquire( base, h, writer );
         }
+
         //! find a bucket by masked hashcode, optionally rehash, and acquire the
         //! lock
         inline void acquire( concurrent_hash_map* base,
@@ -835,8 +858,10 @@ protected:
                 bucket::scoped_t::acquire( my_b->mutex, writer );
             __TBB_ASSERT( my_b->node_list != internal::rehash_req, NULL );
         }
+
         //! check whether bucket is locked for write
         bool is_writer() { return bucket::scoped_t::is_writer; }
+
         //! get bucket pointer
         bucket* operator()() { return my_b; }
     };
@@ -887,9 +912,12 @@ protected:
 
     struct call_clear_on_leave {
         concurrent_hash_map* my_ch_map;
+
         call_clear_on_leave( concurrent_hash_map* a_ch_map )
             : my_ch_map( a_ch_map ) {}
+
         void dismiss() { my_ch_map = 0; }
+
         ~call_clear_on_leave() {
             if ( my_ch_map ) {
                 my_ch_map->clear();
@@ -899,6 +927,7 @@ protected:
 
 public:
     class accessor;
+
     //! Combines data access, locking, and garbage collection.
     class const_accessor
         : private node::scoped_t /*which derived from no_copy*/ {
@@ -940,6 +969,7 @@ public:
 
     protected:
         bool is_writer() { return node::scoped_t::is_writer; }
+
         node* my_node;
         hashcode_t my_hash;
     };
@@ -1131,6 +1161,7 @@ public:
     range_type range( size_type grainsize = 1 ) {
         return range_type( *this, grainsize );
     }
+
     const_range_type range( size_type grainsize = 1 ) const {
         return const_range_type( *this, grainsize );
     }
@@ -1142,15 +1173,20 @@ public:
         return iterator( *this, 0, my_embedded_segment,
                          my_embedded_segment->node_list );
     }
+
     iterator end() { return iterator( *this, 0, 0, 0 ); }
+
     const_iterator begin() const {
         return const_iterator( *this, 0, my_embedded_segment,
                                my_embedded_segment->node_list );
     }
+
     const_iterator end() const { return const_iterator( *this, 0, 0, 0 ); }
+
     std::pair< iterator, iterator > equal_range( const Key& key ) {
         return internal_equal_range( key, end() );
     }
+
     std::pair< const_iterator, const_iterator > equal_range(
         const Key& key ) const {
         return internal_equal_range( key, end() );
@@ -1336,15 +1372,19 @@ protected:
     struct accessor_not_used {
         void release() {}
     };
+
     friend const_accessor* accessor_location( accessor_not_used const& ) {
         return NULL;
     }
+
     friend const_accessor* accessor_location( const_accessor& a ) { return &a; }
 
     friend bool is_write_access_needed( accessor const& ) { return true; }
+
     friend bool is_write_access_needed( const_accessor const& ) {
         return false;
     }
+
     friend bool is_write_access_needed( accessor_not_used const& ) {
         return false;
     }

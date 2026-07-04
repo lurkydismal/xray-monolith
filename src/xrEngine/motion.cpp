@@ -149,6 +149,7 @@ void COMotion::CreateKey( float t, const Fvector& P, const Fvector& R ) {
     envs[ ctRotationP ]->InsertKey( t, R.x );
     envs[ ctRotationB ]->InsertKey( t, R.z );
 }
+
 void COMotion::DeleteKey( float t ) {
     envs[ ctPositionX ]->DeleteKey( t );
     envs[ ctPositionY ]->DeleteKey( t );
@@ -157,9 +158,11 @@ void COMotion::DeleteKey( float t ) {
     envs[ ctRotationP ]->DeleteKey( t );
     envs[ ctRotationB ]->DeleteKey( t );
 }
+
 int COMotion::KeyCount() {
     return envs[ ctPositionX ]->keys.size();
 }
+
 void COMotion::FindNearestKey( float t, float& mn, float& mx, float eps ) {
     KeyIt min_k;
     KeyIt max_k;
@@ -167,6 +170,7 @@ void COMotion::FindNearestKey( float t, float& mn, float& mx, float eps ) {
     mn = ( min_k != envs[ ctPositionX ]->keys.end() ) ? ( *min_k )->time : t;
     mx = ( max_k != envs[ ctPositionX ]->keys.end() ) ? ( *max_k )->time : t;
 }
+
 float COMotion::GetLength( float* mn, float* mx ) {
     float ln, len = 0.f;
     for ( int ch = 0; ch < ctMaxChannel; ch++ )
@@ -174,6 +178,7 @@ float COMotion::GetLength( float* mn, float* mx ) {
             len = ln;
     return len;
 }
+
 BOOL COMotion::ScaleKeys( float from_time, float to_time, float scale_factor ) {
     BOOL bRes = TRUE;
     for ( int ch = 0; ch < ctMaxChannel; ch++ )
@@ -182,6 +187,7 @@ BOOL COMotion::ScaleKeys( float from_time, float to_time, float scale_factor ) {
             break;
     return bRes;
 }
+
 BOOL COMotion::NormalizeKeys( float from_time, float to_time, float speed ) {
     if ( to_time < from_time )
         return FALSE;

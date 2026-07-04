@@ -566,6 +566,7 @@ protected:
 inline UBool SearchIterator::operator!=( const SearchIterator& that ) const {
     return !operator==( that );
 }
+
 U_NAMESPACE_END
 
 #endif /* #if !UCONFIG_NO_COLLATION */

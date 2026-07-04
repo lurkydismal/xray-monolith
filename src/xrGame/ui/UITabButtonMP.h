@@ -12,7 +12,9 @@ public:
     virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData );
 
     virtual bool IsEnabled() { return true; }
+
     void SetOrientation( bool bVert ) { m_orientationVertical = bVert; };
+
     void CreateHint();
 
     virtual CUIWindow* ui_cast_window() { return this; }

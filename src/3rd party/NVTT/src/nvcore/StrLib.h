@@ -64,12 +64,16 @@ public:
     StringBuilder& toUpper();
 
     void reset();
+
     bool isNull() const { return m_size == 0; }
 
     // const char * accessors
     operator const char*() const { return m_str; }
+
     operator char*() { return m_str; }
+
     const char* str() const { return m_str; }
+
     char* str() { return m_str; }
 
     /// Implement value semantics.
@@ -115,8 +119,11 @@ protected:
 class NVCORE_CLASS Path : public StringBuilder {
 public:
     Path() : StringBuilder() {}
+
     explicit Path( int size_hint ) : StringBuilder( size_hint ) {}
+
     Path( const char* str ) : StringBuilder( str ) {}
+
     Path( const Path& path ) : StringBuilder( path ) {}
 
     const char* fileName() const;

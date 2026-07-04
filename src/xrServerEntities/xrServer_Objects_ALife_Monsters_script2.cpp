@@ -14,6 +14,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CSE_ALifeCreatureCrow::script_register( lua_State* L ) {
     module( L )[ luabind_class_creature1( CSE_ALifeCreatureCrow,
                                           "cse_alife_creature_crow",

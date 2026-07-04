@@ -146,6 +146,7 @@ float evaluate( CEF_Storage* ef_storage,
 }
 
 #pragma optimize( "s", on )
+
 void CEF_Storage::script_register( lua_State* L ) {
     module(
         L )[ def( "ef_storage", &ef_storage ),

@@ -53,6 +53,7 @@ class CompactDecimalFormat;
 namespace number {
 class LocalizedNumberFormatter;
 class FormattedNumber;
+
 namespace impl {
 class DecimalQuantity;
 struct DecimalFormatFields;

@@ -73,6 +73,7 @@ typedef my_downsampler* my_downsample_ptr;
  */
 
 METHODDEF( void )
+
 start_pass_downsample( j_compress_ptr cinfo ) {
     /* no work for now */
 }
@@ -83,6 +84,7 @@ start_pass_downsample( j_compress_ptr cinfo ) {
  */
 
 LOCAL( void )
+
 expand_right_edge( JSAMPARRAY image_data,
                    int num_rows,
                    JDIMENSION input_cols,
@@ -113,6 +115,7 @@ expand_right_edge( JSAMPARRAY image_data,
  */
 
 METHODDEF( void )
+
 sep_downsample( j_compress_ptr cinfo,
                 JSAMPIMAGE input_buf,
                 JDIMENSION in_row_index,
@@ -140,6 +143,7 @@ sep_downsample( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 int_downsample( j_compress_ptr cinfo,
                 jpeg_component_info* compptr,
                 JSAMPARRAY input_data,
@@ -187,6 +191,7 @@ int_downsample( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 fullsize_downsample( j_compress_ptr cinfo,
                      jpeg_component_info* compptr,
                      JSAMPARRAY input_data,
@@ -212,6 +217,7 @@ fullsize_downsample( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 h2v1_downsample( j_compress_ptr cinfo,
                  jpeg_component_info* compptr,
                  JSAMPARRAY input_data,
@@ -252,6 +258,7 @@ h2v1_downsample( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 h2v2_downsample( j_compress_ptr cinfo,
                  jpeg_component_info* compptr,
                  JSAMPARRAY input_data,
@@ -300,6 +307,7 @@ h2v2_downsample( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 h2v2_smooth_downsample( j_compress_ptr cinfo,
                         jpeg_component_info* compptr,
                         JSAMPARRAY input_data,
@@ -410,6 +418,7 @@ h2v2_smooth_downsample( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 fullsize_smooth_downsample( j_compress_ptr cinfo,
                             jpeg_component_info* compptr,
                             JSAMPARRAY input_data,
@@ -485,6 +494,7 @@ fullsize_smooth_downsample( j_compress_ptr cinfo,
  */
 
 GLOBAL( void )
+
 jinit_downsampler( j_compress_ptr cinfo ) {
     my_downsample_ptr downsample;
     int ci;

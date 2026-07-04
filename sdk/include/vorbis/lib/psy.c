@@ -75,6 +75,7 @@ static void min_curve( float* c, float* c2 ) {
         if ( c2[ i ] < c[ i ] )
             c[ i ] = c2[ i ];
 }
+
 static void max_curve( float* c, float* c2 ) {
     int i;
     for ( i = 0; i < EHMER_MAX; i++ )
@@ -560,6 +561,7 @@ static void seed_chase( float* seeds, int linesper, long n ) {
 
 /* bleaugh, this is more complicated than it needs to be */
 #include <stdio.h>
+
 static void max_seeds( vorbis_look_psy* p, float* seed, float* flr ) {
     long n = p->total_octave_lines;
     int linesper = p->eighth_octave_lines;
@@ -1039,6 +1041,7 @@ static float dipole_hypot( float a, float b ) {
         return -sqrt( a * a - b * b );
     return sqrt( b * b - a * a );
 }
+
 static float round_hypot( float a, float b ) {
     if ( a > 0. ) {
         if ( b > 0. )

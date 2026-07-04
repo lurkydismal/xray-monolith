@@ -46,6 +46,7 @@ struct SpatialSnapshot {
     SpatialSnapshot( ISpatialShared _ptr, IKinematics* _pKin, float _distSq )
         : ptr( _ptr ), pKin( _pKin ), distSq( _distSq ) {};
 };
+
 void XRay::Engine::CalculateBonesThread() {
     PROF_THREAD( "Secondary Task 3" );
 
@@ -123,6 +124,7 @@ void XRay::Engine::CalculateBonesThread() {
 
 extern BOOL psLua_ParallelGC;
 int psLua_ParallelGC_CallAmount = 25;
+
 void XRay::Engine::GameThread() {
     PROF_THREAD( "Secondary Task 2" )
 

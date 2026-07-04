@@ -133,7 +133,9 @@ public:
                     CObject* ignore_object );
 
     CDB::TRI* GetStaticTris() { return Static.get_tris(); }
+
     Fvector* GetStaticVerts() { return Static.get_verts(); }
+
     CDB::MODEL* GetStaticModel() { return &Static; }
 
     const Fbox& GetBoundingVolume() { return m_BoundingVolume; }

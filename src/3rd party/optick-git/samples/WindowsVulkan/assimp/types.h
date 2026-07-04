@@ -122,6 +122,7 @@ const size_t MAXLEN = 1024;
 struct aiPlane {
 #ifdef __cplusplus
     aiPlane() : a( 0.f ), b( 0.f ), c( 0.f ), d( 0.f ) {}
+
     aiPlane( float _a, float _b, float _c, float _d )
         : a( _a ), b( _b ), c( _c ), d( _d ) {}
 
@@ -139,6 +140,7 @@ struct aiPlane {
 struct aiRay {
 #ifdef __cplusplus
     aiRay() {}
+
     aiRay( const aiVector3D& _pos, const aiVector3D& _dir )
         : pos( _pos ), dir( _dir ) {}
 
@@ -156,8 +158,11 @@ struct aiRay {
 struct aiColor3D {
 #ifdef __cplusplus
     aiColor3D() : r( 0.0f ), g( 0.0f ), b( 0.0f ) {}
+
     aiColor3D( float _r, float _g, float _b ) : r( _r ), g( _g ), b( _b ) {}
+
     explicit aiColor3D( float _r ) : r( _r ), g( _r ), b( _r ) {}
+
     aiColor3D( const aiColor3D& o ) : r( o.r ), g( o.g ), b( o.b ) {}
 
     /** Component-wise comparison */
@@ -218,6 +223,7 @@ struct aiColor3D {
     //! Red, green and blue color values
     float r, g, b;
 } PACK_STRUCT; // !struct aiColor3D
+
 #include "./Compiler/poppack1.h"
 
 // ----------------------------------------------------------------------------------

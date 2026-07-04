@@ -549,6 +549,7 @@ STBTT_DEF int stbtt_BakeFontBitmap(
     int first_char,
     int num_chars,               // characters to bake
     stbtt_bakedchar* chardata ); // you allocate this, it's num_chars long
+
 // if return is positive, the first unused row of the bitmap
 // if return is negative, returns the negative of the number of characters that
 // fit if return is 0, no characters fit and no rows were used This uses a very
@@ -584,6 +585,7 @@ STBTT_DEF void stbtt_GetScaledFontVMetrics( const unsigned char* fontdata,
                                             float* ascent,
                                             float* descent,
                                             float* lineGap );
+
 // Query the font vertical metrics without having to create a font first.
 
 //////////////////////////////////////////////////////////////////////////////
@@ -634,6 +636,7 @@ STBTT_DEF int stbtt_PackFontRange( stbtt_pack_context* spc,
                                    int first_unicode_char_in_range,
                                    int num_chars_in_range,
                                    stbtt_packedchar* chardata_for_range );
+
 // Creates character bitmaps from the font_index'th font found in fontdata (use
 // font_index=0 if you don't know what that is). It creates num_chars_in_range
 // bitmaps for characters with unicode values starting at
@@ -720,6 +723,7 @@ STBTT_DEF int stbtt_PackFontRangesRenderIntoRects( stbtt_pack_context* spc,
                                                    stbtt_pack_range* ranges,
                                                    int num_ranges,
                                                    stbrp_rect* rects );
+
 // Calling these functions in sequence is roughly equivalent to calling
 // stbtt_PackFontRanges(). If you more control over the packing of multiple
 // fonts, or if you want to pack custom data into a font texture, take a look
@@ -760,6 +764,7 @@ STBTT_DEF int stbtt_GetNumberOfFonts( const unsigned char* data );
 
 STBTT_DEF int stbtt_GetFontOffsetForIndex( const unsigned char* data,
                                            int index );
+
 // Each .ttf/.ttc file may have more than one font. Each font has a sequential
 // index number starting from 0. Call this function to get the font offset for
 // a given index; it returns -1 if the index is out of range. A regular .ttf
@@ -894,6 +899,7 @@ STBTT_DEF int stbtt_GetGlyphBox( const stbtt_fontinfo* info,
                                  int* y0,
                                  int* x1,
                                  int* y1 );
+
 // as above, but takes one or more glyph indices for greater efficiency
 
 typedef struct stbtt_kerningentry {
@@ -926,6 +932,7 @@ enum { STBTT_vmove = 1, STBTT_vline, STBTT_vcurve, STBTT_vcubic };
                      // (we share this with other code at RAD)
 #define stbtt_vertex_type \
     short // can't use stbtt_int16 because that's not visible in the header file
+
 typedef struct {
     stbtt_vertex_type x, y, cx, cy, cx1, cy1;
     unsigned char type, padding;
@@ -1300,6 +1307,7 @@ STBTT_DEF const char* stbtt_GetFontNameString( const stbtt_fontinfo* font,
                                                int encodingID,
                                                int languageID,
                                                int nameID );
+
 // returns the string (which may be big-endian double byte, e.g. for unicode)
 // and puts the length in bytes in *length.
 //
@@ -1571,12 +1579,15 @@ static stbtt__buf stbtt__cff_index_get( stbtt__buf b, int i ) {
 static stbtt_uint16 ttUSHORT( stbtt_uint8* p ) {
     return p[ 0 ] * 256 + p[ 1 ];
 }
+
 static stbtt_int16 ttSHORT( stbtt_uint8* p ) {
     return p[ 0 ] * 256 + p[ 1 ];
 }
+
 static stbtt_uint32 ttULONG( stbtt_uint8* p ) {
     return ( p[ 0 ] << 24 ) + ( p[ 1 ] << 16 ) + ( p[ 2 ] << 8 ) + p[ 3 ];
 }
+
 static stbtt_int32 ttLONG( stbtt_uint8* p ) {
     return ( p[ 0 ] << 24 ) + ( p[ 1 ] << 16 ) + ( p[ 2 ] << 8 ) + p[ 3 ];
 }

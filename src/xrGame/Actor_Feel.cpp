@@ -340,6 +340,7 @@ void CActor::Check_for_AutoPickUp() {
 }
 
 BOOL drawPickupItemNames = TRUE;
+
 void CActor::PickupInfoDraw( CObject* object ) {
     LPCSTR draw_str = NULL;
 

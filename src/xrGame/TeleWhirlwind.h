@@ -106,6 +106,7 @@ public:
                                           float height,
                                           u32 max_time_keep,
                                           bool rot = true );
+
     virtual CTelekineticObject* alloc_tele_object() {
         if ( m_iTelekinesisType == 1 ) {
             return static_cast< CTelekineticObject* >(
@@ -124,17 +125,26 @@ public:
 
 public: // Getters
     u16 GetOwnerID() const { return m_iOwnerID; }
+
     u16 GetTelekinesisType() const { return m_iTelekinesisType; }
+
     float GetKeepRadius() const { return m_fKeepRadius; }
+
     float GetTeleTime() const { return m_fTeleTime; }
+
     u16 GetTeleRotateSpeed() const { return m_fTeleRotateSpeed; }
+
     boolean GetSpawnSkeleton() const { return m_bSpawnSkeleton; }
+
     boolean GetHeightFixed() const { return m_bHeightFixed; }
+
     const Fvector& GetCenter() const { return m_vCenter; }
+
     LPCSTR GetTearingParticles() const { return *m_sTearingParticles; }
 
 public: // Setters
     void SetCenter( const Fvector& center ) { m_vCenter.set( center ); }
+
     void SetOwnerID( u16 owner_id ) { m_iOwnerID = owner_id; }
 };
 

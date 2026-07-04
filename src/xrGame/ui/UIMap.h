@@ -23,6 +23,7 @@ protected:
 
 public:
     Frect& WorkingArea() { return m_workingArea; }
+
     Frect m_prevRect;
     shared_str m_texture;
     shared_str m_shader_name;
@@ -56,9 +57,11 @@ public:
     }
 
     const Frect& BoundRect() const { return m_BoundRect_; }
+
     virtual void OptimalFit( const Frect& r );
 
     const shared_str& MapName() { return m_name; }
+
     virtual CUIGlobalMapSpot* GlobalMapSpot() { return NULL; }
 
     virtual void Draw();
@@ -66,16 +69,25 @@ public:
     virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData );
     virtual bool IsRectVisible( Frect r );
     virtual bool NeedShowPointer( Frect r );
+
     bool Locked() { return !!m_flags.test( eLocked ); }
+
     void SetLocked( bool b ) { m_flags.set( eLocked, b ); }
+
     bool IsRounded() { return m_flags.test( eRounded ); }
+
     void SetRounded( bool b ) { m_flags.set( eRounded, b ); }
+
     bool Rotate() { return m_flags.test( eRotate ); }
+
     void SetRotate( bool b ) { m_flags.set( eRotate, b ); }
+
     void SetPointerDistance( float d ) { m_pointer_dist = d; };
+
     float GetPointerDistance() { return m_pointer_dist; };
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
 
 protected:
@@ -104,13 +116,17 @@ public:
     virtual ~CUIGlobalMap();
 
     IC void SetMinZoom( float zoom ) { m_minZoom = zoom; }
+
     IC float GetMinZoom() { return m_minZoom; }
+
     IC float GetMaxZoom() { return m_max_zoom; }
+
     IC void SetMaxZoom( float zoom ) { m_max_zoom = zoom; }
 
     virtual bool OnMouseAction( float x, float y, EUIMessages mouse_action );
 
     CUIMapWnd* MapWnd() { return m_mapWnd; }
+
     void MoveWndDelta( const Fvector2& d );
 
     float CalcOpenRect( const Fvector2& center_point,
@@ -143,6 +159,7 @@ class CUILevelMap : public CUICustomMap {
                              // show
     Fvector2 m_label_offset; // global_rect units from rect centre; +x right, +y
                              // up (scaled by zoom at apply)
+
     CUILevelMap( const CUILevelMap& obj ) {}
 
     CUILevelMap& operator=( const CUILevelMap& obj ) {}
@@ -150,7 +167,9 @@ class CUILevelMap : public CUICustomMap {
 public:
     CUILevelMap( CUIMapWnd* );
     virtual ~CUILevelMap();
+
     const Frect& GlobalRect() const { return m_GlobalRect; }
+
     virtual void Draw();
     virtual void Show( bool status );
     virtual void Update();
@@ -158,6 +177,7 @@ public:
     virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData );
 
     Frect CalcWndRectOnGlobal();
+
     CUIMapWnd* MapWnd() { return m_mapWnd; }
 
     virtual void OnFocusLost();

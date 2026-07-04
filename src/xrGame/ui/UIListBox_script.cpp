@@ -21,6 +21,7 @@ struct CUIListBoxItemMsgChainWrapper : public CUIListBoxItemMsgChain,
 };
 
 #pragma optimize( "s", on )
+
 void CUIListBox::script_register( lua_State* L ) {
     module( L )[
 

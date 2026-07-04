@@ -38,19 +38,25 @@ public:
     virtual bool feel_touch_contact( CObject* O );
 
     virtual u16 GetOriginalOwnerID() { return m_idOriginalOwner; }
+
     virtual CInventoryOwner* GetOriginalOwner();
     virtual CObject* GetOwnerObject();
 
     void TurnOn() { m_bTurnedOff = false; }
+
     void TurnOff() { m_bTurnedOff = true; }
 
     bool IsActive() { return IsOn(); }
+
     bool IsOn() { return !m_bTurnedOff; }
+
     bool IsOff() { return m_bTurnedOff; }
 
     void ActivePDAContacts( xr_vector< CPda* >& res );
     CPda* GetPdaFromOwner( CObject* owner );
+
     u32 ActiveContactsNum() { return m_active_contacts.size(); }
+
     void PlayScriptFunction();
 
     bool CanPlayScriptFunction() {
@@ -89,11 +95,13 @@ protected:
     float m_fLR_MovingFactor;
     float m_fLR_InertiaFactor;
     float m_fUD_InertiaFactor;
+
     bool hasEnoughBatteryPower() {
         return ( !IsUsingCondition() ||
                  ( m_PdaEnabled && IsUsingCondition() &&
                    GetCondition() > m_fLowestBatteryCharge ) );
     }
+
     static void _BCL JoystickCallback( CBoneInstance* B );
     bool m_bNoticedEmptyBattery;
     bool m_LastMBZoom;

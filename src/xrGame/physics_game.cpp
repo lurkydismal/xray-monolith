@@ -64,6 +64,7 @@ public:
         ps->UpdateParent( pos, zero_vel );
         GamePersistent().ps_needtoplay.push_back( ps );
     };
+
     virtual bool obsolete() const { return false; }
 };
 
@@ -106,7 +107,9 @@ private:
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool is_true() { return true; }
+
     virtual bool obsolete() const { return false; }
 };
 
@@ -121,6 +124,7 @@ private:
     virtual bool compare( const CPHReqComparerV* v ) const {
         return v->compare( this );
     }
+
     virtual bool compare( const CPHLiquidParticlesCondition* v ) const {
         return true;
     }
@@ -164,6 +168,7 @@ public:
         ::Render->add_StaticWallmark( pWallmarkShader, pos, 0.09f, T,
                                       Level().ObjectSpace.GetStaticVerts() );
     };
+
     virtual bool obsolete() const { return false; }
 };
 

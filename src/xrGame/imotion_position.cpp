@@ -129,6 +129,7 @@ void imotion_position::state_start() {
     VERIFY( KA );
     KA->SetUpdateTracksCalback( &update_callback );
     update_callback.motion = this;
+
     struct get_controled_blend : public IterateBlendsCallback,
                                  private xray::noncopyable
 
@@ -370,6 +371,7 @@ float imotion_position::advance_animation( float dt, IKinematicsAnimated& KA ) {
 #ifdef DEBUG
 void DBG_DrawBones( CObject& O );
 void DBG_PhysBones( CObject& O );
+
 void collide_anim_dbg_draw( CPhysicsShell* shell, float dt ) {
     VERIFY( shell );
     if ( dbg_imotion_draw_velocity ) {
@@ -456,6 +458,7 @@ public:
 static void save_blends( buffer_vector< sblend_save >& buffer,
                          IKinematicsAnimated& KA ) {
     buffer.clear();
+
     struct scbl : public IterateBlendsCallback, private xray::noncopyable {
         buffer_vector< sblend_save >& _buffer;
 
@@ -467,6 +470,7 @@ static void save_blends( buffer_vector< sblend_save >& buffer,
             _buffer.push_back( s );
         }
     } cbl( buffer );
+
     KA.LL_IterateBlends( cbl );
 }
 

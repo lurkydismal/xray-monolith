@@ -28,14 +28,18 @@ public:
     void reset_end();
 
     IC ID3DVertexBuffer* Buffer() { return pVB; }
+
     IC u32 DiscardID() { return mDiscardID; }
+
     IC void Flush() { mPosition = mSize; }
 
     void* Lock( u32 vl_Count, u32 Stride, u32& vOffset );
     void Unlock( u32 Count, u32 Stride );
+
     u32 GetSize() { return mSize; }
 
     _VertexStream();
+
     ~_VertexStream() { Destroy(); };
 };
 
@@ -64,13 +68,16 @@ public:
     void reset_end();
 
     IC ID3DIndexBuffer* Buffer() { return pIB; }
+
     IC u32 DiscardID() { return mDiscardID; }
+
     void Flush() { mPosition = mSize; }
 
     u16* Lock( u32 Count, u32& vOffset );
     void Unlock( u32 RealCount );
 
     _IndexStream() { _clear(); };
+
     ~_IndexStream() { Destroy(); };
 };
 #endif

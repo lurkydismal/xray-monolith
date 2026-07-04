@@ -5,6 +5,7 @@
 //////////////////////////////////////////////////////////////////////////
 #pragma warning( push )
 #pragma warning( disable : 4200 )
+
 struct XRCORE_API smem_value {
     xr_atomic_u32 dwReference;
     u32 dwCRC;
@@ -43,6 +44,7 @@ IC bool smem_equal( const smem_value* A, u32 dwCRC, u32 dwLength, u8* ptr ) {
         return false;
     return 0 == memcmp( A->value, ptr, dwLength );
 };
+
 #pragma warning( pop )
 
 //////////////////////////////////////////////////////////////////////////
@@ -118,11 +120,15 @@ public:
     }
 
     T* operator*() const { return p_ ? ( T* )p_->value : 0; }
+
     bool operator!() const { return p_ == 0; }
+
     T& operator[]( size_t id ) { return ( ( T* )( p_->value ) )[ id ]; }
+
     const T& operator[]( size_t id ) const {
         return ( ( T* )( p_->value ) )[ id ];
     }
+
     // misc func
     u32 size() {
         if ( 0 == p_ )

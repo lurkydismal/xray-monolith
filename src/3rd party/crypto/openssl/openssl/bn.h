@@ -326,6 +326,7 @@ struct bn_recp_ctx_st {
 struct bn_gencb_st {
     unsigned int ver; /* To handle binary (in)compatibility */
     void* arg;        /* callback-specific data */
+
     union {
         /* if(ver==1) - handles old style callbacks */
         void ( *cb_1 )( int, int, void* );
@@ -333,6 +334,7 @@ struct bn_gencb_st {
         int ( *cb_2 )( int, int, BN_GENCB* );
     } cb;
 };
+
 /* Wrapper function to make using BN_GENCB easier,  */
 int BN_GENCB_call( BN_GENCB* cb, int a, int b );
 /* Macro to populate a BN_GENCB structure with an "old"-style callback */

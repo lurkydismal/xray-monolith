@@ -29,6 +29,7 @@
 #include "visual_memory_manager.h"
 #include "xrServer.h"
 #include "xrServer_Objects_ALife_Monsters.h"
+
 // #include "CustomMonster.h"
 
 CMapLocation::CMapLocation( LPCSTR type, u16 object_id ) {

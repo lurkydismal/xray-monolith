@@ -124,6 +124,7 @@ private:
 
 public:
     Fvector OwnerSectorPoint();
+
     void OwnerReset( ISpatialOwner* ptr ) { RawOwner = ptr; };
 
     void spatial_updatesector();
@@ -157,19 +158,27 @@ public:
         SpatialComponent = xr_new< ISpatial >( db, owner );
         SpatialComponent->spatial.type = type;
     }
+
     virtual void spatial_register() { SpatialComponent->Register(); };
+
     virtual void spatial_unregister() { SpatialComponent->Unregister(); };
 
     virtual void spatial_move() { SpatialComponent->Move(); };
+
     virtual Fvector spatial_sector_point() {
         return SpatialComponent->SectorPoint();
     }
 
     virtual CObject* dcast_CObject() { return nullptr; };
+
     virtual Feel::Sound* dcast_FeelSound() { return nullptr; };
+
     virtual IRenderable* dcast_Renderable() { return nullptr; };
+
     virtual IRender_Light* dcast_Light() { return nullptr; };
+
     virtual CPHObject* dcast_CPHObject() { return nullptr; };
+
     virtual CGlow* dcast_CGlow() { return nullptr; };
 
     virtual ~ISpatialOwner() { SpatialComponent->OwnerReset( nullptr ); }
@@ -229,6 +238,7 @@ public:
 
 private:
     IC u32 _octant( u32 x, u32 y, u32 z ) { return z * 4 + y * 2 + x; }
+
     IC u32 _octant( Fvector& base, Fvector& rel ) {
         u32 o = 0;
         if ( rel.x > base.x )

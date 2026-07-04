@@ -274,6 +274,7 @@ IC bool TestRayTri2( const Fvector& C,
             }                                 \
         }                                     \
     }
+
 //---------------------------------------------------------------------------
 
 IC bool TestBBoxTri( const Fmatrix33& A,

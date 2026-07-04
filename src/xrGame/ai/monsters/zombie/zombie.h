@@ -33,7 +33,9 @@ public:
     void vfAssignBones();
 
     virtual bool use_center_to_aim() const { return true; }
+
     virtual char* get_monster_class_name() { return "zombie"; }
+
     virtual float GetHotness() {
         if ( heat_vision_zombie_cold ) {
             return 0.0f;

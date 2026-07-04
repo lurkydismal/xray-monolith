@@ -143,6 +143,7 @@ typedef union {
 typedef LJ_ALIGN( 8 ) union TValue {
     uint64_t u64; /* 64 bit pattern overlaps number. */
     lua_Number n; /* Number object overlaps split tag/value object. */
+
     struct {
         LJ_ENDIAN_LOHI(
             union {
@@ -153,11 +154,13 @@ typedef LJ_ALIGN( 8 ) union TValue {
             uint32_t it; /* Internal object tag. Must overlap MSW of number. */
         )
     };
+
     struct {
         LJ_ENDIAN_LOHI( GCRef func; /* Function for next frame (or dummy L). */
                         , FrameLink tp; /* Link to previous frame. */
         )
     } fr;
+
     struct {
         LJ_ENDIAN_LOHI( uint32_t lo;   /* Lower 32 bits of number. */
                         , uint32_t hi; /* Upper 32 bits of number. */
@@ -355,13 +358,16 @@ typedef struct GCupval {
     GCHeader;
     uint8_t closed;    /* Set if closed (i.e. uv->v == &uv->u.value). */
     uint8_t immutable; /* Immutable value. */
+
     union {
         TValue tv; /* If closed: the value itself. */
-        struct {   /* If open: double linked list, anchored at thread. */
+
+        struct { /* If open: double linked list, anchored at thread. */
             GCRef prev;
             GCRef next;
         };
     };
+
     MRef v;         /* Points to stack slot (open) or above (closed). */
     uint32_t dhash; /* Disambiguation hash: dh1 != dh2 => cannot alias. */
 } GCupval;
@@ -473,8 +479,9 @@ enum {
 #define MMDEF( _ )                                                           \
     _( index )                                                               \
     _( newindex )                                                            \
-    _( gc ) _( mode ) _( eq ) _( len ) /* Only the above (fast) metamethods  \
-                                          are negative cached (max. 8). */                                                                \
+    _( gc )                                                                  \
+    _( mode ) _( eq ) _( len ) /* Only the above (fast) metamethods          \
+                                  are negative cached (max. 8). */           \
         _( lt ) _( le ) _( concat )                                          \
             _( call ) /* The following must be in ORDER ARITH. */            \
         _( add ) _( sub ) _( mul ) _( div ) _( mod ) _( pow )                \
@@ -482,6 +489,7 @@ enum {
         _( metatable ) _( tostring ) MMDEF_FFI( _ ) MMDEF_PAIRS( _ )
 
 typedef enum {
+
 #define MMENUM( name ) MM_##name,
     MMDEF( MMENUM )
 #undef MMENUM
@@ -779,6 +787,7 @@ static LJ_AINLINE void setgcV( lua_State* L,
     static LJ_AINLINE void name( lua_State* L, TValue* o, type* v ) { \
         setgcV( L, o, obj2gco( v ), tag );                            \
     }
+
 define_setV( setstrV, GCstr, LJ_TSTR )
     define_setV( setthreadV, lua_State, LJ_TTHREAD )
         define_setV( setprotoV, GCproto, LJ_TPROTO )

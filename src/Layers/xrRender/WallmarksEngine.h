@@ -23,6 +23,7 @@ public:
         float m_fTimeEnd;
 
         IC float TimeStart() { return m_fTimeStart; }
+
         IC float TimeEnd() { return m_fTimeEnd; }
     };
 

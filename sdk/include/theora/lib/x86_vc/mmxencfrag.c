@@ -340,9 +340,9 @@ unsigned oc_enc_frag_sad2_thresh_mmxext( const unsigned char* _src,
                   not     available until SSSE3.     Emulating pabsw takes 3       \
                   instructions, so     the straightforward MMXEXT     implementation                                                                \
                   would be (3+3)*8+7=55     instructions (+4 for spilling          \
-                  registers).     Even with pabsw, it     would be (3+1)*8+7=39                                 \
-                  instructions (with no     spills).     This     implementation is                                       \
-                  only 26 (+4 for spilling     registers).*/ \
+                  registers).     Even with pabsw, it     would be (3+1)*8+7=39    \
+                  instructions (with no     spills).     This     implementation   \
+                  is     only 26 (+4 for spilling     registers).*/ \
   __asm  movq [_r7+BUF],mm7 \
   __asm  movq [_r6+BUF],mm6 /*mm7={0x7FFF}x4                                                   \
 mm0=max(abs(mm0),abs(mm1))-0x7FFF*/ \
@@ -353,7 +353,7 @@ mm0=max(abs(mm0),abs(mm1))-0x7FFF*/ \
   __asm  pmaxsw mm0,mm1 \
   __asm  paddsw mm6,mm7 \
   __asm  psubw mm0,mm6 /*mm2=max(abs(mm2),abs(mm3))-0x7FFF                                \
-    mm4=max(abs(mm4),abs(mm5))-0x7FFF*/ \
+mm4=max(abs(mm4),abs(mm5))-0x7FFF*/ \
   __asm  movq mm6,mm2 \
   __asm  movq mm1,mm4 \
   __asm  pmaxsw mm2,mm3 \
@@ -371,7 +371,7 @@ mm0=max(abs(mm0),abs(mm1))-0x7FFF*/ \
   __asm  paddsw mm1,mm7 \
   __asm  psubw mm2,mm6 \
   __asm  psubw mm4,mm1 /*mm7={1}x4 (needed for the horizontal add that follows) \
- mm0+=mm2+mm4+max(abs(mm3),abs(mm5))-0x7FFF*/ \
+mm0+=mm2+mm4+max(abs(mm3),abs(mm5))-0x7FFF*/ \
   __asm  movq mm6,mm3 \
   __asm  pmaxsw mm3,mm5 \
   __asm  paddw mm0,mm2 \
@@ -410,18 +410,18 @@ mm0=max(abs(mm0),abs(mm1))-0x7FFF*/ \
     __asm {                                                           \
         /*First 4x4 transpose:*/ \
   __asm  movq [0x10+_off+BUF],mm5                                       /*mm0 = e3 e2 e1 e0 \
-        mm1 = f3 f2 f1 f0               \
-        mm2 = g3 g2 g1 g0               \
-        mm3 = h3 h2 h1 h0*/ \
+mm1 = f3 f2 f1 f0               \
+mm2 = g3 g2 g1 g0               \
+mm3 = h3 h2 h1 h0*/ \
   __asm  movq mm5,mm2 \
   __asm  punpcklwd mm2,mm3 \
   __asm  punpckhwd mm5,mm3 \
   __asm  movq mm3,mm0 \
   __asm  punpcklwd mm0,mm1 \
   __asm  punpckhwd mm3,mm1                                       /*mm0 = f1 e1 f0 e0 \
-                      mm3 = f3 e3 f2 e2               \
-                      mm2 = h1 g1 h0 g0               \
-                      mm5 = h3 g3 h2 g2*/ \
+       mm3 = f3 e3 f2 e2               \
+       mm2 = h1 g1 h0 g0               \
+       mm5 = h3 g3 h2 g2*/ \
   __asm  movq mm1,mm0 \
   __asm  punpckldq mm0,mm2 \
   __asm  punpckhdq mm1,mm2 \
@@ -429,13 +429,13 @@ mm0=max(abs(mm0),abs(mm1))-0x7FFF*/ \
   __asm  punpckhdq mm3,mm5 \
   __asm  movq [0x40+_off+BUF],mm0 \
   __asm  punpckldq mm2,mm5                                       /*mm0 = h0 g0 f0 e0 \
-                      mm1 = h1 g1 f1 e1               \
-                      mm2 = h2 g2 f2 e2               \
-                      mm3 = h3 g3 f3 e3*/ \
+       mm1 = h1 g1 f1 e1               \
+       mm2 = h2 g2 f2 e2               \
+       mm3 = h3 g3 f3 e3*/ \
   __asm  movq mm5,[0x10+_off+BUF] /*Second 4x4 transpose:*/ /*mm4 = a3 a2 a1 a0 \
-                                mm5 = b3 b2 b1 b0                     \
-                                mm6 = c3 c2 c1 c0                     \
-                                mm7 = d3 d2 d1 d0*/ \
+                      mm5 = b3 b2 b1 b0                               \
+                      mm6 = c3 c2 c1 c0                               \
+                      mm7 = d3 d2 d1 d0*/ \
   __asm  movq mm0,mm6 \
   __asm  punpcklwd mm6,mm7 \
   __asm  movq [0x50+_off+BUF],mm1 \
@@ -444,9 +444,9 @@ mm0=max(abs(mm0),abs(mm1))-0x7FFF*/ \
   __asm  punpcklwd mm4,mm5 \
   __asm  movq [0x60+_off+BUF],mm2 \
   __asm  punpckhwd mm7,mm5                                       /*mm4 = b1 a1 b0 a0 \
-                      mm7 = b3 a3 b2 a2               \
-                      mm6 = d1 c1 d0 c0               \
-                      mm0 = d3 c3 d2 c2*/ \
+       mm7 = b3 a3 b2 a2               \
+       mm6 = d1 c1 d0 c0               \
+       mm0 = d3 c3 d2 c2*/ \
   __asm  movq mm5,mm4 \
   __asm  punpckldq mm4,mm6 \
   __asm  movq [0x70+_off+BUF],mm3 \
@@ -454,9 +454,9 @@ mm0=max(abs(mm0),abs(mm1))-0x7FFF*/ \
   __asm  movq mm6,mm7 \
   __asm  punpckhdq mm7,mm0 \
   __asm  punpckldq mm6,mm0                                       /*mm4 = d0 c0 b0 a0 \
-                      mm5 = d1 c1 b1 a1               \
-                      mm6 = d2 c2 b2 a2               \
-                      mm7 = d3 c3 b3 a3*/             \
+       mm5 = d1 c1 b1 a1               \
+       mm6 = d2 c2 b2 a2               \
+       mm7 = d3 c3 b3 a3*/             \
     }
 
 static unsigned oc_int_frag_satd_thresh_mmxext( const unsigned char* _src,

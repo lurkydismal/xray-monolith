@@ -38,6 +38,7 @@ struct return_reference_to_converter< Direction::cpp_to_lua > {
 template < int N >
 struct return_reference_to_policy : conversion_policy< 0 > {
     static void precall( lua_State*, const index_map& ) {}
+
     static void postcall( lua_State* L, const index_map& indices ) {
         const int result_index = indices[ 0 ];
         const int ref_to_index = indices[ N ];

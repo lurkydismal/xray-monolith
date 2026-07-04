@@ -254,6 +254,7 @@ void throw_exception( const E& e ) {
 }
 
 } // namespace internal
+
 //! @endcond
 
 //! Meets "allocator" requirements of ISO C++ Standard, Section 20.1.5
@@ -270,17 +271,21 @@ public:
     typedef const value_type& const_reference;
     typedef size_t size_type;
     typedef ptrdiff_t difference_type;
+
     template < class U >
     struct rebind {
         typedef scalable_allocator< U > other;
     };
 
     scalable_allocator() throw() {}
+
     scalable_allocator( const scalable_allocator& ) throw() {}
+
     template < typename U >
     scalable_allocator( const scalable_allocator< U >& ) throw() {}
 
     pointer address( reference x ) const { return &x; }
+
     const_pointer address( const_reference x ) const { return &x; }
 
     //! Allocate space for n objects.
@@ -332,6 +337,7 @@ public:
     typedef void* pointer;
     typedef const void* const_pointer;
     typedef void value_type;
+
     template < class U >
     struct rebind {
         typedef scalable_allocator< U > other;

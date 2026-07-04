@@ -443,6 +443,7 @@ extern const int jpeg_natural_order[]; /* zigzag coef order to natural order */
 struct jvirt_sarray_control {
     long dummy;
 };
+
 struct jvirt_barray_control {
     long dummy;
 };

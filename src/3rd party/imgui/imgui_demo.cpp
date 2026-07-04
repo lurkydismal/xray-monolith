@@ -1432,6 +1432,7 @@ static void ShowDemoWindowWidgets( ImGuiDemoWindowData* demo_data ) {
             // only display a name. This technique can also be used with
             // DragInt().
             IMGUI_DEMO_MARKER( "Widgets/Basic/Slider (enum)" );
+
             enum Element {
                 Element_Fire,
                 Element_Earth,
@@ -1439,6 +1440,7 @@ static void ShowDemoWindowWidgets( ImGuiDemoWindowData* demo_data ) {
                 Element_Water,
                 Element_COUNT
             };
+
             static int elem = Element_Fire;
             const char* elems_names[ Element_COUNT ] = { "Fire", "Earth", "Air",
                                                          "Water" };
@@ -2545,6 +2547,7 @@ static void ShowDemoWindowWidgets( ImGuiDemoWindowData* demo_data ) {
                     return 0;
                 }
             };
+
             static char buf1[ 64 ];
             ImGui::InputText( "Completion", buf1, 64,
                               ImGuiInputTextFlags_CallbackCompletion,
@@ -2593,6 +2596,7 @@ static void ShowDemoWindowWidgets( ImGuiDemoWindowData* demo_data ) {
                 "string type to InputText().\n\n"
                 "See misc/cpp/imgui_stdlib.h for an implementation of this for "
                 "std::string." );
+
             struct Funcs {
                 static int MyResizeCallback(
                     ImGuiInputTextCallbackData* data ) {
@@ -2913,10 +2917,12 @@ static void ShowDemoWindowWidgets( ImGuiDemoWindowData* demo_data ) {
         // provide sample rate/count.
         struct Funcs {
             static float Sin( void*, int i ) { return sinf( i * 0.1f ); }
+
             static float Saw( void*, int i ) {
                 return ( i & 1 ) ? 1.0f : -1.0f;
             }
         };
+
         static int func_type = 0, display_count = 70;
         ImGui::SeparatorText( "Functions" );
         ImGui::SetNextItemWidth( ImGui::GetFontSize() * 8 );
@@ -3724,6 +3730,7 @@ static void ShowDemoWindowWidgets( ImGuiDemoWindowData* demo_data ) {
         IMGUI_DEMO_MARKER( "Widgets/Drag and drop/Copy-swap items" );
         if ( ImGui::TreeNode( "Drag and drop to copy/swap items" ) ) {
             enum Mode { Mode_Copy, Mode_Move, Mode_Swap };
+
             static int mode = 0;
             if ( ImGui::RadioButton( "Copy", mode == Mode_Copy ) ) {
                 mode = Mode_Copy;
@@ -4327,6 +4334,7 @@ struct ExampleDualListBox {
         Selections[ src ].Swap( Selections[ dst ] );
         Selections[ src ].Clear();
     }
+
     void MoveSelected( int src, int dst ) {
         for ( int src_n = 0; src_n < Items[ src ].Size; src_n++ ) {
             ImGuiID item_id = Items[ src ][ src_n ];
@@ -4344,6 +4352,7 @@ struct ExampleDualListBox {
         Selections[ src ].Swap( Selections[ dst ] );
         Selections[ src ].Clear();
     }
+
     void ApplySelectionRequests( ImGuiMultiSelectIO* ms_io, int side ) {
         // In this example we store item id in selection (instead of item index)
         Selections[ side ].UserData = Items[ side ].Data;
@@ -4354,16 +4363,19 @@ struct ExampleDualListBox {
             };
         Selections[ side ].ApplyRequests( ms_io );
     }
+
     static int IMGUI_CDECL CompareItemsByValue( const void* lhs,
                                                 const void* rhs ) {
         const int* a = ( const int* )lhs;
         const int* b = ( const int* )rhs;
         return ( *a - *b ) > 0 ? +1 : -1;
     }
+
     void SortItems( int n ) {
         qsort( Items[ n ].Data, ( size_t )Items[ n ].Size,
                sizeof( Items[ n ][ 0 ] ), CompareItemsByValue );
     }
+
     void Show() {
         // ImGui::Checkbox("Sorted", &OptKeepSorted);
         if ( ImGui::BeginTable( "split", 3, ImGuiTableFlags_None ) ) {
@@ -5171,6 +5183,7 @@ static void ShowDemoWindowMultiSelect( ImGuiDemoWindowData* demo_data ) {
         if ( ImGui::TreeNode( "Multi-Select (advanced)" ) ) {
             // Options
             enum WidgetType { WidgetType_Selectable, WidgetType_TreeNode };
+
             static bool use_clipper = true;
             static bool use_deletion = true;
             static bool use_drag_drop = true;
@@ -6974,6 +6987,7 @@ struct MyItem {
         return ( a->ID - b->ID );
     }
 };
+
 const ImGuiTableSortSpecs* MyItem::s_current_sort_specs = NULL;
 } // namespace
 
@@ -6997,6 +7011,7 @@ static void EditTableSizingFlags( ImGuiTableFlags* p_flags ) {
         const char* Name;
         const char* Tooltip;
     };
+
     static const EnumDesc policies[] = {
         { ImGuiTableFlags_None, "Default",
           "Use default sizing policy:\n- ImGuiTableFlags_SizingFixedFit if "
@@ -7231,6 +7246,7 @@ static void ShowDemoWindowTables() {
     if ( ImGui::TreeNode( "Borders, background" ) ) {
         // Expose a few Borders related flags interactively
         enum ContentsType { CT_Text, CT_FillButton };
+
         static ImGuiTableFlags flags =
             ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg;
         static bool display_headers = false;
@@ -7731,6 +7747,7 @@ static void ShowDemoWindowTables() {
             CT_FillButton,
             CT_InputText
         };
+
         static ImGuiTableFlags flags =
             ImGuiTableFlags_ScrollY | ImGuiTableFlags_Borders |
             ImGuiTableFlags_RowBg | ImGuiTableFlags_Resizable;
@@ -8484,6 +8501,7 @@ static void ShowDemoWindowTables() {
                 int Size;
                 int ChildIdx;
                 int ChildCount;
+
                 static void DisplayNode( const MyTreeNode* node,
                                          const MyTreeNode* all_nodes ) {
                     ImGui::TableNextRow();
@@ -8529,6 +8547,7 @@ static void ShowDemoWindowTables() {
                     }
                 }
             };
+
             static const MyTreeNode nodes[] = {
                 { "Root with Long Name", "Folder", -1, 1, 3 },            // 0
                 { "Music", "Folder", -1, 4, 2 },                          // 1
@@ -9077,6 +9096,7 @@ static void ShowDemoWindowTables() {
             CT_Selectable,
             CT_SelectableSpanRow
         };
+
         static int contents_type = CT_SelectableSpanRow;
         const char* contents_type_names[] = {
             "Text",       "Button",     "SmallButton",
@@ -9808,6 +9828,7 @@ static void ShowDemoWindowInputs() {
             struct funcs {
                 static bool IsLegacyNativeDupe( ImGuiKey ) { return false; }
             };
+
             ImGuiKey start_key = ImGuiKey_NamedKey_BEGIN;
             ImGui::Text( "Keys down:" );
             for ( ImGuiKey key = start_key; key < ImGuiKey_NamedKey_END;
@@ -11167,6 +11188,7 @@ struct ExampleAppConsole {
         ScrollToBottom = false;
         AddLog( "Welcome to Dear ImGui!" );
     }
+
     ~ExampleAppConsole() {
         ClearLog();
         for ( int i = 0; i < History.Size; i++ )
@@ -11182,6 +11204,7 @@ struct ExampleAppConsole {
         }
         return d;
     }
+
     static int Strnicmp( const char* s1, const char* s2, int n ) {
         int d = 0;
         while ( n > 0 && ( d = toupper( *s2 ) - toupper( *s1 ) ) == 0 && *s1 ) {
@@ -11191,6 +11214,7 @@ struct ExampleAppConsole {
         }
         return d;
     }
+
     static char* Strdup( const char* s ) {
         IM_ASSERT( s );
         size_t len = strlen( s ) + 1;
@@ -11198,6 +11222,7 @@ struct ExampleAppConsole {
         IM_ASSERT( buf );
         return ( char* )memcpy( buf, ( const void* )s, len );
     }
+
     static void Strtrim( char* s ) {
         char* str_end = s + strlen( s );
         while ( str_end > s && str_end[ -1 ] == ' ' )
@@ -12071,10 +12096,12 @@ static void ShowExampleAppConstrainedResize( bool* p_open ) {
             data->DesiredSize.y =
                 ( float )( int )( data->DesiredSize.x / aspect_ratio );
         }
+
         static void Square( ImGuiSizeCallbackData* data ) {
             data->DesiredSize.x = data->DesiredSize.y =
                 IM_MAX( data->DesiredSize.x, data->DesiredSize.y );
         }
+
         static void Step( ImGuiSizeCallbackData* data ) {
             float step = *( float* )data->UserData;
             data->DesiredSize =
@@ -13053,11 +13080,14 @@ struct MyDocument {
         Dirty = false;
         Color = color;
     }
+
     void DoOpen() { Open = true; }
+
     void DoForceClose() {
         Open = false;
         Dirty = false;
     }
+
     void DoSave() { Dirty = false; }
 };
 
@@ -13175,6 +13205,7 @@ void ShowExampleAppDocuments( bool* p_open ) {
         Target_DockSpaceAndWindow // Create documents as regular windows, and
                                   // create an embedded dockspace
     };
+
     static Target opt_target = Target_Tab;
     static bool opt_reorderable = true;
     static ImGuiTabBarFlags opt_fitting_flags =
@@ -13487,6 +13518,7 @@ struct ExampleAsset {
         return ( ( int )a->ID - ( int )b->ID );
     }
 };
+
 const ImGuiTableSortSpecs* ExampleAsset::s_current_sort_specs = NULL;
 
 struct ExampleAssetsBrowser {
@@ -13526,6 +13558,7 @@ struct ExampleAssetsBrowser {
 
     // Functions
     ExampleAssetsBrowser() { AddItems( 10000 ); }
+
     void AddItems( int count ) {
         if ( Items.Size == 0 )
             NextItemId = 0;
@@ -13537,6 +13570,7 @@ struct ExampleAssetsBrowser {
                                                                      : 2 ) );
         RequestSort = true;
     }
+
     void ClearItems() {
         Items.clear();
         Selection.Clear();
@@ -13951,12 +13985,17 @@ void ShowExampleAppAssetsBrowser( bool* p_open ) {
 #else
 
 void ImGui::ShowAboutWindow( bool* ) {}
+
 void ImGui::ShowDemoWindow( bool* ) {}
+
 void ImGui::ShowUserGuide() {}
+
 void ImGui::ShowStyleEditor( ImGuiStyle* ) {}
+
 bool ImGui::ShowStyleSelector( const char* label ) {
     return false;
 }
+
 void ImGui::ShowFontSelector( const char* label ) {}
 
 #endif

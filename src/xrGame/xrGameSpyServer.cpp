@@ -23,6 +23,7 @@ xrGameSpyServer::~xrGameSpyServer() {
 bool xrGameSpyServer::HasPassword() {
     return !!ServerFlags.test( server_flag_password );
 }
+
 bool xrGameSpyServer::HasProtected() {
     return !!ServerFlags.test( server_flag_protected );
 }

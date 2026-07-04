@@ -20,10 +20,12 @@ const PhaseShifterT< UhjLength512 > PShiftHq{};
 
 template < size_t N >
 struct GetPhaseShifter;
+
 template <>
 struct GetPhaseShifter< UhjLength256 > {
     static auto& Get() noexcept { return PShiftLq; }
 };
+
 template <>
 struct GetPhaseShifter< UhjLength512 > {
     static auto& Get() noexcept { return PShiftHq; }

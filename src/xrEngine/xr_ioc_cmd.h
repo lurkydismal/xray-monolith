@@ -79,7 +79,9 @@ public:
     }
 
     virtual void Execute( LPCSTR args ) = 0;
+
     virtual void Status( TStatus& S ) { S[ 0 ] = 0; }
+
     virtual void Info( TInfo& I ) { xr_strcpy( I, "(no arguments)" ); }
 
     virtual void Save( IWriter* F ) {
@@ -108,6 +110,7 @@ protected:
 public:
     CCC_Mask( LPCSTR N, Flags32* V, u32 M )
         : IConsole_Command( N ), value( V ), mask( M ) {};
+
     const BOOL GetValue() const { return value->test( mask ); }
 
     virtual void Execute( LPCSTR args ) {
@@ -145,6 +148,7 @@ protected:
 public:
     CCC_Mask64( LPCSTR N, Flags64* V, u64 M )
         : IConsole_Command( N ), value( V ), mask( M ) {};
+
     const BOOL GetValue() const { return value->test( mask ); }
 
     virtual void Execute( LPCSTR args ) {
@@ -184,6 +188,7 @@ public:
         : IConsole_Command( N ), value( V ), mask( M ) {
         bEmptyArgsHandled = TRUE;
     };
+
     const BOOL GetValue() const { return value->test( mask ); }
 
     virtual void Execute( LPCSTR args ) {
@@ -295,6 +300,7 @@ protected:
 public:
     CCC_Float( LPCSTR N, float* V, float _min = 0, float _max = 1 )
         : IConsole_Command( N ), value( V ), min( _min ), max( _max ) {};
+
     const float GetValue() const { return *value; };
 
     void GetBounds( float& fmin, float& fmax ) const {
@@ -341,7 +347,9 @@ public:
         min.set( _min );
         max.set( _max );
     };
+
     const Fvector GetValue() const { return *value; };
+
     Fvector* GetValuePtr() const { return value; };
 
     virtual void Execute( LPCSTR args ) {
@@ -399,7 +407,9 @@ public:
         min.set( _min );
         max.set( _max );
     };
+
     const Fvector4 GetValue() const { return *value; };
+
     Fvector4* GetValuePtr() const { return value; };
 
     virtual void Execute( LPCSTR args ) {
@@ -459,7 +469,9 @@ public:
         min.set( _min.x, _min.y, _min.z );
         max.set( _max.x, _max.y, _max.z );
     };
+
     const Ivector3 GetValue() const { return *value; };
+
     Ivector3* GetValuePtr() const { return value; };
 
     virtual void Execute( LPCSTR args ) {
@@ -517,7 +529,9 @@ public:
         min.set( _min );
         max.set( _max );
     };
+
     const Ivector4 GetValue() const { return *value; };
+
     Ivector4* GetValuePtr() const { return value; };
 
     virtual void Execute( LPCSTR args ) {
@@ -660,6 +674,7 @@ public:
 class ENGINE_API CCC_LoadCFG : public IConsole_Command {
 public:
     virtual bool allow( LPCSTR cmd ) { return true; };
+
     CCC_LoadCFG( LPCSTR N );
     virtual void Execute( LPCSTR args );
 };

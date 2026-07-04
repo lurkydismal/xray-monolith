@@ -3,7 +3,9 @@
 class CBlender_accum_direct : public IBlender {
 public:
     virtual LPCSTR getComment() { return "INTERNAL: accumulate direct light"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );
@@ -15,7 +17,9 @@ public:
 class CBlender_accum_direct_msaa : public IBlender {
 public:
     virtual LPCSTR getComment() { return "INTERNAL: accumulate direct light"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );
@@ -35,7 +39,9 @@ public:
 class CBlender_accum_direct_volumetric_msaa : public IBlender {
 public:
     virtual LPCSTR getComment() { return "INTERNAL: accumulate direct light"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );
@@ -54,7 +60,9 @@ public:
 class CBlender_accum_direct_volumetric_sun_msaa : public IBlender {
 public:
     virtual LPCSTR getComment() { return "INTERNAL: accumulate direct light"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );

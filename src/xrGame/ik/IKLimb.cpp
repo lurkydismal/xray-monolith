@@ -487,10 +487,12 @@ IC void get_blend_speed_limits( float& l,
 
 #ifdef DEBUG
 static Fmatrix* dm = 0;
+
 void print_det() {
     if ( dm )
         Msg( "det : %f", DET( *dm ) );
 }
+
 float det_tolerance = 0.2f;
 #endif
 
@@ -764,6 +766,7 @@ void CIKLimb::Blending( SCalculateData& cd ) {
 
 static const s32 unstuck_time_delta_min = 500;
 static const s32 unstuck_time_delta_max = 1200;
+
 IC void new_foot_matrix( const ik_goal_matrix& m, SCalculateData& cd ) {
     cd.state.collide_pos = m;
     cd.state.unstuck_time =

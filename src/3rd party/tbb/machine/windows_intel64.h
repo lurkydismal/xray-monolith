@@ -57,9 +57,11 @@ inline long __TBB_machine_cmpswp4( volatile void* ptr,
                                    __int32 comparand ) {
     return _InterlockedCompareExchange( ( long* )ptr, value, comparand );
 }
+
 inline long __TBB_machine_fetchadd4( volatile void* ptr, __int32 addend ) {
     return _InterlockedExchangeAdd( ( long* )ptr, addend );
 }
+
 inline long __TBB_machine_fetchstore4( volatile void* ptr, __int32 value ) {
     return _InterlockedExchange( ( long* )ptr, value );
 }
@@ -69,9 +71,11 @@ inline __int64 __TBB_machine_cmpswp8( volatile void* ptr,
                                       __int64 comparand ) {
     return _InterlockedCompareExchange64( ( __int64* )ptr, value, comparand );
 }
+
 inline __int64 __TBB_machine_fetchadd8( volatile void* ptr, __int64 addend ) {
     return _InterlockedExchangeAdd64( ( __int64* )ptr, addend );
 }
+
 inline __int64 __TBB_machine_fetchstore8( volatile void* ptr, __int64 value ) {
     return _InterlockedExchange64( ( __int64* )ptr, value );
 }

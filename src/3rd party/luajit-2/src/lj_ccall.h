@@ -63,6 +63,7 @@ typedef intptr_t GPRArg;
 #define CCALL_SPS_FREE 0
 
 typedef intptr_t GPRArg;
+
 typedef union FPRArg {
     double d;
     float f[ 2 ];
@@ -100,8 +101,10 @@ typedef intptr_t GPRArg;
 #define CCALL_SPS_FREE 1
 
 typedef intptr_t GPRArg;
+
 typedef union FPRArg {
     double d;
+
     struct {
         LJ_ENDIAN_LOHI( float f;, float g; )
     };

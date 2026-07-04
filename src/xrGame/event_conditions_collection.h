@@ -46,6 +46,7 @@ struct event_argument_type {
     enum_argument_type m_argument_type_tag;
     union_argument_value m_argument_value;
 }; // struct event_argument_type
+
 typedef xr_vector< event_argument_type > arguments_t;
 
 struct event_condition_t {

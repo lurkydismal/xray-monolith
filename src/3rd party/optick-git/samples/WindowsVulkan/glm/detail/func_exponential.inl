@@ -67,6 +67,7 @@ struct compute_inversesqrt< L, float, lowp, Aligned > {
 
 // pow
 using std::pow;
+
 template < length_t L,
            typename T,
            precision P,
@@ -79,6 +80,7 @@ GLM_FUNC_QUALIFIER vecType< L, T, P > pow(
 
 // exp
 using std::exp;
+
 template < length_t L,
            typename T,
            precision P,
@@ -89,6 +91,7 @@ GLM_FUNC_QUALIFIER vecType< L, T, P > exp( vecType< L, T, P > const& x ) {
 
 // log
 using std::log;
+
 template < length_t L,
            typename T,
            precision P,
@@ -133,6 +136,7 @@ GLM_FUNC_QUALIFIER vecType< L, T, P > log2( vecType< L, T, P > const& x ) {
 
 // sqrt
 using std::sqrt;
+
 template < length_t L,
            typename T,
            precision P,

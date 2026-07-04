@@ -32,6 +32,7 @@ namespace internal {
     __TBB_CPP11_DECLTYPE_PRESENT
 using std::begin;
 using std::end;
+
 template < typename Container >
 auto first( Container& c ) -> decltype( begin( c ) ) {
     return begin( c );

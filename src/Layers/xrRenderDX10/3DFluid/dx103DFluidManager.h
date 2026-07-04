@@ -35,6 +35,7 @@ public:
     //		Manager setup
     void Initialize( int width, int height, int depth );
     void Destroy();
+
     void SetScreenSize( int width, int height ) {
         if ( m_bInited )
             m_pRenderer->SetScreenSize( width, height );
@@ -46,13 +47,16 @@ public:
 
     //		Interface for blenders
     int GetTextureWidth() const { return m_iTextureWidth; }
+
     int GetTextureHeight() const { return m_iTextureHeight; }
+
     int GetTextureDepth() const { return m_iTextureDepth; }
 
     //	float	GetDecay() { return m_fDecay; }
     float GetImpulseSize() const { return m_fImpulseSize; }
 
     static LPCSTR* GetEngineTextureNames() { return m_pEngineTextureNames; }
+
     static LPCSTR* GetShaderTextureNames() { return m_pShaderTextureNames; }
 
     //	Allow real-time config reload

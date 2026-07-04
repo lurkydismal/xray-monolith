@@ -15,6 +15,7 @@ public:
     virtual void initialize();
     virtual void finalize();
     virtual void critical_finalize();
+
     virtual void remove_links( CObject* object ) {
         inherited::remove_links( object );
     }

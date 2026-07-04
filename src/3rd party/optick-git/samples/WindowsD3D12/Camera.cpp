@@ -55,6 +55,7 @@ void Camera::GetOrthoProjMatrices( XMFLOAT4X4* view,
     XMStoreFloat4x4( proj, XMMatrixTranspose( XMMatrixOrthographicRH(
                                width, height, 0.01f, 125.0f ) ) );
 }
+
 void Camera::RotateYaw( float deg ) {
     XMMATRIX rotation = XMMatrixRotationAxis( mUp, deg );
 

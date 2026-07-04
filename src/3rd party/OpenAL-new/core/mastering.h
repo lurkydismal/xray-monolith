@@ -61,6 +61,7 @@ struct Compressor {
 
     ~Compressor();
     void process( const uint SamplesToDo, FloatBufferLine* OutBuffer );
+
     int getLookAhead() const noexcept {
         return static_cast< int >( mLookAhead );
     }
@@ -110,6 +111,7 @@ struct Compressor {
                                                  const float AttackTime,
                                                  const float ReleaseTime );
 };
+
 using CompressorPtr = std::unique_ptr< Compressor >;
 
 #endif /* CORE_MASTERING_H */

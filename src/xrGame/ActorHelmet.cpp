@@ -11,6 +11,7 @@
 #include "Inventory.h"
 #include "Torch.h"
 #include "stdafx.h"
+
 // #include "CustomOutfit.h"
 
 CHelmet::CHelmet() {

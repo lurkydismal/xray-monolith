@@ -28,6 +28,7 @@ float GetHitTypeProtection_CurrentHelmet( CHelmet* helm,
 }
 
 #pragma optimize( "s", on )
+
 void CCustomOutfit::script_register( lua_State* L ) {
     module(
         L )[ class_< CCustomOutfit, CGameObject >( "CCustomOutfit" )

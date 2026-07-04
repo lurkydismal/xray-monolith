@@ -101,10 +101,12 @@ public:
                     const Fvector& Position,
                     float power,
                     TTime time );
+
     IC bool IsRememberSound() { return ( !Sounds.empty() ); }
 
     // Lain: added
     int GetNumSounds() { return Sounds.size(); }
+
     void GetFirstSound( SoundElem& s, bool& bDangerous );
 
     void GetSound( SoundElem& s,
@@ -117,6 +119,7 @@ public:
     bool is_loud_sound( float val );
 
     void clear() { Sounds.clear(); }
+
     void remove_links( CObject* O );
 
     // help sounds

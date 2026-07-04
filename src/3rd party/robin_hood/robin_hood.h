@@ -78,11 +78,13 @@
 #ifdef ROBIN_HOOD_COUNT_ENABLED
 #include <iostream>
 #define ROBIN_HOOD_COUNT( x ) ++counts().x;
+
 namespace robin_hood {
 struct Counts {
     uint64_t shiftUp{};
     uint64_t shiftDown{};
 };
+
 inline std::ostream& operator<<( std::ostream& os, Counts const& c ) {
     return os << c.shiftUp << " shiftUp" << std::endl
               << c.shiftDown << " shiftDown" << std::endl;
@@ -258,8 +260,10 @@ class integer_sequence {
 public:
     using value_type = T;
     static_assert( std::is_integral< value_type >::value, "not integral type" );
+
     static constexpr std::size_t size() noexcept { return sizeof...( Ints ); }
 };
+
 template < std::size_t... Inds >
 using index_sequence = integer_sequence< std::size_t, Inds... >;
 
@@ -589,6 +593,7 @@ struct NodeAllocator< T, MinSize, MaxSize, false >
 namespace swappable {
 #if ROBIN_HOOD( CXX ) < ROBIN_HOOD( CXX17 )
 using std::swap;
+
 template < typename T >
 struct nothrow {
     static const bool value =
@@ -722,11 +727,13 @@ inline constexpr bool operator==( pair< A, B > const& x,
                                   pair< A, B > const& y ) {
     return ( x.first == y.first ) && ( x.second == y.second );
 }
+
 template < typename A, typename B >
 inline constexpr bool operator!=( pair< A, B > const& x,
                                   pair< A, B > const& y ) {
     return !( x == y );
 }
+
 template < typename A, typename B >
 inline constexpr bool
 operator<( pair< A, B > const& x, pair< A, B > const& y ) noexcept(
@@ -735,16 +742,19 @@ operator<( pair< A, B > const& x, pair< A, B > const& y ) noexcept(
     return x.first < y.first ||
            ( !( y.first < x.first ) && x.second < y.second );
 }
+
 template < typename A, typename B >
 inline constexpr bool operator>( pair< A, B > const& x,
                                  pair< A, B > const& y ) {
     return y < x;
 }
+
 template < typename A, typename B >
 inline constexpr bool operator<=( pair< A, B > const& x,
                                   pair< A, B > const& y ) {
     return !( x > y );
 }
+
 template < typename A, typename B >
 inline constexpr bool operator>=( pair< A, B > const& x,
                                   pair< A, B > const& y ) {
@@ -935,6 +945,7 @@ struct has_is_transparent<
 template < typename T >
 struct WrapHash : public T {
     WrapHash() = default;
+
     explicit WrapHash( T const& o ) noexcept(
         noexcept( T( std::declval< T const& >() ) ) )
         : T( o ) {}
@@ -943,6 +954,7 @@ struct WrapHash : public T {
 template < typename T >
 struct WrapKeyEqual : public T {
     WrapKeyEqual() = default;
+
     explicit WrapKeyEqual( T const& o ) noexcept(
         noexcept( T( std::declval< T const& >() ) ) )
         : T( o ) {}
@@ -1075,9 +1087,11 @@ private:
 
         // doesn't do anything
         void destroy( M& ROBIN_HOOD_UNUSED( map ) /*unused*/ ) noexcept {}
+
         void destroyDoNotDeallocate() noexcept {}
 
         value_type const* operator->() const noexcept { return &mData; }
+
         value_type* operator->() noexcept { return &mData; }
 
         const value_type& operator*() const noexcept { return mData; }
@@ -1090,6 +1104,7 @@ private:
             getFirst() noexcept {
             return mData.first;
         }
+
         template < typename VT = value_type >
         ROBIN_HOOD( NODISCARD )
         typename std::enable_if< is_set, VT& >::type getFirst() noexcept {
@@ -1102,6 +1117,7 @@ private:
             getFirst() const noexcept {
             return mData.first;
         }
+
         template < typename VT = value_type >
         ROBIN_HOOD( NODISCARD )
         typename std::enable_if< is_set, VT const& >::type
@@ -1168,6 +1184,7 @@ private:
             getFirst() noexcept {
             return mData->first;
         }
+
         template < typename VT = value_type >
         ROBIN_HOOD( NODISCARD )
         typename std::enable_if< is_set, VT& >::type getFirst() noexcept {
@@ -1180,6 +1197,7 @@ private:
             getFirst() const noexcept {
             return mData->first;
         }
+
         template < typename VT = value_type >
         ROBIN_HOOD( NODISCARD )
         typename std::enable_if< is_set, VT const& >::type
@@ -1214,6 +1232,7 @@ private:
     // helpers for insertKeyPrepareEmptySpot: extract first entry (only const
     // required)
     ROBIN_HOOD( NODISCARD )
+
     key_type const& getFirstConst( Node const& n ) const noexcept {
         return n.getFirst();
     }
@@ -1222,6 +1241,7 @@ private:
     // route k through. No need to disable this because it's just not used if
     // not applicable.
     ROBIN_HOOD( NODISCARD )
+
     key_type const& getFirstConst( key_type const& k ) const noexcept {
         return k;
     }
@@ -2178,10 +2198,12 @@ public:
         }
         return iterator( mKeyVals, mInfo, fast_forward_tag{} );
     }
+
     const_iterator begin() const { // NOLINT(modernize-use-nodiscard)
         ROBIN_HOOD_TRACE( this )
         return cbegin();
     }
+
     const_iterator cbegin() const { // NOLINT(modernize-use-nodiscard)
         ROBIN_HOOD_TRACE( this )
         if ( empty() ) {
@@ -2197,10 +2219,12 @@ public:
         return iterator{
             reinterpret_cast_no_cast_align_warning< Node* >( mInfo ), nullptr };
     }
+
     const_iterator end() const { // NOLINT(modernize-use-nodiscard)
         ROBIN_HOOD_TRACE( this )
         return cend();
     }
+
     const_iterator cend() const { // NOLINT(modernize-use-nodiscard)
         ROBIN_HOOD_TRACE( this )
         return const_iterator{
@@ -2325,6 +2349,7 @@ public:
     }
 
     ROBIN_HOOD( NODISCARD )
+
     size_t calcMaxNumElementsAllowed( size_t maxElements ) const noexcept {
         if ( ROBIN_HOOD_LIKELY( maxElements <=
                                 ( std::numeric_limits< size_t >::max )() /
@@ -2338,6 +2363,7 @@ public:
     }
 
     ROBIN_HOOD( NODISCARD )
+
     size_t calcNumBytesInfo( size_t numElements ) const noexcept {
         // we add a uint64_t, which houses the sentinel (first byte) and padding
         // so we can load 64bit types.
@@ -2345,6 +2371,7 @@ public:
     }
 
     ROBIN_HOOD( NODISCARD )
+
     size_t calcNumElementsWithBuffer( size_t numElements ) const noexcept {
         auto maxNumElementsAllowed = calcMaxNumElementsAllowed( numElements );
         return numElements + ( std::min )( maxNumElementsAllowed,
@@ -2353,6 +2380,7 @@ public:
 
     // calculation only allowed for 2^n values
     ROBIN_HOOD( NODISCARD )
+
     size_t calcNumBytesTotal( size_t numElements ) const {
 #if ROBIN_HOOD( BITNESS ) == 64
         return numElements * sizeof( Node ) + calcNumBytesInfo( numElements );

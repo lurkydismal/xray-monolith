@@ -17,11 +17,13 @@ void Distortion_setParami( EffectProps*, ALenum param, int ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid distortion integer property 0x%04x", param };
 }
+
 void Distortion_setParamiv( EffectProps*, ALenum param, const int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid distortion integer-vector property 0x%04x",
                             param };
 }
+
 void Distortion_setParamf( EffectProps* props, ALenum param, float val ) {
     switch ( param ) {
         case AL_DISTORTION_EDGE:
@@ -71,6 +73,7 @@ void Distortion_setParamf( EffectProps* props, ALenum param, float val ) {
                                     param };
     }
 }
+
 void Distortion_setParamfv( EffectProps* props,
                             ALenum param,
                             const float* vals ) {
@@ -81,11 +84,13 @@ void Distortion_getParami( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid distortion integer property 0x%04x", param };
 }
+
 void Distortion_getParamiv( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid distortion integer-vector property 0x%04x",
                             param };
 }
+
 void Distortion_getParamf( const EffectProps* props,
                            ALenum param,
                            float* val ) {
@@ -116,6 +121,7 @@ void Distortion_getParamf( const EffectProps* props,
                                     param };
     }
 }
+
 void Distortion_getParamfv( const EffectProps* props,
                             ALenum param,
                             float* vals ) {

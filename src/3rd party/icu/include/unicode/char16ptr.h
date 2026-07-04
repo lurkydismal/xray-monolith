@@ -85,6 +85,7 @@ public:
      * @stable ICU 59
      */
     inline char16_t* get() const;
+
     /**
      * char16_t pointer access via type conversion (e.g., static_cast).
      * @return the wrapped pointer
@@ -123,6 +124,7 @@ Char16Ptr::Char16Ptr( uint16_t* p ) : p_( cast( p ) ) {}
 Char16Ptr::Char16Ptr( wchar_t* p ) : p_( cast( p ) ) {}
 #endif
 Char16Ptr::Char16Ptr( std::nullptr_t p ) : p_( p ) {}
+
 Char16Ptr::~Char16Ptr() {
     U_ALIASING_BARRIER( p_ );
 }
@@ -149,6 +151,7 @@ Char16Ptr::Char16Ptr( wchar_t* p ) {
 Char16Ptr::Char16Ptr( std::nullptr_t p ) {
     u_.cp = p;
 }
+
 Char16Ptr::~Char16Ptr() {}
 
 char16_t* Char16Ptr::get() const {
@@ -207,6 +210,7 @@ public:
      * @stable ICU 59
      */
     inline const char16_t* get() const;
+
     /**
      * char16_t pointer access via type conversion (e.g., static_cast).
      * @return the wrapped pointer
@@ -245,6 +249,7 @@ ConstChar16Ptr::ConstChar16Ptr( const uint16_t* p ) : p_( cast( p ) ) {}
 ConstChar16Ptr::ConstChar16Ptr( const wchar_t* p ) : p_( cast( p ) ) {}
 #endif
 ConstChar16Ptr::ConstChar16Ptr( const std::nullptr_t p ) : p_( p ) {}
+
 ConstChar16Ptr::~ConstChar16Ptr() {
     U_ALIASING_BARRIER( p_ );
 }
@@ -271,6 +276,7 @@ ConstChar16Ptr::ConstChar16Ptr( const wchar_t* p ) {
 ConstChar16Ptr::ConstChar16Ptr( const std::nullptr_t p ) {
     u_.cp = p;
 }
+
 ConstChar16Ptr::~ConstChar16Ptr() {}
 
 const char16_t* ConstChar16Ptr::get() const {

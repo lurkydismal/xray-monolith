@@ -108,12 +108,18 @@ public:
     udword mLimit;        //!< Limit number of primitives / node
     udword mRules;        //!< Building/Splitting rules (a combination of flags)
     udword mNbPrimitives; //!< Total number of primitives.
+
     // Stats
     inline_ void SetCount( udword nb ) { mCount = nb; }
+
     inline_ void IncreaseCount( udword nb ) { mCount += nb; }
+
     inline_ udword GetCount() const { return mCount; }
+
     inline_ void SetNbInvalidSplits( udword nb ) { mNbInvalidSplits = nb; }
+
     inline_ void IncreaseNbInvalidSplits() { mNbInvalidSplits++; }
+
     inline_ udword GetNbInvalidSplits() const { return mNbInvalidSplits; }
 
 private:
@@ -121,7 +127,9 @@ private:
     udword mNbInvalidSplits; //!< Stats: number of invalid splits
 public:
     poolSS< AABBTreeNode, 16 * 1024 > mPOOL;
+
     inline_ AABBTreeNode* node_alloc() { return mPOOL.create(); }
+
     inline_ void node_destroy( AABBTreeNode*& n ) { return mPOOL.destroy( n ); }
 };
 
@@ -142,6 +150,7 @@ public:
 };
 
 #pragma warning( disable : 4512 )
+
 class OPCODE_API AABBTreeOfTrianglesBuilder : public AABBTreeBuilder {
 public:
     //! Constructor
@@ -167,6 +176,7 @@ public:
     const Point* mVerts; //!< Shortcut to an app-controlled list of vertices.
     const udword mNbTriangles; //!< Total number of triangles.
 };
+
 #pragma warning( default : 4512 )
 
 #endif // __OPC_TREEBUILDERS_H__

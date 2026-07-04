@@ -7,10 +7,12 @@ CxMemFile::CxMemFile( BYTE* pBuffer, DWORD size ) {
     m_Size = m_Edge = size;
     m_bFreeOnClose = ( bool )( pBuffer == 0 );
 }
+
 //////////////////////////////////////////////////////////
 CxMemFile::~CxMemFile() {
     Close();
 }
+
 //////////////////////////////////////////////////////////
 bool CxMemFile::Close() {
     if ( ( m_pBuffer ) && ( m_bFreeOnClose ) ) {
@@ -20,6 +22,7 @@ bool CxMemFile::Close() {
     }
     return true;
 }
+
 //////////////////////////////////////////////////////////
 bool CxMemFile::Open() {
     if ( m_pBuffer )
@@ -31,6 +34,7 @@ bool CxMemFile::Open() {
 
     return ( m_pBuffer != 0 );
 }
+
 //////////////////////////////////////////////////////////
 BYTE* CxMemFile::GetBuffer( bool bDetachBuffer ) {
     // can only detach, avoid inadvertantly attaching to
@@ -39,6 +43,7 @@ BYTE* CxMemFile::GetBuffer( bool bDetachBuffer ) {
         m_bFreeOnClose = false;
     return m_pBuffer;
 }
+
 //////////////////////////////////////////////////////////
 size_t CxMemFile::Read( void* buffer, size_t size, size_t count ) {
     if ( buffer == NULL )
@@ -64,6 +69,7 @@ size_t CxMemFile::Read( void* buffer, size_t size, size_t count ) {
 
     return ( size_t )( nRead / size );
 }
+
 //////////////////////////////////////////////////////////
 size_t CxMemFile::Write( const void* buffer, size_t size, size_t count ) {
     if ( m_pBuffer == NULL )
@@ -90,6 +96,7 @@ size_t CxMemFile::Write( const void* buffer, size_t size, size_t count ) {
 
     return count;
 }
+
 //////////////////////////////////////////////////////////
 bool CxMemFile::Seek( long offset, int origin ) {
     if ( m_pBuffer == NULL )
@@ -111,36 +118,42 @@ bool CxMemFile::Seek( long offset, int origin ) {
     m_Position = lNewPos;
     return true;
 }
+
 //////////////////////////////////////////////////////////
 long CxMemFile::Tell() {
     if ( m_pBuffer == NULL )
         return -1;
     return m_Position;
 }
+
 //////////////////////////////////////////////////////////
 long CxMemFile::Size() {
     if ( m_pBuffer == NULL )
         return -1;
     return m_Size;
 }
+
 //////////////////////////////////////////////////////////
 bool CxMemFile::Flush() {
     if ( m_pBuffer == NULL )
         return false;
     return true;
 }
+
 //////////////////////////////////////////////////////////
 bool CxMemFile::Eof() {
     if ( m_pBuffer == NULL )
         return true;
     return ( m_Position >= ( long )m_Size );
 }
+
 //////////////////////////////////////////////////////////
 long CxMemFile::Error() {
     if ( m_pBuffer == NULL )
         return -1;
     return ( m_Position > ( long )m_Size );
 }
+
 //////////////////////////////////////////////////////////
 bool CxMemFile::PutC( unsigned char c ) {
     if ( m_pBuffer == NULL )
@@ -159,12 +172,14 @@ bool CxMemFile::PutC( unsigned char c ) {
 
     return true;
 }
+
 //////////////////////////////////////////////////////////
 long CxMemFile::GetC() {
     if ( Eof() )
         return EOF;
     return *( BYTE* )( ( BYTE* )m_pBuffer + m_Position++ );
 }
+
 //////////////////////////////////////////////////////////
 char* CxMemFile::GetS( char* string, int n ) {
     n--;
@@ -180,10 +195,12 @@ char* CxMemFile::GetS( char* string, int n ) {
     string[ i ] = 0;
     return string;
 }
+
 //////////////////////////////////////////////////////////
 long CxMemFile::Scanf( const char* format, void* output ) {
     return 0;
 }
+
 //////////////////////////////////////////////////////////
 bool CxMemFile::Alloc( DWORD dwNewLen ) {
     if ( dwNewLen > ( DWORD )m_Edge ) {
@@ -205,8 +222,10 @@ bool CxMemFile::Alloc( DWORD dwNewLen ) {
     }
     return ( m_pBuffer != 0 );
 }
+
 //////////////////////////////////////////////////////////
 void CxMemFile::Free() {
     Close();
 }
+
 //////////////////////////////////////////////////////////

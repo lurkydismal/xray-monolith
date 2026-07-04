@@ -812,6 +812,7 @@ public:
             }
         }
     }
+
     template <
         typename V,
         std::enable_if_t< std::is_same_v< V, E > &&
@@ -1106,11 +1107,13 @@ explicit bitset( V starter ) -> bitset< V >;
 template < typename E, typename Cmp = std::less< E > >
 class set {
     using index_type = detail::indexing< E, Cmp >;
+
     struct Getter {
         constexpr const E& operator()( const set*, const E* p ) const noexcept {
             return *p;
         }
     };
+
     struct Predicate {
         constexpr bool operator()( const set* h, const E* e ) const noexcept {
             return h->a[ *e ];
@@ -1150,6 +1153,7 @@ public:
             insert( e );
         }
     }
+
     template <
         typename V,
         std::enable_if_t< std::is_same_v< V, E > &&
@@ -1170,6 +1174,7 @@ public:
 
     constexpr set& operator=( const set& ) noexcept = default;
     constexpr set& operator=( set&& ) noexcept = default;
+
     constexpr set& operator=( std::initializer_list< E > ilist ) {
         for ( auto e : ilist ) {
             insert( e );

@@ -156,6 +156,7 @@ static LJ_AINLINE char* exitstub_addr_( char** group, uint32_t exitno ) {
     return ( char* )group[ exitno / EXITSTUBS_PER_GROUP ] +
            EXITSTUB_SPACING * ( exitno % EXITSTUBS_PER_GROUP );
 }
+
 /* Avoid dependence on lj_jit.h if only including lj_target.h. */
 #define exitstub_addr( J, exitno )                                  \
     ( ( MCode* )exitstub_addr_( ( char** )( ( J )->exitstubgroup ), \

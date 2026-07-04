@@ -29,6 +29,7 @@ enum {
     // artefact
     HELMET_SLOT,
     BACKPACK_SLOT,
+
 // Alundaio: More slots for custom uses
 #ifdef MORE_INVENTORY_SLOTS
     CUSTOM_SLOT_1,

@@ -69,6 +69,7 @@ private: // END INTERFACE
     void prepare( int current_indent, int indent, Columns& columns );
 
     static void deleter( text_tree* p ) { xr_delete( p ); }
+
     int group_id;
     bool shown;
     Strings strings;
@@ -108,18 +109,23 @@ IC xr_string __cdecl make_xrstr( LPCSTR format, ... ) {
 IC xr_string __cdecl make_xrstr( bool b ) {
     return b ? "+" : "-";
 }
+
 IC xr_string __cdecl make_xrstr( float f ) {
     return make_xrstr( "%f", f );
 }
+
 IC xr_string __cdecl make_xrstr( s32 d ) {
     return make_xrstr( "%i", d );
 }
+
 IC xr_string __cdecl make_xrstr( u32 d ) {
     return make_xrstr( "%u", d );
 }
+
 IC xr_string __cdecl make_xrstr( Fvector3 v ) {
     return make_xrstr( "[%f][%f][%f]", v.x, v.y, v.z );
 }
+
 IC xr_string __cdecl make_xrstr( const xr_string& s ) {
     return s;
 }

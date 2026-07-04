@@ -30,6 +30,7 @@ public:
         else
             return __ref_count;
     }
+
     IC u32 intrusive_ref_add() {
         if constexpr ( Counter == CounterPolicy::Atomic ) {
             u32 t = __ref_count.fetch_add( 1, std::memory_order_relaxed );
@@ -37,6 +38,7 @@ public:
         } else
             return ++__ref_count;
     }
+
     IC u32 intrusive_ref_sub() {
         if constexpr ( Counter == CounterPolicy::Atomic ) {
             u32 t = __ref_count.fetch_sub( 1, std::memory_order_acq_rel );
@@ -69,6 +71,7 @@ struct intrusive_base_marker {};
 struct destructor_virtual {
     virtual ~destructor_virtual() = default;
 };
+
 struct destructor_non_virtual {
     ~destructor_non_virtual() = default;
 };

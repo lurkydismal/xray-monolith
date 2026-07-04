@@ -19,12 +19,14 @@ void Null_setParami( EffectProps* /*props*/, ALenum param, int /*val*/ ) {
                 param };
     }
 }
+
 void Null_setParamiv( EffectProps* props, ALenum param, const int* vals ) {
     switch ( param ) {
         default:
             Null_setParami( props, param, vals[ 0 ] );
     }
 }
+
 void Null_setParamf( EffectProps* /*props*/, ALenum param, float /*val*/ ) {
     switch ( param ) {
         default:
@@ -33,6 +35,7 @@ void Null_setParamf( EffectProps* /*props*/, ALenum param, float /*val*/ ) {
                                     param };
     }
 }
+
 void Null_setParamfv( EffectProps* props, ALenum param, const float* vals ) {
     switch ( param ) {
         default:
@@ -50,12 +53,14 @@ void Null_getParami( const EffectProps* /*props*/,
                 param };
     }
 }
+
 void Null_getParamiv( const EffectProps* props, ALenum param, int* vals ) {
     switch ( param ) {
         default:
             Null_getParami( props, param, vals );
     }
 }
+
 void Null_getParamf( const EffectProps* /*props*/,
                      ALenum param,
                      float* /*val*/ ) {
@@ -66,6 +71,7 @@ void Null_getParamf( const EffectProps* /*props*/,
                                     param };
     }
 }
+
 void Null_getParamfv( const EffectProps* props, ALenum param, float* vals ) {
     switch ( param ) {
         default:

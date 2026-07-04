@@ -92,6 +92,7 @@ public:
     CSharedResource() { loaded = false; }
 
     bool IsLoaded() { return loaded; }
+
     void SetLoad( bool l = true ) { loaded = l; }
 };
 
@@ -124,6 +125,7 @@ public:
     virtual void load_shared( LPCSTR section ) {}
 
     SHARED_TYPE* get_sd() { return _sd; }
+
     const SHARED_TYPE* get_sd() const { return _sd; }
 
     // управление загрузкой данных при компонентном подходе (загрузка данных

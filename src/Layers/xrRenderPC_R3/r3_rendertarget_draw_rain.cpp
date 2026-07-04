@@ -53,7 +53,7 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
         //= L_dir; 		dir.normalize().mul	(-
         //_sqrt(intensity+EPS)); 		RCache.set_Element
         //(s_accum_mask->E[SE_MASK_DIRECT]);		// masker
-        //RCache.set_c
+        // RCache.set_c
         //("Ldynamic_dir",		dir.x,dir.y,dir.z,0		);
 
         // if (stencil>=1 && aref_pass)	stencil = light_id
@@ -80,8 +80,8 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
     // Perform lighting
     {
         //		phase_accumulator ()	;
-        //RCache.set_CullMode (CULL_NONE);
-        //RCache.set_ColorWriteEnable			()
+        // RCache.set_CullMode (CULL_NONE);
+        // RCache.set_ColorWriteEnable			()
         //;
 
         // texture adjustment matrix
@@ -195,8 +195,8 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
             //  (1.f,1.f,1.f)				;
             //  			m_clouds_shadow.mulA_44 (m_xform)
             //  ; 			m_xform.translate
-            //  (localnormal.mul(w_shift))	; 			m_clouds_shadow.mulA_44
-            //  (m_xform)
+            //  (localnormal.mul(w_shift))	;
+            //  m_clouds_shadow.mulA_44 (m_xform)
             //  ;
         }
 
@@ -272,7 +272,7 @@ void CRenderTarget::draw_rain( light& RainSetup ) {
         // setup stencil
         //		RCache.set_Stencil
         //(TRUE,D3DCMP_LESSEQUAL,dwLightMarkerID,0xff,0x00);
-        //RCache.Render (D3DPT_TRIANGLELIST,Offset,0,4,0,2);
+        // RCache.Render (D3DPT_TRIANGLELIST,Offset,0,4,0,2);
 
         // Fetch4 : disable
         //		if (RImplementation.o.HW_smap_FETCH4)	{

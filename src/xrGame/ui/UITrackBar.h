@@ -25,14 +25,22 @@ public:
     // CUIWindow
     void InitTrackBar( Fvector2 pos, Fvector2 size );
     virtual void Enable( bool status );
+
     void SetInvert( bool v ) { m_b_invert = v; }
+
     bool GetInvert() const { return m_b_invert; };
+
     void SetStep( float step );
+
     void SetType( bool b_float ) { m_b_is_float = b_float; };
+
     bool GetCheck();
     void SetCheck( bool b );
+
     int GetIValue() { return m_i_val; }
+
     float GetFValue() { return m_f_val; }
+
     void SetIValue( int i );
     void SetFValue( float f );
     void SetOptIBounds( int imin, int imax );

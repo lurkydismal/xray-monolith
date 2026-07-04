@@ -27,6 +27,7 @@ CxImageJPG::CxExifInfo::CxExifInfo( EXIFINFO* info ) {
     SectionsRead = 0;
     memset( &Sections, 0, MAX_SECTIONS * sizeof( Section_t ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 CxImageJPG::CxExifInfo::~CxExifInfo() {
     for ( int i = 0; i < MAX_SECTIONS; i++ )
@@ -35,6 +36,7 @@ CxImageJPG::CxExifInfo::~CxExifInfo() {
     if ( freeinfo )
         delete m_exifinfo;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImageJPG::CxExifInfo::DecodeExif( CxFile* hFile, int nReadMode ) {
     int a;
@@ -209,6 +211,7 @@ bool CxImageJPG::CxExifInfo::DecodeExif( CxFile* hFile, int nReadMode ) {
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /*--------------------------------------------------------------------------
    Process a EXIF marker
@@ -282,6 +285,7 @@ bool CxImageJPG::CxExifInfo::process_EXIF( unsigned char* CharBuf,
 
     return true;
 }
+
 //--------------------------------------------------------------------------
 // Get 16 bits motorola order (always) for jpeg header stuff.
 //--------------------------------------------------------------------------
@@ -289,6 +293,7 @@ int CxImageJPG::CxExifInfo::Get16m( void* Short ) {
     return ( ( ( unsigned char* )Short )[ 0 ] << 8 ) |
            ( ( unsigned char* )Short )[ 1 ];
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /*--------------------------------------------------------------------------
    Convert a 16 bit unsigned value from file's native byte order
@@ -302,6 +307,7 @@ int CxImageJPG::CxExifInfo::Get16u( void* Short ) {
                ( ( unsigned char* )Short )[ 0 ];
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /*--------------------------------------------------------------------------
    Convert a 32 bit signed value from file's native byte order
@@ -319,6 +325,7 @@ long CxImageJPG::CxExifInfo::Get32s( void* Long ) {
                ( ( ( unsigned char* )Long )[ 0 ] << 0 );
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /*--------------------------------------------------------------------------
    Convert a 32 bit unsigned value from file's native byte order
@@ -326,6 +333,7 @@ long CxImageJPG::CxExifInfo::Get32s( void* Long ) {
 unsigned long CxImageJPG::CxExifInfo::Get32u( void* Long ) {
     return ( unsigned long )Get32s( Long ) & 0xffffffff;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 
 /* Describes format descriptor */
@@ -763,6 +771,7 @@ bool CxImageJPG::CxExifInfo::ProcessExifDir(
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /*--------------------------------------------------------------------------
    Evaluate number, be it int, rational, or float from directory.
@@ -817,6 +826,7 @@ double CxImageJPG::CxExifInfo::ConvertAnyFormat( void* ValuePtr, int Format ) {
     }
     return Value;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImageJPG::CxExifInfo::process_COM( const BYTE* Data, int length ) {
     int ch;
@@ -848,6 +858,7 @@ void CxImageJPG::CxExifInfo::process_COM( const BYTE* Data, int length ) {
 
     strcpy( m_exifinfo->Comments, Comment );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImageJPG::CxExifInfo::process_SOFn( const BYTE* Data, int marker ) {
     int data_precision, num_components;
@@ -870,6 +881,7 @@ void CxImageJPG::CxExifInfo::process_SOFn( const BYTE* Data, int marker ) {
     //                ImageInfo.Width, ImageInfo.Height, num_components,
     //                data_precision);
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * this will work only on a CxImageJPG object, if the image originally has valid
@@ -919,6 +931,7 @@ bool CxImageJPG::CxExifInfo::EncodeExif( CxFile* hFile ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImageJPG::CxExifInfo::DiscardAllButExif() {
     Section_t ExifKeeper;
@@ -946,6 +959,7 @@ void CxImageJPG::CxExifInfo::DiscardAllButExif() {
         Sections[ SectionsRead++ ] = CommentKeeper;
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void* CxImageJPG::CxExifInfo::FindSection( int SectionType ) {
     int a;
@@ -957,5 +971,6 @@ void* CxImageJPG::CxExifInfo::FindSection( int SectionType ) {
     // Could not be found.
     return NULL;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 #endif // CXIMAGEJPG_SUPPORT_EXIF

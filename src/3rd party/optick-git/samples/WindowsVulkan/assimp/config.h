@@ -355,6 +355,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *  See the documentation to #aiProcess_RemoveComponent for more details.
  */
 enum aiComponent {
+
 /** Normal vectors */
 #ifdef SWIG
     aiComponent_NORMALS = 0x2,

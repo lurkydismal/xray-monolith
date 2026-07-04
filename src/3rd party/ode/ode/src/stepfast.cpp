@@ -869,6 +869,7 @@ static void processIslandsFast( dxWorld* world,
 // bodies will not be included in the simulation. disabled bodies are
 // re-enabled if they are found to be part of an active island.
 const int MAXJ_ALLOC = 2000;
+
 // const int MAXB_ALLOC= 1000;
 static void processIslandsFast( dxWorld* world,
                                 dReal stepsize,

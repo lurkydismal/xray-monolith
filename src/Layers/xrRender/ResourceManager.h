@@ -125,6 +125,7 @@ public:
                           u32& m_lmaps,
                           u32& c_lmaps );
     void _DumpMemoryUsage();
+
     //.	BOOL
     //_GetDetailTexture	(LPCSTR Name, LPCSTR& T, R_constant_setup* &M);
 
@@ -272,7 +273,9 @@ public:
                            ID3DIndexBuffer* ib );
     SGeometry* CreateGeom( u32 FVF, ID3DVertexBuffer* vb, ID3DIndexBuffer* ib );
     void DeleteGeom( const SGeometry* VS );
+
     void DeferredLoad( BOOL E ) { bDeferredLoad = E; }
+
     void DeferredUpload();
     void DeferredUnload();
     void UnloadAllTexturesOnLevelUnload();

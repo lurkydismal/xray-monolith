@@ -257,10 +257,12 @@ struct XRCORE_API xr_rtoken {
 
 public:
     void rename( LPCSTR _nm ) { name = _nm; }
+
     bool equal( LPCSTR _nm ) { return ( 0 == xr_strcmp( *name, _nm ) ); }
 };
 
 #pragma pack( push, 1 )
+
 struct XRCORE_API xr_shortcut {
     enum {
         flShift = 0x20,
@@ -291,6 +293,7 @@ struct XRCORE_API xr_shortcut {
         return ext.equal( v.ext ) && ( key == v.key );
     }
 };
+
 #pragma pack( pop )
 
 DEFINE_VECTOR( shared_str, RStringVec, RStringVecIt );
@@ -331,7 +334,9 @@ class destructor {
 
 public:
     destructor( T* p ) { ptr = p; }
+
     ~destructor() { xr_delete( ptr ); }
+
     IC T& operator()() { return *ptr; }
 };
 
@@ -354,6 +359,7 @@ public:
                       BOOL init_fs = TRUE,
                       LPCSTR fs_fname = 0 );
     void _destroy();
+
     IC bool isDebug() {
         return ParamsData.test( ECoreParams::dbg ) ||
                ParamsData.test( ECoreParams::dbgdev ) ||

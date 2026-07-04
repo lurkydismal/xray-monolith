@@ -67,6 +67,7 @@ filter_exception::filter_exception( ALenum code, const char* msg, ... )
     setMessage( msg, args );
     va_end( args );
 }
+
 filter_exception::~filter_exception() = default;
 
 #define DEFINE_ALFILTER_VTABLE( T )                                   \
@@ -79,11 +80,13 @@ void ALlowpass_setParami( ALfilter*, ALenum param, int ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid low-pass integer property 0x%04x", param };
 }
+
 void ALlowpass_setParamiv( ALfilter*, ALenum param, const int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid low-pass integer-vector property 0x%04x",
                             param };
 }
+
 void ALlowpass_setParamf( ALfilter* filter, ALenum param, float val ) {
     switch ( param ) {
         case AL_LOWPASS_GAIN:
@@ -107,6 +110,7 @@ void ALlowpass_setParamf( ALfilter* filter, ALenum param, float val ) {
                                     param };
     }
 }
+
 void ALlowpass_setParamfv( ALfilter* filter, ALenum param, const float* vals ) {
     ALlowpass_setParamf( filter, param, vals[ 0 ] );
 }
@@ -115,11 +119,13 @@ void ALlowpass_getParami( const ALfilter*, ALenum param, int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid low-pass integer property 0x%04x", param };
 }
+
 void ALlowpass_getParamiv( const ALfilter*, ALenum param, int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid low-pass integer-vector property 0x%04x",
                             param };
 }
+
 void ALlowpass_getParamf( const ALfilter* filter, ALenum param, float* val ) {
     switch ( param ) {
         case AL_LOWPASS_GAIN:
@@ -136,6 +142,7 @@ void ALlowpass_getParamf( const ALfilter* filter, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void ALlowpass_getParamfv( const ALfilter* filter, ALenum param, float* vals ) {
     ALlowpass_getParamf( filter, param, vals );
 }
@@ -146,11 +153,13 @@ void ALhighpass_setParami( ALfilter*, ALenum param, int ) {
     throw filter_exception{
         AL_INVALID_ENUM, "Invalid high-pass integer property 0x%04x", param };
 }
+
 void ALhighpass_setParamiv( ALfilter*, ALenum param, const int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid high-pass integer-vector property 0x%04x",
                             param };
 }
+
 void ALhighpass_setParamf( ALfilter* filter, ALenum param, float val ) {
     switch ( param ) {
         case AL_HIGHPASS_GAIN:
@@ -175,6 +184,7 @@ void ALhighpass_setParamf( ALfilter* filter, ALenum param, float val ) {
                                     param };
     }
 }
+
 void ALhighpass_setParamfv( ALfilter* filter,
                             ALenum param,
                             const float* vals ) {
@@ -185,11 +195,13 @@ void ALhighpass_getParami( const ALfilter*, ALenum param, int* ) {
     throw filter_exception{
         AL_INVALID_ENUM, "Invalid high-pass integer property 0x%04x", param };
 }
+
 void ALhighpass_getParamiv( const ALfilter*, ALenum param, int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid high-pass integer-vector property 0x%04x",
                             param };
 }
+
 void ALhighpass_getParamf( const ALfilter* filter, ALenum param, float* val ) {
     switch ( param ) {
         case AL_HIGHPASS_GAIN:
@@ -206,6 +218,7 @@ void ALhighpass_getParamf( const ALfilter* filter, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void ALhighpass_getParamfv( const ALfilter* filter,
                             ALenum param,
                             float* vals ) {
@@ -218,11 +231,13 @@ void ALbandpass_setParami( ALfilter*, ALenum param, int ) {
     throw filter_exception{
         AL_INVALID_ENUM, "Invalid band-pass integer property 0x%04x", param };
 }
+
 void ALbandpass_setParamiv( ALfilter*, ALenum param, const int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid band-pass integer-vector property 0x%04x",
                             param };
 }
+
 void ALbandpass_setParamf( ALfilter* filter, ALenum param, float val ) {
     switch ( param ) {
         case AL_BANDPASS_GAIN:
@@ -255,6 +270,7 @@ void ALbandpass_setParamf( ALfilter* filter, ALenum param, float val ) {
                                     param };
     }
 }
+
 void ALbandpass_setParamfv( ALfilter* filter,
                             ALenum param,
                             const float* vals ) {
@@ -265,11 +281,13 @@ void ALbandpass_getParami( const ALfilter*, ALenum param, int* ) {
     throw filter_exception{
         AL_INVALID_ENUM, "Invalid band-pass integer property 0x%04x", param };
 }
+
 void ALbandpass_getParamiv( const ALfilter*, ALenum param, int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid band-pass integer-vector property 0x%04x",
                             param };
 }
+
 void ALbandpass_getParamf( const ALfilter* filter, ALenum param, float* val ) {
     switch ( param ) {
         case AL_BANDPASS_GAIN:
@@ -290,6 +308,7 @@ void ALbandpass_getParamf( const ALfilter* filter, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void ALbandpass_getParamfv( const ALfilter* filter,
                             ALenum param,
                             float* vals ) {
@@ -302,14 +321,17 @@ void ALnullfilter_setParami( ALfilter*, ALenum param, int ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid null filter property 0x%04x", param };
 }
+
 void ALnullfilter_setParamiv( ALfilter*, ALenum param, const int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid null filter property 0x%04x", param };
 }
+
 void ALnullfilter_setParamf( ALfilter*, ALenum param, float ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid null filter property 0x%04x", param };
 }
+
 void ALnullfilter_setParamfv( ALfilter*, ALenum param, const float* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid null filter property 0x%04x", param };
@@ -319,14 +341,17 @@ void ALnullfilter_getParami( const ALfilter*, ALenum param, int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid null filter property 0x%04x", param };
 }
+
 void ALnullfilter_getParamiv( const ALfilter*, ALenum param, int* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid null filter property 0x%04x", param };
 }
+
 void ALnullfilter_getParamf( const ALfilter*, ALenum param, float* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid null filter property 0x%04x", param };
 }
+
 void ALnullfilter_getParamfv( const ALfilter*, ALenum param, float* ) {
     throw filter_exception{ AL_INVALID_ENUM,
                             "Invalid null filter property 0x%04x", param };
@@ -483,6 +508,7 @@ AL_API void AL_APIENTRY alGenFilters( ALsizei n,
         std::copy( ids.begin(), ids.end(), filters );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alDeleteFilters( ALsizei n, const ALuint* filters )
@@ -522,6 +548,7 @@ AL_API void AL_APIENTRY alDeleteFilters( ALsizei n, const ALuint* filters )
     };
     std::for_each( filters, filters_end, delete_filter );
 }
+
 END_API_FUNC
 
 AL_API ALboolean AL_APIENTRY alIsFilter( ALuint filter ) START_API_FUNC {
@@ -535,6 +562,7 @@ AL_API ALboolean AL_APIENTRY alIsFilter( ALuint filter ) START_API_FUNC {
         }
     return AL_FALSE;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alFilteri( ALuint filter,
@@ -568,6 +596,7 @@ AL_API void AL_APIENTRY alFilteri( ALuint filter,
             }
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alFilteriv( ALuint filter,
@@ -597,6 +626,7 @@ AL_API void AL_APIENTRY alFilteriv( ALuint filter,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alFilterf( ALuint filter,
@@ -620,6 +650,7 @@ AL_API void AL_APIENTRY alFilterf( ALuint filter,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alFilterfv( ALuint filter,
@@ -643,6 +674,7 @@ AL_API void AL_APIENTRY alFilterfv( ALuint filter,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetFilteri( ALuint filter,
@@ -671,6 +703,7 @@ AL_API void AL_APIENTRY alGetFilteri( ALuint filter,
             }
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetFilteriv( ALuint filter,
@@ -700,6 +733,7 @@ AL_API void AL_APIENTRY alGetFilteriv( ALuint filter,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetFilterf( ALuint filter,
@@ -723,6 +757,7 @@ AL_API void AL_APIENTRY alGetFilterf( ALuint filter,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetFilterfv( ALuint filter,
@@ -746,6 +781,7 @@ AL_API void AL_APIENTRY alGetFilterfv( ALuint filter,
         context->setError( e.errorCode(), "%s", e.what() );
     }
 }
+
 END_API_FUNC
 
 FilterSubList::~FilterSubList() {

@@ -255,6 +255,7 @@ extern "C" {
  * disable checking and workarounds for applications that fork().
  */
 #define ENGINE_CTRL_CHIL_NO_LOCKING 101
+
 /* This prevents the initialisation function from providing mutex
  * callbacks to the nCipher library. */
 
@@ -646,11 +647,13 @@ void ENGINE_add_conf_module( void );
 typedef void* ( *dyn_MEM_malloc_cb )( size_t );
 typedef void* ( *dyn_MEM_realloc_cb )( void*, size_t );
 typedef void ( *dyn_MEM_free_cb )( void* );
+
 typedef struct st_dynamic_MEM_fns {
     dyn_MEM_malloc_cb malloc_cb;
     dyn_MEM_realloc_cb realloc_cb;
     dyn_MEM_free_cb free_cb;
 } dynamic_MEM_fns;
+
 /* FIXME: Perhaps the memory and locking code (crypto.h) should declare and use
  * these types so we (and any other dependant code) can simplify a bit?? */
 typedef void ( *dyn_lock_locking_cb )( int, int, const char*, int );
@@ -664,6 +667,7 @@ typedef void ( *dyn_dynlock_lock_cb )( int,
 typedef void ( *dyn_dynlock_destroy_cb )( struct CRYPTO_dynlock_value*,
                                           const char*,
                                           int );
+
 typedef struct st_dynamic_LOCK_fns {
     dyn_lock_locking_cb lock_locking_cb;
     dyn_lock_add_lock_cb lock_add_lock_cb;
@@ -671,6 +675,7 @@ typedef struct st_dynamic_LOCK_fns {
     dyn_dynlock_lock_cb dynlock_lock_cb;
     dyn_dynlock_destroy_cb dynlock_destroy_cb;
 } dynamic_LOCK_fns;
+
 /* The top-level structure */
 typedef struct st_dynamic_fns {
     void* static_state;

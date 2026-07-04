@@ -266,6 +266,7 @@ int CRYPTO_add_lock( int* pointer,
     defined( _M_AMD64 ) || defined( _M_X64 )
 
 unsigned long OPENSSL_ia32cap_P = 0;
+
 unsigned long* OPENSSL_ia32cap_loc( void ) {
     return &OPENSSL_ia32cap_P;
 }
@@ -273,6 +274,7 @@ unsigned long* OPENSSL_ia32cap_loc( void ) {
 #if defined( OPENSSL_CPUID_OBJ ) && !defined( OPENSSL_NO_ASM ) && \
     !defined( I386_ONLY )
 #define OPENSSL_CPUID_SETUP
+
 void OPENSSL_cpuid_setup( void ) {
     static int trigger = 0;
     unsigned long OPENSSL_ia32_cpuid( void );
@@ -329,6 +331,7 @@ static int DllInit( void ) {
         int ( *f )( void );
         BYTE* p;
     } t = { DllInit };
+
     HANDLE hModuleSnap = INVALID_HANDLE_VALUE;
     IMAGE_DOS_HEADER* dos_header;
     IMAGE_NT_HEADERS* nt_headers;
@@ -563,6 +566,7 @@ void OPENSSL_showfatal( const char* fmta, ... ) {
     vfprintf( stderr, fmta, ap );
     va_end( ap );
 }
+
 int OPENSSL_isservice( void ) {
     return 0;
 }

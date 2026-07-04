@@ -123,6 +123,7 @@ typedef struct pkcs7_signed_st {
 
     struct pkcs7_st* contents;
 } PKCS7_SIGNED;
+
 /* The above structure is very very similar to PKCS7_SIGN_ENVELOPE.
  * How about merging the two */
 
@@ -176,6 +177,7 @@ typedef struct pkcs7_st {
     int detached;
 
     ASN1_OBJECT* type;
+
     /* content as defined by the type */
     /* all encryption/message digests are applied to the 'contents',
      * leaving out the 'type' field. */

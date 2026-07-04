@@ -124,7 +124,9 @@ public:
     bool operator!=( const cpu_ctl_env& ctl ) const {
         return my_ctl != ctl.my_ctl;
     }
+
     void get_env() { my_ctl = _control87( 0, 0 ); }
+
     void set_env() const { _control87( my_ctl, ~0U ); }
 };
 

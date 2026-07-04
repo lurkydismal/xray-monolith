@@ -56,6 +56,7 @@ enum DevFmtType : unsigned char {
 
     DevFmtTypeDefault = DevFmtFloat
 };
+
 enum DevFmtChannels : unsigned char {
     DevFmtMono,
     DevFmtStereo,
@@ -69,6 +70,7 @@ enum DevFmtChannels : unsigned char {
 
     DevFmtChannelsDefault = DevFmtStereo
 };
+
 #define MAX_OUTPUT_CHANNELS 16
 
 /* DevFmtType traits, providing the type, etc given a DevFmtType. */
@@ -79,26 +81,32 @@ template <>
 struct DevFmtTypeTraits< DevFmtByte > {
     using Type = int8_t;
 };
+
 template <>
 struct DevFmtTypeTraits< DevFmtUByte > {
     using Type = uint8_t;
 };
+
 template <>
 struct DevFmtTypeTraits< DevFmtShort > {
     using Type = int16_t;
 };
+
 template <>
 struct DevFmtTypeTraits< DevFmtUShort > {
     using Type = uint16_t;
 };
+
 template <>
 struct DevFmtTypeTraits< DevFmtInt > {
     using Type = int32_t;
 };
+
 template <>
 struct DevFmtTypeTraits< DevFmtUInt > {
     using Type = uint32_t;
 };
+
 template <>
 struct DevFmtTypeTraits< DevFmtFloat > {
     using Type = float;
@@ -109,6 +117,7 @@ using DevFmtType_t = typename DevFmtTypeTraits< T >::Type;
 
 uint BytesFromDevFmt( DevFmtType type ) noexcept;
 uint ChannelsFromDevFmt( DevFmtChannels chans, uint ambiorder ) noexcept;
+
 inline uint FrameSizeFromDevFmt( DevFmtChannels chans,
                                  DevFmtType type,
                                  uint ambiorder ) noexcept {

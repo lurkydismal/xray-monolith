@@ -26,6 +26,7 @@ XRCORE_API void vminfo( size_t* _free, size_t* reserved, size_t* committed ) {
 }
 
 xrCriticalSection mem_lock;
+
 XRCORE_API void log_vminfo() {
     xrCriticalSectionGuard g( mem_lock );
     PROF_EVENT( "log_vminfo" );

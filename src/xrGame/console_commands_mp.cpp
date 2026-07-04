@@ -220,6 +220,7 @@ public:
     CCC_Dbg_NumObjects( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR args ) {
         u32 SVObjNum = ( OnServer() ) ? Level().Server->GetEntitiesNum() : 0;
         xr_vector< u16 > SObjID;
@@ -267,6 +268,7 @@ public:
         Msg( "Client Objects : %d", CLObjNum );
         Msg( "Server Objects : %d", SVObjNum );
     }
+
     virtual void Info( TInfo& I ) { xr_strcpy( I, "dbg Num Objects" ); }
 };
 #endif // DEBUG
@@ -304,6 +306,7 @@ public:
             }
         }
     } // Execute
+
     virtual void Save( IWriter* F ) {};
 
     virtual void fill_tips( vecTips& tips, u32 mode ) {
@@ -811,6 +814,7 @@ public:
     virtual void Execute( LPCSTR args_ ) {
         if ( !g_pGameLevel || !Level().Server )
             return;
+
         struct ScreenshotMaker {
             xrClientData* admin_client;
 
@@ -818,6 +822,7 @@ public:
                 Level().Server->MakeScreenshot( admin_client->ID, C->ID );
             }
         };
+
         ScreenshotMaker tmp_functor;
         tmp_functor.admin_client = exclude_command_initiator( args_ );
         if ( !tmp_functor.admin_client ) {
@@ -844,6 +849,7 @@ public:
     virtual void Execute( LPCSTR args_ ) {
         if ( !g_pGameLevel || !Level().Server )
             return;
+
         struct ConfigDumper {
             xrClientData* admin_client;
 
@@ -851,6 +857,7 @@ public:
                 Level().Server->MakeConfigDump( admin_client->ID, C->ID );
             }
         };
+
         ConfigDumper tmp_functor;
         tmp_functor.admin_client = exclude_command_initiator( args_ );
         if ( !tmp_functor.admin_client ) {
@@ -875,6 +882,7 @@ public:
     CCC_DbgMakeScreenshot( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR args ) {
         if ( !g_pGameLevel || !Level().Server )
             return;
@@ -1197,6 +1205,7 @@ public:
         u32 cnt = Level().Server->game->get_players_count();
         Msg( "- Total Players : %d", cnt );
         Msg( "- ----player list begin-----" );
+
         struct PlayersEnumerator {
             LPCSTR filter_string;
 
@@ -1227,6 +1236,7 @@ public:
                 }
             }
         };
+
         PlayersEnumerator tmp_functor;
         string512 filter_string;
         string512 tmp_dest;

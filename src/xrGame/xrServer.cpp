@@ -63,6 +63,7 @@ xrServer::~xrServer() {
     struct ClientDestroyer {
         static bool true_generator( IClient* ) { return true; }
     };
+
     IClient* tmp_client =
         net_players.GetFoundClient( &ClientDestroyer::true_generator );
     while ( tmp_client ) {
@@ -730,6 +731,7 @@ void xrServer::SendBroadcast( ClientID exclude, NET_Packet& P, u32 dwFlags ) {
             return true;
         }
     };
+
     struct ClientSenderFunctor {
         xrServer* m_owner;
         void* m_data;
@@ -749,6 +751,7 @@ void xrServer::SendBroadcast( ClientID exclude, NET_Packet& P, u32 dwFlags ) {
             m_owner->SendTo_LL( client->ID, m_data, m_size, m_dwFlags );
         }
     };
+
     ClientSenderFunctor temp_functor( this, P.B.data, P.B.count, dwFlags );
     net_players.ForFoundClientsDo( ClientExcluderPredicate( exclude ),
                                    temp_functor );
@@ -847,6 +850,7 @@ void xrServer::OnChatMessage( NET_Packet* P, xrClientData* CL ) {
             m_owner->SendTo( client->ID, *m_packet );
         }
     };
+
     MessageSenderController mesenger( this );
     mesenger.m_team = P->r_s16();
     mesenger.m_sender_ps = CL->ps;
@@ -1014,6 +1018,7 @@ void xrServer::PerformCheckClientsForMaxPing() {
             }
         }
     };
+
     MaxPingClientDisconnector temp_functor( this );
     ForEachClientDoSender( temp_functor );
 }

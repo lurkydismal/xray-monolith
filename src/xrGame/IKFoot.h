@@ -19,7 +19,9 @@ class CIKFoot {
 public:
     CIKFoot();
     void Create( IKinematics* K, LPCSTR section, u16 bones[ 4 ] );
+
     IC void set_ref_bone( u16 ref_bone ) { m_ref_bone = ref_bone; }
+
     void set_ref_bone();
     u16 get_ref_bone( const Fmatrix& foot_transform,
                       const Fmatrix& toe_transform ) const;
@@ -27,7 +29,9 @@ public:
 public:
     IC Fvector& ToePosition( Fvector& toe_position ) const;
     IC Fvector& HeelPosition( Fvector& heel_position ) const;
+
     IC u16 ref_bone() const { return m_ref_bone; }
+
     Fmatrix& ref_bone_to_foot( Fmatrix& foot, const Fmatrix& ref_bone ) const;
     Fmatrix& ref_bone_to_foot( Fmatrix& ref_bone ) const;
 

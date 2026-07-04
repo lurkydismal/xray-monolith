@@ -357,6 +357,7 @@ IRenderVisual* CKinematics::GetVisualByBone( LPCSTR bone_name ) {
     }
     return 0;
 }
+
 //--DSR-- SilencerOverheat_end
 
 IC void iBuildGroups( CBoneData* B, U16Vec& tgt, u16 id, u16& last_id ) {

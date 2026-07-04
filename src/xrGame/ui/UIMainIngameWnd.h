@@ -58,6 +58,7 @@ public:
     void DrawMainIndicatorsForInventory();
 
     CUIHudStatesWnd* get_hud_states() { return m_ui_hud_states; }
+
     void OnSectorChanged( int sector );
 
     ::luabind::object GetQuickSlotIconsScript();
@@ -132,6 +133,7 @@ protected:
 
 public:
     CUIMotionIcon* MotionIcon() { return UIMotionIcon; }
+
     void OnConnected();
     void reset_ui();
 

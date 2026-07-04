@@ -85,10 +85,13 @@ class affinity_partitioner_base_v3 : no_copy {
     affinity_id* my_array;
     //! Number of elements in my_array.
     size_t my_size;
+
     //! Zeros the fields.
     affinity_partitioner_base_v3() : my_array( NULL ), my_size( 0 ) {}
+
     //! Deallocates my_array.
     ~affinity_partitioner_base_v3() { resize( 0 ); }
+
     //! Resize my_array.
     /** Retains values if resulting size is the same. */
     void __TBB_EXPORTED_METHOD resize( unsigned factor );
@@ -98,9 +101,13 @@ class affinity_partitioner_base_v3 : no_copy {
 class partition_type_base {
 public:
     void set_affinity( task& ) {}
+
     void note_affinity( task::affinity_id ) {}
+
     task* continue_after_execute_range() { return NULL; }
+
     bool decide_whether_to_delay() { return false; }
+
     void spawn_or_delay( bool, task& b ) { task::spawn( b ); }
 };
 
@@ -131,8 +138,11 @@ class start_deterministic_reduce;
 class flag_task : public task {
 public:
     tbb::atomic< bool > my_child_stolen;
+
     flag_task() { my_child_stolen = false; }
+
     task* execute() __TBB_override { return NULL; }
+
     static void mark_task_stolen( task& t ) {
         tbb::atomic< bool >& flag =
             static_cast< flag_task* >( t.parent() )->my_child_stolen;
@@ -144,6 +154,7 @@ public:
         flag = true;
 #endif // TBB_USE_THREADING_TOOLS
     }
+
     static bool is_peer_stolen( task& t ) {
         return static_cast< flag_task* >( t.parent() )->my_child_stolen;
     }
@@ -171,12 +182,16 @@ public:
         new ( static_cast< void* >( my_pool.begin() ) )
             T( elem ); // TODO: std::move?
     }
+
     ~range_vector() {
         while ( !empty() )
             pop_back();
     }
+
     bool empty() const { return my_size == 0; }
+
     depth_t size() const { return my_size; }
+
     //! Populates range pool via ranges up to max depth or while divisible
     //! max_depth starts from 0, e.g. value 2 makes 3 ranges in the pool up to
     //! two 1/4 pieces
@@ -193,12 +208,14 @@ public:
             my_size++;
         }
     }
+
     void pop_back() {
         __TBB_ASSERT( my_size > 0, "range_vector::pop_back() with empty size" );
         my_pool.begin()[ my_head ].~T();
         my_size--;
         my_head = ( my_head + MaxCapacity - 1 ) % MaxCapacity;
     }
+
     void pop_front() {
         __TBB_ASSERT( my_size > 0,
                       "range_vector::pop_front() with empty size" );
@@ -206,25 +223,30 @@ public:
         my_size--;
         my_tail = ( my_tail + 1 ) % MaxCapacity;
     }
+
     T& back() {
         __TBB_ASSERT( my_size > 0, "range_vector::back() with empty size" );
         return my_pool.begin()[ my_head ];
     }
+
     T& front() {
         __TBB_ASSERT( my_size > 0, "range_vector::front() with empty size" );
         return my_pool.begin()[ my_tail ];
     }
+
     //! similarly to front(), returns depth of the first range in the pool
     depth_t front_depth() {
         __TBB_ASSERT( my_size > 0,
                       "range_vector::front_depth() with empty size" );
         return my_depth[ my_tail ];
     }
+
     depth_t back_depth() {
         __TBB_ASSERT( my_size > 0,
                       "range_vector::back_depth() with empty size" );
         return my_depth[ my_head ];
     }
+
     bool is_divisible( depth_t max_depth ) {
         return back_depth() < max_depth && back().is_divisible();
     }
@@ -234,20 +256,29 @@ public:
 template < typename Partition >
 struct partition_type_base {
     typedef split split_type;
+
     // decision makers
     void set_affinity( task& ) {}
+
     void note_affinity( task::affinity_id ) {}
+
     bool check_being_stolen( task& ) {
         return false;
     } // part of old should_execute_range()
+
     bool check_for_demand( task& ) { return false; }
+
     bool is_divisible() { return true; } // part of old should_execute_range()
+
     depth_t max_depth() { return 0; }
+
     void align_depth( depth_t ) {}
+
     template < typename Range >
     split_type get_split() {
         return split();
     }
+
     Partition& self() {
         return *static_cast< Partition* >( this );
     } // CRTP helper
@@ -292,11 +323,14 @@ struct adaptive_mode : partition_type_base< Partition > {
     // created deeper than the affinity array can remember must not save its
     // affinity (LIFO order)
     static const unsigned factor = 1;
+
     adaptive_mode()
         : my_divisor( tbb::internal::get_initial_auto_partitioner_divisor() /
                       4 * my_partition::factor ) {}
+
     adaptive_mode( adaptive_mode& src, split )
         : my_divisor( do_split( src, split() ) ) {}
+
     /*! Override do_split methods in order to specify splitting strategy */
     size_t do_split( adaptive_mode& src, split ) {
         return src.my_divisor /= 2u;
@@ -316,6 +350,7 @@ struct proportion_helper {
         return proportional_split( 1, 1 );
     }
 };
+
 template < typename Range >
 struct proportion_helper<
     Range,
@@ -339,12 +374,15 @@ struct proportional_mode : adaptive_mode< Partition > {
                                                   // to derived classes
 
     proportional_mode() : adaptive_mode< Partition >() {}
+
     proportional_mode( proportional_mode& src, split )
         : adaptive_mode< Partition >( src, split() ) {}
+
     proportional_mode( proportional_mode& src,
                        const proportional_split& split_obj ) {
         self().my_divisor = do_split( src, split_obj );
     }
+
     size_t do_split( proportional_mode& src,
                      const proportional_split& split_obj ) {
 #if __TBB_ENABLE_RANGE_FEEDBACK
@@ -367,9 +405,11 @@ struct proportional_mode : adaptive_mode< Partition > {
         src.my_divisor -= portion;
         return portion;
     }
+
     bool is_divisible() { // part of old should_execute_range()
         return self().my_divisor > my_partition::factor;
     }
+
     template < typename Range >
     proportional_split get_split() {
         // Create a proportion for the number of threads expected to handle
@@ -392,19 +432,23 @@ struct linear_affinity_mode : proportional_mode< Partition > {
     size_t my_head;
     size_t my_max_affinity;
     using proportional_mode< Partition >::self;
+
     linear_affinity_mode()
         : proportional_mode< Partition >(),
           my_head( get_initial_partition_head() ),
           my_max_affinity( self().my_divisor ) {}
+
     linear_affinity_mode( linear_affinity_mode& src, split )
         : proportional_mode< Partition >( src, split() ),
           my_head( ( src.my_head + src.my_divisor ) % src.my_max_affinity ),
           my_max_affinity( src.my_max_affinity ) {}
+
     linear_affinity_mode( linear_affinity_mode& src,
                           const proportional_split& split_obj )
         : proportional_mode< Partition >( src, split_obj ),
           my_head( ( src.my_head + src.my_divisor ) % src.my_max_affinity ),
           my_max_affinity( src.my_max_affinity ) {}
+
     void set_affinity( task& t ) {
         if ( self().my_divisor )
             t.set_affinity( affinity_id( my_head ) + 1 );
@@ -419,8 +463,10 @@ struct dynamic_grainsize_mode : Mode {
     tbb::internal::machine_tsc_t my_dst_tsc;
 #endif
     enum { begin = 0, run, pass } my_delay;
+
     depth_t my_max_depth;
     static const unsigned range_pool_size = __TBB_RANGE_POOL_CAPACITY;
+
     dynamic_grainsize_mode()
         : Mode()
 #ifdef __TBB_USE_MACHINE_TIME_STAMPS
@@ -431,6 +477,7 @@ struct dynamic_grainsize_mode : Mode {
           my_delay( begin ),
           my_max_depth( __TBB_INIT_DEPTH ) {
     }
+
     dynamic_grainsize_mode( dynamic_grainsize_mode& p, split )
         : Mode( p, split() )
 #ifdef __TBB_USE_MACHINE_TIME_STAMPS
@@ -441,6 +488,7 @@ struct dynamic_grainsize_mode : Mode {
           my_delay( pass ),
           my_max_depth( p.my_max_depth ) {
     }
+
     dynamic_grainsize_mode( dynamic_grainsize_mode& p,
                             const proportional_split& split_obj )
         : Mode( p, split_obj )
@@ -452,6 +500,7 @@ struct dynamic_grainsize_mode : Mode {
           my_delay( begin ),
           my_max_depth( p.my_max_depth ) {
     }
+
     bool check_being_stolen( task& t ) { // part of old should_execute_range()
         if ( !( self().my_divisor /
                 Mode::my_partition::factor ) ) { // if not from the top P tasks
@@ -479,11 +528,14 @@ struct dynamic_grainsize_mode : Mode {
         }
         return false;
     }
+
     depth_t max_depth() { return my_max_depth; }
+
     void align_depth( depth_t base ) {
         __TBB_ASSERT( base <= my_max_depth, 0 );
         my_max_depth -= base;
     }
+
     template < typename StartType, typename Range >
     void work_balance( StartType& start, Range& range ) {
         if ( !range.is_divisible() || !self().max_depth() ) {
@@ -512,6 +564,7 @@ struct dynamic_grainsize_mode : Mode {
             } while ( !range_pool.empty() && !start.is_cancelled() );
         }
     }
+
     bool check_for_demand( task& t ) {
         if ( pass == my_delay ) {
             if ( self().my_divisor >
@@ -555,10 +608,12 @@ public:
         : dynamic_grainsize_mode< adaptive_mode< auto_partition_type > >() {
         my_divisor *= __TBB_INITIAL_CHUNKS;
     }
+
     auto_partition_type( auto_partition_type& src, split )
         : dynamic_grainsize_mode< adaptive_mode< auto_partition_type > >(
               src,
               split() ) {}
+
     bool is_divisible() { // part of old should_execute_range()
         if ( my_divisor > 1 )
             return true;
@@ -571,6 +626,7 @@ public:
         } else
             return false;
     }
+
     bool check_for_demand( task& t ) {
         if ( flag_task::is_peer_stolen( t ) ) {
             my_max_depth += __TBB_DEMAND_DEPTH_ADD;
@@ -584,7 +640,9 @@ class simple_partition_type
     : public partition_type_base< simple_partition_type > {
 public:
     simple_partition_type( const simple_partitioner& ) {}
+
     simple_partition_type( const simple_partition_type&, split ) {}
+
     //! simplified algorithm
     template < typename StartType, typename Range >
     void execute( StartType& start, Range& range ) {
@@ -600,10 +658,13 @@ class static_partition_type
     : public linear_affinity_mode< static_partition_type > {
 public:
     typedef proportional_split split_type;
+
     static_partition_type( const static_partitioner& )
         : linear_affinity_mode< static_partition_type >() {}
+
     static_partition_type( static_partition_type& p, split )
         : linear_affinity_mode< static_partition_type >( p, split() ) {}
+
     static_partition_type( static_partition_type& p,
                            const proportional_split& split_obj )
         : linear_affinity_mode< static_partition_type >( p, split_obj ) {}
@@ -620,6 +681,7 @@ public:
     static const unsigned factor =
         1 << factor_power; // number of slots in affinity array per task
     typedef proportional_split split_type;
+
     affinity_partition_type( tbb::internal::affinity_partitioner_base_v3& ap )
         : dynamic_grainsize_mode<
               linear_affinity_mode< affinity_partition_type > >() {
@@ -630,15 +692,18 @@ public:
         my_max_depth = factor_power + 1;
         __TBB_ASSERT( my_max_depth < __TBB_RANGE_POOL_CAPACITY, 0 );
     }
+
     affinity_partition_type( affinity_partition_type& p, split )
         : dynamic_grainsize_mode<
               linear_affinity_mode< affinity_partition_type > >( p, split() ),
           my_array( p.my_array ) {}
+
     affinity_partition_type( affinity_partition_type& p,
                              const proportional_split& split_obj )
         : dynamic_grainsize_mode<
               linear_affinity_mode< affinity_partition_type > >( p, split_obj ),
           my_array( p.my_array ) {}
+
     void set_affinity( task& t ) {
         if ( my_divisor ) {
             if ( !my_array[ my_head ] )
@@ -649,6 +714,7 @@ public:
                 t.set_affinity( my_array[ my_head ] );
         }
     }
+
     void note_affinity( task::affinity_id id ) {
         if ( my_divisor )
             my_array[ my_head ] = id;
@@ -666,18 +732,22 @@ public:
             num_chunks = VICTIM_CHUNKS;
         return num_chunks == 1;
     }
+
     old_auto_partition_type( const auto_partitioner& )
         : num_chunks( internal::get_initial_auto_partitioner_divisor() *
                       __TBB_INITIAL_CHUNKS / 4 ) {}
+
     old_auto_partition_type( const affinity_partitioner& )
         : num_chunks( internal::get_initial_auto_partitioner_divisor() *
                       __TBB_INITIAL_CHUNKS / 4 ) {}
+
     old_auto_partition_type( old_auto_partition_type& pt, split ) {
         num_chunks = pt.num_chunks = ( pt.num_chunks + 1u ) / 2u;
     }
 };
 
 } // namespace internal
+
 //! @endcond
 } // namespace interface9
 
@@ -699,13 +769,17 @@ private:
     friend class interface9::internal::start_deterministic_reduce;
     template < typename Range, typename Body, typename Partitioner >
     friend class internal::start_scan;
+
     // backward compatibility
     class partition_type : public internal::partition_type_base {
     public:
         bool should_execute_range( const task& ) { return false; }
+
         partition_type( const simple_partitioner& ) {}
+
         partition_type( const partition_type&, split ) {}
     };
+
     // new implementation just extends existing interface
     typedef interface9::internal::simple_partition_type task_partition_type;
 

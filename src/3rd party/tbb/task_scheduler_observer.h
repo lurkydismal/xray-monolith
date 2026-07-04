@@ -30,6 +30,7 @@ namespace tbb {
 namespace interface6 {
 class task_scheduler_observer;
 }
+
 namespace internal {
 
 class observer_proxy;
@@ -109,6 +110,7 @@ class task_scheduler_observer : public internal::task_scheduler_observer_v3 {
     //! contains task_arena pointer or tag indicating local or global semantics
     //! of the observer
     intptr_t my_context_tag;
+
     enum { global_tag = 0, implicit_tag = 1 };
 
 public:
@@ -168,6 +170,7 @@ public:
 };
 
 } // namespace interface6
+
 using interface6::task_scheduler_observer;
 #else  /*__TBB_ARENA_OBSERVER*/
 typedef tbb::internal::task_scheduler_observer_v3 task_scheduler_observer;

@@ -14,6 +14,7 @@ class intrusive_ref {
 
 public:
     unsigned int add_ref() noexcept { return IncrementRef( mRef ); }
+
     unsigned int dec_ref() noexcept {
         auto ref = DecrementRef( mRef );
         if ( ref == 0 )
@@ -49,15 +50,20 @@ class intrusive_ptr {
 
 public:
     intrusive_ptr() noexcept = default;
+
     intrusive_ptr( const intrusive_ptr& rhs ) noexcept : mPtr{ rhs.mPtr } {
         if ( mPtr )
             mPtr->add_ref();
     }
+
     intrusive_ptr( intrusive_ptr&& rhs ) noexcept : mPtr{ rhs.mPtr } {
         rhs.mPtr = nullptr;
     }
+
     intrusive_ptr( std::nullptr_t ) noexcept {}
+
     explicit intrusive_ptr( T* ptr ) noexcept : mPtr{ ptr } {}
+
     ~intrusive_ptr() {
         if ( mPtr )
             mPtr->dec_ref();
@@ -74,6 +80,7 @@ public:
         mPtr = rhs.mPtr;
         return *this;
     }
+
     intrusive_ptr& operator=( intrusive_ptr&& rhs ) noexcept {
         if ( &rhs != this )
             LIKELY {
@@ -87,7 +94,9 @@ public:
     explicit operator bool() const noexcept { return mPtr != nullptr; }
 
     T& operator*() const noexcept { return *mPtr; }
+
     T* operator->() const noexcept { return mPtr; }
+
     T* get() const noexcept { return mPtr; }
 
     void reset( T* ptr = nullptr ) noexcept {
@@ -99,6 +108,7 @@ public:
     T* release() noexcept { return std::exchange( mPtr, nullptr ); }
 
     void swap( intrusive_ptr& rhs ) noexcept { std::swap( mPtr, rhs.mPtr ); }
+
     void swap( intrusive_ptr&& rhs ) noexcept { std::swap( mPtr, rhs.mPtr ); }
 };
 

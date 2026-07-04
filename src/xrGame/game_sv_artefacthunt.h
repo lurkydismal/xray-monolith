@@ -73,9 +73,11 @@ protected:
 
 public:
     game_sv_ArtefactHunt() { m_type = eGameIDArtefactHunt; }
+
     virtual void Create( shared_str& options );
 
     virtual LPCSTR type_name() const { return "artefacthunt"; };
+
     // Events
     virtual void OnEvent( NET_Packet& tNetPacket,
                           u16 type,
@@ -151,6 +153,7 @@ public:
     virtual void MoveAllAlivePlayers();
     virtual void CheckForTeamElimination();
     virtual void CheckForTeamWin();
+
     virtual BOOL CanHaveFriendlyFire() { return TRUE; }
 
     //-----------------------------------------------------------------------------

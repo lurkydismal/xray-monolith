@@ -40,6 +40,7 @@ LPSTR remove_version_option( LPCSTR opt_str,
 #ifdef DEBUG
 s32 lag_simmulator_min_ping = 0;
 s32 lag_simmulator_max_ping = 0;
+
 static bool SimmulateNetworkLag() {
     static u32 max_lag_time = 0;
 

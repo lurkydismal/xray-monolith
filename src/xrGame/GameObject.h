@@ -112,73 +112,134 @@ public:
 public:
     // functions used for avoiding most of the smart_cast
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CAttachmentOwner* cast_attachment_owner() { return nullptr; }
+
     virtual CInventoryOwner* cast_inventory_owner() { return nullptr; }
+
     virtual CInventoryItem* cast_inventory_item() { return nullptr; }
+
     virtual CEntity* cast_entity() { return nullptr; }
+
     virtual CEntityAlive* cast_entity_alive() { return nullptr; }
+
     virtual CActor* cast_actor() { return nullptr; }
+
     virtual CCustomZone* cast_custom_zone() { return nullptr; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return nullptr; }
+
     virtual IInputReceiver* cast_input_receiver() { return nullptr; }
+
     virtual CParticlesPlayer* cast_particles_player() { return nullptr; }
+
     virtual CArtefact* cast_artefact() { return nullptr; }
+
     virtual CCustomMonster* cast_custom_monster() { return nullptr; }
+
     virtual CAI_Stalker* cast_stalker() { return nullptr; }
+
     virtual CScriptEntity* cast_script_entity() { return nullptr; }
+
     virtual CWeapon* cast_weapon() { return nullptr; }
+
     virtual CExplosive* cast_explosive() { return nullptr; }
+
     virtual CSpaceRestrictor* cast_restrictor() { return nullptr; }
+
     virtual CAttachableItem* cast_attachable_item() { return nullptr; }
+
     virtual CHolderCustom* cast_holder_custom() { return nullptr; }
+
     virtual CBaseMonster* cast_base_monster() { return nullptr; }
+
     virtual CCar* cast_car() { return nullptr; }
+
     virtual CMissile* cast_missile() { return nullptr; }
+
     virtual CExplosiveRocket* cast_explosive_rocket() { return nullptr; }
+
     virtual CGrenade* cast_grenade() { return nullptr; }
+
     virtual CUsableScriptObject* cast_usable_script_object() { return this; }
+
     virtual CBreakableObject* cast_breakable_object() { return nullptr; }
+
     virtual CHudItem* cast_hud_item() { return nullptr; }
+
     virtual CCustomOutfit* cast_outfit() { return nullptr; }
+
     virtual CHelmet* cast_helmet() { return nullptr; }
+
     virtual CCustomDetector* cast_custom_detector() { return nullptr; }
+
     virtual CWeaponAmmo* cast_weapon_ammo() { return nullptr; }
+
     virtual CWeaponBinoculars* cast_weapon_binoculars() { return nullptr; }
+
     virtual CWeaponKnife* cast_weapon_knife() { return nullptr; }
+
     virtual CWeaponMagazined* cast_weapon_magazined() { return nullptr; }
+
     virtual CWeaponMagazinedWGrenade* cast_weapon_magazined_w_grenade() {
         return nullptr;
     }
+
     virtual CWeaponBM16* cast_weapon_bm16() { return nullptr; }
+
     virtual CWeaponRPG7* cast_weapon_rpg7() { return nullptr; }
+
     virtual CWeaponRG6* cast_weapon_rg6() { return nullptr; }
+
     virtual CTorch* cast_torch() { return nullptr; }
+
     virtual CBolt* cast_bolt() { return nullptr; }
+
     virtual CPda* cast_pda() { return nullptr; }
+
     virtual CInventoryBox* cast_inventory_box() { return nullptr; }
+
     virtual CSpectator* cast_spectator() { return nullptr; }
+
     virtual CSilencer* cast_addon_silencer() { return nullptr; }
+
     virtual CScope* cast_addon_scope() { return nullptr; }
+
     virtual CGrenadeLauncher* cast_addon_grenade_launcher() { return nullptr; }
+
     virtual CProjector* cast_projector() { return nullptr; }
+
     virtual CLevelChanger* cast_level_changer() { return nullptr; }
+
     virtual CPhysicItem* cast_physics_item() { return nullptr; }
+
     virtual CEatableItem* cast_eatable_item() { return nullptr; }
+
     virtual CScriptZone* cast_script_zone() { return nullptr; }
+
     virtual CHelicopter* cast_helicopter() { return nullptr; }
+
     virtual CHangingLamp* cast_hanging_lamp() { return nullptr; }
+
     virtual CPhraseDialogManager* cast_phrase_dialog_manager() {
         return nullptr;
     }
+
     virtual CBackpack* cast_backpack() { return nullptr; }
+
     virtual CClimableObject* cast_climable_object() { return nullptr; }
+
     virtual CPhysicObject* cast_physics_object() { return nullptr; }
+
     virtual CTeamBaseZone* cast_team_base_zone() { return nullptr; }
+
     virtual CPhantom* cast_phantom() { return nullptr; }
+
     virtual CAI_Trader* cast_trader() { return nullptr; }
 
 public:
     virtual bool feel_touch_on_contact( CObject* ) { return TRUE; }
+
     virtual bool use( CGameObject* who_use ) {
         return CUsableScriptObject::use( who_use );
     };
@@ -207,10 +268,13 @@ public:
     virtual BOOL net_Relevant() {
         return getLocal();
     } // send messages only if active and local
+
     virtual void spatial_move();
+
     virtual BOOL Ready() {
         return getReady();
     } // update only if active and fully initialized by/for network
+
     //	virtual float			renderable_Ambient	();
 
     virtual void shedule_Update( u32 dt );
@@ -227,6 +291,7 @@ public:
                              s16 element,
                              Fvector Pos,
                              Fvector Dir ) {};
+
     virtual BOOL BonePassBullet( int boneID ) { return FALSE; }
 
     // игровое имя объекта
@@ -237,6 +302,7 @@ public:
     virtual void OnH_B_Independent( bool just_before_destroy );
 
     virtual bool IsVisibleForZones() { return true; }
+
     ///////////////////////////////////////////////////////////////////////
     virtual bool NeedToDestroyObject() const;
     virtual void DestroyObject();
@@ -255,16 +321,20 @@ public:
     virtual void destroy_anim_mov_ctrl();
     void update_animation_movement_controller();
     bool animation_movement_controlled() const;
+
     const animation_movement_controller* animation_movement() const {
         return m_anim_mov_ctrl;
     }
+
     animation_movement_controller* animation_movement() {
         return m_anim_mov_ctrl;
     }
+
     // Game-specific events
 
     virtual BOOL UsedAI_Locations();
     BOOL TestServerFlag( u32 Flag ) const;
+
     virtual bool can_validate_position_on_spawn() { return true; }
 #ifdef DEBUG
     virtual void OnRender();
@@ -273,6 +343,7 @@ public:
     void init();
     virtual void reinit();
     virtual void reload( LPCSTR section );
+
     ///////////////////// network /////////////////////////////////////////
     bool object_removed() const { return m_bObjectRemoved; };
 
@@ -280,9 +351,11 @@ public:
                                                script_attachment* att );
     virtual script_attachment* get_attachment( LPCSTR name );
     virtual void remove_child( LPCSTR name, bool destroy = false );
+
     virtual void remove_attachment( LPCSTR name ) {
         remove_child( name, true );
     }
+
     virtual void remove_attachment( script_attachment* child );
     virtual void iterate_attachments( ::luabind::functor< bool > functor );
 
@@ -303,14 +376,19 @@ public:
 #endif
     virtual void PH_A_CrPr() {
     }; // actions & operations after phisic correction-prediction steps
+
     virtual void CrPr_SetActivationStep( u32 Step ) {
         m_dwCrPr_ActivationStep = Step;
     };
+
     virtual u32 CrPr_GetActivationStep() { return m_dwCrPr_ActivationStep; };
+
     virtual void CrPr_SetActivated( bool Activate ) {
         m_bCrPr_Activated = Activate;
     };
+
     virtual bool CrPr_IsActivated() { return m_bCrPr_Activated; };
+
     ///////////////////////////////////////////////////////////////////////
     virtual const SRotation Orientation() const {
         SRotation rotation;
@@ -381,9 +459,13 @@ public:
     virtual u32 ef_anomaly_type() const;
     virtual u32 ef_weapon_type() const;
     virtual u32 ef_detector_type() const;
+
     virtual bool natural_weapon() const { return true; }
+
     virtual bool natural_detector() const { return true; }
+
     virtual bool use_center_to_aim() const { return false; }
+
     // [12.11.07] Alexander Maniluk: added this method for moving object
     virtual void MoveTo( Fvector const& position ) {};
 
@@ -427,6 +509,7 @@ public:
                            bool b_play,
                            bool b_on_ground,
                            bool b_hud_view );
+
     xr_map< shared_str, script_attachment* >* GetAttachments() {
         return &m_script_attachments;
     }

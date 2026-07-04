@@ -29,6 +29,7 @@ public:
     virtual void SetWidth( float width ) {};
 
     virtual void SetHeight( float height ) {};
+
     virtual void Draw() { inherited::Draw(); };
 
     virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData );
@@ -39,5 +40,6 @@ public:
     virtual bool OnKeyboardHold( int dik );
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIFixedScrollBar* ui_cast_fixed_scroll_bar() { return this; }
 };

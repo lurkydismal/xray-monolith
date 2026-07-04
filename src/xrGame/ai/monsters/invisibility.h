@@ -30,14 +30,18 @@ protected:
 public:
     void activate();
     void deactivate();
+
     IC float energy() { return m_energy; }
+
     IC bool active() { return m_active; }
+
     IC bool full_energy() { return !!fsimilar( m_energy, 1.f ); }
 
     // manual switching
     void set_manual_control( bool b_man = true );
     void manual_activate();
     void manual_deactivate();
+
     bool is_manual_control() { return m_manual; }
 
 private:

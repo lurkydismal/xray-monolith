@@ -186,6 +186,7 @@ public:
         : my_node_ptr( other.my_node_ptr ) {}
 
     reference operator*() const { return *( my_node_ptr->storage() ); }
+
     pointer operator->() const { return &**this; }
 
     skip_list_iterator& operator++() {
@@ -703,7 +704,9 @@ public:
               my_level( my_begin.my_node_ptr->height() ) {}
 
         iterator begin() const { return my_begin; }
+
         iterator end() const { return my_end; }
+
         size_t grainsize() const { return 1; }
 
     }; // class const_range_type
@@ -713,6 +716,7 @@ public:
         using iterator = typename concurrent_skip_list::iterator;
 
         range_type( range_type& r, split ) : const_range_type( r, split() ) {}
+
         range_type( const concurrent_skip_list& l ) : const_range_type( l ) {}
 
         iterator begin() const {
@@ -727,6 +731,7 @@ public:
     }; // class range_type
 
     range_type range() { return range_type( *this ); }
+
     const_range_type range() const { return const_range_type( *this ); }
 
 private:

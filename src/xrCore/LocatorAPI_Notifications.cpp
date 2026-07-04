@@ -15,6 +15,7 @@ void CThread::startup( void* P ) {
 }
 
 static CRITICAL_SECTION CS;
+
 //---------------------------------------------------------------------------
 // TShellChangeThread -------------------------------------------------------
 CFS_PathNotificator::CFS_PathNotificator() : CThread( 0 ) {

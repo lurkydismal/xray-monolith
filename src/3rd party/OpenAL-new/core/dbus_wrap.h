@@ -72,8 +72,11 @@ namespace dbus {
 
 struct Error {
     Error() { dbus_error_init( &mError ); }
+
     ~Error() { dbus_error_free( &mError ); }
+
     DBusError* operator->() { return &mError; }
+
     DBusError& get() { return mError; }
 
 private:
@@ -83,6 +86,7 @@ private:
 struct ConnectionDeleter {
     void operator()( DBusConnection* c ) { dbus_connection_unref( c ); }
 };
+
 using ConnectionPtr = std::unique_ptr< DBusConnection, ConnectionDeleter >;
 
 } // namespace dbus

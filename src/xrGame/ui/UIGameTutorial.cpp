@@ -101,6 +101,7 @@ CUISequencer::CUISequencer() {
 }
 
 extern BOOL g_bootComplete;
+
 void CUISequencer::Start( LPCSTR tutor_name ) {
     VERIFY( m_sequencer_items.size() == 0 );
     Device.seqFrame.Add( this, REG_PRIORITY_LOW - 10000 );

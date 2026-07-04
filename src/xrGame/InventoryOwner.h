@@ -47,18 +47,29 @@ public:
 
 public:
     virtual CInventoryOwner* cast_inventory_owner() { return this; }
+
     virtual CAttachmentOwner* cast_attachment_owner() { return this; }
+
     virtual CActor* cast_actor() { return nullptr; }
+
     virtual CEntityAlive* cast_entity_alive() { return nullptr; }
+
     virtual CEntity* cast_entity() { return nullptr; }
+
     virtual CAI_Stalker* cast_stalker() { return nullptr; }
+
     virtual CGameObject* cast_game_object() { return nullptr; }
+
     virtual CBaseMonster* cast_base_monster() { return nullptr; }
+
     virtual CCar* cast_car() { return nullptr; }
+
     virtual CAI_Trader* cast_trader() { return nullptr; }
+
     virtual CPhraseDialogManager* cast_phrase_dialog_manager() {
         return nullptr;
     }
+
     virtual CAI_PhraseDialogManager* cast_ai_phrase_dialog_manager() {
         return nullptr;
     }
@@ -81,6 +92,7 @@ public:
 
     // обновление
     virtual void UpdateInventoryOwner( u32 deltaT );
+
     virtual bool CanPutInSlot( PIItem item, u32 slot ) { return true; };
 
     void ChangeName( LPCSTR name ) {
@@ -116,18 +128,25 @@ public:
     bool IsTrading();
 
     virtual void EnableTalk() { m_bAllowTalk = true; }
+
     virtual void DisableTalk() { m_bAllowTalk = false; }
+
     virtual bool IsTalkEnabled() { return m_bAllowTalk; }
 
     void EnableTrade() { m_bAllowTrade = true; }
+
     void DisableTrade() { m_bAllowTrade = false; }
+
     bool IsTradeEnabled() { return m_bAllowTrade; }
 
     void EnableInvUpgrade() { m_bAllowInvUpgrade = true; }
+
     void DisableInvUpgrade() { m_bAllowInvUpgrade = false; }
+
     bool IsInvUpgradeEnabled() { return m_bAllowInvUpgrade; }
 
     CInventoryOwner* GetTalkPartner() { return m_pTalkPartner; }
+
     virtual void NewPdaContact( CInventoryOwner* );
     virtual void LostPdaContact( CInventoryOwner* );
 
@@ -135,7 +154,9 @@ public:
     virtual LPCSTR Name() const;
     LPCSTR IconName() const;
     DIALOG_ID_VECTOR Dialogs() const;
+
     u32 get_money() const { return m_money; }
+
     void set_money( u32 amount, bool bSendEvent );
     bool is_alive();
 
@@ -198,9 +219,11 @@ public:
     bool CanPlayShHdRldSounds() const {
         return m_play_show_hide_reload_sounds;
     };
+
     void SetPlayShHdRldSounds( bool play ) {
         m_play_show_hide_reload_sounds = play;
     };
+
     //////////////////////////////////////////////////////////////////////////
     // игровые характеристики персонажа
 public:
@@ -212,6 +235,7 @@ public:
     IC const CSpecificCharacter& SpecificCharacter() const {
         return CharacterInfo().m_SpecificCharacter;
     };
+
     bool InfinitiveMoney() {
         return CharacterInfo().m_SpecificCharacter.MoneyDef().inf_money;
     }
@@ -229,15 +253,19 @@ public:
 
     // для работы с relation system
     u16 object_id() const;
+
     CHARACTER_COMMUNITY_INDEX Community() const {
         return CharacterInfo().Community().index();
     };
+
     CHARACTER_RANK_VALUE Rank() const {
         return CharacterInfo().Rank().value();
     };
+
     CHARACTER_REPUTATION_VALUE Reputation() const {
         return CharacterInfo().Reputation().value();
     };
+
     float Sympathy() const { return CharacterInfo().Sympathy(); }
 
 protected:
@@ -259,7 +287,9 @@ public:
     virtual void OnItemDrop( CInventoryItem* inventory_item,
                              bool just_before_destroy );
     virtual void OnItemDropUpdate();
+
     virtual bool use_bolts() const { return ( true ); }
+
     virtual void spawn_supplies();
 
 protected:
@@ -268,6 +298,7 @@ protected:
 
 public:
     IC const shared_str& item_to_spawn() const { return m_item_to_spawn; }
+
     IC const u32& ammo_in_box_to_spawn() const {
         return m_ammo_in_box_to_spawn;
     }
@@ -302,15 +333,21 @@ public:
     virtual void on_before_buy( CInventoryItem* item ) {}
 
     virtual bool can_use_dynamic_lights() { return true; }
+
     virtual bool use_default_throw_force();
     virtual float missile_throw_force();
     virtual bool use_throw_randomness();
+
     virtual bool NeedOsoznanieMode() { return m_need_osoznanie_mode != FALSE; }
 
     void deadbody_can_take( bool status );
+
     IC bool deadbody_can_take_status() const { return m_deadbody_can_take; }
+
     void deadbody_closed( bool status );
+
     IC bool deadbody_closed_status() const { return m_deadbody_closed; }
+
     DECLARE_SCRIPT_REGISTER_FUNCTION
 };
 

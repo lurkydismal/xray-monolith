@@ -297,8 +297,11 @@ public:
     }
 
     IC u32* begin() { return table; }
+
     IC u32* end() { return table + count; }
+
     IC u32 size() { return count; }
+
     IC void clear() {
         write = 0;
         count = 0;

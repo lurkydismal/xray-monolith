@@ -10,6 +10,7 @@
 #ifdef DEBUG
 static BOOL _cdb_bDebug = false;
 extern XRCDB_API BOOL* cdb_bDebug = &_cdb_bDebug;
+
 bool bDebug() {
     return !!( *cdb_bDebug );
 }
@@ -605,6 +606,7 @@ bool CObjectSpace::BoxQuery( Fvector const& box_center,
     x_axis.crossproduct( box_y_axis, box_z_axis ).normalize();
 
     Fplane planes[ 6 ];
+
     enum {
         left_plane,
         right_plane,

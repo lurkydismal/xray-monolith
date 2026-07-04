@@ -21,6 +21,7 @@ void xrServer::Perform_game_export() {
             server_ptr->SendTo( client->ID, P, mode );
         }
     };
+
     NetExportToClientFunctor temp_functor( this );
     ForEachClientDoSender( temp_functor );
     game->sv_force_sync = FALSE;

@@ -94,6 +94,7 @@ public:
           delta( 0 ),
           numChanges( 0 ),
           errorCode_( U_ZERO_ERROR ) {}
+
     /**
      * Copy constructor.
      * @param other source edits
@@ -108,6 +109,7 @@ public:
           errorCode_( other.errorCode_ ) {
         copyArray( other );
     }
+
     /**
      * Move constructor, might leave src empty.
      * This object will have the same contents that the source object had.
@@ -185,6 +187,7 @@ public:
      * @stable ICU 59
      */
     int32_t lengthDelta() const { return delta; }
+
     /**
      * @return TRUE if there are any change edits
      * @stable ICU 59
@@ -238,6 +241,7 @@ public:
               srcIndex( 0 ),
               replIndex( 0 ),
               destIndex( 0 ) {}
+
         /**
          * Copy constructor.
          * @stable ICU 59
@@ -561,6 +565,7 @@ private:
     Edits& moveArray( Edits& src ) U_NOEXCEPT;
 
     void setLastUnit( int32_t last ) { array[ length - 1 ] = ( uint16_t )last; }
+
     int32_t lastUnit() const {
         return length > 0 ? array[ length - 1 ] : 0xffff;
     }

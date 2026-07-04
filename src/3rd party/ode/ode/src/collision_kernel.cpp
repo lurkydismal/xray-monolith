@@ -98,6 +98,7 @@ struct dColliderEntry {
     dColliderFn* fn; // collider function, 0 = no function available
     int reverse;     // 1 = reverse o1 and o2
 };
+
 static dColliderEntry colliders[ dGeomNumClasses ][ dGeomNumClasses ];
 static int colliders_initialized = 0;
 

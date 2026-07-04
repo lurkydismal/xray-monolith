@@ -1418,6 +1418,7 @@ static MLOCK_T magic_init_mutex = PTHREAD_MUTEX_INITIALIZER;
 */
 
 #define MLOCK_T long
+
 static int win32_acquire_lock( MLOCK_T* sl ) {
     for ( ;; ) {
 #ifdef InterlockedCompareExchangePointer

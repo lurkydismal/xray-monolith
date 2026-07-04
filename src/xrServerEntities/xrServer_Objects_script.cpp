@@ -74,6 +74,7 @@ struct CWrapperBase : public T, public ::luabind::wrap_base {
 };
 
 #pragma optimize( "s", on )
+
 void CPureServerObject::script_register( lua_State* L ) {
     module( L )
         [ class_< IPureLoadableObject< IReader > >( "ipure_alife_load_object" ),

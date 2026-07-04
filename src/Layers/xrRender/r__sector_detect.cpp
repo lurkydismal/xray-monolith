@@ -43,6 +43,7 @@ IRender_Sector* CRender::detectSector( const Fvector& P ) {
 }
 
 thread_local xrXRC sectors_detect_xrc;
+
 IRender_Sector* CRender::detectLastSector( const Fvector& P ) {
     if ( SectorsCount() == 1 )
         return pOutdoorSector;

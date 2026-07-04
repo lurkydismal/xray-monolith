@@ -48,10 +48,13 @@ class CControlPathBuilderBase : public CControl_ComBase {
         }
 
         IC const Fvector& position() const { return _position; }
+
         // IC		  Fvector	&position	()
         // { return _position; }
         IC u32 node() const { return _node; }
+
         IC void set_node( u32 node_ ) { _node = node_; }
+
         IC void set_position( const Fvector& p ) { _position.set( p ); }
     } m_target_set, m_target_found;
 
@@ -114,24 +117,35 @@ public:
 
     // -------------------------------------------------------------------
     IC void set_try_min_time( bool new_val ) { m_try_min_time = new_val; }
+
     IC void set_use_dest_orient( bool new_val ) { m_use_dest_orient = new_val; }
+
     IC void disable_path() { m_enable = false; }
+
     IC void enable_path() { m_enable = true; }
+
     IC void extrapolate_path( bool val ) { m_extrapolate = val; }
+
     IC void set_level_path_type() {
         m_path_type = MovementManager::ePathTypeLevelPath;
     }
+
     IC void set_game_path_type() {
         m_path_type = MovementManager::ePathTypeGamePath;
     }
+
     IC void set_patrol_path_type() {
         m_path_type = MovementManager::ePathTypePatrolPath;
     }
+
     IC void set_velocity_mask( u32 mask ) { m_velocity_mask = mask; }
+
     IC void set_desirable_mask( u32 mask ) { m_desirable_mask = mask; }
+
     void set_dest_direction( const Fvector& dir );
 
     IC bool enabled() { return m_enable; }
+
     // -------------------------------------------------------------------
     // Set methods
     void set_target_point( const Fvector& position, u32 node = u32( -1 ) );
@@ -148,8 +162,11 @@ public:
     IC void set_generic_parameters();
 
     bool is_target_actual() const { return m_target_actual; }
+
     Fvector get_target_found() { return m_target_found.position(); }
+
     u32 get_target_found_node() const { return m_target_found.node(); }
+
     Fvector get_target_set() { return m_target_set.position(); }
 
     // -------------------------------------------------------------------

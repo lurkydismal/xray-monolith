@@ -22,5 +22,6 @@ public:
     virtual BOOL UsedAI_Locations();
     virtual void shedule_Update( u32 DT );
     virtual void UpdateCL();
+
     virtual CScriptEntity* cast_script_entity() { return this; }
 };

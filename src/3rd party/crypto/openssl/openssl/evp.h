@@ -130,6 +130,7 @@ struct evp_pkey_st {
     int type;
     int save_type;
     int references;
+
     union {
         char* ptr;
 #ifndef OPENSSL_NO_RSA
@@ -145,6 +146,7 @@ struct evp_pkey_st {
         struct ec_key_st* ec; /* ECC */
 #endif
     } pkey;
+
     int save_parameters;
     STACK_OF( X509_ATTRIBUTE ) * attributes; /* [ 0 ] */
 } /* EVP_PKEY */;

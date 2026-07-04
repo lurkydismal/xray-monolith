@@ -41,6 +41,7 @@ public:
         : m_line( line ), m_column( column ) {}
 
     int line() const { return m_line; }
+
     int column() const { return m_column; }
 
 private:
@@ -63,12 +64,15 @@ public:
     const Token& token() const { return m_token; }
 
     int lineNumber() const { return m_lineNumber; }
+
     int columnNumber() const { return m_columnNumber; }
 
     void setDelimiters( const char* str ) { m_delimiters = str; }
+
     const char* delimiters() const { return m_delimiters; }
 
     void setSpaces( const char* str ) { m_spaces = str; }
+
     const char* spaces() const { return m_spaces; }
 
 private:

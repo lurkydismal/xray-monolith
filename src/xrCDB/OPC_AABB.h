@@ -124,6 +124,7 @@ public:
 
     //! Get min point of the box
     inline_ void GetMin( Point& min ) const { min = mMin; }
+
     //! Get max point of the box
     inline_ void GetMax( Point& max ) const { max = mMax; }
 
@@ -131,6 +132,7 @@ public:
     inline_ float GetMin( udword axis ) const {
         return ( ( const float* )mMin )[ axis ];
     }
+
     //! Get component of the box's max point along a given axis
     inline_ float GetMax( udword axis ) const {
         return ( ( const float* )mMax )[ axis ];
@@ -140,6 +142,7 @@ public:
     inline_ void GetCenter( Point& center ) const {
         center = ( mMax + mMin ) * 0.5f;
     }
+
     //! Get box extents
     inline_ void GetExtents( Point& extents ) const {
         extents = ( mMax - mMin ) * 0.5f;
@@ -163,8 +166,11 @@ public:
     inline_ void GetDiagonal( Point& diagonal ) const {
         diagonal = mMax - mMin;
     }
+
     inline_ float GetWidth() const { return mMax.x - mMin.x; }
+
     inline_ float GetHeight() const { return mMax.y - mMin.y; }
+
     inline_ float GetDepth() const { return mMax.z - mMin.z; }
 
     //! Volume
@@ -323,6 +329,7 @@ class MESHMERIZER_API AABB {
 public:
     //! Constructor
     inline_ AABB() {}
+
     //! Destructor
     inline_ ~AABB() {}
 
@@ -413,6 +420,7 @@ public:
 
     //! Get min point of the box
     inline_ void GetMin( Point& min ) const { min = mCenter - mExtents; }
+
     //! Get max point of the box
     inline_ void GetMax( Point& max ) const { max = mCenter + mExtents; }
 
@@ -420,6 +428,7 @@ public:
     inline_ float GetMin( udword axis ) const {
         return mCenter[ axis ] - mExtents[ axis ];
     }
+
     //! Get component of the box's max point along a given axis
     inline_ float GetMax( udword axis ) const {
         return mCenter[ axis ] + mExtents[ axis ];
@@ -427,11 +436,13 @@ public:
 
     //! Get box center
     inline_ void GetCenter( Point& center ) const { center = mCenter; }
+
     //! Get box extents
     inline_ void GetExtents( Point& extents ) const { extents = mExtents; }
 
     //! Get component of the box's center along a given axis
     inline_ float GetCenter( udword axis ) const { return mCenter[ axis ]; }
+
     //! Get component of the box's extents along a given axis
     inline_ float GetExtents( udword axis ) const { return mExtents[ axis ]; }
 
@@ -439,8 +450,11 @@ public:
     inline_ void GetDiagonal( Point& diagonal ) const {
         diagonal = mExtents * 2.0f;
     }
+
     inline_ float GetWidth() const { return mExtents.x * 2.0f; }
+
     inline_ float GetHeight() const { return mExtents.y * 2.0f; }
+
     inline_ float GetDepth() const { return mExtents.z * 2.0f; }
 
     //! Volume

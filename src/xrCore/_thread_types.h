@@ -38,6 +38,7 @@ template < typename Index, typename Body >
 inline void xr_parallel_foreach( Index Begin, Index End, Body Functor ) {
     concurrency::parallel_for_each( Begin, End, Functor );
 }
+
 // Helper to deduce the value type for the default predicate
 template < typename RandomIt >
 using IterValueT = typename std::iterator_traits< RandomIt >::value_type;

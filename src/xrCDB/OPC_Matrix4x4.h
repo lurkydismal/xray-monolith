@@ -308,10 +308,12 @@ public:
     inline_ float Trace() const {
         return m[ 0 ][ 0 ] + m[ 1 ][ 1 ] + m[ 2 ][ 2 ] + m[ 3 ][ 3 ];
     }
+
     //! Computes the trace of the upper 3x3 matrix.
     inline_ float Trace3x3() const {
         return m[ 0 ][ 0 ] + m[ 1 ][ 1 ] + m[ 2 ][ 2 ];
     }
+
     //! Clears the matrix.
     inline_ void Zero() { ZeroMemory( &m, sizeof( m ) ); }
 
@@ -435,6 +437,7 @@ public:
     //! Inverts the matrix. Determinant must be different from zero, else matrix
     //! can't be inverted.
     Matrix4x4& Invert();
+
     //				Matrix&	ComputeAxisMatrix(Point& axis, float
     // angle);
 
@@ -714,6 +717,7 @@ public:
     inline_ const HPoint* operator[]( int nRow ) const {
         return ( const HPoint* )&m[ nRow ][ 0 ];
     }
+
     inline_ HPoint* operator[]( int nRow ) {
         return ( HPoint* )&m[ nRow ][ 0 ];
     }

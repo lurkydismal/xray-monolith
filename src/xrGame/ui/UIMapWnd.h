@@ -126,7 +126,9 @@ public:
     void DrawHint();
 
     void MoveMap( Fvector2 const& pos_delta );
+
     float GetZoom() { return m_currentZoom; }
+
     void SetZoom( float value );
 
     // demonized: zoom towards mouse cursor
@@ -164,12 +166,17 @@ public:
         m_UILevelFrame->GetAbsoluteRect( r );
         return r;
     };
+
     void AddMapToRender( CUICustomMap* );
     void RemoveMapToRender( CUICustomMap* );
+
     CUIGlobalMap* GlobalMap() { return m_GlobalMap; };
+
     const GameMaps& GameMaps() { return m_GameMaps; };
+
     CUICustomMap* GetMapByIdx( u16 idx );
     u16 GetIdxByName( const shared_str& map_name );
     void UpdateScroll();
+
     shared_str cName() const { return "ui_map_wnd"; };
 };

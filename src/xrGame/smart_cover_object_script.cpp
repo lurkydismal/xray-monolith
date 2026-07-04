@@ -12,6 +12,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void smart_cover::object::script_register( lua_State* L ) {
     module(
         L )[ class_< smart_cover::object, CGameObject >( "smart_cover_object" )

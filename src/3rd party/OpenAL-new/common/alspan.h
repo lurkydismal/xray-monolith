@@ -56,15 +56,19 @@ using void_t = void;
 
 template < typename T >
 struct is_span_ : std::false_type {};
+
 template < typename T, size_t E >
 struct is_span_< span< T, E > > : std::true_type {};
+
 template < typename T >
 constexpr bool is_span_v = is_span_< std::remove_cv_t< T > >::value;
 
 template < typename T >
 struct is_std_array_ : std::false_type {};
+
 template < typename T, size_t N >
 struct is_std_array_< std::array< T, N > > : std::true_type {};
+
 template < typename T >
 constexpr bool is_std_array_v = is_std_array_< std::remove_cv_t< T > >::value;
 
@@ -114,9 +118,11 @@ public:
 
     template < bool is0 = ( extent == 0 ), REQUIRES( is0 ) >
     constexpr span() noexcept {}
+
     template < typename U >
     constexpr explicit span( U iter, index_type )
         : mData{ to_address( iter ) } {}
+
     template < typename U,
                typename V,
                REQUIRES( !std::is_convertible< V, size_t >::value ) >
@@ -124,8 +130,10 @@ public:
 
     constexpr span( type_identity_t< element_type > ( &arr )[ E ] ) noexcept
         : span{ al::data( arr ), al::size( arr ) } {}
+
     constexpr span( std::array< value_type, E >& arr ) noexcept
         : span{ al::data( arr ), al::size( arr ) } {}
+
     template < typename U = T, REQUIRES( std::is_const< U >::value ) >
     constexpr span( const std::array< value_type, E >& arr ) noexcept
         : span{ al::data( arr ), al::size( arr ) } {}
@@ -142,6 +150,7 @@ public:
                          N == dynamic_extent ) >
     constexpr explicit span( const span< U, N >& span_ ) noexcept
         : span{ al::data( span_ ), al::size( span_ ) } {}
+
     template < typename U,
                index_type N,
                REQUIRES( !std::is_same< element_type, U >::value &&
@@ -149,37 +158,49 @@ public:
                          N == extent ) >
     constexpr span( const span< U, N >& span_ ) noexcept
         : span{ al::data( span_ ), al::size( span_ ) } {}
+
     constexpr span( const span& ) noexcept = default;
 
     constexpr span& operator=( const span& rhs ) noexcept = default;
 
     constexpr reference front() const { return *mData; }
+
     constexpr reference back() const { return *( mData + E - 1 ); }
+
     constexpr reference operator[]( index_type idx ) const {
         return mData[ idx ];
     }
+
     constexpr pointer data() const noexcept { return mData; }
 
     constexpr index_type size() const noexcept { return E; }
+
     constexpr index_type size_bytes() const noexcept {
         return E * sizeof( value_type );
     }
+
     constexpr bool empty() const noexcept { return E == 0; }
 
     constexpr iterator begin() const noexcept { return mData; }
+
     constexpr iterator end() const noexcept { return mData + E; }
+
     constexpr const_iterator cbegin() const noexcept { return mData; }
+
     constexpr const_iterator cend() const noexcept { return mData + E; }
 
     constexpr reverse_iterator rbegin() const noexcept {
         return reverse_iterator{ end() };
     }
+
     constexpr reverse_iterator rend() const noexcept {
         return reverse_iterator{ begin() };
     }
+
     constexpr const_reverse_iterator crbegin() const noexcept {
         return const_reverse_iterator{ cend() };
     }
+
     constexpr const_reverse_iterator crend() const noexcept {
         return const_reverse_iterator{ cbegin() };
     }
@@ -247,9 +268,11 @@ public:
     static constexpr size_t extent{ dynamic_extent };
 
     constexpr span() noexcept = default;
+
     template < typename U >
     constexpr span( U iter, index_type count )
         : mData{ to_address( iter ) }, mDataEnd{ to_address( iter ) + count } {}
+
     template < typename U,
                typename V,
                REQUIRES( !std::is_convertible< V, size_t >::value ) >
@@ -259,9 +282,11 @@ public:
     template < size_t N >
     constexpr span( type_identity_t< element_type > ( &arr )[ N ] ) noexcept
         : span{ al::data( arr ), al::size( arr ) } {}
+
     template < size_t N >
     constexpr span( std::array< value_type, N >& arr ) noexcept
         : span{ al::data( arr ), al::size( arr ) } {}
+
     template < size_t N, typename U = T, REQUIRES( std::is_const< U >::value ) >
     constexpr span( const std::array< value_type, N >& arr ) noexcept
         : span{ al::data( arr ), al::size( arr ) } {}
@@ -277,40 +302,52 @@ public:
                          detail_::is_array_compatible< U, element_type > ) >
     constexpr span( const span< U, N >& span_ ) noexcept
         : span{ al::data( span_ ), al::size( span_ ) } {}
+
     constexpr span( const span& ) noexcept = default;
 
     constexpr span& operator=( const span& rhs ) noexcept = default;
 
     constexpr reference front() const { return *mData; }
+
     constexpr reference back() const { return *( mDataEnd - 1 ); }
+
     constexpr reference operator[]( index_type idx ) const {
         return mData[ idx ];
     }
+
     constexpr pointer data() const noexcept { return mData; }
 
     constexpr index_type size() const noexcept {
         return static_cast< index_type >( mDataEnd - mData );
     }
+
     constexpr index_type size_bytes() const noexcept {
         return static_cast< index_type >( mDataEnd - mData ) *
                sizeof( value_type );
     }
+
     constexpr bool empty() const noexcept { return mData == mDataEnd; }
 
     constexpr iterator begin() const noexcept { return mData; }
+
     constexpr iterator end() const noexcept { return mDataEnd; }
+
     constexpr const_iterator cbegin() const noexcept { return mData; }
+
     constexpr const_iterator cend() const noexcept { return mDataEnd; }
 
     constexpr reverse_iterator rbegin() const noexcept {
         return reverse_iterator{ end() };
     }
+
     constexpr reverse_iterator rend() const noexcept {
         return reverse_iterator{ begin() };
     }
+
     constexpr const_reverse_iterator crbegin() const noexcept {
         return const_reverse_iterator{ cend() };
     }
+
     constexpr const_reverse_iterator crend() const noexcept {
         return const_reverse_iterator{ cbegin() };
     }
@@ -388,18 +425,22 @@ constexpr auto as_span( T ptr, U count_or_end ) {
     using value_type = typename std::pointer_traits< T >::element_type;
     return span< value_type >{ ptr, count_or_end };
 }
+
 template < typename T, size_t N >
 constexpr auto as_span( T ( &arr )[ N ] ) noexcept {
     return span< T, N >{ al::data( arr ), al::size( arr ) };
 }
+
 template < typename T, size_t N >
 constexpr auto as_span( std::array< T, N >& arr ) noexcept {
     return span< T, N >{ al::data( arr ), al::size( arr ) };
 }
+
 template < typename T, size_t N >
 constexpr auto as_span( const std::array< T, N >& arr ) noexcept {
     return span< std::add_const_t< T >, N >{ al::data( arr ), al::size( arr ) };
 }
+
 template <
     typename U,
     REQUIRES( !detail_::is_span_v< U > && !detail_::is_std_array_v< U > &&
@@ -409,6 +450,7 @@ constexpr auto as_span( U&& cont ) {
         std::remove_pointer_t< decltype( al::data( std::declval< U& >() ) ) >;
     return span< value_type >{ al::data( cont ), al::size( cont ) };
 }
+
 template < typename T, size_t N >
 constexpr auto as_span( span< T, N > span_ ) noexcept {
     return span_;

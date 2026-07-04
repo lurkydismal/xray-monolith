@@ -60,7 +60,9 @@ private:
     BOOL Create();
     bool NeedColorMapping();
     BOOL NeedPostProcess();
+
     BOOL Available() { return bAvailable; }
+
     BOOL Perform();
 
     void calc_tc_noise( Fvector2& p0, Fvector2& p1 );
@@ -80,20 +82,29 @@ public:
     void DoAsyncScreenshot();
 
     virtual void set_blur( float f ) { param_blur = f; }
+
     virtual void set_gray( float f ) { param_gray = f; }
+
     virtual void set_duality_h( float f ) { param_duality_h = _abs( f ); }
+
     virtual void set_duality_v( float f ) { param_duality_v = _abs( f ); }
+
     virtual void set_noise( float f ) { param_noise = f; }
+
     virtual void set_noise_scale( float f ) { param_noise_scale = f; }
+
     virtual void set_noise_fps( float f ) {
         param_noise_fps = _abs( f ) + EPS_S;
     }
 
     virtual void set_color_base( u32 f ) { param_color_base = f; }
+
     virtual void set_color_gray( u32 f ) { param_color_gray = f; }
+
     virtual void set_color_add( const Fvector& f ) { param_color_add = f; }
 
     virtual void set_cm_imfluence( float f ) { param_color_map_influence = f; }
+
     virtual void set_cm_interpolate( float f ) {
         param_color_map_interpolate = f;
     }
@@ -104,8 +115,10 @@ public:
     }
 
     virtual u32 get_width() { return curWidth; }
+
     virtual u32 get_height() { return curHeight; }
 
     u32 get_rtwidth() { return rtWidth; }
+
     u32 get_rtheight() { return rtHeight; }
 };

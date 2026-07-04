@@ -20,7 +20,9 @@ enum {
     flRKeyAbsent = ( 1 << 1 ),
     flTKey16IsBit = ( 1 << 2 ),
 };
+
 #pragma pack( push, 2 )
+
 struct CKey {
     Fquaternion Q; // rotation
     Fvector T;     // translation
@@ -117,6 +119,7 @@ public:
     void Save( IWriter* );
 #endif
     bool is_empty() const { return intervals.empty(); }
+
     const interval* pick_mark( float const& t ) const;
     bool is_mark_between( float const& t0, float const& t1 ) const;
     float time_to_next_mark( float time ) const;
@@ -136,6 +139,7 @@ public:
     xr_vector< motion_marks > marks;
 
     IC float Dequantize( u16 V ) const { return float( V ) / 655.35f; }
+
     IC u16 Quantize( float V ) const {
         s32 t = iFloor( V * 655.35f );
         clamp( t, 0, 65535 );
@@ -143,12 +147,17 @@ public:
     }
 
     void Load( IReader* MP, u32 fl, u16 vers );
+
     u32 mem_usage() { return sizeof( *this ); }
 
     ICF float Accrue() { return fQuantizerRangeExt * Dequantize( accrue ); }
+
     ICF float Falloff() { return fQuantizerRangeExt * Dequantize( falloff ); }
+
     ICF float Speed() { return Dequantize( speed ); }
+
     ICF float Power() { return Dequantize( power ); }
+
     bool StopAtEnd();
 };
 
@@ -185,17 +194,22 @@ public:
     IC CPartDef* operator[]( u16 id ) {
         return P.size() > id ? P.at( id ) : nullptr;
     }
+
     IC const CPartDef* part( u16 id ) const {
         return P.size() > id ? P.at( id ) : nullptr;
     }
+
     CPartDef* create() {
         if ( P.size() > MAX_PARTS )
             return nullptr;
         P.emplace_back( xr_new< CPartDef >() );
         return P.back();
     }
+
     u16 part_id( const shared_str& name ) const;
+
     u32 mem_usage() { return P[ 0 ]->mem_usage() * P.size(); }
+
     void load( IKinematics* V, LPCSTR model_name );
 
     u8 count() const { return P.size(); };

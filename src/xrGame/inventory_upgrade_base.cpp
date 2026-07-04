@@ -56,6 +56,7 @@ void UpgradeBase::log_hierarchy( LPCSTR nest ) {
         ( *ib )->log_hierarchy( nest );
     }
 }
+
 /*
 void UpgradeBase::test_all_upgrades( CInventoryItem& item )
 {

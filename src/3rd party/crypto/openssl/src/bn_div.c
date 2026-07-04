@@ -180,6 +180,7 @@ static int BN_div_no_branch( BIGNUM* dv,
                              const BIGNUM* num,
                              const BIGNUM* divisor,
                              BN_CTX* ctx );
+
 int BN_div( BIGNUM* dv,
             BIGNUM* rm,
             const BIGNUM* num,

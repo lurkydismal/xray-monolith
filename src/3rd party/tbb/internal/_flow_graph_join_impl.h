@@ -25,7 +25,9 @@ namespace internal {
 
 struct forwarding_base : tbb::internal::no_assign {
     forwarding_base( graph& g ) : graph_ref( g ) {}
+
     virtual ~forwarding_base() {}
+
     // decrement_port_count may create a forwarding task.  If we cannot handle
     // the task ourselves, ask decrement_port_count to deal with it.
     virtual task* decrement_port_count( bool handle_task ) = 0;
@@ -39,7 +41,9 @@ struct forwarding_base : tbb::internal::no_assign {
 template < typename KeyType >
 struct matching_forwarding_base : public forwarding_base {
     typedef typename tbb::internal::strip< KeyType >::type current_key_type;
+
     matching_forwarding_base( graph& g ) : forwarding_base( g ) {}
+
     virtual task* increment_key_count(
         current_key_type const& /*t*/,
         bool /*handle_task*/ ) = 0; // {return NULL;}
@@ -54,6 +58,7 @@ struct join_helper {
         tbb::flow::get< N - 1 >( my_input ).set_join_node_pointer( port );
         join_helper< N - 1 >::set_join_node_pointer( my_input, port );
     }
+
     template < typename TupleType >
     static inline void consume_reservations( TupleType& my_input ) {
         tbb::flow::get< N - 1 >( my_input ).consume();
@@ -211,6 +216,7 @@ struct join_helper< 1 > {
                                       ->clone() );
         }
     }
+
     template < typename InputTuple >
     static inline void reset_inputs( InputTuple& my_input, reset_flags f ) {
         tbb::flow::get< 0 >( my_input ).reset_receiver( f );
@@ -258,6 +264,7 @@ private:
         : public aggregated_operation< reserving_port_operation > {
     public:
         char type;
+
         union {
             T* my_arg;
             predecessor_type* my_pred;
@@ -266,11 +273,14 @@ private:
             predecessor_list_type* plist;
 #endif
         };
+
         reserving_port_operation( const T& e, op_type t )
             : type( char( t ) ), my_arg( const_cast< T* >( &e ) ) {}
+
         reserving_port_operation( const predecessor_type& s, op_type t )
             : type( char( t ) ),
               my_pred( const_cast< predecessor_type* >( &s ) ) {}
+
         reserving_port_operation( op_type t ) : type( char( t ) ) {}
     };
 
@@ -358,6 +368,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     task* try_put_task( const T& ) __TBB_override { return NULL; }
 
     graph& graph_reference() const __TBB_override { return my_join->graph_ref; }
@@ -417,6 +428,7 @@ public:
     built_predecessors_type& built_predecessors() __TBB_override {
         return my_predecessors.built_predecessors();
     }
+
     void internal_add_built_predecessor( predecessor_type& src )
         __TBB_override {
         reserving_port_operation op_data( src, add_blt_pred );
@@ -508,14 +520,17 @@ private:
         predecessor_list_type* plist;
 #endif
         task* bypass_t;
+
         // constructor for value parameter
         queueing_port_operation( const T& e, op_type t )
             : type( char( t ) ), my_val( e ), bypass_t( NULL ) {}
+
         // constructor for pointer parameter
         queueing_port_operation( const T* p, op_type t )
             : type( char( t ) ),
               my_arg( const_cast< T* >( p ) ),
               bypass_t( NULL ) {}
+
         // constructor with no parameter
         queueing_port_operation( op_type t )
             : type( char( t ) ), bypass_t( NULL ) {}
@@ -583,6 +598,7 @@ private:
             }
         }
     }
+
     // ------------ End Aggregator ---------------
 
 protected:
@@ -592,6 +608,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     task* try_put_task( const T& v ) __TBB_override {
         queueing_port_operation op_data( v, try__put_task );
         my_aggregator.execute( &op_data );
@@ -704,6 +721,7 @@ struct count_element {
 template < typename K >
 struct key_to_count_functor {
     typedef count_element< K > table_item_type;
+
     const K& operator()( const table_item_type& v ) { return v.my_key; }
 };
 
@@ -765,9 +783,11 @@ private:
         // constructor for value parameter
         key_matching_port_operation( const input_type& e, op_type t )
             : type( char( t ) ), my_val( e ) {}
+
         // constructor for pointer parameter
         key_matching_port_operation( const input_type* p, op_type t )
             : type( char( t ) ), my_arg( const_cast< input_type* >( p ) ) {}
+
         // constructor with no parameter
         key_matching_port_operation( op_type t ) : type( char( t ) ) {}
     };
@@ -828,6 +848,7 @@ private:
             }
         }
     }
+
     // ------------ End Aggregator ---------------
 protected:
     template < typename R, typename B >
@@ -836,6 +857,7 @@ protected:
     friend class internal::broadcast_cache;
     template < typename X, typename Y >
     friend class internal::round_robin_cache;
+
     task* try_put_task( const input_type& v ) __TBB_override {
         key_matching_port_operation op_data( v, try__put );
         task* rtask = NULL;
@@ -1029,6 +1051,7 @@ protected:
     void tuple_accepted() {
         join_helper< N >::consume_reservations( my_inputs );
     }
+
     void tuple_rejected() {
         join_helper< N >::release_reservations( my_inputs );
     }
@@ -1113,6 +1136,7 @@ protected:
         reset_port_count();
         join_helper< N >::reset_ports( my_inputs );
     }
+
     void tuple_rejected() {
         // nothing to do.
     }
@@ -1176,6 +1200,7 @@ public:
     // and the output_buffer_type base class
 private:
     enum op_type { res_count, inc_count, may_succeed, try_make };
+
     typedef join_node_FE< key_matching< key_type, key_hash_compare >,
                           InputTuple,
                           OutputTuple >
@@ -1189,6 +1214,7 @@ private:
         output_type* my_output;
         task* bypass_t;
         bool enqueue_task;
+
         // constructor for value parameter
         key_matching_FE_operation( const unref_key_type& e,
                                    bool q_task,
@@ -1198,11 +1224,13 @@ private:
               my_output( NULL ),
               bypass_t( NULL ),
               enqueue_task( q_task ) {}
+
         key_matching_FE_operation( output_type* p, op_type t )
             : type( char( t ) ),
               my_output( p ),
               bypass_t( NULL ),
               enqueue_task( true ) {}
+
         // constructor with no parameter
         key_matching_FE_operation( op_type t )
             : type( char( t ) ),
@@ -1302,6 +1330,7 @@ private:
             }
         }
     }
+
     // ------------ End Aggregator ---------------
 
 public:
@@ -1452,6 +1481,7 @@ private:
         : public aggregated_operation< join_node_base_operation > {
     public:
         char type;
+
         union {
             output_type* my_arg;
             successor_type* my_succ;
@@ -1460,15 +1490,19 @@ private:
             successor_list_type* slist;
 #endif
         };
+
         task* bypass_t;
+
         join_node_base_operation( const output_type& e, op_type t )
             : type( char( t ) ),
               my_arg( const_cast< output_type* >( &e ) ),
               bypass_t( NULL ) {}
+
         join_node_base_operation( const successor_type& s, op_type t )
             : type( char( t ) ),
               my_succ( const_cast< successor_type* >( &s ) ),
               bypass_t( NULL ) {}
+
         join_node_base_operation( op_type t )
             : type( char( t ) ), bypass_t( NULL ) {}
     };
@@ -1566,6 +1600,7 @@ private:
             }
         }
     }
+
     // ---------- end aggregator -----------
 public:
     join_node_base( graph& g )
@@ -1659,6 +1694,7 @@ private:
 
     friend class forward_task_bypass<
         join_node_base< JP, InputTuple, OutputTuple > >;
+
     task* forward_task() {
         join_node_base_operation op_data( do_fwrd_bypass );
         my_aggregator.execute( &op_data );
@@ -1719,6 +1755,7 @@ private:
 
 public:
     unfolded_join_node( graph& g ) : base_type( g ) {}
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };
@@ -1731,6 +1768,7 @@ struct key_from_message_body {
         return key_from_message< K >( t );
     }
 };
+
 // Adds const to reference type
 template < typename K, typename T >
 struct key_from_message_body< K&, T > {
@@ -1800,6 +1838,7 @@ public:
         __TBB_STATIC_ASSERT( tbb::flow::tuple_size< OutputTuple >::value == 2,
                              "wrong number of body initializers" );
     }
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };
@@ -1870,6 +1909,7 @@ public:
         __TBB_STATIC_ASSERT( tbb::flow::tuple_size< OutputTuple >::value == 3,
                              "wrong number of body initializers" );
     }
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };
@@ -1954,6 +1994,7 @@ public:
         __TBB_STATIC_ASSERT( tbb::flow::tuple_size< OutputTuple >::value == 4,
                              "wrong number of body initializers" );
     }
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };
@@ -2052,6 +2093,7 @@ public:
         __TBB_STATIC_ASSERT( tbb::flow::tuple_size< OutputTuple >::value == 5,
                              "wrong number of body initializers" );
     }
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };
@@ -2162,6 +2204,7 @@ public:
         __TBB_STATIC_ASSERT( tbb::flow::tuple_size< OutputTuple >::value == 6,
                              "wrong number of body initializers" );
     }
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };
@@ -2285,6 +2328,7 @@ public:
         __TBB_STATIC_ASSERT( tbb::flow::tuple_size< OutputTuple >::value == 7,
                              "wrong number of body initializers" );
     }
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };
@@ -2419,6 +2463,7 @@ public:
         __TBB_STATIC_ASSERT( tbb::flow::tuple_size< OutputTuple >::value == 8,
                              "wrong number of body initializers" );
     }
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };
@@ -2564,6 +2609,7 @@ public:
         __TBB_STATIC_ASSERT( tbb::flow::tuple_size< OutputTuple >::value == 9,
                              "wrong number of body initializers" );
     }
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };
@@ -2720,6 +2766,7 @@ public:
         __TBB_STATIC_ASSERT( tbb::flow::tuple_size< OutputTuple >::value == 10,
                              "wrong number of body initializers" );
     }
+
     unfolded_join_node( const unfolded_join_node& other )
         : base_type( other ) {}
 };

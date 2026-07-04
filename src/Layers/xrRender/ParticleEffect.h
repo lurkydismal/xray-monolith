@@ -73,19 +73,24 @@ public:
     BOOL Compile( CPEDef* def );
 
     IC CPEDef* GetDefinition() { return m_Def; }
+
     IC int GetHandleEffect() { return m_HandleEffect; }
+
     IC int GetHandleActionList() { return m_HandleActionList; }
 
     virtual void Play();
     virtual void Stop( BOOL bDefferedStop = TRUE );
+
     virtual BOOL IsPlaying() { return m_RT_Flags.is( flRT_Playing ); }
 
     virtual void SetHudMode( BOOL b ) { m_RT_Flags.set( flRT_HUDmode, b ); }
+
     virtual BOOL GetHudMode() { return m_RT_Flags.is( flRT_HUDmode ); }
 
     virtual void SetLiveUpdate( BOOL b ) {
         m_RT_Flags.set( flRT_LiveUpdate, b );
     }
+
     virtual BOOL GetLiveUpdate() { return m_RT_Flags.is( flRT_LiveUpdate ); }
 
     virtual float GetTimeLimit() {
@@ -102,9 +107,11 @@ public:
     void SetDestroyCB( DestroyCallback destroy_cb ) {
         m_DestroyCallback = destroy_cb;
     }
+
     void SetCollisionCB( CollisionCallback collision_cb ) {
         m_CollisionCallback = collision_cb;
     }
+
     void SetBirthDeadCB( PAPI::OnBirthParticleCB bc,
                          PAPI::OnDeadParticleCB dc,
                          void* owner,

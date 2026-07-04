@@ -163,9 +163,11 @@ ICF u8* acc_header( void* P ) {
     u8* _P = ( u8* )P;
     return _P - 1;
 }
+
 ICF u32 get_header( void* P ) {
     return ( u32 )*acc_header( P );
 }
+
 void xrMemory::mem_statistic( LPCSTR fn ) {
     if ( !debug_mode )
         return;

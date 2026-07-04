@@ -12,7 +12,9 @@ public:
     xr_atomic_u32 dwReference;
 
     xr_resource() : dwReference( 0 ) {}
+
     xr_resource( const xr_resource& ) : dwReference( 0 ) {}
+
     xr_resource& operator=( const xr_resource& ) { return *this; }
 };
 
@@ -77,6 +79,7 @@ public:
     }
 
     ICF T* _get() const { return p_; }
+
     void _clear() { p_ = 0; }
 };
 
@@ -112,14 +115,18 @@ public:
 
     // accessors
     T& operator*() const { return *p_; }
+
     T* operator->() const { return p_; }
 
     // unspecified bool type
     typedef T* ( resptr_core::*unspecified_bool_type )() const;
+
     operator unspecified_bool_type() const {
         return p_ == 0 ? 0 : &resptr_core::_get;
     }
+
     bool operator!() const { return p_ == 0; }
+
     operator bool() const { return p_ != 0; }
 
     // fast swapping

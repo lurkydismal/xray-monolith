@@ -277,6 +277,7 @@ typedef long ssize_t;
 #include <string.h>
 #ifdef _WIN64
 #define strlen( s ) _strlen31( s )
+
 /* cut strings to 2GB */
 static unsigned int _strlen31( const char* str ) {
     unsigned int len = 0;

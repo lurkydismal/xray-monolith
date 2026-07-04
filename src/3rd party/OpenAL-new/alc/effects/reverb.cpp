@@ -91,16 +91,20 @@ struct CubicFilter {
     constexpr float getCoeff0( size_t i ) const noexcept {
         return mFilter[ sTableSteps + i ];
     }
+
     constexpr float getCoeff1( size_t i ) const noexcept {
         return mFilter[ i ];
     }
+
     constexpr float getCoeff2( size_t i ) const noexcept {
         return mFilter[ sTableSteps - i ];
     }
+
     constexpr float getCoeff3( size_t i ) const noexcept {
         return mFilter[ sTableSteps * 2 - i ];
     }
 };
+
 constexpr CubicFilter gCubicTable;
 
 using namespace std::placeholders;
@@ -285,6 +289,7 @@ struct DelayLineI {
      * of 2 to allow the use of bit-masking instead of a modulus for wrapping.
      */
     size_t Mask{ 0u };
+
     union {
         uintptr_t LineOffset{ 0u };
         std::array< float, NUM_LINES >* Line;
@@ -538,6 +543,7 @@ struct ReverbState final : public EffectState {
         Cleanup,
         Normal,
     };
+
     PipelineState mPipelineState{ DeviceClear };
     uint8_t mCurrentPipeline{ 0 };
 
@@ -551,6 +557,7 @@ struct ReverbState final : public EffectState {
         alignas( 16 ) FloatBufferLine mTempLine{};
         alignas( 16 ) std::array< ReverbUpdateLine, NUM_LINES > mTempSamples;
     };
+
     alignas( 16 ) std::array< FloatBufferLine, NUM_LINES > mEarlySamples{};
     alignas( 16 ) std::array< FloatBufferLine, NUM_LINES > mLateSamples{};
 

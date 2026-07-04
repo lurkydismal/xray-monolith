@@ -25,19 +25,24 @@ struct AsyncEvent {
     enum class SrcState { Reset, Stop, Play, Pause };
 
     const uint EnumType;
+
     union {
         char dummy;
+
         struct {
             uint id;
             SrcState state;
         } srcstate;
+
         struct {
             uint id;
             uint count;
         } bufcomp;
+
         struct {
             char msg[ 244 ];
         } disconnect;
+
         EffectState* mEffectState;
     } u{};
 

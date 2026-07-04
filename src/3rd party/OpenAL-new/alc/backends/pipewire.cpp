@@ -128,6 +128,7 @@ _Pragma( "GCC diagnostic push" )
     constexpr auto PwIdAny = PW_ID_ANY;
 
 } // namespace
+
 _Pragma( "GCC diagnostic pop" )
 
     namespace {
@@ -292,13 +293,16 @@ _Pragma( "GCC diagnostic pop" )
     template <>
     struct PodInfo< SPA_TYPE_Int > {
         using Type = int32_t;
+
         static auto get_value( const spa_pod* pod, int32_t* val ) {
             return spa_pod_get_int( pod, val );
         }
     };
+
     template <>
     struct PodInfo< SPA_TYPE_Id > {
         using Type = uint32_t;
+
         static auto get_value( const spa_pod* pod, uint32_t* val ) {
             return spa_pod_get_id( pod, val );
         }
@@ -358,11 +362,13 @@ _Pragma( "GCC diagnostic pop" )
             pw_context_destroy( context );
         }
     };
+
     using PwContextPtr = std::unique_ptr< pw_context, PwContextDeleter >;
 
     struct PwCoreDeleter {
         void operator()( pw_core* core ) const { pw_core_disconnect( core ); }
     };
+
     using PwCorePtr = std::unique_ptr< pw_core, PwCoreDeleter >;
 
     struct PwRegistryDeleter {
@@ -370,6 +376,7 @@ _Pragma( "GCC diagnostic pop" )
             pw_proxy_destroy( as< pw_proxy* >( reg ) );
         }
     };
+
     using PwRegistryPtr = std::unique_ptr< pw_registry, PwRegistryDeleter >;
 
     struct PwNodeDeleter {
@@ -377,6 +384,7 @@ _Pragma( "GCC diagnostic pop" )
             pw_proxy_destroy( as< pw_proxy* >( node ) );
         }
     };
+
     using PwNodePtr = std::unique_ptr< pw_node, PwNodeDeleter >;
 
     struct PwMetadataDeleter {
@@ -384,6 +392,7 @@ _Pragma( "GCC diagnostic pop" )
             pw_proxy_destroy( as< pw_proxy* >( mdata ) );
         }
     };
+
     using PwMetadataPtr = std::unique_ptr< pw_metadata, PwMetadataDeleter >;
 
     struct PwStreamDeleter {
@@ -391,6 +400,7 @@ _Pragma( "GCC diagnostic pop" )
             pw_stream_destroy( stream );
         }
     };
+
     using PwStreamPtr = std::unique_ptr< pw_stream, PwStreamDeleter >;
 
     /* Enums for bitflags... again... *sigh* */
@@ -411,21 +421,26 @@ _Pragma( "GCC diagnostic pop" )
     public:
         ThreadMainloop() = default;
         ThreadMainloop( const ThreadMainloop& ) = delete;
+
         ThreadMainloop( ThreadMainloop&& rhs ) noexcept : mLoop{ rhs.mLoop } {
             rhs.mLoop = nullptr;
         }
+
         explicit ThreadMainloop( pw_thread_loop* loop ) noexcept
             : mLoop{ loop } {}
+
         ~ThreadMainloop() {
             if ( mLoop )
                 pw_thread_loop_destroy( mLoop );
         }
 
         ThreadMainloop& operator=( const ThreadMainloop& ) = delete;
+
         ThreadMainloop& operator=( ThreadMainloop&& rhs ) noexcept {
             std::swap( mLoop, rhs.mLoop );
             return *this;
         }
+
         ThreadMainloop& operator=( std::nullptr_t ) noexcept {
             if ( mLoop )
                 pw_thread_loop_destroy( mLoop );
@@ -436,11 +451,13 @@ _Pragma( "GCC diagnostic pop" )
         explicit operator bool() const noexcept { return mLoop != nullptr; }
 
         auto start() const { return pw_thread_loop_start( mLoop ); }
+
         auto stop() const { return pw_thread_loop_stop( mLoop ); }
 
         auto getLoop() const { return pw_thread_loop_get_loop( mLoop ); }
 
         auto lock() const { return pw_thread_loop_lock( mLoop ); }
+
         auto unlock() const { return pw_thread_loop_unlock( mLoop ); }
 
         auto signal( bool wait ) const {
@@ -459,6 +476,7 @@ _Pragma( "GCC diagnostic pop" )
 
         friend struct MainloopUniqueLock;
     };
+
     struct MainloopUniqueLock : public std::unique_lock< ThreadMainloop > {
         using std::unique_lock< ThreadMainloop >::unique_lock;
         MainloopUniqueLock& operator=( MainloopUniqueLock&& ) = default;
@@ -471,6 +489,7 @@ _Pragma( "GCC diagnostic pop" )
                 wait();
         }
     };
+
     using MainloopLockGuard = std::lock_guard< ThreadMainloop >;
 
     /* There's quite a mess here, but the purpose is to track active devices and
@@ -516,6 +535,7 @@ _Pragma( "GCC diagnostic pop" )
         void kill();
 
         auto lock() const { return mLoop.lock(); }
+
         auto unlock() const { return mLoop.unlock(); }
 
         /**
@@ -560,6 +580,7 @@ _Pragma( "GCC diagnostic pop" )
                           const char* type,
                           uint32_t version,
                           const spa_dict* props );
+
         static void addCallbackC( void* object,
                                   uint32_t id,
                                   uint32_t permissions,
@@ -571,6 +592,7 @@ _Pragma( "GCC diagnostic pop" )
         }
 
         void removeCallback( uint32_t id );
+
         static void removeCallbackC( void* object, uint32_t id ) {
             static_cast< EventManager* >( object )->removeCallback( id );
         }
@@ -584,6 +606,7 @@ _Pragma( "GCC diagnostic pop" )
         }
 
         void coreCallback( uint32_t id, int seq );
+
         static void coreCallbackC( void* object, uint32_t id, int seq ) {
             static_cast< EventManager* >( object )->coreCallback( id, seq );
         }
@@ -595,6 +618,7 @@ _Pragma( "GCC diagnostic pop" )
             return ret;
         }
     };
+
     using EventWatcherUniqueLock = std::unique_lock< EventManager >;
     using EventWatcherLockGuard = std::lock_guard< EventManager >;
 
@@ -605,6 +629,7 @@ _Pragma( "GCC diagnostic pop" )
      */
     enum class NodeType : unsigned char { Sink, Source, Duplex };
     constexpr auto InvalidChannelConfig = DevFmtChannels( 255 );
+
     struct DeviceNode {
         uint32_t mId{};
 
@@ -623,12 +648,14 @@ _Pragma( "GCC diagnostic pop" )
         static DeviceNode& Add( uint32_t id );
         static DeviceNode* Find( uint32_t id );
         static void Remove( uint32_t id );
+
         static std::vector< DeviceNode >& GetList() noexcept { return sList; }
 
         void parseSampleRate( const spa_pod* value ) noexcept;
         void parsePositions( const spa_pod* value ) noexcept;
         void parseChannelCount( const spa_pod* value ) noexcept;
     };
+
     std::vector< DeviceNode > DeviceNode::sList;
     std::string DefaultSinkDevice;
     std::string DefaultSourceDevice;
@@ -882,9 +909,11 @@ _Pragma( "GCC diagnostic pop" )
             ppw_node_subscribe_params( mNode.get(), al::data( fmtids ),
                                        al::size( fmtids ) );
         }
+
         ~NodeProxy() { spa_hook_remove( &mListener ); }
 
         void infoCallback( const pw_node_info* info );
+
         static void infoCallbackC( void* object, const pw_node_info* info ) {
             static_cast< NodeProxy* >( object )->infoCallback( info );
         }
@@ -894,6 +923,7 @@ _Pragma( "GCC diagnostic pop" )
                             uint32_t index,
                             uint32_t next,
                             const spa_pod* param );
+
         static void paramCallbackC( void* object,
                                     int seq,
                                     uint32_t id,
@@ -1022,12 +1052,14 @@ _Pragma( "GCC diagnostic pop" )
             ppw_metadata_add_listener( mMetadata.get(), &mListener,
                                        &metadataEvents, this );
         }
+
         ~MetadataProxy() { spa_hook_remove( &mListener ); }
 
         int propertyCallback( uint32_t id,
                               const char* key,
                               const char* type,
                               const char* value );
+
         static int propertyCallbackC( void* object,
                                       uint32_t id,
                                       const char* key,
@@ -1297,6 +1329,7 @@ _Pragma( "GCC diagnostic pop" )
     }
 
     enum use_f32p_e : bool { UseDevType = false, ForceF32Planar = true };
+
     spa_audio_info_raw make_spa_info( DeviceBase * device, bool is51rear,
                                       use_f32p_e use_f32p ) {
         spa_audio_info_raw info{};
@@ -1376,6 +1409,7 @@ _Pragma( "GCC diagnostic pop" )
         void stateChangedCallback( pw_stream_state old,
                                    pw_stream_state state,
                                    const char* error );
+
         static void stateChangedCallbackC( void* data,
                                            pw_stream_state old,
                                            pw_stream_state state,
@@ -1385,6 +1419,7 @@ _Pragma( "GCC diagnostic pop" )
         }
 
         void ioChangedCallback( uint32_t id, void* area, uint32_t size );
+
         static void ioChangedCallbackC( void* data,
                                         uint32_t id,
                                         void* area,
@@ -1394,6 +1429,7 @@ _Pragma( "GCC diagnostic pop" )
         }
 
         void outputCallback();
+
         static void outputCallbackC( void* data ) {
             static_cast< PipeWirePlayback* >( data )->outputCallback();
         }
@@ -1427,6 +1463,7 @@ _Pragma( "GCC diagnostic pop" )
     public:
         PipeWirePlayback( DeviceBase* device ) noexcept
             : BackendBase{ device } {}
+
         ~PipeWirePlayback() {
             /* Stop the mainloop so the stream can be properly destroyed. */
             if ( mLoop )
@@ -1931,6 +1968,7 @@ _Pragma( "GCC diagnostic pop" )
         void stateChangedCallback( pw_stream_state old,
                                    pw_stream_state state,
                                    const char* error );
+
         static void stateChangedCallbackC( void* data,
                                            pw_stream_state old,
                                            pw_stream_state state,
@@ -1940,6 +1978,7 @@ _Pragma( "GCC diagnostic pop" )
         }
 
         void inputCallback();
+
         static void inputCallbackC( void* data ) {
             static_cast< PipeWireCapture* >( data )->inputCallback();
         }
@@ -1970,6 +2009,7 @@ _Pragma( "GCC diagnostic pop" )
     public:
         PipeWireCapture( DeviceBase* device ) noexcept
             : BackendBase{ device } {}
+
         ~PipeWireCapture() {
             if ( mLoop )
                 mLoop.stop();

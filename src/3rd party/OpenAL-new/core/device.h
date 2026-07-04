@@ -221,6 +221,7 @@ struct DeviceBase {
         std::array< float, MixerLineSize + MaxResamplerPadding > mResampleData;
 
     alignas( 16 ) float FilteredData[ BufferLineSize ];
+
     union {
         alignas(
             16 ) float HrtfSourceData[ BufferLineSize + HrtfHistoryLength ];
@@ -284,9 +285,11 @@ struct DeviceBase {
     ~DeviceBase();
 
     uint bytesFromFmt() const noexcept { return BytesFromDevFmt( FmtType ); }
+
     uint channelsFromFmt() const noexcept {
         return ChannelsFromDevFmt( FmtChans, mAmbiOrder );
     }
+
     uint frameSizeFromFmt() const noexcept {
         return bytesFromFmt() * channelsFromFmt();
     }

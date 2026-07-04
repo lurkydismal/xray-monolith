@@ -10,7 +10,9 @@ class XRCORE_API pauseMngr {
 
 public:
     pauseMngr();
+
     bool Paused() { return m_paused; };
+
     void Pause( bool b );
     void Register( CTimer_paused& t );
     void UnRegister( CTimer_paused& t );
@@ -48,6 +50,7 @@ public:
     IC u32 GetElapsed_ms() const {
         return u32( GetElapsed_ticks() * u64( 1000 ) / CPU::qpc_freq );
     }
+
     IC float GetElapsed_sec() const {
 #ifndef _EDITOR
         FPU::m64r();
@@ -155,6 +158,7 @@ public:
     virtual ~CTimer_paused_ex() {}
 
     IC bool Paused() const { return bPause; }
+
     IC void Pause( const bool b ) {
         if ( bPause == b )
             return;
@@ -173,6 +177,7 @@ public:
 class XRCORE_API CTimer_paused : public CTimer_paused_ex {
 public:
     CTimer_paused() { g_pauseMngr().Register( *this ); }
+
     virtual ~CTimer_paused() { g_pauseMngr().UnRegister( *this ); }
 };
 
@@ -208,6 +213,7 @@ public:
     IC u32 GetElapsed_ms() const {
         return u32( GetElapsed_ticks() * u64( 1000 ) / CPU::qpc_freq );
     }
+
     IC float GetElapsed_sec() const {
 #ifndef _EDITOR
         FPU::m64r();

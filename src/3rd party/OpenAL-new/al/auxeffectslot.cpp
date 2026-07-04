@@ -54,6 +54,7 @@ struct FactoryItem {
     EffectSlotType Type;
     EffectStateFactory* ( &GetFactory )( void );
 };
+
 constexpr FactoryItem FactoryList[] = {
     { EffectSlotType::None, NullStateFactory_getFactory },
     { EffectSlotType::EAXReverb, ReverbStateFactory_getFactory },
@@ -376,6 +377,7 @@ alGenAuxiliaryEffectSlots( ALsizei n, ALuint* effectslots ) START_API_FUNC {
         std::copy( ids.cbegin(), ids.cend(), effectslots );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY
@@ -446,6 +448,7 @@ alDeleteAuxiliaryEffectSlots( ALsizei n,
             FreeEffectSlot( context.get(), slot );
     }
 }
+
 END_API_FUNC
 
 AL_API ALboolean AL_APIENTRY alIsAuxiliaryEffectSlot( ALuint effectslot )
@@ -459,6 +462,7 @@ AL_API ALboolean AL_APIENTRY alIsAuxiliaryEffectSlot( ALuint effectslot )
         }
     return AL_FALSE;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alAuxiliaryEffectSlotPlaySOFT( ALuint slotid )
@@ -484,6 +488,7 @@ AL_API void AL_APIENTRY alAuxiliaryEffectSlotPlaySOFT( ALuint slotid )
     AddActiveEffectSlots( { &slot, 1 }, context.get() );
     slot->mState = SlotState::Playing;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alAuxiliaryEffectSlotPlayvSOFT( ALsizei n,
@@ -521,6 +526,7 @@ AL_API void AL_APIENTRY alAuxiliaryEffectSlotPlayvSOFT( ALsizei n,
     for ( auto slot : slots )
         slot->mState = SlotState::Playing;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alAuxiliaryEffectSlotStopSOFT( ALuint slotid )
@@ -541,6 +547,7 @@ AL_API void AL_APIENTRY alAuxiliaryEffectSlotStopSOFT( ALuint slotid )
     RemoveActiveEffectSlots( { &slot, 1 }, context.get() );
     slot->mState = SlotState::Stopped;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alAuxiliaryEffectSlotStopvSOFT( ALsizei n,
@@ -574,6 +581,7 @@ AL_API void AL_APIENTRY alAuxiliaryEffectSlotStopvSOFT( ALsizei n,
     for ( auto slot : slots )
         slot->mState = SlotState::Stopped;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alAuxiliaryEffectSloti( ALuint effectslot,
@@ -734,6 +742,7 @@ AL_API void AL_APIENTRY alAuxiliaryEffectSloti( ALuint effectslot,
     }
     UpdateProps( slot, context.get() );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alAuxiliaryEffectSlotiv( ALuint effectslot,
@@ -768,6 +777,7 @@ AL_API void AL_APIENTRY alAuxiliaryEffectSlotiv( ALuint effectslot,
                 "Invalid effect slot integer-vector property 0x%04x", param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alAuxiliaryEffectSlotf( ALuint effectslot,
@@ -803,6 +813,7 @@ AL_API void AL_APIENTRY alAuxiliaryEffectSlotf( ALuint effectslot,
     }
     UpdateProps( slot, context.get() );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alAuxiliaryEffectSlotfv( ALuint effectslot,
@@ -833,6 +844,7 @@ AL_API void AL_APIENTRY alAuxiliaryEffectSlotfv( ALuint effectslot,
                 "Invalid effect slot float-vector property 0x%04x", param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetAuxiliaryEffectSloti( ALuint effectslot,
@@ -879,6 +891,7 @@ AL_API void AL_APIENTRY alGetAuxiliaryEffectSloti( ALuint effectslot,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetAuxiliaryEffectSlotiv( ALuint effectslot,
@@ -913,6 +926,7 @@ AL_API void AL_APIENTRY alGetAuxiliaryEffectSlotiv( ALuint effectslot,
                 "Invalid effect slot integer-vector property 0x%04x", param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetAuxiliaryEffectSlotf( ALuint effectslot,
@@ -941,6 +955,7 @@ AL_API void AL_APIENTRY alGetAuxiliaryEffectSlotf( ALuint effectslot,
                                param );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetAuxiliaryEffectSlotfv( ALuint effectslot,
@@ -971,6 +986,7 @@ AL_API void AL_APIENTRY alGetAuxiliaryEffectSlotfv( ALuint effectslot,
                 "Invalid effect slot float-vector property 0x%04x", param );
     }
 }
+
 END_API_FUNC
 
 ALeffectslot::ALeffectslot( ALCcontext* context ) {

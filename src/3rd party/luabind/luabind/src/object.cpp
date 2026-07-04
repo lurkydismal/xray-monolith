@@ -45,6 +45,7 @@ LUABIND_API string_class DebugPrintStack( lua_State* L ) {
 
     return msg;
 }
+
 namespace detail {
 
 // *************************************

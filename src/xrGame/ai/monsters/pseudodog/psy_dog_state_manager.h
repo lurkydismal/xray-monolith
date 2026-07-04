@@ -7,6 +7,7 @@ class CStateManagerPsyDog : public CStateManagerPseudodog {
 public:
     CStateManagerPsyDog( CAI_PseudoDog* monster );
     virtual void execute();
+
     virtual void remove_links( CObject* object ) {
         inherited::remove_links( object );
     }

@@ -1153,6 +1153,7 @@ private:
      *   the default locale.)
      */
     enum ELocaleType { eBOGUS };
+
     Locale( ELocaleType );
 
     /**

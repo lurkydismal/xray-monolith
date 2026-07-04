@@ -57,6 +57,7 @@ public:
                                  float& hi_ext ) const = 0;
 
     void clear_cashed_tries();
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     IC dGeomID geom() { return dGeomTransformGetGeom( m_geom_transform ); }
@@ -112,9 +113,13 @@ public:
     // set
     // element part
     void set_body( dBodyID body );
+
     void set_bone_id( u16 id ) { m_bone_id = id; }
+
     u16 bone_id() { return m_bone_id; }
+
     void set_shape_flags( const Flags16& _flags ) { m_flags = _flags; }
+
     void add_to_space( dSpaceID space );
     void remove_from_space( dSpaceID space );
     void set_material( u16 ul_material );

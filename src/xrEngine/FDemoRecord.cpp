@@ -173,10 +173,12 @@ void CDemoRecord::StopDemo() {
 void CDemoRecord::EnableReturnCtrlInputs() {
     return_ctrl_inputs = TRUE;
 }
+
 void CDemoRecord::SetCameraBoundary( float boundary ) {
     m_CameraBoundaryEnabled = TRUE;
     m_fCameraBoundary = boundary;
 }
+
 CDemoRecord::~CDemoRecord() {
     if ( file ) {
         IR_Release(); // release input

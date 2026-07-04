@@ -250,6 +250,7 @@ public:
 
     /** Get pointer. */
     BaseClass* ptr() const { return m_ptr; }
+
     //@}
 
     /** @name Mutators: */
@@ -265,6 +266,7 @@ public:
 
     /** Pointer assignment. */
     void operator=( BaseClass* bc ) { set( bc ); }
+
     //@}
 
     /** @name Comparators: */
@@ -295,6 +297,7 @@ public:
 
     /** This type lower than comparation. */
     bool operator<( const ThisType& p ) const { return m_ptr < p.ptr(); }
+
     //@}
 
 private:

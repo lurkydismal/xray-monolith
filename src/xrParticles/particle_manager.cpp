@@ -11,6 +11,7 @@ using namespace PAPI;
 
 // system
 CParticleManager* PM = nullptr;
+
 PARTICLES_API IParticleManager* PAPI::ParticleManager() {
     if ( !PM ) {
         PM = new CParticleManager();

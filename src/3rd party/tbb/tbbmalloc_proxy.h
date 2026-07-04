@@ -53,6 +53,7 @@ tbbmalloc_proxy.lib /INCLUDE:"__TBB_malloc_proxy"
 /* Primarily to support MinGW */
 
 extern "C" void __TBB_malloc_proxy();
+
 struct __TBB_malloc_proxy_caller {
     __TBB_malloc_proxy_caller() { __TBB_malloc_proxy(); }
 } volatile __TBB_malloc_proxy_helper_object;

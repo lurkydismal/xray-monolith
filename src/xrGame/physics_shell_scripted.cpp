@@ -67,6 +67,7 @@ void cphysics_shell_scripted::unfreeze() {
 }
 
 #pragma optimize( "s", on )
+
 void cphysics_shell_scripted::script_register( lua_State* L ) {
     module( L )
         [ class_< cphysics_shell_scripted >( "physics_shell" )

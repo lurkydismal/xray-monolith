@@ -12,6 +12,7 @@ public:
     void MainLoop();
 
     bool IsRunning() { return m_bRunning; }
+
     bool IsBenchmarkRunning() { return m_bBenchmarkRunning; }
 
     // Event handlers

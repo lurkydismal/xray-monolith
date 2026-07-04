@@ -28,6 +28,7 @@ class HrException : public std::runtime_error {
 public:
     HrException( HRESULT hr )
         : std::runtime_error( HrToString( hr ) ), m_hr( hr ) {}
+
     HRESULT Error() const { return m_hr; }
 
 private:
@@ -106,6 +107,7 @@ inline HRESULT ReadDataFromFile( LPCWSTR filename, byte** data, UINT* size ) {
 inline void SetName( ID3D12Object* pObject, LPCWSTR name ) {
     pObject->SetName( name );
 }
+
 inline void SetNameIndexed( ID3D12Object* pObject, LPCWSTR name, UINT index ) {
     WCHAR fullName[ 50 ];
     if ( swprintf_s( fullName, L"%s[%u]", name, index ) > 0 ) {
@@ -114,6 +116,7 @@ inline void SetNameIndexed( ID3D12Object* pObject, LPCWSTR name, UINT index ) {
 }
 #else
 inline void SetName( ID3D12Object*, LPCWSTR ) {}
+
 inline void SetNameIndexed( ID3D12Object*, LPCWSTR, UINT ) {}
 #endif
 

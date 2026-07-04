@@ -11,6 +11,7 @@ public:
     CEliteDetector();
     virtual ~CEliteDetector();
     virtual void render_item_3d_ui();
+
     virtual LPCSTR ui_xml_tag() const { return "elite"; }
 
 protected:
@@ -29,6 +30,7 @@ public:
     virtual void Load( LPCSTR section );
     virtual void OnH_B_Independent( bool just_before_destroy );
     virtual void shedule_Update( u32 dt );
+
     virtual LPCSTR ui_xml_tag() const { return "scientific"; }
 
 protected:

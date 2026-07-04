@@ -69,6 +69,7 @@ write_colormap JPP( ( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 put_pixel_rows( j_decompress_ptr cinfo,
                 djpeg_dest_ptr dinfo,
                 JDIMENSION rows_supplied )
@@ -107,6 +108,7 @@ put_pixel_rows( j_decompress_ptr cinfo,
 }
 
 METHODDEF( void )
+
 put_gray_rows( j_decompress_ptr cinfo,
                djpeg_dest_ptr dinfo,
                JDIMENSION rows_supplied )
@@ -145,6 +147,7 @@ put_gray_rows( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 start_output_bmp( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     /* no work here */
 }
@@ -158,6 +161,7 @@ start_output_bmp( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 LOCAL( void )
+
 write_bmp_header( j_decompress_ptr cinfo, bmp_dest_ptr dest )
 /* Write a Windows-style BMP file header, including colormap if needed */
 {
@@ -233,6 +237,7 @@ write_bmp_header( j_decompress_ptr cinfo, bmp_dest_ptr dest )
 }
 
 LOCAL( void )
+
 write_os2_header( j_decompress_ptr cinfo, bmp_dest_ptr dest )
 /* Write an OS2-style BMP file header, including colormap if needed */
 {
@@ -295,6 +300,7 @@ write_os2_header( j_decompress_ptr cinfo, bmp_dest_ptr dest )
  */
 
 LOCAL( void )
+
 write_colormap( j_decompress_ptr cinfo,
                 bmp_dest_ptr dest,
                 int map_colors,
@@ -347,6 +353,7 @@ write_colormap( j_decompress_ptr cinfo,
 }
 
 METHODDEF( void )
+
 finish_output_bmp( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     bmp_dest_ptr dest = ( bmp_dest_ptr )dinfo;
     // NOTE: LD / removed register
@@ -395,6 +402,7 @@ finish_output_bmp( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 GLOBAL( djpeg_dest_ptr )
+
 jinit_write_bmp( j_decompress_ptr cinfo, boolean is_os2 ) {
     bmp_dest_ptr dest;
     JDIMENSION row_width;

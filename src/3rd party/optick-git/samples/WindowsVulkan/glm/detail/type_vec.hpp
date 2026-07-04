@@ -44,6 +44,7 @@ template <>
 struct storage< unsigned int, 16, true > {
     typedef glm_uvec4 type;
 };
+
 /*
 #	else
                 typedef union __declspec(align(16)) glm_128

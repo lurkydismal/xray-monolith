@@ -28,8 +28,11 @@ public:
     virtual void Show();
     virtual void Hide();
     CUITalkWnd* m_pParent;
+
     u32 GetHeaderColor() { return m_iNameTextColor; }
+
     CGameFont* GetHeaderFont() { return m_pNameTextFont; }
+
     u32 GetOurReplicsColor() { return m_uOurReplicsColor; }
 
     bool mechanic_mode; // for inventory upgrades

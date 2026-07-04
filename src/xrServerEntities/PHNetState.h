@@ -54,7 +54,9 @@ public:
     void net_Load( NET_Packet& P );
     void net_Load( IReader& P );
     void set_min_max( const Fvector& _min, const Fvector& _max );
+
     const Fvector& get_min() const { return m_min; }
+
     const Fvector& get_max() const { return m_max; }
 };
 #endif

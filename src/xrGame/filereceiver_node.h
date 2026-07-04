@@ -24,6 +24,7 @@ public:
     filereceiver_node& operator=( filereceiver_node const& copy ) {
         NODEFAULT;
     };
+
     ~filereceiver_node();
 
     bool receive_packet(
@@ -32,13 +33,17 @@ public:
     void signal_callback( receiving_status_t status );
 
     inline u32 const get_downloaded_size() { return m_writer->tell(); };
+
     // inline	shared_str const &	get_file_name		() { return
     // m_file_name; };
     inline u32 const get_last_read_time() { return m_last_read_time; };
+
     inline void set_last_read_time( u32 const read_time ) {
         m_last_read_time = read_time;
     };
+
     inline IWriter* get_writer() { return m_writer; };
+
     inline u32 get_user_param() { return m_user_param; };
 }; // class filereceiver_node
 

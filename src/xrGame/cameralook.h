@@ -18,6 +18,7 @@ public:
     virtual void Update( Fvector& point, Fvector& noise_dangle );
 
     virtual float GetWorldYaw() { return -yaw; };
+
     virtual float GetWorldPitch() { return pitch; };
 
 protected:

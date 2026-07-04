@@ -128,6 +128,7 @@ private:
     struct ThreadParameter {
         int threadIndex;
     };
+
     ThreadParameter m_threadParameters[ NumContexts ];
 
     void WorkerThread( int threadIndex );

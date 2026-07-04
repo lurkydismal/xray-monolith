@@ -13,6 +13,7 @@ public:
     ~xr_dsa_verifyer();
 
     bool verify( u8 const* data, u32 data_size, shared_str const& dsign );
+
     u8 const* get_sha_checksum() const { return m_sha.pointer(); };
 
 protected:

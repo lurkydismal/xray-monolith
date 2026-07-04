@@ -197,6 +197,7 @@ bool CPolterTele::trace_object( CObject* obj, const Fvector& target ) {
 }
 
 extern BOOL g_telekinetic_objects_include_corpses;
+
 void CPolterTele::tele_find_objects( xr_vector< CObject* >& objects,
                                      const Fvector& pos ) {
     m_nearest.clear_not_free();

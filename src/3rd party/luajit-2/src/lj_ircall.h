@@ -183,6 +183,7 @@ typedef struct CCallInfo {
 /* End of list. */
 
 typedef enum {
+
 #define IRCALLENUM( cond, name, nargs, kind, type, flags ) IRCALL_##name,
     IRCALLDEF( IRCALLENUM )
 #undef IRCALLENUM

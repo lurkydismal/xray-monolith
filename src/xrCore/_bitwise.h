@@ -20,12 +20,15 @@
 IC bool negative( const float f ) {
     return f < 0;
 }
+
 IC bool positive( const float f ) {
     return f >= 0;
 }
+
 IC void set_negative( float& f ) {
     f = -fabsf( f );
 }
+
 IC void set_positive( float& f ) {
     f = fabsf( f );
 }
@@ -33,12 +36,15 @@ IC void set_positive( float& f ) {
 IC BOOL negative( const float& f ) {
     return ( *( ( unsigned* )( &f ) ) & fdSGN );
 }
+
 IC BOOL positive( const float& f ) {
     return ( *( ( unsigned* )( &f ) ) & fdSGN ) == 0;
 }
+
 IC void set_negative( float& f ) {
     ( *( unsigned* )( &f ) ) |= fdSGN;
 }
+
 IC void set_positive( float& f ) {
     ( *( unsigned* )( &f ) ) &= ~fdSGN;
 }
@@ -51,6 +57,7 @@ IC void set_positive( float& f ) {
 IC int btwLowestBitMask( int v ) {
     return ( v & -v );
 }
+
 IC u32 btwLowestBitMask( u32 x ) {
     return x & ~( x - 1 );
 }
@@ -60,6 +67,7 @@ IC u32 btwLowestBitMask( u32 x ) {
 IC bool btwIsPow2( int v ) {
     return ( btwLowestBitMask( v ) == v );
 }
+
 IC bool btwIsPow2( u32 v ) {
     return ( btwLowestBitMask( v ) == v );
 }

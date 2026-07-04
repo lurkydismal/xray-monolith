@@ -24,6 +24,7 @@ public:
     virtual void State( u32 state, u32 old_state );
 
     virtual BOOL UsedAI_Locations() { return FALSE; }
+
     virtual IDamageSource* cast_IDamageSource() { return this; }
 
     virtual CBolt* cast_bolt() { return this; }

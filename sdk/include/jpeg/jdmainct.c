@@ -156,6 +156,7 @@ process_data_crank_post JPP( ( j_decompress_ptr cinfo,
 #endif
 
 LOCAL( void )
+
 alloc_funny_pointers( j_decompress_ptr cinfo )
 /* Allocate space for the funny pointer lists.
  * This is done only once, not once per pass.
@@ -194,6 +195,7 @@ alloc_funny_pointers( j_decompress_ptr cinfo )
 }
 
 LOCAL( void )
+
 make_funny_pointers( j_decompress_ptr cinfo )
 /* Create the funny pointer lists discussed in the comments above.
  * The actual workspace is already allocated (in main->buffer),
@@ -237,6 +239,7 @@ make_funny_pointers( j_decompress_ptr cinfo )
 }
 
 LOCAL( void )
+
 set_wraparound_pointers( j_decompress_ptr cinfo )
 /* Set up the "wraparound" pointers at top and bottom of the pointer lists.
  * This changes the pointer list state from top-of-image to the normal state.
@@ -265,6 +268,7 @@ set_wraparound_pointers( j_decompress_ptr cinfo )
 }
 
 LOCAL( void )
+
 set_bottom_pointers( j_decompress_ptr cinfo )
 /* Change the pointer lists to duplicate the last sample row at the bottom
  * of the image.  whichptr indicates which xbuffer holds the final iMCU row.
@@ -309,6 +313,7 @@ set_bottom_pointers( j_decompress_ptr cinfo )
  */
 
 METHODDEF( void )
+
 start_pass_main( j_decompress_ptr cinfo, J_BUF_MODE pass_mode ) {
     my_main_ptr main = ( my_main_ptr )cinfo->main;
 
@@ -346,6 +351,7 @@ start_pass_main( j_decompress_ptr cinfo, J_BUF_MODE pass_mode ) {
  */
 
 METHODDEF( void )
+
 process_data_simple_main( j_decompress_ptr cinfo,
                           JSAMPARRAY output_buf,
                           JDIMENSION* out_row_ctr,
@@ -385,6 +391,7 @@ process_data_simple_main( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 process_data_context_main( j_decompress_ptr cinfo,
                            JSAMPARRAY output_buf,
                            JDIMENSION* out_row_ctr,
@@ -466,6 +473,7 @@ process_data_context_main( j_decompress_ptr cinfo,
 #ifdef QUANT_2PASS_SUPPORTED
 
 METHODDEF( void )
+
 process_data_crank_post( j_decompress_ptr cinfo,
                          JSAMPARRAY output_buf,
                          JDIMENSION* out_row_ctr,
@@ -482,6 +490,7 @@ process_data_crank_post( j_decompress_ptr cinfo,
  */
 
 GLOBAL( void )
+
 jinit_d_main_controller( j_decompress_ptr cinfo, boolean need_full_buffer ) {
     my_main_ptr main;
     int ci, rgroup, ngroups;

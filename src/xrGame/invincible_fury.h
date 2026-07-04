@@ -15,7 +15,9 @@ public:
 
     virtual void update() {};
     virtual u32 const get_u32_param();
+
     virtual float const get_float_param() { return 0.0f; };
+
     virtual void reset_game();
 
     virtual void OnPlayerKilled(

@@ -60,6 +60,7 @@ LJ_FUNC int lj_debug_getinfo( lua_State* L,
 
 enum {
     VARNAME_END,
+
 #define VARNAMEENUM( name, str ) VARNAME_##name,
     VARNAMEDEF( VARNAMEENUM )
 #undef VARNAMEENUM

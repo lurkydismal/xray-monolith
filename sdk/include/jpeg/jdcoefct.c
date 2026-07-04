@@ -75,6 +75,7 @@ decompress_smooth_data JPP( ( j_decompress_ptr cinfo, JSAMPIMAGE output_buf ) );
 #endif
 
 LOCAL( void )
+
 start_iMCU_row( j_decompress_ptr cinfo )
 /* Reset within-iMCU-row counters for a new row (input side) */
 {
@@ -104,6 +105,7 @@ start_iMCU_row( j_decompress_ptr cinfo )
  */
 
 METHODDEF( void )
+
 start_input_pass( j_decompress_ptr cinfo ) {
     cinfo->input_iMCU_row = 0;
     start_iMCU_row( cinfo );
@@ -114,6 +116,7 @@ start_input_pass( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 start_output_pass( j_decompress_ptr cinfo ) {
 #ifdef BLOCK_SMOOTHING_SUPPORTED
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
@@ -140,6 +143,7 @@ start_output_pass( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( int )
+
 decompress_onepass( j_decompress_ptr cinfo, JSAMPIMAGE output_buf ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
     JDIMENSION MCU_col_num; /* index of current MCU within row */
@@ -223,6 +227,7 @@ decompress_onepass( j_decompress_ptr cinfo, JSAMPIMAGE output_buf ) {
  */
 
 METHODDEF( int )
+
 dummy_consume_data( j_decompress_ptr cinfo ) {
     return JPEG_SUSPENDED; /* Always indicate nothing was done */
 }
@@ -237,6 +242,7 @@ dummy_consume_data( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( int )
+
 consume_data( j_decompress_ptr cinfo ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
     JDIMENSION MCU_col_num; /* index of current MCU within row */
@@ -307,6 +313,7 @@ consume_data( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( int )
+
 decompress_data( j_decompress_ptr cinfo, JSAMPIMAGE output_buf ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
     JDIMENSION last_iMCU_row = cinfo->total_iMCU_rows - 1;
@@ -399,6 +406,7 @@ decompress_data( j_decompress_ptr cinfo, JSAMPIMAGE output_buf ) {
  */
 
 LOCAL( boolean )
+
 smoothing_ok( j_decompress_ptr cinfo ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
     boolean smoothing_useful = FALSE;
@@ -453,6 +461,7 @@ smoothing_ok( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( int )
+
 decompress_smooth_data( j_decompress_ptr cinfo, JSAMPIMAGE output_buf ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
     JDIMENSION last_iMCU_row = cinfo->total_iMCU_rows - 1;
@@ -675,6 +684,7 @@ decompress_smooth_data( j_decompress_ptr cinfo, JSAMPIMAGE output_buf ) {
  */
 
 GLOBAL( void )
+
 jinit_d_coef_controller( j_decompress_ptr cinfo, boolean need_full_buffer ) {
     my_coef_ptr coef;
 

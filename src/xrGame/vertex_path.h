@@ -11,10 +11,12 @@
 template < bool bEuclidianHeuristics = true >
 struct CVertexPath {
 #pragma pack( push, 1 )
+
     template < template < typename _T > class T1 >
     struct DataStoragePath {
         struct _vertex : public T1< _vertex > {};
     };
+
 #pragma pack( pop )
 
     template < template < typename _T > class _vertex >

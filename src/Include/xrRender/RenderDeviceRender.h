@@ -8,6 +8,7 @@ public:
 
 public:
     virtual ~IRenderDeviceRender() { ; }
+
     virtual void Copy( IRenderDeviceRender& _in ) = 0;
 
     //	Gamma correction functions

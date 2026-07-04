@@ -403,6 +403,7 @@ LPSTR dbg_stalker_death_anim = sdbg_stalker_death_anim;
 BOOL b_death_anim_velocity = TRUE;
 const float cmp_angle = M_PI / 10.f;
 const float cmp_ldisp = 0.1f;
+
 IC bool cmp( const Fmatrix& f0, const Fmatrix& f1 ) {
     Fmatrix if0;
     if0.invert( f0 );

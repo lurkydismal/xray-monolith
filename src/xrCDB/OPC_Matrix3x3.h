@@ -151,6 +151,7 @@ public:
     inline_ float Trace() const {
         return m[ 0 ][ 0 ] + m[ 1 ][ 1 ] + m[ 2 ][ 2 ];
     }
+
     //! Clears the matrix.
     inline_ void Zero() { ZeroMemory( &m, sizeof( m ) ); }
 
@@ -756,6 +757,7 @@ public:
     inline_ const Point* operator[]( int nRow ) const {
         return ( const Point* )&m[ nRow ][ 0 ];
     }
+
     inline_ Point* operator[]( int nRow ) { return ( Point* )&m[ nRow ][ 0 ]; }
 
 public:

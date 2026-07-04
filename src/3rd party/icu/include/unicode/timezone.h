@@ -1023,6 +1023,7 @@ inline UnicodeString& TimeZone::getID( UnicodeString& ID ) const {
 inline void TimeZone::setID( const UnicodeString& ID ) {
     fID = ID;
 }
+
 U_NAMESPACE_END
 
 #endif /* #if !UCONFIG_NO_FORMATTING */

@@ -233,6 +233,7 @@ void SFillPropData::inc() {
 
     ++counter;
 }
+
 static SFillPropData fp_data;
 #endif // #ifdef XRSE_FACTORY_EXPORTS
 
@@ -1505,6 +1506,7 @@ void CSE_ALifeObjectHangingLamp::FillProps( LPCSTR pref, PropItemVec& values ) {
 }
 
 #define VIS_RADIUS 0.25f
+
 void CSE_ALifeObjectHangingLamp::on_render( CDUInterface* du,
                                             ISE_AbstractLEOwner* owner,
                                             bool bSelected,
@@ -1552,6 +1554,7 @@ bool CSE_ALifeObjectHangingLamp::validate() {
 }
 
 BOOL alifeObjectHangingLampIgnoreMatchConfiguration = FALSE;
+
 bool CSE_ALifeObjectHangingLamp::match_configuration() const {
     if ( alifeObjectHangingLampIgnoreMatchConfiguration ) {
         auto gen = ::Render->get_generation();

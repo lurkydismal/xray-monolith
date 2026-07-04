@@ -69,6 +69,7 @@ MAKE_FUNC( Pa_GetStreamInfo );
 
 struct PortPlayback final : public BackendBase {
     PortPlayback( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~PortPlayback() override;
 
     int writeCallback( const void* inputBuffer,
@@ -76,6 +77,7 @@ struct PortPlayback final : public BackendBase {
                        unsigned long framesPerBuffer,
                        const PaStreamCallbackTimeInfo* timeInfo,
                        const PaStreamCallbackFlags statusFlags ) noexcept;
+
     static int writeCallbackC( const void* inputBuffer,
                                void* outputBuffer,
                                unsigned long framesPerBuffer,
@@ -230,6 +232,7 @@ void PortPlayback::stop() {
 
 struct PortCapture final : public BackendBase {
     PortCapture( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~PortCapture() override;
 
     int readCallback( const void* inputBuffer,
@@ -237,6 +240,7 @@ struct PortCapture final : public BackendBase {
                       unsigned long framesPerBuffer,
                       const PaStreamCallbackTimeInfo* timeInfo,
                       const PaStreamCallbackFlags statusFlags ) noexcept;
+
     static int readCallbackC( const void* inputBuffer,
                               void* outputBuffer,
                               unsigned long framesPerBuffer,

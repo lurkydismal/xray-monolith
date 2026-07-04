@@ -31,6 +31,7 @@
 
 struct MyMessageHandler : public nv::MessageHandler {
     MyMessageHandler() { nv::debug::setMessageHandler( this ); }
+
     ~MyMessageHandler() { nv::debug::resetMessageHandler(); }
 
     virtual void log( const char* str, va_list arg ) {
@@ -43,6 +44,7 @@ struct MyMessageHandler : public nv::MessageHandler {
 
 struct MyAssertHandler : public nv::AssertHandler {
     MyAssertHandler() { nv::debug::setAssertHandler( this ); }
+
     ~MyAssertHandler() { nv::debug::resetAssertHandler(); }
 
     // Handler method, note that func might be NULL!

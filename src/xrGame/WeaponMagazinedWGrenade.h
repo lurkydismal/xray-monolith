@@ -75,8 +75,11 @@ public:
     // Script exports
     void SetAmmoElapsed2( int ammo_count );
     void AmmoTypeForEach2( const ::luabind::functor< bool >& funct );
+
     virtual void SetAmmoType2( u8 type ) { m_ammoType2 = type; };
+
     u8 GetAmmoType2() { return m_ammoType2; };
+
     int GetAmmoCount2( u8 ammo2_type ) const;
 
     IC int GetAmmoElapsed2() const { return iAmmoElapsed2; }

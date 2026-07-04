@@ -6,6 +6,7 @@
 #include "silencer.h"
 
 #include "stdafx.h"
+
 // #include "PhysicsShell.h"
 
 CSilencer::CSilencer() {}

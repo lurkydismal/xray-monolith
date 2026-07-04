@@ -5,6 +5,7 @@ template < class T, int size >
 class CCycleConstStorage {
     T array[ size ];
     int first;
+
     IC int position( int i ) const { return ( first + i ) % size; }
 
 public:

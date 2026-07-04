@@ -344,6 +344,7 @@ void CClimableObject::ObjectContactCallback( bool& do_colide,
 }
 #ifdef DEBUG
 extern Flags32 dbg_net_Draw_Flags;
+
 void CClimableObject ::OnRender() {
     if ( !dbg_net_Draw_Flags.test( dbg_draw_climbable ) &&
          !ph_dbg_draw_mask.test( phDbgLadder ) )

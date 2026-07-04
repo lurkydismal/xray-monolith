@@ -121,6 +121,7 @@ struct ECORE_API R_constant : public xr_resource {
     R_constant_setup* handler;
 
     R_constant() : type( u16( -1 ) ), destination( 0 ), handler( nullptr ) {};
+
     // R_constant& operator=(const R_constant& Other) = delete;
 
     IC R_constant_load& get_load( u32 destination ) {
@@ -202,7 +203,9 @@ public:
     R_constant* get( shared_str& name ); // fast search
 
     BOOL equal( R_constant_table& C );
+
     BOOL equal( R_constant_table* C ) { return equal( *C ); }
+
     BOOL empty() { return 0 == table.size(); }
 };
 

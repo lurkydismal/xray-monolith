@@ -103,7 +103,9 @@ private:
 namespace {
 struct lua_pop_stack {
     lua_pop_stack( lua_State* L ) : m_state( L ) {}
+
     ~lua_pop_stack() { lua_pop( m_state, 1 ); }
+
     lua_State* m_state;
 };
 } // namespace

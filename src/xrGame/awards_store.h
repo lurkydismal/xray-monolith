@@ -11,6 +11,7 @@ class CGameSpy_SAKE;
 /**/
 struct SAKEGetMyRecordsOutput; // HACK, FAKE STRUCT TO PRETEND GAMESPY EXISTS
 struct SAKEField;              // HACK, FAKE STRUCT TO PRETEND GAMESPY EXISTS
+
 /**/
 
 namespace gamespy_profile {
@@ -29,9 +30,11 @@ public:
 
     all_awards_t& get_player_awards();
     void merge_sake_to_ltx_awards();
+
     award_fields_names_t const& get_field_names() const {
         return m_field_names_store;
     }
+
     void process_aw_out_response( SAKEGetMyRecordsOutput* tmp_out,
                                   int const out_fields_count );
 

@@ -51,5 +51,6 @@ void CStateCustomGroupAbstract::setup_substates() {
         return;
     }
 }
+
 #undef TEMPLATE_SPECIALIZATION
 #undef CStateCustomGroupAbstract

@@ -121,4 +121,5 @@ public:
     void SetPosition( LPCSTR alias, const Fvector& pos );
     void UpdateAllSoundsPositions( const Fvector& P );
 };
+
 //-Alundaio

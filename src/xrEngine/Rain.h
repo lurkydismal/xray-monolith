@@ -112,7 +112,9 @@ public:
     }
 
     float GetRainVolume() { return rain_volume; }
+
     float GetRainHemi() { return rain_hemi; }
+
     void UpdateItems();
 };
 

@@ -582,6 +582,7 @@ float CAI_Bloodsucker::GetTransparency() {
         return 0.0f;
     }
 }
+
 //--DSR-- HeatVision_end
 
 void CAI_Bloodsucker::set_visibility_state( visibility_t new_state ) {
@@ -893,6 +894,7 @@ void CAI_Bloodsucker::manual_deactivate() {
 }
 
 extern int ps_r2_heatvision;
+
 void CAI_Bloodsucker::renderable_Render( IDSGraphManager* DM ) {
     //--DSR-- HeatVision_start
 

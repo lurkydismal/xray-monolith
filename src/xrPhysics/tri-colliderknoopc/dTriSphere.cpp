@@ -6,6 +6,7 @@
 #include "dTriColliderMath.h"
 #include "dctrilistcollider.h"
 #include "stdafx.h"
+
 ////////////////////////////////////////////////////////////////////////////
 IC dReal dcTriListCollider::PointSphereTest( const dReal* center,
                                              const dReal radius,

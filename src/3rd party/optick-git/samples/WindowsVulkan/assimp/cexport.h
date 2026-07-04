@@ -236,6 +236,7 @@ struct aiExportDataBlob {
         size = 0;
         data = next = NULL;
     }
+
     /// Releases the data
     ~aiExportDataBlob() {
         delete[] static_cast< unsigned char* >( data );

@@ -152,6 +152,7 @@ CHUDManager::~CHUDManager() {
 
 //--------------------------------------------------------------------
 BOOL mt_ui = FALSE;
+
 void CHUDManager::OnFrame() {
     PROF_EVENT( "CHUDManager::OnFrame" );
     if ( !psHUD_Flags.is( HUD_DRAW_RT2 ) )
@@ -172,6 +173,7 @@ void CHUDManager::OnFrame() {
 
 xrCriticalSection ui_lock;
 extern BOOL mt_TaskManager;
+
 void CHUDManager::OnFrameMT() {
     if ( !b_online )
         return;
@@ -299,6 +301,7 @@ void CHUDManager::RenderCamAttachedUI() {
 }
 
 extern ENGINE_API BOOL bShowPauseString;
+
 // отрисовка элементов интерфейса
 void CHUDManager::RenderUI() {
     PROF_EVENT( "CHUDManager::RenderUI" );
@@ -489,6 +492,7 @@ void CHUDManager::OnScreenResolutionChanged() {
 }
 
 BOOL hud_frequent_updates = TRUE;
+
 void CHUDManager::OnDisconnected() {
     b_online = false;
     if ( hud_frequent_updates )

@@ -64,6 +64,7 @@ typedef my_color_deconverter* my_cconvert_ptr;
  */
 
 LOCAL( void )
+
 build_ycc_rgb_table( j_decompress_ptr cinfo ) {
     my_cconvert_ptr cconvert = ( my_cconvert_ptr )cinfo->cconvert;
     int i;
@@ -112,6 +113,7 @@ build_ycc_rgb_table( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 ycc_rgb_convert( j_decompress_ptr cinfo,
                  JSAMPIMAGE input_buf,
                  JDIMENSION input_row,
@@ -171,6 +173,7 @@ ycc_rgb_convert( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 null_convert( j_decompress_ptr cinfo,
               JSAMPIMAGE input_buf,
               JDIMENSION input_row,
@@ -206,6 +209,7 @@ null_convert( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 grayscale_convert( j_decompress_ptr cinfo,
                    JSAMPIMAGE input_buf,
                    JDIMENSION input_row,
@@ -222,6 +226,7 @@ grayscale_convert( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 gray_rgb_convert( j_decompress_ptr cinfo,
                   JSAMPIMAGE input_buf,
                   JDIMENSION input_row,
@@ -253,6 +258,7 @@ gray_rgb_convert( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 ycck_cmyk_convert( j_decompress_ptr cinfo,
                    JSAMPIMAGE input_buf,
                    JDIMENSION input_row,
@@ -315,6 +321,7 @@ ycck_cmyk_convert( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 start_pass_dcolor( j_decompress_ptr cinfo ) {
     /* no work needed */
 }
@@ -324,6 +331,7 @@ start_pass_dcolor( j_decompress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jinit_color_deconverter( j_decompress_ptr cinfo ) {
     my_cconvert_ptr cconvert;
     int ci;

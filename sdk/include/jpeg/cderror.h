@@ -359,7 +359,7 @@ JMESSAGE( JERR_TGA_NOTCOMP, "Targa support was not compiled" )
                                                                                     JERR_UNKNOWN_FORMAT,
                                                                                     "Unrecognized input file format --- perhaps you need -targa" )
 #else
-        JMESSAGE( JERR_UNKNOWN_FORMAT, "Unrecognized input file format" )
+JMESSAGE( JERR_UNKNOWN_FORMAT, "Unrecognized input file format" )
 #endif
                                                                                     JMESSAGE(
                                                                                         JERR_UNSUPPORTED_FORMAT,

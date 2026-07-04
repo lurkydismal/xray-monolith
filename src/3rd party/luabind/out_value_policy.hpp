@@ -115,9 +115,11 @@ struct out_value_converter {
 template < size_t N >
 struct out_value_policy : conversion_policy< N > {
     static void precall( lua_State*, const index_map& ) {}
+
     static void postcall( lua_State*, const index_map& ) {}
 
     struct only_accepts_nonconst_references_or_pointers {};
+
     struct can_only_convert_from_lua_to_cpp {};
 
     template < typename T, Direction Dir >
@@ -181,9 +183,11 @@ struct pure_out_value_converter {
 template < size_t N >
 struct pure_out_value_policy : conversion_policy< N, false > {
     static void precall( lua_State*, const index_map& ) {}
+
     static void postcall( lua_State*, const index_map& ) {}
 
     struct only_accepts_nonconst_references_or_pointers {};
+
     struct can_only_convert_from_lua_to_cpp {};
 
     template < typename T, Direction Dir >

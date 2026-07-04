@@ -70,8 +70,11 @@ public:
     void SetHeight( float S );
 
     IC float GetHeight() { return fCurrentHeight; };
+
     IC void SetInterval( float x, float y ) { vInterval.set( x, y ); };
+
     IC void SetInterval( const Fvector2& v ) { vInterval.set( v ); };
+
     IC void SetAligment( EAligment aligment ) { eCurrentAlignment = aligment; }
 
     float SizeOf_( LPCSTR s );
@@ -95,7 +98,9 @@ public:
                     va_list p );
 
     u32 smart_strlen( const char* S );
+
     BOOL IsMultibyte() { return ( uFlags & fsMultibyte ); };
+
     u16 SplitByWidth( u16* puBuffer,
                       u16 uBufferSize,
                       float fTargetWidth,

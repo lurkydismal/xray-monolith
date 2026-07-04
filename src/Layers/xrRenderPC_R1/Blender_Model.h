@@ -14,6 +14,7 @@ public:
 
 public:
     virtual LPCSTR getComment() { return "MODEL: Default"; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Save( IWriter& fs );

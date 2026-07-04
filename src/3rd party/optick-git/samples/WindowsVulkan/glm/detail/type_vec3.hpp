@@ -42,9 +42,11 @@ struct vec< 3, T, P > {
         struct {
             T x, y, z;
         };
+
         struct {
             T r, g, b;
         };
+
         struct {
             T s, t, p;
         };
@@ -72,9 +74,11 @@ struct vec< 3, T, P > {
     union {
         T x, r, s;
     };
+
     union {
         T y, g, t;
     };
+
     union {
         T z, b, p;
     };
@@ -88,6 +92,7 @@ struct vec< 3, T, P > {
 
     /// Return the count of components of the vector
     typedef length_t length_type;
+
     GLM_FUNC_DECL static length_type length() { return 3; }
 
     GLM_FUNC_DECL T& operator[]( length_type i );

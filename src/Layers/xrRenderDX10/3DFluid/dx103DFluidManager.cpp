@@ -66,9 +66,9 @@ LPCSTR dx103DFluidManager::m_pShaderTextureNames[ NUM_RENDER_TARGETS ] = {
     "Texture_tempvector",   //	 RENDER_TARGET_TEMPVECTOR,
     "Texture_velocity0",    //	RENDER_TARGET_VELOCITY0 =
                             // NUM_OWN_RENDER_TARGETS,	//	For textures
-                         // generated from local data
-    "Texture_pressure", //	RENDER_TARGET_PRESSURE,
-    "Texture_color",    //	RENDER_TARGET_COLOR_IN,
+                            // generated from local data
+    "Texture_pressure",     //	RENDER_TARGET_PRESSURE,
+    "Texture_color",        //	RENDER_TARGET_COLOR_IN,
 };
 
 dx103DFluidManager::dx103DFluidManager()

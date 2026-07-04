@@ -84,10 +84,12 @@ template <>
 struct atomic_rep< 1 > { // Specialization
     typedef int8_t word;
 };
+
 template <>
 struct atomic_rep< 2 > { // Specialization
     typedef int16_t word;
 };
+
 template <>
 struct atomic_rep< 4 > { // Specialization
 #if _MSC_VER && !_WIN64
@@ -132,6 +134,7 @@ struct aligned_storage< value_type, 1 > {
     value_type my_value;
 #if __TBB_ATOMIC_CTORS
     aligned_storage() = default;
+
     constexpr aligned_storage( value_type value ) : my_value( value ) {}
 #endif
 };
@@ -255,8 +258,11 @@ private:
     template < typename value_type >
     union converter {
         typedef typename atomic_rep< sizeof( value_type ) >::word bits_type;
+
         converter() {}
+
         converter( value_type a_value ) : value( a_value ) {}
+
         value_type value;
         bits_type bits;
     };
@@ -265,6 +271,7 @@ private:
     static typename converter< value_t >::bits_type to_bits( value_t value ) {
         return converter< value_t >( value ).bits;
     }
+
     template < typename value_t >
     static value_t to_value( typename converter< value_t >::bits_type bits ) {
         converter< value_t > u;
@@ -278,10 +285,13 @@ private:
     template < typename value_t >
     union ptr_converter< value_t* > {
         ptr_converter() {}
+
         ptr_converter( value_t* a_value ) : value( a_value ) {}
+
         value_t* value;
         uintptr_t bits;
     };
+
     // TODO: check if making to_bits accepting reference (thus unifying it with
     // to_bits_ref) does not hurt performance
     template < typename value_t >
@@ -303,6 +313,7 @@ public:
 
 #if __TBB_ATOMIC_CTORS
     atomic_impl() = default;
+
     constexpr atomic_impl( value_type value ) : my_storage( value ) {}
 #endif
     template < memory_semantics M >
@@ -371,6 +382,7 @@ public:
     typedef I value_type;
 #if __TBB_ATOMIC_CTORS
     atomic_impl_with_arithmetic() = default;
+
     constexpr atomic_impl_with_arithmetic( value_type value )
         : atomic_impl< I >( value ) {}
 #endif
@@ -424,6 +436,7 @@ public:
 };
 
 } // namespace internal
+
 //! @endcond
 
 //! Primary template for atomic.
@@ -435,7 +448,9 @@ struct __TBB_DEPRECATED_VERBOSE_MSG(
     : internal::atomic_impl< T > {
 #if __TBB_ATOMIC_CTORS
     atomic() = default;
+
     constexpr atomic( T arg ) : internal::atomic_impl< T >( arg ) {}
+
     constexpr atomic< T >( const atomic< T >& rhs )
         : internal::atomic_impl< T >( rhs ) {}
 #endif
@@ -444,6 +459,7 @@ struct __TBB_DEPRECATED_VERBOSE_MSG(
         // a dependent name
         return this->store_with_release( rhs );
     }
+
     atomic< T >& operator=( const atomic< T >& rhs ) {
         this->store_with_release( rhs );
         return *this;
@@ -554,8 +570,10 @@ struct __TBB_DEPRECATED_VERBOSE_MSG(
     atomic< T* > : internal::atomic_impl_with_arithmetic< T*, ptrdiff_t, T > {
 #if __TBB_ATOMIC_CTORS
     atomic() = default;
+
     constexpr atomic( T* arg )
         : internal::atomic_impl_with_arithmetic< T*, ptrdiff_t, T >( arg ) {}
+
     constexpr atomic( const atomic< T* >& rhs )
         : internal::atomic_impl_with_arithmetic< T*, ptrdiff_t, T >( rhs ) {}
 #endif
@@ -564,10 +582,12 @@ struct __TBB_DEPRECATED_VERBOSE_MSG(
         // a dependent name
         return this->store_with_release( rhs );
     }
+
     atomic< T* >& operator=( const atomic< T* >& rhs ) {
         this->store_with_release( rhs );
         return *this;
     }
+
     T* operator->() const { return ( *this ); }
 };
 
@@ -579,7 +599,9 @@ struct __TBB_DEPRECATED_VERBOSE_MSG(
     atomic< void* > : internal::atomic_impl< void* > {
 #if __TBB_ATOMIC_CTORS
     atomic() = default;
+
     constexpr atomic( void* arg ) : internal::atomic_impl< void* >( arg ) {}
+
     constexpr atomic( const atomic< void* >& rhs )
         : internal::atomic_impl< void* >( rhs ) {}
 #endif
@@ -588,6 +610,7 @@ struct __TBB_DEPRECATED_VERBOSE_MSG(
         // a dependent name
         return this->store_with_release( rhs );
     }
+
     atomic< void* >& operator=( const atomic< void* >& rhs ) {
         this->store_with_release( rhs );
         return *this;
@@ -617,6 +640,7 @@ atomic< T > make_atomic( T t ) {
     return a;
 }
 } // namespace interface6
+
 using interface6::make_atomic;
 
 namespace internal {

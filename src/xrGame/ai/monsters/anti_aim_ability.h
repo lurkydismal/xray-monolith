@@ -45,6 +45,7 @@ public:
     void update_schedule();
 
     void set_callback( hit_callback callback ) { m_callback = callback; }
+
     void on_monster_death();
     virtual bool check_start_condition();
     //@	bool						is_active

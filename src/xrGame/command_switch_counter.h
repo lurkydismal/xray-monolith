@@ -17,9 +17,13 @@ public:
     virtual ~command_switch_counter() {};
 
     virtual void update() {};
+
     virtual u32 const get_u32_param() { return m_counter; };
+
     virtual float const get_float_param() { return 0.0f; };
+
     virtual void reset_game() { m_counter = 0; };
+
     virtual void OnPlayerChangeTeam( s8 team ) { ++m_counter; };
 
 private:

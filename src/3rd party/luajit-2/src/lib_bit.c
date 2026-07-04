@@ -27,7 +27,7 @@ LJLIB_REC( bit_unary IR_BNOT )
 LJLIB_ASM_( bit_bswap )
 LJLIB_REC( bit_unary IR_BSWAP )
 
-    LJLIB_ASM( bit_lshift ) LJLIB_REC( bit_shift IR_BSHL ) {
+LJLIB_ASM( bit_lshift ) LJLIB_REC( bit_shift IR_BSHL ) {
     lj_lib_checknumber( L, 1 );
     lj_lib_checkbit( L, 2 );
     return FFH_RETRY;
@@ -35,11 +35,12 @@ LJLIB_REC( bit_unary IR_BSWAP )
 LJLIB_ASM_( bit_rshift )
 LJLIB_REC( bit_shift IR_BSHR )
 LJLIB_ASM_( bit_arshift )
-LJLIB_REC( bit_shift IR_BSAR ) LJLIB_ASM_( bit_rol )
-    LJLIB_REC( bit_shift IR_BROL ) LJLIB_ASM_( bit_ror )
-        LJLIB_REC( bit_shift IR_BROR )
 
-            LJLIB_ASM( bit_band ) LJLIB_REC( bit_nary IR_BAND ) {
+LJLIB_REC( bit_shift IR_BSAR )
+LJLIB_ASM_( bit_rol ) LJLIB_REC( bit_shift IR_BROL ) LJLIB_ASM_( bit_ror )
+    LJLIB_REC( bit_shift IR_BROR )
+
+        LJLIB_ASM( bit_band ) LJLIB_REC( bit_nary IR_BAND ) {
     int i = 0;
     do {
         lj_lib_checknumber( L, ++i );
@@ -51,10 +52,10 @@ LJLIB_REC( bit_nary IR_BOR )
 LJLIB_ASM_( bit_bxor )
 LJLIB_REC( bit_nary IR_BXOR )
 
-    /* ------------------------------------------------------------------------
-     */
+/* ------------------------------------------------------------------------
+ */
 
-    LJLIB_CF( bit_tohex ) {
+LJLIB_CF( bit_tohex ) {
     uint32_t b = ( uint32_t )lj_lib_checkbit( L, 1 );
     int32_t i, n = L->base + 1 >= L->top ? 8 : lj_lib_checkbit( L, 2 );
     const char* hexdigits = "0123456789abcdef";

@@ -4,6 +4,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void ScriptLight::script_register( lua_State* L ) {
     module( L )
         [ class_< ScriptLight >( "script_light" )

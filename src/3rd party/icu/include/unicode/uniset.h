@@ -1694,6 +1694,7 @@ private:
     void setPattern( const UnicodeString& newPat ) {
         setPattern( newPat.getBuffer(), newPat.length() );
     }
+
     void setPattern( const char16_t* newPat, int32_t newPatLen );
     /**
      * Release existing cached pattern.

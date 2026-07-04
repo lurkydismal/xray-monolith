@@ -24,8 +24,11 @@ public:
     ~ide();
 
     bool is_shown() const { return m_shown; }
+
     void Show( bool bShow = true );
+
     bool is_input() const { return m_input; }
+
     void EnableInput( bool bInput = true );
 
 public:

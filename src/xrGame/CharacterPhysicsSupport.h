@@ -89,6 +89,7 @@ private:
 
 protected:
     virtual void SpawnInitPhysics( CSE_Abstract* D );
+
     virtual CPhysicsShellHolder* PPhysicsShellHolder() {
         return m_EntityAlife.PhysicsShellHolder();
     }
@@ -97,24 +98,34 @@ protected:
 
 public:
     IC CPHMovementControl* movement() { return m_PhysicMovementControl; }
+
     IC const CPHMovementControl* movement() const {
         return m_PhysicMovementControl;
     }
+
     IC CPHSoundPlayer* ph_sound_player() { return &m_ph_sound_player; }
+
     IC CIKLimbsController* ik_controller() { return m_ik_controller; }
+
     bool interactive_motion();
     bool can_drop_active_weapon();
     void SetRemoved();
+
     bool IsRemoved() { return m_eState == esRemoved; }
+
     bool IsSpecificDamager() {
         return !!m_flags.test( fl_specific_bonce_demager );
     }
+
     float BonceDamageFactor() { return m_BonceDamageFactor; }
+
     void set_movement_position( const Fvector& pos );
     void ForceTransform( const Fmatrix& m );
+
     void set_use_hit_anims( bool v ) {
         m_flags.set( fl_use_hit_anims, ( BOOL )v );
     }
+
     //////////////////base hierarchi
     /// methods///////////////////////////////////////////////////
     void CreateCharacterSafe();
@@ -140,12 +151,15 @@ public:
     void set_collision_hit_callback( ICollisionHitCallback* cc );
     void run_interactive( CBlend* B );
     void update_interactive_anims();
+
     IC physics_shell_animated* animation_collision() {
         return m_physics_shell_animated;
     }
+
     IC const physics_shell_animated* animation_collision() const {
         return m_physics_shell_animated;
     }
+
     void create_animation_collision();
     void destroy_animation_collision();
     u16 PHGetSyncItemsNumber();
@@ -159,6 +173,7 @@ public:
     // on_active_weapon_shell_activate();
     bool has_shell_collision_place( const CPhysicsShellHolder* obj ) const;
     virtual void on_child_shell_activate( CPhysicsShellHolder* obj );
+
     /////////////////////////////////////////////////////////////////
     CCharacterPhysicsSupport& operator=(
         CCharacterPhysicsSupport& /**asup/**/ ) {

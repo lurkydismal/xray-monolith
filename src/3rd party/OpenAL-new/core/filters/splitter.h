@@ -16,11 +16,15 @@ class BandSplitterR {
 public:
     BandSplitterR() = default;
     BandSplitterR( const BandSplitterR& ) = default;
+
     BandSplitterR( Real f0norm ) { init( f0norm ); }
+
     BandSplitterR& operator=( const BandSplitterR& ) = default;
 
     void init( Real f0norm );
+
     void clear() noexcept { mLpZ1 = mLpZ2 = mApZ1 = 0.0f; }
+
     void process( const al::span< const Real > input,
                   Real* hpout,
                   Real* lpout );
@@ -40,6 +44,7 @@ public:
      */
     void processAllPass( const al::span< Real > samples );
 };
+
 using BandSplitter = BandSplitterR< float >;
 
 #endif /* CORE_FILTERS_SPLITTER_H */

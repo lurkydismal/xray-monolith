@@ -250,6 +250,7 @@ protected:
     void TurnEngineSound( bool bOn );
     // explosive
     virtual void OnAfterExplosion() {};
+
     virtual void GetRayExplosionSourcePos( Fvector& pos ) {
         random_point_in_object_box( pos, this );
     }
@@ -272,9 +273,11 @@ public:
     virtual ~CHelicopter();
 
     CHelicopter::EHeliState state() { return m_curState; };
+
     int state_script() { return m_curState; };
 
     void setState( CHelicopter::EHeliState s );
+
     void setState_script( u32 s ) { setState( ( CHelicopter::EHeliState )s ); };
 
     void init();
@@ -294,9 +297,11 @@ public:
     virtual void load( IReader& input_packet );
 
     virtual void SpawnInitPhysics( CSE_Abstract* D );
+
     virtual CPhysicsShellHolder* PPhysicsShellHolder() {
         return PhysicsShellHolder();
     }
+
     virtual void net_Save( NET_Packet& P );
 
     virtual BOOL net_SaveRelevant() {
@@ -308,7 +313,9 @@ public:
     virtual void renderable_Render( IDSGraphManager* DM ) {
         inherited::renderable_Render( DM );
     };
+
     virtual BOOL renderable_ShadowGenerate() { return FALSE; }
+
     virtual BOOL renderable_ShadowReceive() { return TRUE; }
 
     virtual void OnEvent( NET_Packet& P, u16 type );
@@ -318,6 +325,7 @@ public:
 
     virtual void Hit( SHit* pHDS );
     virtual void PHHit( SHit& H );
+
     // CEntity
     virtual void HitSignal( float P,
                             Fvector& local_dir,
@@ -325,6 +333,7 @@ public:
                             s16 element ) {
         ;
     }
+
     virtual void HitImpulse( float P, Fvector& vWorldDir, Fvector& vLocalDir ) {
         ;
     }
@@ -333,14 +342,18 @@ public:
     virtual const Fvector& get_CurrentFirePoint();
 
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CExplosive* cast_explosive() { return this; }
+
     virtual CHelicopter* cast_helicopter() { return this; }
+
     virtual CPHSkeleton* PHSkeleton() { return this; }
 
 public:
     // for scripting
     bool isVisible( CScriptGameObject* O );
     bool isObjectVisible( CObject* O );
+
     bool isOnAttack() { return m_enemy.type != eEnemyNone; }
 
     void goPatrolByPatrolPath( LPCSTR path_name, int start_idx );
@@ -362,7 +375,9 @@ public:
     void SetLinearAcc( float LAcc_fw, float LAcc_bw );
     //////////////////////End By JoHnY/////////////////////////
     Fvector GetCurrVelocityVec();
+
     void SetBarrelDirTolerance( float val ) { m_barrel_dir_tolerance = val; };
+
     void SetEnemy( CScriptGameObject* e );
     void SetEnemy( Fvector* pos );
     void UnSetEnemy();
@@ -377,8 +392,11 @@ public:
     int GetBodyState();
 
     virtual DLL_Pure* _construct();
+
     float GetSafeAltitude() { return m_movement.GetSafeAltitude(); };
+
     float GetHeliHealth() const { return inherited::GetfHealth(); }
+
     float SetHeliHealth( float value ) {
         return inherited::SetfHealth( value );
     }

@@ -513,6 +513,7 @@ void CActorCondition::ConditionJump( float weight ) {
 
 // demonized: Progressive increase of stamina cost depending on weight
 BOOL progressiveStaminaCost = FALSE;
+
 void CActorCondition::ConditionWalk( float weight, bool accel, bool sprint ) {
     float power = m_fWalkPower;
 

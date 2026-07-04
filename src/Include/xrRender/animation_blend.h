@@ -52,14 +52,20 @@ public:
     u32 dwFrame;
 
     u32 mem_usage() { return sizeof( *this ); }
+
     IC bool update_time( float dt );
     IC void update_play( float dt, PlayCallback _Callback );
     IC bool update_falloff( float dt );
     IC bool update( float dt, PlayCallback _Callback );
+
     IC ECurvature blend_state() const { return blend; }
+
     IC void set_free_state() { blend = eFREE_SLOT; }
+
     IC void set_accrue_state() { blend = eAccrue; }
+
     IC void set_falloff_state() { blend = eFalloff; }
+
     IC void set( const CBlend& r ) { *this = r; }
 #ifdef DEBUG
     CBlend()

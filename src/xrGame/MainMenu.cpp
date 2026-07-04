@@ -56,12 +56,14 @@ extern bool b_shniaganeed_pp;
 CMainMenu* MainMenu() {
     return ( CMainMenu* )g_pGamePersistent->m_pMainMenu;
 };
+
 //----------------------------------------------------------------------------------
 #define INIT_MSGBOX( _box, _template )      \
     {                                       \
         _box = xr_new< CUIMessageBoxEx >(); \
         _box->InitMessageBox( _template );  \
     }
+
 //----------------------------------------------------------------------------------
 
 CMainMenu::CMainMenu() {

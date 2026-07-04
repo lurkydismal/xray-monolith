@@ -64,7 +64,9 @@ private:
         u8 SlotID;
         u8 ItemID;
         s16 BigID;
+
         PresetItem( u8 Slot, u8 Item ) { set( Slot, Item ); };
+
         PresetItem( s16 Big ) { set( Big ); };
 
         bool operator==( const s16& ID ) { return ( BigID ) == ( ID ); }
@@ -132,6 +134,7 @@ public:
     void HideBuyMenu();
     BuyMenuItemPair GetBuyMenuItem( shared_str const& itemSectionName );
     void GetPurchaseItems( BuyMenuItemsCollection& dest, s32& moneyDif );
+
     IBuyWnd* GetBuyWnd() const { return m_pCurBuyMenu; };
 
     void ReInitPlayerDefItems();

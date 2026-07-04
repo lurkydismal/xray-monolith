@@ -149,7 +149,7 @@ void loophole_action_base::process_default( bool const& change_sight ) {
 
     //	smart_cover::cover const&	cover =
     //*movement.current_params().cover(); 	smart_cover::loophole
-    //const&loophole = *movement.current_params().cover_loophole();
+    // const&loophole = *movement.current_params().cover_loophole();
     object().sight().setup( CSightAction(
         SightManager::eSightTypeAnimationDirection, true, false ) );
     object().sight().update();

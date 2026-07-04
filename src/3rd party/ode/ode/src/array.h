@@ -58,7 +58,9 @@ public:
     // not: dArrayBase () { _size=0; _anum=0; _data=0; }
 
     int size() const { return _size; }
+
     int allocatedSize() const { return _anum; }
+
     void* operator new( size_t size );
     void operator delete( void* ptr, size_t size );
 
@@ -67,6 +69,7 @@ public:
         _anum = 0;
         _data = 0;
     }
+
     // if this structure is allocated with malloc() instead of new, you can
     // call this to set it up.
 
@@ -91,14 +94,20 @@ public:
     }
 
     dArray() { constructor(); }
+
     dArray( const dArray< T >& x ) {
         constructor();
         equals( x );
     }
+
     ~dArray() { _freeAll( sizeof( T ) ); }
+
     void setSize( int newsize ) { _setSize( newsize, sizeof( T ) ); }
+
     T* data() const { return ( T* )_data; }
+
     T& operator[]( int i ) const { return ( ( T* )_data )[ i ]; }
+
     void operator=( const dArray< T >& x ) { equals( x ); }
 
     void push( const T item ) {

@@ -89,6 +89,7 @@ template < typename T >
 T convert_argument( T value ) {
     return value;
 }
+
 // The overload below is needed to have explicit conversion of pointer to void*
 // in argument list. compiler bug?
 // TODO: add according broken macro and recheck with ICC 13.0 if the overload is
@@ -98,12 +99,14 @@ void* convert_argument( T* value ) {
     return ( void* )value;
 }
 } // namespace icc_intrinsics_port
+
 // TODO: code below is a bit repetitive, consider simplifying it
 template < typename T, size_t S >
 struct machine_load_store {
     static T load_with_acquire( const volatile T& location ) {
         return __atomic_load_explicit( &location, memory_order_acquire );
     }
+
     static void store_with_release( volatile T& location, T value ) {
         __atomic_store_explicit( &location,
                                  icc_intrinsics_port::convert_argument( value ),
@@ -116,6 +119,7 @@ struct machine_load_store_relaxed {
     static inline T load( const T& location ) {
         return __atomic_load_explicit( &location, memory_order_relaxed );
     }
+
     static inline void store( T& location, T value ) {
         __atomic_store_explicit( &location,
                                  icc_intrinsics_port::convert_argument( value ),
@@ -215,6 +219,7 @@ struct machine_load_store< T, 8 > {
             return __TBB_machine_generic_load8acquire( &location );
         }
     }
+
     static void store_with_release( volatile T& location, T value ) {
         if ( tbb::internal::is_aligned( &location, 8 ) ) {
             __atomic_store_explicit(
@@ -235,6 +240,7 @@ struct machine_load_store_relaxed< T, 8 > {
             return __TBB_machine_generic_load8relaxed( &location );
         }
     }
+
     static void store( volatile T& location, T value ) {
         if ( tbb::internal::is_aligned( &location, 8 ) ) {
             __atomic_store_explicit(
@@ -268,6 +274,7 @@ struct machine_load_store_seq_cst< T, 8 > {
 #endif
 } // namespace internal
 } // namespace tbb
+
 template < typename T >
 inline void __TBB_machine_OR( T* operand, T addend ) {
     __atomic_fetch_or_explicit( operand, addend,

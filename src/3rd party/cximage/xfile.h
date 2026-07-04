@@ -67,11 +67,13 @@ public:
     virtual bool Flush() = 0;
     virtual bool Eof() = 0;
     virtual long Error() = 0;
+
     virtual bool PutC( unsigned char c ) {
         // Default implementation
         size_t nWrote = Write( &c, 1, 1 );
         return ( bool )( nWrote == 1 );
     }
+
     virtual long GetC() = 0;
     virtual char* GetS( char* string, int n ) = 0;
     virtual long Scanf( const char* format, void* output ) = 0;

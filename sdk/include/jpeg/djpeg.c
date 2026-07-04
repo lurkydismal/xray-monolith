@@ -81,6 +81,7 @@ static const char* progname; /* program name for error messages */
 static char* outfilename;    /* for -outfile switch */
 
 LOCAL( void )
+
 usage( void )
 /* complain about bad command line */
 {
@@ -162,6 +163,7 @@ usage( void )
 }
 
 LOCAL( int )
+
 parse_switches( j_decompress_ptr cinfo,
                 int argc,
                 char** argv,
@@ -366,6 +368,7 @@ parse_switches( j_decompress_ptr cinfo,
  */
 
 LOCAL( unsigned int )
+
 jpeg_getc( j_decompress_ptr cinfo )
 /* Read next byte */
 {
@@ -380,6 +383,7 @@ jpeg_getc( j_decompress_ptr cinfo )
 }
 
 METHODDEF( boolean )
+
 print_text_marker( j_decompress_ptr cinfo ) {
     boolean traceit = ( cinfo->err->trace_level >= 1 );
     INT32 length;

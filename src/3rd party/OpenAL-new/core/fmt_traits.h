@@ -24,6 +24,7 @@ struct FmtTypeTraits< FmtUByte > {
         return val * OutT{ 1.0 / 128.0 } - OutT{ 1.0 };
     }
 };
+
 template <>
 struct FmtTypeTraits< FmtShort > {
     using Type = int16_t;
@@ -33,6 +34,7 @@ struct FmtTypeTraits< FmtShort > {
         return val * OutT{ 1.0 / 32768.0 };
     }
 };
+
 template <>
 struct FmtTypeTraits< FmtFloat > {
     using Type = float;
@@ -42,6 +44,7 @@ struct FmtTypeTraits< FmtFloat > {
         return val;
     }
 };
+
 template <>
 struct FmtTypeTraits< FmtDouble > {
     using Type = double;
@@ -51,6 +54,7 @@ struct FmtTypeTraits< FmtDouble > {
         return static_cast< OutT >( val );
     }
 };
+
 template <>
 struct FmtTypeTraits< FmtMulaw > {
     using Type = uint8_t;
@@ -60,6 +64,7 @@ struct FmtTypeTraits< FmtMulaw > {
         return muLawDecompressionTable[ val ] * OutT{ 1.0 / 32768.0 };
     }
 };
+
 template <>
 struct FmtTypeTraits< FmtAlaw > {
     using Type = uint8_t;

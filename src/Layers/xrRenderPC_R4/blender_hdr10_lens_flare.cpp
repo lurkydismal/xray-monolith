@@ -6,6 +6,7 @@
 CBlender_hdr10_lens_flare_downsample::CBlender_hdr10_lens_flare_downsample() {
     description.CLS = 0;
 }
+
 CBlender_hdr10_lens_flare_downsample::~CBlender_hdr10_lens_flare_downsample() {}
 
 void CBlender_hdr10_lens_flare_downsample::Compile( CBlender_Compile& C ) {
@@ -27,6 +28,7 @@ void CBlender_hdr10_lens_flare_downsample::Compile( CBlender_Compile& C ) {
 CBlender_hdr10_lens_flare_fgen::CBlender_hdr10_lens_flare_fgen() {
     description.CLS = 0;
 }
+
 CBlender_hdr10_lens_flare_fgen::~CBlender_hdr10_lens_flare_fgen() {}
 
 void CBlender_hdr10_lens_flare_fgen::Compile( CBlender_Compile& C ) {
@@ -52,6 +54,7 @@ void CBlender_hdr10_lens_flare_fgen::Compile( CBlender_Compile& C ) {
 CBlender_hdr10_lens_flare_blur::CBlender_hdr10_lens_flare_blur() {
     description.CLS = 0;
 }
+
 CBlender_hdr10_lens_flare_blur::~CBlender_hdr10_lens_flare_blur() {}
 
 void CBlender_hdr10_lens_flare_blur::Compile( CBlender_Compile& C ) {
@@ -77,6 +80,7 @@ void CBlender_hdr10_lens_flare_blur::Compile( CBlender_Compile& C ) {
 CBlender_hdr10_lens_flare_upsample::CBlender_hdr10_lens_flare_upsample() {
     description.CLS = 0;
 }
+
 CBlender_hdr10_lens_flare_upsample::~CBlender_hdr10_lens_flare_upsample() {}
 
 void CBlender_hdr10_lens_flare_upsample::Compile( CBlender_Compile& C ) {

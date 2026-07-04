@@ -54,18 +54,23 @@ public:
     }
 
     float GetRange_min() { return m_MinPos; }
+
     float GetRange_max() { return m_MaxPos; }
 
     void SetProgressPos( float _Pos );
+
     float GetProgressPos() { return m_ProgressPos.y; }
+
     void SnapProgressPos() { m_ProgressPos.x = m_ProgressPos.y; }
 
     CUIStatic& GetProgressStatic() { return m_UIProgressItem; }
 
     void ShowBackground( bool status ) { m_bBackgroundPresent = status; }
+
     bool IsShownBackground() { return m_bBackgroundPresent; }
 
     bool GetSnapNoDelay() { return m_bSnapNoDelay; }
+
     void SetSnapNoDelay( bool status ) { m_bSnapNoDelay = status; }
 
     virtual void SetColor( u32 color ) {
@@ -73,8 +78,11 @@ public:
     }
 
     void UseColor( bool status ) { m_bUseColor = status; }
+
     virtual void SetMinColor( u32 color ) { m_minColor.set( color ); }
+
     virtual void SetMiddleColor( u32 color ) { m_middleColor.set( color ); }
+
     virtual void SetMaxColor( u32 color ) { m_maxColor.set( color ); }
 
     virtual void Draw();

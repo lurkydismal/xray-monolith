@@ -38,6 +38,7 @@ protected:
     virtual void SendMessage( CUIWindow* wnd,
                               s16 msg,
                               void* data = nullptr ) override;
+
     // ~CUIWindow
     virtual void OnButtonClick( int i ) {}
 
@@ -57,6 +58,7 @@ public:
     void InitChangeWeather( CUIXml& xmlDoc );
     // ButtonListDialog
     virtual void OnButtonClick( int i ) override;
+
     // ~ButtonListDialog
 
     virtual CUIWindow* ui_cast_window() { return this; }
@@ -74,6 +76,7 @@ public:
     void InitChangeGameType( CUIXml& xmlDoc );
     // ButtonListDialog
     virtual void OnButtonClick( int i ) override;
+
     // ~ButtonListDialog
 
     virtual CUIWindow* ui_cast_window() { return this; }

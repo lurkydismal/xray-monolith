@@ -2354,6 +2354,7 @@ struct ImTriangulatorNodeSpan {
     int Size = 0;
 
     void push_back( ImTriangulatorNode* node ) { Data[ Size++ ] = node; }
+
     void find_erase_unsorted( int idx ) {
         for ( int i = Size - 1; i >= 0; i-- )
             if ( Data[ i ]->Index == idx ) {
@@ -2368,6 +2369,7 @@ struct ImTriangulator {
     static int EstimateTriangleCount( int points_count ) {
         return ( points_count < 3 ) ? 0 : points_count - 2;
     }
+
     static int EstimateScratchBufferSize( int points_count ) {
         return sizeof( ImTriangulatorNode ) * points_count +
                sizeof( ImTriangulatorNode* ) * points_count * 2;
@@ -3368,9 +3370,11 @@ static unsigned int stb_decompress_length( const unsigned char* input );
 static unsigned int stb_decompress( unsigned char* output,
                                     const unsigned char* input,
                                     unsigned int length );
+
 static unsigned int Decode85Byte( char c ) {
     return c >= '\\' ? c - 36 : c - 35;
 }
+
 static void Decode85( const unsigned char* src, unsigned char* dst ) {
     while ( *src ) {
         unsigned int tmp =
@@ -6002,6 +6006,7 @@ static unsigned int stb_decompress_length( const unsigned char* input ) {
 static unsigned char *stb__barrier_out_e, *stb__barrier_out_b;
 static const unsigned char* stb__barrier_in_b;
 static unsigned char* stb__dout;
+
 static void stb__match( const unsigned char* data, unsigned int length ) {
     // INVERSE of memmove... write each byte before copying the next...
     IM_ASSERT( stb__dout + length <= stb__barrier_out_e );

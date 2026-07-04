@@ -29,6 +29,7 @@ class CScanningAbility {
 
 public:
     void init_external( _Object* obj ) { object = obj; }
+
     void on_destroy();
 
     void load( LPCSTR section );

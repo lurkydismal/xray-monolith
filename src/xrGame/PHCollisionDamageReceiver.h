@@ -13,7 +13,9 @@ class CPHCollisionDamageReceiver : public ICollisionDamageReceiver {
 
     struct SFind {
         u16 id;
+
         SFind( u16 _id ) { id = _id; };
+
         bool operator()( const SControledBone& cb ) { return cb.first == id; }
     };
 

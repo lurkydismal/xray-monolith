@@ -31,7 +31,9 @@ public:
 
     virtual void _BCL OnFrame();
     virtual void OnRender();
+
     CUIWindow* MainWnd() { return m_UIWindow; }
+
     bool IsActive() { return !!m_flags.test( etsActive ); }
 
     LPCSTR m_name;
@@ -48,6 +50,7 @@ public:
 
     virtual void IR_OnMouseWheel( int direction );
     virtual void IR_OnActivate( void );
+
     bool Persistent() { return !!m_flags.test( etsPersistent ); }
 
     xr_delegate< void() > m_on_destroy_event;
@@ -109,6 +112,7 @@ public:
     virtual bool IsPlaying() = 0;
 
     bool AllowKey( int dik );
+
     bool GrabInput() { return !!m_flags.test( etiGrabInput ); }
 
     shared_str m_check_lua_function;

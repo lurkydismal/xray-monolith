@@ -97,6 +97,7 @@ public:
     BOOL GetFrame( BYTE** pDest );
 
     BOOL NeedUpdate() { return CalcFrame() != m_dwFrameCurrent; }
+
     INT SetSpeed( INT nPercent );
 };
 #endif

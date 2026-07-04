@@ -25,7 +25,9 @@ namespace internal {
 
 // include list of index names
 #define TBB_STRING_RESOURCE( index_name, str ) index_name,
+
 enum string_index {
+
 #include "internal/_tbb_strings.h"
     NUM_STRINGS
 };
@@ -67,6 +69,7 @@ namespace internal {
 
 #if _WIN32 || _WIN64
 void __TBB_EXPORTED_FUNC itt_set_sync_name_v3( void* obj, const wchar_t* name );
+
 inline size_t multibyte_to_widechar( wchar_t* wcs,
                                      const char* mbs,
                                      size_t bufsize ) {
@@ -146,6 +149,7 @@ void __TBB_EXPORTED_FUNC itt_store_pointer_with_release_v3( void* dst,
                                                             void* src );
 void* __TBB_EXPORTED_FUNC itt_load_pointer_with_acquire_v3( const void* src );
 void* __TBB_EXPORTED_FUNC itt_load_pointer_v3( const void* src );
+
 enum itt_domain_enum {
     ITT_DOMAIN_FLOW = 0,
     ITT_DOMAIN_MAIN = 1,
@@ -349,6 +353,7 @@ inline void register_node_addr( itt_domain_enum /*domain*/,
                                 unsigned long long /*addr_extra*/,
                                 string_index /*key*/,
                                 void* /*value*/ ) {}
+
 inline void call_itt_notify( notify_type /*t*/, void* /*ptr*/ ) {}
 
 inline void itt_make_task_group( itt_domain_enum /*domain*/,
@@ -438,6 +443,7 @@ struct event {
 #endif // TBB_USE_THREADING_TOOLS && !(TBB_USE_THREADING_TOOLS == 2)
 
 } // namespace interface10
+
 using interface10::event;
 } // namespace profiling
 } // namespace tbb

@@ -48,6 +48,7 @@ namespace internal {
 /** @ingroup task_scheduling */
 class scheduler;
 } // namespace internal
+
 //! @endcond
 
 //! Class delimiting the scope of task scheduler activity.
@@ -156,6 +157,7 @@ public:
             terminate();
         internal::poison_pointer( my_scheduler );
     }
+
     //! Returns the number of threads TBB scheduler would create if initialized
     //! by default.
     /** Result returned by this method does not depend on whether the scheduler

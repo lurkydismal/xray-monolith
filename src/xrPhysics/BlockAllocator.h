@@ -47,6 +47,7 @@ public:
 private:
     /////////////////////////////////////////////////////////////////
     IC void add_block() { blocks.push_back( xr_alloc< T >( block_size ) ); };
+
     IC void next_block() {
         if ( block_count == blocks.size() )
             add_block();

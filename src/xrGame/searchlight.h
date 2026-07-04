@@ -73,6 +73,7 @@ public:
     virtual bool bfAssignObject( CScriptEntityAction* tpEntityAction );
 
     virtual CScriptEntity* cast_script_entity() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
 #endif
 
@@ -102,6 +103,7 @@ private:
     void CreateSkeleton( CSE_Abstract* po );
     virtual void PhDataUpdate( float step ) {};
     virtual void PhTune( float step ) {};
+
     virtual CPhysicsShellHolder* PPhysicsShellHolder() {
         return static_cast< CPhysicsShellHolder* >( this );
     }
@@ -114,6 +116,7 @@ protected:
 public:
     virtual BOOL AlwaysTheCrow();
     virtual bool is_ai_obstacle() const;
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
 
     IC bool IsActive() { return m_active; }
@@ -125,6 +128,7 @@ public:
         eDesiredDir,
         eDesiredAng,
     };
+
     void Action( int id, u32 flags, LPCSTR sec );
     void SetParam( int id, Fvector val, LPCSTR sec );
 

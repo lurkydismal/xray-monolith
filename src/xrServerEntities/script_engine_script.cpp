@@ -197,6 +197,7 @@ IC profile_timer_script operator+( const profile_timer_script& portion0,
 ICF u32 script_time_global() {
     return Device.dwTimeGlobal;
 }
+
 ICF u32 script_time_global_async() {
     return Device.TimerAsync_MMT();
 }
@@ -204,6 +205,7 @@ ICF u32 script_time_global_async() {
 ICF u32 script_time_global() {
     return 0;
 }
+
 ICF u32 script_time_global_async() {
     return 0;
 }
@@ -217,6 +219,7 @@ static bool is_enough_address_space_available_impl() {
 #endif //-XRGAME_EXPORTS
 
 #pragma optimize( "s", on )
+
 void CScriptEngine::script_register( lua_State* L ) {
     module( L )[
         // def("log1", (void(*) (LPCSTR msg)) &Log), // AVO: fixed log func

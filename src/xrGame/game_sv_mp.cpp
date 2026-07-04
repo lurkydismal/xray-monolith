@@ -139,6 +139,7 @@ void game_sv_mp::OnRoundStart() {
             tmp_ps->m_online_time = Level().timeServer();
         }
     };
+
     ready_clearer tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
     m_async_stats_request_time = 0;
@@ -181,6 +182,7 @@ void game_sv_mp::OnRoundEnd() {
     u_EventSend( P );
     //-------------------------------------------------------
     CleanDelayedEvents();
+
     struct event_clearer {
         GameEventQueue* event_queue;
         IClient* server_client;
@@ -1099,6 +1101,7 @@ void game_sv_mp::OnVoteStart( LPCSTR VoteCommand, ClientID sender ) {
             }
         }
     };
+
     vote_status_setter tmp_functor;
     tmp_functor.senderID = sender;
     tmp_functor.pStartedPlayer = NULL;
@@ -1160,6 +1163,7 @@ void game_sv_mp::UpdateVote() {
             ++NumToCount;
         }
     };
+
     vote_updator vote_stats;
     vote_stats.NumAgreed = 0;
     vote_stats.NumParticipated = 0;
@@ -1709,6 +1713,7 @@ void game_sv_mp::Player_AddMoney( game_PlayerState* ps, s32 MoneyAmount ) {
     Game().m_WeaponUsageStatistic->OnPlayerAddMoney( ps, MoneyAmount );
     //---------------------------------------
 };
+
 //---------------------------------------------------------------------
 extern u32 g_sv_dwMaxClientPing;
 
@@ -1782,6 +1787,7 @@ void game_sv_mp::RenewAllActorsHealth() {
             }
         }
     };
+
     actor_health_renewer tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
     signal_Syncronize();
@@ -1907,6 +1913,7 @@ void game_sv_mp::DumpOnlineStatistic() {
             m_owner->WritePlayerStats( *ini, num_buf, l_pC );
         }
     };
+
     player_stats_writer tmp_functor;
     tmp_functor.m_owner = this;
     tmp_functor.m_server = m_server;
@@ -2099,6 +2106,7 @@ void game_sv_mp::DumpRoundStatistics() {
             m_owner->WritePlayerStats( *ini, num_buf, l_pC );
         }
     };
+
     player_stats_writer tmp_functor;
     tmp_functor.m_owner = this;
     tmp_functor.m_server = m_server;

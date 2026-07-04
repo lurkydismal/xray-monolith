@@ -1,6 +1,7 @@
 #ifndef FOBB_H
 #define FOBB_H
 #include "_plane.h"
+
 template < class T >
 struct _obb {
 public:

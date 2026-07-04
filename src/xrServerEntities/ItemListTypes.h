@@ -51,13 +51,19 @@ public:
     }
 
     virtual ~ListItem() {};
+
     void SetName( LPCSTR _key ) { key = _key; }
 
     IC void Visible( BOOL val ) { m_Flags.set( flHidden, !val ); }
+
     IC BOOL Visible() const { return !m_Flags.test( flHidden ); }
+
     IC int Type() { return type; }
+
     IC void* Item() { return item; }
+
     IC LPCSTR Key() { return *key; }
+
     IC void SetIcon( int index ) { icon_index = index; }
 };
 

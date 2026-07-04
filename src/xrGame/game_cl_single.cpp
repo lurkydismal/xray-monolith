@@ -88,6 +88,7 @@ void game_cl_Single::SetEnvironmentGameTimeFactor( const float fTimeFactor ) {
 }
 
 #pragma optimize( "s", on )
+
 void CScriptGameDifficulty::script_register( lua_State* L ) {
     module( L )
         [ class_< enum_exporter< ESingleGameDifficulty > >( "game_difficulty" )

@@ -32,6 +32,7 @@ class CGameLevelCrossTable {
 
 public:
 #pragma pack( push, 2 )
+
     class CHeader {
         u32 dwVersion;
         u32 dwNodeCount;
@@ -68,6 +69,7 @@ public:
         friend class CGameGraphBuilder;
 #endif // AI_COMPILER
     };
+
 #pragma pack( pop )
 
 private:

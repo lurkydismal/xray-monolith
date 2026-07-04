@@ -30,6 +30,7 @@ backend_exception::backend_exception( backend_error code, const char* msg, ... )
     setMessage( msg, args );
     va_end( args );
 }
+
 backend_exception::~backend_exception() = default;
 
 } // namespace al

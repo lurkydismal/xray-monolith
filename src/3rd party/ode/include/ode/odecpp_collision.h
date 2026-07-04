@@ -38,12 +38,14 @@ protected:
 
 public:
     dGeom() { _id = 0; }
+
     ~dGeom() {
         if ( _id )
             dGeomDestroy( _id );
     }
 
     dGeomID id() const { return _id; }
+
     operator dGeomID() const { return _id; }
 
     void destroy() {
@@ -57,22 +59,27 @@ public:
     dSpaceID getSpace() const { return dGeomGetSpace( _id ); }
 
     void setData( void* data ) { dGeomSetData( _id, data ); }
+
     void* getData() const { return dGeomGetData( _id ); }
 
     void setBody( dBodyID b ) { dGeomSetBody( _id, b ); }
+
     dBodyID getBody() const { return dGeomGetBody( _id ); }
 
     void setPosition( dReal x, dReal y, dReal z ) {
         dGeomSetPosition( _id, x, y, z );
     }
+
     const dReal* getPosition() const { return dGeomGetPosition( _id ); }
 
     void setRotation( const dMatrix3 R ) { dGeomSetRotation( _id, R ); }
+
     const dReal* getRotation() const { return dGeomGetRotation( _id ); }
 
     void setQuaternion( const dQuaternion quat ) {
         dGeomSetQuaternion( _id, quat );
     }
+
     void getQuaternion( dQuaternion quat ) const {
         dGeomGetQuaternion( _id, quat );
     }
@@ -84,14 +91,19 @@ public:
     void setCategoryBits( unsigned long bits ) {
         dGeomSetCategoryBits( _id, bits );
     }
+
     void setCollideBits( unsigned long bits ) {
         dGeomSetCollideBits( _id, bits );
     }
+
     unsigned long getCategoryBits() { return dGeomGetCategoryBits( _id ); }
+
     unsigned long getCollideBits() { return dGeomGetCollideBits( _id ); }
 
     void enable() { dGeomEnable( _id ); }
+
     void disable() { dGeomDisable( _id ); }
+
     int isEnabled() { return dGeomIsEnabled( _id ); }
 
     void collide2( dGeomID g, void* data, dNearCallback* callback ) {
@@ -112,16 +124,21 @@ protected:
 
 public:
     dSpaceID id() const { return ( dSpaceID )_id; }
+
     operator dSpaceID() const { return ( dSpaceID )_id; }
 
     void setCleanup( int mode ) { dSpaceSetCleanup( id(), mode ); }
+
     int getCleanup() { return dSpaceGetCleanup( id() ); }
 
     void add( dGeomID x ) { dSpaceAdd( id(), x ); }
+
     void remove( dGeomID x ) { dSpaceRemove( id(), x ); }
+
     int query( dGeomID x ) { return dSpaceQuery( id(), x ); }
 
     int getNumGeoms() { return dSpaceGetNumGeoms( id() ); }
+
     dGeomID getGeom( int i ) { return dSpaceGetGeom( id(), i ); }
 
     void collide( void* data, dNearCallback* callback ) {
@@ -147,6 +164,7 @@ class dHashSpace : public dSpace {
 
 public:
     dHashSpace( dSpaceID space ) { _id = ( dGeomID )dHashSpaceCreate( space ); }
+
     void setLevels( int minlevel, int maxlevel ) {
         dHashSpaceSetLevels( id(), minlevel, maxlevel );
     }
@@ -173,6 +191,7 @@ class dSphere : public dGeom {
 
 public:
     dSphere() {}
+
     dSphere( dSpaceID space, dReal radius ) {
         _id = dCreateSphere( space, radius );
     }
@@ -184,6 +203,7 @@ public:
     }
 
     void setRadius( dReal radius ) { dGeomSphereSetRadius( _id, radius ); }
+
     dReal getRadius() const { return dGeomSphereGetRadius( _id ); }
 };
 
@@ -194,6 +214,7 @@ class dBox : public dGeom {
 
 public:
     dBox() {}
+
     dBox( dSpaceID space, dReal lx, dReal ly, dReal lz ) {
         _id = dCreateBox( space, lx, ly, lz );
     }
@@ -207,6 +228,7 @@ public:
     void setLengths( dReal lx, dReal ly, dReal lz ) {
         dGeomBoxSetLengths( _id, lx, ly, lz );
     }
+
     void getLengths( dVector3 result ) const {
         dGeomBoxGetLengths( _id, result );
     }
@@ -219,6 +241,7 @@ class dPlane : public dGeom {
 
 public:
     dPlane() {}
+
     dPlane( dSpaceID space, dReal a, dReal b, dReal c, dReal d ) {
         _id = dCreatePlane( space, a, b, c, d );
     }
@@ -232,6 +255,7 @@ public:
     void setParams( dReal a, dReal b, dReal c, dReal d ) {
         dGeomPlaneSetParams( _id, a, b, c, d );
     }
+
     void getParams( dVector4 result ) const {
         dGeomPlaneGetParams( _id, result );
     }
@@ -244,6 +268,7 @@ class dCCylinder : public dGeom {
 
 public:
     dCCylinder() {}
+
     dCCylinder( dSpaceID space, dReal radius, dReal length ) {
         _id = dCreateCCylinder( space, radius, length );
     }
@@ -257,6 +282,7 @@ public:
     void setParams( dReal radius, dReal length ) {
         dGeomCCylinderSetParams( _id, radius, length );
     }
+
     void getParams( dReal* radius, dReal* length ) const {
         dGeomCCylinderGetParams( _id, radius, length );
     }
@@ -269,6 +295,7 @@ class dRay : public dGeom {
 
 public:
     dRay() {}
+
     dRay( dSpaceID space, dReal length ) { _id = dCreateRay( space, length ); }
 
     void create( dSpaceID space, dReal length ) {
@@ -278,22 +305,27 @@ public:
     }
 
     void setLength( dReal length ) { dGeomRaySetLength( _id, length ); }
+
     dReal getLength() { return dGeomRayGetLength( _id ); }
 
     void set( dReal px, dReal py, dReal pz, dReal dx, dReal dy, dReal dz ) {
         dGeomRaySet( _id, px, py, pz, dx, dy, dz );
     }
+
     void get( dVector3 start, dVector3 dir ) { dGeomRayGet( _id, start, dir ); }
 
     void setParams( int firstContact, int backfaceCull ) {
         dGeomRaySetParams( _id, firstContact, backfaceCull );
     }
+
     void getParams( int* firstContact, int* backfaceCull ) {
         dGeomRayGetParams( _id, firstContact, backfaceCull );
     }
+
     void setClosestHit( int closestHit ) {
         dGeomRaySetClosestHit( _id, closestHit );
     }
+
     int getClosestHit() { return dGeomRayGetClosestHit( _id ); }
 };
 
@@ -304,6 +336,7 @@ class dGeomTransform : public dGeom {
 
 public:
     dGeomTransform() {}
+
     dGeomTransform( dSpaceID space ) { _id = dCreateGeomTransform( space ); }
 
     void create( dSpaceID space = 0 ) {
@@ -313,12 +346,15 @@ public:
     }
 
     void setGeom( dGeomID geom ) { dGeomTransformSetGeom( _id, geom ); }
+
     dGeomID getGeom() const { return dGeomTransformGetGeom( _id ); }
 
     void setCleanup( int mode ) { dGeomTransformSetCleanup( _id, mode ); }
+
     int getCleanup() { return dGeomTransformGetCleanup( _id ); }
 
     void setInfo( int mode ) { dGeomTransformSetInfo( _id, mode ); }
+
     int getInfo() { return dGeomTransformGetInfo( _id ); }
 };
 

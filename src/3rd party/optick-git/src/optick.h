@@ -208,6 +208,7 @@ typedef void( VKAPI_PTR* PFN_vkFreeCommandBuffers_ )(
 struct ID3D12CommandList;
 struct ID3D12Device;
 struct ID3D12CommandQueue;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace Optick {
@@ -471,6 +472,7 @@ struct Category {
     };
 
     static uint32_t GetMask( Type t ) { return ( uint32_t )( t >> 32 ); }
+
     static uint32_t GetColor( Type t ) { return ( uint32_t )( t ); }
 };
 
@@ -524,6 +526,7 @@ struct Mode {
                   GPU | SYS_CALLS | OTHER_PROCESSES,
     };
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct FrameType {
     enum Type {
@@ -535,6 +538,7 @@ struct FrameType {
         NONE = -1,
     };
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 OPTICK_API int64_t GetHighPrecisionTime();
 OPTICK_API int64_t GetHighPrecisionFrequency();
@@ -555,6 +559,7 @@ OPTICK_API bool RegisterThread( const wchar_t* name );
 OPTICK_API bool UnRegisterThread( bool keepAlive );
 OPTICK_API EventStorage** GetEventStorageSlotForCurrentThread();
 OPTICK_API bool IsFiberStorage( EventStorage* fiberStorage );
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct ThreadMask {
     enum Type {
@@ -571,6 +576,7 @@ OPTICK_API EventStorage* RegisterStorage(
     const char* name,
     uint64_t threadID = uint64_t( -1 ),
     ThreadMask::Type type = ThreadMask::None );
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct State {
     enum Type {
@@ -588,6 +594,7 @@ struct State {
         CANCEL_CAPTURE,
     };
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Sets a state change callback
 typedef bool ( *StateCallback )( State::Type state );
@@ -617,6 +624,7 @@ struct File {
         OPTICK_OTHER,
     };
 };
+
 // Attaches a file to the current capture
 OPTICK_API bool AttachFile( File::Type type,
                             const char* name,
@@ -631,6 +639,7 @@ OPTICK_API bool AttachFile( File::Type type,
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct EventDescription;
 struct Frame;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct EventTime {
     static const int64_t INVALID_TIMESTAMP = ( int64_t )-1;
@@ -639,12 +648,15 @@ struct EventTime {
     int64_t finish;
 
     OPTICK_INLINE void Start() { start = Optick::GetHighPrecisionTime(); }
+
     OPTICK_INLINE void Stop() { finish = Optick::GetHighPrecisionTime(); }
+
     OPTICK_INLINE bool IsValid() const {
         return start < finish && start != INVALID_TIMESTAMP &&
                finish != INVALID_TIMESTAMP;
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct EventData : public EventTime {
     const EventDescription* description;
@@ -657,6 +669,7 @@ struct EventData : public EventTime {
         return finish > other.finish;
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct OPTICK_API SyncData : public EventTime {
     uint64_t newThreadId;
@@ -664,6 +677,7 @@ struct OPTICK_API SyncData : public EventTime {
     uint8_t core;
     int8_t reason;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct OPTICK_API FiberSyncData : public EventTime {
     uint64_t threadId;
@@ -671,20 +685,25 @@ struct OPTICK_API FiberSyncData : public EventTime {
     static void AttachToThread( EventStorage* storage, uint64_t threadId );
     static void DetachFromThread( EventStorage* storage );
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template < class T >
 struct TagData {
     const EventDescription* description;
     int64_t timestamp;
     T data;
+
     TagData() {}
+
     TagData( const EventDescription& desc, T d )
         : description( &desc ),
           timestamp( Optick::GetHighPrecisionTime() ),
           data( d ) {}
+
     TagData( const EventDescription& desc, T d, int64_t t )
         : description( &desc ), timestamp( t ), data( d ) {}
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct OPTICK_API EventDescription {
     enum Flags : uint8_t {
@@ -721,6 +740,7 @@ private:
     friend class EventDescriptionBoard;
     EventDescription& operator=( const EventDescription& );
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct OPTICK_API Event {
     EventData* data;
@@ -750,6 +770,7 @@ struct OPTICK_API Event {
             Stop( *data );
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 OPTICK_INLINE Optick::EventDescription* CreateDescription(
     const char* functionName,
@@ -766,6 +787,7 @@ OPTICK_INLINE Optick::EventDescription* CreateDescription(
         ( unsigned long )fileLine, ::Optick::Category::GetColor( category ),
         ::Optick::Category::GetMask( category ), flags );
 }
+
 OPTICK_INLINE Optick::EventDescription* CreateDescription(
     const char* functionName,
     const char* fileName,
@@ -776,6 +798,7 @@ OPTICK_INLINE Optick::EventDescription* CreateDescription(
         ::Optick::Category::GetColor( category ),
         ::Optick::Category::GetMask( category ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct OPTICK_API GPUEvent {
     EventData* data;
@@ -792,6 +815,7 @@ struct OPTICK_API GPUEvent {
             Stop( *data );
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct OPTICK_API Tag {
     static void Attach( const EventDescription& description, float val );
@@ -813,6 +837,7 @@ struct OPTICK_API Tag {
         Attach( description, p );
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct ThreadScope {
     ThreadScope( const char* name ) { RegisterThread( name ); }
@@ -821,6 +846,7 @@ struct ThreadScope {
 
     ~ThreadScope() { UnRegisterThread( false ); }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 enum OPTICK_API GPUQueueType {
     GPU_QUEUE_GRAPHICS,
@@ -830,16 +856,19 @@ enum OPTICK_API GPUQueueType {
 
     GPU_QUEUE_COUNT,
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct OPTICK_API GPUContext {
     void* cmdBuffer;
     GPUQueueType queue;
     int node;
+
     GPUContext( void* c = nullptr,
                 GPUQueueType q = GPU_QUEUE_GRAPHICS,
                 int n = 0 )
         : cmdBuffer( c ), queue( q ), node( n ) {}
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 OPTICK_API void InitGpuD3D12( ID3D12Device* device,
                               ID3D12CommandQueue** cmdQueues,
@@ -852,6 +881,7 @@ OPTICK_API void InitGpuVulkan( VkDevice* vkDevices,
                                const VulkanFunctions* functions );
 OPTICK_API void GpuFlip( void* swapChain );
 OPTICK_API GPUContext SetGpuContext( GPUContext context );
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct OPTICK_API GPUContextScope {
     GPUContext prevContext;
@@ -870,6 +900,7 @@ struct OPTICK_API GPUContextScope {
 
     ~GPUContextScope() { SetGpuContext( prevContext ); }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 OPTICK_API const EventDescription* GetFrameDescription(
     FrameType::Type frame = FrameType::CPU );
@@ -891,15 +922,19 @@ OPTICK_API bool StartCapture( Mode::Type mode = Mode::DEFAULT,
 OPTICK_API bool StopCapture( bool force = true );
 OPTICK_API bool SaveCapture( CaptureSaveChunkCb dataCb, bool force = true );
 OPTICK_API bool SaveCapture( const char* path, bool force = true );
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct OptickApp {
     const char* m_Name;
+
     OptickApp( const char* name ) : m_Name( name ) { StartCapture(); }
+
     ~OptickApp() {
         StopCapture();
         SaveCapture( m_Name );
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace Optick
 

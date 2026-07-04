@@ -39,8 +39,11 @@ public:
     ColourSet( u8 const* rgba, int flags, bool createMinimalSet = false );
 
     int GetCount() const { return m_count; }
+
     Vec3 const* GetPoints() const { return m_points; }
+
     float const* GetWeights() const { return m_weights; }
+
     bool IsTransparent() const { return m_transparent; }
 
     void RemapIndices( u8 const* source, u8* target ) const;
@@ -55,6 +58,7 @@ private:
 #if SQUISH_USE_SIMD
 public:
     Vec4 const* GetPointsSimd() const { return m_points_simd; }
+
     Vec4 const* GetWeightsSimd() const { return m_weights_simd; }
 
 private:

@@ -23,6 +23,7 @@ private:
 
 public:
     void init_external( CBaseMonster* obj ) { m_object = obj; }
+
     IC void load( LPCSTR section );
 
     // инициализировано состояние атаки
@@ -41,6 +42,7 @@ public:
 
 #ifdef DEBUG
     IC float dbg_as_min_dist() { return m_as_min_dist; }
+
     IC float dbg_as_step() { return m_as_step; }
 #endif
 };

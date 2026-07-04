@@ -434,6 +434,7 @@ NVAPI_INTERFACE NvAPI_Stereo_GetConvergence( StereoHandle stereoHandle,
 ///////////////////////////////////////////////////////////////////////////////
 NVAPI_INTERFACE NvAPI_Stereo_SetConvergence( StereoHandle stereoHandle,
                                              float newConvergence );
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // FUNCTION NAME: NvAPI_Stereo_SetActiveEye
@@ -478,6 +479,7 @@ typedef enum _NV_StereoActiveEye {
 //! \ingroup stereoapi
 NVAPI_INTERFACE NvAPI_Stereo_SetActiveEye( StereoHandle hStereoHandle,
                                            NV_STEREO_ACTIVE_EYE StereoEye );
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // FUNCTION NAME: NvAPI_Stereo_SetDriverMode
@@ -567,6 +569,7 @@ NVAPI_INTERFACE NvAPI_Stereo_GetEyeSeparation( StereoHandle hStereoHandle,
 //! \ingroup stereoapi
 ///////////////////////////////////////////////////////////////////////////////
 NVAPI_INTERFACE NvAPI_Stereo_IsWindowedModeSupported( NvU8* bSupported );
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // FUNCTION NAME: NvAPI_Stereo_SetSurfaceCreationMode

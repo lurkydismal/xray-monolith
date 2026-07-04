@@ -31,12 +31,19 @@ public:
     class scoped_lock : internal::no_copy {
     public:
         scoped_lock() {}
+
         scoped_lock( null_rw_mutex&, bool = true ) {}
+
         ~scoped_lock() {}
+
         void acquire( null_rw_mutex&, bool = true ) {}
+
         bool upgrade_to_writer() { return true; }
+
         bool downgrade_to_reader() { return true; }
+
         bool try_acquire( null_rw_mutex&, bool = true ) { return true; }
+
         void release() {}
     };
 

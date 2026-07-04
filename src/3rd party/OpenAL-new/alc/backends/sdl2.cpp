@@ -48,9 +48,11 @@ _Pragma( "GCC diagnostic push" )
 
     struct Sdl2Backend final : public BackendBase {
         Sdl2Backend( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
         ~Sdl2Backend() override;
 
         void audioCallback( Uint8* stream, int len ) noexcept;
+
         static void audioCallbackC( void* ptr,
                                     Uint8* stream,
                                     int len ) noexcept {

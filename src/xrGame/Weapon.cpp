@@ -161,6 +161,7 @@ CWeapon::CWeapon() {
 }
 
 extern int scope_2dtexactive; // crookr
+
 CWeapon::~CWeapon() {
     xr_delete( m_UIScope );
     delete_data( m_scopes );
@@ -452,6 +453,7 @@ void CWeapon::SetUIScope( LPCSTR scope_texture ) {
 }
 
 BOOL useSeparateUBGLKeybind = TRUE;
+
 void CWeapon::SwitchZoomType() {
     if ( !useSeparateUBGLKeybind ) {
         if ( m_zoomtype == 0 &&
@@ -732,7 +734,7 @@ void CWeapon::Load( LPCSTR section ) {
     // modified by Peacemaker [17.10.08]
     //	misfireProbability			  =
     // pSettings->r_float(section,"misfire_probability"); misfireConditionK =
-    //READ_IF_EXISTS(pSettings, r_float, section,
+    // READ_IF_EXISTS(pSettings, r_float, section,
     //"misfire_condition_k",	1.0f);
     misfireStartCondition =
         pSettings->r_float( section, "misfire_start_condition" );
@@ -1479,6 +1481,7 @@ void CWeapon::UpdatePosition( const Fmatrix& trans ) {
 }
 
 BOOL interruptFireOnAimToggle = FALSE;
+
 bool CWeapon::Action( u16 cmd, u32 flags ) {
     if ( inherited::Action( cmd, flags ) )
         return true;

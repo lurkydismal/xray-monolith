@@ -43,13 +43,17 @@ public:
     ~CHUDCrosshair();
 
     Fmatrix GetTransform() const { return transform; };
+
     u32 GetColor() const { return crossColor; };
 
     void SetTransform( const Fmatrix& m );
     void SetScale( float s );
     void SetColor( u32 c );
+
     void SetShader( string32* shader ) { crosshairShader = shader; };
+
     void SetTexture( string32* texture ) { crosshairTexture = texture; };
+
     void SetDispersion( float d );
 
     void Load();

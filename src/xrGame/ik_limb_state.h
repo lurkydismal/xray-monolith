@@ -32,8 +32,11 @@ public:
 
 private:
     IC const Fmatrix& anim_pos() const { return state.anim_pos; }
+
     IC const ik_goal_matrix& goal() const { return state.goal; }
+
     IC const ik_goal_matrix& blend_to() const { return state.blend_to; }
+
     IC const Fvector& pick() const { return state.pick; }
 
 public:
@@ -45,8 +48,11 @@ public:
     Fvector& pick( Fvector& v ) const;
 
     IC u16 ref_bone() const { return state.ref_bone; }
+
     IC bool foot_step() const { return state.foot_step; }
+
     IC bool blending() const { return state.blending; }
+
     IC bool valide() const { return state_valide( state ); }
 
     IC void get_calculate_state( calculate_state& s ) const {

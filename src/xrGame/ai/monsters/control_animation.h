@@ -18,6 +18,7 @@ struct SAnimationPart {
     }
 
     void set_motion( MotionID const& m );
+
     MotionID const& get_motion() const { return motion; }
 
 private:
@@ -26,12 +27,15 @@ private:
 
 struct SControlAnimationData : public ControlCom::IComData {
     float _speed;
+
     IC void set_speed( float v ) {
         _speed = v;
         VERIFY2( _abs( _speed ) < 1000,
                  "SControlAnimationData::set_speed too big" );
     };
+
     IC float get_speed() { return _speed; };
+
     SAnimationPart global;
     SAnimationPart legs;
     SAnimationPart torso;
@@ -41,6 +45,7 @@ struct SAnimationSignalEventData : public ControlCom::IEventData {
     MotionID motion;
     float time_perc;
     u32 event_id;
+
     IC SAnimationSignalEventData( MotionID m, float perc, u32 id )
         : time_perc( perc ), event_id( id ), motion( m ) {}
 };

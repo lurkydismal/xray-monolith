@@ -84,6 +84,7 @@ struct CUSTOMVERTEX {
     D3DCOLOR col;
     float uv[ 2 ];
 };
+
 #define D3DFVF_CUSTOMVERTEX ( D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1 )
 
 #ifdef IMGUI_USE_BGRA_PACKED_COLOR
@@ -541,6 +542,7 @@ struct ImGui_ImplDX9_ViewportData {
         SwapChain = nullptr;
         ZeroMemory( &d3dpp, sizeof( D3DPRESENT_PARAMETERS ) );
     }
+
     ~ImGui_ImplDX9_ViewportData() { IM_ASSERT( SwapChain == nullptr ); }
 };
 

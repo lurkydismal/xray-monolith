@@ -57,9 +57,11 @@ typedef struct ExpDesc {
             uint32_t info; /* Primary info. */
             uint32_t aux;  /* Secondary info. */
         } s;
+
         TValue nval; /* Number value. */
         GCstr* sval; /* String value. */
     } u;
+
     ExpKind k;
     BCPos t; /* True condition jump list. */
     BCPos f; /* False condition jump list. */

@@ -36,6 +36,7 @@ public:
     virtual void update_frame() {}
 
     virtual CControl_ComControlled* ced() { return 0; }
+
     virtual CControl_ComControlling* cing() { return 0; }
 
     void set_active( bool val = true ) {
@@ -44,6 +45,7 @@ public:
     }
 
     bool is_active() { return m_active; }
+
     bool is_inited() { return m_inited; }
 
     virtual bool check_start_conditions() { return true; }
@@ -82,8 +84,11 @@ public:
     virtual void on_release() {}
 
     bool is_locked() { return m_locked; }
+
     void set_locked( bool val = true ) { m_locked = val; }
+
     CControl_Com* capturer() { return m_capturer; }
+
     void set_capturer( CControl_Com* com ) { m_capturer = com; }
 
 private:
@@ -159,6 +164,7 @@ class CControl_ComCustom : public CControl_Com,
                            public CControl_ComControlling {
 public:
     virtual CControl_ComControlled* ced() { return this; }
+
     virtual CControl_ComControlling* cing() { return this; }
 
     virtual void reinit() {

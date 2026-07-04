@@ -6,6 +6,7 @@
 
 #include "..\..\Include\xrRender\ObjectSpaceRender.h"
 #include "..\..\xrengine\xr_collide_form.h"
+
 class dxObjectSpaceRender : public IObjectSpaceRender {
 public:
     dxObjectSpaceRender();

@@ -175,6 +175,7 @@ struct mem_fn_matcher {
 
 struct pure_virtual_tag {
     static void precall( lua_State*, index_map const& ) {}
+
     static void postcall( lua_State*, index_map const& ) {}
 };
 
@@ -336,6 +337,7 @@ struct internal_default_construct_holder {
 template < typename HeldType >
 struct holder_constructor {
     using constructor = void ( * )( void*, void* );
+
     template < typename T >
     static constructor apply( detail::type< T > ) {
         return &internal_construct_holder< HeldType, T >::apply;
@@ -345,6 +347,7 @@ struct holder_constructor {
 template <>
 struct holder_constructor< std::in_place_t > {
     using constructor = void ( * )( void*, void* );
+
     template < typename T >
     static constructor apply( detail::type< T > ) {
         return nullptr;
@@ -357,6 +360,7 @@ struct holder_constructor< std::in_place_t > {
 template < typename HolderType >
 struct const_holder_constructor {
     using constructor = void ( * )( void*, void* );
+
     template < typename T >
     static constructor apply( detail::type< T > ) {
         return get_const_holder_constructor(
@@ -375,6 +379,7 @@ private:
 template <>
 struct const_holder_constructor< std::in_place_t > {
     using constructor = void ( * )( void*, void* );
+
     template < typename T >
     static constructor apply( detail::type< T > ) {
         return nullptr;
@@ -387,6 +392,7 @@ struct const_holder_constructor< std::in_place_t > {
 template < typename HeldType >
 struct holder_default_constructor {
     using constructor = void ( * )( void* );
+
     template < typename T >
     static constructor apply( detail::type< T > ) {
         return &internal_default_construct_holder< HeldType, T >::apply;
@@ -396,6 +402,7 @@ struct holder_default_constructor {
 template <>
 struct holder_default_constructor< std::in_place_t > {
     using constructor = void ( * )( void* );
+
     template < typename T >
     static constructor apply( detail::type< T > ) {
         return nullptr;
@@ -409,6 +416,7 @@ struct holder_default_constructor< std::in_place_t > {
 template < typename HolderType >
 struct const_holder_default_constructor {
     using constructor = void ( * )( void* );
+
     template < typename T >
     static constructor apply( detail::type< T > ) {
         return get_const_holder_default_constructor(
@@ -428,6 +436,7 @@ private:
 template <>
 struct const_holder_default_constructor< std::in_place_t > {
     using constructor = void ( * )( void* );
+
     template < typename T >
     static constructor apply( detail::type< T > ) {
         return nullptr;
@@ -461,6 +470,7 @@ struct internal_holder_size< std::in_place_t > {
 template < typename HeldType >
 struct internal_holder_destructor {
     using destructor_t = void ( * )( void* );
+
     template < typename T >
     static destructor_t apply( detail::type< T > ) {
         return &detail::destruct_only_s< HeldType >::apply;
@@ -471,6 +481,7 @@ struct internal_holder_destructor {
 template <>
 struct internal_holder_destructor< std::in_place_t > {
     using destructor_t = void ( * )( void* );
+
     template < typename T >
     static destructor_t apply( detail::type< T > ) {
         return &detail::delete_s< T >::apply;
@@ -481,6 +492,7 @@ struct internal_holder_destructor< std::in_place_t > {
 template < typename HolderType >
 struct internal_const_holder_destructor {
     using destructor_t = void ( * )( void* );
+
     template < typename T >
     static destructor_t apply( detail::type< T > ) {
         return const_holder_type_destructor(
@@ -498,6 +510,7 @@ private:
 template <>
 struct internal_const_holder_destructor< std::in_place_t > {
     using destructor_t = void ( * )( void* );
+
     template < typename T >
     static destructor_t apply( detail::type< T > ) {
         return nullptr;
@@ -559,6 +572,7 @@ public:
     class_base( char const* name );
 
     class_base( const class_base& ) = delete;
+
     class_base( class_base&& that ) noexcept
         : scope( std::move( that ) ), m_registration( that.m_registration ) {
         that.m_registration = nullptr;

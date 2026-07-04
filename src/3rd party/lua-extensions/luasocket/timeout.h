@@ -12,6 +12,7 @@ typedef struct t_timeout_ {
     double total; /* total number of miliseconds for operation */
     double start; /* time of start of operation */
 } t_timeout;
+
 typedef t_timeout* p_timeout;
 
 #ifndef _WIN32

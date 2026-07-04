@@ -26,13 +26,17 @@ public:
     virtual void Hit( SHit* pHDS );
 
     virtual void CheckSpecParams( u32 spec_params );
+
     virtual bool ability_invisibility() { return true; }
+
     virtual bool ability_pitch_correction() { return false; }
+
     virtual bool ability_can_drag() { return true; }
 
     virtual void post_fsm_update();
 
     virtual bool use_center_to_aim() const { return true; }
+
     virtual bool check_start_conditions( ControlCom::EControlType );
     virtual void HitEntity( const CEntity* pEntity,
                             float fDamage,
@@ -91,6 +95,7 @@ public:
     void SatisfyVampire();
 
     u32 get_last_critical_hit_tick() { return m_last_critical_hit_tick; }
+
     void clear_last_critical_hit_tick() { m_last_critical_hit_tick = 0; }
 
 private:
@@ -220,14 +225,17 @@ public:
     float get_partial_visibility_radius();
     float get_no_visibility_radius();
     TTime get_visibility_state_change_min_delay();
+
     void start_runaway_invisible() {
         m_runaway_invisible_time = Device.dwTimeGlobal;
     }
+
     void clear_runaway_invisible() { m_runaway_invisible_time = 0; }
 
     virtual bool can_be_seen() const {
         return get_visibility_state() == full_visibility;
     }
+
     visibility_t get_visibility_state() const;
     void set_visibility_state( visibility_t new_state );
     void force_visibility_state( int state );

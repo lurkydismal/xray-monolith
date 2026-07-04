@@ -6,6 +6,7 @@
 CBlender_pp_bloom::CBlender_pp_bloom() {
     description.CLS = 0;
 }
+
 CBlender_pp_bloom::~CBlender_pp_bloom() {}
 
 void CBlender_pp_bloom::Compile( CBlender_Compile& C ) {

@@ -102,6 +102,7 @@ struct net_update {
     u32 mstate;
     int weapon;
     float fHealth;
+
     //	float				fArmor;
 
     net_update() {

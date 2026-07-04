@@ -130,6 +130,7 @@ void XR_EARLY_INIT() {
 }
 
 static char temp[ 1025 ];
+
 void dump_map( void* ptr, size_t size, char c ) {
 #ifdef DEBUG_MEM
     OutputDebugString(

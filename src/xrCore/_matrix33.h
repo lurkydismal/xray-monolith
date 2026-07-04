@@ -313,6 +313,7 @@ public:
         // Log.Msg("eigen: too many iterations in Jacobi transform (%d).\n", i);
         return i;
     }
+
 #undef ROT
 
     //--------------------------------------------------------------------------------

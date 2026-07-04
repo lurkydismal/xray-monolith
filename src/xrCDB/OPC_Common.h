@@ -65,6 +65,7 @@ public:
         return ( ( const float* )mCenter )[ axis ] -
                ( ( const float* )mExtents )[ axis ];
     }
+
     //! Get component of the box's max point along a given axis
     inline_ float GetMax( udword axis ) const {
         return ( ( const float* )mCenter )[ axis ] +
@@ -132,6 +133,7 @@ public:
     inline_ ~CollisionFaces() {}
 
     inline_ udword GetNbFaces() const { return GetNbEntries() >> 2; }
+
     inline_ const CollisionFace* GetFaces() const {
         return ( const CollisionFace* )GetEntries();
     }

@@ -100,6 +100,7 @@ IC typename _associative_vector::size_type _associative_vector::max_size()
 }
 
 TEMPLATE_SPECIALIZATION
+
 // IC	typename _associative_vector::size_type _associative_vector::size
 // () const
 IC u32 _associative_vector::size() const {

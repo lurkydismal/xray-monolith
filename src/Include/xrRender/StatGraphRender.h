@@ -7,6 +7,7 @@ class CStatGraph;
 class IStatGraphRender {
 public:
     virtual ~IStatGraphRender() { ; }
+
     virtual void Copy( IStatGraphRender& _in ) = 0;
 
     virtual void OnDeviceCreate() = 0;

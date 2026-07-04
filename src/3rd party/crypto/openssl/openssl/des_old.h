@@ -121,6 +121,7 @@ extern "C" {
 #endif
 
 typedef unsigned char _ossl_old_des_cblock[ 8 ];
+
 typedef struct _ossl_old_des_ks_struct {
     union {
         _ossl_old_des_cblock _;

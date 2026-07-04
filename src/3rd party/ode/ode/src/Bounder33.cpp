@@ -65,6 +65,7 @@ void Lcp33::ToBn( int i ) {
     unresolved = true;
     NBn++;
 }
+
 void Lcp33::Swap( int i, int j ) {
     if ( i == j )
         return;
@@ -145,6 +146,7 @@ bool Lcp33::BoundIndex( int i ) {
     }
     return true;
 }
+
 void Lcp33::BoundUnBn() {
     for ( int i = NBn; i < MSIZE; ++i )
         BoundIndex( i ); // if(!CheckIndex(i)) break;
@@ -161,10 +163,12 @@ bool Lcp33::CheckUnBn() {
 bool Lcp33::CheckIndex( int i ) {
     return CheckX( index[ i ] );
 }
+
 void Lcp33::BoundAll() {
     for ( int i = 0; i < MSIZE; ++i )
         BoundX( i );
 }
+
 void Lcp33::Solve() {
     if ( !SolveForLines() )
         SolveForPlanes();
@@ -198,6 +202,7 @@ bool Lcp33::SolveForPlanes() {
     }
     return true;
 }
+
 bool Lcp33::CheckState( int i ) {
     if ( state[ i ] == 1 ) {
         if ( w[ i ] < b[ i ] ) {
@@ -210,6 +215,7 @@ bool Lcp33::CheckState( int i ) {
     }
     return true;
 }
+
 void Lcp33::ToNBn() {
     int idx = index[ 2 ];
     dReal* row0 = RowA( idx );
@@ -226,11 +232,13 @@ void Lcp33::ToNBn() {
     w[ idx2 ] = b[ idx2 ];
     state[ idx1 ] = state[ idx2 ] = 0;
 }
+
 void Lcp33::ToNBn( int i ) {
     w[ i ] = b[ i ];
     Swap( i, NBn );
     NBn--;
 }
+
 void Lcp33::FillA() {
     dReal fDetInv =
         ( EsA( 0, 0 ) *

@@ -68,7 +68,9 @@ public:
 
     // R1-compiler
     void PassBegin();
+
     u32 Pass() { return SH->passes.size(); }
+
     void PassSET_ZB( BOOL bZTest, BOOL bZWrite, BOOL bInvertZTest = FALSE );
     void PassSET_ablend_mode( BOOL bABlend, u32 abSRC, u32 abDST );
     void PassSET_ablend_aref( BOOL aTest, u32 aRef );
@@ -106,7 +108,9 @@ public:
     void PassEnd();
 
     void StageBegin();
+
     u32 Stage() { return dwStage; }
+
     void StageSET_Address( u32 adr );
     void StageSET_XForm( u32 tf, u32 tc );
     void StageSET_Color( u32 a1, u32 op, u32 a2 );
@@ -201,6 +205,7 @@ public:
     void r_dx10Texture( LPCSTR ResourceName, shared_str texture ) {
         return r_dx10Texture( ResourceName, texture.c_str() );
     };
+
     u32 r_dx10Sampler( LPCSTR ResourceName );
 #else  //	USE_DX10
     u32 r_Sampler( LPCSTR name,
@@ -246,6 +251,7 @@ public:
     void _cpp_Compile( ShaderElement* _SH );
     ShaderElement* _lua_Compile( LPCSTR namesp, LPCSTR name );
 };
+
 #pragma pack( pop )
 
 #endif // !defined(AFX_BLENDER_RECORDER_H__1F549674_8674_4EB2_95E6_E6BC19218A6C__INCLUDED_)

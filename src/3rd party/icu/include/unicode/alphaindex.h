@@ -217,6 +217,7 @@ public:
          * @stable ICU 51
          */
         const UnicodeString& getLabel() const { return label_; }
+
         /**
          * Returns whether this bucket is a normal, underflow, overflow, or
          * inflow bucket.
@@ -743,6 +744,7 @@ public:
         Record( const UnicodeString& name, const void* data );
         ~Record();
     };
+
     /** \endcond */
 #endif /* U_HIDE_INTERNAL_API */
 

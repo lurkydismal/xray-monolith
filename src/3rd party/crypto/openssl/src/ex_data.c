@@ -202,6 +202,7 @@ static void impl_check( void ) {
         impl = &impl_default;
     CRYPTO_w_unlock( CRYPTO_LOCK_EX_DATA );
 }
+
 /* A macro wrapper for impl_check that first uses a non-locked test before
  * invoking the function (which checks again inside a lock). */
 #define IMPL_CHECK \
@@ -213,6 +214,7 @@ const CRYPTO_EX_DATA_IMPL* CRYPTO_get_ex_data_implementation( void ) {
     IMPL_CHECK
     return impl;
 }
+
 int CRYPTO_set_ex_data_implementation( const CRYPTO_EX_DATA_IMPL* i ) {
     int toret = 0;
     CRYPTO_w_lock( CRYPTO_LOCK_EX_DATA );
@@ -247,6 +249,7 @@ static LHASH* ex_data = NULL;
 static unsigned long ex_hash_cb( const void* a_void ) {
     return ( ( const EX_CLASS_ITEM* )a_void )->class_index;
 }
+
 static int ex_cmp_cb( const void* a_void, const void* b_void ) {
     return ( ( ( const EX_CLASS_ITEM* )a_void )->class_index -
              ( ( const EX_CLASS_ITEM* )b_void )->class_index );
@@ -263,6 +266,7 @@ static int ex_data_check( void ) {
     CRYPTO_w_unlock( CRYPTO_LOCK_EX_DATA );
     return toret;
 }
+
 /* This macros helps reduce the locking from repeated checks because the
  * ex_data_check() function checks ex_data again inside a lock. */
 #define EX_DATA_CHECK( iffail )           \

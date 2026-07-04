@@ -445,6 +445,7 @@ void CEntity::OnChangeVisual() {
     if ( renderable.visual != 0 )
         renderable.visual->MarkAsHot( true );
 }
+
 //--DSR-- HeatVision_end
 
 //--DSR-- SilencerOverheat_start
@@ -459,4 +460,5 @@ float CEntity::GetGlowing() {
     }
     return 0.f;
 }
+
 //--DSR-- SilencerOverheat_end

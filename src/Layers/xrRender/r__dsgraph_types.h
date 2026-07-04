@@ -28,28 +28,40 @@ public:
 
 public:
     pointer address( reference _Val ) const { return ( &_Val ); }
+
     const_pointer address( const_reference _Val ) const { return ( &_Val ); }
+
     doug_lea_alloc() {}
+
     doug_lea_alloc( const doug_lea_alloc< T >& ) {}
+
     template < class _Other >
     doug_lea_alloc( const doug_lea_alloc< _Other >& ) {}
+
     template < class _Other >
     doug_lea_alloc< T >& operator=( const doug_lea_alloc< _Other >& ) {
         return ( *this );
     }
+
     pointer allocate( size_type n, const void* p = 0 ) const {
         return ( T* )g_render_lua_allocator.malloc_impl( sizeof( T ) *
                                                          ( u32 )n );
     }
+
     void deallocate( pointer p, size_type n ) const {
         g_render_lua_allocator.free_impl( ( void*& )p );
     }
+
     void deallocate( void* p, size_type n ) const {
         g_render_lua_allocator.free_impl( p );
     }
+
     char* __charalloc( size_type n ) { return ( char* )allocate( n ); }
+
     void construct( pointer p, const T& _Val ) { std::_Construct( p, _Val ); }
+
     void destroy( pointer p ) { std::_Destroy( p ); }
+
     size_type max_size() const {
         size_type _Count = ( size_type )( -1 ) / sizeof( T );
         return ( 0 < _Count ? _Count : 1 );
@@ -61,6 +73,7 @@ inline bool operator==( const doug_lea_alloc< _Ty >&,
                         const doug_lea_alloc< _Other >& ) {
     return ( true );
 }
+
 template < class _Ty, class _Other >
 inline bool operator!=( const doug_lea_alloc< _Ty >&,
                         const doug_lea_alloc< _Other >& ) {
@@ -76,6 +89,7 @@ struct doug_lea_allocator_wrapper {
     static void* alloc( const u32& n ) {
         return g_render_lua_allocator.malloc_impl( ( u32 )n );
     }
+
     template < typename T >
     static void dealloc( T*& p ) {
         g_render_lua_allocator.free_impl( ( void*& )p );

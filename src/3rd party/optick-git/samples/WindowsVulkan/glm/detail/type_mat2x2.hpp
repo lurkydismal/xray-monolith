@@ -60,6 +60,7 @@ public:
     // -- Accesses --
 
     typedef length_t length_type;
+
     GLM_FUNC_DECL static length_type length() { return 2; }
 
     GLM_FUNC_DECL col_type& operator[]( length_type i );

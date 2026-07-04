@@ -49,23 +49,28 @@ public:
             unsigned int )( std::vector< T, memory_allocator< T > >::size() );
     }
 };
+
 template < typename T >
 class internal_list : public std::list< T, memory_allocator< T > > {
 public:
 };
+
 template < typename K, class P = std::less< K > >
 class internal_set : public std::set< K, P, memory_allocator< K > > {
 public:
 };
+
 template < typename K, class P = std::less< K > >
 class internal_multiset : public std::multiset< K, P, memory_allocator< K > > {
 public:
 };
+
 template < typename K, class V, class P = std::less< K > >
 class internal_map
     : public std::map< K, V, P, memory_allocator< std::pair< const K, V > > > {
 public:
 };
+
 template < typename K, class V, class P = std::less< K > >
 class internal_multimap
     : public std::

@@ -10,6 +10,7 @@
 #include "car.h"
 #include "game_object_space.h"
 #include "hit.h"
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool CCar::DoorHit( float P, s16 element, ALife::EHitType hit_type ) {
     if ( hit_type == ALife::eHitTypeStrike && P > 20.f ) {

@@ -19,8 +19,11 @@ public:
     virtual bool OnKeyboardAction( int dik, EUIMessages keyboard_action );
 
     bool AddItem( LPCSTR str, void* pData = NULL, u32 tag_value = 0 );
+
     bool AddItem_script( LPCSTR str ) { return AddItem( str ); };
+
     u32 GetItemsCount() { return m_UIListWnd.GetSize(); };
+
     void RemoveItemByTAG( u32 tag_value );
     void RemoveAll();
 
@@ -43,9 +46,11 @@ protected:
 private:
     // I must not hide this menu, and my child sub menu must hide me...
     CUIPropertiesBox* m_sub_property_box;
+
     void SetParentSubMenu( CUIPropertiesBox* parent_menu ) {
         m_parent_sub_menu = parent_menu;
     };
+
     Frect m_last_show_rect;
     CUIPropertiesBox* m_parent_sub_menu;  // warning !!! dubling pointers to the
                                           // same object !!!

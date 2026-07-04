@@ -72,6 +72,7 @@ struct eq_pointer< CStreamReader > {
 
 struct eq_fname_free {
     shared_str _val;
+
     eq_fname_free( shared_str s ) { _val = s; }
 
     bool operator()( _open_file& itm ) {
@@ -81,6 +82,7 @@ struct eq_fname_free {
 
 struct eq_fname_check {
     shared_str _val;
+
     eq_fname_check( shared_str s ) { _val = s; }
 
     bool operator()( _open_file& itm ) {

@@ -34,9 +34,11 @@ void Reverb_setParami( EffectProps* props, ALenum param, int val ) {
                 param };
     }
 }
+
 void Reverb_setParamiv( EffectProps* props, ALenum param, const int* vals ) {
     Reverb_setParami( props, param, vals[ 0 ] );
 }
+
 void Reverb_setParamf( EffectProps* props, ALenum param, float val ) {
     switch ( param ) {
         case AL_EAXREVERB_DENSITY:
@@ -213,6 +215,7 @@ void Reverb_setParamf( EffectProps* props, ALenum param, float val ) {
                                     param };
     }
 }
+
 void Reverb_setParamfv( EffectProps* props, ALenum param, const float* vals ) {
     switch ( param ) {
         case AL_EAXREVERB_REFLECTIONS_PAN:
@@ -254,9 +257,11 @@ void Reverb_getParami( const EffectProps* props, ALenum param, int* val ) {
                 param };
     }
 }
+
 void Reverb_getParamiv( const EffectProps* props, ALenum param, int* vals ) {
     Reverb_getParami( props, param, vals );
 }
+
 void Reverb_getParamf( const EffectProps* props, ALenum param, float* val ) {
     switch ( param ) {
         case AL_EAXREVERB_DENSITY:
@@ -345,6 +350,7 @@ void Reverb_getParamf( const EffectProps* props, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void Reverb_getParamfv( const EffectProps* props, ALenum param, float* vals ) {
     switch ( param ) {
         case AL_EAXREVERB_REFLECTIONS_PAN:
@@ -413,9 +419,11 @@ void StdReverb_setParami( EffectProps* props, ALenum param, int val ) {
                                     param };
     }
 }
+
 void StdReverb_setParamiv( EffectProps* props, ALenum param, const int* vals ) {
     StdReverb_setParami( props, param, vals[ 0 ] );
 }
+
 void StdReverb_setParamf( EffectProps* props, ALenum param, float val ) {
     switch ( param ) {
         case AL_REVERB_DENSITY:
@@ -521,6 +529,7 @@ void StdReverb_setParamf( EffectProps* props, ALenum param, float val ) {
                                     param };
     }
 }
+
 void StdReverb_setParamfv( EffectProps* props,
                            ALenum param,
                            const float* vals ) {
@@ -539,9 +548,11 @@ void StdReverb_getParami( const EffectProps* props, ALenum param, int* val ) {
                                     param };
     }
 }
+
 void StdReverb_getParamiv( const EffectProps* props, ALenum param, int* vals ) {
     StdReverb_getParami( props, param, vals );
 }
+
 void StdReverb_getParamf( const EffectProps* props, ALenum param, float* val ) {
     switch ( param ) {
         case AL_REVERB_DENSITY:
@@ -598,6 +609,7 @@ void StdReverb_getParamf( const EffectProps* props, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void StdReverb_getParamfv( const EffectProps* props,
                            ALenum param,
                            float* vals ) {

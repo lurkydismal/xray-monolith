@@ -247,6 +247,7 @@ BOOL mouseWheelInvertChangeWeapons = FALSE;
 
 // mbehm: switch to allow inverting mouse wheel zoom direction
 BOOL mouseWheelInvertZoom = FALSE;
+
 void CActor::IR_OnMouseWheel( int direction ) {
     if ( hud_adj_mode ) {
         g_player_hud->tune( Ivector().set( 0, 0, direction ) );
@@ -579,7 +580,9 @@ void CActor::ActorUse() {
         }
     }
 }
+
 extern BOOL firstPersonDeath;
+
 BOOL CActor::HUDview() const {
     return IsFocused() && ( cam_active == eacFirstEye ) &&
            ( ( !m_holder ) ||

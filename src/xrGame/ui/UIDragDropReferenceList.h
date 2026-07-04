@@ -19,7 +19,9 @@ public:
     virtual CUICellItem* RemoveItem( CUICellItem* itm, bool force_root );
 
     void Initialize();
+
     CUICellContainer* GetContainer() { return m_container; };
+
     void LoadItemTexture( LPCSTR section, Ivector2 cell_pos );
     void ReloadReferences( CInventoryOwner* pActor );
 

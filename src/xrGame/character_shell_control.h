@@ -5,9 +5,11 @@ class CPhysicsShell;
 class character_shell_control {
 public:
     character_shell_control();
+
     float curr_skin_friction_in_death() {
         return m_curr_skin_friction_in_death;
     }
+
     void set_kill_hit( SHit& H ) const;
     void set_fatal_impulse( SHit& H ) const;
     void set_start_shell_params( CPhysicsShell* sh ) const;

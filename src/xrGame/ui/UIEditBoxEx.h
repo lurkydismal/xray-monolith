@@ -16,6 +16,7 @@ public:
     virtual void InitTextureEx( LPCSTR texture, LPCSTR shader );
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
 
 protected:

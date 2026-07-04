@@ -20,6 +20,7 @@ NVCORE_API void* nvBindSymbol( void* lib, const char* symbol );
 class NVCORE_CLASS Library {
 public:
     Library( const char* name ) { handle = nvLoadLibrary( name ); }
+
     ~Library() {
         if ( isValid() ) {
             nvUnloadLibrary( handle );

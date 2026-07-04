@@ -46,6 +46,7 @@ public:
     void Reset();
 
     IC bool IsActive() { return m_actived; }
+
     //		void	SetActive			(bool Active) {
     // m_actived = Active;		}
     IC void StopShoting() { m_shot_end = true; }
@@ -77,8 +78,10 @@ public:
     virtual ~CCameraShotEffector();
 
     virtual BOOL ProcessCam( SCamEffectorInfo& info );
+
     virtual void SetActor( CActor* pActor ) { m_pActor = pActor; };
 
     virtual CCameraShotEffector* cast_effector_shot() { return this; }
+
     u16 m_WeaponID;
 };

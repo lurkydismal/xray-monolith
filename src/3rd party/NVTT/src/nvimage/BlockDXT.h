@@ -35,6 +35,7 @@ class Stream;
 struct BlockDXT1 {
     Color16 col0;
     Color16 col1;
+
     union {
         uint8 row[ 4 ];
         uint indices;
@@ -81,6 +82,7 @@ struct AlphaBlockDXT3 {
             uint alphaE : 4;
             uint alphaF : 4;
         };
+
         uint16 row[ 4 ];
     };
 
@@ -124,6 +126,7 @@ struct AlphaBlockDXT5 {
             uint64 bitsE : 3;  // 45 - 61
             uint64 bitsF : 3;  // 48 - 64
         };
+
         uint64 u;
     };
 
@@ -177,6 +180,7 @@ struct BlockATI2 {
 struct BlockCTX1 {
     uint8 col0[ 2 ];
     uint8 col1[ 2 ];
+
     union {
         uint8 row[ 4 ];
         uint indices;

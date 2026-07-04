@@ -49,6 +49,7 @@ typedef void __stdcall xrPLC_calc3( int& c0,
                                     Fvector& O );
 
 #pragma pack( push, 8 )
+
 struct xrDispatchTable {
     xrSkin1W* skin1W;
     xrSkin2W* skin2W;
@@ -56,6 +57,7 @@ struct xrDispatchTable {
     xrSkin4W* skin4W;
     xrPLC_calc3* PLC_calc3;
 };
+
 #pragma pack( pop )
 
 // Binder

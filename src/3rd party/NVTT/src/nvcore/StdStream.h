@@ -75,6 +75,7 @@ public:
 
     /// Always true.
     virtual bool isSeekable() const { return true; }
+
     //@}
 
 protected:
@@ -106,6 +107,7 @@ public:
     virtual bool isLoading() const { return false; }
 
     virtual bool isSaving() const { return true; }
+
     //@}
 };
 
@@ -133,6 +135,7 @@ public:
     virtual bool isLoading() const { return true; }
 
     virtual bool isSaving() const { return false; }
+
     //@}
 };
 
@@ -191,6 +194,7 @@ public:
     virtual bool isLoading() const { return true; }
 
     virtual bool isSaving() const { return false; }
+
     //@}
 
 private:
@@ -257,6 +261,7 @@ public:
     virtual bool isLoading() const { return m_s->isLoading(); }
 
     virtual bool isSaving() const { return m_s->isSaving(); }
+
     //@}
 
 private:

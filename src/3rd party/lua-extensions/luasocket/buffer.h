@@ -31,6 +31,7 @@ typedef struct t_buffer_ {
     size_t first, last;    /* index of first and last bytes of stored data */
     char data[ BUF_SIZE ]; /* storage space for buffer data */
 } t_buffer;
+
 typedef t_buffer* p_buffer;
 
 #ifndef _WIN32

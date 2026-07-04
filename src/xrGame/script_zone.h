@@ -30,10 +30,15 @@ public:
     virtual void feel_touch_delete( CObject* O );
     virtual bool feel_touch_contact( CObject* O );
     bool active_contact( u16 id ) const;
+
     virtual bool IsVisibleForZones() { return false; }
+
     virtual bool register_schedule() const { return true; }
+
     virtual CSpaceRestrictor* cast_restrictor() { return this; }
+
     virtual CScriptZone* cast_script_zone() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
 #ifdef DEBUG
     virtual void OnRender();

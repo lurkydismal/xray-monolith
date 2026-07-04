@@ -39,6 +39,7 @@ typedef my_source_mgr* my_src_ptr;
  */
 
 METHODDEF( void )
+
 init_source( j_decompress_ptr cinfo ) {
     my_src_ptr src = ( my_src_ptr )cinfo->src;
 
@@ -83,6 +84,7 @@ init_source( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( boolean )
+
 fill_input_buffer( j_decompress_ptr cinfo ) {
     my_src_ptr src = ( my_src_ptr )cinfo->src;
     size_t nbytes;
@@ -119,6 +121,7 @@ fill_input_buffer( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 skip_input_data( j_decompress_ptr cinfo, long num_bytes ) {
     my_src_ptr src = ( my_src_ptr )cinfo->src;
 
@@ -157,6 +160,7 @@ skip_input_data( j_decompress_ptr cinfo, long num_bytes ) {
  */
 
 METHODDEF( void )
+
 term_source( j_decompress_ptr cinfo ) {
     /* no work necessary here */
 }
@@ -168,6 +172,7 @@ term_source( j_decompress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jpeg_stdio_src( j_decompress_ptr cinfo, FILE* infile ) {
     my_src_ptr src;
 

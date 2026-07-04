@@ -17,6 +17,7 @@ protected:
 
 public:
     game_sv_TeamDeathmatch() { m_type = eGameIDTeamDeathmatch; }
+
     virtual void Create( shared_str& options );
 
     virtual void OnEvent( NET_Packet& tNetPacket,
@@ -46,6 +47,7 @@ public:
                                      SPECIAL_KILL_TYPE SpecialKillType,
                                      CSE_Abstract* pWeaponA );
     virtual void UpdateTeamScore( game_PlayerState* ps_killer, s16 OldKills );
+
     virtual bool CheckTeams() { return true; };
 
     virtual void OnPlayerHitPlayer( u16 id_hitter,
@@ -70,7 +72,9 @@ public:
     virtual char* GetAnomalySetBaseName() {
         return "teamdeathmatch_game_anomaly_sets";
     };
+
     virtual BOOL CanHaveFriendlyFire() { return TRUE; }
+
     virtual void OnFraglimitExceed();
     virtual void OnTimelimitExceed();
 

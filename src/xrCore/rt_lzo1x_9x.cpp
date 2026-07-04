@@ -497,6 +497,7 @@ static void better_match( const lzo_swd_p swd,
 ************************************************************************/
 
 LZO_PUBLIC( int )
+
 lzo1x_999_compress_internal( const lzo_bytep in,
                              lzo_uint in_len,
                              lzo_bytep out,
@@ -754,6 +755,7 @@ lzo1x_999_compress_internal( const lzo_bytep in,
 ************************************************************************/
 
 LZO_PUBLIC( int )
+
 lzo1x_999_compress_level( const lzo_bytep in,
                           lzo_uint in_len,
                           lzo_bytep out,
@@ -802,6 +804,7 @@ lzo1x_999_compress_level( const lzo_bytep in,
 ************************************************************************/
 
 LZO_PUBLIC( int )
+
 lzo1x_999_compress_dict( const lzo_bytep in,
                          lzo_uint in_len,
                          lzo_bytep out,
@@ -814,6 +817,7 @@ lzo1x_999_compress_dict( const lzo_bytep in,
 }
 
 LZO_PUBLIC( int )
+
 lzo1x_999_compress( const lzo_bytep in,
                     lzo_uint in_len,
                     lzo_bytep out,

@@ -31,6 +31,7 @@ public:
 
     // состояние кнопки
     IC bool GetCheck() const { return GetButtonState() == BUTTON_PUSHED; }
+
     IC void SetCheck( bool ch ) {
         SetButtonState( ch ? BUTTON_PUSHED : BUTTON_NORMAL );
     }

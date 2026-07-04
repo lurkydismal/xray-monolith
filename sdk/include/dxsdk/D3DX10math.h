@@ -33,6 +33,7 @@ typedef struct _D3DVECTOR {
     float y;
     float z;
 } D3DVECTOR;
+
 #define D3DVECTOR_DEFINED
 #endif
 
@@ -45,9 +46,11 @@ typedef struct _D3DMATRIX {
             float _31, _32, _33, _34;
             float _41, _42, _43, _44;
         };
+
         float m[ 4 ][ 4 ];
     };
 } D3DMATRIX;
+
 #define D3DMATRIX_DEFINED
 #endif
 

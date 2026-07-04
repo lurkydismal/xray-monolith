@@ -355,6 +355,7 @@ void CMovementManager::on_restrictions_change() {
 }
 
 BOOL monsterStuckFix = FALSE;
+
 bool CMovementManager::can_use_distributed_computations( u32 option ) const {
     // return (!m_build_at_once && g_mt_config.test(option) &&
     // !object().getDestroy());

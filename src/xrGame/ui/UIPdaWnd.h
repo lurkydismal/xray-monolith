@@ -82,6 +82,7 @@ public:
     virtual bool OnKeyboardAction( int dik, EUIMessages keyboard_action );
 
     UIHint* get_hint_wnd() const { return m_hint_wnd; }
+
     void DrawHint();
 
     void SetActiveCaption();
@@ -90,16 +91,23 @@ public:
     void Show_MapLegendWnd( bool status );
 
     void SetActiveDialog( CUIWindow* pUI ) { m_pActiveDialog = pUI; };
+
     CUIWindow* GetActiveDialog() { return m_pActiveDialog; };
+
     LPCSTR GetActiveSection() { return m_sActiveSection.c_str(); };
+
     LPCSTR GetPdaXml() { return g_pda_xml_path.c_str(); }
+
     void SetPdaXml( LPCSTR xml );
+
     CUITabControl* GetTabControl() { return UITabControl; };
 
     void SetActiveSubdialog( const shared_str& section );
+
     void SetActiveSubdialog_script( LPCSTR section ) {
         SetActiveSubdialog( ( const shared_str& )section );
     };
+
     virtual bool StopAnyMove() { return false; }
 
     void UpdatePda();

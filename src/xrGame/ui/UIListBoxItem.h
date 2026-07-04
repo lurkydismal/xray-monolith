@@ -34,7 +34,9 @@ public:
     CGameFont* GetFont();
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIListBoxItem* ui_cast_list_box_item() { return this; }
+
     virtual CUISelectable* ui_cast_selectable() { return this; }
 
 protected:

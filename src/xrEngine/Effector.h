@@ -24,11 +24,15 @@ public:
     };
 
     virtual ~CEffectorCam() {};
+
     void SetType( ECamEffectorType type ) { eType = type; }
+
     void SetHudAffect( bool val ) { bHudAffect = val; }
+
     bool GetHudAffect() { return bHudAffect; }
 
     IC ECamEffectorType GetType() { return eType; }
+
     virtual BOOL Valid() { return fLifeTime > 0.0f; }
 
     BENCH_SEC_SCRAMBLEVTBL1
@@ -37,10 +41,14 @@ public:
         fLifeTime -= Device.fTimeDelta;
         return Valid();
     };
+
     ;
 
     virtual void ProcessIfInvalid( SCamEffectorInfo& info ) {};
+
     virtual BOOL AllowProcessingIfInvalid() { return FALSE; }
+
     virtual bool AbsolutePositioning() { return false; }
+
     virtual bool IsHudMotionEffector() const { return false; }
 };

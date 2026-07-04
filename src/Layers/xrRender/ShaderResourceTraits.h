@@ -13,6 +13,7 @@ struct ShaderTypeTraits< SHS > {
     typedef ID3D11HullShader DXIface;
 
     static inline const char* GetShaderExt() { return ".hs"; }
+
     static inline const char* GetCompilationTarget() { return "hs_5_0"; }
 
     static inline DXIface* CreateHWShader( DWORD const* buffer, size_t size ) {
@@ -30,6 +31,7 @@ struct ShaderTypeTraits< SDS > {
     typedef ID3D11DomainShader DXIface;
 
     static inline const char* GetShaderExt() { return ".ds"; }
+
     static inline const char* GetCompilationTarget() { return "ds_5_0"; }
 
     static inline DXIface* CreateHWShader( DWORD const* buffer, size_t size ) {
@@ -47,6 +49,7 @@ struct ShaderTypeTraits< SCS > {
     typedef ID3D11ComputeShader DXIface;
 
     static inline const char* GetShaderExt() { return ".cs"; }
+
     static inline const char* GetCompilationTarget() { return "cs_5_0"; }
 
     static inline DXIface* CreateHWShader( DWORD const* buffer, size_t size ) {

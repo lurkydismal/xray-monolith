@@ -465,6 +465,7 @@ enum UCalendarDateFields {
 
 /** @stable ICU 2.0 */
 typedef enum UCalendarDateFields UCalendarDateFields;
+
 /**
  * Useful constant for days of week. Note: Calendar day-of-week is 1-based.
  * Clients who create locale resources for the field of first-day-of-week should

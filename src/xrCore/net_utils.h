@@ -45,6 +45,7 @@ public:
     }
 
     void w_seek( u32 pos, const void* p, u32 count );
+
     IC u32 w_tell() { return B.count; }
 
     // read/write operators
@@ -60,18 +61,28 @@ public:
 
     // writing - utilities
     IC void w_float( float a ) { w( &a, 4 ); } // float
+
     IC void w_vec3( const Fvector& a ) { w( &a, 3 * sizeof( float ) ); } // vec3
+
     IC void w_vec4( const Fvector4& a ) {
         w( &a, 4 * sizeof( float ) );
     } // vec4
+
     IC void w_u64( u64 a ) { w( &a, 8 ); } // qword (8b)
+
     IC void w_s64( s64 a ) { w( &a, 8 ); } // qword (8b)
+
     IC void w_u32( u32 a ) { w( &a, 4 ); } // dword (4b)
+
     IC void w_s32( s32 a ) { w( &a, 4 ); } // dword (4b)
+
     IC void w_u16( u16 a ) { w( &a, 2 ); } // word (2b)
+
     IC void w_s16( s16 a ) { w( &a, 2 ); } // word (2b)
-    IC void w_u8( u8 a ) { w( &a, 1 ); }   // byte (1b)
-    IC void w_s8( s8 a ) { w( &a, 1 ); }   // byte (1b)
+
+    IC void w_u8( u8 a ) { w( &a, 1 ); } // byte (1b)
+
+    IC void w_s8( s8 a ) { w( &a, 1 ); } // byte (1b)
 
     IC void w_float_q16( float a, float min, float max ) {
         VERIFY( a >= min && a <= max );
@@ -91,13 +102,16 @@ public:
     IC void w_angle16( float a ) {
         w_float_q16( angle_normalize( a ), 0, PI_MUL_2 );
     }
+
     IC void w_angle8( float a ) {
         w_float_q8( angle_normalize( a ), 0, PI_MUL_2 );
     }
+
     IC void w_dir( const Fvector& D ) {
         u16 value = pvCompress( D );
         w( &value, sizeof( u16 ) );
     }
+
     IC void w_sdir( const Fvector& D ) {
         Fvector C;
         float mag = D.magnitude();

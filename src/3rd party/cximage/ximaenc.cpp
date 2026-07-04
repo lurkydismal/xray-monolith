@@ -80,6 +80,7 @@ bool CxImage::EncodeSafeCheck( CxFile* hFile ) {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 // #ifdef WIN32
 // bool CxImage::Save(LPCWSTR filename, DWORD imagetype)
@@ -114,6 +115,7 @@ bool CxImage::Save( const TCHAR* filename, DWORD imagetype ) {
     fclose( hFile );
     return bOK;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Saves to disk the image in a specific format.
@@ -125,6 +127,7 @@ bool CxImage::Encode( FILE* hFile, DWORD imagetype ) {
     CxIOFile file( hFile );
     return Encode( &file, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Saves to memory buffer the image in a specific format.
@@ -149,6 +152,7 @@ bool CxImage::Encode( BYTE*& buffer, long& size, DWORD imagetype ) {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Saves to disk the image in a specific format.
@@ -361,6 +365,7 @@ bool CxImage::Encode( CxFile* hFile, DWORD imagetype ) {
     strcpy( info.szLastError, "Encode: Unknown format" );
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Saves to disk or memory pagecount images, referenced by an array of CxImage
@@ -378,6 +383,7 @@ bool CxImage::Encode( FILE* hFile,
     CxIOFile file( hFile );
     return Encode( &file, pImages, pagecount, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Saves to disk or memory pagecount images, referenced by an array of CxImage
@@ -458,6 +464,7 @@ bool CxImage::Encode2RGBA( BYTE*& buffer, long& size, bool bFlipY ) {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * exports the image into a RGBA buffer, Useful for OpenGL applications.
@@ -548,6 +555,7 @@ bool CxImage::Load( const TCHAR* filename, DWORD imagetype )
 
     return bOK;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 #ifdef WIN32
 // bool CxImage::Load(LPCWSTR filename, DWORD imagetype)
@@ -635,6 +643,7 @@ CxImage::CxImage( const TCHAR* filename, DWORD imagetype )
     Startup( imagetype );
     Load( filename, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Constructor from file handle, see Decode()
@@ -645,6 +654,7 @@ CxImage::CxImage( FILE* stream, DWORD imagetype ) {
     Startup( imagetype );
     Decode( stream, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Constructor from CxFile object, see Decode()
@@ -655,6 +665,7 @@ CxImage::CxImage( CxFile* stream, DWORD imagetype ) {
     Startup( imagetype );
     Decode( stream, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Constructor from memory buffer, see Decode()
@@ -667,6 +678,7 @@ CxImage::CxImage( BYTE* buffer, DWORD size, DWORD imagetype ) {
     CxMemFile stream( buffer, size );
     Decode( &stream, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Loads an image from memory buffer
@@ -679,6 +691,7 @@ bool CxImage::Decode( BYTE* buffer, DWORD size, DWORD imagetype ) {
     CxMemFile file( buffer, size );
     return Decode( &file, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Loads an image from file handle.
@@ -690,6 +703,7 @@ bool CxImage::Decode( FILE* hFile, DWORD imagetype ) {
     CxIOFile file( hFile );
     return Decode( &file, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Loads an image from CxFile object
@@ -1093,6 +1107,7 @@ bool CxImage::Decode( CxFile* hFile, DWORD imagetype ) {
     strcpy( info.szLastError, "Decode: Unknown or wrong format" );
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Loads an image from CxFile object
@@ -1117,6 +1132,7 @@ bool CxImage::CheckFormat( CxFile* hFile, DWORD imagetype ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::CheckFormat( BYTE* buffer, DWORD size, DWORD imagetype ) {
     if ( buffer == NULL || size == NULL ) {
@@ -1126,6 +1142,7 @@ bool CxImage::CheckFormat( BYTE* buffer, DWORD size, DWORD imagetype ) {
     CxMemFile file( buffer, size );
     return CheckFormat( &file, imagetype );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 #endif // CXIMAGE_SUPPORT_DECODE
 ////////////////////////////////////////////////////////////////////////////////

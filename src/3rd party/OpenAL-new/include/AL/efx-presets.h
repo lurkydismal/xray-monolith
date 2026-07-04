@@ -5,6 +5,7 @@
 
 #ifndef EFXEAXREVERBPROPERTIES_DEFINED
 #define EFXEAXREVERBPROPERTIES_DEFINED
+
 typedef struct {
     float flDensity;
     float flDiffusion;

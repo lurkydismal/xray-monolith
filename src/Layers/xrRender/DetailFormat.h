@@ -57,6 +57,7 @@ struct DetailSlot_v3 {
     u32 c_g : 4;
     u32 c_b : 4;
     DetailPalette palette[ 4 ];
+
     enum { ID_Empty = 0x3f };
 };
 
@@ -95,6 +96,7 @@ public:
     }
 
     float r_ybase() { return float( y_base ) * .2f - 200.f; }
+
     float r_yheight() { return float( y_height ) * .1f; }
 
     u32 w_qclr( float v, u32 range ) {
@@ -102,6 +104,7 @@ public:
         clamp( _v, 0, s32( range ) );
         return _v;
     };
+
     float r_qclr( u32 v, u32 range ) { return float( v ) / float( range ); }
 
     void color_editor() {
@@ -160,6 +163,7 @@ inline u16 _detail_id_v3_to_v4( u32 v ) {
     return ( v == DetailSlot_v3::ID_Empty ) ? ( u16 )DetailSlot::ID_Empty
                                             : ( u16 )v;
 }
+
 inline u32 _detail_id_v4_to_v3( u32 v ) {
     return ( v == DetailSlot::ID_Empty ) ? ( u32 )DetailSlot_v3::ID_Empty
                                          : ( v & 0x3f );

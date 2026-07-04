@@ -12,8 +12,11 @@ namespace nv {
 class NVMATH_CLASS Color64 {
 public:
     Color64() {}
+
     Color64( const Color64& c ) : u( c.u ) {}
+
     Color64( uint16 R, uint16 G, uint16 B, uint16 A ) { setRGBA( R, G, B, A ); }
+
     explicit Color64( uint64 U ) : u( U ) {}
 
     void setRGBA( uint16 R, uint16 G, uint16 B, uint16 A ) {
@@ -36,6 +39,7 @@ public:
             uint16 b : 16;
 #endif
         };
+
         uint64 u;
     };
 };
@@ -44,9 +48,13 @@ public:
 class NVMATH_CLASS Color32 {
 public:
     Color32() {}
+
     Color32( const Color32& c ) : u( c.u ) {}
+
     Color32( uint8 R, uint8 G, uint8 B ) { setRGBA( R, G, B, 0xFF ); }
+
     Color32( uint8 R, uint8 G, uint8 B, uint8 A ) { setRGBA( R, G, B, A ); }
+
     // Color32(uint8 c[4]) { setRGBA(c[0], c[1], c[2], c[3]); }
     // Color32(float R, float G, float B) { setRGBA(uint(R*255), uint(G*255),
     // uint(B*255), 0xFF); } Color32(float R, float G, float B, float A) {
@@ -80,6 +88,7 @@ public:
             uint8 b : 8;
 #endif
         };
+
         uint32 u;
     };
 };
@@ -88,7 +97,9 @@ public:
 class NVMATH_CLASS Color16 {
 public:
     Color16() {}
+
     Color16( const Color16& c ) : u( c.u ) {}
+
     explicit Color16( uint16 U ) : u( U ) {}
 
     union {
@@ -103,6 +114,7 @@ public:
             uint16 b : 5;
 #endif
         };
+
         uint16 u;
     };
 };
@@ -145,7 +157,7 @@ inline Color32 toColor32( Color16 c ) {
     Color32 color;
     //	c.u = ((col0.u << 3) & 0xf8) | ((col0.u << 5) & 0xfc00) | ((col0.u << 8)
     //& 0xf80000); 	c.u |= (c.u >> 5) & 0x070007; 	c.u |= (c.u >> 6) &
-    //0x000300;
+    // 0x000300;
 
     color.b = ( c.b << 3 ) | ( c.b >> 2 );
     color.g = ( c.g << 2 ) | ( c.g >> 4 );

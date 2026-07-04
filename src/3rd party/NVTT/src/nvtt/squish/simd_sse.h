@@ -69,12 +69,15 @@ public:
     Vec4 SplatX() const {
         return Vec4( _mm_shuffle_ps( m_v, m_v, SQUISH_SSE_SPLAT( 0 ) ) );
     }
+
     Vec4 SplatY() const {
         return Vec4( _mm_shuffle_ps( m_v, m_v, SQUISH_SSE_SPLAT( 1 ) ) );
     }
+
     Vec4 SplatZ() const {
         return Vec4( _mm_shuffle_ps( m_v, m_v, SQUISH_SSE_SPLAT( 2 ) ) );
     }
+
     Vec4 SplatW() const {
         return Vec4( _mm_shuffle_ps( m_v, m_v, SQUISH_SSE_SPLAT( 3 ) ) );
     }

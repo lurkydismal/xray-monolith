@@ -14,7 +14,9 @@ public:
 
     virtual void update() {};
     virtual u32 const get_u32_param();
+
     virtual float const get_float_param() { return m_killer_victim_angle_cos; };
+
     virtual void reset_game();
     virtual void OnPlayerKilled(
         u16 killer_id,

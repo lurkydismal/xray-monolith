@@ -70,7 +70,9 @@ protected:
 
 public:
     CHUDState() { SetState( eHidden ); }
+
     IC u32 GetNextState() const { return m_nextState; }
+
     IC u32 GetState() const { return m_hud_item_state; }
 
     IC void SetState( u32 v ) {
@@ -80,12 +82,15 @@ public:
     }
 
     IC void SetNextState( u32 v ) { m_nextState = v; }
+
     IC u32 CurrStateTime() const {
         return Device.dwTimeGlobal - m_dw_curr_state_time;
     }
+
     IC void ResetSubStateTime() {
         m_dw_curr_substate_time = Device.dwTimeGlobal;
     }
+
     virtual void SwitchState( u32 S ) = 0;
     virtual void OnStateSwitch( u32 S, u32 oldState ) = 0;
 };
@@ -135,6 +140,7 @@ protected:
 
 public:
     virtual void Load( LPCSTR section );
+
     virtual BOOL net_Spawn( CSE_Abstract* DC ) { return TRUE; };
 
     virtual void net_Destroy() {};
@@ -151,6 +157,7 @@ public:
                             u8 index ); // Alundaio: Play at index
 
     virtual bool Action( u16 cmd, u32 flags ) { return false; }
+
     virtual void OnMovementChanged( ACTOR_DEFS::EMoveCommand cmd );
 
     virtual u8 GetCurrentHudOffsetIdx() { return 0; }
@@ -160,6 +167,7 @@ public:
                        float speed = 1.f,
                        float power = 1.f,
                        bool stop_old = true );
+
     IC bool IsPending() const { return !!m_huditem_flags.test( fl_pending ); }
 
     virtual void DeleteHudItemData();
@@ -178,7 +186,9 @@ public:
     bool IsHidden() const {
         return GetState() == eHidden;
     } // Does weapon is in hidden state
+
     bool IsHiding() const { return GetState() == eHiding; }
+
     bool IsShowing() const { return GetState() == eShowing; }
 
     virtual void SwitchState( u32 S );
@@ -191,6 +201,7 @@ public:
     virtual void PlayAnimIdle();
     virtual bool TryPlayAnimBore();
     virtual bool TryPlayAnimIdle();
+
     virtual bool MovingAnimAllowedNow() { return true; }
 
     virtual bool NeedBlendAnm();
@@ -219,7 +230,9 @@ public:
     void StopCurrentAnimWithoutCallback();
 
     IC void RenderHud( BOOL B ) { m_huditem_flags.set( fl_renderhud, B ); }
+
     IC BOOL RenderHud() { return m_huditem_flags.test( fl_renderhud ); }
+
     attachable_hud_item* HudItemData();
     bool IsAttachedToHUD();
     virtual bool ParentIsActor();
@@ -233,14 +246,19 @@ public:
     virtual void on_outfit_changed();
     virtual void on_a_hud_attach();
     virtual void on_b_hud_detach();
+
     IC BOOL HudInertionEnabled() const {
         return m_huditem_flags.test( fl_inertion_enable );
     }
+
     IC BOOL HudInertionAllowed() const {
         return m_huditem_flags.test( fl_inertion_allow );
     }
+
     virtual float GetInertionAimFactor() { return 1.f; }; //--#SM+#--
+
     virtual void render_hud_mode() {};
+
     virtual bool need_renderable() { return true; };
 
     virtual void render_item_3d_ui();
@@ -251,6 +269,7 @@ public:
 
 protected:
     IC void SetPending( bool H ) { m_huditem_flags.set( fl_pending, H ); }
+
     shared_str hud_sect;
 
     // êàäðû ìîìåíòà ïåðåñ÷åòà XFORM è FirePos
@@ -260,6 +279,7 @@ protected:
     IC void EnableHudInertion( BOOL B ) {
         m_huditem_flags.set( fl_inertion_enable, B );
     }
+
     IC void AllowHudInertion( BOOL B ) {
         m_huditem_flags.set( fl_inertion_allow, B );
     }
@@ -304,23 +324,39 @@ public:
     float m_nearwall_ofs;
 
     virtual CHudItem* cast_hud_item() { return this; }
+
     virtual CCustomDetector* cast_custom_detector() { return nullptr; }
+
     virtual CWeaponBinoculars* cast_weapon_binoculars() { return nullptr; }
+
     virtual CWeaponKnife* cast_weapon_knife() { return nullptr; }
+
     virtual CWeaponMagazined* cast_weapon_magazined() { return nullptr; }
+
     virtual CWeaponMagazinedWGrenade* cast_weapon_magazined_w_grenade() {
         return nullptr;
     }
+
     virtual CWeaponBM16* cast_weapon_bm16() { return nullptr; }
+
     virtual CWeapon* cast_weapon() { return nullptr; }
+
     virtual CWeaponRPG7* cast_weapon_rpg7() { return nullptr; }
+
     virtual CWeaponRG6* cast_weapon_rg6() { return nullptr; }
+
     virtual CGrenade* cast_grenade() { return nullptr; }
+
     virtual CMissile* cast_missile() { return nullptr; }
+
     virtual CBolt* cast_bolt() { return nullptr; }
+
     virtual CInventoryItem* cast_inventory_item() { return nullptr; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return nullptr; }
+
     virtual CPhysicItem* cast_physics_item() { return nullptr; }
+
     virtual bool PlayAnimCrouchIdleMoving(); // AVO: new crouch idle animation
     bool HudAnimationExist( LPCSTR anim_name );
 
@@ -336,8 +372,11 @@ public:
     virtual void g_fireParams( SPickParam& pp ) {};
     virtual void Ray( SPickParam& pp );
     void UpdatePick();
+
     SPickParam& GetPick() { return PP; };
+
     collide::rq_result& GetRQ() { return GetPick().result; };
+
     float GetRQVis() { return PP.power; };
 
 #ifdef ATTACHMENT_HUD_VISBOX
@@ -364,7 +403,10 @@ public:
     virtual ~CAnonHudItem();
     virtual void UpdateXForm();
     virtual void on_renderable_Render( IDSGraphManager* DM );
+
     virtual bool TryPlayAnimIdle() { return false; }
+
     virtual void UpdateHudAdditional( Fmatrix& trans ) {}
+
     DECLARE_SCRIPT_REGISTER_FUNCTION
 };

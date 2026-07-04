@@ -9,6 +9,7 @@ private:
 public:
     CWeaponCustomPistol();
     virtual ~CWeaponCustomPistol();
+
     virtual int GetCurrentFireMode() { return 1; };
 
 protected:

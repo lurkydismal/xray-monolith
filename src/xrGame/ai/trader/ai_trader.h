@@ -37,17 +37,27 @@ public:
     virtual ~CAI_Trader();
 
     virtual CAttachmentOwner* cast_attachment_owner() { return this; }
+
     virtual CInventoryOwner* cast_inventory_owner() { return this; }
+
     virtual CEntityAlive* cast_entity_alive() { return this; }
+
     virtual CEntity* cast_entity() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CParticlesPlayer* cast_particles_player() { return this; }
+
     virtual CScriptEntity* cast_script_entity() { return this; }
+
     virtual CPhraseDialogManager* cast_phrase_dialog_manager() { return this; }
+
     virtual CAI_PhraseDialogManager* cast_ai_phrase_dialog_manager() {
         return this;
     }
+
     virtual CAI_Trader* cast_trader() { return this; }
 
     virtual DLL_Pure* _construct();
@@ -59,6 +69,7 @@ public:
 
     virtual void save( NET_Packet& output_packet );
     virtual void load( IReader& input_packet );
+
     virtual BOOL net_SaveRelevant() { return inherited::net_SaveRelevant(); }
 
     virtual void Die( CObject* who );
@@ -72,15 +83,20 @@ public:
     virtual void HitImpulse( float /**P/**/,
                              Fvector& /**vWorldDir/**/,
                              Fvector& /**vLocalDir/**/ ) {};
+
     virtual void Hit( SHit* pHDS ) { inherited::Hit( pHDS ); }
+
     virtual void UpdateCL();
 
     virtual void g_fireParams( const CHudItem* pHudItem,
                                Fvector& P,
                                Fvector& D );
     virtual void g_WeaponBones( int& L, int& R1, int& R2 );
+
     virtual float ffGetFov() const { return 150.f; }
+
     virtual float ffGetRange() const { return 30.f; }
+
     virtual void OnEvent( NET_Packet& P, u16 type );
     virtual void feel_touch_new( CObject* O );
     virtual void DropItemSendMessage( CObject* O );
@@ -92,11 +108,15 @@ public:
     virtual u16 PHGetSyncItemsNumber() {
         return inherited::PHGetSyncItemsNumber();
     }
+
     virtual CPHSynchronize* PHGetSyncItem( u16 item ) {
         return inherited::PHGetSyncItem( item );
     }
+
     virtual void PHUnFreeze() { return inherited::PHUnFreeze(); }
+
     virtual void PHFreeze() { return inherited::PHFreeze(); }
+
     ///////////////////////////////////////////////////////////////////////
 
     virtual void reinit();
@@ -143,8 +163,11 @@ public:
     }
 
     virtual bool unlimited_ammo() { return false; };
+
     virtual bool natural_weapon() const { return false; }
+
     virtual bool natural_detector() const { return false; }
+
     virtual bool AllowItemToTrade( CInventoryItem const* item,
                                    const SInvItemPlace& place ) const;
 
@@ -156,5 +179,6 @@ private:
 
 public:
     CTraderAnimation& animation() { return ( *AnimMan ); }
+
     DECLARE_SCRIPT_REGISTER_FUNCTION
 };

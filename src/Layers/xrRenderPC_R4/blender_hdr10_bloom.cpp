@@ -6,6 +6,7 @@
 CBlender_hdr10_bloom_downsample::CBlender_hdr10_bloom_downsample() {
     description.CLS = 0;
 }
+
 CBlender_hdr10_bloom_downsample::~CBlender_hdr10_bloom_downsample() {}
 
 void CBlender_hdr10_bloom_downsample::Compile( CBlender_Compile& C ) {
@@ -27,6 +28,7 @@ void CBlender_hdr10_bloom_downsample::Compile( CBlender_Compile& C ) {
 CBlender_hdr10_bloom_blur::CBlender_hdr10_bloom_blur() {
     description.CLS = 0;
 }
+
 CBlender_hdr10_bloom_blur::~CBlender_hdr10_bloom_blur() {}
 
 void CBlender_hdr10_bloom_blur::Compile( CBlender_Compile& C ) {
@@ -51,6 +53,7 @@ void CBlender_hdr10_bloom_blur::Compile( CBlender_Compile& C ) {
 CBlender_hdr10_bloom_upsample::CBlender_hdr10_bloom_upsample() {
     description.CLS = 0;
 }
+
 CBlender_hdr10_bloom_upsample::~CBlender_hdr10_bloom_upsample() {}
 
 void CBlender_hdr10_bloom_upsample::Compile( CBlender_Compile& C ) {

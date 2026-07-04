@@ -194,6 +194,7 @@ AL_API void AL_APIENTRY alEventControlSOFT( ALsizei count,
         std::lock_guard< std::mutex > _{ context->mEventCbLock };
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alEventCallbackSOFT( ALEVENTPROCSOFT callback,
@@ -207,4 +208,5 @@ AL_API void AL_APIENTRY alEventCallbackSOFT( ALEVENTPROCSOFT callback,
     context->mEventCb = callback;
     context->mEventParam = userParam;
 }
+
 END_API_FUNC

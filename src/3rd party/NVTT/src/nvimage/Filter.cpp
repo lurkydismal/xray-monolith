@@ -131,6 +131,7 @@ float Filter::sampleTriangle( float x, float scale, int samples ) const {
 }
 
 BoxFilter::BoxFilter() : Filter( 0.5f ) {}
+
 BoxFilter::BoxFilter( float width ) : Filter( width ) {}
 
 float BoxFilter::evaluate( float x ) const {
@@ -141,6 +142,7 @@ float BoxFilter::evaluate( float x ) const {
 }
 
 TriangleFilter::TriangleFilter() : Filter( 1.0f ) {}
+
 TriangleFilter::TriangleFilter( float width ) : Filter( width ) {}
 
 float TriangleFilter::evaluate( float x ) const {

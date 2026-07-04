@@ -47,6 +47,7 @@ public:
     virtual void reinit();
 
     virtual bool ability_earthquake() { return true; }
+
     virtual void event_on_step();
 
     virtual bool check_start_conditions( ControlCom::EControlType type );
@@ -56,6 +57,7 @@ public:
 
     virtual void HitEntityInJump( const CEntity* pEntity );
     virtual void TranslateActionToPathParams();
+
     virtual char* get_monster_class_name() { return "pseudogigant"; }
 
     DECLARE_SCRIPT_REGISTER_FUNCTION

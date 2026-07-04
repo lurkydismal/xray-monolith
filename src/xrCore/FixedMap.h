@@ -12,6 +12,7 @@ public:
         T val;
         TNode *left, *right;
     };
+
     typedef void __fastcall callback( TNode* );
     typedef bool __fastcall callback_cmp( TNode& N1, TNode& N2 );
 
@@ -143,6 +144,7 @@ private:
 
 public:
     FixedMAP() : pool( 0 ), limit( 0 ), nodes( nullptr ) {}
+
     ~FixedMAP() { destroy(); }
 
     void destroy() {
@@ -280,9 +282,13 @@ public:
     }
 
     IC u32 allocated() { return limit; }
+
     IC void clear() { pool = 0; }
+
     IC TNode* last() { return nodes + limit; } // for setup only
+
     IC u32 size() { return pool; }
+
     IC TNode& operator[]( int v ) { return nodes[ v ]; }
 
     IC void traverseLR( callback CB ) {

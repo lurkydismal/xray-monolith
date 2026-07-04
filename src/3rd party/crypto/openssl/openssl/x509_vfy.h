@@ -119,6 +119,7 @@ certificate chain.
 typedef struct x509_object_st {
     /* one of the above types */
     int type;
+
     union {
         char* ptr;
         X509* x509;

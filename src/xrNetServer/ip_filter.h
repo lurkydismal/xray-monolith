@@ -12,6 +12,7 @@ struct subnet_item {
 
         u32 data;
     } subnet_ip; // IN NBO !!!
+
     u32 subnet_mask;
 
     subnet_item() {

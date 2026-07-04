@@ -4,6 +4,7 @@
 #define _INCDEF_TARGASAVER_H_
 
 #pragma pack( push, 1 )
+
 struct tgaImgSpecHeader {
     u16 tgaXOrigin;
     u16 tgaYOrigin;
@@ -20,6 +21,7 @@ struct tgaHeader {
     BYTE tgaClrMapSpec[ 5 ];
     tgaImgSpecHeader tgaImgSpec;
 };
+
 #pragma pack( pop )
 
 #define IMG_24B 0

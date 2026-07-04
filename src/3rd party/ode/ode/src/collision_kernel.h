@@ -108,6 +108,7 @@ struct dxGeom : public dBase {
     // GEOM_AABB_BAD flag.
 
     virtual int AABBTest( dxGeom* o, dReal aabb[ 6 ] );
+
     // test whether the given AABB object intersects with this object, return
     // 1=yes, 0=no. this is used as an early-exit test in the space collision
     // functions. the default implementation returns 1, which is the correct
@@ -134,6 +135,7 @@ struct dxGeom : public dBase {
             ( *first_ptr )->tome = &next;
         *first_ptr = this;
     }
+
     void spaceRemove() {
         if ( next )
             next->tome = tome;
@@ -147,6 +149,7 @@ struct dxGeom : public dBase {
         body_next = b->geom;
         b->geom = this;
     }
+
     void bodyRemove();
 };
 

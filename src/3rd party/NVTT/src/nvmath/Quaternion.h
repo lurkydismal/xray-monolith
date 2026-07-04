@@ -32,9 +32,12 @@ private:
 };
 
 inline Quaternion::Quaternion() {}
+
 inline Quaternion::Quaternion( zero_t ) : q( zero ) {}
+
 inline Quaternion::Quaternion( float x, float y, float z, float w )
     : q( x, y, z, w ) {}
+
 inline Quaternion::Quaternion( Vector4::Arg v ) : q( v ) {}
 
 inline const Quaternion& Quaternion::operator=( Quaternion::Arg v ) {
@@ -45,12 +48,15 @@ inline const Quaternion& Quaternion::operator=( Quaternion::Arg v ) {
 inline scalar Quaternion::x() const {
     return q.x();
 }
+
 inline scalar Quaternion::y() const {
     return q.y();
 }
+
 inline scalar Quaternion::z() const {
     return q.z();
 }
+
 inline scalar Quaternion::w() const {
     return q.w();
 }
@@ -58,6 +64,7 @@ inline scalar Quaternion::w() const {
 inline const Vector4& Quaternion::asVector() const {
     return q;
 }
+
 inline Vector4& Quaternion::asVector() {
     return q;
 }
@@ -74,9 +81,11 @@ inline Quaternion mul( Quaternion::Arg a, Quaternion::Arg b ) {
 inline Quaternion scale( Quaternion::Arg q, float s ) {
     return scale( q.asVector(), s );
 }
+
 inline Quaternion operator*( Quaternion::Arg q, float s ) {
     return scale( q, s );
 }
+
 inline Quaternion operator*( float s, Quaternion::Arg q ) {
     return scale( q, s );
 }
@@ -84,6 +93,7 @@ inline Quaternion operator*( float s, Quaternion::Arg q ) {
 inline Quaternion scale( Quaternion::Arg q, Vector4::Arg s ) {
     return scale( q.asVector(), s );
 }
+
 /*inline Quaternion operator *(Quaternion::Arg q, Vector4::Arg s)
 {
         return scale(q, s);

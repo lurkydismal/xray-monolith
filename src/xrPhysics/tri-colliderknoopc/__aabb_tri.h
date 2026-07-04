@@ -39,6 +39,7 @@ public:
 
     //! Computes square magnitude
     IC float SquareMagnitude() const { return x * x + y * y + z * z; }
+
     //! Computes magnitude
     IC float Magnitude() const { return _sqrt( x * x + y * y + z * z ); }
 
@@ -61,18 +62,22 @@ public:
     ICF Point operator+( const Point& p ) const {
         return Point( x + p.x, y + p.y, z + p.z );
     }
+
     //! Operator for Point Minus = Point - Point.
     ICF Point operator-( const Point& p ) const {
         return Point( x - p.x, y - p.y, z - p.z );
     }
+
     //! Operator for Point Scale = Point * float.
     ICF Point operator*( float s ) const {
         return Point( x * s, y * s, z * s );
     }
+
     //! Operator for Point Scale = float * Point.
     friend Point operator*( float s, const Point& p ) {
         return Point( s * p.x, s * p.y, s * p.z );
     }
+
     //! Operator for Point Scale = Point / float.
     ICF Point operator/( float s ) const {
         s = 1.0f / s;
@@ -83,6 +88,7 @@ public:
     ICF float operator|( const Point& p ) const {
         return x * p.x + y * p.y + z * p.z;
     }
+
     //! Operator for Point VecProd = Point ^ Point.
     ICF Point operator^( const Point& p ) const {
         return Point( y * p.z - z * p.y, z * p.x - x * p.z, x * p.y - y * p.x );
@@ -153,6 +159,7 @@ public:
 
     //! Access as array
     ICF operator const float*() const { return &x; }
+
     //! Access as array
     ICF operator float*() { return &x; }
 

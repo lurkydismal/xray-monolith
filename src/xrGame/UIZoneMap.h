@@ -35,7 +35,9 @@ public:
     bool ZoomOut();
 
     CUIStatic& Background() { return m_background; };
+
     CUIWindow& MapFrame() { return m_clipFrame; };
+
     void SetupCurrentMap();
     void OnSectorChanged( int sector );
     void Counter_ResetClrAnimation();

@@ -19,6 +19,7 @@ xrTime CSavedGameWrapper__game_time( const CSavedGameWrapper* self ) {
 }
 
 #pragma optimize( "s", on )
+
 void CSavedGameWrapper::script_register( lua_State* L ) {
     module( L )[ class_< CSavedGameWrapper >( "CSavedGameWrapper" )
                      .def( constructor< LPCSTR >() )

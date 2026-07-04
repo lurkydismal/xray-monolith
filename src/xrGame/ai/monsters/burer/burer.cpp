@@ -244,9 +244,9 @@ void CBurer::Load( LPCSTR section ) {
     // "fx_stand_b", "fx_stand_l", "fx_stand_r");
     // anim().AddAnim(eAnimSteal, "stand_steal_",			-1,
     // &velocity_steal,	PS_STAND); //, "fx_stand_f", "fx_stand_b", "fx_stand_l",
-    // "fx_stand_r"); 	anim().AddAnim(eAnimEat,			"sit_eat_", -1,
-    // &velocity_none,		PS_SIT); //, 	"fx_stand_f", "fx_stand_b",
-    // "fx_stand_l", "fx_stand_r");
+    // "fx_stand_r"); 	anim().AddAnim(eAnimEat,
+    // "sit_eat_", -1, &velocity_none,		PS_SIT); //, 	"fx_stand_f",
+    // "fx_stand_b", "fx_stand_l", "fx_stand_r");
     //
     // 	anim().AddAnim(eAnimSitIdle,		"sit_idle_",
     // -1, &velocity_none,		PS_SIT); //, 	"fx_stand_f",

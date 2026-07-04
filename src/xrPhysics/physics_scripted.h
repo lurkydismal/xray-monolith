@@ -10,5 +10,6 @@ public:
 
     virtual ~cphysics_scripted();
     virtual void set( iphysics_game_scripted* g );
+
     virtual iphysics_game_scripted* get() { return m_game_scripted; };
 };

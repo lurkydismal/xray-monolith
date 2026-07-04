@@ -37,6 +37,7 @@ public:
     uintptr_t status;
 
     Derived* next;
+
     aggregated_operation() : status( 0 ), next( NULL ) {}
 };
 
@@ -153,6 +154,7 @@ class aggregator : public aggregator_generic< operation_type > {
 
 public:
     aggregator() {}
+
     explicit aggregator( handler_type h ) : handle_operations( h ) {}
 
     void initialize_handler( handler_type h ) { handle_operations = h; }
@@ -170,7 +172,9 @@ class aggregating_functor {
 
 public:
     aggregating_functor() : fi() {}
+
     aggregating_functor( aggregating_class* fi_ ) : fi( fi_ ) {}
+
     void operator()( operation_list* op_list ) {
         fi->handle_operations( op_list );
     }

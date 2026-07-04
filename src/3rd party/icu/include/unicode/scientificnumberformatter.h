@@ -173,6 +173,7 @@ private:
         MarkupStyle( const UnicodeString& beginMarkup,
                      const UnicodeString& endMarkup )
             : Style(), fBeginMarkup( beginMarkup ), fEndMarkup( endMarkup ) {}
+
         virtual MarkupStyle* clone() const;
 
     protected:

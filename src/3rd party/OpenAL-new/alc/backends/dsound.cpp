@@ -214,6 +214,7 @@ BOOL CALLBACK DSoundEnumDevices( GUID* guid,
 
 struct DSoundPlayback final : public BackendBase {
     DSoundPlayback( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~DSoundPlayback() override;
 
     int mixerProc();
@@ -602,6 +603,7 @@ void DSoundPlayback::stop() {
 
 struct DSoundCapture final : public BackendBase {
     DSoundCapture( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~DSoundCapture() override;
 
     void open( const char* name ) override;

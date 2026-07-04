@@ -25,6 +25,7 @@ void remove_effector( CScriptEffector* self ) {
 }
 
 #pragma optimize( "s", on )
+
 void CScriptEffector::script_register( lua_State* L ) {
     module( L )[ class_< SPPInfo::SDuality >( "duality" )
                      .def_readwrite( "h", &SPPInfo::SDuality::h )

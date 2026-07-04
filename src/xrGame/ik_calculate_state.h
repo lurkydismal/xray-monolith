@@ -19,6 +19,7 @@ public:
     ik_goal_matrix() : m( Fidentity ), cl_state( cl_undefined ) {}
 
     IC const Fmatrix& get() const { return m; }
+
     IC void set( const Fmatrix& m_, e_collide_state cl ) {
         m.set( m_ );
         cl_state = cl;

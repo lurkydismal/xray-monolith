@@ -13,8 +13,11 @@ public:
     virtual ~silent_shots() {};
 
     virtual void update() {};
+
     virtual u32 const get_u32_param() { return m_thunder_count; };
+
     virtual float const get_float_param() { return 0.0f; };
+
     virtual void reset_game();
 
     virtual void OnWeapon_Fire( u16 sender, u16 sender_weapon_id );

@@ -32,7 +32,9 @@ struct StaticDrawableWrapper : public IPureDestroyableObject {
     virtual void destroy();
     void Draw();
     void Update();
+
     CUIStatic* wnd() { return m_static; }
+
     bool IsActual() const;
     void SetText( const char* text );
 };
@@ -40,6 +42,7 @@ struct StaticDrawableWrapper : public IPureDestroyableObject {
 struct MPLevelDesc {
     shared_str map_name;
     shared_str map_ver;
+
     bool operator==( const MPLevelDesc& rhs ) {
         return map_name == rhs.map_name && map_ver == rhs.map_ver;
     }
@@ -99,8 +102,11 @@ public:
 
     virtual void Render();
     virtual void _BCL OnFrame() override;
+
     IC CUIActorMenu& GetActorMenu() const { return *ActorMenu; }
+
     IC CUIPdaWnd& GetPdaMenu() const { return *PdaMenu; }
+
     bool ShowActorMenu();
     void HideActorMenu();
     void UpdateActorMenu();                 // Alundaio
@@ -109,11 +115,15 @@ public:
     void HidePdaMenu();
     void ShowMessagesWindow();
     void HideMessagesWindow();
+
     void ShowGameIndicators( bool show ) { showGameIndicators = show; }
+
     bool GameIndicatorsShown() { return showGameIndicators; }
+
     void ShowCrosshair( bool show ) {
         psHUD_Flags.set( HUD_CROSSHAIR_RT, show );
     }
+
     bool CrosshairShown() { return !!psHUD_Flags.test( HUD_CROSSHAIR_RT ); }
 
     CUIWindow* GetWindow() { return Window; }

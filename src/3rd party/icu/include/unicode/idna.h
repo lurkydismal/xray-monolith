@@ -291,12 +291,14 @@ public:
           isTransDiff( FALSE ),
           isBiDi( FALSE ),
           isOkBiDi( TRUE ) {}
+
     /**
      * Were there IDNA processing errors?
      * @return TRUE if there were processing errors
      * @stable ICU 4.6
      */
     UBool hasErrors() const { return errors != 0; }
+
     /**
      * Returns a bit set indicating IDNA processing errors.
      * See UIDNA_ERROR_... constants in uidna.h.
@@ -304,6 +306,7 @@ public:
      * @stable ICU 4.6
      */
     uint32_t getErrors() const { return errors; }
+
     /**
      * Returns TRUE if transitional and nontransitional processing produce
      * different results. This is the case when the input label or domain name

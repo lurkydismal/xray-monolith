@@ -171,6 +171,7 @@ public:
 #else  // ifndef USE_LUA_STUDIO
     void try_connect_to_debugger();
     void disconnect_from_debugger();
+
     inline cs::lua_studio::world* debugger() const {
         return m_lua_studio_world;
     }

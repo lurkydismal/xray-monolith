@@ -23,6 +23,7 @@ struct SND_Message {
     u32 priority;
     u32 SoundID;
     u32 LastStarted;
+
     bool operator==( u32 ID ) { return SoundID == ID; }
 
     void Load( u32 const ID, u32 const prior, LPCSTR name ) {
@@ -194,7 +195,9 @@ public:
 
     //// VOTING
     virtual bool IsVotingActive() { return m_bVotingActive; };
+
     virtual void SetVotingActive( bool Active ) { m_bVotingActive = Active; };
+
     virtual void SendStartVoteMessage( LPCSTR args );
     virtual void SendVoteYesMessage();
     virtual void SendVoteNoMessage();
@@ -253,11 +256,13 @@ public:
     virtual void OnSwitchPhase_InProgress();
 
     virtual u8 GetTeamCount() { return 0; };
+
     virtual s16 ModifyTeam( s16 Team ) { return Team; };
 
     virtual bool Is_Spectator_TeamCamera_Allowed() {
         return m_bSpectator_TeamCamera && !Level().IsDemoPlay();
     };
+
     virtual bool Is_Spectator_Camera_Allowed(
         CSpectator::EActorCameras Camera );
     virtual bool Is_Rewarding_Allowed() const = 0;
@@ -331,6 +336,7 @@ public:
         u32 m_detect_time;
         static u32 const max_showing_time = 10000; // 10 seconds
     }; // struct detected_cheater_t
+
     void add_detected_cheater( shared_str const& file_name, string256 diff );
 
 private:
@@ -341,6 +347,7 @@ private:
 
 public:
     bool is_buy_menu_ready() const { return m_ready_to_open_buy_menu; };
+
     void set_buy_menu_not_ready() { m_ready_to_open_buy_menu = false; };
 
     void decompress_and_save_screenshot( LPCSTR file_name,

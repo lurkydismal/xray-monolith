@@ -28,16 +28,20 @@ public:
     void stop_loading();
 
     virtual void shedule_Update( u32 dt );
+
     virtual shared_str shedule_Name() const {
         return shared_str( "gamespy_sake_updator" );
     };
+
     virtual bool shedule_Needed() { return true; };
+
     virtual float shedule_Scale() { return 1.0f; };
 
     all_awards_t const& get_awards();
     all_best_scores_t const& get_best_scores();
 
     awards_store* get_awards_store() { return m_awards_store; };
+
     best_scores_store* get_best_scores_store() { return m_best_scores_store; };
 
 private:
@@ -94,7 +98,7 @@ private:
     // void * inputData,
     //												 void
     //* outputData,
-    //void * userData);
+    // void * userData);
 
     DECLARE_SCRIPT_REGISTER_FUNCTION
 }; // class profile_store

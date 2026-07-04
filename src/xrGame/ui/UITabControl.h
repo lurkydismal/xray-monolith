@@ -40,20 +40,28 @@ public:
     virtual void Enable( bool status );
 
     const shared_str& GetActiveId() const { return m_sPushedId; }
+
     LPCSTR GetActiveId_script();
+
     const shared_str& GetPrevActiveId() { return m_sPrevPushedId; }
+
     void SetActiveTab( const shared_str& sNewTab );
+
     void SetActiveTab_script( LPCSTR sNewTab ) { SetActiveTab( sNewTab ); };
+
     const u32 GetTabsCount() const { return m_TabsArr.size(); }
 
     // Режим клавилатурных акселераторов (вкл/выкл)
     IC bool GetAcceleratorsMode() const { return m_bAcceleratorsEnable; }
+
     void SetAcceleratorsMode( bool bEnable ) {
         m_bAcceleratorsEnable = bEnable;
     }
 
     TABS_VECTOR* GetButtonsVector() { return &m_TabsArr; }
+
     CUITabButton* GetButtonById( const shared_str& id );
+
     CUITabButton* GetButtonById_script( LPCSTR s ) {
         return GetButtonById( s );
     }

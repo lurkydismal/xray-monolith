@@ -44,6 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef INCLUDED_AI_LOGSTREAM_H
 #define INCLUDED_AI_LOGSTREAM_H
 #include "types.h"
+
 namespace Assimp {
 class IOSystem;
 
@@ -89,6 +90,7 @@ public:
                                            IOSystem* io = NULL );
 
 }; // !class LogStream
+
 // ------------------------------------------------------------------------------------
 } // Namespace Assimp
 

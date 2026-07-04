@@ -21,6 +21,7 @@ public:
         gid_hand_grenades,
         gid_cool_weapons,
     }; // enum_group_id
+
     static u16 const gid_any = u16( -1 );
 
     ammunition_group();

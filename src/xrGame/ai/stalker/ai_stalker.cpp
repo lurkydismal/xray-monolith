@@ -1276,6 +1276,7 @@ CPHDestroyable* CAI_Stalker::ph_destroyable() {
 
 BOOL NPCsLookAtActor = TRUE;
 float NPCsLookAtActorMinDistance = 3.5f;
+
 void CAI_Stalker::shedule_Update( u32 DT ) {
     PROF_EVENT( "CAI_Stalker::shedule_Update" );
     // Optimization update

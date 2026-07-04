@@ -2724,6 +2724,7 @@ struct ImGuiGetNameFromIndexOldToNewCallbackData {
     void* UserData;
     bool ( *OldCallback )( void*, int, const char** );
 };
+
 static const char* ImGuiGetNameFromIndexOldToNewCallback( void* user_data,
                                                           int idx ) {
     ImGuiGetNameFromIndexOldToNewCallbackData* data =
@@ -2744,6 +2745,7 @@ bool ImGui::ListBox( const char* label,
     return ListBox( label, current_item, ImGuiGetNameFromIndexOldToNewCallback,
                     &old_to_new_data, items_count, height_in_items );
 }
+
 bool ImGui::Combo( const char* label,
                    int* current_item,
                    bool ( *old_getter )( void*, int, const char** ),
@@ -5478,10 +5480,12 @@ namespace ImStb {
 static int STB_TEXTEDIT_STRINGLEN( const ImGuiInputTextState* obj ) {
     return obj->TextLen;
 }
+
 static char STB_TEXTEDIT_GETCHAR( const ImGuiInputTextState* obj, int idx ) {
     IM_ASSERT( idx <= obj->TextLen );
     return obj->TextSrc[ idx ];
 }
+
 static float STB_TEXTEDIT_GETWIDTH( ImGuiInputTextState* obj,
                                     int line_start_idx,
                                     int char_idx ) {
@@ -5493,7 +5497,9 @@ static float STB_TEXTEDIT_GETWIDTH( ImGuiInputTextState* obj,
     ImGuiContext& g = *obj->Ctx;
     return g.Font->GetCharAdvance( ( ImWchar )c ) * g.FontScale;
 }
+
 static char STB_TEXTEDIT_NEWLINE = '\n';
+
 static void STB_TEXTEDIT_LAYOUTROW( StbTexteditRow* r,
                                     ImGuiInputTextState* obj,
                                     int line_start_idx ) {
@@ -5565,6 +5571,7 @@ static int is_word_boundary_from_right( ImGuiInputTextState* obj, int idx ) {
     return ( ( prev_white || prev_separ ) && !( curr_separ || curr_white ) ) ||
            ( curr_separ && !prev_separ );
 }
+
 static int is_word_boundary_from_left( ImGuiInputTextState* obj, int idx ) {
     if ( ( obj->Flags & ImGuiInputTextFlags_Password ) || idx <= 0 )
         return 0;
@@ -5584,12 +5591,14 @@ static int is_word_boundary_from_left( ImGuiInputTextState* obj, int idx ) {
     return ( ( prev_white ) && !( curr_separ || curr_white ) ) ||
            ( curr_separ && !prev_separ );
 }
+
 static int STB_TEXTEDIT_MOVEWORDLEFT_IMPL( ImGuiInputTextState* obj, int idx ) {
     idx = IMSTB_TEXTEDIT_GETPREVCHARINDEX( obj, idx );
     while ( idx >= 0 && !is_word_boundary_from_right( obj, idx ) )
         idx = IMSTB_TEXTEDIT_GETPREVCHARINDEX( obj, idx );
     return idx < 0 ? 0 : idx;
 }
+
 static int STB_TEXTEDIT_MOVEWORDRIGHT_MAC( ImGuiInputTextState* obj, int idx ) {
     int len = obj->TextLen;
     idx = IMSTB_TEXTEDIT_GETNEXTCHARINDEX( obj, idx );
@@ -5597,6 +5606,7 @@ static int STB_TEXTEDIT_MOVEWORDRIGHT_MAC( ImGuiInputTextState* obj, int idx ) {
         idx = IMSTB_TEXTEDIT_GETNEXTCHARINDEX( obj, idx );
     return idx > len ? len : idx;
 }
+
 static int STB_TEXTEDIT_MOVEWORDRIGHT_WIN( ImGuiInputTextState* obj, int idx ) {
     idx = IMSTB_TEXTEDIT_GETNEXTCHARINDEX( obj, idx );
     int len = obj->TextLen;
@@ -5604,6 +5614,7 @@ static int STB_TEXTEDIT_MOVEWORDRIGHT_WIN( ImGuiInputTextState* obj, int idx ) {
         idx = IMSTB_TEXTEDIT_GETNEXTCHARINDEX( obj, idx );
     return idx > len ? len : idx;
 }
+
 static int STB_TEXTEDIT_MOVEWORDRIGHT_IMPL( ImGuiInputTextState* obj,
                                             int idx ) {
     ImGuiContext& g = *obj->Ctx;
@@ -5612,6 +5623,7 @@ static int STB_TEXTEDIT_MOVEWORDRIGHT_IMPL( ImGuiInputTextState* obj,
     else
         return STB_TEXTEDIT_MOVEWORDRIGHT_WIN( obj, idx );
 }
+
 #define STB_TEXTEDIT_MOVEWORDLEFT \
     STB_TEXTEDIT_MOVEWORDLEFT_IMPL // They need to be #define for stb_textedit.h
 #define STB_TEXTEDIT_MOVEWORDRIGHT STB_TEXTEDIT_MOVEWORDRIGHT_IMPL
@@ -5755,41 +5767,51 @@ void ImGuiInputTextState::OnCharPressed( unsigned int c ) {
 void ImGuiInputTextState::CursorAnimReset() {
     CursorAnim = -0.30f;
 } // After a user-input the cursor stays on for a while without blinking
+
 void ImGuiInputTextState::CursorClamp() {
     Stb->cursor = ImMin( Stb->cursor, TextLen );
     Stb->select_start = ImMin( Stb->select_start, TextLen );
     Stb->select_end = ImMin( Stb->select_end, TextLen );
 }
+
 bool ImGuiInputTextState::HasSelection() const {
     return Stb->select_start != Stb->select_end;
 }
+
 void ImGuiInputTextState::ClearSelection() {
     Stb->select_start = Stb->select_end = Stb->cursor;
 }
+
 int ImGuiInputTextState::GetCursorPos() const {
     return Stb->cursor;
 }
+
 int ImGuiInputTextState::GetSelectionStart() const {
     return Stb->select_start;
 }
+
 int ImGuiInputTextState::GetSelectionEnd() const {
     return Stb->select_end;
 }
+
 void ImGuiInputTextState::SelectAll() {
     Stb->select_start = 0;
     Stb->cursor = Stb->select_end = TextLen;
     Stb->has_preferred_x = 0;
 }
+
 void ImGuiInputTextState::ReloadUserBufAndSelectAll() {
     WantReloadUserBuf = true;
     ReloadSelectionStart = 0;
     ReloadSelectionEnd = INT_MAX;
 }
+
 void ImGuiInputTextState::ReloadUserBufAndKeepSelection() {
     WantReloadUserBuf = true;
     ReloadSelectionStart = Stb->select_start;
     ReloadSelectionEnd = Stb->select_end;
 }
+
 void ImGuiInputTextState::ReloadUserBufAndMoveToEnd() {
     WantReloadUserBuf = true;
     ReloadSelectionStart = ReloadSelectionEnd = INT_MAX;

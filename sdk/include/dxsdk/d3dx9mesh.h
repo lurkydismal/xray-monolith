@@ -149,6 +149,7 @@ enum _D3DXMESH {
 enum _D3DXPATCHMESH {
     D3DXPATCHMESH_DEFAULT = 000,
 };
+
 // option field values for specifying min value in D3DXGeneratePMesh and
 // D3DXSimplifyMesh
 enum _D3DXMESHSIMP {
@@ -232,6 +233,7 @@ typedef struct _D3DXMATERIAL {
     D3DMATERIAL9 MatD3D;
     LPSTR pTextureFilename;
 } D3DXMATERIAL;
+
 typedef D3DXMATERIAL* LPD3DXMATERIAL;
 
 typedef enum _D3DXEFFECTDEFAULTTYPE {
@@ -3089,12 +3091,14 @@ DEFINE_GUID( DXFILEOBJ_CompressedAnimationSet,
              0x4d );
 
 #pragma pack( push, 1 )
+
 typedef struct _XFILECOMPRESSEDANIMATIONSET {
     DWORD CompressedBlockSize;
     FLOAT TicksPerSec;
     DWORD PlaybackType;
     DWORD BufferLength;
 } XFILECOMPRESSEDANIMATIONSET;
+
 #pragma pack( pop )
 
 #define XSKINEXP_TEMPLATES        \

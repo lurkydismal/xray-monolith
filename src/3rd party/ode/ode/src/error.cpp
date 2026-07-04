@@ -151,6 +151,7 @@ void _cdecl dMessage( int num, const char* msg, ... ) {
     else
         printMessage( num, "ODE Message", msg, ap );
 }
+
 // #endif
 
 #endif

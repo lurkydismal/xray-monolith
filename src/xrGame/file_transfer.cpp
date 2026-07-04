@@ -571,6 +571,7 @@ void client_site::dbg_init_statgraph() {
     m_stat_graph->SetStyle( CStatGraph::stBarLine );
     m_stat_graph->AppendSubGraph( CStatGraph::stBarLine );
 }
+
 void client_site::dbg_deinit_statgraph() {
     if ( m_stat_graph ) {
         xr_delete( m_stat_graph );

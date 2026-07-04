@@ -43,6 +43,7 @@ public:
     //	void					SetActiveTask
     //(const shared_str& id);
     void SetActiveTask( CGameTask* task );
+
     u32 ActualFrame() const { return m_actual_frame; }
 
     CGameTask* IterateGet( CGameTask* t, ETaskState state, bool bForward );
@@ -51,5 +52,6 @@ public:
     void MapLocationRelcase( CMapLocation* ml );
 
     void ResetStorage() { m_gametasks = NULL; };
+
     void DumpTasks();
 };

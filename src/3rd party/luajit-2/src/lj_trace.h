@@ -14,6 +14,7 @@
 
 /* Trace errors. */
 typedef enum {
+
 #define TREDEF( name, msg ) LJ_TRERR_##name,
 #include "lj_traceerr.h"
     LJ_TRERR__MAX

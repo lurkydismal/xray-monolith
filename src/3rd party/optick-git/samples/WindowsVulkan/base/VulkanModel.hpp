@@ -113,6 +113,7 @@ struct Model {
         uint32_t indexBase;
         uint32_t indexCount;
     };
+
     std::vector< ModelPart > parts;
 
     static const int defaultFlags =

@@ -13,6 +13,7 @@ public:
 
 public:
     virtual ~IDebugRender() {}
+
     virtual void Render() = 0;
     virtual void add_lines( Fvector const* vertices,
                             u32 const& vertex_count,

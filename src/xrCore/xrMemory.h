@@ -66,7 +66,9 @@ public:
 
     size_t mem_usage( bool assert = true );
     void mem_compact();
+
     void mem_counter_set( u32 _val ) { stat_counter = _val; }
+
     u32 mem_counter_get() { return stat_counter; }
 
 #ifdef DEBUG_MEMORY_NAME
@@ -108,6 +110,7 @@ template < class T >
 IC T* xr_alloc( u32 count ) {
     return ( T* )Memory.mem_alloc( count * sizeof( T ), typeid( T ).name() );
 }
+
 template < class T >
 IC void xr_free( T*& P ) {
     if ( P ) {
@@ -115,9 +118,11 @@ IC void xr_free( T*& P ) {
         P = NULL;
     };
 }
+
 IC void* xr_malloc( size_t size ) {
     return Memory.mem_alloc( size, "xr_malloc" );
 }
+
 IC void* xr_realloc( void* P, size_t size ) {
     return Memory.mem_realloc( P, size, "xr_realloc" );
 }
@@ -138,6 +143,7 @@ IC void xr_free( T*& P ) {
 IC void* xr_malloc( size_t size ) {
     return Memory.mem_alloc( size );
 }
+
 IC void* xr_realloc( void* P, size_t size ) {
     return Memory.mem_realloc( P, size );
 }
@@ -151,12 +157,15 @@ XRCORE_API char* xr_strdup( const char* string );
 IC void* operator new( size_t size ) {
     return Memory.mem_alloc( size ? size : 1, "C++ NEW" );
 }
+
 IC void operator delete( void* p ) {
     xr_free( p );
 }
+
 IC void* operator new[]( size_t size ) {
     return Memory.mem_alloc( size ? size : 1, "C++ NEW" );
 }
+
 IC void operator delete[]( void* p ) {
     xr_free( p );
 }
@@ -166,12 +175,15 @@ IC void operator delete[]( void* p ) {
 IC void* operator new( size_t size ) {
     return Memory.mem_alloc( size ? size : 1 );
 }
+
 IC void operator delete( void* p ) {
     xr_free( p );
 }
+
 IC void* operator new[]( size_t size ) {
     return Memory.mem_alloc( size ? size : 1 );
 }
+
 IC void operator delete[]( void* p ) {
     xr_free( p );
 }

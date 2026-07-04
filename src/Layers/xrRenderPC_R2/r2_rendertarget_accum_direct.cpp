@@ -835,6 +835,7 @@ void CRenderTarget::accum_direct_lum() {
         Fvector4 uv4;
         Fvector4 uv5;
     };
+
     float smooth = 0.6f;
     float ddw = smooth / _w;
     float ddh = smooth / _h;

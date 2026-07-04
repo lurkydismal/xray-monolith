@@ -23,6 +23,7 @@
 #include "uicursor.h"
 
 CUIMapWnd* g_map_wnd = NULL; // quick temporary solution -(
+
 CUIMapWnd* GetMapWnd() {
     return g_map_wnd;
 }
@@ -416,6 +417,7 @@ bool CUIMapWnd::OnKeyboardAction( int dik, EUIMessages keyboard_action ) {
 }
 
 extern BOOL mouseWheelInvertZoom;
+
 bool CUIMapWnd::OnMouseAction( float x, float y, EUIMessages mouse_action ) {
     if (inherited::OnMouseAction(x, y, mouse_action) /*|| m_btn_nav_parent->OnMouseAction(x,y,mouse_action)*/)
 	{
@@ -454,6 +456,7 @@ bool CUIMapWnd::OnMouseAction( float x, float y, EUIMessages mouse_action ) {
 // demonized: Zoom towards mouse cursor instead of map center
 BOOL pda_map_zoom_in_to_mouse = TRUE;
 BOOL pda_map_zoom_out_to_mouse = TRUE;
+
 bool CUIMapWnd::UpdateZoom( bool b_zoom_in, bool b_scroll_wheel ) {
     auto before_mouse_pos = GetGlobalMapCoordsForMouse();
     before_mouse_pos.mul( -1 );

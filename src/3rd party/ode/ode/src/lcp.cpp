@@ -395,6 +395,7 @@ struct dLCP {
     ~dLCP();
 
     int getNub() { return nub; }
+
     // return the value of `nub'. the constructor may want to change it,
     // so the caller should find out its new value.
 
@@ -769,32 +770,47 @@ struct dLCP {
           int* _p,
           int* _C,
           dReal** Arows );
+
     int getNub() { return nub; }
+
     void transfer_i_to_C( int i );
+
     void transfer_i_to_N( int i ) {
         nN++;
     } // because we can assume C and N span 1:i-1
+
     void transfer_i_from_N_to_C( int i );
     void transfer_i_from_C_to_N( int i );
+
     int numC() { return nC; }
+
     int numN() { return nN; }
+
     int indexC( int i ) { return i; }
+
     int indexN( int i ) { return i + nC; }
+
     dReal Aii( int i ) { return AROW( i )[ i ]; }
+
     dReal AiC_times_qC( int i, dReal* q ) { return dDot( AROW( i ), q, nC ); }
+
     dReal AiN_times_qN( int i, dReal* q ) {
         return dDot( AROW( i ) + nC, q + nC, nN );
     }
+
     void pN_equals_ANC_times_qC( dReal* p, dReal* q );
     void pN_plusequals_ANi( dReal* p, int i, int sign = 1 );
+
     void pC_plusequals_s_times_qC( dReal* p, dReal s, dReal* q ) {
         for ( int i = 0; i < nC; i++ )
             p[ i ] += s * q[ i ];
     }
+
     void pN_plusequals_s_times_qN( dReal* p, dReal s, dReal* q ) {
         for ( int i = 0; i < nN; i++ )
             p[ i + nC ] += s * q[ i + nC ];
     }
+
     void solve1( dReal* a, int i, int dir = 1, int only_transfer = 0 );
     void unpermute();
 };

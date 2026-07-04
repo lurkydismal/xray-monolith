@@ -15,6 +15,7 @@
 using namespace ALife;
 
 xr_task_group level_load;
+
 CALifeGraphRegistry::CALifeGraphRegistry() {
     m_level = 0;
     m_process_time = 0;

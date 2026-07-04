@@ -273,6 +273,7 @@ LJLIB_CF( table_sort ) {
 
 #if LJ_52
 LJLIB_PUSH( "n" )
+
 LJLIB_CF( table_pack ) {
     TValue *array, *base = L->base;
     MSize i, n = ( uint32_t )( L->top - base );

@@ -34,6 +34,7 @@ public:
     animation_action const& animation() const;
     animation_action const& animation(
         MonsterSpace::EBodyState const& target_body_state ) const;
+
     IC Animations const& animations() const { return m_animations; };
 
 private:

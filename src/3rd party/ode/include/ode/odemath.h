@@ -53,21 +53,27 @@
 PURE_INLINE dReal dDOT( const dReal* a, const dReal* b ) {
     return dDOTpq( a, b, 1, 1 );
 }
+
 PURE_INLINE dReal dDOT13( const dReal* a, const dReal* b ) {
     return dDOTpq( a, b, 1, 3 );
 }
+
 PURE_INLINE dReal dDOT31( const dReal* a, const dReal* b ) {
     return dDOTpq( a, b, 3, 1 );
 }
+
 PURE_INLINE dReal dDOT33( const dReal* a, const dReal* b ) {
     return dDOTpq( a, b, 3, 3 );
 }
+
 PURE_INLINE dReal dDOT14( const dReal* a, const dReal* b ) {
     return dDOTpq( a, b, 1, 4 );
 }
+
 PURE_INLINE dReal dDOT41( const dReal* a, const dReal* b ) {
     return dDOTpq( a, b, 4, 1 );
 }
+
 PURE_INLINE dReal dDOT44( const dReal* a, const dReal* b ) {
     return dDOTpq( a, b, 4, 4 );
 }
@@ -135,6 +141,7 @@ PURE_INLINE float dDISTANCE( const float a[ 3 ], const float b[ 3 ] ) {
                            ( a[ 1 ] - b[ 1 ] ) * ( a[ 1 ] - b[ 1 ] ) +
                            ( a[ 2 ] - b[ 2 ] ) * ( a[ 2 ] - b[ 2 ] ) );
 }
+
 PURE_INLINE double dDISTANCE( const double a[ 3 ], const double b[ 3 ] ) {
     return dSqrt( ( a[ 0 ] - b[ 0 ] ) * ( a[ 0 ] - b[ 0 ] ) +
                   ( a[ 1 ] - b[ 1 ] ) * ( a[ 1 ] - b[ 1 ] ) +

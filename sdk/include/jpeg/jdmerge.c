@@ -81,6 +81,7 @@ typedef my_upsampler* my_upsample_ptr;
  */
 
 LOCAL( void )
+
 build_ycc_rgb_table( j_decompress_ptr cinfo ) {
     my_upsample_ptr upsample = ( my_upsample_ptr )cinfo->upsample;
     int i;
@@ -122,6 +123,7 @@ build_ycc_rgb_table( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 start_pass_merged_upsample( j_decompress_ptr cinfo ) {
     my_upsample_ptr upsample = ( my_upsample_ptr )cinfo->upsample;
 
@@ -138,6 +140,7 @@ start_pass_merged_upsample( j_decompress_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 merged_2v_upsample( j_decompress_ptr cinfo,
                     JSAMPIMAGE input_buf,
                     JDIMENSION* in_row_group_ctr,
@@ -190,6 +193,7 @@ merged_2v_upsample( j_decompress_ptr cinfo,
 }
 
 METHODDEF( void )
+
 merged_1v_upsample( j_decompress_ptr cinfo,
                     JSAMPIMAGE input_buf,
                     JDIMENSION* in_row_group_ctr,
@@ -223,6 +227,7 @@ merged_1v_upsample( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 h2v1_merged_upsample( j_decompress_ptr cinfo,
                       JSAMPIMAGE input_buf,
                       JDIMENSION in_row_group_ctr,
@@ -287,6 +292,7 @@ h2v1_merged_upsample( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 h2v2_merged_upsample( j_decompress_ptr cinfo,
                       JSAMPIMAGE input_buf,
                       JDIMENSION in_row_group_ctr,
@@ -371,6 +377,7 @@ h2v2_merged_upsample( j_decompress_ptr cinfo,
  */
 
 GLOBAL( void )
+
 jinit_merged_upsampler( j_decompress_ptr cinfo ) {
     my_upsample_ptr upsample;
 

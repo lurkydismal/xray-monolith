@@ -49,6 +49,7 @@ struct tdualquat {
     // -- Component accesses --
 
     typedef length_t length_type;
+
     /// Return the count of components of a dual quaternion
     GLM_FUNC_DECL static length_type length() { return 2; }
 

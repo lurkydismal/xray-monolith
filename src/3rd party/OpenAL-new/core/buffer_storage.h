@@ -21,6 +21,7 @@ enum FmtType : unsigned char {
     FmtIMA4,
     FmtMSADPCM,
 };
+
 enum FmtChannels : unsigned char {
     FmtMono,
     FmtStereo,
@@ -53,6 +54,7 @@ const char* NameFromFormat( FmtChannels channels ) noexcept;
 
 uint BytesFromFmt( FmtType type ) noexcept;
 uint ChannelsFromFmt( FmtChannels chans, uint ambiorder ) noexcept;
+
 inline uint FrameSizeFromFmt( FmtChannels chans,
                               FmtType type,
                               uint ambiorder ) noexcept {
@@ -102,9 +104,11 @@ struct BufferStorage {
     uint mAmbiOrder{ 0u };
 
     inline uint bytesFromFmt() const noexcept { return BytesFromFmt( mType ); }
+
     inline uint channelsFromFmt() const noexcept {
         return ChannelsFromFmt( mChannels, mAmbiOrder );
     }
+
     inline uint frameSizeFromFmt() const noexcept {
         return channelsFromFmt() * bytesFromFmt();
     }

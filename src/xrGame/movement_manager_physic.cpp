@@ -40,6 +40,7 @@ float CMovementManager::speed( CPHMovementControl* movement_control ) const {
 }
 #ifdef DEBUG
 BOOL dbg_dump_collision_hit = FALSE;
+
 void dump_collision_hit( CPHMovementControl* movement_control ) {
     if ( !dbg_dump_collision_hit )
         return;
@@ -202,6 +203,7 @@ Fvector CMovementManager::path_position( const float& time_to_check ) {
 
 float movement_manager_move_along_path_query_pos_threshold = 0.25f;
 float movement_manager_move_along_path_query_pos_threshold_sqr = 0.25f * 0.25f;
+
 void CMovementManager::move_along_path( CPHMovementControl* movement_control,
                                         Fvector& dest_position,
                                         float time_delta ) {

@@ -1091,6 +1091,7 @@ void ImGui::ShowDemoWindow( bool* p_open ) {
                     return true;
                 }
             };
+
             static int item_current_4 = 0;
             ImGui::Combo( "combo 4 (function)", &item_current_4,
                           &FuncHolder::ItemGetter, items,
@@ -1221,6 +1222,7 @@ void ImGui::ShowDemoWindow( bool* p_open ) {
             static char buf5[ 64 ] = "";
             ImGui::InputText( "no blank", buf5, 64,
                               ImGuiInputTextFlags_CharsNoBlank );
+
             struct TextFilters {
                 static int FilterImGuiLetters(
                     ImGuiInputTextCallbackData* data ) {
@@ -1230,6 +1232,7 @@ void ImGui::ShowDemoWindow( bool* p_open ) {
                     return 1;
                 }
             };
+
             static char buf6[ 64 ] = "";
             ImGui::InputText( "\"imgui\" letters", buf6, 64,
                               ImGuiInputTextFlags_CallbackCharFilter,
@@ -1317,10 +1320,12 @@ void ImGui::ShowDemoWindow( bool* p_open ) {
             // provide sample rate/count.
             struct Funcs {
                 static float Sin( void*, int i ) { return sinf( i * 0.1f ); }
+
                 static float Saw( void*, int i ) {
                     return ( i & 1 ) ? 1.0f : -1.0f;
                 }
             };
+
             static int func_type = 0, display_count = 70;
             ImGui::Separator();
             ImGui::PushItemWidth( 100 );
@@ -1872,7 +1877,9 @@ void ImGui::ShowDemoWindow( bool* p_open ) {
             {
                 ImGui::BulletText( "Drag and drop to copy/swap items" );
                 ImGui::Indent();
+
                 enum Mode { Mode_Copy, Mode_Move, Mode_Swap };
+
                 static int mode = 0;
                 if ( ImGui::RadioButton( "Copy", mode == Mode_Copy ) ) {
                     mode = Mode_Copy;
@@ -3866,6 +3873,7 @@ struct ExampleAppConsole {
                                           // to "CL" and displaying matches.
         AddLog( "Welcome to Dear ImGui!" );
     }
+
     ~ExampleAppConsole() {
         ClearLog();
         for ( int i = 0; i < History.Size; i++ )
@@ -3881,6 +3889,7 @@ struct ExampleAppConsole {
         }
         return d;
     }
+
     static int Strnicmp( const char* str1, const char* str2, int n ) {
         int d = 0;
         while ( n > 0 && ( d = toupper( *str2 ) - toupper( *str1 ) ) == 0 &&
@@ -3891,11 +3900,13 @@ struct ExampleAppConsole {
         }
         return d;
     }
+
     static char* Strdup( const char* str ) {
         size_t len = strlen( str ) + 1;
         void* buff = malloc( len );
         return ( char* )memcpy( buff, ( const void* )str, len );
     }
+
     static void Strtrim( char* str ) {
         char* str_end = str + strlen( str );
         while ( str_end > str && str_end[ -1 ] == ' ' )
@@ -4537,6 +4548,7 @@ static void ShowExampleAppConstrainedResize( bool* p_open ) {
                 ImVec2( IM_MAX( data->DesiredSize.x, data->DesiredSize.y ),
                         IM_MAX( data->DesiredSize.x, data->DesiredSize.y ) );
         }
+
         static void Step( ImGuiSizeCallbackData* data ) {
             float step = ( float )( int )( intptr_t )data->UserData;
             data->DesiredSize =
@@ -4895,7 +4907,9 @@ static void ShowExampleAppCustomRendering( bool* p_open ) {
 #else
 
 void ImGui::ShowDemoWindow( bool* ) {}
+
 void ImGui::ShowUserGuide() {}
+
 void ImGui::ShowStyleEditor( ImGuiStyle* ) {}
 
 #endif

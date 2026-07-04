@@ -71,6 +71,7 @@ struct PVector {
         : type( t ), val( _val ), mn( _mn ), mx( _mx ) {}
 
     void set( const Fvector& v ) { val.set( v ); }
+
     void set( float x, float y, float z ) { val.set( x, y, z ); }
 };
 

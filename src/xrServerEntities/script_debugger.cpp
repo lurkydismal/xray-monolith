@@ -3,6 +3,7 @@
 #include "mslotutils.h"
 #include "script_lua_helper.h"
 #include "stdafx.h"
+
 // #include "../xrEngine/XR_IOConsole.h"
 
 // CScriptDebugger* CScriptDebugger::m_pDebugger = NULL;
@@ -20,7 +21,7 @@ LRESULT CScriptDebugger::_SendMessage( u32 message,
                                        LPARAM lParam ) {
     //	if ( (m_pDebugger)&&(m_pDebugger->Active())&&(message >= _DMSG_FIRST_MSG
     //&& message <= _DMSG_LAST_MSG) ) 		return
-    //m_pDebugger->DebugMessage(message, wParam, lParam);
+    // m_pDebugger->DebugMessage(message, wParam, lParam);
     if ( ( Active() ) &&
          ( message >= _DMSG_FIRST_MSG && message <= _DMSG_LAST_MSG ) )
         return DebugMessage( message, wParam, lParam );

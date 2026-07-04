@@ -96,10 +96,12 @@ private:
         const spin_rw_mutex::scoped_lock& lock ) {
         return static_cast< x86_rtm_rw_mutex* >( lock.mutex );
     }
+
     static void internal_set_mutex( spin_rw_mutex::scoped_lock& lock,
                                     spin_rw_mutex* mtx ) {
         lock.mutex = mtx;
     }
+
     //! @endcond
 public:
     //! Construct unacquired mutex.

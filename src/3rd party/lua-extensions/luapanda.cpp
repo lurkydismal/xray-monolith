@@ -75,6 +75,7 @@ enum breakpoint_type { CONDITION_BREAKPOINT = 0, LOG_POINT, LINE_BREAKPOINT };
 struct path_transfer_node {
     std::string src;
     std::string dst;
+
     path_transfer_node( std::string _src, std::string _dst ) {
         src = _src;
         dst = _dst;
@@ -92,7 +93,9 @@ struct debug_auto_stack {
         this->L = l;
         this->top = lua_gettop( L );
     }
+
     ~debug_auto_stack() { lua_settop( this->L, this->top ); }
+
     lua_State* L;
     int top;
 };
@@ -173,6 +176,7 @@ void push_arg( lua_State* L, const char* value ) {
 }
 
 void push_args( lua_State* L ) {}
+
 // push_arg Template End
 
 template < typename T >
@@ -185,6 +189,7 @@ void push_args( lua_State* L, T value, ARGS... args ) {
     push_arg< T >( L, value );
     push_args( L, std::forward< ARGS >( args )... );
 }
+
 // push_args End
 
 template < typename... ARGS >

@@ -264,14 +264,17 @@ private:
         return ( fFlagAndLength >= 0 ) ? fUnion.fStackBuffer
                                        : fUnion.fFields.fBytes;
     }
+
     const uint8_t* getBytes() const {
         return ( fFlagAndLength >= 0 ) ? fUnion.fStackBuffer
                                        : fUnion.fFields.fBytes;
     }
+
     int32_t getCapacity() const {
         return ( fFlagAndLength >= 0 ) ? ( int32_t )sizeof( fUnion )
                                        : fUnion.fFields.fCapacity;
     }
+
     int32_t getLength() const { return fFlagAndLength & 0x7fffffff; }
 
     /**
@@ -308,6 +311,7 @@ private:
      * Special value 2 if the key is bogus.
      */
     mutable int32_t fHashCode;
+
     /**
      * fUnion provides 32 bytes for the internal buffer or for
      * pointer+capacity.
@@ -315,6 +319,7 @@ private:
     union StackBufferOrFields {
         /** fStackBuffer is used iff fFlagAndLength>=0, else fFields is used */
         uint8_t fStackBuffer[ 32 ];
+
         struct {
             uint8_t* fBytes;
             int32_t fCapacity;

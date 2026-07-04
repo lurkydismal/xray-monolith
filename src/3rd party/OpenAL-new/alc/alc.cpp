@@ -260,6 +260,7 @@ BackendFactory* CaptureFactory{};
  * Functions, enums, and errors
  ************************************************/
 #define DECL( x ) { #x, reinterpret_cast< void* >( x ) }
+
 const struct {
     const char* funcName;
     void* address;
@@ -467,6 +468,7 @@ const struct {
 #undef DECL
 
 #define DECL( x ) { #x, ( x ) }
+
 constexpr struct {
     const ALCchar* enumName;
     ALCenum value;
@@ -1369,6 +1371,7 @@ void alc_initconfig( void ) {
     }
 #endif // ALSOFT_EAX
 }
+
 inline void InitConfig() {
     std::call_once( alc_config_once, []() { alc_initconfig(); } );
 }
@@ -1389,6 +1392,7 @@ void ProbeAllDevicesList() {
         names.swap( alcAllDevicesList );
     }
 }
+
 void ProbeCaptureDeviceList() {
     InitConfig();
 
@@ -1407,6 +1411,7 @@ struct DevFmtPair {
     DevFmtChannels chans;
     DevFmtType type;
 };
+
 al::optional< DevFmtPair > DecomposeDevFormat( ALenum format ) {
     static const struct {
         ALenum format;
@@ -1467,6 +1472,7 @@ al::optional< DevFmtType > DevFmtTypeFromEnum( ALCenum type ) {
     WARN( "Unsupported format type: 0x%04x\n", type );
     return al::nullopt;
 }
+
 ALCenum EnumFromDevFmt( DevFmtType type ) {
     switch ( type ) {
         case DevFmtByte:
@@ -1508,6 +1514,7 @@ al::optional< DevFmtChannels > DevFmtChannelsFromEnum( ALCenum channels ) {
     WARN( "Unsupported format channels: 0x%04x\n", channels );
     return al::nullopt;
 }
+
 ALCenum EnumFromDevFmt( DevFmtChannels channels ) {
     switch ( channels ) {
         case DevFmtMono:
@@ -1543,6 +1550,7 @@ al::optional< DevAmbiLayout > DevAmbiLayoutFromEnum( ALCenum layout ) {
     WARN( "Unsupported ambisonic layout: 0x%04x\n", layout );
     return al::nullopt;
 }
+
 ALCenum EnumFromDevAmbi( DevAmbiLayout layout ) {
     switch ( layout ) {
         case DevAmbiLayout::FuMa:
@@ -1566,6 +1574,7 @@ al::optional< DevAmbiScaling > DevAmbiScalingFromEnum( ALCenum scaling ) {
     WARN( "Unsupported ambisonic scaling: 0x%04x\n", scaling );
     return al::nullopt;
 }
+
 ALCenum EnumFromDevAmbi( DevAmbiScaling scaling ) {
     switch ( scaling ) {
         case DevAmbiScaling::FuMa:
@@ -2603,6 +2612,7 @@ ALC_API ALCenum ALC_APIENTRY alcGetError( ALCdevice* device ) START_API_FUNC {
         return dev->LastError.exchange( ALC_NO_ERROR );
     return LastNullDeviceError.exchange( ALC_NO_ERROR );
 }
+
 END_API_FUNC
 
 ALC_API void ALC_APIENTRY alcSuspendContext( ALCcontext* context )
@@ -2618,6 +2628,7 @@ ALC_API void ALC_APIENTRY alcSuspendContext( ALCcontext* context )
         ctx->deferUpdates();
     }
 }
+
 END_API_FUNC
 
 ALC_API void ALC_APIENTRY alcProcessContext( ALCcontext* context )
@@ -2633,6 +2644,7 @@ ALC_API void ALC_APIENTRY alcProcessContext( ALCcontext* context )
         ctx->processUpdates();
     }
 }
+
 END_API_FUNC
 
 ALC_API const ALCchar* ALC_APIENTRY
@@ -2743,6 +2755,7 @@ alcGetString( ALCdevice* Device, ALCenum param ) START_API_FUNC {
 
     return value;
 }
+
 END_API_FUNC
 
 static size_t GetIntegerv( ALCdevice* device,
@@ -3071,6 +3084,7 @@ ALC_API void ALC_APIENTRY alcGetIntegerv( ALCdevice* device,
         GetIntegerv( dev.get(), param,
                      { values, static_cast< uint >( size ) } );
 }
+
 END_API_FUNC
 
 ALC_API void ALC_APIENTRY alcGetInteger64vSOFT( ALCdevice* device,
@@ -3204,6 +3218,7 @@ ALC_API void ALC_APIENTRY alcGetInteger64vSOFT( ALCdevice* device,
             break;
     }
 }
+
 END_API_FUNC
 
 ALC_API ALCboolean ALC_APIENTRY alcIsExtensionPresent( ALCdevice* device,
@@ -3229,6 +3244,7 @@ ALC_API ALCboolean ALC_APIENTRY alcIsExtensionPresent( ALCdevice* device,
     }
     return ALC_FALSE;
 }
+
 END_API_FUNC
 
 ALC_API ALCvoid* ALC_APIENTRY
@@ -3252,6 +3268,7 @@ alcGetProcAddress( ALCdevice* device, const ALCchar* funcName ) START_API_FUNC {
     }
     return nullptr;
 }
+
 END_API_FUNC
 
 ALC_API ALCenum ALC_APIENTRY
@@ -3276,6 +3293,7 @@ alcGetEnumValue( ALCdevice* device, const ALCchar* enumName ) START_API_FUNC {
 
     return 0;
 }
+
 END_API_FUNC
 
 ALC_API ALCcontext* ALC_APIENTRY
@@ -3369,6 +3387,7 @@ alcCreateContext( ALCdevice* device, const ALCint* attrList ) START_API_FUNC {
     TRACE( "Created context %p\n", voidp{ context.get() } );
     return context.release();
 }
+
 END_API_FUNC
 
 ALC_API void ALC_APIENTRY alcDestroyContext( ALCcontext* context )
@@ -3396,6 +3415,7 @@ ALC_API void ALC_APIENTRY alcDestroyContext( ALCcontext* context )
         Device->Flags.reset( DeviceRunning );
     }
 }
+
 END_API_FUNC
 
 ALC_API ALCcontext* ALC_APIENTRY alcGetCurrentContext( void ) START_API_FUNC {
@@ -3404,12 +3424,14 @@ ALC_API ALCcontext* ALC_APIENTRY alcGetCurrentContext( void ) START_API_FUNC {
         Context = ALCcontext::sGlobalContext.load();
     return Context;
 }
+
 END_API_FUNC
 
 /** Returns the currently active thread-local context. */
 ALC_API ALCcontext* ALC_APIENTRY alcGetThreadContext( void ) START_API_FUNC {
     return ALCcontext::getThreadContext();
 }
+
 END_API_FUNC
 
 ALC_API ALCboolean ALC_APIENTRY alcMakeContextCurrent( ALCcontext* context )
@@ -3446,6 +3468,7 @@ ALC_API ALCboolean ALC_APIENTRY alcMakeContextCurrent( ALCcontext* context )
 
     return ALC_TRUE;
 }
+
 END_API_FUNC
 
 /** Makes the given context the active context for the current thread. */
@@ -3466,6 +3489,7 @@ ALC_API ALCboolean ALC_APIENTRY alcSetThreadContext( ALCcontext* context )
 
     return ALC_TRUE;
 }
+
 END_API_FUNC
 
 ALC_API ALCdevice* ALC_APIENTRY alcGetContextsDevice( ALCcontext* Context )
@@ -3477,6 +3501,7 @@ ALC_API ALCdevice* ALC_APIENTRY alcGetContextsDevice( ALCcontext* Context )
     }
     return ctx->mALDevice.get();
 }
+
 END_API_FUNC
 
 ALC_API ALCdevice* ALC_APIENTRY alcOpenDevice( const ALCchar* deviceName )
@@ -3558,6 +3583,7 @@ ALC_API ALCdevice* ALC_APIENTRY alcOpenDevice( const ALCchar* deviceName )
            device->DeviceName.c_str() );
     return device.release();
 }
+
 END_API_FUNC
 
 ALC_API ALCboolean ALC_APIENTRY alcCloseDevice( ALCdevice* device )
@@ -3604,6 +3630,7 @@ ALC_API ALCboolean ALC_APIENTRY alcCloseDevice( ALCdevice* device )
 
     return ALC_TRUE;
 }
+
 END_API_FUNC
 
 /************************************************
@@ -3684,6 +3711,7 @@ ALC_API ALCdevice* ALC_APIENTRY alcCaptureOpenDevice( const ALCchar* deviceName,
            device->DeviceName.c_str() );
     return device.release();
 }
+
 END_API_FUNC
 
 ALC_API ALCboolean ALC_APIENTRY alcCaptureCloseDevice( ALCdevice* device )
@@ -3711,6 +3739,7 @@ ALC_API ALCboolean ALC_APIENTRY alcCaptureCloseDevice( ALCdevice* device )
 
     return ALC_TRUE;
 }
+
 END_API_FUNC
 
 ALC_API void ALC_APIENTRY alcCaptureStart( ALCdevice* device ) START_API_FUNC {
@@ -3735,6 +3764,7 @@ ALC_API void ALC_APIENTRY alcCaptureStart( ALCdevice* device ) START_API_FUNC {
         }
     }
 }
+
 END_API_FUNC
 
 ALC_API void ALC_APIENTRY alcCaptureStop( ALCdevice* device ) START_API_FUNC {
@@ -3748,6 +3778,7 @@ ALC_API void ALC_APIENTRY alcCaptureStop( ALCdevice* device ) START_API_FUNC {
         dev->Flags.reset( DeviceRunning );
     }
 }
+
 END_API_FUNC
 
 ALC_API void ALC_APIENTRY alcCaptureSamples( ALCdevice* device,
@@ -3777,6 +3808,7 @@ ALC_API void ALC_APIENTRY alcCaptureSamples( ALCdevice* device,
 
     backend->captureSamples( static_cast< al::byte* >( buffer ), usamples );
 }
+
 END_API_FUNC
 
 /************************************************
@@ -3841,6 +3873,7 @@ alcLoopbackOpenDeviceSOFT( const ALCchar* deviceName ) START_API_FUNC {
     TRACE( "Created loopback device %p\n", voidp{ device.get() } );
     return device.release();
 }
+
 END_API_FUNC
 
 /**
@@ -3865,6 +3898,7 @@ alcIsRenderFormatSupportedSOFT( ALCdevice* device,
 
     return ALC_FALSE;
 }
+
 END_API_FUNC
 
 /**
@@ -3883,6 +3917,7 @@ FORCE_ALIGN ALC_API void ALC_APIENTRY alcRenderSamplesSOFT( ALCdevice* device,
         device->renderSamples( buffer, static_cast< uint >( samples ),
                                device->channelsFromFmt() );
 }
+
 END_API_FUNC
 
 /************************************************
@@ -3903,6 +3938,7 @@ ALC_API void ALC_APIENTRY alcDevicePauseSOFT( ALCdevice* device )
         dev->Flags.set( DevicePaused );
     }
 }
+
 END_API_FUNC
 
 /** Resume the DSP to restart audio processing. */
@@ -3936,6 +3972,7 @@ ALC_API void ALC_APIENTRY alcDeviceResumeSOFT( ALCdevice* device )
            DevFmtTypeString( device->FmtType ), device->Frequency,
            device->UpdateSize, device->BufferSize );
 }
+
 END_API_FUNC
 
 /************************************************
@@ -3967,6 +4004,7 @@ ALC_API const ALCchar* ALC_APIENTRY alcGetStringiSOFT( ALCdevice* device,
 
     return nullptr;
 }
+
 END_API_FUNC
 
 /** Resets the given device output, using the specified attribute list. */
@@ -3991,6 +4029,7 @@ alcResetDeviceSOFT( ALCdevice* device, const ALCint* attribs ) START_API_FUNC {
 
     return ResetDeviceParams( dev.get(), attribs ) ? ALC_TRUE : ALC_FALSE;
 }
+
 END_API_FUNC
 
 /************************************************
@@ -4076,4 +4115,5 @@ alcReopenDeviceSOFT( ALCdevice* device,
     ResetDeviceParams( dev.get(), attribs );
     return ALC_TRUE;
 }
+
 END_API_FUNC

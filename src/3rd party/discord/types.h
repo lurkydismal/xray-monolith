@@ -515,6 +515,7 @@ public:
     Result SetLocked( bool locked );
 
     IDiscordLobbyTransaction** Receive() { return &internal_; }
+
     IDiscordLobbyTransaction* Internal() { return internal_; }
 
 private:
@@ -527,6 +528,7 @@ public:
     Result DeleteMetadata( MetadataKey key );
 
     IDiscordLobbyMemberTransaction** Receive() { return &internal_; }
+
     IDiscordLobbyMemberTransaction* Internal() { return internal_; }
 
 private:
@@ -544,6 +546,7 @@ public:
     Result Distance( LobbySearchDistance distance );
 
     IDiscordLobbySearchQuery** Receive() { return &internal_; }
+
     IDiscordLobbySearchQuery* Internal() { return internal_; }
 
 private:

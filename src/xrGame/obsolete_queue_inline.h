@@ -23,12 +23,17 @@ public:
     }
 
     const_iterator begin() const { return m_sequence.begin(); };
+
     const_iterator end() const { return m_sequence.end(); };
+
     iterator begin() { return m_sequence.begin(); };
+
     iterator end() { return m_sequence.end(); };
+
     void clear() { m_sequence.clear(); };
 
     size_type size() const { return m_sequence.size(); };
+
     container_type const& get_contaier() const { return m_sequence; };
 
 private:

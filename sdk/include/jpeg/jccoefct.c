@@ -65,6 +65,7 @@ compress_output JPP( ( j_compress_ptr cinfo, JSAMPIMAGE input_buf ) );
 #endif
 
 LOCAL( void )
+
 start_iMCU_row( j_compress_ptr cinfo )
 /* Reset within-iMCU-row counters for a new row */
 {
@@ -94,6 +95,7 @@ start_iMCU_row( j_compress_ptr cinfo )
  */
 
 METHODDEF( void )
+
 start_pass_coef( j_compress_ptr cinfo, J_BUF_MODE pass_mode ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
 
@@ -135,6 +137,7 @@ start_pass_coef( j_compress_ptr cinfo, J_BUF_MODE pass_mode ) {
  */
 
 METHODDEF( boolean )
+
 compress_data( j_compress_ptr cinfo, JSAMPIMAGE input_buf ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
     JDIMENSION MCU_col_num; /* index of current MCU within row */
@@ -246,6 +249,7 @@ compress_data( j_compress_ptr cinfo, JSAMPIMAGE input_buf ) {
  */
 
 METHODDEF( boolean )
+
 compress_first_pass( j_compress_ptr cinfo, JSAMPIMAGE input_buf ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
     JDIMENSION last_iMCU_row = cinfo->total_iMCU_rows - 1;
@@ -344,6 +348,7 @@ compress_first_pass( j_compress_ptr cinfo, JSAMPIMAGE input_buf ) {
  */
 
 METHODDEF( boolean )
+
 compress_output( j_compress_ptr cinfo, JSAMPIMAGE input_buf ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
     JDIMENSION MCU_col_num; /* index of current MCU within row */
@@ -407,6 +412,7 @@ compress_output( j_compress_ptr cinfo, JSAMPIMAGE input_buf ) {
  */
 
 GLOBAL( void )
+
 jinit_c_coef_controller( j_compress_ptr cinfo, boolean need_full_buffer ) {
     my_coef_ptr coef;
 

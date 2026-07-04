@@ -246,6 +246,7 @@ void CRender::Render() {
             GMBase.r_dsgraph_render_cam_ui();
     }
 }
+
 #include "../xrRender/CHudInitializer.h"
 
 void CRender::render_forward() {

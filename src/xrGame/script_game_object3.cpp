@@ -2328,6 +2328,7 @@ bool CScriptGameObject::get_enable_anomalies_pathfinding() {
     }
     return stalker->m_enable_anomalies_pathfinding;
 }
+
 void CScriptGameObject::set_enable_anomalies_pathfinding( bool v ) {
     auto stalker = smart_cast< CAI_Stalker* >( &object() );
     if ( !stalker ) {
@@ -2341,6 +2342,7 @@ void CScriptGameObject::set_enable_anomalies_pathfinding( bool v ) {
     }
     stalker->m_enable_anomalies_pathfinding = v;
 }
+
 bool CScriptGameObject::get_enable_anomalies_damage() {
     auto stalker = smart_cast< CAI_Stalker* >( &object() );
     if ( !stalker ) {
@@ -2354,6 +2356,7 @@ bool CScriptGameObject::get_enable_anomalies_damage() {
     }
     return stalker->m_enable_anomalies_damage;
 }
+
 void CScriptGameObject::set_enable_anomalies_damage( bool v ) {
     auto stalker = smart_cast< CAI_Stalker* >( &object() );
     if ( !stalker ) {
@@ -2367,6 +2370,7 @@ void CScriptGameObject::set_enable_anomalies_damage( bool v ) {
     }
     stalker->m_enable_anomalies_damage = v;
 }
+
 bool CScriptGameObject::inside_anomaly() {
     auto stalker = smart_cast< CAI_Stalker* >( &object() );
     if ( !stalker ) {

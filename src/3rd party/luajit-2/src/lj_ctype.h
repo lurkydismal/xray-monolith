@@ -300,11 +300,13 @@ typedef struct CTState {
     _( P_CCHAR, CTSIZE_PTR, CT_PTR, CTALIGN_PTR | CTID_CCHAR )               \
     _( A_CCHAR, -1, CT_ARRAY, CTF_CONST | CTALIGN( 0 ) | CTID_CCHAR )        \
     _( CTYPEID, 4, CT_ENUM, CTALIGN( 2 ) | CTID_INT32 )                      \
-    CTTYDEFP( _ )                                                            \
-    /* End of type list. */
+    CTTYDEFP( _ )
+
+/* End of type list. */
 
 /* Public predefined type IDs. */
 enum {
+
 #define CTTYIDDEF( id, sz, ct, info ) CTID_##id,
     CTTYDEF( CTTYIDDEF )
 #undef CTTYIDDEF
@@ -332,32 +334,36 @@ enum {
 /* -- C tokens and keywords ----------------------------------------------- */
 
 /* C lexer keywords. */
-#define CTOKDEF( _ )                                                \
-    _( IDENT, "<identifier>" )                                      \
-    _( STRING, "<string>" )                                         \
-    _( INTEGER, "<integer>" ) _( EOF, "<eof>" ) _( OROR, "||" )     \
-        _( ANDAND, "&&" ) _( EQ, "==" ) _( NE, "!=" ) _( LE, "<=" ) \
-            _( GE, ">=" ) _( SHL, "<<" ) _( SHR, ">>" ) _( DEREF, "->" )
+#define CTOKDEF( _ )                                                  \
+    _( IDENT, "<identifier>" )                                        \
+    _( STRING, "<string>" )                                           \
+    _( INTEGER, "<integer>" )                                         \
+    _( EOF, "<eof>" ) _( OROR, "||" ) _( ANDAND, "&&" ) _( EQ, "==" ) \
+        _( NE, "!=" ) _( LE, "<=" ) _( GE, ">=" ) _( SHL, "<<" )      \
+            _( SHR, ">>" ) _( DEREF, "->" )
 
 /* Simple declaration specifiers. */
-#define CDSDEF( _ )                                                            \
-    _( VOID )                                                                  \
-    _( BOOL )                                                                  \
-    _( CHAR ) _( INT ) _( FP ) _( LONG ) _( LONGLONG ) _( SHORT ) _( COMPLEX ) \
-        _( SIGNED ) _( UNSIGNED ) _( CONST ) _( VOLATILE ) _( RESTRICT )       \
-            _( INLINE ) _( TYPEDEF ) _( EXTERN ) _( STATIC ) _( AUTO )         \
+#define CDSDEF( _ )                                                      \
+    _( VOID )                                                            \
+    _( BOOL )                                                            \
+    _( CHAR )                                                            \
+    _( INT ) _( FP ) _( LONG ) _( LONGLONG ) _( SHORT ) _( COMPLEX )     \
+        _( SIGNED ) _( UNSIGNED ) _( CONST ) _( VOLATILE ) _( RESTRICT ) \
+            _( INLINE ) _( TYPEDEF ) _( EXTERN ) _( STATIC ) _( AUTO )   \
                 _( REGISTER )
 
 /* C keywords. */
-#define CKWDEF( _ )                                                          \
-    CDSDEF( _ )                                                              \
-    _( EXTENSION )                                                           \
-    _( ASM ) _( ATTRIBUTE ) _( DECLSPEC ) _( CCDECL ) _( PTRSZ ) _( STRUCT ) \
-        _( UNION ) _( ENUM ) _( SIZEOF ) _( ALIGNOF )
+#define CKWDEF( _ )                                                            \
+    CDSDEF( _ )                                                                \
+    _( EXTENSION )                                                             \
+    _( ASM )                                                                   \
+    _( ATTRIBUTE ) _( DECLSPEC ) _( CCDECL ) _( PTRSZ ) _( STRUCT ) _( UNION ) \
+        _( ENUM ) _( SIZEOF ) _( ALIGNOF )
 
 /* C token numbers. */
 enum {
     CTOK_OFS = 255,
+
 #define CTOKNUM( name, sym ) CTOK_##name,
 #define CKWNUM( name ) CTOK_##name,
     CTOKDEF( CTOKNUM ) CKWDEF( CKWNUM )
@@ -371,6 +377,7 @@ enum {
 
 /* Declaration specifier flags. */
 enum {
+
 #define CDSFLAG( name ) CDF_##name = ( 1u << ( CTOK_##name - CTOK_FIRSTDECL ) ),
     CDSDEF( CDSFLAG )
 #undef CDSFLAG

@@ -16,6 +16,7 @@ BOOL key_state( int key ) {
 }
 
 #pragma optimize( "s", on )
+
 void key_binding_registrator::script_register( lua_State* L ) {
     module( L )
         [ def( "dik_to_keyname", &dik_to_keyname ),

@@ -172,6 +172,7 @@ void CWeapon::FireBullet( const Fvector& pos,
 float CWeapon::GetGlowing() {
     return temperature;
 }
+
 //--DSR-- SilencerOverheat_end
 
 void CWeapon::StartFlameParticles2() {

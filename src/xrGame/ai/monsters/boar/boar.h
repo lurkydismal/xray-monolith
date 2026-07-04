@@ -19,6 +19,7 @@ public:
     virtual void UpdateCL();
 
     virtual bool CanExecRotationJump() { return true; }
+
     virtual void CheckSpecParams( u32 spec_params );
 
     // look at enemy

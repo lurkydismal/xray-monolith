@@ -18,6 +18,7 @@ typedef struct t_unix_ {
     t_buffer buf;
     t_timeout tm;
 } t_unix;
+
 typedef t_unix* p_unix;
 
 LUASOCKET_API int luaopen_socket_unix( lua_State* L );

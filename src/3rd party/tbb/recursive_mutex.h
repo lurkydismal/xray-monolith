@@ -231,6 +231,7 @@ public:
 private:
 #if _WIN32 || _WIN64
     CRITICAL_SECTION impl;
+
     enum state_t {
         INITIALIZED = 0x1234,
         DESTROYED = 0x789A,

@@ -20,12 +20,14 @@ private:
         xrClientData* m_client;
         u32 m_dtime;
     }; // struct dclient
+
     struct expired_client_deleter {
         // copy constructor is valid
         u32 m_expire_time;
         u32 m_current_time;
         bool const operator()( dclient& right ) const;
     }; // struct expired_client_deleter
+
     struct pooled_client_finder {
         // copy constructor is valid
         xrClientData* m_new_client;

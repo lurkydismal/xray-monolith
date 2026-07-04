@@ -291,6 +291,7 @@ void ELightAnimLibrary::RemoveObject( LPCSTR _fname,
         THROW;
     res = false;
 }
+
 //---------------------------------------------------------------------------
 
 void ELightAnimLibrary::RenameObject( LPCSTR nm0, LPCSTR nm1, EItemType type ) {
@@ -301,5 +302,6 @@ void ELightAnimLibrary::RenameObject( LPCSTR nm0, LPCSTR nm1, EItemType type ) {
         I->cName = nm1;
     }
 }
+
 //---------------------------------------------------------------------------
 #endif

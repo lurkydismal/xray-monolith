@@ -172,6 +172,7 @@ public:
 };
 
 static LZfs fs;
+
 //************************** Internal FS
 IC void InitTree( void ) /* initialize trees */
 {

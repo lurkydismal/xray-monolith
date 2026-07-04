@@ -7,6 +7,7 @@ class CApplication;
 class IApplicationRender {
 public:
     virtual ~IApplicationRender() { ; }
+
     virtual void Copy( IApplicationRender& _in ) = 0;
 
     virtual void LoadBegin() = 0;

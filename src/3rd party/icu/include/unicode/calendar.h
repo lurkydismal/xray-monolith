@@ -53,6 +53,7 @@ class ICUServiceFactory;
 typedef int32_t UFieldResolutionTable[ 12 ][ 8 ];
 
 class BasicTimeZone;
+
 /**
  * `Calendar` is an abstract base class for converting between
  * a `UDate` object and a set of integer fields such as

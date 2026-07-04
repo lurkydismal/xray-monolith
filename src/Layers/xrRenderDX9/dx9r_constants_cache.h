@@ -15,7 +15,9 @@ public:
     }
 
     ICF T* access( u32 id ) { return &array[ id ]; }
+
     ICF void flush() { lo = hi = 0; }
+
     ICF void dirty( u32 _lo, u32 _hi ) {
         if ( _lo < lo )
             lo = _lo;
@@ -24,6 +26,7 @@ public:
     }
 
     ICF u32 r_lo() { return lo; }
+
     ICF u32 r_hi() { return hi; }
 };
 
@@ -41,6 +44,7 @@ public:
 
 public:
     t_f& get_array_f() { return c_f; }
+
     //	t_i&					get_array_i		()
     //{ return c_i;	} 	t_b& get_array_b
     //()	{ return c_b;	}

@@ -13,6 +13,7 @@
 #include "game_object_space.h"
 #include "script_callback_ex.h"
 #include "script_game_object.h"
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -525,6 +526,7 @@ BOOL CHangingLamp::UsedAI_Locations() {
 }
 
 #pragma optimize( "s", on )
+
 void CHangingLamp::script_register( lua_State* L ) {
     ::luabind::module(
         L )[::luabind::class_< CHangingLamp, CGameObject >( "hanging_lamp" )

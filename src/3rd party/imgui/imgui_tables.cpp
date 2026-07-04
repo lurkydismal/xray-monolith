@@ -3339,6 +3339,7 @@ void ImGui::TableMergeDrawChannels( ImGuiTable* table ) {
         int ChannelsCount = 0;
         ImBitArrayPtr ChannelsMask = NULL;
     };
+
     int merge_group_mask = 0x00;
     MergeGroup merge_groups[ 4 ];
 
@@ -3769,6 +3770,7 @@ void ImGui::TableFixColumnSortDirection( ImGuiTable* table,
 IM_STATIC_ASSERT( ImGuiSortDirection_None == 0 &&
                   ImGuiSortDirection_Ascending == 1 &&
                   ImGuiSortDirection_Descending == 2 );
+
 ImGuiSortDirection ImGui::TableGetColumnNextSortDirection(
     ImGuiTableColumn* column ) {
     IM_ASSERT( column->SortDirectionsAvailCount > 0 );
@@ -5316,6 +5318,7 @@ void ImGui::DebugNodeTableSettings( ImGuiTableSettings* settings ) {
 #else // #ifndef IMGUI_DISABLE_DEBUG_TOOLS
 
 void ImGui::DebugNodeTable( ImGuiTable* ) {}
+
 void ImGui::DebugNodeTableSettings( ImGuiTableSettings* ) {}
 
 #endif

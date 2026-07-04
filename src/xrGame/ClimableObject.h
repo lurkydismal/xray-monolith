@@ -33,9 +33,12 @@ public:
     virtual void UpdateCL(); // Called each frame, so no need for dt
     virtual void Center( Fvector& C ) const;
     virtual float Radius() const;
+
     ////////////////////////////////////////////////////////////////////
     virtual IPhysicsShellHolder* cast_IPhysicsShellHolder() { return this; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CClimableObject* cast_climable_object() { return this; }
 
 #ifdef DEBUG
@@ -46,12 +49,15 @@ protected:
 
 public:
     const Fvector& Axis() const { return m_axis; }
+
     virtual float DDAxis( Fvector& dir ) const;
 
     virtual const Fvector& Side() const { return m_side; }
+
     virtual float DDSide( Fvector& dir ) const;
 
     virtual const Fvector& Norm() const { return m_norm; }
+
     virtual float DDNorm( Fvector& dir ) const;
     virtual bool BeforeLadder( CPHCharacter* actor,
                                float tolerance = 0.f ) const;
@@ -75,7 +81,9 @@ public:
     virtual float DDToPlain( CPHCharacter* actor, Fvector& dir ) const;
     bool InRange( CPHCharacter* actor ) const;
     virtual bool InTouch( CPHCharacter* actor ) const;
+
     virtual u16 Material() const { return m_material; }
+
     void LowerPoint( Fvector& P ) const;
     void UpperPoint( Fvector& P ) const;
     void DefineClimbState( CPHCharacter* actor ) const;

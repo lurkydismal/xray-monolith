@@ -925,12 +925,14 @@ void bn_sqr_comba4( BN_ULONG* r, const BN_ULONG* a ) {
 
 /* hmm... is it faster just to do a multiply? */
 #undef bn_sqr_comba4
+
 void bn_sqr_comba4( BN_ULONG* r, BN_ULONG* a ) {
     BN_ULONG t[ 8 ];
     bn_sqr_normal( r, a, 4, t );
 }
 
 #undef bn_sqr_comba8
+
 void bn_sqr_comba8( BN_ULONG* r, BN_ULONG* a ) {
     BN_ULONG t[ 16 ];
     bn_sqr_normal( r, a, 8, t );

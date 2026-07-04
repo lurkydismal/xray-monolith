@@ -1617,6 +1617,7 @@ void play_blend( player_hud* hud,
 }
 
 extern BOOL print_bone_warnings;
+
 void player_hud::StopScriptAnim() {
     u8 part = script_anim_part;
     script_anim_part = u8( -1 );
@@ -1829,6 +1830,7 @@ bool player_hud::allow_activation( CHudItem* item ) {
 }
 
 shared_str current_player_hud_sect;
+
 void player_hud::attach_item( CHudItem* item ) {
     attachable_hud_item* pi = item->HudItemData();
     int item_idx = pi->m_attach_place_idx;

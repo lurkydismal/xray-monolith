@@ -55,7 +55,9 @@ public:
     void SetDirection( const Fvector& dir );
     void SetOrientation( float yaw, float pitch, float roll );
     void SetHudMode( bool bHudMode );
+
     Fvector LastPosition() const { return m_transform.c; }
+
     void LoadPath( LPCSTR caPathName );
     void StartPath( bool looped );
     void StopPath();

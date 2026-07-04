@@ -5,6 +5,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CPHCallOnStepCondition::script_register( lua_State* L ) {
     module( L )[ class_< CPHCallOnStepCondition >( "phcondition_callonstep" )
                      .def( "set_step", &CPHCallOnStepCondition::set_step )

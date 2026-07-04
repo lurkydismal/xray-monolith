@@ -111,9 +111,13 @@ struct CRayPick {
               CScriptGameObject* I );
 
     IC void set_position( Fvector& P ) { start_position = P; };
+
     IC void set_direction( Fvector& D ) { direction = D; };
+
     IC void set_range( float R ) { range = R; };
+
     IC void set_flags( collide::rq_target F ) { flags = F; };
+
     void set_ignore_object( CScriptGameObject* I ) {
         if ( I ) {
             CObject* obj = smart_cast< CObject* >( &( I->object() ) );
@@ -128,7 +132,10 @@ struct CRayPick {
     Fvector get_normal();
 
     IC script_rq_result get_result() { return result; };
+
     IC CScriptGameObject* get_object() { return result.O; };
+
     IC float get_distance() { return result.range; };
+
     IC int get_element() { return result.element; };
 };

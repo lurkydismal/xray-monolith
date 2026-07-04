@@ -44,6 +44,7 @@ struct HrtfEntry {
     /* GCC warns when it tries to inline this. */
     ~HrtfEntry();
 };
+
 HrtfEntry::~HrtfEntry() = default;
 
 struct LoadedHrtf {
@@ -54,12 +55,14 @@ struct LoadedHrtf {
     LoadedHrtf( T&& name, U&& entry )
         : mFilename{ std::forward< T >( name ) },
           mEntry{ std::forward< U >( entry ) } {}
+
     LoadedHrtf( LoadedHrtf&& ) = default;
     /* GCC warns when it tries to inline this. */
     ~LoadedHrtf();
 
     LoadedHrtf& operator=( LoadedHrtf&& ) = default;
 };
+
 LoadedHrtf::~LoadedHrtf() = default;
 
 /* Data set limits must be the same as or more flexible than those defined in
@@ -173,6 +176,7 @@ struct IdxBlend {
     uint idx;
     float blend;
 };
+
 /* Calculate the elevation index given the polar elevation in radians. This
  * will return an index between 0 and (evcount - 1).
  */
@@ -292,6 +296,7 @@ void DirectHrtfState::build(
     const float XOverFreq,
     const al::span< const float, MaxAmbiOrder + 1 > AmbiOrderHFGain ) {
     using double2 = std::array< double, 2 >;
+
     struct ImpulseResponse {
         const ConstHrirSpan hrir;
         uint ldelay, rdelay;

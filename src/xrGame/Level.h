@@ -52,12 +52,14 @@ class client_site;
 }
 
 using models_set = xr_unordered_set< xr_string >;
+
 struct prefetch_event {
     NET_Packet p;
     models_set models;
     u16 id;
     bool hasAlifeObject;
 };
+
 using prefetch_event_queue = xr_vector< prefetch_event >;
 using spawn_events_data_map = xr_unordered_flat_map< u16, prefetch_event >;
 
@@ -104,10 +106,13 @@ public:
     void SetInterpolationSteps( u32 InterpSteps );
     bool InterpolationDisabled();
     void ReculcInterpolationSteps();
+
     u32 GetNumCrSteps() const { return m_dwNumSteps; }
+
     void SetNumCrSteps( u32 NumSteps );
 
     bool In_NetCorrectionPrediction() { return m_bIn_CrPr; }
+
     virtual void OnMessage( void* data, u32 size );
     virtual void OnInvalidHost();
     virtual void OnInvalidPassword();
@@ -133,7 +138,9 @@ public:
     void AddObject_To_Objects4CrPr( CGameObject* pObj );
     void AddActor_To_Actors4CrPr( CGameObject* pActor );
     void RemoveObject_From_4CrPr( CGameObject* pObj );
+
     CObject* CurrentControlEntity() const { return pCurrentControlEntity; }
+
     void SetControlEntity( CObject* O ) { pCurrentControlEntity = O; }
 
 private:
@@ -235,9 +242,11 @@ public:
 
     Flags32 m_debug_render_flags;
     xr_map< shared_str, DBG_ScriptObject* > m_debug_render_queue;
+
     xr_map< shared_str, DBG_ScriptObject* >* getScriptRenderQueue() {
         return &m_debug_render_queue;
     }
+
     void ScriptDebugRender();
 
     virtual shared_str OpenDemoFile( const char* demo_file_name );
@@ -248,9 +257,12 @@ public:
     script_attachment* add_attachment( LPCSTR name, script_attachment* att );
     script_attachment* get_attachment( LPCSTR name );
     void remove_child( LPCSTR name, bool destroy = false );
+
     void remove_attachment( LPCSTR name ) { remove_child( name, true ); }
+
     void remove_attachment( script_attachment* child );
     void iterate_attachments( ::luabind::functor< bool > functor );
+
     xr_map< shared_str, script_attachment* >* GetAttachments() {
         return &m_script_attachments;
     }
@@ -326,14 +338,18 @@ public:
 
     CLevel();
     virtual ~CLevel();
+
     // названияе текущего уровня
     void set_name( const shared_str& level_name ) {
         map_data.m_name = level_name;
     }
+
     virtual shared_str name() const;
+
     // this method can be used ONLY from CCC_ChangeGameType
     // XXX nitrocaster: why c_str?
     shared_str version() const { return map_data.m_map_version.c_str(); }
+
     virtual void GetLevelInfo( CServerInfo* si );
     // gets the time from the game simulation
     ALife::_TIME_ID GetStartGameTime();
@@ -367,7 +383,9 @@ protected:
 
 public:
     CMapManager& MapManager() const { return *m_map_manager; }
+
     CGameTaskManager& GameTaskManager() const { return *m_game_task_manager; }
+
     void OnAlifeSimulatorLoaded();
     void OnAlifeSimulatorUnLoaded();
 
@@ -377,6 +395,7 @@ protected:
 
 public:
     IC CBulletManager& BulletManager() { return *m_pBulletManager; }
+
     bool IsServer();
     bool IsClient();
     CSE_Abstract* spawn_item( LPCSTR section,
@@ -411,9 +430,11 @@ public:
 IC CLevel& Level() {
     return *( CLevel* )g_pGameLevel;
 }
+
 IC game_cl_GameState& Game() {
     return *Level().game;
 }
+
 u32 GameID();
 
 #ifdef DEBUG
@@ -465,9 +486,11 @@ IC CPHCommander& CLevel::ph_commander_physics_worldstep() {
 IC bool OnServer() {
     return Level().IsServer();
 }
+
 IC bool OnClient() {
     return Level().IsClient();
 }
+
 IC bool IsGameTypeSingle() {
     return ( g_pGamePersistent->GameType() == eGameIDSingle );
 }

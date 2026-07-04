@@ -38,6 +38,7 @@
 const u16 TEST_RAYS_PER_OBJECT = 5;
 const u16 BLASTED_OBJ_PROCESSED_PER_FRAME = 3;
 const float exp_dist_extinction_factor = 3.f;
+
 //(>1.f, 1.f -means no dist change of exp effect)	on the dist of
 // m_fBlastRadius exp. wave effect in exp_dist_extinction_factor times less than
 // maximum
@@ -189,6 +190,7 @@ struct SExpQParams {
         source_p.set( ec );
         l_dir.set( d );
     }
+
     Fvector source_p;
     Fvector l_dir;
 #else

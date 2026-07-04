@@ -186,6 +186,7 @@ typedef struct GENERAL_NAME_st {
 #define GEN_RID 8
 
     int type;
+
     union {
         char* ptr;
         OTHERNAME* otherName; /* otherName */
@@ -227,6 +228,7 @@ DECLARE_ASN1_SET_OF( ACCESS_DESCRIPTION )
 
 typedef struct DIST_POINT_NAME_st {
     int type;
+
     union {
         GENERAL_NAMES* fullname;
         STACK_OF( X509_NAME_ENTRY ) * relativename;
@@ -277,6 +279,7 @@ typedef struct USERNOTICE_st {
 
 typedef struct POLICYQUALINFO_st {
     ASN1_OBJECT* pqualid;
+
     union {
         ASN1_IA5STRING* cpsuri;
         USERNOTICE* usernotice;
@@ -745,6 +748,7 @@ typedef struct ASRange_st {
 
 typedef struct ASIdOrRange_st {
     int type;
+
     union {
         ASN1_INTEGER* id;
         ASRange* range;
@@ -759,6 +763,7 @@ DECLARE_STACK_OF( ASIdOrRange )
 
 typedef struct ASIdentifierChoice_st {
     int type;
+
     union {
         ASN1_NULL* inherit;
         ASIdOrRanges* asIdsOrRanges;
@@ -783,6 +788,7 @@ typedef struct IPAddressRange_st {
 
 typedef struct IPAddressOrRange_st {
     int type;
+
     union {
         ASN1_BIT_STRING* addressPrefix;
         IPAddressRange* addressRange;
@@ -797,6 +803,7 @@ DECLARE_STACK_OF( IPAddressOrRange )
 
 typedef struct IPAddressChoice_st {
     int type;
+
     union {
         ASN1_NULL* inherit;
         IPAddressOrRanges* addressesOrRanges;

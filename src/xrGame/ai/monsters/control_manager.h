@@ -85,8 +85,11 @@ public:
     ControlCom::IComData* data( CControl_Com*, ControlCom::EControlType );
 
     CControlAnimation& animation() { return ( *m_animation ); }
+
     CControlDirection& direction() { return ( *m_direction ); }
+
     CControlPathBuilder& path_builder() { return ( *m_path ); }
+
     CControlMovement& movement() { return ( *m_movement ); }
 
     void install_path_manager( CControlPathBuilder* );

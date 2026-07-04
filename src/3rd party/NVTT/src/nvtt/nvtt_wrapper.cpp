@@ -205,6 +205,7 @@ void nvttSetOutputOptionsOutputHeader( NvttOutputOptions* outputOptions,
                                        NvttBoolean b ) {
     outputOptions->setOutputHeader( b != NVTT_False );
 }
+
 /*
 void nvttSetOutputOptionsErrorHandler(NvttOutputOptions * outputOptions,
 nvttErrorHandler errorHandler)

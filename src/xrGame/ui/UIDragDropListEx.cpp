@@ -523,6 +523,7 @@ Ivector2 CUIDragDropListEx::PickCell( const Fvector2& abs_pos ) {
 CUICell& CUIDragDropListEx::GetCellAt( const Ivector2& pos ) {
     return m_container->GetCellAt( pos );
 };
+
 // =================================================================================================
 
 CUICellContainer::CUICellContainer( CUIDragDropListEx* parent ) {

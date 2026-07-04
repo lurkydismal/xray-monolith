@@ -12,6 +12,7 @@ protected:
     GLM_FUNC_QUALIFIER T& elem( size_t i ) {
         return ( reinterpret_cast< T* >( _buffer ) )[ i ];
     }
+
     GLM_FUNC_QUALIFIER T const& elem( size_t i ) const {
         return ( reinterpret_cast< const T* >( _buffer ) )[ i ];
     }
@@ -105,6 +106,7 @@ struct _swizzle_base2
         struct op {
             GLM_FUNC_QUALIFIER void operator()( T& e, T& t ) { e = t; }
         };
+
         _apply_op( that, op() );
         return *this;
     }
@@ -113,6 +115,7 @@ struct _swizzle_base2
         struct op {
             GLM_FUNC_QUALIFIER void operator()( T& e, T& t ) { e -= t; }
         };
+
         _apply_op( that, op() );
     }
 
@@ -120,6 +123,7 @@ struct _swizzle_base2
         struct op {
             GLM_FUNC_QUALIFIER void operator()( T& e, T& t ) { e += t; }
         };
+
         _apply_op( that, op() );
     }
 
@@ -127,6 +131,7 @@ struct _swizzle_base2
         struct op {
             GLM_FUNC_QUALIFIER void operator()( T& e, T& t ) { e *= t; }
         };
+
         _apply_op( that, op() );
     }
 
@@ -134,6 +139,7 @@ struct _swizzle_base2
         struct op {
             GLM_FUNC_QUALIFIER void operator()( T& e, T& t ) { e /= t; }
         };
+
         _apply_op( that, op() );
     }
 
@@ -141,6 +147,7 @@ struct _swizzle_base2
         const int offset_dst[ 4 ] = { E0, E1, E2, E3 };
         return this->elem( offset_dst[ i ] );
     }
+
     GLM_FUNC_QUALIFIER T operator[]( size_t i ) const {
         const int offset_dst[ 4 ] = { E0, E1, E2, E3 };
         return this->elem( offset_dst[ i ] );

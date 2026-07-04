@@ -108,8 +108,10 @@ public:
 private:
     FormattedDateIntervalData* fData;
     UErrorCode fErrorCode;
+
     explicit FormattedDateInterval( FormattedDateIntervalData* results )
         : fData( results ), fErrorCode( U_ZERO_ERROR ) {}
+
     explicit FormattedDateInterval( UErrorCode errorCode )
         : fData( nullptr ), fErrorCode( errorCode ) {}
     friend class DateIntervalFormat;

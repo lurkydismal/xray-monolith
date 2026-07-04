@@ -39,6 +39,7 @@ protected:
     void SetLeftIndention( float val );
     void SetUpIndention( float val );
     void SetDownIndention( float val );
+
     void SetVertFlip( bool val ) { m_flags.set( eVertFlip, val ); }
 
 public:
@@ -55,13 +56,18 @@ public:
     void Clear();
     void ScrollToBegin();
     void ScrollToEnd();
+
     bool GetVertFlip() { return !!m_flags.test( eVertFlip ); }
+
     bool Empty() {
         xrCriticalSectionGuard guard( m_pad->csUi );
         return m_pad->GetChildWndList().empty();
     }
+
     u32 GetSize();
+
     WINDOW_LIST& Items() { return m_pad->GetChildWndList(); }
+
     CUIWindow* GetItem( u32 idx );
     void SetFixedScrollBar( bool b );
     float GetDesiredChildWidth();
@@ -79,9 +85,11 @@ public:
     float GetVertIndent();       // top + bottom indent
     void UpdateChildrenLenght(); // set default width for all children
     float Scroll2ViewV();        // calculate scale for scroll position
+
     CUIScrollBar* ScrollBar() { return m_VScrollBar; }
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIScrollView* ui_cast_scroll_view() { return this; }
 
     typedef xr_delegate< bool( CUIWindow*, CUIWindow* ) > cmp_function;

@@ -166,6 +166,7 @@ IC bool get_plane_dynamic( ik_pick_result& r,
 }
 
 static const float reach_dist = 1.5f;
+
 IC bool get_plane( ik_pick_result& r,
                    Fvector& next_pos,
                    float& next_range,

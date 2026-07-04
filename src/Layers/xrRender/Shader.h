@@ -56,6 +56,7 @@ struct ECORE_API STextureList
 
 typedef resptr_core< STextureList, resptr_base< STextureList > >
     ref_texture_list;
+
 //////////////////////////////////////////////////////////////////////////
 struct ECORE_API SMatrixList : public xr_resource_flagged,
                                public svector< ref_matrix, 4 > {
@@ -67,6 +68,7 @@ struct ECORE_API SMatrixList : public xr_resource_flagged,
 };
 
 typedef resptr_core< SMatrixList, resptr_base< SMatrixList > > ref_matrix_list;
+
 //////////////////////////////////////////////////////////////////////////
 struct ECORE_API SConstantList : public xr_resource_flagged,
                                  public svector< ref_constant_obsolette, 4 > {
@@ -95,7 +97,9 @@ struct ECORE_API resptrcode_geom : public resptr_base< SGeometry > {
                  ID3DVertexBuffer* vb,
                  ID3DIndexBuffer* ib );
     void create( u32 FVF, ID3DVertexBuffer* vb, ID3DIndexBuffer* ib );
+
     void destroy() { _set( NULL ); }
+
     u32 stride() const { return _get()->vb_stride; }
 };
 
@@ -192,6 +196,7 @@ struct ECORE_API resptrcode_shader : public resptr_base< Shader > {
                  LPCSTR s_textures = 0,
                  LPCSTR s_constants = 0,
                  LPCSTR s_matrices = 0 );
+
     void destroy() { _set( NULL ); }
 };
 

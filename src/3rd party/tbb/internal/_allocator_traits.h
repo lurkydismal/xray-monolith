@@ -53,6 +53,7 @@ inline void allocator_copy_assignment( MyAlloc& my_allocator,
                                        traits_true_type ) {
     my_allocator = other_allocator;
 }
+
 template < typename MyAlloc, typename OtherAlloc >
 inline void allocator_copy_assignment( MyAlloc&,
                                        OtherAlloc&,
@@ -68,6 +69,7 @@ inline void allocator_move_assignment( MyAlloc& my_allocator,
                                        traits_true_type ) {
     my_allocator = std::move( other_allocator );
 }
+
 template < typename MyAlloc, typename OtherAlloc >
 inline void allocator_move_assignment( MyAlloc&,
                                        OtherAlloc&,
@@ -83,6 +85,7 @@ inline void allocator_swap( MyAlloc& my_allocator,
     using std::swap;
     swap( my_allocator, other_allocator );
 }
+
 template < typename MyAlloc, typename OtherAlloc >
 inline void allocator_swap( MyAlloc&,
                             OtherAlloc&,

@@ -36,6 +36,7 @@ std::string dbg_valide_pos_string( const Fvector& pos,
            std::string( "\n object dump: \n" ) +
            ( obj ? obj->dump( full ) : std::string( "" ) );
 }
+
 std::string dbg_valide_pos_string( const Fvector& pos,
                                    const IPhysicsShellHolder* obj,
                                    LPCSTR msg ) {

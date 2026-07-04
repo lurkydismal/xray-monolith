@@ -83,6 +83,7 @@ void save() {
 
 #include "../3rd party/stackwalker/include/StackWalker.h"
 #include "mezz_stringbuffer.h"
+
 class xr_StackWalker : public StackWalker {
 public:
     xr_StackWalker()
@@ -114,7 +115,9 @@ protected:
         Msg( "%s", s.c_str() );
     }
 };
+
 extern void printLuaStack();
+
 void LogStackTrace( LPCSTR header = nullptr, bool printStack = false ) {
     if ( !shared_str_initialized )
         return;

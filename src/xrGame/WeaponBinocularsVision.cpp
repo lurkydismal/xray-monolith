@@ -75,7 +75,9 @@ void SBinocVisibleObj::Draw() {
 
 struct check_pred {
     check_pred() { apos = Actor()->Position(); };
+
     Fvector apos;
+
     IC void operator()( SBinocVisibleObj* _it ) {
         if ( !_it )
             return;

@@ -788,11 +788,13 @@ void CMissile::g_fireParams( SPickParam& pp ) {
     pp.defs.start = matrix.c;
     pp.defs.dir = matrix.k;
 }
+
 #include "pch_script.h"
 
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CMissile::script_register( lua_State* L ) {
     module( L )[ class_< CMissile, CGameObject >( "CMissile" )
                      .enum_( "EMissileStates" )

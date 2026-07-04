@@ -285,6 +285,7 @@ void game_cl_TeamDeathmatch::OnTeamSelect( int Team ) {
     //		OnKeyboardPress(kJUMP);
     //	}
 };
+
 //-----------------------------------------------------------------
 void game_cl_TeamDeathmatch::SetCurrentBuyMenu() {
     if ( !local_player )

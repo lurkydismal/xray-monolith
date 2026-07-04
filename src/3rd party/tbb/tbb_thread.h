@@ -38,6 +38,7 @@
 #include "machine/windows_api.h"
 #define __TBB_NATIVE_THREAD_ROUTINE unsigned WINAPI
 #define __TBB_NATIVE_THREAD_ROUTINE_PTR( r ) unsigned( WINAPI * r )( void* )
+
 namespace tbb {
 namespace internal {
 #if __TBB_WIN8UI_SUPPORT
@@ -51,6 +52,7 @@ typedef DWORD thread_id_type;
 #define __TBB_NATIVE_THREAD_ROUTINE void*
 #define __TBB_NATIVE_THREAD_ROUTINE_PTR( r ) void* ( *r )( void* )
 #include <pthread.h>
+
 namespace tbb {
 namespace internal {
 typedef pthread_t thread_id_type;
@@ -83,6 +85,7 @@ void __TBB_EXPORTED_FUNC free_closure_v3( void* );
 
 struct thread_closure_base {
     void* operator new( size_t size ) { return allocate_closure_v3( size ); }
+
     void operator delete( void* ptr ) { free_closure_v3( ptr ); }
 };
 
@@ -96,13 +99,16 @@ struct thread_closure_0 : thread_closure_base {
         delete self;
         return 0;
     }
+
     thread_closure_0( const F& f ) : function( f ) {}
 };
+
 //! Structure used to pass user function with 1 argument to thread.
 template < class F, class X >
 struct thread_closure_1 : thread_closure_base {
     F function;
     X arg1;
+
     //! Routine passed to Windows's _beginthreadex by thread::internal_start()
     //! inside tbb.dll
     static __TBB_NATIVE_THREAD_ROUTINE start_routine( void* c ) {
@@ -111,13 +117,16 @@ struct thread_closure_1 : thread_closure_base {
         delete self;
         return 0;
     }
+
     thread_closure_1( const F& f, const X& x ) : function( f ), arg1( x ) {}
 };
+
 template < class F, class X, class Y >
 struct thread_closure_2 : thread_closure_base {
     F function;
     X arg1;
     Y arg2;
+
     //! Routine passed to Windows's _beginthreadex by thread::internal_start()
     //! inside tbb.dll
     static __TBB_NATIVE_THREAD_ROUTINE start_routine( void* c ) {
@@ -126,6 +135,7 @@ struct thread_closure_2 : thread_closure_base {
         delete self;
         return 0;
     }
+
     thread_closure_2( const F& f, const X& x, const Y& y )
         : function( f ), arg1( x ), arg2( y ) {}
 };
@@ -147,6 +157,7 @@ public:
 #endif // _WIN32||_WIN64
 
     class id;
+
     //! Constructs a thread object that does not represent a thread of
     //! execution.
     tbb_thread_v3() __TBB_NOEXCEPT( true )
@@ -164,12 +175,14 @@ public:
         typedef internal::thread_closure_0< F > closure_type;
         internal_start( closure_type::start_routine, new closure_type( f ) );
     }
+
     //! Constructs an object and executes f(x) in a new thread
     template < class F, class X >
     tbb_thread_v3( F f, X x ) {
         typedef internal::thread_closure_1< F, X > closure_type;
         internal_start( closure_type::start_routine, new closure_type( f, x ) );
     }
+
     //! Constructs an object and executes f(x,y) in a new thread
     template < class F, class X, class Y >
     tbb_thread_v3( F f, X x, Y y ) {
@@ -188,6 +201,7 @@ public:
     {
         x.internal_wipe();
     }
+
     tbb_thread_v3& operator=( tbb_thread_v3&& x ) __TBB_NOEXCEPT( true ) {
         internal_move( x );
         return *this;
@@ -206,18 +220,23 @@ public:
     void swap( tbb_thread_v3& t ) __TBB_NOEXCEPT( true ) {
         tbb::swap( *this, t );
     }
+
     bool joinable() const __TBB_NOEXCEPT( true ) { return my_handle != 0; }
+
     //! The completion of the thread represented by *this happens before join()
     //! returns.
     void __TBB_EXPORTED_METHOD join();
     //! When detach() returns, *this no longer represents the possibly
     //! continuing thread of execution.
     void __TBB_EXPORTED_METHOD detach();
+
     ~tbb_thread_v3() {
         if ( joinable() )
             detach();
     }
+
     inline id get_id() const __TBB_NOEXCEPT( true );
+
     native_handle_type native_handle() { return my_handle; }
 
     //! The number of hardware thread contexts.
@@ -245,6 +264,7 @@ private:
         my_thread_id = 0;
 #endif
     }
+
     void internal_move( tbb_thread_v3& x ) __TBB_NOEXCEPT( true ) {
         if ( joinable() )
             detach();
@@ -268,6 +288,7 @@ private:
 
 class tbb_thread_v3::id {
     thread_id_type my_id;
+
     id( thread_id_type id_ ) : my_id( id_ ) {}
 
     friend class tbb_thread_v3;
@@ -295,6 +316,7 @@ public:
         out << id.my_id;
         return out;
     }
+
     friend tbb_thread_v3::id __TBB_EXPORTED_FUNC thread_get_id_v3();
 
     friend inline size_t tbb_hasher( const tbb_thread_v3::id& id ) {
@@ -331,22 +353,27 @@ inline bool operator==( tbb_thread_v3::id x, tbb_thread_v3::id y )
     __TBB_NOEXCEPT( true ) {
     return x.my_id == y.my_id;
 }
+
 inline bool operator!=( tbb_thread_v3::id x, tbb_thread_v3::id y )
     __TBB_NOEXCEPT( true ) {
     return x.my_id != y.my_id;
 }
+
 inline bool operator<( tbb_thread_v3::id x, tbb_thread_v3::id y )
     __TBB_NOEXCEPT( true ) {
     return x.my_id < y.my_id;
 }
+
 inline bool operator<=( tbb_thread_v3::id x, tbb_thread_v3::id y )
     __TBB_NOEXCEPT( true ) {
     return x.my_id <= y.my_id;
 }
+
 inline bool operator>( tbb_thread_v3::id x, tbb_thread_v3::id y )
     __TBB_NOEXCEPT( true ) {
     return x.my_id > y.my_id;
 }
+
 inline bool operator>=( tbb_thread_v3::id x, tbb_thread_v3::id y )
     __TBB_NOEXCEPT( true ) {
     return x.my_id >= y.my_id;
@@ -381,10 +408,12 @@ namespace this_tbb_thread {
 __TBB_DEPRECATED_VERBOSE inline tbb_thread::id get_id() {
     return internal::thread_get_id_v3();
 }
+
 //! Offers the operating system the opportunity to schedule another thread.
 __TBB_DEPRECATED_VERBOSE inline void yield() {
     internal::thread_yield_v3();
 }
+
 //! The current thread blocks at least until the time specified.
 __TBB_DEPRECATED_VERBOSE inline void sleep( const tick_count::interval_t& i ) {
     internal::thread_sleep_v3( i );

@@ -7,6 +7,7 @@
 CUICursor& GetUICursor() {
     return UI().GetUICursor();
 };
+
 ui_core& UI() {
     return *GamePersistent().m_pUI_core;
 };

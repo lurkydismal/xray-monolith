@@ -49,6 +49,7 @@ public:
         Fvector P0, P1;
         u32 color;
     };
+
     xr_vector< std::pair< Fsphere, Fcolor > > dbg_spheres;
     xr_vector< dbg_line_t > dbg_lines;
     xr_vector< Fplane > dbg_planes;
@@ -339,22 +340,33 @@ public:
     void phase_pp();
 
     virtual void set_blur( float f ) { param_blur = f; }
+
     virtual void set_gray( float f ) { param_gray = f; }
+
     virtual void set_duality_h( float f ) { param_duality_h = _abs( f ); }
+
     virtual void set_duality_v( float f ) { param_duality_v = _abs( f ); }
+
     virtual void set_noise( float f ) { param_noise = f; }
+
     virtual void set_noise_scale( float f ) { param_noise_scale = f; }
+
     virtual void set_noise_fps( float f ) {
         param_noise_fps = _abs( f ) + EPS_S;
     }
+
     virtual void set_color_base( u32 f ) { param_color_base = f; }
+
     virtual void set_color_gray( u32 f ) { param_color_gray = f; }
+
     virtual void set_color_add( const Fvector& f ) { param_color_add = f; }
 
     virtual u32 get_width() { return dwWidth; }
+
     virtual u32 get_height() { return dwHeight; }
 
     virtual void set_cm_imfluence( float f ) { param_color_map_influence = f; }
+
     virtual void set_cm_interpolate( float f ) {
         param_color_map_interpolate = f;
     }
@@ -378,12 +390,14 @@ public:
         dbg_lines.back().P1 = P1;
         dbg_lines.back().color = c;
     }
+
     IC void dbg_addbox( const Fbox& box, const u32& color ) {
         Fvector c, r;
         box.getcenter( c );
         box.getradius( r );
         dbg_addbox( c, r.x, r.y, r.z, color );
     }
+
     IC void dbg_addbox( const Fvector& c,
                         float rx,
                         float ry,
@@ -416,6 +430,7 @@ public:
         dbg_addline( p3, p7, color );
         dbg_addline( p4, p8, color );
     }
+
     IC void dbg_addplane( Fplane& P0, u32 c ) { dbg_planes.push_back( P0 ); }
 #else
     IC void dbg_addline( Fvector& P0, Fvector& P1, u32 c ) {}

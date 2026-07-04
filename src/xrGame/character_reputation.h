@@ -43,7 +43,9 @@ public:
     void set( CHARACTER_REPUTATION_VALUE );
 
     shared_str id() const;
+
     int index() const { return m_current_index; };
+
     CHARACTER_REPUTATION_VALUE value() const { return m_current_value; };
 
     static int ValueToIndex( CHARACTER_REPUTATION_VALUE );

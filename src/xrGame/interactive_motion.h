@@ -27,6 +27,7 @@ public:
     void setup( const MotionID& m, CPhysicsShell* s, float angle );
 
     void update();
+
     IC bool is_enabled() { return !!flags.test( fl_use_death_motion ); }
 
     void play();

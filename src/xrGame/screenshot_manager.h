@@ -17,11 +17,15 @@ public:
     virtual ~screenshot_manager();
 
     virtual float shedule_Scale() { return 1.0f; };
+
     virtual void shedule_Update( u32 dt );
+
     virtual shared_str shedule_Name() const {
         return shared_str( "screenshot_manager" );
     };
+
     virtual bool shedule_Needed() { return true; };
+
     void make_screenshot( complete_callback_t cb );
     void set_draw_downloads( bool draw );
     void __stdcall jpeg_compress_cb( long progress );
@@ -51,12 +55,15 @@ private:
     inline bool is_making_screenshot() const {
         return !!( m_state & making_screenshot );
     };
+
     inline bool is_drawing_downloads() const {
         return !!( m_state & drawing_download_states );
     };
+
     inline bool is_active() const {
         return ( is_making_screenshot() || is_drawing_downloads() );
     };
+
     complete_callback_t m_complete_callback;
 
     void process_screenshot( bool in_other_thread );

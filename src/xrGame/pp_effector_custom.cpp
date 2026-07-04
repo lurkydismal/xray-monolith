@@ -22,6 +22,7 @@ CPPEffectorCustom::CPPEffectorCustom( const SPPInfo& ppi,
     m_factor = 0.f;
     m_type = TRANSLATE_TYPE( one_instance );
 }
+
 #pragma warning( pop )
 
 #define SET_VALUE( def, target, factor ) ( def + ( target - def ) * factor )

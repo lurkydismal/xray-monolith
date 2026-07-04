@@ -15,6 +15,7 @@ public:
 
 public:
     virtual LPCSTR getComment() { return "MODEL: env^base"; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Save( IWriter& fs );

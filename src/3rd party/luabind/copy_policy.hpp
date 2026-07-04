@@ -87,9 +87,11 @@ struct copy_reference_to {
 template < size_t N >
 struct copy_policy : conversion_policy< N > {
     struct only_accepts_pointers_or_references {};
+
     struct only_converts_from_cpp_to_lua {};
 
     static void precall( lua_State*, const index_map& ) {}
+
     static void postcall( lua_State*, const index_map& ) {}
 
     template < typename T, Direction Dir >

@@ -11,6 +11,7 @@ class server_info_uploader : xray::noncopyable {
         eUploadNotActive = 0x00,
         eUploadingInfo
     }; // enum ESvInfoUploadState
+
     ESvInfoUploadState m_state;
     u8* m_logo_data;
     u32 m_logo_size;
@@ -30,6 +31,7 @@ public:
     ~server_info_uploader();
 
     inline bool is_active() const { return m_state != eUploadNotActive; };
+
     void start_upload_info( IReader const* svlogo,
                             IReader const* svrules,
                             ClientID const& toclient,

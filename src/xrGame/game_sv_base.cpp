@@ -105,6 +105,7 @@ game_PlayerState* game_sv_GameState::get_eid( u16 id ) // if exist
             }
         }
     }
+
     //-------------------------------------------------
     struct id_searcher {
         u16 id_to_search;
@@ -116,6 +117,7 @@ game_PlayerState* game_sv_GameState::get_eid( u16 id ) // if exist
             return tmp_client->ps->HasOldID( id_to_search );
         }
     };
+
     id_searcher tmp_predicate;
     tmp_predicate.id_to_search = id;
     xrClientData* tmp_client =
@@ -131,6 +133,7 @@ void* game_sv_GameState::get_client( u16 id ) // if exist
     if ( entity && entity->owner && entity->owner->ps &&
          entity->owner->ps->GameID == id )
         return entity->owner;
+
     struct client_searcher {
         u16 binded_id;
 
@@ -141,6 +144,7 @@ void* game_sv_GameState::get_client( u16 id ) // if exist
             return tmp_client->ps->HasOldID( binded_id );
         }
     };
+
     client_searcher searcher_predicate;
     searcher_predicate.binded_id = id;
     return m_server->FindClient( searcher_predicate );
@@ -168,6 +172,7 @@ u32 game_sv_GameState::get_alive_count( u32 team ) {
             }
         }
     };
+
     alife_counter tmp_counter;
     tmp_counter.team = team;
     tmp_counter.count = 0;
@@ -485,6 +490,7 @@ void game_sv_GameState::ReadOptions( shared_str& options ) {
             g_sv_base_iVotingEnabled = 0x00ff;
     }
 };
+
 //-----------------------------------------------------------
 static bool g_bConsoleCommandsCreated_SV_Base = false;
 
@@ -613,6 +619,7 @@ void game_sv_GameState::Update() {
             C->ps->ping = u16( C->stats.getPing() );
         }
     };
+
     ping_filler tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
 
@@ -1155,6 +1162,7 @@ TeamColors[PS->team]);
 BOOL game_sv_GameState::IsVotingEnabled() {
     return g_sv_base_iVotingEnabled != 0;
 };
+
 BOOL game_sv_GameState::IsVotingEnabled( u16 flag ) {
     return ( g_sv_base_iVotingEnabled & flag ) != 0;
 };

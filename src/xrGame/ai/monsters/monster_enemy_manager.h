@@ -44,9 +44,13 @@ public:
     void unforce_enemy();
 
     const CEntityAlive* get_enemy() { return enemy; }
+
     EDangerType get_danger_type() { return danger_type; }
+
     const Fvector& get_enemy_position();
+
     u32 get_enemy_vertex() { return vertex; }
+
     TTime get_enemy_time_last_seen() { return time_last_seen; }
 
     Flags32& get_flags() { return flags; }
@@ -69,6 +73,7 @@ public:
     void transfer_enemy( CBaseMonster* friend_monster );
 
     u32 get_my_vertex_enemy_last_seen() { return my_vertex_enemy_last_seen; }
+
     u32 get_enemy_vertex_enemy_last_seen() {
         return enemy_vertex_enemy_last_seen;
     }
@@ -80,6 +85,7 @@ private:
 
 public:
     const CEntityAlive* get_script_enemy() { return m_script_enemy; }
+
     void script_enemy();
     void script_enemy( const CEntityAlive& enemy );
     void remove_links( CObject* O );

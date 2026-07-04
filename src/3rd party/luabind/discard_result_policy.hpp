@@ -34,6 +34,7 @@ struct discard_converter {
 
 struct discard_result_policy : conversion_policy< 0 > {
     static void precall( lua_State*, const index_map& ) {}
+
     static void postcall( lua_State*, const index_map& ) {}
 
     struct can_only_convert_from_cpp_to_lua {};

@@ -78,7 +78,9 @@ public:
     virtual void _initialize( int stage ) = 0;
     virtual void _clear() = 0;
     virtual void _restart();
+
     virtual void switch_device( LPCSTR device_name ) {}
+
     virtual void refresh_devices() {}
 
     // Sound interface
@@ -138,6 +140,7 @@ public:
 
 #ifdef _EDITOR
     virtual SoundEnvironment_LIB* get_env_library() { return s_environment; }
+
     virtual void refresh_env_library();
     virtual void set_user_env( CSound_environment* E );
     virtual void refresh_sources();
@@ -153,7 +156,9 @@ public:
     void i_stop( CSoundRender_Emitter* E );
     void i_rewind( CSoundRender_Emitter* E );
     BOOL i_allow_play( CSoundRender_Emitter* E );
+
     virtual BOOL i_locked() { return bLocked; }
+
     virtual BOOL is_ready() { return bReady; }
 
     virtual void object_relcase( CObject* obj );

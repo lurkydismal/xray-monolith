@@ -24,6 +24,7 @@ struct CRemoveMemberCorpsesPredicate {
 
 struct CRemoveOfflineCorpsesPredicate {
     CObject* m_object;
+
     IC CRemoveOfflineCorpsesPredicate( CObject* object ) {
         VERIFY( object );
         m_object = object;

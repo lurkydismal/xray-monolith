@@ -136,6 +136,7 @@ public:
     ref_sound_data();
     ref_sound_data( LPCSTR fName, esound_type sound_type, int game_type );
     virtual ~ref_sound_data();
+
     float get_length_sec() const { return fTimeTotal; };
 };
 
@@ -158,7 +159,9 @@ public:
     ~ref_sound() {}
 
     IC CSound_source* _handle() const { return _p ? _p->handle : NULL; }
+
     IC CSound_emitter* _feedback() { return _p ? _p->feedback : 0; }
+
     IC CObject* _g_object() {
         VERIFY( _p );
         return _p->g_object;
@@ -211,6 +214,7 @@ public:
 
     IC const CSound_params* get_params();
     IC void set_params( CSound_params* p );
+
     IC float get_length_sec() const {
         return _p ? _p->get_length_sec() : 0.0f;
     };
@@ -358,6 +362,7 @@ public:
 
 public:
     void clear() { items.clear(); }
+
     void append( const SItem& itm ) { items.push_back( itm ); }
 };
 

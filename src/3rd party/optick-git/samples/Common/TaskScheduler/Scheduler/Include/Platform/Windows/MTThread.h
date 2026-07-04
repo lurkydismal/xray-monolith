@@ -7,8 +7,8 @@
 // "Software"), to deal 	in the Software without restriction, including
 // without limitation the rights 	to use, copy, modify, merge, publish,
 // distribute, sublicense, and/or sell 	copies of the Software, and to permit
-// persons to whom the Software is 	furnished to do so, subject to the following
-// conditions:
+// persons to whom the Software is 	furnished to do so, subject to the
+// following conditions:
 //
 //  The above copyright notice and this permission notice shall be included in
 // 	all copies or substantial portions of the Software.
@@ -170,12 +170,14 @@ public:
         const MW_DWORD MW_MSVC_EXCEPTION = 0x406D1388;
 
 #pragma pack( push, 8 )
+
         typedef struct tagTHREADNAME_INFO {
             MW_DWORD dwType;     // Must be 0x1000.
             const char* szName;  // Pointer to name (in user addr space).
             MW_DWORD dwThreadID; // Thread ID (-1=caller thread).
             MW_DWORD dwFlags;    // Reserved for future use, must be zero.
         } THREADNAME_INFO;
+
 #pragma pack( pop )
 
         THREADNAME_INFO info;

@@ -348,6 +348,7 @@ inline HANDLE safe_handle( HANDLE h ) {
 class auto_delete_file {
 public:
     auto_delete_file( HANDLE hFile ) : m_handle( hFile ) {}
+
     ~auto_delete_file() {
         if ( m_handle ) {
             FILE_DISPOSITION_INFO info = {};
@@ -370,6 +371,7 @@ class auto_delete_file_wic {
 public:
     auto_delete_file_wic( ComPtr< IWICStream >& hFile, LPCWSTR szFile )
         : m_handle( hFile ), m_filename( szFile ) {}
+
     ~auto_delete_file_wic() {
         if ( m_filename ) {
             m_handle.Reset();

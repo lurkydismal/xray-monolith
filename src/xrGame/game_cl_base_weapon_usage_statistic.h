@@ -16,7 +16,9 @@ struct BulletData {
     bool Removed;
 
     SBullet Bullet;
+
     bool operator==( u32 BulletID ) { return BulletID == Bullet.m_dwID; };
+
     bool operator!=( u32 BulletID ) { return BulletID != Bullet.m_dwID; };
 
     BulletData( shared_str FName, shared_str WName, SBullet* pBullet );
@@ -86,7 +88,9 @@ struct HitData {
     static const u32 net_packet_size;
 
     bool operator==( u32 ID ) { return ID == BulletID; };
+
     bool operator!=( u32 ID ) { return ID != BulletID; };
+
     //-----------------------------------------------------------
     void Write( FILE* pFile );
     void WriteLtx( CInifile& ini, LPCSTR sect, LPCSTR perfix );
@@ -209,6 +213,7 @@ struct Bullet_Check_Array {
     u8 NumFalse;
 
     bool operator==( u32 ID ) { return ID == SenderID; }
+
     bool operator!=( u32 ID ) { return ID != SenderID; }
 
     Bullet_Check_Array( u32 ID ) : SenderID( ID ) {
@@ -216,6 +221,7 @@ struct Bullet_Check_Array {
         NumTrue = 0;
         NumFalse = 0;
     };
+
     ~Bullet_Check_Array() { Requests.clear_and_free(); };
 };
 
@@ -223,7 +229,9 @@ DEF_VECTOR( BChA, Bullet_Check_Array );
 
 struct WeaponUsageStatistic {
     bool m_bCollectStatistic;
+
     bool CollectData() { return m_bCollectStatistic; };
+
     void SetCollectData( bool Collect );
     //-----------------------------------------------
     ABULLETS ActiveBullets;

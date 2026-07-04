@@ -18,9 +18,13 @@ public:
     virtual void Draw();
 
     float GetTextureHeight() const { return m_tex_rect[ 0 ].height(); }
+
     float GetTextureWidth() const { return m_tex_rect[ 0 ].width(); }
+
     void SetTextureColor( u32 cl ) { m_texture_color = cl; }
+
     bool IsHorizontal() { return bHorizontal; }
+
     void SetHorizontal( bool horiz ) { bHorizontal = horiz; }
 
     virtual CUIWindow* ui_cast_window() { return this; }

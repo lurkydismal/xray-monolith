@@ -145,6 +145,7 @@ IC dGeomID retrieveGeom( dGeomID geom ) {
 }
 
 XRPHYSICS_API dxGeomUserData* PHRetrieveGeomUserData( dGeomID geom );
+
 IC dxGeomUserData* retrieveGeomUserData( dGeomID geom ) {
     return dGeomGetUserData( retrieveGeom( geom ) );
     // if(dGeomGetClass(geom)==dGeomTransformClass)

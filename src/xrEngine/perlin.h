@@ -36,6 +36,7 @@ public:
     }
 
     IC void SetFrequency( float freq ) { mFrequency = freq; }
+
     IC void SetAmplitude( float amp ) { mAmplitude = amp; }
 };
 
@@ -51,6 +52,7 @@ public:
     CPerlinNoise1D( int seed ) : CPerlinNoiseCustom( seed ) {
         mPrevContiniousTime = 0.0f;
     }
+
     float Get( float x );
     float GetContinious( float v );
 };

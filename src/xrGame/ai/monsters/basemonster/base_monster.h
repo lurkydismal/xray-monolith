@@ -60,25 +60,36 @@ public:
 
 public:
     virtual Feel::Sound* dcast_FeelSound() { return this; }
+
     virtual CCharacterPhysicsSupport* character_physics_support() {
         return m_pPhysics_support;
     }
+
     virtual const CCharacterPhysicsSupport* character_physics_support() const {
         return m_pPhysics_support;
     }
+
     virtual CPHDestroyable* ph_destroyable();
+
     virtual CEntityAlive* cast_entity_alive() { return this; }
+
     virtual CEntity* cast_entity() { return this; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CParticlesPlayer* cast_particles_player() { return this; }
+
     virtual CCustomMonster* cast_custom_monster() { return this; }
+
     virtual CScriptEntity* cast_script_entity() { return this; }
+
     virtual CBaseMonster* cast_base_monster() { return this; }
 
     virtual CGameObject* cast_game_object() { return this; }
 
 public:
     virtual BOOL renderable_ShadowReceive() { return TRUE; }
+
     virtual void Die( CObject* who );
     virtual void HitSignal( float amount,
                             Fvector& vLocalDir,
@@ -109,6 +120,7 @@ public:
     virtual void save( NET_Packet& output_packet ) {
         inherited::save( output_packet );
     }
+
     virtual void load( IReader& input_packet ) {
         inherited::load( input_packet );
     }
@@ -139,22 +151,29 @@ public:
                             const CGameObject* object ) const;
 
     virtual void OnEvent( NET_Packet& P, u16 type );
+
     virtual void OnHUDDraw( CCustomHUD* hud, IDSGraphManager* DM ) {
         return inherited::OnHUDDraw( hud, DM );
     }
+
     virtual u16 PHGetSyncItemsNumber() {
         return inherited::PHGetSyncItemsNumber();
     }
+
     virtual CPHSynchronize* PHGetSyncItem( u16 item ) {
         return inherited::PHGetSyncItem( item );
     }
+
     virtual void PHUnFreeze() { return inherited::PHUnFreeze(); }
+
     virtual void PHFreeze() { return inherited::PHFreeze(); }
+
     virtual BOOL UsedAI_Locations() { return inherited::UsedAI_Locations(); }
 
     virtual const SRotation Orientation() const {
         return inherited::Orientation();
     }
+
     virtual void renderable_Render( IDSGraphManager* DM ) {
         return inherited::renderable_Render( DM );
     }
@@ -180,6 +199,7 @@ public:
     virtual void HitEntityInJump( const CEntity* pEntity ) {}
 
     virtual void on_before_sell( CInventoryItem* item );
+
     float GetSatiety() { return 0.5f; }
 
     void ChangeSatiety( float v ) {}
@@ -214,6 +234,7 @@ public:
     virtual void jump( const Fvector& position, float factor ) {}
 
     bool m_skip_transfer_enemy;
+
     IC void skip_transfer_enemy( bool value ) { m_skip_transfer_enemy = value; }
 
     IC int Rank() { return m_rank; }
@@ -239,15 +260,25 @@ public:
     // Abilities
     // ---------------------------------------------------------------------------------
     virtual bool ability_invisibility() { return false; }
+
     virtual bool ability_can_drag() { return false; }
+
     virtual bool ability_psi_attack() { return false; }
+
     virtual bool ability_earthquake() { return false; }
+
     virtual bool ability_can_jump() { return false; }
+
     virtual bool ability_distant_feel() { return false; }
+
     virtual bool ability_run_attack() { return false; }
+
     virtual bool ability_rotation_jump() { return false; }
+
     virtual bool ability_jump_over_physics() { return false; }
+
     virtual bool ability_pitch_correction() { return true; }
+
     // ---------------------------------------------------------------------------------
 
     virtual void event_on_step() {}
@@ -289,6 +320,7 @@ public:
     void set_force_anti_aim( bool force_anti_aim ) {
         m_force_anti_aim = force_anti_aim;
     }
+
     bool get_force_anti_aim() const { return m_force_anti_aim; }
 
     // --------------------------------------------------------------------------------------
@@ -303,6 +335,7 @@ public:
     void settings_overrides();
 
     SMonsterSettings& db() { return *( *m_current_settings ); }
+
     // --------------------------------------------------------------------------------------
 
     CCharacterPhysicsSupport* m_pPhysics_support;
@@ -326,6 +359,7 @@ public:
     const CEntityAlive* EatedCorpse;
     // Lain: added
     bool check_eated_corpse_draggable();
+
     virtual bool is_base_monster_with_enemy() {
         return EnemyMan.get_enemy() != NULL;
     }
@@ -367,6 +401,7 @@ private:
 
 public:
     CAnomalyDetector& anomaly_detector() { return ( *m_anomaly_detector ); }
+
     // -----------------------------------------------------------------------------
 
     //	//-----------------------------------------------------------------
@@ -381,7 +416,9 @@ public:
     //--------------------------------------------------------------------
 public:
     u32 time_berserk_start;
+
     IC void set_berserk() { time_berserk_start = time(); }
+
     bool berserk_always;
 
     //--------------------------------------------------------------------
@@ -434,13 +471,16 @@ public:
     IC virtual EAction CustomVelocityIndex2Action( u32 velocity_index ) {
         return ACT_STAND_IDLE;
     }
+
     virtual void TranslateActionToPathParams();
 
     bool state_invisible;
 
     void set_action( EAction action );
     void set_state_sound( u32 type, bool once = false );
+
     IC void fall_asleep() { m_bSleep = true; }
+
     IC void wake_up() { m_bSleep = false; }
 
     // Temp
@@ -455,6 +495,7 @@ public:
     IC void set_ignore_collision_hit( bool value ) {
         ignore_collision_hit = value;
     }
+
     // -----------------------------------------------------------------------------
     //////////////////////////////////////////////////////////////////////////
 
@@ -462,8 +503,11 @@ public:
     CControl_Manager& control() { return ( *m_control_manager ); }
 
     CControlAnimationBase& anim() { return ( *m_anim_base ); }
+
     CControlMovementBase& move() { return ( *m_move_base ); }
+
     CControlPathBuilderBase& path() { return ( *m_path_base ); }
+
     CControlDirectionBase& dir() { return ( *m_dir_base ); }
 
     CControlManagerCustom& com_man() { return m_com_manager; }
@@ -525,6 +569,7 @@ public:
         u32 delimiter_color;
 
         SDebugInfo() : active( false ) {}
+
         SDebugInfo( float px, float py, float dy, u32 c, u32 dc )
             : active( true ),
               x( px ),
@@ -535,7 +580,9 @@ public:
     };
 
     u8 m_show_debug_info; // 0 - none, 1 - first column, 2 - second column
+
     void set_show_debug_info( u8 show = 1 ) { m_show_debug_info = show; }
+
     virtual SDebugInfo show_debug_info();
     virtual void add_debug_info( debug::text_tree& root_s );
 
@@ -549,6 +596,7 @@ public:
 
 public:
     bool is_jumping();
+
     virtual bool can_be_seen() const { return true; }
 
 #ifdef DEBUG
@@ -564,10 +612,13 @@ public:
     float get_feel_enemy_who_just_hit_max_distance() {
         return m_feel_enemy_who_just_hit_max_distance;
     }
+
     float get_feel_enemy_who_made_sound_max_distance() {
         return m_feel_enemy_who_made_sound_max_distance;
     }
+
     float get_feel_enemy_max_distance() { return m_feel_enemy_max_distance; }
+
     virtual bool can_use_agressive_jump( const CObject* ) { return false; }
 
 private:
@@ -653,6 +704,7 @@ private:
 
 public:
     pcstr get_head_bone_name() const { return m_head_bone_name; }
+
     shared_str get_section() const { return m_section; }
 
     anti_aim_ability* get_anti_aim() { return m_anti_aim; }
@@ -678,6 +730,7 @@ private:
 
 public:
     virtual bool run_home_point_when_enemy_inaccessible() const { return true; }
+
     virtual bool need_shotmark() const { return true; }
 };
 

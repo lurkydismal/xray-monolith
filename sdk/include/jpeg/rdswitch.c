@@ -18,6 +18,7 @@
 #include "cdjpeg.h" /* Common decls for cjpeg/djpeg applications */
 
 LOCAL( int )
+
 text_getc( FILE* file )
 /* Read next char, skipping over any comments (# to end of line) */
 /* A comment/newline sequence is returned as a newline */
@@ -35,6 +36,7 @@ text_getc( FILE* file )
 }
 
 LOCAL( boolean )
+
 read_text_integer( FILE* file, long* result, int* termchar )
 /* Read an unsigned decimal integer from a file, store it in result */
 /* Reads one trailing character after the integer; returns it in termchar */
@@ -71,6 +73,7 @@ read_text_integer( FILE* file, long* result, int* termchar )
 }
 
 GLOBAL( boolean )
+
 read_quant_tables( j_compress_ptr cinfo,
                    char* filename,
                    int scale_factor,
@@ -130,6 +133,7 @@ read_quant_tables( j_compress_ptr cinfo,
 #ifdef C_MULTISCAN_FILES_SUPPORTED
 
 LOCAL( boolean )
+
 read_scan_integer( FILE* file, long* result, int* termchar )
 /* Variant of read_text_integer that always looks for a non-space termchar;
  * this simplifies parsing of punctuation in scan scripts.
@@ -159,6 +163,7 @@ read_scan_integer( FILE* file, long* result, int* termchar )
 }
 
 GLOBAL( boolean )
+
 read_scan_script( j_compress_ptr cinfo, char* filename )
 /* Read a scan script from the specified text file.
  * Each entry in the file defines one scan to be emitted.
@@ -268,6 +273,7 @@ read_scan_script( j_compress_ptr cinfo, char* filename )
 #endif /* C_MULTISCAN_FILES_SUPPORTED */
 
 GLOBAL( boolean )
+
 set_quant_slots( j_compress_ptr cinfo, char* arg )
 /* Process a quantization-table-selectors parameter string, of the form
  *     N[,N,...]
@@ -305,6 +311,7 @@ set_quant_slots( j_compress_ptr cinfo, char* arg )
 }
 
 GLOBAL( boolean )
+
 set_sample_factors( j_compress_ptr cinfo, char* arg )
 /* Process a sample-factors parameter string, of the form
  *     HxV[,HxV,...]

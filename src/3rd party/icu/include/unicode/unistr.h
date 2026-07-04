@@ -3859,6 +3859,7 @@ private:
             int16_t fLengthAndFlags; // bit fields: see constants above
             char16_t fBuffer[ US_STACKBUF_SIZE ]; // buffer for short strings
         } fStackFields;
+
         struct {
             int16_t fLengthAndFlags; // bit fields: see constants above
             int32_t fLength;   // number of characters in fArray if >127; else

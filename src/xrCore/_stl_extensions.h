@@ -53,18 +53,25 @@ public:
 
 public:
     xr_vector() : std::vector< T >() {}
+
     xr_vector( size_t _count, const T& _value )
         : std::vector< T >( _count, _value ) {}
+
     explicit xr_vector( size_t _count ) : std::vector< T >( _count ) {}
+
     void clear() { erase( begin(), end() ); }
+
     void clear_and_free() { std::vector< T >::clear(); }
+
     void clear_not_free() { erase( begin(), end() ); }
+
     ICF const_reference operator[]( size_type _Pos ) const {
         {
             VERIFY( _Pos < size() );
         }
         return ( *( begin() + _Pos ) );
     }
+
     ICF reference operator[]( size_type _Pos ) {
         {
             VERIFY( _Pos < size() );
@@ -79,10 +86,14 @@ class xr_vector< bool > : public std::vector< bool > {
 
 public:
     xr_vector< T >() : std::vector< T >() {}
+
     xr_vector< T >( size_t _count, const T& _value )
         : std::vector< T >( _count, _value ) {}
+
     explicit xr_vector< T >( size_t _count ) : std::vector< T >( _count ) {}
+
     u32 size() const { return ( u32 )std::vector< T >::size(); }
+
     void clear() { erase( begin(), end() ); }
 };
 
@@ -107,6 +118,7 @@ public:
 
 public:
     pointer address( reference _Val ) const { return ( &_Val ); }
+
     const_pointer address( const_reference _Val ) const { return ( &_Val ); }
 
     xalloc() {}
@@ -124,9 +136,13 @@ public:
     pointer allocate( size_type n, const void* p = 0 ) const {
         return xr_alloc< T >( ( u32 )n );
     }
+
     char* _charalloc( size_type n ) { return ( char* )allocate( n ); }
+
     void deallocate( pointer p, size_type n ) const { xr_free( p ); }
+
     void deallocate( void* p, size_type n ) const { xr_free( p ); }
+
     void construct( pointer p, const T& _Val ) {
         ::new ( ( void* )p ) T( _Val );
     }
@@ -206,6 +222,7 @@ public:
         inherited::clear();
         inherited::shrink_to_fit();
     }
+
     void clear_not_free() { inherited::clear(); }
 
     void clear_and_reserve() {
@@ -279,6 +296,7 @@ private:
 
 public:
     u32 size() const { return ( u32 )inherited::size(); }
+
     void clear() { erase( begin(), end() ); }
 };
 
@@ -289,6 +307,7 @@ private:
 
 public:
     u32 size() const { return ( u32 )inherited::size(); }
+
     void clear() { erase( begin(), end() ); }
 };
 
@@ -299,6 +318,7 @@ public:
     typedef typename allocator allocator_type;
     typedef typename allocator_type::value_type value_type;
     typedef typename allocator_type::size_type size_type;
+
     u32 size() const { return ( u32 ) __super::size(); }
 };
 
@@ -311,6 +331,7 @@ template < typename T, int MaxLen, typename container = xr_deque< T > >
 class xr_fixedqueue : public xr_queue< T, container > {
 private:
     typedef xr_queue< T, container > inherited;
+
     void check_and_pop_front() {
         if ( this->size() == MaxLen )
             this->c.pop_front();
@@ -339,27 +360,39 @@ public:
 
     // explicit stack(const allocator_type& _Al = allocator_type()) : c(_Al) {}
     allocator_type get_allocator() const { return ( c.get_allocator() ); }
+
     bool empty() const { return ( c.empty() ); }
+
     u32 size() const { return c.size(); }
+
     value_type& top() { return ( c.back() ); }
+
     const value_type& top() const { return ( c.back() ); }
+
     void push( const value_type& _X ) { c.push_back( _X ); }
+
     void pop() { c.pop_back(); }
+
     bool operator==( const xr_stack< _Ty, _C >& _X ) const {
         return ( c == _X.c );
     }
+
     bool operator!=( const xr_stack< _Ty, _C >& _X ) const {
         return ( !( *this == _X ) );
     }
+
     bool operator<( const xr_stack< _Ty, _C >& _X ) const {
         return ( c < _X.c );
     }
+
     bool operator>( const xr_stack< _Ty, _C >& _X ) const {
         return ( _X < *this );
     }
+
     bool operator<=( const xr_stack< _Ty, _C >& _X ) const {
         return ( !( _X < *this ) );
     }
+
     bool operator>=( const xr_stack< _Ty, _C >& _X ) const {
         return ( !( *this < _X ) );
     }
@@ -631,22 +664,30 @@ public:
 
     // --- Iterators (Preserves Insertion Order) ---
     iterator begin() noexcept { return m_sequence.begin(); }
+
     const_iterator begin() const noexcept { return m_sequence.begin(); }
+
     const_iterator cbegin() const noexcept { return m_sequence.cbegin(); }
 
     iterator end() noexcept { return m_sequence.end(); }
+
     const_iterator end() const noexcept { return m_sequence.end(); }
+
     const_iterator cend() const noexcept { return m_sequence.cend(); }
 
     reverse_iterator rbegin() noexcept { return m_sequence.rbegin(); }
+
     const_reverse_iterator rbegin() const noexcept {
         return m_sequence.rbegin();
     }
+
     reverse_iterator rend() noexcept { return m_sequence.rend(); }
+
     const_reverse_iterator rend() const noexcept { return m_sequence.rend(); }
 
     // --- Capacity ---
     bool empty() const noexcept { return m_sequence.empty(); }
+
     size_type size() const noexcept { return m_sequence.size(); }
 
     // --- Modifiers ---
@@ -789,20 +830,28 @@ public:
 
     // --- Iterators ---
     iterator begin() noexcept { return m_dense.begin(); }
+
     const_iterator begin() const noexcept { return m_dense.begin(); }
+
     const_iterator cbegin() const noexcept { return m_dense.cbegin(); }
 
     iterator end() noexcept { return m_dense.end(); }
+
     const_iterator end() const noexcept { return m_dense.end(); }
+
     const_iterator cend() const noexcept { return m_dense.cend(); }
 
     reverse_iterator rbegin() noexcept { return m_dense.rbegin(); }
+
     const_reverse_iterator rbegin() const noexcept { return m_dense.rbegin(); }
+
     reverse_iterator rend() noexcept { return m_dense.rend(); }
+
     const_reverse_iterator rend() const noexcept { return m_dense.rend(); }
 
     // --- Capacity ---
     bool empty() const { return m_dense.empty(); }
+
     size_type size() const { return m_dense.size(); }
 
 private:
@@ -981,6 +1030,7 @@ class xr_hash_set : public std::hash_set< V, _HashFcn, _EqualKey, allocator > {
 public:
     u32 size() const { return ( u32 ) __super::size(); }
 };
+
 template < typename V,
            class _HashFcn = std::hash< V >,
            class _EqualKey = std::equal_to< V >,
@@ -1001,6 +1051,7 @@ class xr_hash_map
 public:
     u32 size() const { return ( u32 ) __super::size(); }
 };
+
 template < typename K,
            class V,
            class _HashFcn = std::hash< K >,
@@ -1011,6 +1062,7 @@ class xr_hash_multimap
 public:
     u32 size() const { return ( u32 ) __super::size(); }
 };
+
 // NOTE: LD / disabled
 #elif 0
 template < typename K,
@@ -1021,6 +1073,7 @@ class xr_hash_map : public stdext::hash_map< K, V, _Traits, allocator > {
 public:
     u32 size() const { return ( u32 ) __super::size(); }
 };
+
 // NOTE: LD / new
 #else
 template < typename K,

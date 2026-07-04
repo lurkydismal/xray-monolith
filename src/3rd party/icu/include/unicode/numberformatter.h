@@ -766,6 +766,7 @@ private:
             /** @internal */
             impl::digits_t fMaxSig;
         } fracSig;
+
         /** @internal */
         struct IncrementSettings {
             // For RND_INCREMENT, RND_INCREMENT_ONE, and RND_INCREMENT_FIVE
@@ -776,6 +777,7 @@ private:
             /** @internal */
             impl::digits_t fMaxFrac;
         } increment;
+
         UCurrencyUsage currencyUsage; // For RND_CURRENCY
         UErrorCode errorCode;         // For RND_ERROR
     } fUnion;
@@ -1044,8 +1046,10 @@ private:
             impl::digits_t fMaxInt;
             bool fFormatFailIfMoreThanMaxDigits;
         } minMaxInt;
+
         UErrorCode errorCode;
     } fUnion;
+
     bool fHasError = false;
 
     IntegerWidth( impl::digits_t minInt,
@@ -1431,11 +1435,13 @@ public:
 
 private:
     UChar32 fWidth; // -3 = error; -2 = bogus; -1 = no padding
+
     union {
         struct {
             int32_t fCp;
             UNumberFormatPadPosition fPosition;
         } padding;
+
         UErrorCode errorCode;
     } fUnion;
 
@@ -2898,6 +2904,7 @@ public:
 };
 
 } // namespace number
+
 U_NAMESPACE_END
 
 #endif /* #if !UCONFIG_NO_FORMATTING */

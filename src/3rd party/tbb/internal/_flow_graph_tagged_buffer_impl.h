@@ -87,6 +87,7 @@ private:
 
         DoCleanup( pointer_array_type& pa, list_array_type& my_els, size_t sz )
             : my_pa( &pa ), my_elements( &my_els ), my_size( sz ) {}
+
         ~DoCleanup() {
             if ( my_pa ) {
                 size_t dont_care = 0;
@@ -212,6 +213,7 @@ public:
     // Take ownership of func object allocated with new.
     // This method is only used internally, so can't be misused by user.
     void set_key_func( ValueToKey* vtk ) { my_key = vtk; }
+
     // pointer is used to clone()
     ValueToKey* get_key_func() { return my_key; }
 

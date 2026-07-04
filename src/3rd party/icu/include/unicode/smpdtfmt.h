@@ -1729,7 +1729,9 @@ private:
         int32_t hash;
         NSOverride* next;
         void free();
+
         NSOverride() : snf( NULL ), hash( 0 ), next( NULL ) {}
+
         ~NSOverride();
     };
 

@@ -32,6 +32,7 @@ struct SPrimitiveBuffer {
 
 public:
     SPrimitiveBuffer() : OnRender( 0 ), pGeom( 0 ) { ; }
+
     void CreateFromData( D3DPRIMITIVETYPE _pt,
                          u32 _p_cnt,
                          u32 FVF,
@@ -40,6 +41,7 @@ public:
                          u16* indices = 0,
                          u32 _i_cnt = 0 );
     void Destroy();
+
     void Render() { OnRender(); }
 };
 
@@ -178,6 +180,7 @@ public:
                                      const Fvector& p1,
                                      float sz,
                                      u32 clr );
+
     IC virtual void __stdcall DrawFaceNormal( const Fvector& p0,
                                               const Fvector& p1,
                                               const Fvector& p2,
@@ -211,6 +214,7 @@ public:
     virtual void __stdcall DrawSelectionBox( const Fvector& center,
                                              const Fvector& size,
                                              u32* c = 0 );
+
     IC virtual void __stdcall DrawSelectionBoxB( const Fbox& box, u32* c = 0 ) {
         Fvector S, C;
         box.getsize( S );

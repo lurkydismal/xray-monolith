@@ -29,6 +29,7 @@ al::optional< FShifterDirection > DirectionFromEmum( ALenum value ) {
     }
     return al::nullopt;
 }
+
 ALenum EnumFromDirection( FShifterDirection dir ) {
     switch ( dir ) {
         case FShifterDirection::Down:
@@ -59,6 +60,7 @@ void Fshifter_setParamf( EffectProps* props, ALenum param, float val ) {
                 "Invalid frequency shifter float property 0x%04x", param };
     }
 }
+
 void Fshifter_setParamfv( EffectProps* props,
                           ALenum param,
                           const float* vals ) {
@@ -93,6 +95,7 @@ void Fshifter_setParami( EffectProps* props, ALenum param, int val ) {
                 "Invalid frequency shifter integer property 0x%04x", param };
     }
 }
+
 void Fshifter_setParamiv( EffectProps* props, ALenum param, const int* vals ) {
     Fshifter_setParami( props, param, vals[ 0 ] );
 }
@@ -111,6 +114,7 @@ void Fshifter_getParami( const EffectProps* props, ALenum param, int* val ) {
                 "Invalid frequency shifter integer property 0x%04x", param };
     }
 }
+
 void Fshifter_getParamiv( const EffectProps* props, ALenum param, int* vals ) {
     Fshifter_getParami( props, param, vals );
 }
@@ -127,6 +131,7 @@ void Fshifter_getParamf( const EffectProps* props, ALenum param, float* val ) {
                 "Invalid frequency shifter float property 0x%04x", param };
     }
 }
+
 void Fshifter_getParamfv( const EffectProps* props,
                           ALenum param,
                           float* vals ) {

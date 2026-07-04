@@ -330,6 +330,7 @@ static int comp( const void* a, const void* b ) {
    afford to fail) */
 
 #define EPSILON 10e-7
+
 static int Laguerre_With_Deflation( float* a, int ord, float* r ) {
     int i, m;
     double lastdelta = 0.f;

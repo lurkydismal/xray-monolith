@@ -237,6 +237,7 @@ protected:
     virtual bool NeedToCheckClient_GameSpy_CDKey( IClient* CL ) {
         return false;
     }
+
     virtual void Check_GameSpy_CDKey_Success( IClient* CL );
     void RequestClientDigest( IClient* CL );
     void ProcessClientDigest( xrClientData* xrCL, NET_Packet* P );
@@ -282,6 +283,7 @@ public:
                                 NET_Packet& P,
                                 u32 dwFlags = DPNSEND_GUARANTEED );
     void GetPooledState( xrClientData* xrCL );
+
     void ClearDisconnectedPool() { m_disconnected_clients.Clear(); };
 
     virtual IClient* client_Create(); // create client info
@@ -293,8 +295,11 @@ public:
     // utilities
     CSE_Abstract* entity_Create( LPCSTR name );
     void entity_Destroy( CSE_Abstract*& P );
+
     u32 GetEntitiesNum() { return entities.size(); };
+
     CSE_Abstract* GetEntity( u32 Num );
+
     u32 const GetLastUpdatesSize() const { return m_last_updates_size; };
 
     xrClientData* ID_to_client( ClientID const& ID, bool ScanAll = false ) {
@@ -318,11 +323,15 @@ public:
                                         LPCSTR level_version );
 
     void create_direct_client();
+
     BOOL IsDedicated() const { return m_bDedicated; };
 
     virtual void Assign_ServerType( string512& res ) {};
+
     virtual bool HasPassword() { return false; }
+
     virtual bool HasProtected() { return false; }
+
     void AddCheater( shared_str const& reason, ClientID const& cheaterID );
     void MakeScreenshot( ClientID const& admin_id, ClientID const& cheater_id );
     void MakeConfigDump( ClientID const& admin_id, ClientID const& cheater_id );
@@ -354,6 +363,7 @@ enum e_dbg_net_Draw_Flags {
     dbg_draw_climbable = ( 1 << 10 ),
     dbg_draw_skeleton = ( 1 << 11 )
 };
+
 extern Flags32 dbg_net_Draw_Flags;
 #endif
 

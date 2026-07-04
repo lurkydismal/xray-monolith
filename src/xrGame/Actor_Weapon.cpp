@@ -29,6 +29,7 @@ static const float VEL_A_MAX = 10.f;
 BOOL g_fix_avelocity_spread = 0;
 BOOL g_apply_pdm_to_ads = 0;
 BOOL g_smooth_ads_transition = 0;
+
 // возвращает текуший разброс стрельбы (в радианах)с учетом движения
 float CActor::GetWeaponAccuracy() const {
     CWeapon* W = smart_cast< CWeapon* >( inventory().ActiveItem() );

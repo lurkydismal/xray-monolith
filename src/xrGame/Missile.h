@@ -22,13 +22,16 @@ public:
     virtual ~CMissile();
 
     virtual BOOL AlwaysTheCrow() { return TRUE; }
+
     virtual void render_item_ui();
     virtual bool render_item_ui_query();
 
     virtual void reinit();
+
     virtual CMissile* cast_missile() { return this; }
 
     virtual CBolt* cast_bolt() { return nullptr; }
+
     virtual CGrenade* cast_grenade() { return nullptr; }
 
     virtual void Load( LPCSTR section );
@@ -102,12 +105,15 @@ protected:
 
 public:
     Fvector const& throw_point_offset() const { return m_vThrowPoint; }
+
     virtual void activate_physic_shell();
     virtual void setup_physic_shell();
     virtual void create_physic_shell();
+
     IC void set_destroy_time( u32 delta_destroy_time ) {
         m_dwDestroyTime = delta_destroy_time + Device.dwTimeGlobal;
     }
+
     virtual void PH_A_CrPr();
 
 protected:
@@ -115,10 +121,13 @@ protected:
 
 public:
     virtual u32 ef_weapon_type() const;
+
     IC u32 destroy_time() const { return m_dwDestroyTime; }
+
     IC int time_from_begin_throw() const {
         return ( Device.dwTimeGlobal + m_dwDestroyTimeMax - m_dwDestroyTime );
     }
+
     static void ExitContactCallback( bool& do_colide,
                                      bool bo1,
                                      dContact& c,
@@ -131,11 +140,17 @@ public:
 
 public:
     float GetMinForce() { return m_fMinForce; }
+
     float GetMaxForce() { return m_fMaxForce; }
+
     float GetThrowForce() { return m_fThrowForce; }
+
     float GetConstForce() { return m_fConstForce; }
+
     bool IsConstPower() { return m_constpower; }
+
     Fvector GetThrowPoint() { return m_vThrowPoint; }
+
     Fvector GetThrowDir() { return m_vThrowDir; }
 
 public:

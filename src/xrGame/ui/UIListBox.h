@@ -29,6 +29,7 @@ public:
     virtual void SetSelected( CUIWindow* w ) {
         CUIScrollView::SetSelected( w );
     };
+
     u32 GetSelectedIDX();
     void SetSelectedIDX( u32 idx );
     void SetSelectedTAG( u32 tag_val );
@@ -44,6 +45,7 @@ public:
     CGameFont* GetFont();
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIScrollView* ui_cast_scroll_view() { return this; }
 
 public:

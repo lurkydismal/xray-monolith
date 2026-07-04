@@ -142,6 +142,7 @@ typedef enum STORE_object_types {
     STORE_OBJECT_TYPE_NUM = 0x06               /* The amount of known
                                                   object types */
 } STORE_OBJECT_TYPES;
+
 /* List of text strings corresponding to the object types. */
 extern const char* const STORE_object_type_string[ STORE_OBJECT_TYPE_NUM + 1 ];
 
@@ -158,6 +159,7 @@ typedef enum STORE_params {
     STORE_PARAM_TYPE_NUM = 0x06           /* The amount of known
                                              parameter types */
 } STORE_PARAM_TYPES;
+
 /* Parameter value sizes.  -1 means unknown, anything else is the required size.
  */
 extern const int STORE_param_sizes[ STORE_PARAM_TYPE_NUM + 1 ];
@@ -185,6 +187,7 @@ typedef enum STORE_attribs {
                                            expresses the OR
                                            operation.  */
 } STORE_ATTR_TYPES;
+
 /* Attribute value sizes.  -1 means unknown, anything else is the required size.
  */
 extern const int STORE_attr_sizes[ STORE_ATTR_TYPE_NUM + 1 ];
@@ -203,11 +206,13 @@ typedef enum STORE_certificate_status {
  * for engine authors, it's crucial to know this structure.  */
 typedef struct STORE_OBJECT_st {
     STORE_OBJECT_TYPES type;
+
     union {
         struct {
             STORE_CERTIFICATE_STATUS status;
             X509* certificate;
         } x509;
+
         X509_CRL* crl;
         EVP_PKEY* key;
         BIGNUM* number;

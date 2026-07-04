@@ -291,6 +291,7 @@ CPostProcessParam* CPostprocessAnimator::GetParam( pp_params param ) {
     VERIFY( param >= pp_base_color && param < pp_last );
     return m_Params[ param ];
 }
+
 void CPostprocessAnimator::Save( LPCSTR name ) {
     IWriter* W = FS.w_open( name );
     VERIFY( W );

@@ -500,6 +500,7 @@ typedef enum _NvAPI_Status {
 NVAPI_INTERFACE NvAPI_SYS_GetDriverAndBranchVersion(
     NvU32* pDriverVersion,
     NvAPI_ShortString szBuildBranchString );
+
 //! \ingroup driverapi
 //! Used in NvAPI_GPU_GetMemoryInfo().
 typedef struct {

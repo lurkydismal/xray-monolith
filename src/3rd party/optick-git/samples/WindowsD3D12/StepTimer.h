@@ -33,12 +33,14 @@ public:
 
     // Get elapsed time since the previous Update call.
     UINT64 GetElapsedTicks() const { return m_elapsedTicks; }
+
     double GetElapsedSeconds() const {
         return TicksToSeconds( m_elapsedTicks );
     }
 
     // Get total time since the start of the program.
     UINT64 GetTotalTicks() const { return m_totalTicks; }
+
     double GetTotalSeconds() const { return TicksToSeconds( m_totalTicks ); }
 
     // Get total number of updates since start of the program.
@@ -56,6 +58,7 @@ public:
     void SetTargetElapsedTicks( UINT64 targetElapsed ) {
         m_targetElapsedTicks = targetElapsed;
     }
+
     void SetTargetElapsedSeconds( double targetElapsed ) {
         m_targetElapsedTicks = SecondsToTicks( targetElapsed );
     }
@@ -66,6 +69,7 @@ public:
     static double TicksToSeconds( UINT64 ticks ) {
         return static_cast< double >( ticks ) / TicksPerSecond;
     }
+
     static UINT64 SecondsToTicks( double seconds ) {
         return static_cast< UINT64 >( seconds * TicksPerSecond );
     }

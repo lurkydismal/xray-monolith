@@ -43,6 +43,7 @@ public:
     ID3DBaseTexture* surface_get();
 
     IC BOOL isUser() { return flags.bUser; }
+
     IC u32 get_Width() {
         desc_enshure();
         return desc.Width;
@@ -54,6 +55,7 @@ public:
     }
 
     void video_Sync( u32 _time ) { m_play_time = _time; }
+
     void video_Play( BOOL looped, u32 _time = 0xFFFFFFFF );
     void video_Pause( BOOL state );
     void video_Stop();
@@ -72,15 +74,18 @@ private:
             SwitchToThread();
         }
     }
+
     IC BOOL desc_valid() {
         wait_for_loading();
         return pSurface == desc_cache;
     }
+
     IC void desc_enshure() {
         wait_for_loading();
         if ( !desc_valid() )
             desc_update();
     }
+
     void desc_update();
 #if defined( USE_DX10 ) || defined( USE_DX11 )
     void Apply( u32 dwStage );
@@ -136,13 +141,16 @@ private:
 
 struct resptrcode_texture : public resptr_base< CTexture > {
     void create( LPCSTR _name );
+
     void destroy() { _set( NULL ); }
+
     shared_str bump_get() {
         while ( _get() && _get()->flags.bLoading ) {
             SwitchToThread();
         }
         return _get()->m_bumpmap;
     }
+
     bool bump_exist() {
         while ( _get() && _get()->flags.bLoading ) {
             SwitchToThread();

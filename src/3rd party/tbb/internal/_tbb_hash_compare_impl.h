@@ -64,12 +64,14 @@ __TBB_DEPRECATED_MSG( "tbb::tbb_hasher is deprecated, use std::hash" )
 inline size_t tbb_hasher( const T& t ) {
     return static_cast< size_t >( t ) * internal::hash_multiplier;
 }
+
 template < typename P >
 __TBB_DEPRECATED_MSG( "tbb::tbb_hasher is deprecated, use std::hash" )
 inline size_t tbb_hasher( P* ptr ) {
     size_t const h = reinterpret_cast< size_t >( ptr );
     return ( h >> 3 ) ^ h;
 }
+
 template < typename E, typename S, typename A >
 __TBB_DEPRECATED_MSG( "tbb::tbb_hasher is deprecated, use std::hash" )
 inline size_t tbb_hasher( const std::basic_string< E, S, A >& s ) {
@@ -78,6 +80,7 @@ inline size_t tbb_hasher( const std::basic_string< E, S, A >& s ) {
         h = static_cast< size_t >( *c ) ^ ( h * internal::hash_multiplier );
     return h;
 }
+
 template < typename F, typename S >
 __TBB_DEPRECATED_MSG( "tbb::tbb_hasher is deprecated, use std::hash" )
 inline size_t tbb_hasher( const std::pair< F, S >& p ) {
@@ -85,6 +88,7 @@ inline size_t tbb_hasher( const std::pair< F, S >& p ) {
 }
 
 } // namespace interface5
+
 using interface5::tbb_hasher;
 
 // Template class for hash compare
@@ -101,6 +105,7 @@ public:
 template < typename Key >
 struct tbb_hash_compare {
     static size_t hash( const Key& a ) { return tbb_hasher( a ); }
+
     static bool equal( const Key& a, const Key& b ) { return a == b; }
 };
 

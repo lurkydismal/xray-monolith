@@ -205,6 +205,7 @@ inline int32_t ParsePosition::getErrorIndex() const {
 inline void ParsePosition::setErrorIndex( int32_t ei ) {
     this->errorIndex = ei;
 }
+
 U_NAMESPACE_END
 
 #endif /* U_SHOW_CPLUSPLUS_API */

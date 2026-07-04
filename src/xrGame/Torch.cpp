@@ -309,6 +309,7 @@ void CTorch::SwitchLightOnly() {
 }
 
 extern BOOL r_optimize_torch = TRUE;
+
 void CTorch::Update() {
     PROF_EVENT( "CTorch::Update" )
     if ( !m_switched_on )

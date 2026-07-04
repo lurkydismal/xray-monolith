@@ -79,12 +79,15 @@ virtual ~CSE_ALifeTraderAbstract();
 virtual CSE_Abstract* base() = 0;
 virtual const CSE_Abstract* base() const = 0;
 virtual CSE_Abstract* init();
+
 virtual CSE_Abstract* cast_abstract() {
     return 0;
 };
+
 virtual CSE_ALifeTraderAbstract* cast_trader_abstract() {
     return this;
 };
+
 // end of the virtual inheritance dependant code
 void __stdcall OnChangeProfile( PropValue* sender );
 
@@ -109,9 +112,11 @@ virtual bool interactive() const;
 virtual CSE_Abstract* init();
 virtual CSE_Abstract* base();
 virtual const CSE_Abstract* base() const;
+
 virtual bool natural_weapon() const {
     return false;
 }
+
 virtual bool natural_detector() const {
     return false;
 }
@@ -129,12 +134,15 @@ virtual bool match_configuration() const;
 virtual CSE_Abstract* cast_abstract() {
     return this;
 };
+
 virtual CSE_ALifeTraderAbstract* cast_trader_abstract() {
     return this;
 };
+
 virtual CSE_ALifeTrader* cast_trader() {
     return this;
 };
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifeCustomZone, CSE_ALifeSpaceRestrictor )
@@ -160,12 +168,15 @@ virtual ~CSE_ALifeAnomalousZone();
 virtual CSE_Abstract* init();
 virtual CSE_Abstract* base();
 virtual const CSE_Abstract* base() const;
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 };
+
 virtual CSE_ALifeAnomalousZone* cast_anomalous_zone() {
     return this;
 };
+
 virtual u32 ef_anomaly_type() const;
 virtual u32 ef_weapon_type() const;
 virtual u32 ef_creature_type() const;
@@ -245,6 +256,7 @@ virtual u8 g_group();
 IC float get_health() const {
     return fHealth;
 }
+
 IC ALife::_OBJECT_ID get_killer_id() const {
     return m_killer_id;
 }
@@ -255,12 +267,14 @@ void set_killer_id( ALife::_OBJECT_ID const killer_id );
 IC bool g_Alive() const {
     return ( get_health() > 0.f );
 }
+
 virtual bool used_ai_locations() const;
 virtual bool can_switch_online() const;
 virtual bool can_switch_offline() const;
 virtual u32 ef_creature_type() const;
 virtual u32 ef_weapon_type() const;
 virtual u32 ef_detector_type() const;
+
 virtual CSE_ALifeCreatureAbstract* cast_creature_abstract() {
     return this;
 };
@@ -306,18 +320,23 @@ ALife::_OBJECT_ID m_group_id;
 public:
 CSE_ALifeMonsterAbstract( LPCSTR caSection );
 virtual ~CSE_ALifeMonsterAbstract();
+
 IC float g_MaxHealth() const {
     return m_fMaxHealthValue;
 }
+
 virtual CSE_Abstract* init();
 virtual CSE_Abstract* base();
 virtual const CSE_Abstract* base() const;
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 };
+
 virtual CSE_ALifeSchedulable* cast_schedulable() {
     return this;
 };
+
 virtual CSE_ALifeMonsterAbstract* cast_monster_abstract() {
     return this;
 };
@@ -364,9 +383,11 @@ virtual void on_unregister();
 virtual Fvector draw_level_position() const;
 virtual bool redundant() const;
 virtual void on_location_change() const;
+
 virtual CSE_ALifeDynamicObject const& get_object() const {
     return *this;
 }
+
 virtual CSE_ALifeDynamicObject& get_object() {
     return *this;
 }
@@ -409,12 +430,15 @@ virtual CSE_Abstract* base();
 virtual const CSE_Abstract* base() const;
 virtual CSE_Abstract* init();
 virtual void load( NET_Packet& tNetPacket );
+
 virtual bool can_save() const {
     return true;
 }
+
 virtual bool natural_weapon() const {
     return false;
 }
+
 virtual bool natural_detector() const {
     return false;
 }
@@ -430,6 +454,7 @@ virtual bool match_configuration() const;
 virtual CSE_Abstract* cast_abstract() {
     return this;
 };
+
 virtual CSE_ALifeTraderAbstract* cast_trader_abstract() {
     return this;
 };
@@ -485,12 +510,15 @@ virtual bool bfUseful();
 virtual CSE_Abstract* init();
 virtual CSE_Abstract* base();
 virtual const CSE_Abstract* base() const;
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 };
+
 virtual CSE_ALifeInventoryItem* cast_inventory_item() {
     return this;
 };
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifeMonsterZombie, CSE_ALifeMonsterAbstract )
@@ -522,6 +550,7 @@ CSE_ALifeMonsterBase(
     LPCSTR caSection ); // constructor for variable initialization
 virtual ~CSE_ALifeMonsterBase();
 virtual void load( NET_Packet& tNetPacket );
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }
@@ -541,12 +570,15 @@ SERVER_ENTITY_DECLARE_BEGIN( CSE_ALifePsyDogPhantom, CSE_ALifeMonsterBase )
 CSE_ALifePsyDogPhantom(
     LPCSTR caSection ); // constructor for variable initialization
 virtual ~CSE_ALifePsyDogPhantom();
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }
+
 virtual bool bfActive() {
     return false;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 //-------------------------------
@@ -560,21 +592,27 @@ virtual ~CSE_ALifeHumanAbstract();
 virtual CSE_Abstract* init();
 virtual CSE_Abstract* base();
 virtual const CSE_Abstract* base() const;
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 };
+
 virtual CSE_ALifeTraderAbstract* cast_trader_abstract() {
     return this;
 };
+
 virtual CSE_ALifeHumanAbstract* cast_human_abstract() {
     return this;
 };
+
 virtual bool natural_weapon() const {
     return false;
 }
+
 virtual bool natural_detector() const {
     return false;
 }
+
 IC CALifeHumanBrain& brain() const {
     VERIFY( m_brain );
     return ( *m_brain );
@@ -617,9 +655,11 @@ shared_str m_start_dialog;
 CSE_ALifeHumanStalker( LPCSTR caSection );
 virtual ~CSE_ALifeHumanStalker();
 virtual void load( NET_Packet& tNetPacket );
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 }
+
 SERVER_ENTITY_DECLARE_END
 
 SERVER_ENTITY_DECLARE_BEGIN3( CSE_ALifeOnlineOfflineGroup,
@@ -632,12 +672,15 @@ virtual ~CSE_ALifeOnlineOfflineGroup();
 virtual CSE_Abstract* base();
 virtual const CSE_Abstract* base() const;
 virtual CSE_Abstract* init();
+
 virtual CSE_Abstract* cast_abstract() {
     return this;
 };
+
 virtual CSE_ALifeSchedulable* cast_schedulable() {
     return this;
 };
+
 virtual CSE_ALifeOnlineOfflineGroup* cast_online_offline_group() {
     return this;
 };
@@ -687,12 +730,15 @@ virtual void switch_online();
 virtual void switch_offline();
 virtual bool redundant() const;
 virtual void on_location_change() const;
+
 virtual CSE_ALifeDynamicObject const& get_object() const {
     return *this;
 }
+
 virtual CSE_ALifeDynamicObject& get_object() {
     return *this;
 }
+
 ALife::_OBJECT_ID commander_id();
 MEMBERS const& squad_members() const;
 u32 npc_count() const;

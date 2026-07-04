@@ -33,18 +33,22 @@ class CAI_Crow : public CEntity {
     struct SAnim {
         typedef svector< MotionID, MAX_ANIM_COUNT > MotionSVec;
         MotionSVec m_Animations;
+
         const MotionID& GetRandom() {
             return m_Animations[ Random.randI( 0, m_Animations.size() ) ];
         }
+
         void Load( IKinematicsAnimated* visual, LPCSTR prefix );
     };
 
     struct SSound {
         typedef svector< ref_sound, MAX_SND_COUNT > SoundSVec;
         SoundSVec m_Sounds;
+
         ref_sound& GetRandom() {
             return m_Sounds[ Random.randI( 0, m_Sounds.size() ) ];
         }
+
         void Load( LPCSTR prefix );
         void SetPosition( const Fvector& pos );
         void Unload();
@@ -119,8 +123,11 @@ public:
     void init();
     virtual BOOL net_Spawn( CSE_Abstract* DC );
     virtual void net_Destroy();
+
     virtual BOOL renderable_ShadowGenerate() { return FALSE; }
+
     virtual BOOL renderable_ShadowReceive() { return FALSE; }
+
     virtual void renderable_Render( IDSGraphManager* DM );
     virtual void shedule_Update( u32 DT );
     virtual void UpdateCL();
@@ -147,11 +154,15 @@ public:
                              Fvector& vLocalDir );
     virtual void Hit( SHit* pHDS );
     virtual void Die( CObject* who );
+
     virtual float ffGetFov() const { return 150.f; }
+
     virtual float ffGetRange() const { return 30.f; }
 
     virtual BOOL IsVisibleForHUD() { return FALSE; }
+
     virtual bool IsVisibleForZones() { return false; }
+
     virtual BOOL UsedAI_Locations();
     virtual void create_physic_shell();
 

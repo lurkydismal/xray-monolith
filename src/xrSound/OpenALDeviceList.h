@@ -24,9 +24,12 @@ struct ALDeviceDesc {
 
             u16 unused : 9;
         };
+
         u16 storage;
     };
+
     ESndProps props;
+
     ALDeviceDesc( LPCSTR nm,
                   LPCSTR nml,
                   int almn,
@@ -55,10 +58,13 @@ public:
     ~ALDeviceList();
 
     string256& GetDefaultDeviceName() { return m_defaultDeviceName; }
+
     u32 GetNumDevices() { return m_devices.size(); }
+
     const ALDeviceDesc& GetDeviceDesc( u32 index ) {
         return m_devices[ index ];
     }
+
     const ALDeviceDesc* GetDeviceDescByName( LPCSTR name );
     LPCSTR GetDeviceName( u32 index );
     void GetDeviceVersion( u32 index,

@@ -24,6 +24,7 @@ using namespace luabind;
 CMainMenu* MainMenu();
 
 #pragma optimize( "s", on )
+
 void UIRegistrator::script_register( lua_State* L ) {
     CUIWindow::script_register( L );
     CUIStatic::script_register( L );

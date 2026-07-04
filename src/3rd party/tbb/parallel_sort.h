@@ -119,6 +119,7 @@ public:
         : comp( comp_ ), size( size_ ), begin( begin_ ) {}
 
     bool empty() const { return size == 0; }
+
     bool is_divisible() const { return size >= grainsize; }
 
     quick_sort_range( quick_sort_range& range, split )
@@ -207,6 +208,7 @@ void parallel_quick_sort( RandomAccessIterator begin,
 }
 
 } // namespace internal
+
 //! @endcond
 } // namespace interface9
 
@@ -279,6 +281,7 @@ template < typename T >
 inline void parallel_sort( T* begin, T* end ) {
     parallel_sort( begin, end, std::less< T >() );
 }
+
 //@}
 
 } // namespace tbb

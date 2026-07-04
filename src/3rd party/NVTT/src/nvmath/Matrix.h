@@ -72,18 +72,22 @@ inline scalar Matrix::data( uint idx ) const {
     nvDebugCheck( idx < 16 );
     return m_data[ idx ];
 }
+
 inline scalar& Matrix::data( uint idx ) {
     nvDebugCheck( idx < 16 );
     return m_data[ idx ];
 }
+
 inline scalar Matrix::get( uint row, uint col ) const {
     nvDebugCheck( row < 4 && col < 4 );
     return m_data[ col * 4 + row ];
 }
+
 inline scalar Matrix::operator()( uint row, uint col ) const {
     nvDebugCheck( row < 4 && col < 4 );
     return m_data[ col * 4 + row ];
 }
+
 inline scalar& Matrix::operator()( uint row, uint col ) {
     nvDebugCheck( row < 4 && col < 4 );
     return m_data[ col * 4 + row ];

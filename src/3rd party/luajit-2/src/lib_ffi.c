@@ -267,6 +267,7 @@ LJLIB_CF( ffi_meta___pow ) LJLIB_REC( cdata_arith MM_pow ) {
 LJLIB_CF( ffi_meta___unm ) LJLIB_REC( cdata_arith MM_unm ) {
     return ffi_arith( L );
 }
+
 /* End of contiguous ORDER MM. */
 
 LJLIB_CF( ffi_meta___tostring ) {
@@ -797,7 +798,9 @@ LJLIB_CF( ffi_load ) {
 
 LJLIB_PUSH( top - 4 )
 LJLIB_SET( C )
-LJLIB_PUSH( top - 3 ) LJLIB_SET( os ) LJLIB_PUSH( top - 2 ) LJLIB_SET( arch )
+
+LJLIB_PUSH( top - 3 )
+LJLIB_SET( os ) LJLIB_PUSH( top - 2 ) LJLIB_SET( arch )
 #include "lj_libdef.h"
 
     /* ------------------------------------------------------------------------

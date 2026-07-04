@@ -23,6 +23,7 @@
 #include "unicode/uobject.h"
 
 U_NAMESPACE_BEGIN
+
 /**
  * <code>DateTimeRule</code> is a class representing a time in a year by
  * a rule specified by month, day of month, day of week and

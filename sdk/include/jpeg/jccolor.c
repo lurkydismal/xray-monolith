@@ -80,6 +80,7 @@ typedef my_color_converter* my_cconvert_ptr;
  */
 
 METHODDEF( void )
+
 rgb_ycc_start( j_compress_ptr cinfo ) {
     my_cconvert_ptr cconvert = ( my_cconvert_ptr )cinfo->cconvert;
     INT32* rgb_ycc_tab;
@@ -125,6 +126,7 @@ rgb_ycc_start( j_compress_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 rgb_ycc_convert( j_compress_ptr cinfo,
                  JSAMPARRAY input_buf,
                  JSAMPIMAGE output_buf,
@@ -188,6 +190,7 @@ rgb_ycc_convert( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 rgb_gray_convert( j_compress_ptr cinfo,
                   JSAMPARRAY input_buf,
                   JSAMPIMAGE output_buf,
@@ -233,6 +236,7 @@ rgb_gray_convert( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 cmyk_ycck_convert( j_compress_ptr cinfo,
                    JSAMPARRAY input_buf,
                    JSAMPIMAGE output_buf,
@@ -296,6 +300,7 @@ cmyk_ycck_convert( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 grayscale_convert( j_compress_ptr cinfo,
                    JSAMPARRAY input_buf,
                    JSAMPIMAGE output_buf,
@@ -328,6 +333,7 @@ grayscale_convert( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 null_convert( j_compress_ptr cinfo,
               JSAMPARRAY input_buf,
               JSAMPIMAGE output_buf,
@@ -364,6 +370,7 @@ null_convert( j_compress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 null_method( j_compress_ptr cinfo ) {
     /* no work needed */
 }
@@ -373,6 +380,7 @@ null_method( j_compress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jinit_color_converter( j_compress_ptr cinfo ) {
     my_cconvert_ptr cconvert;
 

@@ -33,6 +33,7 @@ struct BackendBase {
     DeviceBase* const mDevice;
 
     BackendBase( DeviceBase* device ) noexcept : mDevice{ device } {}
+
     virtual ~BackendBase() = default;
 
 protected:
@@ -42,6 +43,7 @@ protected:
     /** Sets the default channel order used by WaveFormatEx. */
     void setDefaultWFXChannelOrder();
 };
+
 using BackendPtr = std::unique_ptr< BackendBase >;
 
 enum class BackendType { Playback, Capture };

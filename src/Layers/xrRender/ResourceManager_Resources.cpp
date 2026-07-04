@@ -455,6 +455,7 @@ void CResourceManager::DeleteGeom( const SGeometry* Geom ) {
 
 //--------------------------------------------------------------------------------------------------------------
 xr_task_group textures_load_tasks;
+
 CTexture* CResourceManager::_CreateTexture( LPCSTR _Name ) {
     // DBG_VerifyTextures	();
     if ( 0 == xr_strcmp( _Name, "null" ) )
@@ -714,6 +715,7 @@ public:
         *pBytes = size;
         return D3D_OK;
     }
+
     HRESULT __stdcall Close( LPCVOID pData ) {
         xr_free( pData );
         return D3D_OK;

@@ -41,6 +41,7 @@ struct ALfilter {
                                     ALenum param,
                                     float* vals );
     };
+
     const Vtable* vtab{ nullptr };
 
     /* Self ID */
@@ -49,24 +50,31 @@ struct ALfilter {
     void setParami( ALenum param, int value ) {
         vtab->setParami( this, param, value );
     }
+
     void setParamiv( ALenum param, const int* values ) {
         vtab->setParamiv( this, param, values );
     }
+
     void setParamf( ALenum param, float value ) {
         vtab->setParamf( this, param, value );
     }
+
     void setParamfv( ALenum param, const float* values ) {
         vtab->setParamfv( this, param, values );
     }
+
     void getParami( ALenum param, int* value ) const {
         vtab->getParami( this, param, value );
     }
+
     void getParamiv( ALenum param, int* values ) const {
         vtab->getParamiv( this, param, values );
     }
+
     void getParamf( ALenum param, float* value ) const {
         vtab->getParamf( this, param, value );
     }
+
     void getParamfv( ALenum param, float* values ) const {
         vtab->getParamfv( this, param, values );
     }

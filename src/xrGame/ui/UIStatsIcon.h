@@ -11,6 +11,7 @@ public:
     void SetValue( LPCSTR str );
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
 
 protected:

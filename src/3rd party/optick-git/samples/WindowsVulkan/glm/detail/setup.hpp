@@ -868,6 +868,7 @@ constexpr std::size_t countof( T const ( & )[ N ] ) {
     return N;
 }
 } // namespace glm
+
 #define GLM_COUNTOF( arr ) glm::countof( arr )
 #elif defined( _MSC_VER )
 #define GLM_COUNTOF( arr ) _countof( arr )

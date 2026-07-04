@@ -17,5 +17,6 @@ public:
     poses_blending( const Fmatrix& m0, const Fmatrix& m1, float target_time_ );
 
     void pose( Fmatrix& p, float time ) const;
+
     IC bool target_reached( float time ) const { return time >= target_time; }
 };

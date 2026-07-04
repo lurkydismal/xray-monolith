@@ -51,15 +51,19 @@ static char* i2a( uint i, char* a, uint r ) {
 static inline char toUpper( char c ) {
     return ( c < 'a' || c > 'z' ) ? ( c ) : ( c + 'A' - 'a' );
 }
+
 static inline char toLower( char c ) {
     return ( c < 'A' || c > 'Z' ) ? ( c ) : ( c + 'a' - 'A' );
 }
+
 static inline bool isAlpha( char c ) {
     return ( c >= 'a' && c <= 'z' ) || ( c >= 'A' && c <= 'Z' );
 }
+
 static inline bool isDigit( char c ) {
     return c >= '0' && c <= '9';
 }
+
 static inline bool isAlnum( char c ) {
     return ( c >= 'a' && c <= 'z' ) || ( c >= 'A' && c <= 'Z' ) ||
            ( c >= '0' && c <= '9' );

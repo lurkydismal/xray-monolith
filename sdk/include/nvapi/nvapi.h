@@ -607,6 +607,7 @@ typedef struct _NV_TIMING {
 #define NV_TIMING_INTERLACED 1
 #define NV_TIMING_INTERLACED_EXTRA_VBLANK_ON_FIELD2 1
 #define NV_TIMING_INTERLACED_NO_EXTRA_VBLANK_ON_FIELD2 2
+
 //! @}
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -652,6 +653,7 @@ typedef struct _NV_TIMING {
 typedef struct {
     NvU32 version; //!< (IN) structure version
     NvU32 count;   //!< (IN) target count
+
     struct {
         NvU32 deviceMask; //!< (IN/OUT) Device mask
         NvU32 sourceId;   //!< (IN/OUT) Source ID - values will be based on the
@@ -956,6 +958,7 @@ typedef struct _NV_DISPLAYCONFIG_PATH_INFO_V1 {
 //! \ingroup dispcontrol
 typedef struct _NV_DISPLAYCONFIG_PATH_INFO_V2 {
     NvU32 version;
+
     union {
         NvU32 sourceId; //!< Identifies sourceId used by Windows CCD. This can
                         //!< be optionally set.
@@ -1001,6 +1004,7 @@ typedef enum _NV_DISPLAYCONFIG_FLAGS {
 
 typedef NvU16 NvAPI_UnicodeString[ NVAPI_UNICODE_STRING_MAX ];
 typedef const NvU16* NvAPI_LPCWSTR;
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // FUNCTION NAME: NvAPI_GetDisplayDriverVersion
@@ -2095,6 +2099,7 @@ typedef enum _NV_GPU_BUS_TYPE {
     NVAPI_GPU_BUS_TYPE_FPCI = 4,
     NVAPI_GPU_BUS_TYPE_AXI = 5,
 } NV_GPU_BUS_TYPE;
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // FUNCTION NAME: NvAPI_GPU_GetBusType
@@ -2458,6 +2463,7 @@ NVAPI_INTERFACE NvAPI_GPU_GetBoardInfo( NvPhysicalGpuHandle hPhysicalGpu,
 #define NVAPI_MAX_GPU_PERF_CLOCKS 32
 #define NVAPI_MAX_GPU_PERF_VOLTAGES 16
 #define NVAPI_MAX_GPU_PERF_PSTATES 16
+
 //! @}
 
 //! \ingroup gpuclock
@@ -2479,6 +2485,7 @@ typedef enum _NV_GPU_PERF_VOLTAGE_INFO_DOMAIN_ID {
 typedef struct {
     NvU32 version;  //!< Structure version
     NvU32 reserved; //!< These bits are reserved for future use.
+
     struct {
         NvU32 bIsPresent : 1; //!< Set if this domain is present on this GPU
         NvU32 reserved : 31;  //!< These bits are reserved for future use.
@@ -2504,6 +2511,7 @@ typedef struct {
     NvU32 reserved
         : 22; //!< These bits are reserved for future use. Must be set to 0.
     NvU32 reserved1 : 8; //!< These bits are reserved.
+
     struct {
         NvU32 bIsPresent : 1; //!< Set if this domain is present on this GPU
         NvU32 reserved : 31;  //!< These bits are reserved for future use.
@@ -2592,6 +2600,7 @@ typedef struct {
                       //!< - all other bits must be set to 0
     NvU32 numPstates; //!< The number of available p-states
     NvU32 numClocks;  //!< The number of clock domains supported by each P-State
+
     struct {
         NV_GPU_PERF_PSTATE_ID pstateId; //!< ID of the p-state.
         NvU32
@@ -2599,6 +2608,7 @@ typedef struct {
                    //!< - bit 1 indicates if the Pstate is overclocked or not
                    //!< - bit 2 indicates if the Pstate is overclockable or not
                    //!< - all other bits must be set to 0
+
         struct {
             NV_GPU_PUBLIC_CLOCK_ID domainId; //!< ID of the clock domain
             NvU32 flags;                     //!< Reserved. Must be set to 0
@@ -2619,6 +2629,7 @@ typedef struct {
     NvU32 numPstates; //!< The number of available p-states
     NvU32 numClocks;  //!< The number of clock domains supported by each P-State
     NvU32 numVoltages;
+
     struct {
         NV_GPU_PERF_PSTATE_ID pstateId; //!< ID of the p-state.
         NvU32
@@ -2626,6 +2637,7 @@ typedef struct {
                    //!< - bit 1 indicates if the Pstate is overclocked or not
                    //!< - bit 2 indicates if the Pstate is overclockable or not
                    //!< - all other bits must be set to 0
+
         struct {
             NV_GPU_PUBLIC_CLOCK_ID domainId;
             NvU32 flags; //!< bit 0 indicates if this clock is overclockable
@@ -2633,6 +2645,7 @@ typedef struct {
             NvU32 freq;
 
         } clocks[ NVAPI_MAX_GPU_PERF_CLOCKS ];
+
         struct {
             NV_GPU_PERF_VOLTAGE_INFO_DOMAIN_ID
             domainId;    //!< ID of the voltage domain, containing flags and
@@ -3043,6 +3056,7 @@ NVAPI_INTERFACE NvAPI_GPU_GetCurrentPstate(
 typedef struct {
     NvU32 version; //!< Structure version
     NvU32 flags;   //!< bit 0 indicates if the dynamic Pstate is enabled or not
+
     struct {
         NvU32 bIsPresent
             : 1; //!< Set if this utilization domain is present on this GPU
@@ -3147,6 +3161,7 @@ typedef enum {
 typedef struct {
     NvU32 version; //!< structure version
     NvU32 count;   //!< number of associated thermal sensors
+
     struct {
         NV_THERMAL_CONTROLLER controller; //!< internal, ADM1032, MAX6649...
         NvU32 defaultMinTemp; //!< The min default temperature value of the
@@ -3166,6 +3181,7 @@ typedef struct {
 typedef struct {
     NvU32 version; //!< structure version
     NvU32 count;   //!< number of associated thermal sensors
+
     struct {
         NV_THERMAL_CONTROLLER controller; //!< internal, ADM1032, MAX6649...
         NvS32 defaultMinTemp; //!< Minimum default temperature value of the
@@ -3736,12 +3752,14 @@ NVAPI_INTERFACE NvAPI_GPU_GetECCStatusInfo(
 //! Used in NvAPI_GPU_GetECCErrorInfo()/
 typedef struct {
     NvU32 version; //!< Structure version
+
     struct {
         NvU64 singleBitErrors; //!< Number of single-bit ECC errors detected
                                //!< since last boot
         NvU64 doubleBitErrors; //!< Number of double-bit ECC errors detected
                                //!< since last boot
     } current;
+
     struct {
         NvU64 singleBitErrors; //!< Number of single-bit ECC errors detected
                                //!< since last counter reset
@@ -5433,6 +5451,7 @@ typedef struct {
     NvU32 version; //!< Version of this structure
     NvU16 size;    //!< Size of this structure
     NvU8 cmd;
+
     struct {
         NvU8 colorFormat;
         NvU8 colorimetry;
@@ -5452,6 +5471,7 @@ NVAPI_INTERFACE NvAPI_Disp_ColorControl( NvU32 displayId,
 typedef struct {
     NvU32 isInterlaced : 4; //!< To retrieve interlaced/progressive timing
     NvU32 reserved0 : 12;
+
     union {
         NvU32 tvFormat
             : 8; //!< The actual analog HD/SDTV format. Used when the timing
@@ -5465,6 +5485,7 @@ typedef struct {
                            //!  Used when the timing type is
                            //!  NV_TIMING_OVERRIDE_NV_PREDEFINED.
     };
+
     NvU32 scaling : 8; //!< Define preferred scaling
 } NV_TIMING_FLAG;
 
@@ -5603,6 +5624,7 @@ typedef struct _NV_MONITOR_CAPABILITIES {
     NvU32 connectorType;   //!< Out: VGA, TV, DVI, HDMI, DP
     NvU8 bIsValidInfo : 1; //!< Boolean : Returns invalid if requested info is
                            //!< not present such as VCDB not present
+
     union {
         NV_MONITOR_CAPS_VSDB vsdb;
         NV_MONITOR_CAPS_VCDB vcdb;
@@ -6864,6 +6886,7 @@ typedef struct {
 
     NvU32 displayCount; //!< (OUT) The number of valid entries in the displays
                         //!< array.
+
     struct {
         NvU32 displayId;    //!< (OUT) The DisplayID of this display.
         NvU32 errorFlags;   //!< (OUT) Any of the NV_MOSAIC_DISPLAYTOPO_ERROR_*
@@ -8672,6 +8695,7 @@ typedef struct _NVVIOCAPS {
     NvU32 dipSwitch;    //!< On-board DIP switch settings bits
     NvU32 dipSwitchReserved; //!< On-board DIP switch settings reserved bits
     NvU32 boardID;           //!< Board ID
+
     //! Driver version
     struct //
     {
@@ -8680,6 +8704,7 @@ typedef struct _NVVIOCAPS {
         NvU32 minorVersion; //!< Minor version. For GVI, minorVersion contains
                             //!< Revison(HIWORD) And Build(LOWORD)
     } driver;               //
+
     //! Firmware version
     struct {
         NvU32 majorVersion; //!< Major version. In version 2, for both GVI and
@@ -8689,8 +8714,9 @@ typedef struct _NVVIOCAPS {
                             //!< GVO, minorVersion contains Revison(HIWORD) And
                             //!< Build(LOWORD)
     } firmWare;             //
-    NVVIOOWNERID ownerId;   //!< Unique identifier for owner of video output
-                            //!< (NVVIOOWNERID_INVALID if free running)
+
+    NVVIOOWNERID ownerId; //!< Unique identifier for owner of video output
+                          //!< (NVVIOOWNERID_INVALID if free running)
     NVVIOOWNERTYPE
     ownerType; //!< Owner type (OpenGL application or Desktop mode)
 } NVVIOCAPS;
@@ -8741,6 +8767,7 @@ typedef struct _NVVIOOUTPUTSTATUS {
 typedef struct _NVVIOSTATUS {
     NvU32 version;                   //!< Structure version
     NVVIOSTATUSTYPE nvvioStatusType; //!< Input or Output status
+
     union {
         NVVIOINPUTSTATUS inStatus;   //!<  Input device status
         NVVIOOUTPUTSTATUS outStatus; //!<  Output device status
@@ -8855,12 +8882,14 @@ typedef struct _NVVIOCOLORCONVERSION {
 typedef struct _NVVIOGAMMACORRECTION {
     NvU32 version;                //!< Structure version
     NvU32 vioGammaCorrectionType; //!< Gamma correction type (8-bit or 10-bit)
+
     //! Gamma correction:
     union {
         NVVIOGAMMARAMP8 gammaRamp8; //!< Gamma ramp (8-bit index, 16-bit values)
         NVVIOGAMMARAMP10
         gammaRamp10; //!< Gamma ramp (10-bit index, 16-bit values)
     } gammaRamp;
+
     float fGammaValueR; //!< Red Gamma value within gamma ranges. 0.5 - 6.0
     float fGammaValueG; //!< Green Gamma value within gamma ranges. 0.5 - 6.0
     float fGammaValueB; //!< Blue Gamma value within gamma ranges. 0.5 - 6.0
@@ -9096,6 +9125,7 @@ typedef struct _NVVIOSTREAM {
     NVVIOCOMPONENTSAMPLING sampling; //!< Sampling
     NvU32 expansionEnable;           //!< Enable/disable 4:2:2->4:4:4 expansion
     NvU32 numLinks;                  //!< Number of active links
+
     struct {
         NvU32 jack; //!< This stream's link[i] will use the specified (0-based)
                     //!< channel within the
@@ -9125,6 +9155,7 @@ typedef struct _NVVIOCONFIG_V1 {
     NvU32 version; //!< Structure version
     NvU32 fields;  //!< Caller sets to NVVIOCONFIG_* mask for fields to use
     NVVIOCONFIGTYPE nvvioConfigType; //!< Input or Output configuration
+
     union {
         NVVIOINPUTCONFIG inConfig;      //!<  Input device configuration
         NVVIOOUTPUTCONFIG_V1 outConfig; //!<  Output device configuration
@@ -9135,6 +9166,7 @@ typedef struct _NVVIOCONFIG_V2 {
     NvU32 version; //!< Structure version
     NvU32 fields;  //!< Caller sets to NVVIOCONFIG_* mask for fields to use
     NVVIOCONFIGTYPE nvvioConfigType; //!< Input or Output configuration
+
     union {
         NVVIOINPUTCONFIG inConfig;      //!< Input device configuration
         NVVIOOUTPUTCONFIG_V2 outConfig; //!< Output device configuration
@@ -9145,11 +9177,13 @@ typedef struct _NVVIOCONFIG_V3 {
     NvU32 version; //!< Structure version
     NvU32 fields;  //!< Caller sets to NVVIOCONFIG_* mask for fields to use
     NVVIOCONFIGTYPE nvvioConfigType; //!< Input or Output configuration
+
     union {
         NVVIOINPUTCONFIG inConfig;      //!< Input device configuration
         NVVIOOUTPUTCONFIG_V3 outConfig; //!< Output device configuration
     } vioConfig;
 } NVVIOCONFIG_V3;
+
 typedef NVVIOOUTPUTCONFIG_V3 NVVIOOUTPUTCONFIG;
 typedef NVVIOCONFIG_V3 NVVIOCONFIG;
 
@@ -10738,6 +10772,7 @@ typedef struct _NVDRS_SETTING_VALUES {
     NvU32 version;          //!< Structure Version
     NvU32 numSettingValues; //!< Total number of values available in a setting.
     NVDRS_SETTING_TYPE settingType; //!< Type of setting value.
+
     union //!< Setting can hold either DWORD or Binary value or string. Not
           //!< mixed types.
     {
@@ -10751,6 +10786,7 @@ typedef struct _NVDRS_SETTING_VALUES {
         NvAPI_UnicodeString wszDefaultValue; //!< Accessing default unicode
                                              //!< string value of this setting.
     };
+
     union //!< Setting values can be of either DWORD, Binary values or String
           //!< type,
     {     //!< NOT mixed types.
@@ -10777,6 +10813,7 @@ typedef struct _NVDRS_SETTING {
                                //!< is a user value.
     NvU32 isPredefinedValid; //!< It is different than 0 if the PredefinedValue
                              //!< union contains a valid value.
+
     union //!< Setting can hold either DWORD or Binary value or string. Not
           //!< mixed types.
     {
@@ -10791,6 +10828,7 @@ typedef struct _NVDRS_SETTING {
             wszPredefinedValue; //!< Accessing default unicode string value of
                                 //!< this setting.
     };
+
     union //!< Setting can hold either DWORD or Binary value or string. Not
           //!< mixed types.
     {

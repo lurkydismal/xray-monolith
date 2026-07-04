@@ -128,6 +128,7 @@ inline aiReturn aiMaterial::Get( const char* pKey,
                                  unsigned int* pMax ) const {
     return ::aiGetMaterialFloatArray( this, pKey, type, idx, pOut, pMax );
 }
+
 // ---------------------------------------------------------------------------
 inline aiReturn aiMaterial::Get( const char* pKey,
                                  unsigned int type,
@@ -136,6 +137,7 @@ inline aiReturn aiMaterial::Get( const char* pKey,
                                  unsigned int* pMax ) const {
     return ::aiGetMaterialIntegerArray( this, pKey, type, idx, pOut, pMax );
 }
+
 // ---------------------------------------------------------------------------
 inline aiReturn aiMaterial::Get( const char* pKey,
                                  unsigned int type,
@@ -143,6 +145,7 @@ inline aiReturn aiMaterial::Get( const char* pKey,
                                  float& pOut ) const {
     return aiGetMaterialFloat( this, pKey, type, idx, &pOut );
 }
+
 // ---------------------------------------------------------------------------
 inline aiReturn aiMaterial::Get( const char* pKey,
                                  unsigned int type,
@@ -150,6 +153,7 @@ inline aiReturn aiMaterial::Get( const char* pKey,
                                  int& pOut ) const {
     return aiGetMaterialInteger( this, pKey, type, idx, &pOut );
 }
+
 // ---------------------------------------------------------------------------
 inline aiReturn aiMaterial::Get( const char* pKey,
                                  unsigned int type,
@@ -157,6 +161,7 @@ inline aiReturn aiMaterial::Get( const char* pKey,
                                  aiColor4D& pOut ) const {
     return aiGetMaterialColor( this, pKey, type, idx, &pOut );
 }
+
 // ---------------------------------------------------------------------------
 inline aiReturn aiMaterial::Get( const char* pKey,
                                  unsigned int type,
@@ -167,6 +172,7 @@ inline aiReturn aiMaterial::Get( const char* pKey,
     pOut = aiColor3D( c.r, c.g, c.b );
     return ret;
 }
+
 // ---------------------------------------------------------------------------
 inline aiReturn aiMaterial::Get( const char* pKey,
                                  unsigned int type,
@@ -174,6 +180,7 @@ inline aiReturn aiMaterial::Get( const char* pKey,
                                  aiString& pOut ) const {
     return aiGetMaterialString( this, pKey, type, idx, &pOut );
 }
+
 // ---------------------------------------------------------------------------
 inline aiReturn aiMaterial::Get( const char* pKey,
                                  unsigned int type,

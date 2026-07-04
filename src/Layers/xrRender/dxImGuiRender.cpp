@@ -91,6 +91,7 @@ void dxImGuiRender::OnDeviceCreate( ImGuiContext* context ) {
     ImGui_ImplDX9_Init( HW.pDevice );
 #endif
 }
+
 void dxImGuiRender::OnDeviceDestroy() {
 #if defined( USE_DX11 )
     ImGui_ImplDX11_Shutdown();

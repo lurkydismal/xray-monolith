@@ -38,6 +38,7 @@ typedef my_destination_mgr* my_dest_ptr;
  */
 
 METHODDEF( void )
+
 init_destination( j_compress_ptr cinfo ) {
     my_dest_ptr dest = ( my_dest_ptr )cinfo->dest;
 
@@ -75,6 +76,7 @@ init_destination( j_compress_ptr cinfo ) {
  */
 
 METHODDEF( boolean )
+
 empty_output_buffer( j_compress_ptr cinfo ) {
     my_dest_ptr dest = ( my_dest_ptr )cinfo->dest;
 
@@ -98,6 +100,7 @@ empty_output_buffer( j_compress_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 term_destination( j_compress_ptr cinfo ) {
     my_dest_ptr dest = ( my_dest_ptr )cinfo->dest;
     size_t datacount = OUTPUT_BUF_SIZE - dest->pub.free_in_buffer;
@@ -120,6 +123,7 @@ term_destination( j_compress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jpeg_stdio_dest( j_compress_ptr cinfo, FILE* outfile ) {
     my_dest_ptr dest;
 

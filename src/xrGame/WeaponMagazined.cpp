@@ -648,6 +648,7 @@ void CWeaponMagazined::on_b_hud_detach() {
 }
 
 extern ENGINE_API BOOL g_bootComplete;
+
 void CWeaponMagazined::UpdateCL() {
     PROF_EVENT();
     inherited::UpdateCL();
@@ -675,6 +676,7 @@ void CWeaponMagazined::UpdateCL() {
 }
 
 BOOL mt_UpdateWeaponSounds = TRUE;
+
 void CWeaponMagazined::UpdateSoundsPositionsImpl() {
     PROF_EVENT();
     auto& P = get_LastFP();
@@ -936,6 +938,7 @@ void CWeaponMagazined::OnEmptyClick() {
 }
 
 #include "../xrEngine/xr_input.h"
+
 void CWeaponMagazined::OnAnimationEnd( u32 state ) {
     switch ( state ) {
         case eReload: {
@@ -1454,6 +1457,7 @@ bool CWeaponMagazined::Detach( const char* item_section_name,
 }
 
 extern int scope_2dtexactive; // crookr
+
 void CWeaponMagazined::InitAddons() {
     if ( IsScopeAttached() ) {
         shared_str scope_tex_name;

@@ -101,12 +101,17 @@ public:
     void LoadScopeKoeffs();
 
     virtual CWeaponBinoculars* cast_weapon_binoculars() { return nullptr; }
+
     virtual CWeaponMagazined* cast_weapon_magazined() { return this; }
+
     virtual CWeaponMagazinedWGrenade* cast_weapon_magazined_w_grenade() {
         return nullptr;
     }
+
     virtual CWeaponBM16* cast_weapon_bm16() { return nullptr; }
+
     virtual CWeaponRPG7* cast_weapon_rpg7() { return nullptr; }
+
     virtual CWeaponRG6* cast_weapon_rg6() { return nullptr; }
 
     virtual void SetDefaults();
@@ -144,6 +149,7 @@ public:
     virtual bool SingleShotMode() { return 1 == m_iQueueSize; }
 
     virtual void SetQueueSize( int size );
+
     IC int GetQueueSize() const { return m_iQueueSize; };
 
     virtual bool StopedAfterQueueFired() { return m_bStopedAfterQueueFired; }

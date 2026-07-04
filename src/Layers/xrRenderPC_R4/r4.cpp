@@ -28,6 +28,7 @@ public:
     CGlow() : bActive( false ) {}
 
     virtual void set_active( bool b ) { bActive = b; }
+
     virtual bool get_active() { return bActive; }
 
     virtual void set_position( const Fvector& P, const float eps = EPS_L ) {}
@@ -52,6 +53,7 @@ bool CRender::is_sun() {
 }
 
 float r_dtex_range = 50.f;
+
 //////////////////////////////////////////////////////////////////////////
 ShaderElement* CRender::rimp_select_sh_dynamic( dxRender_Visual* pVisual,
                                                 float cdist_sq ) {
@@ -161,7 +163,8 @@ static class cl_meatchunks_stuff : public R_constant_setup {
 
 extern ENGINE_API BOOL r2_sun_static;
 extern ENGINE_API BOOL r2_advanced_pp; //	advanced post process and
-                                       //effects
+                                       // effects
+
 //////////////////////////////////////////////////////////////////////////
 // Just two static storage
 void CRender::create() {
@@ -639,15 +642,19 @@ void CRender::ImportParticles() {
 IRender_ObjectSpecific* CRender::ros_create( IRenderable* parent ) {
     return xr_new< CROS_impl >();
 }
+
 void CRender::ros_destroy( IRender_ObjectSpecific*& p ) {
     xr_delete( p );
 }
+
 IRenderVisual* CRender::model_Create( LPCSTR name, IReader* data ) {
     return Models->Create( name, data );
 }
+
 IRenderVisual* CRender::model_CreateChild( LPCSTR name, IReader* data ) {
     return Models->CreateChild( name, data );
 }
+
 IRenderVisual* CRender::model_Duplicate( IRenderVisual* V ) {
     return Models->Instance_Duplicate( ( dxRender_Visual* )V );
 }
@@ -700,12 +707,15 @@ IRenderVisual* CRender::model_CreateParticles( LPCSTR name ) {
 void CRender::models_Prefetch() {
     Models->Prefetch();
 }
+
 void CRender::models_PrefetchOne( LPCSTR name, bool assert ) {
     Models->Prefetch_One( name, assert );
 }
+
 void CRender::models_Clear( BOOL b_complete ) {
     Models->ClearPool( b_complete );
 }
+
 bool CRender::models_Exists( LPCSTR name ) {
     return Models->Exists( name );
 }
@@ -778,6 +788,7 @@ IRender_Target* CRender::getTarget() {
 IRender_Light* CRender::light_create() {
     return Lights.Create();
 }
+
 IRender_Glow* CRender::glow_create() {
     return xr_new< CGlow >();
 }
@@ -789,9 +800,11 @@ void CRender::flush() {
 BOOL CRender::occ_visible( vis_data& P ) {
     return HOM.visible( P );
 }
+
 BOOL CRender::occ_visible( sPoly& P ) {
     return HOM.visible( P );
 }
+
 BOOL CRender::occ_visible( Fbox& P ) {
     return HOM.visible( P );
 }
@@ -1008,6 +1021,7 @@ void CRender::Statistics( CGameFont* _F ) {
 
 /////////
 #pragma comment( lib, "d3dx9.lib" )
+
 /*
 extern "C"
 {

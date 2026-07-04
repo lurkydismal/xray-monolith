@@ -263,6 +263,7 @@ static constexpr char ca_device[] = "CoreAudio Default";
 
 struct CoreAudioPlayback final : public BackendBase {
     CoreAudioPlayback( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~CoreAudioPlayback() override;
 
     OSStatus MixerProc( AudioUnitRenderActionFlags* ioActionFlags,
@@ -270,6 +271,7 @@ struct CoreAudioPlayback final : public BackendBase {
                         UInt32 inBusNumber,
                         UInt32 inNumberFrames,
                         AudioBufferList* ioData ) noexcept;
+
     static OSStatus MixerProcC( void* inRefCon,
                                 AudioUnitRenderActionFlags* ioActionFlags,
                                 const AudioTimeStamp* inTimeStamp,
@@ -538,6 +540,7 @@ void CoreAudioPlayback::stop() {
 
 struct CoreAudioCapture final : public BackendBase {
     CoreAudioCapture( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~CoreAudioCapture() override;
 
     OSStatus RecordProc( AudioUnitRenderActionFlags* ioActionFlags,
@@ -545,6 +548,7 @@ struct CoreAudioCapture final : public BackendBase {
                          UInt32 inBusNumber,
                          UInt32 inNumberFrames,
                          AudioBufferList* ioData ) noexcept;
+
     static OSStatus RecordProcC( void* inRefCon,
                                  AudioUnitRenderActionFlags* ioActionFlags,
                                  const AudioTimeStamp* inTimeStamp,

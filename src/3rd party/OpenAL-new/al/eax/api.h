@@ -17,6 +17,7 @@
 
 #ifndef GUID_DEFINED
 #define GUID_DEFINED
+
 typedef struct _GUID {
     std::uint32_t Data1;
     std::uint16_t Data2;
@@ -26,6 +27,7 @@ typedef struct _GUID {
 
 #ifndef _SYS_GUID_OPERATOR_EQ_
 #define _SYS_GUID_OPERATOR_EQ_
+
 inline bool operator==( const GUID& lhs, const GUID& rhs ) noexcept {
     return std::memcmp( &lhs, &rhs, sizeof( GUID ) ) == 0;
 }

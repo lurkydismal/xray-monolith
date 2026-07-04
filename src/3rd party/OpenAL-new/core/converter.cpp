@@ -36,15 +36,18 @@ inline float LoadSample< DevFmtByte >(
     DevFmtType_t< DevFmtByte > val ) noexcept {
     return val * ( 1.0f / 128.0f );
 }
+
 template <>
 inline float LoadSample< DevFmtShort >(
     DevFmtType_t< DevFmtShort > val ) noexcept {
     return val * ( 1.0f / 32768.0f );
 }
+
 template <>
 inline float LoadSample< DevFmtInt >( DevFmtType_t< DevFmtInt > val ) noexcept {
     return static_cast< float >( val ) * ( 1.0f / 2147483648.0f );
 }
+
 template <>
 inline float LoadSample< DevFmtFloat >(
     DevFmtType_t< DevFmtFloat > val ) noexcept {
@@ -56,11 +59,13 @@ inline float LoadSample< DevFmtUByte >(
     DevFmtType_t< DevFmtUByte > val ) noexcept {
     return LoadSample< DevFmtByte >( static_cast< int8_t >( val - 128 ) );
 }
+
 template <>
 inline float LoadSample< DevFmtUShort >(
     DevFmtType_t< DevFmtUShort > val ) noexcept {
     return LoadSample< DevFmtShort >( static_cast< int16_t >( val - 32768 ) );
 }
+
 template <>
 inline float LoadSample< DevFmtUInt >(
     DevFmtType_t< DevFmtUInt > val ) noexcept {
@@ -107,16 +112,19 @@ template <>
 inline float StoreSample< DevFmtFloat >( float val ) noexcept {
     return val;
 }
+
 template <>
 inline int32_t StoreSample< DevFmtInt >( float val ) noexcept {
     return fastf2i(
         clampf( val * 2147483648.0f, -2147483648.0f, 2147483520.0f ) );
 }
+
 template <>
 inline int16_t StoreSample< DevFmtShort >( float val ) noexcept {
     return static_cast< int16_t >(
         fastf2i( clampf( val * 32768.0f, -32768.0f, 32767.0f ) ) );
 }
+
 template <>
 inline int8_t StoreSample< DevFmtByte >( float val ) noexcept {
     return static_cast< int8_t >(
@@ -129,10 +137,12 @@ inline uint32_t StoreSample< DevFmtUInt >( float val ) noexcept {
     return static_cast< uint32_t >( StoreSample< DevFmtInt >( val ) ) +
            2147483648u;
 }
+
 template <>
 inline uint16_t StoreSample< DevFmtUShort >( float val ) noexcept {
     return static_cast< uint16_t >( StoreSample< DevFmtShort >( val ) + 32768 );
 }
+
 template <>
 inline uint8_t StoreSample< DevFmtUByte >( float val ) noexcept {
     return static_cast< uint8_t >( StoreSample< DevFmtByte >( val ) + 128 );

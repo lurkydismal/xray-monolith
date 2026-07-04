@@ -22,10 +22,13 @@ public:
     virtual void SetIsHelper( bool is_helper );
     bool IsHelperOrHasHelperChild();
     void Update();
+
     CInventoryItem* object() { return ( CInventoryItem* )m_pData; }
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
+
     virtual CUICellItem* ui_cast_cell_item() { return this; }
 
     // Alundaio
@@ -55,10 +58,13 @@ public:
     u32 CalculateAmmoCount();
     virtual bool EqualTo( CUICellItem* itm );
     virtual CUIDragItem* CreateDragItem();
+
     CWeaponAmmo* object() { return ( CWeaponAmmo* )m_pData; }
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
+
     virtual CUICellItem* ui_cast_cell_item() { return this; }
 };
 
@@ -91,13 +97,17 @@ public:
     virtual void SetTextureColor( u32 color );
 
     CWeapon* object() { return ( CWeapon* )m_pData; }
+
     virtual void OnAfterChild( CUIDragDropListEx* parent_list );
     virtual CUIDragItem* CreateDragItem();
     virtual bool EqualTo( CUICellItem* itm );
+
     CUIStatic* get_addon_static( u32 idx ) { return m_addons[ idx ]; }
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
+
     virtual CUICellItem* ui_cast_cell_item() { return this; }
 };
 

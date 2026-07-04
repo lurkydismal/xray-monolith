@@ -33,6 +33,7 @@ namespace detail {
 
 template < class W, class T >
 struct unwrap_parameter_type;
+
 template < class Derived >
 struct operator_ {};
 

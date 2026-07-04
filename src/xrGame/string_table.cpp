@@ -35,6 +35,7 @@ extern void refresh_npc_names();
 
 // demonized: use english text if locale text string is missing
 BOOL use_english_text_for_missing_translations = TRUE;
+
 void CStringTable::Init() {
     if ( NULL != pData )
         return;

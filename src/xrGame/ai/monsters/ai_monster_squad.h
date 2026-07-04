@@ -103,6 +103,7 @@ public:
     // -----------------------------------------------------------------
 
     void SetLeader( CEntity* pE ) { leader = pE; }
+
     CEntity* GetLeader() { return leader; }
 
     // -----------------------------------------------------------------
@@ -186,13 +187,16 @@ public:
     bool is_locked_corpse( const CEntityAlive* );
     void lock_corpse( const CEntityAlive* );
     void unlock_corpse( const CEntityAlive* );
+
     ////////////////////////////////////////////////////////////////////////////////////////
 
     // Lain: added
     MEMBER_COMMAND_MAP* get_commands() { return &m_commands; }
+
     bool home_in_danger() {
         return Device.dwTimeGlobal < m_home_danger_end_tick;
     }
+
     void set_home_in_danger() {
         m_home_danger_end_tick = Device.dwTimeGlobal + m_home_danger_mode_time;
     }

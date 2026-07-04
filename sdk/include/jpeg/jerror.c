@@ -65,6 +65,7 @@ const char* const jpeg_std_message_table[] = {
  */
 
 METHODDEF( void )
+
 error_exit( j_common_ptr cinfo ) {
     /* Always display the message */
     ( *cinfo->err->output_message )( cinfo );
@@ -91,6 +92,7 @@ error_exit( j_common_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 output_message( j_common_ptr cinfo ) {
     char buffer[ JMSG_LENGTH_MAX ];
 
@@ -119,6 +121,7 @@ output_message( j_common_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 emit_message( j_common_ptr cinfo, int msg_level ) {
     struct jpeg_error_mgr* err = cinfo->err;
 
@@ -146,6 +149,7 @@ emit_message( j_common_ptr cinfo, int msg_level ) {
  */
 
 METHODDEF( void )
+
 format_message( j_common_ptr cinfo, char* buffer ) {
     struct jpeg_error_mgr* err = cinfo->err;
     int msg_code = err->msg_code;
@@ -200,6 +204,7 @@ format_message( j_common_ptr cinfo, char* buffer ) {
  */
 
 METHODDEF( void )
+
 reset_error_mgr( j_common_ptr cinfo ) {
     cinfo->err->num_warnings = 0;
     /* trace_level is not reset since it is an application-supplied parameter */
@@ -217,6 +222,7 @@ reset_error_mgr( j_common_ptr cinfo ) {
  */
 
 GLOBAL( struct jpeg_error_mgr* )
+
 jpeg_std_error( struct jpeg_error_mgr* err ) {
     err->error_exit = error_exit;
     err->emit_message = emit_message;

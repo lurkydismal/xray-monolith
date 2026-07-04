@@ -23,6 +23,7 @@ public:
 
     //! Constructor
     Sphere( const udword n, Point* p );
+
     //! Copy constructor
     inline_ Sphere( const Sphere& sphere )
         : mCenter( sphere.mCenter ), mRadius( sphere.mRadius ) {}
@@ -35,9 +36,11 @@ public:
 
     // Access methods
     inline_ const Point& GetCenter() const { return mCenter; }
+
     inline_ float GetRadius() const { return mRadius; }
 
     inline_ const Point& Center() const { return mCenter; }
+
     inline_ float Radius() const { return mRadius; }
 
     inline_ Sphere& Set( const Point& center, float radius ) {

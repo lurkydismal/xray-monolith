@@ -79,6 +79,7 @@ static const UINT8 c5to8bits[ 32 ] = { 0,   8,   16,  25,  33,  41,  49,  58,
                                        197, 206, 214, 222, 230, 239, 247, 255 };
 
 LOCAL( int )
+
 read_byte( tga_source_ptr sinfo )
 /* Read next byte from Targa file */
 {
@@ -93,6 +94,7 @@ read_byte( tga_source_ptr sinfo )
 }
 
 LOCAL( void )
+
 read_colormap( tga_source_ptr sinfo, int cmaplen, int mapentrysize )
 /* Read the colormap from a Targa file */
 {
@@ -114,6 +116,7 @@ read_colormap( tga_source_ptr sinfo, int cmaplen, int mapentrysize )
  */
 
 METHODDEF( void )
+
 read_non_rle_pixel( tga_source_ptr sinfo )
 /* Read one Targa pixel from the input file; no RLE expansion */
 {
@@ -128,6 +131,7 @@ read_non_rle_pixel( tga_source_ptr sinfo )
 }
 
 METHODDEF( void )
+
 read_rle_pixel( tga_source_ptr sinfo )
 /* Read one Targa pixel from the input file, expanding RLE data as needed */
 {
@@ -167,6 +171,7 @@ read_rle_pixel( tga_source_ptr sinfo )
  */
 
 METHODDEF( JDIMENSION )
+
 get_8bit_gray_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading 8-bit grayscale pixels */
 {
@@ -185,6 +190,7 @@ get_8bit_gray_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_8bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading 8-bit colormap indexes */
 {
@@ -210,6 +216,7 @@ get_8bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_16bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading 16-bit pixels */
 {
@@ -241,6 +248,7 @@ get_16bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 }
 
 METHODDEF( JDIMENSION )
+
 get_24bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
 /* This version is for reading 24-bit pixels */
 {
@@ -277,6 +285,7 @@ get_24bit_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo )
  */
 
 METHODDEF( JDIMENSION )
+
 get_memory_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     tga_source_ptr source = ( tga_source_ptr )sinfo;
     JDIMENSION source_row;
@@ -302,6 +311,7 @@ get_memory_row( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
  */
 
 METHODDEF( JDIMENSION )
+
 preload_image( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     tga_source_ptr source = ( tga_source_ptr )sinfo;
     JDIMENSION row;
@@ -334,6 +344,7 @@ preload_image( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
  */
 
 METHODDEF( void )
+
 start_input_tga( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     tga_source_ptr source = ( tga_source_ptr )sinfo;
     U_CHAR targaheader[ 18 ];
@@ -477,6 +488,7 @@ start_input_tga( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
  */
 
 METHODDEF( void )
+
 finish_input_tga( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
     /* no work */
 }
@@ -486,6 +498,7 @@ finish_input_tga( j_compress_ptr cinfo, cjpeg_source_ptr sinfo ) {
  */
 
 GLOBAL( cjpeg_source_ptr )
+
 jinit_read_targa( j_compress_ptr cinfo ) {
     tga_source_ptr source;
 

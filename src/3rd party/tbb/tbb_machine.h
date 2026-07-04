@@ -379,6 +379,7 @@ public:
     // as in for(atomic_backoff b; ; b.pause()) { /*loop body*/ }
     // For this reason, the construction cost must be very small!
     atomic_backoff() : count( 1 ) {}
+
     // This constructor pauses immediately; do not use on hot paths!
     atomic_backoff( bool ) : count( 1 ) { pause(); }
 
@@ -681,6 +682,7 @@ struct machine_load_store {
         __TBB_acquire_consistency_helper();
         return to_return;
     }
+
     static void store_with_release( volatile T& location, T value ) {
         __TBB_release_consistency_helper();
         location = value;
@@ -695,6 +697,7 @@ struct machine_load_store< T, 8 > {
     static T load_with_acquire( const volatile T& location ) {
         return ( T )__TBB_machine_load8( ( const volatile void* )&location );
     }
+
     static void store_with_release( volatile T& location, T value ) {
         __TBB_machine_store8( ( volatile void* )&location, ( int64_t )value );
     }
@@ -737,6 +740,7 @@ struct machine_load_store_seq_cst< T, 8 > {
             ( volatile void* )const_cast< volatile T* >( &location ), anyvalue,
             anyvalue );
     }
+
     static void store( volatile T& location, T value ) {
 #if __TBB_GCC_VERSION >= 40702
 #pragma GCC diagnostic push
@@ -765,6 +769,7 @@ struct machine_load_store_seq_cst< T, 8 > {
 template < typename T, size_t S >
 struct machine_load_store_relaxed {
     static inline T load( const volatile T& location ) { return location; }
+
     static inline void store( volatile T& location, T value ) {
         location = value;
     }
@@ -776,6 +781,7 @@ struct machine_load_store_relaxed< T, 8 > {
     static inline T load( const volatile T& location ) {
         return ( T )__TBB_machine_load8( ( const volatile void* )&location );
     }
+
     static inline void store( volatile T& location, T value ) {
         __TBB_machine_store8( ( volatile void* )&location, ( int64_t )value );
     }
@@ -790,11 +796,13 @@ template < typename T >
 inline T __TBB_load_with_acquire( const volatile T& location ) {
     return machine_load_store< T, sizeof( T ) >::load_with_acquire( location );
 }
+
 template < typename T, typename V >
 inline void __TBB_store_with_release( volatile T& location, V value ) {
     machine_load_store< T, sizeof( T ) >::store_with_release( location,
                                                               T( value ) );
 }
+
 //! Overload that exists solely to avoid /Wp64 warnings.
 inline void __TBB_store_with_release( volatile size_t& location,
                                       size_t value ) {
@@ -806,10 +814,12 @@ template < typename T >
 inline T __TBB_load_full_fence( const volatile T& location ) {
     return machine_load_store_seq_cst< T, sizeof( T ) >::load( location );
 }
+
 template < typename T, typename V >
 inline void __TBB_store_full_fence( volatile T& location, V value ) {
     machine_load_store_seq_cst< T, sizeof( T ) >::store( location, T( value ) );
 }
+
 //! Overload that exists solely to avoid /Wp64 warnings.
 inline void __TBB_store_full_fence( volatile size_t& location, size_t value ) {
     machine_load_store_seq_cst< size_t, sizeof( size_t ) >::store( location,
@@ -821,11 +831,13 @@ inline T __TBB_load_relaxed( const volatile T& location ) {
     return machine_load_store_relaxed< T, sizeof( T ) >::load(
         const_cast< T& >( location ) );
 }
+
 template < typename T, typename V >
 inline void __TBB_store_relaxed( volatile T& location, V value ) {
     machine_load_store_relaxed< T, sizeof( T ) >::store(
         const_cast< T& >( location ), T( value ) );
 }
+
 //! Overload that exists solely to avoid /Wp64 warnings.
 inline void __TBB_store_relaxed( volatile size_t& location, size_t value ) {
     machine_load_store_relaxed< size_t, sizeof( size_t ) >::store(
@@ -890,26 +902,32 @@ template <>
 struct type_with_alignment< 1 > {
     char member;
 };
+
 template <>
 struct type_with_alignment< 2 > {
     uint16_t member;
 };
+
 template <>
 struct type_with_alignment< 4 > {
     uint32_t member;
 };
+
 template <>
 struct type_with_alignment< 8 > {
     __TBB_machine_type_with_alignment_8 member;
 };
+
 template <>
 struct type_with_alignment< 16 > {
     __TBB_machine_type_with_alignment_16 member;
 };
+
 template <>
 struct type_with_alignment< 32 > {
     __TBB_machine_type_with_alignment_32 member;
 };
+
 template <>
 struct type_with_alignment< 64 > {
     __TBB_machine_type_with_alignment_64 member;
@@ -924,6 +942,7 @@ template < size_t Size, typename T >
 struct work_around_alignment_bug {
     static const size_t alignment = __TBB_alignof( T );
 };
+
 #define __TBB_TypeWithAlignmentAtLeastAsStrict( T )            \
     tbb::internal::type_with_alignment<                        \
         tbb::internal::work_around_alignment_bug< sizeof( T ), \
@@ -941,6 +960,7 @@ template < typename T >
 struct reverse {
     static const T byte_table[ 256 ];
 };
+
 // An efficient implementation of the reverse function utilizes a 2^8 lookup
 // table holding the bit-reversed values of [0..2^8 - 1]. Those values can also
 // be computed on the fly at a slightly higher cost.

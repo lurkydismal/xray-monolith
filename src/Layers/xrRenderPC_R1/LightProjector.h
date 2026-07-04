@@ -44,7 +44,9 @@ private:
 
 public:
     void set_object( IRenderable* O, IDSGraphManager& DM );
+
     BOOL shadowing() { return current != 0; }
+
     void calculate();
     void setup( int slot );
 

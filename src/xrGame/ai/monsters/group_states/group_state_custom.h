@@ -14,7 +14,9 @@ public:
 
     virtual void execute();
     virtual void setup_substates();
+
     virtual bool check_completion() { return ( object->b_state_end ); }
+
     virtual void remove_links( CObject* object ) {
         inherited::remove_links( object );
     }

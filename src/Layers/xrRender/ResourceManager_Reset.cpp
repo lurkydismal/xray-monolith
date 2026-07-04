@@ -36,6 +36,7 @@ void CResourceManager::reset_begin() {
 bool cmp_rt( const CRT* A, const CRT* B ) {
     return A->_order < B->_order;
 }
+
 //	DX10 cut bool	cmp_rtc	(const CRTC* A,const CRTC* B)	{ return
 // A->_order < B->_order; }
 

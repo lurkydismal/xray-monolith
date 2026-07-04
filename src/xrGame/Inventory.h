@@ -47,11 +47,15 @@ public:
     void Clear();
 
     u16 m_last_slot;
+
     IC u16 FirstSlot() const { return KNIFE_SLOT; }
+
     IC u16 LastSlot() const { return m_last_slot; } // not "end"
+
     IC bool SlotIsPersistent( u16 slot_id ) const {
         return m_slots[ slot_id ].m_bPersistent;
     }
+
     bool Slot( u16 slot_id,
                PIItem pIItem,
                bool bNotActivate = false,
@@ -87,6 +91,7 @@ public:
                    ? NULL
                    : ItemFromSlot( m_iActiveSlot );
     }
+
     PIItem ItemFromSlot( u16 slot ) const;
 
     bool Action( u16 cmd, u32 flags );
@@ -123,7 +128,9 @@ public:
     IC u16 GetActiveSlot() const { return m_iActiveSlot; }
 
     void SetPrevActiveSlot( u16 ActiveSlot ) { m_iPrevActiveSlot = ActiveSlot; }
+
     u16 GetPrevActiveSlot() const { return m_iPrevActiveSlot; }
+
     IC u16 GetNextActiveSlot() const { return m_iNextActiveSlot; }
 
     void SetActiveSlot( u16 ActiveSlot ) {
@@ -131,8 +138,11 @@ public:
     }
 
     bool IsSlotsUseful() const { return m_bSlotsUseful; }
+
     void SetSlotsUseful( bool slots_useful ) { m_bSlotsUseful = slots_useful; }
+
     bool IsBeltUseful() const { return m_bBeltUseful; }
+
     void SetBeltUseful( bool belt_useful ) { m_bBeltUseful = belt_useful; }
 
     void SetSlotsBlocked( u16 mask, bool bBlock );
@@ -155,6 +165,7 @@ public:
                             bool bOverride = false ) const;
 
     float GetMaxWeight() const { return m_fMaxWeight; }
+
     void SetMaxWeight( float weight ) { m_fMaxWeight = weight; }
 
     u32 BeltWidth() const;
@@ -164,7 +175,9 @@ public:
     friend class CInventoryOwner;
 
     u32 ModifyFrame() const { return m_dwModifyFrame; }
+
     void InvalidateState() { m_dwModifyFrame = Device.dwFrame; }
+
     void Items_SetCurrentEntityHud( bool current_entity );
     bool isBeautifulForActiveSlot( CInventoryItem* pIItem );
 

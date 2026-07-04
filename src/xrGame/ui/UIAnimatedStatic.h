@@ -79,6 +79,7 @@ public:
     virtual void Update();
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
 };
 
@@ -97,6 +98,7 @@ public:
                                 LPCSTR sh_name = "hud\\default" );
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
 };
 #endif // UI_ANIMATED_STATIC_H_

@@ -30,11 +30,13 @@ public:
     virtual ~CUITalkWnd();
 
     IC bool playing_sound() { return !!m_sound._feedback(); }
+
     IC CInventoryOwner* OthersInvOwner() const { return m_pOthersInvOwner; };
 
     void InitTalkWnd();
 
     virtual bool StopAnyMove() { return true; }
+
     virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData = NULL );
 
     virtual void Draw();

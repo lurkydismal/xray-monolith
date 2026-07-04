@@ -49,15 +49,18 @@ class finish_reduce : public flag_task {
     const reduction_context my_context;
     Body* my_body;
     aligned_space< Body > zombie_space;
+
     finish_reduce( reduction_context context_ )
         : has_right_zombie(
               false ), // TODO: substitute by flag_task::child_stolen?
           my_context( context_ ),
           my_body( NULL ) {}
+
     ~finish_reduce() {
         if ( has_right_zombie )
             zombie_space.begin()->~Body();
     }
+
     task* execute() __TBB_override {
         if ( has_right_zombie ) {
             // Right child was stolen.
@@ -91,6 +94,7 @@ class start_reduce : public task {
     typename Partitioner::task_partition_type my_partition;
     reduction_context my_context;
     task* execute() __TBB_override;
+
     //! Update affinity info, if any
     void note_affinity( affinity_id id ) __TBB_override {
         my_partition.note_affinity( id );
@@ -105,6 +109,7 @@ public:
           my_range( range ),
           my_partition( partitioner ),
           my_context( root_task ) {}
+
     //! Splitting constructor used to generate children.
     /** parent_ becomes left child.  Newly constructed object is right child. */
     start_reduce( start_reduce& parent_,
@@ -116,6 +121,7 @@ public:
         my_partition.set_affinity( *this );
         parent_.my_context = left_child;
     }
+
     //! Construct right child from the given range as response to the demand.
     /** parent_ remains left child.  Newly constructed object is right child. */
     start_reduce( start_reduce& parent_, const Range& r, depth_t d )
@@ -128,6 +134,7 @@ public:
             d ); // TODO: move into constructor of partitioner
         parent_.my_context = left_child;
     }
+
     static void run( const Range& range,
                      Body& body,
                      Partitioner& partitioner ) {
@@ -169,6 +176,7 @@ public:
         new ( ( void* )tasks[ 1 ] ) start_reduce( *this, split_obj );
         spawn( *tasks[ 1 ] );
     }
+
     //! spawn right task, serves as callback for partitioner
     void offer_work( const Range& r, depth_t d = 0 ) {
         task* tasks[ 2 ];
@@ -230,6 +238,7 @@ class finish_deterministic_reduce : public task {
 
     finish_deterministic_reduce( Body& body )
         : my_left_body( body ), my_right_body( body, split() ) {}
+
     task* execute() __TBB_override {
         my_left_body.join( my_right_body );
         return NULL;
@@ -253,6 +262,7 @@ class start_deterministic_reduce : public task {
                                 Body& body,
                                 Partitioner& partitioner )
         : my_body( body ), my_range( range ), my_partition( partitioner ) {}
+
     //! Splitting constructor used to generate children.
     /** parent_ becomes left child.  Newly constructed object is right child. */
     start_deterministic_reduce( start_deterministic_reduce& parent_,
@@ -314,6 +324,7 @@ task* start_deterministic_reduce< Range, Body, Partitioner >::execute() {
     return NULL;
 }
 } // namespace internal
+
 //! @endcond
 } // namespace interface9
 
@@ -321,6 +332,7 @@ task* start_deterministic_reduce< Range, Body, Partitioner >::execute() {
 namespace internal {
 using interface9::internal::start_deterministic_reduce;
 using interface9::internal::start_reduce;
+
 //! Auxiliary class for parallel_reduce; for internal use only.
 /** The adaptor class that implements \ref parallel_reduce_body_req
  "parallel_reduce Body" using given \ref parallel_reduce_lambda_req "anonymous
@@ -350,28 +362,34 @@ public:
           my_real_body( body ),
           my_reduction( reduction ),
           my_value( identity ) {}
+
     lambda_reduce_body( const lambda_reduce_body& other )
         : identity_element( other.identity_element ),
           my_real_body( other.my_real_body ),
           my_reduction( other.my_reduction ),
           my_value( other.my_value ) {}
+
     lambda_reduce_body( lambda_reduce_body& other, tbb::split )
         : identity_element( other.identity_element ),
           my_real_body( other.my_real_body ),
           my_reduction( other.my_reduction ),
           my_value( other.identity_element ) {}
+
     void operator()( Range& range ) {
         my_value =
             my_real_body( range, const_cast< const Value& >( my_value ) );
     }
+
     void join( lambda_reduce_body& rhs ) {
         my_value = my_reduction( const_cast< const Value& >( my_value ),
                                  const_cast< const Value& >( rhs.my_value ) );
     }
+
     Value result() const { return my_value; }
 };
 
 } // namespace internal
+
 //! @endcond
 
 // Requirements on Range concept are documented in blocked_range.h

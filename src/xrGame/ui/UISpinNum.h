@@ -17,7 +17,9 @@ public:
     virtual void OnBtnDownClick();
 
     void SetMax( int max ) { m_iMax = max; };
+
     void SetMin( int min ) { m_iMin = min; };
+
     int Value() const { return m_iVal; }
 
 protected:

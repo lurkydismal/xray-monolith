@@ -12,6 +12,7 @@ public:
     CFindByIDPred( shared_str& element_to_find ) {
         IDPredstatic::element = element_to_find;
     }
+
     IC bool operator()( const INFO_DATA& data ) const {
         return data == IDPredstatic::element;
     }

@@ -3338,6 +3338,7 @@ private:
         : fTypeId( typeId ), fSubTypeId( subTypeId ) {
         fCurrency[ 0 ] = 0;
     }
+
     void setTo( int32_t typeId, int32_t subTypeId );
     int32_t getOffset() const;
     static MeasureUnit* create( int typeId, int subTypeId, UErrorCode& status );

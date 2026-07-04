@@ -39,6 +39,7 @@ struct raw_converter {
 template < int N >
 struct raw_policy : conversion_policy< N, false > {
     static void precall( lua_State*, const index_map& ) {}
+
     static void postcall( lua_State*, const index_map& ) {}
 
     template < typename T, Direction >

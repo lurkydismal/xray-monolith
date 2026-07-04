@@ -26,6 +26,7 @@ struct HrtfStore {
         float distance;
         ubyte evCount;
     };
+
     /* NOTE: Fields are stored *backwards*. field[0] is the farthest field, and
      * field[fdCount-1] is the nearest.
      */
@@ -35,6 +36,7 @@ struct HrtfStore {
         ushort azCount;
         ushort irOffset;
     };
+
     Elevation* mElev;
     const HrirArray* mCoeffs;
     const ubyte2* mDelays;
@@ -51,14 +53,17 @@ struct HrtfStore {
 
     DEF_PLACE_NEWDEL()
 };
+
 using HrtfStorePtr = al::intrusive_ptr< HrtfStore >;
 
 struct EvRadians {
     float value;
 };
+
 struct AzRadians {
     float value;
 };
+
 struct AngularPoint {
     EvRadians Elev;
     AzRadians Azim;
@@ -72,6 +77,7 @@ struct DirectHrtfState {
     al::FlexArray< HrtfChannelState > mChannels;
 
     DirectHrtfState( size_t numchans ) : mChannels{ numchans } {}
+
     /**
      * Produces HRTF filter coefficients for decoding B-Format, given a set of
      * virtual speaker positions, a matching decoding matrix, and per-order

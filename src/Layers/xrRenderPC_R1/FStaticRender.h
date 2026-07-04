@@ -123,6 +123,7 @@ public:
     virtual GenerationLevel get_generation() {
         return IRender_interface::GENERATION_R1;
     }
+
     virtual DWORD get_dx_level() { return 0x00090000; }
 
     virtual bool is_sun_static() { return true; }
@@ -147,7 +148,9 @@ public:
 
     // Information
     virtual void Statistics( CGameFont* F );
+
     virtual LPCSTR getShaderPath() { return "r1\\"; }
+
     virtual ref_shader getShader( int id );
     virtual IRender_Sector* getSector( int id );
     virtual IRenderVisual* getVisual( int id );
@@ -255,7 +258,9 @@ public:
     virtual void model_Delete( IRenderVisual*& V, BOOL bDiscard );
     virtual void model_Delete_Deffered( IRenderVisual*& V );
     virtual void model_Delete( IRender_DetailModel*& F );
+
     virtual void model_Logging( BOOL bEnable ) { Models->Logging( bEnable ); }
+
     virtual void models_Prefetch();
     virtual void models_PrefetchOne( LPCSTR name, bool assert = true );
     virtual void models_Clear( BOOL b_complete );
@@ -269,6 +274,7 @@ public:
             return default_pos;
         return sun->position;
     };
+
     virtual Fcolor GetSunColor() {
         static Fcolor default_color = { 0.0f, 0.0f, 0.0f, 0.0f };
         light* sun = ( light* )L_DB->sun_adapted._get();
@@ -276,6 +282,7 @@ public:
             return default_color;
         return sun->color;
     };
+
     virtual float GetSunIntensity() {
         static float default_intensity = 0.0f;
         light* sun = ( light* )L_DB->sun_adapted._get();
@@ -283,6 +290,7 @@ public:
             return default_intensity;
         return sun->color.intensity();
     };
+
     virtual bool IsSun() {
         static bool is_sun_visible = false;
         light* sun = ( light* )L_DB->sun_adapted._get();
@@ -318,7 +326,9 @@ public:
     virtual void rmNear();
     virtual void rmFar();
     virtual void rmNormal();
+
     virtual u32 active_phase() { return phase; }; // Swartz: actor shadow
+
     void RenderToTarget( RRT target ) override;
     // Constructor/destructor/loader
     CRender();

@@ -47,6 +47,7 @@ public:
     void StartTradeEx( CInventoryOwner* pInvOwner );
     void StartTrade();
     void StopTrade();
+
     bool IsInTradeState() { return TradeState; }
 
     void OnPerformTrade( u32 money_get, u32 money_put );

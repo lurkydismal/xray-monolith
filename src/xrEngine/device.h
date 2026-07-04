@@ -148,10 +148,12 @@ public:
                          // ?aiaa?o aoi?iai au?ii?oa
 
         IC bool IsSVPActive() { return isActive; }
+
         void SetSVPActive( bool bState );
         bool IsSVPFrame();
 
         IC u8 GetSVPFrameDelay() { return frameDelay; }
+
         void SetSVPFrameDelay( u8 iDelay ) {
             frameDelay = iDelay;
             clamp< u8 >( frameDelay, 2, u8( -1 ) );
@@ -314,8 +316,11 @@ public:
 
     // Mode control
     void DumpFlags();
+
     IC CTimer_paused* GetTimerGlobal() { return &TimerGlobal; }
+
     u32 TimerAsync() { return TimerGlobal.GetElapsed_ms(); }
+
     u32 TimerAsync_MMT() { return TimerMM.GetElapsed_ms() + Timer_MM_Delta; }
 
     // Creation & Destroying
@@ -467,6 +472,7 @@ private:
     void message_loop();
     virtual void _BCL AddSeqFrame( pureFrame* f, bool mt );
     virtual void _BCL RemoveSeqFrame( pureFrame* f );
+
     virtual CStatsPhysics* _BCL StatPhysics() { return Statistic; }
 
 private:
@@ -474,6 +480,7 @@ private:
 
 public:
     xr_imgui::ide& imgui() { return m_imgui; }
+
     bool imgui_shown() const { return m_imgui.is_shown(); }
 #ifdef INGAME_EDITOR
 public:

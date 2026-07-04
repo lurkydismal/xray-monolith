@@ -21,6 +21,7 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
+
 namespace luabind::detail {
 inline int overload_rep::call( lua_State* L, bool force_static_call ) const {
     if ( force_static_call )

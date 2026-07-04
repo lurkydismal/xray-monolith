@@ -53,6 +53,7 @@ struct tquat {
         struct {
             T x, y, z, w;
         };
+
         typename detail::storage< T,
                                   sizeof( T ) * 4,
                                   detail::is_aligned< P >::value >::type data;
@@ -71,6 +72,7 @@ struct tquat {
     // -- Component accesses --
 
     typedef length_t length_type;
+
     /// Return the count of components of a quaternion
     GLM_FUNC_DECL static length_type length() { return 4; }
 

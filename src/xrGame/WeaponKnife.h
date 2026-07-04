@@ -101,6 +101,7 @@ private:
         targets_t m_targets_vectors;
         obbes_t m_target_boxes;
     };
+
     dbg_draw_data m_dbg_data;
 #endif
     float m_Hit1Distance;
@@ -151,6 +152,7 @@ private:
         u16 m_victim_id;
         u16 m_shots_count;
     }; // struct	victim_bone_data
+
     typedef associative_vector< u16, u16 > victims_hits_count_t;
     typedef buffer_vector< std::pair< victim_bone_data, float > >
         victims_shapes_list_t;
@@ -174,6 +176,7 @@ private:
         Fvector m_start_pos;
         float m_query_distance;
     }; // class victim_filter
+
     class best_victim_selector {
     public:
         best_victim_selector( u16 except_id,

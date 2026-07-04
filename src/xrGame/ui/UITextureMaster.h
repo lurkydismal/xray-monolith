@@ -15,7 +15,9 @@ class CUIStaticItem;
 struct TEX_INFO {
     shared_str file;
     Frect rect;
+
     LPCSTR get_file_name() { return *file; }
+
     Frect get_rect() { return rect; }
 };
 

@@ -20,6 +20,7 @@ struct UhjAllPassFilter {
         /* Last two delayed components for direct form II. */
         float z[ 2 ];
     };
+
     std::array< AllPassState, 4 > mState;
 
     void process( const al::span< const float, 4 > coeffs,

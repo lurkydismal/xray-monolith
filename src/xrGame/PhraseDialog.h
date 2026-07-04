@@ -77,6 +77,7 @@ public:
 
     // список доступных в данный момент фраз
     virtual const PHRASE_VECTOR& PhraseList() const { return m_PhraseVector; }
+
     bool allIsDummy();
     // сказать фразу и перейти к следующей стадии диалога
     // если вернули false, то считаем, что диалог закончился
@@ -87,30 +88,36 @@ public:
 
     LPCSTR GetPhraseText( const shared_str& phrase_id,
                           bool current_speaking = true );
+
     LPCSTR GetLastPhraseText() {
         return GetPhraseText( m_SaidPhraseID, false );
     }
+
     const shared_str& GetDialogID() const { return m_DialogId; }
 
     // заголовок, диалога, если не задан, то 0-я фраза
     const shared_str& GetLastPhraseID() { return m_SaidPhraseID; }
+
     LPCSTR DialogCaption();
     int Priority();
 
     bool IsFinished() const { return m_bFinished; }
 
     IC CPhraseDialogManager* FirstSpeaker() const { return m_pSpeakerFirst; }
+
     IC CPhraseDialogManager* SecondSpeaker() const { return m_pSpeakerSecond; }
 
     // кто собирается говорить и кто слушать
     CPhraseDialogManager* CurrentSpeaker() const;
     CPhraseDialogManager* OtherSpeaker() const;
+
     // кто последний сказал фразу
     CPhraseDialogManager* LastSpeaker() const {
         return m_bFirstIsSpeaking ? SecondSpeaker() : FirstSpeaker();
     }
 
     IC bool FirstIsSpeaking() const { return m_bFirstIsSpeaking; }
+
     IC bool SecondIsSpeaking() const { return !m_bFirstIsSpeaking; }
 
     IC bool IsWeSpeaking( CPhraseDialogManager* dialog_manager ) const {
@@ -169,6 +176,7 @@ public:
                                int goodwil_level ) {
         return AddPhrase( text, phrase_id, prev_phrase_id, goodwil_level );
     };
+
     void SetCaption( LPCSTR str );
     void SetPriority( int val );
     CPhrase* GetPhrase( const shared_str& phrase_id );

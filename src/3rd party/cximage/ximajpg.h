@@ -51,6 +51,7 @@ public:
     // TCHAR * imageFileName){ return
     // CxImage::Save(imageFileName,CXIMAGE_FORMAT_JPG);}
     bool Decode( CxFile* hFile );
+
     bool Decode( FILE* hFile ) {
         CxIOFile file( hFile );
         return Decode( &file );
@@ -58,6 +59,7 @@ public:
 
 #if CXIMAGE_SUPPORT_ENCODE
     bool Encode( CxFile* hFile );
+
     bool Encode( FILE* hFile ) {
         CxIOFile file( hFile );
         return Encode( &file );
@@ -184,6 +186,7 @@ public:
     CxExifInfo* m_exif;
     EXIFINFO m_exifinfo;
     bool DecodeExif( CxFile* hFile );
+
     bool DecodeExif( FILE* hFile ) {
         CxIOFile file( hFile );
         return DecodeExif( &file );
@@ -218,6 +221,7 @@ public:
 
             m_pBuffer = new unsigned char[ eBufSize ];
         }
+
         ~CxFileJpg() { delete[] m_pBuffer; }
 
         static void InitDestination( j_compress_ptr cinfo ) {

@@ -13,6 +13,7 @@ public:
 
 public:
     virtual LPCSTR getComment() { return "LEVEL: detail objects"; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Save( IWriter& fs );

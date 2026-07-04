@@ -188,6 +188,7 @@ constexpr inline DWORD MaskFromTopBits( DWORD b ) noexcept {
     b |= b >> 16;
     return b;
 }
+
 constexpr DWORD MonoMask{ MaskFromTopBits( MONO ) };
 constexpr DWORD StereoMask{ MaskFromTopBits( STEREO ) };
 constexpr DWORD QuadMask{ MaskFromTopBits( QUAD ) };
@@ -220,6 +221,7 @@ public:
                        guid.Data4[ 3 ], guid.Data4[ 4 ], guid.Data4[ 5 ],
                        guid.Data4[ 6 ], guid.Data4[ 7 ] );
     }
+
     const char* c_str() const { return mMsg; }
 };
 
@@ -228,6 +230,7 @@ struct PropVariant {
 
 public:
     PropVariant() { PropVariantInit( &mProp ); }
+
     ~PropVariant() { clear(); }
 
     void clear() { PropVariantClear( &mProp ); }
@@ -235,9 +238,11 @@ public:
     PROPVARIANT* get() noexcept { return &mProp; }
 
     PROPVARIANT& operator*() noexcept { return mProp; }
+
     const PROPVARIANT& operator*() const noexcept { return mProp; }
 
     PROPVARIANT* operator->() noexcept { return &mProp; }
+
     const PROPVARIANT* operator->() const noexcept { return &mProp; }
 };
 
@@ -266,6 +271,7 @@ al::vector< DevMap > PlaybackDevices;
 al::vector< DevMap > CaptureDevices;
 
 using NameGUIDPair = std::pair< std::string, std::string >;
+
 NameGUIDPair get_device_name_and_guid( IMMDevice* device ) {
     static constexpr char UnknownName[]{ "Unknown Device Name" };
     static constexpr char UnknownGuid[]{ "Unknown Device GUID" };
@@ -520,6 +526,7 @@ struct WasapiProxy {
             return mType != MsgType::QuitThread;
         }
     };
+
     static std::thread sThread;
     static std::deque< Msg > mMsgQueue;
     static std::mutex mMsgQueueLock;
@@ -588,6 +595,7 @@ struct WasapiProxy {
         }
     }
 };
+
 std::thread WasapiProxy::sThread;
 std::deque< WasapiProxy::Msg > WasapiProxy::mMsgQueue;
 std::mutex WasapiProxy::mMsgQueueLock;
@@ -678,6 +686,7 @@ int WasapiProxy::messageHandler( std::promise< HRESULT >* promise ) {
 
 struct WasapiPlayback final : public BackendBase, WasapiProxy {
     WasapiPlayback( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~WasapiPlayback() override;
 
     int mixerProc();
@@ -1341,6 +1350,7 @@ ClockLatency WasapiPlayback::getClockLatency() {
 
 struct WasapiCapture final : public BackendBase, WasapiProxy {
     WasapiCapture( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~WasapiCapture() override;
 
     int recordProc();
@@ -1981,12 +1991,15 @@ bool WasapiBackendFactory::querySupport( BackendType type ) {
 std::string WasapiBackendFactory::probe( BackendType type ) {
     struct ProxyControl {
         HRESULT mResult{};
+
         ProxyControl() { mResult = WasapiProxy::InitThread(); }
+
         ~ProxyControl() {
             if ( SUCCEEDED( mResult ) )
                 WasapiProxy::DeinitThread();
         }
     };
+
     ProxyControl proxy;
 
     std::string outnames;

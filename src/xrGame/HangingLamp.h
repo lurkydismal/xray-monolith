@@ -39,7 +39,9 @@ private:
     void CreateBody( CSE_ALifeObjectHangingLamp* lamp );
     void Init();
     void RespawnInit();
+
     bool Alive() { return fHealth > 0.f; }
+
     bool NeedUpdate;
     bool isFlickering;
     float lastFlicker;
@@ -57,8 +59,11 @@ public:
     void ResetLanim();
     void TurnOn();
     void TurnOff();
+
     bool IsOn() { return m_bState; }
+
     bool IsFlickering() { return isFlickering; }
+
     virtual void Load( LPCSTR section );
     virtual BOOL net_Spawn( CSE_Abstract* DC );
     virtual void net_Destroy();
@@ -66,9 +71,11 @@ public:
     virtual void UpdateCL(); // Called each frame, so no need for dt
 
     virtual void SpawnInitPhysics( CSE_Abstract* D );
+
     virtual CPhysicsShellHolder* PPhysicsShellHolder() {
         return PhysicsShellHolder();
     };
+
     virtual void CopySpawnInit();
     virtual void net_Save( NET_Packet& P );
     virtual BOOL net_SaveRelevant();
@@ -76,6 +83,7 @@ public:
     virtual void load( IReader& input_packet );
 
     virtual BOOL renderable_ShadowGenerate() { return TRUE; }
+
     virtual BOOL renderable_ShadowReceive() { return TRUE; }
 
     virtual void Hit( SHit* pHDS );

@@ -8,18 +8,23 @@ struct LockImpl {
     CRITICAL_SECTION cs;
 
     LockImpl() { InitializeCriticalSection( &cs ); }
+
     ~LockImpl() { DeleteCriticalSection( &cs ); }
 
     ICF void Lock() { EnterCriticalSection( &cs ); }
+
     ICF void Unlock() { LeaveCriticalSection( &cs ); }
+
     ICF bool TryLock() { return !!TryEnterCriticalSection( &cs ); }
 };
 
 #ifdef CONFIG_PROFILE_LOCKS
 static add_profile_portion_callback add_profile_portion = 0;
+
 void set_add_profile_portion( add_profile_portion_callback callback ) {
     add_profile_portion = callback;
 }
+
 struct profiler {
     u64 m_time;
     LPCSTR m_timer_id;

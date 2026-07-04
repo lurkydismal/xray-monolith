@@ -45,6 +45,7 @@ public:
 namespace std {
 struct _finddata_t;
 };
+
 #define _FINDDATA_T std::_finddata_t
 #else
 struct _finddata64i32_t;
@@ -70,6 +71,7 @@ public:
     FS_File( const _FINDDATA_T& f );
     FS_File( const xr_string& nm, const _FINDDATA_T& f );
     FS_File( const xr_string& nm, long sz, time_t modif, unsigned attr );
+
     bool operator<( const FS_File& _X ) const {
         return xr_strcmp( name.c_str(), _X.name.c_str() ) < 0;
     }

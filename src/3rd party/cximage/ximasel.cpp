@@ -14,6 +14,7 @@
 bool CxImage::SelectionIsValid() {
     return pSelection != 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Gets the smallest rectangle that contains the selection
@@ -21,6 +22,7 @@ bool CxImage::SelectionIsValid() {
 void CxImage::SelectionGetBox( RECT& r ) {
     memcpy( &r, &info.rSelectionBox, sizeof( RECT ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Empties the selection.
@@ -42,6 +44,7 @@ bool CxImage::SelectionClear( BYTE level ) {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Allocates an empty selection.
@@ -51,6 +54,7 @@ bool CxImage::SelectionCreate() {
     pSelection = ( BYTE* )calloc( head.biWidth * head.biHeight, 1 );
     return ( pSelection != 0 );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Deallocates the selction.
@@ -65,6 +69,7 @@ bool CxImage::SelectionDelete() {
     info.rSelectionBox.right = info.rSelectionBox.top = 0;
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Checks if the coordinates are inside the selection.
@@ -77,6 +82,7 @@ bool CxImage::SelectionIsInside( long x, long y ) {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Checks if the coordinates are inside the selection.
@@ -95,6 +101,7 @@ bool CxImage::BlindSelectionIsInside( long x, long y ) {
         return true;
     return pSelection[ x + y * head.biWidth ] != 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Adds a rectangle to the existing selection.
@@ -140,6 +147,7 @@ bool CxImage::SelectionAddRect( RECT r, BYTE level ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Adds an ellipse to the existing selection.
@@ -199,6 +207,7 @@ bool CxImage::SelectionAddEllipse( RECT r, BYTE level ) {
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Inverts the selection.
@@ -220,6 +229,7 @@ bool CxImage::SelectionInvert() {
     }
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Imports an existing region from another image with the same width and height.
@@ -238,6 +248,7 @@ bool CxImage::SelectionCopy( CxImage& from ) {
     memcpy( &info.rSelectionBox, &from.info.rSelectionBox, sizeof( RECT ) );
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Adds a polygonal region to the existing selection. points points to an array
@@ -498,6 +509,7 @@ bool CxImage::SelectionAddPolygon( POINT* points, long npoints, BYTE level ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Adds to the selection all the pixels matching the specified color.
@@ -540,6 +552,7 @@ bool CxImage::SelectionAddColor( RGBQUAD c, BYTE level ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Adds a single pixel to the existing selection.
@@ -567,6 +580,7 @@ bool CxImage::SelectionAddPixel( long x, long y, BYTE level ) {
 
     return false;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Exports the selection channel in a 8bpp grayscale image.
@@ -592,6 +606,7 @@ bool CxImage::SelectionSplit( CxImage* dest ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Creates the selection channel from a gray scale image.
@@ -628,6 +643,7 @@ bool CxImage::SelectionSet( CxImage& from ) {
 
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Sets the Selection level for a single pixel
@@ -637,6 +653,7 @@ void CxImage::SelectionSet( const long x, const long y, const BYTE level ) {
     if ( pSelection && IsInside( x, y ) )
         pSelection[ x + y * head.biWidth ] = level;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Gets the Selection level for a single pixel
@@ -646,6 +663,7 @@ BYTE CxImage::SelectionGet( const long x, const long y ) {
         return pSelection[ x + y * head.biWidth ];
     return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Rebuilds the SelectionBox
@@ -696,6 +714,7 @@ void CxImage::SelectionRebuildBox() {
         }
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Gets the Selection level for a single pixel
@@ -712,6 +731,7 @@ BYTE CxImage::BlindSelectionGet( const long x, const long y ) {
 #endif
     return pSelection[ x + y * head.biWidth ];
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns pointer to selection data for pixel (x,y).
@@ -721,6 +741,7 @@ BYTE* CxImage::SelectionGetPointer( const long x, const long y ) {
         return pSelection + x + y * head.biWidth;
     return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::SelectionFlip() {
     if ( !pSelection )
@@ -748,6 +769,7 @@ bool CxImage::SelectionFlip() {
     info.rSelectionBox.bottom = head.biHeight - top;
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 bool CxImage::SelectionMirror() {
     if ( !pSelection )
@@ -775,6 +797,7 @@ bool CxImage::SelectionMirror() {
     info.rSelectionBox.right = head.biWidth - left;
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 #if CXIMAGE_SUPPORT_WINDOWS
 /**

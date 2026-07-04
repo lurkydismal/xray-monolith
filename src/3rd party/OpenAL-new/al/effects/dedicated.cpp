@@ -13,11 +13,13 @@ void Dedicated_setParami( EffectProps*, ALenum param, int ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid dedicated integer property 0x%04x", param };
 }
+
 void Dedicated_setParamiv( EffectProps*, ALenum param, const int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid dedicated integer-vector property 0x%04x",
                             param };
 }
+
 void Dedicated_setParamf( EffectProps* props, ALenum param, float val ) {
     switch ( param ) {
         case AL_DEDICATED_GAIN:
@@ -33,6 +35,7 @@ void Dedicated_setParamf( EffectProps* props, ALenum param, float val ) {
                                     param };
     }
 }
+
 void Dedicated_setParamfv( EffectProps* props,
                            ALenum param,
                            const float* vals ) {
@@ -43,11 +46,13 @@ void Dedicated_getParami( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid dedicated integer property 0x%04x", param };
 }
+
 void Dedicated_getParamiv( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid dedicated integer-vector property 0x%04x",
                             param };
 }
+
 void Dedicated_getParamf( const EffectProps* props, ALenum param, float* val ) {
     switch ( param ) {
         case AL_DEDICATED_GAIN:
@@ -60,6 +65,7 @@ void Dedicated_getParamf( const EffectProps* props, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void Dedicated_getParamfv( const EffectProps* props,
                            ALenum param,
                            float* vals ) {

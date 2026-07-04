@@ -53,6 +53,7 @@ union _allocation_size {
         u32 allocation : 1;
         u32 size : 31;
     };
+
     u32 allocation_size;
 };
 
@@ -76,9 +77,11 @@ STATIC void initialize() {
     InitializeCriticalSection( &critical_section );
 }
 } // namespace memory_monitor
+
 XRCORE_API int memory_monitor::counter = 0;
 XRCORE_API int memory_monitor::counter_alloc = 0;
 XRCORE_API int memory_monitor::counter_free = 0;
+
 void memory_monitor::monitor_alloc( const void* allocation_address,
                                     const u32& allocation_size,
                                     LPCSTR allocation_description ) {

@@ -200,8 +200,8 @@ void CServerList::FillUpDetailedServerInfo() {
     //				pItemAdv = m_list[LST_PLAYERS].AddItem();
     //				pItemAdv->SetTextColor
     //(m_list[LST_PLAYERS].GetTextColor());
-    //pItemAdv->SetFont (m_list[LST_PLAYERS].GetFont());
-    //pItemAdv->SetText
+    // pItemAdv->SetFont (m_list[LST_PLAYERS].GetFont());
+    // pItemAdv->SetText
     //(_buff);
     //				pItemAdv->GetTextItem()->SetWidth(m_list[LST_PLAYERS].GetDesiredChildWidth());
     //				t1 = true;
@@ -214,7 +214,8 @@ void CServerList::FillUpDetailedServerInfo() {
     //			pItemAdv->SetTextColor
     //(m_list[LST_PLAYERS].GetTextColor()); pItemAdv->SetFont
     //(m_list[LST_PLAYERS].GetFont()); 			pItemAdv->SetText
-    //(pf.Name); 			pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
+    //(pf.Name);
+    //pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Frags); 			pItemAdv->AddTextField
@@ -222,7 +223,7 @@ void CServerList::FillUpDetailedServerInfo() {
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Deaths);
-    //pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
+    // pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
     //		}
 
     //
@@ -255,7 +256,7 @@ void CServerList::FillUpDetailedServerInfo() {
     //(m_list[LST_PLAYERS].GetTextColor()); pItemAdv->SetFont
     //(m_list[LST_PLAYERS].GetFont()); 			pItemAdv->SetText
     //(pf.Name);
-    //pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
+    // pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
     //
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Frags); 			pItemAdv->AddTextField
@@ -263,7 +264,7 @@ void CServerList::FillUpDetailedServerInfo() {
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Deaths);
-    //pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
+    // pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
     //		}
 
     //		// SPECTATORS
@@ -287,7 +288,7 @@ void CServerList::FillUpDetailedServerInfo() {
     //			pItemAdv->SetFont
     //(m_list[LST_PLAYERS].GetFont()); 			pItemAdv->SetTextColor
     //(m_list[LST_PLAYERS].GetTextColor()); pItemAdv->SetText (pf.Name);
-    //pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
+    // pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Frags); 			pItemAdv->AddTextField
@@ -295,7 +296,7 @@ void CServerList::FillUpDetailedServerInfo() {
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Deaths);
-    //pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
+    // pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
     //		}
 
     //	}
@@ -315,7 +316,7 @@ void CServerList::FillUpDetailedServerInfo() {
     //(m_list[LST_PLAYERS].GetTextColor()); pItemAdv->SetFont
     //(m_list[LST_PLAYERS].GetFont()); 			pItemAdv->SetText
     //(pf.Name);
-    //pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
+    // pItemAdv->GetTextItem()->SetWidth(m_header2[1].GetWidth());
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Frags); 			pItemAdv->AddTextField
@@ -323,7 +324,7 @@ void CServerList::FillUpDetailedServerInfo() {
 
     //			xr_sprintf
     //(buf,sizeof(buf),"%d",pf.Deaths);
-    //pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
+    // pItemAdv->AddTextField (buf, m_header2[3].GetWidth());
     //		}
     //	}
 

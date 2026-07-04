@@ -194,6 +194,7 @@ public:
         fl_cam,
         fl_max,
     };
+
     IRenderable* val_pObject = nullptr;
     bool i_mask
         [ fl_max ]{}; // deffered,forward,wmarks,normal,shmap,val_invisible,val_hud,val_cam_attached
@@ -204,13 +205,16 @@ public:
     virtual void add_Dynamic( IRenderVisual* piVisual, Fmatrix* xform ) = 0;
 
     virtual void set_Object( IRenderable* O = nullptr ) = 0;
+
     IRenderable* get_Object() { return val_pObject; }
 
     virtual void set_HUD( bool V = false ) { i_mask[ fl_hud ] = V; }
+
     virtual bool get_HUD() { return i_mask[ fl_hud ]; }
 
     // Anomaly
     virtual void set_CamAttached( bool V ) { i_mask[ fl_cam ] = V; }
+
     virtual bool get_CamAttached() { return i_mask[ fl_cam ]; }
 
     virtual void set_Invisible( bool V = false ) { i_mask[ fl_invisible ] = V; }
@@ -228,7 +232,9 @@ public:
         PHASE_POINT = 3,
         PHASE_SPOT = 4,
     };
+
     enum { MMSM_OFF = 0, MMSM_ON, MMSM_AUTO, MMSM_AUTODETECT };
+
     u32 phase = PHASE_NORMAL;
     BOOL b_loaded = FALSE;
 
@@ -403,14 +409,17 @@ public:
         static Fvector default_pos;
         return default_pos;
     };
+
     virtual Fcolor GetSunColor() {
         static Fcolor default_color;
         return default_color;
     };
+
     virtual float GetSunIntensity() {
         static float default_intensity;
         return default_intensity;
     };
+
     virtual bool IsSun() {
         static bool is_sun_visible;
         return is_sun_visible;
@@ -446,7 +455,9 @@ public:
     virtual void rmNear() = 0;
     virtual void rmFar() = 0;
     virtual void rmNormal() = 0;
+
     virtual u32 memory_usage() { return 0; }
+
     virtual u32 active_phase() = 0; // Swartz: actor shadow
     virtual void RenderToTarget( RRT target ) = 0;
     // Constructor/destructor

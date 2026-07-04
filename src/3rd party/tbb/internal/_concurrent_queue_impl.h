@@ -154,6 +154,7 @@ private:
 
     public:
         destroyer( T& value ) : my_value( value ) {}
+
         ~destroyer() { my_value.~T(); }
     };
 
@@ -437,6 +438,7 @@ public:
                                ticket k,
                                page* p )
         : my_ticket( k ), my_queue( queue ), my_page( p ), allocator( b ) {}
+
     ~micro_queue_pop_finalizer();
 };
 
@@ -707,6 +709,7 @@ public:
     const concurrent_queue_base_v3< T >& my_queue;
     typename concurrent_queue_base_v3< T >::page*
         array[ concurrent_queue_rep< T >::n_queue ];
+
     concurrent_queue_iterator_rep( const concurrent_queue_base_v3< T >& queue )
         : head_counter( queue.my_rep->head_counter ), my_queue( queue ) {
         for ( size_t k = 0; k < concurrent_queue_rep< T >::n_queue; ++k )
@@ -853,14 +856,17 @@ template < typename T >
 struct tbb_remove_cv {
     typedef T type;
 };
+
 template < typename T >
 struct tbb_remove_cv< const T > {
     typedef T type;
 };
+
 template < typename T >
 struct tbb_remove_cv< volatile T > {
     typedef T type;
 };
+
 template < typename T >
 struct tbb_remove_cv< const volatile T > {
     typedef T type;

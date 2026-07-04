@@ -61,6 +61,7 @@ private:
 
     struct LogRecord {
         LogRecord() {}
+
         LogRecord( LPCSTR Msg, u32 sizeMsg );
         xr_string Message;
         Time time;

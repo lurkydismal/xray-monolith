@@ -72,6 +72,7 @@ public:
     ERoundEnd_Result round_end_reason;
 
     virtual void SaveMapList();
+
     virtual bool HasMapRotation() { return m_bMapRotation; };
 
     bool FindPlayerName( char const* name, IClient const* to_exclude );
@@ -101,6 +102,7 @@ public:
 
     void MapRotation_AddMap( LPCSTR MapName, LPCSTR MapVer );
     void MapRotation_ListMaps();
+
     virtual bool OnNextMap() { return false; }
 
     virtual void OnPrevMap() {}
@@ -109,6 +111,7 @@ public:
 
     virtual BOOL IsVotingEnabled();
     virtual BOOL IsVotingEnabled( u16 flag );
+
     virtual bool IsVotingActive() { return false; };
 
     virtual void SetVotingActive( bool Active ) {};
@@ -172,6 +175,7 @@ public:
         u16 eid_target,
         BOOL bForced = FALSE ) = 0; // TRUE=allow ownership, FALSE=denied
     virtual void OnDetach( u16 eid_who, u16 eid_target ) = 0;
+
     virtual BOOL OnActivate( u16 eid_who, u16 eid_target ) { return TRUE; };
 
     virtual void OnDestroyObject( u16 eid_who );
@@ -213,11 +217,13 @@ public:
     void CleanDelayedEvents();
 
     virtual BOOL isFriendlyFireEnabled() { return FALSE; };
+
     virtual BOOL CanHaveFriendlyFire() = 0;
     virtual void teleport_object( NET_Packet& packet, u16 id );
     virtual void add_restriction( NET_Packet& packet, u16 id );
     virtual void remove_restriction( NET_Packet& packet, u16 id );
     virtual void remove_all_restrictions( NET_Packet& packet, u16 id );
+
     virtual bool custom_sls_default() { return false; };
 
     virtual void sls_default() {};

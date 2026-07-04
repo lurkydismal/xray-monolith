@@ -260,6 +260,7 @@ static codec_setup_info codec_setup0 = { { 0, 0 },
                                          &_psy_set0G };
 
 static int noisy = 0;
+
 void analysis( char* base, int i, float* v, int n, int bark, int dB ) {
     if ( noisy ) {
         int j;

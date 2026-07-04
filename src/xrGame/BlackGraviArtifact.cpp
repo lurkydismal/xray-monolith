@@ -15,6 +15,7 @@
 #include "physicsshellholder.h"
 #include "stdafx.h"
 #include "xrmessages.h"
+
 // extern CPHWorld*	ph_world;
 CBlackGraviArtefact::CBlackGraviArtefact( void ) {
     m_fImpulseThreshold = 10.f;

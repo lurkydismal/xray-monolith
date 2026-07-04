@@ -197,6 +197,7 @@ public:
             }
         return FALSE;
     }
+
     //--DSR-- SilencerOverheat_end
 
     CSkeletonX() {
@@ -205,6 +206,7 @@ public:
     }
 
     virtual void SetParent( CKinematics* K ) { Parent = K; }
+
     virtual void AfterLoad( CKinematics* parent, u16 child_idx ) = 0;
     virtual void EnumBoneVertices( SEnumVerticesCallback& C, u16 bone_id ) = 0;
     virtual BOOL PickBone( IKinematics::pick_result& r,

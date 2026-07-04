@@ -1,4 +1,5 @@
 #pragma once
+
 namespace extrapolation {
 class points;
 }
@@ -26,6 +27,7 @@ public:
 
     void set_taget( float taget, float time );
     float shift() const;
+
     void freeze( bool v ) { b_freeze = v; }
 
 private:

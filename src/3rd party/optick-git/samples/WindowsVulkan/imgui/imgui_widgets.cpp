@@ -3799,9 +3799,11 @@ namespace ImGuiStb {
 static int STB_TEXTEDIT_STRINGLEN( const STB_TEXTEDIT_STRING* obj ) {
     return obj->CurLenW;
 }
+
 static ImWchar STB_TEXTEDIT_GETCHAR( const STB_TEXTEDIT_STRING* obj, int idx ) {
     return obj->TextW[ idx ];
 }
+
 static float STB_TEXTEDIT_GETWIDTH( STB_TEXTEDIT_STRING* obj,
                                     int line_start_idx,
                                     int char_idx ) {
@@ -3811,10 +3813,13 @@ static float STB_TEXTEDIT_GETWIDTH( STB_TEXTEDIT_STRING* obj,
     return GImGui->Font->GetCharAdvance( c ) *
            ( GImGui->FontSize / GImGui->Font->FontSize );
 }
+
 static int STB_TEXTEDIT_KEYTOTEXT( int key ) {
     return key >= 0x10000 ? 0 : key;
 }
+
 static ImWchar STB_TEXTEDIT_NEWLINE = '\n';
+
 static void STB_TEXTEDIT_LAYOUTROW( StbTexteditRow* r,
                                     STB_TEXTEDIT_STRING* obj,
                                     int line_start_idx ) {
@@ -3835,11 +3840,13 @@ static bool is_separator( unsigned int c ) {
     return ImCharIsBlankW( c ) || c == ',' || c == ';' || c == '(' ||
            c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == '|';
 }
+
 static int is_word_boundary_from_right( STB_TEXTEDIT_STRING* obj, int idx ) {
     return idx > 0 ? ( is_separator( obj->TextW[ idx - 1 ] ) &&
                        !is_separator( obj->TextW[ idx ] ) )
                    : 1;
 }
+
 static int STB_TEXTEDIT_MOVEWORDLEFT_IMPL( STB_TEXTEDIT_STRING* obj, int idx ) {
     idx--;
     while ( idx >= 0 && !is_word_boundary_from_right( obj, idx ) )
@@ -3852,6 +3859,7 @@ static int is_word_boundary_from_left( STB_TEXTEDIT_STRING* obj, int idx ) {
                        is_separator( obj->TextW[ idx ] ) )
                    : 1;
 }
+
 static int STB_TEXTEDIT_MOVEWORDRIGHT_IMPL( STB_TEXTEDIT_STRING* obj,
                                             int idx ) {
     idx++;

@@ -46,7 +46,9 @@ namespace luabind {
 class error : public std::exception {
 public:
     error( lua_State* L ) : m_L( L ) {}
+
     lua_State* state() const throw() { return m_L; }
+
     virtual const char* what() const throw() { return "lua runtime error"; }
 
 private:
@@ -59,8 +61,11 @@ private:
 class cast_failed : public std::exception {
 public:
     cast_failed( lua_State* L, LUABIND_TYPE_INFO i ) : m_L( L ), m_info( i ) {}
+
     lua_State* state() const throw() { return m_L; }
+
     LUABIND_TYPE_INFO info() const throw() { return m_info; }
+
     virtual const char* what() const throw() { return "unable to make cast"; }
 
 private:

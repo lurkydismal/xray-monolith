@@ -266,6 +266,7 @@ void CEffect_Rain::OnFrame() {
 extern xr_atomic_u32 current_items;
 extern float r_rain_exp;
 extern float r_rain_k;
+
 void CEffect_Rain::UpdateItems() {
     PROF_EVENT( "CEffect_Rain::UpdateItems" );
     xrCriticalSectionGuard guard( &rainCS );

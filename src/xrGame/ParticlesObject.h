@@ -25,6 +25,7 @@ public:
                       bool destroy_on_game_load );
 
     virtual bool shedule_Needed() { return true; };
+
     virtual float shedule_Scale();
     virtual void Update( u32 dt ) override;
     virtual void renderable_Render( IDSGraphManager* DM );
@@ -32,15 +33,19 @@ public:
 
     Fvector& Position();
     void SetXFORM( const Fmatrix& m );
+
     IC Fmatrix& XFORM() { return renderable.xform; }
+
     void UpdateParent( const Fmatrix& m, const Fvector& vel );
 
     void play_at_pos( const Fvector& pos, BOOL xform = FALSE );
     virtual void Play( bool bHudMode );
     void Stop( BOOL bDefferedStop = TRUE );
+
     // virtual BOOL Locked() { return mt_dt; }
 
     bool IsLooped() { return m_bLooped; }
+
     bool IsAutoRemove();
     bool IsPlaying();
     void SetAutoRemove( bool auto_remove );

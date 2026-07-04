@@ -98,4 +98,5 @@ AL_API ALenum AL_APIENTRY alGetError( void ) START_API_FUNC {
 
     return context->mLastError.exchange( AL_NO_ERROR );
 }
+
 END_API_FUNC

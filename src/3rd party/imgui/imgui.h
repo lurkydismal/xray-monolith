@@ -507,14 +507,19 @@ typedef void ( *ImGuiMemFreeFunc )(
 // - Add '#define IMGUI_DEFINE_MATH_OPERATORS' before including this file (or in
 // imconfig.h) to access courtesy maths operators for ImVec2 and ImVec4.
 IM_MSVC_RUNTIME_CHECKS_OFF
+
 struct ImVec2 {
     float x, y;
+
     constexpr ImVec2() : x( 0.0f ), y( 0.0f ) {}
+
     constexpr ImVec2( float _x, float _y ) : x( _x ), y( _y ) {}
+
     float& operator[]( size_t idx ) {
         IM_ASSERT( idx == 0 || idx == 1 );
         return ( ( float* )( void* )( char* )this )[ idx ];
     } // We very rarely use this [] operator, so the assert overhead is fine.
+
     float operator[]( size_t idx ) const {
         IM_ASSERT( idx == 0 || idx == 1 );
         return ( ( const float* )( const void* )( const char* )this )[ idx ];
@@ -530,7 +535,9 @@ struct ImVec2 {
 // [Compile-time configurable type]
 struct ImVec4 {
     float x, y, z, w;
+
     constexpr ImVec4() : x( 0.0f ), y( 0.0f ), z( 0.0f ), w( 0.0f ) {}
+
     constexpr ImVec4( float _x, float _y, float _z, float _w )
         : x( _x ), y( _y ), z( _z ), w( _w ) {}
 #ifdef IM_VEC4_CLASS_EXTRA
@@ -539,6 +546,7 @@ struct ImVec4 {
                         // between your math types and ImVec4.
 #endif
 };
+
 IM_MSVC_RUNTIME_CHECKS_RESTORE
 
 //-----------------------------------------------------------------------------
@@ -3651,6 +3659,7 @@ enum ImGuiKey : int {
     // [Internal] If you need to iterate all keys (for e.g. an input mapper) you
     // may use ImGuiKey_NamedKey_BEGIN..ImGuiKey_NamedKey_END.
     ImGuiKey_NamedKey_COUNT = ImGuiKey_NamedKey_END - ImGuiKey_NamedKey_BEGIN,
+
 // ImGuiKey_KeysData_SIZE        = ImGuiKey_NamedKey_COUNT,  // Size of
 // KeysData[]: only hold named keys ImGuiKey_KeysData_OFFSET      =
 // ImGuiKey_NamedKey_BEGIN,  // Accesses to io.KeysData[] must use (key -
@@ -4561,16 +4570,20 @@ struct ImGuiTableColumnSortSpecs {
 //-----------------------------------------------------------------------------
 
 struct ImNewWrapper {};
+
 inline void* operator new( size_t, ImNewWrapper, void* ptr ) {
     return ptr;
 }
+
 inline void operator delete( void*, ImNewWrapper, void* ) {
 } // This is only required so we can use the symmetrical new()
+
 #define IM_ALLOC( _SIZE ) ImGui::MemAlloc( _SIZE )
 #define IM_FREE( _PTR ) ImGui::MemFree( _PTR )
 #define IM_PLACEMENT_NEW( _PTR ) new ( ImNewWrapper(), _PTR )
 #define IM_NEW( _TYPE ) \
     new ( ImNewWrapper(), ImGui::MemAlloc( sizeof( _TYPE ) ) ) _TYPE
+
 template < typename T >
 void IM_DELETE( T* p ) {
     if ( p ) {
@@ -4601,6 +4614,7 @@ void IM_DELETE( T* p ) {
 //-----------------------------------------------------------------------------
 
 IM_MSVC_RUNTIME_CHECKS_OFF
+
 template < typename T >
 struct ImVector {
     int Size;
@@ -4617,11 +4631,13 @@ struct ImVector {
         Size = Capacity = 0;
         Data = NULL;
     }
+
     inline ImVector( const ImVector< T >& src ) {
         Size = Capacity = 0;
         Data = NULL;
         operator=( src );
     }
+
     inline ImVector< T >& operator=( const ImVector< T >& src ) {
         clear();
         resize( src.Size );
@@ -4629,6 +4645,7 @@ struct ImVector {
             memcpy( Data, src.Data, ( size_t )Size * sizeof( T ) );
         return *this;
     }
+
     inline ~ImVector() {
         if ( Data )
             IM_FREE( Data );
@@ -4641,11 +4658,13 @@ struct ImVector {
             Data = NULL;
         }
     } // Important: does not destruct anything
+
     inline void clear_delete() {
         for ( int n = 0; n < Size; n++ )
             IM_DELETE( Data[ n ] );
         clear();
     } // Important: never called automatically! always explicit.
+
     inline void clear_destruct() {
         for ( int n = 0; n < Size; n++ )
             Data[ n ].~T();
@@ -4653,39 +4672,53 @@ struct ImVector {
     } // Important: never called automatically! always explicit.
 
     inline bool empty() const { return Size == 0; }
+
     inline int size() const { return Size; }
+
     inline int size_in_bytes() const { return Size * ( int )sizeof( T ); }
+
     inline int max_size() const { return 0x7FFFFFFF / ( int )sizeof( T ); }
+
     inline int capacity() const { return Capacity; }
+
     inline T& operator[]( int i ) {
         IM_ASSERT( i >= 0 && i < Size );
         return Data[ i ];
     }
+
     inline const T& operator[]( int i ) const {
         IM_ASSERT( i >= 0 && i < Size );
         return Data[ i ];
     }
 
     inline T* begin() { return Data; }
+
     inline const T* begin() const { return Data; }
+
     inline T* end() { return Data + Size; }
+
     inline const T* end() const { return Data + Size; }
+
     inline T& front() {
         IM_ASSERT( Size > 0 );
         return Data[ 0 ];
     }
+
     inline const T& front() const {
         IM_ASSERT( Size > 0 );
         return Data[ 0 ];
     }
+
     inline T& back() {
         IM_ASSERT( Size > 0 );
         return Data[ Size - 1 ];
     }
+
     inline const T& back() const {
         IM_ASSERT( Size > 0 );
         return Data[ Size - 1 ];
     }
+
     inline void swap( ImVector< T >& rhs ) {
         int rhs_size = rhs.Size;
         rhs.Size = Size;
@@ -4702,11 +4735,13 @@ struct ImVector {
         int new_capacity = Capacity ? ( Capacity + Capacity / 2 ) : 8;
         return new_capacity > sz ? new_capacity : sz;
     }
+
     inline void resize( int new_size ) {
         if ( new_size > Capacity )
             reserve( _grow_capacity( new_size ) );
         Size = new_size;
     }
+
     inline void resize( int new_size, const T& v ) {
         if ( new_size > Capacity )
             reserve( _grow_capacity( new_size ) );
@@ -4715,11 +4750,13 @@ struct ImVector {
                 memcpy( &Data[ n ], &v, sizeof( v ) );
         Size = new_size;
     }
+
     inline void shrink( int new_size ) {
         IM_ASSERT( new_size <= Size );
         Size = new_size;
     } // Resize a vector to a smaller size, guaranteed not to cause a
       // reallocation
+
     inline void reserve( int new_capacity ) {
         if ( new_capacity <= Capacity )
             return;
@@ -4731,6 +4768,7 @@ struct ImVector {
         Data = new_data;
         Capacity = new_capacity;
     }
+
     inline void reserve_discard( int new_capacity ) {
         if ( new_capacity <= Capacity )
             return;
@@ -4749,16 +4787,19 @@ struct ImVector {
         memcpy( &Data[ Size ], &v, sizeof( v ) );
         Size++;
     }
+
     inline void pop_back() {
         IM_ASSERT( Size > 0 );
         Size--;
     }
+
     inline void push_front( const T& v ) {
         if ( Size == 0 )
             push_back( v );
         else
             insert( Data, v );
     }
+
     inline T* erase( const T* it ) {
         IM_ASSERT( it >= Data && it < Data + Size );
         const ptrdiff_t off = it - Data;
@@ -4767,6 +4808,7 @@ struct ImVector {
         Size--;
         return Data + off;
     }
+
     inline T* erase( const T* it, const T* it_last ) {
         IM_ASSERT( it >= Data && it < Data + Size && it_last >= it &&
                    it_last <= Data + Size );
@@ -4778,6 +4820,7 @@ struct ImVector {
         Size -= ( int )count;
         return Data + off;
     }
+
     inline T* erase_unsorted( const T* it ) {
         IM_ASSERT( it >= Data && it < Data + Size );
         const ptrdiff_t off = it - Data;
@@ -4786,6 +4829,7 @@ struct ImVector {
         Size--;
         return Data + off;
     }
+
     inline T* insert( const T* it, const T& v ) {
         IM_ASSERT( it >= Data && it <= Data + Size );
         const ptrdiff_t off = it - Data;
@@ -4798,6 +4842,7 @@ struct ImVector {
         Size++;
         return Data + off;
     }
+
     inline bool contains( const T& v ) const {
         const T* data = Data;
         const T* data_end = Data + Size;
@@ -4806,6 +4851,7 @@ struct ImVector {
                 return true;
         return false;
     }
+
     inline T* find( const T& v ) {
         T* data = Data;
         const T* data_end = Data + Size;
@@ -4816,6 +4862,7 @@ struct ImVector {
                 ++data;
         return data;
     }
+
     inline const T* find( const T& v ) const {
         const T* data = Data;
         const T* data_end = Data + Size;
@@ -4826,6 +4873,7 @@ struct ImVector {
                 ++data;
         return data;
     }
+
     inline int find_index( const T& v ) const {
         const T* data_end = Data + Size;
         const T* it = find( v );
@@ -4834,6 +4882,7 @@ struct ImVector {
         const ptrdiff_t off = it - Data;
         return ( int )off;
     }
+
     inline bool find_erase( const T& v ) {
         const T* it = find( v );
         if ( it < Data + Size ) {
@@ -4842,6 +4891,7 @@ struct ImVector {
         }
         return false;
     }
+
     inline bool find_erase_unsorted( const T& v ) {
         const T* it = find( v );
         if ( it < Data + Size ) {
@@ -4850,12 +4900,14 @@ struct ImVector {
         }
         return false;
     }
+
     inline int index_from_ptr( const T* it ) const {
         IM_ASSERT( it >= Data && it < Data + Size );
         const ptrdiff_t off = it - Data;
         return ( int )off;
     }
 };
+
 IM_MSVC_RUNTIME_CHECKS_RESTORE
 
 //-----------------------------------------------------------------------------
@@ -5763,11 +5815,14 @@ struct ImGuiInputTextCallbackData {
     IMGUI_API void InsertChars( int pos,
                                 const char* text,
                                 const char* text_end = NULL );
+
     void SelectAll() {
         SelectionStart = 0;
         SelectionEnd = BufTextLen;
     }
+
     void ClearSelection() { SelectionStart = SelectionEnd = BufTextLen; }
+
     bool HasSelection() const { return SelectionStart != SelectionEnd; }
 };
 
@@ -5865,6 +5920,7 @@ struct ImGuiPayload {
                    // button is released over the target item.
 
     ImGuiPayload() { Clear(); }
+
     void Clear() {
         SourceId = SourceParentId = 0;
         Data = NULL;
@@ -5873,10 +5929,13 @@ struct ImGuiPayload {
         DataFrameCount = -1;
         Preview = Delivery = false;
     }
+
     bool IsDataType( const char* type ) const {
         return DataFrameCount != -1 && strcmp( type, DataType ) == 0;
     }
+
     bool IsPreview() const { return Preview; }
+
     bool IsDelivery() const { return Delivery; }
 };
 
@@ -5902,7 +5961,9 @@ struct ImGuiPayload {
 // ImGui::Text("This will be called only once per frame");
 struct ImGuiOnceUponAFrame {
     ImGuiOnceUponAFrame() { RefFrame = -1; }
+
     mutable int RefFrame;
+
     operator bool() const {
         int current_frame = ImGui::GetFrameCount();
         if ( RefFrame == current_frame )
@@ -5920,10 +5981,12 @@ struct ImGuiTextFilter {
     IMGUI_API bool PassFilter( const char* text,
                                const char* text_end = NULL ) const;
     IMGUI_API void Build();
+
     void Clear() {
         InputBuf[ 0 ] = 0;
         Build();
     }
+
     bool IsActive() const { return !Filters.empty(); }
 
     // [Internal]
@@ -5932,14 +5995,18 @@ struct ImGuiTextFilter {
         const char* e;
 
         ImGuiTextRange() { b = e = NULL; }
+
         ImGuiTextRange( const char* _b, const char* _e ) {
             b = _b;
             e = _e;
         }
+
         bool empty() const { return b == e; }
+
         IMGUI_API void split( char separator,
                               ImVector< ImGuiTextRange >* out ) const;
     };
+
     char InputBuf[ 256 ];
     ImVector< ImGuiTextRange > Filters;
     int CountGrep;
@@ -5952,19 +6019,28 @@ struct ImGuiTextBuffer {
     IMGUI_API static char EmptyString[ 1 ];
 
     ImGuiTextBuffer() {}
+
     inline char operator[]( int i ) const {
         IM_ASSERT( Buf.Data != NULL );
         return Buf.Data[ i ];
     }
+
     const char* begin() const { return Buf.Data ? &Buf.front() : EmptyString; }
+
     const char* end() const {
         return Buf.Data ? &Buf.back() : EmptyString;
     } // Buf is zero-terminated, so end() will point on the zero-terminator
+
     int size() const { return Buf.Size ? Buf.Size - 1 : 0; }
+
     bool empty() const { return Buf.Size <= 1; }
+
     void clear() { Buf.clear(); }
+
     void reserve( int capacity ) { Buf.reserve( capacity ); }
+
     const char* c_str() const { return Buf.Data ? Buf.Data : EmptyString; }
+
     IMGUI_API void append( const char* str, const char* str_end = NULL );
     IMGUI_API void appendf( const char* fmt, ... ) IM_FMTARGS( 2 );
     IMGUI_API void appendfv( const char* fmt, va_list args ) IM_FMTLIST( 2 );
@@ -5973,19 +6049,23 @@ struct ImGuiTextBuffer {
 // [Internal] Key+Value for ImGuiStorage
 struct ImGuiStoragePair {
     ImGuiID key;
+
     union {
         int val_i;
         float val_f;
         void* val_p;
     };
+
     ImGuiStoragePair( ImGuiID _key, int _val ) {
         key = _key;
         val_i = _val;
     }
+
     ImGuiStoragePair( ImGuiID _key, float _val ) {
         key = _key;
         val_f = _val;
     }
+
     ImGuiStoragePair( ImGuiID _key, void* _val ) {
         key = _key;
         val_p = _val;
@@ -6015,6 +6095,7 @@ struct ImGuiStorage {
     // - Sorted insertion is costly, paid once. A typical frame shouldn't need
     // to insert any new pair.
     void Clear() { Data.clear(); }
+
     IMGUI_API int GetInt( ImGuiID key, int default_val = 0 ) const;
     IMGUI_API void SetInt( ImGuiID key, int val );
     IMGUI_API bool GetBool( ImGuiID key, bool default_val = false ) const;
@@ -6116,6 +6197,7 @@ struct ImGuiListClipper {
     inline void IncludeItemByIndex( int item_index ) {
         IncludeItemsByIndex( item_index, item_index + 1 );
     }
+
     IMGUI_API void IncludeItemsByIndex(
         int item_begin,
         int item_end ); // item_end is exclusive e.g. use (42, 42+1) to make
@@ -6134,9 +6216,11 @@ struct ImGuiListClipper {
     inline void IncludeRangeByIndices( int item_begin, int item_end ) {
         IncludeItemsByIndex( item_begin, item_end );
     } // [renamed in 1.89.9]
+
     inline void ForceDisplayRangeByIndices( int item_begin, int item_end ) {
         IncludeItemsByIndex( item_begin, item_end );
     } // [renamed in 1.89.6]
+
     // inline ImGuiListClipper(int items_count, float items_height = -1.0f) {
     // memset(this, 0, sizeof(*this)); ItemsCount = -1; Begin(items_count,
     // items_height); } // [removed in 1.79]
@@ -6154,79 +6238,100 @@ struct ImGuiListClipper {
 // enough and we want to reduce the surface for possible user mistake.
 #ifdef IMGUI_DEFINE_MATH_OPERATORS
 #define IMGUI_DEFINE_MATH_OPERATORS_IMPLEMENTED
+
 IM_MSVC_RUNTIME_CHECKS_OFF
 static inline ImVec2 operator*( const ImVec2& lhs, const float rhs ) {
     return ImVec2( lhs.x * rhs, lhs.y * rhs );
 }
+
 static inline ImVec2 operator/( const ImVec2& lhs, const float rhs ) {
     return ImVec2( lhs.x / rhs, lhs.y / rhs );
 }
+
 static inline ImVec2 operator+( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x + rhs.x, lhs.y + rhs.y );
 }
+
 static inline ImVec2 operator-( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x - rhs.x, lhs.y - rhs.y );
 }
+
 static inline ImVec2 operator*( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x * rhs.x, lhs.y * rhs.y );
 }
+
 static inline ImVec2 operator/( const ImVec2& lhs, const ImVec2& rhs ) {
     return ImVec2( lhs.x / rhs.x, lhs.y / rhs.y );
 }
+
 static inline ImVec2 operator-( const ImVec2& lhs ) {
     return ImVec2( -lhs.x, -lhs.y );
 }
+
 static inline ImVec2& operator*=( ImVec2& lhs, const float rhs ) {
     lhs.x *= rhs;
     lhs.y *= rhs;
     return lhs;
 }
+
 static inline ImVec2& operator/=( ImVec2& lhs, const float rhs ) {
     lhs.x /= rhs;
     lhs.y /= rhs;
     return lhs;
 }
+
 static inline ImVec2& operator+=( ImVec2& lhs, const ImVec2& rhs ) {
     lhs.x += rhs.x;
     lhs.y += rhs.y;
     return lhs;
 }
+
 static inline ImVec2& operator-=( ImVec2& lhs, const ImVec2& rhs ) {
     lhs.x -= rhs.x;
     lhs.y -= rhs.y;
     return lhs;
 }
+
 static inline ImVec2& operator*=( ImVec2& lhs, const ImVec2& rhs ) {
     lhs.x *= rhs.x;
     lhs.y *= rhs.y;
     return lhs;
 }
+
 static inline ImVec2& operator/=( ImVec2& lhs, const ImVec2& rhs ) {
     lhs.x /= rhs.x;
     lhs.y /= rhs.y;
     return lhs;
 }
+
 static inline bool operator==( const ImVec2& lhs, const ImVec2& rhs ) {
     return lhs.x == rhs.x && lhs.y == rhs.y;
 }
+
 static inline bool operator!=( const ImVec2& lhs, const ImVec2& rhs ) {
     return lhs.x != rhs.x || lhs.y != rhs.y;
 }
+
 static inline ImVec4 operator+( const ImVec4& lhs, const ImVec4& rhs ) {
     return ImVec4( lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z, lhs.w + rhs.w );
 }
+
 static inline ImVec4 operator-( const ImVec4& lhs, const ImVec4& rhs ) {
     return ImVec4( lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z, lhs.w - rhs.w );
 }
+
 static inline ImVec4 operator*( const ImVec4& lhs, const ImVec4& rhs ) {
     return ImVec4( lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z, lhs.w * rhs.w );
 }
+
 static inline bool operator==( const ImVec4& lhs, const ImVec4& rhs ) {
     return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z && lhs.w == rhs.w;
 }
+
 static inline bool operator!=( const ImVec4& lhs, const ImVec4& rhs ) {
     return lhs.x != rhs.x || lhs.y != rhs.y || lhs.z != rhs.z || lhs.w != rhs.w;
 }
+
 IM_MSVC_RUNTIME_CHECKS_RESTORE
 #endif
 
@@ -6274,14 +6379,18 @@ struct ImColor {
     ImVec4 Value;
 
     constexpr ImColor() {}
+
     constexpr ImColor( float r, float g, float b, float a = 1.0f )
         : Value( r, g, b, a ) {}
+
     constexpr ImColor( const ImVec4& col ) : Value( col ) {}
+
     constexpr ImColor( int r, int g, int b, int a = 255 )
         : Value( ( float )r * ( 1.0f / 255.0f ),
                  ( float )g * ( 1.0f / 255.0f ),
                  ( float )b * ( 1.0f / 255.0f ),
                  ( float )a * ( 1.0f / 255.0f ) ) {}
+
     constexpr ImColor( ImU32 rgba )
         : Value( ( float )( ( rgba >> IM_COL32_R_SHIFT ) & 0xFF ) *
                      ( 1.0f / 255.0f ),
@@ -6291,9 +6400,11 @@ struct ImColor {
                      ( 1.0f / 255.0f ),
                  ( float )( ( rgba >> IM_COL32_A_SHIFT ) & 0xFF ) *
                      ( 1.0f / 255.0f ) ) {}
+
     inline operator ImU32() const {
         return ImGui::ColorConvertFloat4ToU32( Value );
     }
+
     inline operator ImVec4() const { return Value; }
 
     // FIXME-OBSOLETE: May need to obsolete/cleanup those helpers.
@@ -6301,6 +6412,7 @@ struct ImColor {
         ImGui::ColorConvertHSVtoRGB( h, s, v, Value.x, Value.y, Value.z );
         Value.w = a;
     }
+
     static ImColor HSV( float h, float s, float v, float a = 1.0f ) {
         float r, g, b;
         ImGui::ColorConvertHSVtoRGB( h, s, v, r, g, b );
@@ -6598,6 +6710,7 @@ struct ImGuiSelectionBasicStorage {
         ImGuiID* out_id ); // Iterate selection with 'void* it = NULL; ImGuiID
                            // id; while (selection.GetNextSelectedItem(&it,
                            // &id)) { ... }'
+
     inline ImGuiID GetStorageIdFromIndex( int idx ) {
         return AdapterIndexToStorageId( this, idx );
     } // Convert index to item id based on provided adapter.
@@ -6757,11 +6870,14 @@ struct ImDrawListSplitter {
                                          // _Count might be < Channels.Size)
 
     inline ImDrawListSplitter() { memset( this, 0, sizeof( *this ) ); }
+
     inline ~ImDrawListSplitter() { ClearFreeMemory(); }
+
     inline void Clear() {
         _Current = 0;
         _Count = 1;
     } // Do not clear Channels[] so our allocations are reused next frame
+
     IMGUI_API void ClearFreeMemory();
     IMGUI_API void Split( ImDrawList* draw_list, int count );
     IMGUI_API void Merge( ImDrawList* draw_list );
@@ -6910,10 +7026,12 @@ struct ImDrawList {
     IMGUI_API void PopClipRect();
     IMGUI_API void PushTextureID( ImTextureID texture_id );
     IMGUI_API void PopTextureID();
+
     inline ImVec2 GetClipRectMin() const {
         const ImVec4& cr = _ClipRectStack.back();
         return ImVec2( cr.x, cr.y );
     }
+
     inline ImVec2 GetClipRectMax() const {
         const ImVec4& cr = _ClipRectStack.back();
         return ImVec2( cr.z, cr.w );
@@ -7093,26 +7211,32 @@ struct ImDrawList {
     //   'PathArcTo(center, radius, PI, PI * -0.5f)' won't have correct
     //   anti-aliasing when followed by PathFillConvex().
     inline void PathClear() { _Path.Size = 0; }
+
     inline void PathLineTo( const ImVec2& pos ) { _Path.push_back( pos ); }
+
     inline void PathLineToMergeDuplicate( const ImVec2& pos ) {
         if ( _Path.Size == 0 ||
              memcmp( &_Path.Data[ _Path.Size - 1 ], &pos, 8 ) != 0 )
             _Path.push_back( pos );
     }
+
     inline void PathFillConvex( ImU32 col ) {
         AddConvexPolyFilled( _Path.Data, _Path.Size, col );
         _Path.Size = 0;
     }
+
     inline void PathFillConcave( ImU32 col ) {
         AddConcavePolyFilled( _Path.Data, _Path.Size, col );
         _Path.Size = 0;
     }
+
     inline void PathStroke( ImU32 col,
                             ImDrawFlags flags = 0,
                             float thickness = 1.0f ) {
         AddPolyline( _Path.Data, _Path.Size, col, flags, thickness );
         _Path.Size = 0;
     }
+
     IMGUI_API void PathArcTo( const ImVec2& center,
                               float radius,
                               float a_min,
@@ -7192,7 +7316,9 @@ struct ImDrawList {
     //   can stack them. Using the ImDrawList::ChannelsXXXX you cannot stack a
     //   split over another.
     inline void ChannelsSplit( int count ) { _Splitter.Split( this, count ); }
+
     inline void ChannelsMerge() { _Splitter.Merge( this ); }
+
     inline void ChannelsSetCurrent( int n ) {
         _Splitter.SetCurrentChannel( this, n );
     }
@@ -7220,6 +7346,7 @@ struct ImDrawList {
                                const ImVec2& uv_c,
                                const ImVec2& uv_d,
                                ImU32 col );
+
     inline void PrimWriteVtx( const ImVec2& pos, const ImVec2& uv, ImU32 col ) {
         _VtxWritePtr->pos = pos;
         _VtxWritePtr->uv = uv;
@@ -7227,10 +7354,12 @@ struct ImDrawList {
         _VtxWritePtr++;
         _VtxCurrentIdx++;
     }
+
     inline void PrimWriteIdx( ImDrawIdx idx ) {
         *_IdxWritePtr = idx;
         _IdxWritePtr++;
     }
+
     inline void PrimVtx( const ImVec2& pos, const ImVec2& uv, ImU32 col ) {
         PrimWriteIdx( ( ImDrawIdx )_VtxCurrentIdx );
         PrimWriteVtx( pos, uv, col );
@@ -7312,6 +7441,7 @@ struct ImDrawData {
 
     // Functions
     ImDrawData() { Clear(); }
+
     IMGUI_API void Clear();
     IMGUI_API void AddDrawList(
         ImDrawList* draw_list ); // Helper to add an external draw list into an
@@ -7426,22 +7556,27 @@ struct ImFontGlyphRangesBuilder {
         UsedChars; // Store 1-bit per Unicode code point (0=unused, 1=used)
 
     ImFontGlyphRangesBuilder() { Clear(); }
+
     inline void Clear() {
         int size_in_bytes = ( IM_UNICODE_CODEPOINT_MAX + 1 ) / 8;
         UsedChars.resize( size_in_bytes / ( int )sizeof( ImU32 ) );
         memset( UsedChars.Data, 0, ( size_t )size_in_bytes );
     }
+
     inline bool GetBit( size_t n ) const {
         int off = ( int )( n >> 5 );
         ImU32 mask = 1u << ( n & 31 );
         return ( UsedChars[ off ] & mask ) != 0;
     } // Get bit n in the array
+
     inline void SetBit( size_t n ) {
         int off = ( int )( n >> 5 );
         ImU32 mask = 1u << ( n & 31 );
         UsedChars[ off ] |= mask;
     } // Set bit n in the array
+
     inline void AddChar( ImWchar c ) { SetBit( c ); } // Add character
+
     IMGUI_API void AddText(
         const char* text,
         const char* text_end =
@@ -7470,6 +7605,7 @@ struct ImFontAtlasCustomRect {
     ImVec2 GlyphOffset;  // Input    // For custom font glyphs only: glyph
                          // display offset
     ImFont* Font;        // Input    // For custom font glyphs only: target font
+
     ImFontAtlasCustomRect() {
         X = Y = 0xFFFF;
         Width = Height = 0;
@@ -7479,6 +7615,7 @@ struct ImFontAtlasCustomRect {
         GlyphOffset = ImVec2( 0, 0 );
         Font = NULL;
     }
+
     bool IsPacked() const { return X != 0xFFFF; }
 };
 
@@ -7596,11 +7733,13 @@ struct ImFontAtlas {
         int* out_width,
         int* out_height,
         int* out_bytes_per_pixel = NULL ); // 4 bytes-per-pixel
+
     bool IsBuilt() const {
         return Fonts.Size > 0 && TexReady;
     } // Bit ambiguous: used to detect when user didn't build texture but
       // effectively we should check TexID != 0 except that would be backend
       // dependent...
+
     void SetTexID( ImTextureID id ) { TexID = id; }
 
     //-------------------------------------------
@@ -7662,6 +7801,7 @@ struct ImFontAtlas {
                                           float advance_x,
                                           const ImVec2& offset = ImVec2( 0,
                                                                          0 ) );
+
     ImFontAtlasCustomRect* GetCustomRectByIndex( int index ) {
         IM_ASSERT( index >= 0 );
         return &CustomRects[ index ];
@@ -7809,11 +7949,14 @@ struct ImFont {
     IMGUI_API ~ImFont();
     IMGUI_API const ImFontGlyph* FindGlyph( ImWchar c );
     IMGUI_API const ImFontGlyph* FindGlyphNoFallback( ImWchar c );
+
     float GetCharAdvance( ImWchar c ) {
         return ( ( int )c < IndexAdvanceX.Size ) ? IndexAdvanceX[ ( int )c ]
                                                  : FallbackAdvanceX;
     }
+
     bool IsLoaded() const { return ContainerAtlas != NULL; }
+
     const char* GetDebugName() const {
         return ConfigData ? ConfigData->Name : "<unknown>";
     }
@@ -8000,6 +8143,7 @@ struct ImGuiViewport {
                                // e.g. pressing ALT-F4)
 
     ImGuiViewport() { memset( this, 0, sizeof( *this ) ); }
+
     ~ImGuiViewport() {
         IM_ASSERT( PlatformUserData == NULL && RendererUserData == NULL );
     }
@@ -8008,6 +8152,7 @@ struct ImGuiViewport {
     ImVec2 GetCenter() const {
         return ImVec2( Pos.x + Size.x * 0.5f, Pos.y + Size.y * 0.5f );
     }
+
     ImVec2 GetWorkCenter() const {
         return ImVec2( WorkPos.x + WorkSize.x * 0.5f,
                        WorkPos.y + WorkSize.y * 0.5f );
@@ -8304,6 +8449,7 @@ struct ImGuiPlatformMonitor {
     float DpiScale;       // 1.0f = 96 DPI
     void* PlatformHandle; // Backend dependant data (e.g. HMONITOR,
                           // GLFWmonitor*, SDL Display Index, NSScreen*)
+
     ImGuiPlatformMonitor() {
         MainPos = MainSize = WorkPos = WorkSize = ImVec2( 0, 0 );
         DpiScale = 1.0f;
@@ -8334,15 +8480,19 @@ namespace ImGui {
 static inline void PushButtonRepeat( bool repeat ) {
     PushItemFlag( ImGuiItemFlags_ButtonRepeat, repeat );
 }
+
 static inline void PopButtonRepeat() {
     PopItemFlag();
 }
+
 static inline void PushTabStop( bool tab_stop ) {
     PushItemFlag( ImGuiItemFlags_NoTabStop, !tab_stop );
 }
+
 static inline void PopTabStop() {
     PopItemFlag();
 }
+
 IMGUI_API ImVec2
 GetContentRegionMax(); // Content boundaries max (e.g. window boundaries
                        // including scrolling, or current column boundaries).
@@ -8360,15 +8510,18 @@ GetWindowContentRegionMax(); // Content boundaries max for the window (roughly
                              // You should never need this. Always use
                              // GetCursorScreenPos() and
                              // GetContentRegionAvail()!
+
 // OBSOLETED in 1.90.0 (from September 2023)
 static inline bool BeginChildFrame( ImGuiID id,
                                     const ImVec2& size,
                                     ImGuiWindowFlags window_flags = 0 ) {
     return BeginChild( id, size, ImGuiChildFlags_FrameStyle, window_flags );
 }
+
 static inline void EndChildFrame() {
     EndChild();
 }
+
 // static inline bool BeginChild(const char* str_id, const ImVec2& size_arg,
 // bool borders, ImGuiWindowFlags window_flags){ return BeginChild(str_id,
 // size_arg, borders ? ImGuiChildFlags_Borders : ImGuiChildFlags_None,
@@ -8380,6 +8533,7 @@ static inline void EndChildFrame() {
 static inline void ShowStackToolWindow( bool* p_open = NULL ) {
     ShowIDStackToolWindow( p_open );
 }
+
 IMGUI_API bool Combo( const char* label,
                       int* current_item,
                       bool ( *old_callback )( void* user_data,
@@ -8399,10 +8553,12 @@ IMGUI_API bool ListBox( const char* label,
 // OBSOLETED in 1.89.7 (from June 2023)
 IMGUI_API void
 SetItemAllowOverlap(); // Use SetNextItemAllowOverlap() before item.
+
 // OBSOLETED in 1.89.4 (from March 2023)
 static inline void PushAllowKeyboardFocus( bool tab_stop ) {
     PushItemFlag( ImGuiItemFlags_NoTabStop, !tab_stop );
 }
+
 static inline void PopAllowKeyboardFocus() {
     PopItemFlag();
 }

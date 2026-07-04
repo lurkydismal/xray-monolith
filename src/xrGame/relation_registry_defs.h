@@ -13,7 +13,9 @@
 struct SRelation {
     SRelation();
     ~SRelation();
+
     CHARACTER_GOODWILL Goodwill() const { return m_iGoodwill; };
+
     void SetGoodwill( CHARACTER_GOODWILL new_goodwill ) {
         m_iGoodwill = new_goodwill;
     };

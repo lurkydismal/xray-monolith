@@ -37,8 +37,10 @@ typename luabind::memory_allocator< T >::const_pointer
 luabind::memory_allocator< T >::address( const_reference value ) const {
     return ( &value );
 }
+
 #pragma warning( push )
 #pragma warning( disable : 5037 )
+
 template < typename T >
 typename luabind::memory_allocator< T >::pointer
 luabind::memory_allocator< T >::allocate( size_type const n,
@@ -49,7 +51,9 @@ luabind::memory_allocator< T >::allocate( size_type const n,
 
     return ( pResult );
 }
+
 #pragma warning( pop )
+
 template < typename T >
 char* luabind::memory_allocator< T >::__charalloc( size_type const n ) {
     return ( ( char* )allocate( n ) );

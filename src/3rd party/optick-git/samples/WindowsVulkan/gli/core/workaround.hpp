@@ -10,6 +10,7 @@ union u3u3u2 {
         uint y : 3;
         uint z : 2;
     } data;
+
     uint8 pack;
 };
 
@@ -18,6 +19,7 @@ union u4u4 {
         uint x : 4;
         uint y : 4;
     } data;
+
     uint8 pack;
 };
 
@@ -28,6 +30,7 @@ union u4u4u4u4 {
         uint z : 4;
         uint w : 4;
     } data;
+
     uint16 pack;
 };
 
@@ -37,6 +40,7 @@ union u5u6u5 {
         uint y : 6;
         uint z : 5;
     } data;
+
     uint16 pack;
 };
 
@@ -47,6 +51,7 @@ union u5u5u5u1 {
         uint z : 5;
         uint w : 1;
     } data;
+
     uint16 pack;
 };
 
@@ -57,6 +62,7 @@ union u9u9u9e5 {
         uint z : 9;
         uint w : 5;
     } data;
+
     uint32 pack;
 };
 

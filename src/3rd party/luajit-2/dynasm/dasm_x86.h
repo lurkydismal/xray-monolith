@@ -350,6 +350,7 @@ stop:
     sec->pos = pos;
     sec->ofs = ofs;
 }
+
 #undef CK
 
 /* Pass 2: Link sections, shrink branches/aligns, fix label offsets. */

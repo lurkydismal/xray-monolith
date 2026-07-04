@@ -61,6 +61,7 @@ void R_xforms::set_W_prev( const Fmatrix& m ) {
     if ( c_wvp_prev )
         RCache.set_c( c_wvp_prev, m_wvp_prev );
 }
+
 void R_xforms::set_V_prev( const Fmatrix& m ) {
     m_v_prev.set( m );
     m_wv_prev.mul_43( m_v_prev, m_w_prev );
@@ -76,6 +77,7 @@ void R_xforms::set_V_prev( const Fmatrix& m ) {
     if ( c_wvp_prev )
         RCache.set_c( c_wvp_prev, m_wvp_prev );
 }
+
 void R_xforms::set_P_prev( const Fmatrix& m ) {
     m_p_prev.set( m );
     m_vp_prev.mul( m_p_prev, m_v_prev );

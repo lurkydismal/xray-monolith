@@ -258,6 +258,7 @@ inline bool get_config_value( api::effect_runtime* runtime,
     return std::from_chars( value_string, value_string + value_length, value )
                .ec == std::errc{};
 }
+
 template <>
 inline bool get_config_value< bool >( api::effect_runtime* runtime,
                                       const char* section,
@@ -308,6 +309,7 @@ inline void set_config_value( api::effect_runtime* runtime,
     set_config_value( runtime, section, key,
                       static_cast< const char* >( value_string ) );
 }
+
 template <>
 inline void set_config_value< bool >( api::effect_runtime* runtime,
                                       const char* section,
@@ -373,6 +375,7 @@ inline bool register_addon(
     return true;
 #endif
 }
+
 /// <summary>
 /// Unregisters this module as an add-on.
 /// Call this in 'AddonUninit' or 'DllMain' during process detach, after any of
@@ -420,6 +423,7 @@ inline void register_event( typename addon_event_traits< ev >::decl callback ) {
         func( ev, static_cast< void* >( callback ) );
 #endif
 }
+
 /// <summary>
 /// Unregisters a callback from the specified event that was previously
 /// registered via <see cref="register_event"/>.
@@ -462,6 +466,7 @@ inline void register_overlay(
         func( title, callback );
 #endif
 }
+
 /// <summary>
 /// Unregisters an overlay that was previously registered via <see
 /// cref="register_overlay"/>.
@@ -525,6 +530,7 @@ inline bool create_effect_runtime(
                  out_runtime );
 #endif
 }
+
 /// <summary>
 /// Instantly destroys an effect runtime that was previously created via <see
 /// cref="create_effect_runtime"/>. Do not call this with effect runtimes that
@@ -542,6 +548,7 @@ inline void destroy_effect_runtime( api::effect_runtime* runtime ) {
         func( runtime );
 #endif
 }
+
 /// <summary>
 /// Updates and renders an effect runtime onto the current back buffer of the
 /// swap chain it was created with. Do not call this with effect runtimes that

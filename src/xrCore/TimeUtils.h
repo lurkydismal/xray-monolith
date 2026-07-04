@@ -46,6 +46,7 @@ xr_string getCurrentTimeStamp( const char* format = "%H:%M:%S" ) {
 xr_string timeInDMYHMSMMM() {
     return getCurrentTimeStamp( "%d.%m.%Y %H:%M:%S" );
 }
+
 xr_string timeInHMSMMM() {
     return getCurrentTimeStamp( "%H:%M:%S" );
 }

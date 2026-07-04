@@ -17,6 +17,7 @@ public:
 
 private:
     virtual char* get_monster_class_name() { return "chimera"; }
+
     virtual EAction CustomVelocityIndex2Action( u32 velocity_index );
 
     typedef CBaseMonster inherited;

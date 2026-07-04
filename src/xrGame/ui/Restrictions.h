@@ -15,7 +15,9 @@ public:
     ~CRestrictions();
 
     void InitGroups();
+
     const u32 GetRank() const { return m_rank; }
+
     bool IsAvailable( const shared_str& section_name );
     u32 GetItemCount( const shared_str& section_name ) const;
     shared_str GetItemGroup( const shared_str& section_name ) const;
@@ -27,6 +29,7 @@ public:
     }
 
     u32 GetRank() { return m_rank; };
+
     const shared_str& GetRankName( u32 rank ) const { return m_names[ rank ]; }
 
 protected:

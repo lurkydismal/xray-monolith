@@ -146,6 +146,7 @@ public:
     }
 
     float Low() const { return low; }
+
     float High() const { return high; }
 
     int IsFullRange( float eps = AINT_BIG_EPSILON ) const {

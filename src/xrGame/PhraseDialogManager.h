@@ -26,14 +26,18 @@ public:
     virtual void UpdateAvailableDialogs( CPhraseDialogManager* partner );
 
     DEFINE_VECTOR( DIALOG_SHARED_PTR, DIALOG_VECTOR, DIALOG_VECTOR_IT );
+
     const DIALOG_VECTOR& AvailableDialogs() { return m_AvailableDialogs; }
+
     const DIALOG_SHARED_PTR& GetDialogByID( const shared_str& dialog_id ) const;
     bool HaveAvailableDialog( const shared_str& dialog_id ) const;
 
     virtual CPhraseDialogManager* cast_phrase_dialog_manager() { return this; }
+
     virtual CAI_PhraseDialogManager* cast_ai_phrase_dialog_manager() {
         return nullptr;
     }
+
     virtual CInventoryOwner* cast_inventory_owner() { return nullptr; }
 
 protected:

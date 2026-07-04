@@ -73,21 +73,27 @@ float3 calc_model_lq_lighting( float3 norm_w ) {
 float3 unpack_normal( float3 v ) {
     return 2.0 * v - 1.0;
 }
+
 float3 unpack_bx2( float3 v ) {
     return 2.0 * v - 1.0;
 }
+
 float3 unpack_bx4( float3 v ) {
     return 4.0 * v - 2.0;
 } //! reduce the amount of stretching from 4*v-2 and increase precision
+
 float2 unpack_tc_lmap( float2 tc ) {
     return tc * ( 1.0 / 32768.0 );
 } // [-1  .. +1 ]
+
 float4 unpack_color( float4 c ) {
     return c.bgra;
 }
+
 float4 unpack_D3DCOLOR( float4 c ) {
     return c.bgra;
 }
+
 float3 unpack_D3DCOLOR( float3 c ) {
     return c.bgr;
 }
@@ -119,6 +125,7 @@ float3 v_sun( float3 n ) {
 float3 calc_reflection( float3 pos_w, float3 norm_w ) {
     return reflect( normalize( pos_w - eye_position ), norm_w );
 }
+
 // CUSTOM
 float3 blend_soft( float3 a, float3 b ) {
     return 1.0 - ( 1.0 - a ) * ( 1.0 - b );
@@ -158,6 +165,7 @@ float normalize_depth( float depth ) {
 float is_sky( float depth ) {
     return step( depth, SKY_EPS );
 }
+
 float is_not_sky( float depth ) {
     return step( SKY_EPS, depth );
 }
@@ -165,6 +173,7 @@ float is_not_sky( float depth ) {
 float is_sky( float depth ) {
     return step( abs( depth - SKY_DEPTH ), SKY_EPS );
 }
+
 float is_not_sky( float depth ) {
     return step( SKY_EPS, abs( depth - SKY_DEPTH ) );
 }

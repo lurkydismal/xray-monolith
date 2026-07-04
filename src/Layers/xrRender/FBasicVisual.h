@@ -51,12 +51,19 @@ public:
     shared_str dbg_texture;
     shared_str dbg_shader_def;
     shared_str dbg_texture_def;
+
     virtual void setID( u32 id ) { dbg_id = id; }
+
     virtual u32 _BCL getID() { return dbg_id; }
+
     virtual shared_str getDebugName() { return dbg_name; }
+
     virtual LPCSTR _BCL getDebugShader() { return *dbg_shader; }
+
     virtual LPCSTR _BCL getDebugTexture() { return *dbg_texture; }
+
     virtual LPCSTR _BCL getDebugShaderDef() { return *dbg_shader_def; }
+
     virtual LPCSTR _BCL getDebugTextureDef() { return *dbg_texture_def; }
 
 public:
@@ -81,13 +88,14 @@ public:
     //{ return 0;	} 	virtual
     // CKinematicsAnimated*dcast_PKinematicsAnimated	()
     //{ return 0;	} 	virtual IParticleCustom*
-    //dcast_ParticleCustom
+    // dcast_ParticleCustom
     //()				{ return 0;	}
 
     virtual void SetShaderTexture( LPCSTR shader, LPCSTR texture );
     virtual void ResetShaderTexture();
 
     virtual vis_data& _BCL getVisData() { return vis; }
+
     virtual u32 getType() { return Type; }
 
     CTexture* GetTexture();                        //--DSR--

@@ -159,6 +159,7 @@ string512 g_sBenchmarkName;
 ENGINE_API string512 g_sLaunchOnExit_params;
 ENGINE_API string512 g_sLaunchOnExit_app;
 ENGINE_API string_path g_sLaunchWorkingFolder;
+
 // -------------------------------------------
 // startup point
 void InitEngine() {
@@ -1511,6 +1512,7 @@ static CTimer phase_timer;
 extern ENGINE_API BOOL g_appLoaded = FALSE;
 // AVO: used by SPAWN_ANTIFREEZE (by alpet)
 extern ENGINE_API BOOL g_bootComplete = FALSE;
+
 //-AVO
 
 void CApplication::LoadBegin() {
@@ -1871,7 +1873,9 @@ void doBenchmark( LPCSTR name ) {
         Startup();
     }
 }
+
 #pragma optimize( "g", off )
+
 void CApplication::load_draw_internal() {
     m_pRender->load_draw_internal( *this );
     /*

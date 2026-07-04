@@ -41,8 +41,11 @@ public:
         m_len = sz;
         m_pos = 0;
     };
+
     inline void* GetBuffer() { return m_buff; };
+
     inline void SetLen( DWORD l ) { m_len = l; };
+
     inline DWORD GetLen() const { return m_len; };
 
     inline BOOL r_string( char* dst ) {

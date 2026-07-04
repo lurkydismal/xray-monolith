@@ -122,8 +122,11 @@ public:
                                             float* output ) const;
 
     uint width() const { return m_width; }
+
     uint height() const { return m_height; }
+
     uint componentNum() const { return m_componentNum; }
+
     uint count() const { return m_count; }
 
     /** @name Pixel access. */

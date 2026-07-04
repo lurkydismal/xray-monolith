@@ -45,7 +45,9 @@ protected:
         u8 SlotID;
         u8 ItemID;
         s16 BigID;
+
         PresetItem( u8 Slot, u8 Item ) { set( Slot, Item ); };
+
         PresetItem( s16 Big ) { set( Big ); };
 
         bool operator==( const s16& ID ) { return ( BigID ) == ( ID ); }
@@ -84,6 +86,7 @@ protected:
     virtual const shared_str GetBaseCostSect() {
         return "deathmatch_base_cost";
     }
+
     void CheckItem( PIItem pItem, PRESET_ITEMS* pPresetItems, BOOL OnlyPreset );
 
     void ClearBuyMenu();
@@ -140,6 +143,7 @@ public:
     virtual void OnGameMenuRespond_ChangeSkin( NET_Packet& P );
 
     virtual CUIDialogWnd* GetBuyWnd() { return ( CUIDialogWnd* )pCurBuyMenu; };
+
     virtual CUIDialogWnd* GetSkinWnd() {
         return ( CUIDialogWnd* )pCurSkinMenu;
     };

@@ -15,21 +15,27 @@ public:
     bool operator<( const xrTime& other ) const {
         return m_time < other.m_time;
     }
+
     bool operator>( const xrTime& other ) const {
         return m_time > other.m_time;
     }
+
     bool operator>=( const xrTime& other ) const {
         return m_time >= other.m_time;
     }
+
     bool operator<=( const xrTime& other ) const {
         return m_time <= other.m_time;
     }
+
     bool operator==( const xrTime& other ) const {
         return m_time == other.m_time;
     }
+
     xrTime operator+( const xrTime& other ) {
         return xrTime( m_time + other.m_time );
     }
+
     xrTime operator-( const xrTime& other ) {
         return xrTime( m_time - other.m_time );
     }
@@ -39,7 +45,9 @@ public:
     void sub( const xrTime& other );
 
     void add_script( xrTime* other ) { add( *other ); };
+
     void sub_script( xrTime* other ) { sub( *other ); };
+
     float diffSec_script( xrTime* other ) { return diffSec( *other ); };
 
     void setHMS( int h, int m, int s );

@@ -23,6 +23,7 @@ public:
     void update( float time_delta, CGameObject& object );
     void play( CGameObject& O );
     void stop();
+
     IC bool is_active() { return true; /*!!sound._feedback();*/ }
 
 private:

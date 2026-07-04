@@ -12,13 +12,18 @@ class ComPtr {
 
 public:
     ComPtr() noexcept = default;
+
     ComPtr( const ComPtr& rhs ) : mPtr{ rhs.mPtr } {
         if ( mPtr )
             mPtr->AddRef();
     }
+
     ComPtr( ComPtr&& rhs ) noexcept : mPtr{ rhs.mPtr } { rhs.mPtr = nullptr; }
+
     ComPtr( std::nullptr_t ) noexcept {}
+
     explicit ComPtr( T* ptr ) noexcept : mPtr{ ptr } {}
+
     ~ComPtr() {
         if ( mPtr )
             mPtr->Release();
@@ -42,6 +47,7 @@ public:
         }
         return *this;
     }
+
     ComPtr& operator=( ComPtr&& rhs ) {
         if ( &rhs != this )
             LIKELY {
@@ -55,13 +61,17 @@ public:
     explicit operator bool() const noexcept { return mPtr != nullptr; }
 
     T& operator*() const noexcept { return *mPtr; }
+
     T* operator->() const noexcept { return mPtr; }
+
     T* get() const noexcept { return mPtr; }
+
     T** getPtr() noexcept { return &mPtr; }
 
     T* release() noexcept { return std::exchange( mPtr, nullptr ); }
 
     void swap( ComPtr& rhs ) noexcept { std::swap( mPtr, rhs.mPtr ); }
+
     void swap( ComPtr&& rhs ) noexcept { std::swap( mPtr, rhs.mPtr ); }
 };
 

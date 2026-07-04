@@ -50,11 +50,16 @@ public:
     u32 ChildsCount();
     void PushChild( CUICellItem* );
     CUICellItem* PopChild( CUICellItem* );
+
     CUICellItem* Child( u32 idx ) { return m_childs[ idx ]; };
+
     bool HasChild( CUICellItem* item );
     virtual bool EqualTo( CUICellItem* itm );
+
     IC const Ivector2& GetGridSize() { return m_grid_size; }; // size in grid
+
     IC void SetAccelerator( int dik ) { m_accelerator = dik; };
+
     IC int GetAccelerator() const { return m_accelerator; };
 
     CUIProgressBar* m_pConditionState;
@@ -62,17 +67,22 @@ public:
     virtual CUIDragItem* CreateDragItem();
 
     CUIDragDropListEx* OwnerList() { return m_pParentList; }
+
     void SetOwnerList( CUIDragDropListEx* p );
     void UpdateConditionProgressBar();
     void SetCustomDraw( ICustomDrawCellItem* c );
     void Mark( bool status );
+
     CUIStatic& get_ui_text() const { return *m_text; }
 
     virtual bool IsHelper() { return false; }
+
     virtual void SetIsHelper( bool is_helper ) { ; }
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
+
     virtual CUICellItem* ui_cast_cell_item() { return this; }
 
 public:
@@ -105,6 +115,7 @@ public:
     void SetCustomDraw( ICustomDrawDragItem* c );
 
     CUIStatic* wnd() { return &m_static; }
+
     virtual bool OnMouseAction( float x, float y, EUIMessages mouse_action );
     virtual void Draw();
 
@@ -112,7 +123,10 @@ public:
     virtual void _BCL OnFrame();
 
     CUICellItem* ParentItem() { return m_pParent; }
+
     void SetBackList( CUIDragDropListEx* l );
+
     CUIDragDropListEx* BackList() { return m_back_list; }
+
     Fvector2 GetPosition();
 };

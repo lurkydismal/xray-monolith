@@ -333,8 +333,10 @@ public:
 private:
     FormattedRelativeDateTimeData* fData;
     UErrorCode fErrorCode;
+
     explicit FormattedRelativeDateTime( FormattedRelativeDateTimeData* results )
         : fData( results ), fErrorCode( U_ZERO_ERROR ) {}
+
     explicit FormattedRelativeDateTime( UErrorCode errorCode )
         : fData( nullptr ), fErrorCode( errorCode ) {}
     friend class RelativeDateTimeFormatter;

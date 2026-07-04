@@ -55,7 +55,9 @@ protected:
     virtual void LoadRanks();
     virtual bool Player_Check_Rank( game_PlayerState* ps );
     virtual void Player_Rank_Up( game_PlayerState* ps );
+
     virtual bool Player_RankUp_Allowed() { return m_bRankUp_Allowed; };
+
     virtual void Set_RankUp_Allowed( bool RUA ) { m_bRankUp_Allowed = RUA; };
 
     virtual void UpdatePlayersMoney();
@@ -80,9 +82,11 @@ protected:
                             LPCSTR N,
                             u8 Addons,
                             game_PlayerState::PLAYER_ITEMS_LIST& playerItems );
+
     virtual bool CanChargeFreeAmmo( char const* ammo_section ) {
         return false;
     };
+
     // void				SpawnWeaponForActor		(u16
     // actorId,  LPCSTR N, bool isScope, bool isGrenadeLauncher, bool
     // isSilencer);
@@ -134,9 +138,11 @@ public:
     virtual void Create( shared_str& options );
     virtual void OnPlayerConnect( ClientID id_who );
     virtual void OnPlayerDisconnect( ClientID id_who, LPSTR Name, u16 GameID );
+
     virtual BOOL OnTouch( u16 eid_who, u16 eid_target, BOOL bForced = FALSE ) {
         return true;
     };
+
     // TRUE=allow ownership, FALSE=denied
     virtual void OnDetach( u16 eid_who, u16 eid_target ) {};
 
@@ -146,7 +152,9 @@ public:
                                      SPECIAL_KILL_TYPE SpecialKillType,
                                      CSE_Abstract* pWeaponA ) {};
     virtual void OnPlayerKilled( NET_Packet P );
+
     virtual bool CheckTeams() { return false; };
+
     virtual void OnPlayerHitted( NET_Packet P );
     virtual void OnPlayerEnteredGame( ClientID id_who );
 
@@ -162,8 +170,11 @@ public:
 
     virtual void OnVoteStart( LPCSTR VoteCommand, ClientID sender );
     void SendActiveVotingTo( ClientID const& receiver );
+
     virtual bool IsVotingActive() { return m_bVotingActive; };
+
     virtual void SetVotingActive( bool Active ) { m_bVotingActive = Active; };
+
     virtual void UpdateVote();
     virtual void OnVoteYes( ClientID sender );
     virtual void OnVoteNo( ClientID sender );
@@ -187,6 +198,7 @@ public:
                           ClientID sender );
     virtual void Update();
     void KillPlayer( ClientID id_who, u16 GameID );
+
     virtual BOOL CanHaveFriendlyFire() { return TRUE; };
 
     virtual void ClearPlayerState( game_PlayerState* ps );
@@ -198,9 +210,11 @@ public:
     virtual void ConsoleCommands_Clear();
 
     virtual u32 GetTeamCount() { return TeamList.size(); };
+
     TeamStruct* GetTeamData( u32 Team );
 
     virtual u8 GetSpectatorModes() { return m_u8SpectatorModes; };
+
     virtual u32 GetNumTeams() { return 0; };
 
     virtual void DumpOnlineStatistic();

@@ -61,6 +61,7 @@ public:
 
 public:
     IC void _clear() { p_count = 0; }
+
     void _add( Fplane& P );
     void _add( Fvector& P1, Fvector& P2, Fvector& P3 );
 

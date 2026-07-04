@@ -39,6 +39,7 @@ static JCOPY_OPTION copyoption; /* -copy switch */
 static jpeg_transform_info transformoption; /* image transformation options */
 
 LOCAL( void )
+
 usage( void )
 /* complain about bad command line */
 {
@@ -95,6 +96,7 @@ usage( void )
 }
 
 LOCAL( void )
+
 select_transform( JXFORM_CODE transform )
 /* Silly little routine to detect multiple transform options,
  * which we can't handle.
@@ -117,6 +119,7 @@ select_transform( JXFORM_CODE transform )
 }
 
 LOCAL( int )
+
 parse_switches( j_compress_ptr cinfo,
                 int argc,
                 char** argv,

@@ -35,6 +35,7 @@ enum {
     phDbgTrackObject = 1 << 31
 
 };
+
 /// ph_dbg_draw_mask1 ne pereputat by blin!
 enum {
     ph_m1_DbgTrackObject = 1 << 0,
@@ -63,6 +64,7 @@ enum {
 };
 struct dContact;
 class CPHObject;
+
 class IDebugOutput {
 public:
     virtual const Flags32& ph_dbg_draw_mask() const = 0;

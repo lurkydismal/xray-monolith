@@ -31,12 +31,14 @@ inline float do_point( const InterpState&,
                        const uint ) {
     return vals[ 0 ];
 }
+
 inline float do_lerp( const InterpState&,
                       const float* RESTRICT vals,
                       const uint frac ) {
     return lerpf( vals[ 0 ], vals[ 1 ],
                   static_cast< float >( frac ) * ( 1.0f / MixerFracOne ) );
 }
+
 inline float do_cubic( const InterpState& istate,
                        const float* RESTRICT vals,
                        const uint frac ) {
@@ -56,6 +58,7 @@ inline float do_cubic( const InterpState& istate,
            ( fil[ 2 ] + pf * phd[ 2 ] ) * vals[ 2 ] +
            ( fil[ 3 ] + pf * phd[ 3 ] ) * vals[ 3 ];
 }
+
 inline float do_bsinc( const InterpState& istate,
                        const float* RESTRICT vals,
                        const uint frac ) {
@@ -80,6 +83,7 @@ inline float do_bsinc( const InterpState& istate,
              vals[ j_f ];
     return r;
 }
+
 inline float do_fastbsinc( const InterpState& istate,
                            const float* RESTRICT vals,
                            const uint frac ) {
@@ -104,6 +108,7 @@ inline float do_fastbsinc( const InterpState& istate,
 using SamplerT = float ( & )( const InterpState&,
                               const float* RESTRICT,
                               const uint );
+
 template < SamplerT Sampler >
 void DoResample( const InterpState* state,
                  const float* RESTRICT src,

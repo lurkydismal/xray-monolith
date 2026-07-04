@@ -52,6 +52,7 @@ dTriMeshDataID dGeomTriMeshDataCreate();
 void dGeomTriMeshDataDestroy( dTriMeshDataID g );
 
 enum { TRIMESH_FACE_NORMALS, TRIMESH_LAST_TRANSFORMATION };
+
 void dGeomTriMeshDataSet( dTriMeshDataID g, int data_id, void* data );
 
 /*

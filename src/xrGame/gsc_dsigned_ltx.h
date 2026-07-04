@@ -17,6 +17,7 @@ public:
         priv_key_filler_function_t pkf_func );
     ~gsc_dsigned_ltx_writer();
     void sign_and_save( IWriter& writer );
+
     CInifile& get_ltx() { return m_ltx; };
 
 private:
@@ -33,6 +34,7 @@ public:
         u8 const public_key[ crypto::xr_dsa::public_key_length ] );
     ~gsc_dsigned_ltx_reader();
     bool load_and_verify( u8* buffer, u32 const size );
+
     CInifile& get_ltx() { return *m_ltx; };
 
 private:

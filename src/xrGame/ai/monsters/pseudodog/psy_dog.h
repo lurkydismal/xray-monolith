@@ -44,6 +44,7 @@ public:
     virtual char* get_monster_class_name() { return "psydog"; }
 
     u8 get_phantoms_count();
+
     bool must_hide() { return get_phantoms_count() < m_min_phantoms_count; }
 
 private:
@@ -95,6 +96,7 @@ public:
 private:
     void destroy_me();
     void try_to_register_to_parent();
+
     bool is_wait_to_destroy_object() { return ( m_parent_id == 0xffff ); }
 
     DECLARE_SCRIPT_REGISTER_FUNCTION

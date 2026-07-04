@@ -9,6 +9,7 @@
 namespace nv {
 
 enum zero_t { zero };
+
 enum identity_t { identity };
 
 // I should probably use templates.
@@ -130,9 +131,13 @@ private:
 // Vector2
 
 inline Vector2::Vector2() {}
+
 inline Vector2::Vector2( zero_t ) : m_x( 0.0f ), m_y( 0.0f ) {}
+
 inline Vector2::Vector2( scalar f ) : m_x( f ), m_y( f ) {}
+
 inline Vector2::Vector2( scalar x, scalar y ) : m_x( x ), m_y( y ) {}
+
 inline Vector2::Vector2( Vector2::Arg v ) : m_x( v.x() ), m_y( v.y() ) {}
 
 inline const Vector2& Vector2::operator=( Vector2::Arg v ) {
@@ -144,6 +149,7 @@ inline const Vector2& Vector2::operator=( Vector2::Arg v ) {
 inline scalar Vector2::x() const {
     return m_x;
 }
+
 inline scalar Vector2::y() const {
     return m_y;
 }
@@ -194,6 +200,7 @@ inline void Vector2::operator*=( Vector2::Arg v ) {
 inline bool operator==( Vector2::Arg a, Vector2::Arg b ) {
     return a.m_x == b.m_x && a.m_y == b.m_y;
 }
+
 inline bool operator!=( Vector2::Arg a, Vector2::Arg b ) {
     return a.m_x != b.m_x || a.m_y != b.m_y;
 }
@@ -201,11 +208,15 @@ inline bool operator!=( Vector2::Arg a, Vector2::Arg b ) {
 // Vector3
 
 inline Vector3::Vector3() {}
+
 inline Vector3::Vector3( zero_t ) : m_x( 0.0f ), m_y( 0.0f ), m_z( 0.0f ) {}
+
 inline Vector3::Vector3( scalar x, scalar y, scalar z )
     : m_x( x ), m_y( y ), m_z( z ) {}
+
 inline Vector3::Vector3( Vector2::Arg v, scalar z )
     : m_x( v.x() ), m_y( v.y() ), m_z( z ) {}
+
 inline Vector3::Vector3( Vector3::Arg v )
     : m_x( v.x() ), m_y( v.y() ), m_z( v.z() ) {}
 
@@ -219,9 +230,11 @@ inline const Vector3& Vector3::operator=( Vector3::Arg v ) {
 inline scalar Vector3::x() const {
     return m_x;
 }
+
 inline scalar Vector3::y() const {
     return m_y;
 }
+
 inline scalar Vector3::z() const {
     return m_z;
 }
@@ -290,6 +303,7 @@ inline void Vector3::operator*=( Vector3::Arg v ) {
 inline bool operator==( Vector3::Arg a, Vector3::Arg b ) {
     return a.m_x == b.m_x && a.m_y == b.m_y && a.m_z == b.m_z;
 }
+
 inline bool operator!=( Vector3::Arg a, Vector3::Arg b ) {
     return a.m_x != b.m_x || a.m_y != b.m_y || a.m_z != b.m_z;
 }
@@ -297,14 +311,19 @@ inline bool operator!=( Vector3::Arg a, Vector3::Arg b ) {
 // Vector4
 
 inline Vector4::Vector4() {}
+
 inline Vector4::Vector4( zero_t )
     : m_x( 0.0f ), m_y( 0.0f ), m_z( 0.0f ), m_w( 0.0f ) {}
+
 inline Vector4::Vector4( scalar x, scalar y, scalar z, scalar w )
     : m_x( x ), m_y( y ), m_z( z ), m_w( w ) {}
+
 inline Vector4::Vector4( Vector2::Arg v, scalar z, scalar w )
     : m_x( v.x() ), m_y( v.y() ), m_z( z ), m_w( w ) {}
+
 inline Vector4::Vector4( Vector3::Arg v, scalar w )
     : m_x( v.x() ), m_y( v.y() ), m_z( v.z() ), m_w( w ) {}
+
 inline Vector4::Vector4( Vector4::Arg v )
     : m_x( v.x() ), m_y( v.y() ), m_z( v.z() ), m_w( v.w() ) {}
 
@@ -319,12 +338,15 @@ inline const Vector4& Vector4::operator=( const Vector4& v ) {
 inline scalar Vector4::x() const {
     return m_x;
 }
+
 inline scalar Vector4::y() const {
     return m_y;
 }
+
 inline scalar Vector4::z() const {
     return m_z;
 }
+
 inline scalar Vector4::w() const {
     return m_w;
 }
@@ -397,6 +419,7 @@ inline void Vector4::operator*=( Vector4::Arg v ) {
 inline bool operator==( Vector4::Arg a, Vector4::Arg b ) {
     return a.m_x == b.m_x && a.m_y == b.m_y && a.m_z == b.m_z && a.m_w == b.m_w;
 }
+
 inline bool operator!=( Vector4::Arg a, Vector4::Arg b ) {
     return a.m_x != b.m_x || a.m_y != b.m_y || a.m_z != b.m_z || a.m_w != b.m_w;
 }
@@ -408,6 +431,7 @@ inline bool operator!=( Vector4::Arg a, Vector4::Arg b ) {
 inline Vector2 add( Vector2::Arg a, Vector2::Arg b ) {
     return Vector2( a.x() + b.x(), a.y() + b.y() );
 }
+
 inline Vector2 operator+( Vector2::Arg a, Vector2::Arg b ) {
     return add( a, b );
 }
@@ -415,6 +439,7 @@ inline Vector2 operator+( Vector2::Arg a, Vector2::Arg b ) {
 inline Vector2 sub( Vector2::Arg a, Vector2::Arg b ) {
     return Vector2( a.x() - b.x(), a.y() - b.y() );
 }
+
 inline Vector2 operator-( Vector2::Arg a, Vector2::Arg b ) {
     return sub( a, b );
 }
@@ -474,12 +499,15 @@ inline bool isValid( Vector2::Arg v ) {
 inline Vector3 add( Vector3::Arg a, Vector3::Arg b ) {
     return Vector3( a.x() + b.x(), a.y() + b.y(), a.z() + b.z() );
 }
+
 inline Vector3 add( Vector3::Arg a, float b ) {
     return Vector3( a.x() + b, a.y() + b, a.z() + b );
 }
+
 inline Vector3 operator+( Vector3::Arg a, Vector3::Arg b ) {
     return add( a, b );
 }
+
 inline Vector3 operator+( Vector3::Arg a, float b ) {
     return add( a, b );
 }
@@ -487,12 +515,15 @@ inline Vector3 operator+( Vector3::Arg a, float b ) {
 inline Vector3 sub( Vector3::Arg a, Vector3::Arg b ) {
     return Vector3( a.x() - b.x(), a.y() - b.y(), a.z() - b.z() );
 }
+
 inline Vector3 sub( Vector3::Arg a, float b ) {
     return Vector3( a.x() - b, a.y() - b, a.z() - b );
 }
+
 inline Vector3 operator-( Vector3::Arg a, Vector3::Arg b ) {
     return sub( a, b );
 }
+
 inline Vector3 operator-( Vector3::Arg a, float b ) {
     return sub( a, b );
 }
@@ -611,6 +642,7 @@ inline Vector4 add( Vector4::Arg a, Vector4::Arg b ) {
     return Vector4( a.x() + b.x(), a.y() + b.y(), a.z() + b.z(),
                     a.w() + b.w() );
 }
+
 inline Vector4 operator+( Vector4::Arg a, Vector4::Arg b ) {
     return add( a, b );
 }
@@ -619,6 +651,7 @@ inline Vector4 sub( Vector4::Arg a, Vector4::Arg b ) {
     return Vector4( a.x() - b.x(), a.y() - b.y(), a.z() - b.z(),
                     a.w() - b.w() );
 }
+
 inline Vector4 operator-( Vector4::Arg a, Vector4::Arg b ) {
     return sub( a, b );
 }

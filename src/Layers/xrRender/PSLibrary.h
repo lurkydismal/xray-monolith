@@ -35,6 +35,7 @@ public:
 
 public:
     CPSLibrary() { ; }
+
     ~CPSLibrary() { ; }
 
     void OnCreate();
@@ -47,8 +48,11 @@ public:
 
     // get object properties methods
     IC PS::PEDIt FirstPED() { return m_PEDs.begin(); }
+
     IC PS::PEDIt LastPED() { return m_PEDs.end(); }
+
     IC PS::PGDIt FirstPGD() { return m_PGDs.begin(); }
+
     IC PS::PGDIt LastPGD() { return m_PGDs.end(); }
 
     PS::CPEDef* AppendPED( PS::CPEDef* src = 0 );
@@ -66,6 +70,7 @@ public:
         PS::CPGDef const* const*& iterator ) const;
     virtual shared_str const& particles_group_id(
         PS::CPGDef const& particles_group ) const;
+
     virtual xr_vector< shared_str > const& vec_all_particles() const {
         return m_all_ps;
     }

@@ -27,6 +27,7 @@ struct SKeyTable {
     CKey keys[ MAX_CHANNELS ][ MAX_BLENDED ];      // all keys
     CBlend* blends[ MAX_CHANNELS ][ MAX_BLENDED ]; // blend pointers
     int chanel_blend_conts[ MAX_CHANNELS ];        // channel counts
+
     SKeyTable() { std::fill_n( chanel_blend_conts, MAX_CHANNELS, 0 ); }
 };
 

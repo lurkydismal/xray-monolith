@@ -28,7 +28,9 @@ public:
     CEatableItem();
     virtual ~CEatableItem();
     virtual DLL_Pure* _construct();
+
     virtual CEatableItem* cast_eatable_item() { return this; }
+
     virtual CInventoryItem* cast_inventory_item() { return this; }
 
     virtual void Load( LPCSTR section );
@@ -43,13 +45,18 @@ public:
     virtual bool UseBy( CEntityAlive* npc );
 
     bool Empty() const { return m_iRemainingUses == 0; };
+
     bool CanDelete() const { return m_bRemoveAfterUse == 1; };
+
     u8 GetMaxUses() const { return m_iMaxUses; };
+
     u8 GetRemainingUses() const { return m_iRemainingUses; };
+
     void SetRemainingUses( u8 value ) {
         if ( value <= m_iMaxUses )
             m_iRemainingUses = value;
     };
+
     virtual float Weight() const;
 
     DECLARE_SCRIPT_REGISTER_FUNCTION

@@ -51,15 +51,18 @@ struct TgaHeader {
 /// Tga File.
 struct TgaFile {
     TgaFile() { mem = NULL; }
+
     ~TgaFile() { free(); }
 
     uint size() const {
         return head.width * head.height * ( head.pixel_size / 8 );
     }
+
     void allocate() {
         nvCheck( mem == NULL );
         mem = new uint8[ size() ];
     }
+
     void free() {
         delete[] mem;
         mem = NULL;

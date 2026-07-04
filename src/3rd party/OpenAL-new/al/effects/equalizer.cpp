@@ -17,11 +17,13 @@ void Equalizer_setParami( EffectProps*, ALenum param, int ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid equalizer integer property 0x%04x", param };
 }
+
 void Equalizer_setParamiv( EffectProps*, ALenum param, const int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid equalizer integer-vector property 0x%04x",
                             param };
 }
+
 void Equalizer_setParamf( EffectProps* props, ALenum param, float val ) {
     switch ( param ) {
         case AL_EQUALIZER_LOW_GAIN:
@@ -116,6 +118,7 @@ void Equalizer_setParamf( EffectProps* props, ALenum param, float val ) {
                                     param };
     }
 }
+
 void Equalizer_setParamfv( EffectProps* props,
                            ALenum param,
                            const float* vals ) {
@@ -126,11 +129,13 @@ void Equalizer_getParami( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{
         AL_INVALID_ENUM, "Invalid equalizer integer property 0x%04x", param };
 }
+
 void Equalizer_getParamiv( const EffectProps*, ALenum param, int* ) {
     throw effect_exception{ AL_INVALID_ENUM,
                             "Invalid equalizer integer-vector property 0x%04x",
                             param };
 }
+
 void Equalizer_getParamf( const EffectProps* props, ALenum param, float* val ) {
     switch ( param ) {
         case AL_EQUALIZER_LOW_GAIN:
@@ -179,6 +184,7 @@ void Equalizer_getParamf( const EffectProps* props, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void Equalizer_getParamfv( const EffectProps* props,
                            ALenum param,
                            float* vals ) {

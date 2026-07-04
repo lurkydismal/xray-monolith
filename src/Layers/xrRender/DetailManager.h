@@ -274,13 +274,17 @@ public:
     Slot* cache_Query( int sx, int sz );
     void cache_Decompress( Slot* D );
     BOOL cache_Validate();
+
     // cache grid to world
     int cg2w_X( int x ) { return cache_cx - dm_size + x; }
+
     int cg2w_Z( int z ) {
         return cache_cz - dm_size + ( dm_cache_line - 1 - z );
     }
+
     // world to cache grid
     int w2cg_X( int x ) { return x - cache_cx + dm_size; }
+
     int w2cg_Z( int z ) {
         return cache_cz - dm_size + ( dm_cache_line - 1 - z );
     }

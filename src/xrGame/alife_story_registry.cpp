@@ -16,6 +16,7 @@
 CALifeStoryRegistry::~CALifeStoryRegistry() {}
 
 BOOL duplicate_story_id_crash = TRUE;
+
 void CALifeStoryRegistry::add( ALife::_STORY_ID id,
                                CSE_ALifeDynamicObject* object,
                                bool no_assert ) {

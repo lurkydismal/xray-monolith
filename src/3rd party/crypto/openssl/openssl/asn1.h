@@ -204,6 +204,7 @@ typedef struct asn1_const_ctx_st {
 #define ASN1_OBJECT_FLAG_CRITICAL 0x02        /* critical x509v3 object id */
 #define ASN1_OBJECT_FLAG_DYNAMIC_STRINGS 0x04 /* internal use */
 #define ASN1_OBJECT_FLAG_DYNAMIC_DATA 0x08    /* internal use */
+
 typedef struct asn1_object_st {
     const char *sn, *ln;
     int nid;
@@ -500,6 +501,7 @@ DECLARE_STACK_OF( ASN1_GENERALSTRING )
 
 typedef struct asn1_type_st {
     int type;
+
     union {
         char* ptr;
         ASN1_BOOLEAN boolean;

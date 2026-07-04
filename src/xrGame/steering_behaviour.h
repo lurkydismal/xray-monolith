@@ -55,7 +55,9 @@ public:
     virtual vec calc_acceleration() = 0;
 
     void set_enabled( bool value ) { m_p_params->enabled = value; }
+
     bool is_enabled() const { return m_p_params->enabled; }
+
     params* get_supplier() { return m_p_params; }
 
     virtual ~base() { delete m_p_params; }

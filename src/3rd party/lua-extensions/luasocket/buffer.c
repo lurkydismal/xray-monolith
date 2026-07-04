@@ -178,6 +178,7 @@ int buffer_isempty( p_buffer buf ) {
 * Sends a block of data (unbuffered)
 \*-------------------------------------------------------------------------*/
 #define STEPSIZE 8192
+
 static int sendraw( p_buffer buf,
                     const char* data,
                     size_t count,

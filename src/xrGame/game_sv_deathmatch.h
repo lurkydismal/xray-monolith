@@ -19,6 +19,7 @@ protected:
 
         RPointData( u32 ID, float Dist, bool Freezed )
             : PointID( ID ), MinEnemyDist( Dist ), bFreezed( Freezed ) {};
+
         IC bool operator<( const RPointData& x ) const {
             if ( bFreezed && !x.bFreezed )
                 return false;
@@ -109,6 +110,7 @@ public:
     virtual void Create( shared_str& options );
 
     virtual LPCSTR type_name() const { return "deathmatch"; };
+
     virtual void net_Export_State( NET_Packet& P, ClientID id_to );
 
     virtual void OnEvent( NET_Packet& tNetPacket,
@@ -158,7 +160,9 @@ public:
     virtual void Processing_Victim( game_PlayerState* pVictim,
                                     game_PlayerState* pKiller );
     virtual void Victim_Exp( game_PlayerState* pVictim );
+
     virtual bool CheckTeams() { return false; };
+
     virtual void OnPlayerKillPlayer( game_PlayerState* ps_killer,
                                      game_PlayerState* ps_killed,
                                      KILL_TYPE KillType,
@@ -201,6 +205,7 @@ public:
     virtual char* GetAnomalySetBaseName() {
         return "deathmatch_game_anomaly_sets";
     };
+
     virtual void LoadAnomalySets();
 
     void LoadItemRespawns();
@@ -216,7 +221,9 @@ public:
     int GetTeamScore( u32 idx );
     void SetTeamScore( u32 idx, int val );
     game_PlayerState* GetWinningPlayer();
+
     virtual BOOL CanHaveFriendlyFire() { return FALSE; }
+
     virtual void RespawnPlayer( ClientID id_who, bool NoSpectator );
     virtual void check_InvinciblePlayers();
     virtual void check_ForceRespawn();

@@ -45,17 +45,23 @@ public:
     // активность поля
     void activate();
     void deactivate();
+
     IC bool is_active() { return m_active; }
+
     IC bool can_activate() { return ( m_value > m_activate_value ); }
+
     IC bool should_deactivate() { return ( m_value < m_critical_value ); }
+
     IC void set_auto_activate( bool b_auto = true ) {
         m_auto_activate = b_auto;
     }
+
     IC void set_auto_deactivate( bool b_auto = true ) {
         m_auto_deactivate = b_auto;
     }
 
     void enable();
+
     IC void disable() { m_enable = false; }
 
     IC void set_aggressive( bool b_val = true ) { m_aggressive = b_val; }

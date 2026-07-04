@@ -137,9 +137,11 @@ static inline void rcRemoveSubrange() {
 static inline UINT rcBinStart( UINT f0, UINT Shift ) {
     return f0 * ( range >>= Shift );
 }
+
 static inline UINT rcBinDecode( UINT tmp ) {
     return ( code - low >= tmp );
 }
+
 static inline void rcBinCorrect0( UINT tmp ) {
     range = tmp;
 }

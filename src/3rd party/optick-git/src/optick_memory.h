@@ -120,8 +120,10 @@ public:
     template < typename T >
     struct Allocator : public std::allocator< T > {
         Allocator() {}
+
         template < class U >
         Allocator( const Allocator< U >& ) {}
+
         template < typename U >
         struct rebind {
             typedef Allocator< U > other;
@@ -152,15 +154,19 @@ public:
 // std::* section
 template < typename T, size_t _Size >
 class array : public std::array< T, _Size > {};
+
 template < typename T >
 class vector : public std::vector< T, Memory::Allocator< T > > {};
+
 template < typename T >
 class list : public std::list< T, Memory::Allocator< T > > {};
+
 template < typename T >
 class unordered_set : public std::unordered_set< T,
                                                  std::hash< T >,
                                                  std::equal_to< T >,
                                                  Memory::Allocator< T > > {};
+
 template < typename T, typename V >
 class unordered_map : public std::unordered_map<
                           T,
@@ -213,6 +219,7 @@ struct MemoryChunk {
         }
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template < class T, uint32 SIZE = 16 >
 class MemoryPool {
@@ -345,25 +352,32 @@ public:
         typedef T& reference;
         typedef T* pointer;
         typedef int difference_type;
+
         const_iterator( const Chunk* ptr, size_t index )
             : chunkPtr( ptr ), chunkIndex( index ) {}
+
         self_type operator++() {
             self_type i = *this;
             advance();
             return i;
         }
+
         self_type operator++( int /*junk*/ ) {
             advance();
             return *this;
         }
+
         reference operator*() {
             return ( reference )chunkPtr->data[ chunkIndex ];
         }
+
         pointer operator->() { return &chunkPtr->data[ chunkIndex ]; }
+
         bool operator==( const self_type& rhs ) const {
             return ( chunkPtr == rhs.chunkPtr ) &&
                    ( chunkIndex == rhs.chunkIndex );
         }
+
         bool operator!=( const self_type& rhs ) const {
             return ( chunkPtr != rhs.chunkPtr ) ||
                    ( chunkIndex != rhs.chunkIndex );
@@ -425,6 +439,7 @@ public:
         }
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template < uint32 CHUNK_SIZE >
 class MemoryBuffer : private MemoryPool< uint8, CHUNK_SIZE > {
@@ -444,6 +459,7 @@ public:
         MemoryPool< uint8, CHUNK_SIZE >::Clear( preserveMemory );
     }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace Optick
 

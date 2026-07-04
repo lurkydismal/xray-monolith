@@ -109,6 +109,7 @@ void SetCursorPosition_script( Fvector2& pos ) {
 
 using namespace luabind;
 #pragma optimize( "s", on )
+
 void CUIWindow::script_register( lua_State* L ) {
     module( L )
         [ def( "GetARGB", &GetARGB ), def( "ClrGetA", &ClrGetA ),

@@ -416,4 +416,5 @@ void HUD_SOUND_COLLECTION_LAYERED::LoadSound( CInifile const* ini,
         snd_item.m_alias = alias;
     }
 }
+
 //-Alundaio

@@ -31,6 +31,7 @@ extern "C" {
 #include <lua.h>
 int luaopen_marshal( lua_State* L );
 }
+
 struct luajit {
     static void open_lib( lua_State* L,
                           pcstr module_name,

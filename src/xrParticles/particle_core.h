@@ -17,6 +17,7 @@ struct PARTICLES_API pDomain {
     // transformation
     void transform( const pDomain& domain, const Fmatrix& m );
     void transform_dir( const pDomain& domain, const Fmatrix& m );
+
     // This constructor is used when default constructing a
     // ParticleAction that has a pDomain.
     IC pDomain() {}
@@ -33,6 +34,7 @@ struct PARTICLES_API pDomain {
              float a7 = 0.0f,
              float a8 = 0.0f );
 };
+
 // misc
 float NRand( float sigma = 1.0f );
 }; // namespace PAPI

@@ -38,10 +38,13 @@ struct LUABIND_API class_registry {
     static class_registry* get_registry( lua_State* L );
 
     int cpp_instance() const { return m_cpp_instance_metatable; }
+
     int cpp_class() const { return m_cpp_class_metatable; }
 
     int lua_instance() const { return m_lua_instance_metatable; }
+
     int lua_class() const { return m_lua_class_metatable; }
+
     int lua_function() const { return m_lua_function_metatable; }
 
     void add_class( LUABIND_TYPE_INFO info, class_rep* crep );

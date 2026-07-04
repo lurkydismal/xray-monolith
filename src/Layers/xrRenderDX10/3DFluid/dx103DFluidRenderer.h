@@ -26,6 +26,7 @@ public:
     void Draw( const dx103DFluidData& FluidData );
 
     static LPCSTR* GetRTNames() { return m_pRTNames; }
+
     static LPCSTR* GetResourceRTNames() { return m_pResourceRTNames; }
 
 private:

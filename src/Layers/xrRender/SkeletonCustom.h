@@ -19,6 +19,7 @@ class IRenderable;
 
 #pragma warning( push )
 #pragma warning( disable : 4275 )
+
 class CSkeletonWallmark
     : public intrusive_base // 4+4+4+12+4+16+16 = 60 + 4 = 64 + 4 = 68
 {
@@ -34,6 +35,7 @@ public:
     u32 used_in_render;
 #endif
     Fsphere m_LocalBounds; // 16		model space
+
     struct WMFace {
         Fvector3 vert[ 3 ];
         Fvector2 uv[ 3 ];
@@ -72,15 +74,21 @@ public:
 #endif
 
     IC CKinematics* Parent() { return m_Parent; }
+
     IC u32 VCount() { return m_Faces.size() * 3; }
+
     IC bool Similar( ref_shader& sh, const Fvector& cp, float eps ) {
         return ( m_Shader == sh ) && m_ContactPoint.similar( cp, eps );
     }
 
     IC float TimeStart() { return m_fTimeStart; }
+
     IC float TimeEnd() { return m_fTimeEnd; }
+
     IC const Fmatrix* XFORM() { return m_XForm; }
+
     IC const Fvector3& ContactPoint() { return m_ContactPoint; }
+
     IC ref_shader Shader() { return m_Shader; }
 };
 
@@ -92,13 +100,16 @@ DEFINE_VECTOR( intrusive_ptr< CSkeletonWallmark >,
 #ifdef DEBUG
 struct dbg_marker {
     BOOL* lock;
+
     dbg_marker( BOOL* b ) {
         lock = b;
         VERIFY( *lock == FALSE );
         *lock = TRUE;
     }
+
     ~dbg_marker() { *lock = FALSE; }
 };
+
 #define _DBG_SINGLE_USE_MARKER dbg_marker _dbg_marker( &dbg_single_use_marker )
 #else
 #define _DBG_SINGLE_USE_MARKER
@@ -178,9 +189,12 @@ protected:
     virtual CBoneData* CreateBoneData( u16 ID ) {
         return xr_new< CBoneData >( ID );
     }
+
     virtual void IBoneInstances_Create();
     virtual void IBoneInstances_Destroy();
+
     void Visibility_Invalidate() { Update_Visibility = TRUE; };
+
     void Visibility_Update();
 
     //--DSR-- SilencerOverheat_start
@@ -226,7 +240,9 @@ public:
     LPCSTR _BCL LL_BoneName_dbg( u16 ID );
 
     CInifile* _BCL LL_UserData() { return pUserData; }
+
     accel* LL_Bones() { return bone_map_N; }
+
     ICF CBoneInstance& _BCL LL_GetBoneInstance( u16 bone_id ) {
         VERIFY( bone_id < LL_BoneCount() );
         VERIFY( bone_instances );
@@ -276,37 +292,44 @@ public:
                    ? LL_GetBoneInstance( bone_id ).mTransform
                    : LL_GetBoneInstance( bone_id ).mTransformHidden;
     }
+
     ICF Fmatrix& _BCL LL_GetTransform_safed( u16 bone_id ) {
         xrCriticalSectionGuard guard( &UCalc_Mutex );
         return LL_GetBoneVisible( bone_id )
                    ? LL_GetBoneInstance( bone_id ).mTransform
                    : LL_GetBoneInstance( bone_id ).mTransformHidden;
     }
+
     ICF const Fmatrix& _BCL LL_GetTransform( u16 bone_id ) const {
         return LL_GetBoneVisible( bone_id )
                    ? LL_GetBoneInstance( bone_id ).mTransform
                    : LL_GetBoneInstance( bone_id ).mTransformHidden;
     }
+
     ICF void _BCL LL_GetBoneLocalPosition( u16 bone_id, Fvector& result ) {
         xrCriticalSectionGuard guard( &UCalc_Mutex );
         result = LL_GetBoneInstance( bone_id ).mTransform.c;
     }
+
     ICF void _BCL LL_GetBoneLocalTransform( u16 bone_id, Fmatrix& result ) {
         xrCriticalSectionGuard guard( &UCalc_Mutex );
         result = LL_GetBoneInstance( bone_id ).mTransform;
     }
+
     ICF void _BCL LL_GetBoneWorldPosition( u16 bone_id,
                                            const Fmatrix& xform,
                                            Fvector& result ) {
         LL_GetBoneLocalPosition( bone_id, result );
         xform.transform_tiny( result );
     }
+
     ICF void _BCL LL_GetBoneWorldTransform( u16 bone_id,
                                             const Fmatrix& xform,
                                             Fmatrix& result ) {
         LL_GetBoneLocalTransform( bone_id, result );
         result.mulA_43( xform );
     }
+
     ICF void _BCL CalculateBBox( BOOL bforce = TRUE ) {
         if ( !bforce && Device.dwFrame == Visibox_frame )
             return;
@@ -360,9 +383,11 @@ public:
             vis.box.getsphere( vis.sphere.P, vis.sphere.R );
         }
     }
+
     ICF Fmatrix& LL_GetTransform_R( u16 bone_id ) {
         return LL_GetBoneInstance( bone_id ).mRenderTransform;
     }
+
     // rendering only
     Fobb& LL_GetBox( u16 bone_id ) {
         VERIFY( bone_id < LL_BoneCount() );
@@ -370,6 +395,7 @@ public:
     }
 
     const Fbox& _BCL GetBox() const { return vis.box; }
+
     void LL_GetBindTransform( xr_vector< Fmatrix >& matrices );
     int LL_GetBoneGroups( xr_vector< xr_vector< u16 > >& groups );
 
@@ -391,7 +417,9 @@ public:
     }
 
     void LL_SetBoneVisible( u16 bone_id, BOOL val, BOOL bRecursive );
+
     u64 _BCL LL_GetBonesVisible() { return visimask.get(); }
+
     void LL_SetBonesVisible( u64 mask );
 
     // Main functionality
@@ -408,11 +436,13 @@ public:
     virtual void SetUpdateCallback( UpdateCallback pCallback ) {
         Update_Callback = pCallback;
     }
+
     virtual void SetUpdateCallbackParam( void* pCallbackParam ) {
         Update_Callback_Param = pCallbackParam;
     }
 
     virtual UpdateCallback GetUpdateCallback() { return Update_Callback; }
+
     virtual void* GetUpdateCallbackParam() { return Update_Callback_Param; }
 
     virtual bool NeedUCalc() { return UCalc_ThisFrame; }
@@ -433,8 +463,11 @@ public:
     virtual void Release();
 
     virtual IKinematicsAnimated* dcast_PKinematicsAnimated() { return 0; }
+
     virtual IRenderVisual* _BCL dcast_RenderVisual() { return this; }
+
     virtual IKinematics* _BCL dcast_PKinematics() { return this; }
+
     //	virtual	CKinematics*		dcast_PKinematics	()
     //{ return this;	}
 
@@ -458,5 +491,6 @@ private:
 IC CKinematics* PCKinematics( dxRender_Visual* V ) {
     return V ? ( CKinematics* )V->dcast_PKinematics() : 0;
 }
+
 //---------------------------------------------------------------------------
 #endif

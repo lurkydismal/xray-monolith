@@ -40,6 +40,7 @@ void CStateGroupDragAbstract::initialize() {
         *I = K->LL_BoneID( sbone );
         VERIFY( *I != BI_NONE );
     }
+
     struct callback : public CPHCaptureBoneCallback {
         IKinematics* m_K;
         u16 const* use_bones;

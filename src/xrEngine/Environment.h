@@ -75,6 +75,7 @@ public:
         typedef xr_vector< ref_sound > sounds_type;
 
         void load( CInifile& config, LPCSTR sect );
+
         ref_sound& get_rnd_sound() {
             return sounds()[ Random.randI( sounds().size() ) ];
         }
@@ -118,6 +119,7 @@ protected:
 
 public:
     IC const shared_str& name() { return m_load_section; }
+
     IC const shared_str& get_ambients_config_filename() {
         return m_ambients_config_filename;
     }
@@ -126,11 +128,13 @@ public:
                                      CInifile& sound_channels_config,
                                      CInifile& effects_config,
                                      const shared_str& section );
+
     IC SEffect* get_rnd_effect() {
         return effects().empty()
                    ? 0
                    : effects()[ Random.randI( effects().size() ) ];
     }
+
     IC u32 get_rnd_effect_time() {
         return Random.randI( m_effect_period.x, m_effect_period.y );
     }
@@ -140,7 +144,9 @@ public:
                                                              LPCSTR id );
     INGAME_EDITOR_VIRTUAL ~CEnvAmbient();
     void destroy();
+
     inline INGAME_EDITOR_VIRTUAL EffectVec& effects() { return m_effects; }
+
     inline INGAME_EDITOR_VIRTUAL SSndChannelVec& get_snd_channels() {
         return m_sound_channels;
     }
@@ -289,6 +295,7 @@ private:
 
 public:
     void SelectEnv( EnvVec* envs, CEnvDescriptor*& e, float tm );
+
     static bool sort_env_pred( const CEnvDescriptor* x,
                                const CEnvDescriptor* y ) {
         return x->exec_time < y->exec_time;
@@ -377,11 +384,15 @@ public:
 
     bool SetWeatherFX( shared_str name );
     bool StartWeatherFXFromTime( shared_str name, float time );
+
     bool IsWFXPlaying() { return bWFX; }
+
     void StopWFX();
 
     void SetWeather( shared_str name, bool forced = false );
+
     shared_str GetWeather() { return CurrentWeatherName; }
+
     void ChangeGameTime( float game_time );
     void SetGameTime( float game_time, float time_factor );
 
@@ -396,6 +407,7 @@ public:
 
 public:
     void ED_Reload();
+
     float GetGameTime() { return fGameTime; }
 #else // #ifdef _EDITOR
 #ifdef INGAME_EDITOR

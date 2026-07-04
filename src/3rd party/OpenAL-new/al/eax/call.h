@@ -31,13 +31,19 @@ public:
              ALuint property_size );
 
     bool is_get() const noexcept { return mCallType == EaxCallType::get; }
+
     bool is_deferred() const noexcept { return mIsDeferred; }
+
     int get_version() const noexcept { return mVersion; }
+
     EaxCallPropertySetId get_property_set_id() const noexcept {
         return mPropertySetId;
     }
+
     ALuint get_property_id() const noexcept { return mPropertyId; }
+
     ALuint get_property_al_name() const noexcept { return mPropertySourceId; }
+
     EaxFxSlotIndex get_fx_slot_index() const noexcept { return mFxSlotIndex; }
 
     template < typename TException, typename TValue >

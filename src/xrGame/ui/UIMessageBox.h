@@ -37,6 +37,7 @@ public:
     LPCSTR GetUserPassword();
     void SetUserPasswordMode( bool );
     void SetPasswordMode( bool );
+
     E_MESSAGEBOX_STYLE GetBoxStyle() { return m_eMessageBoxStyle; };
 
     void SetTextEditURL( LPCSTR text );
@@ -48,6 +49,7 @@ public:
     void OnYesOk();
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return this; }
 
 protected:

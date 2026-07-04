@@ -28,7 +28,9 @@ protected:
     virtual CPhysicsShellHolder* PPhysicsShellHolder() {
         return PhysicsShellHolder();
     }
+
     virtual CPHSkeleton* PHSkeleton() { return this; }
+
     virtual void SpawnInitPhysics( CSE_Abstract* D );
     virtual void PHObjectPositionUpdate();
     virtual void CreatePhysicsShell( CSE_Abstract* e );

@@ -45,11 +45,13 @@ struct StringHash {
     uint64 hash;
 
     StringHash( size_t h ) : hash( h ) {}
+
     StringHash( const char* str ) : hash( CalcHash( str ) ) {}
 
     bool operator==( const StringHash& other ) const {
         return hash == other.hash;
     }
+
     bool operator<( const StringHash& other ) const {
         return hash < other.hash;
     }
@@ -72,6 +74,7 @@ namespace Optick {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Trace;
 struct SymbolEngine;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct ScopeHeader {
     EventTime event;
@@ -82,8 +85,10 @@ struct ScopeHeader {
 
     ScopeHeader();
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 OutputDataStream& operator<<( OutputDataStream& stream, const ScopeHeader& ob );
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct ScopeData {
     ScopeHeader header;
@@ -115,6 +120,7 @@ struct ScopeData {
     void Send();
     void Clear();
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #if defined( OPTICK_MSVC )
 #pragma warning( push )
@@ -123,13 +129,17 @@ struct ScopeData {
 template < int N >
 struct OptickString {
     char data[ N ];
+
     OptickString() {}
+
     OptickString< N >& operator=( const char* text ) {
         strncpy( data, text ? text : "null", N - 1 );
         data[ N - 1 ] = 0;
         return *this;
     }
+
     OptickString( const char* text ) { *this = text; }
+
     OptickString( const char* text, uint16_t length ) {
         uint16_t maxLength = std::min( ( uint16_t )( N - 1 ), length );
         strncpy( data, text ? text : "null", maxLength );
@@ -142,10 +152,14 @@ struct OptickString {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Point {
     float x, y, z;
+
     Point() {}
+
     Point( float _x, float _y, float _z ) : x( _x ), y( _y ), z( _z ) {}
+
     Point( float pos[ 3 ] ) : x( pos[ 0 ] ), y( pos[ 1 ] ), z( pos[ 2 ] ) {}
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template < int N >
 OutputDataStream& operator<<( OutputDataStream& stream,
@@ -154,6 +168,7 @@ OutputDataStream& operator<<( OutputDataStream& stream,
     stream << ( uint32 )length;
     return stream.Write( ob.data, length );
 }
+
 OutputDataStream& operator<<( OutputDataStream& stream, const Point& ob );
 OutputDataStream& operator<<( OutputDataStream& stream, const ScopeData& ob );
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -189,6 +204,7 @@ string base64_decode( string const& encoded_string );
 // Board
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef MemoryPool< EventDescription, 4096 > EventDescriptionList;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class EventDescriptionBoard {
     // List of stored Event Descriptions
@@ -224,6 +240,7 @@ public:
     friend OutputDataStream& operator<<( OutputDataStream& stream,
                                          const EventDescriptionBoard& ob );
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct EventStorage {
     Mode::Type currentMode;
@@ -247,6 +264,7 @@ struct EventStorage {
         EventData* Start( const EventDescription& desc );
         void Stop( EventData& data );
     };
+
     GPUStorage gpuStorage;
 
     uint32 pushPopEventStackIndex;
@@ -283,6 +301,7 @@ struct EventStorage {
 
     void Reset() { Clear( true ); }
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct ProcessDescription {
     string name;
@@ -290,6 +309,7 @@ struct ProcessDescription {
     uint64 uniqueKey;
     ProcessDescription( const char* processName, ProcessID pid, uint64 key );
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct ThreadDescription {
     string name;
@@ -303,6 +323,7 @@ struct ThreadDescription {
         return name == other.name && threadID == other.threadID &&
                processID == other.processID;
     }
+
     ThreadDescription( const char* threadName,
                        ThreadID tid,
                        ProcessID pid,
@@ -310,12 +331,14 @@ struct ThreadDescription {
                        int32 priority = 0,
                        uint32 mask = 0 );
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct FiberDescription {
     uint64 id;
 
     FiberDescription( uint64 _id ) : id( _id ) {}
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct ThreadEntry {
     ThreadDescription description;
@@ -326,6 +349,7 @@ struct ThreadEntry {
 
     ThreadEntry( const ThreadDescription& desc, EventStorage** tls )
         : description( desc ), threadTLS( tls ), isAlive( true ) {}
+
     void Activate( Mode::Type mode );
     void Sort();
 };
@@ -347,8 +371,10 @@ struct SysCallData : EventData {
     uint64 id;
     uint64 threadID;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 OutputDataStream& operator<<( OutputDataStream& stream, const SysCallData& ob );
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class SysCallCollector {
     typedef MemoryPool< SysCallData, 1024 * 32 > SysCallPool;
@@ -361,6 +387,7 @@ public:
 
     bool Serialize( OutputDataStream& stream );
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -370,6 +397,7 @@ struct CallstackDesc {
     uint64* callstack;
     uint8 count;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class CallstackCollector {
     // Packed callstack list: {ThreadID, Timestamp, Count, Callstack[Count]}
@@ -386,6 +414,7 @@ public:
 
     bool IsEmpty() const;
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -396,9 +425,11 @@ struct SwitchContextDesc {
     uint8 cpuId;
     uint8 reason;
 };
+
 //////////////////////////////////////////////////////////////////////////
 OutputDataStream& operator<<( OutputDataStream& stream,
                               const SwitchContextDesc& ob );
+
 //////////////////////////////////////////////////////////////////////////
 class SwitchContextCollector {
     typedef MemoryPool< SwitchContextDesc, 1024 * 32 > SwitchContextPool;
@@ -409,6 +440,7 @@ public:
     void Clear();
     bool Serialize( OutputDataStream& stream );
 };
+
 //////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -422,13 +454,17 @@ struct CaptureStatus {
         ERR_TRACER_NOT_IMPLEMENTED = 5,
     };
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct FrameData : public EventData {
     uint64_t threadID;
+
     FrameData() : threadID( INVALID_THREAD_ID ) {}
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef MemoryPool< FrameData, 128 > FrameBuffer;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct FrameStorage {
     const EventDescription* m_Description;
@@ -441,6 +477,7 @@ struct FrameStorage {
 
     FrameStorage() : m_Description( nullptr ) {}
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -465,8 +502,10 @@ class Core {
         string name;
         vector< uint8_t > data;
         File::Type type;
+
         Attachment( File::Type t, const char* n ) : name( n ), type( t ) {}
     };
+
     list< Attachment > attachments;
 
     StateCallback stateCallback;
@@ -632,6 +671,7 @@ public:
                                 uint64_t threadID ) {
         return Get().BeginUpdateFrame( frame, timestamp, threadID );
     }
+
     static uint32_t EndFrame( FrameType::Type frame,
                               int64_t timestamp,
                               uint64_t threadID ) {
@@ -644,6 +684,7 @@ public:
     // NOT Thread Safe singleton (performance)
     static Core& Get();
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace Optick
 

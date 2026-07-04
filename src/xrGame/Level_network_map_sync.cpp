@@ -7,6 +7,7 @@
 #include "xrServerMapSync.h"
 
 static const u32 r_buffer_size = 131072; // 128 Kb
+
 void CLevel::CalculateLevelCrc32() {
     void* read_buffer = _alloca( r_buffer_size );
     Msg( "* calculating checksum of level.geom" );

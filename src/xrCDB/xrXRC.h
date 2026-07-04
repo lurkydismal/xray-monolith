@@ -60,6 +60,7 @@ public:
     }
 
     IC void obb_options( u32 f ) { CL.obb_options( f ); }
+
     IC void obb_query( const CDB::MODEL* m_def, const Fobb& obb ) {
 #ifdef DEBUG
         cdb_clBOX->Begin();
@@ -71,12 +72,19 @@ public:
     }
 
     IC CDB::RESULT* r_begin() { return CL.r_begin(); };
+
     IC CDB::RESULT* r_end() { return CL.r_end(); };
+
     IC void r_free() { CL.r_free(); }
+
     IC int r_count() { return CL.r_count(); };
+
     IC void r_clear() { CL.r_clear(); };
+
     IC void r_clear_compact() { CL.r_clear_compact(); };
+
     IC xr_vector< CDB::RESULT >& r_vec() { return CL.r_vec(); };
+
     xrXRC();
     ~xrXRC();
 };

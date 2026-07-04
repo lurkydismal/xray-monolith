@@ -29,6 +29,7 @@ public:
         aiming_weapon = u32( 1 ),
         aiming_head = u32( 2 ),
     }; // enum
+
     enum animation_frame_type {
         animation_frame_none = u32( 0 ),
         animation_frame_start = u32( 1 ),

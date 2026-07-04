@@ -38,30 +38,53 @@ public:
 
 public:
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CInventoryItem* cast_inventory_item() { return this; }
+
     virtual CAttachableItem* cast_attachable_item() { return this; }
+
     virtual CFlashlight* cast_flashlight() { return nullptr; }
+
     virtual CHudItem* cast_hud_item() { return nullptr; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CCustomDetector* cast_custom_detector() { return nullptr; }
+
     virtual CWeaponBinoculars* cast_weapon_binoculars() { return nullptr; }
+
     virtual CWeaponKnife* cast_weapon_knife() { return nullptr; }
+
     virtual CWeaponMagazined* cast_weapon_magazined() { return nullptr; }
+
     virtual CWeaponMagazinedWGrenade* cast_weapon_magazined_w_grenade() {
         return nullptr;
     }
+
     virtual CWeaponBM16* cast_weapon_bm16() { return nullptr; }
+
     virtual CWeapon* cast_weapon() { return nullptr; }
+
     virtual CTorch* cast_torch() { return nullptr; }
+
     virtual CWeaponRPG7* cast_weapon_rpg7() { return nullptr; }
+
     virtual CWeaponRG6* cast_weapon_rg6() { return nullptr; }
+
     virtual CBolt* cast_bolt() { return nullptr; }
+
     virtual CPda* cast_pda() { return nullptr; }
+
     virtual CGrenade* cast_grenade() { return nullptr; }
+
     virtual CMissile* cast_missile() { return nullptr; }
+
     virtual CSilencer* cast_addon_silencer() { return nullptr; }
+
     virtual CScope* cast_addon_scope() { return nullptr; }
+
     virtual CGrenadeLauncher* cast_addon_grenade_launcher() { return nullptr; }
+
     virtual CPhysicItem* cast_physics_item() { return this; }
 
 public:
@@ -82,7 +105,9 @@ public:
     virtual void net_Export( NET_Packet& P ); // export to server
     virtual void save( NET_Packet& output_packet );
     virtual void load( IReader& input_packet );
+
     virtual BOOL net_SaveRelevant() { return TRUE; }
+
     virtual void renderable_Render( IDSGraphManager* DM );
     virtual void reload( LPCSTR section );
     virtual void reinit();

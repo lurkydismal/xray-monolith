@@ -14,6 +14,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CSE_ALifeObjectProjector::script_register( lua_State* L ) {
     module( L )[
 #ifdef PROJECTOR_NEW

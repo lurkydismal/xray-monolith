@@ -15,7 +15,9 @@ public:
 
     virtual void update() {};
     virtual u32 const get_u32_param();
+
     virtual float const get_float_param() { return 0.0f; };
+
     virtual void reset_game() {};
 }; // class player_spots_counter
 
@@ -26,7 +28,9 @@ public:
     player_spots_with_top_enemy_divider( game_state_accumulator* owner )
         : inherited( owner ) {};
     virtual ~player_spots_with_top_enemy_divider() {};
+
     virtual u32 const get_u32_param() { return 0; };
+
     virtual float const get_float_param();
 
 private:

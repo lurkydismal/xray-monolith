@@ -22,6 +22,7 @@
 #define CSIni_Table CIni_Table< T_ITEM, T_INI_LOADER, TABLE_INDEX >
 
 TEMPLATE_SPECIALIZATION_D
+
 class CIni_Table {
 public:
     CIni_Table();

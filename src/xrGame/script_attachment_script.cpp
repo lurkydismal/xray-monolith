@@ -5,6 +5,7 @@
 using namespace ::luabind;
 
 #pragma optimize( "s", on )
+
 void script_attachment::script_register( lua_State* L ) {
     module( L )[
         // Type

@@ -226,7 +226,9 @@ struct HwParamsDeleter {
         snd_pcm_hw_params_free( ptr );
     }
 };
+
 using HwParamsPtr = std::unique_ptr< snd_pcm_hw_params_t, HwParamsDeleter >;
+
 HwParamsPtr CreateHwParams() {
     snd_pcm_hw_params_t* hp{};
     snd_pcm_hw_params_malloc( &hp );
@@ -238,7 +240,9 @@ struct SwParamsDeleter {
         snd_pcm_sw_params_free( ptr );
     }
 };
+
 using SwParamsPtr = std::unique_ptr< snd_pcm_sw_params_t, SwParamsDeleter >;
+
 SwParamsPtr CreateSwParams() {
     snd_pcm_sw_params_t* sp{};
     snd_pcm_sw_params_malloc( &sp );
@@ -428,6 +432,7 @@ int verify_state( snd_pcm_t* handle ) {
 
 struct AlsaPlayback final : public BackendBase {
     AlsaPlayback( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~AlsaPlayback() override;
 
     int mixerProc();
@@ -878,6 +883,7 @@ ClockLatency AlsaPlayback::getClockLatency() {
 
 struct AlsaCapture final : public BackendBase {
     AlsaCapture( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~AlsaCapture() override;
 
     void open( const char* name ) override;

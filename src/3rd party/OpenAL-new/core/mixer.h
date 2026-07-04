@@ -23,6 +23,7 @@ using MixerOutFunc = void ( * )( const al::span< const float > InSamples,
                                  const size_t OutPos );
 
 extern MixerOutFunc MixSamplesOut;
+
 inline void MixSamples( const al::span< const float > InSamples,
                         const al::span< FloatBufferLine > OutBuffer,
                         float* CurrentGains,
@@ -41,6 +42,7 @@ using MixerOneFunc = void ( * )( const al::span< const float > InSamples,
                                  const size_t Counter );
 
 extern MixerOneFunc MixSamplesOne;
+
 inline void MixSamples( const al::span< const float > InSamples,
                         float* OutBuffer,
                         float& CurrentGain,

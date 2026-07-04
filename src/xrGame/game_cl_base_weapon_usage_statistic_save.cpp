@@ -5,6 +5,7 @@
 
 #define WUS_IDENT ( ( 'S' << 24 ) + ( 'U' << 16 ) + ( 'W' << 8 ) + ' ' )
 #define WUS_VERSION 2
+
 // 1 - initial save
 // 2 - added Bone Names
 
@@ -267,6 +268,7 @@ void Weapon_Statistic::Write( FILE* pFile ) {
 };
 
 #define ARCHIVE_HIT_RADIUS 0.5f
+
 // this method searches hit in last 30 hits (magazine size) - optimization
 void Weapon_Statistic::add_hit( HitData const& hit ) {
     u32 magazine_size = 30;

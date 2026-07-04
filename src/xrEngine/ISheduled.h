@@ -27,9 +27,11 @@ public:
 
     virtual float shedule_Scale() = 0;
     virtual void shedule_Update( u32 dt );
+
     [[nodiscard]] virtual auto shedule_Name() const -> shared_str {
         return { "unknown" };
     };
+
     virtual bool shedule_Needed() = 0;
 };
 

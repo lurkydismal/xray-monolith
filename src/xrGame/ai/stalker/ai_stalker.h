@@ -165,22 +165,37 @@ public:
     virtual CCharacterPhysicsSupport* character_physics_support() {
         return m_pPhysics_support;
     }
+
     virtual const CCharacterPhysicsSupport* character_physics_support() const {
         return m_pPhysics_support;
     }
+
     virtual CPHDestroyable* ph_destroyable();
+
     virtual CAttachmentOwner* cast_attachment_owner() { return this; }
+
     virtual CInventoryOwner* cast_inventory_owner() { return this; }
+
     virtual CEntityAlive* cast_entity_alive() { return this; }
+
     virtual CEntity* cast_entity() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CParticlesPlayer* cast_particles_player() { return this; }
+
     virtual Feel::Sound* dcast_FeelSound() { return this; }
+
     virtual CAI_Stalker* cast_stalker() { return this; }
+
     virtual CCustomMonster* cast_custom_monster() { return this; }
+
     virtual CScriptEntity* cast_script_entity() { return this; }
+
     virtual CPhraseDialogManager* cast_phrase_dialog_manager() { return this; }
+
     virtual CAI_PhraseDialogManager* cast_ai_phrase_dialog_manager() {
         return this;
     }
@@ -281,10 +296,13 @@ public:
     virtual u16 PHGetSyncItemsNumber() {
         return inherited::PHGetSyncItemsNumber();
     }
+
     virtual CPHSynchronize* PHGetSyncItem( u16 item ) {
         return inherited::PHGetSyncItem( item );
     }
+
     virtual void PHUnFreeze() { return inherited::PHUnFreeze(); }
+
     virtual void PHFreeze() { return inherited::PHFreeze(); }
 
     // miscellanious functions
@@ -391,7 +409,9 @@ private:
 
 public:
     bool can_select_weapon() { return m_can_select_weapon; };
+
     void can_select_weapon( bool can ) { m_can_select_weapon = can; };
+
     bool can_take( CInventoryItem const* item );
 
 protected:
@@ -449,8 +469,11 @@ public:
 
 private:
     IC bool frame_check( u32& frame );
+
     virtual bool natural_weapon() const { return false; }
+
     virtual bool natural_detector() const { return false; }
+
     virtual bool use_center_to_aim() const;
     void process_enemies();
 
@@ -482,6 +505,7 @@ public:
     IC Fvector weapon_shot_effector_direction( const Fvector& current ) const;
     virtual void UpdateCamera();
     virtual bool can_attach( const CInventoryItem* inventory_item ) const;
+
     // because we don't want to use this feature for stalkers
     virtual bool use_simplified_visual() const {
         return false;
@@ -908,9 +932,11 @@ public:
 
 public:
     typedef xr_vector< CObject* > ignored_touched_objects_type;
+
     inline ignored_touched_objects_type& ignored_touched_objects() {
         return m_ignored_touched_objects;
     }
+
     void generate_take_event( CObject const* const object ) const;
 
 private:
@@ -922,6 +948,7 @@ private:
 
 public:
     CHolderCustom* Holder() { return m_holder; }
+
     bool attach_Holder( CHolderCustom* holder );
     void detach_Holder();
     bool use_HolderEx( CHolderCustom* object );

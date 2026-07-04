@@ -230,6 +230,7 @@ class cl_eye_P : public R_constant_setup {
         RCache.set_c( C, V.x, V.y, V.z, 1 );
     }
 };
+
 static cl_eye_P binder_eye_P;
 
 // interpolated eye position (crookr scope parallax)
@@ -238,8 +239,10 @@ static cl_eye_P binder_eye_P;
 // off center
 extern float scope_fog_interp;
 extern float scope_fog_travel;
+
 class cl_eye_PL : public R_constant_setup {
     Fvector tV;
+
     virtual void setup( R_constant* C ) {
         Fvector& V = RDEVICE.vCameraPosition;
         tV = tV.lerp( tV, V, scope_fog_interp );
@@ -247,6 +250,7 @@ class cl_eye_PL : public R_constant_setup {
         RCache.set_c( C, tV.x, tV.y, tV.z, 1 );
     }
 };
+
 static cl_eye_PL binder_eye_PL;
 
 // eye-params
@@ -256,11 +260,13 @@ class cl_eye_D : public R_constant_setup {
         RCache.set_c( C, V.x, V.y, V.z, 0 );
     }
 };
+
 static cl_eye_D binder_eye_D;
 
 // interpolated eye direction (crookr scope parallax)
 class cl_eye_DL : public R_constant_setup {
     Fvector tV;
+
     virtual void setup( R_constant* C ) {
         Fvector& V = RDEVICE.vCameraDirection;
         tV = tV.lerp( tV, V, scope_fog_interp );
@@ -268,6 +274,7 @@ class cl_eye_DL : public R_constant_setup {
         RCache.set_c( C, tV.x, tV.y, tV.z, 0 );
     }
 };
+
 static cl_eye_DL binder_eye_DL;
 
 // eye-params
@@ -285,17 +292,20 @@ extern float scope_outerblur;
 extern float scope_innerblur;
 extern float scope_scrollpower;
 extern float scope_brightness;
+
 class cl_fakescope_params : public R_constant_setup {
     virtual void setup( R_constant* C ) {
         RCache.set_c( C, scope_scrollpower, scope_innerblur, scope_outerblur,
                       scope_brightness );
     }
 };
+
 static cl_fakescope_params binder_fakescope_params;
 
 extern float scope_ca;
 extern float scope_fog_attack;
 extern float scope_fog_mattack;
+
 // extern float scope_fog_travel;
 class cl_fakescope_ca : public R_constant_setup {
     virtual void setup( R_constant* C ) {
@@ -303,11 +313,13 @@ class cl_fakescope_ca : public R_constant_setup {
                       scope_fog_travel );
     }
 };
+
 static cl_fakescope_ca binder_fakescope_ca;
 
 extern float scope_radius;
 extern float scope_fog_radius;
 extern float scope_fog_sharp;
+
 // extern float scope_drift_amount;
 class cl_fakescope_params3 : public R_constant_setup {
     virtual void setup( R_constant* C ) {
@@ -315,6 +327,7 @@ class cl_fakescope_params3 : public R_constant_setup {
                       0.0f );
     }
 };
+
 static cl_fakescope_params3 binder_fakescope_params3;
 
 // Mark Switch
@@ -379,6 +392,7 @@ static class s3ds_param_4 : public R_constant_setup {
 static class cl_silencer_glowing : public R_constant_setup {
     virtual void setup( R_constant* C ) { RCache.hemi.set_c_glowing( C ); }
 } binder_silencer_glowing;
+
 //--DSR-- SilencerOverheat_end
 
 //--DSR-- HeatVision_start
@@ -530,6 +544,7 @@ class cl_sky_color : public R_constant_setup {
         RCache.set_c( C, result );
     }
 };
+
 static cl_sky_color binder_sky_color;
 #endif
 
@@ -1144,6 +1159,7 @@ DECL_BINDER4F( binder_hdr10_parameters10,
 /* --- HDR10 Parameters --- */
 
 extern Fvector4 ps_vignette_control;
+
 static class vignette_control : public R_constant_setup {
     virtual void setup( R_constant* C ) {
         RCache.set_c( C, ps_vignette_control.x, ps_vignette_control.y,

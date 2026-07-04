@@ -84,12 +84,14 @@ ENGINE_API std::string dbg_object_props_dump_string( const CObject* obj ) {
                obj->dbg_update_cl, obj->dwFrame_UpdateCL, obj->dwFrame_AsCrow,
                Device.dwFrame, Device.dwTimeGlobal );
 }
+
 ENGINE_API std::string dbg_object_full_dump_string( const CObject* obj ) {
     return dbg_object_base_dump_string( obj ) +
            dbg_object_props_dump_string( obj ) +
            dbg_object_poses_dump_string( obj ) +
            dbg_object_visual_geom_dump_string( obj );
 }
+
 ENGINE_API std::string dbg_object_full_capped_dump_string(
     const CObject* obj ) {
     return std::string( "\n object dump: \n" ) +

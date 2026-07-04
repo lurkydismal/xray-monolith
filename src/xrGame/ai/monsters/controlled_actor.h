@@ -18,7 +18,9 @@ class CControlledActor : public CActorInputHandler {
 
 public:
     virtual void reinit();
+
     virtual float mouse_scale_factor() { return flt_max; }
+
     virtual void release();
     virtual void install( CActor* );
     virtual void install();
@@ -29,6 +31,7 @@ public:
     bool is_installed();
 
     void frame_update();
+
     bool is_controlling() { return m_actor != 0; }
 
     void dont_need_turn() { m_need_turn = false; }

@@ -490,6 +490,7 @@ struct LocalPixels {
         }
         return true;
     }
+
     // Quad returns ([0]+[2] - 2.f*[1])
     //	a common want is [1] - ([0]+[2])*0.5f ;
     // so use -0.5f*Quad

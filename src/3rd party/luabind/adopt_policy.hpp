@@ -118,6 +118,7 @@ struct adopt_pointer< Direction::cpp_to_lua > {
 template < size_t N >
 struct adopt_policy : conversion_policy< N > {
     static void precall( lua_State*, const index_map& ) {}
+
     static void postcall( lua_State*, const index_map& ) {}
 
     struct only_accepts_nonconst_pointers {};

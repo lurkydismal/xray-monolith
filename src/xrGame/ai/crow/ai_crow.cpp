@@ -261,10 +261,9 @@ void CAI_Crow::state_Flying( float fdt ) {
     XFORM().setHPB( vHPB.x, vHPB.y, vHPB.z );
     Position().mad( vOldPosition, vDirection, fSpeed * fdt );
 #ifdef DEBUG
-    VERIFY2(
-        valid_pos( Position() ),
-        dbg_valide_pos_string( Position(), this,
-                               "state_Flying		(float fdt)" ) );
+    VERIFY2( valid_pos( Position() ),
+             dbg_valide_pos_string(
+                 Position(), this, "state_Flying		(float fdt)" ) );
 #endif
 }
 
@@ -344,6 +343,7 @@ collide::rq_result GetPickResult( Fvector pos,
                                   Fvector dir,
                                   float range,
                                   CObject* ignore );
+
 void CAI_Crow::shedule_Update( u32 DT ) {
     float fDT = float( DT ) / 1000.F;
     SpatialComponent->spatial.type &= ~STYPE_VISIBLEFORAI;

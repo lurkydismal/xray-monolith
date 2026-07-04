@@ -87,7 +87,9 @@ public:
         clamp( result, 0.f, 1.f );
         return ( result );
     };
+
     virtual float get_luminocity_hemi() { return get_hemi(); }
+
     virtual float* get_luminocity_hemi_cube() { return hemi_cube_smooth; }
 
     void add( light* L );

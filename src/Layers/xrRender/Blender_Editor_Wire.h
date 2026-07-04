@@ -7,6 +7,7 @@ class CBlender_Editor_Wire : public IBlender {
 
 public:
     virtual LPCSTR getComment() { return "EDITOR: wire"; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Save( IWriter& fs );

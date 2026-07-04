@@ -1920,9 +1920,11 @@ static unsigned int stb_decompress( unsigned char* output,
                                     const unsigned char* input,
                                     unsigned int length );
 static const char* GetDefaultCompressedFontDataTTFBase85();
+
 static unsigned int Decode85Byte( char c ) {
     return c >= '\\' ? c - 36 : c - 35;
 }
+
 static void Decode85( const unsigned char* src, unsigned char* dst ) {
     while ( *src ) {
         unsigned int tmp =
@@ -2213,6 +2215,7 @@ bool ImFontAtlasBuildWithStbTruetype( ImFontAtlas* atlas ) {
         stbtt_pack_range* Ranges;
         int RangesCount;
     };
+
     ImFontTempBuildData* tmp_array = ( ImFontTempBuildData* )ImGui::MemAlloc(
         ( size_t )atlas->ConfigData.Size * sizeof( ImFontTempBuildData ) );
     for ( int input_i = 0; input_i < atlas->ConfigData.Size; input_i++ ) {
@@ -3820,6 +3823,7 @@ static unsigned int stb_decompress_length( const unsigned char* input ) {
 static unsigned char *stb__barrier_out_e, *stb__barrier_out_b;
 static const unsigned char* stb__barrier_in_b;
 static unsigned char* stb__dout;
+
 static void stb__match( const unsigned char* data, unsigned int length ) {
     // INVERSE of memmove... write each byte before copying the next...
     IM_ASSERT( stb__dout + length <= stb__barrier_out_e );

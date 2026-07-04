@@ -31,14 +31,17 @@ class AABBNoLeafNode;
 }; // namespace Opcode
 
 #pragma pack( push, 8 )
+
 namespace CDB {
 // Triangle
 class XRCDB_API TRI //*** 16 bytes total (was 32 :)
 {
 public:
     u32 verts[ 3 ]; // 3*4 = 12b
+
     union {
         u32 dummy; // 4b
+
         struct {
             u32 material : 14;        //
             u32 suppress_shadows : 1; //
@@ -79,12 +82,19 @@ public:
     ~MODEL();
 
     IC Fvector* get_verts() { return verts; }
+
     IC const Fvector* get_verts() const { return verts; }
+
     IC int get_verts_count() const { return verts_count; }
+
     IC const TRI* get_tris() const { return tris; }
+
     IC TRI* get_tris() { return tris; }
+
     IC int get_tris_count() const { return tris_count; }
+
     xr_task_group async_cform_load;
+
     IC void syncronize() {
         if ( S_READY != status ) {
             Log( "! WARNING: syncronized CDB::query" );
@@ -114,6 +124,7 @@ struct XRCDB_API RESULT {
 
     union {
         u32 dummy; // 4b
+
         struct {
             u32 material : 14;        //
             u32 suppress_shadows : 1; //
@@ -152,29 +163,39 @@ public:
     ~COLLIDER();
 
     ICF void ray_options( u32 f ) { ray_mode = f; }
+
     void ray_query( const MODEL* m_def,
                     const Fvector& r_start,
                     const Fvector& r_dir,
                     float r_range = 10000.f );
 
     ICF void box_options( u32 f ) { box_mode = f; }
+
     void box_query( const MODEL* m_def,
                     const Fvector& b_center,
                     const Fvector& b_dim );
 
     ICF void frustum_options( u32 f ) { frustum_mode = f; }
+
     void frustum_query( const MODEL* m_def, const CFrustum& F );
 
     ICF void obb_options( u32 f ) { obb_mode = f; }
+
     void obb_query( const MODEL* m_def, const Fobb& _obb );
 
     ICF RESULT* r_begin() { return &*rd.begin(); };
+
     ICF RESULT* r_end() { return &*rd.end(); };
+
     RESULT& r_add();
     void r_free();
+
     ICF int r_count() { return rd.size(); };
+
     ICF void r_clear() { rd.clear_not_free(); };
+
     ICF void r_clear_compact() { rd.clear_and_free(); };
+
     IC xr_vector< RESULT >& r_vec() { return rd; };
 };
 
@@ -182,12 +203,14 @@ public:
 class XRCDB_API Collector {
 public:
 #pragma pack( push, 1 )
+
     struct edge {
         u32 face_id;
         u32 edge_id;
         u32 vertex_id0;
         u32 vertex_id1;
     };
+
 #pragma pack( pop )
 
     xr_vector< Fvector > verts;
@@ -220,9 +243,13 @@ public:
     void calc_adjacency( xr_vector< u32 >& dest );
 
     Fvector* getV() { return &*verts.begin(); }
+
     size_t getVS() { return verts.size(); }
+
     TRI* getT() { return &*faces.begin(); }
+
     size_t getTS() { return faces.size(); }
+
     ICF void reserve( u32 tris_size ) {
         faces.reserve( tris_size );
         verts.reserve( tris_size * 3 );
@@ -285,14 +312,22 @@ public:
                      u32 flags );
 
     xr_vector< Fvector >& getV_Vec() { return verts; }
+
     Fvector* getV() { return &*verts.begin(); }
+
     size_t getVS() { return verts.size(); }
+
     TRI* getT() { return &*faces.begin(); }
+
     u32 getfFlags( u32 index ) { return flags[ index ]; }
+
     IC TRI& getT( u32 index ) { return faces[ index ]; }
+
     size_t getTS() { return faces.size(); }
+
     void clear();
 };
+
 #pragma warning( pop )
 }; // namespace CDB
 

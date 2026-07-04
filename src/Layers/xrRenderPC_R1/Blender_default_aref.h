@@ -14,7 +14,9 @@ public:
 
 public:
     virtual LPCSTR getComment() { return "LEVEL: lmap*base.aref"; }
+
     virtual BOOL canBeDetailed() { return TRUE; }
+
     virtual BOOL canBeLMAPped() { return TRUE; }
 
     virtual void Save( IWriter& fs );

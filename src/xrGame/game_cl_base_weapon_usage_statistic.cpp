@@ -113,6 +113,7 @@ void Weapon_Statistic::net_save( NET_Packet* P,
             return false;
         }
     };
+
     m_dwRoundsFired_d = m_dwRoundsFired - m_dwRoundsFired_d;
     P->w_u32( m_dwRoundsFired_d );
     m_dwRoundsFired_d = m_dwRoundsFired;
@@ -208,6 +209,7 @@ u32 const bone_table::header_count_size = sizeof( u16 );
 
 class bone_id_searcher {
     s16 const& id;
+
     bone_id_searcher& operator=( bone_id_searcher& copy ) { return *this; };
 
 public:
@@ -231,6 +233,7 @@ shared_str bone_table::get_name_by_id( s16 id ) const {
 bool bone_table::add_bone( shared_str const& bone_name, s16 bone_id ) {
     class bone_name_searcher {
         shared_str const& name;
+
         bone_name_searcher& operator=( bone_name_searcher& copy ) {
             return *this;
         };
@@ -245,6 +248,7 @@ bool bone_table::add_bone( shared_str const& bone_name, s16 bone_id ) {
             return false;
         }
     };
+
     bone_table_t::const_iterator tmp_iter = std::find_if(
         m_data.begin(), m_data.end(), bone_name_searcher( bone_name ) );
     if ( tmp_iter != m_data.end() )
@@ -940,6 +944,7 @@ void WeaponUsageStatistic::SVUpdateAliveTimes() {
 
     class alive_time_updator {
         WeaponUsageStatistic& owner;
+
         alive_time_updator& operator=( alive_time_updator& copy ) {
             return *this;
         };
@@ -964,6 +969,7 @@ void WeaponUsageStatistic::SVUpdateAliveTimes() {
             }
         }
     };
+
     alive_time_updator tmp_functor( *this );
     Level().Server->ForEachClientDo( tmp_functor );
 

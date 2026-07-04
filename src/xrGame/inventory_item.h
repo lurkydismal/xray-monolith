@@ -112,6 +112,7 @@ public:
 
     LPCSTR NameItem(); // remove <virtual> by sea
     LPCSTR NameShort();
+
     shared_str ItemDescription() { return m_Description; }
 
     virtual bool GetBriefInfo( II_BriefInfo& info ) {
@@ -122,24 +123,33 @@ public:
     virtual void OnEvent( NET_Packet& P, u16 type );
 
     virtual bool Useful() const; // !!! Переопределить. (см. в Inventory.cpp)
+
     virtual bool IsUsingCondition() const {
         return ( m_flags.test( FUsingCondition ) > 0 );
     };
 
     virtual bool Attach( PIItem pIItem, bool b_send_event ) { return false; }
+
     virtual bool Detach( PIItem pIItem ) { return false; }
+
     // при детаче спаунится новая вещь при заданно названии секции
     virtual bool Detach( const char* item_section_name, bool b_spawn_item );
+
     virtual bool CanAttach( PIItem pIItem ) { return false; }
+
     virtual bool CanDetach( LPCSTR item_section_name ) { return false; }
 
     virtual EHandDependence HandDependence() const { return hd1Hand; };
+
     virtual bool IsSingleHanded() const { return true; };
+
     virtual bool ActivateItem();   // !!! Переопределить. (см. в Inventory.cpp)
     virtual void DeactivateItem(); // !!! Переопределить. (см. в Inventory.cpp)
+
     virtual bool Action( u16 cmd, u32 flags ) {
         return false;
     } // true если известная команда, иначе false
+
     virtual void DiscardState() {};
 
     virtual void OnH_B_Chield();
@@ -149,9 +159,11 @@ public:
 
     virtual void save( NET_Packet& output_packet );
     virtual void load( IReader& input_packet );
+
     virtual BOOL net_SaveRelevant() { return TRUE; }
 
     virtual void render_item_ui() {}; // when in slot & query return TRUE
+
     virtual bool render_item_ui_query() { return false; }; // when in slot
 
     virtual void UpdateCL();
@@ -159,15 +171,19 @@ public:
     virtual void Hit( SHit* pHDS );
 
     BOOL GetDropManual() const { return m_flags.test( FdropManual ); }
+
     void SetDropManual( BOOL val );
 
     BOOL IsInvalid() const;
 
     BOOL IsQuestItem() const { return m_flags.test( FIsQuestItem ); }
+
     virtual u32 Cost() const { return m_cost; }
+
     //			u32					Cost
     //()	const	{ return m_cost; }
     virtual float Weight() const { return m_weight; }
+
     void SetWeight( float w ) { m_weight = w; };
 
 public:
@@ -189,32 +205,50 @@ public:
 
     Irect GetInvGridRect() const;
     Irect GetUpgrIconRect() const;
+
     const shared_str& GetIconName() const { return m_icon_name; };
+
     Frect GetKillMsgRect() const;
+
     //---------------------------------------------------------------------
     IC float GetCondition() const { return m_fCondition; }
+
     virtual float GetConditionToShow() const { return GetCondition(); }
+
     IC void SetCondition( float val ) { m_fCondition = val; }
+
     void ChangeCondition( float fDeltaCondition );
+
     IC float GetLowestBatteryCharge() const { return m_fLowestBatteryCharge; }
 
     u16 BaseSlot() const { return m_ItemCurrPlace.base_slot_id; }
+
     u16 CurrSlot() const { return m_ItemCurrPlace.slot_id; }
+
     u16 CurrPlace() const { return m_ItemCurrPlace.type; }
 
     bool Belt() { return !!m_flags.test( Fbelt ); }
+
     void Belt( bool on_belt ) { m_flags.set( Fbelt, on_belt ); }
+
     bool Ruck() { return !!m_flags.test( Fruck ); }
+
     void Ruck( bool on_ruck ) { m_flags.set( Fruck, on_ruck ); }
+
     bool RuckDefault() { return !!m_flags.test( FRuckDefault ); }
 
     virtual bool CanTake() const { return !!m_flags.test( FCanTake ); }
+
     void SetCanTake( BOOL val ) { m_flags.set( FCanTake, val ); }
+
     bool CanTrade() const;
+
     void AllowTrade() { m_flags.set( FCanTrade, m_can_trade ); };
+
     void DenyTrade() { m_flags.set( FCanTrade, FALSE ); };
 
     virtual bool IsNecessaryItem( CInventoryItem* item );
+
     virtual bool IsNecessaryItem( const shared_str& item_sect ) {
         return false;
     };
@@ -287,6 +321,7 @@ public:
 
 public:
     virtual DLL_Pure* _construct();
+
     IC CPhysicsShellHolder& object() const {
         VERIFY( m_object );
         return ( *m_object );
@@ -314,39 +349,71 @@ private:
 
 public:
     virtual CInventoryItem* cast_inventory_item() { return this; }
+
     virtual CAttachableItem* cast_attachable_item() { return this; }
+
     virtual CFlashlight* cast_flashlight() { return nullptr; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return nullptr; }
+
     virtual CEatableItem* cast_eatable_item() { return nullptr; }
+
     virtual CWeapon* cast_weapon() { return nullptr; }
+
     virtual CFoodItem* cast_food_item() { return nullptr; }
+
     virtual CMissile* cast_missile() { return nullptr; }
+
     virtual CHudItem* cast_hud_item() { return nullptr; }
+
     virtual CWeaponAmmo* cast_weapon_ammo() { return nullptr; }
+
     virtual CGameObject* cast_game_object() { return nullptr; }
+
     virtual CArtefact* cast_artefact() { return nullptr; }
+
     virtual CCustomOutfit* cast_outfit() { return nullptr; }
+
     virtual CHelmet* cast_helmet() { return nullptr; }
+
     virtual CCustomDetector* cast_custom_detector() { return nullptr; }
+
     virtual CCustomDevice* cast_custom_device() { return nullptr; }
+
     virtual CWeaponBinoculars* cast_weapon_binoculars() { return nullptr; }
+
     virtual CWeaponKnife* cast_weapon_knife() { return nullptr; }
+
     virtual CWeaponMagazined* cast_weapon_magazined() { return nullptr; }
+
     virtual CWeaponMagazinedWGrenade* cast_weapon_magazined_w_grenade() {
         return nullptr;
     }
+
     virtual CWeaponBM16* cast_weapon_bm16() { return nullptr; }
+
     virtual CTorch* cast_torch() { return nullptr; }
+
     virtual CWeaponRPG7* cast_weapon_rpg7() { return nullptr; }
+
     virtual CWeaponRG6* cast_weapon_rg6() { return nullptr; }
+
     virtual CBolt* cast_bolt() { return nullptr; }
+
     virtual CPda* cast_pda() { return nullptr; }
+
     virtual CGrenade* cast_grenade() { return nullptr; }
+
     virtual CSilencer* cast_addon_silencer() { return nullptr; }
+
     virtual CScope* cast_addon_scope() { return nullptr; }
+
     virtual CGrenadeLauncher* cast_addon_grenade_launcher() { return nullptr; }
+
     virtual CPhysicItem* cast_physics_item() { return nullptr; }
+
     virtual CBackpack* cast_backpack() { return nullptr; }
+
     virtual CFlare* cast_flare() { return nullptr; }
 
     ////////// upgrades //////////////////////////////////////////////////
@@ -358,6 +425,7 @@ protected:
 
 public:
     IC bool has_any_upgrades() { return ( m_upgrades.size() != 0 ); }
+
     bool has_upgrade( const shared_str& upgrade_id );
     bool has_upgrade_group( const shared_str& upgrade_group_id );
     void add_upgrade( const shared_str& upgrade_id, bool loading );
@@ -416,9 +484,11 @@ protected:
 
 public:
     IC bool is_helper_item() { return !!m_flags.test( FIsHelperItem ); }
+
     IC void set_is_helper( bool is_helper ) {
         m_flags.set( FIsHelperItem, is_helper );
     }
+
     DECLARE_SCRIPT_REGISTER_FUNCTION
 }; // class CInventoryItem
 

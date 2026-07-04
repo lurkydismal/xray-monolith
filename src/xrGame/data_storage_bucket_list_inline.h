@@ -88,7 +88,7 @@ IC void CBucketList::verify_buckets() const {
     // continue; 			u32 count = 0, count1 = 0;
     // for ( ; j; k=j,j=j->next(), ++count) { 				VERIFY
     //(indexes[j->index()].m_path_id == current_path_id());
-    //VERIFY (compute_bucket_id(*j) == i); 				VERIFY
+    // VERIFY (compute_bucket_id(*j) == i); 				VERIFY
     //(!j->prev() || (j == j->prev()->next()));
     // VERIFY	(!j->next() || (j == j->next()->prev()));
     // VERIFY	(!j->next() || (j != j->next()));
@@ -100,7 +100,7 @@ IC void CBucketList::verify_buckets() const {
     // current_path_id()); 				VERIFY
     // (compute_bucket_id(*k) == i); 				VERIFY
     //(!k->prev() || (k == k->prev()->next()));
-    //VERIFY	(!k->next() || (k == k->next()->prev()));
+    // VERIFY	(!k->next() || (k == k->next()->prev()));
     // VERIFY	(!k->next() || (k != k->next()));
     // VERIFY
     //(!k->prev() || (k != k->prev()));

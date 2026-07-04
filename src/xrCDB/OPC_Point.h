@@ -309,8 +309,10 @@ public:
 
     //! Returns _min(x, y, z);
     inline_ float Min() const { return _min( x, _min( y, z ) ); }
+
     //! Returns _max(x, y, z);
     inline_ float Max() const { return _max( x, _max( y, z ) ); }
+
     //! Sets each element to be componentwise minimum
     inline_ Point& Min( const Point& p ) {
         x = _min( x, p.x );
@@ -346,8 +348,10 @@ public:
 
     //! Computes square magnitude
     inline_ float SquareMagnitude() const { return x * x + y * y + z * z; }
+
     //! Computes magnitude
     inline_ float Magnitude() const { return _sqrt( x * x + y * y + z * z ); }
+
     //! Computes volume
     inline_ float Volume() const { return x * y * z; }
 
@@ -375,6 +379,7 @@ public:
 
 #define TWEAKMASK 0x3fffff
 #define TWEAKNOTMASK ~TWEAKMASK
+
     //! Slighty moves the point out
     inline_ void TweakBigger() {
         udword Dummy = ( IR( x ) & TWEAKNOTMASK );
@@ -527,6 +532,7 @@ public:
     inline_ Point operator+( const Point& p ) const {
         return Point( x + p.x, y + p.y, z + p.z );
     }
+
     //! Operator for Point Minus = Point - Point.
     inline_ Point operator-( const Point& p ) const {
         return Point( x - p.x, y - p.y, z - p.z );
@@ -536,10 +542,12 @@ public:
     inline_ Point operator*( const Point& p ) const {
         return Point( x * p.x, y * p.y, z * p.z );
     }
+
     //! Operator for Point Scale = Point * float.
     inline_ Point operator*( float s ) const {
         return Point( x * s, y * s, z * s );
     }
+
     //! Operator for Point Scale = float * Point.
     inline_ friend Point operator*( float s, const Point& p ) {
         return Point( s * p.x, s * p.y, s * p.z );
@@ -549,6 +557,7 @@ public:
     inline_ Point operator/( const Point& p ) const {
         return Point( x / p.x, y / p.y, z / p.z );
     }
+
     //! Operator for Point Scale = Point / float.
     inline_ Point operator/( float s ) const {
         s = 1.0f / s;
@@ -564,6 +573,7 @@ public:
     inline_ float operator|( const Point& p ) const {
         return x * p.x + y * p.y + z * p.z;
     }
+
     //! Operator for Point VecProd = Point ^ Point.
     ICF Point operator^( const Point& p ) const {
         return Point( y * p.z - z * p.y, z * p.x - x * p.z, x * p.y - y * p.x );
@@ -656,6 +666,7 @@ public:
         public:
             float m[ 3 ][ 3 ];
         }; // To allow inlining
+
         const ShadowMatrix3x3* Mat = ( const ShadowMatrix3x3* )&mat;
 
         return Point(
@@ -671,6 +682,7 @@ public:
         public:
             float m[ 4 ][ 4 ];
         }; // To allow inlining
+
         const ShadowMatrix4x4* Mat = ( const ShadowMatrix4x4* )&mat;
 
         return Point( x * Mat->m[ 0 ][ 0 ] + y * Mat->m[ 1 ][ 0 ] +
@@ -687,6 +699,7 @@ public:
         public:
             float m[ 3 ][ 3 ];
         }; // To allow inlining
+
         const ShadowMatrix3x3* Mat = ( const ShadowMatrix3x3* )&mat;
 
         float xp =
@@ -709,6 +722,7 @@ public:
         public:
             float m[ 4 ][ 4 ];
         }; // To allow inlining
+
         const ShadowMatrix4x4* Mat = ( const ShadowMatrix4x4* )&mat;
 
         float xp = x * Mat->m[ 0 ][ 0 ] + y * Mat->m[ 1 ][ 0 ] +
@@ -731,6 +745,7 @@ public:
     operator HPoint() const;
 
     inline_ operator const float*() const { return &x; }
+
     inline_ operator float*() { return &x; }
 
 public:

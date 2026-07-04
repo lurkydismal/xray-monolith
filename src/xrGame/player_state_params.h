@@ -14,6 +14,7 @@ public:
 
     virtual void update() {};
     virtual u32 const get_u32_param();
+
     virtual float const get_float_param() { return -1.0f; };
 
     virtual void reset_game() {};
@@ -29,6 +30,7 @@ public:
 
     virtual void update() {};
     virtual u32 const get_u32_param();
+
     virtual float const get_float_param() { return 0.0f; };
 
     virtual void reset_game() {};
@@ -44,7 +46,9 @@ public:
 
     virtual void update() {};
     virtual u32 const get_u32_param();
+
     virtual float const get_float_param() { return 0.0f; };
+
     virtual void reset_game();
 
     virtual void OnPlayerSpawned( game_PlayerState const* ps );
@@ -68,6 +72,7 @@ public:
 
     virtual void update() {};
     virtual u32 const get_u32_param();
+
     virtual float const get_float_param() { return 0.0f; };
 
     virtual void reset_game() {};
@@ -82,7 +87,9 @@ public:
     virtual ~player_state_velocity() {};
 
     virtual void update() {};
+
     virtual u32 const get_u32_param() { return 0; }
+
     virtual float const get_float_param();
 
     virtual void reset_game() {};
@@ -97,7 +104,9 @@ public:
     virtual ~player_state_ang_velocity() {};
 
     virtual void update() {};
+
     virtual u32 const get_u32_param() { return 0; }
+
     virtual float const get_float_param();
 
     virtual void reset_game() {};

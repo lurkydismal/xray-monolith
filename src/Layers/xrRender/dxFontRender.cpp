@@ -117,7 +117,7 @@ void dxFontRender::OnRender( CGameFont& owner ) {
                     if ( !fis_zero( l.z ) ) {
                         //						tu
                         //= ( l.x / owner.vTS.x ) + ( 0.5f / owner.vTS.x );
-                        //tv = ( l.y / owner.vTS.y ) + ( 0.5f / owner.vTS.y );
+                        // tv = ( l.y / owner.vTS.y ) + ( 0.5f / owner.vTS.y );
                         tu = ( l.x / owner.vTS.x );
                         tv = ( l.y / owner.vTS.y );
 #if !defined( USE_DX10 ) && !defined( USE_DX11 )

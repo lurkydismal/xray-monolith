@@ -304,6 +304,7 @@ RESHADE_DEFINE_ENUM_FLAG_OPERATORS( resource_usage );
 /// </summary>
 struct [[nodiscard]] resource_desc {
     constexpr resource_desc() : texture() {}
+
     constexpr resource_desc( uint64_t size,
                              memory_heap heap,
                              resource_usage usage,
@@ -313,6 +314,7 @@ struct [[nodiscard]] resource_desc {
           heap( heap ),
           usage( usage ),
           flags( flags ) {}
+
     constexpr resource_desc( uint32_t width,
                              uint32_t height,
                              uint16_t layers,
@@ -327,6 +329,7 @@ struct [[nodiscard]] resource_desc {
           heap( heap ),
           usage( usage ),
           flags( flags ) {}
+
     constexpr resource_desc( resource_type type,
                              uint32_t width,
                              uint32_t height,
@@ -461,12 +464,14 @@ enum class resource_view_type : uint32_t {
 /// </summary>
 struct [[nodiscard]] resource_view_desc {
     constexpr resource_view_desc() : texture() {}
+
     constexpr resource_view_desc( format format,
                                   uint64_t offset,
                                   uint64_t size )
         : type( resource_view_type::buffer ),
           format( format ),
           buffer( { offset, size } ) {}
+
     constexpr resource_view_desc( format format,
                                   uint32_t first_level,
                                   uint32_t levels,
@@ -475,11 +480,13 @@ struct [[nodiscard]] resource_view_desc {
         : type( resource_view_type::texture_2d ),
           format( format ),
           texture( { first_level, levels, first_layer, layers } ) {}
+
     constexpr resource_view_desc( resource_view_type type,
                                   format format,
                                   uint64_t offset,
                                   uint64_t size )
         : type( type ), format( format ), buffer( { offset, size } ) {}
+
     constexpr resource_view_desc( resource_view_type type,
                                   format format,
                                   uint32_t first_level,
@@ -489,6 +496,7 @@ struct [[nodiscard]] resource_view_desc {
         : type( type ),
           format( format ),
           texture( { first_level, levels, first_layer, layers } ) {}
+
     constexpr explicit resource_view_desc( format format )
         : type( resource_view_type::texture_2d ),
           format( format ),
@@ -588,7 +596,9 @@ struct subresource_box {
     uint32_t back = 0;
 
     constexpr uint32_t width() const { return right - left; }
+
     constexpr uint32_t height() const { return bottom - top; }
+
     constexpr uint32_t depth() const { return back - front; }
 };
 
@@ -773,6 +783,7 @@ struct acceleration_structure_instance {
 /// </summary>
 struct acceleration_structure_build_input {
     constexpr acceleration_structure_build_input() : triangles() {}
+
     constexpr acceleration_structure_build_input(
         api::resource vertex_buffer,
         uint64_t vertex_offset,
@@ -788,12 +799,14 @@ struct acceleration_structure_build_input {
           triangles( { vertex_buffer, vertex_offset, vertex_count,
                        vertex_stride, vertex_format, index_buffer, index_offset,
                        index_count, index_format, transform_address } ) {}
+
     constexpr acceleration_structure_build_input( api::resource aabb_buffer,
                                                   uint64_t aabb_offset,
                                                   uint32_t aabb_count,
                                                   uint64_t aabb_stride )
         : type( acceleration_structure_build_input_type::aabbs ),
           aabbs( { aabb_buffer, aabb_offset, aabb_count, aabb_stride } ) {}
+
     constexpr acceleration_structure_build_input(
         api::resource instance_buffer,
         uint64_t instance_offset,

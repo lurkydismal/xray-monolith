@@ -134,6 +134,7 @@ struct VoiceProps {
         float GainLF;
         float LFReference;
     } Direct;
+
     struct SendData {
         EffectSlot* Slot;
         float Gain;
@@ -220,6 +221,7 @@ struct Voice {
         int FilterType;
         al::span< FloatBufferLine > Buffer;
     };
+
     TargetData mDirect;
     std::array< TargetData, MAX_SENDS > mSend;
 
@@ -238,6 +240,7 @@ struct Voice {
         DirectParams mDryParams;
         std::array< SendParams, MAX_SENDS > mWetParams;
     };
+
     al::vector< ChannelData > mChans{ 2 };
 
     Voice() = default;

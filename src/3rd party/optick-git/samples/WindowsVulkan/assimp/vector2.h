@@ -61,8 +61,11 @@ template < typename TReal >
 class aiVector2t {
 public:
     aiVector2t() : x(), y() {}
+
     aiVector2t( TReal _x, TReal _y ) : x( _x ), y( _y ) {}
+
     explicit aiVector2t( TReal _xyz ) : x( _xyz ), y( _xyz ) {}
+
     aiVector2t( const aiVector2t& o ) : x( o.x ), y( o.y ) {}
 
 public:

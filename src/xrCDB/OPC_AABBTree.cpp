@@ -406,6 +406,7 @@ udword AABBTree::ComputeDepth() const {
             }
         }
     };
+
     Local::_UpdateDepth( this, Depth, Current );
     return Depth;
 }

@@ -187,7 +187,9 @@ public:
     }
 
     static void InitColorDefs();
+
     static void DeleteColorDefs() { xr_delete( m_pColorDefs ); }
+
     static void AssignColor( LPCSTR name, u32 clr );
 
 private:

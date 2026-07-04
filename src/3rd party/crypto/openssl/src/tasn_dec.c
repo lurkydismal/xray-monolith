@@ -1045,6 +1045,7 @@ static int asn1_find_end( const unsigned char** in, long len, char inf ) {
     *in = p;
     return 1;
 }
+
 /* This function collects the asn1 data from a constructred string
  * type into a buffer. The values of 'in' and 'len' should refer
  * to the contents of the constructed type and 'inf' should be set

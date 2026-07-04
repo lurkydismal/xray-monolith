@@ -35,6 +35,7 @@ transencode_coef_controller JPP( ( j_compress_ptr cinfo,
  */
 
 GLOBAL( void )
+
 jpeg_write_coefficients( j_compress_ptr cinfo, jvirt_barray_ptr* coef_arrays ) {
     if ( cinfo->global_state != CSTATE_START )
         ERREXIT1( cinfo, JERR_BAD_STATE, cinfo->global_state );
@@ -58,6 +59,7 @@ jpeg_write_coefficients( j_compress_ptr cinfo, jvirt_barray_ptr* coef_arrays ) {
  */
 
 GLOBAL( void )
+
 jpeg_copy_critical_parameters( j_decompress_ptr srcinfo,
                                j_compress_ptr dstinfo ) {
     JQUANT_TBL** qtblptr;
@@ -154,6 +156,7 @@ jpeg_copy_critical_parameters( j_decompress_ptr srcinfo,
  */
 
 LOCAL( void )
+
 transencode_master_selection( j_compress_ptr cinfo,
                               jvirt_barray_ptr* coef_arrays ) {
     /* Although we don't actually use input_components for transcoding,
@@ -220,6 +223,7 @@ typedef struct {
 typedef my_coef_controller* my_coef_ptr;
 
 LOCAL( void )
+
 start_iMCU_row( j_compress_ptr cinfo )
 /* Reset within-iMCU-row counters for a new row */
 {
@@ -249,6 +253,7 @@ start_iMCU_row( j_compress_ptr cinfo )
  */
 
 METHODDEF( void )
+
 start_pass_coef( j_compress_ptr cinfo, J_BUF_MODE pass_mode ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
 
@@ -270,6 +275,7 @@ start_pass_coef( j_compress_ptr cinfo, J_BUF_MODE pass_mode ) {
  */
 
 METHODDEF( boolean )
+
 compress_output( j_compress_ptr cinfo, JSAMPIMAGE input_buf ) {
     my_coef_ptr coef = ( my_coef_ptr )cinfo->coef;
     JDIMENSION MCU_col_num; /* index of current MCU within row */
@@ -359,6 +365,7 @@ compress_output( j_compress_ptr cinfo, JSAMPIMAGE input_buf ) {
  */
 
 LOCAL( void )
+
 transencode_coef_controller( j_compress_ptr cinfo,
                              jvirt_barray_ptr* coef_arrays ) {
     my_coef_ptr coef;

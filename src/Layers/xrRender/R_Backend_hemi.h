@@ -16,10 +16,13 @@ public:
     void unmap();
 
     void set_c_pos_faces( R_constant* C ) { c_pos_faces = C; }
+
     void set_c_neg_faces( R_constant* C ) { c_neg_faces = C; }
+
     void set_c_material( R_constant* C ) { c_material = C; }
 
     void set_c_hotness( R_constant* C ) { c_hotness = C; } //--DSR-- HeatVision
+
     void set_c_glowing( R_constant* C ) {
         c_glowing = C;
     } //--DSR-- SilencerOverheat

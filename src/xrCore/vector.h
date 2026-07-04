@@ -98,6 +98,7 @@ inline constexpr float PI_DIV_8 = 0.3926990816987241548078304229099f;
 IC BOOL fsimilar( float a, float b, float cmp = EPS ) {
     return _abs( a - b ) < cmp;
 }
+
 IC BOOL dsimilar( double a, double b, double cmp = EPS ) {
     return _abs( a - b ) < cmp;
 }
@@ -105,6 +106,7 @@ IC BOOL dsimilar( double a, double b, double cmp = EPS ) {
 IC BOOL fis_zero( float val, float cmp = EPS_S ) {
     return _abs( val ) < cmp;
 }
+
 IC BOOL dis_zero( double val, double cmp = EPS_S ) {
     return _abs( val ) < cmp;
 }
@@ -125,12 +127,15 @@ ICF T rad2deg( T val ) {
 ICF float deg2rad( float val ) {
     return implement::deg2rad( val );
 }
+
 ICF double deg2rad( double val ) {
     return implement::deg2rad( val );
 }
+
 ICF float rad2deg( float val ) {
     return implement::rad2deg( val );
 }
+
 ICF double rad2deg( double val ) {
     return implement::rad2deg( val );
 }
@@ -464,7 +469,9 @@ IC _quaternion< T >& _quaternion< T >::set( const _matrix< T >& M ) {
         z = ( M._21 - M._12 ) * s;
     } else {
         int biggest;
+
         enum { A, E, I };
+
         if ( M._11 > M._22 ) {
             if ( M._33 > M._11 )
                 biggest = I;

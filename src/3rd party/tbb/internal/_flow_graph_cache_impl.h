@@ -62,11 +62,13 @@ public:
 
 #if TBB_DEPRECATED_FLOW_NODE_EXTRACTION
     typedef edge_container< T > built_predecessors_type;
+
     built_predecessors_type& built_predecessors() {
         return my_built_predecessors;
     }
 
     typedef typename edge_container< T >::edge_list_type predecessor_list_type;
+
     void internal_add_built_predecessor( T& n ) {
         typename mutex_type::scoped_lock lock( my_mutex );
         my_built_predecessors.add_edge( n );

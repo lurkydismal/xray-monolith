@@ -15,11 +15,14 @@
 // #define LOG_ALL_LINES
 #ifdef LOG_ALL_LINES
 int ListSubLinesCount = 0;
+
 struct DBGList {
     CUISubLine* wnd;
     int num;
 };
+
 xr_vector< DBGList > dbg_list_sublines;
+
 void dump_list_sublines() {
     Msg( "------Total  SubLines %d", dbg_list_sublines.size() );
     xr_vector< DBGList >::iterator _it = dbg_list_sublines.begin();

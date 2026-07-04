@@ -107,6 +107,7 @@ struct XRCORE_API str_value
     u32 length;
 
     str_value() : value( nullptr ), hash( 0 ), length( 0 ) {}
+
     str_value( char* s )
         : value( s ),
           hash( xr_hash< std::string_view >()( s ) ),
@@ -145,9 +146,11 @@ private:
         char* base;         // Start of the block
         u32 used;           // How much used in block
         const u32 capacity; // Total memory used by block
+
         pool_block( char* base, u32 capacity )
             : base( base ), used( 0 ), capacity( capacity ) {}
     };
+
     xr_vector< pool_block > storage;
     char* alloc_in_pool( str_c value, u32 len );
     static constexpr const u32 block_size = 4 * 1024 * 1024; // 4MB
@@ -160,6 +163,7 @@ private:
     struct str_container_constructor_key {
         explicit str_container_constructor_key() = default;
     };
+
     str_container();
 
 public:
@@ -222,8 +226,11 @@ public:
     }
 
     str_c operator*() const { return p_ ? p_->value : 0; }
+
     bool operator!() const { return p_ == 0; }
+
     char operator[]( size_t id ) { return p_->value[ id ]; }
+
     str_c c_str() const { return p_ ? p_->value : 0; }
 
     // misc func
@@ -275,12 +282,15 @@ public:
 IC bool operator==( shared_str const& a, shared_str const& b ) {
     return a._get() == b._get();
 }
+
 IC bool operator!=( shared_str const& a, shared_str const& b ) {
     return a._get() != b._get();
 }
+
 IC bool operator<( shared_str const& a, shared_str const& b ) {
     return a._get() < b._get();
 }
+
 IC bool operator>( shared_str const& a, shared_str const& b ) {
     return a._get() > b._get();
 }
@@ -289,15 +299,19 @@ IC bool operator>( shared_str const& a, shared_str const& b ) {
 IC void swap( shared_str& lhs, shared_str& rhs ) {
     lhs.swap( rhs );
 }
+
 IC u32 xr_strlen( shared_str& a ) {
     return a.size();
 }
+
 IC int xr_strcmp( const shared_str& a, const char* b ) {
     return xr_strcmp( *a, b );
 }
+
 IC int xr_strcmp( const char* a, const shared_str& b ) {
     return xr_strcmp( a, *b );
 }
+
 IC int xr_strcmp( const shared_str& a, const shared_str& b ) {
     if ( a.equal( b ) )
         return 0;

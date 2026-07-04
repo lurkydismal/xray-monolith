@@ -24,6 +24,7 @@
 #include <luabind/luabind.hpp>
 
 using namespace luabind::detail;
+
 string_class luabind::detail::stack_content_by_name( lua_State* L,
                                                      int start_index ) {
     string_class ret;

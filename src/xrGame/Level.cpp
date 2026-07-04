@@ -180,11 +180,13 @@ void _save_impl() {
     for ( auto& file : fset_temp ) {
         fset.push_back( file );
     }
+
     struct {
         bool operator()( FS_File& a, FS_File& b ) {
             return a.time_write > b.time_write;
         }
     } sortFilesDesc;
+
     std::sort( fset.begin(), fset.end(), sortFilesDesc );
 
     // Msg("save mask %s", path_mask.c_str());
@@ -979,6 +981,7 @@ void CLevel::MakeReconnect() {
 
 BOOL mt_ph_commander = FALSE;
 BOOL mt_TaskManager = FALSE;
+
 void CLevel::OnFrame() {
     PROF_EVENT( "CLevel::OnFrame()" );
 
@@ -1070,6 +1073,7 @@ void CLevel::OnFrame() {
                 F->OutNext( "sv_urate/cl_urate : %4d/%4d", psNET_ServerUpdate,
                             psNET_ClientUpdate );
                 F->SetColor( D3DCOLOR_XRGB( 255, 255, 255 ) );
+
                 struct net_stats_functor {
                     xrServer* m_server;
                     CGameFont* F;
@@ -1087,6 +1091,7 @@ void CLevel::OnFrame() {
                             C->stats.dwTimesBlocked );
                     }
                 };
+
                 net_stats_functor tmp_functor;
                 tmp_functor.m_server = Server;
                 tmp_functor.F = F;
@@ -1211,6 +1216,7 @@ int CLevel::LuaGC() {
     return lua_gc( ai().script_engine().lua(), LUA_GCSTEP,
                    psLua_ParallelGCStep );
 }
+
 void CLevel::LuaGCDebug() {
     static int mem_kb = 0;
     mem_kb = lua_gc( ai().script_engine().lua(), LUA_GCCOUNT, 0 );

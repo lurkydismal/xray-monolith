@@ -24,6 +24,7 @@
  */
 
 U_NAMESPACE_BEGIN
+
 /**
  * Abstract class that defines an API for forward-only iteration
  * on text objects.

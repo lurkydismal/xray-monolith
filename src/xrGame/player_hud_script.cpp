@@ -8,6 +8,7 @@ player_hud* get_player_hud() {
 }
 
 #pragma optimize( "s", on )
+
 void player_hud::script_register( lua_State* L ) {
     module( L )[ class_< player_hud >( "player_hud" )
                      .def( constructor<>() )

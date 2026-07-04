@@ -66,34 +66,41 @@ constexpr ALchar alErrOutOfMemory[] = "Out of Memory";
 /* Resampler strings */
 template < Resampler rtype >
 struct ResamplerName {};
+
 template <>
 struct ResamplerName< Resampler::Point > {
     static constexpr const ALchar* Get() noexcept { return "Nearest"; }
 };
+
 template <>
 struct ResamplerName< Resampler::Linear > {
     static constexpr const ALchar* Get() noexcept { return "Linear"; }
 };
+
 template <>
 struct ResamplerName< Resampler::Cubic > {
     static constexpr const ALchar* Get() noexcept { return "Cubic"; }
 };
+
 template <>
 struct ResamplerName< Resampler::FastBSinc12 > {
     static constexpr const ALchar* Get() noexcept {
         return "11th order Sinc (fast)";
     }
 };
+
 template <>
 struct ResamplerName< Resampler::BSinc12 > {
     static constexpr const ALchar* Get() noexcept { return "11th order Sinc"; }
 };
+
 template <>
 struct ResamplerName< Resampler::FastBSinc24 > {
     static constexpr const ALchar* Get() noexcept {
         return "23rd order Sinc (fast)";
     }
 };
+
 template <>
 struct ResamplerName< Resampler::BSinc24 > {
     static constexpr const ALchar* Get() noexcept { return "23rd order Sinc"; }
@@ -136,6 +143,7 @@ al::optional< DistanceModel > DistanceModelFromALenum( ALenum model ) {
     }
     return al::nullopt;
 }
+
 ALenum ALenumFromDistanceModel( DistanceModel model ) {
     switch ( model ) {
         case DistanceModel::Disable:
@@ -168,6 +176,7 @@ AL_API const ALchar* AL_APIENTRY alsoft_get_version( void ) START_API_FUNC {
         return spoof->c_str();
     return ALSOFT_VERSION;
 }
+
 END_API_FUNC
 
 #define DO_UPDATEPROPS()                         \
@@ -201,6 +210,7 @@ AL_API void AL_APIENTRY alEnable( ALenum capability ) START_API_FUNC {
                                "Invalid enable property 0x%04x", capability );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alDisable( ALenum capability ) START_API_FUNC {
@@ -224,6 +234,7 @@ AL_API void AL_APIENTRY alDisable( ALenum capability ) START_API_FUNC {
                                "Invalid disable property 0x%04x", capability );
     }
 }
+
 END_API_FUNC
 
 AL_API ALboolean AL_APIENTRY alIsEnabled( ALenum capability ) START_API_FUNC {
@@ -250,6 +261,7 @@ AL_API ALboolean AL_APIENTRY alIsEnabled( ALenum capability ) START_API_FUNC {
 
     return value;
 }
+
 END_API_FUNC
 
 AL_API ALboolean AL_APIENTRY alGetBoolean( ALenum pname ) START_API_FUNC {
@@ -306,6 +318,7 @@ AL_API ALboolean AL_APIENTRY alGetBoolean( ALenum pname ) START_API_FUNC {
 
     return value;
 }
+
 END_API_FUNC
 
 AL_API ALdouble AL_APIENTRY alGetDouble( ALenum pname ) START_API_FUNC {
@@ -357,6 +370,7 @@ AL_API ALdouble AL_APIENTRY alGetDouble( ALenum pname ) START_API_FUNC {
 
     return value;
 }
+
 END_API_FUNC
 
 AL_API ALfloat AL_APIENTRY alGetFloat( ALenum pname ) START_API_FUNC {
@@ -408,6 +422,7 @@ AL_API ALfloat AL_APIENTRY alGetFloat( ALenum pname ) START_API_FUNC {
 
     return value;
 }
+
 END_API_FUNC
 
 AL_API ALint AL_APIENTRY alGetInteger( ALenum pname ) START_API_FUNC {
@@ -487,6 +502,7 @@ AL_API ALint AL_APIENTRY alGetInteger( ALenum pname ) START_API_FUNC {
 
     return value;
 }
+
 END_API_FUNC
 
 AL_API ALint64SOFT AL_APIENTRY alGetInteger64SOFT( ALenum pname )
@@ -539,6 +555,7 @@ AL_API ALint64SOFT AL_APIENTRY alGetInteger64SOFT( ALenum pname )
 
     return value;
 }
+
 END_API_FUNC
 
 AL_API ALvoid* AL_APIENTRY alGetPointerSOFT( ALenum pname ) START_API_FUNC {
@@ -564,6 +581,7 @@ AL_API ALvoid* AL_APIENTRY alGetPointerSOFT( ALenum pname ) START_API_FUNC {
 
     return value;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetBooleanv( ALenum pname,
@@ -597,6 +615,7 @@ AL_API void AL_APIENTRY alGetBooleanv( ALenum pname,
                                    pname );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetDoublev( ALenum pname,
@@ -630,6 +649,7 @@ AL_API void AL_APIENTRY alGetDoublev( ALenum pname,
                                    pname );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetFloatv( ALenum pname,
@@ -663,6 +683,7 @@ AL_API void AL_APIENTRY alGetFloatv( ALenum pname,
                                    pname );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetIntegerv( ALenum pname,
@@ -696,6 +717,7 @@ AL_API void AL_APIENTRY alGetIntegerv( ALenum pname,
                                    pname );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetInteger64vSOFT( ALenum pname, ALint64SOFT* values )
@@ -729,6 +751,7 @@ AL_API void AL_APIENTRY alGetInteger64vSOFT( ALenum pname, ALint64SOFT* values )
                                    pname );
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetPointervSOFT( ALenum pname,
@@ -756,6 +779,7 @@ AL_API void AL_APIENTRY alGetPointervSOFT( ALenum pname,
                                    pname );
         }
 }
+
 END_API_FUNC
 
 AL_API const ALchar* AL_APIENTRY alGetString( ALenum pname ) START_API_FUNC {
@@ -811,6 +835,7 @@ AL_API const ALchar* AL_APIENTRY alGetString( ALenum pname ) START_API_FUNC {
     }
     return value;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alDopplerFactor( ALfloat value ) START_API_FUNC {
@@ -827,6 +852,7 @@ AL_API void AL_APIENTRY alDopplerFactor( ALfloat value ) START_API_FUNC {
         DO_UPDATEPROPS();
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alDopplerVelocity( ALfloat value ) START_API_FUNC {
@@ -843,6 +869,7 @@ AL_API void AL_APIENTRY alDopplerVelocity( ALfloat value ) START_API_FUNC {
         DO_UPDATEPROPS();
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSpeedOfSound( ALfloat value ) START_API_FUNC {
@@ -859,6 +886,7 @@ AL_API void AL_APIENTRY alSpeedOfSound( ALfloat value ) START_API_FUNC {
         DO_UPDATEPROPS();
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alDistanceModel( ALenum value ) START_API_FUNC {
@@ -875,6 +903,7 @@ AL_API void AL_APIENTRY alDistanceModel( ALenum value ) START_API_FUNC {
         context->setError( AL_INVALID_VALUE,
                            "Distance model 0x%04x out of range", value );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alDeferUpdatesSOFT( void ) START_API_FUNC {
@@ -885,6 +914,7 @@ AL_API void AL_APIENTRY alDeferUpdatesSOFT( void ) START_API_FUNC {
     std::lock_guard< std::mutex > _{ context->mPropLock };
     context->deferUpdates();
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alProcessUpdatesSOFT( void ) START_API_FUNC {
@@ -895,6 +925,7 @@ AL_API void AL_APIENTRY alProcessUpdatesSOFT( void ) START_API_FUNC {
     std::lock_guard< std::mutex > _{ context->mPropLock };
     context->processUpdates();
 }
+
 END_API_FUNC
 
 AL_API const ALchar* AL_APIENTRY alGetStringiSOFT( ALenum pname, ALsizei index )
@@ -920,6 +951,7 @@ AL_API const ALchar* AL_APIENTRY alGetStringiSOFT( ALenum pname, ALsizei index )
     }
     return value;
 }
+
 END_API_FUNC
 
 void UpdateContextProps( ALCcontext* context ) {

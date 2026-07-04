@@ -50,14 +50,23 @@ public:
 
     // generalized writing functions
     IC void w_u64( u64 d ) { w( &d, sizeof( u64 ) ); }
+
     IC void w_u32( u32 d ) { w( &d, sizeof( u32 ) ); }
+
     IC void w_u16( u16 d ) { w( &d, sizeof( u16 ) ); }
+
     IC void w_u8( u8 d ) { w( &d, sizeof( u8 ) ); }
+
     IC void w_s64( s64 d ) { w( &d, sizeof( s64 ) ); }
+
     IC void w_s32( s32 d ) { w( &d, sizeof( s32 ) ); }
+
     IC void w_s16( s16 d ) { w( &d, sizeof( s16 ) ); }
+
     IC void w_s8( s8 d ) { w( &d, sizeof( s8 ) ); }
+
     IC void w_float( float d ) { w( &d, sizeof( float ) ); }
+
     IC void w_string( const char* p ) {
         w( p, ( u32 )xr_strlen( p ) );
         w_u8( 13 );
@@ -65,6 +74,7 @@ public:
     }
 
     IC void w_stringZ( const char* p ) { w( p, ( u32 )xr_strlen( p ) + 1 ); }
+
     IC void w_stringZ( const shared_str& p ) {
         w( *p ? *p : "", p.size() );
         w_u8( 0 );
@@ -81,11 +91,17 @@ public:
     }
 
     IC void w_fcolor( const Fcolor& v ) { w( &v, sizeof( Fcolor ) ); }
+
     IC void w_fvector4( const Fvector4& v ) { w( &v, sizeof( Fvector4 ) ); }
+
     IC void w_fvector3( const Fvector3& v ) { w( &v, sizeof( Fvector3 ) ); }
+
     IC void w_fvector2( const Fvector2& v ) { w( &v, sizeof( Fvector2 ) ); }
+
     IC void w_ivector4( const Ivector4& v ) { w( &v, sizeof( Ivector4 ) ); }
+
     IC void w_ivector3( const Ivector3& v ) { w( &v, sizeof( Ivector3 ) ); }
+
     IC void w_ivector2( const Ivector2& v ) { w( &v, sizeof( Ivector2 ) ); }
 
     // quant writing functions
@@ -104,10 +120,13 @@ public:
     IC void w_angle16( float a ) {
         w_float_q16( angle_normalize( a ), 0, PI_MUL_2 );
     }
+
     IC void w_angle8( float a ) {
         w_float_q8( angle_normalize( a ), 0, PI_MUL_2 );
     }
+
     IC void w_dir( const Fvector& D ) { w_u16( pvCompress( D ) ); }
+
     void w_sdir( const Fvector& D );
     void __cdecl w_printf( const char* format, ... );
 
@@ -118,7 +137,9 @@ public:
     u32 chunk_size(); // returns size of currently opened chunk, 0 otherwise
     void w_compressed( void* ptr, u32 count );
     void w_chunk( u32 type, void* data, u32 size );
+
     virtual bool valid() { return true; }
+
     virtual void flush() = 0;
 };
 
@@ -142,23 +163,29 @@ public:
     virtual void w( const void* ptr, u32 count );
 
     virtual void seek( u32 pos ) { position = pos; }
+
     virtual u32 tell() { return position; }
 
     // specific
     IC u8* pointer() { return data; }
+
     IC u32 size() const { return file_size; }
+
     IC void clear() {
         file_size = 0;
         position = 0;
     }
+
 #pragma warning( push )
 #pragma warning( disable : 4995 )
+
     IC void free() {
         file_size = 0;
         position = 0;
         mem_size = 0;
         xr_free( data );
     }
+
 #pragma warning( pop )
     bool save_to( LPCSTR fn );
 
@@ -177,7 +204,9 @@ struct IReaderBase_Test;
 
 struct XRCORE_API IReaderTestPolicy {
     IReaderBase_Test* m_test;
+
     IReaderTestPolicy() { m_test = NULL; }
+
     ~IReaderTestPolicy(); // defined in FS.cpp
 };
 #endif // TESTING_IREADER
@@ -195,6 +224,7 @@ public:
     virtual ~IReaderBase() {}
 
     IC implementation_type& impl() { return *( implementation_type* )this; }
+
     IC const implementation_type& impl() const {
         return *( implementation_type* )this;
     }
@@ -208,62 +238,79 @@ public:
         r( &tmp, 3 * sizeof( float ) );
         return tmp;
     };
+
     IC Fvector4 r_vec4() {
         Fvector4 tmp;
         r( &tmp, 4 * sizeof( float ) );
         return tmp;
     };
+
     IC u64 r_u64() {
         u64 tmp;
         r( &tmp, sizeof( tmp ) );
         return tmp;
     };
+
     IC u32 r_u32() {
         u32 tmp;
         r( &tmp, sizeof( tmp ) );
         return tmp;
     };
+
     IC u16 r_u16() {
         u16 tmp;
         r( &tmp, sizeof( tmp ) );
         return tmp;
     };
+
     IC u8 r_u8() {
         u8 tmp;
         r( &tmp, sizeof( tmp ) );
         return tmp;
     };
+
     IC s64 r_s64() {
         s64 tmp;
         r( &tmp, sizeof( tmp ) );
         return tmp;
     };
+
     IC s32 r_s32() {
         s32 tmp;
         r( &tmp, sizeof( tmp ) );
         return tmp;
     };
+
     IC s16 r_s16() {
         s16 tmp;
         r( &tmp, sizeof( tmp ) );
         return tmp;
     };
+
     IC s8 r_s8() {
         s8 tmp;
         r( &tmp, sizeof( tmp ) );
         return tmp;
     };
+
     IC float r_float() {
         float tmp;
         r( &tmp, sizeof( tmp ) );
         return tmp;
     };
+
     IC void r_fvector4( Fvector4& v ) { r( &v, sizeof( Fvector4 ) ); }
+
     IC void r_fvector3( Fvector3& v ) { r( &v, sizeof( Fvector3 ) ); }
+
     IC void r_fvector2( Fvector2& v ) { r( &v, sizeof( Fvector2 ) ); }
+
     IC void r_ivector4( Ivector4& v ) { r( &v, sizeof( Ivector4 ) ); }
+
     IC void r_ivector4( Ivector3& v ) { r( &v, sizeof( Ivector3 ) ); }
+
     IC void r_ivector4( Ivector2& v ) { r( &v, sizeof( Ivector2 ) ); }
+
     IC void r_fcolor( Fcolor& v ) { r( &v, sizeof( Fcolor ) ); }
 
     IC float r_float_q16( float min, float max ) {
@@ -283,7 +330,9 @@ public:
     }
 
     IC float r_angle16() { return r_float_q16( 0, PI_MUL_2 ); }
+
     IC float r_angle8() { return r_float_q8( 0, PI_MUL_2 ); }
+
     IC void r_dir( Fvector& A ) {
         u16 t = r_u16();
         pvDecompress( A, t );
@@ -361,13 +410,18 @@ protected:
 
 public:
     IC int elapsed() const { return Size - Pos; };
+
     IC int tell() const { return Pos; };
+
     IC void seek( int ptr ) {
         Pos = ptr;
         VERIFY( ( Pos <= Size ) && ( Pos >= 0 ) );
     };
+
     IC int length() const { return Size; };
+
     IC void* pointer() const { return &( data[ Pos ] ); };
+
     IC void advance( int cnt ) {
         Pos += cnt;
         VERIFY( ( Pos <= Size ) && ( Pos >= 0 ) );

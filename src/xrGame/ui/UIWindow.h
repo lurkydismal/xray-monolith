@@ -43,6 +43,7 @@ public:
 
 public:
     pointer address( reference _Val ) const { return ( &_Val ); }
+
     const_pointer address( const_reference _Val ) const { return ( &_Val ); }
 
     uialloc() {}
@@ -80,6 +81,7 @@ public:
     }
 
     void construct( pointer p, const T& _Val ) { std::_Construct( p, _Val ); }
+
     void destroy( pointer p ) { std::_Destroy( p ); }
 
     size_type max_size() const {
@@ -120,19 +122,31 @@ public:
     virtual ~CUIWindow();
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIStatic* ui_cast_static() { return nullptr; }
+
     virtual CUICellItem* ui_cast_cell_item() { return nullptr; }
+
     virtual CUIListBoxItem* ui_cast_list_box_item() { return nullptr; }
+
     virtual CUIListItem* ui_cast_list_item() { return nullptr; }
+
     virtual CUIListWnd* ui_cast_list() { return nullptr; }
+
     virtual ITextureOwner* ui_cast_texture_owner() { return nullptr; }
+
     virtual CUILightAnimColorConroller* ui_cast_light_anim_color_controller() {
         return nullptr;
     }
+
     virtual CUITreeViewItem* ui_cast_tree_view_item() { return nullptr; }
+
     virtual CUIScrollView* ui_cast_scroll_view() { return nullptr; }
+
     virtual CUIFixedScrollBar* ui_cast_fixed_scroll_bar() { return nullptr; }
+
     virtual CUISelectable* ui_cast_selectable() { return nullptr; }
+
     virtual CUIListItemServer* ui_cast_list_item_server() { return nullptr; }
 
     ////////////////////////////////////
@@ -141,12 +155,14 @@ public:
     virtual void DetachChild( CUIWindow* pChild );
     virtual bool IsChild( CUIWindow* pChild ) const;
     virtual void DetachAll();
+
     int GetChildNum() {
         xrCriticalSectionGuard guard( csUi );
         return m_ChildWndList.size();
     }
 
     void SetParent( CUIWindow* pNewParent );
+
     CUIWindow* GetParent() const { return m_pParentWnd; }
 
     // получить окно самого верхнего уровня
@@ -192,11 +208,13 @@ public:
     // захватить/освободить мышь окном
     // сообщение посылается дочерним окном родительскому
     void SetCapture( CUIWindow* pChildWindow, bool capture_status );
+
     CUIWindow* GetMouseCapturer() { return m_pMouseCapturer; }
 
     // окошко, которому пересылаются сообщения,
     // если NULL, то шлем на GetParent()
     void SetMessageTarget( CUIWindow* pWindow ) { m_pMessageTarget = pWindow; }
+
     CUIWindow* GetMessageTarget();
 
     void SetKeyboardCapture( CUIWindow* pChildWindow, bool capture_status );
@@ -208,6 +226,7 @@ public:
     virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData = NULL );
 
     virtual void Enable( bool status ) { m_bIsEnabled = status; }
+
     bool IsEnabled() { return m_bIsEnabled; }
 
     // убрать/показать окно и его дочерние окна
@@ -217,10 +236,12 @@ public:
     }
 
     IC bool IsShown() { return GetVisible(); }
+
     void ShowChildren( bool show );
 
     // абсолютные координаты
     IC void GetAbsoluteRect( Frect& r );
+
     IC void GetAbsolutePos( Fvector2& p ) {
         Frect abs;
         GetAbsoluteRect( abs );
@@ -230,7 +251,9 @@ public:
     void SetWndRect_script( Frect rect ) {
         CUISimpleWindow::SetWndRect( rect );
     }
+
     void SetWndPos_script( Fvector2 pos ) { CUISimpleWindow::SetWndPos( pos ); }
+
     void SetWndSize_script( Fvector2 size ) {
         CUISimpleWindow::SetWndSize( size );
     }
@@ -243,7 +266,9 @@ public:
 
     void SetPPMode();
     void ResetPPMode();
+
     IC bool GetPPMode() { return m_bPP; };
+
     // для перевода окна и потомков в исходное состояние
     virtual void Reset();
     void ResetAll();
@@ -251,21 +276,28 @@ public:
     virtual bool NeedCursor() const { return true; }
 
     DEF_UILIST( WINDOW_LIST, CUIWindow* );
+
     WINDOW_LIST& GetChildWndList() { return m_ChildWndList; }
 
     IC bool IsAutoDelete() { return m_bAutoDelete; }
+
     IC void SetAutoDelete( bool auto_delete ) { m_bAutoDelete = auto_delete; }
 
     // Name of the window
     const shared_str WindowName() const { return m_windowName; }
+
     void SetWindowName( LPCSTR wn ) { m_windowName = wn; }
+
     LPCSTR WindowName_script() { return m_windowName.c_str(); }
+
     CUIWindow* FindChild( const shared_str name );
 
     IC bool CursorOverWindow() const { return m_bCursorOverWindow; }
+
     IC u32 FocusReceiveTime() const { return m_dwFocusReceiveTime; }
 
     IC bool GetCustomDraw() const { return m_bCustomDraw; }
+
     IC void SetCustomDraw( bool b ) { m_bCustomDraw = b; }
 
     xrCriticalSection csUi;

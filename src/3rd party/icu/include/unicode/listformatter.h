@@ -61,6 +61,7 @@ struct ListFormatData : public UMemory {
           middlePattern( middle ),
           endPattern( end ) {}
 };
+
 /** \endcond */
 
 /**
@@ -135,8 +136,10 @@ public:
 private:
     FormattedListData* fData;
     UErrorCode fErrorCode;
+
     explicit FormattedList( FormattedListData* results )
         : fData( results ), fErrorCode( U_ZERO_ERROR ) {}
+
     explicit FormattedList( UErrorCode errorCode )
         : fData( nullptr ), fErrorCode( errorCode ) {}
     friend class ListFormatter;

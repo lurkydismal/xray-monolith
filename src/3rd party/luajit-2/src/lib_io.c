@@ -386,7 +386,7 @@ LJLIB_SET( __index )
 LJLIB_PUSH( top - 2 )
 LJLIB_SET( !) /* Set environment. */
 
-    LJLIB_CF( io_open ) {
+LJLIB_CF( io_open ) {
     const char* fname = strdata( lj_lib_checkstr( L, 1 ) );
     GCstr* s = lj_lib_optstr( L, 2 );
     const char* mode = s ? strdata( s ) : "r";

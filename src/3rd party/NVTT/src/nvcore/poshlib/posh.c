@@ -332,6 +332,7 @@ posh_i32_t POSH_SwapI32( posh_i32_t v ) {
 */
 posh_u64_t POSH_SwapU64( posh_u64_t v ) {
     posh_byte_t tmp;
+
     union {
         posh_byte_t bytes[ 8 ];
         posh_u64_t u64;

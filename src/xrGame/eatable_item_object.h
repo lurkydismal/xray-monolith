@@ -19,11 +19,17 @@ public:
 
 public:
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CInventoryItem* cast_inventory_item() { return this; }
+
     virtual CAttachableItem* cast_attachable_item() { return this; }
+
     virtual CFoodItem* cast_food_item() { return nullptr; }
+
     virtual CFlashlight* cast_flashlight() { return nullptr; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CEatableItem* cast_eatable_item() { return this; }
 
 public:
@@ -42,7 +48,9 @@ public:
     virtual void net_Export( NET_Packet& P ); // export to server
     virtual void save( NET_Packet& output_packet );
     virtual void load( IReader& input_packet );
+
     virtual BOOL net_SaveRelevant() { return TRUE; }
+
     virtual void renderable_Render( IDSGraphManager* DM );
     virtual void reload( LPCSTR section );
     virtual void reinit();

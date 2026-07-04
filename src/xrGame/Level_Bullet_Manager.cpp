@@ -1042,6 +1042,7 @@ float SqrDistancePointToSegment( const Fvector& pt,
 }
 
 BOOL g_render_short_tracers = 1;
+
 void CBulletManager::Render() {
     PROF_EVENT( "CBulletManager::Render" );
 #ifdef DEBUG

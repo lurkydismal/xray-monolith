@@ -39,9 +39,11 @@ struct MyOutputHandler : public nvtt::OutputHandler {
           progress( 0 ),
           percentage( 0 ),
           stream( new nv::StdOutputStream( name ) ) {}
+
     virtual ~MyOutputHandler() { delete stream; }
 
     void setTotal( int64 t ) { total = t + 128; }
+
     void setDisplayProgress( bool b ) { verbose = b; }
 
     virtual void beginImage( int size,

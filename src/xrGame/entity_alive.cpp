@@ -398,6 +398,7 @@ void CEntityAlive::BloodyWallmarks( float P,
 }
 
 extern BOOL r_blood_decals_on_objects;
+
 void CEntityAlive::PlaceBloodWallmark( const Fvector& dir,
                                        const Fvector& start_pos,
                                        float trace_dist,

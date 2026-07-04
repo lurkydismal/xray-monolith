@@ -366,12 +366,14 @@ struct SimplifyMemFunc< SINGLE_MEMFUNCPTR_SIZE + sizeof( int ) > {
         // as:
         union {
             XFuncType func;
+
             struct {
                 GenericMemFuncType
                     funcaddress; // points to the actual member function
                 int delta;       // #BYTES to be added to the 'this' pointer
             } s;
         } u;
+
         // Check that the horrible_cast will work
         static_assert( sizeof( function_to_bind ) == sizeof( u.s ),
                        "Cannot use horrible_cast<>" );
@@ -397,6 +399,7 @@ struct MicrosoftVirtualMFP {
     int delta;        // #bytes to be added to the 'this' pointer
     int vtable_index; // or 0 if no virtual inheritance
 };
+
 // The CRUCIAL feature of Microsoft/Intel MFPs which we exploit is that the
 // m_codeptr member is *always* called, regardless of the values of the other
 // members. (This is *not* true for other compilers, eg GCC, which obtain the
@@ -408,6 +411,7 @@ struct MicrosoftVirtualMFP {
 // It has a trival member function that returns the value of the 'this' pointer.
 struct GenericVirtualClass : virtual public GenericClass {
     typedef GenericVirtualClass* ( GenericVirtualClass::*ProbePtrType )();
+
     GenericVirtualClass* GetThis() { return this; }
 };
 
@@ -423,12 +427,15 @@ struct SimplifyMemFunc< SINGLE_MEMFUNCPTR_SIZE + 2 * sizeof( int ) > {
             GenericClass* ( X::*ProbeFunc )();
             MicrosoftVirtualMFP s;
         } u;
+
         u.func = function_to_bind;
         bound_func = reinterpret_cast< GenericMemFuncType >( u.s.codeptr );
+
         union {
             GenericVirtualClass::ProbePtrType virtfunc;
             MicrosoftVirtualMFP s;
         } u2;
+
         // Check that the horrible_cast<>s will work
         static_assert(
             sizeof( function_to_bind ) == sizeof( u.s ) &&
@@ -463,6 +470,7 @@ struct SimplifyMemFunc< SINGLE_MEMFUNCPTR_SIZE + 3 * sizeof( int ) > {
         // cast, but we can use a union to do the conversion.
         union {
             XFuncType func;
+
             // In VC++ and ICL, an unknown_inheritance member pointer
             // is internally defined as:
             struct {
@@ -473,6 +481,7 @@ struct SimplifyMemFunc< SINGLE_MEMFUNCPTR_SIZE + 3 * sizeof( int ) > {
                 int vtable_index; // or 0 if no virtual inheritance
             } s;
         } u;
+
         // Check that the horrible_cast will work
         static_assert( sizeof( XFuncType ) == sizeof( u.s ),
                        "Cannot use horrible_cast<>" );
@@ -568,6 +577,7 @@ public:
 #if !defined( FASTDELEGATE_USESTATICFUNCTIONHACK )
     DelegateMemento()
         : m_pthis( 0 ), m_pFunction( 0 ), m_pStaticFunction( 0 ) {};
+
     void clear() {
         m_pthis = 0;
         m_pFunction = 0;
@@ -575,6 +585,7 @@ public:
     }
 #else
     DelegateMemento() : m_pthis( 0 ), m_pFunction( 0 ) {};
+
     void clear() {
         m_pthis = 0;
         m_pFunction = 0;
@@ -615,11 +626,13 @@ public:
         return std::memcmp( &m_pFunction, &right.m_pFunction,
                             sizeof( m_pFunction ) ) < 0;
     }
+
     // Provide a simple hashing method.
     inline size_t Hash() const {
         return reinterpret_cast< size_t >( m_pthis ) ^
                detail::unsafe_horrible_cast< size_t >( m_pFunction );
     }
+
     // BUGFIX (Mar 2005):
     // We can't just compare m_pFunction because on Metrowerks,
     // m_pFunction can be zero even if the delegate is not empty!
@@ -627,6 +640,7 @@ public:
     {
         return m_pthis == 0 && m_pFunction == 0;
     }
+
     inline bool empty() const // Is it bound to anything?
     {
         return m_pthis == 0 && m_pFunction == 0;
@@ -637,12 +651,15 @@ public:
         SetMementoFrom( right );
         return *this;
     }
+
     inline bool operator<( const DelegateMemento& right ) {
         return IsLess( right );
     }
+
     inline bool operator>( const DelegateMemento& right ) {
         return right.IsLess( *this );
     }
+
     DelegateMemento( const DelegateMemento& right )
         : m_pthis( right.m_pthis ),
           m_pFunction( right.m_pFunction )
@@ -698,6 +715,7 @@ public:
         m_pStaticFunction = 0;
 #endif
     }
+
     // For const member functions, we only need a const class pointer.
     // Since we know that the member function is const, it's safe to
     // remove the const qualifier from the 'this' pointer with a const_cast.
@@ -723,6 +741,7 @@ public:
 #endif
     // These functions are required for invoking the stored function
     inline GenericClass* GetClosureThis() const { return m_pthis; }
+
     inline GenericMemFunc GetClosureMemPtr() const {
         return reinterpret_cast< GenericMemFunc >( m_pFunction );
     }
@@ -753,6 +772,7 @@ public:
             m_pthis = reinterpret_cast< GenericClass* >( pParent );
         }
     }
+
     // For static functions, the 'static_function_invoker' class in the parent
     // will be called. The parent then needs to call GetStaticFunction() to find
     // out the actual function to invoke.
@@ -768,6 +788,7 @@ public:
         m_pStaticFunction =
             reinterpret_cast< GenericFuncPtr >( function_to_bind );
     }
+
     inline UnvoidStaticFuncPtr GetStaticFunction() const {
         return reinterpret_cast< UnvoidStaticFuncPtr >( m_pStaticFunction );
     }
@@ -789,6 +810,7 @@ public:
                           const DelegateMemento& right ) {
         SetMementoFrom( right );
     }
+
     // For static functions, the 'static_function_invoker' class in the parent
     // will be called. The parent then needs to call GetStaticFunction() to find
     // out the actual function to invoke.
@@ -821,6 +843,7 @@ public:
         //      m_pthis = reinterpret_cast<GenericClass
         //      *>(reinterpret_cast<long>(function_to_bind));
     }
+
     // ******** EVIL, EVIL CODE! *******
     // This function will be called with an invalid 'this' pointer!!
     // We're just returning the 'this' pointer, converted into
@@ -908,24 +931,31 @@ public:
 
     // Construction and comparison functions
     FastDelegateImpl() { clear(); }
+
     FastDelegateImpl( const FastDelegateImpl& x ) {
         m_Closure.CopyFrom( this, x.m_Closure );
     }
+
     void operator=( const FastDelegateImpl& x ) {
         m_Closure.CopyFrom( this, x.m_Closure );
     }
+
     bool operator==( const FastDelegateImpl& x ) const {
         return m_Closure.IsEqual( x.m_Closure );
     }
+
     bool operator!=( const FastDelegateImpl& x ) const {
         return !m_Closure.IsEqual( x.m_Closure );
     }
+
     bool operator<( const FastDelegateImpl& x ) const {
         return m_Closure.IsLess( x.m_Closure );
     }
+
     bool operator>( const FastDelegateImpl& x ) const {
         return x.m_Closure.IsLess( m_Closure );
     }
+
     // Binding to non-const member functions
     template < typename X, typename Y >
     FastDelegateImpl(
@@ -934,6 +964,7 @@ public:
         m_Closure.bindmemfunc( detail::implicit_cast< X* >( pthis ),
                                function_to_bind );
     }
+
     template < typename X, typename Y >
     inline void bind(
         Y* pthis,
@@ -941,6 +972,7 @@ public:
         m_Closure.bindmemfunc( detail::implicit_cast< X* >( pthis ),
                                function_to_bind );
     }
+
     // Binding to const member functions.
     template < typename X, typename Y >
     FastDelegateImpl( const Y* pthis,
@@ -949,6 +981,7 @@ public:
         m_Closure.bindconstmemfunc( detail::implicit_cast< const X* >( pthis ),
                                     function_to_bind );
     }
+
     template < typename X, typename Y >
     inline void bind( const Y* pthis,
                       DesiredRetType ( X::*function_to_bind )( Args... args )
@@ -956,51 +989,64 @@ public:
         m_Closure.bindconstmemfunc( detail::implicit_cast< const X* >( pthis ),
                                     function_to_bind );
     }
+
     // Static functions. We convert them into a member function call.
     // This constructor also provides implicit conversion
     FastDelegateImpl( DesiredRetType ( *function_to_bind )( Args... args ) ) {
         bind( function_to_bind );
     }
+
     // for efficiency, prevent creation of a temporary
     void operator=( DesiredRetType ( *function_to_bind )( Args... args ) ) {
         bind( function_to_bind );
     }
+
     inline void bind( DesiredRetType ( *function_to_bind )( Args... args ) ) {
         m_Closure.bindstaticfunc( this, &FastDelegateImpl::InvokeStaticFunction,
                                   function_to_bind );
     }
+
     // Invoke the delegate
     RetType operator()( Args... args ) const {
         return (
             m_Closure.GetClosureThis()->*( m_Closure.GetClosureMemPtr() ) )(
             args... );
     }
+
     // Implicit conversion to "bool" using the safe_bool idiom
 private:
     typedef struct SafeBoolStruct {
         int a_data_pointer_to_this_is_0_on_buggy_compilers;
         StaticFunctionPtr m_nonzero;
     } UselessTypedef;
+
     typedef StaticFunctionPtr SafeBoolStruct::* unspecified_bool_type;
 
 public:
     operator unspecified_bool_type() const {
         return empty() ? 0 : &SafeBoolStruct::m_nonzero;
     }
+
     // necessary to allow ==0 to work despite the safe_bool idiom
     inline bool operator==( StaticFunctionPtr funcptr ) {
         return m_Closure.IsEqualToStaticFuncPtr( funcptr );
     }
+
     inline bool operator!=( StaticFunctionPtr funcptr ) {
         return !m_Closure.IsEqualToStaticFuncPtr( funcptr );
     }
+
     inline bool operator!() const { // Is it bound to anything?
         return !m_Closure;
     }
+
     inline bool empty() const { return !m_Closure; }
+
     void clear() { m_Closure.clear(); }
+
     // Conversion to and from the DelegateMemento storage class
     const DelegateMemento& GetMemento() const { return m_Closure; }
+
     void SetMemento( const DelegateMemento& any ) {
         m_Closure.CopyFrom( this, any );
     }
@@ -1055,6 +1101,7 @@ public:
 
     FastDelegate( RetType ( *function_to_bind )( Args... args ) )
         : BaseType( function_to_bind ) {}
+
     void operator=( const BaseType& x ) {
         *static_cast< BaseType* >( this ) = x;
     }

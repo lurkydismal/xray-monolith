@@ -102,6 +102,7 @@ void CObjectFactory::register_script() const {
 }
 
 #pragma optimize( "s", on )
+
 void CObjectFactory::script_register( lua_State* L ) {
     module(
         L )[ class_< CObjectFactory >( "object_factory" )

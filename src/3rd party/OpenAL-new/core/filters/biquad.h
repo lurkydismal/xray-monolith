@@ -132,10 +132,12 @@ public:
     std::pair< Real, Real > getComponents() const noexcept {
         return { mZ1, mZ2 };
     }
+
     void setComponents( Real z1, Real z2 ) noexcept {
         mZ1 = z1;
         mZ2 = z2;
     }
+
     Real processOne( const Real in, Real& z1, Real& z2 ) const noexcept {
         const Real out{ in * mB0 + z1 };
         z1 = in * mB1 - out * mA1 + z2;

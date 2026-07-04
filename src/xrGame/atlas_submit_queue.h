@@ -21,7 +21,9 @@ public:
     void submit_all();
     void submit_reward( gamespy_profile::enum_awards_t const award_id );
     void submit_best_results();
+
     bool is_active() const { return m_atlas_in_process; };
+
     void update();
 
     gamespy_profile::all_best_scores_t& get_best_results_store() {
@@ -40,6 +42,7 @@ private:
         u32 m_awards_count;
         // gamespy_profile::all_best_scores_t*	m_best_scores_ptr;
     }; // struct submit_task
+
     typedef xr_deque< submit_task > reward_tasks_t;
     reward_tasks_t m_reward_tasks;
     gamespy_profile::all_best_scores_t m_best_results_to_submit;

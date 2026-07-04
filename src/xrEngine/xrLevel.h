@@ -78,6 +78,7 @@ enum EBuildQuality {
 };
 
 #pragma pack( push, 8 )
+
 struct hdrLEVEL {
     u16 XRLC_version;
     u16 XRLC_quality;
@@ -98,6 +99,7 @@ struct hdrNODES {
     Fbox aabb;
     xrGUID guid;
 };
+
 #pragma pack( pop )
 
 #pragma pack( push, 1 )
@@ -190,6 +192,7 @@ public:
     SCover low;
     u16 plane;
     NodePosition p;
+
     // 32 + 16 + 40 + 92 = 180 bits = 24.5 bytes => 25 bytes
 
     ICF u32 link( u8 index ) const {
@@ -311,6 +314,7 @@ struct SNodePositionOld {
     u16 y;
     s16 z;
 };
+
 #pragma pack( pop )
 
 #ifdef _EDITOR

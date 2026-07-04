@@ -1,4 +1,5 @@
 #pragma once
+
 struct Triangle {
     // dReal* v0;
     // dReal* v1;

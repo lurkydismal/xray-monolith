@@ -24,6 +24,7 @@ public:
     virtual void update_schedule();
 
     void head_look_point( const Fvector& look_point );
+
     Fvector& get_head_look_point() { return m_head_look_point; }
 
     const MonsterSpace::SBoneRotation& get_head_orientation() const {

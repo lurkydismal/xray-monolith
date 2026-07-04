@@ -195,6 +195,7 @@ __TBB_DEPRECATED_VERBOSE void parallel_for( Index first,
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, step, f, auto_partitioner() );
 }
+
 //! Parallel iteration over a range of integers with explicit step and simple
 //! partitioner
 template < typename Index, typename Function >
@@ -206,6 +207,7 @@ __TBB_DEPRECATED_VERBOSE void parallel_for( Index first,
     parallel_for_impl< Index, Function, const simple_partitioner >(
         first, last, step, f, p );
 }
+
 //! Parallel iteration over a range of integers with explicit step and auto
 //! partitioner
 template < typename Index, typename Function >
@@ -217,6 +219,7 @@ __TBB_DEPRECATED_VERBOSE void parallel_for( Index first,
     parallel_for_impl< Index, Function, const auto_partitioner >( first, last,
                                                                   step, f, p );
 }
+
 //! Parallel iteration over a range of integers with explicit step and static
 //! partitioner
 template < typename Index, typename Function >
@@ -228,6 +231,7 @@ __TBB_DEPRECATED_VERBOSE void parallel_for( Index first,
     parallel_for_impl< Index, Function, const static_partitioner >(
         first, last, step, f, p );
 }
+
 //! Parallel iteration over a range of integers with explicit step and affinity
 //! partitioner
 template < typename Index, typename Function >
@@ -248,6 +252,7 @@ __TBB_DEPRECATED_VERBOSE void parallel_for( Index first,
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, static_cast< Index >( 1 ), f, auto_partitioner() );
 }
+
 //! Parallel iteration over a range of integers with default step and simple
 //! partitioner
 template < typename Index, typename Function >
@@ -258,6 +263,7 @@ __TBB_DEPRECATED_VERBOSE void parallel_for( Index first,
     parallel_for_impl< Index, Function, const simple_partitioner >(
         first, last, static_cast< Index >( 1 ), f, p );
 }
+
 //! Parallel iteration over a range of integers with default step and auto
 //! partitioner
 template < typename Index, typename Function >
@@ -268,6 +274,7 @@ __TBB_DEPRECATED_VERBOSE void parallel_for( Index first,
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, static_cast< Index >( 1 ), f, p );
 }
+
 //! Parallel iteration over a range of integers with default step and static
 //! partitioner
 template < typename Index, typename Function >
@@ -278,6 +285,7 @@ __TBB_DEPRECATED_VERBOSE void parallel_for( Index first,
     parallel_for_impl< Index, Function, const static_partitioner >(
         first, last, static_cast< Index >( 1 ), f, p );
 }
+
 //! Parallel iteration over a range of integers with default step and
 //! affinity_partitioner
 template < typename Index, typename Function >

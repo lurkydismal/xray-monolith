@@ -47,6 +47,7 @@ string64 PacketName[] = {
     "M_MOVE_PLAYERS", "M_MOVE_PLAYERS_RESPOND",
 
     "MSG_FORCEDWORD" };
+
 //---------------------------------------------------------
 INetLog::INetLog( LPCSTR sFileName, u32 dwStartTime )
 #ifdef PROFILE_CRITICAL_SECTIONS

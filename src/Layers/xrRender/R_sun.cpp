@@ -140,8 +140,9 @@ void CRender::render_sun_cascade( u32 cascade_ind ) {
                     for ( int p = 0; p < 4; p++ ) {
                         // 					Fvector asd =
                         // Device.vCameraDirection;
-                        // asd.mul(-2); 					asd.add(Device.vCameraPosition); 					near_p
-                        // = Device.vCameraPosition;//wform
+                        // asd.mul(-2);
+                        // asd.add(Device.vCameraPosition);
+                        // near_p = Device.vCameraPosition;//wform
                         // (fullxform_inv,asd); //
                         near_p = wform( fullxform_inv,
                                         corners[ facetable[ 4 ][ p ] ] );

@@ -10,6 +10,7 @@ typedef FactoryPtr< IUIShader > wm_shader;
 class IWallMarkArray {
 public:
     virtual ~IWallMarkArray() { ; }
+
     virtual void Copy( IWallMarkArray& _in ) = 0;
 
     virtual void AppendMark( LPCSTR s_textures ) = 0;

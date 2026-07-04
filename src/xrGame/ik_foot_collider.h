@@ -40,8 +40,11 @@ public:
     }
 
     IC const Fvector& pos() const { return _pos; }
+
     IC const Fvector& dir() const { return _dir; }
+
     IC float range() const { return _range; }
+
     IC ik_foot_geom::e_collide_point point() const { return _point; }
 
 private:

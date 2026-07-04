@@ -10,6 +10,7 @@
 //*** Bone Instance
 //*******************************************************************************
 #pragma pack( push, 8 )
+
 class CBlendInstance // Bone Instance Blend List (per-bone data)
 {
 public:
@@ -24,6 +25,7 @@ private:
 public:
     // methods
     IC BlendSVec& blend_vector() { return Blend; }
+
     void construct();
     void blend_add( CBlend* H );
     void blend_remove( CBlend* H );
@@ -36,6 +38,7 @@ public:
         return sz;
     }
 };
+
 #pragma pack( pop )
 
 // typedef void	( * MotionMarkCallback)		(CBlend*		P);
@@ -143,9 +146,11 @@ public:
     void LL_IterateBlends( IterateBlendsCallback& callback );
 
     void SetUpdateTracksCalback( IUpdateTracksCallback* callback );
+
     IUpdateTracksCallback* GetUpdateTracksCalback() {
         return m_update_tracks_callback;
     }
+
     //	LPCSTR						LL_MotionDefName_dbg
     //(LPVOID		ptr);
 
@@ -156,18 +161,22 @@ public:
             cnt += m_Motions[ k ].motions.cycle()->size();
         return cnt;
     }
+
     u32 LL_FXCount() {
         u32 cnt = 0;
         for ( u32 k = 0; k < m_Motions.size(); k++ )
             cnt += m_Motions[ k ].motions.fx()->size();
         return cnt;
     }
+
     accel_map* LL_Motions( u32 slot ) {
         return m_Motions[ slot ].motions.motion_map();
     }
+
     MotionID ID_Motion( LPCSTR N, u16 slot );
 #endif
     u16 LL_MotionsSlotCount() { return ( u16 )m_Motions.size(); }
+
     const shared_motions& LL_MotionsSlot( u16 idx ) {
         return m_Motions[ idx ].motions;
     }
@@ -175,9 +184,11 @@ public:
     IC CMotionDef* LL_GetMotionDef( MotionID id ) {
         return m_Motions[ id.slot ].motions.motion_def( id.idx );
     }
+
     IC CMotion* LL_GetRootMotion( MotionID id ) {
         return &m_Motions[ id.slot ].bone_motions[ iRoot ]->at( id.idx );
     }
+
     IC CMotion* LL_GetMotion( MotionID id, u16 bone_id ) {
         return &m_Motions[ id.slot ].bone_motions[ bone_id ]->at( id.idx );
     }
@@ -265,8 +276,11 @@ public:
     virtual void Load( const char* N, IReader* data, u32 dwFlags );
     virtual void Release();
     virtual void Spawn();
+
     virtual IKinematicsAnimated* dcast_PKinematicsAnimated() { return this; }
+
     virtual IRenderVisual* _BCL dcast_RenderVisual() { return this; }
+
     virtual IKinematics* _BCL dcast_PKinematics() { return this; }
 
     virtual ~CKinematicsAnimated();

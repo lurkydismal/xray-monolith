@@ -50,6 +50,7 @@ private:
 
 public:
     CScriptCallbackEx() {}
+
     virtual ~CScriptCallbackEx() {}
 
     CScriptCallbackEx( const CScriptCallbackEx& callback ) {

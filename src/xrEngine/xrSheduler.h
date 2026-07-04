@@ -39,6 +39,7 @@ private:
     IC void Push( Item&& I );
     IC void Pop();
     IC void PopImpl();
+
     IC Item& Top() { return Items.front(); }
 
     void internal_Register( ISheduled* A, BOOL RT = FALSE );

@@ -46,6 +46,7 @@ public:
 
     // this is a safe substitute for an implicit converter to bool
     typedef void ( functor::*member_ptr )() const;
+
     operator member_ptr() const {
         if ( is_valid() )
             return &functor::dummy;
@@ -81,6 +82,7 @@ public:
     bool is_valid() const { return ref_.is_valid(); }
 
     lua_State* lua_state() const { return L_; }
+
     void pushvalue() const { ref_.get( L_ ); }
 
     void reset() {

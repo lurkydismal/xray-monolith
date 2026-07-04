@@ -25,6 +25,7 @@ enum {
 
     MAX_EFFECTS
 };
+
 extern bool DisabledEffects[ MAX_EFFECTS ];
 
 extern float ReverbBoost;
@@ -34,6 +35,7 @@ struct EffectList {
     int type;
     ALenum val;
 };
+
 extern const EffectList gEffectList[ 16 ];
 
 struct ALeffect {

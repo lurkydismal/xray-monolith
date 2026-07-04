@@ -92,7 +92,7 @@ void CStalkerActionDangerInDirectionTakeCover::execute() {
         // object().Position().distance_to(point->position()) < 1.f)
         //			object().brain().affect_cover
         //(true); 		else
-        //object().brain().affect_cover			(false);
+        // object().brain().affect_cover			(false);
     } else {
         object().movement().set_nearest_accessible_position();
         //		object().brain().affect_cover

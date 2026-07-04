@@ -3,6 +3,7 @@
 #include "../3rd party/ode/include/ode/common.h"
 #include "stdafx.h"
 XRPHYSICS_API const float phInfinity = dInfinity;
+
 /*
 #include "MathUtils.h"
 enum EBoxSideNearestPointCode

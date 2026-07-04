@@ -256,8 +256,8 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
             //			if (inventory().ActiveItem()) {
             //				inventory().Action(kWPN_FIRE,
             // CMD_STOP); 				if (CWeapon::eReload !=
-            // l_tpWeapon->STATE) 					inventory().Action(kWPN_RELOAD, CMD_START);
-            // else
+            // l_tpWeapon->STATE)
+            // inventory().Action(kWPN_RELOAD, CMD_START); else
             // l_tObjectAction.m_bCompleted = true;
             //			}
             //			else
@@ -276,7 +276,7 @@ bool CAI_Stalker::bfAssignObject( CScriptEntityAction* tpEntityAction ) {
             //				inventory().Activate(l_tpInventoryItem->GetSlot());
             //			if (inventory().ActiveItem() &&
             //(inventory().ActiveItem()->ID() == l_tpInventoryItem->ID()))
-            //if (l_tpWeapon && (CWeapon::eIdle == l_tpWeapon->STATE))
+            // if (l_tpWeapon && (CWeapon::eIdle == l_tpWeapon->STATE))
             //				l_tObjectAction.m_bCompleted = true;
             return ( ( l_tObjectAction.m_bCompleted =
                            ( CObjectHandler::goal_reached() ) ) == false );

@@ -55,8 +55,11 @@ public:
     void Upset();
     void SetRow( BYTE* buf, int n );
     void GetRow( BYTE* buf, int n );
+
     BYTE GetByte() { return IterImage[ Itx ]; }
+
     void SetByte( BYTE b ) { IterImage[ Itx ] = b; }
+
     BYTE* GetRow( void );
     BYTE* GetRow( int n );
     BOOL NextRow();
@@ -68,15 +71,19 @@ public:
         Stepx = x;
         Stepy = y;
     }
+
     void GetSteps( int* x, int* y ) {
         *x = Stepx;
         *y = Stepy;
     }
+
     BOOL NextStep();
     BOOL PrevStep();
 
     void SetY( int y ); /* AD - for interlace */
+
     int GetY() { return Ity; }
+
     BOOL GetCol( BYTE* pCol, DWORD x );
     BOOL SetCol( BYTE* pCol, DWORD x );
 };
@@ -88,6 +95,7 @@ inline CImageIterator::CImageIterator( void ) {
     Itx = Ity = 0;
     Stepx = Stepy = 0;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline CImageIterator::CImageIterator( CxImage* imageImpl ) : ima( imageImpl ) {
     if ( ima )
@@ -95,10 +103,12 @@ inline CImageIterator::CImageIterator( CxImage* imageImpl ) : ima( imageImpl ) {
     Itx = Ity = 0;
     Stepx = Stepy = 0;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline CImageIterator::operator CxImage*() {
     return ima;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BOOL CImageIterator::ItOK() {
     if ( ima )
@@ -106,6 +116,7 @@ inline BOOL CImageIterator::ItOK() {
     else
         return FALSE;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline void CImageIterator::Reset() {
     if ( ima )
@@ -114,12 +125,14 @@ inline void CImageIterator::Reset() {
         IterImage = 0;
     Itx = Ity = 0;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline void CImageIterator::Upset() {
     Itx = 0;
     Ity = ima->GetHeight() - 1;
     IterImage = ima->GetBits() + ima->GetEffWidth() * ( ima->GetHeight() - 1 );
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BOOL CImageIterator::NextRow() {
     if ( ++Ity >= ( int )ima->GetHeight() )
@@ -127,6 +140,7 @@ inline BOOL CImageIterator::NextRow() {
     IterImage += ima->GetEffWidth();
     return 1;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BOOL CImageIterator::PrevRow() {
     if ( --Ity < 0 )
@@ -134,6 +148,7 @@ inline BOOL CImageIterator::PrevRow() {
     IterImage -= ima->GetEffWidth();
     return 1;
 }
+
 /* AD - for interlace */
 inline void CImageIterator::SetY( int y ) {
     if ( ( y < 0 ) || ( y > ( int )ima->GetHeight() ) )
@@ -141,6 +156,7 @@ inline void CImageIterator::SetY( int y ) {
     Ity = y;
     IterImage = ima->GetBits() + ima->GetEffWidth() * y;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline void CImageIterator::SetRow( BYTE* buf, int n ) {
     if ( n < 0 )
@@ -151,20 +167,24 @@ inline void CImageIterator::SetRow( BYTE* buf, int n ) {
     if ( ( IterImage != NULL ) && ( buf != NULL ) && ( n > 0 ) )
         memcpy( IterImage, buf, n );
 }
+
 /////////////////////////////////////////////////////////////////////
 inline void CImageIterator::GetRow( BYTE* buf, int n ) {
     if ( ( IterImage != NULL ) && ( buf != NULL ) && ( n > 0 ) )
         memcpy( buf, IterImage, min( n, ( int )ima->GetEffWidth() ) );
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BYTE* CImageIterator::GetRow() {
     return IterImage;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BYTE* CImageIterator::GetRow( int n ) {
     SetY( n );
     return IterImage;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BOOL CImageIterator::NextByte() {
     if ( ++Itx < ( int )ima->GetEffWidth() )
@@ -176,6 +196,7 @@ inline BOOL CImageIterator::NextByte() {
     } else
         return 0;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BOOL CImageIterator::PrevByte() {
     if ( --Itx >= 0 )
@@ -187,6 +208,7 @@ inline BOOL CImageIterator::PrevByte() {
     } else
         return 0;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BOOL CImageIterator::NextStep() {
     Itx += Stepx;
@@ -202,6 +224,7 @@ inline BOOL CImageIterator::NextStep() {
             return 0;
     }
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BOOL CImageIterator::PrevStep() {
     Itx -= Stepx;
@@ -217,6 +240,7 @@ inline BOOL CImageIterator::PrevStep() {
             return 0;
     }
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BOOL CImageIterator::GetCol( BYTE* pCol, DWORD x ) {
     if ( ( pCol == 0 ) || ( ima->GetBpp() < 8 ) || ( x >= ima->GetWidth() ) )
@@ -233,6 +257,7 @@ inline BOOL CImageIterator::GetCol( BYTE* pCol, DWORD x ) {
     }
     return 1;
 }
+
 /////////////////////////////////////////////////////////////////////
 inline BOOL CImageIterator::SetCol( BYTE* pCol, DWORD x ) {
     if ( ( pCol == 0 ) || ( ima->GetBpp() < 8 ) || ( x >= ima->GetWidth() ) )
@@ -249,5 +274,6 @@ inline BOOL CImageIterator::SetCol( BYTE* pCol, DWORD x ) {
     }
     return 1;
 }
+
 /////////////////////////////////////////////////////////////////////
 #endif

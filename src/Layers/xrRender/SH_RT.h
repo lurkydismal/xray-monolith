@@ -20,6 +20,7 @@ public:
     void destroy();
     void reset_begin();
     void reset_end();
+
     IC BOOL valid() { return !!pTexture; }
 
 public:

@@ -10,6 +10,7 @@ struct Voice;
 using uint = unsigned int;
 
 enum class VChangeState { Reset, Stop, Play, Pause, Restart };
+
 struct VoiceChange {
     Voice* mOldVoice{ nullptr };
     Voice* mVoice{ nullptr };

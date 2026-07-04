@@ -25,8 +25,11 @@ public:
     void unforce_corpse();
 
     const CEntityAlive* get_corpse() { return corpse; }
+
     const Fvector& get_corpse_position() { return position; }
+
     u32 get_corpse_vertex() { return vertex; }
+
     TTime get_corpse_time_last_seen() { return time_last_seen; }
 
     void reinit();

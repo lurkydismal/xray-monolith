@@ -62,6 +62,7 @@ void visual_read( NET_Packet& P, u16 version );
 void visual_write( NET_Packet& P );
 
 void set_visual( LPCSTR name, bool load = true );
+
 LPCSTR get_visual() const {
     return *visual_name;
 };
@@ -87,6 +88,7 @@ void motion_read( NET_Packet& P );
 void motion_write( NET_Packet& P );
 
 void set_motion( LPCSTR name );
+
 LPCSTR get_motion() const {
     return *motion_name;
 };
@@ -105,11 +107,14 @@ struct ISE_AbstractLEOwner {
 };
 
 IC ISE_AbstractLEOwner::~ISE_AbstractLEOwner() {}
+
 #pragma pack( push, 1 )
+
 struct visual_data {
     Fmatrix matrix;
     CSE_Visual* visual;
 }; // struct visual_data
+
 #pragma pack( pop )
 
 struct ISE_Abstract {
@@ -124,6 +129,7 @@ public:
 
     virtual ~ISE_Abstract() = 0;
     Flags32 m_editor_flags;
+
     IC void set_editor_flag( u32 mask ) { m_editor_flags.set( mask, TRUE ); }
 
 public:
@@ -156,6 +162,7 @@ public:
 };
 
 IC ISE_Abstract::~ISE_Abstract() {}
+
 #pragma warning( pop )
 
 #pragma pack( pop )

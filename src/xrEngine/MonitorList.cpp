@@ -59,30 +59,37 @@ struct LUID_LOCAL {
 struct DISPLAYCONFIG_PATH_SOURCE_INFO_LOCAL {
     LUID_LOCAL adapterId;
     UINT32 id;
+
     union {
         UINT32 modeInfoIdx;
         UINT32 cloneGroupId;
     };
+
     UINT32 statusFlags;
 };
 
 struct DISPLAYCONFIG_PATH_TARGET_INFO_LOCAL {
     LUID_LOCAL adapterId;
     UINT32 id;
+
     union {
         UINT32 modeInfoIdx;
+
         struct {
             UINT32 desktopModeInfoIdx : 16;
             UINT32 targetModeInfoIdx : 16;
         };
     };
+
     UINT32 outputTechnology; // matches DCVOT_LOCAL values
     UINT32 rotation;
     UINT32 scaling;
+
     struct {
         UINT32 Numerator;
         UINT32 Denominator;
     } refreshRate;
+
     UINT32 scanLineOrdering;
     BOOL targetAvailable;
     UINT32 statusFlags;
@@ -117,6 +124,7 @@ struct DISPLAYCONFIG_SOURCE_DEVICE_NAME_LOCAL {
 struct DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_LOCAL {
     UINT32 value;
 };
+
 struct DISPLAYCONFIG_TARGET_DEVICE_NAME_LOCAL {
     DISPLAYCONFIG_DEVICE_INFO_HEADER_LOCAL header;
     DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_LOCAL flags;

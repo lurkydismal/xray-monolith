@@ -56,6 +56,7 @@ bool CAI_Stalker::bfCheckForNodeVisibility( u32 dwNodeID, bool bIfRayPick ) {
 }
 
 extern BOOL g_ai_die_in_anomaly;
+
 bool CAI_Stalker::feel_touch_contact( CObject* O ) {
     if ( !m_take_items_enabled && smart_cast< CInventoryItem* >( O ) )
         return ( false );

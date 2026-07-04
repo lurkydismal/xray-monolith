@@ -1,4 +1,5 @@
 #pragma once
+
 /*
 #include "shared_data.h"
 #include "PhraseScript.h"
@@ -89,5 +90,6 @@ class CInfoPortion {
 
 public:
     void Load( const shared_str& info_id ) { m_InfoId = info_id; }
+
     const shared_str& InfoId() const { return m_InfoId; }
 };

@@ -167,9 +167,11 @@ private:
     virtual int32_t getMaxBranchLinearSubNodeLength() const {
         return UCharsTrie::kMaxBranchLinearSubNodeLength;
     }
+
     virtual int32_t getMinLinearMatch() const {
         return UCharsTrie::kMinLinearMatch;
     }
+
     virtual int32_t getMaxLinearMatchLength() const {
         return UCharsTrie::kMaxLinearMatchLength;
     }

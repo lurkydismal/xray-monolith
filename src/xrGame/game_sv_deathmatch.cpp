@@ -34,31 +34,40 @@ u32 g_sv_dm_dwAnomalySetLengthTime = 3;
 BOOL g_sv_dm_bPDAHunt = TRUE;
 u32 g_sv_dm_dwWarmUp_MaxTime = 0;
 BOOL g_sv_dm_bDMIgnore_Money_OnBuy = FALSE;
+
 //-----------------------------------------------------------------
 BOOL game_sv_Deathmatch::IsDamageBlockIndEnabled() {
     return g_sv_dm_bDamageBlockIndicators;
 };
+
 s32 game_sv_Deathmatch::GetTimeLimit() {
     return g_sv_dm_dwTimeLimit;
 };
+
 s32 game_sv_Deathmatch::GetFragLimit() {
     return g_sv_dm_dwFragLimit;
 };
+
 u32 game_sv_Deathmatch::GetDMBLimit() {
     return g_sv_dm_dwDamageBlockTime;
 };
+
 u32 game_sv_Deathmatch::GetForceRespawn() {
     return g_sv_dm_dwForceRespawn;
 };
+
 u32 game_sv_Deathmatch::GetWarmUpTime() {
     return g_sv_dm_dwWarmUp_MaxTime;
 };
+
 BOOL game_sv_Deathmatch::IsAnomaliesEnabled() {
     return g_sv_dm_bAnomaliesEnabled;
 };
+
 u32 game_sv_Deathmatch::GetAnomaliesTime() {
     return g_sv_dm_dwAnomalySetLengthTime;
 };
+
 //-----------------------------------------------------------------
 
 game_sv_Deathmatch::game_sv_Deathmatch()
@@ -193,6 +202,7 @@ void game_sv_Deathmatch::OnRoundEnd() {
                     m_owner->SpawnPlayer( client->ID, "spectator" );
                 }
             };
+
             spectator_spawner tmp_functor;
             tmp_functor.m_owner = this;
             m_server->ForEachClientDoSender( tmp_functor );
@@ -404,6 +414,7 @@ game_PlayerState* game_sv_Deathmatch::GetWinningPlayer() {
             }
         }
     };
+
     winner_searcher tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
     return tmp_functor.res;
@@ -538,6 +549,7 @@ bool game_sv_Deathmatch::checkForFragLimit() {
                 return false;
             }
         };
+
         frag_limit_searcher tmp_predicate;
         if ( m_server->FindClient( tmp_predicate ) != NULL ) {
             OnFraglimitExceed();
@@ -580,6 +592,7 @@ void game_sv_Deathmatch::SM_SwitchOnNextActivePlayer() {
             PossiblePlayers[ PPlayersCount++ ] = l_pC;
         };
     };
+
     next_active_player_switcher tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
 
@@ -644,6 +657,7 @@ BOOL game_sv_Deathmatch::AllPlayers_Ready() {
         return FALSE;
     // Check if all players ready
     u32 cnt = get_players_count();
+
     struct ready_counter {
         u32 ready;
         ClientID serverClientID;
@@ -672,6 +686,7 @@ BOOL game_sv_Deathmatch::AllPlayers_Ready() {
                 ++ready;
         }
     };
+
     ready_counter tmp_functor;
     tmp_functor.serverClientID = m_server->GetServerClient()->ID;
     m_server->ForEachClientDo( tmp_functor );
@@ -787,6 +802,7 @@ void game_sv_Deathmatch::assign_RP( CSE_Abstract* E,
                 pEnemies.push_back( tmp_client );
         };
     };
+
     rpoints_controller tmp_functor;
     tmp_functor.pA = pA;
     tmp_functor.m_owner = this;
@@ -1366,6 +1382,7 @@ void game_sv_Deathmatch::OnTeamScore( u32 Team, bool Minor ) {
                                     : pTeam->m_iM_RoundLoose ) );
         }
     };
+
     team_score_money_adder tmp_functor;
     tmp_functor.Team = Team;
     tmp_functor.Minor = Minor;
@@ -1838,6 +1855,7 @@ void game_sv_Deathmatch::check_InvinciblePlayers() {
                 m_owner->signal_Syncronize();
         };
     };
+
     invinvible_controller tmp_functor;
     tmp_functor.m_owner = this;
     m_server->ForEachClientDo( tmp_functor );
@@ -1882,6 +1900,7 @@ void game_sv_Deathmatch::OnDelayedTeamEliminated() {
 void game_sv_Deathmatch::check_ForceRespawn() {
     if ( !GetForceRespawn() )
         return;
+
     struct respawn_checker {
         game_sv_Deathmatch* m_owner;
 
@@ -1905,6 +1924,7 @@ void game_sv_Deathmatch::check_ForceRespawn() {
             }
         };
     };
+
     respawn_checker tmp_functor;
     tmp_functor.m_owner = this;
     m_server->ForEachClientDoSender( tmp_functor );
@@ -1938,6 +1958,7 @@ bool game_sv_Deathmatch::HasChampion() {
             }
         };
     };
+
     champion_searcher tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
     return ( ( tmp_functor.champions_count == 1 ) || g_sv_Skip_Winner_Waiting );
@@ -2150,6 +2171,7 @@ void game_sv_Deathmatch::OnPlayerFire( ClientID id_who, NET_Packet& P ) {
 
 #ifdef DEBUG
 xr_vector< u32 > xPath;
+
 void game_sv_Deathmatch::OnRender() {
     inherited::OnRender();
     /*

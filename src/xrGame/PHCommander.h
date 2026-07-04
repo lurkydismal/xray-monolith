@@ -10,6 +10,7 @@ public:
     virtual ~CPHReqBase() {}
 
     virtual bool obsolete() const = 0;
+
     virtual bool compare( const CPHReqComparerV* v ) const { return false; };
 };
 
@@ -40,6 +41,7 @@ public:
 class CPHDummiAction : public CPHAction {
 public:
     virtual void run() { ; }
+
     virtual bool obsolete() const { return false; }
 };
 
@@ -56,6 +58,7 @@ public:
     bool is_any( CPHReqComparerV* v );
 #ifdef DEBUG
     const CPHAction* action() const { return m_action; }
+
     const CPHCondition* condition() const { return m_condition; }
 #endif
 };
@@ -127,5 +130,6 @@ private:
 
 private:
     virtual void update_step() { update(); }
+
     virtual void phys_shell_relcase( CPhysicsShell* sh );
 };

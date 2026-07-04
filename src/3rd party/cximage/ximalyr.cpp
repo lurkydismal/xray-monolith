@@ -15,6 +15,7 @@
 CxImage* CxImage::GetParent() const {
     return info.pParent;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Number of layers allocated directly by the object.
@@ -22,6 +23,7 @@ CxImage* CxImage::GetParent() const {
 long CxImage::GetNumLayers() const {
     return info.nNumLayers;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Creates an empty layer. If position is less than 0, the new layer will be
@@ -58,6 +60,7 @@ bool CxImage::LayerCreate( long position ) {
     ppLayers = ptmp;
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Deletes a layer. If position is less than 0, the last layer will be deleted
@@ -96,6 +99,7 @@ bool CxImage::LayerDelete( long position ) {
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 void CxImage::LayerDeleteAll() {
     if ( ppLayers ) {
@@ -107,6 +111,7 @@ void CxImage::LayerDeleteAll() {
         info.nNumLayers = 0;
     }
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Returns a pointer to a layer. If position is less than 0, the last layer will
@@ -123,5 +128,6 @@ CxImage* CxImage::GetLayer( long position ) {
         position = info.nNumLayers - 1;
     return ppLayers[ position ];
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 #endif // CXIMAGE_SUPPORT_LAYERS

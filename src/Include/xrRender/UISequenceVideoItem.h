@@ -5,6 +5,7 @@
 class IUISequenceVideoItem {
 public:
     virtual ~IUISequenceVideoItem() { ; }
+
     virtual void Copy( IUISequenceVideoItem& _in ) = 0;
 
     virtual bool HasTexture() = 0;

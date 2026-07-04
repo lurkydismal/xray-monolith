@@ -72,6 +72,7 @@ rle_put_pixel_rows JPP( ( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 start_output_rle( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     rle_dest_ptr dest = ( rle_dest_ptr )dinfo;
     size_t cmapsize;
@@ -148,6 +149,7 @@ start_output_rle( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 METHODDEF( void )
+
 rle_put_pixel_rows( j_decompress_ptr cinfo,
                     djpeg_dest_ptr dinfo,
                     JDIMENSION rows_supplied ) {
@@ -167,6 +169,7 @@ rle_put_pixel_rows( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 finish_output_rle( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     rle_dest_ptr dest = ( rle_dest_ptr )dinfo;
     rle_hdr header; /* Output file information */
@@ -271,6 +274,7 @@ finish_output_rle( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 GLOBAL( djpeg_dest_ptr )
+
 jinit_write_rle( j_decompress_ptr cinfo ) {
     rle_dest_ptr dest;
 

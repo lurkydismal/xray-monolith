@@ -49,6 +49,7 @@ static u16 hbox_faces[ 20 * 3 ] = {
     10, 3, 10, 11, 6, 6, 7,  10, 2, 0, 8, 8,  11, 2, 11, 8, 4, 4, 6,  11 };
 
 #pragma pack( push, 1 )
+
 struct v_skybox {
     Fvector3 p;
     u32 color;

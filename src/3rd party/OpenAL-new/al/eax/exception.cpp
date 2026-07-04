@@ -7,6 +7,7 @@
 
 EaxException::EaxException( const char* context, const char* message )
     : std::runtime_error{ make_message( context, message ) } {}
+
 EaxException::~EaxException() = default;
 
 std::string EaxException::make_message( const char* context,

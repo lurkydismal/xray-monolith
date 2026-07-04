@@ -21,6 +21,7 @@
 static shared_str sbones_array;
 
 #pragma pack( push, 1 )
+
 float u_P( s16 v ) {
     return float( v ) / ( 32767.f / 12.f );
 }

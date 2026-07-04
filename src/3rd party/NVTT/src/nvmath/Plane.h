@@ -34,9 +34,13 @@ private:
 };
 
 inline Plane::Plane() {}
+
 inline Plane::Plane( float x, float y, float z, float w ) : p( x, y, z, w ) {}
+
 inline Plane::Plane( Vector4::Arg v ) : p( v ) {}
+
 inline Plane::Plane( Vector3::Arg v, float d ) : p( v, d ) {}
+
 inline Plane::Plane( Vector3::Arg normal, Vector3::Arg point )
     : p( normal, dot( normal, point ) ) {}
 
@@ -48,6 +52,7 @@ inline const Plane& Plane::operator=( Plane::Arg v ) {
 inline Vector3 Plane::vector() const {
     return p.xyz();
 }
+
 inline scalar Plane::offset() const {
     return p.w();
 }
@@ -55,6 +60,7 @@ inline scalar Plane::offset() const {
 inline const Vector4& Plane::asVector() const {
     return p;
 }
+
 inline Vector4& Plane::asVector() {
     return p;
 }

@@ -138,10 +138,12 @@ extern BOOL disableActorBodyRotationDelay; // leer
 extern BOOL firstPersonDeath;
 extern BOOL pseudogiantCanDamageObjects;
 extern BOOL use_english_text_for_missing_translations;
+
 namespace crash_saving {
 extern BOOL enabled;
 extern int saveCountMax;
 } // namespace crash_saving
+
 extern BOOL pda_map_zoom_in_to_mouse;
 extern BOOL pda_map_zoom_out_to_mouse;
 extern BOOL pda_show_map_labels;
@@ -497,9 +499,11 @@ public:
     CCC_MemCheckpoint( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = FALSE;
     };
+
     virtual void Execute( LPCSTR args ) {
         memory_monitor::make_checkpoint( args );
     }
+
     virtual void Save( IWriter* F ) {}
 };
 
@@ -536,6 +540,7 @@ public:
 class CCC_ALifePath : public IConsole_Command {
 public:
     CCC_ALifePath( LPCSTR N ) : IConsole_Command( N ) {};
+
     virtual void Execute( LPCSTR args ) {
         if ( !ai().get_level_graph() )
             Msg( "! there is no graph!" );
@@ -694,6 +699,7 @@ public:
 
 //-----------------------------------------------------------------------
 xr_unordered_set< CDemoRecord* > pDemoRecords;
+
 class CCC_DemoRecord : public IConsole_Command {
 public:
     CCC_DemoRecord( LPCSTR N ) : IConsole_Command( N ) {};
@@ -918,6 +924,7 @@ public:
         offsetB = d.z;
     }
 };
+
 Fvector CCC_FPDDirectionOffset::d = { 0, 0, 0 };
 
 class CCC_FPDPositionOffset : public CCC_Vector3 {
@@ -937,6 +944,7 @@ public:
         offsetZ = d.z;
     }
 };
+
 Fvector CCC_FPDPositionOffset::d = { 0, 0, 0 };
 
 // helper functions --------------------------------------------
@@ -1355,6 +1363,7 @@ public:
     CCC_ScriptDbg( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR args ) {
         if ( strstr( cName, "script_debug_break" ) == cName ) {
             CScriptDebugger* d = ai().script_engine().debugger();
@@ -1393,6 +1402,7 @@ public:
     CCC_ScriptLuaStudioConnect( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR args ) {
         ai().script_engine().try_connect_to_debugger();
     };
@@ -1403,6 +1413,7 @@ public:
     CCC_ScriptLuaStudioDisconnect( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR args ) {
         ai().script_engine().disconnect_from_debugger();
     };
@@ -1414,47 +1425,58 @@ public:
     CCC_DumpInfos( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR args ) {
         CActor* A = smart_cast< CActor* >( Level().CurrentEntity() );
         if ( A )
             A->DumpInfo();
     }
+
     virtual void Info( TInfo& I ) {
         xr_strcpy( I, "dumps all infoportions that actor have" );
     }
 };
+
 class CCC_DumpTasks : public IConsole_Command {
 public:
     CCC_DumpTasks( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR args ) {
         CActor* A = smart_cast< CActor* >( Level().CurrentEntity() );
         if ( A )
             A->DumpTasks();
     }
+
     virtual void Info( TInfo& I ) {
         xr_strcpy( I, "dumps all tasks that actor have" );
     }
 };
+
 #include "map_manager.h"
+
 class CCC_DumpMap : public IConsole_Command {
 public:
     CCC_DumpMap( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR args ) { Level().MapManager().Dump(); }
+
     virtual void Info( TInfo& I ) {
         xr_strcpy( I, "dumps all currentmap locations" );
     }
 };
 
 #include "alife_graph_registry.h"
+
 class CCC_DumpCreatures : public IConsole_Command {
 public:
     CCC_DumpCreatures( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR args ) {
         typedef CSafeMapIterator< ALife::_OBJECT_ID, CSE_ALifeDynamicObject >::
             _REGISTRY::const_iterator const_iterator;
@@ -1469,6 +1491,7 @@ public:
             }
         }
     }
+
     virtual void Info( TInfo& I ) {
         xr_strcpy( I, "dumps all creature names" );
     }
@@ -1479,6 +1502,7 @@ public:
     CCC_DebugFonts( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     }
+
     virtual void Execute( LPCSTR args ) {
         xr_new< CUIDebugFonts >()->ShowDialog( true );
     }
@@ -1536,12 +1560,14 @@ public:
 
 void PH_DBG_SetTrackObject();
 extern string64 s_dbg_trace_obj_name;
+
 class CCC_DbgPhTrackObj : public CCC_String {
 public:
     CCC_DbgPhTrackObj( LPCSTR N )
         : CCC_String( N,
                       s_dbg_trace_obj_name,
                       sizeof( s_dbg_trace_obj_name ) ) {};
+
     virtual void Execute( LPCSTR args /**/ ) {
         CCC_String::Execute( args );
         if ( !xr_strcmp( args, "none" ) ) {
@@ -1655,6 +1681,7 @@ struct CCC_ClearSmartCastStats : public IConsole_Command {
 
     virtual void Execute( LPCSTR args ) { clear_smart_cast_stats(); }
 };
+
 /*
 struct CCC_NoClip : public CCC_Mask
 {
@@ -1809,6 +1836,7 @@ public:
         IConsole_Command::fill_tips( tips, mode );
     }
 };
+
 class CCC_FreezeTime : public IConsole_Command {
 public:
     CCC_FreezeTime( LPCSTR N ) : IConsole_Command( N ) {}
@@ -1837,6 +1865,7 @@ public:
 
     virtual void Info( TInfo& I ) { xr_strcpy( I, "[on,off] or [1,0]" ); }
 };
+
 class CCC_TimeFactor : public IConsole_Command {
 public:
     CCC_TimeFactor( LPCSTR N ) : IConsole_Command( N ) {}
@@ -1970,6 +1999,7 @@ struct CCC_TimeFactorSingle : public CCC_Float {
 
 #ifdef DEBUG
 class CCC_RadioGroupMask2;
+
 class CCC_RadioMask : public CCC_Mask {
     CCC_RadioGroupMask2* group;
 
@@ -1977,7 +2007,9 @@ public:
     CCC_RadioMask( LPCSTR N, Flags32* V, u32 M ) : CCC_Mask( N, V, M ) {
         group = NULL;
     }
+
     void SetGroup( CCC_RadioGroupMask2* G ) { group = G; }
+
     virtual void Execute( LPCSTR args );
 
     IC void Set( BOOL V ) { value->set( mask, V ); }
@@ -1994,6 +2026,7 @@ public:
         mask0->SetGroup( this );
         mask1->SetGroup( this );
     }
+
     void Execute( CCC_RadioMask& m, LPCSTR args ) {
         BOOL value = m.GetValue();
         if ( value ) {
@@ -2037,9 +2070,11 @@ struct CCC_DbgBullets : public CCC_Integer {
 #include "InventoryOwner.h"
 #include "attachable_item.h"
 #include "attachment_owner.h"
+
 class CCC_TuneAttachableItem : public IConsole_Command {
 public:
     CCC_TuneAttachableItem( LPCSTR N ) : IConsole_Command( N ) {};
+
     virtual void Execute( LPCSTR args ) {
         if ( CAttachableItem::m_dbgItem ) {
             CAttachableItem::m_dbgItem = NULL;
@@ -2080,6 +2115,7 @@ public:
 class CCC_Crash : public IConsole_Command {
 public:
     CCC_Crash( LPCSTR N ) : IConsole_Command( N ) { bEmptyArgsHandled = true; };
+
     virtual void Execute( LPCSTR /**args/**/ ) {
         VERIFY3( false, "This is a test crash", "Do not post it as a bug" );
         int* pointer = 0;
@@ -2094,6 +2130,7 @@ public:
     CCC_MemAllocShowStats( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR ) { mem_alloc_show_stats(); }
 };
 
@@ -2102,6 +2139,7 @@ public:
     CCC_MemAllocClearStats( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR ) { mem_alloc_clear_stats(); }
 };
 
@@ -2156,6 +2194,7 @@ public:
     CCC_ShowAnimationStats( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = true;
     };
+
     virtual void Execute( LPCSTR ) { show_animation_stats(); }
 };
 
@@ -2164,6 +2203,7 @@ public:
     CCC_InvUpgradesHierarchy( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = TRUE;
     };
+
     virtual void Execute( LPCSTR args ) {
         if ( ai().get_alife() ) {
             ai().alife().inventory_upgrade_manager().log_hierarchy();
@@ -2176,6 +2216,7 @@ public:
     CCC_InvUpgradesCurItem( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = TRUE;
     };
+
     virtual void Execute( LPCSTR args ) {
         if ( !g_pGameLevel ) {
             return;
@@ -2198,6 +2239,7 @@ public:
     CCC_InvDropAllItems( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = TRUE;
     };
+
     virtual void Execute( LPCSTR args ) {
         if ( !g_pGameLevel ) {
             return;
@@ -2274,6 +2316,7 @@ public:
 };
 #ifdef DEBUG
 void DBG_CashedClear();
+
 class CCC_DBGDrawCashedClear : public IConsole_Command {
 public:
     CCC_DBGDrawCashedClear( LPCSTR N ) : IConsole_Command( N ) {
@@ -2350,6 +2393,7 @@ public:
     CCC_Particle_TEST( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = TRUE;
     };
+
     virtual void Execute( LPCSTR args ) {
         if ( !g_pGameLevel )
             return;
@@ -2381,6 +2425,7 @@ public:
             }
         }
     }
+
     virtual void fill_tips( vecTips& tips, u32 mode ) {
         particles_systems::library_interface const& library =
             GamePersistent()

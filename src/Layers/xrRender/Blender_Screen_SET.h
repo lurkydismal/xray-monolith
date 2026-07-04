@@ -18,6 +18,7 @@ class CBlender_Screen_SET : public IBlender {
 
 public:
     virtual LPCSTR getComment() { return "basic (simple)"; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Save( IWriter& fs );

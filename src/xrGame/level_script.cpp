@@ -438,6 +438,7 @@ CUIStatic* map_get_spot_static( u16 id, LPCSTR spot_type ) {
     CUIStatic* map_spot_static = ml->LevelMapSpotNC();
     return map_spot_static;
 }
+
 CUIStatic* map_get_minimap_spot_static( u16 id, LPCSTR spot_type ) {
     CMapLocation* ml = Level().MapManager().GetMapLocation( spot_type, id );
     if ( !ml )
@@ -797,6 +798,7 @@ float add_cam_effector( LPCSTR fn,
 // demonized: Get cam effector transform data from "*.anm" file
 #include "../xrEngine/envelope.h"
 #include "../xrEngine/motion.h"
+
 bool getCamEffectorTransformData( ::luabind::object& t, LPCSTR animationFile ) {
     string_path full_path;
     if ( !FS.exist( full_path, "$level$", animationFile ) )
@@ -2207,6 +2209,7 @@ DBG_ScriptObject* get_object( LPCSTR s ) {
 
     return it->second;
 }
+
 DBG_ScriptObject* get_object( u32 id ) {
     auto s = std::to_string( id );
     return get_object( s.c_str() );
@@ -2221,6 +2224,7 @@ void remove_object( LPCSTR s ) {
     xr_delete( dbg_obj );
     Level().getScriptRenderQueue()->erase( id );
 }
+
 void remove_object( u32 id ) {
     auto s = std::to_string( id );
     remove_object( s.c_str() );
@@ -2250,6 +2254,7 @@ DBG_ScriptObject* add_object( LPCSTR s, DebugRenderType type ) {
 
     return dbg_obj;
 }
+
 DBG_ScriptObject* add_object( u32 id, DebugRenderType type ) {
     auto s = std::to_string( id );
     return add_object( s.c_str(), type );

@@ -79,6 +79,7 @@ struct iterator_converter {
 
 struct iterator_policy : conversion_policy< 0 > {
     static void precall( lua_State*, const index_map& ) {}
+
     static void postcall( lua_State*, const index_map& ) {}
 
     template < typename T, Direction >

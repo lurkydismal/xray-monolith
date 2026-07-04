@@ -30,10 +30,10 @@
 // CPHObject *obj ); 				void DBG_ObjBeforeStep
 // ( CPHObject *obj ); 				void DBG_ObjeAfterPhTune
 // ( CPHObject *obj ); 				void DBG_ObjBeforePhTune (
-//CPHObject *obj ); 				void DBG_ObjAfterCollision
+// CPHObject *obj ); 				void DBG_ObjAfterCollision
 //( CPHObject *obj
 //); 				void DBG_ObjBeforeCollision		(
-//CPHObject *obj );
+// CPHObject *obj );
 #endif
 //////////////////////////////////////////////////////////////
 //////////////CPHMesh///////////////////////////////////////////

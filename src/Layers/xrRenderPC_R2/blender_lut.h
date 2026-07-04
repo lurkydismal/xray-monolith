@@ -3,7 +3,9 @@
 class CBlender_lut : public IBlender {
 public:
     virtual LPCSTR getComment() { return "Lookup table!"; }
+
     virtual BOOL canBeDetailed() { return FALSE; }
+
     virtual BOOL canBeLMAPped() { return FALSE; }
 
     virtual void Compile( CBlender_Compile& C );

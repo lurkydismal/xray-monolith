@@ -25,8 +25,11 @@ struct CUICell {
     }
 
     bool Empty() { return m_item == NULL; }
+
     bool MainItem() { return m_bMainItem; }
+
     void Clear();
+
     bool operator==( const CUICell& C ) const { return ( m_item == C.m_item ); }
 };
 
@@ -101,6 +104,7 @@ public:
         VERIFY( ItemsCount() == 0 );
         SetCellsCapacity( m_orig_cell_capacity );
     };
+
     const Ivector2& CellSize();
     void SetCellSize( const Ivector2 new_sz );
     const Ivector2& CellsSpacing();
@@ -130,6 +134,7 @@ public:
     void SetVirtualCells( bool b );
 
     bool GetConditionProgBarVisibility() { return m_bConditionProgBarVisible; };
+
     void SetConditionProgBarVisibility( bool b ) {
         m_bConditionProgBarVisible = b;
     };
@@ -155,6 +160,7 @@ public:
     void clear_select_armament();
     Ivector2 PickCell( const Fvector2& abs_pos );
     CUICell& GetCellAt( const Ivector2& pos );
+
     CUICellContainer* GetContainer() { return m_container; }; // Alundaio
 
 public:
@@ -204,10 +210,15 @@ protected:
     virtual void Draw();
 
     IC const Ivector2& CellsCapacity() { return m_cellsCapacity; };
+
     void SetCellsCapacity( const Ivector2& c );
+
     IC const Ivector2& CellSize() { return m_cellSize; };
+
     void SetCellSize( const Ivector2& new_sz );
+
     IC const Ivector2& CellsSpacing() { return m_cellSpacing; };
+
     void SetCellsSpacing( const Ivector2& new_sz );
     Ivector2 TopVisibleCell();
 

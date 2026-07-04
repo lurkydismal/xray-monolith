@@ -393,9 +393,10 @@ void CBlender_fluid_raydata::Compile( CBlender_Compile& C ) {
             // RS.SetRS(D3DRS_SRCBLENDALPHA,
             // bABlend?abSRC:D3DBLEND_ONE	); 	We need different blend
             // arguments for color and alpha 	One Zero for color 	One One
-            // for alpha 	so patch dest color. 	Note: You can't set up dest blend
-            //to zero in r_pass 	since r_pass would disable blend if src=one and
-            //blend - zero.
+            // for alpha 	so patch dest color. 	Note: You can't set up
+            // dest blend
+            // to zero in r_pass 	since r_pass would disable blend if
+            // src=one and blend - zero.
             C.RS.SetRS( D3DRS_DESTBLEND, D3DBLEND_ZERO );
 
             C.RS.SetRS( D3DRS_BLENDOP, D3DBLENDOP_REVSUBTRACT ); // DST - SRC

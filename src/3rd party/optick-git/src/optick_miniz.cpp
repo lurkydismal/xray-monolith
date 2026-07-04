@@ -170,10 +170,12 @@ void* miniz_def_alloc_func( void* opaque, size_t items, size_t size ) {
     ( void )opaque, ( void )items, ( void )size;
     return MZ_MALLOC( items * size );
 }
+
 void miniz_def_free_func( void* opaque, void* address ) {
     ( void )opaque, ( void )address;
     MZ_FREE( address );
 }
+
 void* miniz_def_realloc_func( void* opaque,
                               void* address,
                               size_t items,
@@ -627,6 +629,7 @@ const char* mz_error( int err ) {
                           { MZ_BUF_ERROR, "buf error" },
                           { MZ_VERSION_ERROR, "version error" },
                           { MZ_PARAM_ERROR, "parameter error" } };
+
     mz_uint i;
     for ( i = 0; i < sizeof( s_error_descs ) / sizeof( s_error_descs[ 0 ] );
           ++i )
@@ -809,6 +812,7 @@ static const mz_uint8 s_tdefl_large_dist_extra[ 128 ] = {
 typedef struct {
     mz_uint16 m_key, m_sym_index;
 } tdefl_sym_freq;
+
 static tdefl_sym_freq* tdefl_radix_sort_syms( mz_uint num_syms,
                                               tdefl_sym_freq* pSyms0,
                                               tdefl_sym_freq* pSyms1 ) {
@@ -895,6 +899,7 @@ static void tdefl_calculate_minimum_redundancy( tdefl_sym_freq* A, int n ) {
 
 /* Limits canonical Huffman code table's max code size. */
 enum { TDEFL_MAX_SUPPORTED_HUFF_CODESIZE = 32 };
+
 static void tdefl_huffman_enforce_max_code_size( int* pNum_codes,
                                                  int code_list_len,
                                                  int max_code_size ) {
@@ -1460,6 +1465,7 @@ static mz_uint16 TDEFL_READ_UNALIGNED_WORD( const mz_uint8* p ) {
     memcpy( &ret, p, sizeof( mz_uint16 ) );
     return ret;
 }
+
 static mz_uint16 TDEFL_READ_UNALIGNED_WORD2( const mz_uint16* p ) {
     mz_uint16 ret;
     memcpy( &ret, p, sizeof( mz_uint16 ) );
@@ -2384,6 +2390,7 @@ void* tdefl_write_image_to_png_file_in_memory_ex( const void* pImage,
     MZ_FREE( pComp );
     return out_buf.m_pBuf;
 }
+
 void* tdefl_write_image_to_png_file_in_memory( const void* pImage,
                                                int w,
                                                int h,

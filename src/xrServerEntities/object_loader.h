@@ -290,6 +290,7 @@ struct CEmptyPredicate {
     }
 
     IC bool can_clear() const { return ( true ); }
+
     IC bool can_add() const { return ( true ); }
 };
 }; // namespace detail

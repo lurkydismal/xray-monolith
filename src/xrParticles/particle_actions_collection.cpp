@@ -692,6 +692,7 @@ void PACopyVertexB::Execute( ParticleEffect* effect,
 void PACopyVertexB::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Dampen velocities
@@ -717,6 +718,7 @@ void PADamping::Execute( ParticleEffect* effect,
 void PADamping::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Exert force on each particle away from explosion center
@@ -794,6 +796,7 @@ void PAFollow::Execute( ParticleEffect* effect,
 void PAFollow::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Inter-particle gravitation
@@ -851,6 +854,7 @@ void PAGravitate::Execute( ParticleEffect* effect,
 void PAGravitate::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Acceleration in a constant direction
@@ -868,6 +872,7 @@ void PAGravity::Execute( ParticleEffect* effect,
 void PAGravity::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Accelerate particles along a line
@@ -992,6 +997,7 @@ void PAKillOld::Execute( ParticleEffect* effect,
 void PAKillOld::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Match velocity to near neighbors
@@ -1046,6 +1052,7 @@ void PAMatchVelocity::Execute( ParticleEffect* effect,
 void PAMatchVelocity::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 void PAMove::Execute( ParticleEffect* effect, const float dt, float& tm_max ) {
@@ -1063,6 +1070,7 @@ void PAMove::Execute( ParticleEffect* effect, const float dt, float& tm_max ) {
 void PAMove::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Accelerate particles towards a line
@@ -1312,6 +1320,7 @@ void PARestore::Execute( ParticleEffect* effect,
 void PARestore::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Kill particles with positions on wrong side of the specified domain
@@ -1433,6 +1442,7 @@ void PASpeedLimit::Execute( ParticleEffect* effect,
 void PASpeedLimit::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 #define STEP_DEFAULT 0.033F
@@ -1465,6 +1475,7 @@ void PATargetColor::Execute( ParticleEffect* effect,
 void PATargetColor::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Change sizes of all particles toward the specified size
@@ -1488,6 +1499,7 @@ void PATargetSize::Execute( ParticleEffect* effect,
 void PATargetSize::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Change rotation of all particles toward the specified velocity
@@ -1509,6 +1521,7 @@ void PATargetRotate::Execute( ParticleEffect* effect,
 void PATargetRotate::Transform( const Fmatrix& ) {
     ;
 }
+
 //-------------------------------------------------------------------------------------------------
 
 // Change velocity of all particles toward the specified velocity

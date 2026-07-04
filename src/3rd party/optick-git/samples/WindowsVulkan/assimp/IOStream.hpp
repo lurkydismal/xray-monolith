@@ -128,6 +128,7 @@ inline IOStream::IOStream() {
 inline IOStream::~IOStream() {
     // empty
 }
+
 // ----------------------------------------------------------------------------------
 } // namespace Assimp
 

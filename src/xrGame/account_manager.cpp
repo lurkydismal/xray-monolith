@@ -460,7 +460,7 @@ void __cdecl account_manager::unicks_suggestion_cb( GPConnection* connection,
     //{
     //	tmp_inst->m_suggested_nicks.push_back
     //(tmp_arg->suggestedNicks[i]);
-    //tmp_inst->m_suggested_nicks_ptrs.push_back
+    // tmp_inst->m_suggested_nicks_ptrs.push_back
     //(tmp_inst->m_suggested_nicks.back().c_str());
     // }
     // tmp_cb(tmp_arg->numSuggestedNicks, "");

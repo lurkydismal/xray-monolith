@@ -64,6 +64,7 @@ struct overload_rep : public overload_rep_base {
     typedef int ( *call_ptr )( lua_State*, void ( * )() );
 
     void set_fun( call_ptr f ) { call_fun = f; }
+
     int call( lua_State* L, void ( *f )() ) const { return call_fun( L, f ); }
 
     // this is the actual function pointer to be called when this overload is
@@ -80,6 +81,7 @@ struct overload_rep : public overload_rep_base {
 
 struct LUABIND_API function_rep {
     function_rep( const char* name ) : m_name( name ) {}
+
     void add_overload( const free_functions::overload_rep& o );
 
     const vector_class< overload_rep >& overloads() const throw() {

@@ -34,9 +34,11 @@ private:
         bool operator<( const ModelDef& other ) const {
             return model < other.model;
         }
+
         bool operator<( const dxRender_Visual* other ) const {
             return model < other;
         }
+
         friend bool operator<( dxRender_Visual* ptr, const ModelDef& other ) {
             return ptr < other.model;
         }

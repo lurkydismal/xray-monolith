@@ -145,6 +145,7 @@ void* ASN1_item_d2i_fp( const ASN1_ITEM* it, FILE* in, void* x ) {
 #endif
 
 #define HEADER_SIZE 8
+
 static int asn1_d2i_read_bio( BIO* in, BUF_MEM** pb ) {
     BUF_MEM* b;
     unsigned char* p;

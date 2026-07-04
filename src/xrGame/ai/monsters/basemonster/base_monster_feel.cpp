@@ -316,8 +316,8 @@ void CBaseMonster::Hit_Psy( CObject* object, float value ) {
                   object->ID() ); //					//
                                   // u_EventGen		(P,GE_HIT,
                                   // object->ID()); //
-    HS.whoID = ( ID() ); // own		//	P.w_u16			(ID());
-                         // // own
+    HS.whoID = ( ID() );          // own		//	P.w_u16			(ID());
+                                  // // own
     HS.weaponID =
         ( ID() ); // own		//	P.w_u16			(ID());
                   // // own

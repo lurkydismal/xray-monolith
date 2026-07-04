@@ -19,6 +19,7 @@ public:
     T flags;
 
     IC TYPE get() const { return flags; }
+
     IC SelfRef zero() {
         flags = T( 0 );
         return *this;
@@ -63,8 +64,11 @@ public:
     }
 
     IC BOOL is( const T mask ) const { return mask == ( flags & mask ); }
+
     IC BOOL is_any( const T mask ) const { return BOOL( !!( flags & mask ) ); }
+
     IC BOOL test( const T mask ) const { return BOOL( !!( flags & mask ) ); }
+
     IC SelfRef or_( const T mask ) {
         flags |= mask;
         return *this;
@@ -86,6 +90,7 @@ public:
     }
 
     IC BOOL equal( const Self& f ) const { return flags == f.flags; }
+
     IC BOOL equal( const Self& f, const T mask ) const {
         return ( flags & mask ) == ( f.flags & mask );
     }

@@ -55,7 +55,9 @@ protected:
                              u16 weapon_id,
                              bool send_hit,
                              int iShotNum = 0 );
+
     void SetBulletSpeed( float new_speed ) { m_fStartBulletSpeed = new_speed; }
+
     float GetBulletSpeed() { return m_fStartBulletSpeed; }
 
     virtual void FireStart();
@@ -63,7 +65,9 @@ protected:
 
 public:
     IC BOOL IsWorking() const { return bWorking; }
+
     virtual BOOL ParentMayHaveAimBullet() { return FALSE; }
+
     virtual bool SOParentIsActor() { return false; }
 
 protected:
@@ -104,6 +108,7 @@ protected:
         float condition_shot_dec;
 
         SilencerKoeffs() { Reset(); }
+
         IC void Reset() {
             hit_power = 1.0f;
             hit_impulse = 1.0f;
@@ -119,6 +124,7 @@ protected:
             condition_shot_dec = 1.0f;
         }
     }; // SilencerKoeffs
+
     SilencerKoeffs m_silencer_koef;
 
 public:
@@ -134,6 +140,7 @@ public:
         float zoom_rotate_time;
 
         ScopeKoeffs() { Reset(); }
+
         IC void Reset() {
             cam_dispersion = 1.0f;
             cam_disper_inc = 1.0f;
@@ -160,6 +167,7 @@ public:
         float zoom_rotate_time;
 
         LauncherKoeffs() { Reset(); }
+
         IC void Reset() {
             cam_dispersion = 1.0f;
             cam_disper_inc = 1.0f;

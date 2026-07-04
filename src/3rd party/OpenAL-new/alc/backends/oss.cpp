@@ -97,6 +97,7 @@ al::vector< DevMap > CaptureDevices;
 
 #define DSP_CAP_OUTPUT 0x00020000
 #define DSP_CAP_INPUT 0x00010000
+
 void ALCossListPopulate( al::vector< DevMap >& devlist, int type ) {
     devlist.emplace_back( DevMap{ DefaultName, ( type == DSP_CAP_INPUT )
                                                    ? DefaultCapture
@@ -223,6 +224,7 @@ uint log2i( uint x ) {
 
 struct OSSPlayback final : public BackendBase {
     OSSPlayback( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~OSSPlayback() override;
 
     int mixerProc();
@@ -430,6 +432,7 @@ void OSSPlayback::stop() {
 
 struct OSScapture final : public BackendBase {
     OSScapture( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~OSScapture() override;
 
     int recordProc();

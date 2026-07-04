@@ -53,6 +53,7 @@ public:
     void SetZeroTransform( Fmatrix& aTransform );
     PHDynamicData( unsigned int numOfchilds, dBodyID body );
     PHDynamicData();
+
     //	virtual ~PHDynamicData();
     void GetWorldMX( Fmatrix& aTransform ) {
         dMatrix3 R;

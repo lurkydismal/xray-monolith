@@ -172,8 +172,11 @@ public:
     // thread safe.
     //------------------------------------------------------------------------
     iterator unsafe_begin() { return iterator( *this ); }
+
     iterator unsafe_end() { return iterator(); }
+
     const_iterator unsafe_begin() const { return const_iterator( *this ); }
+
     const_iterator unsafe_end() const { return const_iterator(); }
 };
 
@@ -227,6 +230,7 @@ class concurrent_bounded_queue : public internal::concurrent_queue_base_v8 {
 
     public:
         destroyer( T& value ) : my_value( value ) {}
+
         ~destroyer() { my_value.~T(); }
     };
 
@@ -458,8 +462,11 @@ public:
     // thread safe.
     //------------------------------------------------------------------------
     iterator unsafe_begin() { return iterator( *this ); }
+
     iterator unsafe_end() { return iterator(); }
+
     const_iterator unsafe_begin() const { return const_iterator( *this ); }
+
     const_iterator unsafe_end() const { return const_iterator(); }
 };
 

@@ -92,6 +92,7 @@ extern "C" {
 #define ERR_FLAG_MARK 0x01
 
 #define ERR_NUM_ERRORS 16
+
 typedef struct err_state_st {
     unsigned long pid;
     int err_flags[ ERR_NUM_ERRORS ];

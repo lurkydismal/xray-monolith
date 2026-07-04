@@ -13,6 +13,7 @@ class ENGINE_API CGameFont;
 #include "_flags.h"
 
 extern RP_FUNC rp_Stats;
+
 class pureStats {
 public:
     virtual void OnStats( void ) = 0;

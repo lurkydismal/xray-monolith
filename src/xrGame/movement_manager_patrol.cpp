@@ -101,7 +101,8 @@ void CMovementManager::process_patrol_path() {
                 //								"[path_size=%d][curr_id=%d][last_pp=%d]
                 // start_position=[%f][%f][%f] stop_position=[%f][%f][%f]
                 // position=[%f][%f][%f]",
-                // detail().path().size(), 								detail().curr_travel_point_index(),
+                // detail().path().size(),
+                // detail().curr_travel_point_index(),
                 //								detail().last_patrol_point(),
                 //								VPUSH(detail().path().front().position),
                 //								VPUSH(detail().curr_travel_point().position),

@@ -28,24 +28,25 @@ LJLIB_REC( math_round IRFPM_FLOOR )
 LJLIB_ASM_( math_ceil )
 LJLIB_REC( math_round IRFPM_CEIL )
 
-    LJLIB_ASM( math_sqrt ) LJLIB_REC( math_unary IRFPM_SQRT ) {
+LJLIB_ASM( math_sqrt ) LJLIB_REC( math_unary IRFPM_SQRT ) {
     lj_lib_checknum( L, 1 );
     return FFH_RETRY;
 }
 LJLIB_ASM_( math_log10 )
 LJLIB_REC( math_unary IRFPM_LOG10 )
 LJLIB_ASM_( math_exp )
-LJLIB_REC( math_unary IRFPM_EXP ) LJLIB_ASM_( math_sin ) LJLIB_REC(
-    math_unary IRFPM_SIN ) LJLIB_ASM_( math_cos )
-    LJLIB_REC( math_unary IRFPM_COS ) LJLIB_ASM_( math_tan ) LJLIB_REC(
-        math_unary IRFPM_TAN ) LJLIB_ASM_( math_asin )
-        LJLIB_REC( math_atrig FF_math_asin ) LJLIB_ASM_( math_acos ) LJLIB_REC(
-            math_atrig FF_math_acos ) LJLIB_ASM_( math_atan )
-            LJLIB_REC( math_atrig FF_math_atan ) LJLIB_ASM_( math_sinh )
-                LJLIB_REC( math_htrig IRCALL_sinh ) LJLIB_ASM_( math_cosh )
-                    LJLIB_REC( math_htrig IRCALL_cosh ) LJLIB_ASM_( math_tanh )
-                        LJLIB_REC( math_htrig IRCALL_tanh ) LJLIB_ASM_(
-                            math_frexp ) LJLIB_ASM_( math_modf ) LJLIB_REC(.)
+
+LJLIB_REC( math_unary IRFPM_EXP )
+LJLIB_ASM_( math_sin ) LJLIB_REC( math_unary IRFPM_SIN ) LJLIB_ASM_(
+    math_cos ) LJLIB_REC( math_unary IRFPM_COS ) LJLIB_ASM_( math_tan )
+    LJLIB_REC( math_unary IRFPM_TAN ) LJLIB_ASM_( math_asin ) LJLIB_REC(
+        math_atrig FF_math_asin ) LJLIB_ASM_( math_acos )
+        LJLIB_REC( math_atrig FF_math_acos ) LJLIB_ASM_( math_atan ) LJLIB_REC(
+            math_atrig FF_math_atan ) LJLIB_ASM_( math_sinh )
+            LJLIB_REC( math_htrig IRCALL_sinh ) LJLIB_ASM_( math_cosh )
+                LJLIB_REC( math_htrig IRCALL_cosh ) LJLIB_ASM_( math_tanh )
+                    LJLIB_REC( math_htrig IRCALL_tanh ) LJLIB_ASM_( math_frexp )
+                        LJLIB_ASM_( math_modf ) LJLIB_REC(.)
 
                             LJLIB_PUSH( 57.29577951308232 )
                                 LJLIB_ASM_( math_deg ) LJLIB_REC( math_degrad )
@@ -104,7 +105,9 @@ LJLIB_REC( math_minmax IR_MAX )
 
 LJLIB_PUSH( 3.14159265358979323846 )
 LJLIB_SET( pi )
-LJLIB_PUSH( 1e310 ) LJLIB_SET( huge )
+
+LJLIB_PUSH( 1e310 )
+LJLIB_SET( huge )
 
     /* ------------------------------------------------------------------------
      */
@@ -165,6 +168,7 @@ static void random_init( RandomState* rs, double d ) {
 
 /* PRNG extract function. */
 LJLIB_PUSH( top - 2 ) /* Upvalue holds userdata with RandomState. */
+
 LJLIB_CF( math_random ) LJLIB_REC(.) {
     int n = ( int )( L->top - L->base );
     RandomState* rs =
@@ -220,6 +224,7 @@ LJLIB_CF( math_random ) LJLIB_REC(.) {
 
 /* PRNG seed function. */
 LJLIB_PUSH( top - 2 ) /* Upvalue holds userdata with RandomState. */
+
 LJLIB_CF( math_randomseed ) {
     RandomState* rs =
         ( RandomState* )( uddata( udataV( lj_lib_upvalue( L, 1 ) ) ) );

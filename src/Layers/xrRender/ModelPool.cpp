@@ -617,6 +617,7 @@ IC bool _IsBoxVisible( dxRender_Visual* visual, const Fmatrix& transform ) {
     bb.xform( visual->vis.box, transform );
     return ::Render->occ_visible( bb );
 }
+
 IC bool _IsValidShader( dxRender_Visual* visual,
                         u32 priority,
                         bool strictB2F ) {
@@ -733,6 +734,7 @@ void CModelPool::RenderSingle( dxRender_Visual* m_pVisual,
         Render( m_pVisual, mTransform, p, true, m_fLOD );
     }
 }
+
 void CModelPool::OnDeviceDestroy() {
     Destroy();
 }

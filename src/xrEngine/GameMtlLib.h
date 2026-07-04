@@ -146,6 +146,7 @@ public:
 
     void Load( IReader& fs );
     void Save( IWriter& fs );
+
     IC int GetID() { return ID; }
 #ifdef _EDITOR
     void FillProp( PropItemVec& values, ListItem* owner );
@@ -230,9 +231,13 @@ public:
     }
 
     ~SGameMtlPair();
+
     IC int GetMtl0() { return mtl0; }
+
     IC int GetMtl1() { return mtl1; }
+
     IC int GetID() { return ID; }
+
     IC void SetPair( int m0, int m1 ) {
         mtl0 = m0;
         mtl1 = m1;
@@ -242,9 +247,12 @@ public:
         return !!( ( ( mtl0 == m0 ) && ( mtl1 == m1 ) ) ||
                    ( ( mtl0 == m1 ) && ( mtl1 == m0 ) ) );
     }
+
     void Save( IWriter& fs );
     void Load( IReader& fs );
+
     IC int GetParent() { return ID_parent; }
+
     BOOL SetParent( int parent );
 #ifdef _EDITOR
     void FillProp( PropItemVec& values );
@@ -326,10 +334,12 @@ public:
     // editor
     SGameMtl* AppendMaterial( SGameMtl* parent );
     void RemoveMaterial( LPCSTR name );
+
     IC SGameMtl* GetMaterialByID( int ID ) {
         GameMtlIt it = GetMaterialItByID( ID );
         return materials.end() != it ? *it : 0;
     }
+
     IC SGameMtl* GetMaterial( LPCSTR name ) {
         GameMtlIt it = GetMaterialIt( name );
         return materials.end() != it ? *it : 0;
@@ -358,7 +368,9 @@ public:
     }
 
     IC GameMtlIt FirstMaterial() { return materials.begin(); }
+
     IC GameMtlIt LastMaterial() { return materials.end(); }
+
     IC u32 CountMaterial() { return materials.size(); }
 
     // material pair routine
@@ -392,6 +404,7 @@ public:
     }
 #endif
     IC GameMtlPairIt FirstMaterialPair() { return material_pairs.begin(); }
+
     IC GameMtlPairIt LastMaterialPair() { return material_pairs.end(); }
 
     // IO routines

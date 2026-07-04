@@ -654,6 +654,7 @@ typedef int mz_bool;
 typedef struct mz_dummy_time_t_tag {
     int m_dummy;
 } mz_dummy_time_t;
+
 #define MZ_TIME_T mz_dummy_time_t
 #else
 #define MZ_TIME_T time_t

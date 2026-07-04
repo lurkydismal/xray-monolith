@@ -45,10 +45,12 @@ public:
     cphysics_game_scripted( T* im ) : impl( *im ) {}
 
     virtual ~cphysics_game_scripted() {};
+
     virtual iphysics_scripted& iphysics_impl() { return impl.get_scripted(); }
 
 protected:
     virtual T& physics_impl() { return impl; }
+
     virtual const T& physics_impl() const { return impl; }
 
 public:

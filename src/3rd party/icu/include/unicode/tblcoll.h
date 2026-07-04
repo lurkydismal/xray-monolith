@@ -824,6 +824,7 @@ public:
     static inline RuleBasedCollator* rbcFromUCollator( UCollator* uc ) {
         return dynamic_cast< RuleBasedCollator* >( fromUCollator( uc ) );
     }
+
     /** @internal */
     static inline const RuleBasedCollator* rbcFromUCollator(
         const UCollator* uc ) {
@@ -894,9 +895,11 @@ private:
     void setAttributeDefault( int32_t attribute ) {
         explicitlySetAttributes &= ~( ( uint32_t )1 << attribute );
     }
+
     void setAttributeExplicitly( int32_t attribute ) {
         explicitlySetAttributes |= ( uint32_t )1 << attribute;
     }
+
     UBool attributeHasBeenSetExplicitly( int32_t attribute ) const {
         // assert(0 <= attribute < ATTR_LIMIT);
         return ( UBool )( ( explicitlySetAttributes &

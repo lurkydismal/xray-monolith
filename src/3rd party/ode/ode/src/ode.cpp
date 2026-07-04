@@ -837,6 +837,7 @@ void dWorldAddJoint( dxWorld* w, dxJoint* j ) {
     addObjectToList( j, ( dObject** )&w->firstjoint );
     w->nj++;
 }
+
 void dWorldRemoveJoint( dxWorld* w, dxJoint* j ) {
     dIASSERT( w && j && w == j->world );
     removeObjectFromList( ( dObject* )j );
@@ -904,6 +905,7 @@ dxJoint* dJointCreateContact( dWorldID w,
     j->contact = *c;
     return j;
 }
+
 dxJoint* dJointCreateContactSpecial( dWorldID w,
                                      dJointGroupID group,
                                      const dContact* c ) {
@@ -913,6 +915,7 @@ dxJoint* dJointCreateContactSpecial( dWorldID w,
     j->contact = *c;
     return j;
 }
+
 dxJoint* dJointCreateHinge2( dWorldID w, dJointGroupID group ) {
     // dAASSERT (w);
     return createJoint( w, group, &__dhinge2_vtable );

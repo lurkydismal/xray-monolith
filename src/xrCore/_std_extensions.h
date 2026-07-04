@@ -117,19 +117,25 @@ IC T _sqr( T a ) {
 IC float _abs( float x ) {
     return fabsf( x );
 }
+
 #include <xmmintrin.h>
+
 IC float _sqrt_sse( float x ) {
     return _mm_cvtss_f32( _mm_sqrt_ss( _mm_set_ps1( x ) ) );
 }
+
 IC float _sqrt( float x ) {
     return sqrtf( x );
 }
+
 IC float _sin( float x ) {
     return sinf( x );
 }
+
 IC float _cos( float x ) {
     return cosf( x );
 }
+
 IC BOOL _valid( const float x ) {
     // check for: Signaling NaN, Quiet NaN, Negative infinity (-INF), Positive
     // infinity (+INF), Negative denormalized, Positive denormalized
@@ -151,15 +157,19 @@ IC BOOL _valid( const float x ) {
 IC double _abs( double x ) {
     return fabs( x );
 }
+
 IC double _sqrt( double x ) {
     return sqrt( x );
 }
+
 IC double _sin( double x ) {
     return sin( x );
 }
+
 IC double _cos( double x ) {
     return cos( x );
 }
+
 IC BOOL _valid( const double x ) {
     // check for: Signaling NaN, Quiet NaN, Negative infinity ( –INF), Positive
     // infinity (+INF), Negative denormalized, Positive denormalized
@@ -181,9 +191,11 @@ IC BOOL _valid( const double x ) {
 IC s8 _abs( s8 x ) {
     return ( x >= 0 ) ? x : s8( -x );
 }
+
 IC s8 _min( s8 x, s8 y ) {
     return std::min( x, y );
 }
+
 IC s8 _max( s8 x, s8 y ) {
     return std::max( x, y );
 }
@@ -197,9 +209,11 @@ IC u8 _abs( u8 x ) {
 IC s16 _abs( s16 x ) {
     return ( x >= 0 ) ? x : s16( -x );
 }
+
 IC s16 _min( s16 x, s16 y ) {
     return std::min( x, y );
 }
+
 IC s16 _max( s16 x, s16 y ) {
     return std::max( x, y );
 }
@@ -213,9 +227,11 @@ IC u16 _abs( u16 x ) {
 IC s32 _abs( s32 x ) {
     return ( x >= 0 ) ? x : s32( -x );
 }
+
 IC s32 _min( s32 x, s32 y ) {
     return std::min( x, y );
 }
+
 IC s32 _max( s32 x, s32 y ) {
     return std::max( x, y );
 }
@@ -224,9 +240,11 @@ IC s32 _max( s32 x, s32 y ) {
 IC s64 _abs( s64 x ) {
     return ( x >= 0 ) ? x : s64( -x );
 }
+
 IC s64 _min( s64 x, s64 y ) {
     return std::min( x, y );
 }
+
 IC s64 _max( s64 x, s64 y ) {
     return std::max( x, y );
 }
@@ -234,6 +252,7 @@ IC s64 _max( s64 x, s64 y ) {
 IC BOOL _fsimilar( float a, float b, float cmp = EPS ) {
     return _abs( a - b ) < cmp;
 }
+
 IC float _powf( float x, float y ) {
     if ( _fsimilar( y, 2.0f ) )
         return x * x;

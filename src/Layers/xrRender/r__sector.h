@@ -9,6 +9,7 @@
 #include "r__dsgraph_types.h"
 class CPortal;
 class CSector;
+
 // Connector
 class CPortal : public IRender_Portal {
 private:
@@ -23,8 +24,11 @@ public:
     void Setup( Fvector* V, int vcnt, CSector* face, CSector* back );
 
     svector< Fvector, 8 >& getPoly() { return poly; }
+
     CSector* Back() { return pBack; }
+
     CSector* Front() { return pFace; }
+
     CSector* getSector( CSector* pFrom ) {
         return pFrom == pFace ? pBack : pFace;
     }
@@ -48,6 +52,7 @@ public:
 
 class dxRender_Visual;
 class CDSGraphManager;
+
 // Main 'Sector' class
 class CSector : public IRender_Sector {
 protected:
@@ -57,10 +62,12 @@ protected:
 public:
     // Main interface
     dxRender_Visual* root() { return m_root; }
+
     void traverse( CFrustum&& F, CDSGraphManager& DM );
     void load( IReader& fs );
 
     CSector() { m_root = NULL; }
+
     virtual ~CSector();
 };
 

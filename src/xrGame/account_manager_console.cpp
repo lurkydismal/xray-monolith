@@ -127,7 +127,7 @@ void CCC_GameSpyPrintProfile::Execute( LPCSTR args ) {
     //	gamespy_profile::all_awards_t const & tmp_awards =
     // tmp_store->get_awards(); 	for
     //(gamespy_profile::all_awards_t::const_iterator i = tmp_awards.begin(),
-    //ie = tmp_awards.end(); i < ie; ++i)
+    // ie = tmp_awards.end(); i < ie; ++i)
     //	{
     //		string64 rdate_str;
     //		rdate_str[0]	= 0;
@@ -236,7 +236,7 @@ void CCC_GameSpyProfile::Execute( LPCSTR args ) {
     // MainMenu()->GetStatsSubmitter(); 	VERIFY(tmp_ssubmitter);
     // char const * tmp_scores_str = args + xr_strlen(tmp_command); 	unsigned
     // int score_id = 0; 	int score_value				= 0;
-    //if (sscanf_s(tmp_scores_str, "%u %u", &score_id, &score_value) != 2)
+    // if (sscanf_s(tmp_scores_str, "%u %u", &score_id, &score_value) != 2)
     //	{
     //		Msg("! Not enough parameters");
     //		return;

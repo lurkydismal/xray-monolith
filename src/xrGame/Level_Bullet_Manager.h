@@ -17,6 +17,7 @@ struct SBullet_Hit {
 // структура, описывающая пулю и ее свойства в полете
 struct SBullet {
     u32 init_frame_num; // номер кадра на котором была запущена пуля
+
     union {
         struct {
             u16 ricochet_was : 1; // пуля срикошетила
@@ -82,6 +83,7 @@ struct SBullet {
     float density;
     Fvector begin_density;
     LPCSTR section;
+
     bool operator==( u32 ID ) { return ID == m_dwID; }
 
 public:

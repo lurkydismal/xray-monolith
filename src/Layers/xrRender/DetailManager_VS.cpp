@@ -25,10 +25,12 @@ static D3DVERTEXELEMENT9 dwDecl[] = {
     D3DDECL_END() };
 
 #pragma pack( push, 1 )
+
 struct vertHW {
     float x, y, z;
     short u, v, t, mid;
 };
+
 #pragma pack( pop )
 
 short QC( float v ) {

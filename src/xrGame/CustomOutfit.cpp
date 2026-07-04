@@ -173,7 +173,9 @@ float CCustomOutfit::GetHitTypeProtection( ALife::EHitType hit_type,
 float CCustomOutfit::GetBoneArmor( s16 element ) {
     return m_boneProtection->getBoneArmor( element );
 }
+
 #pragma optimize( "", off )
+
 float CCustomOutfit::HitThroughArmor( float hit_power,
                                       s16 element,
                                       float ap,
@@ -287,7 +289,9 @@ float CCustomOutfit::HitThroughArmor( float hit_power,
 
     return NewHitPower;
 }
+
 #pragma optimize( "", on )
+
 BOOL CCustomOutfit::BonePassBullet( int boneID ) {
     return m_boneProtection->getBonePassBullet( s16( boneID ) );
 }

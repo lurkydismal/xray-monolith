@@ -73,6 +73,7 @@ public:
     void BoostRadiationProtection( const float value );
     void BoostTelepaticProtection( const float value );
     void BoostChemicalBurnProtection( const float value );
+
     BOOSTER_MAP GetCurBoosterInfluences() { return m_booster_influences; };
 
     // хромание при потере сил и здоровья
@@ -87,17 +88,25 @@ public:
     void ConditionJump( float weight );
     void ConditionWalk( float weight, bool accel, bool sprint );
     void ConditionStand( float weight );
+
     IC float MaxWalkWeight() const { return m_MaxWalkWeight; }
+
     IC void SetMaxWalkWeight( float mww ) { m_MaxWalkWeight = mww; }
+
     IC float GetCarryWeightBoost() const { return m_CarryWeightBoost; }
 
     float GetPsyBar() { return m_fPsyBar; }
+
     void SetPsyBar( float psybar ) { m_fPsyBar = psybar; }
 
     float xr_stdcall GetAlcohol() { return m_fAlcohol; }
+
     float xr_stdcall GetPsy() { return 1.0f - GetPsyHealth(); }
+
     virtual float GetSatiety() { return m_fSatiety; }
+
     virtual void SetSatiety( float satiety ) { m_fSatiety = satiety; }
+
     IC float GetSatietyPower() const {
         return IsSleeping() ? m_fV_SatietyPowerSleep * m_fSatiety
                             : m_fV_SatietyPower * m_fSatiety;
@@ -117,17 +126,21 @@ public:
 
     virtual void save( NET_Packet& output_packet );
     virtual void load( IReader& input_packet );
+
     //	IC		float const&	Satiety
     //()	{ return m_fSatiety; }
     IC float const& V_Satiety() {
         return IsSleeping() ? m_fV_SatietySleep : m_fV_Satiety;
     }
+
     IC float const& V_SatietyPower() {
         return IsSleeping() ? m_fV_SatietyPowerSleep : m_fV_SatietyPower;
     }
+
     IC float const& V_SatietyHealth() {
         return IsSleeping() ? m_fV_SatietyHealthSleep : m_fV_SatietyHealth;
     }
+
     IC float const& SatietyCritical() { return m_fSatietyCritical; }
 
     float GetZoneMaxPower( ALife::EInfluenceType type ) const;
@@ -139,8 +152,11 @@ public:
     virtual bool ApplyInfluence( const SMedicineInfluenceValues& V,
                                  const shared_str& sect );
     virtual bool ApplyBooster( const SBooster& B, const shared_str& sect );
+
     float GetMaxPowerRestoreSpeed() { return m_max_power_restore_speed; };
+
     float GetMaxWoundProtection() { return m_max_wound_protection; };
+
     float GetMaxFireWoundProtection() { return m_max_fire_wound_protection; };
 
 protected:
@@ -221,6 +237,8 @@ public:
     CActorDeathEffector( CActorCondition* parent, LPCSTR sect ); // -((
     ~CActorDeathEffector();
     void UpdateCL();
+
     IC bool IsActual() { return m_b_actual; }
+
     void Stop();
 };

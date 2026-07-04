@@ -35,10 +35,15 @@ private:
 
 public:
     IC int df_2_s32( float d ) { return iFloor( d * occQ_s32 ); }
+
     IC s16 df_2_s16( float d ) { return s16( iFloor( d * occQ_s16 ) ); }
+
     IC int df_2_s32up( float d ) { return iCeil( d * occQ_s32 ); }
+
     IC s16 df_2_s16up( float d ) { return s16( iCeil( d * occQ_s16 ) ); }
+
     IC float ds32_2_f( s32 d ) { return float( d ) / occQ_s32; }
+
     IC float ds16_2_f( s16 d ) { return float( d ) / occQ_s16; }
 
     void clear();
@@ -47,6 +52,7 @@ public:
     BOOL test( float x0, float y0, float x1, float y1, float z );
 
     occTri** get_frame() { return &( bufFrame[ 0 ][ 0 ] ); }
+
     float* get_depth() { return &( bufDepth[ 0 ][ 0 ] ); }
 
     occD* get_depth_level( int level ) {
@@ -72,6 +78,7 @@ public:
         Fvector radius;
         float z;
     } dbg_pixel_boxes[ occ_dim_0 * occ_dim_0 ];
+
     bool dbg_HOM_draw_initialized;
 
 #endif

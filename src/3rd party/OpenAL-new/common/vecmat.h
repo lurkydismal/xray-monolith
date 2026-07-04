@@ -19,12 +19,14 @@ class VectorR {
 public:
     constexpr VectorR() noexcept = default;
     constexpr VectorR( const VectorR& ) noexcept = default;
+
     constexpr explicit VectorR( T a, T b, T c, T d ) noexcept
         : mVals{ a, b, c, d } {}
 
     constexpr VectorR& operator=( const VectorR& ) noexcept = default;
 
     constexpr T& operator[]( size_t idx ) noexcept { return mVals[ idx ]; }
+
     constexpr const T& operator[]( size_t idx ) const noexcept {
         return mVals[ idx ];
     }
@@ -72,6 +74,7 @@ public:
                mVals[ 2 ] * rhs.mVals[ 2 ];
     }
 };
+
 using Vector = VectorR< float >;
 
 template < typename T >
@@ -83,6 +86,7 @@ class MatrixR {
 public:
     constexpr MatrixR() noexcept = default;
     constexpr MatrixR( const MatrixR& ) noexcept = default;
+
     constexpr explicit MatrixR( T aa,
                                 T ab,
                                 T ac,
@@ -107,6 +111,7 @@ public:
     constexpr auto operator[]( size_t idx ) noexcept {
         return al::span< T, 4 >{ &mVals[ idx * 4 ], 4 };
     }
+
     constexpr auto operator[]( size_t idx ) const noexcept {
         return al::span< const T, 4 >{ &mVals[ idx * 4 ], 4 };
     }
@@ -117,6 +122,7 @@ public:
                         T{ 0 }, T{ 0 }, T{ 0 }, T{ 1 } };
     }
 };
+
 using Matrix = MatrixR< float >;
 
 template < typename T >

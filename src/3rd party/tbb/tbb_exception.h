@@ -308,6 +308,7 @@ public:
         }
         return ( movable_exception* )e;
     }
+
     void destroy() throw() __TBB_override {
         __TBB_ASSERT( my_dynamic,
                       "Method destroy can be called only on dynamically "
@@ -317,6 +318,7 @@ public:
             internal::deallocate_via_handler_v3( this );
         }
     }
+
     void throw_self() __TBB_override { __TBB_THROW( *this ); }
 
 protected:
@@ -358,6 +360,7 @@ public:
 
 private:
     tbb_exception_ptr( const std::exception_ptr& src ) : my_ptr( src ) {}
+
     tbb_exception_ptr( const captured_exception& src )
         :
 #if __TBB_MAKE_EXCEPTION_PTR_PRESENT

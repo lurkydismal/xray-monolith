@@ -117,6 +117,7 @@ typedef unsigned char krb5_octet;
 #endif
 
 #define KSSL_ERR_MAX 255
+
 typedef struct kssl_err_st {
     int reason;
     char text[ KSSL_ERR_MAX + 1 ];

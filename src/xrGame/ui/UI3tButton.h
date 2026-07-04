@@ -47,6 +47,7 @@ public:
     virtual CUIWindow* ui_cast_window() { return this; }
 
     enum EFrameMode { Framemode_None, Framemode_Line, Framemode_Window };
+
     EFrameMode m_frameline_mode;
     bool vertical;
     CUI_IB_Static* m_background;

@@ -33,6 +33,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 std::wstring g_ScreenshotRequest;
 bool g_TakingScreenshot = false;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool OnOptickStateChanged( Optick::State::Type state ) {
     if ( state == Optick::State::STOP_CAPTURE ) {
@@ -57,6 +58,7 @@ bool OnOptickStateChanged( Optick::State::Type state ) {
     }
     return true;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class VulkanExample : public VulkanExampleBase {
@@ -133,6 +135,7 @@ public:
         // Per object information (position, rotation, etc.)
         std::vector< ObjectData > objectData;
     };
+
     std::vector< ThreadData > threadData;
 
     vks::ThreadPool threadPool;

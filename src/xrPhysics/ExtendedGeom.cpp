@@ -44,5 +44,5 @@ void get_user_data( dxGeomUserData*& gd1,
 //	if(geom&&dGeomGetUserData(geom)&&(dGeomGetUserData(geom))->object_callbacks)
 //				return
 //(dGeomGetUserData(geom))->object_callbacks->HasCallback(obj_callback);
-//else return false;
+// else return false;
 //}

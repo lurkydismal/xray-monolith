@@ -87,6 +87,7 @@ public:
     EaxFxSlotIndexValue eax_get_index() const noexcept {
         return eax_fx_slot_index_;
     }
+
     const EAX50FXSLOTPROPERTIES& eax_get_eax_fx_slot() const noexcept {
         return eax_;
     }

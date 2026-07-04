@@ -66,6 +66,7 @@ static FILE* my_fopen( const char* fname, const char* mode ) {
 #endif
     return file;
 }
+
 #define fopen my_fopen
 
 /* SDL overrides main and provides UTF-8 args for us. */

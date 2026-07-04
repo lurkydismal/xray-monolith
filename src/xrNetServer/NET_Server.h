@@ -111,6 +111,7 @@ public:
         HAddr.m_data.data = 0;
         BanTime = 0;
     };
+
     void Load( CInifile& ini, const shared_str& sect );
     void Save( CInifile& ini );
 
@@ -221,6 +222,7 @@ public:
 
     // statistic
     const IServerStatistic* GetStatistic() { return &stats; }
+
     void ClearStatistic();
     void UpdateClientStatistic( IClient* C );
 
@@ -230,6 +232,7 @@ public:
                                               // with "flags" as returned
     virtual void OnCL_Connected( IClient* C );
     virtual void OnCL_Disconnected( IClient* C );
+
     virtual bool OnCL_QueryHost() { return true; };
 
     virtual IClient* client_Create() = 0; // create client info
@@ -249,6 +252,7 @@ public:
     BOOL HasBandwidth( IClient* C );
 
     IC int GetPort() { return psNET_Port; };
+
     bool GetClientAddress( ClientID ID,
                            ip_address& Address,
                            DWORD* pPort = NULL );
@@ -270,6 +274,7 @@ public:
     virtual void GetServerInfo( CServerInfo* si ) {};
 
     u32 GetClientsCount() { return net_players.ClientsCount(); };
+
     IClient* GetServerClient() { return SV_Client; };
 
     template < typename SearchPredicate >
@@ -306,6 +311,7 @@ public:
     };
 #endif
     bool IsPlayerIPDenied( u32 ip_address );
+
     // WARNING! very bad method :(
     // IClient*				client_Get		(u32 index)
     // {return net_players.GetClientByIndex(index);};
@@ -313,6 +319,7 @@ public:
         return net_players.GetFoundClient(
             ClientIdSearchPredicate( clientId ) );
     };
+
     // IClient*				GetDisconnectedClientByID(ClientID
     // clientId)		{return
     // net_players.GetFoundDisconnectedClient(ClientIdSearchPredicate(clientId));}

@@ -36,6 +36,7 @@
 U_NAMESPACE_BEGIN
 
 class CharString;
+
 namespace number {
 namespace impl {
 class DecimalQuantity;
@@ -712,6 +713,7 @@ private:
         double fDouble;
         int64_t fInt64;
         UDate fDate;
+
         struct {
             Formattable* fArray;
             int32_t fCount;

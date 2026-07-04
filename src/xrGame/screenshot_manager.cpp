@@ -82,12 +82,15 @@ void screenshot_manager::realloc_jpeg_buffer( u32 new_size ) {
 
 #define RESULT_PIXEL_SIZE 3
 #define STRING_SIZE ( RESULT_PIXEL_SIZE * RESULT_WIDTH )
+
 // method get the pixel
 void screenshot_manager::prepare_image() {
 #pragma pack( push, 1 )
+
     struct rgb24color {
         u8 r, g, b;
     };
+
 #pragma pack( pop )
     typedef rgb24color rgb24map[ RESULT_HEIGHT ][ RESULT_WIDTH ];
     u32* sizes = reinterpret_cast< u32* >( m_result_writer.pointer() );

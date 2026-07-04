@@ -50,21 +50,27 @@ enum ETaskState;
 namespace ALife {
 enum ERelationType;
 }
+
 namespace ScriptEntity {
 enum EActionType;
 }
+
 namespace MovementManager {
 enum EPathType;
 }
+
 namespace DetailPathManager {
 enum EDetailPathType;
 }
+
 namespace SightManager {
 enum ESightType;
 }
+
 namespace smart_cover {
 class object;
 }
+
 namespace doors {
 class door;
 }
@@ -1197,17 +1203,23 @@ public:
     void set_hud_fire_bone_silencer( LPCSTR bone_name );
     // Works for anything with visual
     u16 bone_id( LPCSTR bone_name, bool bHud );
+
     u16 bone_id( LPCSTR bone_name ) { return bone_id( bone_name, false ); }
+
     LPCSTR bone_name( u16 bone_id, bool bHud );
+
     LPCSTR bone_name( u16 bone_id ) { return bone_name( bone_id, false ); }
 
     bool is_bone_visible( u16 bone_id, bool bHud );
+
     bool is_bone_visible( u16 bone_id ) {
         return is_bone_visible( bone_id, false );
     }
+
     bool is_bone_visible( LPCSTR bone_name, bool bHud ) {
         return is_bone_visible( bone_id( bone_name, bHud ), bHud );
     }
+
     bool is_bone_visible( LPCSTR bone_name ) {
         return is_bone_visible( bone_id( bone_name ), false );
     }
@@ -1216,9 +1228,11 @@ public:
                            bool bVisibility,
                            bool bRecursive,
                            bool bHud );
+
     void set_bone_visible( u16 bone_id, bool bVisibility, bool bRecursive ) {
         set_bone_visible( bone_id, bVisibility, bRecursive, false );
     }
+
     void set_bone_visible( LPCSTR bone_name,
                            bool bVisibility,
                            bool bRecursive,
@@ -1226,6 +1240,7 @@ public:
         set_bone_visible( bone_id( bone_name, bHud ), bVisibility, bRecursive,
                           bHud );
     }
+
     void set_bone_visible( LPCSTR bone_name,
                            bool bVisibility,
                            bool bRecursive ) {
@@ -1234,43 +1249,55 @@ public:
     }
 
     Fmatrix bone_transform( u16 bone_id, bool bHud );
+
     Fmatrix bone_transform( u16 bone_id ) {
         return bone_transform( bone_id, false );
     }
+
     Fmatrix bone_transform( LPCSTR bone_name, bool bHud ) {
         return bone_transform( bone_id( bone_name, bHud ), bHud );
     }
+
     Fmatrix bone_transform( LPCSTR bone_name ) {
         return bone_transform( bone_id( bone_name ), false );
     }
 
     Fvector bone_position( u16 bone_id, bool bHud );
+
     Fvector bone_position( u16 bone_id ) {
         return bone_position( bone_id, false );
     }
+
     Fvector bone_position( LPCSTR bone_name, bool bHud ) {
         return bone_position( bone_id( bone_name, bHud ), bHud );
     }
+
     Fvector bone_position( LPCSTR bone_name ) {
         return bone_position( bone_id( bone_name ), false );
     }
 
     Fvector bone_direction( u16 bone_id, bool bHud );
+
     Fvector bone_direction( u16 bone_id ) {
         return bone_direction( bone_id, false );
     }
+
     Fvector bone_direction( LPCSTR bone_name, bool bHud ) {
         return bone_direction( bone_id( bone_name, bHud ), bHud );
     }
+
     Fvector bone_direction( LPCSTR bone_name ) {
         return bone_direction( bone_id( bone_name ), false );
     }
 
     u16 bone_parent( u16 bone_id, bool bHud );
+
     u16 bone_parent( u16 bone_id ) { return bone_parent( bone_id, false ); }
+
     u16 bone_parent( LPCSTR bone_name, bool bHud ) {
         return bone_parent( bone_id( bone_name, bHud ), bHud );
     }
+
     u16 bone_parent( LPCSTR bone_name ) {
         return bone_parent( bone_id( bone_name ), false );
     }

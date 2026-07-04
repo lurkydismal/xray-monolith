@@ -757,6 +757,7 @@ RGBQUAD CxImage::GetPixelColorInterpolated( float x,
             return color;
     } // switch
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * Helper function for GetAreaColorInterpolated.
@@ -775,6 +776,7 @@ void CxImage::AddAveragingCont( RGBQUAD const& color,
     aa += color.rgbReserved * surf;
 #endif
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 /**
  * This method is similar to GetPixelColorInterpolated, but this method also
@@ -1092,6 +1094,7 @@ float CxImage::KernelBox( const float x ) {
         return 1.0f;
     return 0.0f;
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelHermite( const float x ) {
     if ( x < -1.0f )
@@ -1104,6 +1107,7 @@ float CxImage::KernelHermite( const float x ) {
     //	if (fabs(x)>1) return 0.0f;
     //	return(0.5f+0.5f*(float)cos(PI*x));
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelHanning( const float x ) {
     if ( fabs( x ) > 1 )
@@ -1111,6 +1115,7 @@ float CxImage::KernelHanning( const float x ) {
     return ( 0.5f + 0.5f * ( float )cos( PI * x ) ) *
            ( ( float )sin( PI * x ) / ( PI * x ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelHamming( const float x ) {
     if ( x < -1.0f )
@@ -1123,18 +1128,21 @@ float CxImage::KernelHamming( const float x ) {
     //	if (fabs(x)>1) return 0.0f;
     //	return(0.54f+0.46f*(float)cos(PI*x));
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelSinc( const float x ) {
     if ( x == 0.0 )
         return ( 1.0 );
     return ( ( float )sin( PI * x ) / ( PI * x ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelBlackman( const float x ) {
     // if (fabs(x)>1) return 0.0f;
     return ( 0.42f + 0.5f * ( float )cos( PI * x ) +
              0.08f * ( float )cos( 2.0f * PI * x ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelBessel_J1( const float x ) {
     double p, q;
@@ -1169,6 +1177,7 @@ float CxImage::KernelBessel_J1( const float x ) {
     }
     return ( float )( p / q );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelBessel_P1( const float x ) {
     double p, q;
@@ -1197,6 +1206,7 @@ float CxImage::KernelBessel_P1( const float x ) {
     }
     return ( float )( p / q );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelBessel_Q1( const float x ) {
     double p, q;
@@ -1225,6 +1235,7 @@ float CxImage::KernelBessel_Q1( const float x ) {
     }
     return ( float )( p / q );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelBessel_Order1( float x ) {
     float p, q;
@@ -1245,17 +1256,20 @@ float CxImage::KernelBessel_Order1( float x ) {
         q = ( -q );
     return ( q );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelBessel( const float x ) {
     if ( x == 0.0f )
         return ( PI / 4.0f );
     return ( KernelBessel_Order1( PI * x ) / ( 2.0f * x ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelGaussian( const float x ) {
     return ( float )( exp( -2.0f * x * x ) *
                       0.79788456080287f /*sqrt(2.0f/PI)*/ );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelQuadratic( const float x ) {
     if ( x < -1.5f )
@@ -1268,6 +1282,7 @@ float CxImage::KernelQuadratic( const float x ) {
         return ( 0.5f * ( x - 1.5f ) * ( x - 1.5f ) );
     return ( 0.0f );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelMitchell( const float x ) {
 #define KM_B ( 1.0f / 3.0f )
@@ -1292,6 +1307,7 @@ float CxImage::KernelMitchell( const float x ) {
         return ( KM_Q0 + x * ( KM_Q1 + x * ( KM_Q2 + x * KM_Q3 ) ) );
     return ( 0.0f );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelCatrom( const float x ) {
     if ( x < -2.0 )
@@ -1306,12 +1322,14 @@ float CxImage::KernelCatrom( const float x ) {
         return ( 0.5f * ( 4.0f + x * ( -8.0f + x * ( 5.0f - x ) ) ) );
     return ( 0.0f );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 float CxImage::KernelPower( const float x, const float a ) {
     if ( fabs( x ) > 1 )
         return 0.0f;
     return ( 1.0f - ( float )fabs( pow( x, a ) ) );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 
 #endif

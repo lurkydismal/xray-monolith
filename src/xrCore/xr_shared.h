@@ -97,6 +97,7 @@ public:
     }
 
     ~shared_item() { destroy(); }
+
     // assignment & accessors
     shared_item< T >& operator=( shared_item const& rhs ) {
         create( rhs );
@@ -104,6 +105,7 @@ public:
     }
 
     const T* get_value() { return p_; }
+
     // creating
     template < typename _on_new >
     void create( shared_str key,

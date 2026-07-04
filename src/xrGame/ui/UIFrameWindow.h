@@ -8,10 +8,13 @@ public:
     CUIFrameWindow();
 
     virtual void SetTextureRect( const Frect& r ) {};
+
     virtual const Frect& GetTextureRect() const { return m_tex_rect[ fmBK ]; }
+
     virtual void SetWndSize( const Fvector2& size );
 
     virtual void SetTextureColor( u32 color ) { m_texture_color = color; }
+
     virtual u32 GetTextureColor() const { return m_texture_color; }
 
     virtual void InitTexture( LPCSTR texture );
@@ -24,6 +27,7 @@ public:
     virtual void Draw();
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual ITextureOwner* ui_cast_texture_owner() { return this; }
 
 protected:

@@ -39,14 +39,17 @@ struct SourceSubList {
 
     SourceSubList() noexcept = default;
     SourceSubList( const SourceSubList& ) = delete;
+
     SourceSubList( SourceSubList&& rhs ) noexcept
         : FreeMask{ rhs.FreeMask }, Sources{ rhs.Sources } {
         rhs.FreeMask = ~0_u64;
         rhs.Sources = nullptr;
     }
+
     ~SourceSubList();
 
     SourceSubList& operator=( const SourceSubList& ) = delete;
+
     SourceSubList& operator=( SourceSubList&& rhs ) noexcept {
         std::swap( FreeMask, rhs.FreeMask );
         std::swap( Sources, rhs.Sources );
@@ -60,14 +63,17 @@ struct EffectSlotSubList {
 
     EffectSlotSubList() noexcept = default;
     EffectSlotSubList( const EffectSlotSubList& ) = delete;
+
     EffectSlotSubList( EffectSlotSubList&& rhs ) noexcept
         : FreeMask{ rhs.FreeMask }, EffectSlots{ rhs.EffectSlots } {
         rhs.FreeMask = ~0_u64;
         rhs.EffectSlots = nullptr;
     }
+
     ~EffectSlotSubList();
 
     EffectSlotSubList& operator=( const EffectSlotSubList& ) = delete;
+
     EffectSlotSubList& operator=( EffectSlotSubList&& rhs ) noexcept {
         std::swap( FreeMask, rhs.FreeMask );
         std::swap( EffectSlots, rhs.EffectSlots );
@@ -170,8 +176,10 @@ private:
     class ThreadCtx {
     public:
         ~ThreadCtx();
+
         void set( ALCcontext* ctx ) const noexcept { sLocalContext = ctx; }
     };
+
     static thread_local ThreadCtx sThreadContext;
 
 public:
@@ -184,6 +192,7 @@ public:
     static void setThreadContext( ALCcontext* context ) noexcept;
 #else
     static ALCcontext* getThreadContext() noexcept { return sLocalContext; }
+
     static void setThreadContext( ALCcontext* context ) noexcept {
         sThreadContext.set( context );
     }
@@ -198,6 +207,7 @@ public:
 #ifdef ALSOFT_EAX
 public:
     bool hasEax() const noexcept { return mEaxIsInitialized; }
+
     bool eaxIsCapable() const noexcept;
 
     void eaxUninitialize() noexcept;
@@ -224,11 +234,13 @@ public:
         EaxFxSlotIndexValue fx_slot_index ) const {
         return mEaxFxSlots.get( fx_slot_index );
     }
+
     ALeffectslot& eaxGetFxSlot( EaxFxSlotIndexValue fx_slot_index ) {
         return mEaxFxSlots.get( fx_slot_index );
     }
 
     bool eaxNeedsCommit() const noexcept { return mEaxNeedsCommit; }
+
     void eaxCommit();
 
     void eaxCommitFxSlots() { mEaxFxSlots.commit(); }

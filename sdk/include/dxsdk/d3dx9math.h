@@ -367,6 +367,7 @@ typedef struct _D3DMATRIX D3DXMATRIX, *LPD3DXMATRIX;
 #ifdef __cplusplus
 typedef struct _D3DXMATRIXA16 : public D3DXMATRIX {
     _D3DXMATRIXA16() {}
+
     _D3DXMATRIXA16( CONST FLOAT* );
     _D3DXMATRIXA16( CONST D3DMATRIX& );
     _D3DXMATRIXA16( CONST D3DXFLOAT16* );
@@ -421,6 +422,7 @@ typedef struct D3DXQUATERNION {
 #ifdef __cplusplus
 public:
     D3DXQUATERNION() {}
+
     D3DXQUATERNION( CONST FLOAT* );
     D3DXQUATERNION( CONST D3DXFLOAT16* );
     D3DXQUATERNION( FLOAT x, FLOAT y, FLOAT z, FLOAT w );
@@ -465,6 +467,7 @@ typedef struct D3DXPLANE {
 #ifdef __cplusplus
 public:
     D3DXPLANE() {}
+
     D3DXPLANE( CONST FLOAT* );
     D3DXPLANE( CONST D3DXFLOAT16* );
     D3DXPLANE( FLOAT a, FLOAT b, FLOAT c, FLOAT d );
@@ -504,6 +507,7 @@ typedef struct D3DXCOLOR {
 #ifdef __cplusplus
 public:
     D3DXCOLOR() {}
+
     D3DXCOLOR( DWORD argb );
     D3DXCOLOR( CONST FLOAT* );
     D3DXCOLOR( CONST D3DXFLOAT16* );

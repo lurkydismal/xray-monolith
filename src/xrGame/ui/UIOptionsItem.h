@@ -16,6 +16,7 @@ public:
     virtual ~CUIOptionsItem();
     virtual void AssignProps( const shared_str& entry,
                               const shared_str& group );
+
     void SetSystemDepends( ESystemDepends val ) { m_dep = val; }
 
     static CUIOptionsManager* GetOptionsManager() { return &m_optionsManager; }

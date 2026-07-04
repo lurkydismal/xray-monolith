@@ -36,6 +36,7 @@ namespace luabind {
 
 template < typename... Ts >
 struct bases {};
+
 using no_bases = bases<>;
 } // namespace luabind
 
@@ -140,11 +141,15 @@ public:
     const vector_class< base_info >& bases() const throw() { return m_bases; }
 
     void set_type( LUABIND_TYPE_INFO t ) { m_type = t; }
+
     LUABIND_TYPE_INFO type() const throw() { return m_type; }
+
     LUABIND_TYPE_INFO holder_type() const throw() { return m_holder_type; }
+
     LUABIND_TYPE_INFO const_holder_type() const throw() {
         return m_const_holder_type;
     }
+
     bool has_holder() const throw() { return m_construct_holder != 0; }
 
     const char* name() const throw() { return m_name; }
@@ -156,17 +161,23 @@ public:
     int metatable_ref() const throw() { return m_instance_metatable; }
 
     void get_table( lua_State* L ) const { m_table_ref.get( L ); }
+
     void get_default_table( lua_State* L ) const {
         m_default_table_ref.get( L );
     }
 
     void ( *destructor() const )( void* ) { return m_destructor; }
+
     void ( *const_holder_destructor() const )( void* ) {
         return m_const_holder_destructor;
     }
+
     typedef const void* ( *t_const_extractor )( void* );
+
     t_const_extractor const_extractor() const { return m_const_extractor; }
+
     typedef void* ( *t_extractor )( void* );
+
     t_extractor extractor() const { return m_extractor; }
 
     void ( *const_converter() const )( void*, void* ) {
@@ -290,7 +301,9 @@ public:
 
     struct operator_callback : public overload_rep_base {
         inline void set_fun( int ( *f )( lua_State* ) ) { func = f; }
+
         inline int call( lua_State* L ) { return func( L ); }
+
         inline void set_arity( int arity ) { m_arity = arity; }
 
     private:
@@ -432,6 +445,7 @@ public:
     inline const STATIC_CONSTANTS& static_constants() const {
         return m_static_constants;
     }
+
     inline const construct_rep& constructors() const { return m_constructor; }
 };
 

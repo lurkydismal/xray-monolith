@@ -65,6 +65,7 @@ void reward_manager::load_reward_item( CInifile& reward_config,
 #ifdef DEBUG
     struct award_name_searcher {
         shared_str m_award_name;
+
         bool operator()( rewards_map_t::value_type const& item ) const {
             return item.second->m_award_name == m_award_name;
         }

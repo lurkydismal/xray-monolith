@@ -257,6 +257,7 @@ void ImGui_ImplDX10_RenderDrawData( ImDrawData* draw_data ) {
         DXGI_FORMAT IndexBufferFormat;
         ID3D10InputLayout* InputLayout;
     };
+
     BACKUP_DX10_STATE old = {};
     old.ScissorRectsCount = old.ViewportsCount =
         D3D10_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE;
@@ -777,6 +778,7 @@ struct ImGui_ImplDX10_ViewportData {
         SwapChain = nullptr;
         RTView = nullptr;
     }
+
     ~ImGui_ImplDX10_ViewportData() {
         IM_ASSERT( SwapChain == nullptr && RTView == nullptr );
     }

@@ -143,7 +143,9 @@ bool CRenderDevice::ChangeOutputMonitor( HMONITOR hTargetMon ) {
 
     struct SwapGuard {
         bool& flag;
+
         SwapGuard( bool& f ) : flag( f ) { flag = true; }
+
         ~SwapGuard() { flag = false; }
     } guard( s_swap_in_progress );
 

@@ -24,7 +24,9 @@ public:
     IC void Balance( Fcolor& C ) { Balance( C.r, C.g, C.b ); }
 
     IC void Gamma( float G ) { fGamma = G; }
+
     IC void Brightness( float B ) { fBrightness = B; }
+
     IC void Contrast( float C ) { fContrast = C; }
 
     void GetIP( float& G, float& B, float& C, Fcolor& Balance ) {

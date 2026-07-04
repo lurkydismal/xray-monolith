@@ -9,6 +9,7 @@ public:
     CCC_CreateGameSpyAccount( LPCSTR N ) : IConsole_Command( N ) {
         bEmptyArgsHandled = false;
     };
+
     virtual void Execute( LPCSTR args );
 
     virtual void Info( TInfo& I ) {

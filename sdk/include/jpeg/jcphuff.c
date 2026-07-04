@@ -102,6 +102,7 @@ METHODDEF( void ) finish_pass_gather_phuff JPP( ( j_compress_ptr cinfo ) );
  */
 
 METHODDEF( void )
+
 start_pass_phuff( j_compress_ptr cinfo, boolean gather_statistics ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     boolean is_DC_band;
@@ -203,6 +204,7 @@ start_pass_phuff( j_compress_ptr cinfo, boolean gather_statistics ) {
     }
 
 LOCAL( void )
+
 dump_buffer( phuff_entropy_ptr entropy )
 /* Empty the output buffer; we do not support suspension in this module. */
 {
@@ -225,6 +227,7 @@ dump_buffer( phuff_entropy_ptr entropy )
 
 INLINE
 LOCAL( void )
+
 emit_bits( phuff_entropy_ptr entropy, unsigned int code, int size )
 /* Emit some bits, unless we are in gather mode */
 {
@@ -266,6 +269,7 @@ emit_bits( phuff_entropy_ptr entropy, unsigned int code, int size )
 }
 
 LOCAL( void )
+
 flush_bits( phuff_entropy_ptr entropy ) {
     emit_bits( entropy, 0x7F, 7 ); /* fill any partial byte with ones */
     entropy->put_buffer = 0;       /* and reset bit-buffer to empty */
@@ -278,6 +282,7 @@ flush_bits( phuff_entropy_ptr entropy ) {
 
 INLINE
 LOCAL( void )
+
 emit_symbol( phuff_entropy_ptr entropy, int tbl_no, int symbol ) {
     if ( entropy->gather_statistics )
         entropy->count_ptrs[ tbl_no ][ symbol ]++;
@@ -292,6 +297,7 @@ emit_symbol( phuff_entropy_ptr entropy, int tbl_no, int symbol ) {
  */
 
 LOCAL( void )
+
 emit_buffered_bits( phuff_entropy_ptr entropy,
                     char* bufstart,
                     unsigned int nbits ) {
@@ -310,6 +316,7 @@ emit_buffered_bits( phuff_entropy_ptr entropy,
  */
 
 LOCAL( void )
+
 emit_eobrun( phuff_entropy_ptr entropy ) {
     // NOTE: LD / removed register
     int temp, nbits;
@@ -340,6 +347,7 @@ emit_eobrun( phuff_entropy_ptr entropy ) {
  */
 
 LOCAL( void )
+
 emit_restart( phuff_entropy_ptr entropy, int restart_num ) {
     int ci;
 
@@ -368,6 +376,7 @@ emit_restart( phuff_entropy_ptr entropy, int restart_num ) {
  */
 
 METHODDEF( boolean )
+
 encode_mcu_DC_first( j_compress_ptr cinfo, JBLOCKROW* MCU_data ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     // NOTE: LD / removed register
@@ -457,6 +466,7 @@ encode_mcu_DC_first( j_compress_ptr cinfo, JBLOCKROW* MCU_data ) {
  */
 
 METHODDEF( boolean )
+
 encode_mcu_AC_first( j_compress_ptr cinfo, JBLOCKROW* MCU_data ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     // NOTE: LD / removed register
@@ -567,6 +577,7 @@ encode_mcu_AC_first( j_compress_ptr cinfo, JBLOCKROW* MCU_data ) {
  */
 
 METHODDEF( boolean )
+
 encode_mcu_DC_refine( j_compress_ptr cinfo, JBLOCKROW* MCU_data ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     // NOTE: LD / removed register
@@ -613,6 +624,7 @@ encode_mcu_DC_refine( j_compress_ptr cinfo, JBLOCKROW* MCU_data ) {
  */
 
 METHODDEF( boolean )
+
 encode_mcu_AC_refine( j_compress_ptr cinfo, JBLOCKROW* MCU_data ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     // NOTE: LD / removed register
@@ -743,6 +755,7 @@ encode_mcu_AC_refine( j_compress_ptr cinfo, JBLOCKROW* MCU_data ) {
  */
 
 METHODDEF( void )
+
 finish_pass_phuff( j_compress_ptr cinfo ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
 
@@ -762,6 +775,7 @@ finish_pass_phuff( j_compress_ptr cinfo ) {
  */
 
 METHODDEF( void )
+
 finish_pass_gather_phuff( j_compress_ptr cinfo ) {
     phuff_entropy_ptr entropy = ( phuff_entropy_ptr )cinfo->entropy;
     boolean is_DC_band;
@@ -808,6 +822,7 @@ finish_pass_gather_phuff( j_compress_ptr cinfo ) {
  */
 
 GLOBAL( void )
+
 jinit_phuff_encoder( j_compress_ptr cinfo ) {
     phuff_entropy_ptr entropy;
     int i;

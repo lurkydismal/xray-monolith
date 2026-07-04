@@ -36,10 +36,13 @@ public:
                      store_operation_cb opcb );
 
     virtual void shedule_Update( u32 dt );
+
     virtual shared_str shedule_Name() const {
         return shared_str( "gamespy_atlas_updator" );
     };
+
     virtual bool shedule_Needed() { return true; };
+
     virtual float shedule_Scale() { return 1.0f; };
 
     static u8 const p_number[ crypto::xr_dsa::public_key_length ];

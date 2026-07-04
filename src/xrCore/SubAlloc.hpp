@@ -15,9 +15,11 @@ enum {
 };
 
 #pragma pack( 1 )
+
 struct BLK_NODE {
     DWORD Stamp;
     BLK_NODE* next;
+
     BOOL avail() const { return ( next != NULL ); }
 
     void link( BLK_NODE* p ) {
@@ -40,6 +42,7 @@ struct BLK_NODE {
 struct MEM_BLK : public BLK_NODE {
     DWORD NU;
 } _PACK_ATTR;
+
 #pragma pack()
 
 static BYTE Indx2Units[ N_INDEXES ], Units2Indx[ 128 ]; // constants

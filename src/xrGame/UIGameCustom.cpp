@@ -23,6 +23,7 @@ EGameIDs ParseStringToGameType( const char* str );
 
 struct predicate_find_stat {
     const char* id;
+
     predicate_find_stat( const char* id ) { this->id = id; }
 
     bool operator()( StaticDrawableWrapper* s ) { return s->m_name == id; }

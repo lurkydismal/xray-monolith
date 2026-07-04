@@ -13,6 +13,7 @@ struct SGrenadeContact {
     Fvector velocity;
     Fvector normal;
     shared_str material;
+
     SGrenadeContact() {
         enabled = false;
         contact = false;
@@ -84,11 +85,17 @@ protected:
 
 public:
     virtual BOOL UsedAI_Locations();
+
     virtual CExplosive* cast_explosive() { return this; }
+
     virtual CMissile* cast_missile() { return this; }
+
     virtual CHudItem* cast_hud_item() { return this; }
+
     virtual CGameObject* cast_game_object() { return this; }
+
     virtual CGrenade* cast_grenade() { return this; }
+
     virtual IDamageSource* cast_IDamageSource() {
         return CExplosive::cast_IDamageSource();
     }

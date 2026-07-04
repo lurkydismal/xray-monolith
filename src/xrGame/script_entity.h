@@ -73,7 +73,9 @@ public:
     virtual void net_Destroy();
     virtual void shedule_Update( u32 DT );
     virtual void UpdateCL();
+
     virtual CScriptEntity* cast_script_entity() { return this; }
+
     virtual DLL_Pure* _construct();
 
 public:
@@ -89,7 +91,9 @@ public:
     virtual LPCSTR GetScriptControlName() const;
     virtual bool CheckObjectVisibility( const CGameObject* tpObject );
     virtual bool CheckTypeVisibility( const char* section_name );
+
     virtual bool CheckIfCompleted() const { return false; };
+
     virtual CScriptEntityAction* GetCurrentAction();
     virtual void AddAction( const CScriptEntityAction* tpEntityAction,
                             bool bHighPriority = false );
@@ -120,6 +124,7 @@ public:
     void process_sound_callbacks();
 
     void set_script_capture( bool val = true ) { m_can_capture = val; }
+
     bool can_script_capture() { return m_can_capture; }
 
 public:

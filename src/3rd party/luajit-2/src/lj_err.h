@@ -11,6 +11,7 @@
 #include "lj_obj.h"
 
 typedef enum {
+
 #define ERRDEF( name, msg ) \
     LJ_ERR_##name, LJ_ERR_##name##_ = LJ_ERR_##name + sizeof( msg ) - 1,
 #include "lj_errmsg.h"

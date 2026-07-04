@@ -177,6 +177,7 @@ void AllocChannels( ALCdevice* device,
 }
 
 using ChannelCoeffs = std::array< float, MaxAmbiChannels >;
+
 enum DecoderMode : bool { SingleBand = false, DualBand = true };
 
 template < DecoderMode Mode, size_t N >
@@ -245,6 +246,7 @@ struct DecoderConfig< DualBand, 0 > {
 
     explicit operator bool() const noexcept { return !mChannels.empty(); }
 };
+
 using DecoderView = DecoderConfig< DualBand, 0 >;
 
 void InitNearFieldCtrl( ALCdevice* device,
@@ -1447,6 +1449,7 @@ void InitHrtfPanning( ALCdevice* device ) {
             RenderMode mode;
             uint order;
         };
+
         static const HrtfModeEntry hrtf_modes[]{
             { "full", RenderMode::Hrtf, 1 },
             { "ambi1", RenderMode::Normal, 1 },

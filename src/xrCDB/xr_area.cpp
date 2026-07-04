@@ -150,6 +150,7 @@ void CObjectSpace::Create( Fvector* verts,
 void CObjectSpace::dbgRender() {
     ( *m_pRender )->dbgRender();
 }
+
 /*
 void CObjectSpace::dbgRender()
 {

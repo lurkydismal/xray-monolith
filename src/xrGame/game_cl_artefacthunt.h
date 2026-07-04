@@ -14,6 +14,7 @@ protected:
     virtual const shared_str GetBaseCostSect() {
         return "artefacthunt_base_cost";
     }
+
     virtual void TranslateGameMessage( u32 msg, NET_Packet& P );
     virtual void shedule_Update( u32 dt );
 

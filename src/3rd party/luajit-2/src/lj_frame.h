@@ -22,6 +22,7 @@ enum {
     FRAME_PCALL,
     FRAME_PCALLH
 };
+
 #define FRAME_TYPE 3
 #define FRAME_P 4
 #define FRAME_TYPEP ( FRAME_TYPE | FRAME_P )

@@ -100,6 +100,7 @@ const int TIXML_PATCH_VERSION = 3;
 */
 struct TiXmlCursor {
     TiXmlCursor() { Clear(); }
+
     void Clear() { row = col = -1; }
 
     int row; // 0 based.
@@ -134,6 +135,7 @@ public:
 
     /// Visit a document.
     virtual bool VisitEnter( const TiXmlDocument& /*doc*/ ) { return true; }
+
     /// Visit a document.
     virtual bool VisitExit( const TiXmlDocument& /*doc*/ ) { return true; }
 
@@ -142,6 +144,7 @@ public:
                              const TiXmlAttribute* /*firstAttribute*/ ) {
         return true;
     }
+
     /// Visit an element.
     virtual bool VisitExit( const TiXmlElement& /*element*/ ) { return true; }
 
@@ -149,10 +152,13 @@ public:
     virtual bool Visit( const TiXmlDeclaration& /*declaration*/ ) {
         return true;
     }
+
     /// Visit a text node
     virtual bool Visit( const TiXmlText& /*text*/ ) { return true; }
+
     /// Visit a comment node
     virtual bool Visit( const TiXmlComment& /*comment*/ ) { return true; }
+
     /// Visit an unknow node
     virtual bool Visit( const TiXmlUnknown& /*unknown*/ ) { return true; }
 };
@@ -246,14 +252,17 @@ public:
             @sa TiXmlDocument::SetTabSize()
     */
     int Row() const { return location.row + 1; }
+
     int Column() const { return location.col + 1; } ///< See Row()
 
     void SetUserData( void* user ) {
         userData = user;
     } ///< Set a pointer to arbitrary user data.
+
     void* GetUserData() {
         return userData;
     } ///< Get a pointer to arbitrary user data.
+
     const void* GetUserData() const {
         return userData;
     } ///< Get a pointer to arbitrary user data.
@@ -523,12 +532,16 @@ public:
 
     /// One step up the DOM.
     TiXmlNode* Parent() { return parent; }
+
     const TiXmlNode* Parent() const { return parent; }
 
     const TiXmlNode* FirstChild() const { return firstChild; }
+
     ///< The first child of this node. Will be null if there are no children.
     TiXmlNode* FirstChild() { return firstChild; }
+
     const TiXmlNode* FirstChild( const char* value ) const;
+
     ///< The first child of this node with the matching 'value'. Will be null if
     ///< none found.
     /// The first child of this node with the matching 'value'. Will be null if
@@ -542,10 +555,12 @@ public:
     }
 
     const TiXmlNode* LastChild() const { return lastChild; }
+
     /// The last child of this node. Will be null if there are no children.
     TiXmlNode* LastChild() { return lastChild; }
 
     const TiXmlNode* LastChild( const char* value ) const;
+
     /// The last child of this node matching 'value'. Will be null if there are
     /// no children.
     TiXmlNode* LastChild( const char* _value ) {
@@ -557,13 +572,16 @@ public:
     const TiXmlNode* FirstChild( const xr_string& _value ) const {
         return FirstChild( _value.c_str() );
     }
+
     ///< STL xr_string form.
     TiXmlNode* FirstChild( const xr_string& _value ) {
         return FirstChild( _value.c_str() );
     } ///< STL xr_string form.
+
     const TiXmlNode* LastChild( const xr_string& _value ) const {
         return LastChild( _value.c_str() );
     }
+
     ///< STL xr_string form.
     TiXmlNode* LastChild( const xr_string& _value ) {
         return LastChild( _value.c_str() );
@@ -612,6 +630,7 @@ public:
                                       const TiXmlNode* previous ) const {
         return IterateChildren( _value.c_str(), previous );
     } ///< STL xr_string form.
+
     TiXmlNode* IterateChildren( const xr_string& _value,
                                 const TiXmlNode* previous ) {
         return IterateChildren( _value.c_str(), previous );
@@ -622,6 +641,7 @@ public:
 
     /// Navigate to a sibling node.
     const TiXmlNode* PreviousSibling() const { return prev; }
+
     TiXmlNode* PreviousSibling() { return prev; }
 
     /// Navigate to a sibling node.
@@ -637,14 +657,17 @@ public:
     const TiXmlNode* PreviousSibling( const xr_string& _value ) const {
         return PreviousSibling( _value.c_str() );
     }
+
     ///< STL xr_string form.
     TiXmlNode* PreviousSibling( const xr_string& _value ) {
         return PreviousSibling( _value.c_str() );
     }
+
     ///< STL xr_string form.
     const TiXmlNode* NextSibling( const xr_string& _value ) const {
         return NextSibling( _value.c_str() );
     }
+
     ///< STL xr_string form.
     TiXmlNode* NextSibling( const xr_string& _value ) {
         return NextSibling( _value.c_str() );
@@ -653,6 +676,7 @@ public:
 
     /// Navigate to a sibling node.
     const TiXmlNode* NextSibling() const { return next; }
+
     TiXmlNode* NextSibling() { return next; }
 
     /// Navigate to a sibling node with the given 'value'.
@@ -690,10 +714,12 @@ public:
     const TiXmlElement* NextSiblingElement( const xr_string& _value ) const {
         return NextSiblingElement( _value.c_str() );
     }
+
     ///< STL xr_string form.
     TiXmlElement* NextSiblingElement( const xr_string& _value ) {
         return NextSiblingElement( _value.c_str() );
     }
+
     ///< STL xr_string form.
 #endif
 
@@ -718,10 +744,12 @@ public:
     const TiXmlElement* FirstChildElement( const xr_string& _value ) const {
         return FirstChildElement( _value.c_str() );
     }
+
     ///< STL xr_string form.
     TiXmlElement* FirstChildElement( const xr_string& _value ) {
         return FirstChildElement( _value.c_str() );
     }
+
     ///< STL xr_string form.
 #endif
 
@@ -746,40 +774,52 @@ public:
     bool NoChildren() const { return !firstChild; }
 
     virtual const TiXmlDocument* ToDocument() const { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual const TiXmlElement* ToElement() const { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual const TiXmlComment* ToComment() const { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual const TiXmlUnknown* ToUnknown() const { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual const TiXmlText* ToText() const { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual const TiXmlDeclaration* ToDeclaration() const { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
 
     virtual TiXmlDocument* ToDocument() { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual TiXmlElement* ToElement() { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual TiXmlComment* ToComment() { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual TiXmlUnknown* ToUnknown() { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual TiXmlText* ToText() { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
     virtual TiXmlDeclaration* ToDeclaration() { return 0; }
+
     ///< Cast to a more defined type. Will return null if not of the requested
     ///< type.
 
@@ -868,6 +908,7 @@ public:
     const char* Name() const {
         return name.c_str();
     } ///< Return the name of this attribute.
+
     const char* Value() const {
         return value.c_str();
     } ///< Return the value of this attribute.
@@ -900,6 +941,7 @@ public:
     void SetName( const char* _name ) {
         name = _name;
     } ///< Set the name of this attribute.
+
     void SetValue( const char* _value ) { value = _value; } ///< Set the value.
 
     void SetIntValue( int _value );       ///< Set the value from an integer.
@@ -908,6 +950,7 @@ public:
 #ifdef TIXML_USE_STL
     /// STL xr_string form.
     void SetName( const xr_string& _name ) { name = _name; }
+
     /// STL xr_string form.
     void SetValue( const xr_string& _value ) { value = _value; }
 #endif
@@ -931,9 +974,11 @@ public:
     bool operator==( const TiXmlAttribute& rhs ) const {
         return rhs.name == name;
     }
+
     bool operator<( const TiXmlAttribute& rhs ) const {
         return name < rhs.name;
     }
+
     bool operator>( const TiXmlAttribute& rhs ) const {
         return name > rhs.name;
     }
@@ -987,6 +1032,7 @@ public:
     const TiXmlAttribute* First() const {
         return ( sentinel.next == &sentinel ) ? 0 : sentinel.next;
     }
+
     TiXmlAttribute* First() {
         return ( sentinel.next == &sentinel ) ? 0 : sentinel.next;
     }
@@ -1060,6 +1106,7 @@ public:
     int QueryIntAttribute( const char* name, int* _value ) const;
     /// QueryDoubleAttribute examines the attribute - see QueryIntAttribute().
     int QueryDoubleAttribute( const char* name, double* _value ) const;
+
     /// QueryFloatAttribute examines the attribute - see QueryIntAttribute().
     int QueryFloatAttribute( const char* name, float* _value ) const {
         double d;
@@ -1073,6 +1120,7 @@ public:
     const TiXmlAttribute* FirstAttribute() const {
         return attributeSet.First();
     }
+
     ///< Access the first attribute in this element.
     TiXmlAttribute* FirstAttribute() { return attributeSet.First(); }
 
@@ -1121,9 +1169,11 @@ public:
                                TiXmlEncoding encoding );
 
     virtual const TiXmlElement* ToElement() const { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
     virtual TiXmlElement* ToElement() { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
 
@@ -1172,9 +1222,11 @@ public:
                                TiXmlEncoding encoding );
 
     virtual const TiXmlComment* ToComment() const { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
     virtual TiXmlComment* ToComment() { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
 
@@ -1213,6 +1265,7 @@ public:
 
     /// Queries whether this represents text using a CDATA section.
     bool CDATA() const { return cdata; }
+
     /// Turns on or off a CDATA representation of text.
     void SetCDATA( bool _cdata ) { cdata = _cdata; }
 
@@ -1222,9 +1275,11 @@ public:
                                TiXmlEncoding encoding );
 
     virtual const TiXmlText* ToText() const { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
     virtual TiXmlText* ToText() { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
 
@@ -1276,8 +1331,10 @@ public:
 
     /// Version. Will return an empty string if none was found.
     const char* Version() const { return version.c_str(); }
+
     /// Encoding. Will return an empty string if none was found.
     const char* Encoding() const { return encoding.c_str(); }
+
     /// Is this a standalone document?
     const char* Standalone() const { return standalone.c_str(); }
 
@@ -1287,9 +1344,11 @@ public:
                                TiXmlEncoding encoding );
 
     virtual const TiXmlDeclaration* ToDeclaration() const { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
     virtual TiXmlDeclaration* ToDeclaration() { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
 
@@ -1322,9 +1381,11 @@ public:
                                TiXmlEncoding encoding );
 
     virtual const TiXmlUnknown* ToUnknown() const { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
     virtual TiXmlUnknown* ToUnknown() { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
 
@@ -1360,6 +1421,7 @@ public:
             multiple elements at the document level.
     */
     const TiXmlElement* RootElement() const { return FirstChildElement(); }
+
     TiXmlElement* RootElement() { return FirstChildElement(); }
 
     /** If an error occurs, Error will be set to true. Also,
@@ -1388,6 +1450,7 @@ public:
             @sa SetTabSize, Row, Column
     */
     int ErrorRow() const { return errorLocation.row + 1; }
+
     int ErrorCol() const {
         return errorLocation.col + 1;
     } ///< The column where the error occured. See ErrorRow()
@@ -1439,9 +1502,11 @@ public:
                    TiXmlEncoding encoding );
 
     virtual const TiXmlDocument* ToDocument() const { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
     virtual TiXmlDocument* ToDocument() { return this; }
+
     ///< Cast to a more defined type. Will return null not of the requested
     ///< type.
 

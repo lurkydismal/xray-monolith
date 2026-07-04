@@ -85,6 +85,7 @@ typedef ppm_dest_struct* ppm_dest_ptr;
  */
 
 METHODDEF( void )
+
 put_pixel_rows( j_decompress_ptr cinfo,
                 djpeg_dest_ptr dinfo,
                 JDIMENSION rows_supplied ) {
@@ -100,6 +101,7 @@ put_pixel_rows( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 copy_pixel_rows( j_decompress_ptr cinfo,
                  djpeg_dest_ptr dinfo,
                  JDIMENSION rows_supplied ) {
@@ -126,6 +128,7 @@ copy_pixel_rows( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 put_demapped_rgb( j_decompress_ptr cinfo,
                   djpeg_dest_ptr dinfo,
                   JDIMENSION rows_supplied ) {
@@ -158,6 +161,7 @@ put_demapped_rgb( j_decompress_ptr cinfo,
 }
 
 METHODDEF( void )
+
 put_demapped_gray( j_decompress_ptr cinfo,
                    djpeg_dest_ptr dinfo,
                    JDIMENSION rows_supplied ) {
@@ -186,6 +190,7 @@ put_demapped_gray( j_decompress_ptr cinfo,
  */
 
 METHODDEF( void )
+
 start_output_ppm( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     ppm_dest_ptr dest = ( ppm_dest_ptr )dinfo;
 
@@ -213,6 +218,7 @@ start_output_ppm( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 METHODDEF( void )
+
 finish_output_ppm( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
     /* Make sure we wrote the output file OK */
     fflush( dinfo->output_file );
@@ -225,6 +231,7 @@ finish_output_ppm( j_decompress_ptr cinfo, djpeg_dest_ptr dinfo ) {
  */
 
 GLOBAL( djpeg_dest_ptr )
+
 jinit_write_ppm( j_decompress_ptr cinfo ) {
     ppm_dest_ptr dest;
 

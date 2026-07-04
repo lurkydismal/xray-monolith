@@ -829,6 +829,7 @@ al::optional< SourceStereo > StereoModeFromEnum( ALenum mode ) {
     WARN( "Unsupported stereo mode: 0x%04x\n", mode );
     return al::nullopt;
 }
+
 ALenum EnumFromStereoMode( SourceStereo mode ) {
     switch ( mode ) {
         case SourceStereo::Normal:
@@ -852,6 +853,7 @@ al::optional< SpatializeMode > SpatializeModeFromEnum( ALenum mode ) {
     WARN( "Unsupported spatialize mode: 0x%04x\n", mode );
     return al::nullopt;
 }
+
 ALenum EnumFromSpatializeMode( SpatializeMode mode ) {
     switch ( mode ) {
         case SpatializeMode::Off:
@@ -877,6 +879,7 @@ al::optional< DirectMode > DirectModeFromEnum( ALenum mode ) {
     WARN( "Unsupported direct mode: 0x%04x\n", mode );
     return al::nullopt;
 }
+
 ALenum EnumFromDirectMode( DirectMode mode ) {
     switch ( mode ) {
         case DirectMode::Off:
@@ -909,6 +912,7 @@ al::optional< DistanceModel > DistanceModelFromALenum( ALenum model ) {
     }
     return al::nullopt;
 }
+
 ALenum ALenumFromDistanceModel( DistanceModel model ) {
     switch ( model ) {
         case DistanceModel::Disable:
@@ -1235,6 +1239,7 @@ constexpr ALuint FloatValsByProp( ALenum prop ) {
     }
     return 0;
 }
+
 constexpr ALuint DoubleValsByProp( ALenum prop ) {
     switch ( static_cast< SourceProp >( prop ) ) {
         case AL_PITCH:
@@ -1319,11 +1324,13 @@ void SetSourcei64v( ALsource* const Source,
                     const al::span< const int64_t > values );
 
 struct check_exception : std::exception {};
+
 struct check_size_exception final : check_exception {
     const char* what() const noexcept override {
         return "check_size_exception";
     }
 };
+
 struct check_value_exception final : check_exception {
     const char* what() const noexcept override {
         return "check_value_exception";
@@ -3065,6 +3072,7 @@ AL_API void AL_APIENTRY alGenSources( ALsizei n,
         std::copy( ids.cbegin(), ids.cend(), sources );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alDeleteSources( ALsizei n, const ALuint* sources )
@@ -3101,6 +3109,7 @@ AL_API void AL_APIENTRY alDeleteSources( ALsizei n, const ALuint* sources )
     };
     std::for_each( sources, sources_end, delete_source );
 }
+
 END_API_FUNC
 
 AL_API ALboolean AL_APIENTRY alIsSource( ALuint source ) START_API_FUNC {
@@ -3113,6 +3122,7 @@ AL_API ALboolean AL_APIENTRY alIsSource( ALuint source ) START_API_FUNC {
         }
     return AL_FALSE;
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcef( ALuint source,
@@ -3131,6 +3141,7 @@ AL_API void AL_APIENTRY alSourcef( ALuint source,
     else SetSourcefv( Source, context.get(), static_cast< SourceProp >( param ),
                       { &value, 1u } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSource3f( ALuint source,
@@ -3154,6 +3165,7 @@ AL_API void AL_APIENTRY alSource3f( ALuint source,
                      fvals );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcefv( ALuint source,
@@ -3177,6 +3189,7 @@ AL_API void AL_APIENTRY alSourcefv( ALuint source,
     SetSourcefv( Source, context.get(), static_cast< SourceProp >( param ),
                  { values, count } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcedSOFT( ALuint source,
@@ -3198,6 +3211,7 @@ AL_API void AL_APIENTRY alSourcedSOFT( ALuint source,
                      fval );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSource3dSOFT( ALuint source,
@@ -3223,6 +3237,7 @@ AL_API void AL_APIENTRY alSource3dSOFT( ALuint source,
                      fvals );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcedvSOFT( ALuint source,
@@ -3249,6 +3264,7 @@ AL_API void AL_APIENTRY alSourcedvSOFT( ALuint source,
     SetSourcefv( Source, context.get(), static_cast< SourceProp >( param ),
                  { fvals, count } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcei( ALuint source,
@@ -3267,6 +3283,7 @@ AL_API void AL_APIENTRY alSourcei( ALuint source,
     else SetSourceiv( Source, context.get(), static_cast< SourceProp >( param ),
                       { &value, 1u } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSource3i( ALuint source,
@@ -3290,6 +3307,7 @@ AL_API void AL_APIENTRY alSource3i( ALuint source,
                      ivals );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourceiv( ALuint source,
@@ -3313,6 +3331,7 @@ AL_API void AL_APIENTRY alSourceiv( ALuint source,
     SetSourceiv( Source, context.get(), static_cast< SourceProp >( param ),
                  { values, count } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcei64SOFT( ALuint source,
@@ -3331,6 +3350,7 @@ AL_API void AL_APIENTRY alSourcei64SOFT( ALuint source,
     else SetSourcei64v( Source, context.get(),
                         static_cast< SourceProp >( param ), { &value, 1u } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSource3i64SOFT( ALuint source,
@@ -3354,6 +3374,7 @@ AL_API void AL_APIENTRY alSource3i64SOFT( ALuint source,
                        static_cast< SourceProp >( param ), i64vals );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcei64vSOFT( ALuint source,
@@ -3378,6 +3399,7 @@ AL_API void AL_APIENTRY alSourcei64vSOFT( ALuint source,
     SetSourcei64v( Source, context.get(), static_cast< SourceProp >( param ),
                    { values, count } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSourcef( ALuint source,
@@ -3401,6 +3423,7 @@ AL_API void AL_APIENTRY alGetSourcef( ALuint source,
             *value = static_cast< float >( dval[ 0 ] );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSource3f( ALuint source,
@@ -3429,6 +3452,7 @@ AL_API void AL_APIENTRY alGetSource3f( ALuint source,
         }
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSourcefv( ALuint source,
@@ -3453,6 +3477,7 @@ AL_API void AL_APIENTRY alGetSourcefv( ALuint source,
                       { dvals, count } ) )
         std::copy_n( dvals, count, values );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSourcedSOFT( ALuint source,
@@ -3472,6 +3497,7 @@ AL_API void AL_APIENTRY alGetSourcedSOFT( ALuint source,
     else GetSourcedv( Source, context.get(), static_cast< SourceProp >( param ),
                       { value, 1u } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSource3dSOFT( ALuint source,
@@ -3500,6 +3526,7 @@ AL_API void AL_APIENTRY alGetSource3dSOFT( ALuint source,
         }
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSourcedvSOFT( ALuint source,
@@ -3522,6 +3549,7 @@ AL_API void AL_APIENTRY alGetSourcedvSOFT( ALuint source,
     GetSourcedv( Source, context.get(), static_cast< SourceProp >( param ),
                  { values, count } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSourcei( ALuint source,
@@ -3541,6 +3569,7 @@ AL_API void AL_APIENTRY alGetSourcei( ALuint source,
     else GetSourceiv( Source, context.get(), static_cast< SourceProp >( param ),
                       { value, 1u } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSource3i( ALuint source,
@@ -3569,6 +3598,7 @@ AL_API void AL_APIENTRY alGetSource3i( ALuint source,
         }
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSourceiv( ALuint source,
@@ -3591,6 +3621,7 @@ AL_API void AL_APIENTRY alGetSourceiv( ALuint source,
     GetSourceiv( Source, context.get(), static_cast< SourceProp >( param ),
                  { values, count } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSourcei64SOFT( ALuint source,
@@ -3611,6 +3642,7 @@ AL_API void AL_APIENTRY alGetSourcei64SOFT( ALuint source,
     else GetSourcei64v( Source, context.get(),
                         static_cast< SourceProp >( param ), { value, 1u } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSource3i64SOFT( ALuint source,
@@ -3640,6 +3672,7 @@ AL_API void AL_APIENTRY alGetSource3i64SOFT( ALuint source,
         }
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alGetSourcei64vSOFT( ALuint source,
@@ -3663,6 +3696,7 @@ AL_API void AL_APIENTRY alGetSourcei64vSOFT( ALuint source,
     GetSourcei64v( Source, context.get(), static_cast< SourceProp >( param ),
                    { values, count } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcePlay( ALuint source ) START_API_FUNC {
@@ -3678,6 +3712,7 @@ AL_API void AL_APIENTRY alSourcePlay( ALuint source ) START_API_FUNC {
 
     StartSources( context.get(), { &srchandle, 1 } );
 }
+
 END_API_FUNC
 
 void AL_APIENTRY alSourcePlayAtTimeSOFT( ALuint source, ALint64SOFT start_time )
@@ -3699,6 +3734,7 @@ void AL_APIENTRY alSourcePlayAtTimeSOFT( ALuint source, ALint64SOFT start_time )
 
     StartSources( context.get(), { &srchandle, 1 }, nanoseconds{ start_time } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcePlayv( ALsizei n,
@@ -3736,6 +3772,7 @@ AL_API void AL_APIENTRY alSourcePlayv( ALsizei n,
 
     StartSources( context.get(), srchandles );
 }
+
 END_API_FUNC
 
 void AL_APIENTRY alSourcePlayAtTimevSOFT( ALsizei n,
@@ -3779,11 +3816,13 @@ void AL_APIENTRY alSourcePlayAtTimevSOFT( ALsizei n,
 
     StartSources( context.get(), srchandles, nanoseconds{ start_time } );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcePause( ALuint source ) START_API_FUNC {
     alSourcePausev( 1, &source );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourcePausev( ALsizei n,
@@ -3853,11 +3892,13 @@ AL_API void AL_APIENTRY alSourcePausev( ALsizei n,
             }
         }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourceStop( ALuint source ) START_API_FUNC {
     alSourceStopv( 1, &source );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourceStopv( ALsizei n,
@@ -3916,11 +3957,13 @@ AL_API void AL_APIENTRY alSourceStopv( ALsizei n,
         LIKELY
     SendVoiceChanges( context.get(), tail );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourceRewind( ALuint source ) START_API_FUNC {
     alSourceRewindv( 1, &source );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourceRewindv( ALsizei n, const ALuint* sources )
@@ -3981,6 +4024,7 @@ AL_API void AL_APIENTRY alSourceRewindv( ALsizei n, const ALuint* sources )
         LIKELY
     SendVoiceChanges( context.get(), tail );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourceQueueBuffers( ALuint src,
@@ -4116,6 +4160,7 @@ AL_API void AL_APIENTRY alSourceQueueBuffers( ALuint src,
             ->mNext.store( al::to_address( iter ), std::memory_order_release );
     }
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY alSourceUnqueueBuffers( ALuint src,
@@ -4177,6 +4222,7 @@ AL_API void AL_APIENTRY alSourceUnqueueBuffers( ALuint src,
         source->mQueue.pop_front();
     } while ( --nb );
 }
+
 END_API_FUNC
 
 AL_API void AL_APIENTRY
@@ -4188,6 +4234,7 @@ alSourceQueueBufferLayersSOFT( ALuint, ALsizei, const ALuint* ) START_API_FUNC {
     context->setError( AL_INVALID_OPERATION,
                        "alSourceQueueBufferLayersSOFT not supported" );
 }
+
 END_API_FUNC
 
 ALsource::ALsource() {

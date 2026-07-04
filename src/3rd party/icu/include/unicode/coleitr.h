@@ -295,15 +295,18 @@ public:
         UCollationElements* uc ) {
         return reinterpret_cast< CollationElementIterator* >( uc );
     }
+
     /** @internal */
     static inline const CollationElementIterator* fromUCollationElements(
         const UCollationElements* uc ) {
         return reinterpret_cast< const CollationElementIterator* >( uc );
     }
+
     /** @internal */
     inline UCollationElements* toUCollationElements() {
         return reinterpret_cast< UCollationElements* >( this );
     }
+
     /** @internal */
     inline const UCollationElements* toUCollationElements() const {
         return reinterpret_cast< const UCollationElements* >( this );

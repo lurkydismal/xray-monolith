@@ -37,6 +37,7 @@ public:
     IC void set_prefere_exact_integration() {
         flags.set( flPrefereExactIntegration, TRUE );
     }
+
     IC void uset_prefere_exact_integration() {
         flags.set( flPrefereExactIntegration, FALSE );
     }
@@ -50,6 +51,7 @@ public:
     IC void set_force_exact_integration() {
         flags.set( flForceExactIntegration, TRUE );
     }
+
     IC void uset_force_exact_integration() {
         flags.set( flForceExactIntegration, FALSE );
     }
@@ -246,7 +248,9 @@ public:
     void SetPrefereExactIntegration() {
         m_flags.set_prefere_exact_integration();
     }
+
     void SetForceExactIntegration() { m_flags.set_force_exact_integration(); }
+
     void Step( dReal step );
     void Enable();
     void Repair();

@@ -395,6 +395,7 @@ void CDSGraphManager::r_dsgraph_render_distort() {
 }
 
 #include "LightTrack.h"
+
 void CDSGraphManager::r_dsgraph_capture_static() {
     PROF_EVENT( "r_dsgraph_capture_static" )
     const bool dbg_enabled = PortalTraverseDbg_Enabled();

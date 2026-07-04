@@ -54,12 +54,14 @@ protected:
 
 public:
     node_handle_base() : my_node( NULL ), my_allocator() {}
+
     node_handle_base( node_handle_base&& nh )
         : my_node( nh.my_node ), my_allocator( std::move( nh.my_allocator ) ) {
         nh.my_node = NULL;
     }
 
     bool empty() const { return my_node == NULL; }
+
     explicit operator bool() const { return my_node != NULL; }
 
     ~node_handle_base() { internal_destroy(); }

@@ -56,8 +56,10 @@ static FString Optick_SCREENSHOT_NAME( TEXT( "UE4_Optick_Screenshot.png" ) );
 struct ThreadStorage {
     Optick::EventStorage* EventStorage;
     uint64 LastTimestamp;
+
     ThreadStorage( Optick::EventStorage* storage = nullptr )
         : EventStorage( storage ), LastTimestamp( 0 ) {}
+
     void Reset() { LastTimestamp = 0; }
 };
 
@@ -93,8 +95,10 @@ class FOptickPlugin : public IOptickPlugin {
 #if WITH_EDITOR
     struct EditorSettings {
         bool bCPUThrottleEnabled;
+
         EditorSettings() : bCPUThrottleEnabled( true ) {}
     };
+
     EditorSettings BaseSettings;
 
     TSharedPtr< const FExtensionBase > ToolbarExtension;
@@ -489,11 +493,15 @@ bool FOptickPlugin::UpdateCalibrationTimestamp(
 struct TimeRange {
     uint64 Start;
     uint64 Finish;
+
     bool IsOverlap( TimeRange other ) const {
         return !( ( Finish < other.Start ) || ( other.Finish < Start ) );
     }
+
     bool IsValid() const { return Start != 0 && Finish != 0 && Finish > Start; }
+
     TimeRange() : Start( 0 ), Finish( 0 ) {}
+
     TimeRange( uint64 start, uint64 finish )
         : Start( start ), Finish( finish ) {}
 };

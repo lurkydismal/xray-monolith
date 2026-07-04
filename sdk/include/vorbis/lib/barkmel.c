@@ -18,6 +18,7 @@
 #include <stdio.h>
 
 #include "scales.h"
+
 int main() {
     int i;
     double rate;

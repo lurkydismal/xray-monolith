@@ -30,7 +30,9 @@ struct LevelMapSyncData {
 
     void CheckToSendMapSync();
     void ReceiveServerMapSync( NET_Packet& P );
+
     inline bool IsInvalidMapOrVersion() { return invalid_map_or_version; }
+
     inline bool IsInvalidClientChecksum() { return invalid_geom_checksum; }
 }; // class LevelMapSyncData
 

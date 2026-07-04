@@ -206,6 +206,7 @@ struct ConvolutionState final : public EffectState {
         float Current[ MAX_OUTPUT_CHANNELS ]{};
         float Target[ MAX_OUTPUT_CHANNELS ]{};
     };
+
     using ChannelDataArray = al::FlexArray< ChannelData >;
     std::unique_ptr< ChannelDataArray > mChans;
     std::unique_ptr< complex_f[] > mComplexData;

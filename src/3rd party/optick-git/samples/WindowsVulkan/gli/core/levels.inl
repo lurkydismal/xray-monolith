@@ -15,6 +15,7 @@ template < typename T >
 inline T levels( T Extent ) {
     return static_cast< T >( glm::log2( Extent ) + static_cast< size_t >( 1 ) );
 }
+
 /*
         inline int levels(int Extent)
         {

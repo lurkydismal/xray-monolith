@@ -131,6 +131,7 @@ protected:
     // Wraps the swap chain to present images (framebuffers) to the windowing
     // system
     VulkanSwapChain swapChain;
+
     // Synchronization semaphores
     struct {
         // Swap chain image presentation
@@ -138,6 +139,7 @@ protected:
         // Command buffer submission and execution
         VkSemaphore renderComplete;
     } semaphores;
+
     std::vector< VkFence > waitFences;
 
 public:
@@ -227,10 +229,12 @@ public:
 #elif defined( VK_USE_PLATFORM_ANDROID_KHR )
     // true if application has focused, false if moved to background
     bool focused = false;
+
     struct TouchPos {
         int32_t x;
         int32_t y;
     } touchPos;
+
     bool touchDown = false;
     double touchTimer = 0.0;
     int64_t lastTapTime = 0;

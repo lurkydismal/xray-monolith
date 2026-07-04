@@ -94,12 +94,17 @@ public:
 
     virtual BOOL _RayQuery( const collide::ray_defs& Q,
                             collide::rq_results& R ) = 0;
+
     // virtual void _BoxQuery ( const Fbox& B, const Fmatrix& M, u32 flags) = 0;
 
     IC CObject* Owner() const { return owner; }
+
     const Fbox& getBBox() const { return bv_box; }
+
     float getRadius() const { return bv_sphere.R; }
+
     const Fsphere& getSphere() const { return bv_sphere; }
+
     const ECollisionFormType Type() const { return m_type; }
 };
 
@@ -132,6 +137,7 @@ public:
         BOOL valid() const {
             return ( elem_id != ( u16( -1 ) ) ) && ( type != 0 );
         }
+
         void center( Fvector& center ) const;
     };
 
@@ -155,6 +161,7 @@ public:
     virtual BOOL _RayQuery( const collide::ray_defs& Q,
                             collide::rq_results& R );
     bool _ElementCenter( u16 elem_id, Fvector& e_center );
+
     const ElementVec& _GetElements() { return elements; }
 #ifdef DEBUG
     void _dbg_refresh() {
@@ -207,6 +214,7 @@ public:
     void add_box( Fmatrix& B );
     void ComputeBounds();
     BOOL Contact( CObject* O );
+
     xr_vector< shape_def >& Shapes() { return shapes; }
 };
 

@@ -94,6 +94,7 @@ typedef struct bignum_pool_item {
     /* Linked-list admin */
     struct bignum_pool_item *prev, *next;
 } BN_POOL_ITEM;
+
 /* A linked-list of bignums grouped in bundles */
 typedef struct bignum_pool {
     /* Linked-list admin */
@@ -101,6 +102,7 @@ typedef struct bignum_pool {
     /* Stack depth and allocation size */
     unsigned used, size;
 } BN_POOL;
+
 static void BN_POOL_init( BN_POOL* );
 static void BN_POOL_finish( BN_POOL* );
 #ifndef OPENSSL_NO_DEPRECATED
@@ -120,6 +122,7 @@ typedef struct bignum_ctx_stack {
     /* Number of stack frames, and the size of the allocated array */
     unsigned int depth, size;
 } BN_STACK;
+
 static void BN_STACK_init( BN_STACK* );
 static void BN_STACK_finish( BN_STACK* );
 #ifndef OPENSSL_NO_DEPRECATED
@@ -149,6 +152,7 @@ struct bignum_ctx {
 /* Enable this to find BN_CTX bugs */
 #ifdef BN_CTX_DEBUG
 static const char* ctxdbg_cur = NULL;
+
 static void ctxdbg( BN_CTX* ctx ) {
     unsigned int bnidx = 0, fpidx = 0;
     BN_POOL_ITEM* item = ctx->pool.head;
@@ -172,6 +176,7 @@ static void ctxdbg( BN_CTX* ctx ) {
     }
     fprintf( stderr, "\n" );
 }
+
 #define CTXDBG_ENTRY( str, ctx )                        \
     do {                                                \
         ctxdbg_cur = ( str );                           \

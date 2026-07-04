@@ -82,24 +82,28 @@ public:
      * @stable ICU 4.4
      */
     explicit LocalPointerBase( T* p = NULL ) : ptr( p ) {}
+
     /**
      * Destructor deletes the object it owns.
      * Subclass must override: Base class does nothing.
      * @stable ICU 4.4
      */
     ~LocalPointerBase() { /* delete ptr; */ }
+
     /**
      * NULL check.
      * @return TRUE if ==NULL
      * @stable ICU 4.4
      */
     UBool isNull() const { return ptr == NULL; }
+
     /**
      * NULL check.
      * @return TRUE if !=NULL
      * @stable ICU 4.4
      */
     UBool isValid() const { return ptr != NULL; }
+
     /**
      * Comparison with a simple pointer, so that existing code
      * with ==NULL need not be changed.
@@ -108,6 +112,7 @@ public:
      * @stable ICU 4.4
      */
     bool operator==( const T* other ) const { return ptr == other; }
+
     /**
      * Comparison with a simple pointer, so that existing code
      * with !=NULL need not be changed.
@@ -116,24 +121,28 @@ public:
      * @stable ICU 4.4
      */
     bool operator!=( const T* other ) const { return ptr != other; }
+
     /**
      * Access without ownership change.
      * @return the pointer value
      * @stable ICU 4.4
      */
     T* getAlias() const { return ptr; }
+
     /**
      * Access without ownership change.
      * @return the pointer value as a reference
      * @stable ICU 4.4
      */
     T& operator*() const { return *ptr; }
+
     /**
      * Access without ownership change.
      * @return the pointer value
      * @stable ICU 4.4
      */
     T* operator->() const { return ptr; }
+
     /**
      * Gives up ownership; the internal pointer becomes NULL.
      * @return the pointer value;
@@ -145,6 +154,7 @@ public:
         ptr = NULL;
         return p;
     }
+
     /**
      * Deletes the object it owns,
      * and adopts (takes ownership of) the one passed in.
@@ -196,12 +206,14 @@ class LocalPointer : public LocalPointerBase< T > {
 public:
     using LocalPointerBase< T >::operator*;
     using LocalPointerBase< T >::operator->;
+
     /**
      * Constructor takes ownership.
      * @param p simple pointer to an object that is adopted
      * @stable ICU 4.4
      */
     explicit LocalPointer( T* p = NULL ) : LocalPointerBase< T >( p ) {}
+
     /**
      * Constructor takes ownership and reports an error if NULL.
      *
@@ -220,6 +232,7 @@ public:
             errorCode = U_MEMORY_ALLOCATION_ERROR;
         }
     }
+
     /**
      * Move constructor, leaves src with isNull().
      * @param src source smart pointer
@@ -250,6 +263,7 @@ public:
      * @stable ICU 4.4
      */
     ~LocalPointer() { delete LocalPointerBase< T >::ptr; }
+
     /**
      * Move assignment operator, leaves src with isNull().
      * The behavior is undefined if *this and src are the same object.
@@ -289,6 +303,7 @@ public:
         LocalPointerBase< T >::ptr = other.ptr;
         other.ptr = temp;
     }
+
     /**
      * Non-member LocalPointer swap function.
      * @param p1 will get p2's pointer
@@ -299,6 +314,7 @@ public:
                              LocalPointer< T >& p2 ) U_NOEXCEPT {
         p1.swap( p2 );
     }
+
     /**
      * Deletes the object it owns,
      * and adopts (takes ownership of) the one passed in.
@@ -309,6 +325,7 @@ public:
         delete LocalPointerBase< T >::ptr;
         LocalPointerBase< T >::ptr = p;
     }
+
     /**
      * Deletes the object it owns,
      * and adopts (takes ownership of) the one passed in.
@@ -378,12 +395,14 @@ class LocalArray : public LocalPointerBase< T > {
 public:
     using LocalPointerBase< T >::operator*;
     using LocalPointerBase< T >::operator->;
+
     /**
      * Constructor takes ownership.
      * @param p simple pointer to an array of T objects that is adopted
      * @stable ICU 4.4
      */
     explicit LocalArray( T* p = NULL ) : LocalPointerBase< T >( p ) {}
+
     /**
      * Constructor takes ownership and reports an error if NULL.
      *
@@ -402,6 +421,7 @@ public:
             errorCode = U_MEMORY_ALLOCATION_ERROR;
         }
     }
+
     /**
      * Move constructor, leaves src with isNull().
      * @param src source smart pointer
@@ -432,6 +452,7 @@ public:
      * @stable ICU 4.4
      */
     ~LocalArray() { delete[] LocalPointerBase< T >::ptr; }
+
     /**
      * Move assignment operator, leaves src with isNull().
      * The behavior is undefined if *this and src are the same object.
@@ -471,6 +492,7 @@ public:
         LocalPointerBase< T >::ptr = other.ptr;
         other.ptr = temp;
     }
+
     /**
      * Non-member LocalArray swap function.
      * @param p1 will get p2's pointer
@@ -481,6 +503,7 @@ public:
                              LocalArray< T >& p2 ) U_NOEXCEPT {
         p1.swap( p2 );
     }
+
     /**
      * Deletes the array it owns,
      * and adopts (takes ownership of) the one passed in.
@@ -491,6 +514,7 @@ public:
         delete[] LocalPointerBase< T >::ptr;
         LocalPointerBase< T >::ptr = p;
     }
+
     /**
      * Deletes the array it owns,
      * and adopts (takes ownership of) the one passed in.
@@ -518,6 +542,7 @@ public:
             delete[] p;
         }
     }
+
     /**
      * Array item access (writable).
      * No index bounds check.

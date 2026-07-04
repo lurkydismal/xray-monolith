@@ -90,6 +90,7 @@ static void Multiply1_3p8q1( dReal* A, dReal* B, dReal* C ) {
 }
 
 #define SZM 3
+
 void dInternalStepJointContact( dxWorld* world,
                                 dxBody* body[ 2 ],
                                 dReal* GI[ 2 ],

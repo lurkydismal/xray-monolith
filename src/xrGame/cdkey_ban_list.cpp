@@ -283,6 +283,7 @@ void cdkey_ban_list::erase_expired_ban_items() {
             return false;
         }
     };
+
     expire_searcher_predicate tmp_predicate;
     time( &tmp_predicate.current_time );
     ban_list_t::iterator new_end_iter =

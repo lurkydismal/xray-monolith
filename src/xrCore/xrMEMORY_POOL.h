@@ -19,6 +19,7 @@ private:
 
 private:
     ICF void** access( void* P ) { return ( void** )( ( void* )( P ) ); }
+
     void block_create();
 
 public:
@@ -29,6 +30,7 @@ public:
 #endif // PROFILE_CRITICAL_SECTIONS
 
     ICF u32 get_block_count() { return block_count; }
+
     ICF u32 get_element() { return s_element; }
 
     ICF void* create() {

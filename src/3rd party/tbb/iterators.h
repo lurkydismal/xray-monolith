@@ -43,9 +43,11 @@ public:
     typedef std::random_access_iterator_tag iterator_category;
 
     counting_iterator() : my_counter() {}
+
     explicit counting_iterator( IntType init ) : my_counter( init ) {}
 
     reference operator*() const { return my_counter; }
+
     value_type operator[]( difference_type i ) const { return *( *this + i ); }
 
     difference_type operator-( const counting_iterator& it ) const {
@@ -56,10 +58,13 @@ public:
         my_counter += forward;
         return *this;
     }
+
     counting_iterator& operator-=( difference_type backward ) {
         return *this += -backward;
     }
+
     counting_iterator& operator++() { return *this += 1; }
+
     counting_iterator& operator--() { return *this -= 1; }
 
     counting_iterator operator++( int ) {
@@ -67,6 +72,7 @@ public:
         ++( *this );
         return it;
     }
+
     counting_iterator operator--( int ) {
         counting_iterator it( *this );
         --( *this );
@@ -76,9 +82,11 @@ public:
     counting_iterator operator-( difference_type backward ) const {
         return counting_iterator( my_counter - backward );
     }
+
     counting_iterator operator+( difference_type forward ) const {
         return counting_iterator( my_counter + forward );
     }
+
     friend counting_iterator operator+( difference_type forward,
                                         const counting_iterator it ) {
         return it + forward;
@@ -87,16 +95,21 @@ public:
     bool operator==( const counting_iterator& it ) const {
         return *this - it == 0;
     }
+
     bool operator!=( const counting_iterator& it ) const {
         return !( *this == it );
     }
+
     bool operator<( const counting_iterator& it ) const {
         return *this - it < 0;
     }
+
     bool operator>( const counting_iterator& it ) const { return it < *this; }
+
     bool operator<=( const counting_iterator& it ) const {
         return !( *this > it );
     }
+
     bool operator>=( const counting_iterator& it ) const {
         return !( *this < it );
     }
@@ -120,6 +133,7 @@ struct tuple_util {
         std::get< N - 1 >( it ) += forward;
         tuple_util< N - 1 >::increment( it, forward );
     }
+
     template < typename TupleType, typename DifferenceType >
     static bool check_sync( const TupleType& it1,
                             const TupleType& it2,
@@ -134,6 +148,7 @@ template <>
 struct tuple_util< 0 > {
     template < typename TupleType, typename DifferenceType >
     static void increment( TupleType&, DifferenceType ) {}
+
     template < typename TupleType, typename DifferenceType >
     static bool check_sync( const TupleType&,
                             const TupleType&,
@@ -162,11 +177,13 @@ struct tuplewrapper
     // In the context of this class, T is a reference, so T&& is a "forwarding
     // reference"
     typedef std::tuple< T&&... > base_type;
+
     // Construct from the result of std::tie
     tuplewrapper( const base_type& in ) : base_type( in ) {}
 #if __INTEL_COMPILER
     // ICC cannot generate copy ctor & assignment
     tuplewrapper( const tuplewrapper& rhs ) : base_type( rhs ) {}
+
     tuplewrapper& operator=( const tuplewrapper& rhs ) {
         *this = base_type( rhs );
         return *this;
@@ -217,9 +234,12 @@ public:
     typedef std::random_access_iterator_tag iterator_category;
 
     zip_iterator() : my_it() {}
+
     explicit zip_iterator( Types... args )
         : my_it( std::make_tuple( args... ) ) {}
+
     zip_iterator( const zip_iterator& input ) : my_it( input.my_it ) {}
+
     zip_iterator& operator=( const zip_iterator& input ) {
         my_it = input.my_it;
         return *this;
@@ -229,6 +249,7 @@ public:
         return tbb::internal::make_references< reference >()(
             my_it, tbb::internal::make_index_sequence< num_types >() );
     }
+
     reference operator[]( difference_type i ) const { return *( *this + i ); }
 
     difference_type operator-( const zip_iterator& it ) const {
@@ -243,10 +264,13 @@ public:
         internal::tuple_util< num_types >::increment( my_it, forward );
         return *this;
     }
+
     zip_iterator& operator-=( difference_type backward ) {
         return *this += -backward;
     }
+
     zip_iterator& operator++() { return *this += 1; }
+
     zip_iterator& operator--() { return *this -= 1; }
 
     zip_iterator operator++( int ) {
@@ -254,6 +278,7 @@ public:
         ++( *this );
         return it;
     }
+
     zip_iterator operator--( int ) {
         zip_iterator it( *this );
         --( *this );
@@ -264,22 +289,29 @@ public:
         zip_iterator it( *this );
         return it -= backward;
     }
+
     zip_iterator operator+( difference_type forward ) const {
         zip_iterator it( *this );
         return it += forward;
     }
+
     friend zip_iterator operator+( difference_type forward,
                                    const zip_iterator& it ) {
         return it + forward;
     }
 
     bool operator==( const zip_iterator& it ) const { return *this - it == 0; }
+
     it_types base() const { return my_it; }
 
     bool operator!=( const zip_iterator& it ) const { return !( *this == it ); }
+
     bool operator<( const zip_iterator& it ) const { return *this - it < 0; }
+
     bool operator>( const zip_iterator& it ) const { return it < *this; }
+
     bool operator<=( const zip_iterator& it ) const { return !( *this > it ); }
+
     bool operator>=( const zip_iterator& it ) const { return !( *this < it ); }
 
 private:
@@ -316,66 +348,86 @@ public:
                 std::random_access_iterator_tag >::value ),
             "Random access iterator required." );
     }
+
     transform_iterator( const transform_iterator& input )
         : my_it( input.my_it ), my_unary_func( input.my_unary_func ) {}
+
     transform_iterator& operator=( const transform_iterator& input ) {
         my_it = input.my_it;
         return *this;
     }
+
     reference operator*() const { return my_unary_func( *my_it ); }
+
     reference operator[]( difference_type i ) const { return *( *this + i ); }
+
     transform_iterator& operator++() {
         ++my_it;
         return *this;
     }
+
     transform_iterator& operator--() {
         --my_it;
         return *this;
     }
+
     transform_iterator operator++( int ) {
         transform_iterator it( *this );
         ++( *this );
         return it;
     }
+
     transform_iterator operator--( int ) {
         transform_iterator it( *this );
         --( *this );
         return it;
     }
+
     transform_iterator operator+( difference_type forward ) const {
         return { my_it + forward, my_unary_func };
     }
+
     transform_iterator operator-( difference_type backward ) const {
         return { my_it - backward, my_unary_func };
     }
+
     transform_iterator& operator+=( difference_type forward ) {
         my_it += forward;
         return *this;
     }
+
     transform_iterator& operator-=( difference_type backward ) {
         my_it -= backward;
         return *this;
     }
+
     friend transform_iterator operator+( difference_type forward,
                                          const transform_iterator& it ) {
         return it + forward;
     }
+
     difference_type operator-( const transform_iterator& it ) const {
         return my_it - it.my_it;
     }
+
     bool operator==( const transform_iterator& it ) const {
         return *this - it == 0;
     }
+
     bool operator!=( const transform_iterator& it ) const {
         return !( *this == it );
     }
+
     bool operator<( const transform_iterator& it ) const {
         return *this - it < 0;
     }
+
     bool operator>( const transform_iterator& it ) const { return it < *this; }
+
     bool operator<=( const transform_iterator& it ) const {
         return !( *this > it );
     }
+
     bool operator>=( const transform_iterator& it ) const {
         return !( *this < it );
     }

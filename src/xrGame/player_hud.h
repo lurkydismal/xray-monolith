@@ -306,6 +306,7 @@ struct attachable_hud_item {
           m_parent_hud_item( nullptr ),
           m_model( nullptr ),
           m_attach_place_idx( 0 ) {}
+
     ~attachable_hud_item();
     void load( const shared_str& sect_name );
     void update( bool bForce );
@@ -356,11 +357,14 @@ public:
     ~player_hud();
     void load( const shared_str& model_name, bool force = false );
     void load_script( LPCSTR section );
+
     void reset_model_script() {
         script_override_arms = false;
         load( m_sect_name, true );
     };
+
     void load_default() { load( "actor_hud_05", true ); };
+
     void update( const Fmatrix& trans );
     void updateMovementLayerState();
     void StopScriptAnim();
@@ -388,7 +392,9 @@ public:
                           LPCSTR anm_name,
                           bool bMixIn = true,
                           float speed = 1.f );
+
     const shared_str& section_name() const { return m_sect_name; }
+
     void OnFrame();
     void net_Relcase( CObject* obj );
 
@@ -420,9 +426,11 @@ public:
     void set_part_cycle_time( u8 part, float time );
     void set_part_cycle_speed( u8 part, float speed );
     bool allow_activation( CHudItem* item );
+
     attachable_hud_item* attached_item( u16 item_idx ) {
         return m_attached_items[ item_idx ];
     };
+
     void detach_item_idx( u16 idx );
     void detach_item( CHudItem* item );
 

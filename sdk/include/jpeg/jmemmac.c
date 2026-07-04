@@ -78,11 +78,13 @@ You forgot to define USE_MAC_MEMMGR in jconfig.h./* deliberate syntax error */
  */
 
 GLOBAL( void* )
+
 jpeg_get_small( j_common_ptr cinfo, size_t sizeofobject ) {
     return ( void* )NewPtr( sizeofobject );
 }
 
 GLOBAL( void )
+
 jpeg_free_small( j_common_ptr cinfo, void* object, size_t sizeofobject ) {
     DisposePtr( ( Ptr )object );
 }
@@ -95,11 +97,13 @@ jpeg_free_small( j_common_ptr cinfo, void* object, size_t sizeofobject ) {
  */
 
 GLOBAL( void FAR* )
+
 jpeg_get_large( j_common_ptr cinfo, size_t sizeofobject ) {
     return ( void FAR* )NewPtr( sizeofobject );
 }
 
 GLOBAL( void )
+
 jpeg_free_large( j_common_ptr cinfo, void FAR* object, size_t sizeofobject ) {
     DisposePtr( ( Ptr )object );
 }
@@ -109,6 +113,7 @@ jpeg_free_large( j_common_ptr cinfo, void FAR* object, size_t sizeofobject ) {
  */
 
 GLOBAL( long )
+
 jpeg_mem_available( j_common_ptr cinfo,
                     long min_bytes_needed,
                     long max_bytes_needed,
@@ -143,6 +148,7 @@ jpeg_mem_available( j_common_ptr cinfo,
  */
 
 METHODDEF( void )
+
 read_backing_store( j_common_ptr cinfo,
                     backing_store_ptr info,
                     void FAR* buffer_address,
@@ -161,6 +167,7 @@ read_backing_store( j_common_ptr cinfo,
 }
 
 METHODDEF( void )
+
 write_backing_store( j_common_ptr cinfo,
                      backing_store_ptr info,
                      void FAR* buffer_address,
@@ -179,6 +186,7 @@ write_backing_store( j_common_ptr cinfo,
 }
 
 METHODDEF( void )
+
 close_backing_store( j_common_ptr cinfo, backing_store_ptr info ) {
     FSClose( info->temp_file );
     FSpDelete( &( info->tempSpec ) );
@@ -192,6 +200,7 @@ close_backing_store( j_common_ptr cinfo, backing_store_ptr info ) {
  */
 
 GLOBAL( void )
+
 jpeg_open_backing_store( j_common_ptr cinfo,
                          backing_store_ptr info,
                          long total_bytes_needed ) {
@@ -259,6 +268,7 @@ jpeg_open_backing_store( j_common_ptr cinfo,
  */
 
 GLOBAL( long )
+
 jpeg_mem_init( j_common_ptr cinfo ) {
     next_file_num = 0;
 
@@ -272,6 +282,7 @@ jpeg_mem_init( j_common_ptr cinfo ) {
 }
 
 GLOBAL( void )
+
 jpeg_mem_term( j_common_ptr cinfo ) {
     /* no work */
 }

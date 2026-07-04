@@ -42,12 +42,14 @@ inline void getref( lua_State* L, int r ) {
 
 struct lua_reference {
     lua_reference( lua_State* L_ = 0 ) : L( L_ ), m_ref( LUA_NOREF ) {}
+
     lua_reference( lua_reference const& r ) : L( r.L ), m_ref( LUA_NOREF ) {
         if ( !r.is_valid() )
             return;
         r.get( L );
         set( L );
     }
+
     ~lua_reference() { reset(); }
 
     lua_State* state() const { return L; }

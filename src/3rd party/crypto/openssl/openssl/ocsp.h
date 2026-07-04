@@ -190,8 +190,10 @@ struct ocsp_response_st {
  */
 #define V_OCSP_RESPID_NAME 0
 #define V_OCSP_RESPID_KEY 1
+
 struct ocsp_responder_id_st {
     int type;
+
     union {
         X509_NAME* byName;
         ASN1_OCTET_STRING* byKey;
@@ -222,8 +224,10 @@ typedef struct ocsp_revoked_info_st {
 #define V_OCSP_CERTSTATUS_GOOD 0
 #define V_OCSP_CERTSTATUS_REVOKED 1
 #define V_OCSP_CERTSTATUS_UNKNOWN 2
+
 typedef struct ocsp_cert_status_st {
     int type;
+
     union {
         ASN1_NULL* good;
         OCSP_REVOKEDINFO* revoked;

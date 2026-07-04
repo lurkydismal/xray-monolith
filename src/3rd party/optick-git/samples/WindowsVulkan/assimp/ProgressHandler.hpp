@@ -44,6 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef INCLUDED_AI_PROGRESSHANDLER_H
 #define INCLUDED_AI_PROGRESSHANDLER_H
 #include "types.h"
+
 namespace Assimp {
 
 // ------------------------------------------------------------------------------------
@@ -117,6 +118,7 @@ public:
     }
 
 }; // !class ProgressHandler
+
 // ------------------------------------------------------------------------------------
 } // Namespace Assimp
 

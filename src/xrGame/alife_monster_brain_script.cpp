@@ -17,6 +17,7 @@ CALifeMonsterMovementManager* get_movement( const CALifeMonsterBrain* brain ) {
 }
 
 #pragma optimize( "s", on )
+
 void CALifeMonsterBrain::script_register( lua_State* L ) {
     module( L )
         [ class_< CALifeMonsterBrain >( "CALifeMonsterBrain" )

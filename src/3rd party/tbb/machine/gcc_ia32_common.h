@@ -29,6 +29,7 @@ static inline intptr_t __TBB_machine_lg( T x ) {
     __asm__( "bsr %1,%0" : "=r"( j ) : "r"( i ) );
     return j;
 }
+
 #define __TBB_Log2( V ) __TBB_machine_lg( V )
 #endif /* !__TBB_Log2 */
 
@@ -51,6 +52,7 @@ static inline void __TBB_machine_pause( int32_t delay ) {
     }
     return;
 }
+
 #define __TBB_Pause( V ) __TBB_machine_pause( V )
 #endif /* !__TBB_Pause */
 
@@ -59,6 +61,7 @@ namespace internal {
 typedef uint64_t machine_tsc_t;
 }
 } // namespace tbb
+
 static inline tbb::internal::machine_tsc_t __TBB_machine_time_stamp() {
 #if __INTEL_COMPILER
     return _rdtsc();
@@ -68,11 +71,13 @@ static inline tbb::internal::machine_tsc_t __TBB_machine_time_stamp() {
     return ( tbb::internal::machine_tsc_t( hi ) << 32 ) | lo;
 #endif
 }
+
 #define __TBB_time_stamp() __TBB_machine_time_stamp()
 
 // API to retrieve/update FPU control setting
 #ifndef __TBB_CPU_CTL_ENV_PRESENT
 #define __TBB_CPU_CTL_ENV_PRESENT 1
+
 namespace tbb {
 namespace internal {
 class cpu_ctl_env {
@@ -85,6 +90,7 @@ public:
     bool operator!=( const cpu_ctl_env& ctl ) const {
         return mxcsr != ctl.mxcsr || x87cw != ctl.x87cw;
     }
+
     void get_env() {
 #if __TBB_ICC_12_0_INL_ASM_FSTCW_BROKEN
         cpu_ctl_env loc_ctl;
@@ -101,6 +107,7 @@ public:
 #endif
         mxcsr &= MXCSR_CONTROL_MASK;
     }
+
     void set_env() const {
         __asm__ __volatile__(
             "ldmxcsr %0\n\t"

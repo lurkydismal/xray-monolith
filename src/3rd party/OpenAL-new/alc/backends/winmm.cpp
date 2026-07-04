@@ -121,12 +121,14 @@ void ProbeCaptureDevices( void ) {
 
 struct WinMMPlayback final : public BackendBase {
     WinMMPlayback( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~WinMMPlayback() override;
 
     void CALLBACK waveOutProc( HWAVEOUT device,
                                UINT msg,
                                DWORD_PTR param1,
                                DWORD_PTR param2 ) noexcept;
+
     static void CALLBACK waveOutProcC( HWAVEOUT device,
                                        UINT msg,
                                        DWORD_PTR instance,
@@ -357,12 +359,14 @@ void WinMMPlayback::stop() {
 
 struct WinMMCapture final : public BackendBase {
     WinMMCapture( DeviceBase* device ) noexcept : BackendBase{ device } {}
+
     ~WinMMCapture() override;
 
     void CALLBACK waveInProc( HWAVEIN device,
                               UINT msg,
                               DWORD_PTR param1,
                               DWORD_PTR param2 ) noexcept;
+
     static void CALLBACK waveInProcC( HWAVEIN device,
                                       UINT msg,
                                       DWORD_PTR instance,

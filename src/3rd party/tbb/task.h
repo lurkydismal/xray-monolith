@@ -54,6 +54,7 @@ public:
         : self( NULL ), parent( parent_ ) {
         suppress_unused_warning( self );
     }
+
     task& __TBB_EXPORTED_METHOD allocate( size_t size ) const;
     void __TBB_EXPORTED_METHOD free( task& ) const;
 };
@@ -153,6 +154,7 @@ class allocate_root_with_context_proxy : no_assign {
 public:
     allocate_root_with_context_proxy( task_group_context& ctx )
         : my_context( ctx ) {}
+
     task& __TBB_EXPORTED_METHOD allocate( size_t size ) const;
     void __TBB_EXPORTED_METHOD free( task& ) const;
 };
@@ -303,6 +305,7 @@ private:
 };
 
 } // namespace internal
+
 //! @endcond
 
 #if __TBB_TASK_GROUP_CONTEXT
@@ -334,9 +337,11 @@ class tbb_exception_ptr;
 #endif /* !TBB_USE_CAPTURED_EXCEPTION */
 
 class task_scheduler_init;
+
 namespace interface7 {
 class task_arena;
 }
+
 using interface7::task_arena;
 
 //! Used to form groups of tasks
@@ -1089,6 +1094,7 @@ namespace internal {
 inline void make_critical( task& t ) {
     t.prefix().extra_state |= 0x8;
 }
+
 inline bool is_critical( task& t ) {
     return bool( ( t.prefix().extra_state & 0x8 ) != 0 );
 }
@@ -1104,6 +1110,7 @@ static void suspend_callback( void* user_callback, task::suspend_point tag ) {
     F user_callback_copy = *static_cast< F* >( user_callback );
     user_callback_copy( tag );
 }
+
 void __TBB_EXPORTED_FUNC internal_suspend( void* suspend_callback,
                                            void* user_callback );
 void __TBB_EXPORTED_FUNC internal_resume( task::suspend_point );
@@ -1114,6 +1121,7 @@ template < typename F >
 inline void task::suspend( F f ) {
     internal::internal_suspend( ( void* )internal::suspend_callback< F >, &f );
 }
+
 inline void task::resume( suspend_point tag ) {
     internal::internal_resume( tag );
 }
@@ -1147,6 +1155,7 @@ public:
 #endif
 };
 } // namespace internal
+
 //! @endcond
 
 //! A list of children.

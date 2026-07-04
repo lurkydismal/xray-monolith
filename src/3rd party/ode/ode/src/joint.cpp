@@ -46,6 +46,7 @@ const dReal min_stop_err = M_PI * 0.03f;     // 0.1f;//
 const dReal min_ball_err = 0.0f;             // 0.01f;
 const dReal hinge_min_err_exis_par = 0.000f; // 0.01f;
 const dReal stop_early_reaction = M_PI * 0.00f;
+
 // #define USE_STOPS_MIN_ERR
 // 1
 
@@ -60,6 +61,7 @@ static inline void add_min_err( dReal& param, const dReal min_err ) {
             param = REAL( 0. );
     }
 }
+
 //****************************************************************************
 // utility
 
@@ -1442,7 +1444,9 @@ static void contactGetInfo2( dxJointContact* j, dxJoint::Info2* info ) {
             info->cfm[ 2 ] = j->contact.surface.slip2;
     }
 }
+
 const float finit_big_force = 1.e5;
+
 static void contactSpecialGetInfo2( dxJointContact* j, dxJoint::Info2* info ) {
     contactGetInfo2( j, info );
     info->hi[ 0 ] = finit_big_force;

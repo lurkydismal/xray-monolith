@@ -11,5 +11,6 @@ public:
     virtual void InitTexture( LPCSTR tex_name );
 
     virtual void SetTextX( float x ) { /*do nothing*/ }
+
     virtual CUIWindow* ui_cast_window() { return this; }
 };

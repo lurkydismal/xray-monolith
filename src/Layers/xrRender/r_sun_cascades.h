@@ -5,7 +5,9 @@
 namespace sun {
 struct ray {
     ray() = default;
+
     ray( Fvector3 const& _P, Fvector3 const& _D ) : P( _P ), D( _D ) {}
+
     ~ray() = default;
 
     Fvector3 D;
@@ -14,6 +16,7 @@ struct ray {
 
 struct cascade {
     cascade() : size( 0.0f ), bias( 0.0f ), reset_chain( false ) {}
+
     cascade( const cascade& other ) {}
 
     Fmatrix xform;

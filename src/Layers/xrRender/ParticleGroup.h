@@ -170,6 +170,7 @@ public:
 
     virtual void Play();
     virtual void Stop( BOOL bDefferedStop = TRUE );
+
     virtual BOOL IsPlaying() { return m_RT_Flags.is( flRT_Playing ); }
 
     virtual void SetHudMode( BOOL b );

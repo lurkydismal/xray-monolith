@@ -68,12 +68,14 @@ public:
      * @stable ICU 4.2
      */
     StringPiece() : ptr_( NULL ), length_( 0 ) {}
+
     /**
      * Constructs from a NUL-terminated const char * pointer.
      * @param str a NUL-terminated const char * pointer
      * @stable ICU 4.2
      */
     StringPiece( const char* str );
+
     /**
      * Constructs from a std::string.
      * @stable ICU 4.2
@@ -116,6 +118,7 @@ public:
      */
     StringPiece( const char* offset, int32_t len )
         : ptr_( offset ), length_( len ) {}
+
     /**
      * Substring of another StringPiece.
      * @param x the other StringPiece
@@ -145,18 +148,21 @@ public:
      * @stable ICU 4.2
      */
     const char* data() const { return ptr_; }
+
     /**
      * Returns the string length. Same as length().
      * @return the string length
      * @stable ICU 4.2
      */
     int32_t size() const { return length_; }
+
     /**
      * Returns the string length. Same as size().
      * @return the string length
      * @stable ICU 4.2
      */
     int32_t length() const { return length_; }
+
     /**
      * Returns whether the string is empty.
      * @return TRUE if the string is empty

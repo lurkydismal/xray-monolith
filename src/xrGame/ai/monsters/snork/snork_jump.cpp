@@ -65,7 +65,7 @@
 //{
 //	//CObject *target = const_cast<CEntityAlive
 //*>(m_object->EnemyMan.get_enemy()); 	CObject *target =
-//Level().CurrentEntity(); 	if (!target) return;
+// Level().CurrentEntity(); 	if (!target) return;
 //
 //	m_specific_jump		= false;
 //	m_target_object		= target;

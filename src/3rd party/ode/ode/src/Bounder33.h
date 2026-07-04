@@ -18,15 +18,23 @@ class Lcp33 {
     int skip;
 
     int index[ 3 ];
+
     inline dReal* RowA( int i ) { return A + i * skip; }
+
     inline dReal* RowI( int i ) { return RowA( index[ i ] ); }
+
     inline dReal& EinRowI( dReal* row, int i ) { return row[ index[ i ] ]; }
+
     inline dReal& EinRowA( dReal* row, int i ) { return row[ i ]; }
+
     inline dReal& EI( int row, int pos ) { return EinRowI( RowI( row ), pos ); }
+
     inline dReal& EA( int row, int pos ) { return A[ skip * row + pos ]; }
+
     inline dReal& EsA( int row, int pos ) {
         return sourceA[ RLENGTH * row + pos ];
     }
+
     void Swap( int i, int j );
     void ToBn( int i );
     bool BoundX( int i );

@@ -79,8 +79,11 @@ struct has_policy< ExpectedPolicy, Policy< P1, P2 > >
 namespace graph_policy_namespace {
 
 struct rejecting {};
+
 struct reserving {};
+
 struct queueing {};
+
 struct lightweight {};
 
 // K == type of field used for key-matching.  Each tag-matching port will be
@@ -112,6 +115,7 @@ template < typename Output >
 class source_body : tbb::internal::no_assign {
 public:
     virtual ~source_body() {}
+
     virtual bool operator()( Output& output ) = 0;
     virtual source_body* clone() = 0;
 };
@@ -121,10 +125,13 @@ template < typename Output, typename Body >
 class source_body_leaf : public source_body< Output > {
 public:
     source_body_leaf( const Body& _body ) : body( _body ) {}
+
     bool operator()( Output& output ) __TBB_override { return body( output ); }
+
     source_body_leaf* clone() __TBB_override {
         return new source_body_leaf< Output, Body >( body );
     }
+
     Body get_body() { return body; }
 
 private:
@@ -136,6 +143,7 @@ template < typename Input, typename Output >
 class function_body : tbb::internal::no_assign {
 public:
     virtual ~function_body() {}
+
     virtual Output operator()( const Input& input ) = 0;
     virtual function_body* clone() = 0;
 };
@@ -145,8 +153,11 @@ template < typename Input, typename Output, typename B >
 class function_body_leaf : public function_body< Input, Output > {
 public:
     function_body_leaf( const B& _body ) : body( _body ) {}
+
     Output operator()( const Input& i ) __TBB_override { return body( i ); }
+
     B get_body() { return body; }
+
     function_body_leaf* clone() __TBB_override {
         return new function_body_leaf< Input, Output, B >( body );
     }
@@ -161,11 +172,14 @@ class function_body_leaf< continue_msg, continue_msg, B >
     : public function_body< continue_msg, continue_msg > {
 public:
     function_body_leaf( const B& _body ) : body( _body ) {}
+
     continue_msg operator()( const continue_msg& i ) __TBB_override {
         body( i );
         return i;
     }
+
     B get_body() { return body; }
+
     function_body_leaf* clone() __TBB_override {
         return new function_body_leaf< continue_msg, continue_msg, B >( body );
     }
@@ -180,11 +194,14 @@ class function_body_leaf< Input, continue_msg, B >
     : public function_body< Input, continue_msg > {
 public:
     function_body_leaf( const B& _body ) : body( _body ) {}
+
     continue_msg operator()( const Input& i ) __TBB_override {
         body( i );
         return continue_msg();
     }
+
     B get_body() { return body; }
+
     function_body_leaf* clone() __TBB_override {
         return new function_body_leaf< Input, continue_msg, B >( body );
     }
@@ -199,10 +216,13 @@ class function_body_leaf< continue_msg, Output, B >
     : public function_body< continue_msg, Output > {
 public:
     function_body_leaf( const B& _body ) : body( _body ) {}
+
     Output operator()( const continue_msg& i ) __TBB_override {
         return body( i );
     }
+
     B get_body() { return body; }
+
     function_body_leaf* clone() __TBB_override {
         return new function_body_leaf< continue_msg, Output, B >( body );
     }
@@ -216,6 +236,7 @@ template < typename Input, typename OutputSet >
 class multifunction_body : tbb::internal::no_assign {
 public:
     virtual ~multifunction_body() {}
+
     virtual void operator()( const Input& /* input*/, OutputSet& /*oset*/ ) = 0;
     virtual multifunction_body* clone() = 0;
     virtual void* get_body_ptr() = 0;
@@ -226,11 +247,14 @@ template < typename Input, typename OutputSet, typename B >
 class multifunction_body_leaf : public multifunction_body< Input, OutputSet > {
 public:
     multifunction_body_leaf( const B& _body ) : body( _body ) {}
+
     void operator()( const Input& input, OutputSet& oset ) __TBB_override {
         body( input,
               oset ); // body may explicitly put() to one or more of oset.
     }
+
     void* get_body_ptr() __TBB_override { return &body; }
+
     multifunction_body_leaf* clone() __TBB_override {
         return new multifunction_body_leaf< Input, OutputSet, B >( body );
     }
@@ -245,6 +269,7 @@ template < typename Input, typename Output >
 class type_to_key_function_body : tbb::internal::no_assign {
 public:
     virtual ~type_to_key_function_body() {}
+
     virtual Output operator()( const Input& input ) = 0; // returns an Output
     virtual type_to_key_function_body* clone() = 0;
 };
@@ -254,6 +279,7 @@ template < typename Input, typename Output >
 class type_to_key_function_body< Input, Output& > : tbb::internal::no_assign {
 public:
     virtual ~type_to_key_function_body() {}
+
     virtual const Output& operator()(
         const Input& input ) = 0; // returns a const Output&
     virtual type_to_key_function_body* clone() = 0;
@@ -264,8 +290,11 @@ class type_to_key_function_body_leaf
     : public type_to_key_function_body< Input, Output > {
 public:
     type_to_key_function_body_leaf( const B& _body ) : body( _body ) {}
+
     Output operator()( const Input& i ) __TBB_override { return body( i ); }
+
     B get_body() { return body; }
+
     type_to_key_function_body_leaf* clone() __TBB_override {
         return new type_to_key_function_body_leaf< Input, Output, B >( body );
     }
@@ -279,10 +308,13 @@ class type_to_key_function_body_leaf< Input, Output&, B >
     : public type_to_key_function_body< Input, Output& > {
 public:
     type_to_key_function_body_leaf( const B& _body ) : body( _body ) {}
+
     const Output& operator()( const Input& i ) __TBB_override {
         return body( i );
     }
+
     B get_body() { return body; }
+
     type_to_key_function_body_leaf* clone() __TBB_override {
         return new type_to_key_function_body_leaf< Input, Output&, B >( body );
     }
@@ -405,6 +437,7 @@ protected:
 
     template < typename U, typename V >
     friend class tbb::flow::interface11::limiter_node;
+
     void reset_receiver( reset_flags f ) __TBB_override {
 #if TBB_DEPRECATED_FLOW_NODE_EXTRACTION
         if ( f & rf_clear_edges )
@@ -419,6 +452,7 @@ public:
     // inside its constructor, my_node can be directly initialized with 'this'
     // pointer passed from the owner, hence making method 'set_owner' needless.
     decrementer() : my_node( NULL ) {}
+
     void set_owner( T* node ) { my_node = node; }
 
 #if TBB_DEPRECATED_FLOW_NODE_EXTRACTION
@@ -431,6 +465,7 @@ public:
         built_predecessors_type;
     typedef
         typename built_predecessors_type::edge_list_type predecessor_list_type;
+
     built_predecessors_type& built_predecessors() __TBB_override {
         return my_built_predecessors;
     }
@@ -474,6 +509,7 @@ protected:
 public:
     typedef continue_msg input_type;
     typedef continue_msg output_type;
+
     decrementer( int number_of_predecessors = 0 )
         : continue_receiver( __TBB_FLOW_GRAPH_PRIORITY_ARG1(
               number_of_predecessors,
@@ -484,6 +520,7 @@ public:
           // 'set_owner' needless.
           ,
           my_node( NULL ) {}
+
     void set_owner( T* node ) { my_node = node; }
 };
 

@@ -82,6 +82,7 @@ static unsigned int table_flags = 0;
 unsigned int ENGINE_get_table_flags( void ) {
     return table_flags;
 }
+
 void ENGINE_set_table_flags( unsigned int flags ) {
     table_flags = flags;
 }
@@ -90,9 +91,11 @@ void ENGINE_set_table_flags( unsigned int flags ) {
 static unsigned long engine_pile_hash( const ENGINE_PILE* c ) {
     return c->nid;
 }
+
 static int engine_pile_cmp( const ENGINE_PILE* a, const ENGINE_PILE* b ) {
     return a->nid - b->nid;
 }
+
 static IMPLEMENT_LHASH_HASH_FN( engine_pile_hash, const ENGINE_PILE* ) static IMPLEMENT_LHASH_COMP_FN(
     engine_pile_cmp,
     const ENGINE_PILE* ) static int int_table_check( ENGINE_TABLE** t,
@@ -169,6 +172,7 @@ end:
     CRYPTO_w_unlock( CRYPTO_LOCK_ENGINE );
     return ret;
 }
+
 static void int_unregister_cb( ENGINE_PILE* pile, ENGINE* e ) {
     int n;
     /* Iterate the 'c->sk' stack removing any occurance of 'e' */
@@ -181,6 +185,7 @@ static void int_unregister_cb( ENGINE_PILE* pile, ENGINE* e ) {
         pile->funct = NULL;
     }
 }
+
 static IMPLEMENT_LHASH_DOALL_ARG_FN(
     int_unregister_cb,
     ENGINE_PILE*,
@@ -198,6 +203,7 @@ static void int_cleanup_cb( ENGINE_PILE* p ) {
         engine_unlocked_finish( p->funct, 0 );
     OPENSSL_free( p );
 }
+
 static IMPLEMENT_LHASH_DOALL_FN(
     int_cleanup_cb,
     ENGINE_PILE* ) void engine_table_cleanup( ENGINE_TABLE** table ) {

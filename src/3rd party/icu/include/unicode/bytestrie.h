@@ -366,6 +366,7 @@ public:
          * @stable ICU 4.8
          */
         StringPiece getString() const;
+
         /**
          * @return The value for the last successful next().
          * @stable ICU 4.8
@@ -424,6 +425,7 @@ private:
     // pos is already after the leadByte, and the lead byte is already shifted
     // right by 1.
     static int32_t readValue( const uint8_t* pos, int32_t leadByte );
+
     static inline const uint8_t* skipValue( const uint8_t* pos,
                                             int32_t leadByte ) {
         // U_ASSERT(leadByte>=kMinValueLead);
@@ -438,6 +440,7 @@ private:
         }
         return pos;
     }
+
     static inline const uint8_t* skipValue( const uint8_t* pos ) {
         int32_t leadByte = *pos++;
         return skipValue( pos, leadByte );

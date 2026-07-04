@@ -387,6 +387,7 @@ GLM_FUNC_QUALIFIER tquat< T, P > cross( tquat< T, P > const& q1,
         q1.w * q2.y + q1.y * q2.w + q1.z * q2.x - q1.x * q2.z,
         q1.w * q2.z + q1.z * q2.w + q1.x * q2.y - q1.y * q2.x );
 }
+
 /*
         // (x * sin(1 - a) * angle / sin(angle)) + (y * sin(a) * angle /
    sin(angle)) template<typename T, precision P> GLM_FUNC_QUALIFIER tquat<T, P>

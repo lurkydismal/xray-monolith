@@ -183,6 +183,7 @@ typedef struct MatchState {
     lua_State* L;
     int level; /* total number of captures (finished or unfinished) */
     int depth;
+
     struct {
         const char* init;
         ptrdiff_t len;

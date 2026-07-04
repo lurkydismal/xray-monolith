@@ -23,6 +23,7 @@ float g_sv_tdm_fFriendlyFireModifier = 1.0f;
 //-------------------------------------------------------
 int g_sv_tdm_iTeamKillLimit = 3;
 int g_sv_tdm_bTeamKillPunishment = TRUE;
+
 //-------------------------------------------------------
 BOOL game_sv_TeamDeathmatch::isFriendlyFireEnabled() {
     return ( int( g_sv_tdm_fFriendlyFireModifier * 100.0f ) > 0 );
@@ -33,24 +34,31 @@ float game_sv_TeamDeathmatch::GetFriendlyFire() {
                ? g_sv_tdm_fFriendlyFireModifier
                : 0.0f;
 };
+
 BOOL game_sv_TeamDeathmatch::Get_AutoTeamBalance() {
     return g_sv_tdm_bAutoTeamBalance;
 };
+
 BOOL game_sv_TeamDeathmatch::Get_AutoTeamSwap() {
     return g_sv_tdm_bAutoTeamSwap;
 };
+
 BOOL game_sv_TeamDeathmatch::Get_FriendlyIndicators() {
     return g_sv_tdm_bFriendlyIndicators;
 };
+
 BOOL game_sv_TeamDeathmatch::Get_FriendlyNames() {
     return g_sv_tdm_bFriendlyNames;
 };
+
 int game_sv_TeamDeathmatch::Get_TeamKillLimit() {
     return g_sv_tdm_iTeamKillLimit;
 };
+
 BOOL game_sv_TeamDeathmatch::Get_TeamKillPunishment() {
     return g_sv_tdm_bTeamKillPunishment;
 };
+
 //-------------------------------------------------------
 void game_sv_TeamDeathmatch::Create( shared_str& options ) {
     inherited::Create( options );
@@ -97,6 +105,7 @@ u8 game_sv_TeamDeathmatch::AutoTeam() {
                 ++( m_teams[ ps->team - 1 ] );
         }
     };
+
     TeamPlayersCalculator team_calculator;
     m_server->ForEachClientDo( team_calculator );
 
@@ -123,6 +132,7 @@ u32 game_sv_TeamDeathmatch::GetPlayersCountInTeams( u8 team ) {
                 ++count;
         }
     };
+
     team_players_calculator tmp_functor;
     tmp_functor.team = team;
     tmp_functor.count = 0;
@@ -170,6 +180,7 @@ void game_sv_TeamDeathmatch::AutoBalanceTeams() {
     // calc team count
     s16 MinTeam, MaxTeam;
     u32 NumToMove;
+
     struct team_counter_functor {
         u8 l_teams[ 2 ];
 
@@ -191,6 +202,7 @@ void game_sv_TeamDeathmatch::AutoBalanceTeams() {
                 ++( l_teams[ ps->team - 1 ] );
         }
     };
+
     team_counter_functor tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
 
@@ -397,6 +409,7 @@ void game_sv_TeamDeathmatch::OnPlayerKillPlayer(
                             return true;
                         }
                     };
+
                     player_state_searcher tmp_predicate;
                     tmp_predicate.ps_killer = ps_killer;
                     tmp_predicate.server_client = m_server->GetServerClient();
@@ -605,6 +618,7 @@ void game_sv_TeamDeathmatch::AutoSwapTeams() {
                 ps->team = ( ps->team == 1 ) ? 2 : 1;
         }
     };
+
     auto_team_swaper tmp_functor;
     m_server->ForEachClientDo( tmp_functor );
     teams_swaped = true;

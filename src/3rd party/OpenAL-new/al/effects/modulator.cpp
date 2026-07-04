@@ -29,6 +29,7 @@ al::optional< ModulatorWaveform > WaveformFromEmum( ALenum value ) {
     }
     return al::nullopt;
 }
+
 ALenum EnumFromWaveform( ModulatorWaveform type ) {
     switch ( type ) {
         case ModulatorWaveform::Sinusoid:
@@ -68,11 +69,13 @@ void Modulator_setParamf( EffectProps* props, ALenum param, float val ) {
                                     param };
     }
 }
+
 void Modulator_setParamfv( EffectProps* props,
                            ALenum param,
                            const float* vals ) {
     Modulator_setParamf( props, param, vals[ 0 ] );
 }
+
 void Modulator_setParami( EffectProps* props, ALenum param, int val ) {
     switch ( param ) {
         case AL_RING_MODULATOR_FREQUENCY:
@@ -95,6 +98,7 @@ void Modulator_setParami( EffectProps* props, ALenum param, int val ) {
                                     param };
     }
 }
+
 void Modulator_setParamiv( EffectProps* props, ALenum param, const int* vals ) {
     Modulator_setParami( props, param, vals[ 0 ] );
 }
@@ -117,9 +121,11 @@ void Modulator_getParami( const EffectProps* props, ALenum param, int* val ) {
                                     param };
     }
 }
+
 void Modulator_getParamiv( const EffectProps* props, ALenum param, int* vals ) {
     Modulator_getParami( props, param, vals );
 }
+
 void Modulator_getParamf( const EffectProps* props, ALenum param, float* val ) {
     switch ( param ) {
         case AL_RING_MODULATOR_FREQUENCY:
@@ -135,6 +141,7 @@ void Modulator_getParamf( const EffectProps* props, ALenum param, float* val ) {
                                     param };
     }
 }
+
 void Modulator_getParamfv( const EffectProps* props,
                            ALenum param,
                            float* vals ) {

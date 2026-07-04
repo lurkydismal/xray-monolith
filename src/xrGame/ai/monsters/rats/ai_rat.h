@@ -24,6 +24,7 @@ class rat_state_manager;
 namespace steering_behaviour {
 class manager;
 } // namespace steering_behaviour
+
 class CAI_Rat : public CCustomMonster, public CEatableItem {
 private:
     typedef CCustomMonster inherited;
@@ -350,16 +351,27 @@ public:
 
 public:
     virtual CGameObject* cast_game_object() { return this; };
+
     virtual CInventoryItem* cast_inventory_item() { return this; }
+
     virtual CAttachableItem* cast_attachable_item() { return this; }
+
     virtual CEatableItem* cast_eatable_item() { return this; }
+
     virtual CEntityAlive* cast_entity_alive() { return this; }
+
     virtual CEntity* cast_entity() { return this; }
+
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CParticlesPlayer* cast_particles_player() { return this; }
+
     virtual CCustomMonster* cast_custom_monster() { return this; }
+
     virtual CScriptEntity* cast_script_entity() { return this; }
+
     virtual CWeapon* cast_weapon() { return NULL; }
+
     virtual CAI_Rat* dcast_Rat() { return this; };
 
 public:
@@ -400,23 +412,31 @@ public:
     virtual void OnHUDDraw( CCustomHUD* hud, IDSGraphManager* DM ) {
         inherited::OnHUDDraw( hud, DM );
     }
+
     virtual void OnH_B_Chield();
     virtual void OnH_B_Independent();
     virtual void OnH_A_Independent();
+
     virtual void OnEvent( NET_Packet& P, u16 type ) {
         inherited::OnEvent( P, type );
     }
+
     virtual bool Useful() const;
     virtual BOOL UsedAI_Locations();
+
     ///////////////////////////////////////////////////////////////////////
     virtual u16 PHGetSyncItemsNumber() {
         return inherited::PHGetSyncItemsNumber();
     }
+
     virtual CPHSynchronize* PHGetSyncItem( u16 item ) {
         return inherited::PHGetSyncItem( item );
     }
+
     virtual void PHUnFreeze() { return inherited::PHUnFreeze(); }
+
     virtual void PHFreeze() { return inherited::PHFreeze(); }
+
     ///////////////////////////////////////////////////////////////////////
 #ifdef DEBUG
     virtual void OnRender();
@@ -448,7 +468,9 @@ public:
     virtual void setup_physic_shell();
     virtual void activate_physic_shell();
     virtual void on_activate_physic_shell();
+
     virtual Feel::Sound* dcast_FeelSound() { return this; }
+
     virtual bool use_model_pitch() const;
     virtual float get_custom_pitch_speed( float def_speed );
 
@@ -456,10 +478,13 @@ public:
     virtual void save( NET_Packet& output_packet ) {
         inherited::save( output_packet );
     }
+
     virtual void load( IReader& input_packet ) {
         inherited::load( input_packet );
     }
+
     virtual BOOL net_SaveRelevant() { return inherited::net_SaveRelevant(); }
+
     bool can_stand_here();
     bool can_stand_in_position();
     Fvector get_next_target_point();

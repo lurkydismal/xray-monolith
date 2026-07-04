@@ -24,6 +24,7 @@ const float particles_time = .3f;
 xr_atomic_u32 current_items;
 extern float r_rain_exp;
 extern float r_rain_k;
+
 dxRainRender::dxRainRender() {
     current_items = 0;
 

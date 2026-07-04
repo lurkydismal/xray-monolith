@@ -34,8 +34,11 @@ struct profile {
           m_online( online ) {}
 
     char const* unique_nick() const { return m_unique_nick.c_str(); };
+
     bool const online() const { return m_online; };
+
     GPProfile const profile_id() const { return m_profile_id; };
+
     // copy constructor is valid
     DECLARE_SCRIPT_REGISTER_FUNCTION
 }; // struct profile

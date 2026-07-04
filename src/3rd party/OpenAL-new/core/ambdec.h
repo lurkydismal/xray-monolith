@@ -16,6 +16,7 @@ enum class AmbDecScale {
     SN3D,
     FuMa,
 };
+
 struct AmbDecConf {
     std::string Description;
     int Version{ 0 }; /* Must be 3 */
@@ -34,6 +35,7 @@ struct AmbDecConf {
         float Elevation{ 0.0f };
         std::string Connection;
     };
+
     size_t NumSpeakers{ 0 };
     std::unique_ptr< SpeakerConf[] > Speakers;
 

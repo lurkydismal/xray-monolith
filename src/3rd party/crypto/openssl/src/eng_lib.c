@@ -138,6 +138,7 @@ int ENGINE_free( ENGINE* e ) {
  * bloat by referring to all *possible* cleanups, but any linker bloat into code
  * "X" will cause X's cleanup function to end up here. */
 static STACK_OF( ENGINE_CLEANUP_ITEM ) * cleanup_stack = NULL;
+
 static int int_cleanup_check( int create ) {
     if ( cleanup_stack )
         return 1;
@@ -146,6 +147,7 @@ static int int_cleanup_check( int create ) {
     cleanup_stack = sk_ENGINE_CLEANUP_ITEM_new_null();
     return ( cleanup_stack ? 1 : 0 );
 }
+
 static ENGINE_CLEANUP_ITEM* int_cleanup_item( ENGINE_CLEANUP_CB* cb ) {
     ENGINE_CLEANUP_ITEM* item = OPENSSL_malloc( sizeof( ENGINE_CLEANUP_ITEM ) );
     if ( !item )
@@ -153,6 +155,7 @@ static ENGINE_CLEANUP_ITEM* int_cleanup_item( ENGINE_CLEANUP_CB* cb ) {
     item->cb = cb;
     return item;
 }
+
 void engine_cleanup_add_first( ENGINE_CLEANUP_CB* cb ) {
     ENGINE_CLEANUP_ITEM* item;
     if ( !int_cleanup_check( 1 ) )
@@ -161,6 +164,7 @@ void engine_cleanup_add_first( ENGINE_CLEANUP_CB* cb ) {
     if ( item )
         sk_ENGINE_CLEANUP_ITEM_insert( cleanup_stack, item, 0 );
 }
+
 void engine_cleanup_add_last( ENGINE_CLEANUP_CB* cb ) {
     ENGINE_CLEANUP_ITEM* item;
     if ( !int_cleanup_check( 1 ) )
@@ -169,11 +173,13 @@ void engine_cleanup_add_last( ENGINE_CLEANUP_CB* cb ) {
     if ( item )
         sk_ENGINE_CLEANUP_ITEM_push( cleanup_stack, item );
 }
+
 /* The API function that performs all cleanup */
 static void engine_cleanup_cb_free( ENGINE_CLEANUP_ITEM* item ) {
     ( *( item->cb ) )();
     OPENSSL_free( item );
 }
+
 void ENGINE_cleanup( void ) {
     if ( int_cleanup_check( 0 ) ) {
         sk_ENGINE_CLEANUP_ITEM_pop_free( cleanup_stack,

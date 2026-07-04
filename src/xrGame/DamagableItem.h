@@ -26,6 +26,7 @@ class CDamagableHealthItem : public CDamagableItem {
 public:
     virtual void Init( float max_health, u16 level_num );
     void Hit( float P );
+
     void SetHealth( float health ) { m_health = health; }
 
 protected:

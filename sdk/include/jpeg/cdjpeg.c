@@ -42,6 +42,7 @@ signal_catcher( int signum ) {
 }
 
 GLOBAL( void )
+
 enable_signal_catcher( j_common_ptr cinfo ) {
     sig_cinfo = cinfo;
 #ifdef SIGINT /* not all systems have SIGINT */
@@ -61,6 +62,7 @@ enable_signal_catcher( j_common_ptr cinfo ) {
 #ifdef PROGRESS_REPORT
 
 METHODDEF( void )
+
 progress_monitor( j_common_ptr cinfo ) {
     cd_progress_ptr prog = ( cd_progress_ptr )cinfo->progress;
     int total_passes = prog->pub.total_passes + prog->total_extra_passes;
@@ -82,6 +84,7 @@ progress_monitor( j_common_ptr cinfo ) {
 }
 
 GLOBAL( void )
+
 start_progress_monitor( j_common_ptr cinfo, cd_progress_ptr progress ) {
     /* Enable progress display, unless trace output is on */
     if ( cinfo->err->trace_level == 0 ) {
@@ -94,6 +97,7 @@ start_progress_monitor( j_common_ptr cinfo, cd_progress_ptr progress ) {
 }
 
 GLOBAL( void )
+
 end_progress_monitor( j_common_ptr cinfo ) {
     /* Clear away progress display */
     if ( cinfo->err->trace_level == 0 ) {
@@ -111,6 +115,7 @@ end_progress_monitor( j_common_ptr cinfo ) {
  */
 
 GLOBAL( boolean )
+
 keymatch( char* arg, const char* keyword, int minchars ) {
     // NOTE: LD / removed register
     int ca, ck;
@@ -138,6 +143,7 @@ keymatch( char* arg, const char* keyword, int minchars ) {
  */
 
 GLOBAL( FILE* )
+
 read_stdin( void ) {
     FILE* input_file = stdin;
 
@@ -154,6 +160,7 @@ read_stdin( void ) {
 }
 
 GLOBAL( FILE* )
+
 write_stdout( void ) {
     FILE* output_file = stdout;
 

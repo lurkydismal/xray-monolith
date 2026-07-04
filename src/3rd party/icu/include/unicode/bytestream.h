@@ -57,6 +57,7 @@ public:
      * @stable ICU 4.2
      */
     ByteSink() {}
+
     /**
      * Virtual destructor.
      * @stable ICU 4.2
@@ -195,12 +196,14 @@ public:
                                    char* scratch,
                                    int32_t scratch_capacity,
                                    int32_t* result_capacity );
+
     /**
      * Returns the number of bytes actually written to the sink.
      * @return number of bytes written to the buffer
      * @stable ICU 4.2
      */
     int32_t NumberOfBytesWritten() const { return size_; }
+
     /**
      * Returns true if any bytes were discarded, i.e., if there was an
      * attempt to write more than 'capacity' bytes.
@@ -208,6 +211,7 @@ public:
      * @stable ICU 4.2
      */
     UBool Overflowed() const { return overflowed_; }
+
     /**
      * Returns the number of bytes appended to the sink.
      * If Overflowed() then NumberOfBytesAppended()>NumberOfBytesWritten()
@@ -243,6 +247,7 @@ public:
      * @stable ICU 4.2
      */
     StringByteSink( StringClass* dest ) : dest_( dest ) {}
+
     /**
      * Constructs a ByteSink that reserves append capacity and will append bytes
      * to the dest string.
@@ -260,6 +265,7 @@ public:
             dest->reserve( dest->length() + initialAppendCapacity );
         }
     }
+
     /**
      * Append "bytes[0,n-1]" to this.
      * @param data the pointer to the bytes

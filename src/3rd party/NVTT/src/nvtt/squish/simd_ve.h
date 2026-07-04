@@ -53,6 +53,7 @@ public:
             vector float v;
             float c[ 4 ];
         } u;
+
         u.c[ 0 ] = v[ 0 ];
         u.c[ 1 ] = v[ 1 ];
         u.c[ 2 ] = v[ 2 ];
@@ -65,6 +66,7 @@ public:
             vector float v;
             float c[ 4 ];
         } u;
+
         u.c[ 0 ] = x;
         u.c[ 1 ] = y;
         u.c[ 2 ] = z;
@@ -77,13 +79,17 @@ public:
             vector float v;
             float c[ 4 ];
         } u;
+
         u.v = m_v;
         return Vec3( u.c[ 0 ], u.c[ 1 ], u.c[ 2 ] );
     }
 
     Vec4 SplatX() const { return Vec4( vec_splat( m_v, 0 ) ); }
+
     Vec4 SplatY() const { return Vec4( vec_splat( m_v, 1 ) ); }
+
     Vec4 SplatZ() const { return Vec4( vec_splat( m_v, 2 ) ); }
+
     Vec4 SplatW() const { return Vec4( vec_splat( m_v, 3 ) ); }
 
     Vec4& operator+=( Arg v ) {

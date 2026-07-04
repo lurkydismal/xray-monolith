@@ -110,13 +110,19 @@ public:
     shared_str Bio() const;
 
     const CHARACTER_COMMUNITY& Community() const { return m_CurrentCommunity; }
+
     const CHARACTER_RANK& Rank() const { return m_CurrentRank; }
+
     const CHARACTER_REPUTATION& Reputation() const {
         return m_CurrentReputation;
     }
+
     float Sympathy() const { return m_Sympathy; }
+
     void SetSympathy( float sympathy ) { m_Sympathy = sympathy; }
+
     shared_str GetCharacterId() const { return data()->m_CharacterId; }
+
     shared_str GetSpecificCharacterId() const { return m_SpecificCharacterId; }
 
     // доступут только у InventoryOwner

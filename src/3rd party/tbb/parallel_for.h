@@ -57,6 +57,7 @@ public:
         tbb::internal::fgt_algorithm( tbb::internal::PARALLEL_FOR_TASK, this,
                                       NULL );
     }
+
     //! Splitting constructor used to generate children.
     /** parent_ becomes left child.  Newly constructed object is right child. */
     start_for( start_for& parent_, typename Partitioner::split_type& split_obj )
@@ -67,6 +68,7 @@ public:
         tbb::internal::fgt_algorithm( tbb::internal::PARALLEL_FOR_TASK, this,
                                       ( void* )&parent_ );
     }
+
     //! Construct right child from the given range as response to the demand.
     /** parent_ remains left child.  Newly constructed object is right child. */
     start_for( start_for& parent_, const Range& r, depth_t d )
@@ -78,6 +80,7 @@ public:
         tbb::internal::fgt_algorithm( tbb::internal::PARALLEL_FOR_TASK, this,
                                       ( void* )&parent_ );
     }
+
     static void run( const Range& range,
                      const Body& body,
                      Partitioner& partitioner ) {
@@ -133,6 +136,7 @@ public:
                                         sizeof( start_for ) ) )
                    start_for( *this, split_obj ) );
     }
+
     //! spawn right task, serves as callback for partitioner
     void offer_work( const Range& r, depth_t d = 0 ) {
         spawn( *new ( allocate_sibling( static_cast< task* >( this ),
@@ -160,6 +164,7 @@ task* start_for< Range, Body, Partitioner >::execute() {
     return NULL;
 }
 } // namespace internal
+
 //! @endcond
 } // namespace interface9
 
@@ -198,6 +203,7 @@ public:
     }
 };
 } // namespace internal
+
 //! @endcond
 
 // Requirements on Range concept are documented in blocked_range.h
@@ -356,6 +362,7 @@ void parallel_for( Index first, Index last, Index step, const Function& f ) {
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, step, f, auto_partitioner() );
 }
+
 //! Parallel iteration over a range of integers with a step provided and simple
 //! partitioner
 template < typename Index, typename Function >
@@ -367,6 +374,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const simple_partitioner >(
         first, last, step, f, partitioner );
 }
+
 //! Parallel iteration over a range of integers with a step provided and auto
 //! partitioner
 template < typename Index, typename Function >
@@ -378,6 +386,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, step, f, partitioner );
 }
+
 //! Parallel iteration over a range of integers with a step provided and static
 //! partitioner
 template < typename Index, typename Function >
@@ -389,6 +398,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const static_partitioner >(
         first, last, step, f, partitioner );
 }
+
 //! Parallel iteration over a range of integers with a step provided and
 //! affinity partitioner
 template < typename Index, typename Function >
@@ -407,6 +417,7 @@ void parallel_for( Index first, Index last, const Function& f ) {
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, static_cast< Index >( 1 ), f, auto_partitioner() );
 }
+
 //! Parallel iteration over a range of integers with a default step value and
 //! simple partitioner
 template < typename Index, typename Function >
@@ -417,6 +428,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const simple_partitioner >(
         first, last, static_cast< Index >( 1 ), f, partitioner );
 }
+
 //! Parallel iteration over a range of integers with a default step value and
 //! auto partitioner
 template < typename Index, typename Function >
@@ -427,6 +439,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, static_cast< Index >( 1 ), f, partitioner );
 }
+
 //! Parallel iteration over a range of integers with a default step value and
 //! static partitioner
 template < typename Index, typename Function >
@@ -437,6 +450,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const static_partitioner >(
         first, last, static_cast< Index >( 1 ), f, partitioner );
 }
+
 //! Parallel iteration over a range of integers with a default step value and
 //! affinity partitioner
 template < typename Index, typename Function >
@@ -481,6 +495,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, step, f, auto_partitioner(), context );
 }
+
 //! Parallel iteration over a range of integers with explicit step, task group
 //! context, and simple partitioner
 template < typename Index, typename Function >
@@ -493,6 +508,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const simple_partitioner >(
         first, last, step, f, partitioner, context );
 }
+
 //! Parallel iteration over a range of integers with explicit step, task group
 //! context, and auto partitioner
 template < typename Index, typename Function >
@@ -505,6 +521,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, step, f, partitioner, context );
 }
+
 //! Parallel iteration over a range of integers with explicit step, task group
 //! context, and static partitioner
 template < typename Index, typename Function >
@@ -517,6 +534,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const static_partitioner >(
         first, last, step, f, partitioner, context );
 }
+
 //! Parallel iteration over a range of integers with explicit step, task group
 //! context, and affinity partitioner
 template < typename Index, typename Function >
@@ -540,6 +558,7 @@ void parallel_for( Index first,
         first, last, static_cast< Index >( 1 ), f, auto_partitioner(),
         context );
 }
+
 //! Parallel iteration over a range of integers with a default step value,
 //! explicit task group context, and simple partitioner
 template < typename Index, typename Function >
@@ -551,6 +570,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const simple_partitioner >(
         first, last, static_cast< Index >( 1 ), f, partitioner, context );
 }
+
 //! Parallel iteration over a range of integers with a default step value,
 //! explicit task group context, and auto partitioner
 template < typename Index, typename Function >
@@ -562,6 +582,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const auto_partitioner >(
         first, last, static_cast< Index >( 1 ), f, partitioner, context );
 }
+
 //! Parallel iteration over a range of integers with a default step value,
 //! explicit task group context, and static partitioner
 template < typename Index, typename Function >
@@ -573,6 +594,7 @@ void parallel_for( Index first,
     parallel_for_impl< Index, Function, const static_partitioner >(
         first, last, static_cast< Index >( 1 ), f, partitioner, context );
 }
+
 //! Parallel iteration over a range of integers with a default step value,
 //! explicit task group context, and affinity_partitioner
 template < typename Index, typename Function >

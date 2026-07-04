@@ -56,8 +56,11 @@ public:
     virtual ~CEffectorController();
 
     void SetPP( CEffectorPP* p ) { m_pe = p; }
+
     void SetCam( CEffectorCam* p ) { m_ce = p; }
+
     virtual BOOL Valid() { return m_ce || m_pe; };
+
     virtual float xr_stdcall GetFactor() = 0;
 };
 
@@ -70,6 +73,7 @@ private:
 
 protected:
     virtual bool Cyclic() const { return m_bCyclic; }
+
     CObjectAnimator* m_objectAnimator;
 
 public:
@@ -81,10 +85,15 @@ public:
     virtual ~CAnimatorCamEffector();
     void Start( LPCSTR fn );
     virtual BOOL ProcessCam( SCamEffectorInfo& info );
+
     void SetCyclic( bool b ) { m_bCyclic = b; }
+
     void SetPower( float p ) { m_power = p; }
+
     float GetPower() { return m_power; }
+
     virtual BOOL Valid();
+
     float GetAnimatorLength() { return fLifeTime; };
 
     virtual bool AbsolutePositioning() { return m_bAbsolutePositioning; }
@@ -99,8 +108,11 @@ private:
 
 public:
     CAnimatorCamEffectorScriptCB( LPCSTR _cb ) { cb_name = _cb; };
+
     virtual BOOL Valid();
+
     virtual BOOL AllowProcessingIfInvalid() { return m_bAbsolutePositioning; }
+
     virtual void ProcessIfInvalid( SCamEffectorInfo& info );
 };
 
@@ -116,6 +128,7 @@ protected:
 
 public:
     void SetFactorFunc( GET_KOEFF_FUNC f ) { m_func = f; }
+
     virtual BOOL ProcessCam( SCamEffectorInfo& info );
 };
 

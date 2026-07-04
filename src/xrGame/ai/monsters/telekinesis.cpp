@@ -79,6 +79,7 @@ void CTelekinesis::clear_deactivate() {
 
 struct SFindPred {
     CPhysicsShellHolder* obj;
+
     SFindPred( CPhysicsShellHolder* aobj ) { obj = aobj; }
 
     bool operator()( CTelekineticObject* tele_obj ) {

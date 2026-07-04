@@ -79,9 +79,11 @@ struct Module {
     string path;
     void* address;
     size_t size;
+
     Module( const char* p, void* a, size_t s )
         : path( p ), address( a ), size( s ) {}
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Symbol {
     uint64 address;
@@ -89,8 +91,10 @@ struct Symbol {
     wstring file;
     wstring function;
     uint32 line;
+
     Symbol() : address( 0 ), offset( 0 ), line( 0 ) {}
 };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct SymbolEngine {
     // Get list of loaded modules
@@ -102,6 +106,7 @@ struct SymbolEngine {
     virtual ~SymbolEngine() {};
 };
 } // namespace Optick
+
 //////////////////////////////////////////////////////////////////////////
 
 #endif // USE_OPTICK

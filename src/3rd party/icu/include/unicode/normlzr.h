@@ -29,6 +29,7 @@
 #include "unicode/uobject.h"
 
 U_NAMESPACE_BEGIN
+
 /**
  * Old Unicode normalization API.
  *

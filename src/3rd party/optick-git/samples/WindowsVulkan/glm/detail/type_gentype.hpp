@@ -37,6 +37,7 @@ public:
     // Address (Implementation details)
 
     value_const_pointer value_address() const { return value_pointer( this ); }
+
     value_pointer value_address() { return value_pointer( this ); }
 
     // protected:
@@ -54,6 +55,7 @@ template < typename VALTYPE, template < typename > class TYPE >
 bool genType< VALTYPE, TYPE >::is_vector() {
     return true;
 }
+
 /*
         template<typename valTypeT, unsigned int colT, unsigned int rowT,
    profile proT = nice> class base

@@ -37,6 +37,7 @@ __TBB_WINBASEAPI BOOL WINAPI
 #define InitializeCriticalSectionEx inlineInitializeCriticalSectionEx
 #define CreateSemaphoreEx inlineCreateSemaphoreEx
 #define CreateEventEx inlineCreateEventEx
+
 inline BOOL WINAPI
 inlineInitializeCriticalSectionEx( LPCRITICAL_SECTION lpCriticalSection,
                                    DWORD dwSpinCount,
@@ -44,6 +45,7 @@ inlineInitializeCriticalSectionEx( LPCRITICAL_SECTION lpCriticalSection,
     return InitializeCriticalSectionAndSpinCount( lpCriticalSection,
                                                   dwSpinCount );
 }
+
 inline HANDLE WINAPI
 inlineCreateSemaphoreEx( LPSECURITY_ATTRIBUTES lpSemaphoreAttributes,
                          LONG lInitialCount,
@@ -54,6 +56,7 @@ inlineCreateSemaphoreEx( LPSECURITY_ATTRIBUTES lpSemaphoreAttributes,
     return CreateSemaphore( lpSemaphoreAttributes, lInitialCount, lMaximumCount,
                             lpName );
 }
+
 inline HANDLE WINAPI
 inlineCreateEventEx( LPSECURITY_ATTRIBUTES lpEventAttributes,
                      LPCTSTR lpName,

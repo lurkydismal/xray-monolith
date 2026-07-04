@@ -36,6 +36,7 @@ public:
     FS_file_list( xr_vector< LPSTR >* p ) : m_p( p ) {}
 
     u32 Size() { return m_p->size(); }
+
     LPCSTR GetAt( u32 idx ) { return m_p->at( idx ); }
 
     void Free() { FS.file_list_close( m_p ); };
@@ -48,7 +49,9 @@ struct FS_item {
     string256 buff;
 
     LPCSTR NameShort() { return name; }
+
     LPCSTR NameFull() { return name; }
+
     u32 Size() { return size; }
 
     LPCSTR Modif() {
@@ -107,7 +110,9 @@ public:
     FS_file_list_ex( LPCSTR path, u32 flags, LPCSTR mask );
 
     u32 Size() { return m_file_items.size(); }
+
     FS_item GetAt( u32 idx ) { return m_file_items[ idx ]; }
+
     void Sort( u32 flags );
 };
 
@@ -192,6 +197,7 @@ LPCSTR get_file_age_str( CLocatorAPI* fs, LPCSTR nm ) {
 }
 
 #pragma optimize( "s", on )
+
 void fs_registrator::script_register( lua_State* L ) {
     module( L )[ class_< FS_item >( "FS_item" )
                      .def( "NameFull", &FS_item::NameFull )

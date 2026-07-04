@@ -39,12 +39,17 @@ public:
     float f_aspect;
 
     IC Fvector Position() const { return vPosition; }
+
     IC Fvector Direction() const { return vDirection; }
+
     IC Fvector Up() const { return vNormal; }
+
     IC Fvector Right() const {
         return Fvector().crossproduct( vNormal, vDirection );
     }
+
     IC float Fov() const { return f_fov; }
+
     IC float Aspect() const { return f_aspect; }
 
     int tag;
@@ -60,8 +65,11 @@ public:
     }
 
     virtual void OnActivate( CCameraBase* old_cam ) { ; }
+
     virtual void OnDeactivate() { ; }
+
     virtual void Move( int cmd, float val = 0, float factor = 1.0f ) { ; }
+
     virtual void Update( Fvector& point, Fvector& noise_angle ) { ; }
 
     virtual void Get( Fvector& P, Fvector& D, Fvector& N ) {
@@ -83,6 +91,7 @@ public:
     }
 
     virtual float GetWorldYaw() { return 0; };
+
     virtual float GetWorldPitch() { return 0; };
 
     virtual float CheckLimYaw();

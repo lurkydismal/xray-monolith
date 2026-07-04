@@ -118,6 +118,7 @@ float InitConeScale() {
     }
     return ret;
 }
+
 /* Cone scalar */
 const float ConeScale{ InitConeScale() };
 
@@ -566,6 +567,7 @@ template <>
 constexpr size_t CalcRotatorSize< 0 >() = delete;
 template <>
 constexpr size_t CalcRotatorSize< 1 >() = delete;
+
 template <>
 constexpr size_t CalcRotatorSize< 2 >() {
     return 5 * 5;
@@ -575,6 +577,7 @@ struct RotatorCoeffs {
     struct CoeffValues {
         float u, v, w;
     };
+
     std::array< CoeffValues, CalcRotatorSize< MaxAmbiOrder >() > mCoeffs{};
 
     RotatorCoeffs() {
@@ -606,6 +609,7 @@ struct RotatorCoeffs {
         }
     }
 };
+
 const RotatorCoeffs RotatorCoeffArray{};
 
 /**
@@ -696,6 +700,7 @@ void AmbiRotator( AmbiRotateMatrix& matrix, const int order ) {
         band_idx += static_cast< uint >( l ) * size_t{ 2 } + 1;
     }
 }
+
 /* End ambisonic rotation helpers. */
 
 constexpr float Deg2Rad( float x ) noexcept {
@@ -2085,6 +2090,7 @@ template <>
 inline float SampleConv( float val ) noexcept {
     return val;
 }
+
 template <>
 inline int32_t SampleConv( float val ) noexcept {
     /* Floats have a 23-bit mantissa, plus an implied 1 bit and a sign bit.
@@ -2095,11 +2101,13 @@ inline int32_t SampleConv( float val ) noexcept {
     return fastf2i(
         clampf( val * 2147483648.0f, -2147483648.0f, 2147483520.0f ) );
 }
+
 template <>
 inline int16_t SampleConv( float val ) noexcept {
     return static_cast< int16_t >(
         fastf2i( clampf( val * 32768.0f, -32768.0f, 32767.0f ) ) );
 }
+
 template <>
 inline int8_t SampleConv( float val ) noexcept {
     return static_cast< int8_t >(
@@ -2112,10 +2120,12 @@ inline uint32_t SampleConv( float val ) noexcept {
     return static_cast< uint32_t >( SampleConv< int32_t >( val ) ) +
            2147483648u;
 }
+
 template <>
 inline uint16_t SampleConv( float val ) noexcept {
     return static_cast< uint16_t >( SampleConv< int16_t >( val ) + 32768 );
 }
+
 template <>
 inline uint8_t SampleConv( float val ) noexcept {
     return static_cast< uint8_t >( SampleConv< int8_t >( val ) + 128 );

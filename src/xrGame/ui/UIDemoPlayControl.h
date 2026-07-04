@@ -24,9 +24,11 @@ public:
     // mouse_action); virtual bool	OnKeyboard		(int dik,
     // EUIMessages keyboard_action);
     virtual bool OnKeyboardAction( int dik, EUIMessages keyboard_action );
+
     virtual bool WorkInPause() const { return true; }
 
     virtual void Update();
+
     Fvector2 const& GetLastCursorPos() const { return m_last_curr_pos; };
 
     void xr_stdcall OnRestart( CUIWindow* w, void* d );
@@ -54,6 +56,7 @@ private:
         eRewindUntilArtDrop,
         eRewindUntilArtDeliver
     }; // enum eRewindTypeTags
+
     typedef buffer_vector< shared_str > players_collection_t;
 
     ERewindTypeTags m_last_rewind_type;

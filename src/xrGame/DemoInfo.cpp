@@ -176,6 +176,7 @@ demo_player_info const* demo_info::get_player( u32 player_index ) const {
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void demo_player_info::script_register( lua_State* L ) {
     module( L )[ class_< demo_player_info >( "demo_player_info" )
                      .def( "get_name", &demo_player_info::get_name )

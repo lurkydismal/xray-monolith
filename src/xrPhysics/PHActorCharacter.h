@@ -14,6 +14,7 @@ struct SPHCharacterRestrictor {
     }
 
     ~SPHCharacterRestrictor() { Destroy(); };
+
     CPHCharacter* m_character;
     ERestrictionType m_type;
 
@@ -78,6 +79,7 @@ struct TPHCharacterRestrictor : public SPHCharacterRestrictor {
 };
 
 DEFINE_VECTOR( SPHCharacterRestrictor*, RESRICTORS_V, RESTRICTOR_I );
+
 // typedef SPHCharacterRestrictor*		RESRICTORS_V[2];
 // typedef SPHCharacterRestrictor**	RESTRICTOR_I;
 IC RESTRICTOR_I begin( RESRICTORS_V& v ) {
@@ -104,6 +106,7 @@ public:
 
 public:
     virtual CPHActorCharacter* CastActorCharacter() { return this; }
+
     virtual void SetObjectContactCallback( ObjectContactCallbackFun* callback );
     virtual void SetMaterial( u16 material );
     virtual void Create( dVector3 sizes );

@@ -609,7 +609,9 @@ public:
     }
 
     const_iterator begin() const __TBB_NOEXCEPT( true ) { return my_begin; }
+
     const_iterator end() const __TBB_NOEXCEPT( true ) { return my_end; }
+
     size_t size() const __TBB_NOEXCEPT( true ) {
         return ( size_t )( my_end - my_begin );
     }
@@ -642,6 +644,7 @@ struct alignment_of {
         char t;
         U padded;
     } test_alignment;
+
     static const size_t value = sizeof( test_alignment ) - sizeof( U );
 };
 
@@ -673,6 +676,7 @@ struct default_constructed {};
 // struct to allow us to copy and test the type of objects
 struct WrapperBase {
     virtual ~WrapperBase() {}
+
     virtual void CopyTo( void* /*newSpace*/ ) const {}
 };
 
@@ -697,7 +701,9 @@ private:
     // trivially-constructed object
     struct _unwind_space {
         pointer_type space;
+
         _unwind_space( pointer_type p ) : space( p ) {}
+
         ~_unwind_space() {
             if ( space )
                 ( void )new ( space )
@@ -707,6 +713,7 @@ private:
 
 public:
     explicit Wrapper( const T& other ) : value_space( other ) {}
+
     explicit Wrapper( const Wrapper& other )
         : value_space( other.value_space ) {}
 
@@ -715,6 +722,7 @@ public:
         ( void )new ( newSpace ) Wrapper( value_space );
         guard.space = NULL;
     }
+
     ~Wrapper() {}
 };
 
@@ -741,7 +749,9 @@ private:
     struct _unwind_class {
         pointer_type space;
         int already_built;
+
         _unwind_class( pointer_type p ) : space( p ), already_built( 0 ) {}
+
         ~_unwind_class() {
             if ( space ) {
                 for ( size_t i = already_built; i > 0; --i )
@@ -772,6 +782,7 @@ public:
         }
         guard.space = NULL;
     }
+
     explicit Wrapper( const Wrapper& other ) : WrapperBase() {
         // we have to do the heavy lifting to copy contents
         _unwind_class guard( ( pointer_type )value_space );
@@ -805,10 +816,12 @@ public:
 
 template < bool, class T1, class T2 >
 struct pick_one;
+
 template < class T1, class T2 >
 struct pick_one< true, T1, T2 > {
     typedef T1 type;
 };
+
 template < class T1, class T2 >
 struct pick_one< false, T1, T2 > {
     typedef T2 type;
@@ -861,12 +874,14 @@ struct ERROR_Type_Not_allowed_In_Tagged_Msg_Not_Member_Of_Tuple;
 
 template < typename T, bool BUILD_IT >
 struct do_if;
+
 template < typename T >
 struct do_if< T, true > {
     static void construct( void* mySpace, const T& x ) {
         ( void )new ( mySpace ) Wrapper< T >( x );
     }
 };
+
 template < typename T >
 struct do_if< T, false > {
     static void construct( void* /*mySpace*/, const T& x ) {
@@ -884,7 +899,9 @@ struct do_if< T, false > {
 // fetched by cast_to<T>().
 
 using tbb::internal::punned_cast;
+
 struct tagged_null_type {};
+
 template < typename TagType,
            typename T0,
            typename T1 = tagged_null_type,
@@ -981,6 +998,7 @@ private:
             }
             return h->value();
         }
+
         template < typename U >
         bool variant_is_a() const {
             return dynamic_cast< const Wrapper< U >* >(
@@ -1014,6 +1032,7 @@ public:
 #endif
 
     void set_tag( TagType const& index ) { my_tag = index; }
+
     TagType tag() const { return my_tag; }
 
     template < typename V >

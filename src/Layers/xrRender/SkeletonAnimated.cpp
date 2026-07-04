@@ -13,6 +13,7 @@
 extern int psSkeletonUpdate;
 extern shared_str current_player_hud_sect;
 using namespace animation;
+
 //////////////////////////////////////////////////////////////////////////
 // BoneInstance methods
 void CBlendInstance::construct() {

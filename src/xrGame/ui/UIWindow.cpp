@@ -16,11 +16,14 @@ poolSS< _12b, 128 > ui_allocator;
 // #define LOG_ALL_WNDS
 #ifdef LOG_ALL_WNDS
 int ListWndCount = 0;
+
 struct DBGList {
     int num;
     bool closed;
 };
+
 xr_vector< DBGList > dbg_list_wnds;
+
 void dump_list_wnd() {
     Msg( "------Total  wnds %d", dbg_list_wnds.size() );
     xr_vector< DBGList >::iterator _it = dbg_list_wnds.begin();

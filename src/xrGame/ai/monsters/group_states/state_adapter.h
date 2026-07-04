@@ -45,7 +45,9 @@ public:
     virtual ~CMonsterStateAdapter() { xr_delete( m_impl ); }
 
     virtual void initialize() { m_impl->initialize(); }
+
     virtual void execute() { m_impl->execute(); }
+
     virtual bool check_completion() { return m_impl->check_completion(); }
 
     virtual void remove_links( CObject* object ) {

@@ -33,7 +33,9 @@ private:
 public:
     CUIItemInfo();
     virtual ~CUIItemInfo();
+
     CInventoryItem* CurrentItem() const { return m_pInvItem; }
+
     void InitItemInfo( Fvector2 pos, Fvector2 size, LPCSTR xml_name );
     void InitItemInfo( LPCSTR xml_name );
     void InitItem( CUICellItem* pCellItem,

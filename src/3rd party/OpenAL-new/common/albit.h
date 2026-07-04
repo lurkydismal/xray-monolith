@@ -46,9 +46,11 @@ namespace detail_ {
 inline int popcount( unsigned long long val ) noexcept {
     return __builtin_popcountll( val );
 }
+
 inline int popcount( unsigned long val ) noexcept {
     return __builtin_popcountl( val );
 }
+
 inline int popcount( unsigned int val ) noexcept {
     return __builtin_popcount( val );
 }
@@ -56,9 +58,11 @@ inline int popcount( unsigned int val ) noexcept {
 inline int countr_zero( unsigned long long val ) noexcept {
     return __builtin_ctzll( val );
 }
+
 inline int countr_zero( unsigned long val ) noexcept {
     return __builtin_ctzl( val );
 }
+
 inline int countr_zero( unsigned int val ) noexcept {
     return __builtin_ctz( val );
 }
@@ -92,18 +96,22 @@ countr_zero( T val ) noexcept {
 namespace detail_ {
 template < typename T, size_t = std::numeric_limits< T >::digits >
 struct fast_utype {};
+
 template < typename T >
 struct fast_utype< T, 8 > {
     using type = std::uint_fast8_t;
 };
+
 template < typename T >
 struct fast_utype< T, 16 > {
     using type = std::uint_fast16_t;
 };
+
 template < typename T >
 struct fast_utype< T, 32 > {
     using type = std::uint_fast32_t;
 };
+
 template < typename T >
 struct fast_utype< T, 64 > {
     using type = std::uint_fast64_t;

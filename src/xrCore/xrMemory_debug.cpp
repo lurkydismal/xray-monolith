@@ -21,6 +21,7 @@ void xrMemory::dbg_check() {}
 bool pred_mdbg( const xrMemory::mdbg& A ) {
     return ( 0 == A._p && 0 == A._size );
 }
+
 extern u32 get_header( void* P );
 extern u32 get_pool( size_t size );
 BOOL g_bDbgFillMemory = true;
@@ -61,6 +62,7 @@ void xrMemory::dbg_register( void* _p, size_t _size, const char* _name ) {
     debug_mode = TRUE;
     debug_cs.Leave();
 }
+
 void xrMemory::dbg_unregister( void* _p ) {
     VERIFY( debug_mode );
     debug_cs.Enter();

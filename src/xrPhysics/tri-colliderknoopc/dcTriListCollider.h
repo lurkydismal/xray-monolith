@@ -79,6 +79,7 @@ private:
                           int Flags,
                           dContactGeom* Contacts,
                           int skip );
+
     IC float dSphereProj( dxGeom* sphere, const dReal* /**normal/**/ ) {
         VERIFY( dGeomGetClass( sphere ) == dSphereClass );
         return dGeomSphereGetRadius( sphere );
@@ -210,6 +211,7 @@ private:
 TRI_PRIMITIVE_COLIDE_CLASS_IMPLEMENT( Box )
 TRI_PRIMITIVE_COLIDE_CLASS_IMPLEMENT( Cyl )
 TRI_PRIMITIVE_COLIDE_CLASS_IMPLEMENT( Sphere )
+
 IC void dcTriListCollider::VxToGlClTriState( u32 v, CDB::TRI* T_array ) {
     // CDB::TRI*       T_array      = Level().ObjectSpace.GetStaticTris();
     xr_vector< int >::iterator LI = I + 1;

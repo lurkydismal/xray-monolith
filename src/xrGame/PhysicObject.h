@@ -94,6 +94,7 @@ public:
     bool get_door_vectors( Fvector& closed, Fvector& open ) const;
 
     virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+
     virtual CPhysicObject* cast_physics_object() { return this; }
 
 public:
@@ -132,10 +133,13 @@ public:
 protected:
     virtual void SpawnInitPhysics( CSE_Abstract* D );
     virtual void RunStartupAnim( CSE_Abstract* D );
+
     virtual CPhysicsShellHolder* PPhysicsShellHolder() {
         return PhysicsShellHolder();
     }
+
     virtual CPHSkeleton* PHSkeleton() { return this; }
+
     virtual void InitServerObject( CSE_Abstract* po );
     virtual void PHObjectPositionUpdate();
 

@@ -73,6 +73,7 @@ struct parallel_for_each_impl {
         tbb::parallel_do( first, last, body );
     }
 };
+
 template < typename Iterator, typename Function >
 struct parallel_for_each_impl< Iterator,
                                Function,
@@ -94,6 +95,7 @@ struct parallel_for_each_impl< Iterator,
     }
 };
 } // namespace internal
+
 //! @endcond
 
 /** \name parallel_for_each

@@ -32,10 +32,12 @@ XRCORE_API extern u64 QPC();
 #ifndef _M_AMD64
 #pragma warning( push )
 #pragma warning( disable : 4035 )
+
 IC u64 GetCLK( void ) {
     _asm _emit 0x0F;
     _asm _emit 0x31;
 }
+
 #pragma warning( pop )
 #else
 IC u64 GetCLK( void ) {

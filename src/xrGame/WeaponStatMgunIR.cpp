@@ -106,6 +106,7 @@ void CWeaponStatMgun::OnKeyboardHold( int dik ) {}
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CWeaponStatMgun::script_register( lua_State* L ) {
     module( L )
         [ class_< CWeaponStatMgun, bases< CGameObject, CHolderCustom > >(

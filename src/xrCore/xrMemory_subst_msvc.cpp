@@ -29,6 +29,7 @@ ICF u8* acc_header( void* P ) {
 ICF u32 get_header( void* P ) {
     return ( u32 )*acc_header( P );
 }
+
 ICF u32 get_pool( size_t size ) {
     u32 pid = u32( size / mem_pools_ebase );
     if ( pid >= mem_pools_count )

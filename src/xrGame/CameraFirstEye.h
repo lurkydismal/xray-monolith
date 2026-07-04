@@ -20,6 +20,7 @@ public:
     virtual void Update( Fvector& point, Fvector& noise_angle );
 
     virtual float GetWorldYaw() { return -yaw; };
+
     virtual float GetWorldPitch() { return pitch; };
 
     void LookAtPoint( Fvector p ) {

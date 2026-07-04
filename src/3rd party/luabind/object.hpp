@@ -308,6 +308,7 @@ public:
 
     // this is a safe substitute for an implicit converter to bool
     typedef void ( object::*member_ptr )() const;
+
     operator member_ptr() const {
         if ( is_valid() )
             return &object::dummy;
@@ -368,7 +369,9 @@ public:
         allocate_slot();
         m_ref.replace( m_state );
     }
+
     lua_State* lua_state() const { return m_state; }
+
     void pushvalue() const {
         // you are trying to dereference an invalid object
         assert( ( m_ref.is_valid() ) &&
@@ -564,6 +567,7 @@ struct tuple_object_ref {
     }
 
     tuple_object_ref( const tuple_object_ref& );
+
     assign_into operator=( const tuple_object_ref& x ) {
         for ( std::size_t i = 0; i < n && i < x.n; ++i )
             *refs[ i ] = *x.refs[ i ];

@@ -26,6 +26,7 @@ public:
     virtual ~CAlienEffectorPP();
 
     void Update( float new_factor ) { factor = new_factor; }
+
     void Destroy();
 
 private:

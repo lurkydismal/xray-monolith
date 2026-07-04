@@ -31,8 +31,11 @@ public:
     CMapSpot( CMapLocation* );
     virtual ~CMapSpot();
     virtual void Load( CUIXml* xml, LPCSTR path );
+
     CMapLocation* MapLocation() { return m_map_location; }
+
     int get_location_level() { return m_location_level; }
+
     virtual LPCSTR GetHint();
     virtual void SetWndPos( const Fvector2& pos );
     virtual void Update();
@@ -75,8 +78,11 @@ protected:
 
 public:
     IC void SetWndPosOrigin( const Fvector2& pos ) { m_origin_pos = pos; }
+
     IC void SetWndSizeOrigin( const Fvector2& size ) { m_origin_size = size; }
+
     IC const Fvector2& GetWndPosOrigin() const { return m_origin_pos; }
+
     IC const Fvector2& GetWndSizeOrigin() const { return m_origin_size; }
 
     void InitWndOrigin();
@@ -118,6 +124,7 @@ public:
     }
 
     void SetTimerFinish( ALife::_TIME_ID time ); // ms game_time
+
     ALife::_TIME_ID GetTimerFinish() const { return m_timer_finish; }
 
 protected:

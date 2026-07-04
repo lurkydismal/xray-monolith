@@ -30,7 +30,9 @@ public:
     void ParseDefinitions();
     void Init( CCar* pcar );
     void Update();
+
     CCar* PCar() { return m_pcar; }
+
     void SwitchHeadLights();
     void TurnOnHeadLights();
     void TurnOffHeadLights();

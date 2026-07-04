@@ -12,6 +12,7 @@ public:
     void destroy();
 
     bool is_active() const { return m_model != nullptr; }
+
     IKinematics* model() const { return m_model; }
 
 private:

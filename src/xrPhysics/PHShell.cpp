@@ -1027,6 +1027,7 @@ void CPHShell::SetCallbacks() {
     struct set_bone_callback {
         void operator()( CPHElement* e ) { e->SetBoneCallback(); }
     };
+
     std::for_each( elements.begin(), elements.end(), set_bone_callback() );
 
     struct set_bone_reference : private xray::noncopyable {
@@ -1046,6 +1047,7 @@ void CPHShell::SetCallbacks() {
             }
         }
     };
+
     for_each_bone_id( *PKinematics(), set_bone_reference( *PKinematics() ) );
 
     // element_position_in_set_calbacks=u16(-1);
@@ -1748,6 +1750,7 @@ void CPHShell::dbg_draw_velocity( float scale, u32 color ) {
     for ( ; i != e; ++i )
         ( *i )->dbg_draw_velocity( scale, color );
 }
+
 void CPHShell::dbg_draw_force( float scale, u32 color ) {
     ELEMENT_I i, e;
     i = elements.begin();

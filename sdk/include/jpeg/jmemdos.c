@@ -93,10 +93,12 @@ You forgot to define USE_MSDOS_MEMMGR in jconfig.h./* deliberate syntax error */
      */
 
     typedef void far* XMSDRIVER; /* actually a pointer to code */
-typedef struct {                 /* registers for calling XMS driver */
+
+typedef struct { /* registers for calling XMS driver */
     unsigned short ax, dx, bx;
     void far* ds_si;
 } XMScontext;
+
 typedef struct { /* registers for calling EMS driver */
     unsigned short ax, dx, bx;
     void far* ds_si;
@@ -124,6 +126,7 @@ extern void far jems_calldriver JPP( ( EMScontext far* ));
 static int next_file_num; /* to distinguish among several temp files */
 
 LOCAL( void )
+
 select_file_name( char* fname ) {
     const char* env;
     char* ptr;
@@ -160,11 +163,13 @@ select_file_name( char* fname ) {
  */
 
 GLOBAL( void* )
+
 jpeg_get_small( j_common_ptr cinfo, size_t sizeofobject ) {
     return ( void* )malloc( sizeofobject );
 }
 
 GLOBAL( void )
+
 jpeg_free_small( j_common_ptr cinfo, void* object, size_t sizeofobject ) {
     free( object );
 }
@@ -174,11 +179,13 @@ jpeg_free_small( j_common_ptr cinfo, void* object, size_t sizeofobject ) {
  */
 
 GLOBAL( void FAR* )
+
 jpeg_get_large( j_common_ptr cinfo, size_t sizeofobject ) {
     return ( void FAR* )far_malloc( sizeofobject );
 }
 
 GLOBAL( void )
+
 jpeg_free_large( j_common_ptr cinfo, void FAR* object, size_t sizeofobject ) {
     far_free( object );
 }
@@ -196,6 +203,7 @@ jpeg_free_large( j_common_ptr cinfo, void FAR* object, size_t sizeofobject ) {
 #endif
 
 GLOBAL( long )
+
 jpeg_mem_available( j_common_ptr cinfo,
                     long min_bytes_needed,
                     long max_bytes_needed,
@@ -229,6 +237,7 @@ jpeg_mem_available( j_common_ptr cinfo,
  */
 
 METHODDEF( void )
+
 read_file_store( j_common_ptr cinfo,
                  backing_store_ptr info,
                  void FAR* buffer_address,
@@ -245,6 +254,7 @@ read_file_store( j_common_ptr cinfo,
 }
 
 METHODDEF( void )
+
 write_file_store( j_common_ptr cinfo,
                   backing_store_ptr info,
                   void FAR* buffer_address,
@@ -261,6 +271,7 @@ write_file_store( j_common_ptr cinfo,
 }
 
 METHODDEF( void )
+
 close_file_store( j_common_ptr cinfo, backing_store_ptr info ) {
     jdos_close( info->handle.file_handle ); /* close the file */
     remove( info->temp_name );              /* delete the file */
@@ -272,6 +283,7 @@ close_file_store( j_common_ptr cinfo, backing_store_ptr info ) {
 }
 
 LOCAL( boolean )
+
 open_file_store( j_common_ptr cinfo,
                  backing_store_ptr info,
                  long total_bytes_needed ) {
@@ -315,6 +327,7 @@ typedef struct { /* XMS move specification structure */
 #define ODD( X ) ( ( ( X ) & 1L ) != 0 )
 
 METHODDEF( void )
+
 read_xms_store( j_common_ptr cinfo,
                 backing_store_ptr info,
                 void FAR* buffer_address,
@@ -348,6 +361,7 @@ read_xms_store( j_common_ptr cinfo,
 }
 
 METHODDEF( void )
+
 write_xms_store( j_common_ptr cinfo,
                  backing_store_ptr info,
                  void FAR* buffer_address,
@@ -383,6 +397,7 @@ write_xms_store( j_common_ptr cinfo,
 }
 
 METHODDEF( void )
+
 close_xms_store( j_common_ptr cinfo, backing_store_ptr info ) {
     XMScontext ctx;
 
@@ -394,6 +409,7 @@ close_xms_store( j_common_ptr cinfo, backing_store_ptr info ) {
 }
 
 LOCAL( boolean )
+
 open_xms_store( j_common_ptr cinfo,
                 backing_store_ptr info,
                 long total_bytes_needed ) {
@@ -470,6 +486,7 @@ typedef union {       /* EMS move specification structure */
 #define LOBYTE( W ) ( ( W ) & 0xFF )
 
 METHODDEF( void )
+
 read_ems_store( j_common_ptr cinfo,
                 backing_store_ptr info,
                 void FAR* buffer_address,
@@ -495,6 +512,7 @@ read_ems_store( j_common_ptr cinfo,
 }
 
 METHODDEF( void )
+
 write_ems_store( j_common_ptr cinfo,
                  backing_store_ptr info,
                  void FAR* buffer_address,
@@ -520,6 +538,7 @@ write_ems_store( j_common_ptr cinfo,
 }
 
 METHODDEF( void )
+
 close_ems_store( j_common_ptr cinfo, backing_store_ptr info ) {
     EMScontext ctx;
 
@@ -531,6 +550,7 @@ close_ems_store( j_common_ptr cinfo, backing_store_ptr info ) {
 }
 
 LOCAL( boolean )
+
 open_ems_store( j_common_ptr cinfo,
                 backing_store_ptr info,
                 long total_bytes_needed ) {
@@ -576,6 +596,7 @@ open_ems_store( j_common_ptr cinfo,
  */
 
 GLOBAL( void )
+
 jpeg_open_backing_store( j_common_ptr cinfo,
                          backing_store_ptr info,
                          long total_bytes_needed ) {
@@ -599,12 +620,14 @@ jpeg_open_backing_store( j_common_ptr cinfo,
  */
 
 GLOBAL( long )
+
 jpeg_mem_init( j_common_ptr cinfo ) {
     next_file_num = 0;      /* initialize temp file name generator */
     return DEFAULT_MAX_MEM; /* default for max_memory_to_use */
 }
 
 GLOBAL( void )
+
 jpeg_mem_term( j_common_ptr cinfo ) {
     /* Microsoft C, at least in v6.00A, will not successfully reclaim freed
      * blocks of size > 32Kbytes unless we give it a kick in the rear, like so:

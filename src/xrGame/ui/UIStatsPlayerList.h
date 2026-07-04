@@ -25,6 +25,7 @@ public:
     virtual void Update();
 
     virtual CUIWindow* ui_cast_window() { return this; }
+
     virtual CUIScrollView* ui_cast_scroll_view() { return this; }
 
 protected:

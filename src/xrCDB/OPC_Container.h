@@ -20,6 +20,7 @@ public:
     Container();
     Container( udword size, float growth_factor );
     ~Container();
+
     // Management
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /**
@@ -155,11 +156,13 @@ public:
     bool Delete( udword entry );
     // Deletes an entry - does preserve insertion order.
     bool DeleteKeepingOrder( udword entry );
+
     //! Deletes the very last entry.
     inline_ void DeleteLastEntry() {
         if ( mCurNbEntries )
             mCurNbEntries--;
     }
+
     //! Deletes the entry whose index is given
     inline_ void DeleteIndex( udword index ) {
         mEntries[ index ] = mEntries[ --mCurNbEntries ];
@@ -168,13 +171,16 @@ public:
     // Helpers
     Container& FindNext( udword& entry, bool wrap = false );
     Container& FindPrev( udword& entry, bool wrap = false );
+
     // Data access.
     inline_ udword GetNbEntries() const {
         return mCurNbEntries;
     } //!< Returns the current number of entries.
+
     inline_ udword GetEntry( udword i ) const {
         return mEntries[ i ];
     } //!< Returns ith entry
+
     inline_ udword* GetEntries() const {
         return mEntries;
     } //!< Returns the list of entries.
@@ -183,6 +189,7 @@ public:
     inline_ float GetGrowthFactor() const {
         return mGrowthFactor;
     } //!< Returns the growth factor
+
     inline_ void SetGrowthFactor( float growth ) {
         mGrowthFactor = growth;
     } //!< Sets the growth factor
@@ -206,6 +213,7 @@ public:
 
 #ifdef CONTAINER_STATS
     inline_ udword GetNbContainers() const { return mNbContainers; }
+
     inline_ udword GetTotalBytes() const { return mUsedRam; }
 
 private:
@@ -232,6 +240,7 @@ public:
     inline_ ~Pairs() {}
 
     inline_ udword GetNbPairs() const { return GetNbEntries() >> 1; }
+
     inline_ Pair* GetPairs() const { return ( Pair* )GetEntries(); }
 
     Pairs& AddPair( const Pair& p ) {

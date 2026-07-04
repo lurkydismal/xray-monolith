@@ -29,6 +29,7 @@ const u32 CULL_NONE = D3DCULL_NONE;
 ///		detailed statistic
 struct R_statistics_element {
     u32 verts, dips;
+
     ICF void add( u32 _verts ) {
         verts += _verts;
         dips++;
@@ -52,6 +53,7 @@ struct R_statistics {
 
 #pragma warning( push )
 #pragma warning( disable : 4324 )
+
 class ECORE_API CBackend {
 public:
 #if defined( USE_DX10 ) || defined( USE_DX11 )
@@ -249,6 +251,7 @@ public:
     IC R_constant_array& get_ConstantCache_Vertex() {
         return constants.a_vertex;
     }
+
     IC R_constant_array& get_ConstantCache_Pixel() { return constants.a_pixel; }
 #endif //	USE_DX10
 
@@ -272,27 +275,33 @@ public:
     IC ID3DDepthStencilView* get_ZB();
 
     IC void set_Constants( R_constant_table* C );
+
     IC void set_Constants( ref_ctable& C ) { set_Constants( &*C ); }
 
     void set_Textures( STextureList* T );
+
     IC void set_Textures( ref_texture_list& T ) { set_Textures( &*T ); }
 
 #ifdef _EDITOR
     IC void set_Matrices( SMatrixList* M );
+
     IC void set_Matrices( ref_matrix_list& M ) { set_Matrices( &*M ); }
 #endif
 
     IC void set_Element( ShaderElement* S, u32 pass = 0 );
+
     IC void set_Element( ref_selement& S, u32 pass = 0 ) {
         set_Element( &*S, pass );
     }
 
     IC void set_Shader( Shader* S, u32 pass = 0 );
+
     IC void set_Shader( ref_shader& S, u32 pass = 0 ) {
         set_Shader( &*S, pass );
     }
 
     ICF void set_States( ID3DState* _state );
+
     ICF void set_States( ref_state& _state ) { set_States( _state->state ); }
 
 #if defined( USE_DX10 ) || defined( USE_DX11 )
@@ -302,20 +311,25 @@ public:
 #endif //	USE_DX10
 
     ICF void set_PS( ID3DPixelShader* _ps, LPCSTR _n = 0 );
+
     ICF void set_PS( ref_ps& _ps ) { set_PS( _ps->ps, _ps->cName.c_str() ); }
 
 #if defined( USE_DX10 ) || defined( USE_DX11 )
     ICF void set_GS( ID3DGeometryShader* _gs, LPCSTR _n = 0 );
+
     ICF void set_GS( ref_gs& _gs ) { set_GS( _gs->gs, _gs->cName.c_str() ); }
 
 #ifdef USE_DX11
     ICF void set_HS( ID3D11HullShader* _hs, LPCSTR _n = 0 );
+
     ICF void set_HS( ref_hs& _hs ) { set_HS( _hs->sh, _hs->cName.c_str() ); }
 
     ICF void set_DS( ID3D11DomainShader* _ds, LPCSTR _n = 0 );
+
     ICF void set_DS( ref_ds& _ds ) { set_DS( _ds->sh, _ds->cName.c_str() ); }
 
     ICF void set_CS( ID3D11ComputeShader* _cs, LPCSTR _n = 0 );
+
     ICF void set_CS( ref_cs& _cs ) { set_CS( _cs->sh, _cs->cName.c_str() ); }
 #endif
 
@@ -341,7 +355,9 @@ public:
     ICF void set_Vertices( ID3DVertexBuffer* _vb, u32 _vb_stride );
     ICF void set_Indices( ID3DIndexBuffer* _ib );
     ICF void set_Geometry( SGeometry* _geom );
+
     ICF void set_Geometry( ref_geom& _geom ) { set_Geometry( &*_geom ); }
+
     IC void set_Stencil( u32 _enable,
                          u32 _func = D3DCMP_ALWAYS,
                          u32 _ref = 0x00,
@@ -359,7 +375,9 @@ public:
                                               D3DCOLORWRITEENABLE_ALPHA );
     IC void set_FillMode( u32 _mode );
     IC void set_CullMode( u32 _mode );
+
     IC u32 get_CullMode() { return cull_mode; }
+
     void set_ClipPlanes( u32 _enable, Fplane* _planes = NULL, u32 count = 0 );
     void set_ClipPlanes( u32 _enable,
                          Fmatrix* _xform = NULL,
@@ -386,22 +404,27 @@ public:
         if ( C )
             constants.set( C, A );
     }
+
     ICF void set_c( R_constant* C, const Fvector4& A ) {
         if ( C )
             constants.set( C, A );
     }
+
     ICF void set_c( R_constant* C, float x, float y, float z, float w ) {
         if ( C )
             constants.set( C, x, y, z, w );
     }
+
     ICF void set_ca( R_constant* C, u32 e, const Fmatrix& A ) {
         if ( C )
             constants.seta( C, e, A );
     }
+
     ICF void set_ca( R_constant* C, u32 e, const Fvector4& A ) {
         if ( C )
             constants.seta( C, e, A );
     }
+
     ICF void set_ca( R_constant* C,
                      u32 e,
                      float x,
@@ -416,6 +439,7 @@ public:
         if ( C )
             constants.set( C, A );
     }
+
     ICF void set_c( R_constant* C, int A ) {
         if ( C )
             constants.set( C, A );
@@ -427,22 +451,27 @@ public:
         if ( ctable )
             set_c( ctable->get( n ), A );
     }
+
     ICF void set_c( LPCSTR n, const Fvector4& A ) {
         if ( ctable )
             set_c( ctable->get( n ), A );
     }
+
     ICF void set_c( LPCSTR n, float x, float y, float z, float w ) {
         if ( ctable )
             set_c( ctable->get( n ), x, y, z, w );
     }
+
     ICF void set_ca( LPCSTR n, u32 e, const Fmatrix& A ) {
         if ( ctable )
             set_ca( ctable->get( n ), e, A );
     }
+
     ICF void set_ca( LPCSTR n, u32 e, const Fvector4& A ) {
         if ( ctable )
             set_ca( ctable->get( n ), e, A );
     }
+
     ICF void set_ca( LPCSTR n, u32 e, float x, float y, float z, float w ) {
         if ( ctable )
             set_ca( ctable->get( n ), e, x, y, z, w );
@@ -452,6 +481,7 @@ public:
         if ( ctable )
             set_c( ctable->get( n ), A );
     }
+
     ICF void set_c( LPCSTR n, int A ) {
         if ( ctable )
             set_c( ctable->get( n ), A );
@@ -463,10 +493,12 @@ public:
         if ( ctable )
             set_c( ctable->get( n ), A );
     }
+
     ICF void set_c( shared_str& n, const Fvector4& A ) {
         if ( ctable )
             set_c( ctable->get( n ), A );
     }
+
     ICF void set_c( shared_str& n, float x, float y, float z, float w ) {
         if ( ctable )
             set_c( ctable->get( n ), x, y, z, w );
@@ -476,10 +508,12 @@ public:
         if ( ctable )
             set_ca( ctable->get( n ), e, A );
     }
+
     ICF void set_ca( shared_str& n, u32 e, const Fvector4& A ) {
         if ( ctable )
             set_ca( ctable->get( n ), e, A );
     }
+
     ICF void set_ca( shared_str& n,
                      u32 e,
                      float x,
@@ -494,6 +528,7 @@ public:
         if ( ctable )
             set_c( ctable->get( n ), A );
     }
+
     ICF void set_c( shared_str& n, int A ) {
         if ( ctable )
             set_c( ctable->get( n ), A );
@@ -557,6 +592,7 @@ public:
                    u16* pIdx,
                    int pcnt );
     void dbg_Draw( D3DPRIMITIVETYPE T, FVF::L* pVerts, int pcnt );
+
     IC void dbg_DrawAABB( Fvector& T, float sx, float sy, float sz, u32 C ) {
         Fvector half_dim;
         half_dim.set( sx, sy, sz );
@@ -564,10 +600,13 @@ public:
         TM.translate( T );
         dbg_DrawOBB( TM, half_dim, C );
     }
+
     void dbg_DrawOBB( Fmatrix& T, Fvector& half_dim, u32 C );
+
     IC void dbg_DrawTRI( Fmatrix& T, Fvector* p, u32 C ) {
         dbg_DrawTRI( T, p[ 0 ], p[ 1 ], p[ 2 ], C );
     }
+
     void dbg_DrawTRI( Fmatrix& T,
                       Fvector& p1,
                       Fvector& p2,
@@ -608,6 +647,7 @@ private:
     bool m_bChangedRTorZB;
 #endif //	USE_DX10
 };
+
 #pragma warning( pop )
 
 extern ECORE_API CBackend RCache;

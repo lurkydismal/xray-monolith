@@ -222,6 +222,7 @@ double dStopwatchTime( dStopwatch* s ) {
 #define MAXNUM 100
 
 static int num = 0; // number of entries used in event array
+
 static struct {
     unsigned long cc[ 2 ]; // clock counts
     double total_t;        // total clocks used in this slot.

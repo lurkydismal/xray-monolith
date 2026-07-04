@@ -19,6 +19,7 @@ public:
     virtual void execute();
     virtual void finalize();
     virtual void critical_finalize();
+
     virtual void remove_links( CObject* object ) {
         inherited::remove_links( object );
     }
@@ -34,6 +35,7 @@ private:
     TTime m_phaze_chosen_time;
 
     enum aim_side { left = 0, right = 1 }; // coupled
+
     aim_side m_attack_side;
     aim_side m_prepare_side;
     TTime m_prepare_side_chosen_time;

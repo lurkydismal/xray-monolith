@@ -72,6 +72,7 @@ using namespace tbb::internal;
 template < ets_key_usage_type ETS_key_type >
 struct ets_key_selector {
     typedef tbb_thread::id key_type;
+
     static key_type current_key() { return tbb::internal::thread_get_id_v3(); }
 };
 
@@ -79,6 +80,7 @@ struct ets_key_selector {
 template <>
 struct ets_key_selector< ets_suspend_aware > {
     typedef task::suspend_point key_type;
+
     static key_type current_key() { return internal_current_suspend_point(); }
 };
 
@@ -102,18 +104,26 @@ public:
     struct array {
         array* next;
         size_t lg_size;
+
         slot& at( size_t k ) { return ( ( slot* )( void* )( this + 1 ) )[ k ]; }
+
         size_t size() const { return size_t( 1 ) << lg_size; }
+
         size_t mask() const { return size() - 1; }
+
         size_t start( size_t h ) const {
             return h >> ( 8 * sizeof( size_t ) - lg_size );
         }
     };
+
     struct slot {
         key_type key;
         void* ptr;
+
         bool empty() const { return key == key_type(); }
+
         bool match( key_type k ) const { return key == k; }
+
         bool claim( key_type k ) {
             // TODO: maybe claim ptr, because key_type is not guaranteed to fit
             // into word size
@@ -132,6 +142,7 @@ protected:
     virtual void* create_local() = 0;
     virtual void* create_array( size_t _size ) = 0;         // _size in bytes
     virtual void free_array( void* ptr, size_t _size ) = 0; // _size in bytes
+
     array* allocate( size_t lg_size ) {
         size_t n = size_t( 1 ) << lg_size;
         array* a = static_cast< array* >(
@@ -140,6 +151,7 @@ protected:
         std::memset( a + 1, 0, n * sizeof( slot ) );
         return a;
     }
+
     void free( array* a ) {
         size_t n = size_t( 1 ) << ( a->lg_size );
         free_array( ( void* )a,
@@ -150,9 +162,11 @@ protected:
         my_root = NULL;
         my_count = 0;
     }
+
     virtual ~ets_base(); // g++ complains if this is not virtual
     void* table_lookup( bool& exists );
     void table_clear();
+
     // The following functions are not used in concurrent context,
     // so we don't need synchronization and ITT annotations there.
     template < ets_key_usage_type E2 >
@@ -188,6 +202,7 @@ protected:
             }
         }
     }
+
     void table_swap( ets_base& other ) {
         __TBB_ASSERT( this != &other, "Don't swap an instance with itself" );
         tbb::internal::swap< relaxed >( my_root, other.my_root );
@@ -296,22 +311,34 @@ class ets_base< ets_key_per_instance > : public ets_base< ets_no_key > {
 #if _WIN32 || _WIN64
 #if __TBB_WIN8UI_SUPPORT
     typedef DWORD tls_key_t;
+
     void create_key() { my_key = FlsAlloc( NULL ); }
+
     void destroy_key() { FlsFree( my_key ); }
+
     void set_tls( void* value ) { FlsSetValue( my_key, ( LPVOID )value ); }
+
     void* get_tls() { return ( void* )FlsGetValue( my_key ); }
 #else
     typedef DWORD tls_key_t;
+
     void create_key() { my_key = TlsAlloc(); }
+
     void destroy_key() { TlsFree( my_key ); }
+
     void set_tls( void* value ) { TlsSetValue( my_key, ( LPVOID )value ); }
+
     void* get_tls() { return ( void* )TlsGetValue( my_key ); }
 #endif
 #else
     typedef pthread_key_t tls_key_t;
+
     void create_key() { pthread_key_create( &my_key, NULL ); }
+
     void destroy_key() { pthread_key_delete( my_key ); }
+
     void set_tls( void* value ) const { pthread_setspecific( my_key, value ); }
+
     void* get_tls() const { return pthread_getspecific( my_key ); }
 #endif
     tls_key_t my_key;
@@ -322,7 +349,9 @@ class ets_base< ets_key_per_instance > : public ets_base< ets_no_key > {
                              size_t _size ) __TBB_override = 0; // size in bytes
 protected:
     ets_base() { create_key(); }
+
     ~ets_base() { destroy_key(); }
+
     void* table_lookup( bool& exists ) {
         void* found = get_tls();
         if ( found ) {
@@ -333,11 +362,13 @@ protected:
         }
         return found;
     }
+
     void table_clear() {
         destroy_key();
         create_key();
         super::table_clear();
     }
+
     void table_swap( ets_base& other ) {
         using std::swap;
         __TBB_ASSERT( this != &other, "Don't swap an instance with itself" );
@@ -692,13 +723,16 @@ struct construct_by_default : tbb::internal::no_assign {
     void construct( void* where ) {
         new ( where ) T();
     } // C++ note: the () in T() ensure zero initialization.
+
     construct_by_default( int ) {}
 };
 
 template < typename T >
 struct construct_by_exemplar : tbb::internal::no_assign {
     const T exemplar;
+
     void construct( void* where ) { new ( where ) T( exemplar ); }
+
     construct_by_exemplar( const T& t ) : exemplar( t ) {}
 #if __TBB_ETS_USE_CPP11
     construct_by_exemplar( T&& t ) : exemplar( std::move( t ) ) {}
@@ -708,7 +742,9 @@ struct construct_by_exemplar : tbb::internal::no_assign {
 template < typename T, typename Finit >
 struct construct_by_finit : tbb::internal::no_assign {
     Finit f;
+
     void construct( void* where ) { new ( where ) T( f() ); }
+
     construct_by_finit( const Finit& f_ ) : f( f_ ) {}
 #if __TBB_ETS_USE_CPP11
     construct_by_finit( Finit&& f_ ) : f( std::move( f_ ) ) {}
@@ -719,6 +755,7 @@ struct construct_by_finit : tbb::internal::no_assign {
 template < typename T, typename... P >
 struct construct_by_args : tbb::internal::no_assign {
     internal::stored_pack< P... > pack;
+
     void construct( void* where ) {
         internal::call(
             [ where ]( const typename strip< P >::type&... args ) {
@@ -726,6 +763,7 @@ struct construct_by_args : tbb::internal::no_assign {
             },
             pack );
     }
+
     construct_by_args( P&&... args ) : pack( std::forward< P >( args )... ) {}
 };
 #endif
@@ -739,8 +777,10 @@ public:
     virtual callback_base* clone() const = 0;
     // Destruct and free *this
     virtual void destroy() = 0;
+
     // Need virtual destructor to satisfy GCC compiler warning
     virtual ~callback_base() {}
+
     // Construct T at where
     virtual void construct( void* where ) = 0;
 };
@@ -799,12 +839,16 @@ template < typename U >
 struct ets_element {
     tbb::aligned_space< U > my_space;
     bool is_built;
+
     ets_element() { is_built = false; } // not currently-built
+
     U* value() { return my_space.begin(); }
+
     U* value_committed() {
         is_built = true;
         return my_space.begin();
     }
+
     ~ets_element() {
         if ( is_built ) {
             my_space.begin()->~U();
@@ -820,6 +864,7 @@ template < typename T, typename ETS >
 struct is_compatible_ets {
     static const bool value = false;
 };
+
 template < typename T, typename U, typename A, ets_key_usage_type C >
 struct is_compatible_ets< T, enumerable_thread_specific< U, A, C > > {
     static const bool value = internal::is_same_type< T, U >::value;
@@ -846,6 +891,7 @@ public:
 #endif
 
 } // namespace internal
+
 //! @endcond
 
 //! The enumerable_thread_specific container
@@ -894,11 +940,14 @@ class enumerable_thread_specific : internal::ets_base< ETS_key_type > {
         typedef const T& const_reference;
         typedef I iterator;
         typedef ptrdiff_t difference_type;
+
         generic_range_type( I begin_, I end_, size_t grainsize_ = 1 )
             : blocked_range< I >( begin_, end_, grainsize_ ) {}
+
         template < typename U >
         generic_range_type( const generic_range_type< U >& r )
             : blocked_range< I >( r.begin(), r.end(), r.grainsize() ) {}
+
         generic_range_type( generic_range_type& r, split )
             : blocked_range< I >( r, split() ) {}
     };
@@ -1073,6 +1122,7 @@ public:
 
     //! begin iterator
     iterator begin() { return iterator( my_locals, 0 ); }
+
     //! end iterator
     iterator end() { return iterator( my_locals, my_locals.size() ); }
 
@@ -1280,10 +1330,13 @@ public:
           my_end( c.end() ) {}
 
     iterator begin() { return iterator( *my_container ) = my_begin; }
+
     iterator end() { return iterator( *my_container ) = my_end; }
+
     const_iterator begin() const {
         return const_iterator( *my_container ) = my_begin;
     }
+
     const_iterator end() const {
         return const_iterator( *my_container ) = my_end;
     }

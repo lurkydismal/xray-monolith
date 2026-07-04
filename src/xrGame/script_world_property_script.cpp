@@ -13,6 +13,7 @@
 using namespace luabind;
 
 #pragma optimize( "s", on )
+
 void CScriptWorldPropertyWrapper::script_register( lua_State* L ) {
     module( L )[ class_< CScriptWorldProperty >( "world_property" )
                      .def( constructor< CScriptWorldProperty::_condition_type,
