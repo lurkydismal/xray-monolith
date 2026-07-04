@@ -41,3 +41,4 @@ compressor/mod/
 /src/build
 /src/build_msvc
 /broken.txt
+/init.fish
