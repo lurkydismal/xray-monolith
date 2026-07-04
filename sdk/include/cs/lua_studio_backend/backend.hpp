@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////////////////////
 //	Module 		: backend.h
 //	Created 	: 14.04.2008
@@ -6,8 +8,8 @@
 //	Description : script debugger backend class
 ////////////////////////////////////////////////////////////////////////////
 
-#ifndef CS_LUA_STUDIO_BACKEND_H_INCLUDED
-#define CS_LUA_STUDIO_BACKEND_H_INCLUDED
+#include "../defines.h"
+#include "interfaces.hpp"
 
 struct lua_State;
 struct lua_Debug;
@@ -29,17 +31,17 @@ enum icon_type {
 	icon_type_class_instance	= unsigned int(4),
 	icon_type_unknown			= unsigned int(0),
 #else // #if 0
-    icon_type_nil = unsigned int( 0 ),
-    icon_type_boolean = unsigned int( 1 ),
-    icon_type_number = unsigned int( 2 ),
-    icon_type_string = unsigned int( 3 ),
-    icon_type_table = unsigned int( 4 ),
-    icon_type_function = unsigned int( 5 ),
-    icon_type_coroutine = unsigned int( 6 ),
-    icon_type_class = unsigned int( 7 ),
-    icon_type_class_base = unsigned int( 8 ),
-    icon_type_class_instance = unsigned int( 9 ),
-    icon_type_unknown = unsigned int( 10 ),
+    icon_type_nil = 0,
+    icon_type_boolean = 1,
+    icon_type_number = 2,
+    icon_type_string = 3,
+    icon_type_table = 4,
+    icon_type_function = 5,
+    icon_type_coroutine = 6,
+    icon_type_class = 7,
+    icon_type_class_base = 8,
+    icon_type_class_instance = 9,
+    icon_type_unknown = 10,
 #endif // #if 0
 }; // enum icon_type
 
@@ -70,5 +72,3 @@ struct DECLSPEC_NOVTABLE value_to_expand {
 
 } // namespace lua_studio
 } // namespace cs
-
-#endif // #ifndef CS_LUA_STUDIO_BACKEND_H_INCLUDED

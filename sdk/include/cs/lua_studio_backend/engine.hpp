@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////////////////////
 //	Module 		: engine.h
 //	Created 	: 10.04.2008
@@ -6,8 +8,11 @@
 //	Description : script debugger engine  class
 ////////////////////////////////////////////////////////////////////////////
 
-#ifndef CS_LUA_STUDIO_BACKEND_ENGINE_H_INCLUDED
-#define CS_LUA_STUDIO_BACKEND_ENGINE_H_INCLUDED
+#include <cstddef>
+
+#include "../defines.h"
+#include "backend.hpp"
+#include "interfaces.hpp"
 
 struct lua_State;
 struct lua_Debug;
@@ -174,22 +179,29 @@ public:
     inline bool lua_typestring( lua_State* L, int n ) {
         return ( this->lua_type( L, n ) == lua_type_string );
     }
+
     inline bool lua_typenumber( lua_State* L, int n ) {
         return ( this->lua_type( L, n ) == lua_type_number );
     }
+
     inline bool lua_is_table( lua_State* L, int n ) {
         return ( lua_type( L, n ) == lua_type_table );
     }
+
     inline bool lua_is_nil( lua_State* L, int n ) {
         return ( lua_type( L, n ) == lua_type_nil );
     }
+
     inline void lua_new_table( lua_State* L ) { lua_createtable( L, 0, 0 ); }
+
     inline void lua_pop_value( lua_State* L, int n ) {
         lua_settop( L, -n - 1 );
     }
+
     inline void lua_push_c_function( lua_State* L, lua_CFunction fn ) {
         lua_pushcclosure( L, fn, 0 );
     }
+
     inline char const* lua_to_string( lua_State* L, int n ) {
         return ( lua_tolstring( L, n, NULL ) );
     }
@@ -234,5 +246,3 @@ public:
 
 } // namespace lua_studio
 } // namespace cs
-
-#endif // #ifndef CS_LUA_STUDIO_BACKEND_ENGINE_H_INCLUDED

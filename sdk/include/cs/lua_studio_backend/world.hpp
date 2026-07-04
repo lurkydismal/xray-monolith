@@ -1,3 +1,5 @@
+#pragma once
+
 ////////////////////////////////////////////////////////////////////////////
 //	Module 		: world.h
 //	Created 	: 10.04.2008
@@ -6,8 +8,9 @@
 //	Description : lua studio backend world class
 ////////////////////////////////////////////////////////////////////////////
 
-#ifndef CS_LUA_STUDIO_BACKEND_WORLD_H_INCLUDED
-#define CS_LUA_STUDIO_BACKEND_WORLD_H_INCLUDED
+#include "../defines.h"
+#include "backend.hpp"
+#include "interfaces.hpp"
 
 struct lua_State;
 
@@ -59,5 +62,3 @@ cs_lua_studio_backend_memory_allocator(
 CS_LUA_STUDIO_BACKEND_API size_t CS_LUA_STUDIO_BACKEND_CALL
 cs_lua_studio_backend_memory_stats();
 }
-
-#endif // #ifndef CS_LUA_STUDIO_BACKEND_WORLD_H_INCLUDED

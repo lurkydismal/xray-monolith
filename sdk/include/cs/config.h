@@ -11,7 +11,7 @@
 
 #include <cs/defines.h>
 
-#if defined( WIN32 )
+#if defined( _WIN32 )
 #define CS_PLATFORM_WINDOWS_32
 #define CS_PLATFORM_ID
 #elif defined( _XBOX ) // #if defined(WIN32)
