@@ -18,6 +18,7 @@
 
 /* preecho trigger settings *****************************************/
 
+#include "../psy.h"
 #include "../shared.h"
 
 static const vorbis_info_psy_global _psy_global_44[ 5 ] = {
