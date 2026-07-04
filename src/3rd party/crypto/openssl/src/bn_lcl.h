@@ -232,7 +232,7 @@ extern "C" {
 #elif defined( __GNUC__ )
 #define BN_UMULT_HIGH( a, b )                                           \
     ( {                                                                 \
-        register BN_ULONG ret;                                          \
+        BN_ULONG ret;                                                   \
         asm( "umulh	%1,%2,%0" : "=r"( ret ) : "r"( a ), "r"( b ) ); \
         ret;                                                            \
     } )
@@ -242,7 +242,7 @@ extern "C" {
 #if defined( __GNUC__ )
 #define BN_UMULT_HIGH( a, b )                                           \
     ( {                                                                 \
-        register BN_ULONG ret;                                          \
+        BN_ULONG ret;                                                   \
         asm( "mulhdu	%0,%1,%2" : "=r"( ret ) : "r"( a ), "r"( b ) ); \
         ret;                                                            \
     } )
@@ -251,7 +251,7 @@ extern "C" {
 #if defined( __GNUC__ )
 #define BN_UMULT_HIGH( a, b )               \
     ( {                                     \
-        register BN_ULONG ret, discard;     \
+        BN_ULONG ret, discard;              \
         asm( "mulq	%3"                      \
              : "=a"( discard ), "=d"( ret ) \
              : "a"( a ), "g"( b )           \
