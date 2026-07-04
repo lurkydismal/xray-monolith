@@ -8,6 +8,7 @@ using str_c = const char*;
 
 #include "_stl_extensions.h"
 #include "_thread_types.h"
+#include "_vector3d.h"
 #include "intrusive_ptr.h"
 
 class xr_string;
