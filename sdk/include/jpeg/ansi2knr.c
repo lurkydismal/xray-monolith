@@ -237,6 +237,7 @@ BY ANY OTHER PARTY.
 
 #include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #if HAVE_CONFIG_H
 
@@ -281,8 +282,11 @@ extern int strlen(), strncmp();
 extern char* malloc();
 extern void free();
 #else
+#if 0
+// NOTE: LD / commented
 extern char* malloc();
 extern int free();
+#endif
 #endif
 #endif
 

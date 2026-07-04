@@ -25,6 +25,11 @@
  * Quantization of the output coefficients is done by jcdctmgr.c.
  */
 
+#include "jpeglib.h"
+
+#define FAST_FLOAT float
+#define MULTIPLIER int
+
 #if BITS_IN_JSAMPLE == 8
 typedef int DCTELEM; /* 16 or 32 bits is fine */
 #else

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * jpegint.h
  *
@@ -11,6 +13,9 @@
  */
 
 /* Declarations for both compression & decompression */
+
+#include "jmorecfg.h"
+#include "jpeglib.h"
 
 typedef enum {                 /* Operating modes for buffer controllers */
                JBUF_PASS_THRU, /* Plain stripwise operation */

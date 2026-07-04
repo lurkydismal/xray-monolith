@@ -24,6 +24,9 @@
 
 /* Short forms of external names for systems with brain-damaged linkers. */
 
+#include "jmorecfg.h"
+#include "jpeglib.h"
+
 #ifdef NEED_SHORT_EXTERNAL_NAMES
 #define jtransform_request_workspace jTrRequest
 #define jtransform_adjust_parameters jTrAdjust
