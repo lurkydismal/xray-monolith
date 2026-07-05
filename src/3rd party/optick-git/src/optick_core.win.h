@@ -62,7 +62,7 @@ int64 Platform::GetTime() {
 #if OPTICK_ENABLE_TRACING
 #include <psapi.h>
 
-#include "optick_core.h"
+#include "optick_core.hpp"
 
 /*
 Event Tracing Functions - API

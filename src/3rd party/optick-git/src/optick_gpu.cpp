@@ -25,7 +25,7 @@
 #if USE_OPTICK
 #include <thread>
 
-#include "optick_core.h"
+#include "optick_core.hpp"
 #include "optick_memory.h"
 
 namespace Optick {

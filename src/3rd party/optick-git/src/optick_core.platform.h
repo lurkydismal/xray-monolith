@@ -26,7 +26,7 @@
 #if USE_OPTICK
 
 #include "optick_common.h"
-#include "optick_core.h"
+#include "optick_core.hpp"
 #include "optick_memory.h"
 
 //////////////////////////////////////////////////////////////////////////

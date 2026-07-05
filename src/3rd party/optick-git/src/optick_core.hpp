@@ -35,6 +35,10 @@
 #include "optick_message.h"
 #include "optick_serialization.h"
 
+#undef min
+#undef max
+#include <algorithm>
+
 // We expect to have 1k unique strings going through Optick at once
 // The chances to hit a collision are 1 in 10 trillion (odds of a meteor landing
 // on your house) We should be quite safe here :)

@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "optick_core.h"
+#include "optick_core.hpp"
 
 #if USE_OPTICK
 

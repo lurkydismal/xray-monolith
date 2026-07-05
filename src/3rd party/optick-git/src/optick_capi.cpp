@@ -24,7 +24,7 @@
 
 #if USE_OPTICK
 
-#include "optick_core.h"
+#include "optick_core.hpp"
 
 #if defined( __MACH__ )
 #include <stdlib.h>

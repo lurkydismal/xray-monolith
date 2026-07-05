@@ -26,7 +26,7 @@
 #if OPTICK_ENABLE_GPU_VULKAN
 #include <vulkan/vulkan.h>
 
-#include "optick_core.h"
+#include "optick_core.hpp"
 #include "optick_gpu.h"
 
 #define OPTICK_VK_CHECK( args )                              \
