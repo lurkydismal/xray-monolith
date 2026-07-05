@@ -56,7 +56,7 @@ dReal dRandReal();
 void dPrintMatrix( const dReal* A,
                    int n,
                    int m,
-                   char* fmt = "%10.4f ",
+                   const char* fmt = "%10.4f ",
                    FILE* f = stdout );
 #else
 void dPrintMatrix( const dReal* A, int n, int m, char* fmt, FILE* f );

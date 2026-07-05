@@ -1,4 +1,7 @@
 #ifndef BOUNDER33_H
+
+#include "ode/common.h"
+
 class Lcp33 {
     static const int MSIZE = 3;
     static const int RLENGTH = 4;

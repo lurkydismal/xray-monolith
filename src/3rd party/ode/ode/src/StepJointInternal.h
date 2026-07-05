@@ -1,5 +1,9 @@
 #ifndef STEP_JOINT_INTERNAL_H
 #define STEP_JOINT_INTERNAL_H
+
+#include "joint.h"
+#include "objects.h"
+
 void dInternalStepJointContact( dxWorld* world,
                                 dxBody* body[ 2 ],
                                 dReal* GI[ 2 ],

@@ -49,6 +49,8 @@ to be implemented. the first `nub' variables are assumed to have findex < 0.
 #ifndef _ODE_LCP_H_
 #define _ODE_LCP_H_
 
+#include "ode/common.h"
+
 void dSolveLCP( int n,
                 dReal* A,
                 dReal* x,
