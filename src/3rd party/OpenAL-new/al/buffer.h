@@ -8,6 +8,7 @@
 #include "alc/inprogext.h"
 #include "almalloc.h"
 #include "atomic.h"
+#include "config.h"
 #include "core/buffer_storage.h"
 #include "vector.h"
 

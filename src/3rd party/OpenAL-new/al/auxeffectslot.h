@@ -11,6 +11,7 @@
 #include "alc/effects/base.h"
 #include "almalloc.h"
 #include "atomic.h"
+#include "config.h"
 #include "core/effectslot.h"
 #include "intrusive_ptr.h"
 #include "vector.h"

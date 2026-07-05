@@ -7,6 +7,7 @@
 #include "AL/alc.h"
 #include "AL/efx.h"
 #include "almalloc.h"
+#include "config.h"
 
 struct ALlistener {
     std::array< float, 3 > Position{ { 0.0f, 0.0f, 0.0f } };
