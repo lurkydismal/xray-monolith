@@ -969,7 +969,7 @@ template <typename V, class _HashFcn = std::hash<V>, class _EqualKey = std::equa
 
 template <typename K, class V, class _HashFcn = std::hash<K>, class _EqualKey = std::equal_to<K>, typename allocator = xalloc<std::pair<K, V> > > class xr_hash_map : public std::hash_map < K, V, _HashFcn, _EqualKey, allocator > { public: u32 size() const { return (u32)__super::size(); } };
 template <typename K, class V, class _HashFcn = std::hash<K>, class _EqualKey = std::equal_to<K>, typename allocator = xalloc<std::pair<K, V> > > class xr_hash_multimap : public std::hash_multimap < K, V, _HashFcn, _EqualKey, allocator > { public: u32 size() const { return (u32)__super::size(); } };
-#else
+#elif 0
 template <typename K, class V, class _Traits = stdext::hash_compare<K, std::less<K>>, typename allocator = xalloc<std::
 	          pair<const K, V>>>
 class xr_hash_map : public stdext::hash_map<K, V, _Traits, allocator>
@@ -977,6 +977,20 @@ class xr_hash_map : public stdext::hash_map<K, V, _Traits, allocator>
 public:
 	u32 size() const { return (u32)__super::size(); }
 };
+#else
+template < typename K,
+           typename V,
+           typename Hash = std::hash< K >,
+           typename KeyEqual = std::equal_to< K >,
+           typename Allocator = xalloc< std::pair< const K, V > > >
+class xr_hash_map
+    : public std::unordered_map< K, V, Hash, KeyEqual, Allocator > {
+public:
+    [[nodiscard]] auto size() const -> u32 {
+        return static_cast< u32 >( __super::size() );
+    }
+};
+
 #endif // #ifdef STLPORT
 
 #endif
