@@ -1,4 +1,3 @@
-#pragma once
 /********************************************************************
  *                                                                  *
  * THIS FILE IS PART OF THE OggVorbis SOFTWARE CODEC SOURCE CODE.   *
@@ -19,8 +18,6 @@
 #ifndef _V_REG_H_
 #define _V_REG_H_
 
-#include "backends.h"
-
 #define VI_TRANSFORMB 1
 #define VI_WINDOWB 1
 #define VI_TIMEB 1
@@ -28,8 +25,8 @@
 #define VI_RESB 3
 #define VI_MAPB 1
 
-extern const vorbis_func_floor* const _floor_P[];
-extern const vorbis_func_residue* const _residue_P[];
-extern const vorbis_func_mapping* const _mapping_P[];
+extern const vorbis_func_floor     *const _floor_P[];
+extern const vorbis_func_residue   *const _residue_P[];
+extern const vorbis_func_mapping   *const _mapping_P[];
 
 #endif

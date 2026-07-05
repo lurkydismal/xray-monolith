@@ -18,16 +18,17 @@
 /**\file
  * The <tt>libtheoradec</tt> C decoding API.*/
 
-#if !defined( _O_THEORA_THEORADEC_H_ )
-#define _O_THEORA_THEORADEC_H_ ( 1 )
-#include <ogg/ogg.h>
-#include <stddef.h>
+#if !defined(_O_THEORA_THEORADEC_H_)
+# define _O_THEORA_THEORADEC_H_ (1)
+# include <stddef.h>
+# include <ogg/ogg.h>
+# include "codec.h"
 
-#include "codec.h"
-
-#if defined( __cplusplus )
+#if defined(__cplusplus)
 extern "C" {
 #endif
+
+
 
 /**\name th_decode_ctl() codes
  * \anchor decctlcodes
@@ -46,7 +47,7 @@ extern "C" {
  * \retval TH_EFAULT  \a _dec_ctx or \a _buf is <tt>NULL</tt>.
  * \retval TH_EINVAL  \a _buf_sz is not <tt>sizeof(int)</tt>.
  * \retval TH_EIMPL   Not supported by this implementation.*/
-#define TH_DECCTL_GET_PPLEVEL_MAX ( 1 )
+#define TH_DECCTL_GET_PPLEVEL_MAX (1)
 /**Sets the post-processing level.
  * By default, post-processing is disabled.
  *
@@ -63,7 +64,7 @@ extern "C" {
  *                     implementation-specific, and can be obtained via
  *                     #TH_DECCTL_GET_PPLEVEL_MAX.
  * \retval TH_EIMPL   Not supported by this implementation.*/
-#define TH_DECCTL_SET_PPLEVEL ( 3 )
+#define TH_DECCTL_SET_PPLEVEL (3)
 /**Sets the granule position.
  * Call this after a seek, before decoding the first frame, to ensure that the
  *  proper granule position is returned for all subsequent frames.
@@ -75,7 +76,7 @@ extern "C" {
  * \retval TH_EFAULT  \a _dec_ctx or \a _buf is <tt>NULL</tt>.
  * \retval TH_EINVAL  \a _buf_sz is not <tt>sizeof(ogg_int64_t)</tt>, or the
  *                     granule position is negative.*/
-#define TH_DECCTL_SET_GRANPOS ( 5 )
+#define TH_DECCTL_SET_GRANPOS (5)
 /**Sets the striped decode callback function.
  * If set, this function will be called as each piece of a frame is fully
  *  decoded in th_decode_packetin().
@@ -89,17 +90,19 @@ extern "C" {
  * \retval TH_EFAULT  \a _dec_ctx or \a _buf is <tt>NULL</tt>.
  * \retval TH_EINVAL  \a _buf_sz is not
  *                     <tt>sizeof(th_stripe_callback)</tt>.*/
-#define TH_DECCTL_SET_STRIPE_CB ( 7 )
+#define TH_DECCTL_SET_STRIPE_CB (7)
 
 /**Enables telemetry and sets the macroblock display mode */
-#define TH_DECCTL_SET_TELEMETRY_MBMODE ( 9 )
+#define TH_DECCTL_SET_TELEMETRY_MBMODE (9)
 /**Enables telemetry and sets the motion vector display mode */
-#define TH_DECCTL_SET_TELEMETRY_MV ( 11 )
+#define TH_DECCTL_SET_TELEMETRY_MV (11)
 /**Enables telemetry and sets the adaptive quantization display mode */
-#define TH_DECCTL_SET_TELEMETRY_QI ( 13 )
+#define TH_DECCTL_SET_TELEMETRY_QI (13)
 /**Enables telemetry and sets the bitstream breakdown visualization mode */
-#define TH_DECCTL_SET_TELEMETRY_BITS ( 15 )
+#define TH_DECCTL_SET_TELEMETRY_BITS (15)
 /*@}*/
+
+
 
 /**A callback function for striped decode.
  * This is a function pointer to an application-provided function that will be
@@ -132,19 +135,19 @@ extern "C" {
  *                    this will always be divisible by two.
  *                   I.e., this section contains fragment rows
  *                    <tt>\a _yfrag0 ...\a _yfrag_end -1</tt>.*/
-typedef void ( *th_stripe_decoded_func )( void* _ctx,
-                                          th_ycbcr_buffer _buf,
-                                          int _yfrag0,
-                                          int _yfrag_end );
+typedef void (*th_stripe_decoded_func)(void *_ctx,th_ycbcr_buffer _buf,
+ int _yfrag0,int _yfrag_end);
 
 /**The striped decode callback data to pass to #TH_DECCTL_SET_STRIPE_CB.*/
-typedef struct {
-    /**An application-provided context pointer.
-     * This will be passed back verbatim to the application.*/
-    void* ctx;
-    /**The callback function pointer.*/
-    th_stripe_decoded_func stripe_decoded;
-} th_stripe_callback;
+typedef struct{
+  /**An application-provided context pointer.
+   * This will be passed back verbatim to the application.*/
+  void                   *ctx;
+  /**The callback function pointer.*/
+  th_stripe_decoded_func  stripe_decoded;
+}th_stripe_callback;
+
+
 
 /**\name Decoder state
    The following data structures are opaque, and their contents are not
@@ -153,7 +156,7 @@ typedef struct {
     warning.*/
 /*@{*/
 /**The decoder context.*/
-typedef struct th_dec_ctx th_dec_ctx;
+typedef struct th_dec_ctx    th_dec_ctx;
 /**Setup information.
    This contains auxiliary information (Huffman tables and quantization
     parameters) decoded from the setup header by th_decode_headerin() to be
@@ -162,6 +165,8 @@ typedef struct th_dec_ctx th_dec_ctx;
     via th_setup_free() at any time.*/
 typedef struct th_setup_info th_setup_info;
 /*@}*/
+
+
 
 /**\defgroup decfuncs Functions for Decoding*/
 /*@{*/
@@ -223,10 +228,8 @@ typedef struct th_setup_info th_setup_info;
  *                        <tt>libtheoradec</tt>.
  * \retval TH_ENOTFORMAT The packet was not a Theora header.
  */
-extern int th_decode_headerin( th_info* _info,
-                               th_comment* _tc,
-                               th_setup_info** _setup,
-                               ogg_packet* _op );
+extern int th_decode_headerin(th_info *_info,th_comment *_tc,
+ th_setup_info **_setup,ogg_packet *_op);
 /**Allocates a decoder instance.
  *
  * <b>Security Warning:</b> The Theora format supports very large frame sizes,
@@ -249,14 +252,14 @@ extern int th_decode_headerin( th_info* _info,
  *                th_decode_headerin().
  * \return The initialized #th_dec_ctx handle.
  * \retval NULL If the decoding parameters were invalid.*/
-extern th_dec_ctx* th_decode_alloc( const th_info* _info,
-                                    const th_setup_info* _setup );
+extern th_dec_ctx *th_decode_alloc(const th_info *_info,
+ const th_setup_info *_setup);
 /**Releases all storage used for the decoder setup information.
  * This should be called after you no longer want to create any decoders for
  *  a stream whose headers you have parsed with th_decode_headerin().
  * \param _setup The setup information to free.
  *               This can safely be <tt>NULL</tt>.*/
-extern void th_setup_free( th_setup_info* _setup );
+extern void th_setup_free(th_setup_info *_setup);
 /**Decoder control function.
  * This is used to provide advanced control of the decoding process.
  * \param _dec    A #th_dec_ctx handle.
@@ -268,10 +271,8 @@ extern void th_setup_free( th_setup_info* _setup );
  * \return Possible return values depend on the control code used.
  *          See \ref decctlcodes "the list of control codes" for
  *          specific values. Generally 0 indicates success.*/
-extern int th_decode_ctl( th_dec_ctx* _dec,
-                          int _req,
-                          void* _buf,
-                          size_t _buf_sz );
+extern int th_decode_ctl(th_dec_ctx *_dec,int _req,void *_buf,
+ size_t _buf_sz);
 /**Submits a packet containing encoded video data to the decoder.
  * \param _dec     A #th_dec_ctx handle.
  * \param _op      An <tt>ogg_packet</tt> containing encoded video data.
@@ -294,9 +295,8 @@ extern int th_decode_ctl( th_dec_ctx* _dec,
  * \retval TH_EBADPACKET \a _op does not contain encoded video data.
  * \retval TH_EIMPL      The video data uses bitstream features which this
  *                        library does not support.*/
-extern int th_decode_packetin( th_dec_ctx* _dec,
-                               const ogg_packet* _op,
-                               ogg_int64_t* _granpos );
+extern int th_decode_packetin(th_dec_ctx *_dec,const ogg_packet *_op,
+ ogg_int64_t *_granpos);
 /**Outputs the next available frame of decoded Y'CbCr data.
  * If a striped decode callback has been set with #TH_DECCTL_SET_STRIPE_CB,
  *  then the application does not need to call this function.
@@ -312,14 +312,17 @@ extern int th_decode_packetin( th_dec_ctx* _dec,
  * \retval 0 Success
  * \retval TH_EFAULT     \a _dec or \a _ycbcr was <tt>NULL</tt>.
  */
-extern int th_decode_ycbcr_out( th_dec_ctx* _dec, th_ycbcr_buffer _ycbcr );
+extern int th_decode_ycbcr_out(th_dec_ctx *_dec,
+ th_ycbcr_buffer _ycbcr);
 /**Frees an allocated decoder instance.
  * \param _dec A #th_dec_ctx handle.*/
-extern void th_decode_free( th_dec_ctx* _dec );
+extern void th_decode_free(th_dec_ctx *_dec);
 /*@}*/
 /*@}*/
 
-#if defined( __cplusplus )
+
+
+#if defined(__cplusplus)
 }
 #endif
 
