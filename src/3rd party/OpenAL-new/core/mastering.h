@@ -10,6 +10,7 @@ struct SlidingHold;
 
 using uint = unsigned int;
 
+
 /* General topology and basic automation was based on the following paper:
  *
  *   D. Giannoulis, M. Massberg and J. D. Reiss,
@@ -21,7 +22,7 @@ using uint = unsigned int;
  *   http://c4dm.eecs.qmul.ac.uk/audioengineering/compressors/
  */
 struct Compressor {
-    size_t mNumChans{ 0u };
+    size_t mNumChans{0u};
 
     struct {
         bool Knee : 1;
@@ -31,40 +32,38 @@ struct Compressor {
         bool Declip : 1;
     } mAuto{};
 
-    uint mLookAhead{ 0 };
+    uint mLookAhead{0};
 
-    float mPreGain{ 0.0f };
-    float mPostGain{ 0.0f };
+    float mPreGain{0.0f};
+    float mPostGain{0.0f};
 
-    float mThreshold{ 0.0f };
-    float mSlope{ 0.0f };
-    float mKnee{ 0.0f };
+    float mThreshold{0.0f};
+    float mSlope{0.0f};
+    float mKnee{0.0f};
 
-    float mAttack{ 0.0f };
-    float mRelease{ 0.0f };
+    float mAttack{0.0f};
+    float mRelease{0.0f};
 
-    alignas( 16 ) float mSideChain[ 2 * BufferLineSize ]{};
-    alignas( 16 ) float mCrestFactor[ BufferLineSize ]{};
+    alignas(16) float mSideChain[2*BufferLineSize]{};
+    alignas(16) float mCrestFactor[BufferLineSize]{};
 
-    SlidingHold* mHold{ nullptr };
-    FloatBufferLine* mDelay{ nullptr };
+    SlidingHold *mHold{nullptr};
+    FloatBufferLine *mDelay{nullptr};
 
-    float mCrestCoeff{ 0.0f };
-    float mGainEstimate{ 0.0f };
-    float mAdaptCoeff{ 0.0f };
+    float mCrestCoeff{0.0f};
+    float mGainEstimate{0.0f};
+    float mAdaptCoeff{0.0f};
 
-    float mLastPeakSq{ 0.0f };
-    float mLastRmsSq{ 0.0f };
-    float mLastRelease{ 0.0f };
-    float mLastAttack{ 0.0f };
-    float mLastGainDev{ 0.0f };
+    float mLastPeakSq{0.0f};
+    float mLastRmsSq{0.0f};
+    float mLastRelease{0.0f};
+    float mLastAttack{0.0f};
+    float mLastGainDev{0.0f};
+
 
     ~Compressor();
-    void process( const uint SamplesToDo, FloatBufferLine* OutBuffer );
-
-    int getLookAhead() const noexcept {
-        return static_cast< int >( mLookAhead );
-    }
+    void process(const uint SamplesToDo, FloatBufferLine *OutBuffer);
+    int getLookAhead() const noexcept { return static_cast<int>(mLookAhead); }
 
     DEF_PLACE_NEWDEL()
 
@@ -94,24 +93,13 @@ struct Compressor {
      * \param ReleaseTime   Release time (in seconds). Acts as a maximum when
      *        automating release time.
      */
-    static std::unique_ptr< Compressor > Create( const size_t NumChans,
-                                                 const float SampleRate,
-                                                 const bool AutoKnee,
-                                                 const bool AutoAttack,
-                                                 const bool AutoRelease,
-                                                 const bool AutoPostGain,
-                                                 const bool AutoDeclip,
-                                                 const float LookAheadTime,
-                                                 const float HoldTime,
-                                                 const float PreGainDb,
-                                                 const float PostGainDb,
-                                                 const float ThresholdDb,
-                                                 const float Ratio,
-                                                 const float KneeDb,
-                                                 const float AttackTime,
-                                                 const float ReleaseTime );
+    static std::unique_ptr<Compressor> Create(const size_t NumChans, const float SampleRate,
+        const bool AutoKnee, const bool AutoAttack, const bool AutoRelease,
+        const bool AutoPostGain, const bool AutoDeclip, const float LookAheadTime,
+        const float HoldTime, const float PreGainDb, const float PostGainDb,
+        const float ThresholdDb, const float Ratio, const float KneeDb, const float AttackTime,
+        const float ReleaseTime);
 };
-
-using CompressorPtr = std::unique_ptr< Compressor >;
+using CompressorPtr = std::unique_ptr<Compressor>;
 
 #endif /* CORE_MASTERING_H */

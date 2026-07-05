@@ -7,10 +7,11 @@
 #include "../texture_cube.hpp"
 #include "../texture_cube_array.hpp"
 
-namespace gli {
-template < typename texture >
-texture flip( texture const& Texture );
+namespace gli
+{
+	template <typename texture>
+	texture flip(texture const & Texture);
 
-} // namespace gli
+}//namespace gli
 
 #include "flip.inl"

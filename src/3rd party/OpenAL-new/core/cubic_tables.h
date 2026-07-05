@@ -4,8 +4,9 @@
 #include "alspan.h"
 #include "cubic_defs.h"
 
+
 struct CubicTable {
-    al::span< const CubicCoefficients, CubicPhaseCount > Tab;
+    al::span<const CubicCoefficients,CubicPhaseCount> Tab;
 };
 
 /* A Catmull-Rom spline. The spline passes through the center two samples,

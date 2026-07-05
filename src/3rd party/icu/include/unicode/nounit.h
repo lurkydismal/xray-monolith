@@ -32,7 +32,7 @@ U_NAMESPACE_BEGIN
  * @see NumberFormatter
  * @draft ICU 60
  */
-class U_I18N_API NoUnit : public MeasureUnit {
+class U_I18N_API NoUnit: public MeasureUnit {
 public:
     /**
      * Returns an instance for the base unit (dimensionless and no scaling).
@@ -62,7 +62,7 @@ public:
      * Copy operator.
      * @draft ICU 60
      */
-    NoUnit( const NoUnit& other );
+    NoUnit(const NoUnit& other);
 
     /**
      * Destructor.
@@ -100,16 +100,17 @@ private:
      * Constructor
      * @internal (private)
      */
-    NoUnit( const char* subtype );
+    NoUnit(const char* subtype);
+
 };
 
 U_NAMESPACE_END
 
-#endif /* U_HIDE_DRAFT_API */
+#endif  /* U_HIDE_DRAFT_API */
 #endif /* #if !UCONFIG_NO_FORMATTING */
 
 #endif /* U_SHOW_CPLUSPLUS_API */
 
 #endif // __NOUNIT_H__
-// eof
+//eof
 //

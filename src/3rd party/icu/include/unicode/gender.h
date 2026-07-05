@@ -38,7 +38,7 @@ class GenderInfoTest;
 U_NAMESPACE_BEGIN
 
 /** \internal Forward Declaration  */
-void U_CALLCONV GenderInfo_initCache( UErrorCode& status );
+void U_CALLCONV GenderInfo_initCache(UErrorCode &status);
 
 /**
  * GenderInfo computes the gender of a list as a whole given the gender of
@@ -47,6 +47,7 @@ void U_CALLCONV GenderInfo_initCache( UErrorCode& status );
  */
 class U_I18N_API GenderInfo : public UObject {
 public:
+
     /**
      * Provides access to the predefined GenderInfo object for a given
      * locale.
@@ -61,13 +62,12 @@ public:
      *                pointer, so it must not attempt to free it.
      * @stable ICU 50
      */
-    static const GenderInfo* U_EXPORT2 getInstance( const Locale& locale,
-                                                    UErrorCode& status );
+    static const GenderInfo* U_EXPORT2 getInstance(const Locale& locale, UErrorCode& status);
 
     /**
      * Determines the gender of a list as a whole given the gender of each
      * of the elements.
-     *
+     * 
      * @param genders the gender of each element in the list.
      * @param length the length of gender array.
      * @param status  Output param set to success/failure code on exit, which
@@ -75,9 +75,7 @@ public:
      * @return        the gender of the whole list.
      * @stable ICU 50
      */
-    UGender getListGender( const UGender* genders,
-                           int32_t length,
-                           UErrorCode& status ) const;
+    UGender getListGender(const UGender* genders, int32_t length, UErrorCode& status) const;
 
     /**
      * Destructor.
@@ -93,12 +91,12 @@ private:
      * Copy constructor. One object per locale invariant. Clients
      * must never copy GenderInfo objects.
      */
-    GenderInfo( const GenderInfo& other );
+    GenderInfo(const GenderInfo& other);
 
     /**
-     * Assignment operator. Not applicable to immutable objects.
-     */
-    GenderInfo& operator=( const GenderInfo& );
+      * Assignment operator. Not applicable to immutable objects.
+      */
+    GenderInfo& operator=(const GenderInfo&);
 
     GenderInfo();
 
@@ -108,11 +106,10 @@ private:
 
     static const GenderInfo* getMaleTaintsInstance();
 
-    static const GenderInfo* loadInstance( const Locale& locale,
-                                           UErrorCode& status );
+    static const GenderInfo* loadInstance(const Locale& locale, UErrorCode& status);
 
     friend class ::GenderInfoTest;
-    friend void U_CALLCONV GenderInfo_initCache( UErrorCode& status );
+    friend void U_CALLCONV GenderInfo_initCache(UErrorCode &status);
 };
 
 U_NAMESPACE_END
@@ -122,4 +119,4 @@ U_NAMESPACE_END
 #endif /* U_SHOW_CPLUSPLUS_API */
 
 #endif // _GENDER
-// eof
+//eof

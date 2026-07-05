@@ -16,14 +16,12 @@
 
 #include "internal/_deprecated_header_message_guard.h"
 
-#if !defined( __TBB_show_deprecation_message_reader_writer_lock_H ) && \
-    defined( __TBB_show_deprecated_header_message )
-#define __TBB_show_deprecation_message_reader_writer_lock_H
-#pragma message( \
-    "TBB Warning: tbb/reader_writer_lock.h is deprecated. For details, please see Deprecated Features appendix in the TBB reference manual." )
+#if !defined(__TBB_show_deprecation_message_reader_writer_lock_H) && defined(__TBB_show_deprecated_header_message)
+#define  __TBB_show_deprecation_message_reader_writer_lock_H
+#pragma message("TBB Warning: tbb/reader_writer_lock.h is deprecated. For details, please see Deprecated Features appendix in the TBB reference manual.")
 #endif
 
-#if defined( __TBB_show_deprecated_header_message )
+#if defined(__TBB_show_deprecated_header_message)
 #undef __TBB_show_deprecated_header_message
 #endif
 
@@ -31,10 +29,11 @@
 #define __TBB_reader_writer_lock_H
 
 #define __TBB_reader_writer_lock_H_include_area
-#include "atomic.h"
 #include "internal/_warning_suppress_enable_notice.h"
-#include "tbb_allocator.h"
+
 #include "tbb_thread.h"
+#include "tbb_allocator.h"
+#include "atomic.h"
 
 namespace tbb {
 namespace interface5 {
@@ -42,13 +41,11 @@ namespace interface5 {
 /** Loosely adapted from Mellor-Crummey and Scott pseudocode at
     http://www.cs.rochester.edu/research/synchronization/pseudocode/rw.html#s_wp
     @ingroup synchronization */
-class __TBB_DEPRECATED_VERBOSE_MSG(
-    "tbb::reader_writer_lock is deprecated, use std::shared_mutex" )
+    class __TBB_DEPRECATED_VERBOSE_MSG("tbb::reader_writer_lock is deprecated, use std::shared_mutex")
     reader_writer_lock : tbb::internal::no_copy {
-public:
+ public:
     friend class scoped_lock;
     friend class scoped_lock_read;
-
     //! Status type for nodes associated with lock instances
     /** waiting_nonblocking: the wait state for nonblocking lock
           instances; for writes, these transition straight to active
@@ -88,82 +85,88 @@ public:
     enum status_t { waiting_nonblocking, waiting, active, invalid };
 
     //! Constructs a new reader_writer_lock
-    reader_writer_lock() { internal_construct(); }
+    reader_writer_lock() {
+        internal_construct();
+    }
 
     //! Destructs a reader_writer_lock object
-    ~reader_writer_lock() { internal_destroy(); }
+    ~reader_writer_lock() {
+        internal_destroy();
+    }
 
     //! The scoped lock pattern for write locks
-    /** Scoped locks help avoid the common problem of forgetting to release the
-       lock. This type also serves as the node for queuing locks. */
+    /** Scoped locks help avoid the common problem of forgetting to release the lock.
+        This type also serves as the node for queuing locks. */
     class scoped_lock : tbb::internal::no_copy {
     public:
         friend class reader_writer_lock;
 
-        //! Construct with blocking attempt to acquire write lock on the
-        //! passed-in lock
-        scoped_lock( reader_writer_lock& lock ) { internal_construct( lock ); }
-
-        //! Destructor, releases the write lock
-        ~scoped_lock() { internal_destroy(); }
-
-        void* operator new( size_t s ) {
-            return tbb::internal::allocate_via_handler_v3( s );
+        //! Construct with blocking attempt to acquire write lock on the passed-in lock
+        scoped_lock(reader_writer_lock& lock) {
+            internal_construct(lock);
         }
 
-        void operator delete( void* p ) {
-            tbb::internal::deallocate_via_handler_v3( p );
+        //! Destructor, releases the write lock
+        ~scoped_lock() {
+            internal_destroy();
+        }
+
+        void* operator new(size_t s) {
+            return tbb::internal::allocate_via_handler_v3(s);
+        }
+        void operator delete(void* p) {
+            tbb::internal::deallocate_via_handler_v3(p);
         }
 
     private:
         //! The pointer to the mutex to lock
-        reader_writer_lock* mutex;
+        reader_writer_lock *mutex;
         //! The next queued competitor for the mutex
         scoped_lock* next;
         //! Status flag of the thread associated with this node
-        atomic< status_t > status;
+        atomic<status_t> status;
 
         //! Construct scoped_lock that is not holding lock
         scoped_lock();
 
-        void __TBB_EXPORTED_METHOD internal_construct( reader_writer_lock& );
+        void __TBB_EXPORTED_METHOD internal_construct(reader_writer_lock&);
         void __TBB_EXPORTED_METHOD internal_destroy();
-    };
+   };
 
     //! The scoped lock pattern for read locks
     class scoped_lock_read : tbb::internal::no_copy {
     public:
         friend class reader_writer_lock;
 
-        //! Construct with blocking attempt to acquire read lock on the
-        //! passed-in lock
-        scoped_lock_read( reader_writer_lock& lock ) {
-            internal_construct( lock );
+        //! Construct with blocking attempt to acquire read lock on the passed-in lock
+        scoped_lock_read(reader_writer_lock& lock) {
+            internal_construct(lock);
         }
 
         //! Destructor, releases the read lock
-        ~scoped_lock_read() { internal_destroy(); }
-
-        void* operator new( size_t s ) {
-            return tbb::internal::allocate_via_handler_v3( s );
+        ~scoped_lock_read() {
+            internal_destroy();
         }
 
-        void operator delete( void* p ) {
-            tbb::internal::deallocate_via_handler_v3( p );
+        void* operator new(size_t s) {
+            return tbb::internal::allocate_via_handler_v3(s);
+        }
+        void operator delete(void* p) {
+            tbb::internal::deallocate_via_handler_v3(p);
         }
 
     private:
         //! The pointer to the mutex to lock
-        reader_writer_lock* mutex;
+        reader_writer_lock *mutex;
         //! The next queued competitor for the mutex
-        scoped_lock_read* next;
+        scoped_lock_read *next;
         //! Status flag of the thread associated with this node
-        atomic< status_t > status;
+        atomic<status_t> status;
 
         //! Construct scoped_lock_read that is not holding lock
         scoped_lock_read();
 
-        void __TBB_EXPORTED_METHOD internal_construct( reader_writer_lock& );
+        void __TBB_EXPORTED_METHOD internal_construct(reader_writer_lock&);
         void __TBB_EXPORTED_METHOD internal_destroy();
     };
 
@@ -197,42 +200,38 @@ public:
     //! Releases the reader_writer_lock
     void __TBB_EXPORTED_METHOD unlock();
 
-private:
+ private:
     void __TBB_EXPORTED_METHOD internal_construct();
     void __TBB_EXPORTED_METHOD internal_destroy();
 
     //! Attempts to acquire write lock
-    /** If unavailable, spins in blocking case, returns false in non-blocking
-     * case. */
-    bool start_write( scoped_lock* );
+    /** If unavailable, spins in blocking case, returns false in non-blocking case. */
+    bool start_write(scoped_lock *);
     //! Sets writer_head to w and attempts to unblock
-    void set_next_writer( scoped_lock* w );
+    void set_next_writer(scoped_lock *w);
     //! Relinquishes write lock to next waiting writer or group of readers
-    void end_write( scoped_lock* );
+    void end_write(scoped_lock *);
     //! Checks if current thread holds write lock
     bool is_current_writer();
 
     //! Attempts to acquire read lock
-    /** If unavailable, spins in blocking case, returns false in non-blocking
-     * case. */
-    void start_read( scoped_lock_read* );
+    /** If unavailable, spins in blocking case, returns false in non-blocking case. */
+    void start_read(scoped_lock_read *);
     //! Unblocks pending readers
     void unblock_readers();
-    //! Relinquishes read lock by decrementing counter; last reader wakes
-    //! pending writer
+    //! Relinquishes read lock by decrementing counter; last reader wakes pending writer
     void end_read();
 
     //! The list of pending readers
-    atomic< scoped_lock_read* > reader_head;
+    atomic<scoped_lock_read*> reader_head;
     //! The list of pending writers
-    atomic< scoped_lock* > writer_head;
+    atomic<scoped_lock*> writer_head;
     //! The last node in the list of pending writers
-    atomic< scoped_lock* > writer_tail;
+    atomic<scoped_lock*> writer_tail;
     //! Writer that owns the mutex; tbb_thread::id() otherwise.
     tbb_thread::id my_current_writer;
     //! Status of mutex
-    atomic< uintptr_t > rdr_count_and_flags; // used with __TBB_AtomicOR, which
-                                             // assumes uintptr_t
+    atomic<uintptr_t> rdr_count_and_flags; // used with __TBB_AtomicOR, which assumes uintptr_t
 };
 
 } // namespace interface5

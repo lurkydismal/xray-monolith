@@ -19,7 +19,7 @@
 
 #include "tbb_stddef.h"
 
-#if _WIN32 || _WIN64
+#if _WIN32||_WIN64
 #include "machine/windows_api.h"
 #elif __linux__
 #include <ctime>
@@ -36,12 +36,10 @@ public:
     //! Relative time interval.
     class interval_t {
         long long value;
-
-        explicit interval_t( long long value_ ) : value( value_ ) {}
-
+        explicit interval_t( long long value_ ) : value(value_) {}
     public:
         //! Construct a time interval representing zero time duration
-        interval_t() : value( 0 ) {};
+        interval_t() : value(0) {};
 
         //! Construct a time interval representing sec seconds time  duration
         explicit interval_t( double sec );
@@ -52,50 +50,40 @@ public:
         friend class tbb::tick_count;
 
         //! Extract the intervals from the tick_counts and subtract them.
-        friend interval_t operator-( const tick_count& t1,
-                                     const tick_count& t0 );
+        friend interval_t operator-( const tick_count& t1, const tick_count& t0 );
 
         //! Add two intervals.
-        friend interval_t operator+( const interval_t& i,
-                                     const interval_t& j ) {
-            return interval_t( i.value + j.value );
+        friend interval_t operator+( const interval_t& i, const interval_t& j ) {
+            return interval_t(i.value+j.value);
         }
 
         //! Subtract two intervals.
-        friend interval_t operator-( const interval_t& i,
-                                     const interval_t& j ) {
-            return interval_t( i.value - j.value );
+        friend interval_t operator-( const interval_t& i, const interval_t& j ) {
+            return interval_t(i.value-j.value);
         }
 
         //! Accumulation operator
-        interval_t& operator+=( const interval_t& i ) {
-            value += i.value;
-            return *this;
-        }
+        interval_t& operator+=( const interval_t& i ) {value += i.value; return *this;}
 
         //! Subtraction operator
-        interval_t& operator-=( const interval_t& i ) {
-            value -= i.value;
-            return *this;
-        }
-
+        interval_t& operator-=( const interval_t& i ) {value -= i.value; return *this;}
     private:
-        static long long ticks_per_second() {
-#if _WIN32 || _WIN64
+        static long long ticks_per_second(){
+#if _WIN32||_WIN64
             LARGE_INTEGER qpfreq;
-            int rval = QueryPerformanceFrequency( &qpfreq );
-            __TBB_ASSERT_EX( rval, "QueryPerformanceFrequency returned zero" );
-            return static_cast< long long >( qpfreq.QuadPart );
+            int rval = QueryPerformanceFrequency(&qpfreq);
+            __TBB_ASSERT_EX(rval, "QueryPerformanceFrequency returned zero");
+            return static_cast<long long>(qpfreq.QuadPart);
 #elif __linux__
-            return static_cast< long long >( 1E9 );
-#else  /* generic Unix */
-            return static_cast< long long >( 1E6 );
+            return static_cast<long long>(1E9);
+#else /* generic Unix */
+            return static_cast<long long>(1E6);
 #endif /* (choice of OS) */
         }
     };
 
     //! Construct an absolute timestamp initialized to zero.
-    tick_count() : my_count( 0 ) {};
+    tick_count() : my_count(0) {};
 
     //! Return current time.
     static tick_count now();
@@ -112,40 +100,35 @@ private:
 
 inline tick_count tick_count::now() {
     tick_count result;
-#if _WIN32 || _WIN64
+#if _WIN32||_WIN64
     LARGE_INTEGER qpcnt;
-    int rval = QueryPerformanceCounter( &qpcnt );
-    __TBB_ASSERT_EX( rval, "QueryPerformanceCounter failed" );
+    int rval = QueryPerformanceCounter(&qpcnt);
+    __TBB_ASSERT_EX(rval, "QueryPerformanceCounter failed");
     result.my_count = qpcnt.QuadPart;
 #elif __linux__
     struct timespec ts;
     int status = clock_gettime( CLOCK_REALTIME, &ts );
-    __TBB_ASSERT_EX( status == 0, "CLOCK_REALTIME not supported" );
-    result.my_count = static_cast< long long >( 1000000000UL ) *
-                          static_cast< long long >( ts.tv_sec ) +
-                      static_cast< long long >( ts.tv_nsec );
-#else  /* generic Unix */
+    __TBB_ASSERT_EX( status==0, "CLOCK_REALTIME not supported" );
+    result.my_count = static_cast<long long>(1000000000UL)*static_cast<long long>(ts.tv_sec) + static_cast<long long>(ts.tv_nsec);
+#else /* generic Unix */
     struct timeval tv;
-    int status = gettimeofday( &tv, NULL );
-    __TBB_ASSERT_EX( status == 0, "gettimeofday failed" );
-    result.my_count = static_cast< long long >( 1000000 ) *
-                          static_cast< long long >( tv.tv_sec ) +
-                      static_cast< long long >( tv.tv_usec );
+    int status = gettimeofday(&tv, NULL);
+    __TBB_ASSERT_EX( status==0, "gettimeofday failed" );
+    result.my_count = static_cast<long long>(1000000)*static_cast<long long>(tv.tv_sec) + static_cast<long long>(tv.tv_usec);
 #endif /*(choice of OS) */
     return result;
 }
 
 inline tick_count::interval_t::interval_t( double sec ) {
-    value = static_cast< long long >( sec * interval_t::ticks_per_second() );
+    value = static_cast<long long>(sec*interval_t::ticks_per_second());
 }
 
-inline tick_count::interval_t operator-( const tick_count& t1,
-                                         const tick_count& t0 ) {
-    return tick_count::interval_t( t1.my_count - t0.my_count );
+inline tick_count::interval_t operator-( const tick_count& t1, const tick_count& t0 ) {
+    return tick_count::interval_t( t1.my_count-t0.my_count );
 }
 
 inline double tick_count::interval_t::seconds() const {
-    return value * tick_count::resolution();
+    return value*tick_count::resolution();
 }
 
 } // namespace tbb

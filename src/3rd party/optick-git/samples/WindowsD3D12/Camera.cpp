@@ -9,74 +9,72 @@
 //
 //*********************************************************
 
-#include "Camera.h"
-
 #include "stdafx.h"
+#include "Camera.h"
 
 Camera* Camera::mCamera = nullptr;
 
-Camera::Camera() {
-    Reset();
-    mCamera = this;
+Camera::Camera()
+{
+	Reset();
+	mCamera = this;
 }
 
-Camera::~Camera() {
-    mCamera = nullptr;
+Camera::~Camera()
+{
+	mCamera = nullptr;
 }
 
-Camera* Camera::get() {
-    return mCamera;
+Camera* Camera::get()
+{
+	return mCamera;
 }
 
-void Camera::Get3DViewProjMatrices( XMFLOAT4X4* view,
-                                    XMFLOAT4X4* proj,
-                                    float fovInDegrees,
-                                    float screenWidth,
-                                    float screenHeight ) {
-    float aspectRatio = ( float )screenWidth / ( float )screenHeight;
-    float fovAngleY = fovInDegrees * XM_PI / 180.0f;
+void Camera::Get3DViewProjMatrices(XMFLOAT4X4 *view, XMFLOAT4X4 *proj, float fovInDegrees, float screenWidth, float screenHeight)
+{
+	
+	float aspectRatio = (float)screenWidth / (float)screenHeight;
+	float fovAngleY = fovInDegrees * XM_PI / 180.0f;
 
-    if ( aspectRatio < 1.0f ) {
-        fovAngleY /= aspectRatio;
-    }
+	if (aspectRatio < 1.0f)
+	{
+		fovAngleY /= aspectRatio;
+	}
 
-    XMStoreFloat4x4( view,
-                     XMMatrixTranspose( XMMatrixLookAtRH( mEye, mAt, mUp ) ) );
-    XMStoreFloat4x4( proj, XMMatrixTranspose( XMMatrixPerspectiveFovRH(
-                               fovAngleY, aspectRatio, 0.01f, 125.0f ) ) );
+	XMStoreFloat4x4(view, XMMatrixTranspose(XMMatrixLookAtRH(mEye, mAt, mUp)));
+	XMStoreFloat4x4(proj, XMMatrixTranspose(XMMatrixPerspectiveFovRH(fovAngleY, aspectRatio, 0.01f, 125.0f)));
 }
 
-void Camera::GetOrthoProjMatrices( XMFLOAT4X4* view,
-                                   XMFLOAT4X4* proj,
-                                   float width,
-                                   float height ) {
-    XMStoreFloat4x4( view,
-                     XMMatrixTranspose( XMMatrixLookAtRH( mEye, mAt, mUp ) ) );
-    XMStoreFloat4x4( proj, XMMatrixTranspose( XMMatrixOrthographicRH(
-                               width, height, 0.01f, 125.0f ) ) );
+void Camera::GetOrthoProjMatrices(XMFLOAT4X4 *view, XMFLOAT4X4 *proj, float width, float height)
+{
+	XMStoreFloat4x4(view, XMMatrixTranspose(XMMatrixLookAtRH(mEye, mAt, mUp)));
+	XMStoreFloat4x4(proj, XMMatrixTranspose(XMMatrixOrthographicRH(width, height, 0.01f, 125.0f)));
+}
+void Camera::RotateYaw(float deg)
+{
+	XMMATRIX rotation = XMMatrixRotationAxis(mUp, deg);
+
+	mEye = XMVector3TransformCoord(mEye, rotation);
 }
 
-void Camera::RotateYaw( float deg ) {
-    XMMATRIX rotation = XMMatrixRotationAxis( mUp, deg );
+void Camera::RotatePitch(float deg)
+{
+	XMVECTOR right = XMVector3Normalize(XMVector3Cross(mEye, mUp));
+	XMMATRIX rotation = XMMatrixRotationAxis(right, deg);
 
-    mEye = XMVector3TransformCoord( mEye, rotation );
+	mEye = XMVector3TransformCoord(mEye, rotation);
 }
 
-void Camera::RotatePitch( float deg ) {
-    XMVECTOR right = XMVector3Normalize( XMVector3Cross( mEye, mUp ) );
-    XMMATRIX rotation = XMMatrixRotationAxis( right, deg );
-
-    mEye = XMVector3TransformCoord( mEye, rotation );
+void Camera::Reset()
+{
+	mEye = XMVectorSet(0.0f, 15.0f, -30.0f, 0.0f);
+	mAt = XMVectorSet(0.0f, 8.0f, 0.0f, 0.0f);
+	mUp = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 }
 
-void Camera::Reset() {
-    mEye = XMVectorSet( 0.0f, 15.0f, -30.0f, 0.0f );
-    mAt = XMVectorSet( 0.0f, 8.0f, 0.0f, 0.0f );
-    mUp = XMVectorSet( 0.0f, 1.0f, 0.0f, 0.0f );
-}
-
-void Camera::Set( XMVECTOR eye, XMVECTOR at, XMVECTOR up ) {
-    mEye = eye;
-    mAt = at;
-    mUp = up;
+void Camera::Set(XMVECTOR eye, XMVECTOR at, XMVECTOR up)
+{
+	mEye = eye;
+	mAt = at;
+	mUp = up;
 }

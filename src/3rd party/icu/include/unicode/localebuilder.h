@@ -7,8 +7,8 @@
 
 #if U_SHOW_CPLUSPLUS_API
 
-#include "unicode/localematcher.h"
 #include "unicode/locid.h"
+#include "unicode/localematcher.h"
 #include "unicode/stringpiece.h"
 #include "unicode/uobject.h"
 
@@ -24,11 +24,11 @@ class CharString;
 /**
  * <code>LocaleBuilder</code> is used to build instances of <code>Locale</code>
  * from values configured by the setters.  Unlike the <code>Locale</code>
- * constructors, the <code>LocaleBuilder</code> checks if a value configured by
- * a setter satisfies the syntax requirements defined by the <code>Locale</code>
- * class.  A <code>Locale</code> object created by a <code>LocaleBuilder</code>
- * is well-formed and can be transformed to a well-formed IETF BCP 47 language
- * tag without losing information.
+ * constructors, the <code>LocaleBuilder</code> checks if a value configured by a
+ * setter satisfies the syntax requirements defined by the <code>Locale</code>
+ * class.  A <code>Locale</code> object created by a <code>LocaleBuilder</code> is
+ * well-formed and can be transformed to a well-formed IETF BCP 47 language tag
+ * without losing information.
  *
  * <p>The following example shows how to create a <code>Locale</code> object
  * with the <code>LocaleBuilder</code>.
@@ -88,13 +88,12 @@ public:
      *
      * @draft ICU 64
      */
-    LocaleBuilder& setLocale( const Locale& locale );
+    LocaleBuilder& setLocale(const Locale& locale);
 
     /**
      * Resets the LocaleBuilder to match the provided
-     * [Unicode Locale
-     * Identifier](http://www.unicode.org/reports/tr35/tr35.html#unicode_locale_id)
-     * . Discards the existing state. the empty string cause the builder to be
+     * [Unicode Locale Identifier](http://www.unicode.org/reports/tr35/tr35.html#unicode_locale_id) .
+     * Discards the existing state. the empty string cause the builder to be
      * reset, like {@link #clear}.  Grandfathered tags are converted to their
      * canonical form before being processed.  Otherwise, the <code>language
      * tag</code> must be well-formed, or else the build() method will later
@@ -107,13 +106,13 @@ public:
      * @return This builder.
      * @draft ICU 64
      */
-    LocaleBuilder& setLanguageTag( StringPiece tag );
+    LocaleBuilder& setLanguageTag(StringPiece tag);
 
     /**
      * Sets the language.  If <code>language</code> is the empty string, the
      * language in this <code>LocaleBuilder</code> is removed. Otherwise, the
-     * <code>language</code> must be well-formed, or else the build() method
-     * will later report an U_ILLEGAL_ARGUMENT_ERROR.
+     * <code>language</code> must be well-formed, or else the build() method will
+     * later report an U_ILLEGAL_ARGUMENT_ERROR.
      *
      * <p>The syntax of language value is defined as
      * [unicode_language_subtag](http://www.unicode.org/reports/tr35/tr35.html#unicode_language_subtag).
@@ -122,13 +121,13 @@ public:
      * @return This builder.
      * @draft ICU 64
      */
-    LocaleBuilder& setLanguage( StringPiece language );
+    LocaleBuilder& setLanguage(StringPiece language);
 
     /**
-     * Sets the script. If <code>script</code> is the empty string, the script
-     * in this <code>LocaleBuilder</code> is removed. Otherwise, the
-     * <code>script</code> must be well-formed, or else the build() method will
-     * later report an U_ILLEGAL_ARGUMENT_ERROR.
+     * Sets the script. If <code>script</code> is the empty string, the script in
+     * this <code>LocaleBuilder</code> is removed.
+     * Otherwise, the <code>script</code> must be well-formed, or else the build()
+     * method will later report an U_ILLEGAL_ARGUMENT_ERROR.
      *
      * <p>The script value is a four-letter script code as
      * [unicode_script_subtag](http://www.unicode.org/reports/tr35/tr35.html#unicode_script_subtag)
@@ -138,7 +137,7 @@ public:
      * @return This builder.
      * @draft ICU 64
      */
-    LocaleBuilder& setScript( StringPiece script );
+    LocaleBuilder& setScript(StringPiece script);
 
     /**
      * Sets the region.  If region is the empty string, the region in this
@@ -157,28 +156,28 @@ public:
      * @return This builder.
      * @draft ICU 64
      */
-    LocaleBuilder& setRegion( StringPiece region );
+    LocaleBuilder& setRegion(StringPiece region);
 
     /**
      * Sets the variant.  If variant is the empty string, the variant in this
-     * <code>LocaleBuilder</code> is removed.  Otherwise, the
-     * <code>variant</code> must be well-formed, or else the build() method will
-     * later report an U_ILLEGAL_ARGUMENT_ERROR.
+     * <code>LocaleBuilder</code> is removed.  Otherwise, the <code>variant</code>
+     * must be well-formed, or else the build() method will later report an
+     * U_ILLEGAL_ARGUMENT_ERROR.
      *
      * <p><b>Note:</b> This method checks if <code>variant</code>
      * satisfies the
      * [unicode_variant_subtag](http://www.unicode.org/reports/tr35/tr35.html#unicode_variant_subtag)
-     * syntax requirements, and normalizes the value to lowercase letters.
-     * However, the <code>Locale</code> class does not impose any syntactic
-     * restriction on variant. To set an ill-formed variant, use a Locale
-     * constructor. If there are multiple unicode_variant_subtag, the caller
-     * must concatenate them with '-' as separator (ex: "foobar-fibar").
+     * syntax requirements, and normalizes the value to lowercase letters. However,
+     * the <code>Locale</code> class does not impose any syntactic
+     * restriction on variant. To set an ill-formed variant, use a Locale constructor.
+     * If there are multiple unicode_variant_subtag, the caller must concatenate
+     * them with '-' as separator (ex: "foobar-fibar").
      *
      * @param variant the variant
      * @return This builder.
      * @draft ICU 64
      */
-    LocaleBuilder& setVariant( StringPiece variant );
+    LocaleBuilder& setVariant(StringPiece variant);
 
     /**
      * Sets the extension for the given key. If the value is the empty string,
@@ -187,8 +186,8 @@ public:
      * later report an U_ILLEGAL_ARGUMENT_ERROR.
      *
      * <p><b>Note:</b> The key ('u') is used for the Unicode locale extension.
-     * Setting a value for this key replaces any existing Unicode locale
-     * key/type pairs with those defined in the extension.
+     * Setting a value for this key replaces any existing Unicode locale key/type
+     * pairs with those defined in the extension.
      *
      * <p><b>Note:</b> The key ('x') is used for the private use code. To be
      * well-formed, the value for this key needs only to have subtags of one to
@@ -199,7 +198,7 @@ public:
      * @return This builder.
      * @draft ICU 64
      */
-    LocaleBuilder& setExtension( char key, StringPiece value );
+    LocaleBuilder& setExtension(char key, StringPiece value);
 
     /**
      * Sets the Unicode locale keyword type for the given key. If the type
@@ -219,7 +218,8 @@ public:
      * @return This builder.
      * @draft ICU 64
      */
-    LocaleBuilder& setUnicodeLocaleKeyword( StringPiece key, StringPiece type );
+    LocaleBuilder& setUnicodeLocaleKeyword(
+        StringPiece key, StringPiece type);
 
     /**
      * Adds a unicode locale attribute, if not already present, otherwise
@@ -231,13 +231,12 @@ public:
      * @return This builder.
      * @draft ICU 64
      */
-    LocaleBuilder& addUnicodeLocaleAttribute( StringPiece attribute );
+    LocaleBuilder& addUnicodeLocaleAttribute(StringPiece attribute);
 
     /**
      * Removes a unicode locale attribute, if present, otherwise has no
      * effect.  The attribute must not be empty string and must be well-formed
-     * or U_ILLEGAL_ARGUMENT_ERROR will be set to status during the build()
-     * call.
+     * or U_ILLEGAL_ARGUMENT_ERROR will be set to status during the build() call.
      *
      * <p>Attribute comparison for removal is case-insensitive.
      *
@@ -245,7 +244,7 @@ public:
      * @return This builder.
      * @draft ICU 64
      */
-    LocaleBuilder& removeUnicodeLocaleAttribute( StringPiece attribute );
+    LocaleBuilder& removeUnicodeLocaleAttribute(StringPiece attribute);
 
     /**
      * Resets the builder to its initial, empty state.
@@ -278,40 +277,39 @@ public:
      * @return a new Locale
      * @draft ICU 64
      */
-    Locale build( UErrorCode& status );
+    Locale build(UErrorCode& status);
 
 #ifndef U_HIDE_DRAFT_API
     /**
      * Sets the UErrorCode if an error occurred while recording sets.
      * Preserves older error codes in the outErrorCode.
-     * @param outErrorCode Set to an error code that occurred while setting
-     * subtags. Unchanged if there is no such error or if outErrorCode already
-     * contained an error.
+     * @param outErrorCode Set to an error code that occurred while setting subtags.
+     *                  Unchanged if there is no such error or if outErrorCode
+     *                  already contained an error.
      * @return TRUE if U_FAILURE(outErrorCode)
      * @draft ICU 65
      */
-    UBool copyErrorTo( UErrorCode& outErrorCode ) const;
-#endif /* U_HIDE_DRAFT_API */
+    UBool copyErrorTo(UErrorCode &outErrorCode) const;
+#endif  /* U_HIDE_DRAFT_API */
 
 private:
     friend class LocaleMatcher::Result;
 
-    void copyExtensionsFrom( const Locale& src, UErrorCode& errorCode );
+    void copyExtensionsFrom(const Locale& src, UErrorCode& errorCode);
 
     UErrorCode status_;
-    char language_[ 9 ];
-    char script_[ 5 ];
-    char region_[ 4 ];
-    CharString* variant_; // Pointer not object so we need not #include internal
-                          // charstr.h.
-    icu::Locale*
-        extensions_; // Pointer not object. Storage for all other fields.
+    char language_[9];
+    char script_[5];
+    char region_[4];
+    CharString *variant_;  // Pointer not object so we need not #include internal charstr.h.
+    icu::Locale *extensions_;  // Pointer not object. Storage for all other fields.
+
 };
 
 U_NAMESPACE_END
 
-#endif // U_HIDE_DRAFT_API
+#endif  // U_HIDE_DRAFT_API
 
 #endif /* U_SHOW_CPLUSPLUS_API */
 
-#endif // __LOCALEBUILDER_H__
+#endif  // __LOCALEBUILDER_H__

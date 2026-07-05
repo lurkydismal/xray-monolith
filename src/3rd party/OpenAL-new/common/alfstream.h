@@ -3,36 +3,27 @@
 
 #ifdef _WIN32
 
-#include <fstream>
 #include <string>
+#include <fstream>
+
 
 namespace al {
 
 // Inherit from std::ifstream to accept UTF-8 filenames
 class ifstream final : public std::ifstream {
 public:
-    explicit ifstream( const char* filename,
-                       std::ios_base::openmode mode = std::ios_base::in );
+    explicit ifstream(const char *filename, std::ios_base::openmode mode=std::ios_base::in);
+    explicit ifstream(const std::string &filename, std::ios_base::openmode mode=std::ios_base::in)
+        : ifstream{filename.c_str(), mode} { }
 
-    explicit ifstream( const std::string& filename,
-                       std::ios_base::openmode mode = std::ios_base::in )
-        : ifstream{ filename.c_str(), mode } {}
+    explicit ifstream(const wchar_t *filename, std::ios_base::openmode mode=std::ios_base::in)
+        : std::ifstream{filename, mode} { }
+    explicit ifstream(const std::wstring &filename, std::ios_base::openmode mode=std::ios_base::in)
+        : ifstream{filename.c_str(), mode} { }
 
-    explicit ifstream( const wchar_t* filename,
-                       std::ios_base::openmode mode = std::ios_base::in )
-        : std::ifstream{ filename, mode } {}
-
-    explicit ifstream( const std::wstring& filename,
-                       std::ios_base::openmode mode = std::ios_base::in )
-        : ifstream{ filename.c_str(), mode } {}
-
-    void open( const char* filename,
-               std::ios_base::openmode mode = std::ios_base::in );
-
-    void open( const std::string& filename,
-               std::ios_base::openmode mode = std::ios_base::in ) {
-        open( filename.c_str(), mode );
-    }
+    void open(const char *filename, std::ios_base::openmode mode=std::ios_base::in);
+    void open(const std::string &filename, std::ios_base::openmode mode=std::ios_base::in)
+    { open(filename.c_str(), mode); }
 
     ~ifstream() override;
 };

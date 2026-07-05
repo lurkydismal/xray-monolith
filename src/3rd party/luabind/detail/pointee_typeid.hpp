@@ -24,13 +24,12 @@
 
 #include <luabind/config.hpp>
 
-namespace luabind {
-namespace detail {
+namespace luabind { namespace detail {
 
-template < typename T >
-LUABIND_TYPE_INFO pointee_typeid( T* ) {
-    return LUABIND_TYPEID( T );
-}
+    template<typename T>
+    LUABIND_TYPE_INFO pointee_typeid(T*)
+    {
+        return LUABIND_TYPEID(T);
+    }
 
-} // namespace detail
-} // namespace luabind
+}} // namespace luabind::detail

@@ -7,6 +7,7 @@ struct EffectState;
 
 using uint = unsigned int;
 
+
 struct AsyncEvent {
     enum : uint {
         /* User event types. */
@@ -22,31 +23,31 @@ struct AsyncEvent {
         KillThread,
     };
 
-    enum class SrcState { Reset, Stop, Play, Pause };
+    enum class SrcState {
+        Reset,
+        Stop,
+        Play,
+        Pause
+    };
 
     const uint EnumType;
-
     union {
         char dummy;
-
         struct {
             uint id;
             SrcState state;
         } srcstate;
-
         struct {
             uint id;
             uint count;
         } bufcomp;
-
         struct {
-            char msg[ 244 ];
+            char msg[244];
         } disconnect;
-
-        EffectState* mEffectState;
+        EffectState *mEffectState;
     } u{};
 
-    constexpr AsyncEvent( uint type ) noexcept : EnumType{ type } {}
+    constexpr AsyncEvent(uint type) noexcept : EnumType{type} { }
 
     DISABLE_ALLOC()
 };

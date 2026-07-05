@@ -4,23 +4,24 @@
 
 #if WITH_EDITOR
 
-#include "OptickStyle.h"
 #include "Slate/Public/Framework/Commands/Commands.h"
 
-class FOptickCommands : public TCommands< FOptickCommands > {
-public:
-    FOptickCommands()
-        : TCommands< FOptickCommands >(
-              TEXT( "Optick" ),
-              NSLOCTEXT( "Contexts", "Optick", "Optick Plugin" ),
-              NAME_None,
-              FOptickStyle::GetStyleSetName() ) {}
+#include "OptickStyle.h"
 
-    // TCommands<> interface
-    virtual void RegisterCommands() override;
+class FOptickCommands : public TCommands<FOptickCommands>
+{
+public:
+
+	FOptickCommands()
+		: TCommands<FOptickCommands>(TEXT("Optick"), NSLOCTEXT("Contexts", "Optick", "Optick Plugin"), NAME_None, FOptickStyle::GetStyleSetName())
+	{
+	}
+
+	// TCommands<> interface
+	virtual void RegisterCommands() override;
 
 public:
-    TSharedPtr< FUICommandInfo > PluginAction;
+	TSharedPtr< FUICommandInfo > PluginAction;
 };
 
 #endif

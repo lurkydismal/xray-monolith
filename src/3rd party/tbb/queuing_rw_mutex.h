@@ -18,10 +18,10 @@
 #define __TBB_queuing_rw_mutex_H
 
 #define __TBB_queuing_rw_mutex_H_include_area
-#include <cstring>
-
-#include "atomic.h"
 #include "internal/_warning_suppress_enable_notice.h"
+
+#include <cstring>
+#include "atomic.h"
 #include "tbb_profiling.h"
 
 namespace tbb {
@@ -43,14 +43,14 @@ public:
     //! Destructor asserts if the mutex is acquired, i.e. q_tail is non-NULL
     ~queuing_rw_mutex() {
 #if TBB_USE_ASSERT
-        __TBB_ASSERT( !q_tail, "destruction of an acquired mutex" );
+        __TBB_ASSERT( !q_tail, "destruction of an acquired mutex");
 #endif
     }
 
     //! The scoped locking pattern
     /** It helps to avoid the common problem of forgetting to release lock.
         It also nicely provides the "node" for queuing locks. */
-    class scoped_lock : internal::no_copy {
+    class scoped_lock: internal::no_copy {
         //! Initialize fields to mean "no lock held".
         void initialize() {
             my_mutex = NULL;
@@ -58,40 +58,38 @@ public:
             my_going = 0;
 #if TBB_USE_ASSERT
             my_state = 0xFF; // Set to invalid state
-            internal::poison_pointer( my_next );
-            internal::poison_pointer( my_prev );
+            internal::poison_pointer(my_next);
+            internal::poison_pointer(my_prev);
 #endif /* TBB_USE_ASSERT */
         }
 
     public:
         //! Construct lock that has not acquired a mutex.
         /** Equivalent to zero-initialization of *this. */
-        scoped_lock() { initialize(); }
+        scoped_lock() {initialize();}
 
         //! Acquire lock on given mutex.
-        scoped_lock( queuing_rw_mutex& m, bool write = true ) {
+        scoped_lock( queuing_rw_mutex& m, bool write=true ) {
             initialize();
-            acquire( m, write );
+            acquire(m,write);
         }
 
         //! Release lock (if lock is held).
         ~scoped_lock() {
-            if ( my_mutex )
-                release();
+            if( my_mutex ) release();
         }
 
         //! Acquire lock on given mutex.
-        void acquire( queuing_rw_mutex& m, bool write = true );
+        void acquire( queuing_rw_mutex& m, bool write=true );
 
         //! Acquire lock on given mutex if free (i.e. non-blocking)
-        bool try_acquire( queuing_rw_mutex& m, bool write = true );
+        bool try_acquire( queuing_rw_mutex& m, bool write=true );
 
         //! Release lock.
         void release();
 
         //! Upgrade reader to become a writer.
-        /** Returns whether the upgrade happened without releasing and
-         * re-acquiring the lock */
+        /** Returns whether the upgrade happened without releasing and re-acquiring the lock */
         bool upgrade_to_writer();
 
         //! Downgrade writer to become a reader.
@@ -106,13 +104,11 @@ public:
 
         typedef unsigned char state_t;
 
-        //! State of the request: reader, writer, active reader, other service
-        //! states
-        atomic< state_t > my_state;
+        //! State of the request: reader, writer, active reader, other service states
+        atomic<state_t> my_state;
 
         //! The local spin-wait variable
-        /** Corresponds to "spin" in the pseudocode but inverted for the sake of
-         * zero-initialization */
+        /** Corresponds to "spin" in the pseudocode but inverted for the sake of zero-initialization */
         unsigned char __TBB_atomic my_going;
 
         //! A tiny internal lock
@@ -144,10 +140,11 @@ public:
 
 private:
     //! The last competitor requesting the lock
-    atomic< scoped_lock* > q_tail;
+    atomic<scoped_lock*> q_tail;
+
 };
 
-__TBB_DEFINE_PROFILING_SET_NAME( queuing_rw_mutex )
+__TBB_DEFINE_PROFILING_SET_NAME(queuing_rw_mutex)
 
 } // namespace tbb
 

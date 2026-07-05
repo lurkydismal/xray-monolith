@@ -52,16 +52,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     corresponding C interface.
 #endif
 
-namespace Assimp {
+namespace Assimp    {
 
 // ----------------------------------------------------------------------------------
 /** @brief CPP-API: Class to handle file I/O for C++
  *
- *  Derive an own implementation from this interface to provide custom IO
- * handling to the Importer. If you implement this interface, be sure to also
- * provide an implementation for IOSystem that creates instances of your custom
- * IO class.
- */
+ *  Derive an own implementation from this interface to provide custom IO handling
+ *  to the Importer. If you implement this interface, be sure to also provide an
+ *  implementation for IOSystem that creates instances of your custom IO class.
+*/
 class ASSIMP_API IOStream
 #ifndef SWIG
     : public Intern::AllocateFromAssimpHeap
@@ -69,7 +68,7 @@ class ASSIMP_API IOStream
 {
 protected:
     /** Constructor protected, use IOSystem::Open() to create an instance. */
-    IOStream( void );
+    IOStream(void);
 
 public:
     // -------------------------------------------------------------------
@@ -83,23 +82,26 @@ public:
      *
      * See fread() for more details
      * This fails for write-only files */
-    virtual size_t Read( void* pvBuffer, size_t pSize, size_t pCount ) = 0;
+    virtual size_t Read(void* pvBuffer,
+        size_t pSize,
+        size_t pCount) = 0;
 
     // -------------------------------------------------------------------
     /** @brief Write to the file
-     *
-     * See fwrite() for more details
-     * This fails for read-only files */
-    virtual size_t Write( const void* pvBuffer,
-                          size_t pSize,
-                          size_t pCount ) = 0;
+    *
+    * See fwrite() for more details
+    * This fails for read-only files */
+    virtual size_t Write(const void* pvBuffer,
+        size_t pSize,
+        size_t pCount) = 0;
 
     // -------------------------------------------------------------------
     /** @brief Set the read/write cursor of the file
      *
      * Note that the offset is _negative_ for aiOrigin_END.
      * See fseek() for more details */
-    virtual aiReturn Seek( size_t pOffset, aiOrigin pOrigin ) = 0;
+    virtual aiReturn Seek(size_t pOffset,
+        aiOrigin pOrigin) = 0;
 
     // -------------------------------------------------------------------
     /** @brief Get the current position of the read/write cursor
@@ -120,16 +122,17 @@ public:
 }; //! class IOStream
 
 // ----------------------------------------------------------------------------------
-inline IOStream::IOStream() {
+inline IOStream::IOStream()
+{
     // empty
 }
 
 // ----------------------------------------------------------------------------------
-inline IOStream::~IOStream() {
+inline IOStream::~IOStream()
+{
     // empty
 }
-
 // ----------------------------------------------------------------------------------
-} // namespace Assimp
+} //!namespace Assimp
 
 #endif //!!AI_IOSTREAM_H_INC

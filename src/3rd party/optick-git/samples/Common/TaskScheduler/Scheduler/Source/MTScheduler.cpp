@@ -2,903 +2,889 @@
 //
 // 	Copyright (c) 2015 Sergey Makeev, Vadim Slyusarev
 //
-// 	Permission is hereby granted, free of charge, to any person obtaining a
-// copy 	of this software and associated documentation files (the
-// "Software"), to deal 	in the Software without restriction, including
-// without limitation the rights 	to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell 	copies of the Software, and to permit
-// persons to whom the Software is 	furnished to do so, subject to the
-// following conditions:
+// 	Permission is hereby granted, free of charge, to any person obtaining a copy
+// 	of this software and associated documentation files (the "Software"), to deal
+// 	in the Software without restriction, including without limitation the rights
+// 	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// 	copies of the Software, and to permit persons to whom the Software is
+// 	furnished to do so, subject to the following conditions:
 //
 //  The above copyright notice and this permission notice shall be included in
 // 	all copies or substantial portions of the Software.
 //
-// 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR 	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// 	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-// THE 	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-// FROM, 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-// DEALINGS IN 	THE SOFTWARE.
+// 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// 	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// 	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// 	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// 	THE SOFTWARE.
 
 #include <MTScheduler.h>
 #include <MTStaticVector.h>
 #include <string.h> // for memset
 
+
 //  Enable low latency experimental wait code path.
-//  Look like low latency hybrid wait is work better for PS4/X1, but a little
-//  worse on PC
-// #define MT_LOW_LATENCY_EXPERIMENTAL_WAIT (1)
+//  Look like low latency hybrid wait is work better for PS4/X1, but a little worse on PC
+//#define MT_LOW_LATENCY_EXPERIMENTAL_WAIT (1)
 
-namespace MT {
-mt_thread_local uint32 isWorkerThreadTLS = 0;
+
+namespace MT
+{
+	mt_thread_local uint32 isWorkerThreadTLS = 0;
+
 
 #ifdef MT_INSTRUMENTED_BUILD
-TaskScheduler::TaskScheduler( uint32 workerThreadsCount,
-                              WorkerThreadParams* workerParameters,
-                              IProfilerEventListener* listener,
-                              TaskStealingMode::Type stealMode )
+	TaskScheduler::TaskScheduler(uint32 workerThreadsCount, WorkerThreadParams* workerParameters, IProfilerEventListener* listener, TaskStealingMode::Type stealMode)
 #else
-TaskScheduler::TaskScheduler( uint32 workerThreadsCount,
-                              WorkerThreadParams* workerParameters,
-                              TaskStealingMode::Type stealMode )
+	TaskScheduler::TaskScheduler(uint32 workerThreadsCount, WorkerThreadParams* workerParameters, TaskStealingMode::Type stealMode)
 #endif
-    : roundRobinThreadIndex( 0 ),
-      startedThreadsCount( 0 ),
-      taskStealingDisabled( stealMode == TaskStealingMode::DISABLED ) {
+		: roundRobinThreadIndex(0)
+		, startedThreadsCount(0)
+		, taskStealingDisabled(stealMode == TaskStealingMode::DISABLED)
+	{
 
 #ifdef MT_INSTRUMENTED_BUILD
-    profilerEventListener = listener;
+		profilerEventListener = listener;
 #endif
 
-    if ( workerThreadsCount != 0 ) {
-        threadsCount.StoreRelaxed( MT::Clamp( workerThreadsCount, ( uint32 )1,
-                                              ( uint32 )MT_MAX_THREAD_COUNT ) );
-    } else {
-        // query number of processor
-        threadsCount.StoreRelaxed(
-            ( uint32 )MT::Clamp( Thread::GetNumberOfHardwareThreads() - 1, 1,
-                                 ( int )MT_MAX_THREAD_COUNT ) );
-    }
+		if (workerThreadsCount != 0)
+		{
+			threadsCount.StoreRelaxed( MT::Clamp(workerThreadsCount, (uint32)1, (uint32)MT_MAX_THREAD_COUNT) );
+		} else
+		{
+			//query number of processor
+			threadsCount.StoreRelaxed( (uint32)MT::Clamp(Thread::GetNumberOfHardwareThreads() - 1, 1, (int)MT_MAX_THREAD_COUNT) );
+		}
 
-    uint32 fiberIndex = 0;
 
-    // create fiber pool (fibers with standard stack size)
-    for ( uint32 i = 0; i < MT_MAX_STANDART_FIBERS_COUNT; i++ ) {
-        FiberContext& context = standartFiberContexts[ i ];
-        context.fiber.Create( MT_STANDART_FIBER_STACK_SIZE, FiberMain,
-                              &context );
-        context.fiberIndex = fiberIndex;
-        bool res = standartFibersAvailable.TryPush( &context );
-        MT_USED_IN_ASSERT( res );
-        MT_ASSERT( res == true, "Can't add fiber to storage" );
-        fiberIndex++;
-    }
+		uint32 fiberIndex = 0;
 
-    // create fiber pool (fibers with extended stack size)
-    for ( uint32 i = 0; i < MT_MAX_EXTENDED_FIBERS_COUNT; i++ ) {
-        FiberContext& context = extendedFiberContexts[ i ];
-        context.fiber.Create( MT_EXTENDED_FIBER_STACK_SIZE, FiberMain,
-                              &context );
-        context.fiberIndex = fiberIndex;
-        bool res = extendedFibersAvailable.TryPush( &context );
-        MT_USED_IN_ASSERT( res );
-        MT_ASSERT( res == true, "Can't add fiber to storage" );
-        fiberIndex++;
-    }
+		// create fiber pool (fibers with standard stack size)
+		for (uint32 i = 0; i < MT_MAX_STANDART_FIBERS_COUNT; i++)
+		{
+			FiberContext& context = standartFiberContexts[i];
+			context.fiber.Create(MT_STANDART_FIBER_STACK_SIZE, FiberMain, &context);
+			context.fiberIndex = fiberIndex;
+			bool res = standartFibersAvailable.TryPush( &context );
+			MT_USED_IN_ASSERT(res);
+			MT_ASSERT(res == true, "Can't add fiber to storage");
+			fiberIndex++;
+		}
+
+		// create fiber pool (fibers with extended stack size)
+		for (uint32 i = 0; i < MT_MAX_EXTENDED_FIBERS_COUNT; i++)
+		{
+			FiberContext& context = extendedFiberContexts[i];
+			context.fiber.Create(MT_EXTENDED_FIBER_STACK_SIZE, FiberMain, &context);
+			context.fiberIndex = fiberIndex;
+			bool res = extendedFibersAvailable.TryPush( &context );
+			MT_USED_IN_ASSERT(res);
+			MT_ASSERT(res == true, "Can't add fiber to storage");
+			fiberIndex++;
+		}
 
 #ifdef MT_INSTRUMENTED_BUILD
-    NotifyFibersCreated( MT_MAX_STANDART_FIBERS_COUNT +
-                         MT_MAX_EXTENDED_FIBERS_COUNT );
+		NotifyFibersCreated(MT_MAX_STANDART_FIBERS_COUNT + MT_MAX_EXTENDED_FIBERS_COUNT);
 #endif
 
-    for ( int16 i = 0; i < TaskGroup::MT_MAX_GROUPS_COUNT; i++ ) {
-        if ( i != TaskGroup::DEFAULT ) {
-            bool res = availableGroups.TryPush( TaskGroup( i ) );
-            MT_USED_IN_ASSERT( res );
-            MT_ASSERT( res == true, "Can't add group to storage" );
-        }
-    }
+		for (int16 i = 0; i < TaskGroup::MT_MAX_GROUPS_COUNT; i++)
+		{
+			if (i != TaskGroup::DEFAULT)
+			{
+				bool res = availableGroups.TryPush( TaskGroup(i) );
+				MT_USED_IN_ASSERT(res);
+				MT_ASSERT(res == true, "Can't add group to storage");
+			}
+		}
 
 #if MT_GROUP_DEBUG
-    groupStats[ TaskGroup::DEFAULT ].SetDebugIsFree( false );
+		groupStats[TaskGroup::DEFAULT].SetDebugIsFree(false);
 #endif
 
-    // create worker thread pool
-    int32 totalThreadsCount = GetWorkersCount();
+		// create worker thread pool
+		int32 totalThreadsCount = GetWorkersCount();
 
 #ifdef MT_INSTRUMENTED_BUILD
-    NotifyThreadsCreated( totalThreadsCount );
+		NotifyThreadsCreated(totalThreadsCount);
 #endif
 
-    for ( int32 i = 0; i < totalThreadsCount; i++ ) {
-        threadContext[ i ].SetThreadIndex( i );
-        threadContext[ i ].taskScheduler = this;
+		for (int32 i = 0; i < totalThreadsCount; i++)
+		{
+			threadContext[i].SetThreadIndex(i);
+			threadContext[i].taskScheduler = this;
 
-        uint32 threadCore = i;
-        ThreadPriority::Type priority = ThreadPriority::DEFAULT;
-        if ( workerParameters != nullptr ) {
-            const WorkerThreadParams& params = workerParameters[ i ];
+			uint32 threadCore = i;
+			ThreadPriority::Type priority = ThreadPriority::DEFAULT;
+			if (workerParameters != nullptr)
+			{
+				const WorkerThreadParams& params = workerParameters[i];
 
-            threadCore = params.core;
-            priority = params.priority;
-        }
+				threadCore = params.core;
+				priority = params.priority;
+			}
 
-        threadContext[ i ].thread.Start( MT_SCHEDULER_STACK_SIZE,
-                                         WorkerThreadMain, &threadContext[ i ],
-                                         threadCore, priority );
-    }
-}
+			threadContext[i].thread.Start( MT_SCHEDULER_STACK_SIZE, WorkerThreadMain, &threadContext[i], threadCore, priority);
+		}
+	}
 
-TaskScheduler::~TaskScheduler() {
-    int32 totalThreadsCount = GetWorkersCount();
-    for ( int32 i = 0; i < totalThreadsCount; i++ ) {
-        threadContext[ i ].state.Store( internal::ThreadState::EXIT );
-        threadContext[ i ].hasNewTasksEvent.Signal();
-    }
 
-    for ( int32 i = 0; i < totalThreadsCount; i++ ) {
-        threadContext[ i ].thread.Join();
-    }
-}
+	TaskScheduler::~TaskScheduler()
+	{
+		int32 totalThreadsCount = GetWorkersCount();
+		for (int32 i = 0; i < totalThreadsCount; i++)
+		{
+			threadContext[i].state.Store(internal::ThreadState::EXIT);
+			threadContext[i].hasNewTasksEvent.Signal();
+		}
 
-FiberContext* TaskScheduler::RequestFiberContext(
-    internal::GroupedTask& task ) {
-    FiberContext* fiberContext = task.awaitingFiber;
-    if ( fiberContext ) {
-        task.awaitingFiber = nullptr;
-        return fiberContext;
-    }
+		for (int32 i = 0; i < totalThreadsCount; i++)
+		{
+			threadContext[i].thread.Join();
+		}
+	}
 
-    MT::StackRequirements::Type stackRequirements = task.desc.stackRequirements;
+	FiberContext* TaskScheduler::RequestFiberContext(internal::GroupedTask& task)
+	{
+		FiberContext *fiberContext = task.awaitingFiber;
+		if (fiberContext)
+		{
+			task.awaitingFiber = nullptr;
+			return fiberContext;
+		}
 
-    fiberContext = nullptr;
-    bool res = false;
-    MT_USED_IN_ASSERT( res );
-    switch ( stackRequirements ) {
-        case MT::StackRequirements::STANDARD:
-            res = standartFibersAvailable.TryPop( fiberContext );
-            MT_USED_IN_ASSERT( res );
-            MT_ASSERT( res, "Can't get more standard fibers!" );
-            break;
-        case MT::StackRequirements::EXTENDED:
-            res = extendedFibersAvailable.TryPop( fiberContext );
-            MT_USED_IN_ASSERT( res );
-            MT_ASSERT( res, "Can't get more extended fibers!" );
-            break;
-        default:
-            MT_REPORT_ASSERT( "Unknown stack requrements" );
-    }
+		MT::StackRequirements::Type stackRequirements = task.desc.stackRequirements;
 
-    MT_ASSERT(
-        fiberContext != nullptr,
-        "Can't get more fibers. Too many tasks in flight simultaneously?" );
+		fiberContext = nullptr;
+		bool res = false;
+		MT_USED_IN_ASSERT(res);
+		switch(stackRequirements)
+		{
+		case MT::StackRequirements::STANDARD:
+			res = standartFibersAvailable.TryPop(fiberContext);
+            MT_USED_IN_ASSERT(res);
+			MT_ASSERT(res, "Can't get more standard fibers!");
+			break;
+		case MT::StackRequirements::EXTENDED:
+			res = extendedFibersAvailable.TryPop(fiberContext);
+            MT_USED_IN_ASSERT(res);
+			MT_ASSERT(res, "Can't get more extended fibers!");
+			break;
+		default:
+			MT_REPORT_ASSERT("Unknown stack requrements");
+		}
 
-    fiberContext->currentTask = task.desc;
-    fiberContext->currentGroup = task.group;
-    fiberContext->parentFiber = task.parentFiber;
-    fiberContext->stackRequirements = stackRequirements;
-    return fiberContext;
-}
+		MT_ASSERT(fiberContext != nullptr, "Can't get more fibers. Too many tasks in flight simultaneously?");
 
-void TaskScheduler::ReleaseFiberContext( FiberContext*&& fiberContext ) {
-    MT_ASSERT( fiberContext,
-               "Can't release nullptr Fiber. fiberContext is nullptr" );
+		fiberContext->currentTask = task.desc;
+		fiberContext->currentGroup = task.group;
+		fiberContext->parentFiber = task.parentFiber;
+		fiberContext->stackRequirements = stackRequirements;
+		return fiberContext;
+	}
 
-    MT::StackRequirements::Type stackRequirements =
-        fiberContext->stackRequirements;
-    fiberContext->Reset();
+	void TaskScheduler::ReleaseFiberContext(FiberContext*&& fiberContext)
+	{
+		MT_ASSERT(fiberContext, "Can't release nullptr Fiber. fiberContext is nullptr");
 
-    MT_ASSERT( fiberContext != nullptr, "Fiber context can't be nullptr" );
+		MT::StackRequirements::Type stackRequirements = fiberContext->stackRequirements;
+		fiberContext->Reset();
 
-    bool res = false;
-    MT_USED_IN_ASSERT( res );
-    switch ( stackRequirements ) {
-        case MT::StackRequirements::STANDARD:
-            res = standartFibersAvailable.TryPush( std::move( fiberContext ) );
-            break;
-        case MT::StackRequirements::EXTENDED:
-            res = extendedFibersAvailable.TryPush( std::move( fiberContext ) );
-            break;
-        default:
-            MT_REPORT_ASSERT( "Unknown stack requrements" );
-    }
+		MT_ASSERT(fiberContext != nullptr, "Fiber context can't be nullptr");
 
-    MT_USED_IN_ASSERT( res );
-    MT_ASSERT( res != false, "Can't return fiber to storage" );
-}
+		bool res = false;
+		MT_USED_IN_ASSERT(res);
+		switch(stackRequirements)
+		{
+		case MT::StackRequirements::STANDARD:
+			res = standartFibersAvailable.TryPush(std::move(fiberContext));
+			break;
+		case MT::StackRequirements::EXTENDED:
+			res = extendedFibersAvailable.TryPush(std::move(fiberContext));
+			break;
+		default:
+			MT_REPORT_ASSERT("Unknown stack requrements");
+		}
 
-FiberContext* TaskScheduler::ExecuteTask(
-    internal::ThreadContext& threadContext,
-    FiberContext* fiberContext ) {
-    MT_ASSERT( threadContext.threadId.IsEqual( ThreadId::Self() ),
-               "Thread context sanity check failed" );
+		MT_USED_IN_ASSERT(res);
+		MT_ASSERT(res != false, "Can't return fiber to storage");
+	}
 
-    MT_ASSERT( fiberContext, "Invalid fiber context" );
-    MT_ASSERT( fiberContext->currentTask.IsValid(), "Invalid task" );
+	FiberContext* TaskScheduler::ExecuteTask(internal::ThreadContext& threadContext, FiberContext* fiberContext)
+	{
+		MT_ASSERT(threadContext.threadId.IsEqual(ThreadId::Self()), "Thread context sanity check failed");
 
-    // Set actual thread context to fiber
-    fiberContext->SetThreadContext( &threadContext );
+		MT_ASSERT(fiberContext, "Invalid fiber context");
+		MT_ASSERT(fiberContext->currentTask.IsValid(), "Invalid task");
 
-    // Update task status
-    fiberContext->SetStatus( FiberTaskStatus::RUNNED );
+		// Set actual thread context to fiber
+		fiberContext->SetThreadContext(&threadContext);
 
-    MT_ASSERT(
-        fiberContext->GetThreadContext()->threadId.IsEqual( ThreadId::Self() ),
-        "Thread context sanity check failed" );
+		// Update task status
+		fiberContext->SetStatus(FiberTaskStatus::RUNNED);
 
-    const void* poolUserData = fiberContext->currentTask.userData;
-    TPoolTaskDestroy poolDestroyFunc =
-        fiberContext->currentTask.poolDestroyFunc;
+		MT_ASSERT(fiberContext->GetThreadContext()->threadId.IsEqual(ThreadId::Self()), "Thread context sanity check failed");
+
+		const void* poolUserData = fiberContext->currentTask.userData;
+		TPoolTaskDestroy poolDestroyFunc = fiberContext->currentTask.poolDestroyFunc;
 
 #ifdef MT_INSTRUMENTED_BUILD
-    threadContext.NotifyTaskExecuteStateChanged(
-        MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::STOP,
-        MT_SYSTEM_FIBER_INDEX );
+		threadContext.NotifyTaskExecuteStateChanged( MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::STOP, MT_SYSTEM_FIBER_INDEX);
 #endif
 
-    // Run current task code
-    Fiber::SwitchTo( threadContext.schedulerFiber, fiberContext->fiber );
+		// Run current task code
+		Fiber::SwitchTo(threadContext.schedulerFiber, fiberContext->fiber);
 
 #ifdef MT_INSTRUMENTED_BUILD
-    threadContext.NotifyTaskExecuteStateChanged(
-        MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::START,
-        MT_SYSTEM_FIBER_INDEX );
+		threadContext.NotifyTaskExecuteStateChanged( MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::START, MT_SYSTEM_FIBER_INDEX);
 #endif
 
-    // If task was done
-    FiberTaskStatus::Type taskStatus = fiberContext->GetStatus();
-    if ( taskStatus == FiberTaskStatus::FINISHED ) {
-        // destroy task (call dtor) for "fire and forget" type of task from
-        // TaskPool
-        if ( poolDestroyFunc != nullptr ) {
-            poolDestroyFunc( poolUserData );
-        }
+		// If task was done
+		FiberTaskStatus::Type taskStatus = fiberContext->GetStatus();
+		if (taskStatus == FiberTaskStatus::FINISHED)
+		{
+			//destroy task (call dtor) for "fire and forget" type of task from TaskPool
+			if (poolDestroyFunc != nullptr)
+			{
+				poolDestroyFunc(poolUserData);
+			}
 
-        TaskGroup taskGroup = fiberContext->currentGroup;
+			TaskGroup taskGroup = fiberContext->currentGroup;
 
-        TaskScheduler::TaskGroupDescription& groupDesc =
-            threadContext.taskScheduler->GetGroupDesc( taskGroup );
+			TaskScheduler::TaskGroupDescription  & groupDesc = threadContext.taskScheduler->GetGroupDesc(taskGroup);
 
-        // Update group status
-        int groupTaskCount = groupDesc.Dec();
-        MT_ASSERT( groupTaskCount >= 0, "Sanity check failed!" );
-        if ( groupTaskCount == 0 ) {
-            fiberContext->currentGroup = TaskGroup::INVALID;
-        }
+			// Update group status
+			int groupTaskCount = groupDesc.Dec();
+			MT_ASSERT(groupTaskCount >= 0, "Sanity check failed!");
+			if (groupTaskCount == 0)
+			{
+				fiberContext->currentGroup = TaskGroup::INVALID;
+			}
 
-        // Update total task count
-        int allGroupTaskCount = threadContext.taskScheduler->allGroups.Dec();
-        MT_USED_IN_ASSERT( allGroupTaskCount );
-        MT_ASSERT( allGroupTaskCount >= 0, "Sanity check failed!" );
+			// Update total task count
+			int allGroupTaskCount = threadContext.taskScheduler->allGroups.Dec();
+			MT_USED_IN_ASSERT(allGroupTaskCount);
+			MT_ASSERT(allGroupTaskCount >= 0, "Sanity check failed!");
 
-        FiberContext* parentFiberContext = fiberContext->parentFiber;
-        if ( parentFiberContext != nullptr ) {
-            int childrenFibersCount =
-                parentFiberContext->childrenFibersCount.DecFetch();
-            MT_ASSERT( childrenFibersCount >= 0, "Sanity check failed!" );
+			FiberContext* parentFiberContext = fiberContext->parentFiber;
+			if (parentFiberContext != nullptr)
+			{
+				int childrenFibersCount = parentFiberContext->childrenFibersCount.DecFetch();
+				MT_ASSERT(childrenFibersCount >= 0, "Sanity check failed!");
 
-            if ( childrenFibersCount == 0 ) {
-                // This is a last subtask. Restore parent task
-                MT_ASSERT( threadContext.threadId.IsEqual( ThreadId::Self() ),
-                           "Thread context sanity check failed" );
-                MT_ASSERT(
-                    parentFiberContext->GetThreadContext() == nullptr,
-                    "Inactive parent should not have a valid thread context" );
+				if (childrenFibersCount == 0)
+				{
+					// This is a last subtask. Restore parent task
+					MT_ASSERT(threadContext.threadId.IsEqual(ThreadId::Self()), "Thread context sanity check failed");
+					MT_ASSERT(parentFiberContext->GetThreadContext() == nullptr, "Inactive parent should not have a valid thread context");
 
-                // WARNING!! Thread context can changed here! Set actual current
-                // thread context.
-                parentFiberContext->SetThreadContext( &threadContext );
+					// WARNING!! Thread context can changed here! Set actual current thread context.
+					parentFiberContext->SetThreadContext(&threadContext);
 
-                MT_ASSERT(
-                    parentFiberContext->GetThreadContext()->threadId.IsEqual(
-                        ThreadId::Self() ),
-                    "Thread context sanity check failed" );
+					MT_ASSERT(parentFiberContext->GetThreadContext()->threadId.IsEqual(ThreadId::Self()), "Thread context sanity check failed");
 
-                // All subtasks is done.
-                // Exiting and return parent fiber to scheduler
-                return parentFiberContext;
-            } else {
-                // Other subtasks still exist
-                // Exiting
-                return nullptr;
-            }
-        } else {
-            // Task is finished and no parent task
-            // Exiting
-            return nullptr;
-        }
-    }
+					// All subtasks is done.
+					// Exiting and return parent fiber to scheduler
+					return parentFiberContext;
+				} else
+				{
+					// Other subtasks still exist
+					// Exiting
+					return nullptr;
+				}
+			} else
+			{
+				// Task is finished and no parent task
+				// Exiting
+				return nullptr;
+			}
+		}
 
-    MT_ASSERT( taskStatus != FiberTaskStatus::RUNNED, "Incorrect task status" )
-    return nullptr;
-}
+		MT_ASSERT(taskStatus != FiberTaskStatus::RUNNED, "Incorrect task status")
+		return nullptr;
+	}
 
-void TaskScheduler::FiberMain( void* userData ) {
-    FiberContext& fiberContext = *( FiberContext* )( userData );
-    for ( ;; ) {
-        MT_ASSERT( fiberContext.currentTask.IsValid(),
-                   "Invalid task in fiber context" );
-        MT_ASSERT( fiberContext.GetThreadContext(), "Invalid thread context" );
-        MT_ASSERT( fiberContext.GetThreadContext()->threadId.IsEqual(
-                       ThreadId::Self() ),
-                   "Thread context sanity check failed" );
+
+	void TaskScheduler::FiberMain(void* userData)
+	{
+		FiberContext& fiberContext = *(FiberContext*)(userData);
+		for(;;)
+		{
+			MT_ASSERT(fiberContext.currentTask.IsValid(), "Invalid task in fiber context");
+			MT_ASSERT(fiberContext.GetThreadContext(), "Invalid thread context");
+			MT_ASSERT(fiberContext.GetThreadContext()->threadId.IsEqual(ThreadId::Self()), "Thread context sanity check failed");
 
 #ifdef MT_INSTRUMENTED_BUILD
-        fiberContext.fiber.SetName( MT_SYSTEM_TASK_FIBER_NAME );
-        fiberContext.GetThreadContext()->NotifyTaskExecuteStateChanged(
-            fiberContext.currentTask.debugColor,
-            fiberContext.currentTask.debugID, TaskExecuteState::START,
-            ( int32 )fiberContext.fiberIndex );
+			fiberContext.fiber.SetName( MT_SYSTEM_TASK_FIBER_NAME );
+			fiberContext.GetThreadContext()->NotifyTaskExecuteStateChanged( fiberContext.currentTask.debugColor, fiberContext.currentTask.debugID, TaskExecuteState::START, (int32)fiberContext.fiberIndex);
 #endif
 
-        fiberContext.currentTask.taskFunc( fiberContext,
-                                           fiberContext.currentTask.userData );
-        fiberContext.SetStatus( FiberTaskStatus::FINISHED );
+			fiberContext.currentTask.taskFunc( fiberContext, fiberContext.currentTask.userData );
+			fiberContext.SetStatus(FiberTaskStatus::FINISHED);
 
 #ifdef MT_INSTRUMENTED_BUILD
-        fiberContext.fiber.SetName( MT_SYSTEM_TASK_FIBER_NAME );
-        fiberContext.GetThreadContext()->NotifyTaskExecuteStateChanged(
-            fiberContext.currentTask.debugColor,
-            fiberContext.currentTask.debugID, TaskExecuteState::STOP,
-            ( int32 )fiberContext.fiberIndex );
+			fiberContext.fiber.SetName( MT_SYSTEM_TASK_FIBER_NAME );
+			fiberContext.GetThreadContext()->NotifyTaskExecuteStateChanged( fiberContext.currentTask.debugColor, fiberContext.currentTask.debugID, TaskExecuteState::STOP, (int32)fiberContext.fiberIndex);
 #endif
 
-        Fiber::SwitchTo( fiberContext.fiber,
-                         fiberContext.GetThreadContext()->schedulerFiber );
-    }
-}
+			Fiber::SwitchTo(fiberContext.fiber, fiberContext.GetThreadContext()->schedulerFiber);
+		}
 
-bool TaskScheduler::TryStealTask( internal::ThreadContext& threadContext,
-                                  internal::GroupedTask& task ) {
-    uint32 workersCount = threadContext.taskScheduler->GetWorkersCount();
+	}
 
-    uint32 victimIndex = threadContext.random.Get();
 
-    for ( uint32 attempt = 0; attempt < workersCount; attempt++ ) {
-        uint32 index = victimIndex % workersCount;
-        if ( index == threadContext.workerIndex ) {
-            victimIndex++;
-            index = victimIndex % workersCount;
-        }
+	bool TaskScheduler::TryStealTask(internal::ThreadContext& threadContext, internal::GroupedTask & task)
+	{
+		uint32 workersCount = threadContext.taskScheduler->GetWorkersCount();
 
-        internal::ThreadContext& victimContext =
-            threadContext.taskScheduler->threadContext[ index ];
-        if ( victimContext.queue.TryPopNewest( task ) ) {
-            return true;
-        }
+		uint32 victimIndex = threadContext.random.Get();
 
-        victimIndex++;
-    }
-    return false;
-}
+		for (uint32 attempt = 0; attempt < workersCount; attempt++)
+		{
+			uint32 index = victimIndex % workersCount;
+			if (index == threadContext.workerIndex)
+			{
+				victimIndex++;
+				index = victimIndex % workersCount;
+			}
 
-void TaskScheduler::WorkerThreadMain( void* userData ) {
-    internal::ThreadContext& context =
-        *( internal::ThreadContext* )( userData );
-    MT_ASSERT( context.taskScheduler, "Task scheduler must be not null!" );
+			internal::ThreadContext& victimContext = threadContext.taskScheduler->threadContext[index];
+			if (victimContext.queue.TryPopNewest(task))
+			{
+				return true;
+			}
 
-    isWorkerThreadTLS = 1;
-    context.threadId = ThreadId::Self();
+			victimIndex++;
+		}
+		return false;
+	}
+
+	void TaskScheduler::WorkerThreadMain( void* userData )
+	{
+		internal::ThreadContext& context = *(internal::ThreadContext*)(userData);
+		MT_ASSERT(context.taskScheduler, "Task scheduler must be not null!");
+
+		isWorkerThreadTLS = 1;
+		context.threadId = ThreadId::Self();
 
 #ifdef MT_INSTRUMENTED_BUILD
-    const char* threadNames[] = { "worker0", "worker1", "worker2",  "worker3",
-                                  "worker4", "worker5", "worker6",  "worker7",
-                                  "worker8", "worker9", "worker10", "worker11",
-                                  "worker12" };
-    if ( context.workerIndex < MT_ARRAY_SIZE( threadNames ) ) {
-        Thread::SetThreadName( threadNames[ context.workerIndex ] );
-    } else {
-        Thread::SetThreadName( "worker_thread" );
-    }
+		const char* threadNames[] = {"worker0","worker1","worker2","worker3","worker4","worker5","worker6","worker7","worker8","worker9","worker10","worker11","worker12"};
+		if (context.workerIndex < MT_ARRAY_SIZE(threadNames))
+		{
+			Thread::SetThreadName(threadNames[context.workerIndex]);
+		} else
+		{
+			Thread::SetThreadName("worker_thread");
+		}
 #endif
 
-    context.schedulerFiber.CreateFromCurrentThreadAndRun( SchedulerFiberMain,
-                                                          userData );
-}
+		context.schedulerFiber.CreateFromCurrentThreadAndRun(SchedulerFiberMain, userData);
+	}
 
-void TaskScheduler::SchedulerFiberWait( void* userData ) {
-    WaitContext& waitContext = *( WaitContext* )( userData );
-    internal::ThreadContext& context = *waitContext.threadContext;
-    MT_ASSERT( context.taskScheduler, "Task scheduler must be not null!" );
-    MT_ASSERT( waitContext.waitCounter, "Wait counter must be not null!" );
+
+	void TaskScheduler::SchedulerFiberWait( void* userData )
+	{
+		WaitContext& waitContext = *(WaitContext*)(userData);
+		internal::ThreadContext& context = *waitContext.threadContext;
+		MT_ASSERT(context.taskScheduler, "Task scheduler must be not null!");
+		MT_ASSERT(waitContext.waitCounter, "Wait counter must be not null!");
 
 #ifdef MT_INSTRUMENTED_BUILD
-    context.NotifyTemporaryWorkerThreadJoin();
+		context.NotifyTemporaryWorkerThreadJoin();
 
-    context.NotifyWaitStarted();
-    context.NotifyTaskExecuteStateChanged(
-        MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::START,
-        MT_SYSTEM_FIBER_INDEX );
+		context.NotifyWaitStarted();
+		context.NotifyTaskExecuteStateChanged( MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::START, MT_SYSTEM_FIBER_INDEX);
 #endif
 
-    bool isTaskStealingDisabled =
-        context.taskScheduler->IsTaskStealingDisabled( 0 );
+		bool isTaskStealingDisabled = context.taskScheduler->IsTaskStealingDisabled(0);
 
-    int64 timeOut = GetTimeMicroSeconds() + ( waitContext.waitTimeMs * 1000 );
+		int64 timeOut = GetTimeMicroSeconds() + (waitContext.waitTimeMs * 1000);
 
-    SpinWait spinWait;
+		SpinWait spinWait;
+		
+		for(;;)
+		{
+			if ( SchedulerFiberStep(context, isTaskStealingDisabled) == false )
+			{
+				spinWait.SpinOnce();
+			} else
+			{
+				spinWait.Reset();
+			}
 
-    for ( ;; ) {
-        if ( SchedulerFiberStep( context, isTaskStealingDisabled ) == false ) {
-            spinWait.SpinOnce();
-        } else {
-            spinWait.Reset();
-        }
+			int32 groupTaskCount = waitContext.waitCounter->Load();
+			if (groupTaskCount == 0)
+			{
+				waitContext.exitCode = 0;
+				break;
+			}
 
-        int32 groupTaskCount = waitContext.waitCounter->Load();
-        if ( groupTaskCount == 0 ) {
-            waitContext.exitCode = 0;
-            break;
-        }
-
-        int64 timeNow = GetTimeMicroSeconds();
-        if ( timeNow >= timeOut ) {
-            waitContext.exitCode = 1;
-            break;
-        }
-    }
+			int64 timeNow = GetTimeMicroSeconds();
+			if (timeNow >= timeOut)
+			{
+				waitContext.exitCode = 1;
+				break;
+			}
+		}
 
 #ifdef MT_INSTRUMENTED_BUILD
-    context.NotifyTaskExecuteStateChanged(
-        MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::STOP,
-        MT_SYSTEM_FIBER_INDEX );
-    context.NotifyWaitFinished();
+		context.NotifyTaskExecuteStateChanged( MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::STOP, MT_SYSTEM_FIBER_INDEX);
+		context.NotifyWaitFinished();
 
-    context.NotifyTemporaryWorkerThreadLeave();
+		context.NotifyTemporaryWorkerThreadLeave();
 #endif
-}
+	}
 
-void TaskScheduler::SchedulerFiberMain( void* userData ) {
-    internal::ThreadContext& context =
-        *( internal::ThreadContext* )( userData );
-    MT_ASSERT( context.taskScheduler, "Task scheduler must be not null!" );
+	void TaskScheduler::SchedulerFiberMain( void* userData )
+	{
+		internal::ThreadContext& context = *(internal::ThreadContext*)(userData);
+		MT_ASSERT(context.taskScheduler, "Task scheduler must be not null!");
 
 #ifdef MT_INSTRUMENTED_BUILD
-    context.NotifyThreadCreated( context.workerIndex );
+		context.NotifyThreadCreated(context.workerIndex);
 #endif
 
-    int32 totalThreadsCount = context.taskScheduler->threadsCount.LoadRelaxed();
-    context.taskScheduler->startedThreadsCount.IncFetch();
+		int32 totalThreadsCount = context.taskScheduler->threadsCount.LoadRelaxed();
+		context.taskScheduler->startedThreadsCount.IncFetch();
 
-    // Simple spinlock until all threads is started and initialized
-    for ( ;; ) {
-        int32 initializedThreadsCount =
-            context.taskScheduler->startedThreadsCount.Load();
-        if ( initializedThreadsCount == totalThreadsCount ) {
-            break;
-        }
+		//Simple spinlock until all threads is started and initialized
+		for(;;)
+		{
+			int32 initializedThreadsCount = context.taskScheduler->startedThreadsCount.Load();
+			if (initializedThreadsCount == totalThreadsCount)
+			{
+				break;
+			}
 
-        // sleep some time until all other thread initialized
-        Thread::Sleep( 1 );
-    }
+			// sleep some time until all other thread initialized
+			Thread::Sleep(1);
+		}
 
-    HardwareFullMemoryBarrier();
+		HardwareFullMemoryBarrier();
 
 #ifdef MT_INSTRUMENTED_BUILD
-    context.NotifyThreadStarted( context.workerIndex );
-    context.NotifyTaskExecuteStateChanged(
-        MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::START,
-        MT_SYSTEM_FIBER_INDEX );
+		context.NotifyThreadStarted(context.workerIndex);
+		context.NotifyTaskExecuteStateChanged( MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::START, MT_SYSTEM_FIBER_INDEX);
 #endif
-    bool isTaskStealingDisabled =
-        context.taskScheduler->IsTaskStealingDisabled();
+		bool isTaskStealingDisabled = context.taskScheduler->IsTaskStealingDisabled();
 
-    while ( context.state.Load() != internal::ThreadState::EXIT ) {
-        if ( SchedulerFiberStep( context, isTaskStealingDisabled ) == false ) {
+		while(context.state.Load() != internal::ThreadState::EXIT)
+		{
+			if ( SchedulerFiberStep(context, isTaskStealingDisabled) == false)
+			{
 #ifdef MT_INSTRUMENTED_BUILD
-            context.NotifyThreadIdleStarted( context.workerIndex );
+				context.NotifyThreadIdleStarted(context.workerIndex);
 #endif
 
 #if MT_LOW_LATENCY_EXPERIMENTAL_WAIT
 
-            SpinWait spinWait;
+				SpinWait spinWait;
 
-            for ( ;; ) {
-                // Queue is empty and stealing attempt has failed.
-                // Fast Spin Wait for new tasks
-                if ( spinWait.SpinOnce() >= SpinWait::YIELD_SLEEP0_THRESHOLD ) {
-                    // Fast Spin wait for new tasks has failed.
-                    // Wait for new events using events
-                    context.hasNewTasksEvent.Wait( 20000 );
+				for(;;)
+				{
+					// Queue is empty and stealing attempt has failed.
+					// Fast Spin Wait for new tasks
+					if (spinWait.SpinOnce() >= SpinWait::YIELD_SLEEP0_THRESHOLD)
+					{
+						// Fast Spin wait for new tasks has failed.
+						// Wait for new events using events
+						context.hasNewTasksEvent.Wait(20000);
 
-                    spinWait.Reset();
+						spinWait.Reset();
 
 #ifdef MT_INSTRUMENTED_BUILD
-                    context.NotifyThreadIdleFinished( context.workerIndex );
+						context.NotifyThreadIdleFinished(context.workerIndex);
 #endif
 
-                    break;
-                }
+						break;
+					}
 
-                internal::GroupedTask task;
-                if ( context.queue.TryPopOldest( task ) ) {
+					internal::GroupedTask task;
+					if ( context.queue.TryPopOldest(task) )
+					{
 #ifdef MT_INSTRUMENTED_BUILD
-                    context.NotifyThreadIdleFinished( context.workerIndex );
+						context.NotifyThreadIdleFinished(context.workerIndex);
 #endif
 
-                    SchedulerFiberProcessTask( context, task );
+						SchedulerFiberProcessTask(context, task);
 
-                    break;
-                }
-            }
+						break;
+					}
+
+				}
 #else
-            // Queue is empty and stealing attempt has failed.
-            // Wait for new events using events
-            context.hasNewTasksEvent.Wait( 20000 );
+				// Queue is empty and stealing attempt has failed.
+				// Wait for new events using events
+				context.hasNewTasksEvent.Wait(20000);
 
 #ifdef MT_INSTRUMENTED_BUILD
-            context.NotifyThreadIdleFinished( context.workerIndex );
+				context.NotifyThreadIdleFinished(context.workerIndex);
 #endif
 
 #endif
-        }
 
-    } // main thread loop
+			}
+
+		} // main thread loop
 
 #ifdef MT_INSTRUMENTED_BUILD
-    context.NotifyTaskExecuteStateChanged(
-        MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::STOP,
-        MT_SYSTEM_FIBER_INDEX );
-    context.NotifyThreadStoped( context.workerIndex );
+		context.NotifyTaskExecuteStateChanged( MT_SYSTEM_TASK_COLOR, MT_SYSTEM_TASK_NAME, TaskExecuteState::STOP, MT_SYSTEM_FIBER_INDEX);
+		context.NotifyThreadStoped(context.workerIndex);
 #endif
-}
 
-void TaskScheduler::SchedulerFiberProcessTask( internal::ThreadContext& context,
-                                               internal::GroupedTask& task ) {
+	}
+
+	void TaskScheduler::SchedulerFiberProcessTask( internal::ThreadContext& context, internal::GroupedTask& task )
+	{
 #ifdef MT_INSTRUMENTED_BUILD
-    bool isNewTask = ( task.awaitingFiber == nullptr );
+		bool isNewTask = (task.awaitingFiber == nullptr);
 #endif
 
-    // There is a new task
-    FiberContext* fiberContext =
-        context.taskScheduler->RequestFiberContext( task );
-    MT_ASSERT( fiberContext, "Can't get execution context from pool" );
-    MT_ASSERT( fiberContext->currentTask.IsValid(), "Sanity check failed" );
-    MT_ASSERT( fiberContext->stackRequirements == task.desc.stackRequirements,
-               "Sanity check failed" );
+		// There is a new task
+		FiberContext* fiberContext = context.taskScheduler->RequestFiberContext(task);
+		MT_ASSERT(fiberContext, "Can't get execution context from pool");
+		MT_ASSERT(fiberContext->currentTask.IsValid(), "Sanity check failed");
+		MT_ASSERT(fiberContext->stackRequirements == task.desc.stackRequirements, "Sanity check failed");
 
-    while ( fiberContext ) {
+		while(fiberContext)
+		{
 #ifdef MT_INSTRUMENTED_BUILD
-        if ( isNewTask ) {
-            // TODO:
-            isNewTask = false;
-        }
+			if (isNewTask)
+			{
+				//TODO:
+				isNewTask = false;
+			}
 #endif
-        // prevent invalid fiber resume from child tasks, before ExecuteTask is
-        // done
-        fiberContext->childrenFibersCount.IncFetch();
+			// prevent invalid fiber resume from child tasks, before ExecuteTask is done
+			fiberContext->childrenFibersCount.IncFetch();
 
-        FiberContext* parentFiber = ExecuteTask( context, fiberContext );
+			FiberContext* parentFiber = ExecuteTask(context, fiberContext);
 
-        FiberTaskStatus::Type taskStatus = fiberContext->GetStatus();
+			FiberTaskStatus::Type taskStatus = fiberContext->GetStatus();
 
-        // release guard
-        int childrenFibersCount = fiberContext->childrenFibersCount.DecFetch();
+			//release guard
+			int childrenFibersCount = fiberContext->childrenFibersCount.DecFetch();
 
-        // Can drop fiber context - task is finished
-        if ( taskStatus == FiberTaskStatus::FINISHED ) {
-            MT_ASSERT( childrenFibersCount == 0, "Sanity check failed" );
-            context.taskScheduler->ReleaseFiberContext(
-                std::move( fiberContext ) );
+			// Can drop fiber context - task is finished
+			if (taskStatus == FiberTaskStatus::FINISHED)
+			{
+				MT_ASSERT( childrenFibersCount == 0, "Sanity check failed");
+				context.taskScheduler->ReleaseFiberContext(std::move(fiberContext));
 
-            // If parent fiber is exist transfer flow control to parent fiber,
-            // if parent fiber is null, exit
-            fiberContext = parentFiber;
-        } else {
-            MT_ASSERT( childrenFibersCount >= 0, "Sanity check failed" );
+				// If parent fiber is exist transfer flow control to parent fiber, if parent fiber is null, exit
+				fiberContext = parentFiber;
+			} else
+			{
+				MT_ASSERT( childrenFibersCount >= 0, "Sanity check failed");
 
-            // No subtasks here and status is not finished, this mean all
-            // subtasks already finished before parent return from ExecuteTask
-            if ( childrenFibersCount == 0 ) {
-                MT_ASSERT( parentFiber == nullptr, "Sanity check failed" );
-            } else {
-                // If subtasks still exist, drop current task execution. task
-                // will be resumed when last subtask finished
-                break;
-            }
+				// No subtasks here and status is not finished, this mean all subtasks already finished before parent return from ExecuteTask
+				if (childrenFibersCount == 0)
+				{
+					MT_ASSERT(parentFiber == nullptr, "Sanity check failed");
+				} else
+				{
+					// If subtasks still exist, drop current task execution. task will be resumed when last subtask finished
+					break;
+				}
 
-            // If task is yielded execution, get another task from queue.
-            if ( taskStatus == FiberTaskStatus::YIELDED ) {
-                // Task is yielded, add to tasks queue
-                ArrayView< internal::GroupedTask > buffer( context.descBuffer,
-                                                           1 );
-                ArrayView< internal::TaskBucket > buckets(
-                    MT_ALLOCATE_ON_STACK( sizeof( internal::TaskBucket ) ), 1 );
+				// If task is yielded execution, get another task from queue.
+				if (taskStatus == FiberTaskStatus::YIELDED)
+				{
+					// Task is yielded, add to tasks queue
+					ArrayView<internal::GroupedTask> buffer(context.descBuffer, 1);
+					ArrayView<internal::TaskBucket> buckets( MT_ALLOCATE_ON_STACK(sizeof(internal::TaskBucket)), 1 );
 
-                FiberContext* yieldedTask = fiberContext;
-                StaticVector< FiberContext*, 1 > yieldedTasksQueue(
-                    1, yieldedTask );
-                internal::DistibuteDescriptions(
-                    TaskGroup( TaskGroup::ASSIGN_FROM_CONTEXT ),
-                    yieldedTasksQueue.Begin(), buffer, buckets );
+					FiberContext* yieldedTask = fiberContext;
+					StaticVector<FiberContext*, 1> yieldedTasksQueue(1, yieldedTask);
+					internal::DistibuteDescriptions( TaskGroup(TaskGroup::ASSIGN_FROM_CONTEXT), yieldedTasksQueue.Begin(), buffer, buckets );
 
-                // add yielded task to scheduler
-                context.taskScheduler->RunTasksImpl( buckets, nullptr, true );
+					// add yielded task to scheduler
+					context.taskScheduler->RunTasksImpl(buckets, nullptr, true);
 
-                // ATENTION! yielded task can be already completed at this point
+					// ATENTION! yielded task can be already completed at this point
 
-                break;
-            }
-        }
-    } // while(fiberContext)
-}
+					break;
+				}
+			}
+		} //while(fiberContext)
+	}
 
-bool TaskScheduler::SchedulerFiberStep( internal::ThreadContext& context,
-                                        bool disableTaskStealing ) {
-    internal::GroupedTask task;
-    if ( context.queue.TryPopOldest( task ) ||
-         ( disableTaskStealing == false && TryStealTask( context, task ) ) ) {
-        SchedulerFiberProcessTask( context, task );
-        return true;
-    }
+	bool TaskScheduler::SchedulerFiberStep( internal::ThreadContext& context, bool disableTaskStealing)
+	{
+		internal::GroupedTask task;
+		if ( context.queue.TryPopOldest(task) || (disableTaskStealing == false && TryStealTask(context, task) ) )
+		{
+			SchedulerFiberProcessTask(context, task);
+			return true;
+		}
 
-    return false;
-}
+		return false;
+	}
 
-void TaskScheduler::RunTasksImpl( ArrayView< internal::TaskBucket >& buckets,
-                                  FiberContext* parentFiber,
-                                  bool restoredFromAwaitState ) {
+	void TaskScheduler::RunTasksImpl(ArrayView<internal::TaskBucket>& buckets, FiberContext * parentFiber, bool restoredFromAwaitState)
+	{
+
 #if MT_LOW_LATENCY_EXPERIMENTAL_WAIT
-    // Early wakeup worker threads (worker thread spin wait for some time before
-    // sleep)
-    int32 roundRobinIndex = roundRobinThreadIndex.LoadRelaxed();
-    for ( size_t i = 0; i < buckets.Size(); ++i ) {
-        int bucketIndex =
-            ( ( roundRobinIndex + i ) % threadsCount.LoadRelaxed() );
-        internal::ThreadContext& context = threadContext[ bucketIndex ];
-        context.hasNewTasksEvent.Signal();
-    }
+		// Early wakeup worker threads (worker thread spin wait for some time before sleep)
+		int32 roundRobinIndex = roundRobinThreadIndex.LoadRelaxed();
+		for (size_t i = 0; i < buckets.Size(); ++i)
+		{
+			int bucketIndex = ((roundRobinIndex + i) % threadsCount.LoadRelaxed());
+			internal::ThreadContext & context = threadContext[bucketIndex];
+			context.hasNewTasksEvent.Signal();
+		}
 #endif
 
-    // This storage is necessary to calculate how many tasks we add to different
-    // groups
-    int newTaskCountInGroup[ TaskGroup::MT_MAX_GROUPS_COUNT ];
 
-    // Default value is 0
-    memset( &newTaskCountInGroup[ 0 ], 0,
-            MT_ARRAY_SIZE( newTaskCountInGroup ) );
+		// This storage is necessary to calculate how many tasks we add to different groups
+		int newTaskCountInGroup[TaskGroup::MT_MAX_GROUPS_COUNT];
 
-    // Set parent fiber pointer
-    // Calculate the number of tasks per group
-    // Calculate total number of tasks
-    size_t count = 0;
-    for ( size_t i = 0; i < buckets.Size(); ++i ) {
-        internal::TaskBucket& bucket = buckets[ i ];
-        for ( size_t taskIndex = 0; taskIndex < bucket.count; taskIndex++ ) {
-            internal::GroupedTask& task = bucket.tasks[ taskIndex ];
+		// Default value is 0
+		memset(&newTaskCountInGroup[0], 0, MT_ARRAY_SIZE(newTaskCountInGroup));
 
-            task.parentFiber = parentFiber;
+		// Set parent fiber pointer
+		// Calculate the number of tasks per group
+		// Calculate total number of tasks
+		size_t count = 0;
+		for (size_t i = 0; i < buckets.Size(); ++i)
+		{
+			internal::TaskBucket& bucket = buckets[i];
+			for (size_t taskIndex = 0; taskIndex < bucket.count; taskIndex++)
+			{
+				internal::GroupedTask & task = bucket.tasks[taskIndex];
 
-            int idx = task.group.GetValidIndex();
-            MT_ASSERT( idx >= 0 && idx < TaskGroup::MT_MAX_GROUPS_COUNT,
-                       "Invalid index" );
-            newTaskCountInGroup[ idx ]++;
-        }
+				task.parentFiber = parentFiber;
 
-        count += bucket.count;
-    }
+				int idx = task.group.GetValidIndex();
+				MT_ASSERT(idx >= 0 && idx < TaskGroup::MT_MAX_GROUPS_COUNT, "Invalid index");
+				newTaskCountInGroup[idx]++;
+			}
 
-    // Increments child fibers count on parent fiber
-    if ( parentFiber ) {
-        parentFiber->childrenFibersCount.AddFetch( ( int )count );
-    }
+			count += bucket.count;
+		}
 
-    if ( restoredFromAwaitState == false ) {
-        // Increase the number of active tasks in the group using data from
-        // temporary storage
-        for ( size_t i = 0; i < TaskGroup::MT_MAX_GROUPS_COUNT; i++ ) {
-            int groupNewTaskCount = newTaskCountInGroup[ i ];
-            if ( groupNewTaskCount > 0 ) {
-                groupStats[ i ].Add( ( uint32 )groupNewTaskCount );
-            }
-        }
+		// Increments child fibers count on parent fiber
+		if (parentFiber)
+		{
+			parentFiber->childrenFibersCount.AddFetch((int)count);
+		}
 
-        // Increments all task in progress counter
-        allGroups.Add( ( uint32 )count );
-    } else {
-        // If task's restored from await state, counters already in correct
-        // state
-    }
+		if (restoredFromAwaitState == false)
+		{
+			// Increase the number of active tasks in the group using data from temporary storage
+			for (size_t i = 0; i < TaskGroup::MT_MAX_GROUPS_COUNT; i++)
+			{
+				int groupNewTaskCount = newTaskCountInGroup[i];
+				if (groupNewTaskCount > 0)
+				{
+					groupStats[i].Add((uint32)groupNewTaskCount);
+				}
+			}
 
-    // Add to thread queue
-    for ( size_t i = 0; i < buckets.Size(); ++i ) {
-        int bucketIndex =
-            roundRobinThreadIndex.IncFetch() % threadsCount.LoadRelaxed();
-        internal::ThreadContext& context = threadContext[ bucketIndex ];
+			// Increments all task in progress counter
+			allGroups.Add((uint32)count);
+		} else
+		{
+			// If task's restored from await state, counters already in correct state
+		}
 
-        internal::TaskBucket& bucket = buckets[ i ];
+		// Add to thread queue
+		for (size_t i = 0; i < buckets.Size(); ++i)
+		{
+			int bucketIndex = roundRobinThreadIndex.IncFetch() % threadsCount.LoadRelaxed();
+			internal::ThreadContext & context = threadContext[bucketIndex];
 
-        for ( ;; ) {
-            MT_ASSERT( bucket.count < ( internal::TASK_BUFFER_CAPACITY - 1 ),
-                       "Sanity check failed. Too many tasks per one bucket." );
+			internal::TaskBucket& bucket = buckets[i];
 
-            bool res = context.queue.Add( bucket.tasks, bucket.count );
-            if ( res == true ) {
-                break;
-            }
+			for(;;)
+			{
+				MT_ASSERT(bucket.count < (internal::TASK_BUFFER_CAPACITY - 1), "Sanity check failed. Too many tasks per one bucket.");
+				
+				bool res = context.queue.Add(bucket.tasks, bucket.count);
+				if (res == true)
+				{
+					break;
+				}
 
-            // Can't add new tasks onto the queue. Look like the job system is
-            // overloaded. Wait some time and try again.
-            // TODO: implement waiting until workers done using events.
-            Thread::Sleep( 10 );
-        }
+				//Can't add new tasks onto the queue. Look like the job system is overloaded. Wait some time and try again.
+				//TODO: implement waiting until workers done using events.
+				Thread::Sleep(10);
+			}
+			
+			context.hasNewTasksEvent.Signal();
+		}
+	}
 
-        context.hasNewTasksEvent.Signal();
-    }
-}
+	void TaskScheduler::RunAsync(TaskGroup group, const TaskHandle* taskHandleArray, uint32 taskHandleCount)
+	{
+		MT_ASSERT(!IsWorkerThread(), "Can't use RunAsync inside Task. Use FiberContext.RunAsync() instead.");
 
-void TaskScheduler::RunAsync( TaskGroup group,
-                              const TaskHandle* taskHandleArray,
-                              uint32 taskHandleCount ) {
-    MT_ASSERT( !IsWorkerThread(),
-               "Can't use RunAsync inside Task. Use FiberContext.RunAsync() "
-               "instead." );
+		ArrayView<internal::GroupedTask> buffer(MT_ALLOCATE_ON_STACK(sizeof(internal::GroupedTask) * taskHandleCount), taskHandleCount);
 
-    ArrayView< internal::GroupedTask > buffer(
-        MT_ALLOCATE_ON_STACK( sizeof( internal::GroupedTask ) *
-                              taskHandleCount ),
-        taskHandleCount );
+		uint32 bucketCount = MT::Min((uint32)GetWorkersCount(), taskHandleCount);
+		ArrayView<internal::TaskBucket> buckets(MT_ALLOCATE_ON_STACK(sizeof(internal::TaskBucket) * bucketCount), bucketCount);
 
-    uint32 bucketCount =
-        MT::Min( ( uint32 )GetWorkersCount(), taskHandleCount );
-    ArrayView< internal::TaskBucket > buckets(
-        MT_ALLOCATE_ON_STACK( sizeof( internal::TaskBucket ) * bucketCount ),
-        bucketCount );
+		internal::DistibuteDescriptions(group, taskHandleArray, buffer, buckets);
+		RunTasksImpl(buckets, nullptr, false);
+	}
 
-    internal::DistibuteDescriptions( group, taskHandleArray, buffer, buckets );
-    RunTasksImpl( buckets, nullptr, false );
-}
+	bool TaskScheduler::WaitGroup(TaskGroup group, uint32 milliseconds)
+	{
+		MT_VERIFY(IsWorkerThread() == false, "Can't use WaitGroup inside Task. Use FiberContext.WaitGroupAndYield() instead.", return false);
 
-bool TaskScheduler::WaitGroup( TaskGroup group, uint32 milliseconds ) {
-    MT_VERIFY( IsWorkerThread() == false,
-               "Can't use WaitGroup inside Task. Use "
-               "FiberContext.WaitGroupAndYield() instead.",
-               return false );
+		TaskScheduler::TaskGroupDescription& groupDesc = GetGroupDesc(group);
 
-    TaskScheduler::TaskGroupDescription& groupDesc = GetGroupDesc( group );
+		// Early exit if not tasks in group
+		int32 taskCount = groupDesc.GetTaskCount();
+		if (taskCount == 0)
+		{
+			return true;
+		}
 
-    // Early exit if not tasks in group
-    int32 taskCount = groupDesc.GetTaskCount();
-    if ( taskCount == 0 ) {
-        return true;
-    }
+		size_t bytesCountForDescBuffer = internal::ThreadContext::GetMemoryRequrementInBytesForDescBuffer();
+		void* descBuffer = MT_ALLOCATE_ON_STACK(bytesCountForDescBuffer);
+		
+		internal::ThreadContext context(descBuffer);
+		context.taskScheduler = this;
+		context.SetThreadIndex(0xFFFFFFFF);
+		context.threadId = ThreadId::Self();
 
-    size_t bytesCountForDescBuffer =
-        internal::ThreadContext::GetMemoryRequrementInBytesForDescBuffer();
-    void* descBuffer = MT_ALLOCATE_ON_STACK( bytesCountForDescBuffer );
+		WaitContext waitContext;
+		waitContext.threadContext = &context;
+		waitContext.waitCounter = groupDesc.GetWaitCounter();
+		waitContext.waitTimeMs = milliseconds;
+		waitContext.exitCode = 0;
 
-    internal::ThreadContext context( descBuffer );
-    context.taskScheduler = this;
-    context.SetThreadIndex( 0xFFFFFFFF );
-    context.threadId = ThreadId::Self();
+		isWorkerThreadTLS = 1;
+		context.schedulerFiber.CreateFromCurrentThreadAndRun(SchedulerFiberWait, &waitContext);
 
-    WaitContext waitContext;
-    waitContext.threadContext = &context;
-    waitContext.waitCounter = groupDesc.GetWaitCounter();
-    waitContext.waitTimeMs = milliseconds;
-    waitContext.exitCode = 0;
+		isWorkerThreadTLS = 0;
 
-    isWorkerThreadTLS = 1;
-    context.schedulerFiber.CreateFromCurrentThreadAndRun( SchedulerFiberWait,
-                                                          &waitContext );
+		return (waitContext.exitCode == 0);
+	}
 
-    isWorkerThreadTLS = 0;
+	bool TaskScheduler::WaitAll(uint32 milliseconds)
+	{
+		MT_VERIFY(IsWorkerThread() == false, "Can't use WaitAll inside Task.", return false);
 
-    return ( waitContext.exitCode == 0 );
-}
+		// Early exit if not tasks in group
+		int32 taskCount = allGroups.GetTaskCount();
+		if (taskCount == 0)
+		{
+			return true;
+		}
 
-bool TaskScheduler::WaitAll( uint32 milliseconds ) {
-    MT_VERIFY( IsWorkerThread() == false, "Can't use WaitAll inside Task.",
-               return false );
+		size_t bytesCountForDescBuffer = internal::ThreadContext::GetMemoryRequrementInBytesForDescBuffer();
+		void* descBuffer = MT_ALLOCATE_ON_STACK(bytesCountForDescBuffer);
 
-    // Early exit if not tasks in group
-    int32 taskCount = allGroups.GetTaskCount();
-    if ( taskCount == 0 ) {
-        return true;
-    }
+		internal::ThreadContext context(descBuffer);
+		context.taskScheduler = this;
+		context.SetThreadIndex(0xFFFFFFFF);
+		context.threadId = ThreadId::Self();
 
-    size_t bytesCountForDescBuffer =
-        internal::ThreadContext::GetMemoryRequrementInBytesForDescBuffer();
-    void* descBuffer = MT_ALLOCATE_ON_STACK( bytesCountForDescBuffer );
+		WaitContext waitContext;
+		waitContext.threadContext = &context;
+		waitContext.waitCounter = allGroups.GetWaitCounter();
+		waitContext.waitTimeMs = milliseconds;
+		waitContext.exitCode = 0;
 
-    internal::ThreadContext context( descBuffer );
-    context.taskScheduler = this;
-    context.SetThreadIndex( 0xFFFFFFFF );
-    context.threadId = ThreadId::Self();
+		isWorkerThreadTLS = 1;
+		context.schedulerFiber.CreateFromCurrentThreadAndRun(SchedulerFiberWait, &waitContext);
+		isWorkerThreadTLS = 0;
 
-    WaitContext waitContext;
-    waitContext.threadContext = &context;
-    waitContext.waitCounter = allGroups.GetWaitCounter();
-    waitContext.waitTimeMs = milliseconds;
-    waitContext.exitCode = 0;
+		return (waitContext.exitCode == 0);
+	}
 
-    isWorkerThreadTLS = 1;
-    context.schedulerFiber.CreateFromCurrentThreadAndRun( SchedulerFiberWait,
-                                                          &waitContext );
-    isWorkerThreadTLS = 0;
+	bool TaskScheduler::IsTaskStealingDisabled(uint32 minWorkersCount) const
+	{
+		if (threadsCount.LoadRelaxed() <= (int32)minWorkersCount)
+		{
+			return true;
+		}
 
-    return ( waitContext.exitCode == 0 );
-}
+		return taskStealingDisabled;
+	}
 
-bool TaskScheduler::IsTaskStealingDisabled( uint32 minWorkersCount ) const {
-    if ( threadsCount.LoadRelaxed() <= ( int32 )minWorkersCount ) {
-        return true;
-    }
+	int32 TaskScheduler::GetWorkersCount() const
+	{
+		return threadsCount.LoadRelaxed();
+	}
 
-    return taskStealingDisabled;
-}
 
-int32 TaskScheduler::GetWorkersCount() const {
-    return threadsCount.LoadRelaxed();
-}
+	bool TaskScheduler::IsWorkerThread() const
+	{
+		return (isWorkerThreadTLS != 0);
+	}
 
-bool TaskScheduler::IsWorkerThread() const {
-    return ( isWorkerThreadTLS != 0 );
-}
+	TaskGroup TaskScheduler::CreateGroup()
+	{
+		MT_ASSERT(IsWorkerThread() == false, "Can't use CreateGroup inside Task.");
 
-TaskGroup TaskScheduler::CreateGroup() {
-    MT_ASSERT( IsWorkerThread() == false,
-               "Can't use CreateGroup inside Task." );
+		TaskGroup group;
+		if (!availableGroups.TryPop(group))
+		{
+			MT_REPORT_ASSERT("Group pool is empty");
+		}
 
-    TaskGroup group;
-    if ( !availableGroups.TryPop( group ) ) {
-        MT_REPORT_ASSERT( "Group pool is empty" );
-    }
-
-    int idx = group.GetValidIndex();
-    MT_USED_IN_ASSERT( idx );
-    MT_ASSERT( groupStats[ idx ].GetDebugIsFree() == true, "Bad logic!" );
+		int idx = group.GetValidIndex();
+		MT_USED_IN_ASSERT(idx);
+		MT_ASSERT(groupStats[idx].GetDebugIsFree() == true, "Bad logic!");
 #if MT_GROUP_DEBUG
-    groupStats[ idx ].SetDebugIsFree( false );
+		groupStats[idx].SetDebugIsFree(false);
 #endif
 
-    return group;
-}
+		return group;
+	}
 
-void TaskScheduler::ReleaseGroup( TaskGroup group ) {
-    MT_ASSERT( IsWorkerThread() == false,
-               "Can't use ReleaseGroup inside Task." );
-    MT_ASSERT( group.IsValid(), "Invalid group ID" );
+	void TaskScheduler::ReleaseGroup(TaskGroup group)
+	{
+		MT_ASSERT(IsWorkerThread() == false, "Can't use ReleaseGroup inside Task.");
+		MT_ASSERT(group.IsValid(), "Invalid group ID");
 
-    int idx = group.GetValidIndex();
-    MT_USED_IN_ASSERT( idx );
-    MT_ASSERT( groupStats[ idx ].GetDebugIsFree() == false,
-               "Group already released" );
+		int idx = group.GetValidIndex();
+		MT_USED_IN_ASSERT(idx);
+		MT_ASSERT(groupStats[idx].GetDebugIsFree() == false, "Group already released");
 #if MT_GROUP_DEBUG
-    groupStats[ idx ].SetDebugIsFree( true );
+		groupStats[idx].SetDebugIsFree(true);
 #endif
 
-    bool res = availableGroups.TryPush( std::move( group ) );
-    MT_USED_IN_ASSERT( res );
-    MT_ASSERT( res, "Can't return group to pool" );
-}
+		bool res = availableGroups.TryPush(std::move(group));
+		MT_USED_IN_ASSERT(res);
+		MT_ASSERT(res, "Can't return group to pool");
+	}
 
-TaskScheduler::TaskGroupDescription& TaskScheduler::GetGroupDesc(
-    TaskGroup group ) {
-    MT_ASSERT( group.IsValid(), "Invalid group ID" );
+	TaskScheduler::TaskGroupDescription& TaskScheduler::GetGroupDesc(TaskGroup group)
+	{
+		MT_ASSERT(group.IsValid(), "Invalid group ID");
 
-    int idx = group.GetValidIndex();
-    TaskScheduler::TaskGroupDescription& groupDesc = groupStats[ idx ];
+		int idx = group.GetValidIndex();
+		TaskScheduler::TaskGroupDescription & groupDesc = groupStats[idx];
 
-    MT_ASSERT( groupDesc.GetDebugIsFree() == false, "Invalid group" );
-    return groupDesc;
-}
+		MT_ASSERT(groupDesc.GetDebugIsFree() == false, "Invalid group");
+		return groupDesc;
+	}
+
 
 #ifdef MT_INSTRUMENTED_BUILD
 
-void TaskScheduler::NotifyFibersCreated( uint32 fibersCount ) {
-    if ( IProfilerEventListener* eventListener = GetProfilerEventListener() ) {
-        eventListener->OnFibersCreated( fibersCount );
-    }
-}
+	void TaskScheduler::NotifyFibersCreated(uint32 fibersCount)
+	{
+		if (IProfilerEventListener* eventListener = GetProfilerEventListener())
+		{
+			eventListener->OnFibersCreated(fibersCount);
+		}
+	}
 
-void TaskScheduler::NotifyThreadsCreated( uint32 createdThreadsCount ) {
-    if ( IProfilerEventListener* eventListener = GetProfilerEventListener() ) {
-        eventListener->OnThreadsCreated( createdThreadsCount );
-    }
-}
+	void TaskScheduler::NotifyThreadsCreated(uint32 createdThreadsCount)
+	{
+		if (IProfilerEventListener* eventListener = GetProfilerEventListener())
+		{
+			eventListener->OnThreadsCreated(createdThreadsCount);
+		}
+	}
+
 
 #endif
 
-} // namespace MT
+}

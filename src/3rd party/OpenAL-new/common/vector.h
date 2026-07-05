@@ -7,8 +7,8 @@
 
 namespace al {
 
-template < typename T, size_t alignment = alignof( T ) >
-using vector = std::vector< T, al::allocator< T, alignment > >;
+template<typename T, size_t alignment=alignof(T)>
+using vector = std::vector<T, al::allocator<T, alignment>>;
 
 } // namespace al
 

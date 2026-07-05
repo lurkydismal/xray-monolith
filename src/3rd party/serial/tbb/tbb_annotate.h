@@ -19,14 +19,14 @@
 
 // Macros used by the Intel(R) Parallel Advisor.
 #ifdef __TBB_NORMAL_EXECUTION
-#define ANNOTATE_SITE_BEGIN( site )
-#define ANNOTATE_SITE_END( site )
-#define ANNOTATE_TASK_BEGIN( task )
-#define ANNOTATE_TASK_END( task )
-#define ANNOTATE_LOCK_ACQUIRE( lock )
-#define ANNOTATE_LOCK_RELEASE( lock )
+    #define ANNOTATE_SITE_BEGIN( site )
+    #define ANNOTATE_SITE_END( site )
+    #define ANNOTATE_TASK_BEGIN( task )
+    #define ANNOTATE_TASK_END( task )
+    #define ANNOTATE_LOCK_ACQUIRE( lock )
+    #define ANNOTATE_LOCK_RELEASE( lock )
 #else
-#include <advisor-annotate.h>
+    #include <advisor-annotate.h>
 #endif
 
 #endif /* __TBB_annotate_H */

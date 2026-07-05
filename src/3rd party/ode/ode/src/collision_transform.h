@@ -30,13 +30,11 @@ geom transform
 #define _ODE_COLLISION_TRANSFORM_H_
 
 #include <ode/common.h>
-
 #include "collision_kernel.h"
 
-int dCollideTransform( dxGeom* o1,
-                       dxGeom* o2,
-                       int flags,
-                       dContactGeom* contact,
-                       int skip );
+
+int dCollideTransform (dxGeom *o1, dxGeom *o2, int flags,
+		       dContactGeom *contact, int skip);
+
 
 #endif

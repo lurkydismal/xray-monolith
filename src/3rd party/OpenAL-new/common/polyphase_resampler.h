@@ -3,6 +3,7 @@
 
 #include <vector>
 
+
 using uint = unsigned int;
 
 /* This is a polyphase sinc-filtered resampler. It is built for very high
@@ -33,17 +34,14 @@ using uint = unsigned int;
  */
 
 struct PPhaseResampler {
-    void init( const uint srcRate, const uint dstRate );
-    void process( const uint inN,
-                  const double* in,
-                  const uint outN,
-                  double* out );
+    void init(const uint srcRate, const uint dstRate);
+    void process(const uint inN, const double *in, const uint outN, double *out);
 
     explicit operator bool() const noexcept { return !mF.empty(); }
 
 private:
     uint mP, mQ, mM, mL;
-    std::vector< double > mF;
+    std::vector<double> mF;
 };
 
 #endif /* POLYPHASE_RESAMPLER_H */

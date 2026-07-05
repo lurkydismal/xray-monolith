@@ -19,8 +19,8 @@
 #ifndef __UDATA_H__
 #define __UDATA_H__
 
-#include "unicode/localpointer.h"
 #include "unicode/utypes.h"
+#include "unicode/localpointer.h"
 
 U_CDECL_BEGIN
 
@@ -38,16 +38,16 @@ U_CDECL_BEGIN
  *
  * See the User Guide Data Management chapter.
  */
-
+ 
 #ifndef U_HIDE_INTERNAL_API
 /**
- * Character used to separate package names from tree names
+ * Character used to separate package names from tree names 
  * @internal ICU 3.0
  */
 #define U_TREE_SEPARATOR '-'
 
 /**
- * String used to separate package names from tree names
+ * String used to separate package names from tree names 
  * @internal ICU 3.0
  */
 #define U_TREE_SEPARATOR_STRING "-"
@@ -65,7 +65,7 @@ U_CDECL_BEGIN
 #define U_TREE_ENTRY_SEP_STRING "/"
 
 /**
- * Alias for standard ICU data
+ * Alias for standard ICU data 
  * @internal ICU 3.0
  */
 #define U_ICUDATA_ALIAS "ICUDATA"
@@ -115,7 +115,7 @@ typedef struct {
      *  @stable ICU 2.0 */
     uint16_t size;
 
-    /** unused, set to 0
+    /** unused, set to 0 
      *  @stable ICU 2.0*/
     uint16_t reservedWord;
 
@@ -124,29 +124,29 @@ typedef struct {
      *  @stable ICU 2.0 */
     uint8_t isBigEndian;
 
-    /** see U_CHARSET_FAMILY values in utypes.h
+    /** see U_CHARSET_FAMILY values in utypes.h 
      *  @stable ICU 2.0*/
     uint8_t charsetFamily;
 
-    /** sizeof(UChar), one of { 1, 2, 4 }
+    /** sizeof(UChar), one of { 1, 2, 4 } 
      *  @stable ICU 2.0*/
     uint8_t sizeofUChar;
 
-    /** unused, set to 0
+    /** unused, set to 0 
      *  @stable ICU 2.0*/
     uint8_t reservedByte;
 
-    /** data format identifier
+    /** data format identifier 
      *  @stable ICU 2.0*/
-    uint8_t dataFormat[ 4 ];
+    uint8_t dataFormat[4];
 
-    /** versions: [0] major [1] minor [2] milli [3] micro
+    /** versions: [0] major [1] minor [2] milli [3] micro 
      *  @stable ICU 2.0*/
-    uint8_t formatVersion[ 4 ];
+    uint8_t formatVersion[4];
 
-    /** versions: [0] major [1] minor [2] milli [3] micro
+    /** versions: [0] major [1] minor [2] milli [3] micro 
      *  @stable ICU 2.0*/
-    uint8_t dataVersion[ 4 ];
+    uint8_t dataVersion[4];
 } UDataInfo;
 
 /* API for reading data -----------------------------------------------------*/
@@ -160,10 +160,9 @@ typedef struct UDataMemory UDataMemory;
 /**
  * Callback function for udata_openChoice().
  * @param context parameter passed into <code>udata_openChoice()</code>.
- * @param type The type of the data as passed into
- * <code>udata_openChoice()</code>. It may be <code>NULL</code>.
- * @param name The name of the data as passed into
- * <code>udata_openChoice()</code>.
+ * @param type The type of the data as passed into <code>udata_openChoice()</code>.
+ *             It may be <code>NULL</code>.
+ * @param name The name of the data as passed into <code>udata_openChoice()</code>.
  * @param pInfo A pointer to the <code>UDataInfo</code> structure
  *              of data that has been loaded and will be returned
  *              by <code>udata_openChoice()</code> if this function
@@ -171,10 +170,11 @@ typedef struct UDataMemory UDataMemory;
  * @return TRUE if the current data memory is acceptable
  * @stable ICU 2.0
  */
-typedef UBool U_CALLCONV UDataMemoryIsAcceptable( void* context,
-                                                  const char* type,
-                                                  const char* name,
-                                                  const UDataInfo* pInfo );
+typedef UBool U_CALLCONV
+UDataMemoryIsAcceptable(void *context,
+                        const char *type, const char *name,
+                        const UDataInfo *pInfo);
+
 
 /**
  * Convenience function.
@@ -189,8 +189,7 @@ typedef UBool U_CALLCONV UDataMemoryIsAcceptable( void* context,
  *             conversion tables with type "cnv".
  *             This may be <code>NULL</code> or empty.
  * @param name A string that specifies the name of the data.
- * @param pErrorCode An ICU UErrorCode parameter. It must not be
- * <code>NULL</code>.
+ * @param pErrorCode An ICU UErrorCode parameter. It must not be <code>NULL</code>.
  * @return A pointer (handle) to a data memory object, or <code>NULL</code>
  *         if an error occurs. Call <code>udata_getMemory()</code>
  *         to get a pointer to the actual data.
@@ -198,10 +197,9 @@ typedef UBool U_CALLCONV UDataMemoryIsAcceptable( void* context,
  * @see udata_openChoice
  * @stable ICU 2.0
  */
-U_STABLE UDataMemory* U_EXPORT2 udata_open( const char* path,
-                                            const char* type,
-                                            const char* name,
-                                            UErrorCode* pErrorCode );
+U_STABLE UDataMemory * U_EXPORT2
+udata_open(const char *path, const char *type, const char *name,
+           UErrorCode *pErrorCode);
 
 /**
  * Data loading function.
@@ -225,8 +223,8 @@ U_STABLE UDataMemory* U_EXPORT2 udata_open( const char* path,
  * matching the type and name.</p>
  *
  * <p>If <code>path==NULL</code>, then ICU data is loaded.
- * Otherwise, it is separated into a basename and a basename-less directory
- * string. The basename is used as the data package name, and the directory is
+ * Otherwise, it is separated into a basename and a basename-less directory string.
+ * The basename is used as the data package name, and the directory is
  * logically prepended to the ICU data directory string.</p>
  *
  * <p>For details about ICU data loading see the User Guide
@@ -245,20 +243,16 @@ U_STABLE UDataMemory* U_EXPORT2 udata_open( const char* path,
  *                     for all data items, then <code>udata_openChoice()</code>
  *                     will return with an error.
  * @param context Arbitrary parameter to be passed into isAcceptable.
- * @param pErrorCode An ICU UErrorCode parameter. It must not be
- * <code>NULL</code>.
+ * @param pErrorCode An ICU UErrorCode parameter. It must not be <code>NULL</code>.
  * @return A pointer (handle) to a data memory object, or <code>NULL</code>
  *         if an error occurs. Call <code>udata_getMemory()</code>
  *         to get a pointer to the actual data.
  * @stable ICU 2.0
  */
-U_STABLE UDataMemory* U_EXPORT2
-udata_openChoice( const char* path,
-                  const char* type,
-                  const char* name,
-                  UDataMemoryIsAcceptable* isAcceptable,
-                  void* context,
-                  UErrorCode* pErrorCode );
+U_STABLE UDataMemory * U_EXPORT2
+udata_openChoice(const char *path, const char *type, const char *name,
+                 UDataMemoryIsAcceptable *isAcceptable, void *context,
+                 UErrorCode *pErrorCode);
 
 /**
  * Close the data memory.
@@ -267,7 +261,8 @@ udata_openChoice( const char* path,
  * @param pData The pointer to data memory object
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 udata_close( UDataMemory* pData );
+U_STABLE void U_EXPORT2
+udata_close(UDataMemory *pData);
 
 /**
  * Get the pointer to the actual data inside the data memory.
@@ -278,7 +273,8 @@ U_STABLE void U_EXPORT2 udata_close( UDataMemory* pData );
  * @param pData The pointer to data memory object
  * @stable ICU 2.0
  */
-U_STABLE const void* U_EXPORT2 udata_getMemory( UDataMemory* pData );
+U_STABLE const void * U_EXPORT2
+udata_getMemory(UDataMemory *pData);
 
 /**
  * Get the information from the data memory header.
@@ -298,7 +294,8 @@ U_STABLE const void* U_EXPORT2 udata_getMemory( UDataMemory* pData );
  * adjusted and only part of the structure will be filled.
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 udata_getInfo( UDataMemory* pData, UDataInfo* pInfo );
+U_STABLE void U_EXPORT2
+udata_getInfo(UDataMemory *pData, UDataInfo *pInfo);
 
 /**
  * This function bypasses the normal ICU data loading process and
@@ -310,14 +307,14 @@ U_STABLE void U_EXPORT2 udata_getInfo( UDataMemory* pData, UDataInfo* pInfo );
  *
  * The format of this data is that of the icu common data file, as is
  * generated by the pkgdata tool with mode=common or mode=dll.
- * You can read in a whole common mode file and pass the address to the start of
- * the data, or (with the appropriate link options) pass in the pointer to the
- * data that has been loaded from a dll by the operating system, as shown in
- * this code:
+ * You can read in a whole common mode file and pass the address to the start of the
+ * data, or (with the appropriate link options) pass in the pointer to
+ * the data that has been loaded from a dll by the operating system,
+ * as shown in this code:
  *
  *       extern const char U_IMPORT U_ICUDATA_ENTRY_POINT [];
- *        // U_ICUDATA_ENTRY_POINT is same as entry point specified to pkgdata
- * tool UErrorCode  status = U_ZERO_ERROR;
+ *        // U_ICUDATA_ENTRY_POINT is same as entry point specified to pkgdata tool
+ *       UErrorCode  status = U_ZERO_ERROR;
  *
  *       udata_setCommonData(&U_ICUDATA_ENTRY_POINT, &status);
  *
@@ -329,35 +326,35 @@ U_STABLE void U_EXPORT2 udata_getInfo( UDataMemory* pData, UDataInfo* pInfo );
  * udata_open() will look for data in the multiple data packages in the order
  * in which they were set.
  * The position of the linked-in or default-name ICU .data package in the
- * search list depends on when the first data item is loaded that is not
- * contained in the already explicitly set packages. If data was loaded
- * implicitly before the first call to this function (for example, via opening a
- * converter, constructing a UnicodeString from default-codepage data, using
- * formatting or collation APIs, etc.), then the default data will be first in
- * the list.
+ * search list depends on when the first data item is loaded that is not contained
+ * in the already explicitly set packages.
+ * If data was loaded implicitly before the first call to this function
+ * (for example, via opening a converter, constructing a UnicodeString
+ * from default-codepage data, using formatting or collation APIs, etc.),
+ * then the default data will be first in the list.
  *
- * This function has no effect on application (non ICU) data.  See
- * udata_setAppData() for similar functionality for application data.
+ * This function has no effect on application (non ICU) data.  See udata_setAppData()
+ * for similar functionality for application data.
  *
  * @param data pointer to ICU common data
- * @param err outgoing error status <code>U_USING_DEFAULT_WARNING,
- * U_UNSUPPORTED_ERROR</code>
+ * @param err outgoing error status <code>U_USING_DEFAULT_WARNING, U_UNSUPPORTED_ERROR</code>
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 udata_setCommonData( const void* data,
-                                             UErrorCode* err );
+U_STABLE void U_EXPORT2
+udata_setCommonData(const void *data, UErrorCode *err);
+
 
 /**
- * This function bypasses the normal ICU data loading process for
- * application-specific data and allows you to force the it to come out of a
- * user-specified pointer.
+ * This function bypasses the normal ICU data loading process for application-specific
+ * data and allows you to force the it to come out of a user-specified
+ * pointer.
  *
  * ICU data must be at least 8-aligned, and should be 16-aligned.
  * See http://userguide.icu-project.org/icudata
  *
- * The format of this data is that of the icu common data file, like
- * 'icudt26l.dat' or the corresponding shared library (DLL) file. The
- * application must read in or otherwise construct an image of the data and then
+ * The format of this data is that of the icu common data file, like 'icudt26l.dat'
+ * or the corresponding shared library (DLL) file.
+ * The application must read in or otherwise construct an image of the data and then
  * pass the address of it to this function.
  *
  *
@@ -370,14 +367,12 @@ U_STABLE void U_EXPORT2 udata_setCommonData( const void* data,
  * @param packageName the package name by which the application will refer
  *             to (open) this data
  * @param data pointer to the data
- * @param err outgoing error status <code>U_USING_DEFAULT_WARNING,
- * U_UNSUPPORTED_ERROR</code>
+ * @param err outgoing error status <code>U_USING_DEFAULT_WARNING, U_UNSUPPORTED_ERROR</code>
  * @see udata_setCommonData
  * @stable ICU 2.0
  */
-U_STABLE void U_EXPORT2 udata_setAppData( const char* packageName,
-                                          const void* data,
-                                          UErrorCode* err );
+U_STABLE void U_EXPORT2
+udata_setAppData(const char *packageName, const void *data, UErrorCode *err);
 
 /**
  * Possible settings for udata_setFileAccess()
@@ -385,13 +380,11 @@ U_STABLE void U_EXPORT2 udata_setAppData( const char* packageName,
  * @stable ICU 3.4
  */
 typedef enum UDataFileAccess {
-    /** ICU looks for data in single files first, then in packages. (default)
-       @stable ICU 3.4 */
+    /** ICU looks for data in single files first, then in packages. (default) @stable ICU 3.4 */
     UDATA_FILES_FIRST,
     /** An alias for the default access mode. @stable ICU 3.4 */
     UDATA_DEFAULT_ACCESS = UDATA_FILES_FIRST,
-    /** ICU only loads data from packages, not from single files. @stable
-       ICU 3.4 */
+    /** ICU only loads data from packages, not from single files. @stable ICU 3.4 */
     UDATA_ONLY_PACKAGES,
     /** ICU loads data from packages first, and only from single files
         if the data cannot be found in a package. @stable ICU 3.4 */
@@ -401,25 +394,24 @@ typedef enum UDataFileAccess {
 #ifndef U_HIDE_DEPRECATED_API
     /**
      * Number of real UDataFileAccess values.
-     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket
-     * #12420.
+     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
      */
     UDATA_FILE_ACCESS_COUNT
-#endif // U_HIDE_DEPRECATED_API
+#endif  // U_HIDE_DEPRECATED_API
 } UDataFileAccess;
 
 /**
  * This function may be called to control how ICU loads data. It must be called
- * before any ICU data is loaded, including application data loaded with
- * ures/ResourceBundle or udata APIs. This function is not multithread safe.
+ * before any ICU data is loaded, including application data loaded with 
+ * ures/ResourceBundle or udata APIs. This function is not multithread safe.  
  * The results of calling it while other threads are loading data are undefined.
  * @param access The type of file access to be used
  * @param status Error code.
  * @see UDataFileAccess
- * @stable ICU 3.4
+ * @stable ICU 3.4 
  */
-U_STABLE void U_EXPORT2 udata_setFileAccess( UDataFileAccess access,
-                                             UErrorCode* status );
+U_STABLE void U_EXPORT2
+udata_setFileAccess(UDataFileAccess access, UErrorCode *status);
 
 U_CDECL_END
 
@@ -436,12 +428,10 @@ U_NAMESPACE_BEGIN
  * @see LocalPointer
  * @stable ICU 4.4
  */
-U_DEFINE_LOCAL_OPEN_POINTER( LocalUDataMemoryPointer,
-                             UDataMemory,
-                             udata_close );
+U_DEFINE_LOCAL_OPEN_POINTER(LocalUDataMemoryPointer, UDataMemory, udata_close);
 
 U_NAMESPACE_END
 
-#endif // U_SHOW_CPLUSPLUS_API
+#endif  // U_SHOW_CPLUSPLUS_API
 
 #endif

@@ -29,21 +29,19 @@ namespace number {
 namespace impl {
 class SimpleModifier;
 }
-} // namespace number
+}
 
 /**
  * Formats simple patterns like "{1} was born in {0}".
  * Minimal subset of MessageFormat; fast, simple, minimal dependencies.
  * Supports only numbered arguments with no type nor style parameters,
  * and formats only string values.
- * Quoting via ASCII apostrophe compatible with ICU MessageFormat default
- * behavior.
+ * Quoting via ASCII apostrophe compatible with ICU MessageFormat default behavior.
  *
  * Factory methods set error codes for syntax errors
  * and for too few or too many arguments/placeholders.
  *
- * SimpleFormatter objects are thread-safe except for assignment and applying
- * new patterns.
+ * SimpleFormatter objects are thread-safe except for assignment and applying new patterns.
  *
  * Example:
  * <pre>
@@ -67,7 +65,7 @@ public:
      * Default constructor.
      * @stable ICU 57
      */
-    SimpleFormatter() : compiledPattern( ( char16_t )0 ) {}
+    SimpleFormatter() : compiledPattern((char16_t)0) {}
 
     /**
      * Constructs a formatter from the pattern string.
@@ -78,44 +76,41 @@ public:
      *                  Set to U_ILLEGAL_ARGUMENT_ERROR for bad argument syntax.
      * @stable ICU 57
      */
-    SimpleFormatter( const UnicodeString& pattern, UErrorCode& errorCode ) {
-        applyPattern( pattern, errorCode );
+    SimpleFormatter(const UnicodeString& pattern, UErrorCode &errorCode) {
+        applyPattern(pattern, errorCode);
     }
 
     /**
      * Constructs a formatter from the pattern string.
      * The number of arguments checked against the given limits is the
-     * highest argument number plus one, not the number of occurrences of
-     * arguments.
+     * highest argument number plus one, not the number of occurrences of arguments.
      *
      * @param pattern The pattern string.
      * @param min The pattern must have at least this many arguments.
      * @param max The pattern must have at most this many arguments.
      * @param errorCode ICU error code in/out parameter.
      *                  Must fulfill U_SUCCESS before the function call.
-     *                  Set to U_ILLEGAL_ARGUMENT_ERROR for bad argument syntax
-     * and too few or too many arguments.
+     *                  Set to U_ILLEGAL_ARGUMENT_ERROR for bad argument syntax and
+     *                  too few or too many arguments.
      * @stable ICU 57
      */
-    SimpleFormatter( const UnicodeString& pattern,
-                     int32_t min,
-                     int32_t max,
-                     UErrorCode& errorCode ) {
-        applyPatternMinMaxArguments( pattern, min, max, errorCode );
+    SimpleFormatter(const UnicodeString& pattern, int32_t min, int32_t max,
+                    UErrorCode &errorCode) {
+        applyPatternMinMaxArguments(pattern, min, max, errorCode);
     }
 
     /**
      * Copy constructor.
      * @stable ICU 57
      */
-    SimpleFormatter( const SimpleFormatter& other )
-        : compiledPattern( other.compiledPattern ) {}
+    SimpleFormatter(const SimpleFormatter& other)
+            : compiledPattern(other.compiledPattern) {}
 
     /**
      * Assignment operator.
      * @stable ICU 57
      */
-    SimpleFormatter& operator=( const SimpleFormatter& other );
+    SimpleFormatter &operator=(const SimpleFormatter& other);
 
     /**
      * Destructor.
@@ -133,38 +128,34 @@ public:
      * @return TRUE if U_SUCCESS(errorCode).
      * @stable ICU 57
      */
-    UBool applyPattern( const UnicodeString& pattern, UErrorCode& errorCode ) {
-        return applyPatternMinMaxArguments( pattern, 0, INT32_MAX, errorCode );
+    UBool applyPattern(const UnicodeString &pattern, UErrorCode &errorCode) {
+        return applyPatternMinMaxArguments(pattern, 0, INT32_MAX, errorCode);
     }
 
     /**
      * Changes this object according to the new pattern.
      * The number of arguments checked against the given limits is the
-     * highest argument number plus one, not the number of occurrences of
-     * arguments.
+     * highest argument number plus one, not the number of occurrences of arguments.
      *
      * @param pattern The pattern string.
      * @param min The pattern must have at least this many arguments.
      * @param max The pattern must have at most this many arguments.
      * @param errorCode ICU error code in/out parameter.
      *                  Must fulfill U_SUCCESS before the function call.
-     *                  Set to U_ILLEGAL_ARGUMENT_ERROR for bad argument syntax
-     * and too few or too many arguments.
+     *                  Set to U_ILLEGAL_ARGUMENT_ERROR for bad argument syntax and
+     *                  too few or too many arguments.
      * @return TRUE if U_SUCCESS(errorCode).
      * @stable ICU 57
      */
-    UBool applyPatternMinMaxArguments( const UnicodeString& pattern,
-                                       int32_t min,
-                                       int32_t max,
-                                       UErrorCode& errorCode );
+    UBool applyPatternMinMaxArguments(const UnicodeString &pattern,
+                                      int32_t min, int32_t max, UErrorCode &errorCode);
 
     /**
      * @return The max argument number + 1.
      * @stable ICU 57
      */
     int32_t getArgumentLimit() const {
-        return getArgumentLimit( compiledPattern.getBuffer(),
-                                 compiledPattern.length() );
+        return getArgumentLimit(compiledPattern.getBuffer(), compiledPattern.length());
     }
 
     /**
@@ -179,9 +170,9 @@ public:
      * @return appendTo
      * @stable ICU 57
      */
-    UnicodeString& format( const UnicodeString& value0,
-                           UnicodeString& appendTo,
-                           UErrorCode& errorCode ) const;
+    UnicodeString &format(
+            const UnicodeString &value0,
+            UnicodeString &appendTo, UErrorCode &errorCode) const;
 
     /**
      * Formats the given values, appending to the appendTo builder.
@@ -196,10 +187,10 @@ public:
      * @return appendTo
      * @stable ICU 57
      */
-    UnicodeString& format( const UnicodeString& value0,
-                           const UnicodeString& value1,
-                           UnicodeString& appendTo,
-                           UErrorCode& errorCode ) const;
+    UnicodeString &format(
+            const UnicodeString &value0,
+            const UnicodeString &value1,
+            UnicodeString &appendTo, UErrorCode &errorCode) const;
 
     /**
      * Formats the given values, appending to the appendTo builder.
@@ -215,11 +206,11 @@ public:
      * @return appendTo
      * @stable ICU 57
      */
-    UnicodeString& format( const UnicodeString& value0,
-                           const UnicodeString& value1,
-                           const UnicodeString& value2,
-                           UnicodeString& appendTo,
-                           UErrorCode& errorCode ) const;
+    UnicodeString &format(
+            const UnicodeString &value0,
+            const UnicodeString &value1,
+            const UnicodeString &value2,
+            UnicodeString &appendTo, UErrorCode &errorCode) const;
 
     /**
      * Formats the given values, appending to the appendTo string.
@@ -232,21 +223,18 @@ public:
      * @param appendTo Gets the formatted pattern and values appended.
      * @param offsets offsets[i] receives the offset of where
      *                values[i] replaced pattern argument {i}.
-     *                Can be shorter or longer than values. Can be NULL if
-     * offsetsLength==0. If there is no {i} in the pattern, then offsets[i] is
-     * set to -1.
+     *                Can be shorter or longer than values. Can be NULL if offsetsLength==0.
+     *                If there is no {i} in the pattern, then offsets[i] is set to -1.
      * @param offsetsLength The length of the offsets array.
      * @param errorCode ICU error code in/out parameter.
      *                  Must fulfill U_SUCCESS before the function call.
      * @return appendTo
      * @stable ICU 57
      */
-    UnicodeString& formatAndAppend( const UnicodeString* const* values,
-                                    int32_t valuesLength,
-                                    UnicodeString& appendTo,
-                                    int32_t* offsets,
-                                    int32_t offsetsLength,
-                                    UErrorCode& errorCode ) const;
+    UnicodeString &formatAndAppend(
+            const UnicodeString *const *values, int32_t valuesLength,
+            UnicodeString &appendTo,
+            int32_t *offsets, int32_t offsetsLength, UErrorCode &errorCode) const;
 
     /**
      * Formats the given values, replacing the contents of the result string.
@@ -258,25 +246,21 @@ public:
      *               Can be NULL if valuesLength==getArgumentLimit()==0.
      * @param valuesLength The length of the values array.
      *                     Must be at least getArgumentLimit().
-     * @param result Gets its contents replaced by the formatted pattern and
-     * values.
+     * @param result Gets its contents replaced by the formatted pattern and values.
      * @param offsets offsets[i] receives the offset of where
      *                values[i] replaced pattern argument {i}.
-     *                Can be shorter or longer than values. Can be NULL if
-     * offsetsLength==0. If there is no {i} in the pattern, then offsets[i] is
-     * set to -1.
+     *                Can be shorter or longer than values. Can be NULL if offsetsLength==0.
+     *                If there is no {i} in the pattern, then offsets[i] is set to -1.
      * @param offsetsLength The length of the offsets array.
      * @param errorCode ICU error code in/out parameter.
      *                  Must fulfill U_SUCCESS before the function call.
      * @return result
      * @stable ICU 57
      */
-    UnicodeString& formatAndReplace( const UnicodeString* const* values,
-                                     int32_t valuesLength,
-                                     UnicodeString& result,
-                                     int32_t* offsets,
-                                     int32_t offsetsLength,
-                                     UErrorCode& errorCode ) const;
+    UnicodeString &formatAndReplace(
+            const UnicodeString *const *values, int32_t valuesLength,
+            UnicodeString &result,
+            int32_t *offsets, int32_t offsetsLength, UErrorCode &errorCode) const;
 
     /**
      * Returns the pattern text with none of the arguments.
@@ -284,8 +268,11 @@ public:
      * @stable ICU 57
      */
     UnicodeString getTextWithNoArguments() const {
-        return getTextWithNoArguments( compiledPattern.getBuffer(),
-                                       compiledPattern.length(), nullptr, 0 );
+        return getTextWithNoArguments(
+            compiledPattern.getBuffer(),
+            compiledPattern.length(),
+            nullptr,
+            0);
     }
 
 #ifndef U_HIDE_INTERNAL_API
@@ -297,18 +284,19 @@ public:
      *
      * @param offsets offsets[i] receives the offset of where {i} was located
      *                before it was replaced by an empty string.
-     *                For example, "a{0}b{1}" produces offset 1 for i=0 and 2
-     * for i=1. Can be nullptr if offsetsLength==0. If there is no {i} in the
-     * pattern, then offsets[i] is set to -1.
+     *                For example, "a{0}b{1}" produces offset 1 for i=0 and 2 for i=1.
+     *                Can be nullptr if offsetsLength==0.
+     *                If there is no {i} in the pattern, then offsets[i] is set to -1.
      * @param offsetsLength The length of the offsets array.
      *
      * @internal
      */
-    UnicodeString getTextWithNoArguments( int32_t* offsets,
-                                          int32_t offsetsLength ) const {
-        return getTextWithNoArguments( compiledPattern.getBuffer(),
-                                       compiledPattern.length(), offsets,
-                                       offsetsLength );
+    UnicodeString getTextWithNoArguments(int32_t *offsets, int32_t offsetsLength) const {
+        return getTextWithNoArguments(
+            compiledPattern.getBuffer(),
+            compiledPattern.length(),
+            offsets,
+            offsetsLength);
     }
 #endif // U_HIDE_INTERNAL_API
 
@@ -319,31 +307,28 @@ private:
      * Followed by zero or more arguments or literal-text segments.
      *
      * An argument is stored as its number, less than ARG_NUM_LIMIT.
-     * A literal-text segment is stored as its length (at least 1) offset by
-     * ARG_NUM_LIMIT, followed by that many chars.
+     * A literal-text segment is stored as its length (at least 1) offset by ARG_NUM_LIMIT,
+     * followed by that many chars.
      */
     UnicodeString compiledPattern;
 
-    static inline int32_t getArgumentLimit( const char16_t* compiledPattern,
-                                            int32_t compiledPatternLength ) {
-        return compiledPatternLength == 0 ? 0 : compiledPattern[ 0 ];
+    static inline int32_t getArgumentLimit(const char16_t *compiledPattern,
+                                              int32_t compiledPatternLength) {
+        return compiledPatternLength == 0 ? 0 : compiledPattern[0];
     }
 
     static UnicodeString getTextWithNoArguments(
-        const char16_t* compiledPattern,
+        const char16_t *compiledPattern,
         int32_t compiledPatternLength,
-        int32_t* offsets,
-        int32_t offsetsLength );
+        int32_t *offsets,
+        int32_t offsetsLength);
 
-    static UnicodeString& format( const char16_t* compiledPattern,
-                                  int32_t compiledPatternLength,
-                                  const UnicodeString* const* values,
-                                  UnicodeString& result,
-                                  const UnicodeString* resultCopy,
-                                  UBool forbidResultAsValue,
-                                  int32_t* offsets,
-                                  int32_t offsetsLength,
-                                  UErrorCode& errorCode );
+    static UnicodeString &format(
+            const char16_t *compiledPattern, int32_t compiledPatternLength,
+            const UnicodeString *const *values,
+            UnicodeString &result, const UnicodeString *resultCopy, UBool forbidResultAsValue,
+            int32_t *offsets, int32_t offsetsLength,
+            UErrorCode &errorCode);
 
     // Give access to internals to SimpleModifier for number formatting
     friend class number::impl::SimpleModifier;
@@ -353,4 +338,4 @@ U_NAMESPACE_END
 
 #endif /* U_SHOW_CPLUSPLUS_API */
 
-#endif // __SIMPLEFORMATTER_H__
+#endif  // __SIMPLEFORMATTER_H__

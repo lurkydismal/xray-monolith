@@ -9,17 +9,23 @@ struct Voice;
 
 using uint = unsigned int;
 
-enum class VChangeState { Reset, Stop, Play, Pause, Restart };
 
+enum class VChangeState {
+    Reset,
+    Stop,
+    Play,
+    Pause,
+    Restart
+};
 struct VoiceChange {
-    Voice* mOldVoice{ nullptr };
-    Voice* mVoice{ nullptr };
-    uint mSourceID{ 0 };
+    Voice *mOldVoice{nullptr};
+    Voice *mVoice{nullptr};
+    uint mSourceID{0};
     VChangeState mState{};
 
-    std::atomic< VoiceChange* > mNext{ nullptr };
+    std::atomic<VoiceChange*> mNext{nullptr};
 
-    DEF_NEWDEL( VoiceChange )
+    DEF_NEWDEL(VoiceChange)
 };
 
 #endif /* VOICE_CHANGE_H */

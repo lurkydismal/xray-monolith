@@ -22,85 +22,85 @@
 
 #pragma once
 
+#include <typeinfo>
+#include <map>
+
 #include <luabind/config.hpp>
 #include <luabind/open.hpp>
 
-#include <map>
-#include <typeinfo>
+namespace luabind { namespace detail
+{
+	class class_rep;
 
-namespace luabind {
-namespace detail {
-class class_rep;
+	struct LUABIND_API class_registry
+	{
+		class_registry(lua_State* L);
 
-struct LUABIND_API class_registry {
-    class_registry( lua_State* L );
+		static class_registry* get_registry(lua_State* L);
 
-    static class_registry* get_registry( lua_State* L );
+		int cpp_instance() const { return m_cpp_instance_metatable; }
+		int cpp_class() const { return m_cpp_class_metatable; }
 
-    int cpp_instance() const { return m_cpp_instance_metatable; }
+		int lua_instance() const { return m_lua_instance_metatable; }
+		int lua_class() const { return m_lua_class_metatable; }
+		int lua_function() const { return m_lua_function_metatable; }
 
-    int cpp_class() const { return m_cpp_class_metatable; }
+		void add_class(LUABIND_TYPE_INFO info, class_rep* crep);
 
-    int lua_instance() const { return m_lua_instance_metatable; }
+		struct cmp
+		{
+			bool operator()(const std::type_info* a, const std::type_info* b) const
+			{
+				return a->before(*b) != 0;
+			}
 
-    int lua_class() const { return m_lua_class_metatable; }
+			template<class T>
+			bool operator()(const T& a, const T& b) const
+			{
+				return a < b;
+			}
+		};
+		
+		class_rep* find_class(LUABIND_TYPE_INFO info) const;
 
-    int lua_function() const { return m_lua_function_metatable; }
+		template <typename T>
+		inline void iterate_classes(lua_State *L, const T &f) const
+		{
+			CLASS_REGISTRY::const_iterator	I = m_classes.begin();
+			CLASS_REGISTRY::const_iterator	E = m_classes.end();
+			for ( ; I != E; ++I)
+				f(L,(*I).second);
+		}
+	
+	private:
+		typedef map_class<LUABIND_TYPE_INFO, class_rep*, cmp> CLASS_REGISTRY;
 
-    void add_class( LUABIND_TYPE_INFO info, class_rep* crep );
+#pragma warning(push)
+#pragma warning(disable:4251)
+		CLASS_REGISTRY m_classes;
+#pragma warning(pop)
 
-    struct cmp {
-        bool operator()( const std::type_info* a,
-                         const std::type_info* b ) const {
-            return a->before( *b ) != 0;
-        }
+		// this is a lua reference that points to the lua table
+		// that is to be used as meta table for all C++ class 
+		// instances. It is a kind of v-table.
+		int m_cpp_instance_metatable;
 
-        template < class T >
-        bool operator()( const T& a, const T& b ) const {
-            return a < b;
-        }
-    };
+		// this is a lua reference to the metatable to be used
+		// for all classes defined in C++.
+		int m_cpp_class_metatable;
 
-    class_rep* find_class( LUABIND_TYPE_INFO info ) const;
+		// this is a lua reference that points to the lua table
+		// that is to be used as meta table for all lua class
+		// instances. It is a kind of v-table.
+		int m_lua_instance_metatable;
 
-    template < typename T >
-    inline void iterate_classes( lua_State* L, const T& f ) const {
-        CLASS_REGISTRY::const_iterator I = m_classes.begin();
-        CLASS_REGISTRY::const_iterator E = m_classes.end();
-        for ( ; I != E; ++I )
-            f( L, ( *I ).second );
-    }
+		// this is a lua reference to the metatable to be used
+		// for all classes defined in lua
+		int m_lua_class_metatable;
 
-private:
-    typedef map_class< LUABIND_TYPE_INFO, class_rep*, cmp > CLASS_REGISTRY;
+		// this metatable only contains a destructor
+		// for luabind::Detail::free_functions::function_rep
+		int m_lua_function_metatable;
+	};
 
-#pragma warning( push )
-#pragma warning( disable : 4251 )
-    CLASS_REGISTRY m_classes;
-#pragma warning( pop )
-
-    // this is a lua reference that points to the lua table
-    // that is to be used as meta table for all C++ class
-    // instances. It is a kind of v-table.
-    int m_cpp_instance_metatable;
-
-    // this is a lua reference to the metatable to be used
-    // for all classes defined in C++.
-    int m_cpp_class_metatable;
-
-    // this is a lua reference that points to the lua table
-    // that is to be used as meta table for all lua class
-    // instances. It is a kind of v-table.
-    int m_lua_instance_metatable;
-
-    // this is a lua reference to the metatable to be used
-    // for all classes defined in lua
-    int m_lua_class_metatable;
-
-    // this metatable only contains a destructor
-    // for luabind::Detail::free_functions::function_rep
-    int m_lua_function_metatable;
-};
-
-} // namespace detail
-} // namespace luabind
+}}

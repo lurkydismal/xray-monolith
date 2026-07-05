@@ -20,7 +20,7 @@
 
 #if _MSC_VER || __INTEL_COMPILER
 #pragma warning( push )
-#pragma warning( disable : 4996 )
+#pragma warning( disable: 4996 )
 #elif __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -29,4 +29,4 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #endif
 
-#endif // __TBB_SUPPRESS_INTERNAL_DEPRECATED_MESSAGES
+#endif  // __TBB_SUPPRESS_INTERNAL_DEPRECATED_MESSAGES

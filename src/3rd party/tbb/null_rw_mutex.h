@@ -22,8 +22,7 @@
 namespace tbb {
 
 //! A rw mutex which does nothing
-/** A null_rw_mutex is a rw mutex that does nothing and simulates successful
-   operation.
+/** A null_rw_mutex is a rw mutex that does nothing and simulates successful operation.
     @ingroup synchronization */
 class null_rw_mutex : internal::mutex_copy_deprecated_and_disabled {
 public:
@@ -31,19 +30,12 @@ public:
     class scoped_lock : internal::no_copy {
     public:
         scoped_lock() {}
-
-        scoped_lock( null_rw_mutex&, bool = true ) {}
-
+        scoped_lock( null_rw_mutex& , bool = true ) {}
         ~scoped_lock() {}
-
-        void acquire( null_rw_mutex&, bool = true ) {}
-
+        void acquire( null_rw_mutex& , bool = true ) {}
         bool upgrade_to_writer() { return true; }
-
         bool downgrade_to_reader() { return true; }
-
-        bool try_acquire( null_rw_mutex&, bool = true ) { return true; }
-
+        bool try_acquire( null_rw_mutex& , bool = true ) { return true; }
         void release() {}
     };
 
@@ -55,6 +47,6 @@ public:
     static const bool is_fair_mutex = true;
 };
 
-} // namespace tbb
+}
 
 #endif /* __TBB_null_rw_mutex_H */

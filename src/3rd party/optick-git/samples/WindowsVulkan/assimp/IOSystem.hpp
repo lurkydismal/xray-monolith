@@ -42,7 +42,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /** @file IOSystem.hpp
  *  @brief File system wrapper for C++. Inherit this class to supply
  *  custom file handling logic to the Import library.
- */
+*/
 
 #ifndef AI_IOSYSTEM_H_INC
 #define AI_IOSYSTEM_H_INC
@@ -52,19 +52,19 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     corresponding C interface.
 #endif
 
-#include <vector>
-
 #include "types.h"
 
-namespace Assimp {
+#include <vector>
+
+namespace Assimp    {
 class IOStream;
 
 // ---------------------------------------------------------------------------
 /** @brief CPP-API: Interface to the file system.
  *
- *  Derive an own implementation from this interface to supply custom file
- * handling to the importer library. If you implement this interface, you also
- * want to supply a custom implementation for IOStream.
+ *  Derive an own implementation from this interface to supply custom file handling
+ *  to the importer library. If you implement this interface, you also want to
+ *  supply a custom implementation for IOStream.
  *
  *  @see Importer::SetIOHandler() */
 class ASSIMP_API IOSystem
@@ -73,6 +73,7 @@ class ASSIMP_API IOSystem
 #endif
 {
 public:
+
     // -------------------------------------------------------------------
     /** @brief Default constructor.
      *
@@ -89,12 +90,14 @@ public:
      */
     virtual ~IOSystem();
 
+
 public:
+
     // -------------------------------------------------------------------
     /** @brief For backward compatibility
      *  @see Exists(const char*)
      */
-    AI_FORCE_INLINE bool Exists( const std::string& pFile ) const;
+    AI_FORCE_INLINE bool Exists( const std::string& pFile) const;
 
     // -------------------------------------------------------------------
     /** @brief Tests for the existence of a file at the given path.
@@ -102,7 +105,7 @@ public:
      * @param pFile Path to the file
      * @return true if there is a file with this path, else false.
      */
-    virtual bool Exists( const char* pFile ) const = 0;
+    virtual bool Exists( const char* pFile) const = 0;
 
     // -------------------------------------------------------------------
     /** @brief Returns the system specific directory separator
@@ -125,21 +128,22 @@ public:
      *  @note When implementing this class to provide custom IO handling,
      *  you probably have to supply an own implementation of IOStream as well.
      */
-    virtual IOStream* Open( const char* pFile, const char* pMode = "rb" ) = 0;
+    virtual IOStream* Open(const char* pFile,
+        const char* pMode = "rb") = 0;
 
     // -------------------------------------------------------------------
     /** @brief For backward compatibility
      *  @see Open(const char*, const char*)
      */
-    inline IOStream* Open( const std::string& pFile,
-                           const std::string& pMode = std::string( "rb" ) );
+    inline IOStream* Open(const std::string& pFile,
+        const std::string& pMode = std::string("rb"));
 
     // -------------------------------------------------------------------
     /** @brief Closes the given file and releases all resources
      *    associated with it.
      *  @param pFile The file instance previously created by Open().
      */
-    virtual void Close( IOStream* pFile ) = 0;
+    virtual void Close( IOStream* pFile) = 0;
 
     // -------------------------------------------------------------------
     /** @brief Compares two paths and check whether the point to
@@ -154,28 +158,29 @@ public:
      * @return true if the paths point to the same file. The file needn't
      *   be existing, however.
      */
-    virtual bool ComparePaths( const char* one, const char* second ) const;
+    virtual bool ComparePaths (const char* one,
+        const char* second) const;
 
     // -------------------------------------------------------------------
     /** @brief For backward compatibility
      *  @see ComparePaths(const char*, const char*)
      */
-    inline bool ComparePaths( const std::string& one,
-                              const std::string& second ) const;
+    inline bool ComparePaths (const std::string& one,
+        const std::string& second) const;
 
     // -------------------------------------------------------------------
     /** @brief Pushes a new directory onto the directory stack.
      *  @param path Path to push onto the stack.
      *  @return True, when push was successful, false if path is empty.
      */
-    virtual bool PushDirectory( const std::string& path );
+    virtual bool PushDirectory( const std::string &path );
 
     // -------------------------------------------------------------------
     /** @brief Returns the top directory from the stack.
      *  @return The directory on the top of the stack.
      *          Returns empty when no directory was pushed to the stack.
      */
-    virtual const std::string& CurrentDirectory() const;
+    virtual const std::string &CurrentDirectory() const;
 
     // -------------------------------------------------------------------
     /** @brief Returns the number of directories stored on the stack.
@@ -191,16 +196,19 @@ public:
     virtual bool PopDirectory();
 
 private:
-    std::vector< std::string > m_pathStack;
+    std::vector<std::string> m_pathStack;
 };
 
 // ----------------------------------------------------------------------------
-AI_FORCE_INLINE IOSystem::IOSystem() : m_pathStack() {
+AI_FORCE_INLINE IOSystem::IOSystem() :
+    m_pathStack()
+{
     // empty
 }
 
 // ----------------------------------------------------------------------------
-AI_FORCE_INLINE IOSystem::~IOSystem() {
+AI_FORCE_INLINE IOSystem::~IOSystem()
+{
     // empty
 }
 
@@ -211,33 +219,36 @@ AI_FORCE_INLINE IOSystem::~IOSystem() {
 // ----------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
-AI_FORCE_INLINE IOStream* IOSystem::Open( const std::string& pFile,
-                                          const std::string& pMode ) {
+AI_FORCE_INLINE IOStream* IOSystem::Open(const std::string& pFile,
+    const std::string& pMode)
+{
     // NOTE:
     // For compatibility, interface was changed to const char* to
     // avoid crashes between binary incompatible STL versions
-    return Open( pFile.c_str(), pMode.c_str() );
+    return Open(pFile.c_str(),pMode.c_str());
 }
 
 // ----------------------------------------------------------------------------
-AI_FORCE_INLINE bool IOSystem::Exists( const std::string& pFile ) const {
+AI_FORCE_INLINE bool IOSystem::Exists( const std::string& pFile) const
+{
     // NOTE:
     // For compatibility, interface was changed to const char* to
     // avoid crashes between binary incompatible STL versions
-    return Exists( pFile.c_str() );
+    return Exists(pFile.c_str());
 }
 
 // ----------------------------------------------------------------------------
-inline bool IOSystem::ComparePaths( const std::string& one,
-                                    const std::string& second ) const {
+inline bool IOSystem::ComparePaths (const std::string& one,
+    const std::string& second) const
+{
     // NOTE:
     // For compatibility, interface was changed to const char* to
     // avoid crashes between binary incompatible STL versions
-    return ComparePaths( one.c_str(), second.c_str() );
+    return ComparePaths(one.c_str(),second.c_str());
 }
 
 // ----------------------------------------------------------------------------
-inline bool IOSystem::PushDirectory( const std::string& path ) {
+inline bool IOSystem::PushDirectory( const std::string &path ) {
     if ( path.empty() ) {
         return false;
     }
@@ -248,12 +259,12 @@ inline bool IOSystem::PushDirectory( const std::string& path ) {
 }
 
 // ----------------------------------------------------------------------------
-inline const std::string& IOSystem::CurrentDirectory() const {
+inline const std::string &IOSystem::CurrentDirectory() const {
     if ( m_pathStack.empty() ) {
-        static const std::string Dummy( "" );
+        static const std::string Dummy("");
         return Dummy;
     }
-    return m_pathStack[ m_pathStack.size() - 1 ];
+    return m_pathStack[ m_pathStack.size()-1 ];
 }
 
 // ----------------------------------------------------------------------------
@@ -274,6 +285,6 @@ inline bool IOSystem::PopDirectory() {
 
 // ----------------------------------------------------------------------------
 
-} // namespace Assimp
+} //!ns Assimp
 
-#endif // AI_IOSYSTEM_H_INC
+#endif //AI_IOSYSTEM_H_INC

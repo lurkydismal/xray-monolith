@@ -24,49 +24,54 @@
 
 #include <type_traits>
 
-#include "policy.hpp"
+namespace luabind { namespace detail
+{
+    template <int Value, int... Values>
+    struct sum_arity
+    {
+        static constexpr int value = Value + sum_arity<Values...>::value;
+    };
+    
+    template <int Value>
+    struct sum_arity<Value>
+    {
+        static constexpr int value = Value;
+    };
 
-namespace luabind {
-namespace detail {
-template < int Value, int... Values >
-struct sum_arity {
-    static constexpr int value = Value + sum_arity< Values... >::value;
-};
+	template<size_t N>
+    struct calc_arity
+	{
+	private:
 
-template < int Value >
-struct sum_arity< Value > {
-    static constexpr int value = Value;
-};
+        template <size_t Index, typename... Policies>
+        static constexpr int hasArg() noexcept
+        {
+            using p = typename find_conversion_policy<Index + 1, Policies...>::type;
+            return p::has_arg ? 1 : 0;
+        }
 
-template < size_t N >
-struct calc_arity {
-private:
-    template < size_t Index, typename... Policies >
-    static constexpr int hasArg() noexcept {
-        using p =
-            typename find_conversion_policy< Index + 1, Policies... >::type;
-        return p::has_arg ? 1 : 0;
-    }
+        template <typename... Policies, size_t... Indices>
+        static constexpr int applyImpl(std::index_sequence<Indices...>) noexcept
+        {
+            return sum_arity<hasArg<Indices, Policies...>()...>::value;
+        }
 
-    template < typename... Policies, size_t... Indices >
-    static constexpr int applyImpl(
-        std::index_sequence< Indices... > ) noexcept {
-        return sum_arity< hasArg< Indices, Policies... >()... >::value;
-    }
+	public:
 
-public:
-    template < typename... Policies >
-    static constexpr int apply() noexcept {
-        return applyImpl< Policies... >( std::make_index_sequence< N >() );
-    }
-};
+        template <typename... Policies>
+	    static constexpr int apply() noexcept
+	    {
+            return applyImpl<Policies...>(std::make_index_sequence<N>());
+	    }
+	};
 
-template <>
-struct calc_arity< 0 > {
-    template < typename... >
-    static constexpr int apply() noexcept {
-        return 0;
-    }
-};
-} // namespace detail
-} // namespace luabind
+    template<>
+    struct calc_arity<0>
+    {
+        template <typename...>
+        static constexpr int apply() noexcept
+        {
+            return 0;
+        }
+    };
+}}

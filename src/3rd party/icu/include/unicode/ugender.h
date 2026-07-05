@@ -63,8 +63,9 @@ typedef struct UGenderInfo UGenderInfo;
  * @return A UGenderInfo for the specified locale, or NULL if an error occurred.
  * @stable ICU 50
  */
-U_STABLE const UGenderInfo* U_EXPORT2 ugender_getInstance( const char* locale,
-                                                           UErrorCode* status );
+U_STABLE const UGenderInfo* U_EXPORT2
+ugender_getInstance(const char *locale, UErrorCode *status);
+
 
 /**
  * Given a list, returns the gender of the list as a whole.
@@ -75,10 +76,8 @@ U_STABLE const UGenderInfo* U_EXPORT2 ugender_getInstance( const char* locale,
  * @return The gender of the list.
  * @stable ICU 50
  */
-U_STABLE UGender U_EXPORT2 ugender_getListGender( const UGenderInfo* genderInfo,
-                                                  const UGender* genders,
-                                                  int32_t size,
-                                                  UErrorCode* status );
+U_STABLE UGender U_EXPORT2
+ugender_getListGender(const UGenderInfo* genderInfo, const UGender *genders, int32_t size, UErrorCode *status);
 
 #endif /* #if !UCONFIG_NO_FORMATTING */
 

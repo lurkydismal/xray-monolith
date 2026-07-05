@@ -16,14 +16,12 @@
 
 #include "internal/_deprecated_header_message_guard.h"
 
-#if !defined( __TBB_show_deprecation_message_aligned_space_H ) && \
-    defined( __TBB_show_deprecated_header_message )
-#define __TBB_show_deprecation_message_aligned_space_H
-#pragma message( \
-    "TBB Warning: tbb/aligned_space.h is deprecated. For details, please see Deprecated Features appendix in the TBB reference manual." )
+#if !defined(__TBB_show_deprecation_message_aligned_space_H) && defined(__TBB_show_deprecated_header_message)
+#define  __TBB_show_deprecation_message_aligned_space_H
+#pragma message("TBB Warning: tbb/aligned_space.h is deprecated. For details, please see Deprecated Features appendix in the TBB reference manual.")
 #endif
 
-#if defined( __TBB_show_deprecated_header_message )
+#if defined(__TBB_show_deprecated_header_message)
 #undef __TBB_show_deprecated_header_message
 #endif
 
@@ -32,29 +30,26 @@
 
 #define __TBB_aligned_space_H_include_area
 #include "internal/_warning_suppress_enable_notice.h"
-#include "tbb_machine.h"
+
 #include "tbb_stddef.h"
+#include "tbb_machine.h"
 
 namespace tbb {
 
 //! Block of space aligned sufficiently to construct an array T with N elements.
 /** The elements are not constructed or destroyed by this class.
     @ingroup memory_allocation */
-template < typename T, size_t N = 1 >
-class __TBB_DEPRECATED_VERBOSE_MSG(
-    "tbb::aligned_space is deprecated, use std::aligned_storage" )
-    aligned_space {
+template<typename T,size_t N=1>
+class __TBB_DEPRECATED_VERBOSE_MSG("tbb::aligned_space is deprecated, use std::aligned_storage") aligned_space {
 private:
-    typedef __TBB_TypeWithAlignmentAtLeastAsStrict( T ) element_type;
-    element_type array[ ( sizeof( T ) * N + sizeof( element_type ) - 1 ) /
-                        sizeof( element_type ) ];
-
+    typedef __TBB_TypeWithAlignmentAtLeastAsStrict(T) element_type;
+    element_type array[(sizeof(T)*N+sizeof(element_type)-1)/sizeof(element_type)];
 public:
     //! Pointer to beginning of array
-    T* begin() const { return internal::punned_cast< T* >( this ); }
+    T* begin() const {return internal::punned_cast<T*>(this);}
 
     //! Pointer to one past last element in array.
-    T* end() const { return begin() + N; }
+    T* end() const {return begin()+N;}
 };
 
 } // namespace tbb

@@ -1,5 +1,10 @@
 #include <ode/common.h>
 
-void emptyAddForces( dxJoint* joint ) {}
+void emptyAddForces(dxJoint *joint)
+{
+	
+}
+void contactAddForces(dxJoint *joint)
+{
 
-void contactAddForces( dxJoint* joint ) {}
+}

@@ -9,7 +9,7 @@ set(Header_Files
     "../optick-git/src/optick_capi.h"
     "../optick-git/src/optick_common.h"
     "../optick-git/src/optick_core.freebsd.h"
-    "../optick-git/src/optick_core.hpp"
+    "../optick-git/src/optick_core.h"
     "../optick-git/src/optick_core.linux.h"
     "../optick-git/src/optick_core.macos.h"
     "../optick-git/src/optick_core.platform.h"
@@ -336,7 +336,7 @@ if(MSVC)
             ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT}
         >
         /permissive-;
-        /std:c++latest;
+        /std:c++17;
         /sdl;
         /W3;
         ${DEFAULT_CXX_EXCEPTION_HANDLING}

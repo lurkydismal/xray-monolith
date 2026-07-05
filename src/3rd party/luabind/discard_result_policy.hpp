@@ -25,33 +25,38 @@
 #include <luabind/config.hpp>
 #include <luabind/detail/policy.hpp>
 
-namespace luabind {
-namespace detail {
-struct discard_converter {
-    template < typename T >
-    void apply( lua_State*, T ) {}
-};
+namespace luabind { namespace detail 
+{
+	struct discard_converter
+	{
+		template<typename T>
+		void apply(lua_State*, T) {}
+	};
 
-struct discard_result_policy : conversion_policy< 0 > {
-    static void precall( lua_State*, const index_map& ) {}
+	struct discard_result_policy : conversion_policy<0>
+	{
+		static void precall(lua_State*, const index_map&) {}
+		static void postcall(lua_State*, const index_map&) {}
 
-    static void postcall( lua_State*, const index_map& ) {}
+		struct can_only_convert_from_cpp_to_lua {};
 
-    struct can_only_convert_from_cpp_to_lua {};
+		template<typename T, Direction Dir>
+		struct generate_converter
+		{
+            using type = std::conditional_t<
+                Dir == Direction::cpp_to_lua,
+                discard_converter,
+                can_only_convert_from_cpp_to_lua
+            >;
+		};
+	};
 
-    template < typename T, Direction Dir >
-    struct generate_converter {
-        using type = std::conditional_t< Dir == Direction::cpp_to_lua,
-                                         discard_converter,
-                                         can_only_convert_from_cpp_to_lua >;
-    };
-};
+}}
 
-} // namespace detail
-} // namespace luabind
-
-namespace luabind {
-namespace {
-detail::policy_cons< detail::discard_result_policy > discard_result;
+namespace luabind
+{
+	namespace 
+	{
+		detail::policy_cons<detail::discard_result_policy> discard_result;
+	}
 }
-} // namespace luabind

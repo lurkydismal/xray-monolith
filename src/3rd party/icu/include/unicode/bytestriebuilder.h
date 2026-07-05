@@ -34,7 +34,6 @@ U_NAMESPACE_BEGIN
 
 class BytesTrieElement;
 class CharString;
-
 /**
  * Builder class for BytesTrie.
  *
@@ -48,7 +47,7 @@ public:
      * @param errorCode Standard ICU error code.
      * @stable ICU 4.8
      */
-    BytesTrieBuilder( UErrorCode& errorCode );
+    BytesTrieBuilder(UErrorCode &errorCode);
 
     /**
      * Destructor.
@@ -70,9 +69,7 @@ public:
      * @return *this
      * @stable ICU 4.8
      */
-    BytesTrieBuilder& add( StringPiece s,
-                           int32_t value,
-                           UErrorCode& errorCode );
+    BytesTrieBuilder &add(StringPiece s, int32_t value, UErrorCode &errorCode);
 
     /**
      * Builds a BytesTrie for the add()ed data.
@@ -81,10 +78,9 @@ public:
      * A BytesTrie cannot be empty. At least one (byte sequence, value) pair
      * must have been add()ed.
      *
-     * This method passes ownership of the builder's internal result array to
-     * the new trie object. Another call to any build() variant will
-     * re-serialize the trie. After clear() has been called, a new array will be
-     * used as well.
+     * This method passes ownership of the builder's internal result array to the new trie object.
+     * Another call to any build() variant will re-serialize the trie.
+     * After clear() has been called, a new array will be used as well.
      * @param buildOption Build option, see UStringTrieBuildOption.
      * @param errorCode Standard ICU error code. Its input value must
      *                  pass the U_SUCCESS() test, or else the function returns
@@ -93,8 +89,7 @@ public:
      * @return A new BytesTrie for the add()ed data.
      * @stable ICU 4.8
      */
-    BytesTrie* build( UStringTrieBuildOption buildOption,
-                      UErrorCode& errorCode );
+    BytesTrie *build(UStringTrieBuildOption buildOption, UErrorCode &errorCode);
 
     /**
      * Builds a BytesTrie for the add()ed data and byte-serializes it.
@@ -107,20 +102,18 @@ public:
      * builder's same byte array, without rebuilding.
      * If buildStringPiece() is called after build(), the trie will be
      * re-serialized into a new array.
-     * If build() is called after buildStringPiece(), the trie object will
-     * become the owner of the previously returned array. After clear() has been
-     * called, a new array will be used as well.
+     * If build() is called after buildStringPiece(), the trie object will become
+     * the owner of the previously returned array.
+     * After clear() has been called, a new array will be used as well.
      * @param buildOption Build option, see UStringTrieBuildOption.
      * @param errorCode Standard ICU error code. Its input value must
      *                  pass the U_SUCCESS() test, or else the function returns
      *                  immediately. Check for U_FAILURE() on output or use with
      *                  function chaining. (See User Guide for details.)
-     * @return A StringPiece which refers to the byte-serialized BytesTrie for
-     * the add()ed data.
+     * @return A StringPiece which refers to the byte-serialized BytesTrie for the add()ed data.
      * @stable ICU 4.8
      */
-    StringPiece buildStringPiece( UStringTrieBuildOption buildOption,
-                                  UErrorCode& errorCode );
+    StringPiece buildStringPiece(UStringTrieBuildOption buildOption, UErrorCode &errorCode);
 
     /**
      * Removes all (byte sequence, value) pairs.
@@ -128,87 +121,61 @@ public:
      * @return *this
      * @stable ICU 4.8
      */
-    BytesTrieBuilder& clear();
+    BytesTrieBuilder &clear();
 
 private:
-    BytesTrieBuilder( const BytesTrieBuilder& other ); // no copy constructor
-    BytesTrieBuilder& operator=(
-        const BytesTrieBuilder& other ); // no assignment operator
+    BytesTrieBuilder(const BytesTrieBuilder &other);  // no copy constructor
+    BytesTrieBuilder &operator=(const BytesTrieBuilder &other);  // no assignment operator
 
-    void buildBytes( UStringTrieBuildOption buildOption,
-                     UErrorCode& errorCode );
+    void buildBytes(UStringTrieBuildOption buildOption, UErrorCode &errorCode);
 
-    virtual int32_t getElementStringLength( int32_t i ) const;
-    virtual char16_t getElementUnit( int32_t i, int32_t byteIndex ) const;
-    virtual int32_t getElementValue( int32_t i ) const;
+    virtual int32_t getElementStringLength(int32_t i) const;
+    virtual char16_t getElementUnit(int32_t i, int32_t byteIndex) const;
+    virtual int32_t getElementValue(int32_t i) const;
 
-    virtual int32_t getLimitOfLinearMatch( int32_t first,
-                                           int32_t last,
-                                           int32_t byteIndex ) const;
+    virtual int32_t getLimitOfLinearMatch(int32_t first, int32_t last, int32_t byteIndex) const;
 
-    virtual int32_t countElementUnits( int32_t start,
-                                       int32_t limit,
-                                       int32_t byteIndex ) const;
-    virtual int32_t skipElementsBySomeUnits( int32_t i,
-                                             int32_t byteIndex,
-                                             int32_t count ) const;
-    virtual int32_t indexOfElementWithNextUnit( int32_t i,
-                                                int32_t byteIndex,
-                                                char16_t byte ) const;
+    virtual int32_t countElementUnits(int32_t start, int32_t limit, int32_t byteIndex) const;
+    virtual int32_t skipElementsBySomeUnits(int32_t i, int32_t byteIndex, int32_t count) const;
+    virtual int32_t indexOfElementWithNextUnit(int32_t i, int32_t byteIndex, char16_t byte) const;
 
     virtual UBool matchNodesCanHaveValues() const { return FALSE; }
 
-    virtual int32_t getMaxBranchLinearSubNodeLength() const {
-        return BytesTrie::kMaxBranchLinearSubNodeLength;
-    }
-
-    virtual int32_t getMinLinearMatch() const {
-        return BytesTrie::kMinLinearMatch;
-    }
-
-    virtual int32_t getMaxLinearMatchLength() const {
-        return BytesTrie::kMaxLinearMatchLength;
-    }
+    virtual int32_t getMaxBranchLinearSubNodeLength() const { return BytesTrie::kMaxBranchLinearSubNodeLength; }
+    virtual int32_t getMinLinearMatch() const { return BytesTrie::kMinLinearMatch; }
+    virtual int32_t getMaxLinearMatchLength() const { return BytesTrie::kMaxLinearMatchLength; }
 
     /**
      * @internal (private)
      */
     class BTLinearMatchNode : public LinearMatchNode {
     public:
-        BTLinearMatchNode( const char* units, int32_t len, Node* nextNode );
-        virtual UBool operator==( const Node& other ) const;
-        virtual void write( StringTrieBuilder& builder );
-
+        BTLinearMatchNode(const char *units, int32_t len, Node *nextNode);
+        virtual UBool operator==(const Node &other) const;
+        virtual void write(StringTrieBuilder &builder);
     private:
-        const char* s;
+        const char *s;
     };
+    
+    virtual Node *createLinearMatchNode(int32_t i, int32_t byteIndex, int32_t length,
+                                        Node *nextNode) const;
 
-    virtual Node* createLinearMatchNode( int32_t i,
-                                         int32_t byteIndex,
-                                         int32_t length,
-                                         Node* nextNode ) const;
+    UBool ensureCapacity(int32_t length);
+    virtual int32_t write(int32_t byte);
+    int32_t write(const char *b, int32_t length);
+    virtual int32_t writeElementUnits(int32_t i, int32_t byteIndex, int32_t length);
+    virtual int32_t writeValueAndFinal(int32_t i, UBool isFinal);
+    virtual int32_t writeValueAndType(UBool hasValue, int32_t value, int32_t node);
+    virtual int32_t writeDeltaTo(int32_t jumpTarget);
 
-    UBool ensureCapacity( int32_t length );
-    virtual int32_t write( int32_t byte );
-    int32_t write( const char* b, int32_t length );
-    virtual int32_t writeElementUnits( int32_t i,
-                                       int32_t byteIndex,
-                                       int32_t length );
-    virtual int32_t writeValueAndFinal( int32_t i, UBool isFinal );
-    virtual int32_t writeValueAndType( UBool hasValue,
-                                       int32_t value,
-                                       int32_t node );
-    virtual int32_t writeDeltaTo( int32_t jumpTarget );
-
-    CharString* strings; // Pointer not object so we need not #include internal
-                         // charstr.h.
-    BytesTrieElement* elements;
+    CharString *strings;  // Pointer not object so we need not #include internal charstr.h.
+    BytesTrieElement *elements;
     int32_t elementsCapacity;
     int32_t elementsLength;
 
     // Byte serialization of the trie.
     // Grows from the back: bytesLength measures from the end of the buffer!
-    char* bytes;
+    char *bytes;
     int32_t bytesCapacity;
     int32_t bytesLength;
 };
@@ -217,4 +184,4 @@ U_NAMESPACE_END
 
 #endif /* U_SHOW_CPLUSPLUS_API */
 
-#endif // __BYTESTRIEBUILDER_H__
+#endif  // __BYTESTRIEBUILDER_H__

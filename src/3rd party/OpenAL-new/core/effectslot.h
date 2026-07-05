@@ -11,7 +11,8 @@
 struct EffectSlot;
 struct WetBuffer;
 
-using EffectSlotArray = al::FlexArray< EffectSlot* >;
+using EffectSlotArray = al::FlexArray<EffectSlot*>;
+
 
 enum class EffectSlotType : unsigned char {
     None,
@@ -35,23 +36,24 @@ enum class EffectSlotType : unsigned char {
 
 struct EffectSlotProps {
     float Gain;
-    bool AuxSendAuto;
-    EffectSlot* Target;
+    bool  AuxSendAuto;
+    EffectSlot *Target;
 
     EffectSlotType Type;
     EffectProps Props;
 
-    al::intrusive_ptr< EffectState > State;
+    al::intrusive_ptr<EffectState> State;
 
-    std::atomic< EffectSlotProps* > next;
+    std::atomic<EffectSlotProps*> next;
 
-    DEF_NEWDEL( EffectSlotProps )
+    DEF_NEWDEL(EffectSlotProps)
 };
 
-struct EffectSlot {
-    bool InUse{ false };
 
-    std::atomic< EffectSlotProps* > Update{ nullptr };
+struct EffectSlot {
+    bool InUse{false};
+
+    std::atomic<EffectSlotProps*> Update{nullptr};
 
     /* Wet buffer configuration is ACN channel order with N3D scaling.
      * Consequently, effects that only want to work with mono input can use
@@ -60,28 +62,28 @@ struct EffectSlot {
      */
     MixParams Wet;
 
-    float Gain{ 1.0f };
-    bool AuxSendAuto{ true };
-    EffectSlot* Target{ nullptr };
+    float Gain{1.0f};
+    bool  AuxSendAuto{true};
+    EffectSlot *Target{nullptr};
 
-    EffectSlotType EffectType{ EffectSlotType::None };
+    EffectSlotType EffectType{EffectSlotType::None};
     EffectProps mEffectProps{};
-    al::intrusive_ptr< EffectState > mEffectState;
+    al::intrusive_ptr<EffectState> mEffectState;
 
-    float RoomRolloff{
-        0.0f }; /* Added to the source's room rolloff, not multiplied. */
-    float DecayTime{ 0.0f };
-    float DecayLFRatio{ 0.0f };
-    float DecayHFRatio{ 0.0f };
-    bool DecayHFLimit{ false };
-    float AirAbsorptionGainHF{ 1.0f };
+    float RoomRolloff{0.0f}; /* Added to the source's room rolloff, not multiplied. */
+    float DecayTime{0.0f};
+    float DecayLFRatio{0.0f};
+    float DecayHFRatio{0.0f};
+    bool DecayHFLimit{false};
+    float AirAbsorptionGainHF{1.0f};
 
     /* Mixing buffer used by the Wet mix. */
-    al::vector< FloatBufferLine, 16 > mWetBuffer;
+    al::vector<FloatBufferLine,16> mWetBuffer;
 
-    static EffectSlotArray* CreatePtrArray( size_t count ) noexcept;
 
-    DEF_NEWDEL( EffectSlot )
+    static EffectSlotArray *CreatePtrArray(size_t count) noexcept;
+
+    DEF_NEWDEL(EffectSlot)
 };
 
 #endif /* CORE_EFFECTSLOT_H */

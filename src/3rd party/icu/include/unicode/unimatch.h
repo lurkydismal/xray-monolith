@@ -1,20 +1,19 @@
 // © 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
 /*
- * Copyright (C) 2001-2005, International Business Machines Corporation and
- * others. All Rights Reserved.
- **********************************************************************
- *   Date        Name        Description
- *   07/18/01    aliu        Creation.
- **********************************************************************
- */
+* Copyright (C) 2001-2005, International Business Machines Corporation and others. All Rights Reserved.
+**********************************************************************
+*   Date        Name        Description
+*   07/18/01    aliu        Creation.
+**********************************************************************
+*/
 #ifndef UNIMATCH_H
 #define UNIMATCH_H
 
 #include "unicode/utypes.h"
 
 /**
- * \file
+ * \file 
  * \brief C++ API: Unicode Matcher
  */
 
@@ -40,7 +39,7 @@ enum UMatchDegree {
      * @stable ICU 2.4
      */
     U_MISMATCH,
-
+    
     /**
      * Constant returned by <code>matches()</code> indicating a
      * partial match between the text and this matcher.  This value is
@@ -52,7 +51,7 @@ enum UMatchDegree {
      * @stable ICU 2.4
      */
     U_PARTIAL_MATCH,
-
+    
     /**
      * Constant returned by <code>matches()</code> indicating a
      * complete match between the text and this matcher.  For an
@@ -69,9 +68,8 @@ enum UMatchDegree {
  * match a range of characters in a Replaceable string.
  * @stable ICU 2.4
  */
-class U_COMMON_API UnicodeMatcher /* not : public UObject because this is an
-                                     interface/mixin class */
-{
+class U_COMMON_API UnicodeMatcher /* not : public UObject because this is an interface/mixin class */ {
+
 public:
     /**
      * Destructor.
@@ -87,7 +85,7 @@ public:
      * Matching in the forward direction is indicated by limit >
      * offset.  Characters from offset forwards to limit-1 will be
      * considered for matching.
-     *
+     * 
      * Matching in the reverse direction is indicated by limit <
      * offset.  Characters from offset backwards to limit+1 will be
      * considered for matching.
@@ -125,10 +123,10 @@ public:
      * U_PARTIAL_MATCH should never be returned.
      * @stable ICU 2.4
      */
-    virtual UMatchDegree matches( const Replaceable& text,
-                                  int32_t& offset,
-                                  int32_t limit,
-                                  UBool incremental ) = 0;
+    virtual UMatchDegree matches(const Replaceable& text,
+                                 int32_t& offset,
+                                 int32_t limit,
+                                 UBool incremental) = 0;
 
     /**
      * Returns a string representation of this matcher.  If the result of
@@ -142,9 +140,8 @@ public:
      * U+000A, U+0020..U+007E.
      * @stable ICU 2.4
      */
-    virtual UnicodeString& toPattern(
-        UnicodeString& result,
-        UBool escapeUnprintable = FALSE ) const = 0;
+    virtual UnicodeString& toPattern(UnicodeString& result,
+                                     UBool escapeUnprintable = FALSE) const = 0;
 
     /**
      * Returns TRUE if this matcher will match a character c, where c
@@ -153,7 +150,7 @@ public:
      * indexing.
      * @stable ICU 2.4
      */
-    virtual UBool matchesIndexValue( uint8_t v ) const = 0;
+    virtual UBool matchesIndexValue(uint8_t v) const = 0;
 
     /**
      * Union the set of all characters that may be matched by this object
@@ -161,7 +158,7 @@ public:
      * @param toUnionTo the set into which to union the source characters
      * @stable ICU 2.4
      */
-    virtual void addMatchSetTo( UnicodeSet& toUnionTo ) const = 0;
+    virtual void addMatchSetTo(UnicodeSet& toUnionTo) const = 0;
 };
 
 U_NAMESPACE_END

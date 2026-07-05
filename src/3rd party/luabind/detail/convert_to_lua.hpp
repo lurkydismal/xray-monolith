@@ -21,40 +21,42 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
+#include <sm_boost/boost_legacy.h>
 #include <luabind/config.hpp>
 #include <luabind/detail/policy.hpp>
-#include <sm_boost/boost_legacy.hpp>
 
-namespace luabind {
-namespace detail {
-template < class T >
-void convert_to_lua( lua_State* L, const T& v ) {
-    using value_type = unwrap_reference_t< T >;
-    typename default_policy::generate_converter<
-        value_type, Direction::cpp_to_lua >::type converter;
+namespace luabind { namespace detail
+{
+	template<class T>
+	void convert_to_lua(lua_State* L, const T& v)
+	{
+		using value_type = unwrap_reference_t<T>;
+		typename default_policy::generate_converter<value_type, Direction::cpp_to_lua>::type converter;
 
-    if constexpr ( boost_legacy::is_reference_wrapper_v< T > ) {
-        converter.apply( L, v.get() );
-    } else {
-        converter.apply( L, v );
-    }
-}
+		if constexpr (boost_legacy::is_reference_wrapper_v<T>)
+		{
+			converter.apply(L, v.get());
+		}
+		else
+		{
+			converter.apply(L, v);
+		}
+	}
 
-template < int Index, class T, typename... Policies >
-void convert_to_lua_p( lua_State* L,
-                       const T& v,
-                       const policy_cons< Policies... > ) {
-    using value_type = unwrap_reference_t< T >;
-    using converter_policy =
-        typename find_conversion_policy< Index, Policies... >::type;
-    typename converter_policy::template generate_converter<
-        value_type, Direction::cpp_to_lua >::type converter;
+	template<int Index, class T, typename... Policies>
+	void convert_to_lua_p(lua_State* L, const T& v, const policy_cons<Policies...>)
+	{
+		using value_type = unwrap_reference_t<T>;
+	    using converter_policy = typename find_conversion_policy<Index, Policies...>::type;
+		typename converter_policy::template generate_converter<value_type, Direction::cpp_to_lua>::type converter;
 
-    if constexpr ( boost_legacy::is_reference_wrapper_v< T > ) {
-        converter.apply( L, v.get() );
-    } else {
-        converter.apply( L, v );
-    }
-}
-} // namespace detail
-} // namespace luabind
+		if constexpr (boost_legacy::is_reference_wrapper_v<T>)
+		{
+			converter.apply(L, v.get());
+		}
+		else
+		{
+			converter.apply(L, v);
+		}
+	}
+}}

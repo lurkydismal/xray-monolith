@@ -11,7 +11,9 @@ struct EffectSlot;
 
 enum class StereoEncoding : unsigned char;
 
-constexpr float GainMixMax{ 1000.0f }; /* +60dB */
+
+constexpr float GainMixMax{1000.0f}; /* +60dB */
+
 
 enum CompatFlags : uint8_t {
     ReverseX,
@@ -20,20 +22,17 @@ enum CompatFlags : uint8_t {
 
     Count
 };
+using CompatFlagBitset = std::bitset<CompatFlags::Count>;
 
-using CompatFlagBitset = std::bitset< CompatFlags::Count >;
-
-void aluInit( CompatFlagBitset flags, const float nfcscale );
+void aluInit(CompatFlagBitset flags, const float nfcscale);
 
 /* aluInitRenderer
  *
  * Set up the appropriate panning method and mixing method given the device
  * properties.
  */
-void aluInitRenderer( ALCdevice* device,
-                      int hrtf_id,
-                      al::optional< StereoEncoding > stereomode );
+void aluInitRenderer(ALCdevice *device, int hrtf_id, al::optional<StereoEncoding> stereomode);
 
-void aluInitEffectPanning( EffectSlot* slot, ALCcontext* context );
+void aluInitEffectPanning(EffectSlot *slot, ALCcontext *context);
 
 #endif

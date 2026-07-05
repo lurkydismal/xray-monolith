@@ -39,10 +39,10 @@ class PluralRules;
  *
  * -----------------------------------------------------------------------------
  *
- * The CompactDecimalFormat produces abbreviated numbers, suitable for display
- * in environments will limited real estate. For example, 'Hits: 1.2B' instead
- * of 'Hits: 1,200,000,000'. The format will be appropriate for the given
- * language, such as "1,2 Mrd." for German.
+ * The CompactDecimalFormat produces abbreviated numbers, suitable for display in
+ * environments will limited real estate. For example, 'Hits: 1.2B' instead of
+ * 'Hits: 1,200,000,000'. The format will be appropriate for the given language,
+ * such as "1,2 Mrd." for German.
  *
  * For numbers under 1000 trillion (under 10^15, such as 123,456,789,012,345),
  * the result will be short for supported languages. However, the result may
@@ -54,36 +54,35 @@ class PluralRules;
  * fixed number of digits are set (with setMaximumIntegerDigits or
  * setMaximumFractionDigits), then result may be wider.
  *
- * At this time, parsing is not supported, and will produce a
- * U_UNSUPPORTED_ERROR. Resetting the pattern prefixes or suffixes is not
- * supported; the method calls are ignored.
+ * At this time, parsing is not supported, and will produce a U_UNSUPPORTED_ERROR.
+ * Resetting the pattern prefixes or suffixes is not supported; the method calls
+ * are ignored.
  *
  * @stable ICU 51
  */
 class U_I18N_API CompactDecimalFormat : public DecimalFormat {
 public:
-    /**
-     * Returns a compact decimal instance for specified locale.
-     *
-     * **NOTE:** New users are strongly encouraged to use
-     * `number::NumberFormatter` instead of NumberFormat.
-     * @param inLocale the given locale.
-     * @param style whether to use short or long style.
-     * @param status error code returned  here.
-     * @stable ICU 51
-     */
-    static CompactDecimalFormat* U_EXPORT2
-    createInstance( const Locale& inLocale,
-                    UNumberCompactStyle style,
-                    UErrorCode& status );
+
+     /**
+      * Returns a compact decimal instance for specified locale.
+      *
+      * **NOTE:** New users are strongly encouraged to use
+      * `number::NumberFormatter` instead of NumberFormat.
+      * @param inLocale the given locale.
+      * @param style whether to use short or long style.
+      * @param status error code returned  here.
+      * @stable ICU 51
+      */
+     static CompactDecimalFormat* U_EXPORT2 createInstance(
+          const Locale& inLocale, UNumberCompactStyle style, UErrorCode& status);
 
     /**
      * Copy constructor.
      *
      * @param source    the DecimalFormat object to be copied from.
      * @stable ICU 51
-     */
-    CompactDecimalFormat( const CompactDecimalFormat& source );
+      */
+    CompactDecimalFormat(const CompactDecimalFormat& source);
 
     /**
      * Destructor.
@@ -97,7 +96,7 @@ public:
      * @param rhs    the DecimalFormat object to be copied.
      * @stable ICU 51
      */
-    CompactDecimalFormat& operator=( const CompactDecimalFormat& rhs );
+    CompactDecimalFormat& operator=(const CompactDecimalFormat& rhs);
 
     /**
      * Clone this Format object polymorphically. The caller owns the
@@ -119,9 +118,8 @@ public:
      * @see Formattable
      * @stable ICU 51
      */
-    void parse( const UnicodeString& text,
-                Formattable& result,
-                ParsePosition& parsePosition ) const U_OVERRIDE;
+    void parse(const UnicodeString& text, Formattable& result,
+               ParsePosition& parsePosition) const U_OVERRIDE;
 
     /**
      * CompactDecimalFormat does not support parsing. This implementation
@@ -132,9 +130,7 @@ public:
      * @param status    Always set to U_UNSUPPORTED_ERROR.
      * @stable ICU 51
      */
-    void parse( const UnicodeString& text,
-                Formattable& result,
-                UErrorCode& status ) const U_OVERRIDE;
+    void parse(const UnicodeString& text, Formattable& result, UErrorCode& status) const U_OVERRIDE;
 
 #ifndef U_HIDE_INTERNAL_API
     /**
@@ -152,14 +148,13 @@ public:
      *             to match; must have 0 <= pos.getIndex() < text.length();
      *             on output, the position after the last matched character.
      *             If the parse fails, the position in unchanged upon output.
-     * @return     if parse succeeds, a pointer to a newly-created
-     * CurrencyAmount object (owned by the caller) containing information about
+     * @return     if parse succeeds, a pointer to a newly-created CurrencyAmount
+     *             object (owned by the caller) containing information about
      *             the parsed currency; if parse fails, this is NULL.
      * @internal
      */
-    CurrencyAmount* parseCurrency( const UnicodeString& text,
-                                   ParsePosition& pos ) const U_OVERRIDE;
-#endif /* U_HIDE_INTERNAL_API */
+    CurrencyAmount* parseCurrency(const UnicodeString& text, ParsePosition& pos) const U_OVERRIDE;
+#endif  /* U_HIDE_INTERNAL_API */
 
     /**
      * Return the class ID for this class.  This is useful only for
@@ -187,10 +182,8 @@ public:
      */
     UClassID getDynamicClassID() const U_OVERRIDE;
 
-private:
-    CompactDecimalFormat( const Locale& inLocale,
-                          UNumberCompactStyle style,
-                          UErrorCode& status );
+  private:
+    CompactDecimalFormat(const Locale& inLocale, UNumberCompactStyle style, UErrorCode& status);
 };
 
 U_NAMESPACE_END
@@ -200,4 +193,4 @@ U_NAMESPACE_END
 #endif /* U_SHOW_CPLUSPLUS_API */
 
 #endif // __COMPACT_DECIMAL_FORMAT_H__
-// eof
+//eof

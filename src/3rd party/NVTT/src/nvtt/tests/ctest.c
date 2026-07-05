@@ -1,33 +1,35 @@
 
-#include <nvtt/nvtt_wrapper.hpp>
 #include <stdio.h>
-#include <string.h>
 
-int main( void ) {
-    NvttInputOptions inputOptions = 0;
-    NvttOutputOptions outputOptions = 0;
-    NvttCompressionOptions compressionOptions = 0;
+#include <nvtt/nvtt_wrapper.h>
 
-    const unsigned int img[ 16 * 16 ];
 
-    memset( img, 0, sizeof( unsigned int ) * 16 * 16 );
+int main(void)
+{
+	NvttInputOptions inputOptions = 0;
+	NvttOutputOptions outputOptions = 0;
+	NvttCompressionOptions compressionOptions = 0;
 
-    inputOptions = nvttCreateInputOptions();
-    nvttSetInputOptionsTextureLayout( inputOptions, NVTT_TextureType_2D, 16, 16,
-                                      1 );
-    nvttSetInputOptionsMipmapData( inputOptions, img, 16, 16, 1, 0, 0 );
+	const unsigned int img[16*16];
+	
+	memset(img, 0, sizeof(unsigned int) * 16 * 16);
 
-    outputOptions = nvttCreateOutputOptions();
-    nvttSetOutputOptionsFileName( outputOptions, "output.dds" );
+	inputOptions = nvttCreateInputOptions();
+	nvttSetInputOptionsTextureLayout(inputOptions, NVTT_TextureType_2D, 16, 16, 1);
+	nvttSetInputOptionsMipmapData(inputOptions, img, 16, 16, 1, 0, 0);
 
-    compressionOptions = nvttCreateCompressionOptions();
-    nvttSetCompressionOptionsFormat( compressionOptions, NVTT_Format_BC1 );
+	outputOptions = nvttCreateOutputOptions();
+	nvttSetOutputOptionsFileName(outputOptions, "output.dds");
 
-    nvttCompress( inputOptions, outputOptions, compressionOptions );
+	compressionOptions = nvttCreateCompressionOptions();
+	nvttSetCompressionOptionsFormat(compressionOptions, NVTT_Format_BC1);
 
-    nvttDestroyCompressionOptions( compressionOptions );
-    nvttDestroyOutputOptions( outputOptions );
-    nvttDestroyInputOptions( inputOptions );
+	nvttCompress(inputOptions, outputOptions, compressionOptions);
 
-    return 0;
+	nvttDestroyCompressionOptions(compressionOptions);
+	nvttDestroyOutputOptions(outputOptions);
+	nvttDestroyInputOptions(inputOptions);
+
+	return 0;
 }
+

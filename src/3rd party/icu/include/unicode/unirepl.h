@@ -17,7 +17,7 @@
 #if U_SHOW_CPLUSPLUS_API
 
 /**
- * \file
+ * \file 
  * \brief C++ API: UnicodeReplacer
  */
 
@@ -37,10 +37,10 @@ class UnicodeSet;
  * @author Alan Liu
  * @stable ICU 2.4
  */
-class U_I18N_API UnicodeReplacer /* not : public UObject because this is an
-                                    interface/mixin class */
-{
-public:
+class U_I18N_API UnicodeReplacer /* not : public UObject because this is an interface/mixin class */ {
+
+ public:
+
     /**
      * Destructor.
      * @stable ICU 2.4
@@ -65,10 +65,10 @@ public:
      * the characters at offsets start..(limit-1) in text
      * @stable ICU 2.4
      */
-    virtual int32_t replace( Replaceable& text,
-                             int32_t start,
-                             int32_t limit,
-                             int32_t& cursor ) = 0;
+    virtual int32_t replace(Replaceable& text,
+                            int32_t start,
+                            int32_t limit,
+                            int32_t& cursor) = 0;
 
     /**
      * Returns a string representation of this replacer.  If the
@@ -84,9 +84,8 @@ public:
      * @return a reference to 'result'.
      * @stable ICU 2.4
      */
-    virtual UnicodeString& toReplacerPattern(
-        UnicodeString& result,
-        UBool escapeUnprintable ) const = 0;
+    virtual UnicodeString& toReplacerPattern(UnicodeString& result,
+                                             UBool escapeUnprintable) const = 0;
 
     /**
      * Union the set of all characters that may output by this object
@@ -94,7 +93,7 @@ public:
      * @param toUnionTo the set into which to union the output characters
      * @stable ICU 2.4
      */
-    virtual void addReplacementSetTo( UnicodeSet& toUnionTo ) const = 0;
+    virtual void addReplacementSetTo(UnicodeSet& toUnionTo) const = 0;
 };
 
 U_NAMESPACE_END

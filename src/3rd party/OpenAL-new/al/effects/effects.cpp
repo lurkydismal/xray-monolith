@@ -3,7 +3,6 @@
 #ifdef ALSOFT_EAX
 
 #include <cassert>
-
 #include "AL/efx.h"
 #include "effects.h"
 

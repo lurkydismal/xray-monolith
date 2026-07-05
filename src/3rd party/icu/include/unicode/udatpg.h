@@ -19,38 +19,37 @@
 #ifndef __UDATPG_H__
 #define __UDATPG_H__
 
-#include "unicode/localpointer.h"
-#include "unicode/uenum.h"
 #include "unicode/utypes.h"
+#include "unicode/uenum.h"
+#include "unicode/localpointer.h"
 
 /**
  * \file
  * \brief C API: Wrapper for icu::DateTimePatternGenerator (unicode/dtptngen.h).
  *
- * UDateTimePatternGenerator provides flexible generation of date format
- * patterns, like "yy-MM-dd". The user can build up the generator by adding
- * successive patterns. Once that is done, a query can be made using a
- * "skeleton", which is a pattern which just includes the desired fields and
- * lengths. The generator will return the "best fit" pattern corresponding to
- * that skeleton. <p>The main method people will use is udatpg_getBestPattern,
- * since normally UDateTimePatternGenerator is pre-built with data from a
- * particular locale. However, generators can be built directly from other data
- * as well. <p><i>Issue: may be useful to also have a function that returns the
- * list of fields in a pattern, in order, since we have that internally. That
- * would be useful for getting the UI order of field elements.</i>
+ * UDateTimePatternGenerator provides flexible generation of date format patterns, 
+ * like "yy-MM-dd". The user can build up the generator by adding successive 
+ * patterns. Once that is done, a query can be made using a "skeleton", which is 
+ * a pattern which just includes the desired fields and lengths. The generator 
+ * will return the "best fit" pattern corresponding to that skeleton.
+ * <p>The main method people will use is udatpg_getBestPattern, since normally
+ * UDateTimePatternGenerator is pre-built with data from a particular locale. 
+ * However, generators can be built directly from other data as well.
+ * <p><i>Issue: may be useful to also have a function that returns the list of 
+ * fields in a pattern, in order, since we have that internally.
+ * That would be useful for getting the UI order of field elements.</i>
  */
 
 /**
  * Opaque type for a date/time pattern generator object.
  * @stable ICU 3.8
  */
-typedef void* UDateTimePatternGenerator;
+typedef void *UDateTimePatternGenerator;
 
 /**
- * Field number constants for udatpg_getAppendItemFormats() and similar
- * functions. These constants are separate from UDateFormatField despite
- * semantic overlap because some fields are merged for the date/time pattern
- * generator.
+ * Field number constants for udatpg_getAppendItemFormats() and similar functions.
+ * These constants are separate from UDateFormatField despite semantic overlap
+ * because some fields are merged for the date/time pattern generator.
  * @stable ICU 3.8
  */
 typedef enum UDateTimePatternField {
@@ -87,16 +86,15 @@ typedef enum UDateTimePatternField {
     /** @stable ICU 3.8 */
     UDATPG_ZONE_FIELD,
 
-/* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
- * it is needed for layout of DateTimePatternGenerator object. */
+    /* Do not conditionalize the following with #ifndef U_HIDE_DEPRECATED_API,
+     * it is needed for layout of DateTimePatternGenerator object. */
 #ifndef U_FORCE_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UDateTimePatternField value.
-     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket
-     * #12420.
+     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
      */
     UDATPG_FIELD_COUNT
-#endif // U_FORCE_HIDE_DEPRECATED_API
+#endif  // U_FORCE_HIDE_DEPRECATED_API
 } UDateTimePatternField;
 
 /**
@@ -116,8 +114,7 @@ typedef enum UDateTimePGDisplayWidth {
  * Masks to control forcing the length of specified fields in the returned
  * pattern to match those in the skeleton (when this would not happen
  * otherwise). These may be combined to force the length of multiple fields.
- * Used with udatpg_getBestPatternWithOptions,
- * udatpg_replaceFieldTypesWithOptions.
+ * Used with udatpg_getBestPatternWithOptions, udatpg_replaceFieldTypesWithOptions.
  * @stable ICU 4.4
  */
 typedef enum UDateTimePatternMatchOptions {
@@ -130,9 +127,9 @@ typedef enum UDateTimePatternMatchOptions {
     UDATPG_MATCH_MINUTE_FIELD_LENGTH = 1 << UDATPG_MINUTE_FIELD,
     /** @internal ICU 4.4 */
     UDATPG_MATCH_SECOND_FIELD_LENGTH = 1 << UDATPG_SECOND_FIELD,
-#endif /* U_HIDE_INTERNAL_API */
+#endif  /* U_HIDE_INTERNAL_API */
     /** @stable ICU 4.4 */
-    UDATPG_MATCH_ALL_FIELDS_LENGTH = ( 1 << UDATPG_FIELD_COUNT ) - 1
+    UDATPG_MATCH_ALL_FIELDS_LENGTH = (1 << UDATPG_FIELD_COUNT) - 1
 } UDateTimePatternMatchOptions;
 
 /**
@@ -149,40 +146,40 @@ typedef enum UDateTimePatternConflict {
 #ifndef U_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UDateTimePatternConflict value.
-     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket
-     * #12420.
+     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
      */
     UDATPG_CONFLICT_COUNT
-#endif // U_HIDE_DEPRECATED_API
+#endif  // U_HIDE_DEPRECATED_API
 } UDateTimePatternConflict;
 
 /**
- * Open a generator according to a given locale.
- * @param locale
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                   failure before the function call.
- * @return a pointer to UDateTimePatternGenerator.
- * @stable ICU 3.8
- */
-U_STABLE UDateTimePatternGenerator* U_EXPORT2
-udatpg_open( const char* locale, UErrorCode* pErrorCode );
+  * Open a generator according to a given locale.
+  * @param locale
+  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+  *                   failure before the function call.
+  * @return a pointer to UDateTimePatternGenerator.
+  * @stable ICU 3.8
+  */
+U_STABLE UDateTimePatternGenerator * U_EXPORT2
+udatpg_open(const char *locale, UErrorCode *pErrorCode);
 
 /**
- * Open an empty generator, to be constructed with udatpg_addPattern(...) etc.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                   failure before the function call.
- * @return a pointer to UDateTimePatternGenerator.
- * @stable ICU 3.8
- */
-U_STABLE UDateTimePatternGenerator* U_EXPORT2
-udatpg_openEmpty( UErrorCode* pErrorCode );
+  * Open an empty generator, to be constructed with udatpg_addPattern(...) etc.
+  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+  *                   failure before the function call.
+  * @return a pointer to UDateTimePatternGenerator.
+  * @stable ICU 3.8
+  */
+U_STABLE UDateTimePatternGenerator * U_EXPORT2
+udatpg_openEmpty(UErrorCode *pErrorCode);
 
 /**
- * Close a generator.
- * @param dtpg a pointer to UDateTimePatternGenerator.
- * @stable ICU 3.8
- */
-U_STABLE void U_EXPORT2 udatpg_close( UDateTimePatternGenerator* dtpg );
+  * Close a generator.
+  * @param dtpg a pointer to UDateTimePatternGenerator.
+  * @stable ICU 3.8
+  */
+U_STABLE void U_EXPORT2
+udatpg_close(UDateTimePatternGenerator *dtpg);
 
 #if U_SHOW_CPLUSPLUS_API
 
@@ -197,35 +194,33 @@ U_NAMESPACE_BEGIN
  * @see LocalPointer
  * @stable ICU 4.4
  */
-U_DEFINE_LOCAL_OPEN_POINTER( LocalUDateTimePatternGeneratorPointer,
-                             UDateTimePatternGenerator,
-                             udatpg_close );
+U_DEFINE_LOCAL_OPEN_POINTER(LocalUDateTimePatternGeneratorPointer, UDateTimePatternGenerator, udatpg_close);
 
 U_NAMESPACE_END
 
 #endif
 
 /**
- * Create a copy pf a generator.
- * @param dtpg a pointer to UDateTimePatternGenerator to be copied.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                   failure before the function call.
- * @return a pointer to a new UDateTimePatternGenerator.
- * @stable ICU 3.8
+  * Create a copy pf a generator.
+  * @param dtpg a pointer to UDateTimePatternGenerator to be copied.
+  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+  *                   failure before the function call.
+  * @return a pointer to a new UDateTimePatternGenerator.
+  * @stable ICU 3.8
  */
-U_STABLE UDateTimePatternGenerator* U_EXPORT2
-udatpg_clone( const UDateTimePatternGenerator* dtpg, UErrorCode* pErrorCode );
+U_STABLE UDateTimePatternGenerator * U_EXPORT2
+udatpg_clone(const UDateTimePatternGenerator *dtpg, UErrorCode *pErrorCode);
 
 /**
  * Get the best pattern matching the input skeleton. It is guaranteed to
  * have all of the fields in the skeleton.
- *
+ * 
  * Note that this function uses a non-const UDateTimePatternGenerator:
  * It uses a stateful pattern parser which is set up for each generator object,
  * rather than creating one for each function call.
  * Consecutive calls to this function do not affect each other,
  * but this function cannot be used concurrently on a single generator object.
- *
+ * 
  * @param dtpg a pointer to UDateTimePatternGenerator.
  * @param skeleton
  *            The skeleton is a pattern containing only the variable fields.
@@ -240,23 +235,21 @@ udatpg_clone( const UDateTimePatternGenerator* dtpg, UErrorCode* pErrorCode );
  * @stable ICU 3.8
  */
 U_STABLE int32_t U_EXPORT2
-udatpg_getBestPattern( UDateTimePatternGenerator* dtpg,
-                       const UChar* skeleton,
-                       int32_t length,
-                       UChar* bestPattern,
-                       int32_t capacity,
-                       UErrorCode* pErrorCode );
+udatpg_getBestPattern(UDateTimePatternGenerator *dtpg,
+                      const UChar *skeleton, int32_t length,
+                      UChar *bestPattern, int32_t capacity,
+                      UErrorCode *pErrorCode);
 
 /**
  * Get the best pattern matching the input skeleton. It is guaranteed to
  * have all of the fields in the skeleton.
- *
+ * 
  * Note that this function uses a non-const UDateTimePatternGenerator:
  * It uses a stateful pattern parser which is set up for each generator object,
  * rather than creating one for each function call.
  * Consecutive calls to this function do not affect each other,
  * but this function cannot be used concurrently on a single generator object.
- *
+ * 
  * @param dtpg a pointer to UDateTimePatternGenerator.
  * @param skeleton
  *            The skeleton is a pattern containing only the variable fields.
@@ -278,42 +271,38 @@ udatpg_getBestPattern( UDateTimePatternGenerator* dtpg,
  * @stable ICU 4.4
  */
 U_STABLE int32_t U_EXPORT2
-udatpg_getBestPatternWithOptions( UDateTimePatternGenerator* dtpg,
-                                  const UChar* skeleton,
-                                  int32_t length,
-                                  UDateTimePatternMatchOptions options,
-                                  UChar* bestPattern,
-                                  int32_t capacity,
-                                  UErrorCode* pErrorCode );
+udatpg_getBestPatternWithOptions(UDateTimePatternGenerator *dtpg,
+                                 const UChar *skeleton, int32_t length,
+                                 UDateTimePatternMatchOptions options,
+                                 UChar *bestPattern, int32_t capacity,
+                                 UErrorCode *pErrorCode);
 
 /**
- * Get a unique skeleton from a given pattern. For example,
- * both "MMM-dd" and "dd/MMM" produce the skeleton "MMMdd".
- *
- * Note that this function uses a non-const UDateTimePatternGenerator:
- * It uses a stateful pattern parser which is set up for each generator object,
- * rather than creating one for each function call.
- * Consecutive calls to this function do not affect each other,
- * but this function cannot be used concurrently on a single generator object.
- *
- * @param unusedDtpg     a pointer to UDateTimePatternGenerator.
- *    This parameter is no longer used. Callers may pass NULL.
- * @param pattern  input pattern, such as "dd/MMM".
- * @param length   the length of pattern.
- * @param skeleton such as "MMMdd"
- * @param capacity the capacity of skeleton.
- * @param pErrorCode a pointer to the UErrorCode which must not indicate a
- *                  failure before the function call.
- * @return the length of skeleton.
- * @stable ICU 3.8
- */
+  * Get a unique skeleton from a given pattern. For example,
+  * both "MMM-dd" and "dd/MMM" produce the skeleton "MMMdd".
+  * 
+  * Note that this function uses a non-const UDateTimePatternGenerator:
+  * It uses a stateful pattern parser which is set up for each generator object,
+  * rather than creating one for each function call.
+  * Consecutive calls to this function do not affect each other,
+  * but this function cannot be used concurrently on a single generator object.
+  *
+  * @param unusedDtpg     a pointer to UDateTimePatternGenerator.
+  *    This parameter is no longer used. Callers may pass NULL.
+  * @param pattern  input pattern, such as "dd/MMM".
+  * @param length   the length of pattern.
+  * @param skeleton such as "MMMdd"
+  * @param capacity the capacity of skeleton.
+  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
+  *                  failure before the function call.
+  * @return the length of skeleton.
+  * @stable ICU 3.8
+  */
 U_STABLE int32_t U_EXPORT2
-udatpg_getSkeleton( UDateTimePatternGenerator* unusedDtpg,
-                    const UChar* pattern,
-                    int32_t length,
-                    UChar* skeleton,
-                    int32_t capacity,
-                    UErrorCode* pErrorCode );
+udatpg_getSkeleton(UDateTimePatternGenerator *unusedDtpg,
+                   const UChar *pattern, int32_t length,
+                   UChar *skeleton, int32_t capacity,
+                   UErrorCode *pErrorCode);
 
 /**
  * Get a unique base skeleton from a given pattern. This is the same
@@ -340,18 +329,16 @@ udatpg_getSkeleton( UDateTimePatternGenerator* unusedDtpg,
  * @stable ICU 3.8
  */
 U_STABLE int32_t U_EXPORT2
-udatpg_getBaseSkeleton( UDateTimePatternGenerator* unusedDtpg,
-                        const UChar* pattern,
-                        int32_t length,
-                        UChar* baseSkeleton,
-                        int32_t capacity,
-                        UErrorCode* pErrorCode );
+udatpg_getBaseSkeleton(UDateTimePatternGenerator *unusedDtpg,
+                       const UChar *pattern, int32_t length,
+                       UChar *baseSkeleton, int32_t capacity,
+                       UErrorCode *pErrorCode);
 
 /**
  * Adds a pattern to the generator. If the pattern has the same skeleton as
  * an existing pattern, and the override parameter is set, then the previous
  * value is overriden. Otherwise, the previous value is retained. In either
- * case, the conflicting status is set and previous vale is stored in
+ * case, the conflicting status is set and previous vale is stored in 
  * conflicting pattern.
  * <p>
  * Note that single-field patterns (like "MMM") are automatically added, and
@@ -360,52 +347,48 @@ udatpg_getBaseSkeleton( UDateTimePatternGenerator* unusedDtpg,
  * @param dtpg     a pointer to UDateTimePatternGenerator.
  * @param pattern  input pattern, such as "dd/MMM"
  * @param patternLength the length of pattern.
- * @param override  When existing values are to be overridden use true,
+ * @param override  When existing values are to be overridden use true, 
  *                  otherwise use false.
  * @param conflictingPattern  Previous pattern with the same skeleton.
  * @param capacity the capacity of conflictingPattern.
  * @param pLength a pointer to the length of conflictingPattern.
  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
  *                  failure before the function call.
- * @return conflicting status. The value could be UDATPG_NO_CONFLICT,
+ * @return conflicting status. The value could be UDATPG_NO_CONFLICT, 
  *                  UDATPG_BASE_CONFLICT or UDATPG_CONFLICT.
  * @stable ICU 3.8
  */
 U_STABLE UDateTimePatternConflict U_EXPORT2
-udatpg_addPattern( UDateTimePatternGenerator* dtpg,
-                   const UChar* pattern,
-                   int32_t patternLength,
-                   UBool override,
-                   UChar* conflictingPattern,
-                   int32_t capacity,
-                   int32_t* pLength,
-                   UErrorCode* pErrorCode );
+udatpg_addPattern(UDateTimePatternGenerator *dtpg,
+                  const UChar *pattern, int32_t patternLength,
+                  UBool override,
+                  UChar *conflictingPattern, int32_t capacity, int32_t *pLength,
+                  UErrorCode *pErrorCode);
 
 /**
- * An AppendItem format is a pattern used to append a field if there is no
- * good match. For example, suppose that the input skeleton is "GyyyyMMMd",
- * and there is no matching pattern internally, but there is a pattern
- * matching "yyyyMMMd", say "d-MM-yyyy". Then that pattern is used, plus the
- * G. The way these two are conjoined is by using the AppendItemFormat for G
- * (era). So if that value is, say "{0}, {1}" then the final resulting
- * pattern is "d-MM-yyyy, G".
- * <p>
- * There are actually three available variables: {0} is the pattern so far,
- * {1} is the element we are adding, and {2} is the name of the element.
- * <p>
- * This reflects the way that the CLDR data is organized.
- *
- * @param dtpg   a pointer to UDateTimePatternGenerator.
- * @param field  UDateTimePatternField, such as UDATPG_ERA_FIELD
- * @param value  pattern, such as "{0}, {1}"
- * @param length the length of value.
- * @stable ICU 3.8
- */
+  * An AppendItem format is a pattern used to append a field if there is no
+  * good match. For example, suppose that the input skeleton is "GyyyyMMMd",
+  * and there is no matching pattern internally, but there is a pattern
+  * matching "yyyyMMMd", say "d-MM-yyyy". Then that pattern is used, plus the
+  * G. The way these two are conjoined is by using the AppendItemFormat for G
+  * (era). So if that value is, say "{0}, {1}" then the final resulting
+  * pattern is "d-MM-yyyy, G".
+  * <p>
+  * There are actually three available variables: {0} is the pattern so far,
+  * {1} is the element we are adding, and {2} is the name of the element.
+  * <p>
+  * This reflects the way that the CLDR data is organized.
+  *
+  * @param dtpg   a pointer to UDateTimePatternGenerator.
+  * @param field  UDateTimePatternField, such as UDATPG_ERA_FIELD
+  * @param value  pattern, such as "{0}, {1}"
+  * @param length the length of value.
+  * @stable ICU 3.8
+  */
 U_STABLE void U_EXPORT2
-udatpg_setAppendItemFormat( UDateTimePatternGenerator* dtpg,
-                            UDateTimePatternField field,
-                            const UChar* value,
-                            int32_t length );
+udatpg_setAppendItemFormat(UDateTimePatternGenerator *dtpg,
+                           UDateTimePatternField field,
+                           const UChar *value, int32_t length);
 
 /**
  * Getter corresponding to setAppendItemFormat. Values below 0 or at or
@@ -417,29 +400,28 @@ udatpg_setAppendItemFormat( UDateTimePatternGenerator* dtpg,
  * @return appendItemFormat for field.
  * @stable ICU 3.8
  */
-U_STABLE const UChar* U_EXPORT2
-udatpg_getAppendItemFormat( const UDateTimePatternGenerator* dtpg,
-                            UDateTimePatternField field,
-                            int32_t* pLength );
+U_STABLE const UChar * U_EXPORT2
+udatpg_getAppendItemFormat(const UDateTimePatternGenerator *dtpg,
+                           UDateTimePatternField field,
+                           int32_t *pLength);
 
 /**
- * Set the name of field, eg "era" in English for ERA. These are only
- * used if the corresponding AppendItemFormat is used, and if it contains a
- * {2} variable.
- * <p>
- * This reflects the way that the CLDR data is organized.
- *
- * @param dtpg   a pointer to UDateTimePatternGenerator.
- * @param field  UDateTimePatternField
- * @param value  name for the field.
- * @param length the length of value.
- * @stable ICU 3.8
- */
+   * Set the name of field, eg "era" in English for ERA. These are only
+   * used if the corresponding AppendItemFormat is used, and if it contains a
+   * {2} variable.
+   * <p>
+   * This reflects the way that the CLDR data is organized.
+   *
+   * @param dtpg   a pointer to UDateTimePatternGenerator.
+   * @param field  UDateTimePatternField
+   * @param value  name for the field.
+   * @param length the length of value.
+   * @stable ICU 3.8
+   */
 U_STABLE void U_EXPORT2
-udatpg_setAppendItemName( UDateTimePatternGenerator* dtpg,
-                          UDateTimePatternField field,
-                          const UChar* value,
-                          int32_t length );
+udatpg_setAppendItemName(UDateTimePatternGenerator *dtpg,
+                         UDateTimePatternField field,
+                         const UChar *value, int32_t length);
 
 /**
  * Getter corresponding to setAppendItemNames. Values below 0 or at or above
@@ -453,10 +435,10 @@ udatpg_setAppendItemName( UDateTimePatternGenerator* dtpg,
  * @see udatpg_getFieldDisplayName
  * @stable ICU 3.8
  */
-U_STABLE const UChar* U_EXPORT2
-udatpg_getAppendItemName( const UDateTimePatternGenerator* dtpg,
-                          UDateTimePatternField field,
-                          int32_t* pLength );
+U_STABLE const UChar * U_EXPORT2
+udatpg_getAppendItemName(const UDateTimePatternGenerator *dtpg,
+                         UDateTimePatternField field,
+                         int32_t *pLength);
 
 /**
  * The general interface to get a display name for a particular date/time field,
@@ -470,27 +452,25 @@ udatpg_getAppendItemName( const UDateTimePatternGenerator* dtpg,
  * @param width
  *          The desired UDateTimePGDisplayWidth, such as UDATPG_ABBREVIATED.
  * @param fieldName
- *          A pointer to a buffer to receive the NULL-terminated display name.
- * If the name fits into fieldName but cannot be  NULL-terminated (length ==
- * capacity) then the error code is set to U_STRING_NOT_TERMINATED_WARNING. If
- * the name doesn't fit into fieldName then the error code is set to
- * U_BUFFER_OVERFLOW_ERROR.
+ *          A pointer to a buffer to receive the NULL-terminated display name. If the name
+ *          fits into fieldName but cannot be  NULL-terminated (length == capacity) then
+ *          the error code is set to U_STRING_NOT_TERMINATED_WARNING. If the name doesn't
+ *          fit into fieldName then the error code is set to U_BUFFER_OVERFLOW_ERROR.
  * @param capacity
  *          The size of fieldName (in UChars).
  * @param pErrorCode
  *          A pointer to a UErrorCode to receive any errors
  * @return
- *         The full length of the name; if greater than capacity, fieldName
- * contains a truncated result.
+ *         The full length of the name; if greater than capacity, fieldName contains a
+ *         truncated result.
  * @stable ICU 61
  */
 U_STABLE int32_t U_EXPORT2
-udatpg_getFieldDisplayName( const UDateTimePatternGenerator* dtpg,
-                            UDateTimePatternField field,
-                            UDateTimePGDisplayWidth width,
-                            UChar* fieldName,
-                            int32_t capacity,
-                            UErrorCode* pErrorCode );
+udatpg_getFieldDisplayName(const UDateTimePatternGenerator *dtpg,
+                           UDateTimePatternField field,
+                           UDateTimePGDisplayWidth width,
+                           UChar *fieldName, int32_t capacity,
+                           UErrorCode *pErrorCode);
 
 /**
  * The DateTimeFormat is a message format pattern used to compose date and
@@ -516,9 +496,8 @@ udatpg_getFieldDisplayName( const UDateTimePatternGenerator* dtpg,
  * @stable ICU 3.8
  */
 U_STABLE void U_EXPORT2
-udatpg_setDateTimeFormat( const UDateTimePatternGenerator* dtpg,
-                          const UChar* dtFormat,
-                          int32_t length );
+udatpg_setDateTimeFormat(const UDateTimePatternGenerator *dtpg,
+                         const UChar *dtFormat, int32_t length);
 
 /**
  * Getter corresponding to setDateTimeFormat.
@@ -527,9 +506,9 @@ udatpg_setDateTimeFormat( const UDateTimePatternGenerator* dtpg,
  * @return dateTimeFormat.
  * @stable ICU 3.8
  */
-U_STABLE const UChar* U_EXPORT2
-udatpg_getDateTimeFormat( const UDateTimePatternGenerator* dtpg,
-                          int32_t* pLength );
+U_STABLE const UChar * U_EXPORT2
+udatpg_getDateTimeFormat(const UDateTimePatternGenerator *dtpg,
+                         int32_t *pLength);
 
 /**
  * The decimal value is used in formatting fractions of seconds. If the
@@ -544,20 +523,21 @@ udatpg_getDateTimeFormat( const UDateTimePatternGenerator* dtpg,
  * @param length the length of decimal.
  * @stable ICU 3.8
  */
-U_STABLE void U_EXPORT2 udatpg_setDecimal( UDateTimePatternGenerator* dtpg,
-                                           const UChar* decimal,
-                                           int32_t length );
+U_STABLE void U_EXPORT2
+udatpg_setDecimal(UDateTimePatternGenerator *dtpg,
+                  const UChar *decimal, int32_t length);
 
 /**
  * Getter corresponding to setDecimal.
- *
+ * 
  * @param dtpg a pointer to UDateTimePatternGenerator.
  * @param pLength A pointer that will receive the length of the decimal string.
  * @return corresponding to the decimal point.
  * @stable ICU 3.8
  */
-U_STABLE const UChar* U_EXPORT2
-udatpg_getDecimal( const UDateTimePatternGenerator* dtpg, int32_t* pLength );
+U_STABLE const UChar * U_EXPORT2
+udatpg_getDecimal(const UDateTimePatternGenerator *dtpg,
+                  int32_t *pLength);
 
 /**
  * Adjusts the field types (width and subtype) of a pattern to match what is
@@ -577,8 +557,7 @@ udatpg_getDecimal( const UDateTimePatternGenerator* dtpg, int32_t* pLength );
  * @param patternLength the length of input pattern.
  * @param skeleton
  * @param skeletonLength the length of input skeleton.
- * @param dest  pattern adjusted to match the skeleton fields widths and
- * subtypes.
+ * @param dest  pattern adjusted to match the skeleton fields widths and subtypes.
  * @param destCapacity the capacity of dest.
  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
  *                  failure before the function call.
@@ -586,14 +565,11 @@ udatpg_getDecimal( const UDateTimePatternGenerator* dtpg, int32_t* pLength );
  * @stable ICU 3.8
  */
 U_STABLE int32_t U_EXPORT2
-udatpg_replaceFieldTypes( UDateTimePatternGenerator* dtpg,
-                          const UChar* pattern,
-                          int32_t patternLength,
-                          const UChar* skeleton,
-                          int32_t skeletonLength,
-                          UChar* dest,
-                          int32_t destCapacity,
-                          UErrorCode* pErrorCode );
+udatpg_replaceFieldTypes(UDateTimePatternGenerator *dtpg,
+                         const UChar *pattern, int32_t patternLength,
+                         const UChar *skeleton, int32_t skeletonLength,
+                         UChar *dest, int32_t destCapacity,
+                         UErrorCode *pErrorCode);
 
 /**
  * Adjusts the field types (width and subtype) of a pattern to match what is
@@ -618,8 +594,7 @@ udatpg_replaceFieldTypes( UDateTimePatternGenerator* dtpg,
  *            pattern are adjusted to match those in the skeleton (when this
  *            would not happen otherwise). For default behavior, use
  *            UDATPG_MATCH_NO_OPTIONS.
- * @param dest  pattern adjusted to match the skeleton fields widths and
- * subtypes.
+ * @param dest  pattern adjusted to match the skeleton fields widths and subtypes.
  * @param destCapacity the capacity of dest.
  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
  *                  failure before the function call.
@@ -627,20 +602,17 @@ udatpg_replaceFieldTypes( UDateTimePatternGenerator* dtpg,
  * @stable ICU 4.4
  */
 U_STABLE int32_t U_EXPORT2
-udatpg_replaceFieldTypesWithOptions( UDateTimePatternGenerator* dtpg,
-                                     const UChar* pattern,
-                                     int32_t patternLength,
-                                     const UChar* skeleton,
-                                     int32_t skeletonLength,
-                                     UDateTimePatternMatchOptions options,
-                                     UChar* dest,
-                                     int32_t destCapacity,
-                                     UErrorCode* pErrorCode );
+udatpg_replaceFieldTypesWithOptions(UDateTimePatternGenerator *dtpg,
+                                    const UChar *pattern, int32_t patternLength,
+                                    const UChar *skeleton, int32_t skeletonLength,
+                                    UDateTimePatternMatchOptions options,
+                                    UChar *dest, int32_t destCapacity,
+                                    UErrorCode *pErrorCode);
 
 /**
  * Return a UEnumeration list of all the skeletons in canonical form.
  * Call udatpg_getPatternForSkeleton() to get the corresponding pattern.
- *
+ * 
  * @param dtpg a pointer to UDateTimePatternGenerator.
  * @param pErrorCode a pointer to the UErrorCode which must not indicate a
  *                  failure before the function call
@@ -648,9 +620,8 @@ udatpg_replaceFieldTypesWithOptions( UDateTimePatternGenerator* dtpg,
  *         The caller must close the object.
  * @stable ICU 3.8
  */
-U_STABLE UEnumeration* U_EXPORT2
-udatpg_openSkeletons( const UDateTimePatternGenerator* dtpg,
-                      UErrorCode* pErrorCode );
+U_STABLE UEnumeration * U_EXPORT2
+udatpg_openSkeletons(const UDateTimePatternGenerator *dtpg, UErrorCode *pErrorCode);
 
 /**
  * Return a UEnumeration list of all the base skeletons in canonical form.
@@ -662,24 +633,22 @@ udatpg_openSkeletons( const UDateTimePatternGenerator* dtpg,
  *             The caller must close the object.
  * @stable ICU 3.8
  */
-U_STABLE UEnumeration* U_EXPORT2
-udatpg_openBaseSkeletons( const UDateTimePatternGenerator* dtpg,
-                          UErrorCode* pErrorCode );
+U_STABLE UEnumeration * U_EXPORT2
+udatpg_openBaseSkeletons(const UDateTimePatternGenerator *dtpg, UErrorCode *pErrorCode);
 
 /**
  * Get the pattern corresponding to a given skeleton.
- *
+ * 
  * @param dtpg a pointer to UDateTimePatternGenerator.
- * @param skeleton
+ * @param skeleton 
  * @param skeletonLength pointer to the length of skeleton.
  * @param pLength pointer to the length of return pattern.
  * @return pattern corresponding to a given skeleton.
  * @stable ICU 3.8
  */
-U_STABLE const UChar* U_EXPORT2
-udatpg_getPatternForSkeleton( const UDateTimePatternGenerator* dtpg,
-                              const UChar* skeleton,
-                              int32_t skeletonLength,
-                              int32_t* pLength );
+U_STABLE const UChar * U_EXPORT2
+udatpg_getPatternForSkeleton(const UDateTimePatternGenerator *dtpg,
+                             const UChar *skeleton, int32_t skeletonLength,
+                             int32_t *pLength);
 
 #endif

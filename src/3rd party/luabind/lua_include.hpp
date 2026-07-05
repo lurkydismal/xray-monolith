@@ -22,5 +22,5 @@
 
 #pragma once
 
-// AVO: use luajit 2 headers (switch to Release_LuaJit_One to use old headers)
+//AVO: use luajit 2 headers (switch to Release_LuaJit_One to use old headers)
 #include "lua.hpp"

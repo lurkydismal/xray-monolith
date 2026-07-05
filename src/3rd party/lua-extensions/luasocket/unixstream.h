@@ -9,8 +9,7 @@
 * SOCK_STREAM) support.
 *
 * Three classes are defined: master, client and server. The master class is
-* a newly created unixstream object, that has not been bound or connected.
-Server
+* a newly created unixstream object, that has not been bound or connected. Server
 * objects are unixstream objects bound to some local address. Client objects are
 * unixstream objects either connected to some address or returned by the accept
 * method of a server object.
@@ -18,10 +17,10 @@ Server
 #include "unix.h"
 
 #ifndef _WIN32
-#pragma GCC visibility push( hidden )
+#pragma GCC visibility push(hidden)
 #endif
 
-int unixstream_open( lua_State* L );
+int unixstream_open(lua_State *L);
 
 #ifndef _WIN32
 #pragma GCC visibility pop

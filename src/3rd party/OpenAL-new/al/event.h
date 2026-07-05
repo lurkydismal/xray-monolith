@@ -3,7 +3,7 @@
 
 struct ALCcontext;
 
-void StartEventThrd( ALCcontext* ctx );
-void StopEventThrd( ALCcontext* ctx );
+void StartEventThrd(ALCcontext *ctx);
+void StopEventThrd(ALCcontext *ctx);
 
 #endif

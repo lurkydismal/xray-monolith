@@ -33,14 +33,14 @@
 #include "unicode/upluralrules.h"
 #ifndef U_HIDE_INTERNAL_API
 #include "unicode/numfmt.h"
-#endif /* U_HIDE_INTERNAL_API */
+#endif  /* U_HIDE_INTERNAL_API */
 
 /**
  * Value returned by PluralRules::getUniqueKeywordValue() when there is no
  * unique value to return.
  * @stable ICU 4.8
  */
-#define UPLRULES_NO_UNIQUE_VALUE ( ( double )-0.00123456777 )
+#define UPLRULES_NO_UNIQUE_VALUE ((double)-0.00123456777)
 
 U_NAMESPACE_BEGIN
 
@@ -118,8 +118,7 @@ class FormattedNumber;
  * <li>i to be the integer digits.</li>
  * <li>f to be the visible fractional digits, as an integer.</li>
  * <li>v to be the number of visible fraction digits.</li>
- * <li>j is defined to only match integers. That is j is 3 fails if v != 0 (eg
- for 3.1 or 3.0).</li>
+ * <li>j is defined to only match integers. That is j is 3 fails if v != 0 (eg for 3.1 or 3.0).</li>
  * </ul>
  * <p>
  * Examples are in the following table:
@@ -163,10 +162,8 @@ class FormattedNumber;
  * </tr>
  * </table>
  * <p>
- * The difference between 'in' and 'within' is that 'in' only includes integers
- in the specified range, while 'within'
- * includes all values. Using 'within' with a range_list consisting entirely of
- values is the same as using 'in' (it's
+ * The difference between 'in' and 'within' is that 'in' only includes integers in the specified range, while 'within'
+ * includes all values. Using 'within' with a range_list consisting entirely of values is the same as using 'in' (it's
  * not an error).
  * </p>
 
@@ -195,15 +192,14 @@ class FormattedNumber;
  * </pre>
  * <strong>Note:</strong><br>
  *  <p>
- *   ICU defines plural rules for many locales based on CLDR <i>Language Plural
- Rules</i>.
+ *   ICU defines plural rules for many locales based on CLDR <i>Language Plural Rules</i>.
  *   For these predefined rules, see CLDR page at
- *
- http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
+ *    http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
  * </p>
  */
 class U_I18N_API PluralRules : public UObject {
 public:
+
     /**
      * Constructor.
      * @param status  Output param set to success/failure code on exit, which
@@ -211,13 +207,13 @@ public:
      *
      * @stable ICU 4.0
      */
-    PluralRules( UErrorCode& status );
+    PluralRules(UErrorCode& status);
 
     /**
      * Copy constructor.
      * @stable ICU 4.0
      */
-    PluralRules( const PluralRules& other );
+    PluralRules(const PluralRules& other);
 
     /**
      * Destructor.
@@ -232,23 +228,23 @@ public:
     PluralRules* clone() const;
 
     /**
-     * Assignment operator.
-     * @stable ICU 4.0
-     */
-    PluralRules& operator=( const PluralRules& );
+      * Assignment operator.
+      * @stable ICU 4.0
+      */
+    PluralRules& operator=(const PluralRules&);
 
     /**
      * Creates a PluralRules from a description if it is parsable, otherwise
      * returns NULL.
      *
      * @param description rule description
-     * @param status      Output param set to success/failure code on exit,
-     * which must not indicate a failure before the function call.
+     * @param status      Output param set to success/failure code on exit, which
+     *                    must not indicate a failure before the function call.
      * @return            new PluralRules pointer. NULL if there is an error.
      * @stable ICU 4.0
      */
-    static PluralRules* U_EXPORT2 createRules( const UnicodeString& description,
-                                               UErrorCode& status );
+    static PluralRules* U_EXPORT2 createRules(const UnicodeString& description,
+                                              UErrorCode& status);
 
     /**
      * The default rules that accept any number.
@@ -258,26 +254,25 @@ public:
      * @return        new PluralRules pointer. NULL if there is an error.
      * @stable ICU 4.0
      */
-    static PluralRules* U_EXPORT2 createDefaultRules( UErrorCode& status );
+    static PluralRules* U_EXPORT2 createDefaultRules(UErrorCode& status);
 
     /**
-     * Provides access to the predefined cardinal-number
-     * <code>PluralRules</code> for a given locale. Same as forLocale(locale,
-     * UPLURAL_TYPE_CARDINAL, status).
+     * Provides access to the predefined cardinal-number <code>PluralRules</code> for a given
+     * locale.
+     * Same as forLocale(locale, UPLURAL_TYPE_CARDINAL, status).
      *
      * @param locale  The locale for which a <code>PluralRules</code> object is
      *                returned.
      * @param status  Output param set to success/failure code on exit, which
      *                must not indicate a failure before the function call.
      * @return        The predefined <code>PluralRules</code> object pointer for
-     *                this locale. If there's no predefined rules for this
-     * locale, the rules for the closest parent in the locale hierarchy that has
-     * one will  be returned.  The final fallback always returns the default
-     * 'other' rules.
+     *                this locale. If there's no predefined rules for this locale,
+     *                the rules for the closest parent in the locale hierarchy
+     *                that has one will  be returned.  The final fallback always
+     *                returns the default 'other' rules.
      * @stable ICU 4.0
      */
-    static PluralRules* U_EXPORT2 forLocale( const Locale& locale,
-                                             UErrorCode& status );
+    static PluralRules* U_EXPORT2 forLocale(const Locale& locale, UErrorCode& status);
 
     /**
      * Provides access to the predefined <code>PluralRules</code> for a given
@@ -289,25 +284,21 @@ public:
      * @param status  Output param set to success/failure code on exit, which
      *                must not indicate a failure before the function call.
      * @return        The predefined <code>PluralRules</code> object pointer for
-     *                this locale. If there's no predefined rules for this
-     * locale, the rules for the closest parent in the locale hierarchy that has
-     * one will  be returned.  The final fallback always returns the default
-     * 'other' rules.
+     *                this locale. If there's no predefined rules for this locale,
+     *                the rules for the closest parent in the locale hierarchy
+     *                that has one will  be returned.  The final fallback always
+     *                returns the default 'other' rules.
      * @stable ICU 50
      */
-    static PluralRules* U_EXPORT2 forLocale( const Locale& locale,
-                                             UPluralType type,
-                                             UErrorCode& status );
+    static PluralRules* U_EXPORT2 forLocale(const Locale& locale, UPluralType type, UErrorCode& status);
 
 #ifndef U_HIDE_INTERNAL_API
     /**
-     * Return a StringEnumeration over the locales for which there is plurals
-     * data.
+     * Return a StringEnumeration over the locales for which there is plurals data.
      * @return a StringEnumeration over the locales available.
      * @internal
      */
-    static StringEnumeration* U_EXPORT2
-    getAvailableLocales( UErrorCode& status );
+    static StringEnumeration* U_EXPORT2 getAvailableLocales(UErrorCode &status);
 
     /**
      * Returns whether or not there are overrides.
@@ -315,16 +306,14 @@ public:
      * @return
      * @internal
      */
-    static UBool hasOverride( const Locale& locale );
+    static UBool hasOverride(const Locale &locale);
 
     /**
      * For ICU use only.
      * creates a  SharedPluralRules object
      * @internal
      */
-    static PluralRules* U_EXPORT2 internalForLocale( const Locale& locale,
-                                                     UPluralType type,
-                                                     UErrorCode& status );
+    static PluralRules* U_EXPORT2 internalForLocale(const Locale& locale, UPluralType type, UErrorCode& status);
 
     /**
      * For ICU use only.
@@ -333,12 +322,11 @@ public:
      * the shared instance.
      * @internal
      */
-    static const SharedPluralRules* U_EXPORT2
-    createSharedInstance( const Locale& locale,
-                          UPluralType type,
-                          UErrorCode& status );
+    static const SharedPluralRules* U_EXPORT2 createSharedInstance(
+            const Locale& locale, UPluralType type, UErrorCode& status);
 
-#endif /* U_HIDE_INTERNAL_API */
+
+#endif  /* U_HIDE_INTERNAL_API */
 
     /**
      * Given an integer, returns the keyword of the first rule
@@ -349,7 +337,7 @@ public:
      * @return        The keyword of the selected rule.
      * @stable ICU 4.0
      */
-    UnicodeString select( int32_t number ) const;
+    UnicodeString select(int32_t number) const;
 
     /**
      * Given a floating-point number, returns the keyword of the first rule
@@ -360,7 +348,7 @@ public:
      * @return        The keyword of the selected rule.
      * @stable ICU 4.0
      */
-    UnicodeString select( double number ) const;
+    UnicodeString select(double number) const;
 
 #ifndef U_HIDE_DRAFT_API
     /**
@@ -378,16 +366,15 @@ public:
      * @return        The keyword of the selected rule.
      * @draft ICU 64
      */
-    UnicodeString select( const number::FormattedNumber& number,
-                          UErrorCode& status ) const;
-#endif /* U_HIDE_DRAFT_API */
+    UnicodeString select(const number::FormattedNumber& number, UErrorCode& status) const;
+#endif  /* U_HIDE_DRAFT_API */
 
 #ifndef U_HIDE_INTERNAL_API
     /**
-     * @internal
-     */
-    UnicodeString select( const IFixedDecimal& number ) const;
-#endif /* U_HIDE_INTERNAL_API */
+      * @internal
+      */
+    UnicodeString select(const IFixedDecimal &number) const;
+#endif  /* U_HIDE_INTERNAL_API */
 
     /**
      * Returns a list of all rule keywords used in this <code>PluralRules</code>
@@ -399,29 +386,28 @@ public:
      *               The caller must delete the object.
      * @stable ICU 4.0
      */
-    StringEnumeration* getKeywords( UErrorCode& status ) const;
+    StringEnumeration* getKeywords(UErrorCode& status) const;
 
 #ifndef U_HIDE_DEPRECATED_API
     /**
      * Deprecated Function, does not return useful results.
      *
-     * Originally intended to return a unique value for this keyword if it
-     * exists, else the constant UPLRULES_NO_UNIQUE_VALUE.
+     * Originally intended to return a unique value for this keyword if it exists,
+     * else the constant UPLRULES_NO_UNIQUE_VALUE.
      *
      * @param keyword The keyword.
-     * @return        Stub deprecated function returns UPLRULES_NO_UNIQUE_VALUE
-     * always.
+     * @return        Stub deprecated function returns UPLRULES_NO_UNIQUE_VALUE always.
      * @deprecated ICU 55
      */
-    double getUniqueKeywordValue( const UnicodeString& keyword );
+    double getUniqueKeywordValue(const UnicodeString& keyword);
 
     /**
      * Deprecated Function, does not produce useful results.
      *
-     * Originally intended to return all the values for which select() would
-     * return the keyword. If the keyword is unknown, returns no values, but
-     * this is not an error.  If the number of values is unlimited, returns no
-     * values and -1 as the count.
+     * Originally intended to return all the values for which select() would return the keyword.
+     * If the keyword is unknown, returns no values, but this is not an error.  If
+     * the number of values is unlimited, returns no values and -1 as the
+     * count.
      *
      * The number of returned values is typically small.
      *
@@ -429,18 +415,16 @@ public:
      * @param dest         Array into which to put the returned values.  May
      *                     be NULL if destCapacity is 0.
      * @param destCapacity The capacity of the array, must be at least 0.
-     * @param status       The error code. Deprecated function, always sets
-     * U_UNSUPPORTED_ERROR.
+     * @param status       The error code. Deprecated function, always sets U_UNSUPPORTED_ERROR.
      * @return             The count of values available, or -1.  This count
      *                     can be larger than destCapacity, but no more than
      *                     destCapacity values will be written.
      * @deprecated ICU 55
      */
-    int32_t getAllKeywordValues( const UnicodeString& keyword,
-                                 double* dest,
-                                 int32_t destCapacity,
-                                 UErrorCode& status );
-#endif /* U_HIDE_DEPRECATED_API */
+    int32_t getAllKeywordValues(const UnicodeString &keyword,
+                                double *dest, int32_t destCapacity,
+                                UErrorCode& status);
+#endif  /* U_HIDE_DEPRECATED_API */
 
     /**
      * Returns sample values for which select() would return the keyword.  If
@@ -455,16 +439,14 @@ public:
      * @param status       The error code.
      * @return             The count of values written.
      *                     If more than destCapacity samples are available, then
-     *                     only destCapacity are written, and destCapacity is
-     * returned as the count, rather than setting a U_BUFFER_OVERFLOW_ERROR.
-     *                     (The actual number of keyword values could be
-     * unlimited.)
+     *                     only destCapacity are written, and destCapacity is returned as the count,
+     *                     rather than setting a U_BUFFER_OVERFLOW_ERROR.
+     *                     (The actual number of keyword values could be unlimited.)
      * @stable ICU 4.8
      */
-    int32_t getSamples( const UnicodeString& keyword,
-                        double* dest,
-                        int32_t destCapacity,
-                        UErrorCode& status );
+    int32_t getSamples(const UnicodeString &keyword,
+                       double *dest, int32_t destCapacity,
+                       UErrorCode& status);
 
     /**
      * Returns TRUE if the given keyword is defined in this
@@ -475,7 +457,8 @@ public:
      *                 Otherwise, return FALSE.
      * @stable ICU 4.0
      */
-    UBool isKeyword( const UnicodeString& keyword ) const;
+    UBool isKeyword(const UnicodeString& keyword) const;
+
 
     /**
      * Returns keyword for default plural form.
@@ -490,8 +473,8 @@ public:
      *
      * @internal
      */
-    UnicodeString getRules() const;
-#endif /* U_HIDE_INTERNAL_API */
+     UnicodeString getRules() const;
+#endif  /* U_HIDE_INTERNAL_API */
 
     /**
      * Compares the equality of two PluralRules objects.
@@ -501,7 +484,7 @@ public:
      *              PluralRules; false otherwise.
      * @stable ICU 4.0
      */
-    virtual UBool operator==( const PluralRules& other ) const;
+    virtual UBool operator==(const PluralRules& other) const;
 
     /**
      * Compares the inequality of two PluralRules objects.
@@ -511,17 +494,16 @@ public:
      *              PluralRules; false otherwise.
      * @stable ICU 4.0
      */
-    UBool operator!=( const PluralRules& other ) const {
-        return !operator==( other );
-    }
+    UBool operator!=(const PluralRules& other) const  {return !operator==(other);}
+
 
     /**
      * ICU "poor man's RTTI", returns a UClassID for this class.
      *
      * @stable ICU 4.0
      *
-     */
-    static UClassID U_EXPORT2 getStaticClassID( void );
+    */
+    static UClassID U_EXPORT2 getStaticClassID(void);
 
     /**
      * ICU "poor man's RTTI", returns a UClassID for the actual class.
@@ -530,22 +512,20 @@ public:
      */
     virtual UClassID getDynamicClassID() const;
 
-private:
-    RuleChain* mRules;
 
-    PluralRules(); // default constructor not implemented
-    void parseDescription( const UnicodeString& ruleData, UErrorCode& status );
-    int32_t getNumberValue( const UnicodeString& token ) const;
-    UnicodeString getRuleFromResource( const Locale& locale,
-                                       UPluralType type,
-                                       UErrorCode& status );
-    RuleChain* rulesForKeyword( const UnicodeString& keyword ) const;
+private:
+    RuleChain  *mRules;
+
+    PluralRules();   // default constructor not implemented
+    void            parseDescription(const UnicodeString& ruleData, UErrorCode &status);
+    int32_t         getNumberValue(const UnicodeString& token) const;
+    UnicodeString   getRuleFromResource(const Locale& locale, UPluralType type, UErrorCode& status);
+    RuleChain      *rulesForKeyword(const UnicodeString &keyword) const;
 
     /**
-     * An internal status variable used to indicate that the object is in an
-     * 'invalid' state. Used by copy constructor, the assignment operator and
-     * the clone method.
-     */
+    * An internal status variable used to indicate that the object is in an 'invalid' state.
+    * Used by copy constructor, the assignment operator and the clone method.
+    */
     UErrorCode mInternalStatus;
 
     friend class PluralRuleParser;
@@ -558,4 +538,4 @@ U_NAMESPACE_END
 #endif /* U_SHOW_CPLUSPLUS_API */
 
 #endif // _PLURRULE
-// eof
+//eof

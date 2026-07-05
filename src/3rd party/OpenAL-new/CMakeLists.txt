@@ -529,8 +529,7 @@ if(MSVC)
             /ZI
         >
         /permissive-;
-        /std:c++latest;
-        /EHsc
+        /std:c++17;
         /Gm-;
         /W4;
         /wd4065;

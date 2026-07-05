@@ -19,67 +19,79 @@
 // ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
+#include "luabind_api.h"
 #include <luabind/error.hpp>
 
-#include "luabind_api.h"
+namespace luabind
+{
 
-namespace luabind {
-
-namespace {
-pcall_callback_fun pcall_callback = 0;
-pregister_callback_fun pregister_callback = 0;
+	namespace
+	{
+		pcall_callback_fun pcall_callback = 0;
+		pregister_callback_fun pregister_callback = 0;
 #ifdef LUABIND_NO_EXCEPTIONS
-error_callback_fun error_callback = 0;
-error_callback_fun error_callback_not_crash = 0;
-cast_failed_callback_fun cast_failed_callback = 0;
+        error_callback_fun error_callback = 0;
+        error_callback_fun error_callback_not_crash = 0;
+		cast_failed_callback_fun cast_failed_callback = 0;
 #endif
-} // namespace
+	}
+
 
 #ifdef LUABIND_NO_EXCEPTIONS
 
-typedef void ( *error_callback_fun )( lua_State* );
-typedef void ( *cast_failed_callback_fun )( lua_State*, LUABIND_TYPE_INFO );
+	typedef void(*error_callback_fun)(lua_State*);
+	typedef void(*cast_failed_callback_fun)(lua_State*, LUABIND_TYPE_INFO);
 
-void set_error_callback( error_callback_fun e ) {
-    error_callback = e;
-}
+	void set_error_callback(error_callback_fun e)
+	{
+		error_callback = e;
+	}
 
-void set_error_callback_not_crash( error_callback_fun e ) {
-    error_callback_not_crash = e;
-}
+    void set_error_callback_not_crash(error_callback_fun e)
+    {
+        error_callback_not_crash = e;
+    }
 
-void set_cast_failed_callback( cast_failed_callback_fun c ) {
-    cast_failed_callback = c;
-}
+	void set_cast_failed_callback(cast_failed_callback_fun c)
+	{
+		cast_failed_callback = c;
+	}
 
-error_callback_fun get_error_callback() {
-    return error_callback;
-}
+	error_callback_fun get_error_callback()
+	{
+		return error_callback;
+	}
 
-error_callback_fun get_error_callback_not_crash() {
-    return error_callback_not_crash;
-}
+    error_callback_fun get_error_callback_not_crash()
+    {
+        return error_callback_not_crash;
+    }
 
-cast_failed_callback_fun get_cast_failed_callback() {
-    return cast_failed_callback;
-}
+	cast_failed_callback_fun get_cast_failed_callback()
+	{
+		return cast_failed_callback;
+	}
 
 #endif
 
-void set_pcall_callback( pcall_callback_fun e ) {
-    pcall_callback = e;
-}
+	void set_pcall_callback(pcall_callback_fun e)
+	{
+		pcall_callback = e;
+	}
 
-pcall_callback_fun get_pcall_callback() {
-    return pcall_callback;
-}
+	pcall_callback_fun get_pcall_callback()
+	{
+		return pcall_callback;
+	}
 
-void set_pregister_callback( pregister_callback_fun e ) {
-    pregister_callback = e;
-}
+	void set_pregister_callback(pregister_callback_fun e)
+	{
+		pregister_callback = e;
+	}
 
-pregister_callback_fun get_pregister_callback() {
-    return pregister_callback;
-}
+	pregister_callback_fun get_pregister_callback()
+	{
+		return pregister_callback;
+	}
 
-} // namespace luabind
+}

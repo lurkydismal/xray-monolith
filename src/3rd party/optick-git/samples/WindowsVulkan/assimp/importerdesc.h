@@ -45,9 +45,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef INCLUDED_AI_IMPORTER_DESC_H
 #define INCLUDED_AI_IMPORTER_DESC_H
 
+
 /** Mixed set of flags for #aiImporterDesc, indicating some features
- *  common to many importers*/
-enum aiImporterFlags {
+  *  common to many importers*/
+enum aiImporterFlags
+{
     /** Indicates that there is a textual encoding of the
      *  file format; and that it is supported.*/
     aiImporterFlags_SupportTextFlavour = 0x1,
@@ -61,17 +63,18 @@ enum aiImporterFlags {
     aiImporterFlags_SupportCompressedFlavour = 0x4,
 
     /** Indicates that the importer reads only a very particular
-     * subset of the file format. This happens commonly for
-     * declarative or procedural formats which cannot easily
-     * be mapped to #aiScene */
+      * subset of the file format. This happens commonly for
+      * declarative or procedural formats which cannot easily
+      * be mapped to #aiScene */
     aiImporterFlags_LimitedSupport = 0x8,
 
     /** Indicates that the importer is highly experimental and
-     * should be used with care. This only happens for trunk
-     * (i.e. SVN) versions, experimental code is not included
-     * in releases. */
+      * should be used with care. This only happens for trunk
+      * (i.e. SVN) versions, experimental code is not included
+      * in releases. */
     aiImporterFlags_Experimental = 0x10
 };
+
 
 /** Meta information about a particular importer. Importers need to fill
  *  this structure, but they can freely decide how talkative they are.
@@ -81,7 +84,8 @@ enum aiImporterFlags {
  *  as importers/exporters are added to Assimp, so it might be useful
  *  to have a common mechanism to query some rough importer
  *  characteristics. */
-struct aiImporterDesc {
+struct aiImporterDesc
+{
     /** Full name of the importer (i.e. Blender3D importer)*/
     const char* mName;
 
@@ -130,12 +134,10 @@ struct aiImporterDesc {
 
 /** \brief  Returns the Importer description for a given extension.
 
-Will return a NULL-pointer if no assigned importer desc. was found for the given
-extension
+Will return a NULL-pointer if no assigned importer desc. was found for the given extension
     \param  extension   [in] The extension to look for
     \return A pointer showing to the ImporterDesc, \see aiImporterDesc.
 */
-ASSIMP_API const C_STRUCT aiImporterDesc* aiGetImporterDesc(
-    const char* extension );
+ASSIMP_API const C_STRUCT aiImporterDesc* aiGetImporterDesc( const char *extension );
 
 #endif

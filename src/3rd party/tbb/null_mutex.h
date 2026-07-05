@@ -30,15 +30,10 @@ public:
     class scoped_lock : internal::no_copy {
     public:
         scoped_lock() {}
-
         scoped_lock( null_mutex& ) {}
-
         ~scoped_lock() {}
-
         void acquire( null_mutex& ) {}
-
         bool try_acquire( null_mutex& ) { return true; }
-
         void release() {}
     };
 
@@ -50,6 +45,6 @@ public:
     static const bool is_fair_mutex = true;
 };
 
-} // namespace tbb
+}
 
 #endif /* __TBB_null_mutex_H */

@@ -10,6 +10,7 @@
 #ifndef __TMUNIT_H__
 #define __TMUNIT_H__
 
+
 /**
  * \file
  * \brief C++ API: time unit object
@@ -31,7 +32,7 @@ U_NAMESPACE_BEGIN
  * @see TimeUnit
  * @stable ICU 4.2
  */
-class U_I18N_API TimeUnit : public MeasureUnit {
+class U_I18N_API TimeUnit: public MeasureUnit {
 public:
     /**
      * Constants for all the time units we supported.
@@ -48,11 +49,10 @@ public:
 #ifndef U_HIDE_DEPRECATED_API
         /**
          * One more than the highest normal UTimeUnitFields value.
-         * @deprecated ICU 58 The numeric value may change over time, see ICU
-         * ticket #12420.
+         * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
          */
         UTIMEUNIT_FIELD_COUNT
-#endif // U_HIDE_DEPRECATED_API
+#endif  // U_HIDE_DEPRECATED_API
     };
 
     /**
@@ -65,8 +65,9 @@ public:
      * @return               a TimeUnit instance
      * @stable ICU 4.2
      */
-    static TimeUnit* U_EXPORT2 createInstance( UTimeUnitFields timeUnitField,
-                                               UErrorCode& status );
+    static TimeUnit* U_EXPORT2 createInstance(UTimeUnitFields timeUnitField,
+                                              UErrorCode& status);
+
 
     /**
      * Override clone.
@@ -78,13 +79,13 @@ public:
      * Copy operator.
      * @stable ICU 4.2
      */
-    TimeUnit( const TimeUnit& other );
+    TimeUnit(const TimeUnit& other);
 
     /**
      * Assignment operator.
      * @stable ICU 4.2
      */
-    TimeUnit& operator=( const TimeUnit& other );
+    TimeUnit& operator=(const TimeUnit& other);
 
     /**
      * Returns a unique class ID for this object POLYMORPHICALLY.
@@ -103,6 +104,7 @@ public:
      * @stable ICU 4.2
      */
     static UClassID U_EXPORT2 getStaticClassID();
+
 
     /**
      * Get time unit field.
@@ -124,8 +126,10 @@ private:
      * Constructor
      * @internal (private)
      */
-    TimeUnit( UTimeUnitFields timeUnitField );
+    TimeUnit(UTimeUnitFields timeUnitField);
+
 };
+
 
 U_NAMESPACE_END
 
@@ -134,5 +138,5 @@ U_NAMESPACE_END
 #endif /* U_SHOW_CPLUSPLUS_API */
 
 #endif // __TMUNIT_H__
-// eof
+//eof
 //

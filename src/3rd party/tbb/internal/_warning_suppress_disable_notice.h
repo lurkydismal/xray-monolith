@@ -24,4 +24,4 @@
 #pragma clang diagnostic pop
 #endif
 
-#endif // __TBB_SUPPRESS_INTERNAL_DEPRECATED_MESSAGES
+#endif  // __TBB_SUPPRESS_INTERNAL_DEPRECATED_MESSAGES

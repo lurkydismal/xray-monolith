@@ -1,16 +1,15 @@
 /*
- * Key codes for multiple platforms
- *
- * Copyright (C) 2016 by Sascha Willems - www.saschawillems.de
- *
- * This code is licensed under the MIT license (MIT)
- * (http://opensource.org/licenses/MIT)
- */
+* Key codes for multiple platforms
+*
+* Copyright (C) 2016 by Sascha Willems - www.saschawillems.de
+*
+* This code is licensed under the MIT license (MIT) (http://opensource.org/licenses/MIT)
+*/
 
 #pragma once
 
-#if defined( _WIN32 )
-#define KEY_ESCAPE VK_ESCAPE
+#if defined(_WIN32)
+#define KEY_ESCAPE VK_ESCAPE 
 #define KEY_F1 VK_F1
 #define KEY_F2 VK_F2
 #define KEY_F3 VK_F3
@@ -31,7 +30,7 @@
 #define KEY_O 0x4F
 #define KEY_T 0x54
 
-#elif defined( VK_USE_PLATFORM_ANDROID_KHR )
+#elif defined(VK_USE_PLATFORM_ANDROID_KHR)
 #define GAMEPAD_BUTTON_A 0x1000
 #define GAMEPAD_BUTTON_B 0x1001
 #define GAMEPAD_BUTTON_X 0x1002
@@ -41,7 +40,7 @@
 #define GAMEPAD_BUTTON_START 0x1006
 #define TOUCH_DOUBLE_TAP 0x1100
 
-#elif defined( VK_USE_PLATFORM_IOS_MVK )
+#elif defined(VK_USE_PLATFORM_IOS_MVK)
 // Use numeric keys instead of function keys.
 // Use main keyboard plus/minus instead of keypad plus/minus
 // Use Delete key instead of Escape key.
@@ -65,7 +64,7 @@
 #define KEY_O 'o'
 #define KEY_T 't'
 
-#elif defined( VK_USE_PLATFORM_MACOS_MVK )
+#elif defined(VK_USE_PLATFORM_MACOS_MVK)
 // For compatibility with iOS UX and absent keypad on MacBook:
 // - Use numeric keys instead of function keys
 // - Use main keyboard plus/minus instead of keypad plus/minus
@@ -90,14 +89,14 @@
 #define KEY_O 0x1F
 #define KEY_T 0x11
 
-#elif defined( VK_USE_PLATFORM_WAYLAND_KHR )
+#elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
 #include <linux/input.h>
 
 // todo: hack for bloom example
 #define KEY_KPADD KEY_KPPLUS
 #define KEY_KPSUB KEY_KPMINUS
 
-#elif defined( __linux__ )
+#elif defined(__linux__)
 #define KEY_ESCAPE 0x9
 #define KEY_F1 0x43
 #define KEY_F2 0x44

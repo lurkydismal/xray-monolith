@@ -2,8 +2,8 @@
 // License & terms of use: http://www.unicode.org/copyright.html
 /*
 ********************************************************************************
-* Copyright (C) 1997-2016, International Business Machines Corporation and
-* others. All Rights Reserved.
+* Copyright (C) 1997-2016, International Business Machines Corporation and others.
+* All Rights Reserved.
 ********************************************************************************
 *
 * File NUMFMT.H
@@ -23,6 +23,7 @@
 #ifndef NUMFMT_H
 #define NUMFMT_H
 
+
 #include "unicode/utypes.h"
 
 #if U_SHOW_CPLUSPLUS_API
@@ -34,13 +35,13 @@
 
 #if !UCONFIG_NO_FORMATTING
 
-#include "unicode/curramt.h"
+#include "unicode/unistr.h"
 #include "unicode/format.h"
+#include "unicode/unum.h" // UNumberFormatStyle
 #include "unicode/locid.h"
 #include "unicode/stringpiece.h"
+#include "unicode/curramt.h"
 #include "unicode/udisplaycontext.h"
-#include "unicode/unistr.h"
-#include "unicode/unum.h" // UNumberFormatStyle
 
 class NumberFormatTest;
 
@@ -78,7 +79,7 @@ class StringEnumeration;
  *    #include "unicode/unistr.h"
  *    #include "unicode/ustream.h"
  *    using namespace std;
- *
+ *    
  *    int main() {
  *        double myNumber = 7.0;
  *        UnicodeString myString;
@@ -117,28 +118,25 @@ class StringEnumeration;
  *    nf->parse(myString, result, success);
  * \endcode
  * Use \c createInstance() to get the normal number format for a \c Locale.
- * There are other static factory methods available.  Use \c
- * createCurrencyInstance() to get the currency number format for that country.
- * Use \c createPercentInstance() to get a format for displaying percentages.
- * With this format, a fraction from 0.53 is displayed as 53%. <P> The type of
- * number formatting can be specified by passing a 'style' parameter to \c
- * createInstance(). For example, use\n
- * \c createInstance(locale, UNUM_DECIMAL, errorCode) to get the normal number
- * format,\n
- * \c createInstance(locale, UNUM_PERCENT, errorCode) to get a format for
- * displaying percentage,\n
- * \c createInstance(locale, UNUM_SCIENTIFIC, errorCode) to get a format for
- * displaying scientific number,\n
- * \c createInstance(locale, UNUM_CURRENCY, errorCode) to get the currency
- * number format, in which the currency is represented by its symbol, for
- * example, "$3.00".\n
- * \c createInstance(locale, UNUM_CURRENCY_ISO, errorCode)  to get the currency
- * number format, in which the currency is represented by its ISO code, for
- * example "USD3.00".\n
- * \c createInstance(locale, UNUM_CURRENCY_PLURAL, errorCode) to get the
- * currency number format, in which the currency is represented by its full name
- * in plural format, for example, "3.00 US dollars" or "1.00 US dollar". <P> You
- * can also control the display of numbers with such methods as
+ * There are other static factory methods available.  Use \c createCurrencyInstance()
+ * to get the currency number format for that country.  Use \c createPercentInstance()
+ * to get a format for displaying percentages. With this format, a
+ * fraction from 0.53 is displayed as 53%.
+ * <P>
+ * The type of number formatting can be specified by passing a 'style' parameter to \c createInstance().
+ * For example, use\n
+ * \c createInstance(locale, UNUM_DECIMAL, errorCode) to get the normal number format,\n
+ * \c createInstance(locale, UNUM_PERCENT, errorCode) to get a format for displaying percentage,\n
+ * \c createInstance(locale, UNUM_SCIENTIFIC, errorCode) to get a format for displaying scientific number,\n
+ * \c createInstance(locale, UNUM_CURRENCY, errorCode) to get the currency number format,
+ * in which the currency is represented by its symbol, for example, "$3.00".\n
+ * \c createInstance(locale, UNUM_CURRENCY_ISO, errorCode)  to get the currency number format,
+ * in which the currency is represented by its ISO code, for example "USD3.00".\n
+ * \c createInstance(locale, UNUM_CURRENCY_PLURAL, errorCode) to get the currency number format,
+ * in which the currency is represented by its full name in plural format,
+ * for example, "3.00 US dollars" or "1.00 US dollar".
+ * <P>
+ * You can also control the display of numbers with such methods as
  * \c getMinimumFractionDigits().  If you want even more control over the
  * format or parsing, or want to give your users more control, you can
  * try dynamic_casting the \c NumberFormat you get from the factory methods to a
@@ -197,9 +195,9 @@ public:
         kRoundHalfUp,   /**< Round towards the nearest integer, or
                              away from zero if equidistant */
         /**
-         *  Return U_FORMAT_INEXACT_ERROR if number does not format exactly.
-         *  @stable ICU 4.8
-         */
+          *  Return U_FORMAT_INEXACT_ERROR if number does not format exactly.
+          *  @stable ICU 4.8
+          */
         kRoundUnnecessary
     };
 
@@ -246,16 +244,16 @@ public:
         kMeasureUnitField = UNUM_MEASURE_UNIT_FIELD,
         /** @draft ICU 64 */
         kCompactField = UNUM_COMPACT_FIELD,
-#endif // U_HIDE_DRAFT_API
+#endif  // U_HIDE_DRAFT_API
 
-        /**
-         * These constants are provided for backwards compatibility only.
-         * Please use the constants defined in the header file unum.h.
-         */
+    /**
+     * These constants are provided for backwards compatibility only.
+     * Please use the constants defined in the header file unum.h.
+     */
         /** @stable ICU 2.0 */
-        INTEGER_FIELD = UNUM_INTEGER_FIELD,
+        INTEGER_FIELD        = UNUM_INTEGER_FIELD,
         /** @stable ICU 2.0 */
-        FRACTION_FIELD = UNUM_FRACTION_FIELD
+        FRACTION_FIELD       = UNUM_FRACTION_FIELD
     };
 
     /**
@@ -278,7 +276,8 @@ public:
      * @return    true if the given Format objects are semantically equal.
      * @stable ICU 2.0
      */
-    virtual UBool operator==( const Format& other ) const;
+    virtual UBool operator==(const Format& other) const;
+
 
     using Format::format;
 
@@ -297,10 +296,10 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.0
      */
-    virtual UnicodeString& format( const Formattable& obj,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString& format(const Formattable& obj,
+                                  UnicodeString& appendTo,
+                                  FieldPosition& pos,
+                                  UErrorCode& status) const;
 
     /**
      * Format an object to produce a string.  This method handles
@@ -318,10 +317,10 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 4.4
      */
-    virtual UnicodeString& format( const Formattable& obj,
-                                   UnicodeString& appendTo,
-                                   FieldPositionIterator* posIter,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString& format(const Formattable& obj,
+                                  UnicodeString& appendTo,
+                                  FieldPositionIterator* posIter,
+                                  UErrorCode& status) const;
 
     /**
      * Parse a string to produce an object.  This methods handles
@@ -351,9 +350,9 @@ public:
      *                  delete it when done.
      * @stable ICU 2.0
      */
-    virtual void parseObject( const UnicodeString& source,
-                              Formattable& result,
-                              ParsePosition& parse_pos ) const;
+    virtual void parseObject(const UnicodeString& source,
+                             Formattable& result,
+                             ParsePosition& parse_pos) const;
 
     /**
      * Format a double number. These methods call the NumberFormat
@@ -365,7 +364,8 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.0
      */
-    UnicodeString& format( double number, UnicodeString& appendTo ) const;
+    UnicodeString& format(  double number,
+                            UnicodeString& appendTo) const;
 
     /**
      * Format a long number. These methods call the NumberFormat
@@ -377,7 +377,8 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.0
      */
-    UnicodeString& format( int32_t number, UnicodeString& appendTo ) const;
+    UnicodeString& format(  int32_t number,
+                            UnicodeString& appendTo) const;
 
     /**
      * Format an int64 number. These methods call the NumberFormat
@@ -389,7 +390,8 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.8
      */
-    UnicodeString& format( int64_t number, UnicodeString& appendTo ) const;
+    UnicodeString& format(  int64_t number,
+                            UnicodeString& appendTo) const;
 
     /**
      * Format a double number. Concrete subclasses must implement
@@ -403,9 +405,9 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.0
      */
-    virtual UnicodeString& format( double number,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos ) const = 0;
+    virtual UnicodeString& format(double number,
+                                  UnicodeString& appendTo,
+                                  FieldPosition& pos) const = 0;
     /**
      * Format a double number. By default, the parent function simply
      * calls the base class and does not return an error status.
@@ -420,10 +422,10 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @internal
      */
-    virtual UnicodeString& format( double number,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString& format(double number,
+                                  UnicodeString& appendTo,
+                                  FieldPosition& pos,
+                                  UErrorCode &status) const;
     /**
      * Format a double number. Subclasses must implement
      * this method.
@@ -438,10 +440,10 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 4.4
      */
-    virtual UnicodeString& format( double number,
-                                   UnicodeString& appendTo,
-                                   FieldPositionIterator* posIter,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString& format(double number,
+                                  UnicodeString& appendTo,
+                                  FieldPositionIterator* posIter,
+                                  UErrorCode& status) const;
     /**
      * Format a long number. Concrete subclasses must implement
      * these pure virtual methods.
@@ -453,10 +455,10 @@ public:
      *                  On output: the offsets of the alignment field.
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.0
-     */
-    virtual UnicodeString& format( int32_t number,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos ) const = 0;
+    */
+    virtual UnicodeString& format(int32_t number,
+                                  UnicodeString& appendTo,
+                                  FieldPosition& pos) const = 0;
 
     /**
      * Format a long number. Concrete subclasses may override
@@ -470,11 +472,11 @@ public:
      * @param status the output status.
      * @return          Reference to 'appendTo' parameter.
      * @internal
-     */
-    virtual UnicodeString& format( int32_t number,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos,
-                                   UErrorCode& status ) const;
+    */
+    virtual UnicodeString& format(int32_t number,
+                                  UnicodeString& appendTo,
+                                  FieldPosition& pos,
+                                  UErrorCode &status) const;
 
     /**
      * Format an int32 number. Subclasses must implement
@@ -490,10 +492,10 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 4.4
      */
-    virtual UnicodeString& format( int32_t number,
-                                   UnicodeString& appendTo,
-                                   FieldPositionIterator* posIter,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString& format(int32_t number,
+                                  UnicodeString& appendTo,
+                                  FieldPositionIterator* posIter,
+                                  UErrorCode& status) const;
     /**
      * Format an int64 number. (Not abstract to retain compatibility
      * with earlier releases, however subclasses should override this
@@ -506,10 +508,10 @@ public:
      *                  On output: the offsets of the alignment field.
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 2.8
-     */
-    virtual UnicodeString& format( int64_t number,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos ) const;
+    */
+    virtual UnicodeString& format(int64_t number,
+                                  UnicodeString& appendTo,
+                                  FieldPosition& pos) const;
 
     /**
      * Format an int64 number. (Not abstract to retain compatibility
@@ -524,11 +526,11 @@ public:
      * @param status    Output param filled with success/failure status.
      * @return          Reference to 'appendTo' parameter.
      * @internal
-     */
-    virtual UnicodeString& format( int64_t number,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos,
-                                   UErrorCode& status ) const;
+    */
+    virtual UnicodeString& format(int64_t number,
+                                  UnicodeString& appendTo,
+                                  FieldPosition& pos,
+                                  UErrorCode& status) const;
     /**
      * Format an int64 number. Subclasses must implement
      * this method.
@@ -543,10 +545,10 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 4.4
      */
-    virtual UnicodeString& format( int64_t number,
-                                   UnicodeString& appendTo,
-                                   FieldPositionIterator* posIter,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString& format(int64_t number,
+                                  UnicodeString& appendTo,
+                                  FieldPositionIterator* posIter,
+                                  UErrorCode& status) const;
 
     /**
      * Format a decimal number. Subclasses must implement
@@ -564,23 +566,22 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @stable ICU 4.4
      */
-    virtual UnicodeString& format( StringPiece number,
-                                   UnicodeString& appendTo,
-                                   FieldPositionIterator* posIter,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString& format(StringPiece number,
+                                  UnicodeString& appendTo,
+                                  FieldPositionIterator* posIter,
+                                  UErrorCode& status) const;
 
-    // Can't use #ifndef U_HIDE_INTERNAL_API because these are virtual methods
+// Can't use #ifndef U_HIDE_INTERNAL_API because these are virtual methods
 
     /**
      * Format a decimal number.
-     * The number is a DecimalQuantity wrapper onto a floating point decimal
-     * number. The default implementation in NumberFormat converts the decimal
-     * number to a double and formats that.  Subclasses of NumberFormat that
-     * want to specifically handle big decimal numbers must override this
-     * method. class DecimalFormat does so.
+     * The number is a DecimalQuantity wrapper onto a floating point decimal number.
+     * The default implementation in NumberFormat converts the decimal number
+     * to a double and formats that.  Subclasses of NumberFormat that want
+     * to specifically handle big decimal numbers must override this method.
+     * class DecimalFormat does so.
      *
-     * @param number    The number, a DecimalQuantity format Decimal Floating
-     * Point.
+     * @param number    The number, a DecimalQuantity format Decimal Floating Point.
      * @param appendTo  Output parameter to receive result.
      *                  Result is appended to existing contents.
      * @param posIter   On return, can be used to iterate over positions
@@ -589,21 +590,20 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @internal
      */
-    virtual UnicodeString& format( const number::impl::DecimalQuantity& number,
-                                   UnicodeString& appendTo,
-                                   FieldPositionIterator* posIter,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString& format(const number::impl::DecimalQuantity &number,
+                                  UnicodeString& appendTo,
+                                  FieldPositionIterator* posIter,
+                                  UErrorCode& status) const;
 
     /**
      * Format a decimal number.
-     * The number is a DecimalQuantity wrapper onto a floating point decimal
-     * number. The default implementation in NumberFormat converts the decimal
-     * number to a double and formats that.  Subclasses of NumberFormat that
-     * want to specifically handle big decimal numbers must override this
-     * method. class DecimalFormat does so.
+     * The number is a DecimalQuantity wrapper onto a floating point decimal number.
+     * The default implementation in NumberFormat converts the decimal number
+     * to a double and formats that.  Subclasses of NumberFormat that want
+     * to specifically handle big decimal numbers must override this method.
+     * class DecimalFormat does so.
      *
-     * @param number    The number, a DecimalQuantity format Decimal Floating
-     * Point.
+     * @param number    The number, a DecimalQuantity format Decimal Floating Point.
      * @param appendTo  Output parameter to receive result.
      *                  Result is appended to existing contents.
      * @param pos       On input: an alignment field, if desired.
@@ -612,33 +612,33 @@ public:
      * @return          Reference to 'appendTo' parameter.
      * @internal
      */
-    virtual UnicodeString& format( const number::impl::DecimalQuantity& number,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString& format(const number::impl::DecimalQuantity &number,
+                                  UnicodeString& appendTo,
+                                  FieldPosition& pos,
+                                  UErrorCode& status) const;
 
-    /**
-     * Return a long if possible (e.g. within range LONG_MAX,
-     * LONG_MAX], and with no decimals), otherwise a double.  If
-     * IntegerOnly is set, will stop at a decimal point (or equivalent;
-     * e.g. for rational numbers "1 2/3", will stop after the 1).
-     * <P>
-     * If no object can be parsed, index is unchanged, and NULL is
-     * returned.
-     * <P>
-     * This is a pure virtual which concrete subclasses must implement.
-     *
-     * @param text           The text to be parsed.
-     * @param result         Formattable to be set to the parse result.
-     *                       If parse fails, return contents are undefined.
-     * @param parsePosition  The position to start parsing at on input.
-     *                       On output, moved to after the last successfully
-     *                       parse character. On parse failure, does not change.
-     * @stable ICU 2.0
-     */
-    virtual void parse( const UnicodeString& text,
-                        Formattable& result,
-                        ParsePosition& parsePosition ) const = 0;
+   /**
+    * Return a long if possible (e.g. within range LONG_MAX,
+    * LONG_MAX], and with no decimals), otherwise a double.  If
+    * IntegerOnly is set, will stop at a decimal point (or equivalent;
+    * e.g. for rational numbers "1 2/3", will stop after the 1).
+    * <P>
+    * If no object can be parsed, index is unchanged, and NULL is
+    * returned.
+    * <P>
+    * This is a pure virtual which concrete subclasses must implement.
+    *
+    * @param text           The text to be parsed.
+    * @param result         Formattable to be set to the parse result.
+    *                       If parse fails, return contents are undefined.
+    * @param parsePosition  The position to start parsing at on input.
+    *                       On output, moved to after the last successfully
+    *                       parse character. On parse failure, does not change.
+    * @stable ICU 2.0
+    */
+    virtual void parse(const UnicodeString& text,
+                       Formattable& result,
+                       ParsePosition& parsePosition) const = 0;
 
     /**
      * Parse a string as a numeric value, and return a Formattable
@@ -655,9 +655,9 @@ public:
      * @see                 NumberFormat::isParseIntegerOnly
      * @stable ICU 2.0
      */
-    virtual void parse( const UnicodeString& text,
-                        Formattable& result,
-                        UErrorCode& status ) const;
+    virtual void parse(const UnicodeString& text,
+                       Formattable& result,
+                       UErrorCode& status) const;
 
     /**
      * Parses text from the given string as a currency amount.  Unlike
@@ -673,13 +673,13 @@ public:
      *             to match; must have 0 <= pos.getIndex() < text.length();
      *             on output, the position after the last matched character.
      *             If the parse fails, the position in unchanged upon output.
-     * @return     if parse succeeds, a pointer to a newly-created
-     * CurrencyAmount object (owned by the caller) containing information about
+     * @return     if parse succeeds, a pointer to a newly-created CurrencyAmount
+     *             object (owned by the caller) containing information about
      *             the parsed currency; if parse fails, this is NULL.
      * @stable ICU 49
      */
-    virtual CurrencyAmount* parseCurrency( const UnicodeString& text,
-                                           ParsePosition& pos ) const;
+    virtual CurrencyAmount* parseCurrency(const UnicodeString& text,
+                                          ParsePosition& pos) const;
 
     /**
      * Return true if this format will parse numbers as integers
@@ -692,7 +692,7 @@ public:
      *            only.
      * @stable ICU 2.0
      */
-    UBool isParseIntegerOnly( void ) const;
+    UBool isParseIntegerOnly(void) const;
 
     /**
      * Sets whether or not numbers should be parsed as integers only.
@@ -701,7 +701,7 @@ public:
      * @see isParseIntegerOnly
      * @stable ICU 2.0
      */
-    virtual void setParseIntegerOnly( UBool value );
+    virtual void setParseIntegerOnly(UBool value);
 
     /**
      * Sets whether lenient parsing should be enabled (it is off by default).
@@ -710,7 +710,7 @@ public:
      *               \c FALSE otherwise.
      * @stable ICU 4.8
      */
-    virtual void setLenient( UBool enable );
+    virtual void setLenient(UBool enable);
 
     /**
      * Returns whether lenient parsing is enabled (it is off by default).
@@ -720,7 +720,7 @@ public:
      * @see #setLenient
      * @stable ICU 4.8
      */
-    virtual UBool isLenient( void ) const;
+    virtual UBool isLenient(void) const;
 
     /**
      * Create a default style NumberFormat for the current default locale.
@@ -730,7 +730,7 @@ public:
      * {@link icu::number::NumberFormatter} instead of NumberFormat.
      * @stable ICU 2.0
      */
-    static NumberFormat* U_EXPORT2 createInstance( UErrorCode& );
+    static NumberFormat* U_EXPORT2 createInstance(UErrorCode&);
 
     /**
      * Create a default style NumberFormat for the specified locale.
@@ -741,8 +741,8 @@ public:
      * {@link icu::number::NumberFormatter} instead of NumberFormat.
      * @stable ICU 2.0
      */
-    static NumberFormat* U_EXPORT2 createInstance( const Locale& inLocale,
-                                                   UErrorCode& );
+    static NumberFormat* U_EXPORT2 createInstance(const Locale& inLocale,
+                                        UErrorCode&);
 
     /**
      * Create a specific style NumberFormat for the specified locale.
@@ -755,9 +755,9 @@ public:
      * @return                 A new NumberFormat instance.
      * @stable ICU 4.8
      */
-    static NumberFormat* U_EXPORT2 createInstance( const Locale& desiredLocale,
-                                                   UNumberFormatStyle style,
-                                                   UErrorCode& errorCode );
+    static NumberFormat* U_EXPORT2 createInstance(const Locale& desiredLocale,
+                                                  UNumberFormatStyle style,
+                                                  UErrorCode& errorCode);
 
 #ifndef U_HIDE_INTERNAL_API
 
@@ -766,9 +766,10 @@ public:
      * Creates NumberFormat instance without using the cache.
      * @internal
      */
-    static NumberFormat* internalCreateInstance( const Locale& desiredLocale,
-                                                 UNumberFormatStyle style,
-                                                 UErrorCode& errorCode );
+    static NumberFormat* internalCreateInstance(
+            const Locale& desiredLocale,
+            UNumberFormatStyle style,
+            UErrorCode& errorCode);
 
     /**
      * ICU use only.
@@ -777,12 +778,10 @@ public:
      * once it is done with the shared instance.
      * @internal
      */
-    static const SharedNumberFormat* U_EXPORT2
-    createSharedInstance( const Locale& inLocale,
-                          UNumberFormatStyle style,
-                          UErrorCode& status );
+    static const SharedNumberFormat* U_EXPORT2 createSharedInstance(
+            const Locale& inLocale, UNumberFormatStyle style, UErrorCode& status);
 
-#endif /* U_HIDE_INTERNAL_API */
+#endif  /* U_HIDE_INTERNAL_API */
 
     /**
      * Returns a currency format for the current default locale.
@@ -791,7 +790,7 @@ public:
      * {@link icu::number::NumberFormatter} instead of NumberFormat.
      * @stable ICU 2.0
      */
-    static NumberFormat* U_EXPORT2 createCurrencyInstance( UErrorCode& );
+    static NumberFormat* U_EXPORT2 createCurrencyInstance(UErrorCode&);
 
     /**
      * Returns a currency format for the specified locale.
@@ -801,8 +800,8 @@ public:
      * @param inLocale    the given locale.
      * @stable ICU 2.0
      */
-    static NumberFormat* U_EXPORT2
-    createCurrencyInstance( const Locale& inLocale, UErrorCode& );
+    static NumberFormat* U_EXPORT2 createCurrencyInstance(const Locale& inLocale,
+                                                UErrorCode&);
 
     /**
      * Returns a percentage format for the current default locale.
@@ -811,7 +810,7 @@ public:
      * {@link icu::number::NumberFormatter} instead of NumberFormat.
      * @stable ICU 2.0
      */
-    static NumberFormat* U_EXPORT2 createPercentInstance( UErrorCode& );
+    static NumberFormat* U_EXPORT2 createPercentInstance(UErrorCode&);
 
     /**
      * Returns a percentage format for the specified locale.
@@ -821,8 +820,8 @@ public:
      * @param inLocale    the given locale.
      * @stable ICU 2.0
      */
-    static NumberFormat* U_EXPORT2
-    createPercentInstance( const Locale& inLocale, UErrorCode& );
+    static NumberFormat* U_EXPORT2 createPercentInstance(const Locale& inLocale,
+                                               UErrorCode&);
 
     /**
      * Returns a scientific format for the current default locale.
@@ -831,7 +830,7 @@ public:
      * {@link icu::number::NumberFormatter} instead of NumberFormat.
      * @stable ICU 2.0
      */
-    static NumberFormat* U_EXPORT2 createScientificInstance( UErrorCode& );
+    static NumberFormat* U_EXPORT2 createScientificInstance(UErrorCode&);
 
     /**
      * Returns a scientific format for the specified locale.
@@ -841,15 +840,15 @@ public:
      * @param inLocale    the given locale.
      * @stable ICU 2.0
      */
-    static NumberFormat* U_EXPORT2
-    createScientificInstance( const Locale& inLocale, UErrorCode& );
+    static NumberFormat* U_EXPORT2 createScientificInstance(const Locale& inLocale,
+                                                UErrorCode&);
 
     /**
      * Get the set of Locales for which NumberFormats are installed.
      * @param count    Output param to receive the size of the locales
      * @stable ICU 2.0
      */
-    static const Locale* U_EXPORT2 getAvailableLocales( int32_t& count );
+    static const Locale* U_EXPORT2 getAvailableLocales(int32_t& count);
 
 #if !UCONFIG_NO_SERVICE
     /**
@@ -862,33 +861,29 @@ public:
      * @return a registry key that can be used to unregister this factory
      * @stable ICU 2.6
      */
-    static URegistryKey U_EXPORT2 registerFactory( NumberFormatFactory* toAdopt,
-                                                   UErrorCode& status );
+    static URegistryKey U_EXPORT2 registerFactory(NumberFormatFactory* toAdopt, UErrorCode& status);
 
     /**
-     * Unregister a previously-registered NumberFormatFactory using the key
-     * returned from the register call.  Key becomes invalid after a successful
-     * call and should not be used again. The NumberFormatFactory corresponding
-     * to the key will be deleted. Because ICU may choose to cache NumberFormat
-     * objects internally, this should be called during application shutdown,
-     * after all calls to NumberFormat::createInstance to avoid undefined
-     * behavior.
-     * @param key the registry key returned by a previous call to
-     * registerFactory
+     * Unregister a previously-registered NumberFormatFactory using the key returned from the
+     * register call.  Key becomes invalid after a successful call and should not be used again.
+     * The NumberFormatFactory corresponding to the key will be deleted.
+     * Because ICU may choose to cache NumberFormat objects internally,
+     * this should be called during application shutdown, after all calls to
+     * NumberFormat::createInstance to avoid undefined behavior.
+     * @param key the registry key returned by a previous call to registerFactory
      * @param status the in/out status code, no special meanings are assigned
      * @return TRUE if the factory for the key was successfully unregistered
      * @stable ICU 2.6
      */
-    static UBool U_EXPORT2 unregister( URegistryKey key, UErrorCode& status );
+    static UBool U_EXPORT2 unregister(URegistryKey key, UErrorCode& status);
 
     /**
-     * Return a StringEnumeration over the locales available at the time of the
-     * call, including registered locales.
-     * @return a StringEnumeration over the locales available at the time of the
-     * call
+     * Return a StringEnumeration over the locales available at the time of the call,
+     * including registered locales.
+     * @return a StringEnumeration over the locales available at the time of the call
      * @stable ICU 2.6
      */
-    static StringEnumeration* U_EXPORT2 getAvailableLocales( void );
+    static StringEnumeration* U_EXPORT2 getAvailableLocales(void);
 #endif /* UCONFIG_NO_SERVICE */
 
     /**
@@ -900,7 +895,7 @@ public:
      * @see setGroupingUsed
      * @stable ICU 2.0
      */
-    UBool isGroupingUsed( void ) const;
+    UBool isGroupingUsed(void) const;
 
     /**
      * Set whether or not grouping will be used in this format.
@@ -908,17 +903,17 @@ public:
      * @see getGroupingUsed
      * @stable ICU 2.0
      */
-    virtual void setGroupingUsed( UBool newValue );
+    virtual void setGroupingUsed(UBool newValue);
 
     /**
      * Returns the maximum number of digits allowed in the integer portion of a
      * number.
-     * @return     the maximum number of digits allowed in the integer portion
-     * of a number.
+     * @return     the maximum number of digits allowed in the integer portion of a
+     *             number.
      * @see setMaximumIntegerDigits
      * @stable ICU 2.0
      */
-    int32_t getMaximumIntegerDigits( void ) const;
+    int32_t getMaximumIntegerDigits(void) const;
 
     /**
      * Sets the maximum number of digits allowed in the integer portion of a
@@ -932,17 +927,17 @@ public:
      * @see getMaximumIntegerDigits
      * @stable ICU 2.0
      */
-    virtual void setMaximumIntegerDigits( int32_t newValue );
+    virtual void setMaximumIntegerDigits(int32_t newValue);
 
     /**
      * Returns the minimum number of digits allowed in the integer portion of a
      * number.
-     * @return    the minimum number of digits allowed in the integer portion of
-     * a number.
+     * @return    the minimum number of digits allowed in the integer portion of a
+     *            number.
      * @see setMinimumIntegerDigits
      * @stable ICU 2.0
      */
-    int32_t getMinimumIntegerDigits( void ) const;
+    int32_t getMinimumIntegerDigits(void) const;
 
     /**
      * Sets the minimum number of digits allowed in the integer portion of a
@@ -954,17 +949,17 @@ public:
      * @see getMinimumIntegerDigits
      * @stable ICU 2.0
      */
-    virtual void setMinimumIntegerDigits( int32_t newValue );
+    virtual void setMinimumIntegerDigits(int32_t newValue);
 
     /**
      * Returns the maximum number of digits allowed in the fraction portion of a
      * number.
-     * @return    the maximum number of digits allowed in the fraction portion
-     * of a number.
+     * @return    the maximum number of digits allowed in the fraction portion of a
+     *            number.
      * @see setMaximumFractionDigits
      * @stable ICU 2.0
      */
-    int32_t getMaximumFractionDigits( void ) const;
+    int32_t getMaximumFractionDigits(void) const;
 
     /**
      * Sets the maximum number of digits allowed in the fraction portion of a
@@ -976,29 +971,29 @@ public:
      * @see getMaximumFractionDigits
      * @stable ICU 2.0
      */
-    virtual void setMaximumFractionDigits( int32_t newValue );
+    virtual void setMaximumFractionDigits(int32_t newValue);
 
     /**
      * Returns the minimum number of digits allowed in the fraction portion of a
      * number.
-     * @return    the minimum number of digits allowed in the fraction portion
-     * of a number.
+     * @return    the minimum number of digits allowed in the fraction portion of a
+     *            number.
      * @see setMinimumFractionDigits
      * @stable ICU 2.0
      */
-    int32_t getMinimumFractionDigits( void ) const;
+    int32_t getMinimumFractionDigits(void) const;
 
     /**
      * Sets the minimum number of digits allowed in the fraction portion of a
-     * number. minimumFractionDigits must be &lt;= maximumFractionDigits.   If
-     * the new value for minimumFractionDigits exceeds the current value of
-     * maximumFractionDigits, then maximumIntegerDigits will also be set to the
-     * new value
+     * number. minimumFractionDigits must be &lt;= maximumFractionDigits.   If the
+     * new value for minimumFractionDigits exceeds the current value
+     * of maximumFractionDigits, then maximumIntegerDigits will also be set to
+     * the new value
      * @param newValue    the new value to be set.
      * @see getMinimumFractionDigits
      * @stable ICU 2.0
      */
-    virtual void setMinimumFractionDigits( int32_t newValue );
+    virtual void setMinimumFractionDigits(int32_t newValue);
 
     /**
      * Sets the currency used to display currency
@@ -1012,7 +1007,7 @@ public:
      * @param ec input-output error code
      * @stable ICU 3.0
      */
-    virtual void setCurrency( const char16_t* theCurrency, UErrorCode& ec );
+    virtual void setCurrency(const char16_t* theCurrency, UErrorCode& ec);
 
     /**
      * Gets the currency used to display currency
@@ -1028,53 +1023,50 @@ public:
      * UDISPCTX_CAPITALIZATION_FOR_STANDALONE.
      * @param value The UDisplayContext value to set.
      * @param status Input/output status. If at entry this indicates a failure
-     *               status, the function will do nothing; otherwise this will
-     * be updated with any new status from the function.
+     *               status, the function will do nothing; otherwise this will be
+     *               updated with any new status from the function.
      * @stable ICU 53
      */
-    virtual void setContext( UDisplayContext value, UErrorCode& status );
+    virtual void setContext(UDisplayContext value, UErrorCode& status);
 
     /**
-     * Get the formatter's UDisplayContext value for the specified
-     * UDisplayContextType, such as UDISPCTX_TYPE_CAPITALIZATION.
+     * Get the formatter's UDisplayContext value for the specified UDisplayContextType,
+     * such as UDISPCTX_TYPE_CAPITALIZATION.
      * @param type The UDisplayContextType whose value to return
      * @param status Input/output status. If at entry this indicates a failure
-     *               status, the function will do nothing; otherwise this will
-     * be updated with any new status from the function.
+     *               status, the function will do nothing; otherwise this will be
+     *               updated with any new status from the function.
      * @return The UDisplayContextValue for the specified type.
      * @stable ICU 53
      */
-    virtual UDisplayContext getContext( UDisplayContextType type,
-                                        UErrorCode& status ) const;
+    virtual UDisplayContext getContext(UDisplayContextType type, UErrorCode& status) const;
 
     /**
-     * Get the rounding mode. This will always return
-     * NumberFormat::ERoundingMode::kRoundUnnecessary if the subclass does not
-     * support rounding.
+     * Get the rounding mode. This will always return NumberFormat::ERoundingMode::kRoundUnnecessary
+     * if the subclass does not support rounding. 
      * @return A rounding mode
      * @stable ICU 60
      */
-    virtual ERoundingMode getRoundingMode( void ) const;
+    virtual ERoundingMode getRoundingMode(void) const;
 
     /**
-     * Set the rounding mode. If a subclass does not support rounding, this will
-     * do nothing.
+     * Set the rounding mode. If a subclass does not support rounding, this will do nothing.
      * @param roundingMode A rounding mode
      * @stable ICU 60
      */
-    virtual void setRoundingMode( ERoundingMode roundingMode );
+    virtual void setRoundingMode(ERoundingMode roundingMode);
 
 public:
+
     /**
      * Return the class ID for this class.  This is useful for
      * comparing to a return value from getDynamicClassID(). Note that,
-     * because NumberFormat is an abstract base class, no fully constructed
-     * object will have the class ID returned by
-     * NumberFormat::getStaticClassID().
+     * because NumberFormat is an abstract base class, no fully constructed object
+     * will have the class ID returned by NumberFormat::getStaticClassID().
      * @return The class ID for all objects of this class.
      * @stable ICU 2.0
      */
-    static UClassID U_EXPORT2 getStaticClassID( void );
+    static UClassID U_EXPORT2 getStaticClassID(void);
 
     /**
      * Returns a unique class ID POLYMORPHICALLY.  Pure virtual override.
@@ -1087,9 +1079,10 @@ public:
      * other classes have different class IDs.
      * @stable ICU 2.0
      */
-    virtual UClassID getDynamicClassID( void ) const = 0;
+    virtual UClassID getDynamicClassID(void) const = 0;
 
 protected:
+
     /**
      * Default constructor for subclass use only.
      * @stable ICU 2.0
@@ -1100,13 +1093,13 @@ protected:
      * Copy constructor.
      * @stable ICU 2.0
      */
-    NumberFormat( const NumberFormat& );
+    NumberFormat(const NumberFormat&);
 
     /**
      * Assignment operator.
      * @stable ICU 2.0
      */
-    NumberFormat& operator=( const NumberFormat& );
+    NumberFormat& operator=(const NumberFormat&);
 
     /**
      * Returns the currency in effect for this formatter.  Subclasses
@@ -1116,7 +1109,7 @@ protected:
      * have a capacity of at least 4
      * @internal
      */
-    virtual void getEffectiveCurrency( char16_t* result, UErrorCode& ec ) const;
+    virtual void getEffectiveCurrency(char16_t* result, UErrorCode& ec) const;
 
 #ifndef U_HIDE_INTERNAL_API
     /**
@@ -1125,14 +1118,15 @@ protected:
      * either a DecimalFormat or it is NULL.
      * @internal
      */
-    static NumberFormat* makeInstance( const Locale& desiredLocale,
-                                       UNumberFormatStyle style,
-                                       UBool mustBeDecimalFormat,
-                                       UErrorCode& errorCode );
-#endif /* U_HIDE_INTERNAL_API */
+    static NumberFormat* makeInstance(const Locale& desiredLocale,
+                                      UNumberFormatStyle style,
+                                      UBool mustBeDecimalFormat,
+                                      UErrorCode& errorCode);
+#endif  /* U_HIDE_INTERNAL_API */
 
 private:
-    static UBool isStyleSupported( UNumberFormatStyle style );
+
+    static UBool isStyleSupported(UNumberFormatStyle style);
 
     /**
      * Creates the specified decimal format style of the desired locale.
@@ -1141,34 +1135,34 @@ private:
      * @param errorCode        Output param filled with success/failure status.
      * @return                 A new NumberFormat instance.
      */
-    static NumberFormat* makeInstance( const Locale& desiredLocale,
-                                       UNumberFormatStyle style,
-                                       UErrorCode& errorCode );
+    static NumberFormat* makeInstance(const Locale& desiredLocale,
+                                      UNumberFormatStyle style,
+                                      UErrorCode& errorCode);
 
-    UBool fGroupingUsed;
-    int32_t fMaxIntegerDigits;
-    int32_t fMinIntegerDigits;
-    int32_t fMaxFractionDigits;
-    int32_t fMinFractionDigits;
+    UBool       fGroupingUsed;
+    int32_t     fMaxIntegerDigits;
+    int32_t     fMinIntegerDigits;
+    int32_t     fMaxFractionDigits;
+    int32_t     fMinFractionDigits;
 
-protected:
+  protected:
     /** \internal */
     static const int32_t gDefaultMaxIntegerDigits;
     /** \internal */
     static const int32_t gDefaultMinIntegerDigits;
 
-private:
-    UBool fParseIntegerOnly;
-    UBool fLenient; // TRUE => lenient parse is enabled
+  private:
+    UBool      fParseIntegerOnly;
+    UBool      fLenient; // TRUE => lenient parse is enabled
 
     // ISO currency code
-    char16_t fCurrency[ 4 ];
+    char16_t      fCurrency[4];
 
     UDisplayContext fCapitalizationContext;
 
     friend class ICUNumberFormatFactory; // access to makeInstance
     friend class ICUNumberFormatService;
-    friend class ::NumberFormatTest; // access to isStyleSupported()
+    friend class ::NumberFormatTest;  // access to isStyleSupported()
 };
 
 #if !UCONFIG_NO_SERVICE
@@ -1182,6 +1176,7 @@ private:
  */
 class U_I18N_API NumberFormatFactory : public UObject {
 public:
+
     /**
      * Destructor
      * @stable ICU 3.0
@@ -1194,16 +1189,14 @@ public:
      * be listed by getAvailableLocales.
      * @stable ICU 2.6
      */
-    virtual UBool visible( void ) const = 0;
+    virtual UBool visible(void) const = 0;
 
     /**
-     * Return the locale names directly supported by this factory.  The number
-     * of names is returned in count;
+     * Return the locale names directly supported by this factory.  The number of names
+     * is returned in count;
      * @stable ICU 2.6
      */
-    virtual const UnicodeString* getSupportedIDs(
-        int32_t& count,
-        UErrorCode& status ) const = 0;
+    virtual const UnicodeString * getSupportedIDs(int32_t &count, UErrorCode& status) const = 0;
 
     /**
      * Return a number format of the appropriate type.  If the locale
@@ -1212,13 +1205,11 @@ public:
      * return an appropriate instance of NumberFormat.
      * @stable ICU 2.6
      */
-    virtual NumberFormat* createFormat( const Locale& loc,
-                                        UNumberFormatStyle formatType ) = 0;
+    virtual NumberFormat* createFormat(const Locale& loc, UNumberFormatStyle formatType) = 0;
 };
 
 /**
- * A NumberFormatFactory that supports a single locale.  It can be visible or
- * invisible.
+ * A NumberFormatFactory that supports a single locale.  It can be visible or invisible.
  * @stable ICU 2.6
  */
 class U_I18N_API SimpleNumberFormatFactory : public NumberFormatFactory {
@@ -1239,7 +1230,7 @@ public:
     /**
      * @stable ICU 2.6
      */
-    SimpleNumberFormatFactory( const Locale& locale, UBool visible = TRUE );
+    SimpleNumberFormatFactory(const Locale& locale, UBool visible = TRUE);
 
     /**
      * @stable ICU 3.0
@@ -1249,23 +1240,26 @@ public:
     /**
      * @stable ICU 2.6
      */
-    virtual UBool visible( void ) const;
+    virtual UBool visible(void) const;
 
     /**
      * @stable ICU 2.6
      */
-    virtual const UnicodeString* getSupportedIDs( int32_t& count,
-                                                  UErrorCode& status ) const;
+    virtual const UnicodeString * getSupportedIDs(int32_t &count, UErrorCode& status) const;
 };
 #endif /* #if !UCONFIG_NO_SERVICE */
 
 // -------------------------------------
 
-inline UBool NumberFormat::isParseIntegerOnly() const {
+inline UBool
+NumberFormat::isParseIntegerOnly() const
+{
     return fParseIntegerOnly;
 }
 
-inline UBool NumberFormat::isLenient() const {
+inline UBool
+NumberFormat::isLenient() const
+{
     return fLenient;
 }
 
@@ -1276,4 +1270,4 @@ U_NAMESPACE_END
 #endif /* U_SHOW_CPLUSPLUS_API */
 
 #endif // _NUMFMT
-// eof
+//eof

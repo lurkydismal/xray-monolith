@@ -27,7 +27,7 @@ namespace tbb {
 namespace interface7 {
 namespace internal {
 
-template < typename Mutex, bool is_rw >
+template<typename Mutex, bool is_rw>
 class padded_mutex;
 
 //! An eliding lock that occupies a single byte.
@@ -41,15 +41,15 @@ class x86_eliding_mutex : tbb::internal::mutex_copy_deprecated_and_disabled {
     //! 0 if lock is released, 1 if lock is acquired.
     __TBB_atomic_flag flag;
 
-    friend class padded_mutex< x86_eliding_mutex, false >;
+    friend class padded_mutex<x86_eliding_mutex, false>;
 
 public:
     //! Construct unacquired lock.
     /** Equivalent to zero-initialization of *this. */
-    x86_eliding_mutex() : flag( 0 ) {}
+    x86_eliding_mutex() : flag(0) {}
 
-// bug in gcc 3.x.x causes syntax error in spite of the friend declaration
-// above. Make the scoped_lock public in that case.
+// bug in gcc 3.x.x causes syntax error in spite of the friend declaration above.
+// Make the scoped_lock public in that case.
 #if __TBB_USE_X86_ELIDING_MUTEX || __TBB_GCC_VERSION < 40000
 #else
     // by default we will not provide the scoped_lock interface.  The user
@@ -66,16 +66,16 @@ private:
 
     public:
         //! Construct without acquiring a mutex.
-        scoped_lock() : my_mutex( NULL ) {}
+        scoped_lock() : my_mutex(NULL) {}
 
         //! Construct and acquire lock on a mutex.
-        scoped_lock( x86_eliding_mutex& m ) : my_mutex( NULL ) { acquire( m ); }
+        scoped_lock( x86_eliding_mutex& m ) : my_mutex(NULL) { acquire(m); }
 
         //! Acquire lock.
         void acquire( x86_eliding_mutex& m ) {
             __TBB_ASSERT( !my_mutex, "already holding a lock" );
 
-            my_mutex = &m;
+            my_mutex=&m;
             my_mutex->lock();
         }
 
@@ -85,7 +85,7 @@ private:
             __TBB_ASSERT( !my_mutex, "already holding a lock" );
 
             bool result = m.try_lock();
-            if ( result ) {
+            if( result ) {
                 my_mutex = &m;
             }
             return result;
@@ -93,8 +93,7 @@ private:
 
         //! Release lock
         void release() {
-            __TBB_ASSERT( my_mutex,
-                          "release on scoped_lock that is not holding a lock" );
+            __TBB_ASSERT( my_mutex, "release on scoped_lock that is not holding a lock" );
 
             my_mutex->unlock();
             my_mutex = NULL;
@@ -102,7 +101,7 @@ private:
 
         //! Destroy lock.  If holding a lock, releases the lock first.
         ~scoped_lock() {
-            if ( my_mutex ) {
+            if( my_mutex ) {
                 release();
             }
         }
@@ -110,7 +109,7 @@ private:
 #if __TBB_USE_X86_ELIDING_MUTEX || __TBB_GCC_VERSION < 40000
 #else
 public:
-#endif /* __TBB_USE_X86_ELIDING_MUTEX */
+#endif  /* __TBB_USE_X86_ELIDING_MUTEX */
 
     // Mutex traits
     static const bool is_rw_mutex = false;
@@ -120,14 +119,20 @@ public:
     // ISO C++0x compatibility methods
 
     //! Acquire lock
-    void lock() { __TBB_LockByteElided( flag ); }
+    void lock() {
+        __TBB_LockByteElided(flag);
+    }
 
     //! Try acquiring lock (non-blocking)
     /** Return true if lock acquired; false otherwise. */
-    bool try_lock() { return __TBB_TryLockByteElided( flag ); }
+    bool try_lock() {
+        return __TBB_TryLockByteElided(flag);
+    }
 
     //! Release lock
-    void unlock() { __TBB_UnlockByteElided( flag ); }
+    void unlock() {
+        __TBB_UnlockByteElided( flag );
+    }
 }; // end of x86_eliding_mutex
 
 } // namespace internal

@@ -18,6 +18,8 @@
  * Or go to http://www.gnu.org/copyleft/lgpl.html
  */
 
+#include "config.h"
+
 #include <algorithm>
 #include <array>
 #include <cstdlib>
@@ -28,7 +30,6 @@
 #include "alnumbers.h"
 #include "alnumeric.h"
 #include "alspan.h"
-#include "config.h"
 #include "core/ambidefs.h"
 #include "core/bufferline.h"
 #include "core/context.h"
@@ -39,141 +40,136 @@
 #include "core/mixer.h"
 #include "intrusive_ptr.h"
 
+
 namespace {
 
 using uint = unsigned int;
 
 #define MAX_UPDATE_SAMPLES 128
 
-#define WAVEFORM_FRACBITS 24
-#define WAVEFORM_FRACONE ( 1 << WAVEFORM_FRACBITS )
-#define WAVEFORM_FRACMASK ( WAVEFORM_FRACONE - 1 )
+#define WAVEFORM_FRACBITS  24
+#define WAVEFORM_FRACONE   (1<<WAVEFORM_FRACBITS)
+#define WAVEFORM_FRACMASK  (WAVEFORM_FRACONE-1)
 
-inline float Sin( uint index ) {
-    constexpr float scale{ al::numbers::pi_v< float > * 2.0f /
-                           WAVEFORM_FRACONE };
-    return std::sin( static_cast< float >( index ) * scale );
+inline float Sin(uint index)
+{
+    constexpr float scale{al::numbers::pi_v<float>*2.0f / WAVEFORM_FRACONE};
+    return std::sin(static_cast<float>(index) * scale);
 }
 
-inline float Saw( uint index ) {
-    return static_cast< float >( index ) * ( 2.0f / WAVEFORM_FRACONE ) - 1.0f;
-}
+inline float Saw(uint index)
+{ return static_cast<float>(index)*(2.0f/WAVEFORM_FRACONE) - 1.0f; }
 
-inline float Square( uint index ) {
-    return static_cast< float >(
-        static_cast< int >( ( index >> ( WAVEFORM_FRACBITS - 2 ) ) & 2 ) - 1 );
-}
+inline float Square(uint index)
+{ return static_cast<float>(static_cast<int>((index>>(WAVEFORM_FRACBITS-2))&2) - 1); }
 
-inline float One( uint ) {
-    return 1.0f;
-}
+inline float One(uint) { return 1.0f; }
 
-template < float ( &func )( uint ) >
-void Modulate( float* RESTRICT dst, uint index, const uint step, size_t todo ) {
-    for ( size_t i{ 0u }; i < todo; i++ ) {
+template<float (&func)(uint)>
+void Modulate(float *RESTRICT dst, uint index, const uint step, size_t todo)
+{
+    for(size_t i{0u};i < todo;i++)
+    {
         index += step;
         index &= WAVEFORM_FRACMASK;
-        dst[ i ] = func( index );
+        dst[i] = func(index);
     }
 }
 
-struct ModulatorState final : public EffectState {
-    void ( *mGetSamples )( float* RESTRICT, uint, const uint, size_t ){};
 
-    uint mIndex{ 0 };
-    uint mStep{ 1 };
+struct ModulatorState final : public EffectState {
+    void (*mGetSamples)(float*RESTRICT, uint, const uint, size_t){};
+
+    uint mIndex{0};
+    uint mStep{1};
 
     struct {
-        uint mTargetChannel{ InvalidChannelIndex };
+        uint mTargetChannel{InvalidChannelIndex};
 
         BiquadFilter mFilter;
 
         float mCurrentGain{};
         float mTargetGain{};
-    } mChans[ MaxAmbiChannels ];
+    } mChans[MaxAmbiChannels];
 
-    void deviceUpdate( const DeviceBase* device,
-                       const BufferStorage* buffer ) override;
-    void update( const ContextBase* context,
-                 const EffectSlot* slot,
-                 const EffectProps* props,
-                 const EffectTarget target ) override;
-    void process( const size_t samplesToDo,
-                  const al::span< const FloatBufferLine > samplesIn,
-                  const al::span< FloatBufferLine > samplesOut ) override;
 
-    DEF_NEWDEL( ModulatorState )
+    void deviceUpdate(const DeviceBase *device, const BufferStorage *buffer) override;
+    void update(const ContextBase *context, const EffectSlot *slot, const EffectProps *props,
+        const EffectTarget target) override;
+    void process(const size_t samplesToDo, const al::span<const FloatBufferLine> samplesIn,
+        const al::span<FloatBufferLine> samplesOut) override;
+
+    DEF_NEWDEL(ModulatorState)
 };
 
-void ModulatorState::deviceUpdate( const DeviceBase*, const BufferStorage* ) {
-    for ( auto& e : mChans ) {
+void ModulatorState::deviceUpdate(const DeviceBase*, const BufferStorage*)
+{
+    for(auto &e : mChans)
+    {
         e.mTargetChannel = InvalidChannelIndex;
         e.mFilter.clear();
         e.mCurrentGain = 0.0f;
     }
 }
 
-void ModulatorState::update( const ContextBase* context,
-                             const EffectSlot* slot,
-                             const EffectProps* props,
-                             const EffectTarget target ) {
-    const DeviceBase* device{ context->mDevice };
+void ModulatorState::update(const ContextBase *context, const EffectSlot *slot,
+    const EffectProps *props, const EffectTarget target)
+{
+    const DeviceBase *device{context->mDevice};
 
-    const float step{ props->Modulator.Frequency /
-                      static_cast< float >( device->Frequency ) };
-    mStep = fastf2u( clampf( step * WAVEFORM_FRACONE, 0.0f,
-                             float{ WAVEFORM_FRACONE - 1 } ) );
+    const float step{props->Modulator.Frequency / static_cast<float>(device->Frequency)};
+    mStep = fastf2u(clampf(step*WAVEFORM_FRACONE, 0.0f, float{WAVEFORM_FRACONE-1}));
 
-    if ( mStep == 0 )
-        mGetSamples = Modulate< One >;
-    else if ( props->Modulator.Waveform == ModulatorWaveform::Sinusoid )
-        mGetSamples = Modulate< Sin >;
-    else if ( props->Modulator.Waveform == ModulatorWaveform::Sawtooth )
-        mGetSamples = Modulate< Saw >;
+    if(mStep == 0)
+        mGetSamples = Modulate<One>;
+    else if(props->Modulator.Waveform == ModulatorWaveform::Sinusoid)
+        mGetSamples = Modulate<Sin>;
+    else if(props->Modulator.Waveform == ModulatorWaveform::Sawtooth)
+        mGetSamples = Modulate<Saw>;
     else /*if(props->Modulator.Waveform == ModulatorWaveform::Square)*/
-        mGetSamples = Modulate< Square >;
+        mGetSamples = Modulate<Square>;
 
-    float f0norm{ props->Modulator.HighPassCutoff /
-                  static_cast< float >( device->Frequency ) };
-    f0norm = clampf( f0norm, 1.0f / 512.0f, 0.49f );
+    float f0norm{props->Modulator.HighPassCutoff / static_cast<float>(device->Frequency)};
+    f0norm = clampf(f0norm, 1.0f/512.0f, 0.49f);
     /* Bandwidth value is constant in octaves. */
-    mChans[ 0 ].mFilter.setParamsFromBandwidth( BiquadType::HighPass, f0norm,
-                                                1.0f, 0.75f );
-    for ( size_t i{ 1u }; i < slot->Wet.Buffer.size(); ++i )
-        mChans[ i ].mFilter.copyParamsFrom( mChans[ 0 ].mFilter );
+    mChans[0].mFilter.setParamsFromBandwidth(BiquadType::HighPass, f0norm, 1.0f, 0.75f);
+    for(size_t i{1u};i < slot->Wet.Buffer.size();++i)
+        mChans[i].mFilter.copyParamsFrom(mChans[0].mFilter);
 
     mOutTarget = target.Main->Buffer;
-    auto set_channel = [ this ]( size_t idx, uint outchan, float outgain ) {
-        mChans[ idx ].mTargetChannel = outchan;
-        mChans[ idx ].mTargetGain = outgain;
+    auto set_channel = [this](size_t idx, uint outchan, float outgain)
+    {
+        mChans[idx].mTargetChannel = outchan;
+        mChans[idx].mTargetGain = outgain;
     };
-    target.Main->setAmbiMixParams( slot->Wet, slot->Gain, set_channel );
+    target.Main->setAmbiMixParams(slot->Wet, slot->Gain, set_channel);
 }
 
-void ModulatorState::process( const size_t samplesToDo,
-                              const al::span< const FloatBufferLine > samplesIn,
-                              const al::span< FloatBufferLine > samplesOut ) {
-    for ( size_t base{ 0u }; base < samplesToDo; ) {
-        alignas( 16 ) float modsamples[ MAX_UPDATE_SAMPLES ];
-        const size_t td{ minz( MAX_UPDATE_SAMPLES, samplesToDo - base ) };
+void ModulatorState::process(const size_t samplesToDo, const al::span<const FloatBufferLine> samplesIn, const al::span<FloatBufferLine> samplesOut)
+{
+    for(size_t base{0u};base < samplesToDo;)
+    {
+        alignas(16) float modsamples[MAX_UPDATE_SAMPLES];
+        const size_t td{minz(MAX_UPDATE_SAMPLES, samplesToDo-base)};
 
-        mGetSamples( modsamples, mIndex, mStep, td );
-        mIndex += static_cast< uint >( mStep * td );
+        mGetSamples(modsamples, mIndex, mStep, td);
+        mIndex += static_cast<uint>(mStep * td);
         mIndex &= WAVEFORM_FRACMASK;
 
-        auto chandata = std::begin( mChans );
-        for ( const auto& input : samplesIn ) {
-            const size_t outidx{ chandata->mTargetChannel };
-            if ( outidx != InvalidChannelIndex ) {
-                alignas( 16 ) float temps[ MAX_UPDATE_SAMPLES ];
+        auto chandata = std::begin(mChans);
+        for(const auto &input : samplesIn)
+        {
+            const size_t outidx{chandata->mTargetChannel};
+            if(outidx != InvalidChannelIndex)
+            {
+                alignas(16) float temps[MAX_UPDATE_SAMPLES];
 
-                chandata->mFilter.process( { &input[ base ], td }, temps );
-                for ( size_t i{ 0u }; i < td; i++ )
-                    temps[ i ] *= modsamples[ i ];
+                chandata->mFilter.process({&input[base], td}, temps);
+                for(size_t i{0u};i < td;i++)
+                    temps[i] *= modsamples[i];
 
-                MixSamples( { temps, td }, samplesOut[ outidx ].data() + base,
-                            chandata->mCurrentGain, chandata->mTargetGain,
-                            samplesToDo - base );
+                MixSamples({temps, td}, samplesOut[outidx].data()+base, chandata->mCurrentGain,
+                    chandata->mTargetGain, samplesToDo-base);
             }
             ++chandata;
         }
@@ -182,15 +178,16 @@ void ModulatorState::process( const size_t samplesToDo,
     }
 }
 
+
 struct ModulatorStateFactory final : public EffectStateFactory {
-    al::intrusive_ptr< EffectState > create() override {
-        return al::intrusive_ptr< EffectState >{ new ModulatorState{} };
-    }
+    al::intrusive_ptr<EffectState> create() override
+    { return al::intrusive_ptr<EffectState>{new ModulatorState{}}; }
 };
 
 } // namespace
 
-EffectStateFactory* ModulatorStateFactory_getFactory() {
+EffectStateFactory *ModulatorStateFactory_getFactory()
+{
     static ModulatorStateFactory ModulatorFactory{};
     return &ModulatorFactory;
 }

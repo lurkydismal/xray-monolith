@@ -24,56 +24,48 @@
 
 #include <luabind/config.hpp>
 
-namespace luabind {
-namespace detail {
-template < class T >
-struct type {};
+namespace luabind { namespace detail
+{
+	template<class T>
+	struct type {};
 
-enum class Direction : unsigned { lua_to_cpp, cpp_to_lua };
+    enum class Direction : unsigned
+    {
+        lua_to_cpp,
+        cpp_to_lua
+    };
 
-template < class T >
-struct by_value {};
+	template<class T> struct by_value {};
+	template<class T> struct by_reference {};
+	template<class T> struct by_const_reference {};
+	template<class T> struct by_pointer {};
+	template<class T> struct by_const_pointer {};
 
-template < class T >
-struct by_reference {};
+	struct converter_policy_tag {};
 
-template < class T >
-struct by_const_reference {};
+	struct ltstr
+	{
+#pragma warning(push)
+#pragma warning(disable:4995)
+		bool operator()(const char* s1, const char* s2) const { return std::strcmp(s1, s2) < 0; }
+#pragma warning(pop)
+	};
 
-template < class T >
-struct by_pointer {};
+	template<int N>
+	struct aligned 
+	{
+		char storage[N];
+	};
 
-template < class T >
-struct by_const_pointer {};
+	// returns the offset added to a Derived* when cast to a Base*
+	template<class Derived, class Base>
+	ptrdiff_t ptr_offset()
+	{
+		aligned<sizeof(Derived)> obj;
+		Derived* ptr = reinterpret_cast<Derived*>(&obj);
 
-struct converter_policy_tag {};
+		return ptrdiff_t(static_cast<char*>(static_cast<void*>(static_cast<Base*>(ptr)))
+		- static_cast<char*>(static_cast<void*>(ptr)));
+	}
 
-struct ltstr {
-#pragma warning( push )
-#pragma warning( disable : 4995 )
-
-    bool operator()( const char* s1, const char* s2 ) const {
-        return std::strcmp( s1, s2 ) < 0;
-    }
-
-#pragma warning( pop )
-};
-
-template < int N >
-struct aligned {
-    char storage[ N ];
-};
-
-// returns the offset added to a Derived* when cast to a Base*
-template < class Derived, class Base >
-ptrdiff_t ptr_offset() {
-    aligned< sizeof( Derived ) > obj;
-    Derived* ptr = reinterpret_cast< Derived* >( &obj );
-
-    return ptrdiff_t( static_cast< char* >( static_cast< void* >(
-                          static_cast< Base* >( ptr ) ) ) -
-                      static_cast< char* >( static_cast< void* >( ptr ) ) );
-}
-
-} // namespace detail
-} // namespace luabind
+}}

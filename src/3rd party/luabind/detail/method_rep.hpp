@@ -23,84 +23,89 @@
 #pragma once
 
 #include <luabind/config.hpp>
-#include <luabind/detail/overload_rep.hpp>
 
 #include <vector>
 
-namespace luabind {
-namespace detail {
+#include <luabind/detail/overload_rep.hpp>
 
-class class_rep;
+namespace luabind { namespace detail
+{
 
-/*
-        contains information about a method. It contains
-        a list of all overloads of the function. If a class
-        derives from another class all methods and overloads
-        are copied into the derived class and the pointer
-        offset is applied to each copied method. The pointer
-        offset is needed because if the method is called
-        on a derived object the method needs a pointer
-        to the base class, and that typecast may need
-        an offseted pointer (if multiple inheritance is used).
-*/
-struct method_rep {
-    method_rep() = default;
-    method_rep( const method_rep& ) = default;
+	class class_rep;
 
-    method_rep( method_rep&& that ) noexcept
-        : name( that.name ),
-          crep( that.crep ),
-          m_overloads( std::move( that.m_overloads ) ) {
-        that.name = nullptr;
-        that.crep = nullptr;
-    }
+	/*
+		contains information about a method. It contains
+		a list of all overloads of the function. If a class
+		derives from another class all methods and overloads
+		are copied into the derived class and the pointer
+		offset is applied to each copied method. The pointer
+		offset is needed because if the method is called
+		on a derived object the method needs a pointer
+		to the base class, and that typecast may need
+		an offseted pointer (if multiple inheritance is used).
+	*/
+	struct method_rep
+	{
+        method_rep() = default;
+        method_rep(const method_rep&) = default;
 
-    method_rep& operator=( const method_rep& ) = default;
-
-    method_rep& operator=( method_rep&& that ) noexcept {
-        name = that.name;
-        crep = that.crep;
-        m_overloads = std::move( that.m_overloads );
-
-        that.name = nullptr;
-        that.crep = nullptr;
-        return *this;
-    }
-
-    void add_overload( const overload_rep& o ) {
-        auto copy = o;
-        add_overload( std::move( copy ) );
-    }
-
-    void add_overload( overload_rep&& o ) {
-        auto i = std::find( m_overloads.begin(), m_overloads.end(), o );
-        if ( i == m_overloads.end() ) {
-            // if this overload does not exist, we can just add it to the end of
-            // the overloads list
-            m_overloads.push_back( std::move( o ) );
-        } else {
-            // if this specific overload already exists, replace it
-            *i = std::move( o );
+        method_rep(method_rep&& that) noexcept
+            : name(that.name),
+              crep(that.crep),
+              m_overloads(std::move(that.m_overloads))
+        {
+            that.name = nullptr;
+            that.crep = nullptr;
         }
-    }
 
-    const vector_class< overload_rep >& overloads() const throw() {
-        return m_overloads;
-    }
+        method_rep& operator= (const method_rep&) = default;
 
-    // this is a pointer to the string kept in class_rep::m_methods, and those
-    // strings are deleted at the end of the lua session.
-    const char* name;
+        method_rep& operator= (method_rep&& that) noexcept
+        {
+            name = that.name;
+            crep = that.crep;
+            m_overloads = std::move(that.m_overloads);
+            
+            that.name = nullptr;
+            that.crep = nullptr;
+            return *this;
+        }
 
-    // the class_rep in which this method_rep is found
-    const class_rep* crep;
+		void add_overload(const overload_rep& o)
+		{
+            auto copy = o;
+            add_overload(std::move(copy));
+		}
 
-private:
-    // this have to be write protected, since each time an overload is
-    // added it has to be checked for existence. add_overload() should
-    // be used.
-    vector_class< overload_rep > m_overloads;
-};
+        void add_overload(overload_rep&& o)
+        {
+            auto i = std::find(m_overloads.begin(), m_overloads.end(), o);
+            if (i == m_overloads.end())
+            {
+                // if this overload does not exist, we can just add it to the end of the overloads list
+                m_overloads.push_back(std::move(o));
+            }
+            else
+            {
+                // if this specific overload already exists, replace it
+                *i = std::move(o);
+            }
+        }
 
-} // namespace detail
-} // namespace luabind
+		const vector_class<overload_rep>& overloads() const throw() { return m_overloads; }
+
+		// this is a pointer to the string kept in class_rep::m_methods, and those strings are deleted
+		// at the end of the lua session.
+		const char* name;
+
+		// the class_rep in which this method_rep is found
+		const class_rep* crep;
+
+	private:
+		// this have to be write protected, since each time an overload is
+		// added it has to be checked for existence. add_overload() should
+		// be used.
+		vector_class<overload_rep> m_overloads;
+	};
+
+}}

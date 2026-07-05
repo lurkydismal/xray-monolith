@@ -25,110 +25,101 @@
 #include <luabind/config.hpp>
 #include <luabind/detail/ref.hpp>
 
-namespace luabind {
-namespace detail {
-// class class_rep;
+namespace luabind { namespace detail
+{
+	//class class_rep;
 
-void finalize( lua_State* L, class_rep* crep );
+	void finalize(lua_State* L, class_rep* crep);
 
-// this class is allocated inside lua for each pointer.
-// it contains the actual c++ object-pointer.
-// it also tells if it is const or not.
-class LUABIND_API object_rep {
-public:
-    enum : unsigned { constant = 1, owner = 2, lua_class = 4, call_super = 8 };
+	// this class is allocated inside lua for each pointer.
+	// it contains the actual c++ object-pointer.
+	// it also tells if it is const or not.
+	class LUABIND_API object_rep
+	{
+	public:
+		enum: unsigned { constant = 1, owner = 2, lua_class = 4, call_super = 8 };
 
-    // dest is a function that is called to delete the c++ object this struct
-    // holds
-    object_rep( void* obj,
-                class_rep* crep,
-                int flags,
-                void ( *dest )( void* ) );
-    object_rep( class_rep* crep,
-                int flags,
-                detail::lua_reference const& table_ref );
-    ~object_rep();
+		// dest is a function that is called to delete the c++ object this struct holds
+		object_rep(void* obj, class_rep* crep, int flags, void(*dest)(void*));
+		object_rep(class_rep* crep, int flags, detail::lua_reference const& table_ref);
+		~object_rep();
 
-    void* ptr() const { return m_object; }
+		void* ptr() const { return m_object; }
 
-    void* ptr( ptrdiff_t pointer_offset ) const {
-        return reinterpret_cast< char* >( m_object ) + pointer_offset;
-    }
+		void* ptr(ptrdiff_t pointer_offset) const
+		{
+			return reinterpret_cast<char*>(m_object) + pointer_offset;
+		}
 
-    const class_rep* crep() const { return m_classrep; }
+		const class_rep* crep() const { return m_classrep; }
+		class_rep* crep() { return m_classrep; }
+		int flags() const { return m_flags; }
+		void set_flags(int flags) { m_flags = flags; }
 
-    class_rep* crep() { return m_classrep; }
+		detail::lua_reference& get_lua_table() { return m_lua_table_ref; }
+		detail::lua_reference const& get_lua_table() const { return m_lua_table_ref; }
 
-    int flags() const { return m_flags; }
+		void remove_ownership();
+		void set_destructor(void(*ptr)(void*));
 
-    void set_flags( int flags ) { m_flags = flags; }
+		void set_object(void* p) { m_object = p; }
 
-    detail::lua_reference& get_lua_table() { return m_lua_table_ref; }
+		void add_dependency(lua_State* L, int index);
 
-    detail::lua_reference const& get_lua_table() const {
-        return m_lua_table_ref;
-    }
+		static int garbage_collector(lua_State* L);
 
-    void remove_ownership();
-    void set_destructor( void ( *ptr )( void* ) );
+	private:
 
-    void set_object( void* p ) { m_object = p; }
+		void* m_object; // pointer to the c++ object or holder / if lua class, this is a pointer the the instance of the
+									// c++ base or 0.
+		class_rep* m_classrep; // the class information about this object's type
+		int m_flags;
+#pragma warning(push)
+#pragma warning(disable:4251)
+		detail::lua_reference m_lua_table_ref; // reference to lua table if this is a lua class
+#pragma warning(pop)
+		void(*m_destructor)(void*); // this could be in class_rep? it can't: see intrusive_ptr
+		int m_dependency_cnt; // counts dependencies
+#pragma warning(push)
+#pragma warning(disable:4251)
+		detail::lua_reference m_dependency_ref; // reference to lua table holding dependency references
+#pragma warning(pop)
 
-    void add_dependency( lua_State* L, int index );
+		// ======== the new way, separate object_rep from the holder
+//		instance_holder* m_instance;
+	};
 
-    static int garbage_collector( lua_State* L );
+	template<class T>
+	struct delete_s
+	{
+		static void apply(void* ptr)
+		{
+			T*				temp = static_cast<T*>(ptr);
+			luabind_delete	(temp);
+		}
+	};
 
-private:
-    void* m_object; // pointer to the c++ object or holder / if lua class, this
-                    // is a pointer the the instance of the c++ base or 0.
-    class_rep* m_classrep; // the class information about this object's type
-    int m_flags;
-#pragma warning( push )
-#pragma warning( disable : 4251 )
-    detail::lua_reference
-        m_lua_table_ref; // reference to lua table if this is a lua class
-#pragma warning( pop )
-    void ( *m_destructor )(
-        void* ); // this could be in class_rep? it can't: see intrusive_ptr
-    int m_dependency_cnt; // counts dependencies
-#pragma warning( push )
-#pragma warning( disable : 4251 )
-    detail::lua_reference m_dependency_ref; // reference to lua table holding
-                                            // dependency references
-#pragma warning( pop )
+	template<class T>
+	struct destruct_only_s
+	{
+		static void apply(void* ptr)
+		{
+			static_cast<T*>(ptr)->~T();
+		}
+	};
 
-    // ======== the new way, separate object_rep from the holder
-    //		instance_holder* m_instance;
-};
 
-template < class T >
-struct delete_s {
-    static void apply( void* ptr ) {
-        T* temp = static_cast< T* >( ptr );
-        luabind_delete( temp );
-    }
-};
+	inline object_rep* is_class_object(lua_State* L, int index)
+	{
+		object_rep* obj = static_cast<detail::object_rep*>(lua_touserdata(L, index));
+		if (!obj) return nullptr;
+		if (!lua_getmetatable(L, index)) return 0;
 
-template < class T >
-struct destruct_only_s {
-    static void apply( void* ptr ) { static_cast< T* >( ptr )->~T(); }
-};
-
-inline object_rep* is_class_object( lua_State* L, int index ) {
-    object_rep* obj =
-        static_cast< detail::object_rep* >( lua_touserdata( L, index ) );
-    if ( !obj )
-        return nullptr;
-    if ( !lua_getmetatable( L, index ) )
-        return 0;
-
-    lua_pushstring( L, "__luabind_class" );
-    lua_gettable( L, -2 );
-    bool confirmation = lua_toboolean( L, -1 ) != 0;
-    lua_pop( L, 2 );
-    if ( !confirmation )
-        return nullptr;
-    return obj;
-}
-} // namespace detail
-} // namespace luabind
+		lua_pushstring(L, "__luabind_class");
+		lua_gettable(L, -2);
+		bool confirmation = lua_toboolean(L, -1) != 0;
+		lua_pop(L, 2);
+		if (!confirmation) return nullptr;
+		return obj;
+	}
+}}

@@ -23,9 +23,9 @@
 
 #include "unicode/locid.h"
 #include "unicode/strenum.h"
-#include "unicode/udisplaycontext.h"
-#include "unicode/uldnames.h"
 #include "unicode/uscript.h"
+#include "unicode/uldnames.h"
+#include "unicode/udisplaycontext.h"
 
 U_NAMESPACE_BEGIN
 
@@ -45,14 +45,13 @@ public:
 
     /**
      * Convenience overload of
-     * {@link #createInstance(const Locale& locale, UDialectHandling
-     * dialectHandling)} that specifies STANDARD dialect handling.
+     * {@link #createInstance(const Locale& locale, UDialectHandling dialectHandling)}
+     * that specifies STANDARD dialect handling.
      * @param locale the display locale
      * @return a LocaleDisplayNames instance
      * @stable ICU 4.4
      */
-    inline static LocaleDisplayNames* U_EXPORT2
-    createInstance( const Locale& locale );
+    inline static LocaleDisplayNames* U_EXPORT2 createInstance(const Locale& locale);
 
     /**
      * Returns an instance of LocaleDisplayNames that returns names
@@ -64,8 +63,8 @@ public:
      * @return a LocaleDisplayNames instance
      * @stable ICU 4.4
      */
-    static LocaleDisplayNames* U_EXPORT2
-    createInstance( const Locale& locale, UDialectHandling dialectHandling );
+    static LocaleDisplayNames* U_EXPORT2 createInstance(const Locale& locale,
+                            UDialectHandling dialectHandling);
 
     /**
      * Returns an instance of LocaleDisplayNames that returns names formatted
@@ -78,10 +77,8 @@ public:
      * @return a LocaleDisplayNames instance
      * @stable ICU 51
      */
-    static LocaleDisplayNames* U_EXPORT2
-    createInstance( const Locale& locale,
-                    UDisplayContext* contexts,
-                    int32_t length );
+    static LocaleDisplayNames* U_EXPORT2 createInstance(const Locale& locale,
+                            UDisplayContext *contexts, int32_t length);
 
     // getters for state
     /**
@@ -105,7 +102,7 @@ public:
      * @return the UDisplayContext for the specified type.
      * @stable ICU 51
      */
-    virtual UDisplayContext getContext( UDisplayContextType type ) const = 0;
+    virtual UDisplayContext getContext(UDisplayContextType type) const = 0;
 
     // names for entire locales
     /**
@@ -115,8 +112,8 @@ public:
      * @return the display name of the provided locale
      * @stable ICU 4.4
      */
-    virtual UnicodeString& localeDisplayName( const Locale& locale,
-                                              UnicodeString& result ) const = 0;
+    virtual UnicodeString& localeDisplayName(const Locale& locale,
+                         UnicodeString& result) const = 0;
 
     /**
      * Returns the display name of the provided locale id.
@@ -125,8 +122,8 @@ public:
      * @return the display name of the provided locale
      * @stable ICU 4.4
      */
-    virtual UnicodeString& localeDisplayName( const char* localeId,
-                                              UnicodeString& result ) const = 0;
+    virtual UnicodeString& localeDisplayName(const char* localeId,
+                         UnicodeString& result) const = 0;
 
     // names for components of a locale id
     /**
@@ -136,9 +133,8 @@ public:
      * @return the display name of the provided language code
      * @stable ICU 4.4
      */
-    virtual UnicodeString& languageDisplayName(
-        const char* lang,
-        UnicodeString& result ) const = 0;
+    virtual UnicodeString& languageDisplayName(const char* lang,
+                           UnicodeString& result) const = 0;
 
     /**
      * Returns the display name of the provided script code.
@@ -147,8 +143,8 @@ public:
      * @return the display name of the provided script code
      * @stable ICU 4.4
      */
-    virtual UnicodeString& scriptDisplayName( const char* script,
-                                              UnicodeString& result ) const = 0;
+    virtual UnicodeString& scriptDisplayName(const char* script,
+                         UnicodeString& result) const = 0;
 
     /**
      * Returns the display name of the provided script code.
@@ -157,8 +153,8 @@ public:
      * @return the display name of the provided script code
      * @stable ICU 4.4
      */
-    virtual UnicodeString& scriptDisplayName( UScriptCode scriptCode,
-                                              UnicodeString& result ) const = 0;
+    virtual UnicodeString& scriptDisplayName(UScriptCode scriptCode,
+                         UnicodeString& result) const = 0;
 
     /**
      * Returns the display name of the provided region code.
@@ -167,8 +163,8 @@ public:
      * @return the display name of the provided region code
      * @stable ICU 4.4
      */
-    virtual UnicodeString& regionDisplayName( const char* region,
-                                              UnicodeString& result ) const = 0;
+    virtual UnicodeString& regionDisplayName(const char* region,
+                         UnicodeString& result) const = 0;
 
     /**
      * Returns the display name of the provided variant.
@@ -177,9 +173,8 @@ public:
      * @return the display name of the provided variant
      * @stable ICU 4.4
      */
-    virtual UnicodeString& variantDisplayName(
-        const char* variant,
-        UnicodeString& result ) const = 0;
+    virtual UnicodeString& variantDisplayName(const char* variant,
+                          UnicodeString& result) const = 0;
 
     /**
      * Returns the display name of the provided locale key.
@@ -188,27 +183,23 @@ public:
      * @return the display name of the provided locale key
      * @stable ICU 4.4
      */
-    virtual UnicodeString& keyDisplayName( const char* key,
-                                           UnicodeString& result ) const = 0;
+    virtual UnicodeString& keyDisplayName(const char* key,
+                      UnicodeString& result) const = 0;
 
     /**
-     * Returns the display name of the provided value (used with the provided
-     * key).
+     * Returns the display name of the provided value (used with the provided key).
      * @param key the locale key name
      * @param value the locale key's value
      * @param result receives the value's display name
      * @return the display name of the provided value
      * @stable ICU 4.4
      */
-    virtual UnicodeString& keyValueDisplayName(
-        const char* key,
-        const char* value,
-        UnicodeString& result ) const = 0;
+    virtual UnicodeString& keyValueDisplayName(const char* key, const char* value,
+                           UnicodeString& result) const = 0;
 };
 
-inline LocaleDisplayNames* LocaleDisplayNames::createInstance(
-    const Locale& locale ) {
-    return LocaleDisplayNames::createInstance( locale, ULDN_STANDARD_NAMES );
+inline LocaleDisplayNames* LocaleDisplayNames::createInstance(const Locale& locale) {
+  return LocaleDisplayNames::createInstance(locale, ULDN_STANDARD_NAMES);
 }
 
 U_NAMESPACE_END

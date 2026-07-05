@@ -25,11 +25,11 @@
 /* sigpipe handling */
 #include <signal.h>
 /* IP stuff*/
-#include <arpa/inet.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 /* TCP options (nagle algorithm disable) */
-#include <net/if.h>
 #include <netinet/tcp.h>
+#include <net/if.h>
 
 #ifndef SO_REUSEPORT
 #define SO_REUSEPORT SO_REUSEADDR
@@ -51,9 +51,9 @@
 #endif /* !IPV6_DROP_MEMBERSHIP */
 
 typedef int t_socket;
-typedef t_socket* p_socket;
+typedef t_socket *p_socket;
 typedef struct sockaddr_storage t_sockaddr_storage;
 
-#define SOCKET_INVALID ( -1 )
+#define SOCKET_INVALID (-1)
 
 #endif /* USOCKET_H */

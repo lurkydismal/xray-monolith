@@ -44,8 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef INCLUDED_AI_PROGRESSHANDLER_H
 #define INCLUDED_AI_PROGRESSHANDLER_H
 #include "types.h"
-
-namespace Assimp {
+namespace Assimp    {
 
 // ------------------------------------------------------------------------------------
 /** @brief CPP-API: Abstract interface for custom progress report receivers.
@@ -59,11 +58,12 @@ class ASSIMP_API ProgressHandler
 {
 protected:
     /** @brief  Default constructor */
-    ProgressHandler() {}
-
+    ProgressHandler () {
+    }
 public:
     /** @brief  Virtual destructor  */
-    virtual ~ProgressHandler() {}
+    virtual ~ProgressHandler () {
+    }
 
     // -------------------------------------------------------------------
     /** @brief Progress callback.
@@ -82,7 +82,7 @@ public:
      *   caller). If the loading is aborted, #Importer::ReadFile()
      *   returns always NULL.
      *   */
-    virtual bool Update( float percentage = -1.f ) = 0;
+    virtual bool Update(float percentage = -1.f) = 0;
 
     // -------------------------------------------------------------------
     /** @brief Progress callback for file loading steps
@@ -96,9 +96,8 @@ public:
      *  @note This is currently only used at the start and the end
      *   of the file parsing.
      *   */
-    virtual void UpdateFileRead( int currentStep /*= 0*/,
-                                 int numberOfSteps /*= 0*/ ) {
-        float f = numberOfSteps ? currentStep / ( float )numberOfSteps : 1.0f;
+    virtual void UpdateFileRead(int currentStep /*= 0*/, int numberOfSteps /*= 0*/) {
+        float f = numberOfSteps ? currentStep / (float)numberOfSteps : 1.0f;
         Update( f * 0.5f );
     }
 
@@ -111,14 +110,12 @@ public:
      *   them has finished. This number is always strictly monotone
      *   increasing, although not necessarily linearly.
      *   */
-    virtual void UpdatePostProcess( int currentStep /*= 0*/,
-                                    int numberOfSteps /*= 0*/ ) {
-        float f = numberOfSteps ? currentStep / ( float )numberOfSteps : 1.0f;
+    virtual void UpdatePostProcess(int currentStep /*= 0*/, int numberOfSteps /*= 0*/) {
+        float f = numberOfSteps ? currentStep / (float)numberOfSteps : 1.0f;
         Update( f * 0.5f + 0.5f );
     }
 
 }; // !class ProgressHandler
-
 // ------------------------------------------------------------------------------------
 } // Namespace Assimp
 

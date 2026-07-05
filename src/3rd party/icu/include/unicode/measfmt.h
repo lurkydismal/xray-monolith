@@ -23,7 +23,7 @@
 #include "unicode/udat.h"
 
 /**
- * \file
+ * \file 
  * \brief C++ API: Compatibility APIs for measure formatting.
  */
 
@@ -40,10 +40,10 @@ enum UMeasureFormatWidth {
     // Wide, short, and narrow must be first and in this order.
     /**
      * Spell out measure units.
-     * @stable ICU 53
+     * @stable ICU 53 
      */
     UMEASFMT_WIDTH_WIDE,
-
+ 
     /**
      * Abbreviate measure units.
      * @stable ICU 53
@@ -66,14 +66,13 @@ enum UMeasureFormatWidth {
 #ifndef U_HIDE_DEPRECATED_API
     /**
      * One more than the highest normal UMeasureFormatWidth value.
-     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket
-     * #12420.
+     * @deprecated ICU 58 The numeric value may change over time, see ICU ticket #12420.
      */
     UMEASFMT_WIDTH_COUNT = 4
-#endif // U_HIDE_DEPRECATED_API
+#endif  // U_HIDE_DEPRECATED_API
 };
 /** @stable ICU 53 */
-typedef enum UMeasureFormatWidth UMeasureFormatWidth;
+typedef enum UMeasureFormatWidth UMeasureFormatWidth; 
 
 U_NAMESPACE_BEGIN
 
@@ -99,9 +98,9 @@ class DateFormat;
  * @stable ICU 3.0
  */
 class U_I18N_API MeasureFormat : public Format {
-public:
-    using Format::format;
+ public:
     using Format::parseObject;
+    using Format::format;
 
     /**
      * Constructor.
@@ -110,9 +109,8 @@ public:
      * {@link icu::number::NumberFormatter} instead of NumberFormat.
      * @stable ICU 53
      */
-    MeasureFormat( const Locale& locale,
-                   UMeasureFormatWidth width,
-                   UErrorCode& status );
+    MeasureFormat(
+            const Locale &locale, UMeasureFormatWidth width, UErrorCode &status);
 
     /**
      * Constructor.
@@ -121,22 +119,23 @@ public:
      * {@link icu::number::NumberFormatter} instead of NumberFormat.
      * @stable ICU 53
      */
-    MeasureFormat( const Locale& locale,
-                   UMeasureFormatWidth width,
-                   NumberFormat* nfToAdopt,
-                   UErrorCode& status );
+    MeasureFormat(
+            const Locale &locale,
+            UMeasureFormatWidth width,
+            NumberFormat *nfToAdopt,
+            UErrorCode &status);
 
     /**
      * Copy constructor.
      * @stable ICU 3.0
      */
-    MeasureFormat( const MeasureFormat& other );
+    MeasureFormat(const MeasureFormat &other);
 
     /**
      * Assignment operator.
      * @stable ICU 3.0
      */
-    MeasureFormat& operator=( const MeasureFormat& rhs );
+    MeasureFormat &operator=(const MeasureFormat &rhs);
 
     /**
      * Destructor.
@@ -148,22 +147,23 @@ public:
      * Return true if given Format objects are semantically equal.
      * @stable ICU 53
      */
-    virtual UBool operator==( const Format& other ) const;
+    virtual UBool operator==(const Format &other) const;
 
     /**
      * Clones this object polymorphically.
      * @stable ICU 53
      */
-    virtual MeasureFormat* clone() const;
+    virtual MeasureFormat *clone() const;
 
     /**
      * Formats object to produce a string.
      * @stable ICU 53
      */
-    virtual UnicodeString& format( const Formattable& obj,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos,
-                                   UErrorCode& status ) const;
+    virtual UnicodeString &format(
+            const Formattable &obj,
+            UnicodeString &appendTo,
+            FieldPosition &pos,
+            UErrorCode &status) const;
 
 #ifndef U_FORCE_HIDE_DRAFT_API
     /**
@@ -172,10 +172,11 @@ public:
      *
      * @draft ICU 53
      */
-    virtual void parseObject( const UnicodeString& source,
-                              Formattable& reslt,
-                              ParsePosition& pos ) const;
-#endif // U_FORCE_HIDE_DRAFT_API
+    virtual void parseObject(
+            const UnicodeString &source,
+            Formattable &reslt,
+            ParsePosition &pos) const;
+#endif  // U_FORCE_HIDE_DRAFT_API
 
     /**
      * Formats measure objects to produce a string. An example of such a
@@ -193,11 +194,12 @@ public:
      *
      * @stable ICU 53
      */
-    UnicodeString& formatMeasures( const Measure* measures,
-                                   int32_t measureCount,
-                                   UnicodeString& appendTo,
-                                   FieldPosition& pos,
-                                   UErrorCode& status ) const;
+    UnicodeString &formatMeasures(
+            const Measure *measures,
+            int32_t measureCount,
+            UnicodeString &appendTo,
+            FieldPosition &pos,
+            UErrorCode &status) const;
 
     /**
      * Formats a single measure per unit. An example of such a
@@ -212,25 +214,26 @@ public:
      *
      * @stable ICU 55
      */
-    UnicodeString& formatMeasurePerUnit( const Measure& measure,
-                                         const MeasureUnit& perUnit,
-                                         UnicodeString& appendTo,
-                                         FieldPosition& pos,
-                                         UErrorCode& status ) const;
+    UnicodeString &formatMeasurePerUnit(
+            const Measure &measure,
+            const MeasureUnit &perUnit,
+            UnicodeString &appendTo,
+            FieldPosition &pos,
+            UErrorCode &status) const;
 
     /**
-     * Gets the display name of the specified {@link MeasureUnit} corresponding
-     * to the current locale and format width.
+     * Gets the display name of the specified {@link MeasureUnit} corresponding to the current
+     * locale and format width.
      * @param unit  The unit for which to get a display name.
      * @param status the error.
      * @return  The display name in the locale and width specified in
-     *          the MeasureFormat constructor, or null if there is no display
-     * name available for the specified unit.
+     *          the MeasureFormat constructor, or null if there is no display name available
+     *          for the specified unit.
      *
      * @stable ICU 58
      */
-    UnicodeString getUnitDisplayName( const MeasureUnit& unit,
-                                      UErrorCode& status ) const;
+    UnicodeString getUnitDisplayName(const MeasureUnit& unit, UErrorCode &status) const;
+
 
     /**
      * Return a formatter for CurrencyAmount objects in the given
@@ -243,8 +246,8 @@ public:
      * @return a formatter object, or NULL upon error
      * @stable ICU 3.0
      */
-    static MeasureFormat* U_EXPORT2 createCurrencyFormat( const Locale& locale,
-                                                          UErrorCode& ec );
+    static MeasureFormat* U_EXPORT2 createCurrencyFormat(const Locale& locale,
+                                               UErrorCode& ec);
 
     /**
      * Return a formatter for CurrencyAmount objects in the default
@@ -256,7 +259,7 @@ public:
      * @return a formatter object, or NULL upon error
      * @stable ICU 3.0
      */
-    static MeasureFormat* U_EXPORT2 createCurrencyFormat( UErrorCode& ec );
+    static MeasureFormat* U_EXPORT2 createCurrencyFormat(UErrorCode& ec);
 
     /**
      * Return the class ID for this class. This is useful only for comparing to
@@ -269,7 +272,7 @@ public:
      * @return          The class ID for all objects of this class.
      * @stable ICU 53
      */
-    static UClassID U_EXPORT2 getStaticClassID( void );
+    static UClassID U_EXPORT2 getStaticClassID(void);
 
     /**
      * Returns a unique class ID POLYMORPHICALLY. Pure virtual override. This
@@ -282,26 +285,27 @@ public:
      *                  other classes have different class IDs.
      * @stable ICU 53
      */
-    virtual UClassID getDynamicClassID( void ) const;
+    virtual UClassID getDynamicClassID(void) const;
 
-protected:
+ protected:
     /**
      * Default constructor.
      * @stable ICU 3.0
      */
     MeasureFormat();
 
-#ifndef U_HIDE_INTERNAL_API
+#ifndef U_HIDE_INTERNAL_API 
 
     /**
      * ICU use only.
      * Initialize or change MeasureFormat class from subclass.
      * @internal.
      */
-    void initMeasureFormat( const Locale& locale,
-                            UMeasureFormatWidth width,
-                            NumberFormat* nfToAdopt,
-                            UErrorCode& status );
+    void initMeasureFormat(
+            const Locale &locale,
+            UMeasureFormatWidth width,
+            NumberFormat *nfToAdopt,
+            UErrorCode &status);
     /**
      * ICU use only.
      * Allows subclass to change locale. Note that this method also changes
@@ -309,20 +313,20 @@ protected:
      * change was made.
      * @internal.
      */
-    UBool setMeasureFormatLocale( const Locale& locale, UErrorCode& status );
+    UBool setMeasureFormatLocale(const Locale &locale, UErrorCode &status);
 
     /**
      * ICU use only.
      * Let subclass change NumberFormat.
      * @internal.
      */
-    void adoptNumberFormat( NumberFormat* nfToAdopt, UErrorCode& status );
+    void adoptNumberFormat(NumberFormat *nfToAdopt, UErrorCode &status);
 
     /**
      * ICU use only.
      * @internal.
      */
-    const NumberFormat& getNumberFormatInternal() const;
+    const NumberFormat &getNumberFormatInternal() const;
 
     /**
      * ICU use only.
@@ -335,51 +339,53 @@ protected:
      * ICU use only.
      * @internal.
      */
-    const PluralRules& getPluralRules() const;
+    const PluralRules &getPluralRules() const;
 
     /**
      * ICU use only.
      * @internal.
      */
-    Locale getLocale( UErrorCode& status ) const;
+    Locale getLocale(UErrorCode &status) const;
 
     /**
      * ICU use only.
      * @internal.
      */
-    const char* getLocaleID( UErrorCode& status ) const;
+    const char *getLocaleID(UErrorCode &status) const;
 
 #endif /* U_HIDE_INTERNAL_API */
 
-private:
-    const MeasureFormatCacheData* cache;
-    const SharedNumberFormat* numberFormat;
-    const SharedPluralRules* pluralRules;
-    UMeasureFormatWidth fWidth;
+ private:
+    const MeasureFormatCacheData *cache;
+    const SharedNumberFormat *numberFormat;
+    const SharedPluralRules *pluralRules;
+    UMeasureFormatWidth fWidth;    
 
     // Declared outside of MeasureFormatSharedData because ListFormatter
     // objects are relatively cheap to copy; therefore, they don't need to be
     // shared across instances.
-    ListFormatter* listFormatter;
+    ListFormatter *listFormatter;
 
-    UnicodeString& formatMeasure( const Measure& measure,
-                                  const NumberFormat& nf,
-                                  UnicodeString& appendTo,
-                                  FieldPosition& pos,
-                                  UErrorCode& status ) const;
+    UnicodeString &formatMeasure(
+        const Measure &measure,
+        const NumberFormat &nf,
+        UnicodeString &appendTo,
+        FieldPosition &pos,
+        UErrorCode &status) const;
 
-    UnicodeString& formatMeasuresSlowTrack( const Measure* measures,
-                                            int32_t measureCount,
-                                            UnicodeString& appendTo,
-                                            FieldPosition& pos,
-                                            UErrorCode& status ) const;
-
-    UnicodeString& formatNumeric(
-        const Formattable* hms, // always length 3: [0] is hour; [1] is
-                                // minute; [2] is second.
-        int32_t bitMap,         // 1=hour set, 2=minute set, 4=second set
+    UnicodeString &formatMeasuresSlowTrack(
+        const Measure *measures,
+        int32_t measureCount,
         UnicodeString& appendTo,
-        UErrorCode& status ) const;
+        FieldPosition& pos,
+        UErrorCode& status) const;
+
+    UnicodeString &formatNumeric(
+        const Formattable *hms,  // always length 3: [0] is hour; [1] is
+                                 // minute; [2] is second.
+        int32_t bitMap,   // 1=hour set, 2=minute set, 4=second set
+        UnicodeString &appendTo,
+        UErrorCode &status) const;
 };
 
 U_NAMESPACE_END

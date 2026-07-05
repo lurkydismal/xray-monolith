@@ -346,7 +346,7 @@ if(MSVC)
             /ZI
         >
         /permissive-;
-        /std:c++latest;
+        /std:c++17;
         /sdl;
         /W3;
         ${DEFAULT_CXX_EXCEPTION_HANDLING};

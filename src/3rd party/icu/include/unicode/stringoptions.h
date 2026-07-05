@@ -11,13 +11,11 @@
 
 /**
  * \file
- * \brief C API: Bit set option bit constants for various string and character
- * processing functions.
+ * \brief C API: Bit set option bit constants for various string and character processing functions.
  */
 
 /**
- * Option value for case folding: Use default mappings defined in
- * CaseFolding.txt.
+ * Option value for case folding: Use default mappings defined in CaseFolding.txt.
  *
  * @stable ICU 2.0
  */
@@ -26,8 +24,8 @@
 /**
  * Option value for case folding:
  *
- * Use the modified set of mappings provided in CaseFolding.txt to handle dotted
- * I and dotless i appropriately for Turkic languages (tr, az).
+ * Use the modified set of mappings provided in CaseFolding.txt to handle dotted I
+ * and dotless i appropriately for Turkic languages (tr, az).
  *
  * Before Unicode 3.2, CaseFolding.txt contains mappings marked with 'I' that
  * are to be included for default mappings and
@@ -112,18 +110,16 @@
 
 /**
  * Adjust each titlecasing BreakIterator index to the next cased character.
- * (See the Unicode Standard, chapter 3, Default Case Conversion, R3
- * toTitlecase(X).) Option bit for titlecasing APIs that take an options bit
- * set.
+ * (See the Unicode Standard, chapter 3, Default Case Conversion, R3 toTitlecase(X).)
+ * Option bit for titlecasing APIs that take an options bit set.
  *
  * This used to be the default index adjustment in ICU.
  * Since ICU 60, the default index adjustment is to the next character that is
  * a letter, number, symbol, or private use code point.
  * (Uncased modifier letters are skipped.)
  * The difference in behavior is small for word titlecasing,
- * but the new adjustment is much better for whole-string and sentence
- * titlecasing: It yields "49ers" and "«丰(abc)»" instead of "49Ers" and
- * "«丰(Abc)»".
+ * but the new adjustment is much better for whole-string and sentence titlecasing:
+ * It yields "49ers" and "«丰(abc)»" instead of "49Ers" and "«丰(Abc)»".
  *
  * It is an error to specify multiple titlecasing adjustment options together.
  *
@@ -133,8 +129,8 @@
 #define U_TITLECASE_ADJUST_TO_CASED 0x400
 
 /**
- * Option for string transformation functions to not first reset the Edits
- * object. Used for example in some case-mapping and normalization functions.
+ * Option for string transformation functions to not first reset the Edits object.
+ * Used for example in some case-mapping and normalization functions.
  *
  * @see CaseMap
  * @see Edits
@@ -160,21 +156,21 @@
  * Compare strings in code point order instead of code unit order.
  * @stable ICU 2.2
  */
-#define U_COMPARE_CODE_POINT_ORDER 0x8000
+#define U_COMPARE_CODE_POINT_ORDER  0x8000
 
 /**
  * Option bit for unorm_compare:
  * Perform case-insensitive comparison.
  * @stable ICU 2.2
  */
-#define U_COMPARE_IGNORE_CASE 0x10000
+#define U_COMPARE_IGNORE_CASE       0x10000
 
 /**
  * Option bit for unorm_compare:
  * Both input strings are assumed to fulfill FCD conditions.
  * @stable ICU 2.2
  */
-#define UNORM_INPUT_IS_FCD 0x20000
+#define UNORM_INPUT_IS_FCD          0x20000
 
 // Related definitions elsewhere.
 // Options that are not meaningful in the same functions
@@ -191,4 +187,4 @@
 // ustr_imp.h #define _STRNCMP_STYLE 0x1000
 // unormcmp.cpp #define _COMPARE_EQUIV 0x80000
 
-#endif // __STRINGOPTIONS_H__
+#endif  // __STRINGOPTIONS_H__

@@ -46,38 +46,38 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define INCLUDED_AI_ASSIMP_HPP
 
 #ifndef __cplusplus
-#error This header requires C++ to be used. Use assimp.h for plain C.
+#   error This header requires C++ to be used. Use assimp.h for plain C.
 #endif
 
 // Public ASSIMP data structures
-#include "config.h"
 #include "types.h"
+#include "config.h"
 
-namespace Assimp {
-// =======================================================================
-// Public interface to Assimp
-class Importer;
-class Exporter; // export.hpp
-class IOStream;
-class IOSystem;
-class ProgressHandler;
+namespace Assimp    {
+    // =======================================================================
+    // Public interface to Assimp
+    class Importer;
+    class Exporter; // export.hpp
+    class IOStream;
+    class IOSystem;
+    class ProgressHandler;
 
-// =======================================================================
-// Plugin development
-//
-// Include the following headers for the declarations:
-// BaseImporter.h
-// BaseProcess.h
-class BaseImporter;
-class BaseProcess;
-class SharedPostProcessInfo;
-class BatchLoader;
+    // =======================================================================
+    // Plugin development
+    //
+    // Include the following headers for the declarations:
+    // BaseImporter.h
+    // BaseProcess.h
+    class BaseImporter;
+    class BaseProcess;
+    class SharedPostProcessInfo;
+    class BatchLoader;
 
-// =======================================================================
-// Holy stuff, only for members of the high council of the Jedi.
-class ImporterPimpl;
-class ExporterPimpl; // export.hpp
-} // namespace Assimp
+    // =======================================================================
+    // Holy stuff, only for members of the high council of the Jedi.
+    class ImporterPimpl;
+    class ExporterPimpl; // export.hpp
+} //! namespace Assimp
 
 #define AI_PROPERTY_WAS_NOT_EXISTING 0xffffffff
 
@@ -87,40 +87,41 @@ struct aiScene;
 struct aiImporterDesc;
 
 /** @namespace Assimp Assimp's CPP-API and all internal APIs */
-namespace Assimp {
+namespace Assimp    {
 
 // ----------------------------------------------------------------------------------
-/** CPP-API: The Importer class forms an C++ interface to the functionality of
- * the Open Asset Import Library.
- *
- * Create an object of this class and call ReadFile() to import a file.
- * If the import succeeds, the function returns a pointer to the imported data.
- * The data remains property of the object, it is intended to be accessed
- * read-only. The imported data will be destroyed along with the Importer
- * object. If the import fails, ReadFile() returns a NULL pointer. In this
- * case you can retrieve a human-readable error description be calling
- * GetErrorString(). You can call ReadFile() multiple times with a single
- * Importer instance. Actually, constructing Importer objects involves quite
- * many allocations and may take some time, so it's better to reuse them as
- * often as possible.
- *
- * If you need the Importer to do custom file handling to access the files,
- * implement IOSystem and IOStream and supply an instance of your custom
- * IOSystem implementation by calling SetIOHandler() before calling ReadFile().
- * If you do not assign a custion IO handler, a default handler using the
- * standard C++ IO logic will be used.
- *
- * @note One Importer instance is not thread-safe. If you use multiple
- * threads for loading, each thread should maintain its own Importer instance.
- */
-class ASSIMP_API Importer {
+/** CPP-API: The Importer class forms an C++ interface to the functionality of the
+*   Open Asset Import Library.
+*
+* Create an object of this class and call ReadFile() to import a file.
+* If the import succeeds, the function returns a pointer to the imported data.
+* The data remains property of the object, it is intended to be accessed
+* read-only. The imported data will be destroyed along with the Importer
+* object. If the import fails, ReadFile() returns a NULL pointer. In this
+* case you can retrieve a human-readable error description be calling
+* GetErrorString(). You can call ReadFile() multiple times with a single Importer
+* instance. Actually, constructing Importer objects involves quite many
+* allocations and may take some time, so it's better to reuse them as often as
+* possible.
+*
+* If you need the Importer to do custom file handling to access the files,
+* implement IOSystem and IOStream and supply an instance of your custom
+* IOSystem implementation by calling SetIOHandler() before calling ReadFile().
+* If you do not assign a custion IO handler, a default handler using the
+* standard C++ IO logic will be used.
+*
+* @note One Importer instance is not thread-safe. If you use multiple
+* threads for loading, each thread should maintain its own Importer instance.
+*/
+class ASSIMP_API Importer   {
 public:
     /**
      *  @brief The upper limit for hints.
      */
-    static const unsigned int MaxLenHint = 200;
+    static const unsigned int MaxLenHint = 200; 
 
 public:
+
     // -------------------------------------------------------------------
     /** Constructor. Creates an empty importer object.
      *
@@ -136,13 +137,14 @@ public:
      * If this Importer owns a scene it won't be copied.
      * Call ReadFile() to start the import process.
      */
-    Importer( const Importer& other );
+    Importer(const Importer& other);
 
     // -------------------------------------------------------------------
     /** Destructor. The object kept ownership of the imported data,
      * which now will be destroyed along with the object.
      */
     ~Importer();
+
 
     // -------------------------------------------------------------------
     /** Registers a new loader.
@@ -153,7 +155,7 @@ public:
      * @return AI_SUCCESS if the loader has been added. The registration
      *   fails if there is already a loader for a specific file extension.
      */
-    aiReturn RegisterLoader( BaseImporter* pImp );
+    aiReturn RegisterLoader(BaseImporter* pImp);
 
     // -------------------------------------------------------------------
     /** Unregisters a loader.
@@ -164,7 +166,7 @@ public:
      *   if the #Importer instance is used by more than one thread) or
      *   if it has not yet been registered.
      */
-    aiReturn UnregisterLoader( BaseImporter* pImp );
+    aiReturn UnregisterLoader(BaseImporter* pImp);
 
     // -------------------------------------------------------------------
     /** Registers a new post-process step.
@@ -177,7 +179,7 @@ public:
      *   deleted with the Importer instance.
      * @return AI_SUCCESS if the step has been added correctly.
      */
-    aiReturn RegisterPPStep( BaseProcess* pImp );
+    aiReturn RegisterPPStep(BaseProcess* pImp);
 
     // -------------------------------------------------------------------
     /** Unregisters a post-process step.
@@ -188,7 +190,8 @@ public:
      *   if the #Importer instance is used by more than one thread) or
      *   if it has not yet been registered.
      */
-    aiReturn UnregisterPPStep( BaseProcess* pImp );
+    aiReturn UnregisterPPStep(BaseProcess* pImp);
+
 
     // -------------------------------------------------------------------
     /** Set an integer configuration property.
@@ -203,7 +206,7 @@ public:
      *   floating-point property has no effect - the loader will call
      *   GetPropertyFloat() to read the property, but it won't be there.
      */
-    bool SetPropertyInteger( const char* szName, int iValue );
+    bool SetPropertyInteger(const char* szName, int iValue);
 
     // -------------------------------------------------------------------
     /** Set a boolean configuration property. Boolean properties
@@ -212,27 +215,27 @@ public:
      *  #GetPropertyBool and vice versa.
      * @see SetPropertyInteger()
      */
-    bool SetPropertyBool( const char* szName, bool value ) {
-        return SetPropertyInteger( szName, value );
+    bool SetPropertyBool(const char* szName, bool value)    {
+        return SetPropertyInteger(szName,value);
     }
 
     // -------------------------------------------------------------------
     /** Set a floating-point configuration property.
      * @see SetPropertyInteger()
      */
-    bool SetPropertyFloat( const char* szName, float fValue );
+    bool SetPropertyFloat(const char* szName, float fValue);
 
     // -------------------------------------------------------------------
     /** Set a string configuration property.
      * @see SetPropertyInteger()
      */
-    bool SetPropertyString( const char* szName, const std::string& sValue );
+    bool SetPropertyString(const char* szName, const std::string& sValue);
 
     // -------------------------------------------------------------------
     /** Set a matrix configuration property.
      * @see SetPropertyInteger()
      */
-    bool SetPropertyMatrix( const char* szName, const aiMatrix4x4& sValue );
+    bool SetPropertyMatrix(const char* szName, const aiMatrix4x4& sValue);
 
     // -------------------------------------------------------------------
     /** Get a configuration property.
@@ -247,8 +250,8 @@ public:
      *   floating-point property has no effect - the loader will call
      *   GetPropertyFloat() to read the property, but it won't be there.
      */
-    int GetPropertyInteger( const char* szName,
-                            int iErrorReturn = 0xffffffff ) const;
+    int GetPropertyInteger(const char* szName,
+        int iErrorReturn = 0xffffffff) const;
 
     // -------------------------------------------------------------------
     /** Get a boolean configuration property. Boolean properties
@@ -257,17 +260,16 @@ public:
      *  #GetPropertyBool and vice versa.
      * @see GetPropertyInteger()
      */
-    bool GetPropertyBool( const char* szName,
-                          bool bErrorReturn = false ) const {
-        return GetPropertyInteger( szName, bErrorReturn ) != 0;
+    bool GetPropertyBool(const char* szName, bool bErrorReturn = false) const {
+        return GetPropertyInteger(szName,bErrorReturn)!=0;
     }
 
     // -------------------------------------------------------------------
     /** Get a floating-point configuration property
      * @see GetPropertyInteger()
      */
-    float GetPropertyFloat( const char* szName,
-                            float fErrorReturn = 10e10f ) const;
+    float GetPropertyFloat(const char* szName,
+        float fErrorReturn = 10e10f) const;
 
     // -------------------------------------------------------------------
     /** Get a string configuration property
@@ -275,9 +277,8 @@ public:
      *  The return value remains valid until the property is modified.
      * @see GetPropertyInteger()
      */
-    const std::string GetPropertyString(
-        const char* szName,
-        const std::string& sErrorReturn = "" ) const;
+    const std::string GetPropertyString(const char* szName,
+        const std::string& sErrorReturn = "") const;
 
     // -------------------------------------------------------------------
     /** Get a matrix configuration property
@@ -285,9 +286,8 @@ public:
      *  The return value remains valid until the property is modified.
      * @see GetPropertyInteger()
      */
-    const aiMatrix4x4 GetPropertyMatrix(
-        const char* szName,
-        const aiMatrix4x4& sErrorReturn = aiMatrix4x4() ) const;
+    const aiMatrix4x4 GetPropertyMatrix(const char* szName,
+        const aiMatrix4x4& sErrorReturn = aiMatrix4x4()) const;
 
     // -------------------------------------------------------------------
     /** Supplies a custom IO handler to the importer to use to open and
@@ -304,7 +304,7 @@ public:
      * @param pIOHandler The IO handler to be used in all file accesses
      *   of the Importer.
      */
-    void SetIOHandler( IOSystem* pIOHandler );
+    void SetIOHandler( IOSystem* pIOHandler);
 
     // -------------------------------------------------------------------
     /** Retrieves the IO handler that is currently set.
@@ -335,7 +335,7 @@ public:
      *    disable progress reporting.
      *  @note Progress handlers can be used to abort the loading
      *    at almost any time.*/
-    void SetProgressHandler( ProgressHandler* pHandler );
+    void SetProgressHandler ( ProgressHandler* pHandler );
 
     // -------------------------------------------------------------------
     /** Retrieves the progress handler that is currently set.
@@ -367,7 +367,7 @@ public:
      *  @param pFlags Bitwise combination of the aiPostProcess flags.
      *  @return true if this flag combination is fine.
      */
-    bool ValidateFlags( unsigned int pFlags ) const;
+    bool ValidateFlags(unsigned int pFlags) const;
 
     // -------------------------------------------------------------------
     /** Reads the given file and returns its contents if successful.
@@ -391,7 +391,9 @@ public:
      * @note Assimp is able to determine the file format of a file
      * automatically.
      */
-    const aiScene* ReadFile( const char* pFile, unsigned int pFlags );
+    const aiScene* ReadFile(
+        const char* pFile,
+        unsigned int pFlags);
 
     // -------------------------------------------------------------------
     /** Reads the given file from a memory buffer and returns its
@@ -430,10 +432,11 @@ public:
      * a custom IOSystem to make Assimp find these files and use
      * the regular ReadFile() API.
      */
-    const aiScene* ReadFileFromMemory( const void* pBuffer,
-                                       size_t pLength,
-                                       unsigned int pFlags,
-                                       const char* pHint = "" );
+    const aiScene* ReadFileFromMemory(
+        const void* pBuffer,
+        size_t pLength,
+        unsigned int pFlags,
+        const char* pHint = "");
 
     // -------------------------------------------------------------------
     /** Apply post-processing to an already-imported scene.
@@ -453,7 +456,7 @@ public:
      *
      *  @note The method does nothing if no scene is currently bound
      *    to the #Importer instance.  */
-    const aiScene* ApplyPostProcessing( unsigned int pFlags );
+    const aiScene* ApplyPostProcessing(unsigned int pFlags);
 
     // -------------------------------------------------------------------
     /** @brief Reads the given file and returns its contents if successful.
@@ -461,7 +464,9 @@ public:
      * This function is provided for backward compatibility.
      * See the const char* version for detailled docs.
      * @see ReadFile(const char*, pFlags)  */
-    const aiScene* ReadFile( const std::string& pFile, unsigned int pFlags );
+    const aiScene* ReadFile(
+        const std::string& pFile,
+        unsigned int pFlags);
 
     // -------------------------------------------------------------------
     /** Frees the current scene.
@@ -469,7 +474,7 @@ public:
      *  The function does nothing if no scene has previously been
      *  read via ReadFile(). FreeScene() is called automatically by the
      *  destructor and ReadFile() itself.  */
-    void FreeScene();
+    void FreeScene( );
 
     // -------------------------------------------------------------------
     /** Returns an error description of an error that occurred in ReadFile().
@@ -509,6 +514,9 @@ public:
      *   It will work as well for static linkage with Assimp.*/
     aiScene* GetOrphanedScene();
 
+
+
+
     // -------------------------------------------------------------------
     /** Returns whether a given file extension is supported by ASSIMP.
      *
@@ -516,7 +524,7 @@ public:
      *   Must include a trailing dot '.'. Example: ".3ds", ".md3".
      *   Cases-insensitive.
      * @return true if the extension is supported, false otherwise */
-    bool IsExtensionSupported( const char* szExtension ) const;
+    bool IsExtensionSupported(const char* szExtension) const;
 
     // -------------------------------------------------------------------
     /** @brief Returns whether a given file extension is supported by ASSIMP.
@@ -524,7 +532,7 @@ public:
      * This function is provided for backward compatibility.
      * See the const char* version for detailed and up-to-date docs.
      * @see IsExtensionSupported(const char*) */
-    inline bool IsExtensionSupported( const std::string& szExtension ) const;
+    inline bool IsExtensionSupported(const std::string& szExtension) const;
 
     // -------------------------------------------------------------------
     /** Get a full list of all file extensions supported by ASSIMP.
@@ -536,7 +544,7 @@ public:
      * @param szOut String to receive the extension list.
      *   Format of the list: "*.3ds;*.obj;*.dae". This is useful for
      *   use with the WinAPI call GetOpenFileName(Ex). */
-    void GetExtensionList( aiString& szOut ) const;
+    void GetExtensionList(aiString& szOut) const;
 
     // -------------------------------------------------------------------
     /** @brief Get a full list of all file extensions supported by ASSIMP.
@@ -544,7 +552,7 @@ public:
      * This function is provided for backward compatibility.
      * See the aiString version for detailed and up-to-date docs.
      * @see GetExtensionList(aiString&)*/
-    inline void GetExtensionList( std::string& szOut ) const;
+    inline void GetExtensionList(std::string& szOut) const;
 
     // -------------------------------------------------------------------
     /** Get the number of importrs currently registered with Assimp. */
@@ -552,43 +560,46 @@ public:
 
     // -------------------------------------------------------------------
     /** Get meta data for the importer corresponding to a specific index..
-     *
-     *  For the declaration of #aiImporterDesc, include <assimp/importerdesc.h>.
-     *  @param index Index to query, must be within [0,GetImporterCount())
-     *  @return Importer meta data structure, NULL if the index does not
-     *     exist or if the importer doesn't offer meta information (
-     *     importers may do this at the cost of being hated by their peers).*/
-    const aiImporterDesc* GetImporterInfo( size_t index ) const;
+    *
+    *  For the declaration of #aiImporterDesc, include <assimp/importerdesc.h>.
+    *  @param index Index to query, must be within [0,GetImporterCount())
+    *  @return Importer meta data structure, NULL if the index does not
+    *     exist or if the importer doesn't offer meta information (
+    *     importers may do this at the cost of being hated by their peers).*/
+    const aiImporterDesc* GetImporterInfo(size_t index) const;
 
     // -------------------------------------------------------------------
     /** Find the importer corresponding to a specific index.
-     *
-     *  @param index Index to query, must be within [0,GetImporterCount())
-     *  @return Importer instance. NULL if the index does not
-     *     exist. */
-    BaseImporter* GetImporter( size_t index ) const;
+    *
+    *  @param index Index to query, must be within [0,GetImporterCount())
+    *  @return Importer instance. NULL if the index does not
+    *     exist. */
+    BaseImporter* GetImporter(size_t index) const;
 
     // -------------------------------------------------------------------
     /** Find the importer corresponding to a specific file extension.
-     *
-     *  This is quite similar to #IsExtensionSupported except a
-     *  BaseImporter instance is returned.
-     *  @param szExtension Extension to check for. The following formats
-     *    are recognized (BAH being the file extension): "BAH" (comparison
-     *    is case-insensitive), ".bah", "*.bah" (wild card and dot
-     *    characters at the beginning of the extension are skipped).
-     *  @return NULL if no importer is found*/
-    BaseImporter* GetImporter( const char* szExtension ) const;
+    *
+    *  This is quite similar to #IsExtensionSupported except a
+    *  BaseImporter instance is returned.
+    *  @param szExtension Extension to check for. The following formats
+    *    are recognized (BAH being the file extension): "BAH" (comparison
+    *    is case-insensitive), ".bah", "*.bah" (wild card and dot
+    *    characters at the beginning of the extension are skipped).
+    *  @return NULL if no importer is found*/
+    BaseImporter* GetImporter (const char* szExtension) const;
 
     // -------------------------------------------------------------------
     /** Find the importer index corresponding to a specific file extension.
-     *
-     *  @param szExtension Extension to check for. The following formats
-     *    are recognized (BAH being the file extension): "BAH" (comparison
-     *    is case-insensitive), ".bah", "*.bah" (wild card and dot
-     *    characters at the beginning of the extension are skipped).
-     *  @return (size_t)-1 if no importer is found */
-    size_t GetImporterIndex( const char* szExtension ) const;
+    *
+    *  @param szExtension Extension to check for. The following formats
+    *    are recognized (BAH being the file extension): "BAH" (comparison
+    *    is case-insensitive), ".bah", "*.bah" (wild card and dot
+    *    characters at the beginning of the extension are skipped).
+    *  @return (size_t)-1 if no importer is found */
+    size_t GetImporterIndex (const char* szExtension) const;
+
+
+
 
     // -------------------------------------------------------------------
     /** Returns the storage allocated by ASSIMP to hold the scene data
@@ -599,7 +610,7 @@ public:
      * @note The returned memory statistics refer to the actual
      *   size of the use data of the aiScene. Heap-related overhead
      *   is (naturally) not included.*/
-    void GetMemoryRequirements( aiMemoryInfo& in ) const;
+    void GetMemoryRequirements(aiMemoryInfo& in) const;
 
     // -------------------------------------------------------------------
     /** Enables "extra verbose" mode.
@@ -608,18 +619,20 @@ public:
      * single post processing step to make sure everyone modifies the data
      * structure in a well-defined manner. This is a debug feature and not
      * intended for use in production environments. */
-    void SetExtraVerbose( bool bDo );
+    void SetExtraVerbose(bool bDo);
+
 
     // -------------------------------------------------------------------
     /** Private, do not use. */
     ImporterPimpl* Pimpl() { return pimpl; }
-
     const ImporterPimpl* Pimpl() const { return pimpl; }
 
 protected:
+
     // Just because we don't want you to know how we're hacking around.
     ImporterPimpl* pimpl;
 }; //! class Importer
+
 
 // ----------------------------------------------------------------------------
 // For compatibility, the interface of some functions taking a std::string was
@@ -628,23 +641,19 @@ protected:
 // ----------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
-AI_FORCE_INLINE const aiScene* Importer::ReadFile( const std::string& pFile,
-                                                   unsigned int pFlags ) {
-    return ReadFile( pFile.c_str(), pFlags );
+AI_FORCE_INLINE const aiScene* Importer::ReadFile( const std::string& pFile,unsigned int pFlags){
+    return ReadFile(pFile.c_str(),pFlags);
 }
-
 // ----------------------------------------------------------------------------
-AI_FORCE_INLINE void Importer::GetExtensionList( std::string& szOut ) const {
+AI_FORCE_INLINE void Importer::GetExtensionList(std::string& szOut) const   {
     aiString s;
-    GetExtensionList( s );
+    GetExtensionList(s);
     szOut = s.data;
 }
-
 // ----------------------------------------------------------------------------
-AI_FORCE_INLINE bool Importer::IsExtensionSupported(
-    const std::string& szExtension ) const {
-    return IsExtensionSupported( szExtension.c_str() );
+AI_FORCE_INLINE bool Importer::IsExtensionSupported(const std::string& szExtension) const   {
+    return IsExtensionSupported(szExtension.c_str());
 }
 
-} // namespace Assimp
+} // !namespace Assimp
 #endif // INCLUDED_AI_ASSIMP_HPP

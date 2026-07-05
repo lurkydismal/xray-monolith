@@ -6,73 +6,63 @@
 
 #include "opthelpers.h"
 
-template < typename T >
+
+template<typename T>
 class ComPtr {
-    T* mPtr{ nullptr };
+    T *mPtr{nullptr};
 
 public:
     ComPtr() noexcept = default;
+    ComPtr(const ComPtr &rhs) : mPtr{rhs.mPtr} { if(mPtr) mPtr->AddRef(); }
+    ComPtr(ComPtr&& rhs) noexcept : mPtr{rhs.mPtr} { rhs.mPtr = nullptr; }
+    ComPtr(std::nullptr_t) noexcept { }
+    explicit ComPtr(T *ptr) noexcept : mPtr{ptr} { }
+    ~ComPtr() { if(mPtr) mPtr->Release(); }
 
-    ComPtr( const ComPtr& rhs ) : mPtr{ rhs.mPtr } {
-        if ( mPtr )
-            mPtr->AddRef();
-    }
-
-    ComPtr( ComPtr&& rhs ) noexcept : mPtr{ rhs.mPtr } { rhs.mPtr = nullptr; }
-
-    ComPtr( std::nullptr_t ) noexcept {}
-
-    explicit ComPtr( T* ptr ) noexcept : mPtr{ ptr } {}
-
-    ~ComPtr() {
-        if ( mPtr )
-            mPtr->Release();
-    }
-
-    ComPtr& operator=( const ComPtr& rhs ) {
-        if ( !rhs.mPtr ) {
-            if ( mPtr )
+    ComPtr& operator=(const ComPtr &rhs)
+    {
+        if(!rhs.mPtr)
+        {
+            if(mPtr)
                 mPtr->Release();
             mPtr = nullptr;
-        } else {
+        }
+        else
+        {
             rhs.mPtr->AddRef();
             try {
-                if ( mPtr )
+                if(mPtr)
                     mPtr->Release();
                 mPtr = rhs.mPtr;
-            } catch ( ... ) {
+            }
+            catch(...) {
                 rhs.mPtr->Release();
                 throw;
             }
         }
         return *this;
     }
-
-    ComPtr& operator=( ComPtr&& rhs ) {
-        if ( &rhs != this )
-            LIKELY {
-                if ( mPtr )
-                    mPtr->Release();
-                mPtr = std::exchange( rhs.mPtr, nullptr );
-            }
+    ComPtr& operator=(ComPtr&& rhs)
+    {
+        if(&rhs != this) LIKELY
+        {
+            if(mPtr) mPtr->Release();
+            mPtr = std::exchange(rhs.mPtr, nullptr);
+        }
         return *this;
     }
 
     explicit operator bool() const noexcept { return mPtr != nullptr; }
 
     T& operator*() const noexcept { return *mPtr; }
-
     T* operator->() const noexcept { return mPtr; }
-
     T* get() const noexcept { return mPtr; }
-
     T** getPtr() noexcept { return &mPtr; }
 
-    T* release() noexcept { return std::exchange( mPtr, nullptr ); }
+    T* release() noexcept { return std::exchange(mPtr, nullptr); }
 
-    void swap( ComPtr& rhs ) noexcept { std::swap( mPtr, rhs.mPtr ); }
-
-    void swap( ComPtr&& rhs ) noexcept { std::swap( mPtr, rhs.mPtr ); }
+    void swap(ComPtr &rhs) noexcept { std::swap(mPtr, rhs.mPtr); }
+    void swap(ComPtr&& rhs) noexcept { std::swap(mPtr, rhs.mPtr); }
 };
 
 #endif

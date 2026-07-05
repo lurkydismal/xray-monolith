@@ -22,8 +22,8 @@
 
 #pragma once
 
-#include <luabind/class.hpp>
 #include <luabind/config.hpp>
+#include <luabind/class.hpp>
 #include <luabind/detail/class_registry.hpp>
 #include <luabind/function.hpp>
 #include <luabind/functor.hpp>

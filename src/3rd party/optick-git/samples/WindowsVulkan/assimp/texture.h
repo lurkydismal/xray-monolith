@@ -57,6 +57,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 extern "C" {
 #endif
 
+
 // --------------------------------------------------------------------------------
 /** @def AI_MAKE_EMBEDDED_TEXNAME
  *  Used to build the reserved path name used by the material system to
@@ -64,34 +65,41 @@ extern "C" {
  *  model files. The parameter specifies the index of the texture
  *  (zero-based, in the aiScene::mTextures array)
  */
-#if ( !defined AI_MAKE_EMBEDDED_TEXNAME )
-#define AI_MAKE_EMBEDDED_TEXNAME( _n_ ) "*" #_n_
+#if (!defined AI_MAKE_EMBEDDED_TEXNAME)
+#   define AI_MAKE_EMBEDDED_TEXNAME(_n_) "*" # _n_
 #endif
+
 
 #include "./Compiler/pushpack1.h"
 
 // --------------------------------------------------------------------------------
 /** @brief Helper structure to represent a texel in a ARGB8888 format
- *
- *  Used by aiTexture.
- */
-struct aiTexel {
-    unsigned char b, g, r, a;
+*
+*  Used by aiTexture.
+*/
+struct aiTexel
+{
+    unsigned char b,g,r,a;
 
 #ifdef __cplusplus
     //! Comparison operator
-    bool operator==( const aiTexel& other ) const {
-        return b == other.b && r == other.r && g == other.g && a == other.a;
+    bool operator== (const aiTexel& other) const
+    {
+        return b == other.b && r == other.r &&
+               g == other.g && a == other.a;
     }
 
     //! Inverse comparison operator
-    bool operator!=( const aiTexel& other ) const {
-        return b != other.b || r != other.r || g != other.g || a != other.a;
+    bool operator!= (const aiTexel& other) const
+    {
+        return b != other.b || r != other.r ||
+               g != other.g || a != other.a;
     }
 
     //! Conversion to a floating-point 4d color
-    operator aiColor4D() const {
-        return aiColor4D( r / 255.f, g / 255.f, b / 255.f, a / 255.f );
+    operator aiColor4D() const
+    {
+        return aiColor4D(r/255.f,g/255.f,b/255.f,a/255.f);
     }
 #endif // __cplusplus
 
@@ -106,14 +114,15 @@ struct aiTexel {
  * them directly in the model file. There are two types of embedded textures:
  * 1. Uncompressed textures. The color data is given in an uncompressed format.
  * 2. Compressed textures stored in a file format like png or jpg. The raw file
- * bytes are given so the application must utilize an image decoder (e.g. DevIL)
- * to get access to the actual color data.
+ * bytes are given so the application must utilize an image decoder (e.g. DevIL) to
+ * get access to the actual color data.
  *
- * Embedded textures are referenced from materials using strings like "*0",
- * "*1", etc. as the texture paths (a single asterisk character followed by the
+ * Embedded textures are referenced from materials using strings like "*0", "*1", etc.
+ * as the texture paths (a single asterisk character followed by the
  * zero-based index of the texture in the aiScene::mTextures array).
  */
-struct aiTexture {
+struct aiTexture
+{
     /** Width of the texture, in pixels
      *
      * If mHeight is zero the texture is compressed in a format
@@ -141,7 +150,7 @@ struct aiTexture {
      * E.g. 'dds\\0', 'pcx\\0', 'jpg\\0'.  All characters are lower-case.
      * The fourth character will always be '\\0'.
      */
-    char achFormatHint[ 4 ];
+    char achFormatHint[4];
 
     /** Data of the texture.
      *
@@ -161,20 +170,29 @@ struct aiTexture {
     //! @param s Input string. 3 characters are maximally processed.
     //!        Example values: "jpg", "png"
     //! @return true if the given string matches the format hint
-    bool CheckFormat( const char* s ) const {
-        return ( 0 == ::strncmp( achFormatHint, s, 3 ) );
+    bool CheckFormat(const char* s) const
+    {
+        return (0 == ::strncmp(achFormatHint,s,3));
     }
 
     // Construction
-    aiTexture() : mWidth( 0 ), mHeight( 0 ), pcData( NULL ) {
-        achFormatHint[ 0 ] = achFormatHint[ 1 ] = 0;
-        achFormatHint[ 2 ] = achFormatHint[ 3 ] = 0;
+    aiTexture ()
+        : mWidth  (0)
+        , mHeight (0)
+        , pcData  (NULL)
+    {
+        achFormatHint[0] = achFormatHint[1] = 0;
+        achFormatHint[2] = achFormatHint[3] = 0;
     }
 
     // Destruction
-    ~aiTexture() { delete[] pcData; }
+    ~aiTexture ()
+    {
+        delete[] pcData;
+    }
 #endif
 };
+
 
 #ifdef __cplusplus
 }

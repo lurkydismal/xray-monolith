@@ -21,10 +21,10 @@
 #ifndef __UCASEMAP_H__
 #define __UCASEMAP_H__
 
+#include "unicode/utypes.h"
 #include "unicode/localpointer.h"
 #include "unicode/stringoptions.h"
 #include "unicode/ustring.h"
-#include "unicode/utypes.h"
 
 /**
  * \file
@@ -45,8 +45,7 @@
  * @stable ICU 3.4
  */
 struct UCaseMap;
-typedef struct UCaseMap
-    UCaseMap; /**< C typedef for struct UCaseMap. @stable ICU 3.4 */
+typedef struct UCaseMap UCaseMap; /**< C typedef for struct UCaseMap. @stable ICU 3.4 */
 
 /**
  * Open a UCaseMap service object for a locale and a set of options.
@@ -70,16 +69,16 @@ typedef struct UCaseMap
  * @see U_TITLECASE_NO_BREAK_ADJUSTMENT
  * @stable ICU 3.4
  */
-U_STABLE UCaseMap* U_EXPORT2 ucasemap_open( const char* locale,
-                                            uint32_t options,
-                                            UErrorCode* pErrorCode );
+U_STABLE UCaseMap * U_EXPORT2
+ucasemap_open(const char *locale, uint32_t options, UErrorCode *pErrorCode);
 
 /**
  * Close a UCaseMap service object.
  * @param csm Object to be closed.
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2 ucasemap_close( UCaseMap* csm );
+U_STABLE void U_EXPORT2
+ucasemap_close(UCaseMap *csm);
 
 #if U_SHOW_CPLUSPLUS_API
 
@@ -94,7 +93,7 @@ U_NAMESPACE_BEGIN
  * @see LocalPointer
  * @stable ICU 4.4
  */
-U_DEFINE_LOCAL_OPEN_POINTER( LocalUCaseMapPointer, UCaseMap, ucasemap_close );
+U_DEFINE_LOCAL_OPEN_POINTER(LocalUCaseMapPointer, UCaseMap, ucasemap_close);
 
 U_NAMESPACE_END
 
@@ -106,7 +105,8 @@ U_NAMESPACE_END
  * @return locale ID
  * @stable ICU 3.4
  */
-U_STABLE const char* U_EXPORT2 ucasemap_getLocale( const UCaseMap* csm );
+U_STABLE const char * U_EXPORT2
+ucasemap_getLocale(const UCaseMap *csm);
 
 /**
  * Get the options bit set that is used for case folding and string comparisons.
@@ -114,7 +114,8 @@ U_STABLE const char* U_EXPORT2 ucasemap_getLocale( const UCaseMap* csm );
  * @return options bit set
  * @stable ICU 3.4
  */
-U_STABLE uint32_t U_EXPORT2 ucasemap_getOptions( const UCaseMap* csm );
+U_STABLE uint32_t U_EXPORT2
+ucasemap_getOptions(const UCaseMap *csm);
 
 /**
  * Set the locale ID that is used for language-dependent case mappings.
@@ -127,9 +128,8 @@ U_STABLE uint32_t U_EXPORT2 ucasemap_getOptions( const UCaseMap* csm );
  * @see ucasemap_open
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2 ucasemap_setLocale( UCaseMap* csm,
-                                            const char* locale,
-                                            UErrorCode* pErrorCode );
+U_STABLE void U_EXPORT2
+ucasemap_setLocale(UCaseMap *csm, const char *locale, UErrorCode *pErrorCode);
 
 /**
  * Set the options bit set that is used for case folding and string comparisons.
@@ -142,9 +142,8 @@ U_STABLE void U_EXPORT2 ucasemap_setLocale( UCaseMap* csm,
  * @see ucasemap_open
  * @stable ICU 3.4
  */
-U_STABLE void U_EXPORT2 ucasemap_setOptions( UCaseMap* csm,
-                                             uint32_t options,
-                                             UErrorCode* pErrorCode );
+U_STABLE void U_EXPORT2
+ucasemap_setOptions(UCaseMap *csm, uint32_t options, UErrorCode *pErrorCode);
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
@@ -155,8 +154,8 @@ U_STABLE void U_EXPORT2 ucasemap_setOptions( UCaseMap* csm,
  * @return titlecasing break iterator
  * @stable ICU 3.8
  */
-U_STABLE const UBreakIterator* U_EXPORT2
-ucasemap_getBreakIterator( const UCaseMap* csm );
+U_STABLE const UBreakIterator * U_EXPORT2
+ucasemap_getBreakIterator(const UCaseMap *csm);
 
 /**
  * Set the break iterator that is used for titlecasing.
@@ -178,15 +177,14 @@ ucasemap_getBreakIterator( const UCaseMap* csm );
  * @see ucasemap_utf8ToTitle
  * @stable ICU 3.8
  */
-U_STABLE void U_EXPORT2 ucasemap_setBreakIterator( UCaseMap* csm,
-                                                   UBreakIterator* iterToAdopt,
-                                                   UErrorCode* pErrorCode );
+U_STABLE void U_EXPORT2
+ucasemap_setBreakIterator(UCaseMap *csm, UBreakIterator *iterToAdopt, UErrorCode *pErrorCode);
 
 /**
- * Titlecase a UTF-16 string. This function is almost a duplicate of
- * u_strToTitle(), except that it takes ucasemap_setOptions() into account and
- * has performance advantages from being able to use a UCaseMap object for
- * multiple case mapping operations, saving setup time.
+ * Titlecase a UTF-16 string. This function is almost a duplicate of u_strToTitle(),
+ * except that it takes ucasemap_setOptions() into account and has performance
+ * advantages from being able to use a UCaseMap object for multiple case mapping
+ * operations, saving setup time.
  *
  * Casing is locale-dependent and context-sensitive.
  * Titlecasing uses a break iterator to find the first characters of words
@@ -212,31 +210,29 @@ U_STABLE void U_EXPORT2 ucasemap_setBreakIterator( UCaseMap* csm,
  *
  * @param csm       UCaseMap service object. This pointer is non-const!
  *                  See the note above for details.
- * @param dest      A buffer for the result string. The result will be
- * NUL-terminated if the buffer is large enough. The contents is undefined in
- * case of failure.
- * @param destCapacity The size of the buffer (number of UChars). If it is 0,
- * then dest may be NULL and the function will only return the length of the
- * result without writing any of the result string.
+ * @param dest      A buffer for the result string. The result will be NUL-terminated if
+ *                  the buffer is large enough.
+ *                  The contents is undefined in case of failure.
+ * @param destCapacity The size of the buffer (number of UChars). If it is 0, then
+ *                  dest may be NULL and the function will only return the length of the result
+ *                  without writing any of the result string.
  * @param src       The original string.
- * @param srcLength The length of the original string. If -1, then src must be
- * NUL-terminated.
+ * @param srcLength The length of the original string. If -1, then src must be NUL-terminated.
  * @param pErrorCode Must be a valid pointer to an error code value,
  *                  which must not indicate a failure before the function call.
- * @return The length of the result string, if successful - or in case of a
- * buffer overflow, in which case it will be greater than destCapacity.
+ * @return The length of the result string, if successful - or in case of a buffer overflow,
+ *         in which case it will be greater than destCapacity.
  *
  * @see u_strToTitle
  * @stable ICU 3.8
  */
-U_STABLE int32_t U_EXPORT2 ucasemap_toTitle( UCaseMap* csm,
-                                             UChar* dest,
-                                             int32_t destCapacity,
-                                             const UChar* src,
-                                             int32_t srcLength,
-                                             UErrorCode* pErrorCode );
+U_STABLE int32_t U_EXPORT2
+ucasemap_toTitle(UCaseMap *csm,
+                 UChar *dest, int32_t destCapacity,
+                 const UChar *src, int32_t srcLength,
+                 UErrorCode *pErrorCode);
 
-#endif // UCONFIG_NO_BREAK_ITERATION
+#endif  // UCONFIG_NO_BREAK_ITERATION
 
 /**
  * Lowercase the characters in a UTF-8 string.
@@ -245,29 +241,27 @@ U_STABLE int32_t U_EXPORT2 ucasemap_toTitle( UCaseMap* csm,
  * The source string and the destination buffer must not overlap.
  *
  * @param csm       UCaseMap service object.
- * @param dest      A buffer for the result string. The result will be
- * NUL-terminated if the buffer is large enough. The contents is undefined in
- * case of failure.
- * @param destCapacity The size of the buffer (number of bytes). If it is 0,
- * then dest may be NULL and the function will only return the length of the
- * result without writing any of the result string.
+ * @param dest      A buffer for the result string. The result will be NUL-terminated if
+ *                  the buffer is large enough.
+ *                  The contents is undefined in case of failure.
+ * @param destCapacity The size of the buffer (number of bytes). If it is 0, then
+ *                  dest may be NULL and the function will only return the length of the result
+ *                  without writing any of the result string.
  * @param src       The original string.
- * @param srcLength The length of the original string. If -1, then src must be
- * NUL-terminated.
+ * @param srcLength The length of the original string. If -1, then src must be NUL-terminated.
  * @param pErrorCode Must be a valid pointer to an error code value,
  *                  which must not indicate a failure before the function call.
- * @return The length of the result string, if successful - or in case of a
- * buffer overflow, in which case it will be greater than destCapacity.
+ * @return The length of the result string, if successful - or in case of a buffer overflow,
+ *         in which case it will be greater than destCapacity.
  *
  * @see u_strToLower
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2 ucasemap_utf8ToLower( const UCaseMap* csm,
-                                                 char* dest,
-                                                 int32_t destCapacity,
-                                                 const char* src,
-                                                 int32_t srcLength,
-                                                 UErrorCode* pErrorCode );
+U_STABLE int32_t U_EXPORT2
+ucasemap_utf8ToLower(const UCaseMap *csm,
+                     char *dest, int32_t destCapacity,
+                     const char *src, int32_t srcLength,
+                     UErrorCode *pErrorCode);
 
 /**
  * Uppercase the characters in a UTF-8 string.
@@ -276,29 +270,27 @@ U_STABLE int32_t U_EXPORT2 ucasemap_utf8ToLower( const UCaseMap* csm,
  * The source string and the destination buffer must not overlap.
  *
  * @param csm       UCaseMap service object.
- * @param dest      A buffer for the result string. The result will be
- * NUL-terminated if the buffer is large enough. The contents is undefined in
- * case of failure.
- * @param destCapacity The size of the buffer (number of bytes). If it is 0,
- * then dest may be NULL and the function will only return the length of the
- * result without writing any of the result string.
+ * @param dest      A buffer for the result string. The result will be NUL-terminated if
+ *                  the buffer is large enough.
+ *                  The contents is undefined in case of failure.
+ * @param destCapacity The size of the buffer (number of bytes). If it is 0, then
+ *                  dest may be NULL and the function will only return the length of the result
+ *                  without writing any of the result string.
  * @param src       The original string.
- * @param srcLength The length of the original string. If -1, then src must be
- * NUL-terminated.
+ * @param srcLength The length of the original string. If -1, then src must be NUL-terminated.
  * @param pErrorCode Must be a valid pointer to an error code value,
  *                  which must not indicate a failure before the function call.
- * @return The length of the result string, if successful - or in case of a
- * buffer overflow, in which case it will be greater than destCapacity.
+ * @return The length of the result string, if successful - or in case of a buffer overflow,
+ *         in which case it will be greater than destCapacity.
  *
  * @see u_strToUpper
  * @stable ICU 3.4
  */
-U_STABLE int32_t U_EXPORT2 ucasemap_utf8ToUpper( const UCaseMap* csm,
-                                                 char* dest,
-                                                 int32_t destCapacity,
-                                                 const char* src,
-                                                 int32_t srcLength,
-                                                 UErrorCode* pErrorCode );
+U_STABLE int32_t U_EXPORT2
+ucasemap_utf8ToUpper(const UCaseMap *csm,
+                     char *dest, int32_t destCapacity,
+                     const char *src, int32_t srcLength,
+                     UErrorCode *pErrorCode);
 
 #if !UCONFIG_NO_BREAK_ITERATION
 
@@ -320,39 +312,37 @@ U_STABLE int32_t U_EXPORT2 ucasemap_utf8ToUpper( const UCaseMap* csm,
  * The standard titlecase iterator for the root locale implements the
  * algorithm of Unicode TR 21.
  *
- * This function uses only the setUText(), first(), next() and close() methods
- * of the provided break iterator.
+ * This function uses only the setUText(), first(), next() and close() methods of the
+ * provided break iterator.
  *
  * The result may be longer or shorter than the original.
  * The source string and the destination buffer must not overlap.
  *
  * @param csm       UCaseMap service object. This pointer is non-const!
  *                  See the note above for details.
- * @param dest      A buffer for the result string. The result will be
- * NUL-terminated if the buffer is large enough. The contents is undefined in
- * case of failure.
- * @param destCapacity The size of the buffer (number of bytes). If it is 0,
- * then dest may be NULL and the function will only return the length of the
- * result without writing any of the result string.
+ * @param dest      A buffer for the result string. The result will be NUL-terminated if
+ *                  the buffer is large enough.
+ *                  The contents is undefined in case of failure.
+ * @param destCapacity The size of the buffer (number of bytes). If it is 0, then
+ *                  dest may be NULL and the function will only return the length of the result
+ *                  without writing any of the result string.
  * @param src       The original string.
- * @param srcLength The length of the original string. If -1, then src must be
- * NUL-terminated.
+ * @param srcLength The length of the original string. If -1, then src must be NUL-terminated.
  * @param pErrorCode Must be a valid pointer to an error code value,
  *                  which must not indicate a failure before the function call.
- * @return The length of the result string, if successful - or in case of a
- * buffer overflow, in which case it will be greater than destCapacity.
+ * @return The length of the result string, if successful - or in case of a buffer overflow,
+ *         in which case it will be greater than destCapacity.
  *
  * @see u_strToTitle
  * @see U_TITLECASE_NO_LOWERCASE
  * @see U_TITLECASE_NO_BREAK_ADJUSTMENT
  * @stable ICU 3.8
  */
-U_STABLE int32_t U_EXPORT2 ucasemap_utf8ToTitle( UCaseMap* csm,
-                                                 char* dest,
-                                                 int32_t destCapacity,
-                                                 const char* src,
-                                                 int32_t srcLength,
-                                                 UErrorCode* pErrorCode );
+U_STABLE int32_t U_EXPORT2
+ucasemap_utf8ToTitle(UCaseMap *csm,
+                    char *dest, int32_t destCapacity,
+                    const char *src, int32_t srcLength,
+                    UErrorCode *pErrorCode);
 
 #endif
 
@@ -360,26 +350,25 @@ U_STABLE int32_t U_EXPORT2 ucasemap_utf8ToTitle( UCaseMap* csm,
  * Case-folds the characters in a UTF-8 string.
  *
  * Case-folding is locale-independent and not context-sensitive,
- * but there is an option for whether to include or exclude mappings for dotted
- * I and dotless i that are marked with 'T' in CaseFolding.txt.
+ * but there is an option for whether to include or exclude mappings for dotted I
+ * and dotless i that are marked with 'T' in CaseFolding.txt.
  *
  * The result may be longer or shorter than the original.
  * The source string and the destination buffer must not overlap.
  *
  * @param csm       UCaseMap service object.
- * @param dest      A buffer for the result string. The result will be
- * NUL-terminated if the buffer is large enough. The contents is undefined in
- * case of failure.
- * @param destCapacity The size of the buffer (number of bytes). If it is 0,
- * then dest may be NULL and the function will only return the length of the
- * result without writing any of the result string.
+ * @param dest      A buffer for the result string. The result will be NUL-terminated if
+ *                  the buffer is large enough.
+ *                  The contents is undefined in case of failure.
+ * @param destCapacity The size of the buffer (number of bytes). If it is 0, then
+ *                  dest may be NULL and the function will only return the length of the result
+ *                  without writing any of the result string.
  * @param src       The original string.
- * @param srcLength The length of the original string. If -1, then src must be
- * NUL-terminated.
+ * @param srcLength The length of the original string. If -1, then src must be NUL-terminated.
  * @param pErrorCode Must be a valid pointer to an error code value,
  *                  which must not indicate a failure before the function call.
- * @return The length of the result string, if successful - or in case of a
- * buffer overflow, in which case it will be greater than destCapacity.
+ * @return The length of the result string, if successful - or in case of a buffer overflow,
+ *         in which case it will be greater than destCapacity.
  *
  * @see u_strFoldCase
  * @see ucasemap_setOptions
@@ -387,11 +376,10 @@ U_STABLE int32_t U_EXPORT2 ucasemap_utf8ToTitle( UCaseMap* csm,
  * @see U_FOLD_CASE_EXCLUDE_SPECIAL_I
  * @stable ICU 3.8
  */
-U_STABLE int32_t U_EXPORT2 ucasemap_utf8FoldCase( const UCaseMap* csm,
-                                                  char* dest,
-                                                  int32_t destCapacity,
-                                                  const char* src,
-                                                  int32_t srcLength,
-                                                  UErrorCode* pErrorCode );
+U_STABLE int32_t U_EXPORT2
+ucasemap_utf8FoldCase(const UCaseMap *csm,
+                      char *dest, int32_t destCapacity,
+                      const char *src, int32_t srcLength,
+                      UErrorCode *pErrorCode);
 
 #endif

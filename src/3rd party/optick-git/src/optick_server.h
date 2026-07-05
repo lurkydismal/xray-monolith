@@ -9,8 +9,8 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions :
 //
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -24,50 +24,50 @@
 #include "optick.config.h"
 
 #if USE_OPTICK
+#include "optick_message.h"
+
 #include <mutex>
 #include <thread>
 
-#include "optick_message.h"
-
-namespace Optick {
+namespace Optick
+{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Socket;
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class Server {
-    InputDataStream networkStream;
+class Server
+{
+	InputDataStream networkStream;
 
-    static const int BIFFER_SIZE = 1024;
-    char buffer[ BIFFER_SIZE ];
+	static const int BIFFER_SIZE = 1024;
+	char buffer[BIFFER_SIZE];
 
-    Socket* socket;
+	Socket* socket;
 
-    std::recursive_mutex socketLock;
+	std::recursive_mutex socketLock;
 
-    CaptureSaveChunkCb saveCb;
+	CaptureSaveChunkCb saveCb;
 
-    Server( short port );
-    ~Server();
+	Server( short port );
+	~Server();
 
-    bool InitConnection();
+	bool InitConnection();
 
-    void Send( const char* data, size_t size );
+	void Send(const char* data, size_t size);
 
 public:
-    void SetSaveCallback( CaptureSaveChunkCb cb );
+	void SetSaveCallback(CaptureSaveChunkCb cb);
 
-    void SendStart();
-    void Send( DataResponse::Type type, OutputDataStream& stream );
-    void SendFinish();
+	void SendStart();
+	void Send(DataResponse::Type type, OutputDataStream& stream);
+	void SendFinish();
 
-    void Update();
+	void Update();
 
-    string GetHostName() const;
+	string GetHostName() const;
 
-    static Server& Get();
+	static Server &Get();
 };
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-} // namespace Optick
+}
 
-#endif // USE_OPTICK
+#endif //USE_OPTICK

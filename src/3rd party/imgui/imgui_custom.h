@@ -1,5 +1,5 @@
 #pragma once
-
-namespace ImGui {
-void LockMousePos();
+namespace ImGui
+{
+	void LockMousePos();
 }
