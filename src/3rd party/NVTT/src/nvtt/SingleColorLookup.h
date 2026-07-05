@@ -56,6 +56,7 @@ void initTables()
 };
 */
 
+#include "nvcore.h"
 #if __CUDACC__
 __constant__ unsigned short
 #else

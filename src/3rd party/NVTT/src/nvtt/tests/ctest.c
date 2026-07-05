@@ -1,6 +1,7 @@
 
-#include <nvtt/nvtt_wrapper.h>
+#include <nvtt/nvtt_wrapper.hpp>
 #include <stdio.h>
+#include <string.h>
 
 int main( void ) {
     NvttInputOptions inputOptions = 0;

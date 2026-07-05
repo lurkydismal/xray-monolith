@@ -24,7 +24,7 @@
 #ifndef NV_TT_COMPRESSRGB_H
 #define NV_TT_COMPRESSRGB_H
 
-#include "nvtt.h"
+#include "nvtt.hpp"
 
 namespace nv {
 class Image;

@@ -1,5 +1,9 @@
 // This code is in the public domain -- castanyo@yahoo.es
 
+// clang-format off
+#include <stdexcept> // std::runtime_error
+// clang-format on
+
 #include <nvcore/Debug.h>
 #include <nvcore/StrLib.h>
 
@@ -50,8 +54,7 @@
 #endif
 #endif
 
-#include <stdexcept> // std::runtime_error
-#undef assert        // defined on mingw
+#undef assert // defined on mingw
 
 using namespace nv;
 

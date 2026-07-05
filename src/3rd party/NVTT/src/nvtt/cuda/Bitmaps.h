@@ -1,4 +1,5 @@
 
+using uint = unsigned int;
 
 /*
 static void doPrecomputation()

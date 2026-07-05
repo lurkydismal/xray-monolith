@@ -3,11 +3,11 @@ PROJECT(nvtt)
 ADD_SUBDIRECTORY(squish)
 
 SET(NVTT_SRCS
-	nvtt.h 
+	nvtt.hpp
 	nvtt.cpp
 	Compressor.h
 	Compressor.cpp
-	nvtt_wrapper.h
+	nvtt_wrapper.hpp
 	nvtt_wrapper.cpp
 	CompressDXT.h
 	CompressDXT.cpp
@@ -52,12 +52,12 @@ ENDIF(NVTT_SHARED)
 
 TARGET_LINK_LIBRARIES(nvtt ${LIBS} nvcore nvmath nvimage squish)
 
-INSTALL(TARGETS nvtt 
+INSTALL(TARGETS nvtt
 	RUNTIME DESTINATION bin
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib/static)
 
-INSTALL(FILES nvtt.h DESTINATION include/nvtt)
+INSTALL(FILES nvtt.hpp DESTINATION include/nvtt)
 
 
 
@@ -89,7 +89,7 @@ INSTALL(TARGETS nvcompress nvdecompress nvddsinfo nvimgdiff nvassemble nvzoom DE
 IF(QT4_FOUND AND NOT MSVC)
 	SET(QT_USE_QTOPENGL TRUE)
 	INCLUDE_DIRECTORIES(${QT_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
-	
+
 	SET(SRCS
 		tools/main.cpp
 		tools/configdialog.h

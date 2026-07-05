@@ -1,7 +1,7 @@
 
-#include "nvtt_wrapper.h"
+#include "nvtt_wrapper.hpp"
 
-#include "nvtt.h"
+#include "nvtt.hpp"
 
 // InputOptions class.
 NvttInputOptions* nvttCreateInputOptions() {

@@ -27,7 +27,7 @@
 #include <nvcore/StrLib.h>
 #include <nvmath/Vector.h>
 
-#include "nvtt.h"
+#include "nvtt.hpp"
 
 namespace nvtt {
 

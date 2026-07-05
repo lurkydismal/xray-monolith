@@ -26,7 +26,7 @@
 #include <nvcore/Memory.h>
 #include <string.h> // memcpy
 
-#include "nvtt.h"
+#include "nvtt.hpp"
 
 using namespace nv;
 using namespace nvtt;

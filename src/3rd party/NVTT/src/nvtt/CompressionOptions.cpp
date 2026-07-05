@@ -23,7 +23,7 @@
 
 #include "CompressionOptions.h"
 
-#include "nvtt.h"
+#include "nvtt.hpp"
 
 using namespace nv;
 using namespace nvtt;

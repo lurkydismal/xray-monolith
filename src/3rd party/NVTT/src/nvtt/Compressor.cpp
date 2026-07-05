@@ -34,7 +34,7 @@
 #include <nvimage/NormalMap.h>
 #include <nvimage/PixelFormat.h>
 #include <nvimage/Quantize.h>
-#include <nvtt/nvtt.h>
+#include <nvtt/nvtt.hpp>
 
 #include "CompressDXT.h"
 #include "CompressRGB.h"

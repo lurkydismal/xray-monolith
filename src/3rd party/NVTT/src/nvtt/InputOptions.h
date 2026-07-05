@@ -29,7 +29,7 @@
 #include <nvmath/Matrix.h>
 #include <nvmath/Vector.h>
 
-#include "nvtt.h"
+#include "nvtt.hpp"
 
 namespace nvtt {
 

@@ -24,6 +24,8 @@
 #ifndef NVTT_WRAPPER_H
 #define NVTT_WRAPPER_H
 
+#include <nvtt/nvtt.hpp>
+
 // Function linkage
 #if NVTT_SHARED
 

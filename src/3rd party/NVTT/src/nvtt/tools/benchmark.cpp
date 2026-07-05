@@ -25,7 +25,7 @@
 #include <nvcore/StrLib.h>
 #include <nvimage/DirectDrawSurface.h>
 #include <nvimage/Image.h>
-#include <nvtt/nvtt.h>
+#include <nvtt/nvtt.hpp>
 #include <time.h> // clock
 
 #include "cmdline.h"

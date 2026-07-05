@@ -24,7 +24,7 @@
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
-#include <nvtt/nvtt.h>
+#include <nvtt/nvtt.hpp>
 
 #include <QtGui/QDialog>
 

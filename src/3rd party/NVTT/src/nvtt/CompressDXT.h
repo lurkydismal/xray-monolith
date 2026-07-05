@@ -26,7 +26,7 @@
 
 #include <nvimage/nvimage.h>
 
-#include "nvtt.h"
+#include "nvtt.hpp"
 
 namespace nv {
 class Image;

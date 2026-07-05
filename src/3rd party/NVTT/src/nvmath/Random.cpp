@@ -36,11 +36,11 @@ void MTRand::reload() {
     // Made clearer and faster by Matthew Bellew (matthew.bellew@home.com)
     uint32* p = state;
     int i;
-    for ( i = N - M; i--; ++p )
+    for ( i = static_cast< long >( N ) - M; i--; ++p )
         *p = twist( p[ M ], p[ 0 ], p[ 1 ] );
     for ( i = M; --i; ++p )
-        *p = twist( p[ M - N ], p[ 0 ], p[ 1 ] );
-    *p = twist( p[ M - N ], p[ 0 ], state[ 0 ] );
+        *p = twist( p[ static_cast< long >( M ) - N ], p[ 0 ], p[ 1 ] );
+    *p = twist( p[ static_cast< long >( M ) - N ], p[ 0 ], state[ 0 ] );
 
     left = N, next = state;
 }

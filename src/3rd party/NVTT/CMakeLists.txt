@@ -10,8 +10,8 @@ source_group("" FILES ${no_group_source_files})
 
 set(include
     "include/nvconfig.h"
-    "include/nvtt/nvtt.h"
-    "include/nvtt/nvtt_wrapper.h"
+    "include/nvtt/nvtt.hpp"
+    "include/nvtt/nvtt_wrapper.hpp"
 )
 source_group("include" FILES ${include})
 
@@ -109,9 +109,9 @@ set(src
     "src/nvtt/InputOptions.cpp"
     "src/nvtt/InputOptions.h"
     "src/nvtt/nvtt.cpp"
-    "src/nvtt/nvtt.h"
+    "src/nvtt/nvtt.hpp"
     "src/nvtt/nvtt_wrapper.cpp"
-    "src/nvtt/nvtt_wrapper.h"
+    "src/nvtt/nvtt_wrapper.hpp"
     "src/nvtt/OptimalCompressDXT.cpp"
     "src/nvtt/OptimalCompressDXT.h"
     "src/nvtt/OutputOptions.cpp"
@@ -445,6 +445,7 @@ if(MSVC)
             /ZI
         >
         /std:c++latest;
+        /EHsc
         /wd4005
     )
     target_link_options(${PROJECT_NAME} PRIVATE

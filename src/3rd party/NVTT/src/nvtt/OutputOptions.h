@@ -27,7 +27,7 @@
 #include <nvcore/StdStream.h>
 #include <nvcore/StrLib.h>
 
-#include "nvtt.h"
+#include "nvtt.hpp"
 
 namespace nvtt {
 

@@ -27,7 +27,7 @@
 #include <nvcore/Ptr.h>
 #include <nvtt/cuda/CudaCompressDXT.h>
 
-#include "nvtt.h"
+#include "nvtt.hpp"
 
 namespace nv {
 class Image;

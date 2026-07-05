@@ -21,6 +21,14 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 
+// clang-format off
+// squish
+#include "squish/colourset.h"
+//#include "squish/clusterfit.h"
+#include "squish/fastclusterfit.h"
+#include "squish/weightedclusterfit.h"
+// clang-format on
+
 #include "CompressDXT.h"
 
 #include <nvcore/Memory.h>
@@ -32,13 +40,7 @@
 #include "OptimalCompressDXT.h"
 #include "OutputOptions.h"
 #include "QuickCompressDXT.h"
-#include "nvtt.h"
-
-// squish
-#include "squish/colourset.h"
-// #include "squish/clusterfit.h"
-#include "squish/fastclusterfit.h"
-#include "squish/weightedclusterfit.h"
+#include "nvtt.hpp"
 
 // s3_quant
 #if defined( HAVE_S3QUANT )
