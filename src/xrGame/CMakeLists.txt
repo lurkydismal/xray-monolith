@@ -7080,7 +7080,7 @@ if(MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++latest;
+        /std:c++17;
         /wd4995;
         /wd4005;
         /wd4237

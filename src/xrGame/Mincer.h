@@ -1,58 +1,56 @@
 /////////////////////////////////////////////////////
-//
+// 
 // Common class for gravity anomalies: Vortex and Whirlgig
 // When object gets caught it will be pulled towards the
 // center + additional tele_height, then ripped apart.
 // Zone recharges after blowout
 // (charges from 0 to m_fMaxPower in m_dwPeriod time)
-//
+// 
 /////////////////////////////////////////////////////
 #pragma once
 
-#include "PHDestroyable.h"
-#include "PhysicsShellHolder.h"
 #include "gravizone.h"
-#include "script_export_space.h"
 #include "telewhirlwind.h"
+#include "PhysicsShellHolder.h"
+#include "script_export_space.h"
+#include "PHDestroyable.h"
 
-class CMincer : public CBaseGraviZone, public CPHDestroyableNotificator {
+class CMincer :
+	public CBaseGraviZone,
+	public CPHDestroyableNotificator
+{
 private:
-    typedef CBaseGraviZone inherited;
+	typedef CBaseGraviZone inherited;
 
-    CTeleWhirlwind m_oTelekinesis;
-    shared_str m_sParticlesSkeleton;
-    float m_fActorBlowoutRadiusPercent;
-
-public:
-    virtual CTelekinesis& Telekinesis() { return m_oTelekinesis; }
+	CTeleWhirlwind	m_oTelekinesis;
+	shared_str		m_sParticlesSkeleton;
+	float			m_fActorBlowoutRadiusPercent;
 
 public:
-    CMincer();
-    virtual ~CMincer();
+	virtual CTelekinesis& Telekinesis() { return m_oTelekinesis; }
 
-    virtual void OnStateSwitch( EZoneState new_state );
-    virtual bool feel_touch_contact( CObject* O );
-    virtual void feel_touch_new( CObject* O );
-    virtual void Load( LPCSTR section );
-    virtual bool BlowoutState();
+public:
+	CMincer();
+	virtual ~CMincer();
 
-    virtual void AffectPullDead( CPhysicsShellHolder* GO,
-                                 const Fvector& throw_in_dir,
-                                 float dist ) {}
+	virtual void OnStateSwitch(EZoneState new_state);
+	virtual bool feel_touch_contact(CObject* O);
+	virtual void feel_touch_new(CObject* O);
+	virtual void Load(LPCSTR section);
+	virtual bool BlowoutState();
 
-    virtual void AffectPullAlife( CEntityAlive* EA,
-                                  const Fvector& throw_in_dir,
-                                  float dist );
-    virtual void AffectThrow( SZoneObjectInfo* O,
-                              CPhysicsShellHolder* GO,
-                              const Fvector& throw_in_dir,
-                              float dist );
-    virtual void ThrowInCenter( Fvector& C );
-    virtual BOOL net_Spawn( CSE_Abstract* DC );
-    virtual void net_Destroy();
-    virtual void Center( Fvector& C ) const;
-    virtual void NotificateDestroy( CPHDestroyableNotificate* dn );
-    virtual float BlowoutRadiusPercent( CPhysicsShellHolder* GO );
+	virtual void AffectPullDead(CPhysicsShellHolder* GO, const Fvector& throw_in_dir, float dist)
+	{
+	}
 
-    DECLARE_SCRIPT_REGISTER_FUNCTION
+	virtual void AffectPullAlife(CEntityAlive* EA, const Fvector& throw_in_dir, float dist);
+	virtual void AffectThrow(SZoneObjectInfo* O, CPhysicsShellHolder* GO, const Fvector& throw_in_dir, float dist);
+	virtual void ThrowInCenter(Fvector& C);
+	virtual BOOL net_Spawn(CSE_Abstract* DC);
+	virtual void net_Destroy();
+	virtual void Center(Fvector& C) const;
+	virtual void NotificateDestroy(CPHDestroyableNotificate* dn);
+	virtual float BlowoutRadiusPercent(CPhysicsShellHolder* GO);
+
+DECLARE_SCRIPT_REGISTER_FUNCTION
 };

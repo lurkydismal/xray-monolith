@@ -1090,7 +1090,7 @@ if(MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++latest;
+        /std:c++17;
         /wd4005;
         /wd4099;
         -Zm113

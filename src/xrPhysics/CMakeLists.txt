@@ -729,7 +729,7 @@ if(MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++latest
+        /std:c++17
     )
     target_link_options(${PROJECT_NAME} PRIVATE
         /OPT:REF;

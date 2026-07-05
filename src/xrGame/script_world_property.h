@@ -13,9 +13,10 @@
 
 typedef GraphEngineSpace::CWorldProperty CScriptWorldProperty;
 
-class CScriptWorldPropertyWrapper {
+class CScriptWorldPropertyWrapper
+{
 public:
-    DECLARE_SCRIPT_REGISTER_FUNCTION
+DECLARE_SCRIPT_REGISTER_FUNCTION
 };
 
 #include "script_world_property_inline.h"

@@ -5,10 +5,13 @@
 
 #pragma once
 
+#include "stdafx.h"
 #include "exooutfit.h"
 
-#include "stdafx.h"
+CExoOutfit::CExoOutfit()
+{
+}
 
-CExoOutfit::CExoOutfit() {}
-
-CExoOutfit::~CExoOutfit() {}
+CExoOutfit::~CExoOutfit()
+{
+}

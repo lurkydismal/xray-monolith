@@ -6,53 +6,55 @@
 //	Description : Stalker danger by sound planner class
 ////////////////////////////////////////////////////////////////////////////
 
+#include "stdafx.h"
 #include "stalker_danger_by_sound_planner.h"
-
 #include "ai/stalker/ai_stalker.h"
 #include "script_game_object.h"
 #include "stalker_danger_by_sound_actions.h"
-#include "stalker_danger_property_evaluators.h"
 #include "stalker_decision_space.h"
-#include "stdafx.h"
+#include "stalker_danger_property_evaluators.h"
 
 using namespace StalkerDecisionSpace;
 
-CStalkerDangerBySoundPlanner::CStalkerDangerBySoundPlanner( CAI_Stalker* object,
-                                                            LPCSTR action_name )
-    : inherited( object, action_name ) {}
-
-void CStalkerDangerBySoundPlanner::setup( CAI_Stalker* object,
-                                          CPropertyStorage* storage ) {
-    inherited::setup( object, storage );
-    clear();
-    add_evaluators();
-    add_actions();
+CStalkerDangerBySoundPlanner::CStalkerDangerBySoundPlanner(CAI_Stalker* object, LPCSTR action_name) :
+	inherited(object, action_name)
+{
 }
 
-void CStalkerDangerBySoundPlanner::initialize() {
-    inherited::initialize();
+void CStalkerDangerBySoundPlanner::setup(CAI_Stalker* object, CPropertyStorage* storage)
+{
+	inherited::setup(object, storage);
+	clear();
+	add_evaluators();
+	add_actions();
 }
 
-void CStalkerDangerBySoundPlanner::update() {
-    inherited::update();
+void CStalkerDangerBySoundPlanner::initialize()
+{
+	inherited::initialize();
 }
 
-void CStalkerDangerBySoundPlanner::finalize() {
-    inherited::finalize();
+void CStalkerDangerBySoundPlanner::update()
+{
+	inherited::update();
 }
 
-void CStalkerDangerBySoundPlanner::add_evaluators() {
-    add_evaluator(
-        eWorldPropertyDanger,
-        xr_new< CStalkerPropertyEvaluatorDangers >( m_object, "danger" ) );
-    add_evaluator( eWorldPropertyDangerUnknown,
-                   xr_new< CStalkerPropertyEvaluatorConst >( false, "fake" ) );
+void CStalkerDangerBySoundPlanner::finalize()
+{
+	inherited::finalize();
 }
 
-void CStalkerDangerBySoundPlanner::add_actions() {
-    CStalkerActionBase* action;
+void CStalkerDangerBySoundPlanner::add_evaluators()
+{
+	add_evaluator(eWorldPropertyDanger, xr_new<CStalkerPropertyEvaluatorDangers>(m_object, "danger"));
+	add_evaluator(eWorldPropertyDangerUnknown, xr_new<CStalkerPropertyEvaluatorConst>(false, "fake"));
+}
 
-    action = xr_new< CStalkerActionDangerBySoundTakeCover >( m_object, "fake" );
-    add_effect( action, eWorldPropertyDanger, false );
-    add_operator( eWorldOperatorDangerUnknownTakeCover, action );
+void CStalkerDangerBySoundPlanner::add_actions()
+{
+	CStalkerActionBase* action;
+
+	action = xr_new<CStalkerActionDangerBySoundTakeCover>(m_object, "fake");
+	add_effect(action, eWorldPropertyDanger, false);
+	add_operator(eWorldOperatorDangerUnknownTakeCover, action);
 }

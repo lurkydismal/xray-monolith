@@ -6,15 +6,22 @@
 //	Description : make_final class for debug purposes
 ////////////////////////////////////////////////////////////////////////////
 
+#include "stdafx.h"
 #include "debug_make_final.hpp"
 
-#include "stdafx.h"
+struct A : private xray::noncopyable
+{
+};
 
-struct A : private xray::noncopyable {};
+struct B :
+	public A,
+	private debug::make_final<B>
+{
+};
 
-struct B : public A, private debug::make_final< B > {};
-
-struct C : B {};
+struct C : B
+{
+};
 
 B b;
 

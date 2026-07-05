@@ -1,19 +1,27 @@
-#include "GeometryBits.h"
-
-#include "geometry.h"
-#include "phworld.h"
 #include "stdafx.h"
 
-static enum geom_category { gct_static = 1 << 0, gct_dynamic = 1 << 1 };
+#include "GeometryBits.h"
 
-void CPHGeometryBits::init_geom( CODEGeom& g ) {}
+#include "phworld.h"
+#include "geometry.h"
 
-void CPHGeometryBits::init_geom( CPHMesh& g ) {
-    dGeomSetCategoryBits( g.GetGeom(), gct_static );
+static enum geom_category
+{
+	gct_static = 1 << 0,
+	gct_dynamic = 1 << 1
+};
+
+
+void CPHGeometryBits::init_geom(CODEGeom& g)
+{
 }
 
-void CPHGeometryBits::set_ignore_static( CODEGeom& g ) {
-    dGeomSetCollideBits(
-        g.geometry_transform(),
-        dGeomGetCollideBits( g.geometry_transform() ) & ~gct_static );
+void CPHGeometryBits::init_geom(CPHMesh& g)
+{
+	dGeomSetCategoryBits(g.GetGeom(), gct_static);
+}
+
+void CPHGeometryBits::set_ignore_static(CODEGeom& g)
+{
+	dGeomSetCollideBits(g.geometry_transform(), dGeomGetCollideBits(g.geometry_transform()) & ~gct_static);
 }

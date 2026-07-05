@@ -3,35 +3,43 @@
 
 #if 0
 
-#define transform_dir( idx, res, SX, SY, SZ, T1 )                            \
-    __asm movzx eax, WORD PTR[esi][idx * ( TYPE u16 )] S.m __asm movaps res, \
-        SX __asm sal eax, 5 __asm lea eax, [eax + eax * 4] __asm movaps T1,  \
-        SY __asm mulps res, XMMWORD PTR[edx][eax][64] __asm mulps T1,        \
-        XMMWORD PTR[edx][eax][80] __asm addps res, T1 __asm movaps T1,       \
-        SZ __asm mulps T1, XMMWORD PTR[edx][eax][96] __asm addps res, T1
+#define transform_dir(idx,res,SX,SY,SZ,T1)									\
+__asm	movzx		eax, WORD PTR [esi][idx*(TYPE u16)]S.m					\
+__asm	movaps		res, SX													\
+__asm	sal			eax, 5													\
+__asm	lea			eax, [eax+eax*4]										\
+__asm	movaps		T1, SY													\
+__asm	mulps		res, XMMWORD PTR [edx][eax][64]							\
+__asm	mulps		T1, XMMWORD PTR [edx][eax][80]							\
+__asm	addps		res, T1													\
+__asm	movaps		T1, SZ													\
+__asm	mulps		T1, XMMWORD PTR [edx][eax][96]							\
+__asm	addps		res, T1													
 
-#define transform_tiny( idx, res, SX, SY, SZ, T1 )             \
-    transform_dir( idx, res, SX, SY, SZ, T1 ) __asm addps res, \
-        XMMWORD PTR[ edx ][ eax ][ 112 ]
+#define transform_tiny(idx,res,SX,SY,SZ,T1)									\
+transform_dir(idx,res,SX,SY,SZ,T1)											\
+__asm	addps		res, XMMWORD PTR [edx][eax][112]	
 
-#define shuffle_vec( VEC, SX, SY, SZ )                   \
-    __asm movss SX, DWORD PTR[esi] VEC.x __asm movss SY, \
-        DWORD PTR[esi] VEC.y __asm shufps SX, SX,        \
-        _MM_SHUFFLE( 1, 0, 0, 0 ) __asm movss SZ,        \
-        DWORD PTR[esi] VEC.z __asm shufps SY, SY,        \
-        _MM_SHUFFLE( 1, 0, 0, 0 ) __asm shufps SZ, SZ,   \
-        _MM_SHUFFLE( 1, 0, 0, 0 )
+#define shuffle_vec(VEC,SX,SY,SZ)											\
+__asm	movss		SX, DWORD PTR [esi]VEC.x								\
+__asm	movss		SY, DWORD PTR [esi]VEC.y								\
+__asm	shufps		SX, SX, _MM_SHUFFLE(1,0,0,0)							\
+__asm	movss		SZ, DWORD PTR [esi]VEC.z								\
+__asm	shufps		SY, SY, _MM_SHUFFLE(1,0,0,0)							\
+__asm	shufps		SZ, SZ, _MM_SHUFFLE(1,0,0,0)							\
 
-#define shuffle_sw4( SW0, SW1, SW2, SW3 )                                     \
-    __asm movss SW3, DWORD PTR[One] __asm movss SW0,                          \
-        DWORD PTR[esi][0 * ( TYPE float )] S.w __asm movss SW1,               \
-        DWORD PTR[esi][1 * ( TYPE float )] S.w __asm subss SW3,               \
-        SW0 __asm shufps SW0, SW0, _MM_SHUFFLE( 1, 0, 0, 0 ) __asm subss SW3, \
-        SW1 __asm movss SW2,                                                  \
-        DWORD PTR[esi][2 * ( TYPE float )] S.w __asm shufps SW1, SW1,         \
-        _MM_SHUFFLE( 1, 0, 0, 0 ) __asm subss SW3, SW2 __asm shufps SW2, SW2, \
-        _MM_SHUFFLE( 1, 0, 0, 0 ) __asm shufps SW3, SW3,                      \
-        _MM_SHUFFLE( 1, 0, 0, 0 )							
+#define shuffle_sw4(SW0,SW1,SW2,SW3)										\
+__asm	movss		SW3, DWORD PTR [One]									\
+__asm	movss		SW0, DWORD PTR [esi][0*(TYPE float)]S.w					\
+__asm	movss		SW1, DWORD PTR [esi][1*(TYPE float)]S.w					\
+__asm	subss		SW3, SW0												\
+__asm	shufps		SW0, SW0, _MM_SHUFFLE(1,0,0,0)							\
+__asm	subss		SW3, SW1												\
+__asm	movss		SW2, DWORD PTR [esi][2*(TYPE float)]S.w					\
+__asm	shufps		SW1, SW1, _MM_SHUFFLE(1,0,0,0)							\
+__asm	subss		SW3, SW2												\
+__asm	shufps		SW2, SW2, _MM_SHUFFLE(1,0,0,0)							\
+__asm	shufps		SW3, SW3, _MM_SHUFFLE(1,0,0,0)							
 
 // ==================================================================
 void __stdcall xrSkin4W_SSE(vertRender*		D,
@@ -112,13 +120,16 @@ __asm{
 // ------------------------------------------------------------------
 }}
 
-#define shuffle_sw3( SW0, SW1, SW2 )                                           \
-    __asm movss SW2, DWORD PTR[One] __asm movss SW0,                           \
-        DWORD PTR[esi][0 * ( TYPE float )] S.w __asm movss SW1,                \
-        DWORD PTR[esi][1 * ( TYPE float )] S.w __asm subss SW2,                \
-        SW0 __asm shufps SW0, SW0, _MM_SHUFFLE( 1, 0, 0, 0 ) __asm subss SW2,  \
-        SW1 __asm shufps SW1, SW1, _MM_SHUFFLE( 1, 0, 0, 0 ) __asm shufps SW2, \
-        SW2, _MM_SHUFFLE( 1, 0, 0, 0 )							
+
+#define shuffle_sw3(SW0,SW1,SW2)											\
+__asm	movss		SW2, DWORD PTR [One]									\
+__asm	movss		SW0, DWORD PTR [esi][0*(TYPE float)]S.w					\
+__asm	movss		SW1, DWORD PTR [esi][1*(TYPE float)]S.w					\
+__asm	subss		SW2, SW0												\
+__asm	shufps		SW0, SW0, _MM_SHUFFLE(1,0,0,0)							\
+__asm	subss		SW2, SW1												\
+__asm	shufps		SW1, SW1, _MM_SHUFFLE(1,0,0,0)							\
+__asm	shufps		SW2, SW2, _MM_SHUFFLE(1,0,0,0)							
 
 
 // ==================================================================
@@ -194,16 +205,23 @@ __asm{
 // ------------------------------------------------------------------
 }}
 
-#define transform_dir2( idx, res, SX, SY, SZ, T1 )                          \
-    __asm movzx eax, WORD PTR[esi] S.matrix##idx __asm movaps res,          \
-        SX __asm sal eax, 5 __asm lea eax, [eax + eax * 4] __asm movaps T1, \
-        SY __asm mulps res, XMMWORD PTR[edx][eax][64] __asm mulps T1,       \
-        XMMWORD PTR[edx][eax][80] __asm addps res, T1 __asm movaps T1,      \
-        SZ __asm mulps T1, XMMWORD PTR[edx][eax][96] __asm addps res, T1
 
-#define transform_tiny2( idx, res, SX, SY, SZ, T1 )             \
-    transform_dir2( idx, res, SX, SY, SZ, T1 ) __asm addps res, \
-        XMMWORD PTR[ edx ][ eax ][ 112 ]
+#define transform_dir2(idx,res,SX,SY,SZ,T1)									\
+__asm	movzx		eax, WORD PTR [esi]S.matrix##idx						\
+__asm	movaps		res, SX													\
+__asm	sal			eax, 5													\
+__asm	lea			eax, [eax+eax*4]										\
+__asm	movaps		T1, SY													\
+__asm	mulps		res, XMMWORD PTR [edx][eax][64]							\
+__asm	mulps		T1, XMMWORD PTR [edx][eax][80]							\
+__asm	addps		res, T1													\
+__asm	movaps		T1, SZ													\
+__asm	mulps		T1, XMMWORD PTR [edx][eax][96]							\
+__asm	addps		res, T1
+
+#define transform_tiny2(idx,res,SX,SY,SZ,T1)								\
+transform_dir2(idx,res,SX,SY,SZ,T1)											\
+__asm	addps		res, XMMWORD PTR [edx][eax][112]
 
 
 // ==================================================================

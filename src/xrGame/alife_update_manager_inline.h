@@ -8,6 +8,7 @@
 
 #pragma once
 
-IC float CALifeUpdateManager::update_monster_factor() const {
-    return ( m_update_monster_factor );
+IC float CALifeUpdateManager::update_monster_factor() const
+{
+	return (m_update_monster_factor);
 }

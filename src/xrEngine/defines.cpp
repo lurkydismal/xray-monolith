@@ -7,12 +7,12 @@ ECORE_API BOOL bDebug = FALSE;
 
 // Video
 //. u32 psCurrentMode = 1024;
-u32 psCurrentVidMode[ 2 ] = { 0, 0 };
+u32 psCurrentVidMode[2] = {0, 0};
 u32 psCurrentBPP = 32;
 // release version always has "mt_*" enabled
-Flags32 psDeviceFlags = { rsFullscreen | rsDetails | mtPhysics | mtSound |
-                          mtNetwork | rsDrawStatic | rsDrawDynamic |
-                          mtParticles };
+Flags32 psDeviceFlags = {
+	rsFullscreen | rsDetails | mtPhysics | mtSound | mtNetwork | rsDrawStatic | rsDrawDynamic | mtParticles
+};
 
 // textures
 int psTextureLOD = 1;

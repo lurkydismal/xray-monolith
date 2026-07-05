@@ -8,11 +8,15 @@
 // BlackDrops - черные капли
 ///////////////////////////////////////////////////////////////
 
-#include "Needles.h"
-
-#include "../xrphysics/PhysicsShell.h"
 #include "stdafx.h"
+#include "Needles.h"
+#include "../xrphysics/PhysicsShell.h"
 
-CNeedles::CNeedles( void ) {}
 
-CNeedles::~CNeedles( void ) {}
+CNeedles::CNeedles(void)
+{
+}
+
+CNeedles::~CNeedles(void)
+{
+}

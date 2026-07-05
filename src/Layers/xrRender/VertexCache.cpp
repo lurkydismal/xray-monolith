@@ -1,32 +1,44 @@
+#include "stdafx.h"
 #include "VertexCache.h"
 
-#include "stdafx.h"
-
-VertexCache::VertexCache() : VertexCache( 16 ) {}
-
-VertexCache::VertexCache( int size ) {
-    entries.assign( size, -1 );
+VertexCache::VertexCache() : VertexCache(16)
+{
 }
 
-VertexCache::~VertexCache() {
-    entries.clear();
+
+VertexCache::VertexCache(int size)
+{
+	entries.assign(size, -1);
 }
 
-int VertexCache::At( int index ) {
-    return entries[ index ];
+
+VertexCache::~VertexCache()
+{
+	entries.clear();
 }
 
-void VertexCache::Set( int index, int value ) {
-    entries[ index ] = value;
+
+int VertexCache::At(int index)
+{
+	return entries[index];
 }
 
-void VertexCache::Clear() {
-    for ( u32 i = 0; i < entries.size(); i++ )
-        entries[ i ] = -1;
+void VertexCache::Set(int index, int value)
+{
+	entries[index] = value;
 }
 
-void VertexCache::Copy( VertexCache* inVcache ) {
-    for ( u32 i = 0; i < entries.size(); i++ ) {
-        inVcache->Set( i, entries[ i ] );
-    }
+
+void VertexCache::Clear()
+{
+	for (u32 i = 0; i < entries.size(); i++)
+		entries[i] = -1;
+}
+
+void VertexCache::Copy(VertexCache* inVcache)
+{
+	for (u32 i = 0; i < entries.size(); i++)
+	{
+		inVcache->Set(i, entries[i]);
+	}
 }

@@ -22,18 +22,18 @@ class CBlend;
 class IKinematics;
 class IKinematicsAnimated;
 
-typedef class_exporter< DLL_Pure > DLL_PureScript;
+typedef class_exporter<DLL_Pure> DLL_PureScript;
 
-typedef class_exporter< ISheduled > ISheduledScript;
+typedef class_exporter<ISheduled> ISheduledScript;
 
-typedef class_exporter< IRenderable > IRenderableScript;
+typedef class_exporter<IRenderable> IRenderableScript;
 
-typedef class_exporter< ICollidable > ICollidableScript;
+typedef class_exporter<ICollidable> ICollidableScript;
 
-typedef class_exporter< CObject > CObjectScript;
+typedef class_exporter<CObject> CObjectScript;
 
-typedef class_exporter< CBlend > CBlendScript;
+typedef class_exporter<CBlend> CBlendScript;
 
-typedef class_exporter< IRenderVisual > IRender_VisualScript;
+typedef class_exporter<IRenderVisual> IRender_VisualScript;
 
-typedef class_exporter< IKinematicsAnimated > IKinematicsAnimatedScript;
+typedef class_exporter<IKinematicsAnimated> IKinematicsAnimatedScript;

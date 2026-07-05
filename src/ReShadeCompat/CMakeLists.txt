@@ -444,7 +444,7 @@ if(MSVC)
             /W3;
             /ZI
         >
-        /std:c++latest
+        /std:c++17
     )
     target_link_options(${PROJECT_NAME} PRIVATE
         /OPT:REF;

@@ -6,44 +6,57 @@
 //	Description : Script object class
 ////////////////////////////////////////////////////////////////////////////
 
+#include "stdafx.h"
 #include "script_object.h"
 
-#include "stdafx.h"
-
-CScriptObject::CScriptObject() {}
-
-CScriptObject::~CScriptObject() {}
-
-DLL_Pure* CScriptObject::_construct() {
-    CGameObject::_construct();
-    CScriptEntity::_construct();
-    return ( this );
+CScriptObject::CScriptObject()
+{
 }
 
-void CScriptObject::reinit() {
-    CScriptEntity::reinit();
-    CGameObject::reinit();
+CScriptObject::~CScriptObject()
+{
 }
 
-BOOL CScriptObject::net_Spawn( CSE_Abstract* DC ) {
-    return ( CGameObject::net_Spawn( DC ) && CScriptEntity::net_Spawn( DC ) );
+DLL_Pure* CScriptObject::_construct()
+{
+	CGameObject::_construct();
+	CScriptEntity::_construct();
+	return (this);
 }
 
-void CScriptObject::net_Destroy() {
-    CGameObject::net_Destroy();
-    CScriptEntity::net_Destroy();
+void CScriptObject::reinit()
+{
+	CScriptEntity::reinit();
+	CGameObject::reinit();
 }
 
-BOOL CScriptObject::UsedAI_Locations() {
-    return ( FALSE );
+BOOL CScriptObject::net_Spawn(CSE_Abstract* DC)
+{
+	return (
+		CGameObject::net_Spawn(DC) &&
+		CScriptEntity::net_Spawn(DC)
+	);
 }
 
-void CScriptObject::shedule_Update( u32 DT ) {
-    CGameObject::shedule_Update( DT );
-    CScriptEntity::shedule_Update( DT );
+void CScriptObject::net_Destroy()
+{
+	CGameObject::net_Destroy();
+	CScriptEntity::net_Destroy();
 }
 
-void CScriptObject::UpdateCL() {
-    CGameObject::UpdateCL();
-    CScriptEntity::UpdateCL();
+BOOL CScriptObject::UsedAI_Locations()
+{
+	return (FALSE);
+}
+
+void CScriptObject::shedule_Update(u32 DT)
+{
+	CGameObject::shedule_Update(DT);
+	CScriptEntity::shedule_Update(DT);
+}
+
+void CScriptObject::UpdateCL()
+{
+	CGameObject::UpdateCL();
+	CScriptEntity::UpdateCL();
 }

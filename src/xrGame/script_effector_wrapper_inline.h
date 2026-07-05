@@ -8,5 +8,7 @@
 
 #pragma once
 
-IC CScriptEffectorWrapper::CScriptEffectorWrapper( int iType, float fTime )
-    : CScriptEffector( iType, fTime ) {}
+IC CScriptEffectorWrapper::CScriptEffectorWrapper(int iType, float fTime) :
+	CScriptEffector(iType, fTime)
+{
+}

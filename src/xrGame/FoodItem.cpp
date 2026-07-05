@@ -1,7 +1,11 @@
-#include "FoodItem.h"
-
 #include "stdafx.h"
 
-CFoodItem::CFoodItem() {}
+#include "FoodItem.h"
 
-CFoodItem::~CFoodItem() {}
+CFoodItem::CFoodItem()
+{
+}
+
+CFoodItem::~CFoodItem()
+{
+}

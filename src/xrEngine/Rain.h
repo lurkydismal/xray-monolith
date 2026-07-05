@@ -8,7 +8,7 @@
 
 #include "../xrcdb/xr_collide_defs.h"
 
-// refs
+//refs
 class ENGINE_API IRender_DetailModel;
 
 #include "../Include/xrRender/FactoryPtr.h"
@@ -18,104 +18,104 @@ class ENGINE_API IRender_DetailModel;
 #include "../../xrEngine/perlin.h"
 
 //
-class ENGINE_API CEffect_Rain {
-    friend class dxRainRender;
+class ENGINE_API CEffect_Rain
+{
+	friend class dxRainRender;
+private:
+	struct Item
+	{
+		Fvector P;
+		Fvector Phit;
+		Fvector D;
+		float fSpeed;
+		u32 dwTime_Life;
+		u32 dwTime_Hit;
+		u32 uv_set;
+
+		void invalidate()
+		{
+			dwTime_Life = 0;
+		}
+	};
+
+	struct Particle
+	{
+		Particle *next, *prev;
+		Fmatrix mXForm;
+		Fsphere bounds;
+		float time;
+	};
+
+	enum States
+	{
+		stIdle = 0,
+		stWorking
+	};
 
 private:
-    struct Item {
-        Fvector P;
-        Fvector Phit;
-        Fvector D;
-        float fSpeed;
-        u32 dwTime_Life;
-        u32 dwTime_Hit;
-        u32 uv_set;
+	// Visualization (rain) and (drops)
+	FactoryPtr<IRainRender> m_pRender;
+	/*
+	// Visualization (rain)
+	ref_shader SH_Rain;
+	ref_geom hGeom_Rain;
 
-        void invalidate() { dwTime_Life = 0; }
-    };
+	// Visualization (drops)
+	IRender_DetailModel* DM_Drop;
+	ref_geom hGeom_Drops;
+	*/
 
-    struct Particle {
-        Particle *next, *prev;
-        Fmatrix mXForm;
-        Fsphere bounds;
-        float time;
-    };
+	// Data and logic
+	xr_vector<Item> items;
+	States state;
+	xrCriticalSection rainCS;
 
-    enum States { stIdle = 0, stWorking };
+	// Particles
+	xr_vector<Particle> particle_pool;
+	Particle* particle_active;
+	Particle* particle_idle;
 
-private:
-    // Visualization (rain) and (drops)
-    FactoryPtr< IRainRender > m_pRender;
-    /*
-    // Visualization (rain)
-    ref_shader SH_Rain;
-    ref_geom hGeom_Rain;
+	// Sounds
+	ref_sound snd_Ambient;
+	float rain_volume;
+	float rain_hemi = 0.0f;
 
-    // Visualization (drops)
-    IRender_DetailModel* DM_Drop;
-    ref_geom hGeom_Drops;
-    */
+	// Utilities
+	void p_create();
+	void p_destroy();
 
-    // Data and logic
-    xr_vector< Item > items;
-    States state;
-    xrCriticalSection rainCS;
+	// SSS
+	CPerlinNoise1D* RainPerlin;
 
-    // Particles
-    xr_vector< Particle > particle_pool;
-    Particle* particle_active;
-    Particle* particle_idle;
+	void p_remove(Particle* P, Particle*& LST);
+	void p_insert(Particle* P, Particle*& LST);
+	int p_size(Particle* LST);
+	Particle* p_allocate();
+	void p_free(Particle* P);
 
-    // Sounds
-    ref_sound snd_Ambient;
-    float rain_volume;
-    float rain_hemi = 0.0f;
-
-    // Utilities
-    void p_create();
-    void p_destroy();
-
-    // SSS
-    CPerlinNoise1D* RainPerlin;
-
-    void p_remove( Particle* P, Particle*& LST );
-    void p_insert( Particle* P, Particle*& LST );
-    int p_size( Particle* LST );
-    Particle* p_allocate();
-    void p_free( Particle* P );
-
-    // Some methods
-    void Born( Item& dest, float radius, float speed );
-    void Hit( Fvector& pos );
-    BOOL RayPick( const Fvector& s,
-                  const Fvector& d,
-                  float& range,
-                  collide::rq_target tgt );
-    void RenewItem( Item& dest, float height, BOOL bHit );
-    void Prepare( Fvector2& offset,
-                  Fvector3& axis,
-                  float Wind_Vel,
-                  float Wind_Dir );
-
+	// Some methods
+	void Born(Item& dest, float radius, float speed);
+	void Hit(Fvector& pos);
+	BOOL RayPick(const Fvector& s, const Fvector& d, float& range, collide::rq_target tgt);
+	void RenewItem(Item& dest, float height, BOOL bHit);
+	void Prepare(Fvector2& offset, Fvector3& axis, float Wind_Vel, float Wind_Dir);
 public:
-    CEffect_Rain();
-    ~CEffect_Rain();
+	CEffect_Rain();
+	~CEffect_Rain();
 
-    void Render();
-    void OnFrame();
+	void Render();
+	void OnFrame();
 
-    void InvalidateState() {
-        if ( state != stIdle )
-            snd_Ambient.stop();
-        rain_volume = 0.0f;
-        state = stIdle;
-    }
+	void InvalidateState()
+	{
+		if (state != stIdle) snd_Ambient.stop();
+		rain_volume = 0.0f;
+		state = stIdle;
+	}
 
-    float GetRainVolume() { return rain_volume; }
-
-    float GetRainHemi() { return rain_hemi; }
-
-    void UpdateItems();
+	float GetRainVolume() { return rain_volume; }
+	float GetRainHemi() { return rain_hemi; }
+	void UpdateItems();
 };
 
-#endif // RainH
+#endif //RainH

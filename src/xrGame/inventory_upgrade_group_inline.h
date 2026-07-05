@@ -9,16 +9,20 @@
 #ifndef INVENTORY_UPGRADE_GROUP_INLINE_H_INCLUDED
 #define INVENTORY_UPGRADE_GROUP_INLINE_H_INCLUDED
 
-namespace inventory {
-namespace upgrade {
-IC const shared_str& Group::id() const {
-    return ( m_id );
-}
+namespace inventory
+{
+	namespace upgrade
+	{
+		IC const shared_str& Group::id() const
+		{
+			return (m_id);
+		}
 
-IC LPCSTR Group::id_str() const {
-    return ( m_id.c_str() );
-}
-} // namespace upgrade
+		IC LPCSTR Group::id_str() const
+		{
+			return (m_id.c_str());
+		}
+	} // namespace upgrade
 } // namespace inventory
 
 #endif // INVENTORY_UPGRADE_GROUP_INLINE_H_INCLUDED

@@ -44,8 +44,7 @@ do_compress ( const lzo_bytep in , lzo_uint  in_len,
                     lzo_bytep out, lzo_uintp out_len,
                     lzo_voidp wrkmem )
 {
-    // NOTE: LD / removed register
-    const lzo_bytep ip;
+    register const lzo_bytep ip;
     lzo_bytep op;
     const lzo_bytep const in_end = in + in_len;
     const lzo_bytep const ip_end = in + in_len - M2_MAX_LEN - 5;
@@ -59,8 +58,7 @@ do_compress ( const lzo_bytep in , lzo_uint  in_len,
     ip += 4;
     for (;;)
     {
-        // NOTE: LD / removed register
-        const lzo_bytep m_pos;
+        register const lzo_bytep m_pos;
         lzo_uint m_off;
         lzo_uint m_len;
         lzo_uint dindex;
@@ -120,8 +118,7 @@ try_match:
                 if (m_off <= M1_MAX_OFFSET && lit == 3)
 #endif
                 {
-                    // NOTE: LD / removed register
-                    lzo_uint t;
+                    register lzo_uint t;
 
                     t = lit;
                     assert(op - 2 > out); op[-2] |= LZO_BYTE(t);
@@ -153,8 +150,7 @@ match:
         /* store current literal run */
         if (pd(ip,ii) > 0)
         {
-            // NOTE: LD / removed register
-            lzo_uint t = pd(ip,ii);
+            register lzo_uint t = pd(ip,ii);
 
             if (t <= 3)
             {
@@ -165,8 +161,7 @@ match:
                 *op++ = LZO_BYTE(t - 3);
             else
             {
-                // NOTE: LD / removed register
-                lzo_uint tt = t - 18;
+                register lzo_uint tt = t - 18;
 
                 *op++ = 0;
                 while (tt > 255)

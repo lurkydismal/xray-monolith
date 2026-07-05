@@ -6,126 +6,103 @@
 #include "ParticleEffectDef.h"
 
 #ifdef _EDITOR
-#include "../../Layers/xrRender/FBasicVisual.h"
-#include "../../Layers/xrRender/dxParticleCustom.h"
+#	include "../../Layers/xrRender/FBasicVisual.h"
+#	include "../../Layers/xrRender/dxParticleCustom.h"
 #else // _EDITOR
-#include "../xrRender/FBasicVisual.h"
-#include "../xrRender/dxParticleCustom.h"
+#	include "../xrRender/FBasicVisual.h"
+#	include "../xrRender/dxParticleCustom.h"
 #endif // _EDITOR
 
-namespace PS {
-class ECORE_API CParticleEffect : public dxParticleCustom {
-    //		friend void ParticleRenderStream( LPVOID lpvParams );
-    friend class CPEDef;
+namespace PS
+{
+	class ECORE_API CParticleEffect : public dxParticleCustom
+	{
+		//		friend void ParticleRenderStream( LPVOID lpvParams );
+		friend class CPEDef;
+	protected:
+		float m_fElapsedLimit;
 
-protected:
-    float m_fElapsedLimit;
+		int m_HandleEffect;
+		int m_HandleActionList;
 
-    int m_HandleEffect;
-    int m_HandleActionList;
+		s32 m_MemDT;
 
-    s32 m_MemDT;
+		Fvector m_InitialPosition;
+	public:
+		CPEDef* m_Def;
+		Fmatrix m_XFORM;
+	protected:
+		DestroyCallback m_DestroyCallback;
+		CollisionCallback m_CollisionCallback;
+	public:
+		enum
+		{
+			flRT_Playing = (1 << 0),
+			flRT_DefferedStop = (1 << 1),
+			flRT_XFORM = (1 << 2),
+			flRT_HUDmode = (1 << 3),
+			flRT_LiveUpdate = (1 << 4),
+		};
 
-    Fvector m_InitialPosition;
+		Flags8 m_RT_Flags;
+	protected:
+		BOOL SaveActionList(IWriter& F);
+		BOOL LoadActionList(IReader& F);
 
-public:
-    CPEDef* m_Def;
-    Fmatrix m_XFORM;
+		void RefreshShader();
+	public:
+		CParticleEffect();
+		virtual ~CParticleEffect();
 
-protected:
-    DestroyCallback m_DestroyCallback;
-    CollisionCallback m_CollisionCallback;
+		void OnFrame(u32 dt);
 
-public:
-    enum {
-        flRT_Playing = ( 1 << 0 ),
-        flRT_DefferedStop = ( 1 << 1 ),
-        flRT_XFORM = ( 1 << 2 ),
-        flRT_HUDmode = ( 1 << 3 ),
-        flRT_LiveUpdate = ( 1 << 4 ),
-    };
+		u32 RenderTO();
+		virtual void Render(float LOD);
+		virtual void Copy(dxRender_Visual* pFrom);
 
-    Flags8 m_RT_Flags;
+		virtual void OnDeviceCreate();
+		virtual void OnDeviceDestroy();
 
-protected:
-    BOOL SaveActionList( IWriter& F );
-    BOOL LoadActionList( IReader& F );
+		virtual void UpdateParent(const Fmatrix& m, const Fvector& velocity, BOOL bXFORM);
 
-    void RefreshShader();
+		BOOL Compile(CPEDef* def);
 
-public:
-    CParticleEffect();
-    virtual ~CParticleEffect();
+		IC CPEDef* GetDefinition() { return m_Def; }
+		IC int GetHandleEffect() { return m_HandleEffect; }
+		IC int GetHandleActionList() { return m_HandleActionList; }
 
-    void OnFrame( u32 dt );
+		virtual void Play();
+		virtual void Stop(BOOL bDefferedStop = TRUE);
+		virtual BOOL IsPlaying() { return m_RT_Flags.is(flRT_Playing); }
 
-    u32 RenderTO();
-    virtual void Render( float LOD );
-    virtual void Copy( dxRender_Visual* pFrom );
+		virtual void SetHudMode(BOOL b) { m_RT_Flags.set(flRT_HUDmode, b); }
+		virtual BOOL GetHudMode() { return m_RT_Flags.is(flRT_HUDmode); }
 
-    virtual void OnDeviceCreate();
-    virtual void OnDeviceDestroy();
+		virtual void SetLiveUpdate(BOOL b) { m_RT_Flags.set(flRT_LiveUpdate, b); }
+		virtual BOOL GetLiveUpdate() { return m_RT_Flags.is(flRT_LiveUpdate); }
 
-    virtual void UpdateParent( const Fmatrix& m,
-                               const Fvector& velocity,
-                               BOOL bXFORM );
+		virtual float GetTimeLimit()
+		{
+			VERIFY(m_Def);
+			return m_Def->m_Flags.is(CPEDef::dfTimeLimit) ? m_Def->m_fTimeLimit : -1.f;
+		}
 
-    BOOL Compile( CPEDef* def );
+		virtual const shared_str Name()
+		{
+			VERIFY(m_Def);
+			return m_Def->m_Name;
+		}
 
-    IC CPEDef* GetDefinition() { return m_Def; }
+		void SetDestroyCB(DestroyCallback destroy_cb) { m_DestroyCallback = destroy_cb; }
+		void SetCollisionCB(CollisionCallback collision_cb) { m_CollisionCallback = collision_cb; }
+		void SetBirthDeadCB(PAPI::OnBirthParticleCB bc, PAPI::OnDeadParticleCB dc, void* owner, u32 p);
 
-    IC int GetHandleEffect() { return m_HandleEffect; }
+		virtual u32 ParticlesCount();
+	};
 
-    IC int GetHandleActionList() { return m_HandleActionList; }
-
-    virtual void Play();
-    virtual void Stop( BOOL bDefferedStop = TRUE );
-
-    virtual BOOL IsPlaying() { return m_RT_Flags.is( flRT_Playing ); }
-
-    virtual void SetHudMode( BOOL b ) { m_RT_Flags.set( flRT_HUDmode, b ); }
-
-    virtual BOOL GetHudMode() { return m_RT_Flags.is( flRT_HUDmode ); }
-
-    virtual void SetLiveUpdate( BOOL b ) {
-        m_RT_Flags.set( flRT_LiveUpdate, b );
-    }
-
-    virtual BOOL GetLiveUpdate() { return m_RT_Flags.is( flRT_LiveUpdate ); }
-
-    virtual float GetTimeLimit() {
-        VERIFY( m_Def );
-        return m_Def->m_Flags.is( CPEDef::dfTimeLimit ) ? m_Def->m_fTimeLimit
-                                                        : -1.f;
-    }
-
-    virtual const shared_str Name() {
-        VERIFY( m_Def );
-        return m_Def->m_Name;
-    }
-
-    void SetDestroyCB( DestroyCallback destroy_cb ) {
-        m_DestroyCallback = destroy_cb;
-    }
-
-    void SetCollisionCB( CollisionCallback collision_cb ) {
-        m_CollisionCallback = collision_cb;
-    }
-
-    void SetBirthDeadCB( PAPI::OnBirthParticleCB bc,
-                         PAPI::OnDeadParticleCB dc,
-                         void* owner,
-                         u32 p );
-
-    virtual u32 ParticlesCount();
-};
-
-void OnEffectParticleBirth( void* owner,
-                            u32 param,
-                            PAPI::Particle& m,
-                            u32 idx );
-void OnEffectParticleDead( void* owner, u32 param, PAPI::Particle& m, u32 idx );
-} // namespace PS
+	void OnEffectParticleBirth(void* owner, u32 param, PAPI::Particle& m, u32 idx);
+	void OnEffectParticleDead(void* owner, u32 param, PAPI::Particle& m, u32 idx);
+}
 
 //---------------------------------------------------------------------------
 #endif

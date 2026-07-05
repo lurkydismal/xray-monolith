@@ -6,14 +6,17 @@
 //	Description : Crow script export
 ////////////////////////////////////////////////////////////////////////////
 
-#include "ai/crow/ai_crow.h"
 #include "pch_script.h"
+#include "ai/crow/ai_crow.h"
 
 using namespace luabind;
 
-#pragma optimize( "s", on )
-
-void CAI_Crow::script_register( lua_State* L ) {
-    module( L )[ class_< CAI_Crow, CGameObject >( "CAI_Crow" )
-                     .def( constructor<>() ) ];
+#pragma optimize("s",on)
+void CAI_Crow::script_register(lua_State* L)
+{
+	module(L)
+	[
+		class_<CAI_Crow, CGameObject>("CAI_Crow")
+		.def(constructor<>())
+	];
 }

@@ -1,21 +1,23 @@
-#include "Dosimeter.h"
-
-#include "UIDosimeter.h"
 #include "stdafx.h"
+#include "Dosimeter.h"
+#include "UIDosimeter.h"
 
-void CDosimeter::CreateUI() {
-    R_ASSERT( nullptr == m_ui );
-    m_ui = xr_new< CUIDosimeter >();
-    ui().construct( this );
+void CDosimeter::CreateUI()
+{
+	R_ASSERT(nullptr == m_ui);
+	m_ui = xr_new<CUIDosimeter>();
+	ui().construct(this);
 }
 
-CUIDosimeter& CDosimeter::ui() {
-    return *( ( CUIDosimeter* )m_ui );
+CUIDosimeter& CDosimeter::ui()
+{
+	return *((CUIDosimeter*)m_ui);
 }
 
-void CDosimeter::render_item_3d_ui() {
-    ui().Draw();
+void CDosimeter::render_item_3d_ui()
+{
+	ui().Draw();
 
-    //	Restore cull mode
-    inherited::render_item_3d_ui();
+	//	Restore cull mode
+	inherited::render_item_3d_ui();
 }

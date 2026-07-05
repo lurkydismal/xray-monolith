@@ -10,4 +10,4 @@
 
 #include "script_export_space.h"
 
-typedef class_exporter< Fcolor > CScriptFcolor;
+typedef class_exporter<Fcolor> CScriptFcolor;

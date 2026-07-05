@@ -1,24 +1,25 @@
 #pragma once
 
-// #if 0
+//#if 0
 
 #include "entity.h"
-// #include "../xrphysics/PHDynamicData.h"
+//#include "../xrphysics/PHDynamicData.h"
 #include "../xrphysics/PhysicsShell.h"
 #include "../xrphysics/phupdateobject.h"
-#include "CarLights.h"
 #include "script_entity.h"
-// #include "phobject.h"
-#include "CarDamageParticles.h"
+#include "CarLights.h"
+//#include "phobject.h"
+#include "holder_custom.h"
+#include "PHSkeleton.h"
 #include "DamagableItem.h"
-#include "DelayedActionFuse.h"
+#include "phcollisiondamagereceiver.h"
+#include "CarDamageParticles.h"
+#include "xrserver_objects_alife.h"
+#include "CarDamageParticles.h"
+#include "hit_immunity.h"
 #include "Explosive.h"
 #include "PHDestroyable.h"
-#include "PHSkeleton.h"
-#include "hit_immunity.h"
-#include "holder_custom.h"
-#include "phcollisiondamagereceiver.h"
-#include "xrserver_objects_alife.h"
+#include "DelayedActionFuse.h"
 // refs
 class ENGINE_API CBoneInstance;
 class CActor;
@@ -30,874 +31,843 @@ struct dSurfaceParameters;
 // defs
 
 #ifdef DEBUG
-#include "../xrEngine/StatGraph.h"
-#include "PHDebug.h"
+	#include "../xrEngine/StatGraph.h"
+	#include "PHDebug.h"
 #endif
 
 class CScriptEntityAction;
 class car_memory;
 
-class CCar : public CEntity,
-             public CScriptEntity,
-             public CPHUpdateObject,
-             public CHolderCustom,
-             public CPHSkeleton,
-             public CDamagableItem,
-             public CPHDestroyable,
-             public CPHCollisionDamageReceiver,
-             public CHitImmunity,
-             public CExplosive,
-             public CDelayedActionFuse {
+class CCar :
+	public CEntity,
+	public CScriptEntity,
+	public CPHUpdateObject,
+	public CHolderCustom,
+	public CPHSkeleton,
+	public CDamagableItem,
+	public CPHDestroyable,
+	public CPHCollisionDamageReceiver,
+	public CHitImmunity,
+	public CExplosive,
+	public CDelayedActionFuse
+{
 private:
-    collide::rq_results RQR;
+	collide::rq_results RQR;
 
 #ifdef DEBUG
-    CFunctionGraph m_dbg_power_rpm;
-    CFunctionGraph m_dbg_torque_rpm;
-    CStatGraph* m_dbg_dynamic_plot;
-    bool b_plots;
-
-    float _stdcall TorqueRpmFun( float rpm ) { return Parabola( rpm ) / rpm; }
-
-    void InitDebug();
-    void DbgSheduleUpdate();
-    void DbgUbdateCl();
-    void DbgCreatePlots();
-    void DBgClearPlots();
+	CFunctionGraph 					m_dbg_power_rpm			;
+	CFunctionGraph 					m_dbg_torque_rpm		;
+	CStatGraph	   					*m_dbg_dynamic_plot		;
+	bool							b_plots					;
+	float _stdcall			TorqueRpmFun		(float rpm)		{return Parabola(rpm)/rpm;}
+	void 					InitDebug			()				;
+	void 					DbgSheduleUpdate	()				;
+	void 					DbgUbdateCl			()				;
+	void 					DbgCreatePlots		()				;
+	void 					DBgClearPlots		()				;
 #endif
-    ////////////////////////////////////////////////////////////////////
-    Flags16 async_calls;
-    static const u16 cAsCallsnum = 3;
+	////////////////////////////////////////////////////////////////////	
+	Flags16 async_calls;
+	static const u16 cAsCallsnum = 3;
 
-    enum EAsyncCalls {
-        ascSndTransmission = 1 << 0,
-        ascSndStall = 1 << 1,
-        ascExhoustStop = 1 << 2,
-        ascLast = 1 << cAsCallsnum
-    };
+	enum EAsyncCalls
+	{
+		ascSndTransmission = 1 << 0,
+		ascSndStall = 1 << 1,
+		ascExhoustStop = 1 << 2,
+		ascLast = 1 << cAsCallsnum
+	};
 
-    void ASCUpdate();
-    void ASCUpdate( EAsyncCalls c );
-    void AscCall( EAsyncCalls c );
-    ////////////////////////////////////////////////////////////////////////////////////////
-    virtual bool CanRemoveObject();
-    ////////////////////////////////////////////////////////////////////////
-    static BONE_P_MAP bone_map; // interface for PhysicsShell
-    static void ActorObstacleCallback( bool& do_colide,
-                                       bool bo1,
-                                       dContact& c,
-                                       SGameMtl* material_1,
-                                       SGameMtl* material_2 );
-    virtual void PhDataUpdate( float step );
-    virtual void PhTune( float step );
-    /////////////////////////////////////////////////////////////////////////
-    virtual void ApplyDamage( u16 level );
+	void ASCUpdate();
+	void ASCUpdate(EAsyncCalls c);
+	void AscCall(EAsyncCalls c);
+	////////////////////////////////////////////////////////////////////////////////////////
+	virtual bool CanRemoveObject();
+	////////////////////////////////////////////////////////////////////////
+	static BONE_P_MAP bone_map; //interface for PhysicsShell
+	static void ActorObstacleCallback(bool& do_colide, bool bo1, dContact& c, SGameMtl* material_1,
+	                                  SGameMtl* material_2);
+	virtual void PhDataUpdate(float step);
+	virtual void PhTune(float step);
+	/////////////////////////////////////////////////////////////////////////
+	virtual void ApplyDamage(u16 level);
+	virtual float Health() { return GetfHealth(); }
+	virtual void ChangeCondition(float fDeltaCondition);
 
-    virtual float Health() { return GetfHealth(); }
+	virtual void StartTimerEffects()
+	{
+	};
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	virtual CPhysicsShellHolder* PPhysicsShellHolder() { return static_cast<CPhysicsShellHolder*>(this); }
+	virtual ICollisionDamageReceiver* PHCollisionDamageReceiver() { return this; }
 
-    virtual void ChangeCondition( float fDeltaCondition );
-
-    virtual void StartTimerEffects() {};
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    virtual CPhysicsShellHolder* PPhysicsShellHolder() {
-        return static_cast< CPhysicsShellHolder* >( this );
-    }
-
-    virtual ICollisionDamageReceiver* PHCollisionDamageReceiver() {
-        return this;
-    }
-
-    ////////////////////////////////////////////////////////////////////////
-    CCarDamageParticles m_damage_particles;
-    ///////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
+	CCarDamageParticles m_damage_particles;
+	///////////////////////////////////////////////////////////////////////
 protected:
-    enum ECarCamType { ectFirst = 0, ectChase, ectFree };
+	enum ECarCamType
+	{
+		ectFirst = 0,
+		ectChase,
+		ectFree
+	};
 
 public:
-    bool rsp, lsp, fwp, bkp, brp;
-    Fmatrix m_root_transform;
-    Fvector m_exit_position;
 
-    enum eStateDrive { drive, neutral };
 
-    eStateDrive e_state_drive;
+	bool rsp, lsp, fwp, bkp, brp;
+	Fmatrix m_root_transform;
+	Fvector m_exit_position;
 
-    enum eStateSteer { right, idle, left };
+	enum eStateDrive
+	{
+		drive,
+		neutral
+	};
 
-    eStateSteer e_state_steer;
+	eStateDrive e_state_drive;
 
-    bool b_wheels_limited;
-    bool b_engine_on;
-    bool b_clutch;
-    bool b_starting;
-    bool b_stalling;
-    bool b_breaks;
-    bool b_transmission_switching;
+	enum eStateSteer
+	{
+		right,
+		idle,
+		left
+	};
 
-    u32 m_dwStartTime;
-    float m_fuel;
-    float m_fuel_tank;
-    float m_fuel_consumption;
-    u16 m_driver_anim_type;
+	eStateSteer e_state_steer;
 
-    float m_break_start;
-    float m_break_time;
-    float m_breaks_to_back_rate;
-    float m_power_neutral_factor; // multiplier for power when accelerator is
-                                  // not pressed (0-1,0.25)
-    bool b_exploded;
+	bool b_wheels_limited;
+	bool b_engine_on;
+	bool b_clutch;
+	bool b_starting;
+	bool b_stalling;
+	bool b_breaks;
+	bool b_transmission_switching;
 
-    struct SWheel : public CDamagableHealthItem {
-        typedef CDamagableHealthItem inherited;
-        u16 bone_id;
-        bool inited;
-        float radius;
-        CPhysicsJoint* joint;
-        CCar* car;
+	u32 m_dwStartTime;
+	float m_fuel;
+	float m_fuel_tank;
+	float m_fuel_consumption;
+	u16 m_driver_anim_type;
 
-        struct SWheelCollisionParams {
-            float spring_factor;
-            float damping_factor;
-            float mu_factor;
-            SWheelCollisionParams();
-        } collision_params;
+	float m_break_start;
+	float m_break_time;
+	float m_breaks_to_back_rate;
+	float m_power_neutral_factor; //multiplier for power when accelerator is not pressed (0-1,0.25)
+	bool b_exploded;
 
-        IC static void applywheelCollisionParams( const dxGeomUserData* ud,
-                                                  bool& do_colide,
-                                                  dContact& c,
-                                                  SGameMtl* material_1,
-                                                  SGameMtl* material_2 );
-        static void WheellCollisionCallback( bool& do_colide,
-                                             bool bo1,
-                                             dContact& c,
-                                             SGameMtl* material_1,
-                                             SGameMtl* material_2 );
+	struct SWheel :
+		public CDamagableHealthItem
+	{
+		typedef CDamagableHealthItem inherited;
+		u16 bone_id;
+		bool inited;
+		float radius;
+		CPhysicsJoint* joint;
+		CCar* car;
 
-        void Init(); // asumptions: bone_map is 1. ini parsed 2. filled in 3.
-                     // bone_id is set
-        void Load( LPCSTR section );
-        void RestoreNetState( const CSE_ALifeCar::SWheelState& a_state );
-        void SaveNetState( NET_Packet& P );
-        void ApplyDriveAxisVel( float vel );
-        void ApplyDriveAxisTorque( float torque );
-        void ApplyDriveAxisVelTorque( float vel, float torque );
-        void ApplySteerAxisVel( float vel );
-        void ApplySteerAxisTorque( float torque );
-        void ApplySteerAxisVelTorque( float vel, float torque );
-        void SetSteerLoLimit( float lo );
-        void SetSteerHiLimit( float hi );
-        void SetSteerLimits( float hi, float lo );
+		struct SWheelCollisionParams
+		{
+			float spring_factor;
+			float damping_factor;
+			float mu_factor;
+			SWheelCollisionParams();
+		} collision_params;
 
-        virtual void ApplyDamage( u16 level );
+		IC static void applywheelCollisionParams(const dxGeomUserData* ud, bool& do_colide, dContact& c,
+		                                         SGameMtl* material_1, SGameMtl* material_2);
+		static void WheellCollisionCallback(bool& do_colide, bool bo1, dContact& c, SGameMtl* material_1,
+		                                    SGameMtl* material_2);
 
-        SWheel( CCar* acar ) {
-            radius = 0.0f;
-            bone_id = BI_NONE;
-            car = acar;
-            joint = NULL;
-            inited = false;
-        }
-    };
+		void Init(); //asumptions: bone_map is 1. ini parsed 2. filled in 3. bone_id is set 
+		void Load(LPCSTR section);
+		void RestoreNetState(const CSE_ALifeCar::SWheelState& a_state);
+		void SaveNetState(NET_Packet& P);
+		void ApplyDriveAxisVel(float vel);
+		void ApplyDriveAxisTorque(float torque);
+		void ApplyDriveAxisVelTorque(float vel, float torque);
+		void ApplySteerAxisVel(float vel);
+		void ApplySteerAxisTorque(float torque);
+		void ApplySteerAxisVelTorque(float vel, float torque);
+		void SetSteerLoLimit(float lo);
+		void SetSteerHiLimit(float hi);
+		void SetSteerLimits(float hi, float lo);
 
-    struct SWheelDrive {
-        SWheel* pwheel;
-        float pos_fvd;
-        float gear_factor;
-        void Init();
-        void Drive();
-        void Neutral();
-        void UpdatePower();
-        float ASpeed();
+		virtual void ApplyDamage(u16 level);
 
-        void Load( LPCSTR /*section*/ ){};
-    };
+		SWheel(CCar* acar)
+		{
+			radius = 0.0f;
+			bone_id = BI_NONE;
+			car = acar;
+			joint = NULL;
+			inited = false;
+		}
+	};
 
-    struct SWheelSteer {
-        SWheel* pwheel;
-        float pos_right;
-        float lo_limit;
-        float hi_limit;
-        float steering_velocity;
-        float steering_torque;
-        bool limited; // zero limited for idle steering drive
-        float GetSteerAngle();
+	struct SWheelDrive
+	{
+		SWheel* pwheel;
+		float pos_fvd;
+		float gear_factor;
+		void Init();
+		void Drive();
+		void Neutral();
+		void UpdatePower();
+		float ASpeed();
 
-        void Init();
-        void SteerRight();
-        void SteerLeft();
-        void SteerIdle();
-        void SteerTo( float k );
-        void Limit();
+		void Load(LPCSTR /*section*/)
+		{
+		} ;
+	};
 
-        void Load( LPCSTR /*section*/ ){};
-    };
+	struct SWheelSteer
+	{
+		SWheel* pwheel;
+		float pos_right;
+		float lo_limit;
+		float hi_limit;
+		float steering_velocity;
+		float steering_torque;
+		bool limited; //zero limited for idle steering drive
+		float GetSteerAngle();
 
-    struct SWheelBreak {
-        SWheel* pwheel;
-        float break_torque;
-        float hand_break_torque;
-        void Init();
-        void Break( float k );
-        void HandBreak();
-        void Neutral();
-        void Load( LPCSTR section );
-    };
+		void Init();
+		void SteerRight();
+		void SteerLeft();
+		void SteerIdle();
+		void SteerTo(float k);
+		void Limit();
 
-    struct SExhaust {
-        u16 bone_id;
-        Fmatrix transform;
-        // Fvector				velocity;
-        intrusive_ptr< CParticlesObject > p_pgobject;
-        CPhysicsElement* pelement;
-        CCar* pcar;
-        void Init();
-        void Play();
-        void Stop();
-        void Update();
-        void Clear();
+		void Load(LPCSTR /*section*/)
+		{
+		} ;
+	};
 
-        SExhaust( CCar* acar ) {
-            bone_id = BI_NONE;
-            pcar = acar;
-            p_pgobject = NULL;
-            pelement = NULL;
-        }
+	struct SWheelBreak
+	{
+		SWheel* pwheel;
+		float break_torque;
+		float hand_break_torque;
+		void Init();
+		void Break(float k);
+		void HandBreak();
+		void Neutral();
+		void Load(LPCSTR section);
+	};
 
-        ~SExhaust();
-    };
+	struct SExhaust
+	{
+		u16 bone_id;
+		Fmatrix transform;
+		//Fvector				velocity;
+		intrusive_ptr<CParticlesObject> p_pgobject;
+		CPhysicsElement* pelement;
+		CCar* pcar;
+		void Init();
+		void Play();
+		void Stop();
+		void Update();
+		void Clear();
 
-    struct SDoor;
+		SExhaust(CCar* acar)
+		{
+			bone_id = BI_NONE;
+			pcar = acar;
+			p_pgobject = NULL;
+			pelement = NULL;
+		}
 
-    struct SDoor : public CDamagableHealthItem {
-        typedef CDamagableHealthItem inherited;
-        u16 bone_id;
-        CCar* pcar;
-        bool update;
-        CPhysicsJoint* joint;
-        float torque;
-        float a_vel;
-        float pos_open;
-        float opened_angle;
-        float closed_angle;
-        u32 open_time;
+		~SExhaust();
+	};
 
-        struct SDoorway {
-            Fvector2 door_plane_ext;
-            _vector2< int > door_plane_axes;
-            SDoor* door;
-            SDoorway();
-            void SPass();
-            void Init( SDoor* adoor );
-            void Trace( const Fvector& point, const Fvector& dir );
-        };
+	struct SDoor;
 
-        Fvector2 door_plane_ext;
-        _vector2< int > door_plane_axes;
-        Fvector door_dir_in_door;
-        Fmatrix closed_door_form_in_object;
-        void Use();
-        void Switch();
-        void Init();
-        void Open();
-        void Close();
-        void Break();
-        virtual void ApplyDamage( u16 level );
-        void Update();
-        float GetAngle();
-        bool CanEnter( const Fvector& pos,
-                       const Fvector& dir,
-                       const Fvector& foot_pos );
-        bool IsInArea( const Fvector& pos, const Fvector& dir );
-        bool IsFront( const Fvector& pos, const Fvector& dir );
-        bool CanExit( const Fvector& pos, const Fvector& dir );
-        bool TestPass( const Fvector& pos, const Fvector& dir );
-        // bool TestPass1(const Fvector& pos,const Fvector& dir);
-        void GetExitPosition( Fvector& pos );
-        void ApplyOpenTorque();
-        void ApplyTorque( float atorque, float aa_vel );
-        void ApplyCloseTorque();
-        void NeutralTorque( float atorque );
-        void ClosingToClosed();
-        void ClosedToOpening();
-        void PlaceInUpdate();
-        void RemoveFromUpdate();
-        void SaveNetState( NET_Packet& P );
-        void RestoreNetState( const CSE_ALifeCar::SDoorState& a_state );
-        void SetDefaultNetState();
+	struct SDoor :
+		public CDamagableHealthItem
+	{
+		typedef CDamagableHealthItem inherited;
+		u16 bone_id;
+		CCar* pcar;
+		bool update;
+		CPhysicsJoint* joint;
+		float torque;
+		float a_vel;
+		float pos_open;
+		float opened_angle;
+		float closed_angle;
+		u32 open_time;
 
-        enum eState { opening, closing, opened, closed, broken };
+		struct SDoorway
+		{
+			Fvector2 door_plane_ext;
+			_vector2<int> door_plane_axes;
+			SDoor* door;
+			SDoorway();
+			void SPass();
+			void Init(SDoor* adoor);
+			void Trace(const Fvector& point, const Fvector& dir);
+		};
 
-        eState state;
+		Fvector2 door_plane_ext;
+		_vector2<int> door_plane_axes;
+		Fvector door_dir_in_door;
+		Fmatrix closed_door_form_in_object;
+		void Use();
+		void Switch();
+		void Init();
+		void Open();
+		void Close();
+		void Break();
+		virtual void ApplyDamage(u16 level);
+		void Update();
+		float GetAngle();
+		bool CanEnter(const Fvector& pos, const Fvector& dir, const Fvector& foot_pos);
+		bool IsInArea(const Fvector& pos, const Fvector& dir);
+		bool IsFront(const Fvector& pos, const Fvector& dir);
+		bool CanExit(const Fvector& pos, const Fvector& dir);
+		bool TestPass(const Fvector& pos, const Fvector& dir);
+		//bool TestPass1(const Fvector& pos,const Fvector& dir);
+		void GetExitPosition(Fvector& pos);
+		void ApplyOpenTorque();
+		void ApplyTorque(float atorque, float aa_vel);
+		void ApplyCloseTorque();
+		void NeutralTorque(float atorque);
+		void ClosingToClosed();
+		void ClosedToOpening();
+		void PlaceInUpdate();
+		void RemoveFromUpdate();
+		void SaveNetState(NET_Packet& P);
+		void RestoreNetState(const CSE_ALifeCar::SDoorState& a_state);
+		void SetDefaultNetState();
 
-        SDoor( CCar* acar ) {
-            update = false;
-            pos_open = 0.0f;
-            opened_angle = 0.0f;
-            closed_angle = 0.0f;
-            open_time = 0;
-            bone_id = BI_NONE;
-            pcar = acar;
-            joint = NULL;
-            state = closed;
-            torque = 500.f;
-            a_vel = M_PI;
-        }
-    };
+		enum eState
+		{
+			opening,
+			closing,
+			opened,
+			closed,
+			broken
+		};
 
-    struct SCarSound {
-        ref_sound snd_engine;
-        ref_sound snd_engine_start;
-        ref_sound snd_engine_stop;
-        ref_sound snd_transmission;
+		eState state;
 
-        enum ESoundState {
-            sndOff,
-            sndStalling,
-            sndStoping,
-            sndStarting,
-            sndDrive
-        } eCarSound;
+		SDoor(CCar* acar)
+		{
+			update = false;
+			pos_open = 0.0f;
+			opened_angle = 0.0f;
+			closed_angle = 0.0f;
+			open_time = 0;
+			bone_id = BI_NONE;
+			pcar = acar;
+			joint = NULL;
+			state = closed;
+			torque = 500.f;
+			a_vel = M_PI;
+		}
+	};
 
-        void Update();
-        void UpdateStarting();
-        void UpdateStoping();
-        void UpdateStalling();
-        void UpdateDrive();
-        void SwitchState( ESoundState new_state );
-        void SetSoundPosition( ref_sound& snd );
-        void SwitchOff();
-        void SwitchOn();
-        void Init();
-        void Destroy();
-        void Start();
-        void Stop();
-        void Stall();
-        void Drive();
-        void TransmissionSwitch();
+	struct SCarSound
+	{
+		ref_sound snd_engine;
+		ref_sound snd_engine_start;
+		ref_sound snd_engine_stop;
+		ref_sound snd_transmission;
 
-        SCarSound( CCar* car );
-        ~SCarSound();
-        Fvector relative_pos;
-        float volume;
-        u32 engine_start_delay; // snd_engine starts after engine_start_delay ms
-                                // by snd_engine_start
-        u32 time_state_start;
-        CCar* pcar;
-    }* m_car_sound;
+		enum ESoundState
+		{
+			sndOff,
+			sndStalling,
+			sndStoping,
+			sndStarting,
+			sndDrive
+		} eCarSound;
+
+		void Update();
+		void UpdateStarting();
+		void UpdateStoping();
+		void UpdateStalling();
+		void UpdateDrive();
+		void SwitchState(ESoundState new_state);
+		void SetSoundPosition(ref_sound& snd);
+		void SwitchOff();
+		void SwitchOn();
+		void Init();
+		void Destroy();
+		void Start();
+		void Stop();
+		void Stall();
+		void Drive();
+		void TransmissionSwitch();
+
+		SCarSound(CCar* car);
+		~SCarSound();
+		Fvector relative_pos;
+		float volume;
+		u32 engine_start_delay; //snd_engine starts after engine_start_delay ms by snd_engine_start
+		u32 time_state_start;
+		CCar* pcar;
+	} * m_car_sound;
 
 private:
-    typedef CEntity inherited;
-
+	typedef CEntity inherited;
 private:
-    CCarWeapon* m_car_weapon;
-    float m_steer_angle;
-    bool m_repairing;
-    u16 m_bone_steer;
-    CCameraBase* camera[ 3 ];
-    CCameraBase* active_camera;
+	CCarWeapon* m_car_weapon;
+	float m_steer_angle;
+	bool m_repairing;
+	u16 m_bone_steer;
+	CCameraBase* camera[3];
+	CCameraBase* active_camera;
 
-    Fvector m_camera_position;
+	Fvector m_camera_position;
 
-    ////////////////////////////////////////////////////
-    friend struct SWheel;
-    friend struct SDoor;
+	////////////////////////////////////////////////////
+	friend struct SWheel;
+	friend struct SDoor;
 
-    xr_map< u16, SWheel > m_wheels_map;
-    xr_vector< SWheelDrive > m_driving_wheels;
-    xr_vector< SWheelSteer > m_steering_wheels;
-    xr_vector< SWheelBreak > m_breaking_wheels;
-    xr_vector< SExhaust > m_exhausts;
-    shared_str m_exhaust_particles;
-    xr_map< u16, SDoor > m_doors;
-    xr_vector< SDoor* > m_doors_update;
-    xr_vector< Fvector > m_gear_ratious;
-    xr_vector< Fmatrix >
-        m_sits_transforms; // m_sits_transforms[0] - driver_place
-    float m_current_gear_ratio;
+	xr_map<u16, SWheel> m_wheels_map;
+	xr_vector<SWheelDrive> m_driving_wheels;
+	xr_vector<SWheelSteer> m_steering_wheels;
+	xr_vector<SWheelBreak> m_breaking_wheels;
+	xr_vector<SExhaust> m_exhausts;
+	shared_str m_exhaust_particles;
+	xr_map<u16, SDoor> m_doors;
+	xr_vector<SDoor*> m_doors_update;
+	xr_vector<Fvector> m_gear_ratious;
+	xr_vector<Fmatrix> m_sits_transforms; // m_sits_transforms[0] - driver_place
+	float m_current_gear_ratio;
 
-    /////////////////////////////////////////////////////////////
-    bool b_auto_switch_transmission;
+	/////////////////////////////////////////////////////////////
+	bool b_auto_switch_transmission;
 
-    /////////////////////////////////////////////////////////////
-    float m_doors_torque_factor;
-    /////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////
+	float m_doors_torque_factor;
+	/////////////////////////////////////////////////////////////
 
-    float m_max_power; // best rpm
-    float m_power_increment_factor;
-    float m_power_decrement_factor;
-    float m_rpm_increment_factor;
-    float m_rpm_decrement_factor;
-    /////////////////////porabola
-    float m_a, m_b, m_c;
+	float m_max_power; //best rpm
+	float m_power_increment_factor;
+	float m_power_decrement_factor;
+	float m_rpm_increment_factor;
+	float m_rpm_decrement_factor;
+	/////////////////////porabola
+	float m_a, m_b, m_c;
 
-    float m_current_engine_power;
-    float m_current_rpm;
+	float m_current_engine_power;
+	float m_current_rpm;
 
-    float m_axle_friction;
+	float m_axle_friction;
 
-    float m_fSaveMaxRPM;
-    float m_max_rpm;
-    float m_min_rpm;
-    float m_power_rpm;  // max power
-    float m_torque_rpm; // max torque
+	float m_fSaveMaxRPM;
+	float m_max_rpm;
+	float m_min_rpm;
+	float m_power_rpm; //max power
+	float m_torque_rpm; //max torque
 
-    float m_steering_speed;
-    float m_ref_radius;
-    bool m_speed_governed;
-    float m_target_speed;
-    float m_throttle;
-    size_t m_current_transmission_num;
-    ///////////////////////////////////////////////////
-    CCarLights m_lights;
-    ////////////////////////////////////////////////////
-    /////////////////////////////////////////////////
-    void InitParabola();
-    float _stdcall Parabola( float rpm );
-    // float GetSteerAngle();
-    void LimitWheels();
-    void Drive();
-    void Starter();
-    void StartEngine();
-    void StopEngine();
-    void Stall();
-    void Clutch();
-    void Unclutch();
-    void SwitchEngine();
-    void NeutralDrive();
-    void UpdatePower();
-    void ReleasePedals();
-    void ResetKeys();
 
-    ////////////////////////////////////////////////////////////////////////////
-    float RefWheelMaxSpeed();
-    float EngineCurTorque();
-    float RefWheelCurTorque();
-    float EnginePower();
-    float EngineDriveSpeed();
-    float DriveWheelsMeanAngleRate();
+	float m_steering_speed;
+	float m_ref_radius;
+	bool m_speed_governed;
+	float m_target_speed;
+	float m_throttle;
+	size_t m_current_transmission_num;
+	///////////////////////////////////////////////////
+	CCarLights m_lights;
+	////////////////////////////////////////////////////
+	/////////////////////////////////////////////////
+	void InitParabola();
+	float _stdcall Parabola(float rpm);
+	//float GetSteerAngle();
+	void LimitWheels();
+	void Drive();
+	void Starter();
+	void StartEngine();
+	void StopEngine();
+	void Stall();
+	void Clutch();
+	void Unclutch();
+	void SwitchEngine();
+	void NeutralDrive();
+	void UpdatePower();
+	void ReleasePedals();
+	void ResetKeys();
 
-    IC float EngineRpmFromWheels() {
-        return _abs( DriveWheelsMeanAngleRate() * m_current_gear_ratio );
-    }
+	////////////////////////////////////////////////////////////////////////////
+	float RefWheelMaxSpeed();
+	float EngineCurTorque();
+	float RefWheelCurTorque();
+	float EnginePower();
+	float EngineDriveSpeed();
+	float DriveWheelsMeanAngleRate();
+	IC float EngineRpmFromWheels() { return _abs(DriveWheelsMeanAngleRate() * m_current_gear_ratio); }
+	/////////////////////////////////////////////////////////////////////////	
+	void SteerRight();
+	void SteerLeft();
+	void SteerIdle();
+	void Transmission(size_t num);
+	void CircleSwitchTransmission();
+	void TransmissionUp();
+	void TransmissionDown();
+	IC size_t CurrentTransmission() { return m_current_transmission_num; }
+	void PressRight();
+	void PressLeft();
+	void PressForward();
+	void PressBack();
+	void PressBreaks();
 
-    /////////////////////////////////////////////////////////////////////////
-    void SteerRight();
-    void SteerLeft();
-    void SteerIdle();
-    void Transmission( size_t num );
-    void CircleSwitchTransmission();
-    void TransmissionUp();
-    void TransmissionDown();
+	void ReleaseRight();
+	void ReleaseLeft();
+	void ReleaseForward();
+	void ReleaseBack();
+	void ReleaseBreaks();
+	void Revert();
+	float EffectiveGravity();
+	float AntiGravityAccel();
+	float GravityFactorImpulse();
+	void StartBreaking();
+	void StopBreaking();
+	void UpdateBack();
 
-    IC size_t CurrentTransmission() { return m_current_transmission_num; }
+	void HandBreak();
+	void ReleaseHandBreak();
+	void DriveForward();
+	void DriveBack();
+	void ParseDefinitions();
+	void CreateSkeleton(CSE_Abstract* po); //creates m_pPhysicsShell
+	void Init();
 
-    void PressRight();
-    void PressLeft();
-    void PressForward();
-    void PressBack();
-    void PressBreaks();
-
-    void ReleaseRight();
-    void ReleaseLeft();
-    void ReleaseForward();
-    void ReleaseBack();
-    void ReleaseBreaks();
-    void Revert();
-    float EffectiveGravity();
-    float AntiGravityAccel();
-    float GravityFactorImpulse();
-    void StartBreaking();
-    void StopBreaking();
-    void UpdateBack();
-
-    void HandBreak();
-    void ReleaseHandBreak();
-    void DriveForward();
-    void DriveBack();
-    void ParseDefinitions();
-    void CreateSkeleton( CSE_Abstract* po ); // creates m_pPhysicsShell
-    void Init();
-
-    void PlayExhausts();
-    void StopExhausts();
-    void UpdateExhausts();
-    void ClearExhausts();
-    void UpdateFuel( float time_delta );
-    float AddFuel( float ammount ); // ammount - fuel to load, ret - fuel loaded
-    void CarExplode();
-    /************************************************** added by Ray Twitty (aka
-     * Shadows) START **************************************************/
-    // Alundaio
+	void PlayExhausts();
+	void StopExhausts();
+	void UpdateExhausts();
+	void ClearExhausts();
+	void UpdateFuel(float time_delta);
+	float AddFuel(float ammount); //ammount - fuel to load, ret - fuel loaded
+	void CarExplode();
+	/************************************************** added by Ray Twitty (aka Shadows) START **************************************************/
+	//Alundaio
 #ifdef ENABLE_CAR
-    float GetfFuel();
-    void SetfFuel( float fuel );
-    float GetfFuelTank();
-    void SetfFuelTank( float fuel_tank );
-    float GetfFuelConsumption();
-    void SetfFuelConsumption( float fuel_consumption );
-    void ChangefFuel( float fuel );
-    void ChangefHealth( float health );
+	float GetfFuel();
+	void SetfFuel(float fuel);
+	float GetfFuelTank();
+	void SetfFuelTank(float fuel_tank);
+	float GetfFuelConsumption();
+	void SetfFuelConsumption(float fuel_consumption);
+	void ChangefFuel(float fuel);
+	void ChangefHealth(float health);
 
-    void PlayDamageParticles() {
-        m_damage_particles.Play1( this );
-        m_damage_particles.Play2( this );
-    }
+	void PlayDamageParticles()
+	{
+		m_damage_particles.Play1(this);
+		m_damage_particles.Play2(this);
+	}
 
-    void StopDamageParticles() {
-        m_damage_particles.Stop1( this );
-        m_damage_particles.Stop2( this );
-    }
+	void StopDamageParticles()
+	{
+		m_damage_particles.Stop1(this);
+		m_damage_particles.Stop2(this);
+	}
 
-    bool isActiveEngine();
-
-    float GetRPM() { return m_current_rpm; }
-
-    void SetRPM( float val ) { m_current_rpm = val; }
+	bool isActiveEngine();
+	float GetRPM() { return m_current_rpm; }
+	void SetRPM(float val) { m_current_rpm = val; }
 #endif
-    //-Alundaio
-    /*************************************************** added by Ray Twitty
-     * (aka Shadows) END ***************************************************/
-    ////////////////////////////////////////////		////////
+	//-Alundaio
+	/*************************************************** added by Ray Twitty (aka Shadows) END ***************************************************/
+	////////////////////////////////////////////		////////
 
-    void OnCameraChange( int type );
+	void OnCameraChange(int type);
 
-    bool HUDview() { return IsFocused(); }
 
-    static void _BCL cb_Steer( CBoneInstance* B );
-    virtual void Hit( SHit* pHDS );
-    virtual void Die( CObject* who );
-    virtual void PHHit( SHit& H );
-    bool WheelHit( float P, s16 element, ALife::EHitType hit_type );
-    bool DoorHit( float P, s16 element, ALife::EHitType hit_type );
+	bool HUDview() { return IsFocused(); }
 
+	static void _BCL cb_Steer(CBoneInstance* B);
+	virtual void Hit(SHit* pHDS);
+	virtual void Die(CObject* who);
+	virtual void PHHit(SHit& H);
+	bool WheelHit(float P, s16 element, ALife::EHitType hit_type);
+	bool DoorHit(float P, s16 element, ALife::EHitType hit_type);
 public:
-    virtual bool allowWeapon() const { return true; };
+	virtual bool allowWeapon() const { return true; };
+	virtual bool HUDView() const;
+	virtual Fvector ExitPosition();
+	virtual Fvector ExitVelocity();
+	void GetVelocity(Fvector& vel) { m_pPhysicsShell->get_LinearVel(vel); }
+	void cam_Update(float dt, float fov);
+	void detach_Actor();
+	bool attach_Actor(CGameObject* actor);
+	bool is_Door(u16 id, xr_map<u16, SDoor>::iterator& i);
+	bool is_Door(u16 id);
+	bool DoorOpen(u16 id);
+	bool DoorClose(u16 id);
+	bool DoorUse(u16 id);
+	bool DoorSwitch(u16 id);
+	bool Enter(const Fvector& pos, const Fvector& dir, const Fvector& foot_pos);
+	bool Exit(const Fvector& pos, const Fvector& dir);
+	bool Use(const Fvector& pos, const Fvector& dir, const Fvector& foot_pos);
+	u16 DriverAnimationType();
+	// Core events
+	virtual DLL_Pure* _construct();
+	virtual void Load(LPCSTR section);
+	virtual BOOL net_Spawn(CSE_Abstract* DC);
+	virtual void net_Destroy();
+	virtual void UpdateCL();
+	virtual void UpdateEx(float fov); //called by owner
 
-    virtual bool HUDView() const;
-    virtual Fvector ExitPosition();
-    virtual Fvector ExitVelocity();
+	virtual void shedule_Update(u32 dt);
+	virtual void renderable_Render(IDSGraphManager* DM);
+	virtual bool bfAssignMovement(CScriptEntityAction* tpEntityAction);
+	virtual bool bfAssignObject(CScriptEntityAction* tpEntityAction);
 
-    void GetVelocity( Fvector& vel ) { m_pPhysicsShell->get_LinearVel( vel ); }
+	// Network
+	virtual void net_Export(NET_Packet& P); // export to server
+	virtual void net_Import(NET_Packet& P); // import from server
+	virtual BOOL net_Relevant() { return getLocal(); }; // relevant for export to server
+	virtual BOOL UsedAI_Locations();
+	virtual void net_Relcase(CObject* O);
+	// Input
+	virtual void OnMouseMove(int x, int y);
+	virtual void OnKeyboardPress(int dik);
+	virtual void OnKeyboardRelease(int dik);
+	virtual void OnKeyboardHold(int dik);
+	virtual void vfProcessInputKey(int iCommand, bool bPressed);
+	virtual void OnEvent(NET_Packet& P, u16 type);
+	virtual void OnAfterExplosion();
+	virtual void OnBeforeExplosion();
+	virtual void GetRayExplosionSourcePos(Fvector& pos);
 
-    void cam_Update( float dt, float fov );
-    void detach_Actor();
-    bool attach_Actor( CGameObject* actor );
-    bool is_Door( u16 id, xr_map< u16, SDoor >::iterator& i );
-    bool is_Door( u16 id );
-    bool DoorOpen( u16 id );
-    bool DoorClose( u16 id );
-    bool DoorUse( u16 id );
-    bool DoorSwitch( u16 id );
-    bool Enter( const Fvector& pos,
-                const Fvector& dir,
-                const Fvector& foot_pos );
-    bool Exit( const Fvector& pos, const Fvector& dir );
-    bool Use( const Fvector& pos, const Fvector& dir, const Fvector& foot_pos );
-    u16 DriverAnimationType();
-    // Core events
-    virtual DLL_Pure* _construct();
-    virtual void Load( LPCSTR section );
-    virtual BOOL net_Spawn( CSE_Abstract* DC );
-    virtual void net_Destroy();
-    virtual void UpdateCL();
-    virtual void UpdateEx( float fov ); // called by owner
+	virtual void ActivateExplosionBox(const Fvector& size, Fvector& in_out_pos)
+	{
+	};
+	virtual void ResetScriptData(void* P = 0);
 
-    virtual void shedule_Update( u32 dt );
-    virtual void renderable_Render( IDSGraphManager* DM );
-    virtual bool bfAssignMovement( CScriptEntityAction* tpEntityAction );
-    virtual bool bfAssignObject( CScriptEntityAction* tpEntityAction );
+	virtual void Action(u16 id, u32 flags);
+	virtual void SetParam(int id, Fvector2 val);
+	virtual void SetParam(int id, Fvector val);
+	bool HasWeapon();
+	bool WpnCanHit();
+	float FireDirDiff();
+	bool isObjectVisible(CScriptGameObject* O);
+	Fvector CurrentVel();
+	float GetSpeed();
+	void SetTargetSpeed(float mps);
+	void ClearTargetSpeed();
+	void SetThrottle(float k);
+	void SetSteer(float k);
+	// wheel-ground friction multiplier (SWheelCollisionParams::mu_factor)
+	float GetWheelFriction();
+	void SetWheelFriction(float mu_factor);
+	bool IsSpeedGoverned() const { return m_speed_governed; }
+	float ThrottleFactor() const { return m_throttle; }
+	float DriveRefSpeed();
+	virtual float GetfHealth() const { return CEntity::GetfHealth(); };
+	virtual float SetfHealth(float value) { return CEntity::SetfHealth(value); };
 
-    // Network
-    virtual void net_Export( NET_Packet& P ); // export to server
-    virtual void net_Import( NET_Packet& P ); // import from server
+	// Hits
+	virtual void HitSignal(float /**HitAmount/**/, Fvector& /**local_dir/**/, CObject* /**who/**/, s16 /**element/**/)
+	{
+	};
 
-    virtual BOOL net_Relevant() {
-        return getLocal();
-    }; // relevant for export to server
+	virtual void HitImpulse(float /**amount/**/, Fvector& /**vWorldDir/**/, Fvector& /**vLocalDir/**/)
+	{
+	};
 
-    virtual BOOL UsedAI_Locations();
-    virtual void net_Relcase( CObject* O );
-    // Input
-    virtual void OnMouseMove( int x, int y );
-    virtual void OnKeyboardPress( int dik );
-    virtual void OnKeyboardRelease( int dik );
-    virtual void OnKeyboardHold( int dik );
-    virtual void vfProcessInputKey( int iCommand, bool bPressed );
-    virtual void OnEvent( NET_Packet& P, u16 type );
-    virtual void OnAfterExplosion();
-    virtual void OnBeforeExplosion();
-    virtual void GetRayExplosionSourcePos( Fvector& pos );
+	virtual void g_fireParams(const CHudItem* /**pHudItem/**/, Fvector& /**P/**/, Fvector& /**D/**/)
+	{
+	};
+	virtual u16 Initiator();
+	// HUD
+	virtual void OnHUDDraw(CCustomHUD* hud, IDSGraphManager* DM);
 
-    virtual void ActivateExplosionBox( const Fvector& size,
-                                       Fvector& in_out_pos ) {};
-    virtual void ResetScriptData( void* P = 0 );
-
-    virtual void Action( u16 id, u32 flags );
-    virtual void SetParam( int id, Fvector2 val );
-    virtual void SetParam( int id, Fvector val );
-    bool HasWeapon();
-    bool WpnCanHit();
-    float FireDirDiff();
-    bool isObjectVisible( CScriptGameObject* O );
-    Fvector CurrentVel();
-    float GetSpeed();
-    void SetTargetSpeed( float mps );
-    void ClearTargetSpeed();
-    void SetThrottle( float k );
-    void SetSteer( float k );
-    // wheel-ground friction multiplier (SWheelCollisionParams::mu_factor)
-    float GetWheelFriction();
-    void SetWheelFriction( float mu_factor );
-
-    bool IsSpeedGoverned() const { return m_speed_governed; }
-
-    float ThrottleFactor() const { return m_throttle; }
-
-    float DriveRefSpeed();
-
-    virtual float GetfHealth() const { return CEntity::GetfHealth(); };
-
-    virtual float SetfHealth( float value ) {
-        return CEntity::SetfHealth( value );
-    };
-
-    // Hits
-    virtual void HitSignal( float /**HitAmount/**/,
-                            Fvector& /**local_dir/**/,
-                            CObject* /**who/**/,
-                            s16 /**element/**/ ) {};
-
-    virtual void HitImpulse( float /**amount/**/,
-                             Fvector& /**vWorldDir/**/,
-                             Fvector& /**vLocalDir/**/ ) {};
-
-    virtual void g_fireParams( const CHudItem* /**pHudItem/**/,
-                               Fvector& /**P/**/,
-                               Fvector& /**D/**/ ) {};
-    virtual u16 Initiator();
-    // HUD
-    virtual void OnHUDDraw( CCustomHUD* hud, IDSGraphManager* DM );
-
-    CCameraBase* Camera() { return active_camera; }
-
-    void SetExplodeTime( u32 et );
-    u32 ExplodeTime();
-
-    // Inventory for the car
-    CInventory* GetInventory() { return inventory; }
-
-    void VisualUpdate( float fov = 90.0f );
+	CCameraBase* Camera() { return active_camera; }
+	void SetExplodeTime(u32 et);
+	u32 ExplodeTime();
+	// Inventory for the car	
+	CInventory* GetInventory() { return inventory; }
+	void VisualUpdate(float fov = 90.0f);
 
 protected:
-    virtual void SpawnInitPhysics( CSE_Abstract* D );
-    virtual void net_Save( NET_Packet& P );
-    virtual BOOL net_SaveRelevant();
-    void SaveNetState( NET_Packet& P );
-    virtual void RestoreNetState( CSE_PHSkeleton* po );
-    void SetDefaultNetState( CSE_PHSkeleton* po );
+	virtual void SpawnInitPhysics(CSE_Abstract* D);
+	virtual void net_Save(NET_Packet& P);
+	virtual BOOL net_SaveRelevant();
+	void SaveNetState(NET_Packet& P);
+	virtual void RestoreNetState(CSE_PHSkeleton* po);
+	void SetDefaultNetState(CSE_PHSkeleton* po);
 
-    virtual bool IsHudModeNow() { return false; };
-
-public:
-    CCar( void );
-    virtual ~CCar( void );
-    virtual BOOL AlwaysTheCrow();
+	virtual bool IsHudModeNow() { return false; };
 
 public:
-    virtual CEntity* cast_entity() { return this; }
+	CCar(void);
+	virtual ~CCar(void);
+	virtual BOOL AlwaysTheCrow();
 
-    virtual CGameObject* cast_game_object() { return this; }
+public:
+	virtual CEntity* cast_entity() { return this; }
+	virtual CGameObject* cast_game_object() { return this; }
+	virtual CExplosive* cast_explosive() { return this; }
+	virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
+	virtual CParticlesPlayer* cast_particles_player() { return this; }
+	virtual CScriptEntity* cast_script_entity() { return this; }
+	virtual IDamageSource* cast_IDamageSource() { return this; }
+	virtual CHolderCustom* cast_holder_custom() { return this; }
+	virtual CCar* cast_car() { return this; }
+private:
+	template <class T>
+	IC void fill_wheel_vector(LPCSTR S, xr_vector<T>& type_wheels);
+	IC void fill_exhaust_vector(LPCSTR S, xr_vector<SExhaust>& exhausts);
+	IC void fill_doors_map(LPCSTR S, xr_map<u16, SDoor>& doors);
 
-    virtual CExplosive* cast_explosive() { return this; }
+	//Inventory for the car
+	CInventory* inventory;
 
-    virtual CPhysicsShellHolder* cast_physics_shell_holder() { return this; }
-
-    virtual CParticlesPlayer* cast_particles_player() { return this; }
-
-    virtual CScriptEntity* cast_script_entity() { return this; }
-
-    virtual IDamageSource* cast_IDamageSource() { return this; }
-
-    virtual CHolderCustom* cast_holder_custom() { return this; }
-
-    virtual CCar* cast_car() { return this; }
+	virtual void reinit();
+	virtual void reload(LPCSTR section);
 
 private:
-    template < class T >
-    IC void fill_wheel_vector( LPCSTR S, xr_vector< T >& type_wheels );
-    IC void fill_exhaust_vector( LPCSTR S, xr_vector< SExhaust >& exhausts );
-    IC void fill_doors_map( LPCSTR S, xr_map< u16, SDoor >& doors );
-
-    // Inventory for the car
-    CInventory* inventory;
-
-    virtual void reinit();
-    virtual void reload( LPCSTR section );
-
-private:
-    car_memory* m_memory;
+	car_memory* m_memory;
 
 #ifdef CAR_NEW
 private:
-    struct SCarFlyBone {
-        u16 bid;
-        CPhysicsElement* E;
-        CPhysicsJoint* J;
-        bool clockwise;
-        u8 axis;
-        bool spinning;
-        SCarFlyBone();
-    };
+	struct SCarFlyBone
+	{
+		u16 bid;
+		CPhysicsElement *E;
+		CPhysicsJoint *J;
+		bool clockwise;
+		u8 axis;
+		bool spinning;
+		SCarFlyBone();
+	};
 
 private:
-    u16 m_type;
-    bool m_remote_control;
+	u16 m_type;
+	bool m_remote_control;
 
-    u16 m_camera_bone_def;
-    u16 m_camera_bone_aim;
-    float m_zoom_factor_def;
-    float m_zoom_factor_aim;
-    bool m_zoom_status;
+	u16 m_camera_bone_def;
+	u16 m_camera_bone_aim;
+	float m_zoom_factor_def;
+	float m_zoom_factor_aim;
+	bool m_zoom_status;
 
-    LPCSTR m_on_before_hit_callback;
-    LPCSTR m_on_before_use_callback;
-    LPCSTR m_on_before_engine_callback;
-    LPCSTR m_on_key_board_callback;
+	LPCSTR m_on_before_hit_callback;
+	LPCSTR m_on_before_use_callback;
+	LPCSTR m_on_before_engine_callback;
+	LPCSTR m_on_key_board_callback;
 
-    u16 m_body_bid;
-    xr_vector< SCarFlyBone > m_drive_bones;
-    xr_vector< SCarFlyBone > m_rotor_bones;
-    float m_rotor_force_max;
-    float m_rotor_speed_max;
+	u16 m_body_bid;
+	xr_vector<SCarFlyBone> m_drive_bones;
+	xr_vector<SCarFlyBone> m_rotor_bones;
+	float m_rotor_force_max;
+	float m_rotor_speed_max;
 
-    bool m_control_press_ele_up; /* Up */
-    bool m_control_press_ele_dw; /* Down */
-    bool m_control_press_yaw_rs; /* Strafe right */
-    bool m_control_press_yaw_ls; /* Strafe left */
-    bool m_control_press_pit_fs; /* Move forward */
-    bool m_control_press_pit_bs; /* Move backward */
-    bool m_control_press_rol_rs; /* Rotate right */
-    bool m_control_press_rol_ls; /* Rotate left */
-    void ControlPressEleUp( bool status );
-    void ControlPressEleDw( bool status );
-    void ControlPressYawRs( bool status );
-    void ControlPressYawLs( bool status );
-    void ControlPressPitFs( bool status );
-    void ControlPressPitBs( bool status );
-    void ControlPressRolRs( bool status );
-    void ControlPressRolLs( bool status );
+	bool m_control_press_ele_up; /* Up */
+	bool m_control_press_ele_dw; /* Down */
+	bool m_control_press_yaw_rs; /* Strafe right */
+	bool m_control_press_yaw_ls; /* Strafe left */
+	bool m_control_press_pit_fs; /* Move forward */
+	bool m_control_press_pit_bs; /* Move backward */
+	bool m_control_press_rol_rs; /* Rotate right */
+	bool m_control_press_rol_ls; /* Rotate left */
+	void ControlPressEleUp(bool status);
+	void ControlPressEleDw(bool status);
+	void ControlPressYawRs(bool status);
+	void ControlPressYawLs(bool status);
+	void ControlPressPitFs(bool status);
+	void ControlPressPitBs(bool status);
+	void ControlPressRolRs(bool status);
+	void ControlPressRolLs(bool status);
 
-    u16 m_control_ele; /* Elevating */
-    u16 m_control_pit; /* Pitch */
-    u16 m_control_rol; /* Roll */
-    u16 m_control_yaw; /* Yaw */
+	u16 m_control_ele; /* Elevating */
+	u16 m_control_pit; /* Pitch */
+	u16 m_control_rol; /* Roll */
+	u16 m_control_yaw; /* Yaw */
 
-    float m_control_neutral;
-    float m_control_ele_max;
-    float m_control_pit_max;
-    float m_control_rol_max;
-    float m_control_yaw_max;
+	float m_control_neutral;
+	float m_control_ele_max;
+	float m_control_pit_max;
+	float m_control_rol_max;
+	float m_control_yaw_max;
 
-    float m_control_ele_inc;
-    float m_control_pit_inc;
-    float m_control_rol_inc;
-    float m_control_yaw_inc;
+	float m_control_ele_inc;
+	float m_control_pit_inc;
+	float m_control_rol_inc;
+	float m_control_yaw_inc;
 
-    float m_fly_weight_min;
-    float m_fly_weight_add;
-    float FlyWeightScale();
+	float m_fly_weight_min;
+	float m_fly_weight_add;
+	float FlyWeightScale();
 
-    void Fly_Load( LPCSTR section );
-    BOOL Fly_net_Spawn( CSE_Abstract* DC );
-    bool Fly_attach_Actor( CGameObject* actor );
-    void Fly_detach_Actor();
-    void Fly_VisualUpdate( float fov );
-    void Fly_PhDataUpdate( float step );
-    void Fly_OnMouseMove( int dx, int dy );
-    void Fly_OnKeyboardPress( int dik );
-    void Fly_OnKeyboardRelease( int dik );
-    void Fly_OnKeyboardHold( int dik );
-    void Fly_RotorUpdate();
+	void Fly_Load(LPCSTR section);
+	BOOL Fly_net_Spawn(CSE_Abstract *DC);
+	bool Fly_attach_Actor(CGameObject *actor);
+	void Fly_detach_Actor();
+	void Fly_VisualUpdate(float fov);
+	void Fly_PhDataUpdate(float step);
+	void Fly_OnMouseMove(int dx, int dy);
+	void Fly_OnKeyboardPress(int dik);
+	void Fly_OnKeyboardRelease(int dik);
+	void Fly_OnKeyboardHold(int dik);
+	void Fly_RotorUpdate();
 
 public:
-    virtual bool is_ai_obstacle() const;
+	virtual bool is_ai_obstacle() const;
+	u16 GetType() { return m_type; }
+	void SetUseAction(LPCSTR txt);
 
-    u16 GetType() { return m_type; }
+	enum eCarType
+	{
+		eCarTypeDef = 0,
+		eCarTypeFly,
+	};
 
-    void SetUseAction( LPCSTR txt );
+	enum eControlEle
+	{
+		eControlEle_NA = 0,
+		eControlEle_UP,
+		eControlEle_DW,
+	};
+	enum eControlYaw
+	{
+		eControlYaw_NA = 0,
+		eControlYaw_RS,
+		eControlYaw_LS,
+	};
+	enum eControlPit
+	{
+		eControlPit_NA = 0,
+		eControlPit_FS,
+		eControlPit_BS,
+	};
+	enum eControlRol
+	{
+		eControlRol_NA = 0,
+		eControlRol_RS,
+		eControlRol_LS,
+	};
 
-    enum eCarType {
-        eCarTypeDef = 0,
-        eCarTypeFly,
-    };
+	u16 GetControlEle() { return m_control_ele; };
+	u16 GetControlYaw() { return m_control_yaw; };
+	u16 GetControlPit() { return m_control_pit; };
+	u16 GetControlRol() { return m_control_rol; };
+	void SetControlEle(u16 val) { m_control_ele = val; };
+	void SetControlYaw(u16 val) { m_control_yaw = val; };
+	void SetControlPit(u16 val) { m_control_pit = val; };
+	void SetControlRol(u16 val) { m_control_rol = val; };
+	float GetControlEleScale() { return m_control_ele_max; };
+	float GetControlYawScale() { return m_control_yaw_max; };
+	float GetControlPitScale() { return m_control_pit_max; };
+	float GetControlRolScale() { return m_control_rol_max; };
+	void SetControlEleScale(float val) { m_control_ele_max = val; };
+	void SetControlYawScale(float val) { m_control_yaw_max = val; };
+	void SetControlPitScale(float val) { m_control_pit_max = val; };
+	void SetControlRolScale(float val) { m_control_rol_max = val; };
 
-    enum eControlEle {
-        eControlEle_NA = 0,
-        eControlEle_UP,
-        eControlEle_DW,
-    };
-
-    enum eControlYaw {
-        eControlYaw_NA = 0,
-        eControlYaw_RS,
-        eControlYaw_LS,
-    };
-
-    enum eControlPit {
-        eControlPit_NA = 0,
-        eControlPit_FS,
-        eControlPit_BS,
-    };
-
-    enum eControlRol {
-        eControlRol_NA = 0,
-        eControlRol_RS,
-        eControlRol_LS,
-    };
-
-    u16 GetControlEle() { return m_control_ele; };
-
-    u16 GetControlYaw() { return m_control_yaw; };
-
-    u16 GetControlPit() { return m_control_pit; };
-
-    u16 GetControlRol() { return m_control_rol; };
-
-    void SetControlEle( u16 val ) { m_control_ele = val; };
-
-    void SetControlYaw( u16 val ) { m_control_yaw = val; };
-
-    void SetControlPit( u16 val ) { m_control_pit = val; };
-
-    void SetControlRol( u16 val ) { m_control_rol = val; };
-
-    float GetControlEleScale() { return m_control_ele_max; };
-
-    float GetControlYawScale() { return m_control_yaw_max; };
-
-    float GetControlPitScale() { return m_control_pit_max; };
-
-    float GetControlRolScale() { return m_control_rol_max; };
-
-    void SetControlEleScale( float val ) { m_control_ele_max = val; };
-
-    void SetControlYawScale( float val ) { m_control_yaw_max = val; };
-
-    void SetControlPitScale( float val ) { m_control_pit_max = val; };
-
-    void SetControlRolScale( float val ) { m_control_rol_max = val; };
-
-    void ControlReset();
-    bool IsCameraZoom();
-
-    bool IsRemoteControl() { return m_remote_control; };
-
-    float GetFlyWeightAdd() { return m_fly_weight_add; };
-
-    void SetFlyWeightAdd( float val );
+	void ControlReset();
+	bool IsCameraZoom();
+	bool IsRemoteControl() { return m_remote_control; };
+	float GetFlyWeightAdd() { return m_fly_weight_add; };
+	void SetFlyWeightAdd(float val);
 #endif
 
 public:
-    DECLARE_SCRIPT_REGISTER_FUNCTION
+DECLARE_SCRIPT_REGISTER_FUNCTION
 };
