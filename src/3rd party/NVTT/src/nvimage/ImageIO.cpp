@@ -128,7 +128,7 @@ FloatImage* nv::ImageIO::loadFloat( const char* fileName ) {
     StdInputStream stream( fileName );
 
     if ( stream.isError() ) {
-        return false;
+        return nullptr;
     }
 
     return loadFloat( fileName, stream );
@@ -229,7 +229,7 @@ Image* nv::ImageIO::loadTGA( Stream& s ) {
                 nvDebug(
                     "*** ImageIO::loadTGA: Error, only 24bit paletted images "
                     "are supported.\n" );
-                return false;
+                return nullptr;
             }
             pal = true;
             break;
@@ -250,7 +250,7 @@ Image* nv::ImageIO::loadTGA( Stream& s ) {
 
         default:
             nvDebug( "*** ImageIO::loadTGA: Error, unsupported image type.\n" );
-            return false;
+            return nullptr;
     }
 
     const uint pixel_size = ( tga.pixel_size / 8 );
@@ -1155,7 +1155,7 @@ FloatImage * nv::ImageIO::loadFloatPFM(const char * fileName, Stream & s)
 	}
 
 	parser.nextLine();
-	
+
 	int width = parser.token().toInt(); parser.nextToken();
 	int height = parser.token().toInt();
 
@@ -1258,7 +1258,7 @@ static bool SavePNG(const PiImage * img, const char * name) {
 	if( piStrCmp(piExtension(name), ".png" ) != 0 ) {
 		return false;
 	}
-	
+
 	if( img->flags & PI_IT_CUBEMAP ) {
 		nvDebug("*** Cannot save cubemaps as PNG.");
 		return false;
@@ -1269,7 +1269,7 @@ static bool SavePNG(const PiImage * img, const char * name) {
 	}
 
 	nvDebug( "--- Saving '%s'.\n", name );
-	
+
 	PiAutoPtr<PiStream> ar( PiFileSystem::CreateFileWriter( name ) );
 	if( ar == NULL ) {
 		nvDebug( "*** SavePNG: Error, cannot save file '%s'.\n", name );
@@ -1324,7 +1324,7 @@ public class PNGEnc {
     private static var crcTable:Array;
     private static var crcTableComputed:Boolean = false;
 
-    private static function writeChunk(png:ByteArray, 
+    private static function writeChunk(png:ByteArray,
             type:uint, data:ByteArray) {
         if (!crcTableComputed) {
             crcTableComputed = true;
@@ -1333,7 +1333,7 @@ public class PNGEnc {
                 var c:uint = n;
                 for (var k:uint = 0; k < 8; k++) {
                     if (c & 1) {
-                        c = uint(uint(0xedb88320) ^ 
+                        c = uint(uint(0xedb88320) ^
                             uint(c >>> 1));
                     } else {
                         c = uint(c >>> 1);
@@ -1357,7 +1357,7 @@ public class PNGEnc {
         var c:uint = 0xffffffff;
         for (var i:int = 0; i < (e-p); i++) {
             c = uint(crcTable[
-                (c ^ png.readUnsignedByte()) & 
+                (c ^ png.readUnsignedByte()) &
                 uint(0xff)] ^ uint(c >>> 8));
         }
         c = uint(c^uint(0xffffffff));
@@ -1386,71 +1386,71 @@ namespace ImageIO {
 		AddInputPlugin( "jpg", LoadJPG );
 #endif
 		AddInputPlugin( "dds", LoadDDS );
-		
+
 		AddOutputPlugin( "tga", SaveTGA );
 	}
-	
+
 	/** Reset ImageIO plugins. */
 	void ResetPlugins() {
 		s_plugin_load_map.Clear();
 		s_plugin_save_map.Clear();
 	}
-	
+
 	/** Add an input plugin. */
 	void AddInputPlugin( const char * ext, ImageInput_Plugin plugin ) {
 		s_plugin_load_map.Add(ext, plugin);
 	}
-	
+
 	/** Add an output plugin. */
 	void AddOutputPlugin( const char * ext, ImageOutput_Plugin plugin ) {
 		s_plugin_save_map.Add(ext, plugin);
 	}
 
-	
+
 	bool Load(PiImage * img, const char * name, PiStream & stream) {
-			
+
 		// Get name extension.
 		const char * extension = piExtension(name);
-		
+
 		// Skip the dot.
 		if( *extension == '.' ) {
 			extension++;
 		}
-		
+
 		// Lookup plugin in the map.
 		ImageInput_Plugin plugin = NULL;
 		if( s_plugin_load_map.Get(extension, &plugin) ) {
 			return plugin(img, stream);
 		}
-		
+
 		/*foreach(i, s_plugin_load_map) {
 			nvDebug("%s %s %d\n", s_plugin_load_map[i].key.GetStr(), extension, 0 == strcmp(extension, s_plugin_load_map[i].key));
 		}
-		
+
 		nvDebug("No plugin found for '%s' %d.\n", extension, s_plugin_load_map.Size());*/
-		
+
 		return false;
 	}
 
 	bool Save(const PiImage * img, const char * name, PiStream & stream) {
-				
+
 		// Get name extension.
 		const char * extension = piExtension(name);
-		
+
 		// Skip the dot.
 		if( *extension == '.' ) {
 			extension++;
 		}
-		
+
 		// Lookup plugin in the map.
 		ImageOutput_Plugin plugin = NULL;
 		if( s_plugin_save_map.Get(extension, &plugin) ) {
 			return plugin(img, stream);
 		}
-		
+
 		return false;
 	}
-	
+
 } // ImageIO
 
 #endif // 0
