@@ -349,6 +349,8 @@ if(MSVC)
         /std:c++17;
         /sdl;
         /W3;
+        /D_CRT_NONSTDC_NO_WARNINGS;
+        /D_CRT_SECURE_NO_WARNINGS;
         ${DEFAULT_CXX_EXCEPTION_HANDLING};
         /Y-
     )
