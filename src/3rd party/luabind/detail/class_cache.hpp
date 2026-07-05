@@ -26,6 +26,9 @@
 
 #include <type_traits>
 
+#include "class_registry.hpp"
+#include "class_rep.hpp"
+
 namespace luabind {
 namespace detail {
 

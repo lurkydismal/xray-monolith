@@ -24,6 +24,8 @@
 
 #include <type_traits>
 
+#include "policy.hpp"
+
 namespace luabind {
 namespace detail {
 template < int Value, int... Values >
