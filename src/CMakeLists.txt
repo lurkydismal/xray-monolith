@@ -199,10 +199,23 @@ add_subdirectory("3rd party/ode/contrib/msvc7/ode_default")
 add_subdirectory("3rd party/OpenAL-new")
 add_subdirectory("3rd party/optick")
 add_subdirectory(Layers/xrAPI)
-add_subdirectory(Layers/xrRenderPC_R1)
-add_subdirectory(Layers/xrRenderPC_R2)
-add_subdirectory(Layers/xrRenderPC_R3)
-add_subdirectory(Layers/xrRenderPC_R4)
+
+if(CMAKE_BUILD_TYPE MATCHES "^(DX8|DX8AVX|VerifiedDX8)$")
+    add_subdirectory(Layers/xrRenderPC_R1)
+endif()
+
+if(CMAKE_BUILD_TYPE MATCHES "^(DX9|DX9AVX|VerifiedDX9)$")
+    add_subdirectory(Layers/xrRenderPC_R2)
+endif()
+
+if(CMAKE_BUILD_TYPE MATCHES "^(DX10|DX10AVX|VerifiedDX10)$")
+    add_subdirectory(Layers/xrRenderPC_R3)
+endif()
+
+if(CMAKE_BUILD_TYPE MATCHES "^(DX11|DX11AVX|VerifiedDX11)$")
+    add_subdirectory(Layers/xrRenderPC_R4)
+endif()
+
 add_subdirectory(ReShadeCompat)
 add_subdirectory(xrCDB)
 add_subdirectory(xrCore)
