@@ -453,26 +453,28 @@ endif()
 ################################################################################
 # Post build events
 ################################################################################
-add_custom_command_if(
-    TARGET ${PROJECT_NAME}
-    POST_BUILD
-    COMMANDS
-    COMMAND             $<CONFIG:DX10> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND          $<CONFIG:DX10AVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND             $<CONFIG:DX11> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND          $<CONFIG:DX11AVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND              $<CONFIG:DX8> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND           $<CONFIG:DX8AVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND              $<CONFIG:DX9> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND           $<CONFIG:DX9AVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND     $<CONFIG:ProfiledDX11> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND          $<CONFIG:Release> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND       $<CONFIG:ReleaseAVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND         $<CONFIG:Verified> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND     $<CONFIG:VerifiedDX11> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND $<CONFIG:VerifiedDX11ASAN> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND      $<CONFIG:VerifiedDX8> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMAND      $<CONFIG:VerifiedDX9> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
-    COMMENT "Performing registration"
-)
+if(WIN32 AND FALSE)
+    add_custom_command_if(
+        TARGET ${PROJECT_NAME}
+        POST_BUILD
+        COMMANDS
+        COMMAND             $<CONFIG:DX10> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND          $<CONFIG:DX10AVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND             $<CONFIG:DX11> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND          $<CONFIG:DX11AVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND              $<CONFIG:DX8> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND           $<CONFIG:DX8AVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND              $<CONFIG:DX9> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND           $<CONFIG:DX9AVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND     $<CONFIG:ProfiledDX11> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND          $<CONFIG:Release> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND       $<CONFIG:ReleaseAVX> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND         $<CONFIG:Verified> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND     $<CONFIG:VerifiedDX11> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND $<CONFIG:VerifiedDX11ASAN> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND      $<CONFIG:VerifiedDX8> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMAND      $<CONFIG:VerifiedDX9> regsvr32 /s /c "$<SHELL_PATH:$<TARGET_FILE:${PROJECT_NAME}>>"
+        COMMENT "Performing registration"
+    )
+endif()
 
