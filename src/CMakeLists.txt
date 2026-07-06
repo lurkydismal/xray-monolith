@@ -201,18 +201,22 @@ add_subdirectory("3rd party/optick")
 add_subdirectory(Layers/xrAPI)
 
 if(CMAKE_BUILD_TYPE MATCHES "^(DX8|DX8AVX|VerifiedDX8)$")
+    message(STATUS "Selected renderer: DirectX 8 (PC_R1)")
     add_subdirectory(Layers/xrRenderPC_R1)
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES "^(DX9|DX9AVX|VerifiedDX9)$")
+    message(STATUS "Selected renderer: DirectX 9 (PC_R2)")
     add_subdirectory(Layers/xrRenderPC_R2)
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES "^(DX10|DX10AVX|VerifiedDX10)$")
+    message(STATUS "Selected renderer: DirectX 10 (PC_R3)")
     add_subdirectory(Layers/xrRenderPC_R3)
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES "^(DX11|DX11AVX|VerifiedDX11)$")
+    message(STATUS "Selected renderer: DirectX 11 (PC_R4)")
     add_subdirectory(Layers/xrRenderPC_R4)
 endif()
 
