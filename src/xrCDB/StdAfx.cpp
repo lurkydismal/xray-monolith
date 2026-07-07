@@ -10,7 +10,7 @@
 #else
 #pragma comment(lib,"xrCore.lib")
 
-#pragma comment(lib,"xrApi.lib")
+#pragma comment(lib,"xrAPI.lib")
 
 #endif
 
