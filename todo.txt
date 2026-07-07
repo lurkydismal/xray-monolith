@@ -1,0 +1,12 @@
+xrAPI
+xrCDB
+xrCPU_Pipe
+xrCore
+xrEngine
+xrGame
+xrNetServer
+xrParticles
+xrPhysics
+xrRender_R4
+xrSound
+xrXMLParser
