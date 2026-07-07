@@ -14,7 +14,7 @@
 #include "MathUtils.h"
 //#include "Level.h"
 #include "../xrEngine/GameMtlLib.h"
-//#include "gameobject.h"
+//#include "GameObject.h"
 #include "IPhysicsShellHolder.h"
 #include "../Include/xrRender/Kinematics.h"
 #include "PHSimpleCharacterInline.h"

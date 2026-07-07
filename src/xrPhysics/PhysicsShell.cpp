@@ -9,7 +9,7 @@
 #include "PHJointDestroyInfo.h"
 #include "PHSplitedShell.h"
 
-//#include "gameobject.h"
+//#include "GameObject.h"
 #include "IPhysicsShellHolder.h"
 
 //#include "objectdump.h"

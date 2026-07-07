@@ -11,7 +11,7 @@
 #include "../xrServerEntities/smart_cast.h"
 //#include "../xrEngine/pure.h"
 //#include "../xrEngine/engineapi.h"
-//#include "../xrEngine/eventapi.h"
+//#include "../xrEngine/EventAPI.h"
 
 
 #include "../xrCDB/xrCDB.h"
