@@ -98,9 +98,9 @@
 #	include "weaponSSRS.h"
 #	include "WeaponStatMgun.h"
 
-#	include "scope.h"
-#	include "silencer.h"
-#	include "grenadelauncher.h"
+#	include "Scope.h"
+#	include "Silencer.h"
+#	include "GrenadeLauncher.h"
 
 #	include "bolt.h"
 #	include "medkit.h"
