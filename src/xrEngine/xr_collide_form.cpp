@@ -8,7 +8,7 @@
 #include "Fmesh.h"
 #include "../xrCDB/Frustum.h"
 
-//#include "skeletoncustom.h"
+//#include "SkeletonCustom.h"
 #include "../Include/xrRender/Kinematics.h"
 #include "bone.h"
 #ifdef DEBUG
