@@ -150,7 +150,7 @@
 #	include "searchlight.h"
 
 #	include "HangingLamp.h"
-#	include "physicobject.h"
+#	include "PhysicObject.h"
 #	include "script_object.h"
 #	include "BreakableObject.h"
 #	include "PhysicsSkeletonObject.h"
@@ -159,19 +159,19 @@
 #	include "game_sv_single.h"
 #	include "game_sv_deathmatch.h"
 #	include "game_sv_teamdeathmatch.h"
-#	include "game_sv_ArtefactHunt.h"
+#	include "game_sv_artefacthunt.h"
 #	include "game_sv_capture_the_artefact.h"
 
 #	include "game_cl_single.h"
 #	include "game_cl_deathmatch.h"
 #	include "game_cl_teamdeathmatch.h"
-#	include "game_cl_ArtefactHunt.h"
+#	include "game_cl_artefacthunt.h"
 #	include	"game_cl_capture_the_artefact.h"
 
 #	include "UIGameSP.h"
 #	include "UIGameAHunt.h"
 #	include "UIGameCTA.h"
-#	include	"climableobject.h"
+#	include	"ClimableObject.h"
 #	include "space_restrictor.h"
 #	include "smart_zone.h"
 #	include "InventoryBox.h"
@@ -180,7 +180,7 @@
 #	include "actor_mp_client.h"
 #	include "smart_cover_object.h"
 
-#include "..\xrGame\HolderEntityObject.h"
+#include "../xrGame/HolderEntityObject.h"
 
 #include "Flashlight.h"
 #include "Dosimeter.h"

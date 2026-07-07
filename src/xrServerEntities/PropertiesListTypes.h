@@ -3,7 +3,7 @@
 #define PropertiesListTypesH
 
 
-#include "WaveForm.H"
+#include "WaveForm.h"
 #include "gametype_chooser.h"
 
 #ifdef __BORLANDC__
@@ -51,7 +51,7 @@ class PropItem;
 DEFINE_VECTOR(PropItem*, PropItemVec, PropItemIt);
 
 //------------------------------------------------------------------------------
-#include "../xrcore/ChooseTypes.H"
+#include "../xrCore/ChooseTypes.H"
 //------------------------------------------------------------------------------
 typedef xr_delegate<void(PropValue*, xr_string&)> TOnDrawTextEvent;
 typedef xr_delegate<void(PropItem*)> TOnClick;
