@@ -240,7 +240,7 @@ set(Memory_manager
     "xrMemory_align.h"
     "xrMemory_debug.cpp"
     "xrMemory_POOL.cpp"
-    "xrMEMORY_POOL.h"
+    "xrMemory_POOL.h"
     "xrMemory_pso.h"
     "xrMemory_pso_Copy.cpp"
     "xrMemory_pso_Fill.cpp"
