@@ -4,7 +4,7 @@
 #include "UICellItemFactory.h"
 #include "UIStatic.h"
 #include "../Inventory.h"
-#include "../inventoryOwner.h"
+#include "../InventoryOwner.h"
 #include "../Actor.h"
 #include "../actor_defs.h"
 #include "UIInventoryUtilities.h"

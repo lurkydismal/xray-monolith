@@ -30,7 +30,7 @@
 #include "GameTask.h"
 #include "Car.h"
 #include "ZoneCampfire.h"
-#include "physicobject.h"
+#include "PhysicObject.h"
 #include "Artefact.h"
 #include "sight_manager_space.h"
 #include "script_attachment_manager.h"

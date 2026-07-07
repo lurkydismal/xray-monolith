@@ -2,7 +2,7 @@
 #include "alife_space.h"
 #include "Hit.h"
 #include "PHDestroyable.h"
-#include "mincer.h"
+#include "Mincer.h"
 #include "xrmessages.h"
 #include "Level.h"
 #include "CustomZone.h"

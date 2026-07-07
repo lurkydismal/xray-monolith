@@ -23,12 +23,12 @@
 #include "UITaskWnd.h"
 
 #include "../GameTaskDefs.h"
-#include "../gametask.h"
+#include "../GameTask.h"
 #include "../map_location.h"
 #include "UIInventoryUtilities.h"
 #include "../string_table.h"
 #include "../Level.h"
-#include "../gametaskmanager.h"
+#include "../GametaskManager.h"
 #include "../Actor.h"
 
 

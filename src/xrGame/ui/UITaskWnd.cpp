@@ -11,14 +11,14 @@
 #include "UIHelper.h"
 #include "UIHint.h"
 
-#include "../gametask.h"
+#include "../GameTask.h"
 #include "../map_location.h"
 #include "../map_location_defs.h"
 #include "../map_manager.h"
 #include "UIInventoryUtilities.h"
 #include "../string_table.h"
 #include "../Level.h"
-#include "../gametaskmanager.h"
+#include "../GametaskManager.h"
 #include "../Actor.h"
 #include "UICheckButton.h"
 

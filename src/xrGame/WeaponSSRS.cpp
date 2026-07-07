@@ -35,7 +35,7 @@ extern BOOL g_launcher_dynamic_range_zoom;
 #include "ai/stalker/ai_stalker.h"
 
 #ifdef DEBUG
-#	include "phdebug.h"
+#	include "PHDebug.h"
 #endif
 
 CWeaponSSRS::~CWeaponSSRS()

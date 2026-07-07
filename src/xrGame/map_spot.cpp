@@ -13,8 +13,8 @@
 #include "UICursor.h"
 
 #include "../Include/xrRender/UIShader.h"
-#include "gametaskmanager.h"
-#include "gametask.h"
+#include "GametaskManager.h"
+#include "GameTask.h"
 
 CMapSpot::CMapSpot(CMapLocation* ml)
 	: m_map_location(ml)

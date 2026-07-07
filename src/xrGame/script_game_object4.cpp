@@ -44,7 +44,7 @@
 #include "Torch.h"
 #include "GrenadeLauncher.h"
 #include "searchlight.h"
-//#include "grenade.h"
+//#include "Grenade.h"
 #include "eatable_item.h"
 #include "FoodItem.h"
 #include "medkit.h"

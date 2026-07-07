@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "weaponrpg7.h"
-#include "xrserver_objects_alife_items.h"
-#include "explosiverocket.h"
+#include "WeaponRPG7.h"
+#include "xrServer_Objects_ALife_Items.h"
+#include "ExplosiveRocket.h"
 #include "Entity.h"
 #include "Level.h"
 #include "player_hud.h"
@@ -100,7 +100,7 @@ void CWeaponRPG7::FireStart()
 }
 
 #include "Inventory.h"
-#include "inventoryOwner.h"
+#include "InventoryOwner.h"
 
 void CWeaponRPG7::switch2_Fire()
 {

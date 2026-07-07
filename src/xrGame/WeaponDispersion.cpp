@@ -10,7 +10,7 @@
 #include "inventory_item_impl.h"
 
 #include "actoreffector.h"
-#include "effectorshot.h"
+#include "EffectorShot.h"
 #include "EffectorShotX.h"
 
 

@@ -2,11 +2,11 @@
 #include "base_monster.h"
 #include "../../../Level.h"
 #include "../../../level_debug.h"
-#include "../../../entitycondition.h"
+#include "../../../EntityCondition.h"
 #include "../../../ai_debug.h"
 #include "../state_defs.h"
 #include "../state_manager.h"
-#include "../../../phmovementcontrol.h"
+#include "../../../PHMovementControl.h"
 #include "../../../characterphysicssupport.h"
 #include "../../../Actor.h"
 

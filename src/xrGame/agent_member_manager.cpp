@@ -15,7 +15,7 @@
 #include "Explosive.h"
 #include "sound_player.h"
 #include "cover_point.h"
-#include "grenade.h"
+#include "Grenade.h"
 
 class CMemberPredicate2
 {

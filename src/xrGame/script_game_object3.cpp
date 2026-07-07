@@ -50,7 +50,7 @@
 #include "eatable_item.h"
 #include "script_callback_ex.h"
 #include "../xrEngine/Feel_Touch.h"
-#include "weaponammo.h"
+#include "WeaponAmmo.h"
 #include "WeaponMagazinedWGrenade.h"
 #endif
 //-Alundaio

@@ -9,7 +9,7 @@ extern BOOL g_launcher_dynamic_range_zoom;
 #include "Actor.h"
 
 #ifdef DEBUG
-#	include "phdebug.h"
+#	include "PHDebug.h"
 #endif
 
 
@@ -50,7 +50,7 @@ void CWeaponRG6::Load(LPCSTR section)
 }
 
 #include "Inventory.h"
-#include "inventoryOwner.h"
+#include "InventoryOwner.h"
 
 void CWeaponRG6::FireStart()
 {

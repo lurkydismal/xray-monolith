@@ -11,7 +11,7 @@
 #include "../xrEngine/XR_IOConsole.h"
 #include "string_table.h"
 #include "Level.h"
-#include "demoinfo.h"
+#include "DemoInfo.h"
 #include "demoplay_control.h"
 
 CUIDemoPlayControl::CUIDemoPlayControl()

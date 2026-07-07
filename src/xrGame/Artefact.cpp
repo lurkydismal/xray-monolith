@@ -346,8 +346,8 @@ void CArtefact::MoveTo(Fvector const& position)
 }
 
 
-#include "inventoryOwner.h"
-#include "Entity_alive.h"
+#include "InventoryOwner.h"
+#include "entity_alive.h"
 
 void CArtefact::UpdateXForm()
 {

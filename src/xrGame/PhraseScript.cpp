@@ -4,7 +4,7 @@
 #include "ai_space.h"
 #include "GameObject.h"
 #include "script_game_object.h"
-#include "infoportion.h"
+#include "InfoPortion.h"
 #include "InventoryOwner.h"
 #include "ai_debug.h"
 #include "ui/xrUIXmlParser.h"

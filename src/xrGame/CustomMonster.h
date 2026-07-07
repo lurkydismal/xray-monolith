@@ -360,4 +360,4 @@ public:
 #endif // #ifdef DEBUG
 };
 
-#include "custommonster_inline.h"
+#include "CustomMonster_inline.h"

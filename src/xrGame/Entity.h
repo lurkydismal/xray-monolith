@@ -3,7 +3,7 @@
 
 #include "PhysicsShellHolder.h"
 #include "damage_manager.h"
-#include "entitycondition.h"
+#include "EntityCondition.h"
 // refs
 class ENGINE_API CCameraBase;
 class ENGINE_API C3DSound;

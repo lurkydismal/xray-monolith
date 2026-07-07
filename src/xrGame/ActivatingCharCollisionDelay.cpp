@@ -4,7 +4,7 @@
 #include "characterphysicssupport.h"
 #include "phmovementcontrol.h"
 #ifdef	DEBUG
-#include "phdebug.h"
+#include "PHDebug.h"
 #endif
 activating_character_delay::activating_character_delay(CCharacterPhysicsSupport* char_support_):
 	char_support(*char_support_),

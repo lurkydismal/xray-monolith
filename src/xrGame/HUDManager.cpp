@@ -14,7 +14,7 @@
 #include "string_table.h"
 #include "game_cl_base.h"
 #ifdef	DEBUG
-#include "phdebug.h"
+#include "PHDebug.h"
 #endif
 
 #include "Flashlight.h"

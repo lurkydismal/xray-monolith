@@ -2,7 +2,7 @@
 #include "weaponmagazinedwgrenade.h"
 #include "Entity.h"
 #include "GrenadeLauncher.h"
-#include "xrserver_objects_alife_items.h"
+#include "xrServer_Objects_ALife_Items.h"
 #include "ExplosiveRocket.h"
 #include "Actor.h"
 #include "xr_level_controller.h"
@@ -14,7 +14,7 @@
 #include "../build_config_defines.h"
 
 #ifdef DEBUG
-#	include "phdebug.h"
+#	include "PHDebug.h"
 #endif
 
 CWeaponMagazinedWGrenade::CWeaponMagazinedWGrenade(ESoundTypes eSoundType) : CWeaponMagazined(eSoundType)
@@ -325,7 +325,7 @@ bool CWeaponMagazinedWGrenade::Action(u16 cmd, u32 flags)
 }
 
 #include "Inventory.h"
-#include "inventoryOwner.h"
+#include "InventoryOwner.h"
 
 void CWeaponMagazinedWGrenade::state_Fire(float dt)
 {
