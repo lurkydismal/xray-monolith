@@ -16,7 +16,7 @@
 
 #include "../build_config_defines.h"
 
-//#include "resourcemanager.h"
+//#include "ResourceManager.h"
 
 #ifndef _EDITOR
 #include "IGame_Level.h"
