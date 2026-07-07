@@ -19,10 +19,10 @@
 // client entities includes
 #ifndef NO_XR_GAME
 #	include "../xrEngine/std_classes.h"
-#	include "level.h"
+#	include "Level.h"
 #	include "gamepersistent.h"
 #	include "hudmanager.h"
-#	include "actor.h"
+#	include "Actor.h"
 #	include "spectator.h"
 
 #	include "ai/monsters/flesh/flesh.h"
