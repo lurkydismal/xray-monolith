@@ -4,7 +4,7 @@
 #include "Blender.h"
 
 //////////////////////////////////////////////////////////////////////
-#include "blender_clsid.h"
+#include "Blender_CLSID.h"
 IC bool p_sort(IBlender* A, IBlender* B)
 {
 	return stricmp(A->getComment(), B->getComment()) < 0;
