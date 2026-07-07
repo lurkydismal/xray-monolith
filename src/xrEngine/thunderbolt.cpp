@@ -2,7 +2,7 @@
 #pragma once
 
 #ifndef _EDITOR
-#include "ender.h"
+#include "Render.h"
 #endif
 #include "thunderbolt.h"
 #include "IGame_Persistent.h"
