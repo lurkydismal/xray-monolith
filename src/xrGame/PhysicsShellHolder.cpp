@@ -11,7 +11,7 @@
 #include "CustomRocket.h"
 #include "Grenade.h"
 
-//#include "phactivationshape.h"
+//#include "PHActivationShape.h"
 #include "../xrPhysics/IPHWorld.h"
 #include "../xrPhysics/IActivationShape.h"
 //#include "../xrPhysics/phvalide.h"

@@ -4,7 +4,7 @@
 #include "xrServer_Objects_ALife.h"
 #include "../xrPhysics/PHCharacter.h"
 #include "../xrPhysics/MathUtils.h"
-#include "../xrPhysics/extendedgeom.h"
+#include "../xrPhysics/ExtendedGeom.h"
 #include "../xrEngine/GameMtlLib.h"
 #ifdef DEBUG
 #	include "debug_renderer.h"

@@ -21,7 +21,7 @@
 #include "../Include/xrRender/KinematicsAnimated.h"
 #include "../xrEngine/bone.h"
 #include "../xrEngine/IPHdebug.h"
-//#include "phelement.h"
+//#include "PHElement.h"
 #include "ui_base.h"
 
 Flags32		ph_dbg_draw_mask						;
