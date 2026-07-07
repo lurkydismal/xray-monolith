@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "blender_blur.h"
+#include "Blender_Blur.h"
 
 CBlender_blur::CBlender_blur() { description.CLS = 0; }
 
