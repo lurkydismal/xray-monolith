@@ -91,7 +91,7 @@ void IBlender::Destroy(IBlender*& B)
 #include "blender_B.h"
 #include "blender_shadow_texture.h"
 #include "../Layers/xrRenderPC_R1/Blender_Shadow_World.h"
-#include "../Layers/xrRenderPC_R1/blender_blur.h"
+#include "../Layers/xrRenderPC_R1/Blender_Blur.h"
 #include "../Layers/xrRenderPC_R1/Blender_Shadow_World.h"
 #include "Blender_Model_EbB.h"
 #include "Blender_detail_still.h"
