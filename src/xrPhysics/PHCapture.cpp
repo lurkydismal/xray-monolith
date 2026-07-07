@@ -15,7 +15,7 @@
 #include "MathUtilsOde.h"
 #include "PHElement.h"
 
-//#include "characterphysicssupport.h"
+//#include "CharacterPhysicsSupport.h"
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 IPHCapture* phcapture_create(CPHCharacter* ch, IPhysicsShellHolder* object, NearestToPointCallback* cb /*=0*/)
