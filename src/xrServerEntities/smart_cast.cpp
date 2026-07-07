@@ -12,12 +12,12 @@
 //#	ifdef XRGAME_EXPORTS
 //#		include "../include/xrRender/rendervisual.h"
 //#		include "alife_space.h"
-//#		include "hit.h"
+//#		include "Hit.h"
 //#		include "Actor.h"
 //#		include "custommonster.h"
 //#		include "ai/stalker/ai_stalker.h"
 //#		include "ui/uiwindow.h"
-//#		include "customzone.h"
+//#		include "CustomZone.h"
 //#		include "Weapon.h"
 //#		include "cameraeffector.h"
 //#	endif
