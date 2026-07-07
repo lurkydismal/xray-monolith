@@ -1,4 +1,3 @@
-xrCPU_Pipe
 xrEngine
 xrGame
 xrNetServer
