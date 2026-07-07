@@ -31,7 +31,7 @@ if not test -f host/minilua.exe
         /fp:precise \
         /MD \
         /GF \
-        /GS- \
+        /GS \
         /Zi \
         host/minilua.c
     or exit 1
@@ -73,7 +73,7 @@ if not test -f host/buildvm.exe
         /fp:precise \
         /MD \
         /GF \
-        /GS- \
+        /GS \
         /Zi \
         /I . \
         /I ../dynasm \
