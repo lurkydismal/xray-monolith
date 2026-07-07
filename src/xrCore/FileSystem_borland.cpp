@@ -9,7 +9,7 @@
 
 #include <io.h>
 #include <fcntl.h>
-#include <sys\stat.h>
+#include <sys/stat.h>
 //#include "commdlg.h"
 
 #include <shlobj.h>
