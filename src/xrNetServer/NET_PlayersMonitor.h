@@ -1,7 +1,7 @@
 #ifndef NET_PLAYERS_MONITOR
 #define NET_PLAYERS_MONITOR
 
-#include "NET_Shared"
+#include "NET_Shared.h"
 #include "NET_Common.h"
 #include "../xrCore/xr_delegate.h"
 

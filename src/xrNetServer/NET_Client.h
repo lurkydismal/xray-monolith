@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NET_Shared"
+#include "NET_Shared.h"
 #include "NET_Common.h"
 
 struct ip_address;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NET_Shared"
+#include "NET_Shared.h"
 
 struct SLogPacket
 {
