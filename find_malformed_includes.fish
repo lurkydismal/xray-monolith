@@ -2,7 +2,7 @@
 
 rg -n \
     -g '!sdk/**' \
-    -g '!src/3rd party/**' \
+    -g '!src/3rd_party/**' \
     '#\s*include\s*[<"]([^">]+)[">]' . |
     while read -l match
         set file (string split : $match)[1]
@@ -18,7 +18,7 @@ rg -n \
 
         set found (fd \
         -E sdk \
-        -E 'src/3rd party' \
+        -E 'src/3rd_party' \
         -i --full-path \
         "^.*/"(string escape --style=regex $inc)'$' \
         $dir)
