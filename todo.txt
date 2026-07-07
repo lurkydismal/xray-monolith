@@ -1,5 +1,4 @@
 xrEngine
 xrGame
-xrParticles
 xrPhysics
 xrRender_R4
