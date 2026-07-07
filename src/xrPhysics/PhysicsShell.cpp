@@ -12,7 +12,7 @@
 //#include "GameObject.h"
 #include "IPhysicsShellHolder.h"
 
-//#include "objectdump.h"
+//#include "ObjectDump.h"
 #include "phvalide.h"
 
 #include "../Include/xrRender/Kinematics.h"

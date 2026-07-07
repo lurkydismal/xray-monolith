@@ -7,7 +7,7 @@
 #include "ExtendedGeom.h"
 
 //#include "entity_alive.h"
-//#include "phmovementcontrol.h"
+//#include "PHMovementControl.h"
 #include "../Include/xrRender/Kinematics.h"
 #include "IPhysicsShellHolder.h"
 #include "../xrEngine/bone.h"
