@@ -11,7 +11,7 @@
 #include "game_cl_Single.h"
 #include "xr_level_controller.h"
 #include "actorcondition.h"
-#include "../xrEngine/xr_ioconsole.h"
+#include "../xrEngine/XR_IOConsole.h"
 #include "object_broker.h"
 #include "GameTaskManager.h"
 #include "GameTask.h"
