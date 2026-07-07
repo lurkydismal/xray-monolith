@@ -1,4 +1,3 @@
-fix ReShadeCompat
 fix optick
 fix crypto
 fix imgui

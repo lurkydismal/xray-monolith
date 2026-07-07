@@ -226,7 +226,7 @@ if(MSVC)
             /Zi;
             /fp:precise;
             /GR;
-            /std:c++latest;
+            /std:c++17;
             /Ob3;
             /GS-
         >
@@ -259,7 +259,7 @@ if(MSVC)
             /Zi;
             /fp:precise;
             /GR;
-            /std:c++latest;
+            /std:c++17;
             /Ob3;
             /GS-
         >
@@ -292,7 +292,7 @@ if(MSVC)
             /Zi;
             /fp:precise;
             /GR;
-            /std:c++latest;
+            /std:c++17;
             /Ob3;
             /GS-
         >
@@ -325,7 +325,7 @@ if(MSVC)
             /Zi;
             /fp:precise;
             /GR;
-            /std:c++latest;
+            /std:c++17;
             /Ob3;
             /GS-
         >
@@ -358,7 +358,7 @@ if(MSVC)
             /Zi;
             /fp:precise;
             /GR;
-            /std:c++latest;
+            /std:c++17;
             /GS-
         >
         $<$<CONFIG:Release>:
@@ -373,7 +373,7 @@ if(MSVC)
             /Zi;
             /fp:precise;
             /GR;
-            /std:c++latest;
+            /std:c++17;
             /Ob3;
             /GS-
         >
