@@ -13,7 +13,7 @@
 #ifdef DEBUG
 //#	include "../xrEngine/StatGraph.h"
 #	include "debug_output.h"
-//#	include "level.h"
+//#	include "Level.h"
 //#	include "debug_renderer.h"
 #endif
 
