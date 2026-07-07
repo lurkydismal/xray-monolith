@@ -1028,17 +1028,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     OpenAL32
     optick
     xrRender_R4
-    xrRender_R4
     xrRender_R2
-    xrRender_R4
-    xrRender_R4
-    xrRender_R4
     xrRender_R3
-    xrRender_R3
-    xrRender_R2
-    xrRender_R2
-    xrRender_R1
-    xrRender_R1
     xrRender_R1
 )
 
