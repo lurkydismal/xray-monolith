@@ -535,7 +535,7 @@ float r_rain_exp = 1.f;
 float r_rain_k = 99.0f;
 
 #ifndef _EDITOR
-#include	"../../xrEngine/xr_ioconsole.h"
+#include	"../../xrEngine/XR_IOConsole.h"
 #include	"../../xrEngine/xr_ioc_cmd.h"
 
 #if defined(USE_DX10) || defined(USE_DX11)

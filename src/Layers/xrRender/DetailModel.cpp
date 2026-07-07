@@ -123,7 +123,7 @@ void CDetail::Load(IReader* S)
 }
 
 #ifndef _EDITOR
-#include "xrstripify.h"
+#include "xrStripify.h"
 
 void CDetail::Optimize()
 {

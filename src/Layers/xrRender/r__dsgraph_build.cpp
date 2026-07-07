@@ -3,10 +3,10 @@
 #include "FHierrarhyVisual.h"
 #include "SkeletonCustom.h"
 #include "../../xrEngine/Fmesh.h"
-#include "../../xrEngine/irenderable.h"
+#include "../../xrEngine/IRenderable.h"
 
 #include "FLOD.h"
-#include "particlegroup.h"
+#include "ParticleGroup.h"
 #include "FTreeVisual.h"
 
 using namespace R_dsgraph;
