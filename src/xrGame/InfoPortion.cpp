@@ -12,7 +12,7 @@
 #include "alife_story_registry.h"
 #include "xrServer_Objects_ALife.h"
 #include "script_engine.h"
-#include "ui\uixmlinit.h"
+#include "ui/uixmlinit.h"
 
 void INFO_DATA::load (IReader& stream) 
 {

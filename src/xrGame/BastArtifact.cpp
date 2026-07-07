@@ -5,8 +5,8 @@
 
 #include "stdafx.h"
 #include "BastArtifact.h"
-#include "../xrphysics/PhysicsShell.h"
-#include "../xrphysics/extendedgeom.h"
+#include "../xrPhysics/PhysicsShell.h"
+#include "../xrPhysics/ExtendedGeom.h"
 
 CBastArtefact::CBastArtefact(void)
 {

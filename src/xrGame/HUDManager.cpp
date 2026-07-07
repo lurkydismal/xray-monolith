@@ -482,7 +482,7 @@ void CHUDManager::SetGrenadeMarkType(LPCSTR tex_name)
 
 // ------------------------------------------------------------------------------------
 
-#include "ui\UIMainInGameWnd.h"
+#include "ui/UIMainIngameWnd.h"
 extern CUIXml* pWpnScopeXml;
 extern CUIXml* g_uiSpotXml;
 

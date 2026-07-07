@@ -5,8 +5,8 @@
 
 #include "stdafx.h"
 
-#include "customoutfit.h"
-#include "../xrphysics/PhysicsShell.h"
+#include "CustomOutfit.h"
+#include "../xrPhysics/PhysicsShell.h"
 #include "inventory_space.h"
 #include "Inventory.h"
 #include "Actor.h"

@@ -5,10 +5,10 @@
 #include "../Include/xrRender/Kinematics.h"
 #include "../xrEngine/bone.h"
 
-#include "gameobject.h"
-#include "../xrphysics/matrix_utils.h"
+#include "GameObject.h"
+#include "../xrPhysics/matrix_utils.h"
 #ifdef DEBUG
-#include "phdebug.h"
+#include "PHDebug.h"
 #endif
 moving_bones_snd_player::moving_bones_snd_player(IKinematics* K, CInifile* ini, LPCSTR section, const Fmatrix& object):
 	bone_id(BI_NONE),

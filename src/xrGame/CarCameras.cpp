@@ -3,17 +3,17 @@
 #ifdef DEBUG
 
 #include "PHDebug.h"
-#include "../xrphysics/iphworld.h"
+#include "../xrPhysics/IPHWorld.h"
 #endif
 #include "alife_space.h"
-#include "hit.h"
+#include "Hit.h"
 #include "PHDestroyable.h"
-#include "car.h"
-#include "actor.h"
+#include "Car.h"
+#include "Actor.h"
 #include "cameralook.h"
-#include "camerafirsteye.h"
-#include "level.h"
-#include "../xrEngine/cameramanager.h"
+#include "CameraFirstEye.h"
+#include "Level.h"
+#include "../xrEngine/CameraManager.h"
 
 #ifdef CAR_NEW
 #include "../Include/xrRender/Kinematics.h"
