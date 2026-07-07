@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "../xrRender/du_cone.h"
-#include "..\xrRender\CHudInitializer.h"
+#include "../xrRender/CHudInitializer.h"
 
 //extern Fvector du_cone_vertices[DU_CONE_NUMVERTEX];
 

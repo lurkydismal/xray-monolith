@@ -2,7 +2,7 @@
 #define	dxUIShader_included
 #pragma once
 
-#include "..\..\Include\xrRender\UIShader.h"
+#include "../../Include/xrRender/UIShader.h"
 
 extern xr_unordered_flat_map<xr_string, ref_shader> g_UIShadersCache;
 

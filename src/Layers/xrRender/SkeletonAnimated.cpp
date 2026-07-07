@@ -8,7 +8,7 @@
 #include	"SkeletonX.h"
 #include	"../../xrEngine/fmesh.h"
 #ifdef DEBUG
-#include	"../../xrcore/dump_string.h"
+#include	"../../xrCore/dump_string.h"
 #endif
 extern int psSkeletonUpdate;
 extern shared_str current_player_hud_sect;

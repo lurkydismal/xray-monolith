@@ -11,8 +11,8 @@
 
 #include "ResourceManager.h"
 #include "tss.h"
-#include "blenders\blender.h"
-#include "blenders\blender_recorder.h"
+#include "blenders/Blender.h"
+#include "blenders/Blender_Recorder.h"
 #include "../../xrCore/_thread_types.h"
 
 //	Already defined in Texture.cpp
