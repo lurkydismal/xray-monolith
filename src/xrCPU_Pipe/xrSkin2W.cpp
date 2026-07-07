@@ -2,8 +2,8 @@
 #pragma hdrstop
 
 #ifdef _EDITOR
-#	include "skeletonX.h"
-#	include "skeletoncustom.h"
+#	include "SkeletonX.h"
+#	include "SkeletonCustom.h"
 #endif // _EDITOR
 
 void __stdcall xrSkin1W_x86(vertRender* D,

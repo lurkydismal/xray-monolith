@@ -17,8 +17,8 @@
 #define ECORE_API
 
 #ifdef _EDITOR
-#	include "skeletonX.h"
-#	include "skeletoncustom.h"
+#	include "SkeletonX.h"
+#	include "SkeletonCustom.h"
 #else // _EDITOR
 #include "../xrCore/xrCore.h"
 #include "../Layers/xrRender/SkeletonXVertRender.h"
