@@ -7,7 +7,7 @@
 #include "../../xrCDB/ISpatial.h"
 #include "../../xrCDB/Frustum.h"
 #include "Render.h"
-#include "Irenderable.h"
+#include "IRenderable.h"
 #include "../../Include/xrRender/Kinematics.h"
 
 BOOL mt_Scheduler = TRUE;
