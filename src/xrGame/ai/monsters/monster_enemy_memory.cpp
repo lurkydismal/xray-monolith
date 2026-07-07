@@ -6,7 +6,7 @@
 #include "../../enemy_manager.h"
 #include "../../ai_object_location.h"
 #include "monster_home.h"
-#include "Dog/dog.h"
+#include "dog/dog.h"
 #include "ai_monster_squad.h"
 #include "ai_monster_squad_manager.h"
 #include "../../Actor.h"
