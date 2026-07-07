@@ -13,7 +13,7 @@
 #include "ActorCondition.h"
 #include "Grenade.h"
 
-#include "CameraLook.h"
+#include "cameralook.h"
 #include "CameraFirstEye.h"
 #include "holder_custom.h"
 //.#include "ui/uiinventoryWnd.h"

@@ -7,7 +7,7 @@
 #include "../state_defs.h"
 #include "../state_manager.h"
 #include "../../../PHMovementControl.h"
-#include "../../../characterphysicssupport.h"
+#include "../../../CharacterPhysicsSupport.h"
 #include "../../../Actor.h"
 
 // Lain: added

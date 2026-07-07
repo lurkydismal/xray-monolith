@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "weaponmagazinedwgrenade.h"
+#include "WeaponMagazinedWGrenade.h"
 #include "Entity.h"
 #include "GrenadeLauncher.h"
 #include "xrServer_Objects_ALife_Items.h"

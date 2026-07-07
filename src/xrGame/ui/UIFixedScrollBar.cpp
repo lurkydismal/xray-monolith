@@ -140,7 +140,7 @@ void CUIFixedScrollBar::ClampByViewRect()
 	}
 }
 
-#include "../uicursor.h"
+#include "../UICursor.h"
 u32 last_hold_tm = 0;
 
 bool CUIFixedScrollBar::OnKeyboardHold(int dik)

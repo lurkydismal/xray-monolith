@@ -13,7 +13,7 @@
 #include "game_cl_base.h"
 #include "WeaponMagazined.h"
 #include "CharacterPhysicsSupport.h"
-#include "actoreffector.h"
+#include "ActorEffector.h"
 #include "static_cast_checked.hpp"
 #include "player_hud.h"
 

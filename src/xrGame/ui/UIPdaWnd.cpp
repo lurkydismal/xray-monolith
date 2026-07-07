@@ -32,7 +32,7 @@
 #include "Actor.h"
 #include "Inventory.h"
 #include "../xrEngine/XR_IOConsole.h"
-#include "ui/UIProgressBar.h"
+#include "UIProgressBar.h"
 #include "player_hud.h"
 
 u32 g_pda_info_state = 0;

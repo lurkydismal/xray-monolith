@@ -3,7 +3,7 @@
 #include "Level.h"
 #include "debug_renderer.h"
 #include "../xrEngine/xr_input.h"
-#include "HudManager.h"
+#include "HUDManager.h"
 #include "HudItem.h"
 #include "../xrEngine/Effector.h"
 #include "../xrEngine/CameraManager.h"

@@ -12,7 +12,7 @@
 #include "../../../CharacterPhysicsSupport.h"
 #include "../../../level_debug.h"
 #include "../../../ActorCondition.h"
-#include "../../../HudManager.h"
+#include "../../../HUDManager.h"
 
 void CControllerPsyHit::load(LPCSTR section)
 {

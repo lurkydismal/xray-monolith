@@ -437,7 +437,7 @@ void CActorCondition::AffectDamage_InjuriousMaterialAndMonstersInfluence()
 	} //while
 }
 
-#include "characterphysicssupport.h"
+#include "CharacterPhysicsSupport.h"
 
 float CActorCondition::GetInjuriousMaterialDamage()
 {

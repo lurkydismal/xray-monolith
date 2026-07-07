@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "weaponrevolver.h"
+#include "WeaponRevolver.h"
 #include "ParticlesObject.h"
 #include "Actor.h"
 

@@ -7,7 +7,7 @@
 #include "entity_alive.h"
 #include "ui/UIInventoryUtilities.h"
 #include "ui/UIXmlInit.h"
-#include "ui/UItextureMaster.h"
+#include "ui/UITextureMaster.h"
 
 #include "InfoPortion.h"
 #include "PhraseDialog.h"

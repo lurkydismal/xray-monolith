@@ -5,7 +5,7 @@
 
 #include "stdafx.h"
 #include "UICellItem.h"
-#include "uicursor.h"
+#include "UICursor.h"
 #include "../inventory_item.h"
 #include "../eatable_item.h"
 #include "UIDragDropListEx.h"

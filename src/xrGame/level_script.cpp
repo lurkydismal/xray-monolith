@@ -766,7 +766,7 @@ void iterate_sounds2(LPCSTR prefix, u32 max_count, ::luabind::object object, ::l
 	iterate_sounds(prefix, max_count, temp);
 }
 
-#include "actoreffector.h"
+#include "ActorEffector.h"
 
 float add_cam_effector(LPCSTR fn, int id, bool cyclic, LPCSTR cb_func)
 {

@@ -7,7 +7,7 @@
 #include "Entity.h"
 #include "Actor.h"
 
-#include "actoreffector.h"
+#include "ActorEffector.h"
 #include "EffectorShot.h"
 
 #include "Level_Bullet_Manager.h"

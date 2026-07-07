@@ -18,7 +18,7 @@
 #include "Weapon.h"
 #include "xr_level_controller.h"
 #include "clsid_game.h"
-#include "characterphysicssupport.h"
+#include "CharacterPhysicsSupport.h"
 #include "WeaponMagazined.h"
 
 using namespace StalkerDecisionSpace;

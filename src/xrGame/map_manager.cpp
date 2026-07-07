@@ -7,7 +7,7 @@
 #include "relation_registry.h"
 #include "GameObject.h"
 #include "map_location.h"
-#include "GameTaskManager.h"
+#include "GametaskManager.h"
 #include "xrServer.h"
 #include "game_object_space.h"
 #include "script_callback_ex.h"

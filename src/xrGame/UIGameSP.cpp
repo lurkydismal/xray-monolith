@@ -8,12 +8,12 @@
 #include "attachable_item.h"
 #endif
 
-#include "game_cl_Single.h"
+#include "game_cl_single.h"
 #include "xr_level_controller.h"
 #include "ActorCondition.h"
 #include "../xrEngine/XR_IOConsole.h"
 #include "object_broker.h"
-#include "GameTaskManager.h"
+#include "GametaskManager.h"
 #include "GameTask.h"
 
 #include "ui/UIActorMenu.h"

@@ -510,7 +510,7 @@ void CUIActorMenu::InitInventoryContents(CUIDragDropListEx* pBagList)
 	m_pQuickSlot->ReloadReferences(m_pActorInvOwner);
 }
 
-#include "ui/UI3tButton.h"
+#include "UI3tButton.h"
 
 void CUIActorMenu::FilterActorBagList(int mode)
 {

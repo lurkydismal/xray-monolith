@@ -14,7 +14,7 @@
 #include "../../ShootingObject.h"
 #include "../../Level.h"
 #include "../../ai_monster_space.h"
-#include "../../characterphysicssupport.h"
+#include "../../CharacterPhysicsSupport.h"
 #include "CustomZone.h"
 #include "script_game_object.h"
 

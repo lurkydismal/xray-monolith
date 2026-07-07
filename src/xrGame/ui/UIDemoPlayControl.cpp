@@ -12,7 +12,7 @@
 #include "string_table.h"
 #include "Level.h"
 #include "DemoInfo.h"
-#include "demoplay_control.h"
+#include "DemoPlay_Control.h"
 
 CUIDemoPlayControl::CUIDemoPlayControl()
 {

@@ -1,7 +1,7 @@
 #include "pch_script.h"
 
-#include "uiiteminfo.h"
-#include "uistatic.h"
+#include "UIItemInfo.h"
+#include "UIStatic.h"
 #include "UIXmlInit.h"
 
 #include "UIProgressBar.h"

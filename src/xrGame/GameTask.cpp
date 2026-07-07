@@ -17,7 +17,7 @@
 #include "alife_story_registry.h"
 #include "game_object_space.h"
 #include "object_broker.h"
-#include "ui/uitexturemaster.h"
+#include "ui/UITextureMaster.h"
 
 
 CGameTask::CGameTask() :

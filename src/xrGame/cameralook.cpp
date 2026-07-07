@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #pragma hdrstop
 
-#include "CameraLook.h"
+#include "cameralook.h"
 #include "../xrEngine/Cameramanager.h"
 #include "xr_level_controller.h"
 #include "Actor.h"

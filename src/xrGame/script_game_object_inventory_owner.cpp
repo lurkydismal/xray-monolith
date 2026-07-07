@@ -6,7 +6,7 @@
 #include "script_game_object.h"
 #include "script_game_object_impl.h"
 #include "InventoryOwner.h"
-#include "Pda.h"
+#include "PDA.h"
 #include "xrMessages.h"
 #include "character_info.h"
 #include "GameTask.h"
@@ -25,11 +25,11 @@
 #include "EntityCondition.h"
 #include "ActorCondition.h"
 #include "level_graph.h"
-#include "huditem.h"
+#include "HudItem.h"
 #include "ui/UITalkWnd.h"
 #include "Inventory.h"
 #include "InfoPortion.h"
-#include "AI/Monsters/BaseMonster/base_monster.h"
+#include "ai/monsters/basemonster/base_monster.h"
 #include "WeaponMagazined.h"
 #include "ai/stalker/ai_stalker.h"
 #include "agent_manager.h"
@@ -1085,7 +1085,7 @@ LPCSTR CScriptGameObject::sound_voice_prefix() const
 	return pInventoryOwner->SpecificCharacter().sound_voice_prefix();
 }
 
-#include "GameTaskManager.h"
+#include "GametaskManager.h"
 
 ETaskState CScriptGameObject::GetGameTaskState(LPCSTR task_id)
 {

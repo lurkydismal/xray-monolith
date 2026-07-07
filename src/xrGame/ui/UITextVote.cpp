@@ -4,7 +4,7 @@
 #include "UIVotingCategory.h"
 #include "UIXmlInit.h"
 #include "UI3tButton.h"
-#include "UIEditboxEx.h"
+#include "UIEditBoxEx.h"
 
 //#include "UIMapList.h"
 #include "../Level.h"

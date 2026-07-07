@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "monster_enemy_manager.h"
-#include "BaseMonster/base_monster.h"
+#include "basemonster/base_monster.h"
 #include "../ai_monsters_misc.h"
 #include "../../ai_object_location.h"
 #include "../../memory_manager.h"

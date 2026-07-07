@@ -4,7 +4,7 @@
 #include "../xrEngine/xr_object.h"
 #include "../xrEngine/cameramanager.h"
 #include "Actor.h"
-#include "actoreffector.h"
+#include "ActorEffector.h"
 #include "PostprocessAnimator.h"
 #include "CustomOutfit.h"
 

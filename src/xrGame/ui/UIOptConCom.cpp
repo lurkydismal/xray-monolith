@@ -7,7 +7,7 @@
 #include "gametype_chooser.h"
 #include "../RegistryFuncs.h"
 
-#include "ui/UICDkey.h"
+#include "UICDkey.h"
 
 xr_token g_GameModes [] = {
 	{"st_deathmatch", eGameIDDeathmatch},

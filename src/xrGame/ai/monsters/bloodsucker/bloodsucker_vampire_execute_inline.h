@@ -6,7 +6,7 @@
 
 // #include "../../../../xrEngine/CameraBase.h"
 //#include "../../../ActorCondition.h"
-#include "../../../HudManager.h"
+#include "../../../HUDManager.h"
 
 #define TEMPLATE_SPECIALIZATION template <\
 	typename _Object\

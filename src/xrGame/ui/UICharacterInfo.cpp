@@ -12,7 +12,7 @@
 #include "xrUIXmlParser.h"
 #include "UIXmlInit.h"
 
-#include "uistatic.h"
+#include "UIStatic.h"
 #include "UIScrollView.h"
 
 

@@ -8,7 +8,7 @@
 
 #include "stdafx.h"
 #include "script_particles.h"
-#include "../xrEngine/objectanimator.h"
+#include "../xrEngine/ObjectAnimator.h"
 #include "../xrEngine/IGame_Persistent.h"
 
 CScriptParticlesCustom::CScriptParticlesCustom(CScriptParticles* owner, LPCSTR caParticlesName): CParticlesObject(

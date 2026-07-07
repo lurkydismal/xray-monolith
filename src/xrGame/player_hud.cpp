@@ -5,7 +5,7 @@
 #include "Actor.h"
 #include "physic_item.h"
 #include "static_cast_checked.hpp"
-#include "actoreffector.h"
+#include "ActorEffector.h"
 #include "../xrEngine/IGame_Persistent.h"
 #include "inventory_item.h"
 #include "Weapon.h"

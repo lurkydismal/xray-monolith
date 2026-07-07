@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "phrase.h"
+#include "Phrase.h"
 
 #include "ai_space.h"
 #include "GameObject.h"

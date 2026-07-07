@@ -15,7 +15,7 @@
 #include "object_broker.h"
 #include "game_base.h"
 
-#include "ui/UICDkey.h"
+#include "UICDkey.h"
 
 extern ENGINE_API string512 g_sLaunchOnExit_app;
 extern ENGINE_API string512 g_sLaunchOnExit_params;

@@ -13,7 +13,7 @@
 #include "sound_player.h"
 #include "stalker_animation_data.h"
 #include "UIGameSP.h"
-#include "ui/uitalkwnd.h"
+#include "ui/UITalkWnd.h"
 
 void CStalkerAnimationManager::head_play_callback(CBlend* blend)
 {

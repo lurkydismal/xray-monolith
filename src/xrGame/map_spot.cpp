@@ -3,7 +3,7 @@
 #include "map_location.h"
 
 #include "ui/UIXmlInit.h"
-#include "ui/UIMApWnd.h"
+#include "ui/UIMapWnd.h"
 #include "Level.h"
 #include "ui/UIInventoryUtilities.h"
 #include "../xrEngine/xr_object.h"

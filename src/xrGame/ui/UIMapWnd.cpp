@@ -18,7 +18,7 @@
 #include "UIMapWndActionsSpace.h"
 #include "UIHint.h"
 #include "map_hint.h"
-#include "uicursor.h"
+#include "UICursor.h"
 
 #include "UIPropertiesBox.h"
 #include "UIListBoxItem.h"
