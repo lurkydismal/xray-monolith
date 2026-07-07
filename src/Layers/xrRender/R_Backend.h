@@ -17,10 +17,10 @@
 #include "R_Backend_tree.h"
 
 #ifdef USE_DX11
-#	include "..\xrRenderPC_R4\R_Backend_LOD.h"
+#	include "../xrRenderPC_R4/R_Backend_LOD.h"
 #endif
 
-#include "fvf.h"
+#include "FVF.h"
 
 const u32 CULL_CCW = D3DCULL_CCW;
 const u32 CULL_CW = D3DCULL_CW;

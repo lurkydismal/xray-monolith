@@ -9,7 +9,7 @@
 #include "FBasicVisual.h"
 #include "CHudInitializer.h"
 
-#include "fhierrarhyvisual.h"
+#include "FHierrarhyVisual.h"
 #include "SkeletonCustom.h"
 #include "../../xrEngine/Fmesh.h"
 #include "FLOD.h"

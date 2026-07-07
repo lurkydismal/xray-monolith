@@ -6,7 +6,7 @@
 
 #include	"AnimationKeyCalculate.h"
 #include	"SkeletonX.h"
-#include	"../../xrEngine/fmesh.h"
+#include	"../../xrEngine/Fmesh.h"
 #ifdef DEBUG
 #include	"../../xrCore/dump_string.h"
 #endif
