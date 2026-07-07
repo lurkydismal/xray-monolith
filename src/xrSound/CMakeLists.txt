@@ -224,7 +224,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include/libvorbis-1.2.3/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include/libogg-1.1.4/include;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd party/OpenAL-new/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/OpenAL-new/include"
 )
 
 ################################################################################

@@ -3182,7 +3182,7 @@ set(AI__ASpace
 source_group("AI\\ASpace" FILES ${AI__ASpace})
 
 set(Core
-    "../3rd party/fastdelegate/fastdelegate.h"
+    "../3rd_party/fastdelegate/fastdelegate.h"
     "../xrServerEntities/pch_script.cpp"
     "../xrServerEntities/pch_script.h"
     "StdAfx.cpp"
@@ -4614,7 +4614,7 @@ set(Core__Common__Shared
 source_group("Core\\Common\\Shared" FILES ${Core__Common__Shared})
 
 set(Core__Common__SmartCast
-    "../3rd party/fast_dynamic_cast/fast_dynamic_cast.hpp"
+    "../3rd_party/fast_dynamic_cast/fast_dynamic_cast.hpp"
     "../xrServerEntities/smart_cast.h"
 )
 source_group("Core\\Common\\SmartCast" FILES ${Core__Common__SmartCast})
@@ -6843,11 +6843,11 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/..;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../xrCore;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../xrServerEntities;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd party/luajit-2/src;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd party/luabind;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/luajit-2/src;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/luabind;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include/OpenAutomate/inc;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd party/cximage"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/cximage"
 )
 
 ################################################################################
@@ -7116,7 +7116,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd party/luajit-2/src/;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/luajit-2/src/;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/libraries;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my/;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include/OpenAutomate/libraries;"

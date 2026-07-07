@@ -833,9 +833,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUN
 ################################################################################
 target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/.;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../../3rd party/imgui;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../../3rd party/luajit-2/src;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../../3rd party/luabind;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../3rd_party/imgui;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../3rd_party/luajit-2/src;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../3rd_party/luabind;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../xrCore;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../sdk/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../sdk/include/OpenAutomate/inc;"
@@ -1105,7 +1105,7 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
 target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 
 target_link_directories(${PROJECT_NAME} PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/../../3rd party/luajit-2/src/;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../3rd_party/luajit-2/src/;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../sdk/libraries/x64;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../_build/lib/my/;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../../sdk/include/OpenAutomate/libraries;"

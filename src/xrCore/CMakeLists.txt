@@ -4,8 +4,8 @@ set(PROJECT_NAME xrCore)
 # Source groups
 ################################################################################
 set(no_group_source_files
-    "../3rd party/fastdelegate/fastdelegate.h"
-    "../3rd party/robin_hood/robin_hood.h"
+    "../3rd_party/fastdelegate/fastdelegate.h"
+    "../3rd_party/robin_hood/robin_hood.h"
     "../build_config_defines.h"
     "ChooseTypes.H"
     "client_id.h"
@@ -79,7 +79,7 @@ set(Compression__rt
 source_group("Compression\\rt" FILES ${Compression__rt})
 
 set(Debug_core
-    "../3rd party/stackwalker/include/StackWalker.h"
+    "../3rd_party/stackwalker/include/StackWalker.h"
 #    "xrDebug.cpp"
     "xrDebug.h"
     "xrDebug_macros.h"
@@ -470,7 +470,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUN
 ################################################################################
 target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/.;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd party/optick-git/src;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/optick-git/src;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include"
 )
 

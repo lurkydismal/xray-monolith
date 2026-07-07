@@ -24,7 +24,7 @@ set(xrIntDir          "${CMAKE_SOURCE_DIR}/../_build/intermediate/${PROPS_CONFIG
 set(xrSdkDir          "${CMAKE_SOURCE_DIR}/../sdk")
 set(xrGameDir         "${CMAKE_SOURCE_DIR}/../_build/_game")
 set(xrGameBinDir      "${CMAKE_SOURCE_DIR}/../_build/_game/bin")
-set(xr3rdPartyDir     "${CMAKE_SOURCE_DIR}/3rd party")
+set(xr3rdPartyDir     "${CMAKE_SOURCE_DIR}/3rd_party")
 set(dxSdkDir          "${CMAKE_SOURCE_DIR}/../sdk/include/dxsdk")
 
 # ------------------------------------------------------------------------------
@@ -33,8 +33,8 @@ set(dxSdkDir          "${CMAKE_SOURCE_DIR}/../sdk/include/dxsdk")
 
 target_include_directories(${PROPS_TARGET}
     PRIVATE
-        "${CMAKE_SOURCE_DIR}/../src/3rd party"
-        "${CMAKE_SOURCE_DIR}/3rd party/icu/include"
+        "${CMAKE_SOURCE_DIR}/../src/3rd_party"
+        "${CMAKE_SOURCE_DIR}/3rd_party/icu/include"
         "${CMAKE_SOURCE_DIR}/../sdk/include"
         "${CMAKE_SOURCE_DIR}/../sdk/include/OpenAutomate"
         "${CMAKE_SOURCE_DIR}/../sdk/include/nvapi"

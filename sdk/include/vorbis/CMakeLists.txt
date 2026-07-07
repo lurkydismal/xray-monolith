@@ -84,7 +84,7 @@ set(ALL_FILES
 # Target
 ################################################################################
 add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
-set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "3rd party")
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "3rd_party")
 
 use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 ################################################################################
@@ -450,7 +450,7 @@ set(ALL_FILES
 # Target
 ################################################################################
 add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
-set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "3rd party")
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "3rd_party")
 
 use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 ################################################################################

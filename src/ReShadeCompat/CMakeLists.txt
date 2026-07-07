@@ -18,7 +18,7 @@ set(ALL_FILES
 # Target
 ################################################################################
 add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
-set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "3rd party")
+set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "3rd_party")
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h>"
