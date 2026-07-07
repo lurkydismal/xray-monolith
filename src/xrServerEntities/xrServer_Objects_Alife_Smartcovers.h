@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: xrServer_Objects_ALife_Smartcovers.h
+//	Module 		: xrServer_Objects_Alife_Smartcovers.h
 //	Created 	: 17.12.2008
 //  Modified 	: 
 //	Author		: Alexander Plichko
