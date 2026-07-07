@@ -4,8 +4,6 @@ set(CMAKE_SYSTEM_VERSION 10.0 CACHE STRING "" FORCE)
 
 project(engine-vs2022 C CXX)
 
-set(CMAKE_NINJA_FORCE_RESPONSE_FILE ON)
-
 ################################################################################
 # Set target arch type if empty. Visual studio solution generator provides it.
 ################################################################################
