@@ -905,7 +905,7 @@ if(MSVC)
         >
         $<$<CONFIG:DX11>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:STATUS;
             /OPT:ICF;
             /INCREMENTAL:NO
         >
@@ -1021,26 +1021,30 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     xrCDB
     xrCore
     xrCPU_Pipe
-    xrGame
+    #xrGame
     xrParticles
     xrPhysics
     xrXMLParser
     OpenAL32
     optick
-    xrRender_R4
-    xrRender_R4
-    xrRender_R2
-    xrRender_R4
-    xrRender_R4
-    xrRender_R4
-    xrRender_R3
-    xrRender_R3
-    xrRender_R2
-    xrRender_R2
-    xrRender_R1
-    xrRender_R1
-    xrRender_R1
 )
+
+if(CMAKE_BUILD_TYPE MATCHES "^(DX8|DX8AVX|VerifiedDX8)$")
+    target_include_directories(${PROJECT_NAME} PRIVATE xrRenderPC_R1)
+endif()
+
+if(CMAKE_BUILD_TYPE MATCHES "^(DX9|DX9AVX|VerifiedDX9)$")
+    target_include_directories(${PROJECT_NAME} PRIVATE xrRenderPC_R2)
+endif()
+
+if(CMAKE_BUILD_TYPE MATCHES "^(DX10|DX10AVX|VerifiedDX10)$")
+    target_include_directories(${PROJECT_NAME} PRIVATE xrRenderPC_R3)
+endif()
+
+if(CMAKE_BUILD_TYPE MATCHES "^(DX11|DX11AVX|VerifiedDX11)$")
+    target_include_directories(${PROJECT_NAME} PRIVATE xrRenderPC_R4)
+endif()
+
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "vfw32;"
