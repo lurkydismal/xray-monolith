@@ -14,7 +14,7 @@
 #include "../../Inventory.h"
 #include "../../../xrServerEntities/xrserver_objects_alife_monsters.h"
 #include "../../Artefact.h"
-#include "../../xrserver.h"
+#include "../../xrServer.h"
 #include "../../relation_registry.h"
 #include "../../../xrServerEntities/object_broker.h"
 #include "../../sound_player.h"

@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "weaponshotgun.h"
-#include "entity.h"
+#include "WeaponShotgun.h"
+#include "Entity.h"
 #include "xr_level_controller.h"
 #include "Inventory.h"
 #include "Level.h"

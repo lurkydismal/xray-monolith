@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "Weapon.h"
 #include "entity_alive.h"
-#include "inventoryowner.h"
+#include "InventoryOwner.h"
 #include "alife_simulator.h"
 #include "ef_storage.h"
 #include "ai_space.h"

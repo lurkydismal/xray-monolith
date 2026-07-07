@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Level.h"
 #include "Level_Bullet_Manager.h"
-#include "xrserver.h"
+#include "xrServer.h"
 #include "game_cl_base.h"
 #include "xrmessages.h"
 #include "xrGameSpyServer.h"

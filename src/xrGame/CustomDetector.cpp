@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "CustomDetector.h"
 #include "ui/ArtefactDetectorUI.h"
-#include "hudmanager.h"
+#include "HUDManager.h"
 #include "Inventory.h"
 #include "Level.h"
 #include "map_manager.h"

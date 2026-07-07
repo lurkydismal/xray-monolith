@@ -7,7 +7,7 @@
 #include "script_callback_ex.h"
 #include "script_game_object.h"
 #include "ui/UIActorMenu.h"
-#include "uigamecustom.h"
+#include "UIGameCustom.h"
 #include "inventory_item.h"
 
 CInventoryBox::CInventoryBox()

@@ -10,7 +10,7 @@
 #include "../../../detail_path_manager.h"
 #include "../../../level_debug.h"
 #include "../monster_velocity_space.h"
-#include "../../../gamepersistent.h"
+#include "../../../GamePersistent.h"
 #include "../../../game_object_space.h"
 
 #include "../control_animation_base.h"

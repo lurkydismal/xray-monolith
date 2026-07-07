@@ -34,7 +34,7 @@
 #include "map_manager.h"
 #include "xrEngine/CameraManager.h"
 #include "level_sounds.h"
-#include "car.h"
+#include "Car.h"
 #include "trade_parameters.h"
 #include "game_cl_base_weapon_usage_statistic.h"
 #include "MainMenu.h"

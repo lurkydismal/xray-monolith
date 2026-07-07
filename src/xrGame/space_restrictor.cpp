@@ -234,7 +234,7 @@ bool CSpaceRestrictor::prepared_inside(const Fsphere& sphere) const
 
 #ifdef DEBUG
 
-#include "customzone.h"
+#include "CustomZone.h"
 #include "ui_base.h"
 
 extern	Flags32	dbg_net_Draw_Flags;

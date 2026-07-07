@@ -2,7 +2,7 @@
 #include "anomaly_detector.h"
 #include "BaseMonster/base_monster.h"
 #include "../../restricted_object.h"
-#include "../../customzone.h"
+#include "../../CustomZone.h"
 #include "../../Level.h"
 #include "../../space_restriction_manager.h"
 

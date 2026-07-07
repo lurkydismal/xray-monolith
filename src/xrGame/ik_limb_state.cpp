@@ -2,7 +2,7 @@
 
 #include	"ik_limb_state.h"
 
-#include	"ik/iklimb.h"
+#include	"ik/IKLimb.h"
 
 void ik_limb_state::set_limb(CIKLimb* l)
 {

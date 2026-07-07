@@ -19,7 +19,7 @@
 #include "stalker_planner.h"
 #include "Weapon.h"
 #include "Inventory.h"
-#include "customzone.h"
+#include "CustomZone.h"
 #include "patrol_path_manager.h"
 #include "object_handler_planner.h"
 #include "object_handler_space.h"
@@ -49,7 +49,7 @@
 #include "player_hud.h"
 #include "eatable_item.h"
 #include "script_callback_ex.h"
-#include "../xrEngine/feel_touch.h"
+#include "../xrEngine/Feel_Touch.h"
 #include "weaponammo.h"
 #include "WeaponMagazinedWGrenade.h"
 #endif

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "weaponmagazinedwgrenade.h"
-#include "entity.h"
+#include "Entity.h"
 #include "GrenadeLauncher.h"
 #include "xrserver_objects_alife_items.h"
 #include "ExplosiveRocket.h"

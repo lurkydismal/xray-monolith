@@ -9,7 +9,7 @@
 #include "Level.h"
 #include "UIGameCustom.h"
 #include "string_table.h"
-#include "actorcondition.h"
+#include "ActorCondition.h"
 #include "game_cl_base.h"
 #include "WeaponMagazined.h"
 #include "CharacterPhysicsSupport.h"

@@ -19,7 +19,7 @@
 #include "xr_level_controller.h"
 #include "clsid_game.h"
 #include "characterphysicssupport.h"
-#include "weaponmagazined.h"
+#include "WeaponMagazined.h"
 
 using namespace StalkerDecisionSpace;
 

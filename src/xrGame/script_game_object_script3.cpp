@@ -28,7 +28,7 @@
 #include "script_zone.h"
 #include "relation_registry.h"
 #include "GameTask.h"
-#include "car.h"
+#include "Car.h"
 #include "ZoneCampfire.h"
 #include "physicobject.h"
 #include "Artefact.h"

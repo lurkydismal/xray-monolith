@@ -5,7 +5,7 @@
 #include	"../xrPhysics/PhysicsShell.h"
 #include	"../xrPhysics/ExtendedGeom.h"
 #include	"../xrPhysics/MathUtils.h"
-//#include	"phobject.h"
+//#include	"PHObject.h"
 
 #include	"../Include/xrRender/KinematicsAnimated.h"
 

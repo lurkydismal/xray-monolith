@@ -9,7 +9,7 @@
 #	include "PHDebug.h"
 #endif
 
-#include "hit.h"
+#include "Hit.h"
 #include "PHDestroyable.h"
 #include "UIGameSP.h"
 #include "Inventory.h"
@@ -17,7 +17,7 @@
 #include "game_cl_base.h"
 #include "xr_level_controller.h"
 #include "UsableScriptObject.h"
-#include "actorcondition.h"
+#include "ActorCondition.h"
 #include "actor_input_handler.h"
 #include "string_table.h"
 #include "UI/UIStatic.h"
@@ -30,7 +30,7 @@
 #include "flare.h"
 #include "CustomDetector.h"
 #include "clsid_game.h"
-#include "hudmanager.h"
+#include "HUDManager.h"
 #include "Weapon.h"
 #include "Flashlight.h"
 #include "../xrPhysics/IElevatorState.h"

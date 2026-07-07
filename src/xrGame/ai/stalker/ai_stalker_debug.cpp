@@ -43,7 +43,7 @@
 #include "../../cover_point.h"
 #include "../../../xrEngine/camerabase.h"
 #include "../../mt_config.h"
-#include "../../weaponmagazined.h"
+#include "../../WeaponMagazined.h"
 #include "../../object_handler_space.h"
 #include "../../debug_renderer.h"
 #include "../../CharacterPhysicsSupport.h"

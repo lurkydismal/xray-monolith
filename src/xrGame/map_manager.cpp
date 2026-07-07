@@ -1,7 +1,7 @@
 #include "pch_script.h"
 #include "map_manager.h"
 #include "alife_registry_wrappers.h"
-#include "inventoryowner.h"
+#include "InventoryOwner.h"
 #include "Level.h"
 #include "Actor.h"
 #include "relation_registry.h"

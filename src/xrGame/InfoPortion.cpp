@@ -4,7 +4,7 @@
 
 /*
 #include "InfoPortion.h"
-#include "gameobject.h"
+#include "GameObject.h"
 #include "encyclopedia_article.h"
 #include "gametask.h"
 #include "ai_space.h"

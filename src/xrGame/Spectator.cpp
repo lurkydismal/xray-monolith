@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "spectator.h"
+#include "Spectator.h"
 #include "effectorfall.h"
 #include "CameraLook.h"
 #include "spectator_camera_first_eye.h"

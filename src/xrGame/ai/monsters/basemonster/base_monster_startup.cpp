@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "base_monster.h"
 #include "../../../ai_space.h"
-#include "../../../hit.h"
+#include "../../../Hit.h"
 #include "../../../PHDestroyable.h"
 #include "../../../CharacterPhysicsSupport.h"
 #include "../../../phmovementcontrol.h"

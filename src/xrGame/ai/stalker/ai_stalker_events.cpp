@@ -8,7 +8,7 @@
 
 #include "stdafx.h"
 #include "ai_stalker.h"
-#include "../../pda.h"
+#include "../../PDA.h"
 #include "../../Inventory.h"
 #include "../../../xrServerEntities/xrmessages.h"
 #include "../../shootingobject.h"

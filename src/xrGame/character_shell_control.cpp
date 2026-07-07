@@ -8,7 +8,7 @@
 //#include "Physics.h"
 #include "../xrPhysics/ExtendedGeom.h"
 #include "../xrPhysics/PhysicsShell.h"
-//#include "hit.h"
+//#include "Hit.h"
 #include "Level.h"
 #include "CustomZone.h"
 

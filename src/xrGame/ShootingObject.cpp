@@ -10,7 +10,7 @@
 #include "WeaponAmmo.h"
 
 #include "Actor.h"
-#include "spectator.h"
+#include "Spectator.h"
 #include "game_cl_base.h"
 #include "Level.h"
 #include "level_bullet_manager.h"

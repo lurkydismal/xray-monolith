@@ -2,7 +2,7 @@
 
 #include "Actor.h"
 #include "Level.h"
-#include "actorEffector.h"
+#include "ActorEffector.h"
 #include "ai_sounds.h"
 
 #include "ActorNightVision.h"

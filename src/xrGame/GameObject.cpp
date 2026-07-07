@@ -972,7 +972,7 @@ void CGameObject::u_EventSend(NET_Packet& P, u32 dwFlags)
 	Level().Send(P, dwFlags);
 }
 
-#include "bolt.h"
+#include "Bolt.h"
 
 void CGameObject::OnH_B_Chield()
 {

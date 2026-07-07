@@ -912,7 +912,7 @@ void CCustomZone::PlayHitParticles(CGameObject* pObject)
 	}
 }
 
-#include "bolt.h"
+#include "Bolt.h"
 
 void CCustomZone::PlayEntranceParticles(CGameObject* pObject)
 {

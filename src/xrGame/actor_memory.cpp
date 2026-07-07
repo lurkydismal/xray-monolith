@@ -10,7 +10,7 @@
 #include "actor_memory.h"
 #include "Actor.h"
 #include "../xrEngine/camerabase.h"
-#include "gamepersistent.h"
+#include "GamePersistent.h"
 
 CActorMemory::CActorMemory(CActor* actor) :
 	inherited(

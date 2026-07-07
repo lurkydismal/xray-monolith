@@ -5,7 +5,7 @@
 #include "../xrEngine/cameramanager.h"
 #include "Actor.h"
 #include "actoreffector.h"
-#include "postprocessanimator.h"
+#include "PostprocessAnimator.h"
 #include "CustomOutfit.h"
 
 CZoneEffector::CZoneEffector()

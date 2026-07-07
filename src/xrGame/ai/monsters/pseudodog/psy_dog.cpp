@@ -4,7 +4,7 @@
 #include "../../../ai_space.h"
 #include "../../../alife_simulator.h"
 #include "../../../../xrServerEntities/xrServer_Object_Base.h"
-#include "../../../xrserver.h"
+#include "../../../xrServer.h"
 #include "../../../ai_object_location.h"
 #include "../../../Level.h"
 #include "../control_movement_base.h"

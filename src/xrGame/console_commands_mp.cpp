@@ -8,7 +8,7 @@
 #include "Actor.h"
 #include "xrServer_Object_base.h"
 #include "RegistryFuncs.h"
-#include "gamepersistent.h"
+#include "GamePersistent.h"
 #include "MainMenu.h"
 #include "UIGameCustom.h"
 #include "game_sv_deathmatch.h"

@@ -1,5 +1,5 @@
 #pragma once
-#include "weaponmagazined.h"
+#include "WeaponMagazined.h"
 #include "rocketlauncher.h"
 
 

@@ -8,7 +8,7 @@
 
 #include "stdafx.h"
 #include "car_memory.h"
-#include "car.h"
+#include "Car.h"
 
 car_memory::car_memory(CCar* object) :
 	inherited(

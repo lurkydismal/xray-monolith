@@ -3,7 +3,7 @@
 #include "UIGameDM.h"
 #include "xrServer.h"
 #include "game_sv_mp.h"
-#include "spectator.h"
+#include "Spectator.h"
 #include "Actor.h"
 #include "game_cl_base.h"
 #include "game_cl_mp.h"

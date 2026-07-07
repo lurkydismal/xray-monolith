@@ -1025,7 +1025,7 @@ void remove_complex_effector(int id)
 	RemoveEffector(Actor(), id);
 }
 
-#include "postprocessanimator.h"
+#include "PostprocessAnimator.h"
 
 void add_pp_effector(LPCSTR fn, int id, bool cyclic)
 {
