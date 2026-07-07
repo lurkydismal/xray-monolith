@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "eventapi.h"
+#include "EventAPI.h"
 #include "XR_IOConsole.h"
 
 extern void msRead();
