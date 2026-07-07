@@ -4,4 +4,3 @@ xrNetServer
 xrParticles
 xrPhysics
 xrRender_R4
-xrSound
