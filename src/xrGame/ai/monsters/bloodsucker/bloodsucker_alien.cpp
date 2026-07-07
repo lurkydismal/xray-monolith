@@ -4,7 +4,7 @@
 #include "../../../Level.h"
 #include "../../../Actor.h"
 #include "../../../ActorEffector.h"
-#include "../../../inventory.h"
+#include "../../../Inventory.h"
 #include "../../../HudItem.h"
 #include "../../../../xrEngine/CustomHUD.h"
 

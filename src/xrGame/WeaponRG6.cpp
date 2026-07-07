@@ -49,7 +49,7 @@ void CWeaponRG6::Load(LPCSTR section)
 	inheritedSG::Load(section);
 }
 
-#include "inventory.h"
+#include "Inventory.h"
 #include "inventoryOwner.h"
 
 void CWeaponRG6::FireStart()

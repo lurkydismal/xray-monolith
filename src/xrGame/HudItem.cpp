@@ -919,7 +919,7 @@ void CHudItem::PlayAnimIdleMoving()
 	PlayHUDMotion("anm_idle_moving", TRUE, NULL, GetState(), isActorAccelerated(Actor()->MovingState(), false) ? 1.f : .75f);
 }
 
-#include "weapon.h"
+#include "Weapon.h"
 #include "../xrEngine/SkeletonMotions.h"
 
 void CHudItem::PlayAnimIdleSprint()

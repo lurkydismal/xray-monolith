@@ -4,11 +4,11 @@
 ////////////////////////////////////////////////////////////////////////////
 
 #include "pch_script.h"
-#include "inventory.h"
+#include "Inventory.h"
 #include "Actor.h"
 #include "CustomOutfit.h"
 #include "trade.h"
-#include "weapon.h"
+#include "Weapon.h"
 
 #include "ui/UIInventoryUtilities.h"
 #include "ui/UIActorMenu.h"

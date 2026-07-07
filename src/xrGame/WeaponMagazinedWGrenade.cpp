@@ -324,7 +324,7 @@ bool CWeaponMagazinedWGrenade::Action(u16 cmd, u32 flags)
 	return false;
 }
 
-#include "inventory.h"
+#include "Inventory.h"
 #include "inventoryOwner.h"
 
 void CWeaponMagazinedWGrenade::state_Fire(float dt)

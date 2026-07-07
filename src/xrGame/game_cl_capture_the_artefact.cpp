@@ -16,7 +16,7 @@
 #include "game_cl_capture_the_artefact.h"
 #include "clsid_game.h"
 #include "Actor.h"
-#include "weapon.h"
+#include "Weapon.h"
 #include "game_cl_base_weapon_usage_statistic.h"
 
 #include "../xrEngine/IGame_Persistent.h"

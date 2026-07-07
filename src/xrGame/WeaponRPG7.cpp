@@ -99,7 +99,7 @@ void CWeaponRPG7::FireStart()
 	inherited::FireStart();
 }
 
-#include "inventory.h"
+#include "Inventory.h"
 #include "inventoryOwner.h"
 
 void CWeaponRPG7::switch2_Fire()

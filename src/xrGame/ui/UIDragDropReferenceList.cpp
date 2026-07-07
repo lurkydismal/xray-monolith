@@ -3,7 +3,7 @@
 #include "UICellItem.h"
 #include "UICellItemFactory.h"
 #include "UIStatic.h"
-#include "../inventory.h"
+#include "../Inventory.h"
 #include "../inventoryOwner.h"
 #include "../Actor.h"
 #include "../actor_defs.h"

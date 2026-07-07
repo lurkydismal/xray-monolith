@@ -12,7 +12,7 @@
 #include "hit.h"
 #include "PHDestroyable.h"
 #include "UIGameSP.h"
-#include "inventory.h"
+#include "Inventory.h"
 #include "Level.h"
 #include "game_cl_base.h"
 #include "xr_level_controller.h"

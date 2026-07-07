@@ -1,8 +1,8 @@
 #include "StdAfx.h"
 
 #include "Actor.h"
-#include "inventory.h"
-#include "weapon.h"
+#include "Inventory.h"
+#include "Weapon.h"
 #include "../xrEngine/CameraBase.h"
 #include "xrMessages.h"
 

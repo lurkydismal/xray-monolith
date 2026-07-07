@@ -7,8 +7,8 @@
 #include "GameObject.h"
 #include "Level.h"
 #include "actor_mp_client.h"
-#include "inventory.h"
-#include "weapon.h"
+#include "Inventory.h"
+#include "Weapon.h"
 #include "game_cl_mp.h"
 #include "profiler.h"
 

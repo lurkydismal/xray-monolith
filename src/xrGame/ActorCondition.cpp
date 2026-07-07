@@ -2,7 +2,7 @@
 #include "actorcondition.h"
 #include "Actor.h"
 #include "actorEffector.h"
-#include "inventory.h"
+#include "Inventory.h"
 #include "Level.h"
 //#include "sleepeffector.h"
 #include "game_base_space.h"
@@ -14,7 +14,7 @@
 #include "game_object_space.h"
 #include "script_callback_ex.h"
 #include "object_broker.h"
-#include "weapon.h"
+#include "Weapon.h"
 
 #include "PDA.h"
 #include "ai/monsters/basemonster/base_monster.h"

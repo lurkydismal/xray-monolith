@@ -11,7 +11,7 @@
 #include "../../trade.h"
 #include "../../script_entity_action.h"
 #include "../../script_game_object.h"
-#include "../../inventory.h"
+#include "../../Inventory.h"
 #include "../../../xrServerEntities/xrserver_objects_alife_monsters.h"
 #include "../../Artefact.h"
 #include "../../xrserver.h"

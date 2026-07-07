@@ -8,7 +8,7 @@
 #include "actoreffector.h"
 #include "../xrEngine/IGame_Persistent.h"
 #include "inventory_item.h"
-#include "weapon.h"
+#include "Weapon.h"
 #include "script_attachment_manager.h"
 #include "../xrEngine/CameraBase.h"
 

@@ -16,7 +16,7 @@
 
 #include "../Actor.h"
 #include "../../xrServerEntities/script_process.h"
-#include "../inventory.h"
+#include "../Inventory.h"
 
 #include "ai_space.h"
 #include "alife_simulator.h"

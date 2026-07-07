@@ -2,7 +2,7 @@
 #include "weaponshotgun.h"
 #include "entity.h"
 #include "xr_level_controller.h"
-#include "inventory.h"
+#include "Inventory.h"
 #include "Level.h"
 #include "Actor.h"
 #include "script_game_object.h"

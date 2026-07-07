@@ -10,7 +10,7 @@
 #include "UIActorStateInfo.h"
 #include "../Actor.h"
 #include "../uigamesp.h"
-#include "../inventory.h"
+#include "../Inventory.h"
 #include "../inventory_item.h"
 #include "../InventoryBox.h"
 #include "object_broker.h"
