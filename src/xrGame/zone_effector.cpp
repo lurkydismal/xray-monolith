@@ -2,7 +2,7 @@
 #include "zone_effector.h"
 #include "Level.h"
 #include "../xrEngine/xr_object.h"
-#include "../xrEngine/cameramanager.h"
+#include "../xrEngine/CameraManager.h"
 #include "Actor.h"
 #include "ActorEffector.h"
 #include "PostprocessAnimator.h"

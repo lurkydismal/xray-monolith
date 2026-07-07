@@ -10,7 +10,7 @@
 
 #pragma warning(push)
 #pragma warning(disable:4995)
-#include "../xrEngine/StdAfx.h"
+#include "../xrEngine/stdafx.h"
 #include "DPlay/dplay8.h"
 #pragma warning(pop)
 //#pragma warning(default:4995)
