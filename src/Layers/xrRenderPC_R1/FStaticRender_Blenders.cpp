@@ -12,7 +12,7 @@
 #include "../xrRender/Blender_Lm(EbB).h"
 #include "../xrRender/Blender_BmmD.h"
 #include "Blender_Shadow_World.h"
-#include "blender_blur.h"
+#include "Blender_Blur.h"
 #include "Blender_Model.h"
 #include "../xrRender/Blender_Model_EbB.h"
 #include "../xrRender/Blender_detail_still.h"
