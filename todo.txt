@@ -1,6 +1,5 @@
 xrEngine
 xrGame
-xrNetServer
 xrParticles
 xrPhysics
 xrRender_R4
