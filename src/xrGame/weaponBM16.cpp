@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "weaponBM16.h"
 #include "Entity.h"
 #include "Actor.h"

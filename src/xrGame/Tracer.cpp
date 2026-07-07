@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "Tracer.h"
 #include "../xrEngine/Render.h"
 

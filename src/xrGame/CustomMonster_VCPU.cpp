@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "CustomMonster.h"
 #include "movement_manager.h"
 

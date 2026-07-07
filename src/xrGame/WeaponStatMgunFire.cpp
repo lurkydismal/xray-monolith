@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "WeaponStatMgun.h"
 #include "Level.h"
 #include "entity_alive.h"

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "WeaponAutomaticShotgun.h"
 #include "Entity.h"
 #include "xr_level_controller.h"

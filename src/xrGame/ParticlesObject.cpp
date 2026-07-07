@@ -1,7 +1,7 @@
 //----------------------------------------------------
 // file: PSObject.cpp
 //----------------------------------------------------
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "ParticlesObject.h"
 #include "../xrParticles/ParticlesAsyncManager.h"
 #include "../xrEngine/defines.h"

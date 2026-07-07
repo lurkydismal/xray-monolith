@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "UIGameCTA.h"
 
 #include <dinput.h>

@@ -6,7 +6,7 @@
 //	Description : XRay Script sound class
 ////////////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "script_particles.h"
 #include "../xrEngine/ObjectAnimator.h"
 #include "../xrEngine/IGame_Persistent.h"

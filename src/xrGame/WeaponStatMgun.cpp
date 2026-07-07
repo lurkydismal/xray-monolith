@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "WeaponStatMgun.h"
 #include "../Include/xrRender/Kinematics.h"
 #include "../xrPhysics/PhysicsShell.h"

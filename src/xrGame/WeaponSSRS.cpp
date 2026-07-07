@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+﻿#include "StdAfx.h"
 #include "WeaponSSRS.h"
 
 extern BOOL g_launcher_dynamic_range_zoom;

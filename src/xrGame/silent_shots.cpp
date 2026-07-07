@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "silent_shots.h"
 #include "game_base.h"
 #include "game_state_accumulator.h"

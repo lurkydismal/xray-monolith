@@ -3,7 +3,7 @@
 //	Last updated: 13/08/2015
 ////////////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "Weapon.h"
 #include "entity_alive.h"
 #include "inventory_item_impl.h"

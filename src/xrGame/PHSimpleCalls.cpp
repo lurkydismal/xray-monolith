@@ -1,4 +1,4 @@
-#include	"stdafx.h"
+#include	"StdAfx.h"
 #include	"../xrPhysics/PhysicsShell.h"
 #include	"PHSimpleCalls.h"
 //#include	"PHObject.h"

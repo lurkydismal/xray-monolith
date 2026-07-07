@@ -1,4 +1,4 @@
-#include	"stdafx.h"
+#include	"StdAfx.h"
 
 #include	"ik_limb_state.h"
 

@@ -2,7 +2,7 @@
 // function responsible for firing with CWeapon
 //////////////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "Weapon.h"
 #include "Entity.h"
 #include "Actor.h"

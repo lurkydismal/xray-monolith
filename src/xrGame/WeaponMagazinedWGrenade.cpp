@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "WeaponMagazinedWGrenade.h"
 #include "Entity.h"
 #include "GrenadeLauncher.h"

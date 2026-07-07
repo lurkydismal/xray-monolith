@@ -3,7 +3,7 @@
 // GrenadeLauncher - апгрейд оружия поствольный гранатомет
 ///////////////////////////////////////////////////////////////
 
-#include "stdafx.h"
+#include "StdAfx.h"
 
 #include "GrenadeLauncher.h"
 //#include "PhysicsShell.h"

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 #ifdef STATIONARYMGUN_NEW
 #include "WeaponStatMgun.h"
 #include "../Include/xrRender/Kinematics.h"
