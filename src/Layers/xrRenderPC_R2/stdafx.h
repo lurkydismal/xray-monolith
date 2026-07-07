@@ -27,7 +27,7 @@
 #define		R_R4	4
 #define		RENDER	R_R2
 
-#include "../xrRender/resourcemanager.h"
+#include "../xrRender/ResourceManager.h"
 
 #include "../../xrEngine/vis_common.h"
 #include "../../xrEngine/Render.h"
