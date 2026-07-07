@@ -7,7 +7,7 @@
 #include "HUDTarget.h"
 
 #include "../xrEngine/CustomHUD.h"
-#include "../xrEngine/igame_persistent.h"
+#include "../xrEngine/IGame_Persistent.h"
 #include "ui_base.h"
 
 string32 crosshair_shader = "hud\\cursor";
