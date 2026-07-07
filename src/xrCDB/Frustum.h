@@ -4,7 +4,7 @@
 #pragma once
 
 #include "xrCDB.h"
-#include "../xrcore/fixedvector.h"
+#include "../xrCore/FixedVector.h"
 
 enum EFC_Visible
 {

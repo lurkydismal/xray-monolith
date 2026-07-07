@@ -1,9 +1,9 @@
 #include "stdafx.h"
 
 #include "xr_area.h"
-#include "../xrengine/xr_object.h"
-#include "../xrengine/xrLevel.h"
-#include "../xrengine/xr_collide_form.h"
+#include "../xrEngine/xr_object.h"
+#include "../xrEngine/xrLevel.h"
+#include "../xrEngine/xr_collide_form.h"
 
 using namespace collide;
 
