@@ -14,9 +14,9 @@
 //#include "../xrEngine/eventapi.h"
 
 
-#include "../xrcdb/xrcdb.h"
-#include "../xrsound/sound.h"
-//#include "../xrengine/IGame_Level.h"
+#include "../xrCDB/xrCDB.h"
+#include "../xrSound/Sound.h"
+//#include "../xrEngine/IGame_Level.h"
 
 #pragma comment( lib, "xrCore.lib"	)
 
@@ -24,7 +24,7 @@
 
 #include "../xrCore/profiler.h"
 
-#include "../include/xrapi/xrapi.h"
+#include "../Include/xrAPI/xrAPI.h"
 #ifdef	DEBUG
 #include "d3d9types.h"
 #endif

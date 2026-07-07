@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../xrcdb/ispatial.h"
+#include "../xrCDB/ISpatial.h"
 #include "PHItemList.h"
 #include "PHIsland.h"
 typedef u32 CLClassBits;
