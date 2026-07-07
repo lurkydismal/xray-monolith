@@ -1,4 +1,3 @@
 xrEngine
 xrGame
-xrPhysics
 xrRender_R4

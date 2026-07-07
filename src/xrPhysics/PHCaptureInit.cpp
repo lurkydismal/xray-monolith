@@ -287,7 +287,7 @@ void CPHCapture::Release()
 	e_state = cstReleased;
 }
 
-#include "phelement.h"
+#include "PHElement.h"
 
 void CPHCapture::Deactivate()
 {
