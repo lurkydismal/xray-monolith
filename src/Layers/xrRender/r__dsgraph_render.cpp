@@ -1,9 +1,9 @@
 #include "stdafx.h"
 
-#include "../../xrEngine/render.h"
-#include "../../xrEngine/irenderable.h"
-#include "../../xrEngine/igame_persistent.h"
-#include "../../xrEngine/environment.h"
+#include "../../xrEngine/Render.h"
+#include "../../xrEngine/IRenderable.h"
+#include "../../xrEngine/IGame_Persistent.h"
+#include "../../xrEngine/Environment.h"
 #include "../../xrEngine/CustomHUD.h"
 
 #include "FBasicVisual.h"
@@ -11,8 +11,8 @@
 
 #include "fhierrarhyvisual.h"
 #include "SkeletonCustom.h"
-#include "../../xrEngine/fmesh.h"
-#include "flod.h"
+#include "../../xrEngine/Fmesh.h"
+#include "FLOD.h"
 
 #include "../../xrEngine/xr_object.h"
 
