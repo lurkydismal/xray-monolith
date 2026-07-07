@@ -12,7 +12,7 @@
 
 // Implement profiler macro interface
 #if XRCORE_PROFILER == PROFILER_OPTICK
-#	include "../3rd party/optick-git/src/optick.h"
+#	include "../3rd_party/optick-git/src/optick.h"
 #	define PROF_THREAD(Name) OPTICK_THREAD(Name)
 #	define PROF_START_CAPTURE() OPTICK_START_CAPTURE()
 #	define PROF_STOP_CAPTURE() OPTICK_STOP_CAPTURE()

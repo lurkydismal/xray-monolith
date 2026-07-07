@@ -4,7 +4,7 @@
 #include <bitset>
 #include <map>
 #include <string_view>
-#include "../3rd party/magic_enum/magic_enum.hpp"
+#include "../3rd_party/magic_enum/magic_enum.hpp"
 
 template <class T>
 struct _flags
