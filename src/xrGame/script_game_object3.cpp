@@ -34,7 +34,7 @@
 #include "movement_manager_space.h"
 #include "detail_path_manager_space.h"
 #include "level_debug.h"
-#include "ai/monsters/BaseMonster/base_monster.h"
+#include "ai/monsters/basemonster/base_monster.h"
 #include "trade_parameters.h"
 #include "script_ini_file.h"
 #include "sound_player.h"
