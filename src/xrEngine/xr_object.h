@@ -3,7 +3,7 @@
 
 #include "../xrCDB/ISpatial.h"
 #include "ISheduled.h"
-//#include "iinputreceiver.h"
+//#include "IInputReceiver.h"
 #include "IRenderable.h"
 #include "ICollidable.h"
 #include "EngineAPI.h"
