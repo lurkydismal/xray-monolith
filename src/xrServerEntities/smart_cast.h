@@ -17,10 +17,10 @@ template<> struct has_dcast<TO*, FROM*> : std::true_type { \
     static TO* cast(FROM* ptr) { return ptr ? ptr->METHOD() : nullptr; } \
 };
 
-#include "../include/xrRender/RenderVisual.h"
-#include "../include/xrRender/Kinematics.h"
-#include "../include/xrRender/KinematicsAnimated.h"
-#include "../include/xrRender/ParticleCustom.h"
+#include "../Include/xrRender/RenderVisual.h"
+#include "../Include/xrRender/Kinematics.h"
+#include "../Include/xrRender/KinematicsAnimated.h"
+#include "../Include/xrRender/ParticleCustom.h"
 
 DECLARE_SPECIALIZATION(IKinematics, IRenderVisual, dcast_PKinematics)
 DECLARE_SPECIALIZATION(IKinematicsAnimated, IRenderVisual, dcast_PKinematicsAnimated)
