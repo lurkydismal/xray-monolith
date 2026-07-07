@@ -73,7 +73,7 @@ target_compile_options(${PROPS_TARGET}
     PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
             /MP
-            /GS-
+            /GS
             /O2
             /fp:precise
             /Gy
