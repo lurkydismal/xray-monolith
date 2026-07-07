@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "car.h"
+#include "Car.h"
 
 #ifdef DEBUG
 #	include "../xrEngine/StatGraph.h"

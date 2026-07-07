@@ -16,11 +16,11 @@
 
 #include "Actor.h"
 #include "ActorEffector.h"
-#include ":evel.h"
+#include "Level.h"
 #include "Level_Bullet_Manager.h"
-#include "xrmessages.h"
+#include "xrMessages.h"
 #include "../xrEngine/GameMtlLib.h"
-#include "hudsound.h"
+#include "HudSound.h"
 #include "script_game_object.h"
 
 #ifdef DEBUG
