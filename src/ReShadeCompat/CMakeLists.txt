@@ -228,7 +228,7 @@ if(MSVC)
             /GR;
             /std:c++17;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:DX10AVX>:
             /GL;
@@ -245,7 +245,7 @@ if(MSVC)
             /fp:precise;
             /GR;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:DX11>:
             /GL;
@@ -261,7 +261,7 @@ if(MSVC)
             /GR;
             /std:c++17;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:DX11AVX>:
             /GL;
@@ -278,7 +278,7 @@ if(MSVC)
             /fp:precise;
             /GR;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:DX8>:
             /GL;
@@ -294,7 +294,7 @@ if(MSVC)
             /GR;
             /std:c++17;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:DX8AVX>:
             /GL;
@@ -311,7 +311,7 @@ if(MSVC)
             /fp:precise;
             /GR;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:DX9>:
             /GL;
@@ -327,7 +327,7 @@ if(MSVC)
             /GR;
             /std:c++17;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:DX9AVX>:
             /GL;
@@ -344,7 +344,7 @@ if(MSVC)
             /fp:precise;
             /GR;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:ProfiledDX11>:
             /GL-;
@@ -359,7 +359,7 @@ if(MSVC)
             /fp:precise;
             /GR;
             /std:c++17;
-            /GS-
+            /GS
         >
         $<$<CONFIG:Release>:
             /GL;
@@ -375,7 +375,7 @@ if(MSVC)
             /GR;
             /std:c++17;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:ReleaseAVX>:
             /GL;
@@ -392,7 +392,7 @@ if(MSVC)
             /fp:precise;
             /GR;
             /Ob3;
-            /GS-
+            /GS
         >
         $<$<CONFIG:Verified>:
             /GL-;
