@@ -1,7 +1,5 @@
-xrAPI
 xrCDB
 xrCPU_Pipe
-xrCore
 xrEngine
 xrGame
 xrNetServer
