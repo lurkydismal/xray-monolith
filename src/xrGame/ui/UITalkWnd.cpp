@@ -16,7 +16,7 @@
 #include "../game_cl_base.h"
 #include "../string_table.h"
 #include "../xr_level_controller.h"
-#include "../../xrEngine/cameraBase.h"
+#include "../../xrEngine/CameraBase.h"
 #include "UIXmlInit.h"
 #include "UI3tButton.h"
 
