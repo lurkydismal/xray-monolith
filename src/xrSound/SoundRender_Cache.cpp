@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #pragma hdrstop
 
-#include ".\soundrender_cache.h"
+#include "./soundrender_cache.h"
 
 CSoundRender_Cache::CSoundRender_Cache()
 {
