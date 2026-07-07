@@ -41,7 +41,7 @@
 #include "xrEngine/XR_IOConsole.h"
 #include "Actor.h"
 #include "player_hud.h"
-#include "UI/UIGameTutorial.h"
+#include "ui/UIGameTutorial.h"
 #include "file_transfer.h"
 #include "message_filter.h"
 #include "demoplay_control.h"

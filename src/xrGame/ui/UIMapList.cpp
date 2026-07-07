@@ -314,7 +314,7 @@ void CUIMapList::SetServerParams(LPCSTR params)
 	m_srv_params = params;
 }
 
-#include "uilistboxitem.h"
+#include "UIListBoxItem.h"
 
 void CUIMapList::AddWeather(const shared_str& WeatherType, const shared_str& WeatherTime, u32 _id)
 {

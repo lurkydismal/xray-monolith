@@ -13,7 +13,7 @@
 #include "../InventoryOwner.h"
 #include "../Inventory.h"
 #include "../Actor.h"
-#include "../uigamesp.h"
+#include "../UIGameSP.h"
 #include "UI3tButton.h"
 
 #include "inventory_upgrade.h"

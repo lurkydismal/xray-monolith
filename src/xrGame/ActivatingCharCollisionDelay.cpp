@@ -1,8 +1,8 @@
 #include "stdafx.h"
 
-#include "activatingcharcollisiondelay.h"
-#include "characterphysicssupport.h"
-#include "phmovementcontrol.h"
+#include "ActivatingCharCollisionDelay.h"
+#include "CharacterPhysicsSupport.h"
+#include "PHMovementControl.h"
 #ifdef	DEBUG
 #include "PHDebug.h"
 #endif

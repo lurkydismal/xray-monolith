@@ -2,7 +2,7 @@
 
 #include "UIInventoryUtilities.h"
 
-#include "uicharacterinfo.h"
+#include "UICharacterInfo.h"
 #include "../Actor.h"
 #include "../Level.h"
 #include "../../xrServerEntities/character_info.h"

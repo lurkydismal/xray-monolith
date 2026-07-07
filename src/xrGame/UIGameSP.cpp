@@ -1,5 +1,5 @@
 #include "pch_script.h"
-#include "uigamesp.h"
+#include "UIGameSP.h"
 #include "Actor.h"
 #include "Level.h"
 #include "../xrEngine/xr_input.h"
