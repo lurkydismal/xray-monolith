@@ -1,4 +1,4 @@
-fix vorbis/psytune
-
-fix icu
-fix nvapi
+fix ReShadeCompat
+fix optick
+fix crypto
+fix imgui
