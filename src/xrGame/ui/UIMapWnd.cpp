@@ -982,7 +982,7 @@ void CUIMapWnd::Reset()
 }
 
 #include "../gametaskmanager.h"
-#include "../actor.h"
+#include "../Actor.h"
 #include "../map_spot.h"
 #include "../gametask.h"
 

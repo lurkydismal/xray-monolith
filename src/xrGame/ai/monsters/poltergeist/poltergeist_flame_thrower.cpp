@@ -3,10 +3,10 @@
 #include "../../../../xrServerEntities/xrmessages.h"
 #include "../../../ai_object_location.h"
 #include "../../../level_graph.h"
-#include "../../../level.h"
+#include "../../../Level.h"
 #include "../../../ai_space.h"
 #include "../../../restricted_object.h"
-#include "../../../actor.h"
+#include "../../../Actor.h"
 #include "../../../actorEffector.h"
 #include "../ai_monster_effector.h"
 

@@ -1,6 +1,6 @@
 #include "pch_script.h"
 #include "base_monster.h"
-#include "../../../level.h"
+#include "../../../Level.h"
 #include "../../../level_debug.h"
 #include "../../../entitycondition.h"
 #include "../../../ai_debug.h"
@@ -8,7 +8,7 @@
 #include "../state_manager.h"
 #include "../../../phmovementcontrol.h"
 #include "../../../characterphysicssupport.h"
-#include "../../../actor.h"
+#include "../../../Actor.h"
 
 // Lain: added
 #include "../../../debug_text_tree.h"

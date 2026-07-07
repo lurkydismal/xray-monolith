@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "UIActorMenu.h"
 #include "UIActorStateInfo.h"
-#include "../actor.h"
+#include "../Actor.h"
 #include "../uigamesp.h"
 #include "../inventory.h"
 #include "../inventory_item.h"

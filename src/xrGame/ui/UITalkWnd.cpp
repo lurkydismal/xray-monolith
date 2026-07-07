@@ -3,12 +3,12 @@
 
 #include "UITalkDialogWnd.h"
 
-#include "../actor.h"
+#include "../Actor.h"
 #include "../trade.h"
 #include "../UIGameSP.h"
 #include "../PDA.h"
 #include "../../xrServerEntities/character_info.h"
-#include "../level.h"
+#include "../Level.h"
 
 #include "../PhraseDialog.h"
 #include "../PhraseDialogManager.h"

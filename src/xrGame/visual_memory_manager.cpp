@@ -31,7 +31,7 @@
 float g_ai_vision_speed_boost = 1.0f;
 
 #ifndef MASTER_GOLD
-#	include "actor.h"
+#	include "Actor.h"
 #	include "ai_debug.h"
 #endif // MASTER_GOLD
 

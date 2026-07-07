@@ -40,11 +40,11 @@
 #include "sound_player.h"
 #include "stalker_decision_space.h"
 #include "space_restriction_manager.h"
-#include "artefact.h"
+#include "Artefact.h"
 //Alundaio
 #ifdef GAME_OBJECT_EXTENDED_EXPORTS
 #include "holder_custom.h"
-#include "actor.h"
+#include "Actor.h"
 #include "CharacterPhysicsSupport.h"
 #include "player_hud.h"
 #include "eatable_item.h"

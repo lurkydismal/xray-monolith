@@ -9,7 +9,7 @@
 #include "stdafx.h"
 #include "alife_graph_registry.h"
 #include "../xrEngine/x_ray.h"
-#include "level.h"
+#include "Level.h"
 
 using namespace ALife;
 

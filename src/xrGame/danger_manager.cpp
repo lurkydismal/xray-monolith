@@ -13,7 +13,7 @@
 #include "profiler.h"
 #include "memory_manager.h"
 #include "enemy_manager.h"
-#include "actor.h"
+#include "Actor.h"
 #include "object_broker.h"
 
 // Danger perception multipliers. 1.0 = original engine behaviour.

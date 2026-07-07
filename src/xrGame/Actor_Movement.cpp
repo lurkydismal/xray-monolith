@@ -1,12 +1,12 @@
-#include "stdafx.h"
+#include "StdAfx.h"
 
-#include "actor.h"
+#include "Actor.h"
 #include "inventory.h"
 #include "weapon.h"
 #include "../xrEngine/CameraBase.h"
 #include "xrMessages.h"
 
-#include "level.h"
+#include "Level.h"
 #include "UIGameCustom.h"
 #include "string_table.h"
 #include "actorcondition.h"
@@ -701,7 +701,7 @@ float CActor::MaxWalkWeight() const
 	return max_w;
 }
 
-#include "artefact.h"
+#include "Artefact.h"
 #include "ActorBackpack.h"
 
 float CActor::get_additional_weight() const

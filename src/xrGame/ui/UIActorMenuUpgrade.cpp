@@ -12,7 +12,7 @@
 #include "UICellItem.h"
 #include "../InventoryOwner.h"
 #include "../Inventory.h"
-#include "../actor.h"
+#include "../Actor.h"
 #include "../uigamesp.h"
 #include "UI3tButton.h"
 

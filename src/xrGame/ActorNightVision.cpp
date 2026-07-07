@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 #include "Actor.h"
-#include "level.h"
+#include "Level.h"
 #include "actorEffector.h"
 #include "ai_sounds.h"
 

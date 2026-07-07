@@ -5,7 +5,7 @@
 
 #include "pch_script.h"
 #include "inventory.h"
-#include "actor.h"
+#include "Actor.h"
 #include "CustomOutfit.h"
 #include "trade.h"
 #include "weapon.h"
@@ -17,7 +17,7 @@
 #include "script_engine.h"
 #include "xrmessages.h"
 #include "xr_level_controller.h"
-#include "level.h"
+#include "Level.h"
 #include "ai_space.h"
 #include "entitycondition.h"
 #include "game_base_space.h"

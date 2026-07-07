@@ -90,7 +90,7 @@ void CRadioactiveZone::feel_touch_new(CObject* O)
 	};
 };
 
-#include "actor.h"
+#include "Actor.h"
 
 bool CRadioactiveZone::feel_touch_contact(CObject* O)
 {

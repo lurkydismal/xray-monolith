@@ -21,7 +21,7 @@
 #include "../ef_pattern.h"
 #include "../memory_manager.h"
 #include "../enemy_manager.h"
-#include "../level.h"
+#include "../Level.h"
 #include "../agent_manager.h"
 #include "../agent_member_manager.h"
 #include "stalker/ai_stalker.h"

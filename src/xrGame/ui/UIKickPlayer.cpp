@@ -8,7 +8,7 @@
 #include "UIListBoxItem.h"
 #include "UISpinNum.h"
 #include "UIGameCustom.h"
-#include "../level.h"
+#include "../Level.h"
 #include "../game_cl_base.h"
 #include "../game_cl_teamdeathmatch.h"
 #include "../../xrEngine/xr_ioconsole.h"

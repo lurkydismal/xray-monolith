@@ -10,7 +10,7 @@
 #include "UICursor.h"
 #include "../xrEngine/XR_IOConsole.h"
 #include "string_table.h"
-#include "level.h"
+#include "Level.h"
 #include "demoinfo.h"
 #include "demoplay_control.h"
 

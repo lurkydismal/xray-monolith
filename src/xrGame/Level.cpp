@@ -39,7 +39,7 @@
 #include "game_cl_base_weapon_usage_statistic.h"
 #include "MainMenu.h"
 #include "xrEngine/XR_IOConsole.h"
-#include "actor.h"
+#include "Actor.h"
 #include "player_hud.h"
 #include "UI/UIGameTutorial.h"
 #include "file_transfer.h"

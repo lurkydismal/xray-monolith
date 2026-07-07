@@ -10,7 +10,7 @@
 #include "../state_manager.h"
 
 #include "../../../ai_debug.h"
-#include "../../../level.h"
+#include "../../../Level.h"
 #include "../../../level_debug.h"
 
 #include "../control_animation_base.h"

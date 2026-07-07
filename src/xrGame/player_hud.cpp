@@ -2,7 +2,7 @@
 #include "player_hud.h"
 #include "HudItem.h"
 #include "ui_base.h"
-#include "actor.h"
+#include "Actor.h"
 #include "physic_item.h"
 #include "static_cast_checked.hpp"
 #include "actoreffector.h"

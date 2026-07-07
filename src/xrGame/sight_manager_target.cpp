@@ -36,7 +36,7 @@ void CSightManager::SetPointLookAngles(const Fvector& tPosition, float& yaw, flo
 	pitch *= -1;
 }
 
-#include "actor.h"
+#include "Actor.h"
 #include "../xrEngine/CameraBase.h"
 
 bool CSightManager::aim_target(Fvector& my_position, Fvector& aim_target, const CGameObject* object) const

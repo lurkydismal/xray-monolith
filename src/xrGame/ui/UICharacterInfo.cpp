@@ -3,8 +3,8 @@
 #include "UIInventoryUtilities.h"
 
 #include "uicharacterinfo.h"
-#include "../actor.h"
-#include "../level.h"
+#include "../Actor.h"
+#include "../Level.h"
 #include "../../xrServerEntities/character_info.h"
 #include "../string_table.h"
 #include "../relation_registry.h"

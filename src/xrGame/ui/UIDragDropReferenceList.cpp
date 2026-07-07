@@ -5,7 +5,7 @@
 #include "UIStatic.h"
 #include "../inventory.h"
 #include "../inventoryOwner.h"
-#include "../actor.h"
+#include "../Actor.h"
 #include "../actor_defs.h"
 #include "UIInventoryUtilities.h"
 #include "../../xrEngine/xr_input.h"

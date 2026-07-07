@@ -4,7 +4,7 @@
 
 #ifdef STATIONARYMGUN_NEW
 #include "Actor.h"
-#include "level.h"
+#include "Level.h"
 #include "camerafirsteye.h"
 #endif
 

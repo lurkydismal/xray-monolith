@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "UIXmlInit.h"
-#include "../level.h"
+#include "../Level.h"
 #include "../string_table.h"
 #include "UIFrameWindow.h"
 #include "UICheckButton.h"

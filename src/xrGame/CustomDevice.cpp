@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "customdevice.h"
 #include "inventory.h"
-#include "actor.h"
+#include "Actor.h"
 #include "player_hud.h"
 #include "weapon.h"
 #include "Missile.h"

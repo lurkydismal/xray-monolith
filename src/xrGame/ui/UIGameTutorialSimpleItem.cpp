@@ -7,7 +7,7 @@
 #include "../../xrEngine/xr_input.h"
 #include "../xr_level_controller.h"
 #include "../UIGameSp.h"
-#include "../level.h"
+#include "../Level.h"
 #include "UIPdaWnd.h"
 #include "UIActorMenu.h"
 #include "UITalkWnd.h"

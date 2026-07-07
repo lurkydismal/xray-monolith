@@ -1,7 +1,7 @@
 #include "pch_script.h"
 #include "uigamesp.h"
-#include "actor.h"
-#include "level.h"
+#include "Actor.h"
+#include "Level.h"
 #include "../xrEngine/xr_input.h"
 
 #ifdef DEBUG
