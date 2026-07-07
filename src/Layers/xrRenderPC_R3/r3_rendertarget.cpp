@@ -19,7 +19,7 @@
 #include "blender_gasmask_drops.h"
 #include "blender_gasmask_dudv.h"
 #include "blender_smaa.h"
-#include "Blender_Blur.h"
+#include "blender_blur.h"
 #include "blender_dof.h"
 #include "blender_pp_bloom.h"
 #include "blender_nightvision.h"
