@@ -11,7 +11,7 @@
 //#include "hw.h"
 #include "../xrCore/FTimer.h"
 #include "Stats.h"
-//#include "shader.h"
+//#include "Shader.h"
 //#include "R_Backend.h"
 
 #include "../build_config_defines.h"
