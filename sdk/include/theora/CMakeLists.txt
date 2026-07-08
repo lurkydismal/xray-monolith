@@ -23,7 +23,6 @@ set(no_group_source_files
     "lib/encinfo.c"
     "lib/encint.h"
     "lib/encode.c"
-#    "lib/encoder_disabled.c"
     "lib/enquant.c"
     "lib/enquant.h"
     "lib/fdct.c"
@@ -59,6 +58,9 @@ set(no_group_source_files
     "theora.h"
     "theoradec.h"
 )
+if(ENABLE_DEBUG_OLD_RUNTIME)
+    list(APPEND no_group_source_files lib/encoder_disabled.c)
+endif()
 source_group("" FILES ${no_group_source_files})
 
 set(ALL_FILES

@@ -49,7 +49,6 @@ set(src
     "src/nvimage/BlockDXT.h"
     "src/nvimage/ColorBlock.cpp"
     "src/nvimage/ColorBlock.h"
-#    "src/nvimage/ConeMap.cpp"
     "src/nvimage/ConeMap.h"
     "src/nvimage/DirectDrawSurface.cpp"
     "src/nvimage/DirectDrawSurface.h"
@@ -149,6 +148,9 @@ set(src
     "src/nvtt/squish/weightedclusterfit.cpp"
     "src/nvtt/squish/weightedclusterfit.h"
 )
+if(ENABLE_DEBUG_OLD_RUNTIME)
+    list(APPEND src src/nvimage/ConeMap.cpp)
+endif()
 source_group("src" FILES ${src})
 
 set(ALL_FILES

@@ -39,12 +39,6 @@ set(CMAKE_CONFIGURATION_TYPES
     CACHE STRING "" FORCE
 )
 
-if(CMAKE_BUILD_TYPE MATCHES "(Release|Profile|Verified)")
-    set(IS_DEBUG FALSE)
-else()
-    set(IS_DEBUG TRUE)
-endif()
-
 set(DX8_TYPES  DX8 DX8AVX VerifiedDX8)
 set(DX9_TYPES  DX9 DX9AVX VerifiedDX9)
 set(DX10_TYPES DX10 DX10AVX VerifiedDX10)
@@ -63,6 +57,15 @@ elseif(CMAKE_BUILD_TYPE IN_LIST DX10_TYPES)
     set(IS_DX10 TRUE)
 elseif(CMAKE_BUILD_TYPE IN_LIST DX11_TYPES)
     set(IS_DX11 TRUE)
+endif()
+
+# TODO: Refactor and rename
+if(CMAKE_BUILD_TYPE MATCHES "^(Release|Release-AVX|ProfiledDX11|Verified|VerifiedDX11|VerifiedDX11ASAN)$")
+    message(STATUS "Legacy debug runtime: disabled")
+    set(ENABLE_DEBUG_OLD_RUNTIME FALSE)
+else()
+    message(STATUS "Legacy debug runtime: enabled")
+    set(ENABLE_DEBUG_OLD_RUNTIME TRUE)
 endif()
 
 ################################################################################

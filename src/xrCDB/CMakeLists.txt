@@ -9,7 +9,6 @@ set(no_group_source_files
 source_group("" FILES ${no_group_source_files})
 
 set(Kernel
-#    "cl_raypick.cpp"
     "Frustum.cpp"
     "Frustum.h"
     "StdAfx.cpp"
@@ -21,6 +20,9 @@ set(Kernel
     "xrCDB_frustum.cpp"
     "xrCDB_ray.cpp"
 )
+if(ENABLE_DEBUG_OLD_RUNTIME)
+    list(APPEND Kernel cl_raypick.cpp)
+endif()
 source_group("Kernel" FILES ${Kernel})
 
 set(Opcode

@@ -2499,7 +2499,6 @@ set(AI__AMonsters__monsters__Rats
     "ai/monsters/rats/ai_rat_behaviour.cpp"
     "ai/monsters/rats/ai_rat_feel.cpp"
     "ai/monsters/rats/ai_rat_fire.cpp"
-#    "ai/monsters/rats/ai_rat_fsm.cpp"
     "ai/monsters/rats/ai_rat_impl.h"
     "ai/monsters/rats/ai_rat_inline.h"
     "ai/monsters/rats/ai_rat_space.h"
@@ -3249,7 +3248,6 @@ set(Core__Client__Effects
 source_group("Core\\Client\\Effects" FILES ${Core__Client__Effects})
 
 set(Core__Client__Effects__Core
-#    "DynamicHeightMap.cpp"
     "DynamicHeightMap.h"
 )
 source_group("Core\\Client\\Effects\\Core" FILES ${Core__Client__Effects__Core})
@@ -3851,13 +3849,15 @@ source_group("Core\\Client\\Objects\\items & weapons\\Documents" FILES ${Core__C
 
 set(Core__Client__Objects__items__weapons__Explosives
     "Explosive.cpp"
-#    "Explosive.h"
     "ExplosiveItem.cpp"
     "ExplosiveItem.h"
     "ExplosiveScript.cpp"
     "wallmark_manager.cpp"
     "wallmark_manager.h"
 )
+if(ENABLE_DEBUG_OLD_RUNTIME)
+    list(APPEND Core__Client__Objects__items__weapons__Explosives Explosive.h)
+endif()
 source_group("Core\\Client\\Objects\\items & weapons\\Explosives" FILES ${Core__Client__Objects__items__weapons__Explosives})
 
 set(Core__Client__Objects__items__weapons__Food__Drugs
@@ -4640,13 +4640,11 @@ source_group("Core\\Common\\associative_vector\\vector" FILES ${Core__Common__as
 
 set(Core__Common__debug__make_final
     "debug_make_final.hpp"
-#    "debug_make_final_test.cpp"
 )
 source_group("Core\\Common\\debug\\make_final" FILES ${Core__Common__debug__make_final})
 
 set(Core__Common__debug__static_cast_checked
     "static_cast_checked.hpp"
-#    "static_cast_checked_test.cpp"
 )
 source_group("Core\\Common\\debug\\static_cast_checked" FILES ${Core__Common__debug__static_cast_checked})
 
@@ -5436,9 +5434,11 @@ set(UI__Common__TALK
 source_group("UI\\Common\\TALK" FILES ${UI__Common__TALK})
 
 set(UI__Common___Debug_Fonts
-#    "ui/UIDebugFonts.cpp"
     "ui/UIDebugFonts.h"
 )
+if(ENABLE_DEBUG_OLD_RUNTIME)
+    list(APPEND UI__Common___Debug_Fonts ui/UIDebugFonts.cpp)
+endif()
 source_group("UI\\Common\\_Debug Fonts" FILES ${UI__Common___Debug_Fonts})
 
 set(UI__Common__ui-item-infos

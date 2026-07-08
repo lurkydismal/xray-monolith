@@ -70,8 +70,6 @@ set(Sources
     "lj_udata.c"
     "lj_vmevent.c"
     "lj_vmmath.c"
-#    "ljamalg.c"
-#    "luajit.c"
     "xr_alloc.c"
 )
 source_group("Sources" FILES ${Sources})

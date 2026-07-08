@@ -80,11 +80,13 @@ source_group("Compression\\rt" FILES ${Compression__rt})
 
 set(Debug_core
     "../3rd_party/stackwalker/include/StackWalker.h"
-#    "xrDebug.cpp"
     "xrDebug.h"
     "xrDebug_macros.h"
     "xrDebugNew.cpp"
 )
+if(ENABLE_DEBUG_OLD_RUNTIME)
+    list(APPEND Debug_core xrDebug.cpp)
+endif()
 source_group("Debug core" FILES ${Debug_core})
 
 set(Debug_core__BlackBox
@@ -93,7 +95,6 @@ set(Debug_core__BlackBox
     "blackbox/BugslayerUtil.h"
     "blackbox/CrashHandler.cpp"
     "blackbox/CrashHandler.h"
-#    "blackbox/DiagAssert.cpp"
     "blackbox/DiagAssert.h"
     "blackbox/GetLoadedModules.cpp"
     "blackbox/Internal.h"
@@ -106,6 +107,9 @@ set(Debug_core__BlackBox
     "blackbox/WarningsOff.h"
     "blackbox/WarningsOn.h"
 )
+if(ENABLE_DEBUG_OLD_RUNTIME)
+    list(APPEND Debug_core blackbox/DiagAssert.cpp)
+endif()
 source_group("Debug core\\BlackBox" FILES ${Debug_core__BlackBox})
 
 set(FS
@@ -123,8 +127,6 @@ set(FS
     "LocatorAPI_auth.cpp"
     "LocatorAPI_defs.cpp"
     "LocatorAPI_defs.h"
-#    "LocatorAPI_Notifications.cpp"
-#    "LocatorAPI_Notifications.h"
     "log.cpp"
     "log.h"
     "NET_utils.cpp"
@@ -133,6 +135,12 @@ set(FS
     "Xr_ini.cpp"
     "xr_ini.h"
 )
+if(ENABLE_DEBUG_OLD_RUNTIME)
+    list(APPEND FS
+        LocatorAPI_Notifications.cpp
+        LocatorAPI_Notifications.h
+    )
+endif()
 source_group("FS" FILES ${FS})
 
 set(FS__file_stream_reader
@@ -338,6 +346,11 @@ add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h>"
+)
+
+# TODO: Refactor into a separate target
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
 )
 
 use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")

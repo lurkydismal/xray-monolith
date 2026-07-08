@@ -50,7 +50,6 @@ set(include
 source_group("include" FILES ${include})
 
 set(src
-    # "../../vorbis.def"
     "lib/analysis.c"
     "lib/bitrate.c"
     "lib/block.c"

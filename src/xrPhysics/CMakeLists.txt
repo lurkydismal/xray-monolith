@@ -284,7 +284,6 @@ source_group("physics\\colliders\\cyl" FILES ${physics__colliders__cyl})
 set(physics__colliders__tri
     "tri-colliderknoopc/__aabb_tri.h"
     "tri-colliderknoopc/dcTriangle.h"
-#    "tri-colliderknoopc/dcTriListCollider.cpp"
     "tri-colliderknoopc/dcTriListCollider.h"
     "tri-colliderknoopc/dSortTriPrimitive.cpp"
     "tri-colliderknoopc/dSortTriPrimitive.h"
@@ -303,6 +302,9 @@ set(physics__colliders__tri
     "tri-colliderknoopc/dxTriList.h"
     "tri-colliderknoopc/TriPrimitiveCollideClassDef.h"
 )
+if(ENABLE_DEBUG_OLD_RUNTIME)
+    list(APPEND physics__colliders__tri tri-colliderknoopc/dcTriListCollider.cpp)
+endif()
 source_group("physics\\colliders\\tri" FILES ${physics__colliders__tri})
 
 set(physics__damage_receiver
