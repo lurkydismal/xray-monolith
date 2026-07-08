@@ -39,6 +39,12 @@ set(CMAKE_CONFIGURATION_TYPES
     CACHE STRING "" FORCE
 )
 
+if(CMAKE_BUILD_TYPE MATCHES "(Release|Profile|Verified)")
+    set(IS_DEBUG FALSE)
+else()
+    set(IS_DEBUG TRUE)
+endif()
+
 set(DX8_TYPES  DX8 DX8AVX VerifiedDX8)
 set(DX9_TYPES  DX9 DX9AVX VerifiedDX9)
 set(DX10_TYPES DX10 DX10AVX VerifiedDX10)
