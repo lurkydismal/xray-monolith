@@ -480,7 +480,6 @@ endif()
 # Dependencies
 ################################################################################
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
-    "lua51;"
     "kernel32;"
     "user32;"
     "gdi32;"
@@ -491,6 +490,7 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "uuid;"
     "comdlg32;"
     "advapi32"
+    LuaJIT-2
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 
