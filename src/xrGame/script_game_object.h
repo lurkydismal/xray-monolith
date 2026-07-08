@@ -837,6 +837,12 @@ public:
 	void sniper_fire_mode(bool value);
 	bool sniper_fire_mode() const;
 
+	void set_aim_params(float max_angle, float min_angle, float min_speed, float predict_time);
+	void set_vision_speed(float value);
+	bool can_kill_enemy();
+	bool can_kill_member();
+	bool fire_make_sense();
+
 	void aim_bone_id(LPCSTR value);
 	LPCSTR aim_bone_id() const;
 
@@ -908,6 +914,7 @@ public:
 	bool is_door_blocked_by_npc() const;
 	bool is_weapon_going_to_be_strapped(CScriptGameObject const* object) const;
 
+    ::luabind::object g_fireParams();
 
 #ifdef GAME_OBJECT_TESTING_EXPORTS
 	//AVO: functions for object testing
