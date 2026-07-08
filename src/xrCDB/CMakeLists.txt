@@ -20,9 +20,9 @@ set(Kernel
     "xrCDB_frustum.cpp"
     "xrCDB_ray.cpp"
 )
-if(ENABLE_DEBUG_OLD_RUNTIME)
-    list(APPEND Kernel cl_raypick.cpp)
-endif()
+# if(ENABLE_DEBUG_OLD_RUNTIME)
+#     list(APPEND Kernel cl_raypick.cpp)
+# endif()
 source_group("Kernel" FILES ${Kernel})
 
 set(Opcode
