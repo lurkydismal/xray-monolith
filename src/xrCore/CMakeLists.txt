@@ -84,9 +84,9 @@ set(Debug_core
     "xrDebug_macros.h"
     "xrDebugNew.cpp"
 )
-if(ENABLE_DEBUG_OLD_RUNTIME)
-    list(APPEND Debug_core xrDebug.cpp)
-endif()
+# if(ENABLE_DEBUG_OLD_RUNTIME)
+#     list(APPEND Debug_core xrDebug.cpp)
+# endif()
 source_group("Debug core" FILES ${Debug_core})
 
 set(Debug_core__BlackBox
