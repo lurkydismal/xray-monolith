@@ -111,6 +111,7 @@ void CFS_PathNotificator::Execute(void)
 
 //---------------------------------------------------------------------------
 
+#if 0
 void CLocatorAPI::SetEventNotification()
 {
 	InitializeCriticalSection(&CS);
@@ -132,3 +133,4 @@ void CLocatorAPI::ClearEventNotification()
 	}
 	DeleteCriticalSection(&CS);
 }
+#endif
