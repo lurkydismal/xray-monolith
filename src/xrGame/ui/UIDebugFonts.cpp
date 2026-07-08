@@ -3,6 +3,7 @@
 #include "UIDialogHolder.h"
 #include "dinput.h"
 
+#ifdef DEBUG
 
 CUIDebugFonts::CUIDebugFonts()
 {
@@ -64,3 +65,5 @@ void CUIDebugFonts::FillUpList()
 		AttachChild(pItem);
 	}
 }
+
+#endif
