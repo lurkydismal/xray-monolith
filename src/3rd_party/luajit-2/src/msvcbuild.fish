@@ -125,6 +125,9 @@ end
 ./buildvm.exe -m peobj -o lj_vm.obj
 or exit 1
 
+lib /OUT:lj_vm.obj.lib lj_vm.obj
+or exit 1
+
 ./buildvm.exe -m bcdef -o lj_bcdef.h $ALL_LIB
 or exit 1
 
