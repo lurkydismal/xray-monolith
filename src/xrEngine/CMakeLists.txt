@@ -987,6 +987,7 @@ if(MSVC)
             /INCREMENTAL
         >
         /DEBUG;
+        /LTCG:INCREMENTAL;
         /ignore:4099
     )
 endif()
