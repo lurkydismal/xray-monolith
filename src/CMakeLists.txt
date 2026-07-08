@@ -39,6 +39,26 @@ set(CMAKE_CONFIGURATION_TYPES
     CACHE STRING "" FORCE
 )
 
+set(DX8_TYPES  DX8 DX8AVX VerifiedDX8)
+set(DX9_TYPES  DX9 DX9AVX VerifiedDX9)
+set(DX10_TYPES DX10 DX10AVX VerifiedDX10)
+set(DX11_TYPES DX11 DX11AVX VerifiedDX11)
+
+set(IS_DX8  FALSE)
+set(IS_DX9  FALSE)
+set(IS_DX10 FALSE)
+set(IS_DX11 FALSE)
+
+if(CMAKE_BUILD_TYPE IN_LIST DX8_TYPES)
+    set(IS_DX8 TRUE)
+elseif(CMAKE_BUILD_TYPE IN_LIST DX9_TYPES)
+    set(IS_DX9 TRUE)
+elseif(CMAKE_BUILD_TYPE IN_LIST DX10_TYPES)
+    set(IS_DX10 TRUE)
+elseif(CMAKE_BUILD_TYPE IN_LIST DX11_TYPES)
+    set(IS_DX11 TRUE)
+endif()
+
 ################################################################################
 # Global compiler options
 ################################################################################
@@ -200,25 +220,27 @@ add_subdirectory("3rd_party/OpenAL-new")
 add_subdirectory("3rd_party/optick")
 add_subdirectory(Layers/xrAPI)
 
-if(CMAKE_BUILD_TYPE MATCHES "^(DX8|DX8AVX|VerifiedDX8)$")
+if(IS_DX8)
     message(STATUS "Selected renderer: DirectX 8 (PC_R1)")
-    add_subdirectory(Layers/xrRenderPC_R1)
-endif()
-
-if(CMAKE_BUILD_TYPE MATCHES "^(DX9|DX9AVX|VerifiedDX9)$")
+    set(RENDERER_LIB xrRender_R1)
+    set(RENDERER_DIR Layers/xrRenderPC_R1)
+elseif(IS_DX9)
     message(STATUS "Selected renderer: DirectX 9 (PC_R2)")
-    add_subdirectory(Layers/xrRenderPC_R2)
-endif()
-
-if(CMAKE_BUILD_TYPE MATCHES "^(DX10|DX10AVX|VerifiedDX10)$")
+    set(RENDERER_LIB xrRender_R2)
+    set(RENDERER_DIR Layers/xrRenderPC_R2)
+elseif(IS_DX10)
     message(STATUS "Selected renderer: DirectX 10 (PC_R3)")
-    add_subdirectory(Layers/xrRenderPC_R3)
+    set(RENDERER_LIB xrRender_R3)
+    set(RENDERER_DIR Layers/xrRenderPC_R3)
+elseif(IS_DX11)
+    message(STATUS "Selected renderer: DirectX 11 (PC_R4)")
+    set(RENDERER_LIB xrRender_R4)
+    set(RENDERER_DIR Layers/xrRenderPC_R4)
+else()
+    message(FATAL_ERROR "No renderer selected")
 endif()
 
-if(CMAKE_BUILD_TYPE MATCHES "^(DX11|DX11AVX|VerifiedDX11)$")
-    message(STATUS "Selected renderer: DirectX 11 (PC_R4)")
-    add_subdirectory(Layers/xrRenderPC_R4)
-endif()
+add_subdirectory(${RENDERER_DIR})
 
 add_subdirectory(ReShadeCompat)
 add_subdirectory(xrCDB)

@@ -1027,10 +1027,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     xrXMLParser
     OpenAL32
     optick
-    xrRender_R4
-    xrRender_R2
-    xrRender_R3
-    xrRender_R1
+    ${RENDERER_LIB}
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
