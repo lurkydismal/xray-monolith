@@ -284,7 +284,7 @@ if(BUILD_DOCS)
             COMMAND ${UV_EXECUTABLE} sync
             COMMAND ${CMAKE_COMMAND} -E chdir
                     ${PROJECT_ROOT}/docs
-                    ${UV_EXECUTABLE} run ${MAKE_EXECUTABLE} html SPHINXOPTS=-j\ auto
+                    ${UV_EXECUTABLE} run ${MAKE_EXECUTABLE} html
             WORKING_DIRECTORY ${PROJECT_ROOT}
             COMMENT "Generating documentation"
         )
