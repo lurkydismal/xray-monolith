@@ -1,40 +1,43 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/**
- *	Contains a simple container class.
- *	\file		IceContainer.h
- *	\author		Pierre Terdiman
- *	\date		February, 5, 2000
- */
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Contains a simple container class.
+///
+/// @file IceContainer.h
+/// @author Pierre Terdiman
+/// @date February 5, 2000
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Include Guard
-#ifndef __ICECONTAINER_H__
-#define __ICECONTAINER_H__
+#pragma once
 
 #define CONTAINER_STATS
 
+/// Dynamic array container storing 32-bit values.
+///
+/// Provides automatic resizing, insertion, deletion, searching, and direct
+/// array-style access. The container stores values as udword internally and
+/// can also accept float values by storing their bit representation.
+///
+/// The storage buffer can either be released with Empty() or preserved with
+/// Reset() for reuse without additional allocations.
 class ICECORE_API Container
 {
 public:
-	// Constructor / Destructor
+ 	/// Creates an empty container.
 	Container();
+
+	/// Creates a container with a specified initial size and growth factor.
+    ///
+    /// @param size Initial number of allocated entries.
+    /// @param growth_factor Factor used when resizing the container.
 	Container(udword size, float growth_factor);
+
+	/// Destroys the container and releases allocated memory.
 	~Container();
-	// Management
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 *	A O(1) method to add a value in the container. The container is automatically resized if needed.
-	 *	The method is inline, not the resize. The call overhead happens on resizes only, which is not a problem since the resizing operation
-	 *	costs a lot more than the call overhead...
-	 *
-	 *	\param		entry		[in] a udword to store in the container
-	 *	\see		Add(float entry)
-	 *	\see		Empty()
-	 *	\see		Contains(udword entry)
-	 *	\return		Self-Reference
-	 */
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/// Adds a value to the end of the container.
+    ///
+    /// The container automatically grows if there is not enough space.
+    /// Complexity: O(1) amortized.
+    ///
+    /// @param entry Value to add.
+    /// @return Reference to this container.
 	inline_ Container& Add(udword entry)
 	{
 		// Resize if needed
@@ -45,6 +48,11 @@ public:
 		return *this;
 	}
 
+	/// Adds multiple values to the end of the container.
+    ///
+    /// @param entries Array of values to add.
+    /// @param nb Number of values to add.
+    /// @return Reference to this container.
 	inline_ Container& Add(const udword* entries, udword nb)
 	{
 		// Resize if needed
@@ -56,19 +64,12 @@ public:
 		return *this;
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 *	A O(1) method to add a value in the container. The container is automatically resized if needed.
-	 *	The method is inline, not the resize. The call overhead happens on resizes only, which is not a problem since the resizing operation
-	 *	costs a lot more than the call overhead...
-	 *
-	 *	\param		entry		[in] a float to store in the container
-	 *	\see		Add(udword entry)
-	 *	\see		Empty()
-	 *	\see		Contains(udword entry)
-	 *	\return		Self-Reference
-	 */
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// Adds a floating-point value to the container.
+    ///
+    /// The float value is stored as its raw bit representation.
+    ///
+    /// @param entry Floating-point value to add.
+    /// @return Reference to this container.
 	inline_ Container& Add(float entry)
 	{
 		// Resize if needed
@@ -79,6 +80,11 @@ public:
 		return *this;
 	}
 
+	/// Adds multiple floating-point values to the container.
+    ///
+    /// @param entries Array of values to add.
+    /// @param nb Number of values to add.
+    /// @return Reference to this container.
 	inline_ Container& Add(const float* entries, udword nb)
 	{
 		// Resize if needed
@@ -90,20 +96,19 @@ public:
 		return *this;
 	}
 
-	//! Add unique [slow]
+	/// Adds a value only if it does not already exist in the container.
+    ///
+    /// @param entry Value to add.
+    /// @return Reference to this container.
 	Container& AddUnique(udword entry)
 	{
 		if (!Contains(entry)) Add(entry);
 		return *this;
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 *	Clears the container. All stored values are deleted, and it frees used ram.
-	 *	\see		Reset()
-	 *	\return		Self-Reference
-	 */
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// Clears the container and releases allocated memory.
+    ///
+    /// @return Reference to this container.
 	inline_ Container& Empty()
 	{
 #ifdef CONTAINER_STATS
@@ -114,13 +119,9 @@ public:
 		return *this;
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 *	Resets the container. Stored values are discarded but the buffer is kept so that further calls don't need resizing again.
-	 *	That's a kind of temporal coherence.
-	 *	\see		Empty()
-	 */
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// Removes all entries while keeping the allocated memory.
+    ///
+    /// Useful when the container will be reused to avoid reallocations.
 	inline_ void Reset()
 	{
 		// Avoid the write if possible
@@ -128,57 +129,70 @@ public:
 		if (mCurNbEntries) mCurNbEntries = 0;
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 *	Sets the initial size of the container. If it already contains something, it's discarded.
-	 *	\param		nb		[in] Number of entries
-	 *	\return		true if success
-	 */
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// Sets the number of allocated entries.
+    ///
+    /// Existing contents are discarded.
+    ///
+    /// @param nb Number of entries to allocate.
+    /// @return true on success.
 	bool SetSize(udword nb);
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 *	Refits the container and get rid of unused bytes.
-	 *	\return		true if success
-	 */
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// Shrinks the container allocation to fit the current number of entries.
+    ///
+    /// @return true on success.
 	bool Refit();
 
-	// Checks whether the container already contains a given value.
+	/// Checks whether the container contains a value.
+    ///
+    /// @param entry Value to search for.
+    /// @param location Optional pointer receiving the found index.
+    /// @return true if the value exists.
 	bool Contains(udword entry, udword* location = null) const;
-	// Deletes an entry - doesn't preserve insertion order.
+
+	/// Removes a value without preserving insertion order.
 	bool Delete(udword entry);
-	// Deletes an entry - does preserve insertion order.
+
+	/// Removes a value while preserving insertion order.
 	bool DeleteKeepingOrder(udword entry);
-	//! Deletes the very last entry.
+
+	/// Removes the last entry.
 	inline_ void DeleteLastEntry() { if (mCurNbEntries) mCurNbEntries--; }
-	//! Deletes the entry whose index is given
+
+	/// Removes an entry by index without preserving insertion order.
 	inline_ void DeleteIndex(udword index) { mEntries[index] = mEntries[--mCurNbEntries]; }
 
-	// Helpers
+	/// Finds the next matching entry.
 	Container& FindNext(udword& entry, bool wrap = false);
+
+	/// Finds the previous matching entry.
 	Container& FindPrev(udword& entry, bool wrap = false);
-	// Data access.
-	inline_ udword GetNbEntries() const { return mCurNbEntries; } //!< Returns the current number of entries.
-	inline_ udword GetEntry(udword i) const { return mEntries[i]; } //!< Returns ith entry
-	inline_ udword* GetEntries() const { return mEntries; } //!< Returns the list of entries.
 
-	// Growth control
-	inline_ float GetGrowthFactor() const { return mGrowthFactor; } //!< Returns the growth factor
-	inline_ void SetGrowthFactor(float growth) { mGrowthFactor = growth; } //!< Sets the growth factor
+	/// Returns the current number of entries.
+	inline_ udword GetNbEntries() const { return mCurNbEntries; }
 
-	//! Access as an array
+	/// Returns an entry by index.
+	inline_ udword GetEntry(udword i) const { return mEntries[i]; }
+
+	/// Returns the internal entry buffer.
+	inline_ udword* GetEntries() const { return mEntries; }
+
+	/// Returns the current resize growth factor.
+	inline_ float GetGrowthFactor() const { return mGrowthFactor; }
+
+	/// Sets the resize growth factor.
+	inline_ void SetGrowthFactor(float growth) { mGrowthFactor = growth; }
+
+	/// Provides array-style access to entries.
 	inline_ udword& operator[](udword i) const
 	{
 		ASSERT(i>=0 && i<mCurNbEntries);
 		return mEntries[i];
 	}
 
-	// Stats
+	/// Returns the amount of memory used by the container.
 	udword GetUsedRam() const;
 
-	//! Operator for Container A = Container B
+	/// Copies the contents of another container.
 	void operator =(const Container& object)
 	{
 		SetSize(object.GetNbEntries());
@@ -187,43 +201,67 @@ public:
 	}
 
 #ifdef CONTAINER_STATS
+	/// Returns the number of currently existing Container instances.
 	inline_ udword GetNbContainers() const { return mNbContainers; }
-	inline_ udword GetTotalBytes() const { return mUsedRam; }
-private:
 
-	static udword mNbContainers; //!< Number of containers around
-	static udword mUsedRam; //!< Amount of bytes used by containers in the system
-#endif
+	/// Returns the total amount of memory allocated by all containers.
+	inline_ udword GetTotalBytes() const { return mUsedRam; }
+
 private:
-	// Resizing
+	static udword mNbContainers; ///< Global count of active Container instances.
+	static udword mUsedRam; ///< Total memory currently allocated by all Container instances.
+#endif
+
+private:
+	/// Resizes the internal storage buffer.
+    ///
+    /// @param needed Additional number of entries required.
+    /// @return true on success.
 	bool Resize(udword needed = 1);
+
 	// Data
-	udword mMaxNbEntries; //!< Maximum possible number of entries
-	udword mCurNbEntries; //!< Current number of entries
-	udword* mEntries; //!< List of entries
-	float mGrowthFactor; //!< Resize: _new_ number of entries = old number * mGrowthFactor
+	udword mMaxNbEntries; ///< Maximum allocated number of entries.
+	udword mCurNbEntries; ///< Current number of stored entries.
+	udword* mEntries; ///< Pointer to the entry storage buffer.
+	float mGrowthFactor; ///< Resize multiplier.
 };
 
+/// Container storing a collection of pairs.
+/// 
+/// Provides helpers for adding and accessing pairs stored internally as
+/// consecutive entries in the base Container.
 class ICECORE_API Pairs : public Container
 {
 public:
-	// Constructor / Destructor
+	/// Creates an empty pair container.
 	inline_ Pairs()
 	{
 	}
 
+	/// Destroys the pair container.
 	inline_ ~Pairs()
 	{
 	}
 
+	/// Returns the number of stored pairs.
+    ///
+    /// The number of pairs is calculated from the number of entries,
+    /// as each pair occupies two consecutive entries.
 	inline_ udword GetNbPairs() const { return GetNbEntries() >> 1; }
+
+	/// Returns the internal pair data array.
+    ///
+    /// The returned pointer references the container's underlying storage
+    /// interpreted as Pair objects.
 	inline_ Pair* GetPairs() const { return (Pair*)GetEntries(); }
 
+	/// Adds a pair to the container.
+    ///
+    /// @param p Pair to add.
+    /// @return Reference to this container.
 	Pairs& AddPair(const Pair& p)
 	{
 		Add(p.id0).Add(p.id1);
 		return *this;
 	}
 };
-
-#endif // __ICECONTAINER_H__
