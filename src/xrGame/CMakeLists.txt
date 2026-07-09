@@ -3247,11 +3247,6 @@ set(Core__Client__Effects
 )
 source_group("Core\\Client\\Effects" FILES ${Core__Client__Effects})
 
-set(Core__Client__Effects__Core
-    "DynamicHeightMap.h"
-)
-source_group("Core\\Client\\Effects\\Core" FILES ${Core__Client__Effects__Core})
-
 set(Core__Client__Game_Persistent
     "GamePersistent.cpp"
     "GamePersistent.h"
@@ -6387,7 +6382,6 @@ set(ALL_FILES
     ${Core__Client__Effectors__Weapon}
     ${Core__Client__Effectors__monsters}
     ${Core__Client__Effects}
-    ${Core__Client__Effects__Core}
     ${Core__Client__Game_Persistent}
     ${Core__Client__Level}
     ${Core__Client__Level_Controller}
