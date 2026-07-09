@@ -8,6 +8,11 @@ default: build-release
 build-release:
     ninja
 
+# Builds the project documentation target.
+[working-directory('src/build_msvc')]
+build-docs:
+    cmake --build . --target docs
+
 # Creates the out-of-source build directory used for the MSVC build.
 make-build-directory:
     mkdir src/build_msvc
