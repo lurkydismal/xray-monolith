@@ -45,3 +45,4 @@ compressor/mod/
 /broken.txt
 /init.fish
 /malformed.txt
+/docs/doxygen/xml

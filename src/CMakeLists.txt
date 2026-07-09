@@ -263,3 +263,26 @@ add_subdirectory(xrPhysics)
 add_subdirectory(xrSound)
 add_subdirectory(xrXMLParser)
 
+option(BUILD_DOCS "Enable documentation target" ON)
+
+if(BUILD_DOCS)
+    find_package(Doxygen QUIET)
+    find_program(UV_EXECUTABLE uv)
+    find_program(MAKE_EXECUTABLE NAMES make gmake)
+
+    if(DOXYGEN_FOUND AND UV_EXECUTABLE AND MAKE_EXECUTABLE)
+        set(PROJECT_ROOT "${CMAKE_SOURCE_DIR}/..")
+
+        add_custom_target(docs
+            COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_ROOT}/Doxyfile
+            COMMAND ${UV_EXECUTABLE} sync
+            COMMAND ${CMAKE_COMMAND} -E chdir
+                    ${PROJECT_ROOT}/docs
+                    ${UV_EXECUTABLE} run ${MAKE_EXECUTABLE} html SPHINXOPTS=-j\ auto
+            WORKING_DIRECTORY ${PROJECT_ROOT}
+            COMMENT "Generating documentation"
+        )
+    else()
+        message(STATUS "Documentation target disabled (missing Doxygen, uv, or make)")
+    endif()
+endif()
