@@ -102,5 +102,7 @@ enum class ECoreParams : u8
 };
 
 namespace xrParams {
+	/// Loads core parameters from the command line and enables matching ECoreParams flags.
+	/// Handles special-case parameter aliases before performing enum lookup.
 	void LoadParams();
 }
