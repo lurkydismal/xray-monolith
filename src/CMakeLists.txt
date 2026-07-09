@@ -271,6 +271,12 @@ if(BUILD_DOCS)
     find_program(MAKE_EXECUTABLE NAMES make gmake)
 
     if(DOXYGEN_FOUND AND UV_EXECUTABLE AND MAKE_EXECUTABLE)
+        if(DOXYGEN_DOT_FOUND)
+            message(STATUS "Graphviz support enabled")
+        else()
+            message(STATUS "Graphviz not found; graphs disabled")
+        endif()
+
         set(PROJECT_ROOT "${CMAKE_SOURCE_DIR}/..")
 
         add_custom_target(docs
@@ -283,6 +289,6 @@ if(BUILD_DOCS)
             COMMENT "Generating documentation"
         )
     else()
-        message(STATUS "Documentation target disabled (missing Doxygen, uv, or make)")
+        message(STATUS "Documentation target disabled (missing Doxygen, Graphviz (dot), uv, or make)")
     endif()
 endif()
