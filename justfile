@@ -4,18 +4,15 @@
 default: build-release
 
 # Builds the project in release mode.
-[script('fish')]
 [working-directory('src/build_msvc')]
 build-release:
     ninja
 
 # Creates the out-of-source build directory used for the MSVC build.
-[script]
 make-build-directory:
     mkdir src/build_msvc
 
 # Generates CMake build files for an MSVC Windows DX11 build in the build directory.
-[script]
 [working-directory('src/build_msvc')]
 generate-build-files:
     CC=cl CXX=cl \
