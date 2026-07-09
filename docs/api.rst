@@ -1,4 +1,8 @@
 API Reference
 =============
 
-.. doxygenindex::
+Namespace ALife
+----------------
+
+.. doxygennamespace:: ALife
+   :members:
