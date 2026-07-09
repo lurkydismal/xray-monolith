@@ -51,6 +51,12 @@ struct SFillPropData
 	void dec();
 };
 
+// Base class for ALife objects that participate in the scheduler.
+//
+// Provides the common interface used by the ALife simulation to update
+// scheduled objects, query their AI characteristics, and (in the game
+// build) perform combat, inventory, and interaction logic. It also
+// stores cached references to the currently selected weapon and detector.
 SERVER_ENTITY_DECLARE_BEGIN(CSE_ALifeSchedulable, IPureSchedulableObject)
 	CSE_ALifeItemWeapon* m_tpCurrentBestWeapon;
 	CSE_ALifeDynamicObject* m_tpBestDetector;
@@ -303,6 +309,12 @@ public:
 #endif
 };
 
+// Base class for dynamic ALife objects.
+//
+// Represents objects whose state changes during the simulation. It
+// provides lifecycle callbacks for registration and online/offline
+// switching, inventory attachment support, and network
+// serialization/deserialization of state updates.
 SERVER_ENTITY_DECLARE_BEGIN(CSE_ALifeDynamicObject, CSE_ALifeObject)
 	ALife::_TIME_ID m_tTimeID;
 	u64 m_switch_counter;
