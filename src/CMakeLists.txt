@@ -289,6 +289,6 @@ if(BUILD_DOCS)
             COMMENT "Generating documentation"
         )
     else()
-        message(STATUS "Documentation target disabled (missing Doxygen, Graphviz (dot), uv, or make)")
+        message(STATUS "Documentation target disabled (missing Doxygen, uv, or make)")
     endif()
 endif()
