@@ -452,39 +452,47 @@ set(ALL_FILES
 ################################################################################
 # Target
 ################################################################################
-add_executable(${PROJECT_NAME} ${ALL_FILES})
+set(OBJECT_TARGET ${PROJECT_NAME}_objects)
+set(EXECUTABLE_TARGET ${PROJECT_NAME}_exe)
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE
+add_library(${OBJECT_TARGET} OBJECT ${ALL_FILES})
+add_library(${PROJECT_NAME} STATIC $<TARGET_OBJECTS:${OBJECT_TARGET}>)
+add_executable(${EXECUTABLE_TARGET} "x_ray_winmain.cpp")
+
+target_precompile_headers(${OBJECT_TARGET} PRIVATE
+    "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h>"
+)
+target_precompile_headers(${EXECUTABLE_TARGET} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h>"
 )
 
-use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
+use_props(${OBJECT_TARGET} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 ################################################################################
 # Includes for CMake from *.props
 ################################################################################
-use_props(${PROJECT_NAME} DX10             "../Common.cmake")
-use_props(${PROJECT_NAME} DX10AVX          "../Common.cmake")
-use_props(${PROJECT_NAME} DX11             "../Common.cmake")
-use_props(${PROJECT_NAME} DX11AVX          "../Common.cmake")
-use_props(${PROJECT_NAME} DX8              "../Common.cmake")
-use_props(${PROJECT_NAME} DX8AVX           "../Common.cmake")
-use_props(${PROJECT_NAME} DX9              "../Common.cmake")
-use_props(${PROJECT_NAME} DX9AVX           "../Common.cmake")
-use_props(${PROJECT_NAME} ProfiledDX11     "../Common.cmake")
-use_props(${PROJECT_NAME} Release          "../Common.cmake")
-use_props(${PROJECT_NAME} ReleaseAVX       "../Common.cmake")
-use_props(${PROJECT_NAME} Verified         "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX11     "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX11ASAN "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX8      "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX9      "../Common.cmake")
+use_props(${OBJECT_TARGET} DX10             "../Common.cmake")
+use_props(${OBJECT_TARGET} DX10AVX          "../Common.cmake")
+use_props(${OBJECT_TARGET} DX11             "../Common.cmake")
+use_props(${OBJECT_TARGET} DX11AVX          "../Common.cmake")
+use_props(${OBJECT_TARGET} DX8              "../Common.cmake")
+use_props(${OBJECT_TARGET} DX8AVX           "../Common.cmake")
+use_props(${OBJECT_TARGET} DX9              "../Common.cmake")
+use_props(${OBJECT_TARGET} DX9AVX           "../Common.cmake")
+use_props(${OBJECT_TARGET} ProfiledDX11     "../Common.cmake")
+use_props(${OBJECT_TARGET} Release          "../Common.cmake")
+use_props(${OBJECT_TARGET} ReleaseAVX       "../Common.cmake")
+use_props(${OBJECT_TARGET} Verified         "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX11     "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX11ASAN "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX8      "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX9      "../Common.cmake")
 
 set(ROOT_NAMESPACE xrEngine)
 
 ################################################################################
 # Target name
 ################################################################################
-set_target_properties(${PROJECT_NAME} PROPERTIES
+set_target_properties(${EXECUTABLE_TARGET} PROPERTIES
     TARGET_NAME_DX10             "AnomalyDX10"
     TARGET_NAME_DX10AVX          "AnomalyDX10AVX"
     TARGET_NAME_DX11             "AnomalyDX11"
@@ -505,7 +513,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 ################################################################################
 # Output directory
 ################################################################################
-set_target_properties(${PROJECT_NAME} PROPERTIES
+set_target_properties(${EXECUTABLE_TARGET} PROPERTIES
     OUTPUT_DIRECTORY_DX10             "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
     OUTPUT_DIRECTORY_DX10AVX          "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
     OUTPUT_DIRECTORY_DX11             "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
@@ -559,7 +567,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_NAME_VERIFIEDDX8      "${TARGET_NAME}"
     ARCHIVE_OUTPUT_NAME_VERIFIEDDX9      "${TARGET_NAME}"
 )
-set_target_properties(${PROJECT_NAME} PROPERTIES
+set_target_properties(${OBJECT_TARGET} ${EXECUTABLE_TARGET} PROPERTIES
     INTERPROCEDURAL_OPTIMIZATION_DX10             "TRUE"
     INTERPROCEDURAL_OPTIMIZATION_DX10AVX          "TRUE"
     INTERPROCEDURAL_OPTIMIZATION_DX11             "TRUE"
@@ -576,7 +584,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 ################################################################################
 # MSVC runtime library
 ################################################################################
-get_property(MSVC_RUNTIME_LIBRARY_DEFAULT TARGET ${PROJECT_NAME} PROPERTY MSVC_RUNTIME_LIBRARY)
+get_property(MSVC_RUNTIME_LIBRARY_DEFAULT TARGET ${OBJECT_TARGET} PROPERTY MSVC_RUNTIME_LIBRARY)
 string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
     $<$<CONFIG:Verified>:
         MultiThreadedDLL
@@ -595,12 +603,13 @@ string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
     >
     $<$<NOT:$<OR:$<CONFIG:Verified>,$<CONFIG:VerifiedDX11>,$<CONFIG:VerifiedDX11ASAN>,$<CONFIG:VerifiedDX8>,$<CONFIG:VerifiedDX9>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
 )
-set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
+set_target_properties(${OBJECT_TARGET} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
+set_target_properties(${EXECUTABLE_TARGET} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
 
 ################################################################################
 # Include directories
 ################################################################################
-target_include_directories(${PROJECT_NAME} PUBLIC
+target_include_directories(${OBJECT_TARGET} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/.;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/imgui;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/luajit-2/src;"
@@ -612,11 +621,13 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include/OpenAutomate"
 )
+target_include_directories(${PROJECT_NAME} PUBLIC "$<TARGET_PROPERTY:${OBJECT_TARGET},INCLUDE_DIRECTORIES>")
+target_include_directories(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJECT_TARGET},INCLUDE_DIRECTORIES>")
 
 ################################################################################
 # Compile definitions
 ################################################################################
-target_compile_definitions(${PROJECT_NAME} PRIVATE
+target_compile_definitions(${OBJECT_TARGET} PRIVATE
     "$<$<CONFIG:DX10>:"
         "STATIC_RENDERER_R3;"
         "_MBCS"
@@ -698,11 +709,13 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     "AL_LIBTYPE_STATIC"
 )
 
+target_compile_definitions(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJECT_TARGET},COMPILE_DEFINITIONS>")
+
 ################################################################################
 # Compile and link options
 ################################################################################
 if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE
+    target_compile_options(${OBJECT_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
             /GL;
             /O2;
@@ -890,7 +903,8 @@ if(MSVC)
         >
         /std:c++17
     )
-    target_link_options(${PROJECT_NAME} PRIVATE
+    target_compile_options(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJECT_TARGET},COMPILE_OPTIONS>")
+    target_link_options(${EXECUTABLE_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
             /OPT:REF;
             /LTCG;
@@ -1002,9 +1016,15 @@ add_dependencies(${PROJECT_NAME}
     giflib
     imgui
 )
+add_dependencies(${EXECUTABLE_TARGET}
+    LuaJIT-2
+    ReShadeCompat
+    giflib
+    imgui
+)
 
 # Link with other targets.
-target_link_libraries(${PROJECT_NAME} PRIVATE
+target_link_libraries(${PROJECT_NAME} PUBLIC
     LuaJIT-2
     luabind
     xrAPI
@@ -1041,9 +1061,10 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "OpenAL32;"
     "giflib"
 )
-target_link_libraries(${PROJECT_NAME} PRIVATE "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+target_link_libraries(${EXECUTABLE_TARGET} PRIVATE ${OBJECT_TARGET} ${PROJECT_NAME})
 
-target_link_directories(${PROJECT_NAME} PRIVATE
+target_link_directories(${PROJECT_NAME} PUBLIC
     "$<$<CONFIG:DX10>:"
         "${OUTPUT_DIRECTORY}${CMAKE_VS_PLATFORM_NAME}/Release/;"
         "${CMAKE_CURRENT_SOURCE_DIR}/../../lib/${CMAKE_VS_PLATFORM_NAME}/Release;"

@@ -64,6 +64,7 @@ function(add_xray_discovered_tests)
         GTest::gtest_main
         GTest::gmock
         xrCore
+        xrEngine
     )
 
     # Match the engine's C++ language level for test translation units.
