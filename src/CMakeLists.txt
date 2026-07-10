@@ -263,6 +263,15 @@ add_subdirectory(xrPhysics)
 add_subdirectory(xrSound)
 add_subdirectory(xrXMLParser)
 
+
+################################################################################
+# Unit testing support
+################################################################################
+# Include the project test integration after production targets are declared so
+# test executables can link against existing libraries without adding test files
+# to any production target.
+include(CMake/XRayTesting.cmake)
+
 option(BUILD_DOCS "Enable documentation target" ON)
 
 if(BUILD_DOCS)
