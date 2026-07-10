@@ -7,6 +7,9 @@ API Reference
 .. doxygennamespace:: IceCore
    :members:
 
+.. doxygennamespace:: IceMaths
+   :members:
+
 .. doxygennamespace:: RatSpace
    :members:
 
