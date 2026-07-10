@@ -988,6 +988,7 @@ if(MSVC)
         >
         /DEBUG;
         /LTCG:INCREMENTAL;
+        /SUBSYSTEM:WINDOWS;
         /ignore:4099
     )
 endif()
