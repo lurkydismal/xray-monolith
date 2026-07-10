@@ -7107,6 +7107,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrXMLParser
     xrCDB
     xrCore
+    imgui
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC

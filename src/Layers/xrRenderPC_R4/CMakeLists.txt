@@ -1111,6 +1111,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     crypto
     xrCore
     xrCPU_Pipe
+    imgui
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
