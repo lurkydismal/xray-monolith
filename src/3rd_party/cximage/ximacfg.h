@@ -10,7 +10,7 @@ extern "C" void*	cxrealloc(void* ptr, size_t size);
 #include "xrCore/xrCore.h"
 
 #pragma comment(lib,"libjpeg.lib")
-#pragma comment(lib,"xrCore.lib")
+// #pragma comment(lib,"xrCore.lib")
 
 #ifdef DEBUG
 #include "xrCore/ftimer.h"
