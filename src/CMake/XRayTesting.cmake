@@ -58,13 +58,14 @@ function(add_xray_discovered_tests)
         "${CMAKE_SOURCE_DIR}"
     )
 
+    xray_collect_test_link_targets(XRAY_TEST_LINK_TARGETS)
+
     # GoogleTest supplies the test runner entry point; GoogleMock is linked so
     # tests can use mocks when they add value without requiring extra CMake edits.
     target_link_libraries(xray_unit_tests PRIVATE
         GTest::gtest_main
         GTest::gmock
-        xrCore
-        xrEngine
+        ${XRAY_TEST_LINK_TARGETS}
     )
 
     # Match the engine's C++ language level for test translation units.
@@ -73,6 +74,52 @@ function(add_xray_discovered_tests)
     # Discover individual TEST/TEST_F cases from the built binary and register
     # them with CTest automatically.
     gtest_discover_tests(xray_unit_tests)
+endfunction()
+
+# xray_collect_test_link_targets discovers all linkable project targets so the
+# aggregate test binary exercises the same CMake targets declared by sdk/, src/,
+# and src/3rd_party/. Dual libraries are resolved to their shared variants to
+# preserve the default test behavior when PROJECT_SHARED_LIBS is OFF.
+function(xray_collect_test_link_targets OUT_VAR)
+    xray_collect_directory_targets("${CMAKE_SOURCE_DIR}" DISCOVERED_TARGETS)
+
+    set(RESULT)
+    foreach(DISCOVERED_TARGET IN LISTS DISCOVERED_TARGETS)
+        if(DISCOVERED_TARGET STREQUAL "xray_unit_tests")
+            continue()
+        endif()
+
+        get_target_property(TARGET_TYPE "${DISCOVERED_TARGET}" TYPE)
+        if(NOT TARGET_TYPE MATCHES "^(STATIC_LIBRARY|SHARED_LIBRARY|MODULE_LIBRARY|INTERFACE_LIBRARY|UNKNOWN_LIBRARY)$")
+            continue()
+        endif()
+
+        if(TARGET "${DISCOVERED_TARGET}_shared")
+            set(DISCOVERED_TARGET "${DISCOVERED_TARGET}_shared")
+        endif()
+
+        if(NOT DISCOVERED_TARGET IN_LIST RESULT)
+            list(APPEND RESULT "${DISCOVERED_TARGET}")
+        endif()
+    endforeach()
+
+    set(${OUT_VAR} "${RESULT}" PARENT_SCOPE)
+endfunction()
+
+# xray_collect_directory_targets recursively walks CMake's directory tree and
+# returns targets declared in the root project, including out-of-tree sdk targets
+# that were added with add_subdirectory().
+function(xray_collect_directory_targets DIRECTORY OUT_VAR)
+    get_property(LOCAL_TARGETS DIRECTORY "${DIRECTORY}" PROPERTY BUILDSYSTEM_TARGETS)
+    set(RESULT ${LOCAL_TARGETS})
+
+    get_property(SUBDIRECTORIES DIRECTORY "${DIRECTORY}" PROPERTY SUBDIRECTORIES)
+    foreach(SUBDIRECTORY IN LISTS SUBDIRECTORIES)
+        xray_collect_directory_targets("${SUBDIRECTORY}" SUBDIRECTORY_TARGETS)
+        list(APPEND RESULT ${SUBDIRECTORY_TARGETS})
+    endforeach()
+
+    set(${OUT_VAR} "${RESULT}" PARENT_SCOPE)
 endfunction()
 
 add_xray_discovered_tests()
