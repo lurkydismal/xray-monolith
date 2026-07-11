@@ -259,7 +259,6 @@ add_subdirectory(${RENDERER_DIR})
 
 add_subdirectory(ReShadeCompat)
 add_subdirectory(xrCDB)
-add_subdirectory(xrServerEntities)
 add_subdirectory(xrCore)
 add_subdirectory(xrCPU_Pipe)
 add_subdirectory(xrEngine)
