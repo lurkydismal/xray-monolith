@@ -467,6 +467,7 @@ target_precompile_headers(${EXECUTABLE_TARGET} PRIVATE
 )
 
 use_props(${OBJECT_TARGET} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
+use_props(${EXECUTABLE_TARGET} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 ################################################################################
 # Includes for CMake from *.props
 ################################################################################
