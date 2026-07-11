@@ -63,8 +63,8 @@ function(add_xray_discovered_tests)
     target_link_libraries(xray_unit_tests PRIVATE
         GTest::gtest_main
         GTest::gmock
-        xrCore
-        xrEngine
+        xrCore_shared
+        xrEngine_shared
     )
 
     # Match the engine's C++ language level for test translation units.

@@ -455,8 +455,7 @@ set(ALL_FILES
 set(OBJECT_TARGET ${PROJECT_NAME}_objects)
 set(EXECUTABLE_TARGET ${PROJECT_NAME}_exe)
 
-add_library(${OBJECT_TARGET} OBJECT ${ALL_FILES})
-add_library(${PROJECT_NAME} STATIC $<TARGET_OBJECTS:${OBJECT_TARGET}>)
+xray_add_dual_library(${PROJECT_NAME} ${OBJECT_TARGET} ${ALL_FILES})
 add_executable(${EXECUTABLE_TARGET} "x_ray_winmain.cpp")
 
 target_precompile_headers(${OBJECT_TARGET} PRIVATE
@@ -622,6 +621,7 @@ target_include_directories(${OBJECT_TARGET} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include/OpenAutomate"
 )
 target_include_directories(${PROJECT_NAME} PUBLIC "$<TARGET_PROPERTY:${OBJECT_TARGET},INCLUDE_DIRECTORIES>")
+target_include_directories(${PROJECT_NAME}_shared PUBLIC "$<TARGET_PROPERTY:${OBJECT_TARGET},INCLUDE_DIRECTORIES>")
 target_include_directories(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJECT_TARGET},INCLUDE_DIRECTORIES>")
 
 ################################################################################
@@ -1024,7 +1024,7 @@ add_dependencies(${EXECUTABLE_TARGET}
 )
 
 # Link with other targets.
-target_link_libraries(${PROJECT_NAME} PUBLIC
+set(XR_ENGINE_LINK_LIBRARIES
     LuaJIT-2
     luabind
     xrAPI
@@ -1052,6 +1052,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     optick
     ${RENDERER_LIB}
 )
+target_link_libraries(${PROJECT_NAME} PUBLIC ${XR_ENGINE_LINK_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}_shared PUBLIC ${XR_ENGINE_LINK_LIBRARIES})
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "vfw32;"
@@ -1062,6 +1064,7 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "giflib"
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+target_link_libraries(${PROJECT_NAME}_shared PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 target_link_libraries(${EXECUTABLE_TARGET} PRIVATE ${OBJECT_TARGET} ${PROJECT_NAME})
 
 target_link_directories(${PROJECT_NAME} PUBLIC

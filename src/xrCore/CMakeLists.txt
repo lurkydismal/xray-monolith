@@ -342,9 +342,10 @@ set(ALL_FILES
 ################################################################################
 # Target
 ################################################################################
-add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
+set(OBJECT_TARGET ${PROJECT_NAME}_objects)
+xray_add_dual_library(${PROJECT_NAME} ${OBJECT_TARGET} ${ALL_FILES})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE
+target_precompile_headers(${OBJECT_TARGET} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h>"
 )
 
@@ -352,27 +353,33 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE
 target_link_libraries(${PROJECT_NAME} PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
 )
+target_link_libraries(${PROJECT_NAME}_shared PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
+)
 
-use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
+use_props(${OBJECT_TARGET} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 ################################################################################
 # Includes for CMake from *.props
 ################################################################################
-use_props(${PROJECT_NAME} DX10             "../Common.cmake")
-use_props(${PROJECT_NAME} DX10AVX          "../Common.cmake")
-use_props(${PROJECT_NAME} DX11             "../Common.cmake")
-use_props(${PROJECT_NAME} DX11AVX          "../Common.cmake")
-use_props(${PROJECT_NAME} DX8              "../Common.cmake")
-use_props(${PROJECT_NAME} DX8AVX           "../Common.cmake")
-use_props(${PROJECT_NAME} DX9              "../Common.cmake")
-use_props(${PROJECT_NAME} DX9AVX           "../Common.cmake")
-use_props(${PROJECT_NAME} ProfiledDX11     "../Common.cmake")
-use_props(${PROJECT_NAME} Release          "../Common.cmake")
-use_props(${PROJECT_NAME} ReleaseAVX       "../Common.cmake")
-use_props(${PROJECT_NAME} Verified         "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX11     "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX11ASAN "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX8      "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX9      "../Common.cmake")
+use_props(${OBJECT_TARGET} DX10             "../Common.cmake")
+use_props(${OBJECT_TARGET} DX10AVX          "../Common.cmake")
+use_props(${OBJECT_TARGET} DX11             "../Common.cmake")
+use_props(${OBJECT_TARGET} DX11AVX          "../Common.cmake")
+use_props(${OBJECT_TARGET} DX8              "../Common.cmake")
+use_props(${OBJECT_TARGET} DX8AVX           "../Common.cmake")
+use_props(${OBJECT_TARGET} DX9              "../Common.cmake")
+use_props(${OBJECT_TARGET} DX9AVX           "../Common.cmake")
+use_props(${OBJECT_TARGET} ProfiledDX11     "../Common.cmake")
+use_props(${OBJECT_TARGET} Release          "../Common.cmake")
+use_props(${OBJECT_TARGET} ReleaseAVX       "../Common.cmake")
+use_props(${OBJECT_TARGET} Verified         "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX11     "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX11ASAN "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX8      "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX9      "../Common.cmake")
+
+target_include_directories(${PROJECT_NAME} PUBLIC "$<TARGET_PROPERTY:${OBJECT_TARGET},INCLUDE_DIRECTORIES>")
+target_include_directories(${PROJECT_NAME}_shared PUBLIC "$<TARGET_PROPERTY:${OBJECT_TARGET},INCLUDE_DIRECTORIES>")
 
 set(ROOT_NAMESPACE xrCore)
 
@@ -481,7 +488,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUN
 ################################################################################
 # Include directories
 ################################################################################
-target_include_directories(${PROJECT_NAME} PUBLIC
+target_include_directories(${OBJECT_TARGET} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/.;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/optick-git/src;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include"
@@ -490,7 +497,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 ################################################################################
 # Compile definitions
 ################################################################################
-target_compile_definitions(${PROJECT_NAME} PRIVATE
+target_compile_definitions(${OBJECT_TARGET} PRIVATE
     "$<$<CONFIG:DX10>:"
         "PROFILER_OPTICK"
     ">"
@@ -551,7 +558,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 # Compile and link options
 ################################################################################
 if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE
+    target_compile_options(${OBJECT_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
             /GL;
             /O2;
