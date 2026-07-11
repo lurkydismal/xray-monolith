@@ -350,10 +350,10 @@ target_precompile_headers(${OBJECT_TARGET} PRIVATE
 )
 
 # TODO: Refactor into a separate target
-target_link_libraries(${PROJECT_NAME} PRIVATE
+xray_link_project_libraries(${PROJECT_NAME} PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
 )
-target_link_libraries(${PROJECT_NAME}_shared PRIVATE
+xray_link_project_libraries(${PROJECT_NAME}_shared PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
 )
 

@@ -1088,7 +1088,7 @@ endif()
 # Dependencies
 ################################################################################
 # Link with other targets.
-target_link_libraries(${PROJECT_NAME} PUBLIC
+xray_link_project_libraries(${PROJECT_NAME} PUBLIC
     xrCPU_Pipe
     xrParticles
     xrAPI
@@ -1102,7 +1102,7 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "dxgi;"
     "nvapi"
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+xray_link_project_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 
 target_link_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../../3rd_party/luajit-2/src/;"

@@ -1052,8 +1052,8 @@ set(XR_ENGINE_LINK_LIBRARIES
     optick
     ${RENDERER_LIB}
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC ${XR_ENGINE_LINK_LIBRARIES})
-target_link_libraries(${PROJECT_NAME}_shared PUBLIC ${XR_ENGINE_LINK_LIBRARIES})
+xray_link_project_libraries(${PROJECT_NAME} PUBLIC ${XR_ENGINE_LINK_LIBRARIES})
+xray_link_project_libraries(${PROJECT_NAME}_shared PUBLIC ${XR_ENGINE_LINK_LIBRARIES})
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "vfw32;"
@@ -1063,9 +1063,9 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "OpenAL32;"
     "giflib"
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
-target_link_libraries(${PROJECT_NAME}_shared PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
-target_link_libraries(${EXECUTABLE_TARGET} PRIVATE ${OBJECT_TARGET} ${PROJECT_NAME})
+xray_link_project_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+xray_link_project_libraries(${PROJECT_NAME}_shared PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+xray_link_project_libraries(${EXECUTABLE_TARGET} PRIVATE ${OBJECT_TARGET} ${PROJECT_NAME})
 
 target_link_directories(${PROJECT_NAME} PUBLIC
     "$<$<CONFIG:DX10>:"
