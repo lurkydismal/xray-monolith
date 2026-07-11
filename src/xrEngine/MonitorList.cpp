@@ -12,7 +12,7 @@
 #include "stdafx.h"
 #include "MonitorList.h"
 
-// #pragma comment\(lib, "cfgmgr32.lib")
+#pragma comment(lib, "cfgmgr32.lib")
 #include <cfgmgr32.h>
 #include <initguid.h>
 #include <devpkey.h>

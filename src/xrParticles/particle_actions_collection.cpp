@@ -1675,7 +1675,7 @@ extern void noise3Init();
 
 #include <xmmintrin.h>
 #include "../xrCPU_Pipe/ttapi.h"
-// #pragma comment\(lib,"xrCPU_Pipe.lib")
+#pragma comment(lib,"xrCPU_Pipe.lib")
 
 __forceinline __m128 _mm_load_fvector(const Fvector& v)
 {

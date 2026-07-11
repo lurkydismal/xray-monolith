@@ -22,7 +22,7 @@
 #		include <shlwapi.h>
 #	pragma warning(pop)
 
-// #pragma comment\(lib, "shlwapi.lib")
+#pragma comment(lib, "shlwapi.lib")
 static SFillPropData			fp_data;
 #endif // XRSE_FACTORY_EXPORTS
 

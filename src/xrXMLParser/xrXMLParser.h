@@ -9,7 +9,7 @@
 #else
 	#define XRXMLPARSER_API
 //__declspec(dllimport)
-	// #pragma comment			(lib,"xrXMLParser.lib")
+	#pragma comment			(lib,"xrXMLParser.lib")
 #endif
 
 const LPCSTR CONFIG_PATH = "$game_config$";

@@ -55,7 +55,7 @@
 
 BOOL g_draw_downloads = FALSE;
 
-// #pragma comment\(lib, "crypto.lib")
+#pragma comment(lib, "crypto.lib")
 
 game_cl_mp::game_cl_mp()
 {

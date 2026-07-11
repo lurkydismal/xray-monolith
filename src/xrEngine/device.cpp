@@ -39,7 +39,7 @@
 
 #include "Rain.h"
 
-// #pragma comment\( lib, "d3dx9.lib" )
+#pragma comment( lib, "d3dx9.lib" )
 
 ENGINE_API CRenderDevice Device;
 ENGINE_API CLoadScreenRenderer load_screen_renderer;
