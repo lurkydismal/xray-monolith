@@ -36,7 +36,7 @@
 #		include <shlwapi.h>
 #	pragma warning(pop)
 
-#pragma comment(lib, "shlwapi.lib")
+// #pragma comment\(lib, "shlwapi.lib")
 
 struct logical_string_predicate {
 	static HRESULT AnsiToUnicode						(LPCSTR pszA, LPVOID buffer, u32 const& buffer_size)

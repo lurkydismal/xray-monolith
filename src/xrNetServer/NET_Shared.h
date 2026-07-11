@@ -7,7 +7,7 @@
 //__declspec(dllimport)
 
 #ifndef _EDITOR
-		#pragma comment(lib,	"xrNetServer"	)
+		// #pragma comment(lib,	"xrNetServer"	)
 #endif
 #endif
 

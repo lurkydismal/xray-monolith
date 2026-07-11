@@ -42,9 +42,9 @@ void __cdecl dummy(void)
 // OpenAL32
 // version.lib;winmm.lib
 
-#pragma comment(lib, "Ws2_32.lib")
-#pragma comment(lib, "vfw32.lib")
-#pragma comment(lib, "nvapi.lib")
+// #pragma comment\(lib, "Ws2_32.lib")
+// #pragma comment\(lib, "vfw32.lib")
+// #pragma comment\(lib, "nvapi.lib")
 
 #if !defined(STATIC_RENDERER_R1) && !defined(STATIC_RENDERER_R2) && !defined(STATIC_RENDERER_R3) && !defined(STATIC_RENDERER_R4)
 	#error Select one of the renderers R1, R2, R3, or R4
@@ -54,37 +54,37 @@ void __cdecl dummy(void)
 #if defined(STATIC_RENDERER_R2) || defined(STATIC_RENDERER_R3) || defined(STATIC_RENDERER_R4)
 		#error Only one of the renderers R1, R2, R3, and R4 can be selected at once
 #endif
-	#pragma comment(lib, "xrRender_R1.lib")
-	#pragma comment(lib, "d3dx9.lib")
+	// #pragma comment(lib, "xrRender_R1.lib")
+	// #pragma comment(lib, "d3dx9.lib")
 #endif
 #ifdef STATIC_RENDERER_R2
 #if defined(STATIC_RENDERER_R1) || defined(STATIC_RENDERER_R3) || defined(STATIC_RENDERER_R4)
 		#error Only one of the renderers R1, R2, R3, and R4 can be selected at once
 #endif
-	#pragma comment(lib, "xrRender_R2.lib")
+	// #pragma comment(lib, "xrRender_R2.lib")
 #endif
 #ifdef STATIC_RENDERER_R3
 #if defined(STATIC_RENDERER_R1) || defined(STATIC_RENDERER_R2) || defined(STATIC_RENDERER_R4)
 		#error Only one of the renderers R1, R2, R3, and R4 can be selected at once
 #endif
-#pragma comment(lib, "xrRender_R3.lib")
-#pragma comment(lib, "dxguid.lib")
-#pragma comment(lib, "d3dcompiler.lib")
-#pragma comment(lib, "d3d10.lib")
-#pragma comment(lib, "d3dx10.lib")
-#pragma comment(lib, "dxgi.lib")
+// #pragma comment\(lib, "xrRender_R3.lib")
+// #pragma comment\(lib, "dxguid.lib")
+// #pragma comment\(lib, "d3dcompiler.lib")
+// #pragma comment\(lib, "d3d10.lib")
+// #pragma comment\(lib, "d3dx10.lib")
+// #pragma comment\(lib, "dxgi.lib")
 #endif
 #ifdef STATIC_RENDERER_R4
 #if  defined(STATIC_RENDERER_R1) || defined(STATIC_RENDERER_R2) || defined(STATIC_RENDERER_R3)
 		#error Only one of the renderers R1, R2, R3, and R4 can be selected at once
 #endif
-	#pragma comment(lib, "xrRender_R4.lib")
-	#pragma comment(lib, "dxguid.lib")
-	#pragma comment(lib, "d3dx11.lib")
-	#pragma comment(lib, "D3DCompiler.lib")
-	#pragma comment(lib, "d3d11.lib")
-	#pragma comment(lib, "dxgi.lib")
-	#pragma comment(lib, "d3d10.lib")
+	// #pragma comment(lib, "xrRender_R4.lib")
+	// #pragma comment(lib, "dxguid.lib")
+	// #pragma comment(lib, "d3dx11.lib")
+	// #pragma comment(lib, "D3DCompiler.lib")
+	// #pragma comment(lib, "d3d11.lib")
+	// #pragma comment(lib, "dxgi.lib")
+	// #pragma comment(lib, "d3d10.lib")
 #endif
 
 CEngineAPI::CEngineAPI()

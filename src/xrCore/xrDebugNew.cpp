@@ -21,7 +21,7 @@ extern bool shared_str_initialized;
 # include "d3d9.h"
 # include "d3dx9.h"
 # include "D3DX_Wrapper.h"
-# pragma comment(lib,"EToolsB.lib")
+// # pragma comment(lib,"EToolsB.lib")
 # define DEBUG_INVOKE DebugBreak()
 static BOOL bException = TRUE;
 # define USE_BUG_TRAP
@@ -39,7 +39,7 @@ static BOOL bException = FALSE;
 
 #ifndef _M_AMD64
 # ifndef __BORLANDC__
-# pragma comment(lib,"dxerr.lib")
+// # pragma comment(lib,"dxerr.lib")
 # endif
 #endif
 
@@ -48,9 +48,9 @@ static BOOL bException = FALSE;
 #ifdef USE_BUG_TRAP
 # include <BugTrap/source/BugTrap.h> // for BugTrap functionality
 #ifndef __BORLANDC__
-# pragma comment(lib,"BugTrap.lib") // Link to ANSI DLL
+// # pragma comment(lib,"BugTrap.lib") // Link to ANSI DLL
 #else
-# pragma comment(lib,"BugTrapB.lib") // Link to ANSI DLL
+// # pragma comment(lib,"BugTrapB.lib") // Link to ANSI DLL
 #endif
 #endif // USE_BUG_TRAP
 
@@ -795,7 +795,7 @@ void format_message(LPSTR buffer, const u32& buffer_size)
 
 #ifndef _EDITOR
 #include <errorrep.h>
-#pragma comment( lib, "faultrep.lib" )
+// #pragma comment\( lib, "faultrep.lib" )
 #endif //-!_EDITOR
 
 #ifdef NO_BUG_TRAP

@@ -5141,9 +5141,9 @@ ACCLIB_PUBLIC(long, acc_safe_hwrite) (int fd, const acc_hvoid_p buf, long size)
 #    if (ACC_CC_DMC)
 #      pragma DMC includelib "winmm.lib"
 #    elif (ACC_CC_INTELC || ACC_CC_MSC || ACC_CC_PELLESC)
-#      pragma comment(lib, "winmm.lib")
+// #      pragma comment(lib, "winmm.lib")
 #    elif (ACC_CC_MWERKS && (__MWERKS__ >= 0x3000))
-#      pragma comment(lib, "winmm.lib")
+// #      pragma comment(lib, "winmm.lib")
 #    elif (ACC_CC_SYMANTECC)
 #      pragma SC includelib "winmm.lib"
 #    elif (ACC_CC_WATCOMC && (__WATCOMC__ >= 1050))

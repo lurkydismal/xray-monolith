@@ -868,7 +868,7 @@ static inline bool match_shader_id(LPCSTR const debug_shader_id, LPCSTR const fu
                                    FS_FileSet const& file_set, string_path& result);
 
 /////////
-#pragma comment(lib,"d3dx9.lib")
+// #pragma comment\(lib,"d3dx9.lib")
 /*
 extern "C"
 {

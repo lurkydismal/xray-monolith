@@ -14,8 +14,8 @@
 #include "xmemfile.h"
 #include "profiler.h"
 
-#pragma comment(lib,"cximage.lib")
-#pragma comment(lib,"libjpeg.lib")
+// #pragma comment\(lib,"cximage.lib")
+// #pragma comment\(lib,"libjpeg.lib")
 
 void* cxalloc(size_t size)
 {

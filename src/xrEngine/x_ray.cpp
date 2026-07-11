@@ -61,18 +61,18 @@ discord::Core* discord_core{};
 discord::Activity discordPresence{};
 static int64_t StartTime;
 bool use_discord = true;
-#pragma comment(lib, "discord_game_sdk.lib")
+// #pragma comment\(lib, "discord_game_sdk.lib")
 rpc_info discord_gameinfo;
 rpc_strings discord_strings;
 float discord_update_rate = .5f;
 
 //UTF-8 (ICU)
-#pragma comment(lib, "icuuc.lib")
+// #pragma comment\(lib, "icuuc.lib")
 //#pragma comment(lib, "sicuuc.lib")
 //#pragma comment(lib, "sicudt.lib")
 
 //Reshade
-#pragma comment(lib, "reshadecompat.lib")
+// #pragma comment\(lib, "reshadecompat.lib")
 bool use_reshade = false;
 extern bool init_reshade();
 extern void unregister_reshade();
@@ -80,7 +80,7 @@ extern void GetMonitorResolution(u32& horizontal, u32& vertical);
 extern void GetMonitorPosition(int& x, int& y);
 
 //ImGui
-#pragma comment(lib, "imgui.lib")
+// #pragma comment\(lib, "imgui.lib")
 
 static LPSTR month_id[12] =
 {

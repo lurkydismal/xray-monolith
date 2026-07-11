@@ -18,7 +18,7 @@
 #include "../xrSound/Sound.h"
 //#include "../xrEngine/IGame_Level.h"
 
-#pragma comment( lib, "xrCore.lib"	)
+// #pragma comment\( lib, "xrCore.lib"	)
 
 #include "xrPhysics.h"
 
