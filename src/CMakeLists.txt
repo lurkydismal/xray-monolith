@@ -4,12 +4,6 @@ set(CMAKE_SYSTEM_VERSION 10.0 CACHE STRING "" FORCE)
 
 project(engine-vs2022 C CXX)
 
-option(PROJECT_SHARED_LIBS "Link project targets against shared project library variants" OFF)
-if(PROJECT_SHARED_LIBS)
-    message(STATUS "Shared library mode enabled: all project targets will link against shared library variants")
-endif()
-set_property(GLOBAL PROPERTY XRAY_DUAL_LIBRARY_TARGETS xrCore xrEngine)
-
 ################################################################################
 # Set target arch type if empty. Visual studio solution generator provides it.
 ################################################################################
