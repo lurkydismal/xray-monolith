@@ -6698,6 +6698,9 @@ set(ALL_FILES
     ${UI__UIWindows__arrow}
 )
 
+# TODO: Improve
+list(FILTER ALL_FILES EXCLUDE REGEX "^\.\./xrServerEntities/")
+
 ################################################################################
 # Target
 ################################################################################

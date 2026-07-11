@@ -353,8 +353,14 @@ target_precompile_headers(${OBJECT_TARGET} PRIVATE
 xray_link_project_libraries(${PROJECT_NAME} PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
 )
+xray_link_project_libraries(${PROJECT_NAME} PUBLIC
+    xrServerEntities
+)
 xray_link_project_libraries(${PROJECT_NAME}_shared PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
+)
+xray_link_project_libraries(${PROJECT_NAME}_shared PUBLIC
+    xrServerEntities
 )
 
 use_props(${OBJECT_TARGET} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
