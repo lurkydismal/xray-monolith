@@ -341,96 +341,128 @@ function(xray_dual_targets OUT_VAR TARGET)
     set(${OUT_VAR} "${TARGETS}" PARENT_SCOPE)
 endfunction()
 
-function(xray_get_object_target OUT_VAR TARGET)
-    if(TARGET "${TARGET}")
-        get_property(OBJECT_TARGET
-            TARGET ${TARGET}
-            PROPERTY XRAY_OBJECT_TARGET
-        )
-    endif()
-
-    set(${OUT_VAR} "${OBJECT_TARGET}" PARENT_SCOPE)
-endfunction()
-
-function(xray_target_include_directories TARGET SCOPE)
-    xray_get_object_target(OBJECT_TARGET ${TARGET})
+function(xray_target_include_directories TARGET TARGET SCOPE)
+    get_property(OBJECT_TARGET
+        TARGET ${TARGET}
+        PROPERTY XRAY_OBJECT_TARGET
+    )
 
     if(OBJECT_TARGET)
-        target_include_directories(${OBJECT_TARGET} ${SCOPE} ${ARGN})
+        target_include_directories(${OBJECT_TARGET}
+            ${SCOPE}
+            ${ARGN}
+        )
     else()
-        target_include_directories(${TARGET} ${SCOPE} ${ARGN})
+        target_include_directories(${TARGET}
+            ${SCOPE}
+            ${ARGN}
+        )
     endif()
 
     if(SCOPE STREQUAL "PUBLIC" OR SCOPE STREQUAL "INTERFACE")
         xray_dual_targets(TARGETS ${TARGET})
 
         foreach(T IN LISTS TARGETS)
-            target_include_directories(${T} ${SCOPE} ${ARGN})
+            xray_target_precompile_headers(${T}
+                ${SCOPE}
+                ${ARGN}
+            )
+            target_include_directories(${T}
+                ${SCOPE}
+                "$<TARGET_PROPERTY:${OBJECT_TARGET},INTERFACE_INCLUDE_DIRECTORIES>"
+                "$<TARGET_PROPERTY:${OBJECT_TARGET},INCLUDE_DIRECTORIES>"
+            )
         endforeach()
     endif()
 endfunction()
 
 function(xray_target_compile_definitions TARGET SCOPE)
-    xray_get_object_target(OBJECT_TARGET ${TARGET})
+    get_property(OBJECT_TARGET
+        TARGET ${TARGET}
+        PROPERTY XRAY_OBJECT_TARGET
+    )
 
     if(OBJECT_TARGET)
-        target_compile_definitions(${OBJECT_TARGET} ${SCOPE} ${ARGN})
+        target_compile_definitions(${OBJECT_TARGET}
+            ${SCOPE}
+            ${ARGN}
+        )
     else()
-        target_compile_definitions(${TARGET} ${SCOPE} ${ARGN})
+        target_compile_definitions(${TARGET}
+            ${SCOPE}
+            ${ARGN}
+        )
     endif()
 
     if(SCOPE STREQUAL "PUBLIC" OR SCOPE STREQUAL "INTERFACE")
         xray_dual_targets(TARGETS ${TARGET})
 
         foreach(T IN LISTS TARGETS)
-            target_compile_definitions(${T} ${SCOPE} ${ARGN})
+            target_compile_definitions(${T}
+                ${SCOPE}
+                ${ARGN}
+            )
         endforeach()
     endif()
 endfunction()
 
 function(xray_target_compile_options TARGET SCOPE)
-    xray_get_object_target(OBJECT_TARGET ${TARGET})
+    get_property(OBJECT_TARGET
+        TARGET ${TARGET}
+        PROPERTY XRAY_OBJECT_TARGET
+    )
 
     if(OBJECT_TARGET)
-        target_compile_options(${OBJECT_TARGET} ${SCOPE} ${ARGN})
+        target_compile_options(${OBJECT_TARGET}
+            ${SCOPE}
+            ${ARGN}
+        )
     else()
-        target_compile_options(${TARGET} ${SCOPE} ${ARGN})
+        target_compile_options(${TARGET}
+            ${SCOPE}
+            ${ARGN}
+        )
     endif()
 
     if(SCOPE STREQUAL "PUBLIC" OR SCOPE STREQUAL "INTERFACE")
         xray_dual_targets(TARGETS ${TARGET})
 
         foreach(T IN LISTS TARGETS)
-            target_compile_options(${T} ${SCOPE} ${ARGN})
-        endforeach()
-    endif()
-endfunction()
-
-function(xray_target_compile_features TARGET SCOPE)
-    xray_get_object_target(OBJECT_TARGET ${TARGET})
-
-    if(OBJECT_TARGET)
-        target_compile_features(${OBJECT_TARGET} ${SCOPE} ${ARGN})
-    else()
-        target_compile_features(${TARGET} ${SCOPE} ${ARGN})
-    endif()
-
-    if(SCOPE STREQUAL "PUBLIC" OR SCOPE STREQUAL "INTERFACE")
-        xray_dual_targets(TARGETS ${TARGET})
-
-        foreach(T IN LISTS TARGETS)
-            target_compile_features(${T} ${SCOPE} ${ARGN})
+            xray_target_compile_options(${T}
+                ${SCOPE}
+                ${ARGN}
+            )
         endforeach()
     endif()
 endfunction()
 
 function(xray_target_precompile_headers TARGET SCOPE)
-    xray_get_object_target(OBJECT_TARGET ${TARGET})
+    get_property(OBJECT_TARGET
+        TARGET ${TARGET}
+        PROPERTY XRAY_OBJECT_TARGET
+    )
 
     if(OBJECT_TARGET)
-        target_precompile_headers(${OBJECT_TARGET} ${SCOPE} ${ARGN})
+        target_precompile_headers(${OBJECT_TARGET}
+            ${SCOPE}
+            ${ARGN}
+        )
     else()
-        target_precompile_headers(${TARGET} ${SCOPE} ${ARGN})
+        target_precompile_headers(${TARGET}
+            ${SCOPE}
+            ${ARGN}
+        )
+    endif()
+
+    if(SCOPE STREQUAL "PUBLIC" OR SCOPE STREQUAL "INTERFACE")
+        xray_dual_targets(TARGETS ${TARGET})
+
+        foreach(T IN LISTS TARGETS)
+            xray_target_precompile_headers(${T}
+                ${SCOPE}
+                ${ARGN}
+            )
+        endforeach()
     endif()
 endfunction()
 
