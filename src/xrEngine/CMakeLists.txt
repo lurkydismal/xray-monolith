@@ -908,49 +908,49 @@ if(MSVC)
     target_link_options(${EXECUTABLE_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX10AVX>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX11>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX11AVX>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX8>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX8AVX>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX9>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX9AVX>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
@@ -961,13 +961,13 @@ if(MSVC)
         >
         $<$<CONFIG:Release>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:ReleaseAVX>:
             /OPT:REF;
-            /LTCG;
+            /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
