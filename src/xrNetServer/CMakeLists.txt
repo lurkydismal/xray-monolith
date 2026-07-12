@@ -419,7 +419,7 @@ add_dependencies(${PROJECT_NAME}
 )
 
 # Link with other targets.
-xray_link_project_libraries(${PROJECT_NAME} PUBLIC
+target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
 )
 
@@ -427,7 +427,7 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "Ws2_32;"
     "dxerr"
 )
-xray_link_project_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 
 target_link_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/libraries;"

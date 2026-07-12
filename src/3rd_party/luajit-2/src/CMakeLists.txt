@@ -364,5 +364,5 @@ add_custom_command_if(
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "lj_vm.obj"
 )
-xray_link_project_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 
