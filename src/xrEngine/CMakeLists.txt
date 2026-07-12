@@ -910,66 +910,66 @@ if(MSVC)
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:DX10AVX>:
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:DX11>:
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:DX11AVX>:
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:DX8>:
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:DX8AVX>:
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:DX9>:
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:DX9AVX>:
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:ProfiledDX11>:
             /OPT:NOREF;
             /OPT:NOICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:Release>:
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:ReleaseAVX>:
             /OPT:REF;
             /LTCG;
             /OPT:ICF;
-            /INCREMENTAL:NO
+            /INCREMENTAL
         >
         $<$<CONFIG:Verified>:
             /FIXED:NO;
