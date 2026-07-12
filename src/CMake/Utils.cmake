@@ -268,8 +268,6 @@ function(xray_add_dual_library TARGET OBJECT_TARGET)
     set_target_properties(${TARGET}_shared PROPERTIES
         XRAY_DUAL_TARGET "${TARGET}"
     )
-
-    set_property(GLOBAL APPEND PROPERTY XRAY_DUAL_LIBRARY_TARGETS "${TARGET}")
 endfunction()
 
 ################################################################################
