@@ -456,7 +456,7 @@ set(OBJECT_TARGET ${PROJECT_NAME}_objects)
 set(EXECUTABLE_TARGET ${PROJECT_NAME}_exe)
 
 add_library(${OBJECT_TARGET} OBJECT ${ALL_FILES})
-add_library(${PROJECT_NAME} STATIC $<TARGET_OBJECTS:${OBJECT_TARGET}>)
+add_library(${PROJECT_NAME} SHARED $<TARGET_OBJECTS:${OBJECT_TARGET}>)
 add_executable(${EXECUTABLE_TARGET} "x_ray_winmain.cpp")
 
 target_precompile_headers(${OBJECT_TARGET} PRIVATE
@@ -549,6 +549,24 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY_VERIFIEDDX11ASAN "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my"
     ARCHIVE_OUTPUT_DIRECTORY_VERIFIEDDX8      "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my"
     ARCHIVE_OUTPUT_DIRECTORY_VERIFIEDDX9      "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my"
+)
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY_DX10             "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_DX10AVX          "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_DX11             "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_DX11AVX          "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_DX8              "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_DX8AVX           "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_DX9              "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_DX9AVX           "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_PROFILEDDX11     "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE          "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASEAVX       "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_VERIFIED         "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_VERIFIEDDX11     "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_VERIFIEDDX11ASAN "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_VERIFIEDDX8      "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
+    RUNTIME_OUTPUT_DIRECTORY_VERIFIEDDX9      "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/"
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_NAME_DX10             "${TARGET_NAME}"
@@ -1063,7 +1081,7 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "giflib"
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
-target_link_libraries(${EXECUTABLE_TARGET} PRIVATE ${OBJECT_TARGET} ${PROJECT_NAME})
+target_link_libraries(${EXECUTABLE_TARGET} PRIVATE ${PROJECT_NAME})
 
 target_link_directories(${PROJECT_NAME} PUBLIC
     "$<$<CONFIG:DX10>:"

@@ -4,6 +4,9 @@ set(CMAKE_SYSTEM_VERSION 10.0 CACHE STRING "" FORCE)
 
 project(engine-vs2022 C CXX)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 ################################################################################
 # Set target arch type if empty. Visual studio solution generator provides it.
 ################################################################################
