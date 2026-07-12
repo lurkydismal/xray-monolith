@@ -339,46 +339,47 @@ set(ALL_FILES
 ################################################################################
 # Target
 ################################################################################
-add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
+set(OBJECT_TARGET ${PROJECT_NAME}_objects)
+xray_add_dual_library(${PROJECT_NAME} ${OBJECT_TARGET} ${ALL_FILES})
 
-target_precompile_headers(${PROJECT_NAME} PRIVATE
+xray_target_precompile_headers(${OBJECT_TARGET} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h>"
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
+xray_target_link_libraries(${PROJECT_NAME} PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
 )
 
-use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
+use_props(${OBJECT_TARGET} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 ################################################################################
 # Includes for CMake from *.props
 ################################################################################
-use_props(${PROJECT_NAME} DX10             "../Common.cmake")
-use_props(${PROJECT_NAME} DX10AVX          "../Common.cmake")
-use_props(${PROJECT_NAME} DX11             "../Common.cmake")
-use_props(${PROJECT_NAME} DX11AVX          "../Common.cmake")
-use_props(${PROJECT_NAME} DX8              "../Common.cmake")
-use_props(${PROJECT_NAME} DX8AVX           "../Common.cmake")
-use_props(${PROJECT_NAME} DX9              "../Common.cmake")
-use_props(${PROJECT_NAME} DX9AVX           "../Common.cmake")
-use_props(${PROJECT_NAME} ProfiledDX11     "../Common.cmake")
-use_props(${PROJECT_NAME} Release          "../Common.cmake")
-use_props(${PROJECT_NAME} ReleaseAVX       "../Common.cmake")
-use_props(${PROJECT_NAME} Verified         "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX11     "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX11ASAN "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX8      "../Common.cmake")
-use_props(${PROJECT_NAME} VerifiedDX9      "../Common.cmake")
+use_props(${OBJECT_TARGET} DX10             "../Common.cmake")
+use_props(${OBJECT_TARGET} DX10AVX          "../Common.cmake")
+use_props(${OBJECT_TARGET} DX11             "../Common.cmake")
+use_props(${OBJECT_TARGET} DX11AVX          "../Common.cmake")
+use_props(${OBJECT_TARGET} DX8              "../Common.cmake")
+use_props(${OBJECT_TARGET} DX8AVX           "../Common.cmake")
+use_props(${OBJECT_TARGET} DX9              "../Common.cmake")
+use_props(${OBJECT_TARGET} DX9AVX           "../Common.cmake")
+use_props(${OBJECT_TARGET} ProfiledDX11     "../Common.cmake")
+use_props(${OBJECT_TARGET} Release          "../Common.cmake")
+use_props(${OBJECT_TARGET} ReleaseAVX       "../Common.cmake")
+use_props(${OBJECT_TARGET} Verified         "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX11     "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX11ASAN "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX8      "../Common.cmake")
+use_props(${OBJECT_TARGET} VerifiedDX9      "../Common.cmake")
 
 set(ROOT_NAMESPACE xrCore)
 
-set_target_properties(${PROJECT_NAME} PROPERTIES
+xray_set_target_properties(${PROJECT_NAME}
     VS_GLOBAL_KEYWORD "Win32Proj"
 )
 ################################################################################
 # Output directory
 ################################################################################
-set_target_properties(${PROJECT_NAME} PROPERTIES
+xray_set_target_properties(${PROJECT_NAME}
     OUTPUT_DIRECTORY_DX10             "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
     OUTPUT_DIRECTORY_DX10AVX          "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
     OUTPUT_DIRECTORY_DX11             "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
@@ -396,7 +397,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     OUTPUT_DIRECTORY_VERIFIEDDX8      "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
     OUTPUT_DIRECTORY_VERIFIEDDX9      "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/${CMAKE_VS_PLATFORM_NAME}/$<CONFIG>/"
 )
-set_target_properties(${PROJECT_NAME} PROPERTIES
+xray_set_target_properties(${PROJECT_NAME}
     ARCHIVE_OUTPUT_DIRECTORY_DX10             "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my"
     ARCHIVE_OUTPUT_DIRECTORY_DX10AVX          "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my"
     ARCHIVE_OUTPUT_DIRECTORY_DX11             "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my"
@@ -414,7 +415,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY_VERIFIEDDX8      "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my"
     ARCHIVE_OUTPUT_DIRECTORY_VERIFIEDDX9      "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my"
 )
-set_target_properties(${PROJECT_NAME} PROPERTIES
+xray_set_target_properties(${PROJECT_NAME}
     ARCHIVE_OUTPUT_NAME_DX10             "${TARGET_NAME}"
     ARCHIVE_OUTPUT_NAME_DX10AVX          "${TARGET_NAME}"
     ARCHIVE_OUTPUT_NAME_DX11             "${TARGET_NAME}"
@@ -432,7 +433,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_NAME_VERIFIEDDX8      "${TARGET_NAME}"
     ARCHIVE_OUTPUT_NAME_VERIFIEDDX9      "${TARGET_NAME}"
 )
-set_target_properties(${PROJECT_NAME} PROPERTIES
+xray_set_target_properties(${PROJECT_NAME}
     INTERPROCEDURAL_OPTIMIZATION_DX10             "TRUE"
     INTERPROCEDURAL_OPTIMIZATION_DX10AVX          "TRUE"
     INTERPROCEDURAL_OPTIMIZATION_DX11             "TRUE"
@@ -472,12 +473,14 @@ string(CONCAT "MSVC_RUNTIME_LIBRARY_STR"
     >
     $<$<NOT:$<OR:$<CONFIG:Verified>,$<CONFIG:VerifiedDX11>,$<CONFIG:VerifiedDX11ASAN>,$<CONFIG:VerifiedDX8>,$<CONFIG:VerifiedDX9>>>:${MSVC_RUNTIME_LIBRARY_DEFAULT}>
 )
-set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR})
+xray_set_target_properties(${PROJECT_NAME}
+    MSVC_RUNTIME_LIBRARY ${MSVC_RUNTIME_LIBRARY_STR}
+)
 
 ################################################################################
 # Include directories
 ################################################################################
-target_include_directories(${PROJECT_NAME} PUBLIC
+xray_target_include_directories(${PROJECT_NAME} ${OBJECT_TARGET} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/.;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/optick-git/src;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include"
@@ -486,7 +489,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 ################################################################################
 # Compile definitions
 ################################################################################
-target_compile_definitions(${PROJECT_NAME} PRIVATE
+xray_target_compile_definitions(${OBJECT_TARGET} PRIVATE
     "$<$<CONFIG:DX10>:"
         "PROFILER_OPTICK"
     ">"
@@ -547,7 +550,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 # Compile and link options
 ################################################################################
 if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE
+    xray_target_compile_options(${OBJECT_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
             /GL;
             /O2;
@@ -776,7 +779,7 @@ if(MSVC)
         "/w;/Y-"
     )
     source_file_compile_options(Model.cpp ${FILE_CL_OPTIONS})
-    target_link_options(${PROJECT_NAME} PRIVATE
+    xray_target_link_options(${PROJECT_NAME} PRIVATE
         /OPT:REF;
         /OPT:ICF;
         /DYNAMICBASE:NO
@@ -786,11 +789,11 @@ endif()
 ################################################################################
 # Dependencies
 ################################################################################
-add_dependencies(${PROJECT_NAME}
+xray_add_dependencies(${PROJECT_NAME}
     DXERR
 )
 
-target_link_directories(${PROJECT_NAME} PUBLIC
+xray_target_link_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/libraries;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include/BugTrap/Bin;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my/"
