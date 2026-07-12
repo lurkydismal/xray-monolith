@@ -30,12 +30,15 @@ endfunction()
 #     name - Name of watched property and output variable
 ################################################################################
 function(create_property_reader NAME)
-    set(PROPERTY_READER_GUARD_DISABLED TRUE)
-    set(CONFIG_VALUE "$<TARGET_GENEX_EVAL:${PROPS_TARGET},$<TARGET_PROPERTY:${PROPS_TARGET},${NAME}_$<UPPER_CASE:$<CONFIG>>>>")
+    set(CONFIG_VALUE
+        "$<TARGET_GENEX_EVAL:${PROPS_TARGET},$<TARGET_PROPERTY:${PROPS_TARGET},${NAME}_$<UPPER_CASE:$<CONFIG>>>>")
     set(IS_CONFIG_VALUE_EMPTY "$<STREQUAL:${CONFIG_VALUE},>")
-    set(GENERAL_VALUE "$<TARGET_GENEX_EVAL:${PROPS_TARGET},$<TARGET_PROPERTY:${PROPS_TARGET},${NAME}>>")
-    set("${NAME}" "$<IF:${IS_CONFIG_VALUE_EMPTY},${GENERAL_VALUE},${CONFIG_VALUE}>" PARENT_SCOPE)
-    variable_watch("${NAME}" property_reader_guard)
+    set(GENERAL_VALUE
+        "$<TARGET_GENEX_EVAL:${PROPS_TARGET},$<TARGET_PROPERTY:${PROPS_TARGET},${NAME}>>")
+
+    set("${PROPS_TARGET}_${NAME}"
+        "$<IF:${IS_CONFIG_VALUE_EMPTY},${GENERAL_VALUE},${CONFIG_VALUE}>"
+        PARENT_SCOPE)
 endfunction()
 
 ################################################################################
@@ -55,11 +58,11 @@ create_property_reader("TARGET_NAME")
 create_property_reader("OUTPUT_DIRECTORY")
 
 set_config_specific_property("TARGET_NAME" "${PROPS_TARGET}")
-set_config_specific_property("OUTPUT_NAME" "${TARGET_NAME}")
-set_config_specific_property("ARCHIVE_OUTPUT_NAME" "${TARGET_NAME}")
-set_config_specific_property("LIBRARY_OUTPUT_NAME" "${TARGET_NAME}")
-set_config_specific_property("RUNTIME_OUTPUT_NAME" "${TARGET_NAME}")
+set_config_specific_property("OUTPUT_NAME" "${${PROPS_TARGET}_TARGET_NAME}")
+set_config_specific_property("ARCHIVE_OUTPUT_NAME" "${${PROPS_TARGET}_TARGET_NAME}")
+set_config_specific_property("LIBRARY_OUTPUT_NAME" "${${PROPS_TARGET}_TARGET_NAME}")
+set_config_specific_property("RUNTIME_OUTPUT_NAME" "${${PROPS_TARGET}_TARGET_NAME}")
 
-set_config_specific_property("ARCHIVE_OUTPUT_DIRECTORY" "${OUTPUT_DIRECTORY}")
-set_config_specific_property("LIBRARY_OUTPUT_DIRECTORY" "${OUTPUT_DIRECTORY}")
-set_config_specific_property("RUNTIME_OUTPUT_DIRECTORY" "${OUTPUT_DIRECTORY}")
+set_config_specific_property("ARCHIVE_OUTPUT_DIRECTORY" "${${PROPS_TARGET}_OUTPUT_DIRECTORY}")
+set_config_specific_property("LIBRARY_OUTPUT_DIRECTORY" "${${PROPS_TARGET}_OUTPUT_DIRECTORY}")
+set_config_specific_property("RUNTIME_OUTPUT_DIRECTORY" "${${PROPS_TARGET}_OUTPUT_DIRECTORY}")
