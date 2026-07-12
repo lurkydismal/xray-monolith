@@ -358,34 +358,11 @@ function(xray_target_include_directories TARGET OBJECT_TARGET SCOPE)
     endforeach()
 endfunction()
 
-function(xray_target_compile_definitions TARGET SCOPE)
-    get_property(OBJECT_TARGET
-        TARGET ${TARGET}
-        PROPERTY XRAY_OBJECT_TARGET
+function(xray_target_compile_definitions OBJECT_TARGET SCOPE)
+    target_compile_definitions(${OBJECT_TARGET}
+        ${SCOPE}
+        ${ARGN}
     )
-
-    if(OBJECT_TARGET)
-        target_compile_definitions(${OBJECT_TARGET}
-            ${SCOPE}
-            ${ARGN}
-        )
-    else()
-        target_compile_definitions(${TARGET}
-            ${SCOPE}
-            ${ARGN}
-        )
-    endif()
-
-    if(SCOPE STREQUAL "PUBLIC" OR SCOPE STREQUAL "INTERFACE")
-        xray_dual_targets(TARGETS ${TARGET})
-
-        foreach(T IN LISTS TARGETS)
-            target_compile_definitions(${T}
-                ${SCOPE}
-                ${ARGN}
-            )
-        endforeach()
-    endif()
 endfunction()
 
 function(xray_target_compile_options OBJECT_TARGET SCOPE)

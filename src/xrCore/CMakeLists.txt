@@ -342,7 +342,7 @@ set(ALL_FILES
 set(OBJECT_TARGET ${PROJECT_NAME}_objects)
 xray_add_dual_library(${PROJECT_NAME} ${OBJECT_TARGET} ${ALL_FILES})
 
-xray_target_precompile_headers(${PROJECT_NAME} PRIVATE
+xray_target_precompile_headers(${OBJECT_TARGET} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h>"
 )
 
@@ -480,7 +480,7 @@ xray_set_target_properties(${PROJECT_NAME}
 ################################################################################
 # Include directories
 ################################################################################
-xray_target_include_directories(${PROJECT_NAME} PUBLIC
+xray_target_include_directories(${PROJECT_NAME} ${OBJECT_TARGET} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/.;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/optick-git/src;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include"
@@ -489,7 +489,7 @@ xray_target_include_directories(${PROJECT_NAME} PUBLIC
 ################################################################################
 # Compile definitions
 ################################################################################
-xray_target_compile_definitions(${PROJECT_NAME} PRIVATE
+xray_target_compile_definitions(${OBJECT_TARGET} PRIVATE
     "$<$<CONFIG:DX10>:"
         "PROFILER_OPTICK"
     ">"
@@ -550,7 +550,7 @@ xray_target_compile_definitions(${PROJECT_NAME} PRIVATE
 # Compile and link options
 ################################################################################
 if(MSVC)
-    xray_target_compile_options(${PROJECT_NAME} PRIVATE
+    xray_target_compile_options(${OBJECT_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
             /GL;
             /O2;
