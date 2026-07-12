@@ -25,3 +25,8 @@ generate-build-files:
         -DCMAKE_BUILD_TYPE=DX11 \
         -DCMAKE_SYSTEM_NAME=Windows \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+# Check Doxygen documentation comment coverage.
+[working-directory('docs')]
+check-docs-coverage:
+    uv run doc-coverage.py
