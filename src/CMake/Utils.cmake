@@ -261,6 +261,14 @@ function(xray_add_dual_library TARGET OBJECT_TARGET)
         OUTPUT_NAME "${TARGET}_shared"
     )
 
+    set_property(TARGET ${TARGET} PROPERTY
+        XRAY_SHARED_VARIANT FALSE
+    )
+
+    set_property(TARGET ${TARGET}_shared PROPERTY
+        XRAY_SHARED_VARIANT TRUE
+    )
+
     # Mark both libraries as belonging to the same pair.
     set_target_properties(${TARGET} PROPERTIES
         XRAY_DUAL_TARGET "${TARGET}"
@@ -295,9 +303,11 @@ endfunction()
 ################################################################################
 function(xray_link_project_libraries XRAY_TARGET_NAME SCOPE)
     set(USE_SHARED "${PROJECT_SHARED_LIBS}")
-    if("${XRAY_TARGET_NAME}" MATCHES "_shared$")
-        set(USE_SHARED TRUE)
-    endif()
+
+    get_property(USE_SHARED
+        TARGET ${XRAY_TARGET_NAME}
+        PROPERTY XRAY_SHARED_VARIANT
+    )
 
     set(LINK_LIBRARIES)
     foreach(LINK_LIBRARY IN LISTS ARGN)
