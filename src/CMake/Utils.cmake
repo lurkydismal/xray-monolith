@@ -1,3 +1,5 @@
+# utils file for projects came from visual studio solution with cmake-converter.
+
 ################################################################################
 # Wrap each token of the command with condition
 ################################################################################
@@ -249,25 +251,21 @@ function(xray_add_dual_library TARGET OBJECT_TARGET)
     set_property(GLOBAL APPEND PROPERTY XRAY_DUAL_LIBRARY_TARGETS "${TARGET}")
 endfunction()
 
-################################################################################
 # xray_project_link_variant returns the correct link target for a project library.
 # Shared-library consumers and PROJECT_SHARED_LIBS builds use <target>_shared
 # when that variant exists; the default production build keeps historical static
 # target links.
-################################################################################
 function(xray_project_link_variant OUT_VAR LINK_TARGET USE_SHARED)
     get_property(XRAY_DUAL_LIBRARY_TARGETS GLOBAL PROPERTY XRAY_DUAL_LIBRARY_TARGETS)
-    if(${USE_SHARED} AND TARGET "${LINK_TARGET}_shared")
+    if(${USE_SHARED} AND (TARGET "${LINK_TARGET}_shared" OR LINK_TARGET IN_LIST XRAY_DUAL_LIBRARY_TARGETS))
         set(${OUT_VAR} "${LINK_TARGET}_shared" PARENT_SCOPE)
     else()
         set(${OUT_VAR} "${LINK_TARGET}" PARENT_SCOPE)
     endif()
 endfunction()
 
-################################################################################
 # xray_link_project_libraries mirrors target_link_libraries while remapping
 # project dual-library dependencies to their shared variants when requested.
-################################################################################
 function(xray_link_project_libraries XRAY_TARGET_NAME SCOPE)
     set(USE_SHARED ${PROJECT_SHARED_LIBS})
     if("${XRAY_TARGET_NAME}" MATCHES "_shared$")

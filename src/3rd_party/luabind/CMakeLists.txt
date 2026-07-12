@@ -479,10 +479,6 @@ endif()
 ################################################################################
 # Dependencies
 ################################################################################
-xray_link_project_libraries(${PROJECT_NAME} PUBLIC
-    LuaJIT-2
-)
-
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "kernel32;"
     "user32;"
@@ -494,8 +490,9 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "uuid;"
     "comdlg32;"
     "advapi32"
+    LuaJIT-2
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+xray_link_project_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 
 target_link_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/./;"

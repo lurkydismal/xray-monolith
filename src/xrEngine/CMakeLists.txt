@@ -1025,7 +1025,7 @@ add_dependencies(${EXECUTABLE_TARGET}
 )
 
 # Link with other targets.
-xray_link_project_libraries(${PROJECT_NAME} PUBLIC
+target_link_libraries(${PROJECT_NAME} PUBLIC
     LuaJIT-2
     luabind
     xrAPI
@@ -1051,15 +1051,19 @@ xray_link_project_libraries(${PROJECT_NAME} PUBLIC
     xrXMLParser
     OpenAL32
     optick
-    giflib
     ${RENDERER_LIB}
 )
+xray_link_project_libraries(${PROJECT_NAME} PUBLIC ${XR_ENGINE_LINK_LIBRARIES})
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "vfw32;"
-    "winmm"
+    "libogg_static;"
+    "libtheora_static;"
+    "winmm;"
+    "OpenAL32;"
+    "giflib"
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
+xray_link_project_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 xray_link_project_libraries(${EXECUTABLE_TARGET} PRIVATE ${OBJECT_TARGET} ${PROJECT_NAME})
 
 target_link_directories(${PROJECT_NAME} PUBLIC

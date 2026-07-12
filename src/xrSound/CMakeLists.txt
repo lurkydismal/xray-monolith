@@ -485,10 +485,15 @@ xray_link_project_libraries(${PROJECT_NAME} PUBLIC
     xrCDB
     xrCore
     OpenAL32
-    libogg_static
-    libvorbis_static
-    libvorbisfile_static
 )
+
+set(ADDITIONAL_LIBRARY_DEPENDENCIES
+    "libogg_static;"
+    "libvorbis_static;"
+    "libvorbisfile_static;"
+    "OpenAL32"
+)
+xray_link_project_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 
 target_link_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/libraries;"
