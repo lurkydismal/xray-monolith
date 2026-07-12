@@ -232,19 +232,3 @@ endfunction()
 ################################################################################
 set(DEFAULT_CXX_PROPS "${CMAKE_CURRENT_LIST_DIR}/DefaultCXX.cmake")
 set(DEFAULT_Fortran_PROPS "${CMAKE_CURRENT_LIST_DIR}/DefaultFortran.cmake")
-
-################################################################################
-# Add static and shared variants from one object library.
-#
-# xray_add_dual_library keeps the historical target name as the static library
-# used by production targets, and creates <target>_shared for tests without
-# duplicating source lists or recompiling the same source files in CMake.
-################################################################################
-function(xray_add_dual_library TARGET OBJECT_TARGET)
-    add_library(${OBJECT_TARGET} OBJECT ${ARGN})
-    set_target_properties(${OBJECT_TARGET} PROPERTIES POSITION_INDEPENDENT_CODE ON)
-
-    add_library(${TARGET} STATIC $<TARGET_OBJECTS:${OBJECT_TARGET}>)
-    add_library(${TARGET}_shared SHARED $<TARGET_OBJECTS:${OBJECT_TARGET}>)
-    set_target_properties(${TARGET}_shared PROPERTIES OUTPUT_NAME "${TARGET}_shared")
-endfunction()
