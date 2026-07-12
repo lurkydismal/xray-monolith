@@ -52,6 +52,16 @@ function(add_xray_discovered_tests)
 
     add_executable(xray_unit_tests ${XRAY_TEST_SOURCES})
 
+    file(GLOB XRAY_RUNTIME_DLLS
+        "${CMAKE_SOURCE_DIR}/../sdk/binaries/*.dll"
+    )
+
+    add_custom_command(TARGET xray_unit_tests POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${XRAY_RUNTIME_DLLS}
+            "$<TARGET_FILE_DIR:xray_unit_tests>"
+    )
+
     # Tests include production headers directly from src and link against the
     # existing production targets rather than recompiling production sources.
     target_include_directories(xray_unit_tests PRIVATE
@@ -69,6 +79,18 @@ function(add_xray_discovered_tests)
 
     # Match the engine's C++ language level for test translation units.
     target_compile_features(xray_unit_tests PRIVATE cxx_std_17)
+
+    execute_process(
+        COMMAND wine cmd /c "dir C:\\windows\\system32\\concrt140.dll"
+        RESULT_VARIABLE HAS_CONCRT
+    )
+
+    if(NOT HAS_CONCRT EQUAL 0)
+        message(FATAL_ERROR
+            "Missing concrt140.dll in Wine prefix. "
+            "Install the Microsoft Visual C++ Runtime by running: winetricks vcrun2022"
+        )
+    endif()
 
     # Discover individual TEST/TEST_F cases from the built binary and register
     # them with CTest automatically.
