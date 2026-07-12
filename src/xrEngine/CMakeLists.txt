@@ -909,49 +909,49 @@ if(MSVC)
         $<$<CONFIG:DX10>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX10AVX>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX11>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX11AVX>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX8>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX8AVX>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX9>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX9AVX>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:ProfiledDX11>:
@@ -962,13 +962,13 @@ if(MSVC)
         $<$<CONFIG:Release>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:ReleaseAVX>:
             /OPT:NOREF;
             /LTCG:INCREMENTAL;
-            /OPT:ICF;
+            /OPT:NOICF;
             /INCREMENTAL
         >
         $<$<CONFIG:Verified>:

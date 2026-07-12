@@ -445,7 +445,7 @@ if(MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE
         /SUBSYSTEM:WINDOWS;
         /OPT:NOREF;
-        /OPT:ICF;
+        /OPT:NOICF;
         /DYNAMICBASE:NO
     )
 endif()
