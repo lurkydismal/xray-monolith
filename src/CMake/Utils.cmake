@@ -276,15 +276,6 @@ function(xray_add_dual_library TARGET OBJECT_TARGET)
     set_target_properties(${TARGET}_shared PROPERTIES
         XRAY_DUAL_TARGET "${TARGET}"
     )
-
-    # Store object target name.
-    set_target_properties(${TARGET} PROPERTIES
-        XRAY_OBJECT_TARGET "${OBJECT_TARGET}"
-    )
-
-    set_target_properties(${TARGET}_shared PROPERTIES
-        XRAY_OBJECT_TARGET "${OBJECT_TARGET}"
-    )
 endfunction()
 
 ################################################################################
@@ -388,18 +379,6 @@ function(xray_add_dependencies TARGET)
 endfunction()
 
 function(xray_target_link_libraries TARGET SCOPE)
-    get_property(OBJECT_TARGET
-        TARGET ${TARGET}
-        PROPERTY XRAY_OBJECT_TARGET
-    )
-
-    if(OBJECT_TARGET)
-        target_link_libraries(${OBJECT_TARGET}
-            ${SCOPE}
-            ${ARGN}
-        )
-    endif()
-
     xray_dual_targets(TARGETS ${TARGET})
 
     foreach(T IN LISTS TARGETS)
