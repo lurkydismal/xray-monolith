@@ -1112,6 +1112,7 @@ xray_link_project_libraries(${PROJECT_NAME} PUBLIC
     xrCore
     xrCPU_Pipe
     imgui
+    DXERR
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
@@ -1121,7 +1122,6 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "d3d11;"
     "dxgi;"
     "nvapi;"
-    "dxerr;"
     "d3d10"
 )
 xray_link_project_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
