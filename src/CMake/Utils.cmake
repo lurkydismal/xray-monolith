@@ -240,10 +240,13 @@ set(DEFAULT_Fortran_PROPS "${CMAKE_CURRENT_LIST_DIR}/DefaultFortran.cmake")
 ################################################################################
 function(xray_add_dual_library TARGET OBJECT_TARGET)
     add_library(${OBJECT_TARGET} OBJECT ${ARGN})
-    set_target_properties(${OBJECT_TARGET}
-        PROPERTIES
-        POSITION_INDEPENDENT_CODE ON
-    )
+
+    if(PROJECT_SHARED_LIBS)
+        set_target_properties(${OBJECT_TARGET}
+            PROPERTIES
+            POSITION_INDEPENDENT_CODE ON
+        )
+    endif()
 
     add_library(${TARGET} STATIC
         $<TARGET_OBJECTS:${OBJECT_TARGET}>
