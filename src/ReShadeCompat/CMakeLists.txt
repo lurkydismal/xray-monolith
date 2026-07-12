@@ -223,7 +223,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /fp:precise;
             /GR;
             /std:c++17;
@@ -240,7 +240,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /Ot;
             /fp:precise;
             /GR;
@@ -256,7 +256,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /fp:precise;
             /GR;
             /std:c++17;
@@ -273,7 +273,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /Ot;
             /fp:precise;
             /GR;
@@ -289,7 +289,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /fp:precise;
             /GR;
             /std:c++17;
@@ -306,7 +306,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /Ot;
             /fp:precise;
             /GR;
@@ -322,7 +322,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /fp:precise;
             /GR;
             /std:c++17;
@@ -339,7 +339,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /Ot;
             /fp:precise;
             /GR;
@@ -355,7 +355,7 @@ if(MSVC)
             /Oy;
             /Gy-;
             /W4;
-            /Zi;
+            /Z7;
             /fp:precise;
             /GR;
             /std:c++17;
@@ -370,7 +370,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /fp:precise;
             /GR;
             /std:c++17;
@@ -387,7 +387,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /Ot;
             /fp:precise;
             /GR;
@@ -422,7 +422,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /Zi
+            /Z7
         >
         $<$<CONFIG:VerifiedDX8>:
             /GL-;

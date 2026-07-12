@@ -733,7 +733,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:DX10AVX>:
@@ -745,7 +745,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:DX11>:
@@ -756,7 +756,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:DX11AVX>:
@@ -768,7 +768,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:DX8>:
@@ -779,7 +779,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:DX8AVX>:
@@ -791,7 +791,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:DX9>:
@@ -802,7 +802,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:DX9AVX>:
@@ -814,7 +814,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:ProfiledDX11>:
@@ -825,7 +825,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy-;
-            /Zi
+            /Z7
         >
         $<$<CONFIG:Release>:
             /GL;
@@ -835,7 +835,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:ReleaseAVX>:
@@ -847,7 +847,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Zi;
+            /Z7;
             /Ob3
         >
         $<$<CONFIG:Verified>:
@@ -882,7 +882,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Zi;
+            /Z7;
             /GS;
             /Zc:inline-
         >
