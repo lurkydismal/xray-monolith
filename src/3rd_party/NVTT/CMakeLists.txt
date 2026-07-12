@@ -450,7 +450,7 @@ if(MSVC)
         /wd4005
     )
     target_link_options(${PROJECT_NAME} PRIVATE
-        /OPT:REF;
+        /OPT:NOREF;
         /OPT:ICF
     )
 endif()

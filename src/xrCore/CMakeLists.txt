@@ -778,7 +778,7 @@ if(MSVC)
     )
     source_file_compile_options(Model.cpp ${FILE_CL_OPTIONS})
     target_link_options(${PROJECT_NAME} PRIVATE
-        /OPT:REF;
+        /OPT:NOREF;
         /OPT:ICF;
         /DYNAMICBASE:NO
     )

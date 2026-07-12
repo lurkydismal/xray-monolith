@@ -907,49 +907,49 @@ if(MSVC)
     target_compile_options(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJECT_TARGET},COMPILE_OPTIONS>")
     target_link_options(${EXECUTABLE_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX10AVX>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX11>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX11AVX>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX8>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX8AVX>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX9>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX9AVX>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
@@ -960,13 +960,13 @@ if(MSVC)
             /INCREMENTAL
         >
         $<$<CONFIG:Release>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:ReleaseAVX>:
-            /OPT:REF;
+            /OPT:NOREF;
             /LTCG:INCREMENTAL;
             /OPT:ICF;
             /INCREMENTAL
