@@ -109,6 +109,18 @@ if(MSVC)
     set(CMAKE_CXX_FLAGS_VERIFIEDDX9 "")
 endif()
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    add_compile_options(
+        -clang:-Wno-c++11-narrowing
+        -clang:-Wno-microsoft-cast
+        -clang:-Wno-microsoft-enum-value
+        -clang:-Wno-invalid-offsetof
+        -clang:-fms-extensions
+        -clang:-fms-compatibility
+        -clang:-fdelayed-template-parsing
+    )
+endif()
+
 ################################################################################
 # Global linker options
 ################################################################################
