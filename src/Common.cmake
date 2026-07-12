@@ -72,7 +72,6 @@ target_compile_definitions(${PROPS_TARGET}
 target_compile_options(${PROPS_TARGET}
     PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:
-            /MD
             /MP
             /GS
             /O2
