@@ -252,39 +252,47 @@ function(xray_add_dual_library TARGET OBJECT_TARGET)
         $<TARGET_OBJECTS:${OBJECT_TARGET}>
     )
 
-    add_library(${TARGET}_shared SHARED
-        $<TARGET_OBJECTS:${OBJECT_TARGET}>
-    )
+    if(PROJECT_SHARED_LIBS)
+        add_library(${TARGET}_shared SHARED
+            $<TARGET_OBJECTS:${OBJECT_TARGET}>
+        )
 
-    set_target_properties(${TARGET}_shared
-        PROPERTIES
-        OUTPUT_NAME "${TARGET}_shared"
-    )
+        set_target_properties(${TARGET}_shared
+            PROPERTIES
+            OUTPUT_NAME "${TARGET}_shared"
+        )
+    endif()
 
     set_property(TARGET ${TARGET} PROPERTY
         XRAY_SHARED_VARIANT FALSE
     )
 
-    set_property(TARGET ${TARGET}_shared PROPERTY
-        XRAY_SHARED_VARIANT TRUE
-    )
+    if(PROJECT_SHARED_LIBS)
+        set_property(TARGET ${TARGET}_shared PROPERTY
+            XRAY_SHARED_VARIANT TRUE
+        )
+    endif()
 
     # Mark both libraries as belonging to the same pair.
     set_target_properties(${TARGET} PROPERTIES
         XRAY_DUAL_TARGET "${TARGET}"
     )
-    set_target_properties(${TARGET}_shared PROPERTIES
-        XRAY_DUAL_TARGET "${TARGET}"
-    )
+    if(PROJECT_SHARED_LIBS)
+        set_target_properties(${TARGET}_shared PROPERTIES
+            XRAY_DUAL_TARGET "${TARGET}"
+        )
+    endif()
 
     # Store object target name.
     set_target_properties(${TARGET} PROPERTIES
         XRAY_OBJECT_TARGET "${OBJECT_TARGET}"
     )
 
-    set_target_properties(${TARGET}_shared PROPERTIES
-        XRAY_OBJECT_TARGET "${OBJECT_TARGET}"
-    )
+    if(PROJECT_SHARED_LIBS)
+        set_target_properties(${TARGET}_shared PROPERTIES
+            XRAY_OBJECT_TARGET "${OBJECT_TARGET}"
+        )
+    endif()
 endfunction()
 
 ################################################################################
