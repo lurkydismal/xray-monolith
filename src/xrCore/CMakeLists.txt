@@ -345,7 +345,11 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE
     "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/stdafx.h>"
 )
 
+# TODO: Refactor into a separate target
 xray_link_project_libraries(${PROJECT_NAME} PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
+)
+xray_link_project_libraries(${PROJECT_NAME}_shared PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
 )
 

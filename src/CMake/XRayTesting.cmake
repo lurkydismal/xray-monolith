@@ -52,16 +52,6 @@ function(add_xray_discovered_tests)
 
     add_executable(xray_unit_tests ${XRAY_TEST_SOURCES})
 
-    file(GLOB XRAY_RUNTIME_DLLS
-        "${CMAKE_SOURCE_DIR}/../sdk/binaries/*.dll"
-    )
-
-    add_custom_command(TARGET xray_unit_tests POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            ${XRAY_RUNTIME_DLLS}
-            "$<TARGET_FILE_DIR:xray_unit_tests>"
-    )
-
     # Tests include production headers directly from src and link against the
     # existing production targets rather than recompiling production sources.
     target_include_directories(xray_unit_tests PRIVATE
