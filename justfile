@@ -24,7 +24,8 @@ generate-build-files:
         cmake .. \
         -DCMAKE_BUILD_TYPE=DX11 \
         -DCMAKE_SYSTEM_NAME=Windows \
-        -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+        -G "Ninja"
 
 # Check Doxygen documentation comment coverage.
 [working-directory('docs')]
