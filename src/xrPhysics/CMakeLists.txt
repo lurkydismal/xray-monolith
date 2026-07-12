@@ -543,7 +543,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -554,7 +554,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX10AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -566,7 +566,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX11>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -577,7 +577,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX11AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -589,7 +589,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX8>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -600,7 +600,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX8AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -612,7 +612,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX9>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -623,7 +623,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX9AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -649,7 +649,7 @@ if(MSVC)
             /Zc:inline-
         >
         $<$<CONFIG:Release>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -660,7 +660,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:ReleaseAVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -679,7 +679,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /ZI;
+            /Z7;
             /GS;
             /Zc:inline-
         >
@@ -691,7 +691,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /ZI;
+            /Z7;
             /GS;
             /Zc:inline-
         >
@@ -715,7 +715,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /ZI;
+            /Z7;
             /GS;
             /Zc:inline-
         >
@@ -727,7 +727,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /ZI;
+            /Z7;
             /GS;
             /Zc:inline-
         >

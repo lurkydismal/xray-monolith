@@ -311,7 +311,7 @@ if(MSVC)
             /Oi-;
             /Oy-;
             /Gy;
-            /ZI
+            /Z7
         >
         $<$<CONFIG:VerifiedDX11>:
             /Od;
@@ -319,7 +319,7 @@ if(MSVC)
             /Oi-;
             /Oy-;
             /Gy;
-            /ZI
+            /Z7
         >
         $<$<CONFIG:VerifiedDX8>:
             /Od;
@@ -327,7 +327,7 @@ if(MSVC)
             /Oi-;
             /Oy-;
             /Gy;
-            /ZI
+            /Z7
         >
         $<$<CONFIG:VerifiedDX9>:
             /Od;
@@ -335,7 +335,7 @@ if(MSVC)
             /Oi-;
             /Oy-;
             /Gy;
-            /ZI
+            /Z7
         >
         $<$<CONFIG:VerifiedDX11ASAN>:
             /Od;
@@ -343,7 +343,7 @@ if(MSVC)
             /Oi-;
             /Oy-;
             /Gy;
-            /ZI
+            /Z7
         >
         /permissive-;
         /std:c++17;

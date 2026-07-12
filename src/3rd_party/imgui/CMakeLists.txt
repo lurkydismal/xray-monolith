@@ -321,14 +321,14 @@ if(MSVC)
             /Ob0;
             /Oy-;
             /Gy;
-            /ZI
+            /Z7
         >
         $<$<CONFIG:VerifiedDX11>:
             /Od;
             /Ob0;
             /Oy-;
             /Gy;
-            /ZI
+            /Z7
         >
         $<$<CONFIG:VerifiedDX11ASAN>:
             /Od;
@@ -342,14 +342,14 @@ if(MSVC)
             /Ob0;
             /Oy-;
             /Gy;
-            /ZI
+            /Z7
         >
         $<$<CONFIG:VerifiedDX9>:
             /Od;
             /Ob0;
             /Oy-;
             /Gy;
-            /ZI
+            /Z7
         >
         /permissive-;
         /std:c++17;

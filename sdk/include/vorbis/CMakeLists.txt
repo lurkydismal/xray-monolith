@@ -203,7 +203,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -214,7 +214,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX10AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -227,7 +227,7 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:DX11>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -238,7 +238,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX11AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -251,7 +251,7 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:DX8>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -262,7 +262,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX8AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -275,7 +275,7 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:DX9>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -286,7 +286,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX9AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -310,7 +310,7 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:Release>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -321,7 +321,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:ReleaseAVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -341,7 +341,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /ZI;
+            /Z7;
             /TC;
             /Y-
         >
@@ -353,7 +353,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /ZI;
+            /Z7;
             /TC;
             /Y-
         >
@@ -377,7 +377,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /ZI;
+            /Z7;
             /TC;
             /Y-
         >
@@ -389,7 +389,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /ZI;
+            /Z7;
             /TC;
             /Y-
         >
@@ -584,7 +584,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -595,7 +595,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX10AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -608,7 +608,7 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:DX11>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -619,7 +619,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX11AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -632,7 +632,7 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:DX8>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -643,7 +643,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX8AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -656,7 +656,7 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:DX9>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -667,7 +667,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX9AVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -691,7 +691,7 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:Release>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -702,7 +702,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:ReleaseAVX>:
-            /GL;
+            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -720,7 +720,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /ZI;
+            /Z7;
             /Y-
         >
         $<$<CONFIG:VerifiedDX11>:
@@ -729,7 +729,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /ZI;
+            /Z7;
             /Y-
         >
         $<$<CONFIG:VerifiedDX11ASAN>:
@@ -747,7 +747,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /ZI;
+            /Z7;
             /Y-
         >
         $<$<CONFIG:VerifiedDX9>:
@@ -756,7 +756,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /ZI;
+            /Z7;
             /Y-
         >
         /std:c++17
