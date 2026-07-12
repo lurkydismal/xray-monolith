@@ -240,31 +240,11 @@ set(DEFAULT_Fortran_PROPS "${CMAKE_CURRENT_LIST_DIR}/DefaultFortran.cmake")
 ################################################################################
 function(xray_add_dual_library TARGET OBJECT_TARGET)
     add_library(${OBJECT_TARGET} OBJECT ${ARGN})
-    set_target_properties(${OBJECT_TARGET}
-        PROPERTIES
-        POSITION_INDEPENDENT_CODE ON
-    )
+    set_target_properties(${OBJECT_TARGET} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-    add_library(${TARGET} STATIC
-        $<TARGET_OBJECTS:${OBJECT_TARGET}>
-    )
-
-    add_library(${TARGET}_shared SHARED
-        $<TARGET_OBJECTS:${OBJECT_TARGET}>
-    )
-
-    set_target_properties(${TARGET}_shared
-        PROPERTIES
-        OUTPUT_NAME "${TARGET}_shared"
-    )
-
-    # Mark both libraries as belonging to the same pair.
-    set_target_properties(${TARGET} PROPERTIES
-        XRAY_DUAL_TARGET "${TARGET}"
-    )
-    set_target_properties(${TARGET}_shared PROPERTIES
-        XRAY_DUAL_TARGET "${TARGET}"
-    )
+    add_library(${TARGET} STATIC $<TARGET_OBJECTS:${OBJECT_TARGET}>)
+    add_library(${TARGET}_shared SHARED $<TARGET_OBJECTS:${OBJECT_TARGET}>)
+    set_target_properties(${TARGET}_shared PROPERTIES OUTPUT_NAME "${TARGET}_shared")
 
     set_property(GLOBAL APPEND PROPERTY XRAY_DUAL_LIBRARY_TARGETS "${TARGET}")
 endfunction()
@@ -276,12 +256,8 @@ endfunction()
 # target links.
 ################################################################################
 function(xray_project_link_variant OUT_VAR LINK_TARGET USE_SHARED)
-    if(NOT TARGET "${LINK_TARGET}")
-        set(${OUT_VAR} "${LINK_TARGET}" PARENT_SCOPE)
-        return()
-    endif()
-
-    if(USE_SHARED AND TARGET "${LINK_TARGET}_shared")
+    get_property(XRAY_DUAL_LIBRARY_TARGETS GLOBAL PROPERTY XRAY_DUAL_LIBRARY_TARGETS)
+    if(${USE_SHARED} AND TARGET "${LINK_TARGET}_shared")
         set(${OUT_VAR} "${LINK_TARGET}_shared" PARENT_SCOPE)
     else()
         set(${OUT_VAR} "${LINK_TARGET}" PARENT_SCOPE)
@@ -305,99 +281,4 @@ function(xray_link_project_libraries XRAY_TARGET_NAME SCOPE)
     endforeach()
 
     target_link_libraries(${XRAY_TARGET_NAME} ${SCOPE} ${LINK_LIBRARIES})
-endfunction()
-
-function(xray_dual_targets OUT_VAR TARGET)
-    set(TARGETS)
-
-    if(TARGET "${TARGET}")
-        list(APPEND TARGETS "${TARGET}")
-    endif()
-
-    if(TARGET "${TARGET}_shared")
-        list(APPEND TARGETS "${TARGET}_shared")
-    endif()
-
-    set(${OUT_VAR} "${TARGETS}" PARENT_SCOPE)
-endfunction()
-
-function(xray_target_include_directories TARGET OBJECT_TARGET SCOPE)
-    target_include_directories(${OBJECT_TARGET}
-        ${SCOPE}
-        ${ARGN}
-    )
-
-    xray_dual_targets(TARGETS ${TARGET})
-
-    foreach(T IN LISTS TARGETS)
-        target_include_directories(${T}
-            ${SCOPE}
-            "$<TARGET_PROPERTY:${OBJECT_TARGET},INTERFACE_INCLUDE_DIRECTORIES>"
-            "$<TARGET_PROPERTY:${OBJECT_TARGET},INCLUDE_DIRECTORIES>"
-        )
-    endforeach()
-endfunction()
-
-function(xray_target_compile_definitions OBJECT_TARGET SCOPE)
-    target_compile_definitions(${OBJECT_TARGET}
-        ${SCOPE}
-        ${ARGN}
-    )
-endfunction()
-
-function(xray_target_compile_options OBJECT_TARGET SCOPE)
-    target_compile_options(${OBJECT_TARGET}
-        ${SCOPE}
-        ${ARGN}
-    )
-endfunction()
-
-function(xray_target_precompile_headers OBJECT_TARGET SCOPE)
-    target_precompile_headers(${OBJECT_TARGET}
-        ${SCOPE}
-        ${ARGN}
-    )
-endfunction()
-
-function(xray_add_dependencies TARGET)
-    xray_dual_targets(TARGETS ${TARGET})
-
-    foreach(T IN LISTS TARGETS)
-        add_dependencies(${T} ${ARGN})
-    endforeach()
-endfunction()
-
-function(xray_target_link_libraries TARGET SCOPE)
-    xray_dual_targets(TARGETS ${TARGET})
-
-    foreach(T IN LISTS TARGETS)
-        xray_link_project_libraries(${T} ${SCOPE} ${ARGN})
-    endforeach()
-endfunction()
-
-function(xray_target_link_options TARGET SCOPE)
-    xray_dual_targets(TARGETS ${TARGET})
-
-    foreach(T IN LISTS TARGETS)
-        target_link_options(${T} ${SCOPE} ${ARGN})
-    endforeach()
-endfunction()
-
-function(xray_target_link_directories TARGET SCOPE)
-    xray_dual_targets(TARGETS ${TARGET})
-
-    foreach(T IN LISTS TARGETS)
-        target_link_directories(${T} ${SCOPE} ${ARGN})
-    endforeach()
-endfunction()
-
-function(xray_set_target_properties TARGET)
-    xray_dual_targets(TARGETS ${TARGET})
-
-    foreach(T IN LISTS TARGETS)
-        set_target_properties(${T}
-            PROPERTIES
-            ${ARGN}
-        )
-    endforeach()
 endfunction()
