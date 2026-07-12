@@ -269,7 +269,7 @@ endfunction()
 # project dual-library dependencies to their shared variants when requested.
 ################################################################################
 function(xray_link_project_libraries XRAY_TARGET_NAME SCOPE)
-    set(USE_SHARED "${PROJECT_SHARED_LIBS}")
+    set(USE_SHARED ${PROJECT_SHARED_LIBS})
     if("${XRAY_TARGET_NAME}" MATCHES "_shared$")
         set(USE_SHARED TRUE)
     endif()
