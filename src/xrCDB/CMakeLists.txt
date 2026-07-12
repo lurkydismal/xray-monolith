@@ -493,7 +493,7 @@ endif()
 # Dependencies
 ################################################################################
 # Link with other targets.
-xray_link_project_libraries(${PROJECT_NAME} PUBLIC
+target_link_libraries(${PROJECT_NAME} PUBLIC
     xrAPI
     xrCore
 )
