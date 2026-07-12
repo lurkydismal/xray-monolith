@@ -4,22 +4,30 @@
 # This file is included by the existing top-level CMakeLists.txt so testing is
 # added without replacing the current project layout or production targets.
 
+################################################################################
 # Keep tests opt-in for normal engine builds while still making CTest integration
 # available from the root project when XRay_BUILD_TESTING is enabled.
+################################################################################
 option(XRay_BUILD_TESTING "Build X-Ray unit tests" ON)
 
 if(NOT XRay_BUILD_TESTING)
     return()
 endif()
 
+################################################################################
 # CTest must be enabled at the top level before test executables are registered.
+################################################################################
 include(CTest)
 
+################################################################################
 # CPM.cmake is the required dependency manager for test-only dependencies.
+################################################################################
 include("${CMAKE_CURRENT_LIST_DIR}/CPM.cmake")
 
+################################################################################
 # GoogleTest's CMake package also provides GoogleMock targets; both are fetched
 # through CPM so tests can link to GTest::gtest_main and GTest::gmock.
+################################################################################
 CPMAddPackage(
     NAME googletest
     GITHUB_REPOSITORY google/googletest
@@ -29,21 +37,27 @@ CPMAddPackage(
         "gtest_force_shared_crt ON"
 )
 
+################################################################################
 # gtest_discover_tests is used below so newly added tests are automatically
 # exposed to CTest after the test binary is built.
+################################################################################
 include(GoogleTest)
 
+################################################################################
 # Collect every side-by-side unit test under src while deliberately skipping all
 # vendored code beneath src/3rd_party. CONFIGURE_DEPENDS lets CMake reconfigure
 # automatically when a new *.test.cpp file is added or removed.
+################################################################################
 file(GLOB_RECURSE XRAY_TEST_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/*.test.cpp"
 )
 list(FILTER XRAY_TEST_SOURCES EXCLUDE REGEX "${CMAKE_SOURCE_DIR}/3rd_party/")
 
+################################################################################
 # add_xray_discovered_tests creates the single aggregate unit-test executable.
 # Keeping the production libraries separate ensures *.test.cpp files never become
 # part of the existing production targets.
+################################################################################
 function(add_xray_discovered_tests)
     if(NOT XRAY_TEST_SOURCES)
         message(STATUS "No X-Ray unit tests found")
@@ -86,10 +100,12 @@ function(add_xray_discovered_tests)
     gtest_discover_tests(xray_unit_tests)
 endfunction()
 
+################################################################################
 # xray_collect_test_link_targets discovers all linkable project targets so the
 # aggregate test binary exercises the same CMake targets declared by sdk/, src/,
 # and src/3rd_party/. Dual libraries are resolved to their shared variants to
 # preserve the default test behavior when PROJECT_SHARED_LIBS is OFF.
+################################################################################
 function(xray_collect_test_link_targets OUT_VAR)
     xray_collect_directory_targets("${CMAKE_SOURCE_DIR}" DISCOVERED_TARGETS)
 
@@ -116,9 +132,11 @@ function(xray_collect_test_link_targets OUT_VAR)
     set(${OUT_VAR} "${RESULT}" PARENT_SCOPE)
 endfunction()
 
+################################################################################
 # xray_collect_directory_targets recursively walks CMake's directory tree and
 # returns targets declared in the root project, including out-of-tree sdk targets
 # that were added with add_subdirectory().
+################################################################################
 function(xray_collect_directory_targets DIRECTORY OUT_VAR)
     get_property(LOCAL_TARGETS DIRECTORY "${DIRECTORY}" PROPERTY BUILDSYSTEM_TARGETS)
     set(RESULT ${LOCAL_TARGETS})
