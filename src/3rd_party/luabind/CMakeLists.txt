@@ -479,7 +479,7 @@ endif()
 ################################################################################
 # Dependencies
 ################################################################################
-xray_link_project_libraries(${PROJECT_NAME} PUBLIC
+target_link_libraries(${PROJECT_NAME} PUBLIC
     LuaJIT-2
 )
 
