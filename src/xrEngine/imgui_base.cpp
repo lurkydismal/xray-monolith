@@ -14,6 +14,35 @@ static bool xrayOpenInShellFn_Disabled(ImGuiContext*, const char*)
     return true;
 }
 
+static void DrawOutlinedText(ImDrawList* draw, ImVec2 pos, ImU32 color, const char* text)
+{
+    constexpr ImU32 outline = IM_COL32(0, 0, 0, 255);
+
+    draw->AddText({pos.x - 1, pos.y}, outline, text);
+    draw->AddText({pos.x + 1, pos.y}, outline, text);
+    draw->AddText({pos.x, pos.y - 1}, outline, text);
+    draw->AddText({pos.x, pos.y + 1}, outline, text);
+
+    draw->AddText(pos, color, text);
+}
+
+static void ShowFPSOverlay()
+{
+    ImGuiIO& io = ImGui::GetIO();
+
+    char fpsBuf[64];
+    char msBuf[64];
+
+    std::snprintf(fpsBuf, sizeof(fpsBuf), "FPS: %.1f", io.Framerate);
+    std::snprintf(msBuf, sizeof(msBuf), "Frame: %.3f ms",
+        io.Framerate > 0.0f ? 1000.0f / io.Framerate : 0.0f);
+
+    ImDrawList* draw = ImGui::GetForegroundDrawList();
+
+    DrawOutlinedText(draw, {10.0f, 10.0f}, IM_COL32(255, 255, 0, 255), fpsBuf);
+    DrawOutlinedText(draw, {10.0f, 30.0f}, IM_COL32(255, 255, 0, 255), msBuf);
+}
+
 namespace xr_imgui
 {
     static bool imgui_demo = false;
@@ -161,10 +190,12 @@ namespace xr_imgui
         
         if (is_shown())
         {
-            ShowMain();
-            if (imgui_demo)     ImGui::ShowDemoWindow(&imgui_demo);
-            if (imgui_metrics)  ImGui::ShowMetricsWindow(&imgui_metrics);
+            ShowFPSOverlay();
+            // ShowMain();
+            // if (imgui_demo)     ImGui::ShowDemoWindow(&imgui_demo);
+            // if (imgui_metrics)  ImGui::ShowMetricsWindow(&imgui_metrics);
         }
+
 
         if (io.WantSetMousePos)
         {
