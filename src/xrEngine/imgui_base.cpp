@@ -47,6 +47,7 @@ namespace xr_imgui
 {
     static bool imgui_demo = false;
     static bool imgui_metrics = false;
+    static bool show_fps_overlay = false;
 
     ide::ide()
         : keyboard_code_page(CP_ACP), m_backend_data(nullptr), m_input(false), m_render(nullptr), m_shown(false), firstframe(true)
@@ -187,13 +188,15 @@ namespace xr_imgui
             OnScreenResolutionChanged();
             ImGui::NewFrame();
         }
-        
+
+        if (show_fps_overlay)
+            ShowFPSOverlay();
+
         if (is_shown())
         {
-            ShowFPSOverlay();
-            // ShowMain();
-            // if (imgui_demo)     ImGui::ShowDemoWindow(&imgui_demo);
-            // if (imgui_metrics)  ImGui::ShowMetricsWindow(&imgui_metrics);
+            ShowMain();
+            if (imgui_demo)     ImGui::ShowDemoWindow(&imgui_demo);
+            if (imgui_metrics)  ImGui::ShowMetricsWindow(&imgui_metrics);
         }
 
 
@@ -247,6 +250,8 @@ namespace xr_imgui
 
             if (ImGui::BeginMenu("About"))
             {
+                ImGui::MenuItem("FPS Overlay", nullptr, &show_fps_overlay);
+                
                 if (ImGui::MenuItem("Demo", nullptr, imgui_demo))
                     imgui_demo = !imgui_demo;
 
