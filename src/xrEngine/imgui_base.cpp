@@ -18,10 +18,10 @@ static void DrawOutlinedText(ImDrawList* draw, ImVec2 pos, ImU32 color, const ch
 {
     constexpr ImU32 outline = IM_COL32(0, 0, 0, 255);
 
-    draw->AddText({pos.x - 1, pos.y}, outline, text);
-    draw->AddText({pos.x + 1, pos.y}, outline, text);
-    draw->AddText({pos.x, pos.y - 1}, outline, text);
-    draw->AddText({pos.x, pos.y + 1}, outline, text);
+    draw->AddText({pos.x - 3, pos.y}, outline, text);
+    draw->AddText({pos.x + 3, pos.y}, outline, text);
+    draw->AddText({pos.x, pos.y - 3}, outline, text);
+    draw->AddText({pos.x, pos.y + 3}, outline, text);
 
     draw->AddText(pos, color, text);
 }
