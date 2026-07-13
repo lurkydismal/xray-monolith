@@ -5,7 +5,7 @@
 
 #include "Level.h"
 #include "../Include/xrRender/Kinematics.h"
-#include "../xrphysics/IPHWorld.h"
+#include "../xrPhysics/IPHWorld.h"
 
 #include "script_game_object.h"
 #include "CameraFirstEye.h"
