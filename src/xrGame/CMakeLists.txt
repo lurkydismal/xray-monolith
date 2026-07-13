@@ -4329,6 +4329,8 @@ set(Core__Client__Objects__vehicles__Car
     "CarNew.cpp"
     "CarScript.cpp"
     "CarSound.cpp"
+    "CarDrone.cpp"
+    "CarDrone.h"
     "CarWheels.cpp"
     "DBG_Car.cpp"
 )
