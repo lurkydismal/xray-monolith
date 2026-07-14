@@ -6,7 +6,7 @@
 
 # Keep tests opt-in for normal engine builds while still making CTest integration
 # available from the root project when XRay_BUILD_TESTING is enabled.
-option(XRay_BUILD_TESTING "Build X-Ray unit tests" ON)
+option(XRay_BUILD_TESTING "Build X-Ray unit tests" OFF)
 
 if(NOT XRay_BUILD_TESTING)
     return()
