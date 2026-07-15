@@ -86,6 +86,25 @@ template <
 class CGraphAbstractSerialize : public CGraphAbstract<_data_type, _edge_weight_type, _vertex_id_type>,
                                 public IPureSerializeObject<IReader, IWriter>
 {
+private:
+	using inherited = CGraphAbstract<_data_type, _edge_weight_type, _vertex_id_type>;
+
+public:
+    using typename inherited::CVertex;
+    using typename inherited::CEdge;
+
+    using typename inherited::VERTICES;
+    using typename inherited::EDGES;
+
+    using typename inherited::const_vertex_iterator;
+    using typename inherited::vertex_iterator;
+    using typename inherited::const_iterator;
+    using typename inherited::iterator;
+
+    using inherited::vertices;
+    using inherited::vertex;
+    using inherited::edge;
+
 public:
 	virtual void save(IWriter& stream);
 	virtual void load(IReader& stream);
