@@ -97,7 +97,7 @@ IC void CSGraphVertex::on_edge_addition(CVertex* vertex)
 TEMPLATE_SPECIALIZATION
 IC void CSGraphVertex::on_edge_removal(const CVertex* vertex)
 {
-	VERTICES::iterator I = std::find(m_vertices.begin(), m_vertices.end(), vertex);
+	typename VERTICES::iterator I = std::find(m_vertices.begin(), m_vertices.end(), vertex);
 	VERIFY(I != m_vertices.end());
 	m_vertices.erase(I);
 }
