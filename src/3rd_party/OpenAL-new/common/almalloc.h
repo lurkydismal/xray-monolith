@@ -116,6 +116,7 @@ constexpr T *to_address(T *p) noexcept
 }
 
 template<typename T>
+requires (!std::is_pointer_v<std::remove_reference_t<T>>)
 constexpr auto to_address(const T &p) noexcept
 { return to_address(p.operator->()); }
 
