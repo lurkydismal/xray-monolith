@@ -20,7 +20,7 @@ public:
 		// depth determines load order of DLTX overrides, lower depth is more important
 		// depth order: DLTX mod_file -> its includes -> Base file -> its includes
 		int depth;
-		
+
 		// Insertion index will determine what kv pair in overrides will win even if the depth is the same
 		u32 insertionIndex;
 
@@ -125,14 +125,14 @@ public:
 	void DLTX_print(LPCSTR sec, LPCSTR line);
 	LPCSTR DLTX_getFilenameOfLine(LPCSTR sec, LPCSTR line);
 	bool DLTX_isOverride(LPCSTR sec, LPCSTR line);
-	
+
 private:
 	static xr_unordered_flat_map<xr_string, Root> CachedData;
 	static xrCriticalSection CacheCS;
 
 public:
 	static void InvalidateCache(LPCSTR path = nullptr);
-	static void CInifile::GetCacheStats(u64& files_cached, u64& total_bytes, u64& section_count)
+	static void GetCacheStats(u64& files_cached, u64& total_bytes, u64& section_count)
 	{
         xrCriticalSectionGuard g(CacheCS);
 		total_bytes = 0;
