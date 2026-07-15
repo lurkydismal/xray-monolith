@@ -38,13 +38,12 @@ private:
 		_compare_predicate_type
 	> self_type;
 
-	typedef
-	xr_vector<
+	using inherited = xr_vector<
 		std::pair<
 			_key_type,
 			_data_type
 		>
-	> inherited;
+	>;
 
 public:
 	typedef
