@@ -24,7 +24,11 @@ private:
 	};
 
 protected:
-	typedef CGraphAbstractSerialize<CPatrolPoint, float, u32> inherited;
+	using inherited = CGraphAbstractSerialize<CPatrolPoint, float, u32>;
+
+public:
+    using const_vertex_iterator = typename inherited::const_vertex_iterator;
+    using CVertex = typename inherited::CVertex;
 
 public:
 #ifdef DEBUG
@@ -42,7 +46,7 @@ public:
 	IC const CVertex* point(const Fvector& position) const;
 
 private:
-    std::pair<u32, float> CPatrolPath::parse_point_link(LPCSTR patrol_name, xr_string link, xr_map<shared_str, u32> vertex_ids_by_name);
+    std::pair<u32, float> parse_point_link(LPCSTR patrol_name, xr_string link, xr_map<shared_str, u32> vertex_ids_by_name);
 
 #ifdef DEBUG
 public:
