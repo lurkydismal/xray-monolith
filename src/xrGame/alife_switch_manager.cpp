@@ -58,7 +58,7 @@ void CALifeSwitchManager::add_online(CSE_ALifeDynamicObject* object, bool update
 		ClientID clientID;
 		clientID.set(server().GetServerClient() ? server().GetServerClient()->ID.value() : 0);
 		server().Process_spawn(tNetPacket, clientID,FALSE, l_tpAbstract);
-		object->s_flags.and(u16(-1) ^ M_SPAWN_UPDATE);
+		object->s_flags.assign_and(u16(-1) ^ M_SPAWN_UPDATE);
 
 		//Alundaio: Knowing last object to spawn can be very useful to debugging
 		if (Core.isDebug())

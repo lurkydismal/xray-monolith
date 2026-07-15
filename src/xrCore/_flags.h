@@ -82,13 +82,13 @@ public:
 		return *this;
 	}
 
-	IC SelfRef and(const T mask)
+	IC SelfRef assign_and(const T mask)
 	{
 		flags &= mask;
 		return *this;
 	}
 
-	IC SelfRef and(const Self& f, const T mask)
+	IC SelfRef assign_and(const Self& f, const T mask)
 	{
 		flags = f.flags & mask;
 		return *this;
