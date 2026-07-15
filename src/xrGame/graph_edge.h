@@ -28,11 +28,17 @@ public:
 };
 
 template <typename _edge_weight_type, typename _vertex_type, typename _edge_data_type>
-class CEdge : 
-	public CEdgeBase<_edge_weight_type,_vertex_type> 
+class CEdge :
+	public CEdgeBase<_edge_weight_type,_vertex_type>
 {
 private:
 	typedef CEdgeBase<_edge_weight_type, _vertex_type> inherited;
+
+public:
+    using _vertex_id_type = typename inherited::_vertex_id_type;
+
+    using inherited::weight;
+    using inherited::vertex;
 
 private:
 	_edge_data_type m_data;
@@ -46,7 +52,7 @@ public:
 };
 
 template <typename _edge_weight_type, typename _vertex_type>
-class CEdge<_edge_weight_type, _vertex_type, xr_empty> : 
+class CEdge<_edge_weight_type, _vertex_type, xr_empty> :
 	public CEdgeBase<_edge_weight_type,_vertex_type> {
 private:
 	typedef CEdgeBase<_edge_weight_type, _vertex_type> inherited;
