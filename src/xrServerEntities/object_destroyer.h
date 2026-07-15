@@ -8,6 +8,9 @@
 
 #pragma once
 
+#include "object_type_traits.h"
+#include "object_interfaces.h"
+
 struct CDestroyer
 {
 	IC static void delete_data(LPCSTR data)

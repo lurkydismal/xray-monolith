@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "object_type_traits.h"
+
 template <class M, typename P>
 struct CSaver
 {

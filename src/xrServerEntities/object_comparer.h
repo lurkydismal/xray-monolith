@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "object_type_traits.h"
+
 template <typename P>
 struct CComparer
 {

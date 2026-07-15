@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "object_type_traits.h"
+
 struct CCloner
 {
 	template <typename T>
