@@ -185,7 +185,7 @@ void add_online_impl(CSE_ALifeDynamicObject* object, const bool& update_registri
 
 		//R_ASSERT2				(l_tpALifeInventoryItem,"Non inventory item object has parent?!");
 
-		l_tpALifeInventoryItem->base()->s_flags.or(M_SPAWN_UPDATE);
+		l_tpALifeInventoryItem->base()->s_flags.assign_or(M_SPAWN_UPDATE);
 		CSE_Abstract* l_tpAbstract = smart_cast<CSE_Abstract*>(l_tpALifeInventoryItem);
 		object->alife().server().entity_Destroy(l_tpAbstract);
 

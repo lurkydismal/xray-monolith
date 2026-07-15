@@ -70,13 +70,13 @@ public:
 	IC BOOL is(const T mask) const { return mask == (flags & mask); }
 	IC BOOL is_any(const T mask) const { return BOOL(!!(flags & mask)); }
 	IC BOOL test(const T mask) const { return BOOL(!!(flags & mask)); }
-	IC SelfRef or(const T mask)
+	IC SelfRef assign_or(const T mask)
 	{
 		flags |= mask;
 		return *this;
 	}
 
-	IC SelfRef or(const Self& f, const T mask)
+	IC SelfRef assign_or(const Self& f, const T mask)
 	{
 		flags = f.flags | mask;
 		return *this;

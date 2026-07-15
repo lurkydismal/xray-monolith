@@ -206,7 +206,7 @@ void CSE_ALifeInventoryBox::add_online(const bool& update_registries)
 		CSE_ALifeDynamicObject* l_tpALifeDynamicObject = ai().alife().objects().object(*I);
 		CSE_ALifeInventoryItem* l_tpALifeInventoryItem = smart_cast<CSE_ALifeInventoryItem*>(l_tpALifeDynamicObject);
 		R_ASSERT2(l_tpALifeInventoryItem, "Non inventory item object has parent?!");
-		l_tpALifeInventoryItem->base()->s_flags.or(M_SPAWN_UPDATE);
+		l_tpALifeInventoryItem->base()->s_flags.assign_or(M_SPAWN_UPDATE);
 		CSE_Abstract* l_tpAbstract = smart_cast<CSE_Abstract*>(l_tpALifeInventoryItem);
 		object->alife().server().entity_Destroy(l_tpAbstract);
 
