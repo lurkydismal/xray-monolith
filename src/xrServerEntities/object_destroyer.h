@@ -84,35 +84,36 @@ struct CDestroyer
 	template <typename T>
 	struct CHelper1
 	{
-		template <bool a>
-		IC static void delete_data(T&)
-		{
-		}
-
-		template <>
-		IC static void delete_data<true>(T& data)
-		{
-			data.destroy();
-		}
+        template <bool a>
+        IC static void delete_data(T& data)
+        {
+            if constexpr (a)
+                data.destroy();
+        }
 	};
 
 	template <typename T>
 	struct CHelper2
 	{
-		template <bool a>
-		IC static void delete_data(T& data)
-		{
-			CHelper1<T>::delete_data < object_type_traits::is_base_and_derived<IPureDestroyableObject, T>::value > (data
-			);
-		}
-
-		template <>
-		IC static void delete_data<true>(T& data)
-		{
-			if (data)
-				CDestroyer::delete_data(*data);
-			xr_delete(data);
-		}
+        template <bool a>
+        IC static void delete_data(T& data)
+        {
+            if constexpr (a)
+            {
+                if (data)
+                    CDestroyer::delete_data(*data);
+                xr_delete(data);
+            }
+            else
+            {
+                CHelper1<T>::template delete_data<
+                    object_type_traits::is_base_and_derived<
+                        IPureDestroyableObject,
+                        T
+                    >::value
+                >(data);
+            }
+        }
 	};
 
 	struct CHelper3
@@ -131,23 +132,26 @@ struct CDestroyer
 	template <typename T>
 	struct CHelper4
 	{
-		template <bool a>
-		IC static void delete_data(T& data)
-		{
-			CHelper2<T>::delete_data < object_type_traits::is_pointer<T>::value > (data);
-		}
-
-		template <>
-		IC static void delete_data<true>(T& data)
-		{
-			CHelper3::delete_data(data);
-		}
+        template <bool a>
+        IC static void delete_data(T& data)
+        {
+            if constexpr (a)
+            {
+                CHelper3::delete_data(data);
+            }
+            else
+            {
+                CHelper2<T>::template delete_data<
+                    object_type_traits::is_pointer<T>::value
+                >(data);
+            }
+        }
 	};
 
 	template <typename T>
 	IC static void delete_data(T& data)
 	{
-		CHelper4<T>::delete_data < object_type_traits::is_stl_container<T>::value > (data);
+        CHelper4<T>::template delete_data< object_type_traits::is_stl_container<T>::value >(data);
 	}
 };
 
