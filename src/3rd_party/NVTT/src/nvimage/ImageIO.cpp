@@ -49,13 +49,13 @@ namespace {
 
 	// Array of image save plugins.
 //	static HashMap<String, ImageOutput_Plugin> s_plugin_save_map;
-	
+
 	struct Color555 {
 		uint16 b : 5;
 		uint16 g : 5;
 		uint16 r : 5;
 	};
-	
+
 } // namespace
 
 
@@ -64,11 +64,11 @@ Image * nv::ImageIO::load(const char * fileName)
 	nvDebugCheck(fileName != NULL);
 
 	StdInputStream stream(fileName);
-	
+
 	if (stream.isError()) {
 		return NULL;
 	}
-	
+
 	return ImageIO::load(fileName, stream);
 }
 
@@ -78,7 +78,7 @@ Image * nv::ImageIO::load(const char * fileName, Stream & s)
 	nvDebugCheck(s.isLoading());
 
 	const char * extension = Path::extension(fileName);
-	
+
 	if (strCaseCmp(extension, ".tga") == 0) {
 		return ImageIO::loadTGA(s);
 	}
@@ -133,11 +133,11 @@ FloatImage * nv::ImageIO::loadFloat(const char * fileName)
 	nvDebugCheck(fileName != NULL);
 
 	StdInputStream stream(fileName);
-	
+
 	if (stream.isError()) {
-		return false;
+		return nullptr;
 	}
-	
+
 	return loadFloat(fileName, stream);
 }
 
@@ -146,7 +146,7 @@ FloatImage * nv::ImageIO::loadFloat(const char * fileName, Stream & s)
 	nvDebugCheck(fileName != NULL);
 
 	const char * extension = Path::extension(fileName);
-	
+
 #if defined(HAVE_TIFF)
 	if (strCaseCmp(extension, ".tif") == 0 || strCaseCmp(extension, ".tiff") == 0) {
 		return loadFloatTIFF(fileName, s);
@@ -215,7 +215,7 @@ Image * nv::ImageIO::loadTGA(Stream & s)
 {
 	nvCheck(!s.isError());
 	nvCheck(s.isLoading());
-	
+
 	TgaHeader tga;
 	s << tga;
 	s.seek(TgaHeader::Size + tga.id_length);
@@ -233,7 +233,7 @@ Image * nv::ImageIO::loadTGA(Stream & s)
 		case TGA_TYPE_INDEXED:
 			if( tga.colormap_type!=1 || tga.colormap_size!=24 || tga.colormap_length>256 ) {
 				nvDebug( "*** ImageIO::loadTGA: Error, only 24bit paletted images are supported.\n" );
-				return false;
+				return nullptr;
 			}
 			pal = true;
 			break;
@@ -254,15 +254,15 @@ Image * nv::ImageIO::loadTGA(Stream & s)
 
 		default:
 			nvDebug( "*** ImageIO::loadTGA: Error, unsupported image type.\n" );
-			return false;
+			return nullptr;
 	}
 
 	const uint pixel_size = (tga.pixel_size/8);
 	nvDebugCheck(pixel_size <= 4);
-	
+
 	const uint size = tga.width * tga.height * pixel_size;
 
-	
+
 	// Read palette
 	uint8 palette[768];
 	if( pal ) {
@@ -279,7 +279,7 @@ Image * nv::ImageIO::loadTGA(Stream & s)
 
 		while (num > 0) {
 			// Get packet header
-			uint8 c; 
+			uint8 c;
 			s << c;
 
 			uint count = (c & 0x7f) + 1;
@@ -335,7 +335,7 @@ Image * nv::ImageIO::loadTGA(Stream & s)
 	}
 	else if( grey ) {
 		img->setFormat(Image::Format_ARGB);
-		
+
 		for( int y = 0; y < tga.height; y++ ) {
 			for( int x = 0; x < tga.width; x++ ) {
 				dst[x].setBGRA(*src, *src, *src, *src);
@@ -345,12 +345,12 @@ Image * nv::ImageIO::loadTGA(Stream & s)
 		}
 	}
 	else {
-		
+
 		if( tga.pixel_size == 16 ) {
 			for( int y = 0; y < tga.height; y++ ) {
 				for( int x = 0; x < tga.width; x++ ) {
 					Color555 c = *reinterpret_cast<Color555 *>(src);
-					uint8 b = (c.b << 3) | (c.b >> 2);					
+					uint8 b = (c.b << 3) | (c.b >> 2);
 					uint8 g = (c.g << 3) | (c.g >> 2);
 					uint8 r = (c.r << 3) | (c.r >> 2);
 					dst[x].setBGRA(b, g, r, 0xFF);
@@ -370,7 +370,7 @@ Image * nv::ImageIO::loadTGA(Stream & s)
 		}
 		else if( tga.pixel_size == 32 ) {
 			img->setFormat(Image::Format_ARGB);
-			
+
 			for( int y = 0; y < tga.height; y++ ) {
 				for( int x = 0; x < tga.width; x++ ) {
 					dst[x].setBGRA(src[0], src[1], src[2], src[3]);
@@ -393,7 +393,7 @@ bool nv::ImageIO::saveTGA(Stream & s, const Image * img)
 	nvCheck(!s.isError());
 	nvCheck(img != NULL);
 	nvCheck(img->pixels() != NULL);
-	
+
 	TgaFile tga;
 	tga.head.id_length = 0;
 	tga.head.colormap_type = 0;
@@ -439,9 +439,9 @@ bool nv::ImageIO::saveTGA(Stream & s, const Image * img)
 	}
 
 	s << tga;
-	
+
 	tga.free();
-	
+
 	return true;
 }
 
@@ -450,26 +450,26 @@ Image * nv::ImageIO::loadPSD(Stream & s)
 {
 	nvCheck(!s.isError());
 	nvCheck(s.isLoading());
-	
+
 	s.setByteOrder(Stream::BigEndian);
-	
+
 	PsdHeader header;
 	s << header;
-	
+
 	if (!header.isValid())
 	{
 		printf("invalid header!\n");
 		return NULL;
 	}
-	
+
 	if (!header.isSupported())
 	{
 		printf("unsupported file!\n");
 		return NULL;
 	}
-	
+
 	int tmp;
-	
+
 	// Skip mode data.
 	s << tmp;
 	s.seek(s.tell() + tmp);
@@ -477,28 +477,28 @@ Image * nv::ImageIO::loadPSD(Stream & s)
 	// Skip image resources.
 	s << tmp;
 	s.seek(s.tell() + tmp);
-	
+
 	// Skip the reserved data.
 	s << tmp;
 	s.seek(s.tell() + tmp);
-	
+
 	// Find out if the data is compressed.
 	// Known values:
 	//   0: no compression
 	//   1: RLE compressed
 	uint16 compression;
 	s << compression;
-	
+
 	if (compression > 1) {
 		// Unknown compression type.
 		return NULL;
 	}
-	
+
 	uint channel_num = header.channel_count;
-	
+
 	AutoPtr<Image> img(new Image());
 	img->allocate(header.width, header.height);
-	
+
 	if (channel_num < 4)
 	{
 		// Clear the image.
@@ -508,33 +508,33 @@ Image * nv::ImageIO::loadPSD(Stream & s)
 	{
 		// Enable alpha.
 		img->setFormat(Image::Format_ARGB);
-		
+
 		// Ignore remaining channels.
 		channel_num = 4;
 	}
-	
-	
+
+
 	const uint pixel_count = header.height * header.width;
-	
+
 	static const uint components[4] = {2, 1, 0, 3};
-	
+
 	if (compression)
 	{
 		s.seek(s.tell() + header.height * header.channel_count * sizeof(uint16));
-		
-		// Read RLE data.						
+
+		// Read RLE data.
 		for (uint channel = 0; channel < channel_num; channel++)
 		{
 			uint8 * ptr = (uint8 *)img->pixels() + components[channel];
-			
+
 			uint count = 0;
 			while( count < pixel_count )
 			{
 				if (s.isAtEnd()) return NULL;
-				
+
 				uint8 c;
 				s << c;
-				
+
 				uint len = c;
 				if (len < 128)
 				{
@@ -542,14 +542,14 @@ Image * nv::ImageIO::loadPSD(Stream & s)
 					len++;
 					count += len;
 					if (count > pixel_count) return NULL;
-	
+
 					while (len != 0)
 					{
 						s << *ptr;
 						ptr += 4;
 						len--;
 					}
-				} 
+				}
 				else if (len > 128)
 				{
 					// Next -len+1 bytes in the dest are replicated from next source byte.
@@ -558,7 +558,7 @@ Image * nv::ImageIO::loadPSD(Stream & s)
 					len += 2;
 					count += len;
 					if (s.isAtEnd() || count > pixel_count) return NULL;
-					
+
 					uint8 val;
 					s << val;
 					while( len != 0 ) {
@@ -577,12 +577,12 @@ Image * nv::ImageIO::loadPSD(Stream & s)
 	{
 		// We're at the raw image data. It's each channel in order (Red, Green, Blue, Alpha, ...)
 		// where each channel consists of an 8-bit value for each pixel in the image.
-		
+
 		// Read the data by channel.
 		for (uint channel = 0; channel < channel_num; channel++)
 		{
 			uint8 * ptr = (uint8 *)img->pixels() + components[channel];
-			
+
 			// Read the data.
 			uint count = pixel_count;
 			while (count != 0)
@@ -602,10 +602,10 @@ Image * nv::ImageIO::loadPSD(Stream & s)
 static void user_read_data(png_structp png_ptr, png_bytep data, png_size_t length)
 {
 	nvDebugCheck(png_ptr != NULL);
-	
+
 	Stream * s = (Stream *)png_ptr->io_ptr;
 	s->serialize(data, (int)length);
-	
+
 	if (s->isError()) {
 		png_error(png_ptr, "Read Error");
 	}
@@ -615,7 +615,7 @@ static void user_read_data(png_structp png_ptr, png_bytep data, png_size_t lengt
 Image * nv::ImageIO::loadPNG(Stream & s)
 {
 	nvCheck(!s.isError());
-	
+
 	// Set up a read buffer and check the library version
 	png_structp png_ptr;
 	png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
@@ -738,7 +738,7 @@ Image * nv::ImageIO::loadPNG(Stream & s)
 		Color32 c = img->pixel(i);
 		img->pixel(i) = Color32(c.b, c.g, c.r, c.a);
 	}
-	
+
 	// Compute alpha channel if needed.
 	/*if( img->flags & PI_IU_BUMPMAP || img->flags & PI_IU_ALPHAMAP ) {
 		if( img->flags & PI_IF_HAS_COLOR && !(img->flags & PI_IF_HAS_ALPHA)) {
@@ -790,12 +790,12 @@ static void term_source (j_decompress_ptr /*cinfo*/){
 Image * nv::ImageIO::loadJPG(Stream & s)
 {
 	nvCheck(!s.isError());
-	
+
 	// Read the entire file.
 	Array<uint8> byte_array;
 	byte_array.resize(s.size());
 	s.serialize(byte_array.unsecureBuffer(), s.size());
-	
+
 	jpeg_decompress_struct cinfo;
 	jpeg_error_mgr jerr;
 
@@ -877,7 +877,7 @@ static toff_t tiffSeekProc(thandle_t h, toff_t offset, int whence)
 {
 	Stream * s = (Stream *)h;
 	nvDebugCheck(s != NULL);
-	
+
 	if (!s->isSeekable())
 	{
 		return (toff_t)-1;
@@ -926,16 +926,16 @@ static void tiffUnmapFileProc(thandle_t, tdata_t, toff_t)
 FloatImage * nv::ImageIO::loadFloatTIFF(const char * fileName, Stream & s)
 {
 	nvCheck(!s.isError());
-	
+
 	TIFF * tif = TIFFOpen(fileName, "r");
 	//TIFF * tif = TIFFClientOpen(fileName, "r", &s, tiffReadWriteProc, tiffReadWriteProc, tiffSeekProc, tiffCloseProc, tiffSizeProc, tiffMapFileProc, tiffUnmapFileProc);
-	
+
 	if (!tif)
 	{
 		nvDebug("Can't open '%s' for reading\n", fileName);
 		return NULL;
 	}
-	
+
 	::uint16 spp, bpp, format;
 	::uint32 width, height;
 	TIFFGetField(tif, TIFFTAG_IMAGELENGTH, &height);
@@ -943,28 +943,28 @@ FloatImage * nv::ImageIO::loadFloatTIFF(const char * fileName, Stream & s)
 	TIFFGetField(tif, TIFFTAG_BITSPERSAMPLE, &bpp);
 	TIFFGetField(tif, TIFFTAG_SAMPLESPERPIXEL, &spp);
 	TIFFGetField(tif, TIFFTAG_SAMPLEFORMAT, &format);
-	
+
 	if (bpp != 8 && bpp != 16 && bpp != 32) {
 		nvDebug("Can't load '%s', only 1 sample per pixel supported\n", fileName);
 		TIFFClose(tif);
 		return NULL;
 	}
-	
+
 	AutoPtr<FloatImage> fimage(new FloatImage());
 	fimage->allocate(spp, width, height);
-	
+
 	int linesize = TIFFScanlineSize(tif);
 	tdata_t buf = (::uint8 *)nv::mem::malloc(linesize);
-	
-	for (uint y = 0; y < height; y++) 
+
+	for (uint y = 0; y < height; y++)
 	{
 		TIFFReadScanline(tif, buf, y, 0);
 
-		for (uint c=0; c<spp; c++ ) 
+		for (uint c=0; c<spp; c++ )
 		{
 			float * dst = fimage->scanline(y, c);
 
-			for(uint x = 0; x < width; x++) 
+			for(uint x = 0; x < width; x++)
 			{
 				if (bpp == 8)
 				{
@@ -992,9 +992,9 @@ FloatImage * nv::ImageIO::loadFloatTIFF(const char * fileName, Stream & s)
 	}
 
 	nv::mem::free(buf);
-	
+
 	TIFFClose(tif);
-	
+
 	return fimage.release();
 }
 
@@ -1003,7 +1003,7 @@ bool nv::ImageIO::saveFloatTIFF(const char * fileName, const FloatImage * fimage
 	nvCheck(fileName != NULL);
 	nvCheck(fimage != NULL);
 	nvCheck(base_component + num_components <= fimage->componentNum());
-	
+
 	const int iW = fimage->width();
 	const int iH = fimage->height();
 	const int iC = num_components;
@@ -1022,8 +1022,8 @@ bool nv::ImageIO::saveFloatTIFF(const char * fileName, const FloatImage * fimage
 	TIFFSetField(image, TIFFTAG_SAMPLESPERPIXEL, iC);
 	TIFFSetField(image, TIFFTAG_SAMPLEFORMAT, SAMPLEFORMAT_IEEEFP);
 	TIFFSetField(image, TIFFTAG_BITSPERSAMPLE, 32);
-	
-	uint32 rowsperstrip = TIFFDefaultStripSize(image, (uint32)-1); 
+
+	uint32 rowsperstrip = TIFFDefaultStripSize(image, (uint32)-1);
 
 	TIFFSetField(image, TIFFTAG_ROWSPERSTRIP, rowsperstrip);
 	TIFFSetField(image, TIFFTAG_COMPRESSION, COMPRESSION_PACKBITS);
@@ -1038,7 +1038,7 @@ bool nv::ImageIO::saveFloatTIFF(const char * fileName, const FloatImage * fimage
 	float * scanline = new float[iW * iC];
 	for (int y = 0; y < iH; y++)
 	{
-		for (int c = 0; c < iC; c++) 
+		for (int c = 0; c < iC; c++)
 		{
 			const float * src = fimage->scanline(y, base_component + c);
 			for (int x = 0; x < iW; x++) scanline[x * iC + c] = src[x];
@@ -1069,34 +1069,34 @@ namespace
 		{
 			nvDebugCheck(s.isLoading());
 		}
-		
+
 		virtual bool read(char c[], int n)
 		{
 			m_stream.serialize(c, n);
-			
+
 			if (m_stream.isError())
 			{
 				throw Iex::InputExc("I/O error.");
 			}
-			
+
 			return m_stream.isAtEnd();
 		}
-		
+
 		virtual Imf::Int64 tellg()
 		{
 			return m_stream.tell();
 		}
-		
+
 		virtual void seekg(Imf::Int64 pos)
 		{
 			m_stream.seek(pos);
 		}
-		
+
 		virtual void clear()
 		{
 			m_stream.clearError();
 		}
-		
+
 	private:
 		Stream & m_stream;
 	};
@@ -1117,18 +1117,18 @@ FloatImage * nv::ImageIO::loadFloatEXR(const char * fileName, Stream & s)
 	int height = box.max.x - box.min.y + 1;
 
 	const Imf::ChannelList & channels = inputFile.header().channels();
-	
+
 	// Count channels.
 	uint channelCount= 0;
 	for (Imf::ChannelList::ConstIterator it = channels.begin(); it != channels.end(); ++it)
 	{
 		channelCount++;
 	}
-	
+
 	// Allocate FloatImage.
 	AutoPtr<FloatImage> fimage(new FloatImage());
 	fimage->allocate(channelCount, width, height);
-	
+
 	// Describe image's layout with a framebuffer.
 	Imf::FrameBuffer frameBuffer;
 	uint i = 0;
@@ -1136,11 +1136,11 @@ FloatImage * nv::ImageIO::loadFloatEXR(const char * fileName, Stream & s)
 	{
 		frameBuffer.insert(it.name(), Imf::Slice(Imf::FLOAT, (char *)fimage->channel(i), sizeof(float), sizeof(float) * width));
 	}
-	
+
 	// Read it.
 	inputFile.setFrameBuffer (frameBuffer);
 	inputFile.readPixels (box.min.y, box.max.y);
-	
+
 	return fimage.release();
 }
 
@@ -1150,31 +1150,31 @@ bool nv::ImageIO::saveFloatEXR(const char * fileName, const FloatImage * fimage,
 	nvCheck(fimage != NULL);
 	nvCheck(base_component + num_components <= fimage->componentNum());
 	nvCheck(num_components > 0 && num_components <= 4);
-	
+
 	const int w = fimage->width();
 	const int h = fimage->height();
-	
+
 	const char * channelNames[] = {"R", "G", "B", "A"};
-	
+
     Imf::Header header (w, h);
-	
+
 	for (uint c = 0; c < num_components; c++)
 	{
 		header.channels().insert(channelNames[c], Imf::Channel(Imf::FLOAT));
 	}
-	
+
     Imf::OutputFile file(fileName, header);
     Imf::FrameBuffer frameBuffer;
-    
+
 	for (uint c = 0; c < num_components; c++)
 	{
 		char * channel = (char *) fimage->channel(base_component + c);
 		frameBuffer.insert(channelNames[c], Imf::Slice(Imf::FLOAT, channel, sizeof(float), sizeof(float) * w));
 	}
-	
+
 	file.setFrameBuffer(frameBuffer);
 	file.writePixels(h);
-	
+
 	return true;
 }
 
@@ -1207,7 +1207,7 @@ FloatImage * nv::ImageIO::loadFloatPFM(const char * fileName, Stream & s)
 	}
 
 	parser.nextLine();
-	
+
 	int width = parser.token().toInt(); parser.nextToken();
 	int height = parser.token().toInt();
 
@@ -1310,7 +1310,7 @@ static bool SavePNG(const PiImage * img, const char * name) {
 	if( piStrCmp(piExtension(name), ".png" ) != 0 ) {
 		return false;
 	}
-	
+
 	if( img->flags & PI_IT_CUBEMAP ) {
 		nvDebug("*** Cannot save cubemaps as PNG.");
 		return false;
@@ -1321,7 +1321,7 @@ static bool SavePNG(const PiImage * img, const char * name) {
 	}
 
 	nvDebug( "--- Saving '%s'.\n", name );
-	
+
 	PiAutoPtr<PiStream> ar( PiFileSystem::CreateFileWriter( name ) );
 	if( ar == NULL ) {
 		nvDebug( "*** SavePNG: Error, cannot save file '%s'.\n", name );
@@ -1376,7 +1376,7 @@ public class PNGEnc {
     private static var crcTable:Array;
     private static var crcTableComputed:Boolean = false;
 
-    private static function writeChunk(png:ByteArray, 
+    private static function writeChunk(png:ByteArray,
             type:uint, data:ByteArray) {
         if (!crcTableComputed) {
             crcTableComputed = true;
@@ -1385,7 +1385,7 @@ public class PNGEnc {
                 var c:uint = n;
                 for (var k:uint = 0; k < 8; k++) {
                     if (c & 1) {
-                        c = uint(uint(0xedb88320) ^ 
+                        c = uint(uint(0xedb88320) ^
                             uint(c >>> 1));
                     } else {
                         c = uint(c >>> 1);
@@ -1409,7 +1409,7 @@ public class PNGEnc {
         var c:uint = 0xffffffff;
         for (var i:int = 0; i < (e-p); i++) {
             c = uint(crcTable[
-                (c ^ png.readUnsignedByte()) & 
+                (c ^ png.readUnsignedByte()) &
                 uint(0xff)] ^ uint(c >>> 8));
         }
         c = uint(c^uint(0xffffffff));
@@ -1438,71 +1438,71 @@ namespace ImageIO {
 		AddInputPlugin( "jpg", LoadJPG );
 #endif
 		AddInputPlugin( "dds", LoadDDS );
-		
+
 		AddOutputPlugin( "tga", SaveTGA );
 	}
-	
+
 	/** Reset ImageIO plugins. */
 	void ResetPlugins() {
 		s_plugin_load_map.Clear();
 		s_plugin_save_map.Clear();
 	}
-	
+
 	/** Add an input plugin. */
 	void AddInputPlugin( const char * ext, ImageInput_Plugin plugin ) {
 		s_plugin_load_map.Add(ext, plugin);
 	}
-	
+
 	/** Add an output plugin. */
 	void AddOutputPlugin( const char * ext, ImageOutput_Plugin plugin ) {
 		s_plugin_save_map.Add(ext, plugin);
 	}
 
-	
+
 	bool Load(PiImage * img, const char * name, PiStream & stream) {
-			
+
 		// Get name extension.
 		const char * extension = piExtension(name);
-		
+
 		// Skip the dot.
 		if( *extension == '.' ) {
 			extension++;
 		}
-		
+
 		// Lookup plugin in the map.
 		ImageInput_Plugin plugin = NULL;
 		if( s_plugin_load_map.Get(extension, &plugin) ) {
 			return plugin(img, stream);
 		}
-		
+
 		/*foreach(i, s_plugin_load_map) {
 			nvDebug("%s %s %d\n", s_plugin_load_map[i].key.GetStr(), extension, 0 == strcmp(extension, s_plugin_load_map[i].key));
 		}
-		
+
 		nvDebug("No plugin found for '%s' %d.\n", extension, s_plugin_load_map.Size());*/
-		
+
 		return false;
 	}
 
 	bool Save(const PiImage * img, const char * name, PiStream & stream) {
-				
+
 		// Get name extension.
 		const char * extension = piExtension(name);
-		
+
 		// Skip the dot.
 		if( *extension == '.' ) {
 			extension++;
 		}
-		
+
 		// Lookup plugin in the map.
 		ImageOutput_Plugin plugin = NULL;
 		if( s_plugin_save_map.Get(extension, &plugin) ) {
 			return plugin(img, stream);
 		}
-		
+
 		return false;
 	}
-	
+
 } // ImageIO
 
 #endif // 0
