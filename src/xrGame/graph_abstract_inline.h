@@ -227,12 +227,12 @@ TEMPLATE_SPECIALIZATION
 IC void CAbstractGraph::save(IWriter& stream)
 {
 	stream.open_chunk(0);
-	stream.w_u32((u32)vertices().size());
+	stream.w_u32((u32)this->vertices().size());
 	stream.close_chunk();
 
 	stream.open_chunk(1);
-	const_vertex_iterator I = vertices().begin();
-	const_vertex_iterator E = vertices().end();
+	const_vertex_iterator I = this->vertices().begin();
+	const_vertex_iterator E = this->vertices().end();
 	for (int i = 0; I != E; ++I, ++i)
 	{
 		stream.open_chunk(i);
@@ -251,8 +251,8 @@ IC void CAbstractGraph::save(IWriter& stream)
 
 	stream.open_chunk(2);
 	{
-		const_vertex_iterator I = vertices().begin();
-		const_vertex_iterator E = vertices().end();
+		const_vertex_iterator I = this->vertices().begin();
+		const_vertex_iterator E = this->vertices().end();
 		for (; I != E; ++I)
 		{
 			if ((*I).second->edges().empty())
@@ -276,7 +276,7 @@ IC void CAbstractGraph::save(IWriter& stream)
 TEMPLATE_SPECIALIZATION
 IC void CAbstractGraph::load(IReader& stream)
 {
-	clear();
+	this->clear();
 
 	u32 id;
 	_data_type data;
