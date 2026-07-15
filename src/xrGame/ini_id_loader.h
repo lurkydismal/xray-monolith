@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////
 // ini_id_loader.h
-// темплейтовый класс, который загружает из ini файла 
+// темплейтовый класс, который загружает из ini файла
 // строку с текстовыми id, потом присваивает каждому текстовому
 // id уникальный index
 ///////////////////////////////////////////////////////////////
@@ -11,7 +11,7 @@
 
 //ITEM_DATA		-	структура с полями id и index типа T_ID и T_INDEX,
 //					обязательно имеет конструктор с параметрами (T_INDEX index, T_ID id, LPCSTR r1, ..., LPCSTR rN)
-//					N = ITEM_REC_NUM - число доп. параметров в ITEM_DATA 
+//					N = ITEM_REC_NUM - число доп. параметров в ITEM_DATA
 
 //T_INIT		-	класс где определена статическая InitIdToIndex
 //					функция инициализации section_name и line_name
@@ -123,7 +123,7 @@ CSINI_IdToIndex::~CIni_IdToIndex()
 TEMPLATE_SPECIALIZATION
 const typename ITEM_DATA* CSINI_IdToIndex::GetById(const T_ID& str_id, bool no_assert)
 {
-	T_VECTOR::iterator it = m_pItemDataVector->begin();
+	typename T_VECTOR::iterator it = m_pItemDataVector->begin();
 	for (; m_pItemDataVector->end() != it; ++it)
 	{
 		if (!xr_strcmp((*it).id, str_id))
