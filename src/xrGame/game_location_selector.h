@@ -36,11 +36,19 @@ class
 	>
 {
 	typedef CGameGraph _Graph;
-	typedef CAbstractLocationSelector<
+	using inherited = CAbstractLocationSelector<
 		CGameGraph,
 		_VertexEvaluator,
 		_vertex_id_type
-	> inherited;
+	>;
+
+public:
+    using inherited::m_failed;
+    using inherited::m_graph;
+    using inherited::m_restricted_object;
+
+    using inherited::used;
+
 private:
 	ESelectionType m_selection_type;
 	GameGraph::_GRAPH_ID m_previous_vertex_id;
