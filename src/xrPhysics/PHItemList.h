@@ -19,7 +19,7 @@
 												friend class CPHItemStack<class_name>;\
 												u16 stack_pos;
 
-//#define TPI(item)								((T::CPHListItem*)item)	
+//#define TPI(item)								((T::CPHListItem*)item)
 
 template <class T>
 class CPHItemList
@@ -99,7 +99,7 @@ class CPHItemStack :
 public:
 	void push_back(T* item)
 	{
-		item->stack_pos = size;
+		item->stack_pos = this->size;
 		CPHItemList<T>::push_back(item);
 	}
 };
