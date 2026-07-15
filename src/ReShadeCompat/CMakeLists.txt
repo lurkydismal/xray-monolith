@@ -226,7 +226,6 @@ if(MSVC)
             /Z7;
             /fp:precise;
             /GR;
-            /std:c++17;
             /Ob3;
             /GS
         >
@@ -259,7 +258,6 @@ if(MSVC)
             /Z7;
             /fp:precise;
             /GR;
-            /std:c++17;
             /Ob3;
             /GS
         >
@@ -292,7 +290,6 @@ if(MSVC)
             /Z7;
             /fp:precise;
             /GR;
-            /std:c++17;
             /Ob3;
             /GS
         >
@@ -325,7 +322,6 @@ if(MSVC)
             /Z7;
             /fp:precise;
             /GR;
-            /std:c++17;
             /Ob3;
             /GS
         >
@@ -358,7 +354,6 @@ if(MSVC)
             /Z7;
             /fp:precise;
             /GR;
-            /std:c++17;
             /GS
         >
         $<$<CONFIG:Release>:
@@ -373,7 +368,6 @@ if(MSVC)
             /Z7;
             /fp:precise;
             /GR;
-            /std:c++17;
             /Ob3;
             /GS
         >
