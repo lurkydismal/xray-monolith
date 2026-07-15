@@ -758,7 +758,7 @@ public:
 	{
 		xr_string draw_val;
 		if (!OnDrawText.empty()) OnDrawText(this, draw_val);
-		else for (int i = 0; token[i].name; i++) if (token[i].id == (int)GetValue()) return token[i].name;
+		else for (int i = 0; token[i].name; i++) if (token[i].id == (int)this->GetValue()) return token[i].name;
 		return draw_val;
 	}
 };
@@ -790,7 +790,7 @@ public:
 	{
 		xr_string draw_val;
 		if (!OnDrawText.empty()) OnDrawText(this, draw_val);
-		else for (u32 k = 0; k < token_count; k++) if ((T)token[k].id == GetValue()) return *token[k].name;
+		else for (u32 k = 0; k < token_count; k++) if ((T)token[k].id == this->GetValue()) return *token[k].name;
 		return draw_val;
 	}
 };
