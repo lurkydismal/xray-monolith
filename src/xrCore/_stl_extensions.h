@@ -172,6 +172,22 @@ private:
 	typedef std::vector<T, allocator> inherited;
 
 public:
+    using size_type = typename inherited::size_type;
+    using iterator = typename inherited::iterator;
+    using const_iterator = typename inherited::const_iterator;
+    using reference = typename inherited::reference;
+    using const_reference = typename inherited::const_reference;
+
+    using inherited::begin;
+    using inherited::end;
+    using inherited::cbegin;
+    using inherited::cend;
+    using inherited::back;
+    using inherited::pop_back;
+    using inherited::capacity;
+    using inherited::reserve;
+
+public:
 	typedef allocator allocator_type;
 
 public:
@@ -215,8 +231,8 @@ public:
 				std::iter_swap(it, prev);
 			else
 				*it = back();
-		}		
-		
+		}
+
 		pop_back();
 		return it;
 	}
@@ -423,8 +439,8 @@ public:
 	xrSRWLock& get_lock() { return lock; }
 
     // Size operations
-    u32 size() const 
-    { 
+    u32 size() const
+    {
         xrSRWLockGuard guard(lock, true);
 		return (u32)base_type::size();
 	}
@@ -863,7 +879,7 @@ public:
 
     T& operator[](const Key& key)
     {
-        // Calling emplace with no extra arguments perfectly forwards an empty list, 
+        // Calling emplace with no extra arguments perfectly forwards an empty list,
         // resulting in T() being constructed (which acts identically to T{}).
         // It returns a pair; .first gets the iterator, ->second gets the value reference.
         return emplace(key).first->second;
@@ -911,7 +927,7 @@ public:
         sparse_index_t idx = static_cast<sparse_index_t>(std::distance(m_dense.begin(), pos));
         erase_at_index(idx);
 
-        // Return the iterator pointing to the same slot 
+        // Return the iterator pointing to the same slot
         // (which now contains the swapped-in element or is end())
         return m_dense.begin() + idx;
     }
