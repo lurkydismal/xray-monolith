@@ -7,13 +7,14 @@
 #	include "object_broker.h"
 #endif // XRGAME_EXPORTS
 
+#include "object_destroyer.h"
 
 //T_ID    - уникальный текстовый идентификатор (аттрибут id в XML файле)
-//T_INDEX - уникальный числовой индекс 
+//T_INDEX - уникальный числовой индекс
 //T_INIT -  класс где определена статическая InitXmlIdToIndex
 //          функция инициализации file_str и tag_name
 
-//структура хранит строковый id элемента 
+//структура хранит строковый id элемента
 //файл и позицию, где этот элемент находится
 struct ITEM_DATA
 {
@@ -39,7 +40,7 @@ private:
 	static T_VECTOR* m_pItemDataVector;
 
 protected:
-	//имена xml файлов (разделенных запятой) из которых 
+	//имена xml файлов (разделенных запятой) из которых
 	//производить загрузку элементов
 	static LPCSTR file_str;
 	//имена тегов
@@ -53,7 +54,7 @@ public:
 	static const ITEM_DATA* GetById(const shared_str& str_id, bool no_assert = false);
 	static const ITEM_DATA* GetByIndex(int index, bool no_assert = false);
 
-	static const int IdToIndex(const shared_str& str_id, int default_index = T_INDEX(-1), bool no_assert = false)
+	static const int IdToIndex(const shared_str& str_id, int default_index = int(-1), bool no_assert = false)
 	{
 		const ITEM_DATA* item = GetById(str_id, no_assert);
 		return item ? item->index : default_index;
@@ -73,7 +74,7 @@ public:
 
 
 TEMPLATE_SPECIALIZATION
-typename T_VECTOR* CSXML_IdToIndex::m_pItemDataVector = NULL;
+T_VECTOR* CSXML_IdToIndex::m_pItemDataVector = NULL;
 
 TEMPLATE_SPECIALIZATION
 LPCSTR CSXML_IdToIndex::file_str = NULL;
@@ -140,7 +141,7 @@ void CSXML_IdToIndex::DeleteIdToIndexData()
 }
 
 TEMPLATE_SPECIALIZATION
-typename void CSXML_IdToIndex::InitInternal()
+void CSXML_IdToIndex::InitInternal()
 {
 	VERIFY(!m_pItemDataVector);
 	T_INIT::InitXmlIdToIndex();
