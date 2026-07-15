@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////
 // ini_table_loader.h
-// темплейтовый класс, который загружает из ini файла 
+// темплейтовый класс, который загружает из ini файла
 // квадратную таблицу для элементов
 ///////////////////////////////////////////////////////////////
 
@@ -8,8 +8,8 @@
 
 
 //T_ITEM		-	тип элемента таблицы
-//					
-//T_INI_LOADER	-	тип класса CIni_IdToIndex, 
+//
+//T_INI_LOADER	-	тип класса CIni_IdToIndex,
 //					откуда будет браться информация размерах таблицы
 //TABLE_INDEX		-	порядковый номер таблицы, нужен только в том случае
 //					если мы хотим сгененрировать несколько таблиц с одинаковыми
@@ -117,15 +117,15 @@ typename CSIni_Table::ITEM_TABLE& CSIni_Table::table()
 
 	for (CInifile::SectCIt i = table_ini.Data.begin(); table_ini.Data.end() != i; ++i)
 	{
-		T_INI_LOADER::index_type cur_index = T_INI_LOADER::IdToIndex((*i).first, type_max(T_INI_LOADER::index_type));
+		typename T_INI_LOADER::index_type cur_index = T_INI_LOADER::IdToIndex((*i).first, type_max(T_INI_LOADER::index_type));
 
-		if (type_max(T_INI_LOADER::index_type) == cur_index)
+		if (type_max(typename T_INI_LOADER::index_type) == cur_index)
 			Debug.fatal(DEBUG_INFO, "wrong community %s in section [%s]", (*i).first, table_sect);
 
 		(*m_pTable)[cur_index].resize(cur_table_width);
 		for (std::size_t j = 0; j < cur_table_width; j++)
 		{
-			(*m_pTable)[cur_index][j] = convert<typename T_ITEM>(_GetItem(*(*i).second, (int)j, buffer));
+			(*m_pTable)[cur_index][j] = convert<T_ITEM>(_GetItem(*(*i).second, (int)j, buffer));
 		}
 	}
 
