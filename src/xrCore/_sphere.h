@@ -97,6 +97,8 @@ public:
 	 */
 	ICF ERP_Result intersect_full(const _vector3<T>& start, const _vector3<T>& dir, T& dist) const
 	{
+        typedef _sphere<float> Fsphere;
+
 		int quantity;
 		float afT[2];
 		Fsphere::ERP_Result result = intersect(start, dir, dist, quantity, afT);
