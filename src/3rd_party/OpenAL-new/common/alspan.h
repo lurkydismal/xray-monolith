@@ -65,7 +65,7 @@ namespace detail_ {
     constexpr bool has_size_and_data = false;
     template<typename T>
     constexpr bool has_size_and_data<T,
-        void_t<decltype(al::size(std::declval<T>())), decltype(al::data(std::declval<T>()))>>
+        void_t<decltype(al::size(std::declval<T&>())), decltype(al::data(std::declval<T&>()))>>
         = true;
 
     template<typename T, typename U>
