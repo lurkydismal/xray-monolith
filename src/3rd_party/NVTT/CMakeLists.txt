@@ -446,7 +446,7 @@ if(MSVC)
             /W3;
             /Z7
         >
-        /std:c++17;
+        /std:c++20;
         /wd4005
     )
     target_link_options(${PROJECT_NAME} PRIVATE
