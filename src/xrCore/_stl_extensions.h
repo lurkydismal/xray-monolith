@@ -288,6 +288,22 @@ private:
 	typedef std::vector<bool, allocator> inherited;
 
 public:
+    using size_type = typename inherited::size_type;
+    using iterator = typename inherited::iterator;
+    using const_iterator = typename inherited::const_iterator;
+    using reference = typename inherited::reference;
+    using const_reference = typename inherited::const_reference;
+
+    using inherited::begin;
+    using inherited::end;
+    using inherited::cbegin;
+    using inherited::cend;
+    using inherited::back;
+    using inherited::pop_back;
+    using inherited::capacity;
+    using inherited::reserve;
+
+public:
 	u32 size() const { return (u32)inherited::size(); }
 	void clear() { erase(begin(), end()); }
 };
