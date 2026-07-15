@@ -94,6 +94,12 @@ public:
 template <class T, typename C>
 class resptr_core : public C
 {
+public:
+    using C::p_;
+    using C::_inc;
+    using C::_dec;
+    using C::_set;
+    using C::_get;
 protected:
 	typedef resptr_core this_type;
 	typedef resptr_core<T, C> self;
