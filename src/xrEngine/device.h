@@ -27,6 +27,7 @@
 #include "../Include/xrRender/FactoryPtr.h"
 #include "../Include/xrRender/RenderDeviceRender.h"
 #include "imgui_base.h"
+#include "../xrCore/xr_delegate.h"
 
 #ifdef INGAME_EDITOR
 # include "../Include/editor/interfaces.hpp"
@@ -110,7 +111,7 @@ protected:
 	CTimer_paused Timer;
 	CTimer_paused TimerGlobal;
 
-	//AVO: 
+	//AVO:
 	CTimer frame_timer; //TODO: ïðîâåðèòü, íå äóáëèðóåòñÿ-ëè ñõîæèé òàéìåð (alpet)
 	//-AVO
 
@@ -159,8 +160,8 @@ public:
 			frameDelay = iDelay;
 			clamp<u8>(frameDelay, 2, u8(-1));
 		}
-	};	
-	
+	};
+
 private:
 	// Main objects used for creating and rendering the 3D scene
 	u32 m_dwWindowStyle;
@@ -285,7 +286,7 @@ public:
         m_engine(0)
 #endif // #ifdef INGAME_EDITOR
 #ifdef PROFILE_CRITICAL_SECTIONS
-        
+
 #endif // #ifdef PROFILE_CRITICAL_SECTIONS
 	{
 		m_hWnd = NULL;
@@ -294,7 +295,7 @@ public:
 		b_hide_cursor = FALSE;
 		Timer.Start();
 		m_bNearer = FALSE;
-		
+
 		m_SecondViewport.SetSVPActive(false);
 		m_SecondViewport.SetSVPFrameDelay(2);
 		m_SecondViewport.isCamReady = false;
