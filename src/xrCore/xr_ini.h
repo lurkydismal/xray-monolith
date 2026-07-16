@@ -3,7 +3,6 @@
 #include "xr_delegate.h"
 
 // refs
-class CInifile;
 struct xr_token;
 
 class XRCORE_API CInifile
