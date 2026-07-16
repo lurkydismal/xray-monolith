@@ -1,6 +1,9 @@
 #pragma once
+
 #include "DateTime.hpp"
 #include <atomic>
+#include "_stl_extensions.h"
+
 #define VPUSH(a)	((a).x), ((a).y), ((a).z)
 
 void 	XRCORE_API		Msg	(const char* format, ...);
