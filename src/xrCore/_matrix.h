@@ -1,6 +1,8 @@
 #ifndef __M__
 #define __M__
 
+#include "_vector4.h"
+
 /*
 * DirectX-compliant, ie row-column order, ie m[Row][Col].
 * Same as:
@@ -970,17 +972,9 @@ public:
 		xyz.mul(-1.f);
 	}
 
-	IC SelfRef hud_to_world()
-	{
-		Device.hud_to_world(*this);
-		return *this;
-	}
+	SelfRef hud_to_world();
 
-	IC SelfRef world_to_hud()
-	{
-		Device.world_to_hud(*this);
-		return *this;
-	}
+	SelfRef world_to_hud();
 };
 
 typedef _matrix<float> Fmatrix;
@@ -998,5 +992,7 @@ BOOL _valid(const _matrix<T>& m)
 
 extern XRCORE_API Fmatrix Fidentity;
 extern XRCORE_API Dmatrix Didentity;
+
+#include "_matrix_custom_ext.hpp"
 
 #endif
