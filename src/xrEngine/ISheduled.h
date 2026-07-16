@@ -1,6 +1,8 @@
 #ifndef XRENGINE_ISHEDULED_H_INCLUDED
 #define XRENGINE_ISHEDULED_H_INCLUDED
 
+#include "../xrCore/xrstring.h"
+
 class ENGINE_API ISheduled
 {
 public:
