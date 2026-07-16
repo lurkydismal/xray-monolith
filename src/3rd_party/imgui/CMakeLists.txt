@@ -352,7 +352,7 @@ if(MSVC)
             /Z7
         >
         /permissive-;
-        /std:c++20;
+        /std:c++17;
         /sdl;
         /W3;
         ${DEFAULT_CXX_EXCEPTION_HANDLING}

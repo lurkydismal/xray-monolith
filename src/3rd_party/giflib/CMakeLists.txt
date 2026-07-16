@@ -346,7 +346,7 @@ if(MSVC)
             /Z7
         >
         /permissive-;
-        /std:c++20;
+        /std:c++17;
         /sdl;
         /W3;
         /D_CRT_NONSTDC_NO_WARNINGS;
