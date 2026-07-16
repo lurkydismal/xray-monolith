@@ -8,6 +8,7 @@
 
 class ENGINE_API CGameFont;
 
+#include "stdafx.h"
 #include "../Include/xrRender/FactoryPtr.h"
 #include "../Include/xrRender/StatsRender.h"
 
