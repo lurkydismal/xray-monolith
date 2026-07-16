@@ -193,7 +193,6 @@ set(Math
     "_types.h"
     "_vector2.h"
     "_vector3d.h"
-    "_vector3d_custom_ext.hpp"
     "_vector3d_ext.h"
     "_vector4.h"
     "dump_string.cpp"
