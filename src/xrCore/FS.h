@@ -7,6 +7,7 @@
 
 #include "_stl_extensions.h"
 #include "vector.h"
+#include "_compressed_normal.h"
 
 #define CFS_CompressMark (1ul << 31ul)
 #define CFS_HeaderChunkID (666)
