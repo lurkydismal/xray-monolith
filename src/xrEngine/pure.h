@@ -14,22 +14,61 @@ typedef void __fastcall RP_FUNC(void* obj);
 #define DECLARE_MESSAGE( name ) DECLARE_MESSAGE_CL(name, )
 #define DECLARE_RP(name) void __fastcall rp_##name(void *p) { ((pure##name *)p)->On##name(); }
 
-DECLARE_MESSAGE_CL(Frame, _BCL);
+extern RP_FUNC rp_Frame;
 
-DECLARE_MESSAGE(Render);
+class pureFrame {
+public:
+    virtual void __stdcall OnFrame( void ) = 0;
+};
 
-DECLARE_MESSAGE(AppActivate);
+extern RP_FUNC rp_Render;
 
-DECLARE_MESSAGE(AppDeactivate);
+class pureRender {
+public:
+    virtual void OnRender( void ) = 0;
+};
 
-DECLARE_MESSAGE(AppStart);
+extern RP_FUNC rp_AppActivate;
 
-DECLARE_MESSAGE(AppEnd);
+class pureAppActivate {
+public:
+    virtual void OnAppActivate( void ) = 0;
+};
 
-DECLARE_MESSAGE(DeviceReset);
+extern RP_FUNC rp_AppDeactivate;
 
-DECLARE_MESSAGE(ScreenResolutionChanged);
+class pureAppDeactivate {
+public:
+    virtual void OnAppDeactivate( void ) = 0;
+};
 
+extern RP_FUNC rp_AppStart;
+
+class pureAppStart {
+public:
+    virtual void OnAppStart( void ) = 0;
+};
+
+extern RP_FUNC rp_AppEnd;
+
+class pureAppEnd {
+public:
+    virtual void OnAppEnd( void ) = 0;
+};
+
+extern RP_FUNC rp_DeviceReset;
+
+class pureDeviceReset {
+public:
+    virtual void OnDeviceReset( void ) = 0;
+};
+
+extern RP_FUNC rp_ScreenResolutionChanged;
+
+class pureScreenResolutionChanged {
+public:
+    virtual void OnScreenResolutionChanged( void ) = 0;
+};
 
 //-----------------------------------------------------------------------------
 struct _REG_INFO

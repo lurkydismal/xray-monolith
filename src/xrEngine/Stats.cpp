@@ -13,7 +13,9 @@ int g_ErrorLineCount = 15;
 Flags32 g_stats_flags = {0};
 
 // stats
-DECLARE_RP(Stats);
+void __fastcall rp_Stats( void* p ) {
+    ( ( pureStats* )p )->OnStats();
+};
 
 class optimizer
 {
