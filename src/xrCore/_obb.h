@@ -1,6 +1,10 @@
 #ifndef FOBB_H
 #define FOBB_H
+
 #include "_plane.h"
+#include "_matrix33.h"
+#include "_fbox.h"
+
 template <class T>
 struct _obb
 {
