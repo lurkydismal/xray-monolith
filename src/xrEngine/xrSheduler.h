@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ISheduled.h"
+#include "../xrCore/_stl_extensions.h"
 
 class ENGINE_API CSheduler
 {
