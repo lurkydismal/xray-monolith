@@ -1,0 +1,1 @@
+justfile: add docs build, improve build files generation
