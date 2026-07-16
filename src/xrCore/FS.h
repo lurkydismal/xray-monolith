@@ -6,6 +6,7 @@
 #define fsH
 
 #include "_stl_extensions.h"
+#include "vector.h"
 
 #define CFS_CompressMark (1ul << 31ul)
 #define CFS_HeaderChunkID (666)
