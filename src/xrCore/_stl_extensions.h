@@ -86,6 +86,9 @@ public:
 	typedef const T& const_reference;
 	typedef T value_type;
 
+    using propagate_on_container_move_assignment = std::true_type;
+    using is_always_equal = std::true_type;
+
 public:
 	template <class _Other>
 	struct rebind
@@ -119,6 +122,7 @@ public:
 	void deallocate(void* p, size_type n) const { xr_free(p); }
 	void construct(pointer p, const T& _Val) { ::new((void*)p) T(_Val); }
 
+    // TODO: Probably change pointer* to pointer
 	template <typename... Args>
 	static void construct(pointer* ptr, Args&&... args)
 	{
@@ -154,6 +158,7 @@ inline bool operator==(const xalloc<_Ty>&, const xalloc<_Other>&) { return (true
 template <class _Ty, class _Other>
 inline bool operator!=(const xalloc<_Ty>&, const xalloc<_Other>&) { return (false); }
 
+#if 0
 namespace std
 {
 	template <class _Tp1, class _Tp2>
@@ -162,6 +167,7 @@ namespace std
 	template <class _Tp1, class _Tp2>
 	inline xalloc<_Tp2> __stl_alloc_create(xalloc<_Tp1>&, const _Tp2*) { return xalloc<_Tp2>(); }
 };
+#endif
 
 // array
 template<typename Type, size_t Size>
@@ -1067,9 +1073,7 @@ struct pred_stri
 DEFINE_VECTOR(bool, boolVec, boolIt);
 DEFINE_VECTOR(BOOL, BOOLVec, BOOLIt);
 DEFINE_VECTOR(BOOL*, LPBOOLVec, LPBOOLIt);
-typedef xr_vector< Frect > FrectVec;
-typedef FrectVec ::iterator FrectIt;
-;
+DEFINE_VECTOR(Frect, FrectVec, FrectIt);
 DEFINE_VECTOR(Irect, IrectVec, IrectIt);
 DEFINE_VECTOR(Fplane, PlaneVec, PlaneIt);
 DEFINE_VECTOR(Fvector2, Fvector2Vec, Fvector2It);
