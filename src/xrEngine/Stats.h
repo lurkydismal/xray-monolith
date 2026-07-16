@@ -6,9 +6,10 @@
 #define AFX_STATS_H__4C8D1860_0EE2_11D4_B4E3_4854E82A090D__INCLUDED_
 #pragma once
 
+#include "stdafx.h"
+
 class ENGINE_API CGameFont;
 
-#include "stdafx.h"
 #include "../Include/xrRender/FactoryPtr.h"
 #include "../Include/xrRender/StatsRender.h"
 
