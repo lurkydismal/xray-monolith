@@ -1,4 +1,7 @@
 #pragma once
+
+#include "xrstring.h"
+
 #include <ctime>
 #include <string>
 
