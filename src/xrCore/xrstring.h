@@ -9,8 +9,6 @@ using str_c = const char*;
 #include "_stl_extensions.h"
 #include "intrusive_ptr.h"
 
-class xr_string;
-
 class XRCORE_API xr_string : public std::basic_string<char, std::char_traits<char>, xalloc<char>>
 {
 public:
@@ -147,7 +145,7 @@ private:
 private:
 	struct str_container_constructor_key { explicit str_container_constructor_key() = default; };
 	str_container();
-	
+
 public:
 	str_container(str_container_constructor_key);
 	static str_container* create();
