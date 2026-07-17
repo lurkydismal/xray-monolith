@@ -307,17 +307,17 @@ IPureServer::EConnect IPureServer::Connect(LPCSTR options, GameDescriptionData& 
 #ifdef DEBUG
 	string1024 tmp;
 #endif // DEBUG
-		//	HRESULT CoInitializeExRes = CoInitializeEx(NULL, 0);	
+		//	HRESULT CoInitializeExRes = CoInitializeEx(NULL, 0);
 		//	if (CoInitializeExRes != S_OK && CoInitializeExRes != S_FALSE)
 		//	{
 		//		DXTRACE_ERR(tmp, CoInitializeExRes);
 		//		CHK_DX(CoInitializeExRes);
-		//	};	
+		//	};
 		//---------------------------
 		// Create the IDirectPlay8Client object.
 		HRESULT CoCreateInstanceRes = CoCreateInstance(XR_GUID(CLSID_DirectPlay8Server), NULL, CLSCTX_INPROC_SERVER,
 		                                               XR_GUID(IID_IDirectPlay8Server), (LPVOID*)&NET);
-		//---------------------------	
+		//---------------------------
 		if (CoCreateInstanceRes != S_OK)
 		{
 			DXTRACE_ERR(tmp, CoCreateInstanceRes);
@@ -567,14 +567,16 @@ HRESULT IPureServer::net_Handler(u32 dwMessageType, PVOID pMessage)
 			if (GetBannedClient(HAddr))
 			{
 				msg->dwReplyDataSize = sizeof(NET_BANNED_STR);
-				msg->pvReplyData = NET_BANNED_STR;
+                static char pvReplyData[] = NET_BANNED_STR;
+                msg->pvReplyData = pvReplyData;
 				return S_FALSE;
 			};
 			//first connected client is SV_Client so if it is NULL then this server client tries to connect ;)
 			if (SV_Client && !m_ip_filter.is_ip_present(HAddr.m_data.data))
 			{
 				msg->dwReplyDataSize = sizeof(NET_NOTFOR_SUBNET_STR);
-				msg->pvReplyData = NET_NOTFOR_SUBNET_STR;
+                static char pvReplyData[] = NET_NOTFOR_SUBNET_STR;
+                msg->pvReplyData = pvReplyData;
 				return S_FALSE;
 			}
 		}
