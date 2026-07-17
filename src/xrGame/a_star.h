@@ -41,15 +41,6 @@ namespace AStar
 	};
 }
 
-template <typename _dist_type, template <typename> class T1>
-struct AStarVertexWrapper
-{
-    template <typename T2>
-    struct type : public AStar::_Vertex<_dist_type, T1>::template _vertex<T2>
-    {
-    };
-};
-
 template <
 	typename _dist_type,
 	typename _priority_queue,
@@ -107,7 +98,7 @@ class CAStar : public CDijkstra<
 		_vertex_allocator,
 		euclidian_heuristics,
 		_data_storage_base,
-        AStarVertexWrapper<_dist_type, _vertex>::template type,
+        AStar::_Vertex<_dist_type, _vertex>::template _vertex,
 		_builder_allocator_constructor,
 		_manager_builder_allocator_constructor,
 		_data_storage_constructor,
@@ -122,7 +113,7 @@ private:
 		_vertex_allocator,
 		euclidian_heuristics,
 		_data_storage_base,
-        AStarVertexWrapper<_dist_type, _vertex>::template type,
+        AStar::_Vertex<_dist_type, _vertex>::template _vertex,
 		_builder_allocator_constructor,
 		_manager_builder_allocator_constructor,
 		_data_storage_constructor,
@@ -141,7 +132,7 @@ protected:
 		_vertex_allocator,
 		euclidian_heuristics,
 		_data_storage_base,
-        AStarVertexWrapper<_dist_type, _vertex>::template type,
+        AStar::_Vertex<_dist_type, _vertex>::template _vertex,
 		_builder_allocator_constructor,
 		_manager_builder_allocator_constructor,
 		_data_storage_constructor,
