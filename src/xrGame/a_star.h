@@ -123,6 +123,7 @@ private:
 public:
     using inherited::m_search_started;
     using inherited::data_storage;
+    using inherited::finalize;
 
 protected:
 	typedef CDijkstra<
