@@ -84,6 +84,7 @@ class CStateMove : public CState<_Object>
 {
 protected:
 	typedef CState<_Object> inherited;
+    using inherited::object;
 public:
 	CStateMove(_Object* obj, void* data = 0) : inherited(obj, data)
 	{

@@ -63,9 +63,9 @@ void CStateAbstract::execute()
 				{
 					p_monster->add_debug_info(tree);
 				}
-				
+
 				debug::log_text_tree(tree);
-				VERIFY(current_substate != u32(-1)); 
+				VERIFY(current_substate != u32(-1));
 			}
 #endif
 	}
@@ -166,7 +166,7 @@ void   CStateAbstract::add_debug_info (debug::text_tree& root_s)
 	typedef debug::text_tree TextTree;
 	if ( !substates.size() )
 	{
-		root_s.add_line("Current");		
+		root_s.add_line("Current");
 	}
 	else
 	{
@@ -214,8 +214,8 @@ EMonsterState CStateAbstract::get_state_type()
 TEMPLATE_SPECIALIZATION
 void CStateAbstract::remove_links(CObject* object)
 {
-	SubStates::iterator i = substates.begin();
-	SubStates::iterator e = substates.end();
+	typename SubStates::iterator i = substates.begin();
+	typename SubStates::iterator e = substates.end();
 	for (; i != e; ++i)
 		(*i).second->remove_links(object);
 }
