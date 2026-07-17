@@ -50,7 +50,7 @@ public:
 
 	//--------------------------------------------------------------------
 	// Bones
-	//--------------------------------------------------------------------
+	//-------------------------------------------------------------------- const
 private:
 	static void _BCL BoneCallback(CBoneInstance* B);
 	void vfAssignBones();
@@ -180,14 +180,14 @@ public:
 
 	float get_vampire_distance() const { return m_vampire_distance; }
 
-	virtual char* get_monster_class_name() { return "bloodsucker"; }
+	virtual const char* get_monster_class_name() { return "bloodsucker"; }
 
 	virtual void renderable_Render(IDSGraphManager* DM);
 
 #ifdef DEBUG
 	virtual CBaseMonster::SDebugInfo show_debug_info();
 
-	// Lain: added 
+	// Lain: added
 	virtual void add_debug_info  (debug::text_tree& root_s);
 
 #ifdef _DEBUG
