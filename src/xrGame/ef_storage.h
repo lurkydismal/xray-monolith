@@ -103,6 +103,8 @@ class CEF_Storage;
 template <typename T>
 struct CEnemyFunction : public T
 {
+    using T::ef_storage;
+
 	IC CEnemyFunction(CEF_Storage* storage) : T(storage)
 	{
 	}
