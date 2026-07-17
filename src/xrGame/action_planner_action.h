@@ -28,6 +28,11 @@ protected:
 	using _world_operator = typename inherited_planner::_world_operator;
 
 public:
+    using inherited_action::effects;
+    using inherited_planner::set_target_state;
+    using inherited_planner::update;
+
+public:
 	typedef typename inherited_action::COperatorCondition COperatorCondition;
 
 #ifdef LOG_ACTION
