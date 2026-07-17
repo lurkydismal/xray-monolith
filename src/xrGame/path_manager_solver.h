@@ -47,6 +47,7 @@ protected:
 
 public:
 	using const_iterator = typename _Graph::const_iterator;
+	using _solver_dist_type = typename _Graph::_solver_dist_type;
 
 protected:
 	xr_vector<_edge_type>* m_edge_path;
