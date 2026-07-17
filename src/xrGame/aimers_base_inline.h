@@ -9,6 +9,8 @@
 #ifndef AIMERS_BASE_INLINE_H_INCLUDED
 #define AIMERS_BASE_INLINE_H_INCLUDED
 
+#include "animation_movement_controller.h"
+
 template <u32 bone_count0, u32 bone_count1>
 inline void aimers::base::fill_bones(
 	u32 const (&bones) [bone_count0],
