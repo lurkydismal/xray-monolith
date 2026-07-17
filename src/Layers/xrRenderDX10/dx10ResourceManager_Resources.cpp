@@ -58,8 +58,8 @@ void fix_texture_name(LPSTR fn);
 template <class T>
 BOOL reclaim(xr_vector<T*>& vec, const T* ptr)
 {
-	xr_vector<T*>::iterator it = vec.begin();
-	xr_vector<T*>::iterator end = vec.end();
+	typename xr_vector<T*>::iterator it = vec.begin();
+	typename xr_vector<T*>::iterator end = vec.end();
 	for (; it != end; it++)
 		if (*it == ptr)
 		{
@@ -74,7 +74,7 @@ SState* CResourceManager::_CreateState(SimulatorStates& state_code)
 {
 	xrCriticalSectionGuard guard(creationGuard);
 
-	// Search equal state-code 
+	// Search equal state-code
 	for (u32 it = 0; it < v_states.size(); it++)
 	{
 		SState* C = v_states[it];;
@@ -677,7 +677,7 @@ void	CResourceManager::DBG_VerifyTextures	()
 {
 	map_Texture::iterator I		= m_textures.begin	();
 	map_Texture::iterator E		= m_textures.end	();
-	for (; I!=E; I++) 
+	for (; I!=E; I++)
 	{
 		R_ASSERT(I->first);
 		R_ASSERT(I->second);
