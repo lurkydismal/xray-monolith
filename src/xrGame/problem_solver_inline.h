@@ -192,7 +192,7 @@ TEMPLATE_SPECIALIZATION
 IC typename CProblemSolverAbstract::_condition_evaluator_ptr CProblemSolverAbstract::evaluator(
 	const _condition_type& condition_id) const
 {
-	EVALUATORS::const_iterator I = evaluators().find(condition_id);
+	typename EVALUATORS::const_iterator I = evaluators().find(condition_id);
 	THROW(evaluators().end() != I);
 	return ((*I).second);
 }
@@ -274,12 +274,12 @@ TEMPLATE_SPECIALIZATION
 IC bool CProblemSolverAbstract::is_goal_reached_impl(const _index_type& vertex_index) const
 {
 	STATIC_CHECK(!reverse_search, This_function_cannot_be_used_in_the_REVERSE_search);
-	xr_vector<COperatorCondition>::const_iterator I = vertex_index.conditions().begin();
-	xr_vector<COperatorCondition>::const_iterator E = vertex_index.conditions().end();
-	xr_vector<COperatorCondition>::const_iterator i = target_state().conditions().begin();
-	xr_vector<COperatorCondition>::const_iterator e = target_state().conditions().end();
-	xr_vector<COperatorCondition>::const_iterator II = current_state().conditions().begin();
-	xr_vector<COperatorCondition>::const_iterator EE = current_state().conditions().end();
+	typename xr_vector<COperatorCondition>::const_iterator I = vertex_index.conditions().begin();
+	typename xr_vector<COperatorCondition>::const_iterator E = vertex_index.conditions().end();
+	typename xr_vector<COperatorCondition>::const_iterator i = target_state().conditions().begin();
+	typename xr_vector<COperatorCondition>::const_iterator e = target_state().conditions().end();
+	typename xr_vector<COperatorCondition>::const_iterator II = current_state().conditions().begin();
+	typename xr_vector<COperatorCondition>::const_iterator EE = current_state().conditions().end();
 	for (; (i != e) && (I != E);)
 	{
 		if ((*I).condition() < (*i).condition())
@@ -337,10 +337,10 @@ TEMPLATE_SPECIALIZATION
 IC bool CProblemSolverAbstract::is_goal_reached_impl(const _index_type& vertex_index, bool) const
 {
 	STATIC_CHECK(reverse_search, This_function_cannot_be_used_in_the_STRAIGHT_search);
-	xr_vector<COperatorCondition>::const_iterator I = m_current_state.conditions().begin();
-	xr_vector<COperatorCondition>::const_iterator E = m_current_state.conditions().end();
-	xr_vector<COperatorCondition>::const_iterator i = vertex_index.conditions().begin();
-	xr_vector<COperatorCondition>::const_iterator e = vertex_index.conditions().end();
+	typename xr_vector<COperatorCondition>::const_iterator I = m_current_state.conditions().begin();
+	typename xr_vector<COperatorCondition>::const_iterator E = m_current_state.conditions().end();
+	typename xr_vector<COperatorCondition>::const_iterator i = vertex_index.conditions().begin();
+	typename xr_vector<COperatorCondition>::const_iterator e = vertex_index.conditions().end();
 	for (; i != e;)
 	{
 		if ((I == E) || ((*I).condition() > (*i).condition()))
@@ -415,10 +415,10 @@ IC typename CProblemSolverAbstract::_edge_value_type CProblemSolverAbstract::est
 {
 	STATIC_CHECK(!reverse_search, This_function_cannot_be_used_in_the_REVERSE_search);
 	_edge_value_type result = 0;
-	xr_vector<COperatorCondition>::const_iterator I = target_state().conditions().begin();
-	xr_vector<COperatorCondition>::const_iterator E = target_state().conditions().end();
-	xr_vector<COperatorCondition>::const_iterator i = condition.conditions().begin();
-	xr_vector<COperatorCondition>::const_iterator e = condition.conditions().end();
+	typename xr_vector<COperatorCondition>::const_iterator I = target_state().conditions().begin();
+	typename xr_vector<COperatorCondition>::const_iterator E = target_state().conditions().end();
+	typename xr_vector<COperatorCondition>::const_iterator i = condition.conditions().begin();
+	typename xr_vector<COperatorCondition>::const_iterator e = condition.conditions().end();
 	for (; (I != E) && (i != e);)
 		if ((*I).condition() < (*i).condition())
 		{
@@ -443,10 +443,10 @@ IC typename CProblemSolverAbstract::_edge_value_type CProblemSolverAbstract::est
 {
 	STATIC_CHECK(reverse_search, This_function_cannot_be_used_in_the_STRAIGHT_search);
 	_edge_value_type result = 0;
-	xr_vector<COperatorCondition>::const_iterator I = current_state().conditions().begin();
-	xr_vector<COperatorCondition>::const_iterator E = current_state().conditions().end();
-	xr_vector<COperatorCondition>::const_iterator i = condition.conditions().begin();
-	xr_vector<COperatorCondition>::const_iterator e = condition.conditions().end();
+	typename xr_vector<COperatorCondition>::const_iterator I = current_state().conditions().begin();
+	typename xr_vector<COperatorCondition>::const_iterator E = current_state().conditions().end();
+	typename xr_vector<COperatorCondition>::const_iterator i = condition.conditions().begin();
+	typename xr_vector<COperatorCondition>::const_iterator e = condition.conditions().end();
 	for (; (i != e);)
 	{
 		if ((I == E) || ((*I).condition() > (*i).condition()))
