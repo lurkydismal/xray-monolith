@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "level_graph.h"
+
 IC CSpaceRestrictionAbstract::CSpaceRestrictionAbstract()
 {
 	m_initialized = false;
@@ -49,7 +51,7 @@ IC const xr_vector<u32>& CSpaceRestrictionAbstract::accessible_neighbour_border(
 template <typename T>
 IC bool CSpaceRestrictionAbstract::accessible_neighbours(T& restriction, u32 level_vertex_id, bool out_restriction)
 {
-	CLevelGraph::const_iterator I, E;
+	typename CLevelGraph::const_iterator I, E;
 	ai().level_graph().begin(level_vertex_id, I, E);
 	for (; I != E; ++I)
 	{
@@ -74,8 +76,8 @@ IC void CSpaceRestrictionAbstract::prepare_accessible_neighbour_border(T& restri
 	VERIFY(!border().empty());
 	m_accessible_neighbour_border.reserve(border().size());
 
-	xr_vector<u32>::const_iterator I = border().begin();
-	xr_vector<u32>::const_iterator E = border().end();
+	typename xr_vector<u32>::const_iterator I = border().begin();
+	typename xr_vector<u32>::const_iterator E = border().end();
 	for (; I != E; ++I)
 		if (accessible_neighbours(restriction, *I, out_restriction))
 			m_accessible_neighbour_border.push_back(*I);
