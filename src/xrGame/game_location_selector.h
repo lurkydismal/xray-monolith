@@ -48,6 +48,7 @@ public:
     using inherited::m_restricted_object;
 
     using inherited::used;
+    using inherited::perform_search;
 
 private:
 	ESelectionType m_selection_type;
