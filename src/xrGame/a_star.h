@@ -41,6 +41,15 @@ namespace AStar
 	};
 }
 
+template <typename _dist_type, template <typename> class T1>
+struct AStarVertexWrapper
+{
+    template <typename T2>
+    struct type : public AStar::_Vertex<_dist_type, T1>::template _vertex<T2>
+    {
+    };
+};
+
 template <
 	typename _dist_type,
 	typename _priority_queue,
@@ -98,13 +107,32 @@ class CAStar : public CDijkstra<
 		_vertex_allocator,
 		euclidian_heuristics,
 		_data_storage_base,
-		AStar::_Vertex<_dist_type, _vertex>::_vertex,
+        AStarVertexWrapper<_dist_type, _vertex>::template type,
 		_builder_allocator_constructor,
 		_manager_builder_allocator_constructor,
 		_data_storage_constructor,
 		_iteration_type
 	>
 {
+private:
+    using inherited = typename CDijkstra<
+		_dist_type,
+		_priority_queue,
+		_vertex_manager,
+		_vertex_allocator,
+		euclidian_heuristics,
+		_data_storage_base,
+        AStarVertexWrapper<_dist_type, _vertex>::template type,
+		_builder_allocator_constructor,
+		_manager_builder_allocator_constructor,
+		_data_storage_constructor,
+		_iteration_type
+	>;
+
+public:
+    using inherited::m_search_started;
+    using inherited::data_storage;
+
 protected:
 	typedef CDijkstra<
 		_dist_type,
@@ -113,7 +141,7 @@ protected:
 		_vertex_allocator,
 		euclidian_heuristics,
 		_data_storage_base,
-		AStar::_Vertex<_dist_type, _vertex>::_vertex,
+        AStarVertexWrapper<_dist_type, _vertex>::template type,
 		_builder_allocator_constructor,
 		_manager_builder_allocator_constructor,
 		_data_storage_constructor,
