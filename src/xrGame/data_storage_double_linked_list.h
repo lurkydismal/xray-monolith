@@ -33,17 +33,21 @@ struct CDataStorageDoubleLinkedList
 		template <typename _T> class _vertex = CEmptyClassTemplate
 	>
 	class CDataStorage : public CDataStorageSingleLinkedList<sorted>::CDataStorage<
-			_data_storage, DoubleLinkedList<_vertex>::_vertex>
+			_data_storage, DoubleLinkedList<_vertex>::template _vertex>
 	{
 	public:
 		typedef typename CDataStorageSingleLinkedList<sorted>::CDataStorage<
 			_data_storage,
-			DoubleLinkedList<_vertex>::_vertex
+			DoubleLinkedList<_vertex>::template _vertex
 		> inherited;
 		typedef typename inherited::inherited inherited_base;
 		typedef typename inherited::CGraphVertex CGraphVertex;
 		typedef typename CGraphVertex::_dist_type _dist_type;
 		typedef typename CGraphVertex::_index_type _index_type;
+
+        using inherited::m_list_tail;
+        using inherited::m_list_head;
+        using inherited::m_max_distance;
 
 	protected:
 		_dist_type m_switch_factor;
