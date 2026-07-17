@@ -2708,6 +2708,7 @@ set(AI__ANavigation__Pathfinding__GraphEngine
     "graph_engine.h"
     "graph_engine_inline.h"
     "graph_engine_space.h"
+    "hash_fixed_vertex_manager.hpp"
 )
 source_group("AI\\ANavigation\\Pathfinding\\GraphEngine" FILES ${AI__ANavigation__Pathfinding__GraphEngine})
 
