@@ -15,14 +15,7 @@
 #include "level_graph.h"
 #include "graph_engine.h"
 
-namespace hash_fixed_vertex_manager
-{
-	IC u32 to_u32(shared_str const& string)
-	{
-		const str_value* get = string._get();
-		return (*(u32 const*)&get);
-	}
-} // namespace hash_fixed_vertex_manager
+#include "hash_fixed_vertex_manager.hpp"
 
 namespace smart_cover
 {
@@ -288,7 +281,7 @@ bool cover::loophole_path					(shared_str const &source_raw, shared_str const &t
 
 	typedef GraphEngineSpace::CBaseParameters	CBaseParameters;
 	CBaseParameters				parameters(u32(-1),u32(-1),u32(-1));
-	bool						result = 
+	bool						result =
 		ai().graph_engine().search(
 			m_description->transitions(),
 			source,
