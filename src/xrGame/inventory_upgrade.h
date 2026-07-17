@@ -31,7 +31,7 @@ namespace inventory
 			{
 				IC return_type operator()() const
 				{
-					return functr(parameter);
+					return functr(this->parameter);
 				}
 			};
 
@@ -42,7 +42,7 @@ namespace inventory
 
 				IC return_type operator()() const
 				{
-					return functr(parameter, parameter2);
+					return this->functr(this->parameter, parameter2);
 				}
 			};
 
@@ -53,7 +53,7 @@ namespace inventory
 
 				IC return_type operator()() const
 				{
-					return functr(parameter, parameter2, parameter3);
+					return this->functr(this->parameter, this->parameter2, parameter3);
 				}
 			};
 
@@ -62,7 +62,7 @@ namespace inventory
 			{
 				IC void operator()() const
 				{
-					functr(parameter);
+					this->functr(this->parameter);
 				}
 			};
 
@@ -72,7 +72,7 @@ namespace inventory
 				LPCSTR parameter2;
 				IC void operator()() const
 				{
-					functr(parameter, parameter2);
+					this->functr(this->parameter, parameter2);
 				}
 			};
 
@@ -82,7 +82,7 @@ namespace inventory
 				int parameter3;
 				IC void operator()() const
 				{
-					functr(parameter, parameter2, parameter3);
+					this->functr(this->parameter, this->parameter2, parameter3);
 				}
 			};
 		} // namespace detail
