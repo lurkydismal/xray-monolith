@@ -68,6 +68,7 @@ public:
     using inherited::m_operators;
     using EVALUATORS = typename inherited::EVALUATORS;
     using OPERATOR_VECTOR = typename inherited::OPERATOR_VECTOR;
+    using inherited::get_operator;
 
 protected:
 	bool m_initialized;
