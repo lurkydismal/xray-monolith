@@ -8,11 +8,16 @@ using str_c = const char*;
 #include "_thread_types.h"
 #include "_stl_extensions.h"
 #include "intrusive_ptr.h"
+#include "mezz_stringbuffer_class.hpp"
 
 class XRCORE_API xr_string : public std::basic_string<char, std::char_traits<char>, xalloc<char>>
 {
 public:
 	typedef std::basic_string<char, std::char_traits<char>, xalloc<char>> Super;
+
+    xr_string(const MezzStringBuffer& buf)
+        : Super(buf.GetBuffer())
+    {}
 
 	xr_string() = default;
 	xr_string(const xr_string& other) = default;

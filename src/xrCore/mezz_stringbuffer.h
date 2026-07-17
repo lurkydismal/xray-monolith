@@ -6,22 +6,7 @@
 #include <vector>
 #include <regex>
 
-class MezzStringBuffer
-{
-public:
-	MezzStringBuffer(uint32_t Size = 4096);
-
-	char* GetBuffer() const;
-	uint32_t GetSize() const;
-
-	operator char* () const;
-
-private:
-	std::unique_ptr<char[]> StringBuffer;
-
-	char* BufferRaw;
-	uint32_t BufferSize;
-};
+#include "mezz_stringbuffer_class.hpp"
 
 // String utils
 std::vector<std::string> splitStringMulti(const std::string& inputString, std::string separator = " ", bool includeSeparators = false, bool trimStrings = false);
