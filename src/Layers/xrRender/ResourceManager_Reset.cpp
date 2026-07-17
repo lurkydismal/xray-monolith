@@ -51,7 +51,7 @@ void CResourceManager::reset_end()
 			if (_G->vb == RCache.Vertex.old_pVB)
 				_G->vb = RCache.Vertex.Buffer();
 
-			// Here we may recover the buffer using one of 
+			// Here we may recover the buffer using one of
 			// RCache's index buffers.
 			// Do not remove else.
 			if (_G->ib == RCache.Index.old_pIB)
@@ -102,7 +102,7 @@ template <class C>
 void mdump(C c)
 {
 	if (0 == c.size()) return;
-	for (C::iterator I = c.begin(); I != c.end(); I++)
+	for (typename C::iterator I = c.begin(); I != c.end(); I++)
 		Msg("*        : %3d: %s", I->second->dwReference.load(std::memory_order_relaxed), I->second->cName.c_str());
 }
 
