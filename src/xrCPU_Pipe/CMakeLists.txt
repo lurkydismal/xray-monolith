@@ -413,7 +413,7 @@ if(MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++17;
+        /std:c++20;
         /wd4995
     )
     target_link_options(${PROJECT_NAME} PRIVATE
