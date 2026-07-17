@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "space_restriction.h"
 #include "space_restriction_holder.h"
 #include "alife_space.h"
 
@@ -18,8 +19,6 @@ namespace RestrictionSpace
 
 template <typename _1>
 class intrusive_ptr;
-
-class CSpaceRestriction;
 
 class CSpaceRestrictionManager : public CSpaceRestrictionHolder
 {
