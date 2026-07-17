@@ -60,6 +60,15 @@ public:
 	typedef GraphEngineSpace::CWorldState CWorldState;
 	typedef _world_operator _world_operator;
 
+public:
+    using inherited::solve;
+    using inherited::m_failed;
+    using inherited::solution;
+    using inherited::m_evaluators;
+    using inherited::m_operators;
+    using EVALUATORS = typename inherited::EVALUATORS;
+    using OPERATOR_VECTOR = typename inherited::OPERATOR_VECTOR;
+
 protected:
 	bool m_initialized;
 	_action_id_type m_current_action_id;
