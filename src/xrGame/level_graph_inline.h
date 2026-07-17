@@ -505,7 +505,7 @@ IC bool CLevelGraph::create_straight_path(u32 start_vertex_id, const Fvector2& s
 #ifdef DEBUG
 				VERIFY			(_valid(next1));
 				VERIFY			(_valid(next2));
-				u32				dwIntersect = 
+				u32				dwIntersect =
 #endif
 				intersect_no_check(start_point.x, start_point.y, finish_point.x, finish_point.y, next1.x, next1.y,
 				                   next2.x, next2.y, &tIntersectPoint.x, &tIntersectPoint.z);
@@ -564,8 +564,8 @@ IC void CLevelGraph::assign_y_values(xr_vector<T>& path)
 	const CVertex* _vertex;
 	u32 prev_id = u32(-1);
 
-	xr_vector<T>::iterator I = path.begin();
-	xr_vector<T>::iterator E = path.end();
+	typename xr_vector<T>::iterator I = path.begin();
+	typename xr_vector<T>::iterator E = path.end();
 	for (; I != E; ++I)
 	{
 		if (prev_id != (*I).get_vertex_id())
