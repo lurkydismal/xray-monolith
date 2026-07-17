@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "hash_fixed_vertex_manager.hpp"
+
 #define TEMPLATE_SPECIALIZATION \
 	template <\
 		typename _path_id_type,\
