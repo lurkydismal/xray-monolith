@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "graph_engine_space.h"
+
 #define TEMPLATE_SPECIALIZATION \
 	template <\
 		typename T1,\
@@ -48,7 +50,7 @@ IC void CSolverPathManager::setup(
 	this->start_node_index = _start_node_index;
 	this->goal_node_index = _goal_node_index;
 	this->max_visited_node_count = params.max_visited_node_count;
-	this->max_range = (_solver_dist_type)params.max_range;
+	this->max_range = (GraphEngineSpace::_solver_dist_type)params.max_range;
 	this->max_iteration_count = params.max_iteration_count;
 }
 
