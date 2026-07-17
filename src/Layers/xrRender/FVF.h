@@ -122,10 +122,6 @@ namespace FVF
 		{
 			set(x, y, .0001f, .9999f, c, u, v);
 		};
-		IC void set(int x, int y, u32 c, float u, float v)
-		{
-			set(float(x), float(y), .0001f, .9999f, c, u, v);
-		};
 		IC void set(float x, float y, float z, float w, u32 c, float u, float v)
 		{
 			p.set(x, y, z, w);
