@@ -60,6 +60,16 @@ protected:
 		_iteration_type
 	> inherited;
 
+public:
+    using inherited::graph;
+    using inherited::max_range;
+    using inherited::m_sqr_distance_xz;
+    using inherited::path;
+    using inherited::best_node;
+    using inherited::max_iteration_count;
+    using inherited::data_storage;
+    using inherited::max_visited_node_count;
+
 protected:
 	int x0, y0;
 	u32 max_range_sqr;
