@@ -5,6 +5,7 @@
 #include "state_custom_action.h"
 #include "../../../cover_point.h"
 #include "../monster_cover_manager.h"
+#include "../ai_monster_squad_manager.h"
 
 
 #define TEMPLATE_SPECIALIZATION template <\
@@ -16,9 +17,9 @@
 TEMPLATE_SPECIALIZATION
 CStateMonsterRestIdleAbstract::CStateMonsterRestIdle(_Object* obj) : inherited(obj)
 {
-	add_state(eStateRest_WalkToCover, xr_new<CStateMonsterMoveToPointEx<_Object>>(obj));
-	add_state(eStateRest_LookOpenPlace, xr_new<CStateMonsterLookToPoint<_Object>>(obj));
-	add_state(eStateRest_Idle, xr_new<CStateMonsterCustomAction<_Object>>(obj));
+	this->add_state(eStateRest_WalkToCover, xr_new<CStateMonsterMoveToPointEx<_Object>>(obj));
+	this->add_state(eStateRest_LookOpenPlace, xr_new<CStateMonsterLookToPoint<_Object>>(obj));
+	this->add_state(eStateRest_Idle, xr_new<CStateMonsterCustomAction<_Object>>(obj));
 }
 
 TEMPLATE_SPECIALIZATION
@@ -38,7 +39,7 @@ void CStateMonsterRestIdleAbstract::initialize()
 
 	m_target_node = point->level_vertex_id();
 
-	CMonsterSquad* squad = this->monster_squad().get_squad(this->object);
+	CMonsterSquad* squad = monster_squad().get_squad(this->object);
 	squad->lock_cover(m_target_node);
 }
 
@@ -46,7 +47,7 @@ TEMPLATE_SPECIALIZATION
 void CStateMonsterRestIdleAbstract::finalize()
 {
 	inherited::finalize();
-	CMonsterSquad* squad = this->monster_squad().get_squad(this->object);
+	CMonsterSquad* squad = monster_squad().get_squad(this->object);
 	squad->unlock_cover(m_target_node);
 }
 
@@ -55,7 +56,7 @@ void CStateMonsterRestIdleAbstract::critical_finalize()
 {
 	inherited::critical_finalize();
 
-	CMonsterSquad* squad = this->monster_squad().get_squad(this->object);
+	CMonsterSquad* squad = monster_squad().get_squad(this->object);
 	squad->unlock_cover(m_target_node);
 }
 

@@ -6,6 +6,7 @@
 #include "state_custom_action.h"
 #include "state_move_to_point.h"
 #include "../../../restricted_object.h"
+#include "../ai_monster_squad_manager.h"
 
 #define TEMPLATE_SPECIALIZATION template <\
 	typename _Object\
@@ -23,8 +24,8 @@
 TEMPLATE_SPECIALIZATION
 CStateMonsterSquadRestAbstract::CStateMonsterSquadRest(_Object* obj) : inherited(obj)
 {
-	add_state(eStateSquad_Rest_Idle, xr_new<CStateMonsterCustomAction<_Object>>(obj));
-	add_state(eStateSquad_Rest_WalkAroundLeader, xr_new<CStateMonsterMoveToPoint<_Object>>(obj));
+	this->add_state(eStateSquad_Rest_Idle, xr_new<CStateMonsterCustomAction<_Object>>(obj));
+	this->add_state(eStateSquad_Rest_WalkAroundLeader, xr_new<CStateMonsterMoveToPoint<_Object>>(obj));
 }
 
 TEMPLATE_SPECIALIZATION
@@ -60,7 +61,7 @@ void CStateMonsterSquadRestAbstract::setup_substates()
 	if (this->current_substate == eStateSquad_Rest_WalkAroundLeader)
 	{
 		SStateDataMoveToPoint data;
-		CMonsterSquad* squad = this->monster_squad().get_squad(this->object);
+		CMonsterSquad* squad = monster_squad().get_squad(this->object);
 
 		if (this->object->control().path_builder().get_node_in_radius(squad->GetLeader()->ai_location().level_vertex_id(),
 		                                                        8.f, LEADER_RADIUS, FIND_POINT_ATTEMPTS, data.vertex))

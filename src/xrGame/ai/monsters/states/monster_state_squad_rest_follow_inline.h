@@ -19,8 +19,8 @@
 TEMPLATE_SPECIALIZATION
 CStateMonsterSquadRestFollowAbstract::CStateMonsterSquadRestFollow(_Object* obj) : inherited(obj)
 {
-	add_state(eStateSquad_RestFollow_Idle, xr_new<CStateMonsterCustomAction<_Object>>(obj));
-	add_state(eStateSquad_RestFollow_WalkToPoint, xr_new<CStateMonsterMoveToPointEx<_Object>>(obj));
+	this->add_state(eStateSquad_RestFollow_Idle, xr_new<CStateMonsterCustomAction<_Object>>(obj));
+	this->add_state(eStateSquad_RestFollow_WalkToPoint, xr_new<CStateMonsterMoveToPointEx<_Object>>(obj));
 }
 
 TEMPLATE_SPECIALIZATION
@@ -33,14 +33,14 @@ void CStateMonsterSquadRestFollowAbstract::initialize()
 {
 	inherited::initialize();
 
-	SSquadCommand& command = this->monster_squad().get_squad(this->object)->GetCommand(this->object);
+	SSquadCommand& command = monster_squad().get_squad(this->object)->GetCommand(this->object);
 	last_point = command.position;
 }
 
 TEMPLATE_SPECIALIZATION
 void CStateMonsterSquadRestFollowAbstract::reselect_state()
 {
-	SSquadCommand& command = this->monster_squad().get_squad(this->object)->GetCommand(this->object);
+	SSquadCommand& command = monster_squad().get_squad(this->object)->GetCommand(this->object);
 	if (command.position.distance_to(this->object->Position()) < Random.randF(STOP_DISTANCE, STAY_DISTANCE))
 	{
 		this->select_state(eStateSquad_RestFollow_Idle);
@@ -78,7 +78,7 @@ void CStateMonsterSquadRestFollowAbstract::setup_substates()
 	{
 		SStateDataMoveToPointEx data;
 
-		Fvector dest_pos = this->monster_squad().get_squad(this->object)->GetCommand(this->object).position;
+		Fvector dest_pos = monster_squad().get_squad(this->object)->GetCommand(this->object).position;
 		if (!this->object->control().path_builder().restrictions().accessible(dest_pos))
 		{
 			data.vertex = this->object->control().path_builder().restrictions().accessible_nearest(dest_pos, data.point);
