@@ -13,6 +13,14 @@ class CMonsterStateManager : public IStateManagerBase, public CState<_Object>
 	typedef CState<_Object> inherited;
 
 public:
+    using inherited::object;
+    using inherited::execute;
+    using inherited::select_state;
+    using inherited::get_state;
+    using inherited::get_state_current;
+    using inherited::prev_substate;
+
+public:
 	CMonsterStateManager(_Object* obj) : inherited(obj)
 	{
 	}
