@@ -156,8 +156,8 @@ IC bool CSDijkstra::step(_PathManager& path_manager)
 	data_storage().remove_best_opened();
 
 	// iterating on the best node neighbours
-	_PathManager::const_iterator i;
-	_PathManager::const_iterator e;
+	typename _PathManager::const_iterator i;
+	typename _PathManager::const_iterator e;
 	path_manager.begin(best.index(), i, e);
 	for (; i != e; ++i)
 	{
@@ -165,7 +165,7 @@ IC bool CSDijkstra::step(_PathManager& path_manager)
 		// check if neighbour is accessible
 		if (!path_manager.is_accessible(neighbour_index))
 			continue;
-		// check if neighbour is visited, i.e. is in the opened or 
+		// check if neighbour is visited, i.e. is in the opened or
 		// closed lists
 		if (data_storage().is_visited(neighbour_index))
 		{
@@ -204,7 +204,7 @@ IC bool CSDijkstra::step(_PathManager& path_manager)
 			// so, this neighbour node is not in the opened or closed lists
 			// put neighbour node to the opened list
 			CGraphVertex& neighbour = data_storage().create_vertex(neighbour_index);
-			// fill the corresponding node parameters 
+			// fill the corresponding node parameters
 			neighbour.f() = best.f() + path_manager.evaluate(best.index(), neighbour_index, i);
 			// assign best node as its parent
 			data_storage().assign_parent(neighbour, &best, path_manager.edge(i));
