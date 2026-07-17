@@ -56,6 +56,11 @@ protected:
 		_iteration_type
 	> inherited;
 
+public:
+    using inherited::graph;
+    using inherited::start_node_index;
+    using inherited::goal_node_index;
+
 protected:
 	int x1;
 	//	float				y1;
