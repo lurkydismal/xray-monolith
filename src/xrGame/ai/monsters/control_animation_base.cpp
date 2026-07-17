@@ -13,7 +13,7 @@
 #include "../../sound_player.h"
 
 // DEBUG purpose only
-char* dbg_action_name_table[] = {
+const char* dbg_action_name_table[] = {
 	"ACT_STAND_IDLE",
 	"ACT_SIT_IDLE",
 	"ACT_LIE_IDLE",
@@ -239,7 +239,7 @@ void CControlAnimationBase::select_animation(bool anim_end)
 		index = ::Random.randI(anim_it->count);
 	}
 
-	// установить анимацию	
+	// установить анимацию
 	string128 s1, s2;
 	MotionID cur_anim = smart_cast<IKinematicsAnimated*>(m_object->Visual())->ID_Cycle_Safe(
 		strconcat(sizeof(s2), s2, *anim_it->target_name, itoa(index, s1, 10)));
@@ -356,7 +356,7 @@ SAAParam& CControlAnimationBase::AA_GetParams(MotionID motion, float time_perc)
 
 EPState CControlAnimationBase::GetState(EMotionAnim a)
 {
-	// найти анимацию 
+	// найти анимацию
 	SAnimItem* item_it = m_anim_storage[a];
 	VERIFY2(item_it, make_string("animation not found in m_anim_storage!"));
 
@@ -387,7 +387,7 @@ void CControlAnimationBase::FX_Play(EHitSide side, float amount)
 		break;
 	}
 
-	if (p_str && p_str->size()) 
+	if (p_str && p_str->size())
 	{
 		if (anim_it->fxs.may_not_exist[side])
 			smart_cast<IKinematicsAnimated*>(m_object->Visual())->PlayFX_Safe(*(*p_str), amount);
