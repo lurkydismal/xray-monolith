@@ -28,7 +28,7 @@ public:
 
 	virtual void Update();
 	virtual void net_Export_State(NET_Packet& P, ClientID id_to); // full state
-	// Events	
+	// Events
 	virtual void OnPlayerConnect(ClientID id_who);
 	virtual void OnPlayerConnectFinished(ClientID id_who);
 
@@ -56,7 +56,7 @@ public:
 
 	virtual void LoadTeams();
 
-	virtual char* GetAnomalySetBaseName() { return "teamdeathmatch_game_anomaly_sets"; };
+	virtual const char* GetAnomalySetBaseName() { return "teamdeathmatch_game_anomaly_sets"; };
 	virtual BOOL CanHaveFriendlyFire() { return TRUE; }
 	virtual void OnFraglimitExceed();
 	virtual void OnTimelimitExceed();
