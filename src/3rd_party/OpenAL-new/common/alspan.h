@@ -102,7 +102,7 @@ public:
     template<bool is0=(extent == 0), REQUIRES(is0)>
     constexpr span() noexcept { }
     template<typename U>
-    constexpr explicit span(U iter, index_type) : mData{to_address(iter)} { }
+    constexpr explicit span(U iter, index_type) : mData{std::to_address(iter)} { }
     template<typename U, typename V, REQUIRES(!std::is_convertible<V,size_t>::value)>
     constexpr explicit span(U first, V) : mData{to_address(first)} { }
 
@@ -216,10 +216,10 @@ public:
     constexpr span() noexcept = default;
     template<typename U>
     constexpr span(U iter, index_type count)
-        : mData{to_address(iter)}, mDataEnd{to_address(iter)+count}
+        : mData{std::to_address(iter)}, mDataEnd{std::to_address(iter)+count}
     { }
     template<typename U, typename V, REQUIRES(!std::is_convertible<V,size_t>::value)>
-    constexpr span(U first, V last) : span{to_address(first), static_cast<size_t>(last-first)}
+    constexpr span(U first, V last) : span{std::to_address(first), static_cast<size_t>(last-first)}
     { }
 
     template<size_t N>
