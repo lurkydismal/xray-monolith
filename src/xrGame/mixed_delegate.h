@@ -111,12 +111,15 @@ DECLARE_SCRIPT_REGISTER_FUNCTION
 #define DEFINE_MIXED_DELEGATE_SCRIPT(type, name_str) \
 	void type::script_register(lua_State *L)\
 	{\
+        using callback_t = void (type::*)(\
+        type::lua_object_type,\
+        type::lua_function_type);\
 		module(L)\
 		[\
 			class_<type>(name_str)\
 				.def(						constructor<>())\
 				.def(						constructor<type::lua_object_type, type::lua_function_type>())\
-				.def("bind",				&type::bind)\
+				.def("bind",				static_cast<callback_t>(&type::bind))\
 				.def("clear",				&type::clear)\
 		];\
 	};
