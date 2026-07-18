@@ -65,7 +65,7 @@ namespace gamespy_profile
 
 	typedef associative_vector<enum_awards_t, award_data> all_awards_t;
 
-	char const* get_award_name(enum_awards_t award);
+	const char const* get_award_name(enum_awards_t award);
 	extern u16 get_award_id_key(enum_awards_t award);
 	extern u16 get_award_reward_date_key(enum_awards_t award);
 
@@ -97,15 +97,15 @@ namespace gamespy_profile
 
 	typedef mixed_delegate<void (bool, char const*), store_operation_cb_tag> store_operation_cb;
 
-	extern char* profile_table_name;
+	extern const char* profile_table_name;
 
-	extern char* profile_store_file_name;
-	extern char* award_count_line;
-	extern char* award_rdate_line;
-	extern char* best_score_value_line;
-	extern char* profile_data_section;
-	extern char* profile_id_line;
-	extern char* profile_last_submit_time;
+	extern const char* profile_store_file_name;
+	extern const char* award_count_line;
+	extern const char* award_rdate_line;
+	extern const char* best_score_value_line;
+	extern const char* profile_data_section;
+	extern const char* profile_id_line;
+	extern const char* profile_last_submit_time;
 } //namespace gamespy_profile
 
 
