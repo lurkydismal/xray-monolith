@@ -181,6 +181,7 @@ set(Math
     "_math.cpp"
     "_math.h"
     "_matrix.h"
+    "_matrix.cpp"
     "_matrix33.h"
     "_obb.h"
     "_plane.h"
