@@ -72,7 +72,7 @@ void CFontManager::InitializeFonts()
 
 LPCSTR CFontManager::GetFontTexName(LPCSTR section)
 {
-	static char* tex_names[] = {"texture800", "texture", "texture1600", "texture2160"};
+	static const char* tex_names[] = {"texture800", "texture", "texture1600", "texture2160"};
 	int def_idx = 1; //default 1024x768
 	int idx = def_idx;
 #if 0
@@ -409,7 +409,7 @@ ICF static BOOL pick_trace_callback(collide::rq_result& result, LPVOID params)
 		{
 			return TRUE;
 		}
-		//.		if (mtl->Flags.is(SGameMtl::flPassable)) 
+		//.		if (mtl->Flags.is(SGameMtl::flPassable))
 		//.			return TRUE;
 	}
 	pp->result = result;
