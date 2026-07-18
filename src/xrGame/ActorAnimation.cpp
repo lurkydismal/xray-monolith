@@ -334,7 +334,7 @@ CMotion* FindMotionKeys(MotionID motion_ID, IRenderVisual* V)
 #ifdef DEBUG
 BOOL	g_ShowAnimationInfo = TRUE;
 #endif // DEBUG
-char* mov_state[] = {
+const char* mov_state[] = {
 	"idle",
 	"walk",
 	"run",
@@ -753,7 +753,7 @@ void CActor::g_SetAnimation(u32 mstate_rl)
 		UI().Font().pFontStat->OutNext	("Accel     [%3.2f, %3.2f, %3.2f]",VPUSH(NET_SavedAccel));
 		UI().Font().pFontStat->OutNext	("V         [%3.2f, %3.2f, %3.2f]",VPUSH(m_PhysicMovementControl->GetVelocity()));
 		UI().Font().pFontStat->OutNext	("vertex ID   %d",ai_location().level_vertex_id());
-		
+
 		Game().m_WeaponUsageStatistic->Draw();
 		*/
 	};
