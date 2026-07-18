@@ -42,8 +42,8 @@ struct CrosshairSettings
 
 	CrosshairSettings(
 		Flags32 _flags,
-		string32 _shader,
-		string32 _texture,
+		const string32 _shader,
+		const string32 _texture,
 		float _distance_lerp_rate,
 		float _size,
 		float _depth,
@@ -96,7 +96,7 @@ struct CrosshairPair {
 
 	CrosshairPair(CrosshairSettings& settings_near, CrosshairSettings& settings_far) :
 		crosshair_near(settings_near),
-		crosshair_far(settings_far) 
+		crosshair_far(settings_far)
 	{
 		shaderWire->create("hud\\crosshair");
 	};
