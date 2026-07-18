@@ -99,8 +99,8 @@ inline void swap(float& x, float& y)
 }
 
 //
-// Given two families of solutions 
-//	f1[0],..,f1[2]  and f2[0],..,f2[2] 
+// Given two families of solutions
+//	f1[0],..,f1[2]  and f2[0],..,f2[2]
 // determine which one comes closest to satisfying the joint limits
 // and copy the result into soln[0]...[2]
 //
@@ -165,7 +165,7 @@ inline float put_angle_in_range(float low, float high, float v)
 }
 
 //
-// Extract the euler angles for the first spherical joint 
+// Extract the euler angles for the first spherical joint
 // without checking if the joint limits are satisfied.
 //
 void Limb::extract_s1(const Matrix R1, float s[3])
@@ -188,7 +188,7 @@ void Limb::extract_s1(const Matrix R1, float s[3])
 
 //
 // Same as above but for a particular family
-// 
+//
 //
 void Limb::extract_s1_family(const Matrix R1, int family, float s[3])
 {
@@ -203,9 +203,9 @@ void Limb::extract_s1_family(const Matrix R1, int family, float s[3])
 }
 
 //
-// Extract the euler angles for both spherical 
+// Extract the euler angles for both spherical
 // joints without checking joint limits
-//		  
+//
 void Limb::extract_s1s2(const Matrix R1,
                         const Matrix R2,
                         float s1[3],
@@ -231,7 +231,7 @@ void Limb::extract_s1s2(const Matrix R1,
 
 //
 // Same as above but given which two families to use
-//		  
+//
 void Limb::extract_s1s2_family(const Matrix R1,
                                const Matrix R2,
                                int f1, int f2,
@@ -276,7 +276,7 @@ int Limb::set_goal_pos(const float g[3], const Matrix E)
 }
 
 //
-// Calculates the two families of valid psi for the 
+// Calculates the two families of valid psi for the
 // first three joints for a specified position problem.
 //
 void Limb::get_R1psi(AngleIntList psi[])
@@ -312,8 +312,8 @@ void Limb::get_R1psi(AngleIntList psi[])
 
 
 //
-// Calculates the four families of valid psi for the 
-// pair of spherical joints. PSI[0] corresponds to  
+// Calculates the four families of valid psi for the
+// pair of spherical joints. PSI[0] corresponds to
 // family1 in the first three joints, family1 in the
 // last three joints. PSI[1] corresponds to family1
 // in the first three joints, family2 in the last three,
@@ -435,8 +435,8 @@ int Limb::SetGoalPos(const float g[3], const Matrix E, int limits)
 }
 
 //
-// Sets the goal matrix. If limits is turned on then 
-// also compute the valid psi ranges and store them  
+// Sets the goal matrix. If limits is turned on then
+// also compute the valid psi ranges and store them
 //
 int Limb::SetGoal(const Matrix G, int limits)
 {
@@ -451,7 +451,7 @@ int Limb::SetGoal(const Matrix G, int limits)
 	return success;
 }
 
-static void init_error(char* msg)
+static void init_error(const char* msg)
 {
 	fprintf(stderr, "You forgot to call SetGoal or SetGoalPos in %s\n", msg);
 	exit(0);
@@ -503,10 +503,10 @@ inline int find_min(int n, float d[])
 // Given two or four disjoint intervals of valid psi, find the
 // midpoint of the largest continous range of valid psi.
 // Return an integer code corresponding to which of the two/four
-// intervals contains this midpoint. 
+// intervals contains this midpoint.
 //
 // 0 means that all intervals are empty.
-// 
+//
 int choose_largest_range(float& swivel_angle,
                          const AngleIntList* f11,
                          const AngleIntList* f12,
@@ -556,11 +556,11 @@ int choose_largest_range(float& swivel_angle,
 			return 4;
 	}
 
-	// 
+	//
 	// Rarely, the swivel angle could be at the boundary and out of
 	// range because of numerical rounding. In this case, return
 	// the interval that is closest to the swivel angle
-	// 
+	//
 
 	float d[4];
 
@@ -638,7 +638,7 @@ int inspect_range(const AngleIntList& f,
 // the closest angle that can be achieved.
 //
 // 0 means that all intervals are empty.
-// 
+//
 
 int choose_closest_range(float& swivel_angle,
                          const AngleIntList* f11,
@@ -684,7 +684,7 @@ void Limb::solve_aux(float swivel_angle, float x[])
 }
 
 //
-// Solve for G for a particular family for two spherical joints 
+// Solve for G for a particular family for two spherical joints
 //  family_set = 1 => family1,family1
 //  family_set = 2 => family1,family2
 //  family_set = 3 => family2,family1
@@ -717,9 +717,9 @@ void Limb::solve_aux_family(int family_set, float swivel_angle, float x[])
 
 
 //
-// Solve for the first three joints for a given 
+// Solve for the first three joints for a given
 // position, family, and swivel angle
-//  
+//
 
 void Limb::solve_pos_aux_family(int family, float swivel_angle, float x[])
 {
@@ -731,7 +731,7 @@ void Limb::solve_pos_aux_family(int family, float swivel_angle, float x[])
 
 
 //
-// Solve for the first three joints for a given 
+// Solve for the first three joints for a given
 // position, and swivel angle. Choose the solution that
 // is closest to satisfying the joint limits
 
@@ -853,7 +853,7 @@ int Limb::Solve(float x[], float* new_swivel, float* new_pos)
 
 //
 // First try solving using the swivel angle. If this fails
-// then see if the desired swivel angle is close to a singularity. 
+// then see if the desired swivel angle is close to a singularity.
 // If so then try evaluating the singularity since the PSI
 // intervals are not computed reliably near a singularity.
 //
@@ -883,7 +883,7 @@ int Limb::try_closeby_singularity(int solves,
 
 //
 // Solves an IK problem for a swivel angle
-// 
+//
 int Limb::SolveByAngle(float swivel_angle, float x[7],
                        float* new_swivel, float* new_pos)
 {
