@@ -82,7 +82,7 @@ extern void GetMonitorPosition(int& x, int& y);
 //ImGui
 #pragma comment(lib, "imgui.lib")
 
-static LPSTR month_id[12] =
+static LPCSTR month_id[12] =
 {
 	"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 };
@@ -416,13 +416,13 @@ void updateDiscordPresence()
 		discordPresence.GetAssets().SetLargeText("");
 		discordPresence.GetAssets().SetSmallImage("");
 		discordPresence.GetAssets().SetSmallText("");
-			
+
 		// Pause Menu
 		if (discord_gameinfo.ingame)
 			snprintf(state_buffer, 128, discord_strings.paused);
 		else
 			discordPresence.SetDetails("");
-	}	
+	}
 
 	// Loading
 	else if (discord_gameinfo.loadscreen)
@@ -559,7 +559,7 @@ void updateDiscordPresence()
 void Init_Discord()
 {
 	auto result = discord::Core::Create(477910171964801060, DiscordCreateFlags_NoRequireDiscord, &discord_core);
-	
+
 	if (result != discord::Result::Ok)
 	{
 		Msg("[Discord RPC] Failed to create Discord RPC");
@@ -1026,7 +1026,7 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 	// Create hash
 	u32 pathHash = path_crc32(exePath, xr_strlen(exePath));
 
-	// Create unique mutex name  
+	// Create unique mutex name
 	string256 mutexName = {};
 	xr_sprintf(mutexName, sizeof(mutexName), STALKER_PRESENCE_MUTEX"_%08x", pathHash);
 
@@ -1235,7 +1235,7 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 
 LPCSTR _GetFontTexName(LPCSTR section)
 {
-	static char* tex_names[] = {"texture800", "texture", "texture1600", "texture2160"};
+	static const char* tex_names[] = {"texture800", "texture", "texture1600", "texture2160"};
 	int def_idx = 1; //default 1024x768
 	int idx = def_idx;
 
