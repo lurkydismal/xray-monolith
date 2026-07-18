@@ -145,7 +145,8 @@ bool CUIPropertiesBox::CursorOverTree()
 {
 	Frect r;
 	GetAbsoluteRect(r);
-	if (r.in(GetUICursor().GetCursorPosition()))
+    Fvector2 vec = GetUICursor().GetCursorPosition();
+	if (r.in(vec))
 		return true;
 	if (m_active_submenu && m_active_submenu->IsShown())
 		return m_active_submenu->CursorOverTree();
@@ -370,7 +371,8 @@ void CUIPropertiesBox::Update()
 	{
 		Frect ir;
 		m_active_sub_item->GetAbsoluteRect(ir);
-		bool inside = ir.in(GetUICursor().GetCursorPosition()) || m_active_submenu->CursorOverTree();
+        Fvector2 vec =GetUICursor().GetCursorPosition();
+		bool inside = ir.in(vec) || m_active_submenu->CursorOverTree();
 		if (inside)
 		{
 			m_submenu_close_at = 0;
