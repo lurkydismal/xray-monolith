@@ -82,7 +82,7 @@ game_cl_mp::game_cl_mp()
 	m_cur_MenuID = u32(-1);
 	//-------------------------------------
 	LoadBonuses();
-	//-------------------------------------	
+	//-------------------------------------
 	buffer_for_compress = NULL;
 	buffer_for_compress_size = 0;
 	//-----------------------------------------------------------
@@ -92,7 +92,7 @@ game_cl_mp::game_cl_mp()
 		pBuySpawnMsgBox->Init("message_box_buy_spawn");
 		pBuySpawnMsgBox->AddCallback("msg_box", MESSAGE_BOX_YES_CLICKED, CUIWndCallback::void_function(this, &game_cl_mp::OnBuySpawn));
 		string1024	BuySpawnText;
-		xr_sprintf(BuySpawnText, "You can buy a spawn for %d $. Press Yes to pay.", 
+		xr_sprintf(BuySpawnText, "You can buy a spawn for %d $. Press Yes to pay.",
 			abs(m_iSpawn_Cost));
 		pBuySpawnMsgBox->SetText(BuySpawnText);
 	*/ //-----------------------------------------------------------
@@ -118,13 +118,13 @@ game_cl_mp::~game_cl_mp()
 	/*	TODO: check if shaders are deleted automatically...
 		if (m_EquipmentIconsShader)
 			m_EquipmentIconsShader.destroy();
-		
+
 		if (m_KillEventIconsShader)
 			m_KillEventIconsShader.destroy();
-	
+
 		if (m_RadiationIconsShader)
 			m_RadiationIconsShader.destroy();
-	
+
 		if (m_BloodLossIconsShader)
 			m_BloodLossIconsShader.destroy();
 			*/
@@ -355,7 +355,7 @@ void game_cl_mp::GetActiveVoting()
 }
 
 u32 Color_Teams_u32[3] = {color_rgba(255, 240, 190, 255), color_rgba(64, 255, 64, 255), color_rgba(64, 64, 255, 255)};
-LPSTR Color_Teams[3] = {"%c[255,255,240,190]", "%c[255,64,255,64]", "%c[255,64,64,255]"};
+LPCSTR Color_Teams[3] = {"%c[255,255,240,190]", "%c[255,64,255,64]", "%c[255,64,64,255]"};
 char Color_Main[] = "%c[255,192,192,192]";
 u32 Color_Neutral_u32 = color_rgba(255, 0, 255, 255);
 char Color_Red[] = "%c[255,255,1,1]";
@@ -1078,7 +1078,7 @@ void game_cl_mp::OnPlayerKilled(NET_Packet& P)
 			{
 				KMS.m_killer.m_name = pKiller ? pKiller->getName() : *(pOKiller->cNameSect());
 				KMS.m_killer.m_color = pKiller ? Color_Teams_u32[ModifyTeam(pKiller->team) + 1] : Color_Neutral_u32;
-				//-----------------------------------------------------------------------				
+				//-----------------------------------------------------------------------
 				Msg("%s died from bleeding, thanks to %s ", *KMS.m_victim.m_name, *KMS.m_killer.m_name);
 			}
 			else
@@ -1218,7 +1218,7 @@ bool game_cl_mp::Is_Spectator_Camera_Allowed(CSpectator::EActorCameras Camera)
 	case CSpectator::eacFreeFly		 : return m_bSpectator_FreeFly	;
 	case CSpectator::eacFirstEye	 : return m_bSpectator_FirstEye	;
 	case CSpectator::eacLookAt		 : return m_bSpectator_LookAt	;
-	case CSpectator::eacFreeLook	 : return m_bSpectator_FreeLook	;	
+	case CSpectator::eacFreeLook	 : return m_bSpectator_FreeLook	;
 	}
 	return false;
 	*/
