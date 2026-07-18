@@ -172,7 +172,7 @@ void CWeaponMagazined::Load(LPCSTR section)
 			m_sounds.LoadSound(section, "snd_silncer_shot_misfire", "sndSilencerShotMisfire", false, m_eSoundShot);
 		if (WeaponSoundExist(section, "snd_silncer_shot_misfire_actor"))
 			m_sounds.LoadSound(section, "snd_silncer_shot_misfire_actor", "sndSilencerShotMisfireActor", false, m_eSoundShot);
-		
+
 	}
 
 	m_iBaseDispersionedBulletsCount = READ_IF_EXISTS(pSettings, r_u8, section, "base_dispersioned_bullets_count", 0);
@@ -982,7 +982,7 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
 		break; // End of Show
 	case eIdle: switch2_Idle();
 		break; // Keep showing idle
-	case eFire: 
+	case eFire:
 		if (!bWorking || 0 == iAmmoElapsed)
 			SwitchState(eIdle);
 		break; // Switch to idle if we stopped shooting
@@ -1247,33 +1247,43 @@ bool CWeaponMagazined::TryPlayAnimBore()
 		PlayHUDMotion("anm_bore_empty", TRUE, this, GetState());
 		return true;
 	}
-	
+
 	return inherited::TryPlayAnimBore();
 }
 
 void CWeaponMagazined::PlayAnimIdleSprint()
 {
-	iAmmoElapsed == 0 && HudAnimationExist("anm_idle_sprint_empty")
-		? PlayHUDMotion("anm_idle_sprint_empty", TRUE, NULL, GetState())
-		: inherited::PlayAnimIdleSprint();
+	if ( iAmmoElapsed == 0 && HudAnimationExist("anm_idle_sprint_empty") ) {
+		PlayHUDMotion("anm_idle_sprint_empty", TRUE, NULL, GetState());
+    } else {
+		inherited::PlayAnimIdleSprint();
+    }
 }
 
 void CWeaponMagazined::PlayAnimIdleMoving()
 {
 	bool bAccelerated = isActorAccelerated(Actor()->MovingState(), IsZoomed());
 
-	iAmmoElapsed == 0 && HudAnimationExist("anm_idle_moving_empty")
-		? PlayHUDMotion("anm_idle_moving_empty", TRUE, NULL, GetState(), bAccelerated ? 1.f : .75f)
-		: inherited::PlayAnimIdleMoving();
+	if (iAmmoElapsed == 0 && HudAnimationExist("anm_idle_moving_empty") ) {
+		PlayHUDMotion("anm_idle_moving_empty", TRUE, NULL, GetState(), bAccelerated ? 1.f : .75f);
+    } else {
+        inherited::PlayAnimIdleMoving();
+    }
 }
 
 bool CWeaponMagazined::PlayAnimCrouchIdleMoving()
 {
 	if (iAmmoElapsed == 0)
 	{
-		HudAnimationExist("anm_idle_moving_crouch_empty")
-			? PlayHUDMotion("anm_idle_moving_crouch_empty", TRUE, NULL, GetState())
-			: HudAnimationExist("anm_idle_moving_empty") ? PlayHUDMotion("anm_idle_moving_empty", TRUE, NULL, GetState(), .7f) : inherited::PlayAnimCrouchIdleMoving();
+		if (HudAnimationExist("anm_idle_moving_crouch_empty") ) {
+			PlayHUDMotion("anm_idle_moving_crouch_empty", TRUE, NULL, GetState());
+        } else {
+            if ( HudAnimationExist("anm_idle_moving_empty") ) {
+                PlayHUDMotion("anm_idle_moving_empty", TRUE, NULL, GetState(), .7f);
+            } else {
+                inherited::PlayAnimCrouchIdleMoving();
+            }
+        }
 
 		return true;
 	}
@@ -1742,7 +1752,7 @@ void CWeaponMagazined::PlayAnimShoot()
 		else
 			PlayHUDMotion("anm_shots_aim", TRUE, this, GetState(), 1.f, 0.f, false);
 	}
-	else 
+	else
 	{
 		if (!IsZoomed() || !HudAnimationExist("anm_shots_aim_l"))
 			PlayHUDMotion("anm_shot_l", TRUE, this, GetState(), 1.f, 0.f, false);
@@ -1766,7 +1776,7 @@ void CWeaponMagazined::OnMotionMark(u32 state, const motion_marks& M)
             m_needReload = false; // Verdatim, fix for anm_reload_misfire with motion marks causing reloads
 			return;
 		}
-		
+
 		if (bHasBulletsToHide && xr_strcmp(M.name.c_str(),"lmg_reload")==0)
 		{
 			u8 ammo_type = m_ammoType;
