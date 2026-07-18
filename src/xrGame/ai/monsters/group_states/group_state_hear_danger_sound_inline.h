@@ -71,7 +71,7 @@ void CStateGroupHearDangerousSoundAbstract::reselect_state()
 TEMPLATE_SPECIALIZATION
 void CStateGroupHearDangerousSoundAbstract::setup_substates()
 {
-	state_ptr state = get_state_current();
+	state_ptr state = this->get_state_current();
 
 	if (this->current_substate == eStateSquad)
 	{
