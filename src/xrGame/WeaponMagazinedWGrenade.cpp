@@ -226,7 +226,7 @@ void CWeaponMagazinedWGrenade::PerformSwitchGL()
 		SetZoomType(m_bGrenadeMode ? 2 : newzoomtype);
 	} else {
 		SetZoomType(m_bGrenadeMode ? 2 : 0);
-	}	
+	}
 
 	UpdateUIScope();
 
@@ -925,7 +925,7 @@ void CWeaponMagazinedWGrenade::PlayAnimShoot()
 				PlayHUDMotion("anm_shot_g_l", TRUE, this, GetState(), 1.f, 0.f, false);
 			else
 				PlayHUDMotion("anm_shot_g_l_aim", TRUE, this, GetState(), 1.f, 0.f, false);
-		}		
+		}
 	}
 	else
 	{
@@ -952,14 +952,36 @@ void CWeaponMagazinedWGrenade::PlayAnimShoot()
 
 void CWeaponMagazinedWGrenade::PlayAnimModeSwitch()
 {
-	if (m_bGrenadeMode)
-		iAmmoElapsed == 0 && HudAnimationExist("anm_switch_g_empty")
-		? PlayHUDMotion("anm_switch_g_empty", TRUE, this, eSwitch)
-		: HudAnimationExist("anm_switch_g") ? PlayHUDMotion("anm_switch_g", TRUE, this, eSwitch) : SwitchState(eSwitch);
-	else
-		iAmmoElapsed == 0 && HudAnimationExist("anm_switch_empty")
-		? PlayHUDMotion("anm_switch_empty", TRUE, this, eSwitch)
-		: HudAnimationExist("anm_switch") ? PlayHUDMotion("anm_switch", TRUE, this, eSwitch) : SwitchState(eSwitch);
+    if (m_bGrenadeMode)
+    {
+        if (iAmmoElapsed == 0 && HudAnimationExist("anm_switch_g_empty"))
+        {
+            PlayHUDMotion("anm_switch_g_empty", TRUE, this, eSwitch);
+        }
+        else if (HudAnimationExist("anm_switch_g"))
+        {
+            PlayHUDMotion("anm_switch_g", TRUE, this, eSwitch);
+        }
+        else
+        {
+            SwitchState(eSwitch);
+        }
+    }
+    else
+    {
+        if (iAmmoElapsed == 0 && HudAnimationExist("anm_switch_empty"))
+        {
+            PlayHUDMotion("anm_switch_empty", TRUE, this, eSwitch);
+        }
+        else if (HudAnimationExist("anm_switch"))
+        {
+            PlayHUDMotion("anm_switch", TRUE, this, eSwitch);
+        }
+        else
+        {
+            SwitchState(eSwitch);
+        }
+    }
 }
 
 bool CWeaponMagazinedWGrenade::TryPlayAnimBore()
