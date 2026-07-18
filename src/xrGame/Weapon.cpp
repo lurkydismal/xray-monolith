@@ -108,7 +108,7 @@ CWeapon::CWeapon()
 	m_Offset.identity();
 	m_StrapOffset.identity();
 	isGrenadeLauncherActive = false;
-	
+
 	m_iAmmoCurrentTotal = 0;
 	m_BriefInfo_CalcFrame = 0;
 
@@ -411,7 +411,7 @@ void CWeapon::UpdateUIScope()
 			m_scope_tex_name = scope_tex_name;
 			m_UIScope = xr_new<CUIWindow>();
 			CUIXmlInit::InitWindow(*pWpnScopeXml, scope_tex_name.c_str(), 0, m_UIScope);
-		}		
+		}
 	}
 	UpdateZoomParams();
 }
@@ -996,10 +996,10 @@ BOOL CWeapon::net_Spawn(CSE_Abstract* DC)
 	BOOL bResult = inherited::net_Spawn(DC);
 	CSE_Abstract* e = (CSE_Abstract*)(DC);
 	CSE_ALifeItemWeapon* E = smart_cast<CSE_ALifeItemWeapon*>(e);
-	
+
 	iAmmoElapsed = E->a_elapsed;
 	m_flagsAddOnState = E->m_addon_flags.get();
-	
+
 	if (m_modular_attachments && m_cur_scope == 0 && (m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponAddonScope) != 0 && m_scopes.size() > 1)
 	{
 		m_cur_scope = ::Random.randI(1, m_scopes.size());
@@ -1100,7 +1100,7 @@ void CWeapon::net_Import(NET_Packet& P)
 	P.r_u8(wstate);
 
 	u8 Zoom;
-	P.r_u8((u8)Zoom);
+	P.r_u8(Zoom);
 
 	if (H_Parent() && H_Parent()->Remote())
 	{
@@ -1310,7 +1310,7 @@ bool CWeapon::NeedBlendAnm()
 
 	if (psDeviceFlags2.test(rsBlendMoveAnims))
 		return true;
-	
+
 	return inherited::NeedBlendAnm();
 }
 
@@ -1476,7 +1476,7 @@ bool CWeapon::Action(u16 cmd, u32 flags)
 				if (!m_current_motion_def || !m_playFullShotAnim)
 					SwitchState(eIdle);
 			}
-			
+
 			FireStart();
 		}
 		else
@@ -1590,7 +1590,7 @@ bool CWeapon::Action(u16 cmd, u32 flags)
 		{
 			if (pActor && pActor->is_safemode())
 				pActor->set_safemode(false);
-			
+
 			ToggleGrenadeLauncher();
 		}
 		return true;
@@ -1775,7 +1775,7 @@ float CWeapon::GetConditionMisfireProbability() const
                 misfireStartCondition
                 : (misfireStartCondition - misfireEndCondition))
             );
-        
+
     }
     if (!smart_cast<CActor*>(H_Parent()))
     {
@@ -2059,7 +2059,7 @@ void CWeapon::OnZoomIn()
 		sens_multiple = 1.0f;
 	}
     //////////
-    
+
 	m_zoom_params.m_bIsZoomModeNow = true;
 
 	if (!firstZoomDone) {
@@ -2068,13 +2068,13 @@ void CWeapon::OnZoomIn()
 		if (m_zoom_params.m_bUseDynamicZoom) {
 			float delta, min_zoom_factor;
 			float power = scope_radius > 0.0 ? scope_scrollpower : 1;
-			
+
 			if (zoomFlags.test(NEW_ZOOM)) {
 				NewGetZoomData(m_zoom_params.m_fScopeZoomFactor * power, m_zoom_params.m_fZoomStepCount, delta, min_zoom_factor, GetZoomFactor() * power, m_zoom_params.m_fMinBaseZoomFactor);
 			} else {
 				GetZoomData(m_zoom_params.m_fScopeZoomFactor * power, m_zoom_params.m_fZoomStepCount, m_zoom_params.m_fMinBaseZoomFactor, delta, min_zoom_factor);
 			}
-			
+
 			m_fRTZoomFactor = min_zoom_factor;
 		}
 	}
@@ -2118,7 +2118,7 @@ void CWeapon::OnZoomOut()
     {
         m_fRTZoomFactor = scope_radius > 0.0 ? GetZoomFactor() * scope_scrollpower : GetZoomFactor(); //store current
     }
-    
+
 	m_zoom_params.m_fCurrentZoomFactor = g_fov;
 
 	GamePersistent().RestoreEffectorDOF();
@@ -2136,7 +2136,7 @@ void CWeapon::OnZoomOut()
 	}
 
 	g_player_hud->updateMovementLayerState();
-    
+
     scope_radius = 0.0;
     scope_2dtexactive = 0;
     sens_multiple = 1.0f;
@@ -2485,9 +2485,9 @@ void CWeapon::UpdateHudAdditional(Fmatrix& trans)
 				curr_rot = hi->m_measures.m_hands_offset[1][idx]; //rot,aim
 			}
 		}
-		
+
 		float factor;
-		
+
 		if (idx == 4 || last_idx == 4)
 			factor = Device.fTimeDelta / m_fSafeModeRotateTime;
 		else
@@ -2731,7 +2731,7 @@ void CWeapon::UpdateHudAdditional(Fmatrix& trans)
 	clamp(m_fLR_MovingFactor, -1.0f, 1.0f); // Фактор боковой ходьбы не должен превышать эти лимиты
 
 	// Вычисляем и нормализируем итоговый фактор наклона
-	float fLR_Factor = m_fLR_MovingFactor; 
+	float fLR_Factor = m_fLR_MovingFactor;
 	fLR_Factor += m_fLR_CameraFactor;
 
 	clamp(fLR_Factor, -1.0f, 1.0f); // Фактор боковой ходьбы не должен превышать эти лимиты
@@ -3271,7 +3271,7 @@ void CWeapon::ZoomDec()
 
 	clamp(f, m_zoom_params.m_fScopeZoomFactor * power, min_zoom_factor);
 	SetZoomFactor(f / power);
-	
+
 	m_fRTZoomFactor = GetZoomFactor() * power;
 }
 
