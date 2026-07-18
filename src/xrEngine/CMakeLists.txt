@@ -907,88 +907,88 @@ if(MSVC)
     target_compile_options(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJECT_TARGET},COMPILE_OPTIONS>")
     target_link_options(${EXECUTABLE_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX10AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX11>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX11AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX8>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX8AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX9>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:DX9AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:ProfiledDX11>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:Release>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:ReleaseAVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:Verified>:
             /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:VerifiedDX11>:
             /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:VerifiedDX11ASAN>:
             /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:VerifiedDX8>:
             /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         $<$<CONFIG:VerifiedDX9>:
             /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
+            /OPT:REF;
+            /OPT:ICF;
             /INCREMENTAL
         >
         /DEBUG;

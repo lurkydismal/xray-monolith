@@ -359,48 +359,48 @@ if(MSVC)
     )
     target_link_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:DX10AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:DX11>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:DX11AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:DX8>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:DX8AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:DX9>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:DX9AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:ProfiledDX11>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:Release>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         $<$<CONFIG:ReleaseAVX>:
-            /OPT:NOREF;
-            /OPT:NOICF
+            /OPT:REF;
+            /OPT:ICF
         >
         /SUBSYSTEM:CONSOLE
     )

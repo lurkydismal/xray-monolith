@@ -407,8 +407,8 @@ if(MSVC)
     )
     target_link_options(${PROJECT_NAME} PRIVATE
         /MANIFEST;
-        /OPT:NOREF;
-        /OPT:NOICF;
+        /OPT:REF;
+        /OPT:ICF;
         /DYNAMICBASE:NO
     )
 endif()

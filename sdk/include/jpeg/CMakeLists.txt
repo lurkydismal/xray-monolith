@@ -400,8 +400,8 @@ if(MSVC)
         /std:c++17
     )
     target_link_options(${PROJECT_NAME} PRIVATE
-        /OPT:NOREF;
-        /OPT:NOICF
+        /OPT:REF;
+        /OPT:ICF
     )
 endif()
 
