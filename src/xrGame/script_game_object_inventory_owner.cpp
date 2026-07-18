@@ -504,10 +504,10 @@ void CScriptGameObject::MoveItemToRuck(CScriptGameObject* pItem)
 			"CScriptGameObject::MoveItemToRuck non-CInventoryOwner object !!!");
 		return;
 	}
-	
+
 	if (!owner->inventory().CanPutInRuck(item))
 		return;
-	
+
 	NET_Packet P;
 	CGameObject::u_EventGen(P, GEG_PLAYER_ITEM2RUCK, owner->object_id());
 	P.w_u16(item->object().ID());
@@ -524,7 +524,7 @@ void CScriptGameObject::MoveItemToSlot(CScriptGameObject* pItem, u16 slot_id)
 			"CScriptGameObject::MoveItemToSlot non-CInventoryOwner object !!!");
 		return;
 	}
-	
+
 	// Have a crash if you want
 	/*
 	if (!owner->inventory().CanPutInSlot(item, slot_id))
@@ -534,7 +534,7 @@ void CScriptGameObject::MoveItemToSlot(CScriptGameObject* pItem, u16 slot_id)
 		return;
 	}
 	*/
-	
+
 	CInventoryItem* item_in_slot = owner->inventory().ItemFromSlot(slot_id);
 
 	NET_Packet P;
@@ -544,7 +544,7 @@ void CScriptGameObject::MoveItemToSlot(CScriptGameObject* pItem, u16 slot_id)
 		P.w_u16(item_in_slot->object().ID());
 		CGameObject::u_EventSend(P);
 	}
-	
+
 	CGameObject::u_EventGen(P, GEG_PLAYER_ITEM2SLOT, owner->object_id());
 	P.w_u16(item->object().ID());
 	P.w_u16(slot_id);
@@ -561,10 +561,10 @@ void CScriptGameObject::MoveItemToBelt(CScriptGameObject* pItem)
 			"CScriptGameObject::MoveItemToBelt non-CInventoryOwner object !!!");
 		return;
 	}
-	
+
 	if (!owner->inventory().CanPutInBelt(item))
 		return;
-	
+
 	NET_Packet P;
 	CGameObject::u_EventGen(P, GEG_PLAYER_ITEM2BELT, owner->object_id());
 	P.w_u16(item->object().ID());
@@ -2009,7 +2009,7 @@ LPCSTR CScriptGameObject::aim_bone_id() const
 	{
 		ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError,
 		                                make_string("CAI_Stalker [%s]: cannot access class member aim_bone_id!", object().cNameSect().c_str()).c_str());
-		return (false);
+		return (nullptr);
 	}
 
 	return (stalker->aim_bone_id().c_str());
@@ -2069,7 +2069,7 @@ bool CScriptGameObject::suitable_smart_cover(CScriptGameObject* object)
 		ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError,
 		                                make_string("CAI_Stalker [%s]: cannot access class member suitable_smart_cover!", this->object().cNameSect().c_str()).c_str());
 		return (false);
-	}	
+	}
 
 	smart_cover::object const* const smart_object = smart_cast<smart_cover::object const*>(&object->object());
 	if (!smart_object)
