@@ -124,7 +124,7 @@ private:
 	void LoadArtefactRPoints();
 
 
-	s32 GetMoneyAmount(const shared_str& caSection, char* caMoneyStr);
+	s32 GetMoneyAmount(const shared_str& caSection, const char* caMoneyStr);
 	void OnPlayerChangeSkin(ClientID id_who, s8 skin);
 	void OnPlayerChangeTeam(game_PlayerState* playerState, s8 team);
 	void ProcessPlayerDeath(game_PlayerState* playerState);
@@ -170,7 +170,7 @@ private:
 	void OnObjectEnterTeamBase(u16 id, u16 zone_team);
 	void OnObjectLeaveTeamBase(u16 id, u16 zone_team);
 
-	/// Moves and prepears all player for new round (invokes 
+	/// Moves and prepears all player for new round (invokes
 	/// PrepareActorForNewRound, MoveActorToPoint.
 	void StartNewRound();
 	void ActorDeliverArtefactOnBase(CSE_ActorMP* actor, ETeam actorTeam, ETeam teamOfArtefact);

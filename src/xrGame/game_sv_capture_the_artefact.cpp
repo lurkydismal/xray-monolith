@@ -424,7 +424,7 @@ void game_sv_CaptureTheArtefact::OnPlayerConnect(ClientID id_who)
 		return;
 	}
 
-	/*if (!xrCData->flags.bReconnect) 
+	/*if (!xrCData->flags.bReconnect)
 		Money_SetStart				(id_who);
 
 	SetPlayersDefItems				(ps_who);*/
@@ -1194,7 +1194,7 @@ void game_sv_CaptureTheArtefact::CheckAnomalyUpdate(u32 currentTime)
 }
 
 
-s32 game_sv_CaptureTheArtefact::GetMoneyAmount(const shared_str& caSection, char* caMoneyStr)
+s32 game_sv_CaptureTheArtefact::GetMoneyAmount(const shared_str& caSection, const char* caMoneyStr)
 {
 	if (pSettings->line_exist(caSection, caMoneyStr))
 		return pSettings->r_s32(caSection, caMoneyStr);
@@ -1713,7 +1713,7 @@ BOOL game_sv_CaptureTheArtefact::OnTouch(u16 eid_who, u16 eid_target, BOOL bForc
 		return TRUE;
 	}
 
-	/*VERIFY2(e_who, 
+	/*VERIFY2(e_who,
 		make_string("no actor (id = %id) touches the target (id = %d)").c_str());*/
 
 	xrClientData* xrCData = e_who->owner;
@@ -1737,7 +1737,7 @@ BOOL game_sv_CaptureTheArtefact::OnTouch(u16 eid_who, u16 eid_target, BOOL bForc
 		/*if (std::find_if(
 				teams.begin(),
 				te,
-				std::bind2nd(SearchOwnerIdFunctor(), e_who->ID)) != te) 
+				std::bind2nd(SearchOwnerIdFunctor(), e_who->ID)) != te)
 		{
 			return FALSE;
 		}*/
