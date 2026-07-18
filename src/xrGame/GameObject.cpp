@@ -96,7 +96,7 @@ void CGameObject::reinit()
 	if (!g_dedicated_server)
 		ai_location().reinit();
 
-	// clear callbacks	
+	// clear callbacks
 	for (CALLBACK_MAP_IT it = m_callbacks->begin(); it != m_callbacks->end(); ++it) it->second.clear();
 }
 
@@ -179,7 +179,7 @@ void CGameObject::OnEvent(NET_Packet& P, u16 type)
 						Fvector			position_in_bone_space;
 						u16				hit_type;
 						float			ap = 0.0f;
-			
+
 						P.r_u16			(id);
 						P.r_u16			(weapon_id);
 						P.r_dir			(dir);
@@ -192,10 +192,10 @@ void CGameObject::OnEvent(NET_Packet& P, u16 type)
 						{
 							P.r_float	(ap);
 						}
-			
+
 						CObject*	Hitter = Level().Objects.net_Find(id);
 						CObject*	Weapon = Level().Objects.net_Find(weapon_id);
-			
+
 						SHit	HDS = SHit(power, dir, Hitter, element, position_in_bone_space, impulse, (ALife::EHitType)hit_type, ap);
 			*/
 			SHit HDS;
@@ -343,11 +343,13 @@ BOOL CGameObject::net_Spawn(CSE_Abstract* DC)
 	{
 #pragma warning(push)
 #pragma warning(disable:4238)
+        IReader reader(
+            (void*)(*(O->m_ini_string)),
+            O->m_ini_string.size()
+        );
+
 		m_ini_file = xr_new<CInifile>(
-			&IReader(
-				(void*)(*(O->m_ini_string)),
-				O->m_ini_string.size()
-			),
+			&reader,
 			FS.get_path("$game_config$")->m_Path
 		);
 #pragma warning(pop)
@@ -638,10 +640,10 @@ void CGameObject::setup_parent_ai_locations(bool assign_position)
 	if (assign_position && use_parent_ai_locations())
 		Position().set(l_tpGameObject->Position());
 
-	//if ( assign_position && 
+	//if ( assign_position &&
 	//		( use_parent_ai_locations() &&
 	//		!( cast_attachable_item() && cast_attachable_item()->enabled() )
-	//		 ) 
+	//		 )
 	//	)
 	//	Position().set		(l_tpGameObject->Position());
 
@@ -748,7 +750,7 @@ void			CGameObject::dbg_DrawSkeleton	()
 				Level().debug_renderer().draw_ellipse(l_ball, color_rgba(0, 255, 0, 255));
 									  }break;
 		};
-	};	
+	};
 }
 #endif
 
@@ -813,7 +815,7 @@ static void update_visbox(IKinematics* k)
 			kbox.getsphere(kshere.P, kshere.R);
 		}
 	}
-	
+
 #ifdef DEBUG_VISBOX
 	Fmatrix box, cent;
 	cent.translate(k->dcast_RenderVisual()->getVisData().sphere.P);
@@ -854,7 +856,7 @@ static void update_visbox_hud(IKinematics* k)
 			kbox.getsphere(kshere.P, kshere.R);
 		}
 	}
-	
+
 #ifdef DEBUG_VISBOX
 	Fmatrix box, cent;
 	cent.translate(k->dcast_RenderVisual()->getVisData().sphere.P);
@@ -891,7 +893,7 @@ script_attachment* CGameObject::get_attachment(LPCSTR name)
 {
 	if (m_script_attachments.size())
 	{
-		auto& att = m_script_attachments.find(name);
+		auto att = m_script_attachments.find(name);
 		if (att != m_script_attachments.end())
 			return att->second;
 	}
@@ -1330,7 +1332,7 @@ void render_box						(IRenderVisual *visual, const Fmatrix &xform, const Fvector
 	for (u16 i=0; i<bone_count; ++i) {
 		if (!kinematics->LL_GetBoneVisible(i))
 			continue;
-		
+
 		const Fobb			&obb = kinematics->LL_GetData(i).obb;
 		if (fis_zero(obb.m_halfsize.square_magnitude())) {
 			VERIFY			(visible_bone_count > 1);
@@ -1361,7 +1363,7 @@ void render_box						(IRenderVisual *visual, const Fmatrix &xform, const Fvector
 			Fvector().set(+1.f,-1.f,+1.f),
 			Fvector().set(+1.f,-1.f,-1.f)
 		};
-		
+
 		for (u32 i=0; i<8; ++i, ++I)
 			matrix.transform_tiny	(*I,local_points[i]);
 	}
@@ -1375,7 +1377,7 @@ void render_box						(IRenderVisual *visual, const Fmatrix &xform, const Fvector
 	VERIFY						((I - points) == (visible_bone_count*8));
 	MagicBox3					box = MagicMinBox(visible_bone_count*8,points);
 	box.ComputeVertices			(points);
-	
+
 	Fmatrix						result;
 	result.identity				();
 
@@ -1409,7 +1411,7 @@ void CGameObject::OnRender			()
 	}
 
 	if (0) {
-		Fvector						bc,bd; 
+		Fvector						bc,bd;
 		Visual()->getVisData().box.get_CD	(bc,bd);
 		Fmatrix						M = Fidentity;
 		float						half_cell_size = ai().level_graph().header().cell_size()*.5f;
