@@ -18,8 +18,8 @@ namespace Feel
 	const float lr_granularity = 0.1f; // assume similar positions
 
 	class ENGINE_API Vision:
-		private pure_relcase,
-        private pure_relcase_visual
+		public pure_relcase,
+        public pure_relcase_visual
 	{
 	private:
 		xr_vector<CObject*> seen;
@@ -67,7 +67,7 @@ namespace Feel
                 Msg("![feel_vision_get] abnormally high size of feel_visible, clear and skip");
                 feel_visible.clear_and_free();
                 return;
-            }			
+            }
 			for (const feel_visible_Item& item : feel_visible)
 			{
 				if (item.O && !item.O->getDestroy() && positive(item.fuzzy))
