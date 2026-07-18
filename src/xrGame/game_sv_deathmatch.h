@@ -41,7 +41,7 @@ protected:
 
 	shared_str m_sBaseWeaponCostSection;
 
-	xr_vector<game_TeamState> teams; //dm,tdm,ah	
+	xr_vector<game_TeamState> teams; //dm,tdm,ah
 
 	LPCSTR pWinnigPlayerName;
 
@@ -179,7 +179,7 @@ public:
 	virtual void LoadDefItemsForTeam(const shared_str& caSection, /*TEAM_WPN_LIST *pWpnList,*/
 	                                 DEF_ITEMS_LIST* pDefItems);
 
-	virtual char* GetAnomalySetBaseName() { return "deathmatch_game_anomaly_sets"; };
+	virtual const char* GetAnomalySetBaseName() { return "deathmatch_game_anomaly_sets"; };
 	virtual void LoadAnomalySets();
 
 	void LoadItemRespawns();
