@@ -539,7 +539,7 @@ void CEnvDescriptorMixer::boost(CEnvironment* env)
 		sky_color.add(env->env_boost.sky_color);
 		sky_color.clamp({0.f, 0.f, 0.f}, {1.f, 1.f, 1.f});
 	}
-	
+
 	//Clouds color brightness adjustment
 	if (env->env_boost.clouds_color != 0.f)
 	{
@@ -585,7 +585,7 @@ void CEnvDescriptorMixer::boost(CEnvironment* env)
 		fog_color.add(env->env_boost.fog_color);
 		fog_color.clamp({0.f, 0.f, 0.f}, {1.f, 1.f, 1.f});
 	}
-	
+
 }
 
 //-----------------------------------------------------------------------------
@@ -802,7 +802,7 @@ void CEnvironment::load_weather_effects()
 		sections_type& sections = config->sections();
 
 		env.reserve(sections.size() + 2);
-		env.push_back(create_descriptor("00:00:00", false));
+		env.push_back(create_descriptor("00:00:00", nullptr));
 
 		sections_type::const_iterator i = sections.begin();
 		sections_type::const_iterator e = sections.end();
@@ -814,7 +814,7 @@ void CEnvironment::load_weather_effects()
 
 		CInifile::Destroy(config);
 
-		env.push_back(create_descriptor("24:00:00", false));
+		env.push_back(create_descriptor("24:00:00", nullptr));
 		env.back()->exec_time_loaded = DAY_LENGTH;
 	}
 
