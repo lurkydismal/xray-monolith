@@ -6,6 +6,7 @@
 #include "../../../cover_point.h"
 #include "../monster_cover_manager.h"
 #include "../monster_home.h"
+#include "../ai_monster_squad_manager.h"
 
 
 #define TEMPLATE_SPECIALIZATION template <\
