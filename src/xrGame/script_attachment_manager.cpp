@@ -226,7 +226,7 @@ void script_attachment::Update()
 		{
 			script_attachment_bone_cb* cb = pair.second;
 			if (!cb) continue;
-			
+
 			if (cb->m_func)
 			{
 				cb->m_mat.set((*(cb->m_func))(
@@ -235,7 +235,7 @@ void script_attachment::Update()
 
 				continue;
 			}
-			
+
 			Fmatrix& target = cb->m_mat;
 			u16 bone = cb->m_bone_id;
 
@@ -316,7 +316,7 @@ void script_attachment::RenderUI()
 		LM.mulB_43(m_script_ui_mat);
 		UIRender->CacheSetXformWorld(LM);
 		m_script_ui->Draw();
-		
+
 		UIRender->CacheSetCullMode(IUIRender::cmCCW);
 		UI().m_currentPointType = bk;
 	}
@@ -331,7 +331,7 @@ void script_attachment::RenderUI()
 }
 
 void script_attachment::AttachLight(AttachmentScriptLight* light)
-{ 
+{
 	R_ASSERT(light);
 	m_script_light = light;
 }
@@ -445,7 +445,7 @@ void script_attachment::SetParent(CGameObject* obj)
 
 		m_parent_object->remove_child(GetName());
 	}
-	
+
 	if (m_parent_level)
 		Level().remove_child(GetName());
 
@@ -522,7 +522,7 @@ script_attachment* script_attachment::GetChild(LPCSTR name)
 {
 	if (m_children.size())
 	{
-		auto& pair = m_children.find(name);
+		auto pair = m_children.find(name);
 		if (pair != m_children.end())
 			return pair->second;
 	}
@@ -532,7 +532,7 @@ script_attachment* script_attachment::GetChild(LPCSTR name)
 
 void script_attachment::RemoveChild(LPCSTR name, bool destroy)
 {
-	auto& pair = m_children.find(name);
+	auto pair = m_children.find(name);
 	if (pair == m_children.end())
 		return;
 
@@ -747,7 +747,7 @@ void script_attachment::LoadModel(LPCSTR model_name, bool keep_bc)
 		count_prev = m_kinematics->LL_BoneCount();
 		::Render->model_Delete(renderable.visual);
 	}
-	
+
 	renderable.visual = ::Render->model_Create(*m_model_name);
 	R_ASSERT(renderable.visual);
 	m_kinematics = renderable.visual->dcast_PKinematics();
@@ -778,7 +778,7 @@ void script_attachment::SetName(LPCSTR name)
 		// Remove old instance from parent (without destroying it)
 		Level().remove_child(GetName(), false);
 
-		auto& pair = Level().GetAttachments()->find(name);
+		auto pair = Level().GetAttachments()->find(name);
 		if (pair != Level().GetAttachments()->end())
 		{
 			// Attachment with name exists, replace it
@@ -796,7 +796,7 @@ void script_attachment::SetName(LPCSTR name)
 		// Remove old instance from parent (without destroying it)
 		m_parent_object->remove_child(GetName(), false);
 
-		auto& pair = m_parent_object->GetAttachments()->find(name);
+		auto pair = m_parent_object->GetAttachments()->find(name);
 		if (pair != m_parent_object->GetAttachments()->end())
 		{
 			// Attachment with name exists, replace it
@@ -815,7 +815,7 @@ void script_attachment::SetName(LPCSTR name)
 		// Remove old instance from parent (without destroying it)
 		m_parent_attachment->RemoveChild(GetName(), false);
 
-		auto& pair = m_parent_attachment->m_children.find(name);
+		auto pair = m_parent_attachment->m_children.find(name);
 		if (pair != m_parent_attachment->m_children.end())
 		{
 			// Attachment with name exists, replace it
@@ -836,7 +836,7 @@ const ::luabind::object& script_attachment::GetUserdata() const
 {
 	if (!m_userdata)
 	{
-		const_cast<::luabind::object*>(m_userdata) = xr_new<::luabind::object>();
+		::luabind::object* m_userdata = xr_new<::luabind::object>();
 		*m_userdata = ::luabind::newtable(ai().script_engine().lua());
 	}
 	return *m_userdata;
