@@ -108,7 +108,7 @@ public:
 
 class CLevel;
 
-class CBulletManager : private pure_relcase
+class CBulletManager : public pure_relcase
 {
 private:
 	static float const parent_ignore_distance;
