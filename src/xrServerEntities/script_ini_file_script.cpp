@@ -78,13 +78,15 @@ bool r_line(CScriptIniFile* self, LPCSTR S, int L, ::luabind::internal_string&N,
 #pragma warning(disable:4238)
 CScriptIniFile* create_ini_file(LPCSTR ini_string)
 {
+    IReader reader(
+        (void*)ini_string,
+        xr_strlen(ini_string)
+    );
+
 	return (
 		(CScriptIniFile*)
 		xr_new<CInifile>(
-			&IReader(
-				(void*)ini_string,
-				xr_strlen(ini_string)
-			),
+			&reader,
 			FS.get_path("$game_config$")->m_Path
 		)
 	);
@@ -146,7 +148,7 @@ xr_string get_modded_exes_version_string() {
 	for (const auto& v : pData->m_StringTable) {
 		table[v.first.c_str()] = v.second.c_str();
 	}
-	
+
 	return table;
 }
 
