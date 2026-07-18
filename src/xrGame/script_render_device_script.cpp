@@ -77,6 +77,6 @@ void CScriptRenderDevice::script_register(lua_State* L)
         .def("pause", &set_device_paused)
         .def("pause_ex", &set_device_paused_ex),
 
-		def("app_ready", &is_app_ready),
+		def("app_ready", &is_app_ready)
 	];
 }
