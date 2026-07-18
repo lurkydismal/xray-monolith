@@ -69,12 +69,6 @@ void CUIListBox::script_register(lua_State* L)
 		.def_readwrite("without_ff", &SServerFilters::without_ff)
 		.def_readwrite("listen_servers", &SServerFilters::listen_servers),
 
-		class_<connect_error_cb>("connect_error_cb")
-		.def(constructor<>())
-		.def(constructor<connect_error_cb::lua_object_type, connect_error_cb::lua_function_type>())
-		.def("bind", &connect_error_cb::bind)
-		.def("clear", &connect_error_cb::clear),
-
 		class_<CServerList, CUIWindow>("CServerList")
 		.def(constructor<>())
 		.enum_("enum_connect_errcode")
@@ -120,4 +114,8 @@ void CUIListBox::script_register(lua_State* L)
 		]
 
 	];
+
+    connect_error_cb::script_register(L);
 }
+
+DEFINE_MIXED_DELEGATE_SCRIPT(connect_error_cb, "connect_error_cb")
