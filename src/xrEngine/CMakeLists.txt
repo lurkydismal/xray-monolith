@@ -902,7 +902,7 @@ if(MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++20
+        /std:c++17
     )
     target_compile_options(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJECT_TARGET},COMPILE_OPTIONS>")
     target_link_options(${EXECUTABLE_TARGET} PRIVATE

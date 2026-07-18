@@ -7076,7 +7076,7 @@ if(MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++20;
+        /std:c++17;
         /wd4995;
         /wd4005;
         /wd4237
