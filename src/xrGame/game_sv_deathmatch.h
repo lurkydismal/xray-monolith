@@ -8,7 +8,7 @@
 
 class IClient;
 
-class game_sv_Deathmatch : public game_sv_mp, private pure_relcase
+class game_sv_Deathmatch : public game_sv_mp, public pure_relcase
 {
 	typedef game_sv_mp inherited;
 protected:
@@ -190,7 +190,7 @@ public:
 	void RemoveItemFromActor(CSE_Abstract* pItem);
 	//----- Money routines -----------------------------------------------------------------
 	virtual void Money_SetStart(ClientID id_who);
-	virtual s32 GetMoneyAmount(const shared_str& caSection, char* caMoneyStr);
+	virtual s32 GetMoneyAmount(const shared_str& caSection, const char* caMoneyStr);
 	int GetTeamScore(u32 idx);
 	void SetTeamScore(u32 idx, int val);
 	game_PlayerState* GetWinningPlayer();
