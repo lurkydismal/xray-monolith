@@ -8,7 +8,7 @@
 //----------------------------- FLAGS
 static struct _DF
 {
-	char* name;
+	const char* name;
 	u32 mask;
 } DF[] =
 {
