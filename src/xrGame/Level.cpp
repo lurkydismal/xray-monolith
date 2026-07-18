@@ -674,6 +674,8 @@ void CLevel::ProcessSpawnEvents()
 
 		if (spawn_antifreeze_debug) Msg("[ProcessSpawnEvents] spawning section %s, obj_id %d, parent_id %d, event_id %d", section.c_str(), obj_id, parent_id, dest);
 
+        auto spawn_data_it = spawn_events_data_copy.end();
+
 		// demonized: If item is II_BOLT class - go through anyway
 		if (pSettings->line_exist(section.c_str(), "class") && strstr(pSettings->r_string(section.c_str(), "class"), "II_BOLT") != nullptr)
 		{
@@ -682,7 +684,7 @@ void CLevel::ProcessSpawnEvents()
 		}
 
         // If the object was in alife, but now its absent, skip it
-        auto spawn_data_it = spawn_events_data_copy.find(obj_id);
+        spawn_data_it = spawn_events_data_copy.find(obj_id);
         if (spawn_data_it != spawn_events_data_copy.end())
         {
             if (spawn_data_it->second.hasAlifeObject)
@@ -694,7 +696,7 @@ void CLevel::ProcessSpawnEvents()
                     continue;
                 }
             }
-        }        
+        }
 
 		// If there is a parent of this object, check if its still in alife
 		if (parent_id != 0xffff)
@@ -844,7 +846,7 @@ void CLevel::ProcessGameEvents()
 							it++; // Move to next event
 							continue;
 						}
-					}					
+					}
 				}
 			}
 #endif
@@ -1024,7 +1026,7 @@ void CLevel::OnFrame()
 		ClientReceive();
 		Device.Statistic->netClient1.End();
 	}
-	
+
 	ProcessGameEvents();
 #ifdef SPAWN_ANTIFREEZE
 	{
@@ -1204,7 +1206,7 @@ void CLevel::script_gc()
 		PROF_EVENT("CLevel::script_gc");
 		lua_gc(ai().script_engine().lua(), LUA_GCSTEP, psLUA_GCSTEP);
 	}
-	
+
 }
 
 // demonized: bind LuaGC call to be available in device.cpp
@@ -1443,7 +1445,7 @@ void CLevel::ScriptDebugRender()
 		}
 	}
 
-	// demonized: fix of showing console window when there are no visible gizmos 
+	// demonized: fix of showing console window when there are no visible gizmos
 	if (hasVisibleObj)
 		DRender->OnFrameEnd();
 }
