@@ -53,27 +53,30 @@ void CScriptRenderDevice::script_register(lua_State* L)
 {
 	module(L)
 	[
-		class_<CRenderDevice>("render_device")
-		.def_readonly("width", &CRenderDevice::dwWidth)
-		.def_readonly("height", &CRenderDevice::dwHeight)
-		.def_readonly("time_delta", &CRenderDevice::dwTimeDelta)
-		.def_readonly("f_time_delta", &CRenderDevice::fTimeDelta)
-		.def_readonly("cam_pos", &CRenderDevice::vCameraPosition)
-		.def_readonly("cam_dir", &CRenderDevice::vCameraDirection)
-		.def_readonly("cam_top", &CRenderDevice::vCameraTop)
-		.def_readonly("cam_right", &CRenderDevice::vCameraRight)
+        class_<CRenderDeviceData>("render_device_data")
+		.def_readonly("width", &CRenderDeviceData::dwWidth)
+		.def_readonly("height", &CRenderDeviceData::dwHeight)
+		.def_readonly("time_delta", &CRenderDeviceData::dwTimeDelta)
+		.def_readonly("f_time_delta", &CRenderDeviceData::fTimeDelta)
+		.def_readonly("cam_pos", &CRenderDeviceData::vCameraPosition)
+		.def_readonly("cam_dir", &CRenderDeviceData::vCameraDirection)
+		.def_readonly("cam_top", &CRenderDeviceData::vCameraTop)
+		.def_readonly("cam_right", &CRenderDeviceData::vCameraRight)
+		.def_readonly("fov", &CRenderDeviceData::fFOV)
+		.def_readonly("aspect_ratio", &CRenderDeviceData::fASPECT)
+		.def_readonly("precache_frame", &CRenderDeviceData::dwPrecacheFrame)
+		.def_readonly("frame", &CRenderDeviceData::dwFrame),
+
+        class_<CRenderDevice, bases<CRenderDeviceData>>("render_device")
 		//			.def_readonly("view",					&CRenderDevice::mView)
 		//			.def_readonly("projection",				&CRenderDevice::mProject)
 		//			.def_readonly("full_transform",			&CRenderDevice::mFullTransform)
-		.def_readonly("fov", &CRenderDevice::fFOV)
-		.def_readonly("aspect_ratio", &CRenderDevice::fASPECT)
-		.def("time_global", &time_global)
-		.def("time_continual", &time_continual)
-		.def_readonly("precache_frame", &CRenderDevice::dwPrecacheFrame)
-		.def_readonly("frame", &CRenderDevice::dwFrame)
-		.def("is_paused", &is_device_paused)
-		.def("pause", &set_device_paused)
-		.def("pause_ex", &set_device_paused_ex),
-		def("app_ready", &is_app_ready)
+        .def("time_global", &time_global)
+        .def("time_continual", &time_continual)
+        .def("is_paused", &is_device_paused)
+        .def("pause", &set_device_paused)
+        .def("pause_ex", &set_device_paused_ex),
+
+		def("app_ready", &is_app_ready),
 	];
 }
