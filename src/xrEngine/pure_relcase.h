@@ -1,6 +1,9 @@
 #ifndef pure_relcaseH
 #define pure_relcaseH
 
+#include "xr_object_list.h"
+#include "IGame_Level.h"
+
 class ENGINE_API pure_relcase
 {
 private:
