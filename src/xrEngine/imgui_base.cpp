@@ -251,7 +251,7 @@ namespace xr_imgui
             if (ImGui::BeginMenu("About"))
             {
                 ImGui::MenuItem("FPS Overlay", nullptr, &show_fps_overlay);
-                
+
                 if (ImGui::MenuItem("Demo", nullptr, imgui_demo))
                     imgui_demo = !imgui_demo;
 
@@ -304,7 +304,7 @@ namespace xr_imgui
             return nullptr;
 
         char* lowstring = xr_strdup(name);
-        auto& pair = ImFonts.find(xr_strlwr(lowstring));
+        auto pair = ImFonts.find(xr_strlwr(lowstring));
         xr_free(lowstring);
 
         if (pair != ImFonts.end())
@@ -330,8 +330,16 @@ namespace xr_imgui
         FontConfig.OversampleH = READ_IF_EXISTS(config, r_u8, "font", "oversampleh", 2);
         FontConfig.OversampleV = READ_IF_EXISTS(config, r_u8, "font", "oversamplev", 1);
         FontConfig.PixelSnapH = READ_IF_EXISTS(config, r_bool, "font", "pixelsnaph", false);
-        FontConfig.GlyphExtraSpacing = *(ImVec2*)&READ_IF_EXISTS(config, r_fvector2, "font", "glyphextraspacing", Fvector2().set(0, 0));
-        FontConfig.GlyphOffset = *(ImVec2*)&READ_IF_EXISTS(config, r_fvector2, "font", "glyphoffset", Fvector2().set(0, 0));
+
+        const Fvector2 GlyphExtraSpacing = READ_IF_EXISTS(config, r_fvector2,
+            "font", "glyphoffset",
+            Fvector2().set(0, 0));
+        FontConfig.GlyphExtraSpacing = { GlyphExtraSpacing.x, GlyphExtraSpacing.y };
+        const Fvector2 GlyphOffset = READ_IF_EXISTS(config, r_fvector2,
+            "font", "glyphextraspacing",
+            Fvector2().set(0, 0));
+        FontConfig.GlyphOffset = { GlyphOffset.x, GlyphOffset.y };
+
         FontConfig.EllipsisChar = READ_IF_EXISTS(config, r_u16, "font", "ellipsischar", 0);
         FontConfig.SizePixels = READ_IF_EXISTS(config, r_float, "font", "sizepixels", xrImGuiFontSize);
         FontConfig.GlyphMinAdvanceX = READ_IF_EXISTS(config, r_float, "font", "glyphminadvancex", 0.f);
