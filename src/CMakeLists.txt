@@ -117,6 +117,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         -clang:-Wno-invalid-offsetof
         -clang:-fms-extensions
         -clang:-fms-compatibility
+        -clang:-fdelayed-template-parsing
         -clang:-march=native
     )
 endif()
