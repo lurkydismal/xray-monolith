@@ -222,6 +222,20 @@ include(CMake/GlobalSettingsInclude.cmake OPTIONAL)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 ################################################################################
+# IPO / LTO
+################################################################################
+option(ENABLE_IPO "Enable interprocedural optimization (LTO)" OFF)
+
+if(ENABLE_IPO)
+    include(CheckIPOSupported)
+    check_ipo_supported(RESULT ipo_supported)
+
+    if(ipo_supported)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
+    endif()
+endif()
+
+################################################################################
 # Sub-projects
 ################################################################################
 add_subdirectory(../sdk/include/jpeg ${CMAKE_BINARY_DIR}/libjpeg)
