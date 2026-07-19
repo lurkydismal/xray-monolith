@@ -25,9 +25,12 @@ void CScriptPropertyEvaluatorWrapper::setup_static(CScriptPropertyEvaluator* eva
 
 bool CScriptPropertyEvaluatorWrapper::evaluate()
 {
+#if 0
 	try
 	{
+#endif
 		return (::luabind::call_member<bool>(this, "evaluate"));
+#if 0
 	}
 #ifdef DEBUG
 	catch(::luabind::cast_failed &exception) {
@@ -45,6 +48,7 @@ bool CScriptPropertyEvaluatorWrapper::evaluate()
 		                                "SCRIPT RUNTIME ERROR : evaluator [%s] returns value with not a bool type!",
 		                                m_evaluator_name);
 	}
+#endif
 	return (false);
 }
 
