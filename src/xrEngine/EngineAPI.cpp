@@ -42,7 +42,7 @@ void __cdecl dummy(void)
 // OpenAL32
 // version.lib;winmm.lib
 
-#pragma comment(lib, "Ws2_32.lib")
+#pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "vfw32.lib")
 #pragma comment(lib, "nvapi.lib")
 
@@ -81,7 +81,7 @@ void __cdecl dummy(void)
 	#pragma comment(lib, "xrRender_R4.lib")
 	#pragma comment(lib, "dxguid.lib")
 	#pragma comment(lib, "d3dx11.lib")
-	#pragma comment(lib, "D3DCompiler.lib")
+	#pragma comment(lib, "d3dcompiler.lib")
 	#pragma comment(lib, "d3d11.lib")
 	#pragma comment(lib, "dxgi.lib")
 	#pragma comment(lib, "d3d10.lib")
