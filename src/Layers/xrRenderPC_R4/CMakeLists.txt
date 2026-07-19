@@ -1117,11 +1117,11 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
     "dxguid;"
     "d3dx11;"
-    "D3DCompiler;"
+    "d3dcompiler;"
     "d3d11;"
     "dxgi;"
     "nvapi;"
-    "dxerr;"
+    "DxErr;"
     "d3d10"
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
