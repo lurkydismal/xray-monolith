@@ -539,7 +539,8 @@ if(MSVC)
         /wd5030;
         /wd5051;
         /w14640;
-        /Y-
+        /Y-;
+        /EHsc
     )
 endif()
 
