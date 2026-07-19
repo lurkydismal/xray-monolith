@@ -20,13 +20,13 @@
 #include "../monster_home.h"
 #include "../../../ai_object_location.h"
 #include "../../../Level.h"
-#include "../../../../xrServerEntities/xrserver_objects_alife_monsters.h"
+#include "../../../../xrServerEntities/xrServer_Objects_ALife_Monsters.h"
 #include "../../../alife_simulator.h"
 #include "../../../alife_object_registry.h"
 #include "../../../xrServer.h"
 #include "../../../inventory_item.h"
-#include "../../../../xrServerEntities/xrServer_objects_ALife.h"
-#include "../../../phMovementControl.h"
+#include "../../../../xrServerEntities/xrServer_Objects_ALife.h"
+#include "../../../PHMovementControl.h"
 #include "../ai_monster_squad.h"
 #include "../control_movement_base.h"
 #include "../control_animation_base.h"
@@ -104,7 +104,7 @@ void CBaseMonster::Load(LPCSTR section)
 	                                                          feel_enemy_who_made_sound_max_distance);
 
 	//------------------------------------
-	// Steering Behaviour 
+	// Steering Behaviour
 	//------------------------------------
 	float separate_factor = READ_IF_EXISTS(pSettings, r_float, section,
 	                                       "separate_factor", 0.f);
@@ -355,13 +355,13 @@ BOOL CBaseMonster::net_Spawn(CSE_Abstract* DC)
 
 	// spawn inventory item
 	//	if (ai().get_alife()) {
-	//		
+	//
 	//		CSE_ALifeMonsterBase					*se_monster = smart_cast<CSE_ALifeMonsterBase*>(ai().alife().objects().object(ID()));
 	//		VERIFY									(se_monster);
 	//
 	//		if (se_monster->m_flags.is(CSE_ALifeMonsterBase::flNeedCheckSpawnItem)) {
 	//			float prob = Random.randF();
-	//			if ((prob < m_spawn_probability) || fsimilar(m_spawn_probability,1.f)) 
+	//			if ((prob < m_spawn_probability) || fsimilar(m_spawn_probability,1.f))
 	//				se_monster->m_flags.set(CSE_ALifeMonsterBase::flSkipSpawnItem, FALSE);
 	//
 	//			se_monster->m_flags.set(CSE_ALifeMonsterBase::flNeedCheckSpawnItem, FALSE);
@@ -439,7 +439,7 @@ void CBaseMonster::settings_read(CInifile const* ini, LPCSTR section, SMonsterSe
 	READ_SETTINGS(data.m_legs_number, "LegsCount", r_u8, ini, section);
 	READ_SETTINGS(data.m_max_hear_dist, "max_hear_dist", r_float, ini, section);
 
-	// Load attack postprocess 
+	// Load attack postprocess
 	if (ini->line_exist(section, "attack_effector"))
 	{
 		LPCSTR ppi_section = ini->r_string(section, "attack_effector");

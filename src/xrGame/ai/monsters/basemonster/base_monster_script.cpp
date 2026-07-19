@@ -27,7 +27,7 @@
 #include "../../../alife_group_registry.h"
 #include "../../../alife_object_registry.h"
 #include "../../../../xrCore/_vector3d_ext.h"
-#include "../../../../xrServerEntities/xrServer_Objects_Alife_Monsters.h"
+#include "../../../../xrServerEntities/xrServer_Objects_ALife_Monsters.h"
 
 using namespace MonsterSpace;
 using namespace MonsterSound;
@@ -293,14 +293,14 @@ bool CBaseMonster::bfAssignObject(CScriptEntityAction* tpEntityAction)
 	//	if (!l_tpEntity) return	(false == (l_tObjectAction.m_bCompleted = true));
 	//
 	//	switch (l_tObjectAction.m_tGoalType) {
-	//		case eObjectActionTake: 
+	//		case eObjectActionTake:
 	//			m_PhysicMovementControl->PHCaptureObject(l_tpEntity);
 	//			break;
-	//		case eObjectActionDrop: 
+	//		case eObjectActionDrop:
 	//			m_PhysicMovementControl->PHReleaseObject();
 	//			break;
 	//	}
-	//	
+	//
 	//	l_tObjectAction.m_bCompleted = true;
 	return (true);
 }
