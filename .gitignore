@@ -40,8 +40,7 @@ compressor/mod/
 # emacs temp file
 \#*\#
 *~
-/src/build
-/src/build_msvc
+/src/build*
 /broken.txt
 /init.fish
 /malformed.txt
