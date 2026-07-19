@@ -1,4 +1,4 @@
-﻿//                      FastDelegate.hpp
+//                      FastDelegate.hpp
 //  Efficient delegates in C++ that generate only two lines of asm code!
 //  Documentation is found at http://www.codeproject.com/cpp/FastDelegate.asp
 //
@@ -53,7 +53,7 @@
 //                * Use variadic templates (C++11)
 //                * Added MakeDelegate for plain function pointers
 //                * Use static_assert for compile-time checks (C++11)
-// 21-Jan-14 2.0.1* Fixed 2 typos (line 393 & 429) where a static_cast should have been a static_assert. 
+// 21-Jan-14 2.0.1* Fixed 2 typos (line 393 & 429) where a static_cast should have been a static_assert.
 // 21-Jun-14 2.0.2* Fixed incorrect union member name in the SimplifyMemFunc struct.
 
 #ifndef FASTDELEGATE_HPP
@@ -926,6 +926,12 @@ public:
       RetType (X::* function_to_bind)( Args... args ) const)
     : BaseType(pthis, function_to_bind)
   {  }
+
+    auto operator=(std::nullptr_t) -> FastDelegate&
+    {
+        *this = BaseType();
+        return *this;
+    }
 
   FastDelegate(RetType (*function_to_bind)( Args... args ))
     : BaseType(function_to_bind)  { }
