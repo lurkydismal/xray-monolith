@@ -80,7 +80,7 @@ void CWallmarksEngine::clear()
                 for (auto m_it = static_vec.begin(); m_it != static_vec.end(); m_it++)
                     static_wm_destroy(*m_it);
             }
-			
+
 			xr_delete(*p_it);
 		}
 		marks.clear();
@@ -274,7 +274,7 @@ void CWallmarksEngine::AddWallmark_internal(CDB::TRI* pTri, const Fvector* pVert
 
     IRender_Sector* S = RImplementation.detectLastSector(W->bounds.P);
 
-	//	if (W->bounds.R < 1.f)	
+	//	if (W->bounds.R < 1.f)
 	{
 		// search if similar wallmark exists
 		wm_slot* slot = FindSlot(hShader);
@@ -572,15 +572,21 @@ void CWallmarksEngine::Render()
                     }
 
                     FVF::LIT* w_save = w_verts;
+#if 0
                     try
                     {
+#endif
                         W->Parent()->RenderWallmark(W, w_verts);
+#if 0
                     }
                     catch (...)
                     {
+#endif
                         Msg("! Failed to render dynamic wallmark");
                         w_verts = w_save;
+#if 0
                     }
+#endif
 
 #ifdef	DEBUG
                     W->used_in_render = u32(-1);
@@ -592,7 +598,7 @@ void CWallmarksEngine::Render()
             FlushStream(hGeom, slot->shader, w_offset, w_verts, w_start, !skeleton_empty);
         }
     }
-	
+
 	// Level-wmarks
 	RImplementation.GMBase.r_dsgraph_render_wmarks();
 	Device.Statistic->RenderDUMP_WM.End();
