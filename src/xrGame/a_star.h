@@ -105,7 +105,7 @@ class CAStar : public CDijkstra<
 		_iteration_type
 	>
 {
-private:
+protected:
     using inherited = typename CDijkstra<
 		_dist_type,
 		_priority_queue,
@@ -125,20 +125,6 @@ public:
     using inherited::data_storage;
     using inherited::finalize;
 
-protected:
-	typedef CDijkstra<
-		_dist_type,
-		_priority_queue,
-		_vertex_manager,
-		_vertex_allocator,
-		euclidian_heuristics,
-		_data_storage_base,
-        AStar::_Vertex<_dist_type, _vertex>::template _vertex,
-		_builder_allocator_constructor,
-		_manager_builder_allocator_constructor,
-		_data_storage_constructor,
-		_iteration_type
-	> inherited;
 	typedef typename inherited::CGraphVertex CGraphVertex;
 	typedef typename CGraphVertex::_dist_type _dist_type;
 	typedef typename CGraphVertex::_index_type _index_type;
