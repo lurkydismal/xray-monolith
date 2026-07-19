@@ -44,6 +44,7 @@ typedef unsigned int uintptr_t;
 /* Needed everywhere. */
 #include <string.h>
 #include <stdlib.h>
+#include <intrin.h>
 
 /* Various VM limits. */
 #define LJ_MAX_MEM	0x7fffff00	/* Max. total memory allocation. */
@@ -254,19 +255,21 @@ static LJ_AINLINE uint32_t lj_fls(uint32_t x)
   return _CountLeadingZeros(x) ^ 31;
 }
 #else
+#if 0
 unsigned char _BitScanForward(uint32_t *, unsigned long);
 unsigned char _BitScanReverse(uint32_t *, unsigned long);
 #pragma intrinsic(_BitScanForward)
 #pragma intrinsic(_BitScanReverse)
+#endif
 
 static LJ_AINLINE uint32_t lj_ffs(uint32_t x)
 {
-  uint32_t r; _BitScanForward(&r, x); return r;
+  unsigned long r; _BitScanForward(&r, x); return r;
 }
 
 static LJ_AINLINE uint32_t lj_fls(uint32_t x)
 {
-  uint32_t r; _BitScanReverse(&r, x); return r;
+  unsigned long r; _BitScanReverse(&r, x); return r;
 }
 #endif
 
