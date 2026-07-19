@@ -283,6 +283,7 @@ BY ANY OTHER PARTY.
 #  else
      extern char *malloc();
      extern int free();
+    extern void exit (int) __attribute__((noreturn));
 #  endif
 # endif
 
