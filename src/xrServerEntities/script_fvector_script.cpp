@@ -19,8 +19,10 @@ void CScriptFvector::script_register(lua_State* L)
 		class_<Fvector>("vector")
 		// demonized: new exports of static functions, in Lua use like this: vector.generate_orthonormal_basis(a, b, c)
 		.scope()[
-			def("generate_orthonormal_basis", &Fvector::generate_orthonormal_basis),
-			def("generate_orthonormal_basis_normalized", &Fvector::generate_orthonormal_basis_normalized)
+			(
+                def("generate_orthonormal_basis", &Fvector::generate_orthonormal_basis),
+                def("generate_orthonormal_basis_normalized", &Fvector::generate_orthonormal_basis_normalized)
+            )
 		]
 		.def_readwrite("x", &Fvector::x)
 		.def_readwrite("y", &Fvector::y)
