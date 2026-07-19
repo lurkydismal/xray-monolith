@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "builder_allocator_constructor.h"
+
 template <typename T>
 class CEmptyClassTemplate
 {
