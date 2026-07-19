@@ -1031,7 +1031,7 @@ CScriptGameObject* CScriptGameObject::GetActiveItem()
 	}
 }
 
-CScriptGameObject* CScriptGameObject::GetObjectByName(LPCSTR caObjectName) const
+CScriptGameObject* CScriptGameObject::GetObjectByName(LPCSTR caObjectName)
 {
 	CInventoryOwner* l_tpInventoryOwner = smart_cast<CInventoryOwner*>(&object());
 	CInventoryBox* inventory_box = smart_cast<CInventoryBox*>(&this->object());
@@ -1065,7 +1065,7 @@ CScriptGameObject* CScriptGameObject::GetObjectByName(LPCSTR caObjectName) const
 	}
 }
 
-CScriptGameObject* CScriptGameObject::GetObjectByIndex(int iIndex) const
+CScriptGameObject* CScriptGameObject::GetObjectByIndex(int iIndex)
 {
 	CInventoryOwner* l_tpInventoryOwner = smart_cast<CInventoryOwner*>(&object());
 	if (l_tpInventoryOwner)
