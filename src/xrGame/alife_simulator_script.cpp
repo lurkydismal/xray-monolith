@@ -59,13 +59,13 @@ bool valid_object_id(const CALifeSimulator* self, ALife::_OBJECT_ID object_id)
 CSE_ALifeDynamicObject *alife_object		(const CALifeSimulator *self, LPCSTR name)
 {
 	VERIFY			(self);
-	
+
 	for (CALifeObjectRegistry::OBJECT_REGISTRY::const_iterator it = self->objects().objects().begin(); it != self->objects().objects().end(); it++) {
 		CSE_ALifeDynamicObject	*obj = it->second;
 		if (xr_strcmp(obj->name_replace(),name) == 0)
 			return	(it->second);
 	}
-	
+
 	return			(0);
 }
 #endif // #ifdef DEBUG
@@ -582,7 +582,7 @@ ALife::_OBJECT_ID alife_object_count(const CALifeSimulator* self)
 ::luabind::object alife_objects(const CALifeSimulator *self, const bool keytable = false, const bool withActor = false)
 {
 	VERIFY(self);
-	
+
 	::luabind::object result = ::luabind::newtable(ai().script_engine().lua());
 	const CALifeObjectRegistry& objects = self->objects();
 	int i = 1;
@@ -618,7 +618,10 @@ void CALifeSimulator::script_register(lua_State* L)
 		.def("next", &alife_object_iterator::next)
 		.def("__call", &alife_object_iterator::next), // for Lua for-loop
 
-		class_<CALifeSimulator>("alife_simulator")
+        class_<CALifeUpdateManager>("alife_simulator_manager")
+		.def("set_process_time", &CALifeUpdateManager::set_process_time),
+
+		class_<CALifeSimulator, bases<CALifeUpdateManager>>("alife_simulator")
 		.def("valid_object_id", &valid_object_id)
 		.def("level_id", &get_level_id)
 		.def("level_name", &get_level_name)
@@ -657,7 +660,6 @@ void CALifeSimulator::script_register(lua_State* L)
 		.def("clone_weapon", &try_to_clone_object)
 		.def("register", &reprocess_spawn)
 		.def("set_objects_per_update", &set_objects_per_update)
-		.def("set_process_time", &set_process_time)
 		.def("force_update", &force_update)
 		.def("get_children", &get_children, return_stl_iterator)
 		//Alundaio: END
