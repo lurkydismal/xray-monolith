@@ -96,7 +96,7 @@ void CALifeMonsterBrain::on_location_change()
 {
 }
 
-IC CSE_ALifeSmartZone& CALifeMonsterBrain::smart_terrain()
+CSE_ALifeSmartZone& CALifeMonsterBrain::smart_terrain()
 {
 	VERIFY(object().m_smart_terrain_id != 0xffff);
 	if (m_smart_terrain && (object().m_smart_terrain_id == m_smart_terrain->ID))
@@ -157,7 +157,7 @@ void CALifeMonsterBrain::update()
 {
 #if 0//def DEBUG
 	if (!Level().MapManager().HasMapLocation("debug_stalker",object().ID)) {
-		CMapLocation				*map_location = 
+		CMapLocation				*map_location =
 			Level().MapManager().AddMapLocation(
 				"debug_stalker",
 				object().ID
