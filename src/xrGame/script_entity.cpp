@@ -124,7 +124,7 @@ void CScriptEntity::SetScriptControl(const bool bScriptControl, shared_str caSci
 
 	m_bScriptControl = bScriptControl;
 	m_caScriptName = caSciptName;
-	/* 
+	/*
 	#ifdef DEBUG
 		if (bScriptControl)
 			ai().script_engine().script_log			(ScriptStorage::eLuaMessageTypeInfo,"Script %s set object %s under its control",*caSciptName,*object().cName());
@@ -154,7 +154,7 @@ bool CScriptEntity::CheckObjectVisibility(const CGameObject* tpObject)
 	return (m_monster->memory().visual().visible_now(tpObject));
 }
 
-//определяет видимость определенного типа объектов, 
+//определяет видимость определенного типа объектов,
 //заданного через section_name
 bool CScriptEntity::CheckTypeVisibility(const char* section_name)
 {
@@ -221,10 +221,13 @@ void __stdcall ActionCallback(IKinematics* tpKinematics)
 	l_tpScriptMonster->vfUpdateParticles();*/
 
 	// Fix crash due to lua gc in second thread
+#if 0
 	try
 	{
+#endif
 		l_tpScriptMonster->vfUpdateSounds();
 		l_tpScriptMonster->vfUpdateParticles();
+#if 0
 	}
 	catch (std::exception& e)
 	{
@@ -234,7 +237,8 @@ void __stdcall ActionCallback(IKinematics* tpKinematics)
 	{
 
 	}
-	
+#endif
+
 }
 
 void CScriptEntity::vfUpdateParticles()
@@ -329,8 +333,10 @@ void CScriptEntity::ProcessScripts()
 		return;
 	}
 
+#if 0
 	try
 	{
+#endif
 		bool l_bCompleted;
 		l_bCompleted = l_tpEntityAction->m_tWatchAction.m_bCompleted;
 		bfAssignWatch(l_tpEntityAction);
@@ -367,11 +373,13 @@ void CScriptEntity::ProcessScripts()
 			bfScriptAnimation();
 
 		bfAssignMonsterAction(l_tpEntityAction);
+#if 0
 	}
 	catch (...)
 	{
 		ResetScriptData();
 	}
+#endif
 }
 
 bool CScriptEntity::bfAssignWatch(CScriptEntityAction* tpEntityAction)
