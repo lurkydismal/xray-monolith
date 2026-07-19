@@ -406,7 +406,7 @@ public:
 #endif
 
 #define CLONE_MTL_SOUND_DO(_res_, _mtl_pair_, _a_vector_)\
- { _res_.clone(GET_RANDOM(_mtl_pair_##->_a_vector_),st_Effect,sg_SourceType); }
+ { _res_.clone(GET_RANDOM(_mtl_pair_->_a_vector_),st_Effect,sg_SourceType); }
 
 extern MTL_EXPORT_API CGameMtlLibrary GMLib;
 
