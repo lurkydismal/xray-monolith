@@ -43,8 +43,10 @@ CScriptThread::CScriptThread(LPCSTR caNamespaceName, bool do_string, bool reload
 	m_virtual_machine = 0;
 	m_active = false;
 
+#if 0
 	try
 	{
+#endif
 		string256 S;
 		if (!do_string)
 		{
@@ -114,11 +116,13 @@ CScriptThread::CScriptThread(LPCSTR caNamespaceName, bool do_string, bool reload
 			return;
 
 		m_active = true;
+#if 0
 	}
 	catch (...)
 	{
 		m_active = false;
 	}
+#endif
 }
 
 CScriptThread::~CScriptThread()
@@ -126,8 +130,10 @@ CScriptThread::~CScriptThread()
 #ifdef DEBUG
 	Msg						("* Destroying script thread %s",*m_script_name);
 #endif
+#if 0
 	try
 	{
+#endif
 #if defined(USE_DEBUGGER) && defined(USE_LUA_STUDIO)
 		if (ai().script_engine().debugger())
 			ai().script_engine().debugger()->remove	( m_virtual_machine );
@@ -135,10 +141,12 @@ CScriptThread::~CScriptThread()
 #ifndef LUABIND_HAS_BUGS_WITH_LUA_THREADS
 		luaL_unref			(ai().script_engine().lua(),LUA_REGISTRYINDEX,m_thread_reference);
 #endif
+#if 0
 	}
 	catch (...)
 	{
 	}
+#endif
 }
 
 bool CScriptThread::update()
@@ -146,8 +154,10 @@ bool CScriptThread::update()
 	if (!m_active)
 		R_ASSERT2(false, "Cannot resume dead Lua thread!");
 
+#if 0
 	try
 	{
+#endif
 		ai().script_engine().current_thread(this);
 
 		int l_iErrorCode = lua_resume(lua(), 0);
@@ -184,11 +194,13 @@ bool CScriptThread::update()
 		}
 
 		ai().script_engine().current_thread(0);
+#if 0
 	}
 	catch (...)
 	{
 		ai().script_engine().current_thread(0);
 		m_active = false;
 	}
+#endif
 	return (m_active);
 }

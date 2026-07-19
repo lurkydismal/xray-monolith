@@ -74,6 +74,7 @@ static void w_file_from_string(const char* path, const char* buffer)
 }
 
 #pragma optimize("s",on)
+template<>
 void CScriptReader::script_register(lua_State* L)
 {
 	module(L)
