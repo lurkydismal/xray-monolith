@@ -28,7 +28,7 @@ namespace gamespy_profile
 		bool is_sake_equal_to_file() const;
 		void reset_awards();
 
-		static int const fields_count = at_awards_count * ap_award_params_count;
+		static int const fields_count = (int)at_awards_count * ap_award_params_count;
 		typedef char* award_fields_names_t[fields_count];
 
 		all_awards_t& get_player_awards();
