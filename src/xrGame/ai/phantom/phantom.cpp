@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "phantom.h"
 #include "../../Level.h"
-#include "../../../xrServerEntities/xrserver_objects_alife_monsters.h"
+#include "../../../xrServerEntities/xrServer_Objects_ALife_Monsters.h"
 #include "../../../xrEngine/motion.h"
 #include "../Include/xrRender/RenderVisual.h"
 #include "../Include/xrRender/KinematicsAnimated.h"
@@ -82,7 +82,7 @@ BOOL CPhantom::net_Spawn(CSE_Abstract* DC)
 	m_enemy = Level().CurrentEntity();
 	VERIFY(m_enemy);
 
-	// default init 
+	// default init
 	m_fly_particles = 0;
 	SetfHealth(0.001f);
 
@@ -347,14 +347,14 @@ void CPhantom::PsyHit(const CObject* object, float value)
 {
 	NET_Packet P;
 	SHit HS;
-	HS.GenHeader(GE_HIT, object->ID()); //				//	u_EventGen		(P,GE_HIT, object->ID());				
-	HS.whoID = (ID()); // own			//	P.w_u16			(object->ID());							
-	HS.weaponID = (ID()); // own			//	P.w_u16			(object->ID());							
-	HS.dir = (Fvector().set(0.f, 1.f, 0.f)); // direction	//	P.w_dir			(Fvector().set(0.f,1.f,0.f));			
-	HS.power = (value); // hit value	//	P.w_float		(value);								
-	HS.boneID = (BI_NONE); // bone			//	P.w_s16			(BI_NONE);								
-	HS.p_in_bone_space = (Fvector().set(0.f, 0.f, 0.f)); //	P.w_vec3		(Fvector().set(0.f,0.f,0.f));			
-	HS.impulse = (0.f); //	P.w_float		(0.f);									
+	HS.GenHeader(GE_HIT, object->ID()); //				//	u_EventGen		(P,GE_HIT, object->ID());
+	HS.whoID = (ID()); // own			//	P.w_u16			(object->ID());
+	HS.weaponID = (ID()); // own			//	P.w_u16			(object->ID());
+	HS.dir = (Fvector().set(0.f, 1.f, 0.f)); // direction	//	P.w_dir			(Fvector().set(0.f,1.f,0.f));
+	HS.power = (value); // hit value	//	P.w_float		(value);
+	HS.boneID = (BI_NONE); // bone			//	P.w_s16			(BI_NONE);
+	HS.p_in_bone_space = (Fvector().set(0.f, 0.f, 0.f)); //	P.w_vec3		(Fvector().set(0.f,0.f,0.f));
+	HS.impulse = (0.f); //	P.w_float		(0.f);
 	HS.hit_type = (ALife::eHitTypeTelepatic); //	P.w_u16			(u16(ALife::eHitTypeTelepatic));
 	HS.Write_Packet(P);
 
@@ -375,7 +375,7 @@ void CPhantom::load(IReader& input_packet)
 
 void CPhantom::net_Export(NET_Packet& P) // export to server
 {
-	// export 
+	// export
 	R_ASSERT(Local());
 
 	u8 flags = 0;
