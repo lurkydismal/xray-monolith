@@ -99,7 +99,7 @@ public:
 		_manager_builder_allocator_constructor
 	> CDataStorage;
 
-protected:
+public:
 	typedef typename CDataStorage::CGraphVertex CGraphVertex;
 	typedef typename CGraphVertex::_dist_type _dist_type;
 	typedef typename CGraphVertex::_index_type _index_type;
@@ -108,12 +108,11 @@ public:
 	bool m_search_started;
 	CDataStorage* m_data_storage;
 
-protected:
+public:
 	template <typename _PathManager>
 	IC void initialize(_PathManager& path_manager);
 	template <typename _PathManager>
 	IC bool step(_PathManager& path_manager);
-public:
 	template <typename _PathManager>
 	IC void finalize(_PathManager& path_manager);
 
