@@ -6,8 +6,8 @@
 using namespace nv;
 
 // Statics
-const uint16 Rand48::a0 = 0xE66D; 
-const uint16 Rand48::a1 = 0xDEEC; 
+const uint16 Rand48::a0 = 0xE66D;
+const uint16 Rand48::a1 = 0xDEEC;
 const uint16 Rand48::a2 = 0x0005;
 const uint16 Rand48::c0 = 0x000B;
 
@@ -43,11 +43,11 @@ void MTRand::reload()
 	// Made clearer and faster by Matthew Bellew (matthew.bellew@home.com)
 	uint32 *p = state;
 	int i;
-	for( i = N - M; i--; ++p )
+	for( i = (int)N - M; i--; ++p )
 		*p = twist( p[M], p[0], p[1] );
 	for( i = M; --i; ++p )
-		*p = twist( p[M-N], p[0], p[1] );
-	*p = twist( p[M-N], p[0], state[0] );
+		*p = twist( p[(int)M-N], p[0], p[1] );
+	*p = twist( p[(int)M-N], p[0], state[0] );
 
 	left = N, next = state;
 }
