@@ -784,7 +784,7 @@ BOOL CAI_Stalker::net_Spawn(CSE_Abstract* DC)
 
 #ifdef _DEBUG
 	if (ai().get_alife() && !Level().MapManager().HasMapLocation("debug_stalker",ID())) {
-		CMapLocation				*map_location = 
+		CMapLocation				*map_location =
 			Level().MapManager().AddMapLocation(
 				"debug_stalker",
 				ID()
@@ -954,11 +954,16 @@ void CAI_Stalker::update_object_handler()
 	if (!g_Alive())
 		return;
 
+#if 0
 	try
 	{
+#endif
+#if 0
 		try
 		{
+#endif
 			CObjectHandler::update();
+#if 0
 		}
 #ifdef DEBUG
 		catch (::luabind::cast_failed &message) {
@@ -975,12 +980,15 @@ void CAI_Stalker::update_object_handler()
 		{
 			throw;
 		}
+#endif
+#if 0
 	}
 	catch (...)
 	{
 		CObjectHandler::set_goal(eObjectActionIdle);
 		CObjectHandler::update();
 	}
+#endif
 }
 
 void CAI_Stalker::create_anim_mov_ctrl(CBlend* b, Fmatrix* start_pose, bool local_animation)
@@ -1056,15 +1064,19 @@ void CAI_Stalker::UpdateCL()
 			{
 				START_PROFILE("stalker/client_update/sight_manager")
 					VERIFY(!m_pPhysicsShell);
+#if 0
 					try
 					{
+#endif
 						sight().update();
+#if 0
 					}
 					catch (...)
 					{
 						sight().setup(CSightAction(SightManager::eSightTypeCurrentDirection));
 						sight().update();
 					}
+#endif
 
 					Exec_Look(client_update_fdelta());
 				STOP_PROFILE
@@ -1266,22 +1278,26 @@ void CAI_Stalker::Think()
 		u32 update_delta = Device.dwTimeGlobal - m_dwLastUpdateTime;
 
 		START_PROFILE("stalker/schedule_update/think/brain")
+#if 0
 			try
 			{
+#endif
 				brain().update(update_delta);
+#if 0
 			}
-			/*catch (::luabind::cast_failed &message) 
+			/*catch (::luabind::cast_failed &message)
 			{
 				Msg						("! Expression \"%s\" from ::luabind::object to %s", message.what(), message.info()->name());
 			}
-			catch (std::exception &message) 
+			catch (std::exception &message)
 			{
 				Msg						("! Expression \"%s\"",message.what());
 			}*/
-			catch (...) 
+			catch (...)
 			{
 				//Msg						("! unknown exception occured");
 			}
+#endif
 		STOP_PROFILE
 
 		START_PROFILE("stalker/schedule_update/think/movement")
@@ -1346,7 +1362,7 @@ void CAI_Stalker::net_Relcase(CObject* O)
         m_best_item_to_kill = nullptr;
 
 	if (!g_Alive())
-		return;    
+		return;
 
 	agent_manager().remove_links(O);
 	m_pPhysics_support->in_NetRelcase(O);
