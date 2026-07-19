@@ -25,6 +25,20 @@ struct CUIListBoxItemMsgChainWrapper : public CUIListBoxItemMsgChain, public ::l
 	}
 };
 
+template<>
+void connect_error_cb::script_register( lua_State* L ) {
+    using callback_t =
+        void ( connect_error_cb ::* )( connect_error_cb ::lua_object_type,
+                                       connect_error_cb ::lua_function_type );
+    module(
+        L )[ class_< connect_error_cb >( "connect_error_cb" )
+                 .def( constructor<>() )
+                 .def( constructor< connect_error_cb ::lua_object_type,
+                                    connect_error_cb ::lua_function_type >() )
+                 .def( "bind",
+                       static_cast< callback_t >( &connect_error_cb ::bind ) )
+                 .def( "clear", &connect_error_cb ::clear ) ];
+};
 
 #pragma optimize("s",on)
 void CUIListBox::script_register(lua_State* L)
@@ -117,18 +131,3 @@ void CUIListBox::script_register(lua_State* L)
 
     connect_error_cb::script_register(L);
 }
-
-template<>
-void connect_error_cb ::script_register( lua_State* L ) {
-    using callback_t =
-        void ( connect_error_cb ::* )( connect_error_cb ::lua_object_type,
-                                       connect_error_cb ::lua_function_type );
-    module(
-        L )[ class_< connect_error_cb >( "connect_error_cb" )
-                 .def( constructor<>() )
-                 .def( constructor< connect_error_cb ::lua_object_type,
-                                    connect_error_cb ::lua_function_type >() )
-                 .def( "bind",
-                       static_cast< callback_t >( &connect_error_cb ::bind ) )
-                 .def( "clear", &connect_error_cb ::clear ) ];
-};

@@ -81,9 +81,9 @@ bool UITaskListWnd::OnMouseAction(float x, float y, EUIMessages mouse_action)
 
 void UITaskListWnd::OnMouseScroll(float iDirection)
 {
-	if (iDirection == WINDOW_MOUSE_WHEEL_UP)
+	if (iDirection == (float)WINDOW_MOUSE_WHEEL_UP)
 		m_list->ScrollBar()->TryScrollDec();
-	else if (iDirection == WINDOW_MOUSE_WHEEL_DOWN)
+	else if (iDirection == (float)WINDOW_MOUSE_WHEEL_DOWN)
 		m_list->ScrollBar()->TryScrollInc();
 }
 
@@ -291,7 +291,7 @@ void UITaskListWndItem::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
 			GetMessageTarget()->SendMessage(this, PDA_TASK_SET_TARGET_MAP, (void*)m_task);
 		}
 	}
-	/*	
+	/*
 		if ( pWnd == m_bt_view )
 		{
 			if ( m_bt_view->GetCheck() && msg == BUTTON_CLICKED )

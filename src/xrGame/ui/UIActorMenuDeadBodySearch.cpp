@@ -13,7 +13,7 @@
 #include "../GameObject.h"
 #include "../InventoryOwner.h"
 #include "../Inventory.h"
-#include "../Inventory_item.h"
+#include "../inventory_item.h"
 #include "../InventoryBox.h"
 #include "../string_table.h"
 #include "../ai/monsters/basemonster/base_monster.h"
@@ -25,7 +25,7 @@ void move_item_from_to(u16 from_id, u16 to_id, u16 what_id)
 	P.w_u16(what_id);
 	CGameObject::u_EventSend(P);
 
-	//другому инвентарю - взять вещь 
+	//другому инвентарю - взять вещь
 	CGameObject::u_EventGen(P, GE_TRADE_BUY, to_id);
 	P.w_u16(what_id);
 	CGameObject::u_EventSend(P);

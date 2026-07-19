@@ -11,7 +11,7 @@
 #include "ai_space.h"
 #include "alife_simulator.h"
 #include "../string_table.h"
-#include "../Inventory_Item.h"
+#include "../inventory_item.h"
 #include "UIInventoryUtilities.h"
 #include "../PhysicsShellHolder.h"
 #include "UIWpnParams.h"
@@ -138,7 +138,7 @@ void CUIItemInfo::InitItemInfo(LPCSTR xml_name)
 		UIBoosterInfo->InitFromXml(uiXml);
 
 		//UIDesc_line						= xr_new<CUIStatic>();
-		//AttachChild						(UIDesc_line);	
+		//AttachChild						(UIDesc_line);
 		//UIDesc_line->SetAutoDelete		(true);
 		//xml_init.InitStatic				(uiXml, "description_line", 0, UIDesc_line);
 

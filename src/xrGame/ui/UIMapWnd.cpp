@@ -889,7 +889,9 @@ u16 CUIMapWnd::AddRightClickMapProperties(CMapSpot* top, shared_str& out_level)
 			u32 current_gvid = 0;
 			float dist = FLT_MAX;
 			while (gg.valid_vertex_id(current_gvid)) {
+#if 0
 				try {
+#endif
 					auto vertex = gg.vertex(current_gvid);
 					if (!vertex) {
 						current_gvid++;
@@ -919,9 +921,11 @@ u16 CUIMapWnd::AddRightClickMapProperties(CMapSpot* top, shared_str& out_level)
 							}
 						}
 					}
+#if 0
 				} catch (std::exception& e) {
 					Msg("![UIMapWnd.cpp] _G.COnRightClickMap %s", e.what());
 				}
+#endif
 				current_gvid++;
 			}
 
