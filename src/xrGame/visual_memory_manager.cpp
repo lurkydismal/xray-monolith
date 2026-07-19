@@ -174,7 +174,7 @@ void CVisualMemoryManager::reload(LPCSTR section)
 	}
 }
 
-IC const CVisionParameters& CVisualMemoryManager::current_state() const
+const CVisionParameters& CVisualMemoryManager::current_state() const
 {
 	if (m_stalker)
 	{
@@ -588,7 +588,7 @@ void CVisualMemoryManager::check_visibles	() const
 	for ( ; I != E; ++I) {
 		if (!(*I).visible(mask))
 			continue;
-		
+
 		xr_vector<Feel::Vision::feel_visible_Item>::iterator	i = m_object->feel_visible.begin();
 		xr_vector<Feel::Vision::feel_visible_Item>::iterator	e = m_object->feel_visible.end();
 		for (; i!=e; ++i)
@@ -689,7 +689,7 @@ CVisibleObject* CVisualMemoryManager::visible_object(const CGameObject* game_obj
 	return (&*I);
 }
 
-IC squad_mask_type CVisualMemoryManager::mask() const
+squad_mask_type CVisualMemoryManager::mask() const
 {
 	if (!m_stalker)
 		return (squad_mask_type(-1));
