@@ -23,7 +23,7 @@ dx10StateCache<IDeviceState, StateDecs>
 
 /*
 template <class IDeviceState, class StateDecs>
-void 
+void
 dx10StateCache<IDeviceState, StateDecs>
 ::FlushStates()
 {
@@ -31,9 +31,35 @@ dx10StateCache<IDeviceState, StateDecs>
 }
 */
 
-template <class IDeviceState, class StateDecs>
+template <>
 void
-dx10StateCache<IDeviceState, StateDecs>
+dx10StateCache<ID3DRasterizerState, D3D_RASTERIZER_DESC>
+::ClearStateArray()
+{
+	for (u32 i = 0; i < m_StateArray.size(); ++i)
+	{
+		_RELEASE(m_StateArray[i].m_pState);
+	}
+
+	m_StateArray.clear_not_free();
+}
+
+template <>
+void
+dx10StateCache<ID3DDepthStencilState, D3D_DEPTH_STENCIL_DESC>
+::ClearStateArray()
+{
+	for (u32 i = 0; i < m_StateArray.size(); ++i)
+	{
+		_RELEASE(m_StateArray[i].m_pState);
+	}
+
+	m_StateArray.clear_not_free();
+}
+
+template <>
+void
+dx10StateCache<ID3DBlendState, D3D_BLEND_DESC>
 ::ClearStateArray()
 {
 	for (u32 i = 0; i < m_StateArray.size(); ++i)
@@ -85,7 +111,7 @@ dx10StateCache<ID3DBlendState, D3D_BLEND_DESC>
 
 /*
 template <>
-void 
+void
 dx10StateCache<ID3DxxRasterizerState, D3D_RASTERIZER_DESC>
 ::ResetDescription( D3D_RASTERIZER_DESC &desc )
 {
@@ -103,7 +129,7 @@ dx10StateCache<ID3DxxRasterizerState, D3D_RASTERIZER_DESC>
 }
 
 template <>
-void 
+void
 dx10StateCache<ID3DxxDepthStencilState, D3D_DEPTH_STENCIL_DESC>
 ::ResetDescription( D3D_DEPTH_STENCIL_DESC &desc )
 {
@@ -127,7 +153,7 @@ dx10StateCache<ID3DxxDepthStencilState, D3D_DEPTH_STENCIL_DESC>
 }
 
 template <>
-void 
+void
 dx10StateCache< ID3DxxBlendState , D3D_BLEND_DESC >
 ::ResetDescription( D3D_BLEND_DESC &desc )
 {
