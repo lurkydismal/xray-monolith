@@ -9,7 +9,7 @@
 #include "pch_script.h"
 #include "script_zone.h"
 #include "script_game_object.h"
-#include "xrserver_objects_alife_monsters.h"
+#include "xrServer_Objects_ALife_Monsters.h"
 #include "../xrEngine/xr_collide_form.h"
 #include "script_callback_ex.h"
 #include "game_object_space.h"
@@ -96,7 +96,7 @@ bool CScriptZone::feel_touch_contact(CObject* O)
 }
 
 #ifdef DEBUG
-void CScriptZone::OnRender() 
+void CScriptZone::OnRender()
 {
 	if(!bDebug) return;
 	DRender->OnFrameEnd();
@@ -105,8 +105,8 @@ void CScriptZone::OnRender()
 	Fmatrix l_ball, l_box;
 	xr_vector<CCF_Shape::shape_def> &l_shapes = ((CCF_Shape*)CFORM())->Shapes();
 	xr_vector<CCF_Shape::shape_def>::iterator l_pShape;
-	
-	for(l_pShape = l_shapes.begin(); l_shapes.end() != l_pShape; ++l_pShape) 
+
+	for(l_pShape = l_shapes.begin(); l_shapes.end() != l_pShape; ++l_pShape)
 	{
 		switch(l_pShape->type)
 		{
