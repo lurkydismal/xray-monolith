@@ -308,7 +308,7 @@ void CConsole::OutFont(LPCSTR text, float& pos_y)
 		int sz = 0;
 		int ln = 0;
 		PSTR one_line = (PSTR)_alloca((CONSOLE_BUF_SIZE + 1) * sizeof(char));
-		
+
 		while (text[sz] && (ln + sz < CONSOLE_BUF_SIZE - 5)) // перенос строк
 		{
 			one_line[ln + sz] = text[sz];
@@ -496,7 +496,7 @@ void CConsole::OnRender()
 
 			temp_y -= LDIST;
 
-			if (temp_y < -1.0f) 
+			if (temp_y < -1.0f)
 				break;
 
 			LPCSTR ls = logLine.c_str();
@@ -645,7 +645,7 @@ void CConsole::DrawBackgrounds(bool bGame)
 
 		VERIFY(rb.y2 - rb.y1 >= 1.0f);
 		float back_height = rb.y2 - rb.y1;
-		float u_height = (back_height * VIEW_TIPS_COUNT) / float(tips_sz);
+		float u_height = (back_height * (float)VIEW_TIPS_COUNT) / float(tips_sz);
 		if (u_height < 0.5f * font_h)
 		{
 			u_height = 0.5f * font_h;
