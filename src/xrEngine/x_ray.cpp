@@ -72,7 +72,7 @@ float discord_update_rate = .5f;
 //#pragma comment(lib, "sicudt.lib")
 
 //Reshade
-#pragma comment(lib, "reshadecompat.lib")
+#pragma comment(lib, "ReShadeCompat.lib")
 bool use_reshade = false;
 extern bool init_reshade();
 extern void unregister_reshade();
