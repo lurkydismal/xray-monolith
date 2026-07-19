@@ -43,7 +43,7 @@ static luabind::internal_string r_file_as_string(const char* path)
 		lua_pushfstring(ai().script_engine().lua(), "Not found file: %s", path);
 		lua_error(ai().script_engine().lua());
 
-		return nullptr;
+		return {};
 	}
 
 	IReader* reader = FS.r_open(path);
