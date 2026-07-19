@@ -405,7 +405,7 @@ if(MSVC)
             /TC;
             /Y-
         >
-        /std:c++20;
+        /std:c++latest;
         /wd4244;
         /wd4267;
         /wd4057;

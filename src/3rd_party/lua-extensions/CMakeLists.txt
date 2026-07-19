@@ -400,7 +400,7 @@ if(MSVC)
             /Z7;
             ${DEFAULT_CXX_EXCEPTION_HANDLING}
         >
-        /std:c++20;
+        /std:c++latest;
         /wd4996;
         /wd4244;
         /wd4018

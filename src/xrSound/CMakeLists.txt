@@ -456,7 +456,7 @@ if(MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++20
+        /std:c++latest
     )
     string(CONCAT FILE_CL_OPTIONS
         "/Y-"

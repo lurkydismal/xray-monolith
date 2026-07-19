@@ -731,7 +731,7 @@ if(MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++20
+        /std:c++latest
     )
     target_link_options(${PROJECT_NAME} PRIVATE
         /OPT:REF;

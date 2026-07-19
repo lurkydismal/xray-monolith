@@ -430,7 +430,7 @@ if(MSVC)
             /W3;
             /Z7
         >
-        /std:c++20;
+        /std:c++latest;
         /wd4100;
         /wd4505
     )
