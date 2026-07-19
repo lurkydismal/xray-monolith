@@ -54,8 +54,10 @@ bool CSE_ALifeOnlineOfflineGroup::need_update(CSE_ALifeDynamicObject* object)
 
 void CSE_ALifeOnlineOfflineGroup::update()
 {
+#if 0
     try
     {
+#endif
         m_members.begin(); // force actualize
         if (m_bOnline && !m_members.empty())
         {
@@ -86,11 +88,13 @@ void CSE_ALifeOnlineOfflineGroup::update()
             }
 
         }
+#if 0
     }
     catch (...)
     {
 
     }
+#endif
 }
 
 void CSE_ALifeOnlineOfflineGroup::on_location_change() const
