@@ -265,13 +265,17 @@ void CDialogScriptHelper::Action(const CGameObject* pSpeakerGO1, const CGameObje
 		GetLuaFunctionStringAndHeaderFlag(str, lua_function_str, sizeof(lua_function_str), is_positive);
 		bool functor_exists = ai().script_engine().functor(lua_function_str, lua_function);
 		THROW3(functor_exists, "Cannot find phrase dialog script function", Actions()[i].c_str());
+#if 0
 		try
 		{
+#endif
 			lua_function(pSpeakerGO1->lua_game_object(), pSpeakerGO2->lua_game_object(), dialog_id, phrase_id, "", parameters_table);
+#if 0
 		}
 		catch (...)
 		{
 		}
+#endif
 #else
 		bool functor_exists = ai().script_engine().functor(*Actions()[i], lua_function);
 		THROW3(functor_exists, "Cannot find phrase dialog script function", *Actions()[i]);
