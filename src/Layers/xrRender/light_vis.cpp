@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "light.h"
 #include "QueryHelper.h"
 #include "../../xrEngine/cl_intersect.h"
@@ -107,10 +107,10 @@ void light::vis_update()
             vis.visible = true;
             vis.pending = false;
             vis.frame2test = frame + ::Random.randI(delay_small_min, delay_small_max);
-        }  
+        }
         return;
     }
-    
+
     vis.visible = (fragments > cullfragments);
     vis.frame2test = vis.visible ? (frame + ::Random.randI(delay_large_min, delay_large_max)) : (frame + 1);
 }
