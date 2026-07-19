@@ -45,14 +45,18 @@ bool CPHCall::is_any(CPHReqComparerV* v)
 
 void delete_call(CPHCall* & call)
 {
+#if 0
 	try
 	{
+#endif
 		xr_delete(call);
+#if 0
 	}
 	catch (...)
 	{
 		call = NULL;
 	}
+#endif
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -84,9 +88,12 @@ void CPHCommander::update()
 	PROF_EVENT("CPHCommander::update");
 	for (u32 i = 0; i < m_calls.size(); i++)
 	{
+#if 0
 		try
 		{
+#endif
 			m_calls[i]->check();
+#if 0
 		}
 		catch (...)
 		{
@@ -94,6 +101,7 @@ void CPHCommander::update()
 			i--;
 			continue;
 		}
+#endif
 
 		if (m_calls[i]->obsolete())
 		{
@@ -130,7 +138,7 @@ void CPHCommander::remove_call(PHCALL_I i, PHCALL_STORAGE& cs)
 		float m = f.magnitude();
 		if(m>EPS_S)
 				f.mul(1.f/m);
-		//Msg(" const force removed: force: %f,  remove step: %d  world step: %d ,dir(%f,%f,%f) ", m, esc->step(), (u32)physics_world()->StepsNum(), f.x, f.y , f.z ); 
+		//Msg(" const force removed: force: %f,  remove step: %d  world step: %d ,dir(%f,%f,%f) ", m, esc->step(), (u32)physics_world()->StepsNum(), f.x, f.y , f.z );
 	}
 #endif
 	delete_call(*i);
