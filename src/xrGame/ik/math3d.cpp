@@ -85,9 +85,9 @@ void hmatmult(Matrix A, Matrix B, Matrix C)
  * A *CAN* point to the same matrix as B or C.
  */
 {
-	register float *a, *b, *c, *bp, *cp;
-	register float *bmax, *cmax, *cpmax;
-	register float *b32, *c00, *c03;
+	float *a, *b, *c, *bp, *cp;
+	float *bmax, *cmax, *cpmax;
+	float *b32, *c00, *c03;
 	Matrix Bt, Ct;
 
 	if (A == B)
@@ -165,11 +165,11 @@ void inverthomomatrix(Matrix N, Matrix M)
  * Invert a homogeneous transform.  A homogeneous transform is any
  * combination of rotation and translation, but no scaling or perspective!
  * This does not check where the matrix is homogeneous.
- * 
+ *
  * n = inverse of m
  */
 {
-	register float *n, *m, *nmax, *C, *m3;
+	float *n, *m, *nmax, *C, *m3;
 
 	nmax = &N[2][3];
 	n = &N[0][0];
@@ -206,7 +206,7 @@ void vecmult0(float y[], float x[], Matrix M)
  * y = x * M, with y[3] = 0
  */
 {
-	register int i, j;
+	int i, j;
 	float Y[3];
 
 	for (i = 0; i < 3; i++)
@@ -228,7 +228,7 @@ void vecmult(float y[], float x[], Matrix M)
  * y = x * M, with y[3] = 1
  */
 {
-	register int i, j;
+	int i, j;
 	float Y[3];
 
 	for (i = 0; i < 3; i++)
@@ -253,9 +253,9 @@ axisangletomatrix(Matrix m, float axis[], float theta)
  * like the coordinate axes.
  */
 {
-	register float s, v, c;
-	register float* p;
-	register float a01, a02, a12, a0s, a1s, a2s, a01v, a02v, a12v;
+	float s, v, c;
+	float* p;
+	float a01, a02, a12, a0s, a1s, a2s, a01v, a02v, a12v;
 
 	c = _cos(theta);
 	s = _sin(theta);
@@ -379,7 +379,7 @@ void rotation_axis_to_matrix(float axis[3], float angle, Matrix R)
 	cos_a = _cos(angle);
 	sin_a = _sin(angle);
 
-	// Assume axis is normalized 
+	// Assume axis is normalized
 
 #if 0
 	// float normal[3];
@@ -433,7 +433,7 @@ void rotation_axis_to_matrix(float axis[3], float angle, Matrix R)
 
 //
 // p = Projection of u onto v
-// 
+//
 void project(float p[3], const float u[3], const float v[3])
 {
 	float vnorm[3];
@@ -462,7 +462,7 @@ void project_plane(float p[3], float u[3], float n[3])
 float angle_between_vectors(float u[3], float v[3], float n[3])
 {
 #if 0
-    float temp[3]; 
+    float temp[3];
     float up[3];
     float vp[3];
 
@@ -474,7 +474,7 @@ float angle_between_vectors(float u[3], float v[3], float n[3])
     crossproduct(temp, up, vp);
     float mag = DOT(temp,n);
 
-    // Vectors are parallel at 0 or 180 
+    // Vectors are parallel at 0 or 180
     if (mag*mag < 1e-8)
     {
 	if (DOT(up,vp) < 0)
@@ -484,7 +484,7 @@ float angle_between_vectors(float u[3], float v[3], float n[3])
     }
 
     int sign = (mag > 0) ? 1 : -1;
-    float t = DOT(up,vp); 
+    float t = DOT(up,vp);
     if (t > 1.0)
 	t = 1.0;
     else if (t < -1.0)
@@ -506,7 +506,7 @@ float angle_between_vectors(float u[3], float v[3], float n[3])
 
 
 //
-// Print 4x4 homogeneous matrix 
+// Print 4x4 homogeneous matrix
 //
 void print_matrix(Matrix M)
 {
@@ -598,7 +598,7 @@ void find_normal_vector(float v[3], float n[3])
 
 
 //
-// Multiplies only the rotational components of B*C 
+// Multiplies only the rotational components of B*C
 // and stores the result into A
 //
 void rmatmult(Matrix A, Matrix B, Matrix C)
@@ -606,9 +606,9 @@ void rmatmult(Matrix A, Matrix B, Matrix C)
 	Matrix Temp1;
 	Matrix Temp2;
 
-	register float* a = (float *)A;
-	register float* b;
-	register float* c;
+	float* a = (float *)A;
+	float* b;
+	float* c;
 
 	if (A == B)
 	{
@@ -672,11 +672,11 @@ void rmatmult(Matrix A, Matrix B, Matrix C)
 
 void invertrmatrix(Matrix N, Matrix M)
 /*
- * Invert a rotation matrix 
+ * Invert a rotation matrix
  * n = inverse of m
  */
 {
-	register float *n, *m, *nmax, *C;
+	float *n, *m, *nmax, *C;
 
 	nmax = &N[2][3];
 	n = &N[0][0];
@@ -775,13 +775,13 @@ void rotation_principal_axis_to_matrix(char axis, float angle, Matrix m)
 //
 // To extract axis and angle from R use the formulas (murray, pg 414)
 //
-//	2 * cos(theta) - 1 = trace(R) 
-// and 
-//	axis = vector associated with skew symmetric matrix (R-R')/(2*sin(theta)) 
+//	2 * cos(theta) - 1 = trace(R)
+// and
+//	axis = vector associated with skew symmetric matrix (R-R')/(2*sin(theta))
 //
 //
 // By our convention always return 0 <= angle < M_PI
-// 
+//
 void rotation_matrix_to_axis(const Matrix R, float axis[], float& angle)
 {
 	const float eps = 1e-7f;
@@ -789,7 +789,7 @@ void rotation_matrix_to_axis(const Matrix R, float axis[], float& angle)
 	angle = acos((R[0][0] + R[1][1] + R[2][2] - 1) / 2.0f);
 
 
-	// Close to identity. Arbitrarily set solution to z axis rotation of 0 
+	// Close to identity. Arbitrarily set solution to z axis rotation of 0
 	if (_abs(angle) < eps || _abs(angle - M_PI) < eps)
 	{
 		angle = 0.0;
@@ -847,9 +847,9 @@ void
 qtomatrix(Matrix m, Quaternion q)
 /*
  * Convert quaterion to rotation sub-matrix of 'm'.
- * The left column of 'm' gets zeroed, and m[3][3]=1.0, but the 
+ * The left column of 'm' gets zeroed, and m[3][3]=1.0, but the
  * translation part is left unmodified.
- * 
+ *
  * m = q
  */
 {
