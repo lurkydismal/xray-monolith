@@ -12,7 +12,13 @@
 #include "../ik_limb_state_predict.h"
 
 class IKinematics;
-class CDB::TRI;
+
+namespace CDB
+{
+	// Triangle
+	class TRI;
+};
+
 struct SCalculateData;
 struct SIKCollideData;
 class CGameObject;
