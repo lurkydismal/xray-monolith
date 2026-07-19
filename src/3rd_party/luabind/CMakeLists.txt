@@ -421,7 +421,8 @@ if(MSVC)
         /wd4996;
         /wd4005;
         /wd4530;
-        /Y-
+        /Y-;
+        /EHsc
     )
     target_link_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
