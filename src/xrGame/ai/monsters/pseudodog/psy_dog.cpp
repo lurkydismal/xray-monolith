@@ -16,7 +16,7 @@
 #include "psy_dog_aura.h"
 #include "psy_dog_state_manager.h"
 #include "../../../alife_object_registry.h"
-#include "../../../../xrServerEntities/xrserver_objects_alife_monsters.h"
+#include "../../../../xrServerEntities/xrServer_Objects_ALife_Monsters.h"
 
 CPsyDog::CPsyDog()
 {
@@ -34,7 +34,7 @@ CPsyDog::~CPsyDog()
 void CPsyDog::Load(LPCSTR section)
 {
 	inherited::Load(section);
-	
+
 	m_aura->load(pSettings->r_string(section, "aura_effector"));
 	m_min_phantoms_count = READ_IF_EXISTS(pSettings, r_u8, section, "Min_Phantoms_Count", 1);
 	if (pSettings->line_exist(section, "Phantoms_Count"))
