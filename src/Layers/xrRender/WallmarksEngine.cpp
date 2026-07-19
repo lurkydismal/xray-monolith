@@ -581,10 +581,8 @@ void CWallmarksEngine::Render()
                     }
                     catch (...)
                     {
-#endif
                         Msg("! Failed to render dynamic wallmark");
                         w_verts = w_save;
-#if 0
                     }
 #endif
 
