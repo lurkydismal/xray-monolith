@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "xrServer.h"
-#include "xrserver_objects.h"
-#include "xrserver_objects_alife_monsters.h"
+#include "xrServer_Objects.h"
+#include "xrServer_Objects_ALife_Monsters.h"
 #include "xrServer_svclient_validation.h"
 
 void ReplaceOwnershipHeader(NET_Packet& P)
@@ -22,7 +22,7 @@ void xrServer::Process_event_ownership(NET_Packet& P, ClientID sender, u32 time,
 
 
 #ifdef MP_LOGGING
-	Msg( "--- SV: Process ownership take: parent [%d][%s], item [%d][%s]", 
+	Msg( "--- SV: Process ownership take: parent [%d][%s], item [%d][%s]",
 		id_parent, e_parent ? e_parent->name_replace() : "null_parent",
 		id_entity, e_entity ? e_entity->name() : "null_entity");
 #endif // MP_LOGGING

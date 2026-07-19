@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "xrServer.h"
-#include "xrserver_objects.h"
+#include "xrServer_Objects.h"
 
 #ifdef DEBUG
 #	include "xrServer_Objects_ALife_Items.h"
