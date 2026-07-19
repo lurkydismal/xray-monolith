@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "LightProjector.h"
-#include "../../include/xrRender/RenderVisual.h"
+#include "../../Include/xrRender/RenderVisual.h"
 #include "../../xrEngine/xr_object.h"
 #include "../xrRender/lighttrack.h"
 #include "../xrServerEntities/smart_cast.h"
@@ -38,7 +38,7 @@ CLightProjector::CLightProjector()
 	current = 0;
 	RT = 0;
 
-	// 
+	//
 	RT.create("$user$projector", P_rt_size, P_rt_size, P_rtf);
 
 	// ref-str for faster const-search
@@ -101,7 +101,7 @@ void CLightProjector::set_object(IRenderable* O, IDSGraphManager& DM)
 	}
 }
 
-// 
+//
 void CLightProjector::setup(int id)
 {
 	if (id >= int(cache.size()) || id < 0)
@@ -239,7 +239,7 @@ void CLightProjector::calculate()
 			else bValid = FALSE; // out of bounds
 		}
 
-		// 
+		//
 		if (bValid)
 		{
 			// Ok, use cached version
@@ -448,7 +448,7 @@ void CLightProjector::render	()
 		Fvector2				p0,p1;
 		p0.set					(.5f/P_rt_size, .5f/P_rt_size);
 		p1.set					((P_rt_size+.5f)/P_rt_size, (P_rt_size+.5f)/P_rt_size);
-		
+
 		// Fill vertex buffer
 		u32 C			=	0xffffffff, Offset;
 		u32 _w		=	P_rt_size/2, _h = P_rt_size/2;
@@ -458,7 +458,7 @@ void CLightProjector::render	()
 		pv->set(float(_w),	float(_h),	.0001f,.9999f, C, p1.x, p1.y);	pv++;
 		pv->set(float(_w),	0,			.0001f,.9999f, C, p1.x, p0.y);	pv++;
 		geom_Screen->Unlock			(4);
-		
+
 		// Actual rendering
 		RCache.set_Shader(sh_Screen);
 		RCache.Draw	(geom_Screen,4,2,Offset,Device.Streams_QuadIB);
