@@ -12,7 +12,7 @@
 #include "../../script_entity_action.h"
 #include "../../script_game_object.h"
 #include "../../Inventory.h"
-#include "../../../xrServerEntities/xrserver_objects_alife_monsters.h"
+#include "../../../xrServerEntities/xrServer_Objects_ALife_Monsters.h"
 #include "../../Artefact.h"
 #include "../../xrServer.h"
 #include "../../relation_registry.h"
@@ -201,7 +201,7 @@ void CAI_Trader::OnEvent(NET_Packet& P, u16 type)
 
 			Obj->SetTmpPreDestroy(just_before_destroy);
 			inventory().DropItem(smart_cast<CGameObject*>(Obj), just_before_destroy, dont_create_shell);
-			//if(inventory().DropItem(smart_cast<CGameObject*>(Obj), just_before_destroy)) 
+			//if(inventory().DropItem(smart_cast<CGameObject*>(Obj), just_before_destroy))
 			//	Obj->H_SetParent(0, just_before_destroy); //moved to DropItem
 		}
 		break;
