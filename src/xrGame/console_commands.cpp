@@ -236,8 +236,8 @@ extern CrosshairSettings g_crosshair_weapon_far;
 extern CrosshairSettings g_crosshair_device_near;
 extern CrosshairSettings g_crosshair_device_far;
 
-#define Concat2(a, b) #a ## b
-#define Concat3(a, b, c) #a ## b ## #c
+#define Concat2(a, b) #a #b
+#define Concat3(a, b, c) #a #b #c
 
 #define CrosshairBaseCommands(crosshair, suffix) \
 	CMD3(CCC_Mask, Concat2(g_crosshair_, suffix), &crosshair.flags, CROSSHAIR_SHOW); \
@@ -441,15 +441,19 @@ public:
 
 static void mem_stats_async_thread(void*)
 {
+#if 0
     try
     {
+#endif
         PROF_EVENT("mem_stats_async_thread");
         full_memory_stats(false);
+#if 0
     }
     catch (...)
     {
         // do nothing
     }
+#endif
 	g_mem_stats_async_in_progress.store(false, std::memory_order_release);
 }
 
@@ -2883,7 +2887,7 @@ void CCC_RegisterCommands()
     CMD4(CCC_Float, "ai_danger_attacked_mult",         &g_ai_danger_attacked_mult,         0.f, 5.f);
     CMD4(CCC_Float, "ai_danger_grenade_mult",          &g_ai_danger_grenade_mult,          0.f, 5.f);
     CMD4(CCC_Float, "ai_danger_enemy_sound_mult",      &g_ai_danger_enemy_sound_mult,      0.f, 5.f);
-	
+
     CMD4(CCC_Integer, "ai_move_to_cover_run", &g_ai_move_to_cover_run, 0, 1);
     CMD4(CCC_Integer, "ai_enhanced_vision", &g_ai_enhanced_vision, 0, 1);
 
@@ -2956,7 +2960,7 @@ void CCC_RegisterCommands()
 	CMD4(CCC_Integer, "g_auto_reload", &g_auto_reload, 0, 1);
 	CMD3(CCC_Mask, "g_crosshair_show_always", &psCrosshair_Flags, CROSSHAIR_SHOW_ALWAYS);
 	CMD3(CCC_Mask, "g_crosshair_independent", &psCrosshair_Flags, CROSSHAIR_INDEPENDENT);
-	
+
 	CrosshairCameraNearCommands(g_crosshair_camera_near, "camera_near");
 	CrosshairCameraFarCommands(g_crosshair_camera_far, "camera_far");
 	CrosshairNearCommands(g_crosshair_weapon_near, "weapon_near");
@@ -3319,7 +3323,7 @@ void CCC_RegisterCommands()
     CMD4(CCC_Float, "first_person_death_near_plane_offset", &viewportNearOffset, -.1f, .5f);
     CMD4(CCC_Float, "first_person_death_head_scale", &firstPersonDeathHeadScale, 1.f, 10.f);
 
-	//legs 
+	//legs
 
 	CMD4(CCC_Integer, "g_legs", &g_legs_enabled, 0, 1);
 
@@ -3375,7 +3379,7 @@ void CCC_RegisterCommands()
 		CMD4(CCC_Float, "g_streff", &streff, -10.f, 10.f);
 	//No need for server commands in a singleplayer-only mod
 	//register_mp_console_commands();
-    
+
     zoomFlags.set(NEW_ZOOM, FALSE);
     zoomFlags.set(SDS_ZOOM, TRUE);
     zoomFlags.set(SDS_SPEED, TRUE);
@@ -3389,7 +3393,7 @@ void CCC_RegisterCommands()
     CMD4(CCC_Float, "zoom_step_count", &n_zoom_step_count, 1.0f, 10.0f);
 
 	// UBGL/Aim mode switch separation
-	// When switching to UBGL the weapon will remember what mode you switched from and will put you back in that mode. 
+	// When switching to UBGL the weapon will remember what mode you switched from and will put you back in that mode.
 	// For example: You were aiming down with a canted sight when you switched to UBGL. When you switch back it will put you back into Canted sight aim and not the scope.
 	CMD4(CCC_Integer, "use_separate_ubgl_keybind", &useSeparateUBGLKeybind, 0, 1);
 	CMD4(CCC_Integer, "aimmode_remember", &g_aimmode_remember, 0, 1);
