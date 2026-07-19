@@ -1,5 +1,6 @@
 // This code is in the public domain -- castanyo@yahoo.es
 
+#include <stdexcept> // std::runtime_error
 #include <nvcore/Debug.h>
 #include <nvcore/StrLib.h>
 
@@ -48,17 +49,16 @@
 #	endif
 #endif
 
-#include <stdexcept> // std::runtime_error
 #undef assert // defined on mingw
 
 using namespace nv;
 
-namespace 
+namespace
 {
 
 	static MessageHandler * s_message_handler = NULL;
 	static AssertHandler * s_assert_handler = NULL;
-	
+
 	static bool s_sig_handler_enabled = false;
 
 #if NV_OS_WIN32 && NV_CC_MSVC
@@ -73,59 +73,59 @@ namespace
 	struct sigaction s_old_sigtrap;
 	struct sigaction s_old_sigfpe;
 	struct sigaction s_old_sigbus;
-	
+
 #endif
 
 
 #if NV_OS_WIN32 && NV_CC_MSVC
 
 	// TODO write minidump
-	
+
 	static LONG WINAPI nvTopLevelFilter( struct _EXCEPTION_POINTERS * pExceptionInfo)
 	{
 		NV_UNUSED(pExceptionInfo);
 	/*	BOOL (WINAPI * Dump) (HANDLE, DWORD, HANDLE, MINIDUMP_TYPE, PMINIDUMP_EXCEPTION_INFORMATION, PMINIDUMP_USER_STREAM_INFORMATION, PMINIDUMP_CALLBACK_INFORMATION );
-	
+
 		AutoString dbghelp_path(512);
 		getcwd(dbghelp_path, 512);
 		dbghelp_path.Append("\\DbgHelp.dll");
 		nvTranslatePath(dbghelp_path);
-		
+
 		PiLibrary DbgHelp_lib(dbghelp_path, true);
-		
+
 		if( !DbgHelp_lib.IsValid() ) {
 			nvDebug("*** 'DbgHelp.dll' not found.\n");
 			return EXCEPTION_CONTINUE_SEARCH;
 		}
-		
+
 		if( !DbgHelp_lib.BindSymbol( (void **)&Dump, "MiniDumpWriteDump" ) ) {
 			nvDebug("*** 'DbgHelp.dll' too old.\n");
 			return EXCEPTION_CONTINUE_SEARCH;
 		}
-		
+
 		// create the file
 		HANDLE hFile = ::CreateFile( "nv.dmp", GENERIC_WRITE, FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL );
 		if( hFile == INVALID_HANDLE_VALUE ) {
 			nvDebug("*** Failed to create dump file.\n");
 			return EXCEPTION_CONTINUE_SEARCH;
 		}
-		
-		
+
+
 		_MINIDUMP_EXCEPTION_INFORMATION ExInfo;
-	
+
 		ExInfo.ThreadId = ::GetCurrentThreadId();
 		ExInfo.ExceptionPointers = pExceptionInfo;
 		ExInfo.ClientPointers = NULL;
-	
+
 		// write the dump
 		bool ok = Dump( GetCurrentProcess(), GetCurrentProcessId(), hFile, MiniDumpNormal, &ExInfo, NULL, NULL )!=0;
 		::CloseHandle(hFile);
-		
+
 		if( !ok ) {
 			nvDebug("*** Failed to save dump file.\n");
 			return EXCEPTION_CONTINUE_SEARCH;
 		}
-		
+
 		nvDebug("--- Dump file saved.\n");
 		*/
 		return EXCEPTION_CONTINUE_SEARCH;
@@ -145,7 +145,7 @@ namespace
 
 	static void nvPrintStackTrace(void * trace[], int size, int start=0) {
 		char ** string_array = backtrace_symbols(trace, size);
-	
+
 		nvDebug( "\nDumping stacktrace:\n" );
 		for(int i = start; i < size-1; i++ ) {
 #		if NV_CC_GNUC // defined(HAVE_CXXABI_H)
@@ -173,7 +173,7 @@ namespace
 #		endif
 		}
 		nvDebug("\n");
-	
+
 		free(string_array);
 	}
 
@@ -212,7 +212,7 @@ namespace
 			return (void *) ucp->uc_mcontext.regs->nip;
 #		endif
 #	endif
-		
+
 		// How to obtain the instruction pointers in different platforms, from mlton's source code.
 		// http://mlton.org/
 		// OpenBSD && NetBSD
@@ -229,7 +229,7 @@ namespace
 		// ((struct sigcontext*) secret)->sigc_regs.tpc
 		// Linux sparc64:
 		// ((struct sigcontext*) secret)->si_regs.pc
-	
+
 		// potentially correct for other archs:
 		// Linux alpha: ucp->m_context.sc_pc
 		// Linux arm: ucp->m_context.ctx.arm_pc
@@ -237,11 +237,11 @@ namespace
 		// Linux mips: ucp->m_context.sc_pc
 		// Linux s390: ucp->m_context.sregs->regs.psw.addr
 	}
-	
+
 	static void nvSigHandler(int sig, siginfo_t *info, void *secret)
 	{
 		void * pnt = callerAddress(secret);
-		
+
 		// Do something useful with siginfo_t
 		if (sig == SIGSEGV) {
 			if (pnt != NULL) nvDebug("Got signal %d, faulty address is %p, from %p\n", sig, info->si_addr, pnt);
@@ -253,22 +253,22 @@ namespace
 		else {
 			nvDebug("Got signal %d\n", sig);
 		}
-		
+
 #	if defined(HAVE_EXECINFO_H)
 		if (nvHasStackTrace()) // in case of weak linking
 		{
 			void * trace[64];
 			int size = backtrace(trace, 64);
-		
+
 			if (pnt != NULL) {
 				// Overwrite sigaction with caller's address.
 				trace[1] = pnt;
 			}
-			
+
 			nvPrintStackTrace(trace, size, 1);
 		}
 #	endif // defined(HAVE_EXECINFO_H)
-		
+
 		exit(0);
 	}
 
@@ -277,27 +277,27 @@ namespace
 
 
 #if NV_OS_WIN32 //&& NV_CC_MSVC
-	
+
 	/** Win32 asset handler. */
-	struct Win32AssertHandler : public AssertHandler 
+	struct Win32AssertHandler : public AssertHandler
 	{
 		// Code from Daniel Vogel.
 		static bool isDebuggerPresent()
 		{
 			bool result = false;
-			
+
 			HINSTANCE kern_lib = LoadLibraryExA( "kernel32.dll", NULL, 0 );
 			if( kern_lib ) {
 				FARPROC lIsDebuggerPresent = GetProcAddress( kern_lib, "IsDebuggerPresent" );
 				if( lIsDebuggerPresent && lIsDebuggerPresent() ) {
 					result = true;
 				}
-				
+
 				FreeLibrary( kern_lib );
 			}
 			return result;
 		}
-		
+
 		// Flush the message queue. This is necessary for the message box to show up.
 		static void flushMessageQueue()
 		{
@@ -308,12 +308,12 @@ namespace
 				DispatchMessage( &msg );
 			}
 		}
-	
+
 		// Assert handler method.
 		virtual int assert( const char * exp, const char * file, int line, const char * func/*=NULL*/ )
 		{
 			int ret = NV_ABORT_EXIT;
-			
+
 			StringBuilder error_string;
 			if( func != NULL ) {
 				error_string.format( "*** Assertion failed: %s\n    On file: %s\n    On function: %s\n    On line: %d\n ", exp, file, func, line );
@@ -323,13 +323,13 @@ namespace
 				error_string.format( "*** Assertion failed: %s\n    On file: %s\n    On line: %d\n ", exp, file, line );
 				nvDebug( error_string );
 			}
-			
+
 		#if _DEBUG
-			
+
 			if( isDebuggerPresent() ) {
 				return NV_ABORT_DEBUG;
 			}
-			
+
 			flushMessageQueue();
 			int action = MessageBoxA(NULL, error_string, "Assertion failed", MB_ABORTRETRYIGNORE|MB_ICONERROR);
 			switch( action ) {
@@ -347,20 +347,20 @@ namespace
 			/*if( _CrtDbgReport( _CRT_ASSERT, file, line, module, exp ) == 1 ) {
 				return NV_ABORT_DEBUG;
 			}*/
-			
+
 		#endif
-			
+
 			if( ret == NV_ABORT_EXIT ) {
 				// Exit cleanly.
 				throw std::runtime_error("Assertion failed");
 			}
-			
-			return ret;			
+
+			return ret;
 		}
 	};
-	
+
 #else
-	
+
 	/** Unix asset handler. */
 	struct UnixAssertHandler : public AssertHandler
 	{
@@ -379,11 +379,11 @@ namespace
 			sysctl(mib,4,&info,&size,NULL,0);
 			return ((info.kp_proc.p_flag & P_TRACED) == P_TRACED);
 #		else
-			// if ppid != sid, some process spawned our app, probably a debugger. 
+			// if ppid != sid, some process spawned our app, probably a debugger.
 			return getsid(getpid()) != getppid();
 #		endif
 		}
-		
+
 		// Assert handler method.
 		virtual int assert(const char * exp, const char * file, int line, const char * func)
 		{
@@ -393,7 +393,7 @@ namespace
 			else {
 				nvDebug( "*** Assertion failed: %s\n    On file: %s\n    On line: %d\n ", exp, file, line );
 			}
-			
+
 #		if _DEBUG
 			if( isDebuggerPresent() ) {
 				return NV_ABORT_DEBUG;
@@ -413,7 +413,7 @@ namespace
 			throw std::runtime_error("Assertion failed");
 		}
 	};
-	
+
 #endif
 
 } // namespace
@@ -427,7 +427,7 @@ int nvAbort(const char * exp, const char * file, int line, const char * func)
 #else
 	static UnixAssertHandler s_default_assert_handler;
 #endif
-	
+
 	if( s_assert_handler != NULL ) {
 		return s_assert_handler->assert( exp, file, line, func );
 	}
@@ -493,13 +493,13 @@ void debug::enableSigHandler()
 {
 	nvCheck(s_sig_handler_enabled != true);
 	s_sig_handler_enabled = true;
-	
+
 #if NV_OS_WIN32 && NV_CC_MSVC
-	
+
 	s_old_exception_filter = ::SetUnhandledExceptionFilter( nvTopLevelFilter );
-	
+
 #elif !NV_OS_WIN32 && defined(HAVE_SIGNAL_H)
-	
+
 	// Install our signal handler
 	struct sigaction sa;
 	sa.sa_sigaction = nvSigHandler;
@@ -510,7 +510,7 @@ void debug::enableSigHandler()
 	sigaction(SIGTRAP, &sa, &s_old_sigtrap);
 	sigaction(SIGFPE, &sa, &s_old_sigfpe);
 	sigaction(SIGBUS, &sa, &s_old_sigbus);
-	
+
 #endif
 }
 
@@ -526,12 +526,12 @@ void debug::disableSigHandler()
 	s_old_exception_filter = NULL;
 
 #elif !NV_OS_WIN32 && defined(HAVE_SIGNAL_H)
-	
+
 	sigaction(SIGSEGV, &s_old_sigsegv, NULL);
 	sigaction(SIGTRAP, &s_old_sigtrap, NULL);
 	sigaction(SIGFPE, &s_old_sigfpe, NULL);
 	sigaction(SIGBUS, &s_old_sigbus, NULL);
-	
+
 #endif
 }
 
