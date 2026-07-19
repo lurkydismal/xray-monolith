@@ -8,6 +8,9 @@
 
 #pragma once
 
+#include "data_storage_constructor.h"
+#include "builder_allocator_constructor.h"
+
 template <
 	typename _path_id_type,
 	typename _index_type,
