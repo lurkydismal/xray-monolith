@@ -597,7 +597,7 @@ void attachable_hud_item::load(const shared_str& sect_name)
         IRenderVisual* pVisual = m_model->dcast_RenderVisual();
         if (pVisual)
             pVisual->MarkIgnoreOptimization(TRUE);
-    }    
+    }
 
 	m_attach_place_idx = pSettings->r_u16(sect_name, "attach_place_idx");
 	m_measures.load(sect_name, m_model);
@@ -616,7 +616,7 @@ player_hud_motion* attachable_hud_item::find_motion(const shared_str& anm_name)
 	if (!anm)
 		anm = m_hand_motions->find_motion(anm_name);
 
-	R_ASSERT2(anm, make_string("model [%s] has no motion alias defined [%s]", m_sect_name.c_str(), anm_name).c_str())
+	R_ASSERT2(anm, make_string("model [%s] has no motion alias defined [%s]", m_sect_name.c_str(), anm_name.c_str()).c_str())
 		;
 	VERIFY2(anm->m_animations.size(),
 		make_string("model [%s] has no motion defined in motion_alias [%s]", pSettings->r_string(m_sect_name,
@@ -1531,7 +1531,7 @@ void player_hud::StopScriptAnim()
             ai().script_engine().print_stack();
         }
     }
-        
+
 	if (part < 2 && !m_attached_items[part])
 		re_sync_anim(part + 1);
 	else
