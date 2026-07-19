@@ -86,9 +86,9 @@ class_<CScriptGameObject> script_register_game_object1(class_<CScriptGameObject>
 		.def("change_satiety", &CScriptGameObject::ChangeSatiety)
 		.def("change_radiation", &CScriptGameObject::ChangeRadiation)
 		.def("change_morale", &CScriptGameObject::ChangeMorale)
-	
+
 		//		.def("get_bleeding",				&CScriptGameObject::GetBleeding)
-		
+
 		// demonized: exports
 		.def("xform", SAFE_WRAP(&CScriptGameObject::Xform))
 		.def("bounding_box", SAFE_WRAP(&CScriptGameObject::bounding_box))
@@ -113,7 +113,7 @@ class_<CScriptGameObject> script_register_game_object1(class_<CScriptGameObject>
 		// Added by Ncenka - allow turn on/off devices
 		.def("is_device_enabled", SAFE_WRAP(&CScriptGameObject::IsDeviceEnabled))
 		.def("set_device_enabled", SAFE_WRAP(&CScriptGameObject::SetDeviceEnabled))
-		
+
 		.def("death_time", &CScriptGameObject::DeathTime)
 		//		.def("armor",						&CScriptGameObject::Armor)
 		.def("max_health", &CScriptGameObject::MaxHealth)
