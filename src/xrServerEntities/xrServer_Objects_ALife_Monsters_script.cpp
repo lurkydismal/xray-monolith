@@ -28,7 +28,7 @@ void set_character_name_script(CSE_ALifeTraderAbstract* ta, LPCSTR str)
 {
 	ta->m_character_name_str = str;
 	ta->m_character_name = TranslateName(ta->m_character_name_str.c_str());
-	
+
 	if (g_pGameLevel)
 	{
 		CObject* obj = g_pGameLevel->Objects.net_Find(ta->object_id());
@@ -68,15 +68,15 @@ void CSE_ALifeTraderAbstract::script_register(lua_State* L)
 		("cse_alife_trader_abstract")
 		//			.def(		constructor<LPCSTR>())
 #ifdef XRGAME_EXPORTS
-		.def("community", &CommunityName)
+		.def("community", &CSE_ALifeTraderAbstract::CommunityName)
 		.def("profile_name", &profile_name_script)
 		.def("set_profile_name", &profile_name_set_script)
 		.def("character_name", &character_name_script)
 		.def("character_name_str", &character_name_str_script)
 		.def("set_character_name", &set_character_name_script)
-		.def("rank", &Rank)
-		.def("set_rank", &SetRank)
-		.def("reputation", &Reputation)
+		.def("rank", &CSE_ALifeTraderAbstract::Rank)
+		.def("set_rank", &CSE_ALifeTraderAbstract::SetRank)
+		.def("reputation", &CSE_ALifeTraderAbstract::Reputation)
 		.def("character_icon", &icon_name_script)
 #endif // XRGAME_EXPORTS
 	];
