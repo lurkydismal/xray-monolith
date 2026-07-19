@@ -18,6 +18,7 @@
 using namespace luabind;
 
 #pragma optimize("s",on)
+template<>
 void DLL_PureScript::script_register(lua_State* L)
 {
 	module(L)
@@ -47,6 +48,7 @@ void ISpatialScript::script_register	(lua_State *L)
 }
 */
 
+template<>
 void ISheduledScript::script_register(lua_State* L)
 {
 	module(L)
@@ -58,6 +60,7 @@ void ISheduledScript::script_register(lua_State* L)
 	];
 }
 
+template<>
 void IRenderableScript::script_register(lua_State* L)
 {
 	module(L)
@@ -70,6 +73,7 @@ void IRenderableScript::script_register(lua_State* L)
 	];
 }
 
+template<>
 void ICollidableScript::script_register(lua_State* L)
 {
 	module(L)
@@ -79,6 +83,7 @@ void ICollidableScript::script_register(lua_State* L)
 	];
 }
 
+template<>
 void CObjectScript::script_register(lua_State* L)
 {
 	module(L)
@@ -86,7 +91,7 @@ void CObjectScript::script_register(lua_State* L)
 		//		class_<CObject,bases<DLL_Pure,ISheduled,ICollidable,IRenderable>,CObjectWrapper>("CObject")
 		//			.def(constructor<>())
 		//			.def("_construct",			&CObject::_construct,&CObjectWrapper::_construct_static)
-		/*			
+		/*
 					.def("spatial_register",	&CObject::spatial_register,	&CObjectWrapper::spatial_register_static)
 					.def("spatial_unregister",	&CObject::spatial_unregister,	&CObjectWrapper::spatial_unregister_static)
 					.def("spatial_move",		&CObject::spatial_move,		&CObjectWrapper::spatial_move_static)
@@ -150,6 +155,7 @@ void CObjectScript::script_register(lua_State* L)
 	];
 }
 
+template<>
 void IRender_VisualScript::script_register(lua_State* L)
 {
 	module(L)
@@ -165,6 +171,7 @@ void IKinematicsAnimated_PlayCycle(IKinematicsAnimated* sa, LPCSTR anim)
 	sa->PlayCycle(anim);
 }
 
+template<>
 void IKinematicsAnimatedScript::script_register(lua_State* L)
 {
 	module(L)
@@ -174,6 +181,7 @@ void IKinematicsAnimatedScript::script_register(lua_State* L)
 	];
 }
 
+template<>
 void CBlendScript::script_register(lua_State* L)
 {
 	module(L)
