@@ -222,7 +222,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /fp:precise;
             /GR;
             /Ob3;
@@ -237,7 +237,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /Ot;
             /fp:precise;
             /GR;
@@ -252,7 +252,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /fp:precise;
             /GR;
             /Ob3;
@@ -267,7 +267,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /Ot;
             /fp:precise;
             /GR;
@@ -282,7 +282,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /fp:precise;
             /GR;
             /Ob3;
@@ -297,7 +297,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /Ot;
             /fp:precise;
             /GR;
@@ -312,7 +312,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /fp:precise;
             /GR;
             /Ob3;
@@ -327,7 +327,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /Ot;
             /fp:precise;
             /GR;
@@ -342,7 +342,7 @@ if(MSVC)
             /Oy;
             /Gy-;
             /W4;
-            /Z7;
+            /Zi;
             /fp:precise;
             /GR;
             /GS
@@ -355,7 +355,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /fp:precise;
             /GR;
             /Ob3;
@@ -370,7 +370,7 @@ if(MSVC)
             /Oy;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /Ot;
             /fp:precise;
             /GR;
@@ -384,7 +384,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /Z7
+            /Zi
         >
         $<$<CONFIG:VerifiedDX11>:
             /Od;
@@ -393,7 +393,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /Z7
+            /Zi
         >
         $<$<CONFIG:VerifiedDX11ASAN>:
             /Od;
@@ -402,7 +402,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /Z7
+            /Zi
         >
         $<$<CONFIG:VerifiedDX8>:
             /Od;
@@ -411,7 +411,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /Z7
+            /Zi
         >
         $<$<CONFIG:VerifiedDX9>:
             /Od;
@@ -420,7 +420,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W3;
-            /Z7
+            /Zi
         >
         /std:c++latest
     )

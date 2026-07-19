@@ -221,7 +221,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX10AVX>:
@@ -232,7 +232,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3;
             /Y-
         >
@@ -243,7 +243,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX11AVX>:
@@ -254,7 +254,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3;
             /Y-
         >
@@ -265,7 +265,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX8AVX>:
@@ -276,7 +276,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3;
             /Y-
         >
@@ -287,7 +287,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX9AVX>:
@@ -298,7 +298,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3;
             /Y-
         >
@@ -309,7 +309,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy-;
-            /Z7;
+            /Zi;
             /Y-
         >
         $<$<CONFIG:Release>:
@@ -319,7 +319,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:ReleaseAVX>:
@@ -330,7 +330,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3;
             /Y-
         >
@@ -341,7 +341,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /TC;
             /Y-
         >
@@ -352,7 +352,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /TC;
             /Y-
         >
@@ -363,7 +363,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /TC;
             /Y-
         >
@@ -374,7 +374,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /TC;
             /Y-
         >
@@ -385,7 +385,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7;
+            /Zi;
             /TC;
             /Y-
         >

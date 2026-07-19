@@ -227,7 +227,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX10AVX>:
@@ -238,7 +238,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX11>:
@@ -248,7 +248,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX11AVX>:
@@ -259,7 +259,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX8>:
@@ -269,7 +269,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX8AVX>:
@@ -280,7 +280,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX9>:
@@ -290,7 +290,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:DX9AVX>:
@@ -301,7 +301,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:ProfiledDX11>:
@@ -311,7 +311,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy-;
-            /Z7
+            /Zi
         >
         $<$<CONFIG:Release>:
             /O2;
@@ -320,7 +320,7 @@ if(MSVC)
             /GT;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:ReleaseAVX>:
@@ -331,7 +331,7 @@ if(MSVC)
             /arch:AVX;
             /Oy;
             /Gy;
-            /Z7;
+            /Zi;
             /Ob3
         >
         $<$<CONFIG:Verified>:
@@ -341,7 +341,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7
+            /Zi
         >
         $<$<CONFIG:VerifiedDX11>:
             /Od;
@@ -350,7 +350,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7
+            /Zi
         >
         $<$<CONFIG:VerifiedDX11ASAN>:
             /Od;
@@ -359,7 +359,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7
+            /Zi
         >
         $<$<CONFIG:VerifiedDX8>:
             /Od;
@@ -368,7 +368,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7
+            /Zi
         >
         $<$<CONFIG:VerifiedDX9>:
             /Od;
@@ -377,7 +377,7 @@ if(MSVC)
             /Oy-;
             /Gy;
             /W4;
-            /Z7
+            /Zi
         >
         /std:c++latest;
         /wd4995;
