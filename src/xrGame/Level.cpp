@@ -204,15 +204,19 @@ namespace crash_saving {
 
             //Msg("found save file %s, save_name %s", name, name_string.c_str());
 
+#if 0
             try {
+#endif
                 //Msg("save number %s", name_string.substr(path.length()).c_str());
                 int name_count = std::stoi(name_string.substr(path.length()).c_str());
                 saveCount = name_count;
                 break;
+#if 0
             }
             catch (...) {
                 Msg("!error getting save number from %s", name);
             }
+#endif
         }
 
         saveCount++;
