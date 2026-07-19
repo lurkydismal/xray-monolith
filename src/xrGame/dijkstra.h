@@ -104,7 +104,7 @@ protected:
 	typedef typename CGraphVertex::_dist_type _dist_type;
 	typedef typename CGraphVertex::_index_type _index_type;
 
-protected:
+public:
 	bool m_search_started;
 	CDataStorage* m_data_storage;
 
@@ -113,6 +113,7 @@ protected:
 	IC void initialize(_PathManager& path_manager);
 	template <typename _PathManager>
 	IC bool step(_PathManager& path_manager);
+public:
 	template <typename _PathManager>
 	IC void finalize(_PathManager& path_manager);
 
