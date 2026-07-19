@@ -139,7 +139,7 @@ private:
 //{
 //	virtual bool			compare							(const	CPHReqComparerV* v)					const	{return v->compare(this);}
 //	virtual bool			compare							(const	CPHOnesConditionSelfCmpTrue* v)		const	{return true;}
-//	
+//
 //};
 
 class CPHWallMarksCall :
@@ -176,16 +176,20 @@ static void play_object(dxGeomUserData* data, SGameMtlPair* mtl_pair, const dCon
 
 	CPHSoundPlayer* sp = nullptr;
 
+#if 0
 	try
 	{
+#endif
         if (data->ph_ref_object)
 		    sp = data->ph_ref_object->ObjectPhSoundPlayer();
+#if 0
 	}
 	catch (...)
 	{
 		Msg("! Physics callbacks sound player play_object error");
 		sp = nullptr;
 	}
+#endif
 
 	if (sp)
 	{
@@ -241,7 +245,7 @@ void TContactShotMark(CDB::TRI* T, dContactGeom* c)
 	//dBodyID b=dGeomGetBody(c->g1);
 	//dxGeomUserData* data =0;
 	//bool b_invert_normal=false;
-	//if(!b) 
+	//if(!b)
 	//{
 	//	b=dGeomGetBody(c->g2);
 	//	data=dGeomGetUserData(c->g2);
@@ -251,7 +255,7 @@ void TContactShotMark(CDB::TRI* T, dContactGeom* c)
 	//{
 	//	data=dGeomGetUserData(c->g1);
 	//}
-	//if(!b) 
+	//if(!b)
 	//	return;
 
 	//dVector3 vel;
