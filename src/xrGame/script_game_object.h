@@ -504,12 +504,12 @@ public:
 
 	CScriptGameObject* GetActiveItem();
 
-	CScriptGameObject* GetObjectByName(LPCSTR caObjectName) const;
-	CScriptGameObject* GetObjectByIndex(int iIndex) const;
+	CScriptGameObject* GetObjectByName(LPCSTR caObjectName);
+	CScriptGameObject* GetObjectByIndex(int iIndex);
 	CScriptGameObject * GetObjectById(u16 id) const;
 
 
-	// Callbacks			
+	// Callbacks
 	void SetCallback(GameObject::ECallbackType type, const ::luabind::functor<void>& functor);
 	void SetCallback(GameObject::ECallbackType type, const ::luabind::functor<void>& functor,
 	                 const ::luabind::object& object);
@@ -879,13 +879,13 @@ public:
 	void set_smart_cover_target_fire_no_lookout();
 	void set_smart_cover_target_default(bool value);
 
-	float const idle_min_time() const;
+	float idle_min_time() const;
 	void idle_min_time(float value);
-	float const idle_max_time() const;
+	float idle_max_time() const;
 	void idle_max_time(float value);
-	float const lookout_min_time() const;
+	float lookout_min_time() const;
 	void lookout_min_time(float value);
-	float const lookout_max_time() const;
+	float lookout_max_time() const;
 	void lookout_max_time(float value);
 
 	bool in_loophole_fov(LPCSTR cover_id, LPCSTR loophole_id, Fvector object_position) const;
@@ -1106,8 +1106,8 @@ public:
 
 	::luabind::object list_bones(bool bHud = false);
 
-	bool IsBoneVisible(LPCSTR bone_name, bool bHud = false);	
-	void SetBoneVisible(LPCSTR bone_name, bool bVisibility, bool bRecursive = true, bool bHud = false);	
+	bool IsBoneVisible(LPCSTR bone_name, bool bHud = false);
+	void SetBoneVisible(LPCSTR bone_name, bool bVisibility, bool bRecursive = true, bool bHud = false);
 	//CAI_Stalker
 	void ResetBoneProtections(LPCSTR imm_sect, LPCSTR bone_sect);
 	//Anything with PPhysicShell (ie. car, actor, stalker, monster, heli)
@@ -1263,7 +1263,7 @@ struct SafeWrapBase
         ai().script_engine().lua_error_not_crash(ai().script_engine().lua());
     }
 
-    // This generic function accepts ANY instance type (const or non-const) 
+    // This generic function accepts ANY instance type (const or non-const)
     // and ANY member function pointer type.
     template <typename InstanceT, typename FuncT, typename... Args>
     static auto execute(InstanceT instance, FuncT memFunc, Args&&... args)
