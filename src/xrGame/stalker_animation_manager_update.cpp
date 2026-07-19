@@ -246,9 +246,12 @@ void CStalkerAnimationManager::update_impl()
 void CStalkerAnimationManager::update()
 {
 	START_PROFILE("stalker/client_update/animations")
+#if 0
 		try
 		{
+#endif
 			update_impl();
+#if 0
 		}
 		catch (...)
 		{
@@ -271,5 +274,6 @@ void CStalkerAnimationManager::update()
 			//throw;
 			/* avo: end */
 		}
+#endif
 	STOP_PROFILE
 }
