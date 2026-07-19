@@ -165,7 +165,6 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -176,7 +175,6 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX10AVX>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -189,7 +187,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:DX11>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -200,7 +197,6 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX11AVX>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -213,7 +209,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:DX8>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -224,7 +219,6 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX8AVX>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -237,7 +231,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:DX9>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -248,7 +241,6 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX9AVX>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -261,7 +253,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:ProfiledDX11>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -272,7 +263,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:Release>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -283,7 +273,6 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:ReleaseAVX>:
-            /GL-;
             /O2;
             /Oi;
             /GF;
@@ -296,7 +285,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:Verified>:
-            /GL-;
             /Od;
             /Ob0;
             /Oi-;
@@ -308,7 +296,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:VerifiedDX11>:
-            /GL-;
             /Od;
             /Ob0;
             /Oi-;
@@ -320,7 +307,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:VerifiedDX11ASAN>:
-            /GL-;
             /Od;
             /Ob0;
             /Oi-;
@@ -332,7 +318,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:VerifiedDX8>:
-            /GL-;
             /Od;
             /Ob0;
             /Oi-;
@@ -344,7 +329,6 @@ if(MSVC)
             /Y-
         >
         $<$<CONFIG:VerifiedDX9>:
-            /GL-;
             /Od;
             /Ob0;
             /Oi-;
