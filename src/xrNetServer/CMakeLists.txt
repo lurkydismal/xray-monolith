@@ -424,8 +424,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
-    "Ws2_32;"
-    "dxerr"
+    "ws2_32;"
+    "DxErr"
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC "${ADDITIONAL_LIBRARY_DEPENDENCIES}")
 
