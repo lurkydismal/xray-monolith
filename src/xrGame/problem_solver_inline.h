@@ -126,14 +126,18 @@ IC void CProblemSolverAbstract::remove_operator(const _edge_type& operator_id)
 {
 	typename OPERATOR_VECTOR::iterator I = std::lower_bound(m_operators.begin(), m_operators.end(), operator_id);
 	THROW(m_operators.end() != I);
+#if 0
 	try
 	{
+#endif
 		delete_data((*I).m_operator);
+#if 0
 	}
 	catch (...)
 	{
 		(*I).m_operator = 0;
 	}
+#endif
 	m_actuality = false;
 	m_operators.erase(I);
 }
@@ -176,14 +180,18 @@ IC void CProblemSolverAbstract::remove_evaluator(const _condition_type& conditio
 {
 	typename EVALUATORS::iterator I = m_evaluators.find(condition_id);
 	THROW(I != m_evaluators.end());
+#if 0
 	try
 	{
+#endif
 		delete_data((*I).second);
+#if 0
 	}
 	catch (...)
 	{
 		(*I).second = 0;
 	}
+#endif
 	m_evaluators.erase(I);
 	m_actuality = false;
 }
