@@ -32,7 +32,8 @@ void eax_validate_range(
         std::to_string(min_value) + "; max: " +
         std::to_string(max_value) + ").";
 
-    throw TException{message.c_str()};
+    TException tml{message.c_str()};
+    std::terminate();
 }
 
 namespace detail {

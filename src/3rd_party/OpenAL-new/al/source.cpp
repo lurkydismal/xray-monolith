@@ -815,7 +815,8 @@ ALenum EnumFromStereoMode(SourceStereo mode)
     case SourceStereo::Normal: return AL_NORMAL_SOFT;
     case SourceStereo::Enhanced: return AL_SUPER_STEREO_SOFT;
     }
-    throw std::runtime_error{"Invalid SourceStereo: "+std::to_string(int(mode))};
+    std::runtime_error tmp{"Invalid SourceStereo: "+std::to_string(int(mode))};
+    std::terminate();
 }
 
 al::optional<SpatializeMode> SpatializeModeFromEnum(ALenum mode)
@@ -837,7 +838,8 @@ ALenum EnumFromSpatializeMode(SpatializeMode mode)
     case SpatializeMode::On: return AL_TRUE;
     case SpatializeMode::Auto: return AL_AUTO_SOFT;
     }
-    throw std::runtime_error{"Invalid SpatializeMode: "+std::to_string(int(mode))};
+    std::runtime_error tmp{"Invalid SpatializeMode: "+std::to_string(int(mode))};
+    std::terminate();
 }
 
 al::optional<DirectMode> DirectModeFromEnum(ALenum mode)
@@ -859,7 +861,8 @@ ALenum EnumFromDirectMode(DirectMode mode)
     case DirectMode::DropMismatch: return AL_DROP_UNMATCHED_SOFT;
     case DirectMode::RemixMismatch: return AL_REMIX_UNMATCHED_SOFT;
     }
-    throw std::runtime_error{"Invalid DirectMode: "+std::to_string(int(mode))};
+    std::runtime_error tmp{"Invalid DirectMode: "+std::to_string(int(mode))};
+    std::terminate();
 }
 
 al::optional<DistanceModel> DistanceModelFromALenum(ALenum model)
@@ -888,7 +891,8 @@ ALenum ALenumFromDistanceModel(DistanceModel model)
     case DistanceModel::Exponent: return AL_EXPONENT_DISTANCE;
     case DistanceModel::ExponentClamped: return AL_EXPONENT_DISTANCE_CLAMPED;
     }
-    throw std::runtime_error{"Unexpected distance model "+std::to_string(static_cast<int>(model))};
+    std::runtime_error tmp{"Unexpected distance model "+std::to_string(static_cast<int>(model))};
+    std::terminate();
 }
 
 enum SourceProp : ALenum {
@@ -1346,20 +1350,25 @@ auto GetCheckers(ALCcontext *const Context, const SourceProp prop, const al::spa
             if(values.size() == expect) LIKELY return;
             Context->setError(AL_INVALID_ENUM, "Property 0x%04x expects %zu value(s), got %zu",
                 prop, expect, values.size());
-            throw check_size_exception{};
+            check_size_exception tmp{};
+            std::terminate();
         },
         [Context](bool passed) -> void
         {
             if(passed) LIKELY return;
             Context->setError(AL_INVALID_VALUE, "Value out of range");
-            throw check_value_exception{};
+            check_value_exception tmp{};
+            std::terminate();
         }
     );
 }
 
 void SetSourcefv(ALsource *const Source, ALCcontext *const Context, const SourceProp prop,
     const al::span<const float> values)
+{
+#if 0
 try {
+#endif
     /* Structured bindings would be nice (C++17). */
     auto Checkers = GetCheckers(Context, prop, values);
     auto &CheckSize = Checkers.first;
@@ -1594,13 +1603,19 @@ try {
 
     ERR("Unexpected property: 0x%04x\n", prop);
     Context->setError(AL_INVALID_ENUM, "Invalid source float property 0x%04x", prop);
+#if 0
 }
 catch(check_exception&) {
+}
+#endif
 }
 
 void SetSourceiv(ALsource *const Source, ALCcontext *const Context, const SourceProp prop,
     const al::span<const int> values)
+{
+#if 0
 try {
+#endif
     auto Checkers = GetCheckers(Context, prop, values);
     auto &CheckSize = Checkers.first;
     auto &CheckValue = Checkers.second;
@@ -1951,13 +1966,19 @@ try {
 
     ERR("Unexpected property: 0x%04x\n", prop);
     Context->setError(AL_INVALID_ENUM, "Invalid source integer property 0x%04x", prop);
+#if 0
 }
 catch(check_exception&) {
+}
+#endif
 }
 
 void SetSourcei64v(ALsource *const Source, ALCcontext *const Context, const SourceProp prop,
     const al::span<const int64_t> values)
+{
+#if 0
 try {
+#endif
     auto Checkers = GetCheckers(Context, prop, values);
     auto &CheckSize = Checkers.first;
     auto &CheckValue = Checkers.second;
@@ -2083,8 +2104,11 @@ try {
 
     ERR("Unexpected property: 0x%04x\n", prop);
     Context->setError(AL_INVALID_ENUM, "Invalid source integer64 property 0x%04x", prop);
+#if 0
 }
 catch(check_exception&) {
+}
+#endif
 }
 
 
@@ -2096,7 +2120,8 @@ auto GetSizeChecker(ALCcontext *const Context, const SourceProp prop, const al::
         if(values.size() == expect) LIKELY return;
         Context->setError(AL_INVALID_ENUM, "Property 0x%04x expects %zu value(s), got %zu",
             prop, expect, values.size());
-        throw check_size_exception{};
+        check_size_exception tmp{};
+        std::terminate();
     };
 }
 
@@ -2106,7 +2131,10 @@ bool GetSourcei64v(ALsource *const Source, ALCcontext *const Context, const Sour
 
 bool GetSourcedv(ALsource *const Source, ALCcontext *const Context, const SourceProp prop,
     const al::span<double> values)
+{
+#if 0
 try {
+#endif
     auto CheckSize = GetSizeChecker(Context, prop, values);
     ALCdevice *device{Context->mALDevice.get()};
     ClockLatency clocktime;
@@ -2312,14 +2340,20 @@ try {
     ERR("Unexpected property: 0x%04x\n", prop);
     Context->setError(AL_INVALID_ENUM, "Invalid source double property 0x%04x", prop);
     return false;
+#if 0
 }
 catch(check_exception&) {
     return false;
 }
+#endif
+}
 
 bool GetSourceiv(ALsource *const Source, ALCcontext *const Context, const SourceProp prop,
     const al::span<int> values)
+{
+#if 0
 try {
+#endif
     auto CheckSize = GetSizeChecker(Context, prop, values);
     double dvals[MaxValues];
     bool err;
@@ -2548,14 +2582,20 @@ try {
     ERR("Unexpected property: 0x%04x\n", prop);
     Context->setError(AL_INVALID_ENUM, "Invalid source integer property 0x%04x", prop);
     return false;
+#if 0
 }
 catch(check_exception&) {
     return false;
 }
+#endif
+}
 
 bool GetSourcei64v(ALsource *const Source, ALCcontext *const Context, const SourceProp prop,
     const al::span<int64_t> values)
+{
+#if 0
 try {
+#endif
     auto CheckSize = GetSizeChecker(Context, prop, values);
     ALCdevice *device{Context->mALDevice.get()};
     ClockLatency clocktime;
@@ -2728,11 +2768,13 @@ try {
     ERR("Unexpected property: 0x%04x\n", prop);
     Context->setError(AL_INVALID_ENUM, "Invalid source integer64 property 0x%04x", prop);
     return false;
+#if 0
 }
 catch(check_exception&) {
     return false;
 }
-
+#endif
+}
 
 void StartSources(ALCcontext *const context, const al::span<ALsource*> srchandles,
     const nanoseconds start_time=nanoseconds::min())
@@ -4072,7 +4114,8 @@ ALsource* ALsource::EaxLookupSource(ALCcontext& al_context, ALuint source_id) no
 
 [[noreturn]] void ALsource::eax_fail(const char* message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 [[noreturn]] void ALsource::eax_fail_unknown_property_id()

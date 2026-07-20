@@ -120,8 +120,7 @@ void PortPlayback::open(const char *name)
     if(!name)
         name = pa_device;
     else if(strcmp(name, pa_device) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
 
     PaStreamParameters params{};
     auto devidopt = ConfigValueInt(nullptr, "port", "device");
@@ -166,8 +165,7 @@ retry_open:
             params.sampleFormat = paInt16;
             goto retry_open;
         }
-        throw al::backend_exception{al::backend_error::NoDevice, "Failed to open stream: %s",
-            Pa_GetErrorText(err)};
+        std::terminate();
     }
 
     Pa_CloseStream(mStream);
@@ -218,8 +216,7 @@ void PortPlayback::start()
 {
     const PaError err{Pa_StartStream(mStream)};
     if(err == paNoError)
-        throw al::backend_exception{al::backend_error::DeviceError, "Failed to start playback: %s",
-            Pa_GetErrorText(err)};
+        std::terminate();
 }
 
 void PortPlayback::stop()
@@ -280,8 +277,7 @@ void PortCapture::open(const char *name)
     if(!name)
         name = pa_device;
     else if(strcmp(name, pa_device) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
 
     uint samples{mDevice->BufferSize};
     samples = maxu(samples, 100 * mDevice->Frequency / 1000);
@@ -314,16 +310,14 @@ void PortCapture::open(const char *name)
         break;
     case DevFmtUInt:
     case DevFmtUShort:
-        throw al::backend_exception{al::backend_error::DeviceError, "%s samples not supported",
-            DevFmtTypeString(mDevice->FmtType)};
+        std::terminate();
     }
     mParams.channelCount = static_cast<int>(mDevice->channelsFromFmt());
 
     PaError err{Pa_OpenStream(&mStream, &mParams, nullptr, mDevice->Frequency,
         paFramesPerBufferUnspecified, paNoFlag, &PortCapture::readCallbackC, this)};
     if(err != paNoError)
-        throw al::backend_exception{al::backend_error::NoDevice, "Failed to open stream: %s",
-            Pa_GetErrorText(err)};
+        std::terminate();
 
     mDevice->DeviceName = name;
 }
@@ -333,8 +327,7 @@ void PortCapture::start()
 {
     const PaError err{Pa_StartStream(mStream)};
     if(err != paNoError)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start recording: %s", Pa_GetErrorText(err)};
+        std::terminate();
 }
 
 void PortCapture::stop()

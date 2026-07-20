@@ -217,8 +217,7 @@ void WinMMPlayback::open(const char *name)
         std::find(PlaybackDevices.cbegin(), PlaybackDevices.cend(), name) :
         PlaybackDevices.cbegin();
     if(iter == PlaybackDevices.cend())
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
     auto DeviceID = static_cast<UINT>(std::distance(PlaybackDevices.cbegin(), iter));
 
     DevFmtType fmttype{mDevice->FmtType};
@@ -254,7 +253,7 @@ retry_open:
             fmttype = DevFmtShort;
             goto retry_open;
         }
-        throw al::backend_exception{al::backend_error::DeviceError, "waveOutOpen failed: %u", res};
+        std::terminate();
     }
 
     if(mOutHdl)
@@ -331,18 +330,21 @@ bool WinMMPlayback::reset()
 
 void WinMMPlayback::start()
 {
+#if 0
     try {
+#endif
         for(auto &waveHdr : mWaveBuffer)
             waveOutPrepareHeader(mOutHdl, &waveHdr, sizeof(WAVEHDR));
         mWritable.store(static_cast<uint>(mWaveBuffer.size()), std::memory_order_release);
 
         mKillNow.store(false, std::memory_order_release);
         mThread = std::thread{std::mem_fn(&WinMMPlayback::mixerProc), this};
+#if 0
     }
     catch(std::exception& e) {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start mixing thread: %s", e.what()};
+        std::terminate();
     }
+#endif
 }
 
 void WinMMPlayback::stop()
@@ -455,8 +457,7 @@ void WinMMCapture::open(const char *name)
         std::find(CaptureDevices.cbegin(), CaptureDevices.cend(), name) :
         CaptureDevices.cbegin();
     if(iter == CaptureDevices.cend())
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
     auto DeviceID = static_cast<UINT>(std::distance(CaptureDevices.cbegin(), iter));
 
     switch(mDevice->FmtChans)
@@ -472,8 +473,7 @@ void WinMMCapture::open(const char *name)
     case DevFmtX714:
     case DevFmtX3D71:
     case DevFmtAmbi3D:
-        throw al::backend_exception{al::backend_error::DeviceError, "%s capture not supported",
-            DevFmtChannelsString(mDevice->FmtChans)};
+        std::terminate();
     }
 
     switch(mDevice->FmtType)
@@ -487,8 +487,7 @@ void WinMMCapture::open(const char *name)
     case DevFmtByte:
     case DevFmtUShort:
     case DevFmtUInt:
-        throw al::backend_exception{al::backend_error::DeviceError, "%s samples not supported",
-            DevFmtTypeString(mDevice->FmtType)};
+        std::terminate();
     }
 
     mFormat = WAVEFORMATEX{};
@@ -505,7 +504,7 @@ void WinMMCapture::open(const char *name)
         reinterpret_cast<DWORD_PTR>(&WinMMCapture::waveInProcC),
         reinterpret_cast<DWORD_PTR>(this), CALLBACK_FUNCTION)};
     if(res != MMSYSERR_NOERROR)
-        throw al::backend_exception{al::backend_error::DeviceError, "waveInOpen failed: %u", res};
+        std::terminate();
 
     // Ensure each buffer is 50ms each
     DWORD BufferSize{mFormat.nAvgBytesPerSec / 20u};
@@ -534,7 +533,9 @@ void WinMMCapture::open(const char *name)
 
 void WinMMCapture::start()
 {
+#if 0
     try {
+#endif
         for(size_t i{0};i < mWaveBuffer.size();++i)
         {
             waveInPrepareHeader(mInHdl, &mWaveBuffer[i], sizeof(WAVEHDR));
@@ -545,11 +546,12 @@ void WinMMCapture::start()
         mThread = std::thread{std::mem_fn(&WinMMCapture::captureProc), this};
 
         waveInStart(mInHdl);
+#if 0
     }
     catch(std::exception& e) {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start recording thread: %s", e.what()};
+        std::terminate();
     }
+#endif
 }
 
 void WinMMCapture::stop()

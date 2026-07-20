@@ -140,8 +140,10 @@ namespace luabind { namespace detail
 
 	void LUABIND_API unref(lua_State *L, int ref)
 	{
+#if 0
 		try
 		{
+#endif
 			int t = LUA_REGISTRYINDEX;
 			if (ref >= 0) {
 				lua_rawgeti(L, t, FREELIST_REF);
@@ -149,6 +151,7 @@ namespace luabind { namespace detail
 				lua_pushnumber(L, ref);
 				lua_rawseti(L, t, FREELIST_REF);  /* t[FREELIST_REF] = ref */
 			}
+#if 0
 		}
 		catch (...)
 		{
@@ -156,6 +159,7 @@ namespace luabind { namespace detail
 #	error check me!
 #endif
 		}
+#endif
 	}
 
 }}

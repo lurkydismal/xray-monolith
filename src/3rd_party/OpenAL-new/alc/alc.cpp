@@ -1475,7 +1475,8 @@ ALCenum EnumFromDevFmt(DevFmtType type)
     case DevFmtUInt: return ALC_UNSIGNED_INT_SOFT;
     case DevFmtFloat: return ALC_FLOAT_SOFT;
     }
-    throw std::runtime_error{"Invalid DevFmtType: "+std::to_string(int(type))};
+    std::runtime_error tmp{"Invalid DevFmtType: "+std::to_string(int(type))};
+    std::terminate();
 }
 
 al::optional<DevFmtChannels> DevFmtChannelsFromEnum(ALCenum channels)
@@ -1508,7 +1509,8 @@ ALCenum EnumFromDevFmt(DevFmtChannels channels)
     case DevFmtX714:
     case DevFmtX3D71: break;
     }
-    throw std::runtime_error{"Invalid DevFmtChannels: "+std::to_string(int(channels))};
+    std::runtime_error tmp{"Invalid DevFmtChannels: "+std::to_string(int(channels))};
+    std::terminate();
 }
 
 al::optional<DevAmbiLayout> DevAmbiLayoutFromEnum(ALCenum layout)
@@ -1528,7 +1530,8 @@ ALCenum EnumFromDevAmbi(DevAmbiLayout layout)
     case DevAmbiLayout::FuMa: return ALC_FUMA_SOFT;
     case DevAmbiLayout::ACN: return ALC_ACN_SOFT;
     }
-    throw std::runtime_error{"Invalid DevAmbiLayout: "+std::to_string(int(layout))};
+    std::runtime_error tmp{"Invalid DevAmbiLayout: "+std::to_string(int(layout))};
+    std::terminate();
 }
 
 al::optional<DevAmbiScaling> DevAmbiScalingFromEnum(ALCenum scaling)
@@ -1550,7 +1553,8 @@ ALCenum EnumFromDevAmbi(DevAmbiScaling scaling)
     case DevAmbiScaling::SN3D: return ALC_SN3D_SOFT;
     case DevAmbiScaling::N3D: return ALC_N3D_SOFT;
     }
-    throw std::runtime_error{"Invalid DevAmbiScaling: "+std::to_string(int(scaling))};
+    std::runtime_error tmp{"Invalid DevAmbiScaling: "+std::to_string(int(scaling))};
+    std::terminate();
 }
 
 
@@ -2125,16 +2129,23 @@ ALCenum UpdateDeviceParams(ALCdevice *device, const int *attrList)
     const uint oldFreq{device->Frequency};
     const DevFmtChannels oldChans{device->FmtChans};
     const DevFmtType oldType{device->FmtType};
+#if 0
     try {
+#endif
         auto backend = device->Backend.get();
         if(!backend->reset())
-            throw al::backend_exception{al::backend_error::DeviceError, "Device reset failure"};
+        {
+            al::backend_exception tmp{al::backend_error::DeviceError, "Device reset failure"};
+            std::terminate();
+        }
+#if 0
     }
     catch(std::exception &e) {
         ERR("Device error: %s\n", e.what());
         device->handleDisconnect("%s", e.what());
         return ALC_INVALID_DEVICE;
     }
+#endif
 
     if(device->FmtChans != oldChans && device->Flags.test(ChannelsRequest))
     {
@@ -2447,16 +2458,20 @@ ALCenum UpdateDeviceParams(ALCdevice *device, const int *attrList)
 
     if(!device->Flags.test(DevicePaused))
     {
+#if 0
         try {
+#endif
             auto backend = device->Backend.get();
             backend->start();
             device->Flags.set(DeviceRunning);
+#if 0
         }
         catch(al::backend_exception& e) {
             ERR("%s\n", e.what());
             device->handleDisconnect("%s", e.what());
             return ALC_INVALID_DEVICE;
         }
+#endif
         TRACE("Post-start: %s, %s, %uhz, %u / %u buffer\n",
             DevFmtChannelsString(device->FmtChans), DevFmtTypeString(device->FmtType),
             device->Frequency, device->UpdateSize, device->BufferSize);
@@ -3564,11 +3579,14 @@ START_API_FUNC
     device->AuxiliaryEffectSlotMax = 64;
     device->NumAuxSends = DefaultSends;
 
+#if 0
     try {
+#endif
         auto backend = PlaybackFactory->createBackend(device.get(), BackendType::Playback);
         std::lock_guard<std::recursive_mutex> _{ListLock};
         backend->open(deviceName);
         device->Backend = std::move(backend);
+#if 0
     }
     catch(al::backend_exception &e) {
         WARN("Failed to open playback device: %s\n", e.what());
@@ -3576,6 +3594,7 @@ START_API_FUNC
             ? ALC_OUT_OF_MEMORY : ALC_INVALID_VALUE);
         return nullptr;
     }
+#endif
 
     {
         std::lock_guard<std::recursive_mutex> _{ListLock};
@@ -3688,7 +3707,9 @@ START_API_FUNC
     device->UpdateSize = static_cast<uint>(samples);
     device->BufferSize = static_cast<uint>(samples);
 
+#if 0
     try {
+#endif
         TRACE("Capture format: %s, %s, %uhz, %u / %u buffer\n",
             DevFmtChannelsString(device->FmtChans), DevFmtTypeString(device->FmtType),
             device->Frequency, device->UpdateSize, device->BufferSize);
@@ -3697,6 +3718,7 @@ START_API_FUNC
         std::lock_guard<std::recursive_mutex> _{ListLock};
         backend->open(deviceName);
         device->Backend = std::move(backend);
+#if 0
     }
     catch(al::backend_exception &e) {
         WARN("Failed to open capture device: %s\n", e.what());
@@ -3704,6 +3726,7 @@ START_API_FUNC
             ? ALC_OUT_OF_MEMORY : ALC_INVALID_VALUE);
         return nullptr;
     }
+#endif
 
     {
         std::lock_guard<std::recursive_mutex> _{ListLock};
@@ -3760,16 +3783,20 @@ START_API_FUNC
         alcSetError(dev.get(), ALC_INVALID_DEVICE);
     else if(!dev->Flags.test(DeviceRunning))
     {
+#if 0
         try {
+#endif
             auto backend = dev->Backend.get();
             backend->start();
             dev->Flags.set(DeviceRunning);
+#if 0
         }
         catch(al::backend_exception& e) {
             ERR("%s\n", e.what());
             dev->handleDisconnect("%s", e.what());
             alcSetError(dev.get(), ALC_INVALID_DEVICE);
         }
+#endif
     }
 }
 END_API_FUNC
@@ -3864,11 +3891,14 @@ START_API_FUNC
     device->NumStereoSources = 1;
     device->NumMonoSources = device->SourcesMax - device->NumStereoSources;
 
+#if 0
     try {
+#endif
         auto backend = LoopbackBackendFactory::getFactory().createBackend(device.get(),
             BackendType::Playback);
         backend->open("Loopback");
         device->Backend = std::move(backend);
+#if 0
     }
     catch(al::backend_exception &e) {
         WARN("Failed to open loopback device: %s\n", e.what());
@@ -3876,6 +3906,7 @@ START_API_FUNC
             ? ALC_OUT_OF_MEMORY : ALC_INVALID_VALUE);
         return nullptr;
     }
+#endif
 
     {
         std::lock_guard<std::recursive_mutex> _{ListLock};
@@ -3967,10 +3998,13 @@ START_API_FUNC
     if(dev->mContexts.load()->empty())
         return;
 
+#if 0
     try {
+#endif
         auto backend = dev->Backend.get();
         backend->start();
         dev->Flags.set(DeviceRunning);
+#if 0
     }
     catch(al::backend_exception& e) {
         ERR("%s\n", e.what());
@@ -3978,6 +4012,7 @@ START_API_FUNC
         alcSetError(dev.get(), ALC_INVALID_DEVICE);
         return;
     }
+#endif
     TRACE("Post-resume: %s, %s, %uhz, %u / %u buffer\n",
         DevFmtChannelsString(device->FmtChans), DevFmtTypeString(device->FmtType),
         device->Frequency, device->UpdateSize, device->BufferSize);
@@ -4074,9 +4109,12 @@ START_API_FUNC
     }
 
     BackendPtr newbackend;
+#if 0
     try {
+#endif
         newbackend = PlaybackFactory->createBackend(dev.get(), BackendType::Playback);
         newbackend->open(deviceName);
+#if 0
     }
     catch(al::backend_exception &e) {
         listlock.unlock();
@@ -4104,6 +4142,7 @@ START_API_FUNC
         }
         return ALC_FALSE;
     }
+#endif
     listlock.unlock();
     dev->Backend = std::move(newbackend);
     TRACE("Reopened device %p, \"%s\"\n", voidp{dev.get()}, dev->DeviceName.c_str());

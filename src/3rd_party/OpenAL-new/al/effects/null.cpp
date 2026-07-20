@@ -19,8 +19,8 @@ void Null_setParami(EffectProps* /*props*/, ALenum param, int /*val*/)
     switch(param)
     {
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid null effect integer property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid null effect integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Null_setParamiv(EffectProps *props, ALenum param, const int *vals)
@@ -36,8 +36,8 @@ void Null_setParamf(EffectProps* /*props*/, ALenum param, float /*val*/)
     switch(param)
     {
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid null effect float property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid null effect float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Null_setParamfv(EffectProps *props, ALenum param, const float *vals)
@@ -54,8 +54,8 @@ void Null_getParami(const EffectProps* /*props*/, ALenum param, int* /*val*/)
     switch(param)
     {
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid null effect integer property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid null effect integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Null_getParamiv(const EffectProps *props, ALenum param, int *vals)
@@ -71,8 +71,8 @@ void Null_getParamf(const EffectProps* /*props*/, ALenum param, float* /*val*/)
     switch(param)
     {
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid null effect float property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid null effect float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Null_getParamfv(const EffectProps *props, ALenum param, float *vals)
@@ -114,7 +114,8 @@ struct NullCommitter::Exception : public EaxException
 template<>
 [[noreturn]] void NullCommitter::fail(const char *message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 template<>

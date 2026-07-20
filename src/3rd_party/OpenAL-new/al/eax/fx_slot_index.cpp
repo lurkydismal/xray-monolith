@@ -67,5 +67,6 @@ void EaxFxSlotIndex::set(const GUID &guid)
 [[noreturn]]
 void EaxFxSlotIndex::fail(const char* message)
 {
-    throw EaxFxSlotIndexException{message};
+    EaxFxSlotIndexException tmp{message};
+    std::terminate();
 }

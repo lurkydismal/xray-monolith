@@ -15,8 +15,8 @@ void Convolution_setParami(EffectProps* /*props*/, ALenum param, int /*val*/)
     switch(param)
     {
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid null effect integer property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid null effect integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Convolution_setParamiv(EffectProps *props, ALenum param, const int *vals)
@@ -32,8 +32,8 @@ void Convolution_setParamf(EffectProps* /*props*/, ALenum param, float /*val*/)
     switch(param)
     {
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid null effect float property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid null effect float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Convolution_setParamfv(EffectProps *props, ALenum param, const float *vals)
@@ -50,8 +50,8 @@ void Convolution_getParami(const EffectProps* /*props*/, ALenum param, int* /*va
     switch(param)
     {
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid null effect integer property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid null effect integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Convolution_getParamiv(const EffectProps *props, ALenum param, int *vals)
@@ -67,8 +67,8 @@ void Convolution_getParamf(const EffectProps* /*props*/, ALenum param, float* /*
     switch(param)
     {
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid null effect float property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid null effect float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Convolution_getParamfv(const EffectProps *props, ALenum param, float *vals)

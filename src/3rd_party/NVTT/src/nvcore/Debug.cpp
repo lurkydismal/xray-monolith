@@ -352,7 +352,8 @@ namespace
 
 			if( ret == NV_ABORT_EXIT ) {
 				// Exit cleanly.
-				throw std::runtime_error("Assertion failed");
+				std::runtime_error tmp{"Assertion failed"};
+                std::terminate();
 			}
 
 			return ret;

@@ -637,8 +637,7 @@ void AlsaPlayback::open(const char *name)
         auto iter = std::find_if(PlaybackDevices.cbegin(), PlaybackDevices.cend(),
             [name](const DevMap &entry) -> bool { return entry.name == name; });
         if(iter == PlaybackDevices.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
         driver = iter->device_name;
     }
     else
@@ -652,8 +651,7 @@ void AlsaPlayback::open(const char *name)
     snd_pcm_t *pcmHandle{};
     int err{snd_pcm_open(&pcmHandle, driver.c_str(), SND_PCM_STREAM_PLAYBACK, SND_PCM_NONBLOCK)};
     if(err < 0)
-        throw al::backend_exception{al::backend_error::NoDevice,
-            "Could not open ALSA device \"%s\"", driver.c_str()};
+        std::terminate();
     if(mPcmHandle)
         snd_pcm_close(mPcmHandle);
     mPcmHandle = pcmHandle;
@@ -701,8 +699,7 @@ bool AlsaPlayback::reset()
     HwParamsPtr hp{CreateHwParams()};
 #define CHECK(x) do {                                                         \
     if((err=(x)) < 0)                                                         \
-        throw al::backend_exception{al::backend_error::DeviceError, #x " failed: %s", \
-            snd_strerror(err)};                                               \
+        std::terminate();                                               \
 } while(0)
     CHECK(snd_pcm_hw_params_any(mPcmHandle, hp.get()));
     /* set interleaved access */
@@ -745,7 +742,7 @@ bool AlsaPlayback::reset()
         uint numchans{2u};
         CHECK(snd_pcm_hw_params_set_channels_near(mPcmHandle, hp.get(), &numchans));
         if(numchans < 1)
-            throw al::backend_exception{al::backend_error::DeviceError, "Got 0 device channels"};
+            std::terminate();
         if(numchans == 1) mDevice->FmtChans = DevFmtMono;
         else mDevice->FmtChans = DevFmtStereo;
     }
@@ -803,8 +800,7 @@ void AlsaPlayback::start()
     HwParamsPtr hp{CreateHwParams()};
 #define CHECK(x) do {                                                         \
     if((err=(x)) < 0)                                                         \
-        throw al::backend_exception{al::backend_error::DeviceError, #x " failed: %s", \
-            snd_strerror(err)};                                               \
+        std::terminate();                                               \
 } while(0)
     CHECK(snd_pcm_hw_params_current(mPcmHandle, hp.get()));
     /* retrieve configuration info */
@@ -830,8 +826,7 @@ void AlsaPlayback::start()
         mThread = std::thread{std::mem_fn(thread_func), this};
     }
     catch(std::exception& e) {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start mixing thread: %s", e.what()};
+        std::terminate();
     }
 }
 
@@ -909,8 +904,7 @@ void AlsaCapture::open(const char *name)
         auto iter = std::find_if(CaptureDevices.cbegin(), CaptureDevices.cend(),
             [name](const DevMap &entry) -> bool { return entry.name == name; });
         if(iter == CaptureDevices.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
         driver = iter->device_name;
     }
     else
@@ -923,8 +917,7 @@ void AlsaCapture::open(const char *name)
     TRACE("Opening device \"%s\"\n", driver.c_str());
     int err{snd_pcm_open(&mPcmHandle, driver.c_str(), SND_PCM_STREAM_CAPTURE, SND_PCM_NONBLOCK)};
     if(err < 0)
-        throw al::backend_exception{al::backend_error::NoDevice,
-            "Could not open ALSA device \"%s\"", driver.c_str()};
+        std::terminate();
 
     /* Free alsa's global config tree. Otherwise valgrind reports a ton of leaks. */
     snd_config_update_free_global();
@@ -962,8 +955,7 @@ void AlsaCapture::open(const char *name)
     HwParamsPtr hp{CreateHwParams()};
 #define CHECK(x) do {                                                         \
     if((err=(x)) < 0)                                                         \
-        throw al::backend_exception{al::backend_error::DeviceError, #x " failed: %s", \
-            snd_strerror(err)};                                               \
+        std::terminate();                                               \
 } while(0)
     CHECK(snd_pcm_hw_params_any(mPcmHandle, hp.get()));
     /* set interleaved access */
@@ -1001,13 +993,11 @@ void AlsaCapture::start()
 {
     int err{snd_pcm_prepare(mPcmHandle)};
     if(err < 0)
-        throw al::backend_exception{al::backend_error::DeviceError, "snd_pcm_prepare failed: %s",
-            snd_strerror(err)};
+        std::terminate();
 
     err = snd_pcm_start(mPcmHandle);
     if(err < 0)
-        throw al::backend_exception{al::backend_error::DeviceError, "snd_pcm_start failed: %s",
-            snd_strerror(err)};
+        std::terminate();
 
     mDoCapture = true;
 }

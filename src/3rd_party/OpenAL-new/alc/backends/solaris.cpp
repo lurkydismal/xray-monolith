@@ -145,13 +145,11 @@ void SolarisBackend::open(const char *name)
     if(!name)
         name = solaris_device;
     else if(strcmp(name, solaris_device) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
 
     int fd{::open(solaris_driver.c_str(), O_WRONLY)};
     if(fd == -1)
-        throw al::backend_exception{al::backend_error::NoDevice, "Could not open %s: %s",
-            solaris_driver.c_str(), strerror(errno)};
+        std::terminate();
 
     if(mFd != -1)
         ::close(mFd);
@@ -203,8 +201,7 @@ bool SolarisBackend::reset()
         else if(info.play.channels == 1)
             mDevice->FmtChans = DevFmtMono;
         else
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Got %u device channels", info.play.channels};
+            std::terminate();
     }
 
     if(info.play.precision == 8 && info.play.encoding == AUDIO_ENCODING_LINEAR8)
@@ -243,8 +240,7 @@ void SolarisBackend::start()
         mThread = std::thread{std::mem_fn(&SolarisBackend::mixerProc), this};
     }
     catch(std::exception& e) {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start mixing thread: %s", e.what()};
+        std::terminate();
     }
 }
 

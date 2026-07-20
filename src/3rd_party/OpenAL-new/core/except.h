@@ -24,8 +24,14 @@ public:
 
 } // namespace al
 
+#if 0
 #define START_API_FUNC try
+#endif
+#define START_API_FUNC
 
+#if 0
 #define END_API_FUNC catch(...) { std::terminate(); }
+#endif
+#define END_API_FUNC
 
 #endif /* CORE_EXCEPT_H */

@@ -467,8 +467,7 @@ void JackPlayback::open(const char *name)
         jack_status_t status;
         mClient = jack_client_open(client_name, ClientOptions, &status, nullptr);
         if(mClient == nullptr)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to open client connection: 0x%02x", status};
+            std::terminate();
         if((status&JackServerStarted))
             TRACE("JACK server started\n");
         if((status&JackNameNotUnique))
@@ -492,8 +491,7 @@ void JackPlayback::open(const char *name)
         { return entry.mName == name; };
         auto iter = std::find_if(PlaybackList.cbegin(), PlaybackList.cend(), check_name);
         if(iter == PlaybackList.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name?name:""};
+            std::terminate();
         mPortPattern = iter->mPattern;
     }
 
@@ -573,7 +571,7 @@ bool JackPlayback::reset()
 void JackPlayback::start()
 {
     if(jack_activate(mClient))
-        throw al::backend_exception{al::backend_error::DeviceError, "Failed to activate client"};
+        std::terminate();
 
     const char *devname{mDevice->DeviceName.c_str()};
     if(ConfigValueBool(devname, "jack", "connect-ports").value_or(true))
@@ -583,7 +581,7 @@ void JackPlayback::start()
         if(!pnames)
         {
             jack_deactivate(mClient);
-            throw al::backend_exception{al::backend_error::DeviceError, "No playback ports found"};
+            std::terminate();
         }
 
         for(size_t i{0};i < al::size(mPort) && mPort[i];++i)
@@ -626,8 +624,7 @@ void JackPlayback::start()
         catch(std::exception& e) {
             jack_deactivate(mClient);
             mPlaying.store(false, std::memory_order_release);
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to start mixing thread: %s", e.what()};
+            std::terminate();
         }
     }
 }

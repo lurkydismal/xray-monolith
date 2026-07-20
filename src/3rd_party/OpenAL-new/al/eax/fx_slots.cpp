@@ -59,7 +59,8 @@ ALeffectslot& EaxFxSlots::get(EaxFxSlotIndex index)
 void EaxFxSlots::fail(
     const char* message)
 {
-    throw EaxFxSlotsException{message};
+    EaxFxSlotsException tmp{message};
+    std::terminate();
 }
 
 void EaxFxSlots::initialize_fx_slots(ALCcontext& al_context)

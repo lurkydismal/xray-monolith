@@ -80,7 +80,8 @@ ALenum EnumFromAmbiLayout(AmbiLayout layout)
     case AmbiLayout::FuMa: return AL_FUMA_SOFT;
     case AmbiLayout::ACN: return AL_ACN_SOFT;
     }
-    throw std::runtime_error{"Invalid AmbiLayout: "+std::to_string(int(layout))};
+    std::runtime_error tmp{"Invalid AmbiLayout: "+std::to_string(int(layout))};
+    std::terminate();
 }
 
 al::optional<AmbiScaling> AmbiScalingFromEnum(ALenum scale)
@@ -102,7 +103,8 @@ ALenum EnumFromAmbiScaling(AmbiScaling scale)
     case AmbiScaling::N3D: return AL_N3D_SOFT;
     case AmbiScaling::UHJ: break;
     }
-    throw std::runtime_error{"Invalid AmbiScaling: "+std::to_string(int(scale))};
+    std::runtime_error tmp{"Invalid AmbiScaling: "+std::to_string(int(scale))};
+    std::terminate();
 }
 
 #ifdef ALSOFT_EAX
@@ -124,7 +126,8 @@ ALenum EnumFromEaxStorage(EaxStorage storage)
     case EaxStorage::Accessible: return AL_STORAGE_ACCESSIBLE;
     case EaxStorage::Hardware: return AL_STORAGE_HARDWARE;
     }
-    throw std::runtime_error{"Invalid EaxStorage: "+std::to_string(int(storage))};
+    std::runtime_error tmp{"Invalid EaxStorage: "+std::to_string(int(storage))};
+    std::terminate();
 }
 
 

@@ -189,7 +189,8 @@ EaxCall::EaxCall(
 
 [[noreturn]] void EaxCall::fail(const char* message)
 {
-    throw EaxCallException{message};
+    EaxCallException tmp{message};
+    std::terminate();
 }
 
 [[noreturn]] void EaxCall::fail_too_small()
@@ -206,7 +207,10 @@ EaxCall create_eax_call(
     ALuint property_size)
 {
     if(!property_set_id)
-        throw EaxCallException{"Null property set ID."};
+    {
+        EaxCallException tmp{"Null property set ID."};
+        std::terminate();
+    }
 
     return EaxCall{
         type,

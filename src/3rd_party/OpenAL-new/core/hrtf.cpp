@@ -416,7 +416,7 @@ std::unique_ptr<HrtfStore> CreateHrtfStore(uint rate, uint8_t irSize,
         offset += sizeof(delays_[0])*irCount;
 
         if(offset != total)
-            throw std::runtime_error{"HrtfStore allocation size mismatch"};
+            std::terminate();
 
         /* Copy input data to storage. */
         std::uninitialized_copy(fields.cbegin(), fields.cend(), field_);

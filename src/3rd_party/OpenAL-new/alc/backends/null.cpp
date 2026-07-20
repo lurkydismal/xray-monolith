@@ -110,8 +110,10 @@ void NullBackend::open(const char *name)
     if(!name)
         name = nullDevice;
     else if(strcmp(name, nullDevice) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+    {
+    al::backend_exception tmp{al::backend_error::NoDevice, "Device name \"%s\" not found", name};
+    std::terminate();
+}
 
     mDevice->DeviceName = name;
 }
@@ -124,14 +126,17 @@ bool NullBackend::reset()
 
 void NullBackend::start()
 {
+#if 0
     try {
+#endif
         mKillNow.store(false, std::memory_order_release);
         mThread = std::thread{std::mem_fn(&NullBackend::mixerProc), this};
+#if 0
     }
     catch(std::exception& e) {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start mixing thread: %s", e.what()};
+        std::terminate();
     }
+#endif
 }
 
 void NullBackend::stop()

@@ -419,7 +419,7 @@ void ALCcontext::eaxSetLastError() noexcept
 
 [[noreturn]] void ALCcontext::eax_fail(const char* message)
 {
-    throw ContextException{message};
+    std::terminate();
 }
 
 [[noreturn]] void ALCcontext::eax_fail_unknown_property_set_id()
@@ -1029,7 +1029,7 @@ public:
 
 [[noreturn]] void eax_fail_set(const char* message)
 {
-    throw EaxSetException{message};
+    std::terminate();
 }
 
 class EaxGetException : public EaxException {
@@ -1041,7 +1041,7 @@ public:
 
 [[noreturn]] void eax_fail_get(const char* message)
 {
-    throw EaxGetException{message};
+    std::terminate();
 }
 
 } // namespace
@@ -1053,7 +1053,9 @@ FORCE_ALIGN ALenum AL_APIENTRY EAXSet(
     ALuint property_source_id,
     ALvoid* property_value,
     ALuint property_value_size) noexcept
+#if 0
 try
+#endif
 {
     auto context = GetContextRef();
 
@@ -1068,11 +1070,13 @@ try
         property_source_id,
         property_value,
         property_value_size);
+#if 0
 }
 catch (...)
 {
     eax_log_exception(__func__);
     return AL_INVALID_OPERATION;
+#endif
 }
 
 FORCE_ALIGN ALenum AL_APIENTRY EAXGet(
@@ -1081,7 +1085,9 @@ FORCE_ALIGN ALenum AL_APIENTRY EAXGet(
     ALuint property_source_id,
     ALvoid* property_value,
     ALuint property_value_size) noexcept
+#if 0
 try
+#endif
 {
     auto context = GetContextRef();
 
@@ -1096,10 +1102,12 @@ try
         property_source_id,
         property_value,
         property_value_size);
+#if 0
 }
 catch (...)
 {
     eax_log_exception(__func__);
     return AL_INVALID_OPERATION;
+#endif
 }
 #endif // ALSOFT_EAX

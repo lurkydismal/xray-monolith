@@ -317,8 +317,7 @@ void OpenSLPlayback::open(const char *name)
     if(!name)
         name = opensl_device;
     else if(strcmp(name, opensl_device) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
 
     /* There's only one device, so if it's already open, there's nothing to do. */
     if(mEngineObj) return;
@@ -358,8 +357,7 @@ void OpenSLPlayback::open(const char *name)
         mEngineObj = nullptr;
         mEngine = nullptr;
 
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to initialize OpenSL device: 0x%08x", result};
+        std::terminate();
     }
 
     mDevice->DeviceName = name;
@@ -568,16 +566,14 @@ void OpenSLPlayback::start()
         PrintErr(result, "bufferQueue->RegisterCallback");
     }
     if(SL_RESULT_SUCCESS != result)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to register callback: 0x%08x", result};
+        std::terminate();
 
     try {
         mKillNow.store(false, std::memory_order_release);
         mThread = std::thread(std::mem_fn(&OpenSLPlayback::mixerProc), this);
     }
     catch(std::exception& e) {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start mixing thread: %s", e.what()};
+        std::terminate();
     }
 }
 
@@ -691,8 +687,7 @@ void OpenSLCapture::open(const char* name)
     if(!name)
         name = opensl_device;
     else if(strcmp(name, opensl_device) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
 
     SLresult result{slCreateEngine(&mEngineObj, 0, nullptr, 0, nullptr, nullptr)};
     PrintErr(result, "slCreateEngine");
@@ -847,8 +842,7 @@ void OpenSLCapture::open(const char* name)
         mEngineObj = nullptr;
         mEngine = nullptr;
 
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to initialize OpenSL device: 0x%08x", result};
+        std::terminate();
     }
 
     mDevice->DeviceName = name;
@@ -866,8 +860,7 @@ void OpenSLCapture::start()
         PrintErr(result, "record->SetRecordState");
     }
     if(SL_RESULT_SUCCESS != result)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start capture: 0x%08x", result};
+        std::terminate();
 }
 
 void OpenSLCapture::stop()

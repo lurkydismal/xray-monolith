@@ -117,7 +117,7 @@ void ContextBase::allocVoices(size_t addcount)
     addcount = (addcount+(clustersize-1)) / clustersize;
 
     if(addcount >= std::numeric_limits<int>::max()/clustersize - mVoiceClusters.size())
-        throw std::runtime_error{"Allocating too many voices"};
+        std::terminate();
     const size_t totalcount{(mVoiceClusters.size()+addcount) * clustersize};
     TRACE("Increasing allocated voices to %zu\n", totalcount);
 
@@ -155,7 +155,7 @@ EffectSlot *ContextBase::getEffectSlot()
     }
 
     if(1 >= std::numeric_limits<int>::max()/EffectSlotClusterSize - mEffectSlotClusters.size())
-        throw std::runtime_error{"Allocating too many effect slots"};
+        std::terminate();
     const size_t totalcount{(mEffectSlotClusters.size()+1) * EffectSlotClusterSize};
     TRACE("Increasing allocated effect slots to %zu\n", totalcount);
 

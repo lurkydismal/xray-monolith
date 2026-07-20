@@ -116,8 +116,11 @@ static int EventThread(ALCcontext *context)
 
 void StartEventThrd(ALCcontext *ctx)
 {
+#if 0
     try {
+#endif
         ctx->mEventThread = std::thread{EventThread, ctx};
+#if 0
     }
     catch(std::exception& e) {
         ERR("Failed to start event thread: %s\n", e.what());
@@ -125,6 +128,7 @@ void StartEventThrd(ALCcontext *ctx)
     catch(...) {
         ERR("Failed to start event thread! Expect problems.\n");
     }
+#endif
 }
 
 void StopEventThrd(ALCcontext *ctx)

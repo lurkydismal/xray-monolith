@@ -778,22 +778,24 @@ FORCE_ALIGN int WasapiPlayback::mixerProc()
 void WasapiPlayback::open(const char *name)
 {
     if(SUCCEEDED(mOpenStatus))
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Unexpected duplicate open call"};
+    {
+        al::backend_exception tmp{al::backend_error::DeviceError, "Unexpected duplicate open call"};
+    std::terminate();
+    }
 
     mNotifyEvent = CreateEventW(nullptr, FALSE, FALSE, nullptr);
     if(mNotifyEvent == nullptr)
     {
         ERR("Failed to create notify events: %lu\n", GetLastError());
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to create notify events"};
+        al::backend_exception tmp{al::backend_error::DeviceError, "Failed to create notify events"};
+    std::terminate();
     }
 
     HRESULT hr{InitThread()};
     if(FAILED(hr))
     {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to init COM thread: 0x%08lx", hr};
+        al::backend_exception tmp{al::backend_error::DeviceError, "Failed to init COM thread: 0x%08lx", hr};
+        std::terminate();
     }
 
     if(name)
@@ -812,8 +814,8 @@ void WasapiPlayback::open(const char *name)
     if(FAILED(mOpenStatus))
     {
         DeinitThread();
-        throw al::backend_exception{al::backend_error::DeviceError, "Device init failed: 0x%08lx",
-            mOpenStatus};
+        al::backend_exception tmp{al::backend_error::DeviceError, "Device init failed: 0x%08lx", mOpenStatus};
+    std::terminate();
     }
 }
 
@@ -878,7 +880,10 @@ bool WasapiPlayback::reset()
 {
     HRESULT hr{pushMessage(MsgType::ResetDevice).get()};
     if(FAILED(hr))
-        throw al::backend_exception{al::backend_error::DeviceError, "0x%08lx", hr};
+    {
+        al::backend_exception tmp{al::backend_error::DeviceError, "0x%08lx", hr};
+        std::terminate();
+    }
     return true;
 }
 
@@ -1227,8 +1232,10 @@ void WasapiPlayback::start()
 {
     const HRESULT hr{pushMessage(MsgType::StartDevice).get()};
     if(FAILED(hr))
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start playback: 0x%lx", hr};
+    {
+        al::backend_exception tmp{al::backend_error::DeviceError, "Failed to start playback: 0x%lx", hr};
+    std::terminate();
+    }
 }
 
 HRESULT WasapiPlayback::startProxy()
@@ -1247,15 +1254,19 @@ HRESULT WasapiPlayback::startProxy()
     if(SUCCEEDED(hr))
     {
         mRender = ComPtr<IAudioRenderClient>{static_cast<IAudioRenderClient*>(ptr)};
+#if 0
         try {
+#endif
             mKillNow.store(false, std::memory_order_release);
             mThread = std::thread{std::mem_fn(&WasapiPlayback::mixerProc), this};
+#if 0
         }
         catch(...) {
             mRender = nullptr;
             ERR("Failed to start thread\n");
             hr = E_FAIL;
         }
+#endif
     }
 
     if(FAILED(hr))
@@ -1444,23 +1455,25 @@ FORCE_ALIGN int WasapiCapture::recordProc()
 
 void WasapiCapture::open(const char *name)
 {
-    if(SUCCEEDED(mOpenStatus))
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Unexpected duplicate open call"};
+        if(SUCCEEDED(mOpenStatus))
+        {
+            al::backend_exception tmp{al::backend_error::DeviceError, "Unexpected duplicate open call"};
+        std::terminate();
+        }
 
     mNotifyEvent = CreateEventW(nullptr, FALSE, FALSE, nullptr);
     if(mNotifyEvent == nullptr)
     {
         ERR("Failed to create notify events: %lu\n", GetLastError());
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to create notify events"};
+        al::backend_exception tmp{al::backend_error::DeviceError, "Failed to create notify events"};
+        std::terminate();
     }
 
     HRESULT hr{InitThread()};
     if(FAILED(hr))
     {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to init COM thread: 0x%08lx", hr};
+        al::backend_exception tmp{al::backend_error::DeviceError, "Failed to init COM thread: 0x%08lx", hr};
+            std::terminate();
     }
 
     if(name)
@@ -1479,16 +1492,20 @@ void WasapiCapture::open(const char *name)
     if(FAILED(mOpenStatus))
     {
         DeinitThread();
-        throw al::backend_exception{al::backend_error::DeviceError, "Device init failed: 0x%08lx",
-            mOpenStatus};
+        al::backend_exception tmp{al::backend_error::DeviceError, "Device init failed: 0x%08lx", mOpenStatus};
+        std::terminate();
     }
 
     hr = pushMessage(MsgType::ResetDevice).get();
     if(FAILED(hr))
     {
-        if(hr == E_OUTOFMEMORY)
-            throw al::backend_exception{al::backend_error::OutOfMemory, "Out of memory"};
-        throw al::backend_exception{al::backend_error::DeviceError, "Device reset failed"};
+            if(hr == E_OUTOFMEMORY)
+            {
+                al::backend_exception tmp{al::backend_error::OutOfMemory, "Out of memory"};
+                std::terminate();
+            }
+        al::backend_exception tmp{al::backend_error::DeviceError, "Device reset failed"};
+        std::terminate();
     }
 }
 
@@ -1833,9 +1850,11 @@ HRESULT WasapiCapture::resetProxy()
 void WasapiCapture::start()
 {
     const HRESULT hr{pushMessage(MsgType::StartDevice).get()};
-    if(FAILED(hr))
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start recording: 0x%lx", hr};
+        if(FAILED(hr))
+        {
+            al::backend_exception tmp{al::backend_error::DeviceError, "Failed to start recording: 0x%lx", hr};
+        std::terminate();
+        }
 }
 
 HRESULT WasapiCapture::startProxy()
@@ -1854,15 +1873,19 @@ HRESULT WasapiCapture::startProxy()
     if(SUCCEEDED(hr))
     {
         mCapture = ComPtr<IAudioCaptureClient>{static_cast<IAudioCaptureClient*>(ptr)};
+#if 0
         try {
+#endif
             mKillNow.store(false, std::memory_order_release);
             mThread = std::thread{std::mem_fn(&WasapiCapture::recordProc), this};
+#if 0
         }
         catch(...) {
             mCapture = nullptr;
             ERR("Failed to start thread\n");
             hr = E_FAIL;
         }
+#endif
     }
 
     if(FAILED(hr))
@@ -1905,7 +1928,11 @@ bool WasapiBackendFactory::init()
 {
     static HRESULT InitResult{E_FAIL};
 
-    if(FAILED(InitResult)) try
+    if(FAILED(InitResult))
+#if 0
+    try
+    {
+#endif
     {
         auto res = std::async(std::launch::async, []() -> HRESULT
         {
@@ -1933,8 +1960,11 @@ bool WasapiBackendFactory::init()
 
         InitResult = res.get();
     }
+#if 0
+    }
     catch(...) {
     }
+#endif
 
     return SUCCEEDED(InitResult);
 }

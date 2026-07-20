@@ -38,8 +38,8 @@ ALenum EnumFromWaveform(ModulatorWaveform type)
     case ModulatorWaveform::Sawtooth: return AL_RING_MODULATOR_SAWTOOTH;
     case ModulatorWaveform::Square: return AL_RING_MODULATOR_SQUARE;
     }
-    throw std::runtime_error{"Invalid modulator waveform: " +
-        std::to_string(static_cast<int>(type))};
+    std::runtime_error tmp{"Invalid modulator waveform: " + std::to_string(static_cast<int>(type))};
+    std::terminate();
 }
 
 void Modulator_setParamf(EffectProps *props, ALenum param, float val)
@@ -47,19 +47,26 @@ void Modulator_setParamf(EffectProps *props, ALenum param, float val)
     switch(param)
     {
     case AL_RING_MODULATOR_FREQUENCY:
-        if(!(val >= AL_RING_MODULATOR_MIN_FREQUENCY && val <= AL_RING_MODULATOR_MAX_FREQUENCY))
-            throw effect_exception{AL_INVALID_VALUE, "Modulator frequency out of range: %f", val};
+            if(!(val >= AL_RING_MODULATOR_MIN_FREQUENCY && val <= AL_RING_MODULATOR_MAX_FREQUENCY))
+            {
+                effect_exception tmp{AL_INVALID_VALUE, "Modulator frequency out of range: %f", val};
+                std::terminate();
+            }
         props->Modulator.Frequency = val;
         break;
 
     case AL_RING_MODULATOR_HIGHPASS_CUTOFF:
-        if(!(val >= AL_RING_MODULATOR_MIN_HIGHPASS_CUTOFF && val <= AL_RING_MODULATOR_MAX_HIGHPASS_CUTOFF))
-            throw effect_exception{AL_INVALID_VALUE, "Modulator high-pass cutoff out of range: %f", val};
+            if(!(val >= AL_RING_MODULATOR_MIN_HIGHPASS_CUTOFF && val <= AL_RING_MODULATOR_MAX_HIGHPASS_CUTOFF))
+            {
+                effect_exception tmp{AL_INVALID_VALUE, "Modulator high-pass cutoff out of range: %f", val};
+                std::terminate();
+            }
         props->Modulator.HighPassCutoff = val;
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid modulator float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid modulator float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Modulator_setParamfv(EffectProps *props, ALenum param, const float *vals)
@@ -76,13 +83,16 @@ void Modulator_setParami(EffectProps *props, ALenum param, int val)
     case AL_RING_MODULATOR_WAVEFORM:
         if(auto formopt = WaveformFromEmum(val))
             props->Modulator.Waveform = *formopt;
-        else
-            throw effect_exception{AL_INVALID_VALUE, "Invalid modulator waveform: 0x%04x", val};
+            else
+            {
+                effect_exception tmp{AL_INVALID_VALUE, "Invalid modulator waveform: 0x%04x", val};
+                std::terminate();
+            }
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid modulator integer property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid modulator integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Modulator_setParamiv(EffectProps *props, ALenum param, const int *vals)
@@ -103,8 +113,8 @@ void Modulator_getParami(const EffectProps *props, ALenum param, int *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid modulator integer property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid modulator integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Modulator_getParamiv(const EffectProps *props, ALenum param, int *vals)
@@ -121,7 +131,8 @@ void Modulator_getParamf(const EffectProps *props, ALenum param, float *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid modulator float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid modulator float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Modulator_getParamfv(const EffectProps *props, ALenum param, float *vals)
@@ -200,7 +211,8 @@ struct ModulatorCommitter::Exception : public EaxException {
 template<>
 [[noreturn]] void ModulatorCommitter::fail(const char *message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 template<>

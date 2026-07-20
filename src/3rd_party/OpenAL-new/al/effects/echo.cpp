@@ -20,54 +20,82 @@ static_assert(EchoMaxDelay >= AL_ECHO_MAX_DELAY, "Echo max delay too short");
 static_assert(EchoMaxLRDelay >= AL_ECHO_MAX_LRDELAY, "Echo max left-right delay too short");
 
 void Echo_setParami(EffectProps*, ALenum param, int)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid echo integer property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid echo integer property 0x%04x", param};
+    std::terminate();
+}
 void Echo_setParamiv(EffectProps*, ALenum param, const int*)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid echo integer-vector property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid echo integer-vector property 0x%04x", param};
+    std::terminate();
+}
 void Echo_setParamf(EffectProps *props, ALenum param, float val)
 {
     switch(param)
     {
     case AL_ECHO_DELAY:
         if(!(val >= AL_ECHO_MIN_DELAY && val <= AL_ECHO_MAX_DELAY))
-            throw effect_exception{AL_INVALID_VALUE, "Echo delay out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Echo delay out of range"};
+            std::terminate();
+        }
         props->Echo.Delay = val;
         break;
 
     case AL_ECHO_LRDELAY:
         if(!(val >= AL_ECHO_MIN_LRDELAY && val <= AL_ECHO_MAX_LRDELAY))
-            throw effect_exception{AL_INVALID_VALUE, "Echo LR delay out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Echo LR delay out of range"};
+            std::terminate();
+        }
         props->Echo.LRDelay = val;
         break;
 
     case AL_ECHO_DAMPING:
         if(!(val >= AL_ECHO_MIN_DAMPING && val <= AL_ECHO_MAX_DAMPING))
-            throw effect_exception{AL_INVALID_VALUE, "Echo damping out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Echo damping out of range"};
+            std::terminate();
+        }
         props->Echo.Damping = val;
         break;
 
     case AL_ECHO_FEEDBACK:
         if(!(val >= AL_ECHO_MIN_FEEDBACK && val <= AL_ECHO_MAX_FEEDBACK))
-            throw effect_exception{AL_INVALID_VALUE, "Echo feedback out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Echo feedback out of range"};
+            std::terminate();
+        }
         props->Echo.Feedback = val;
         break;
 
     case AL_ECHO_SPREAD:
         if(!(val >= AL_ECHO_MIN_SPREAD && val <= AL_ECHO_MAX_SPREAD))
-            throw effect_exception{AL_INVALID_VALUE, "Echo spread out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Echo spread out of range"};
+            std::terminate();
+        }
         props->Echo.Spread = val;
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid echo float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid echo float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Echo_setParamfv(EffectProps *props, ALenum param, const float *vals)
 { Echo_setParamf(props, param, vals[0]); }
 
 void Echo_getParami(const EffectProps*, ALenum param, int*)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid echo integer property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid echo integer property 0x%04x", param};
+    std::terminate();
+}
 void Echo_getParamiv(const EffectProps*, ALenum param, int*)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid echo integer-vector property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid echo integer-vector property 0x%04x", param};
+    std::terminate();
+}
 void Echo_getParamf(const EffectProps *props, ALenum param, float *val)
 {
     switch(param)
@@ -93,7 +121,8 @@ void Echo_getParamf(const EffectProps *props, ALenum param, float *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid echo float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid echo float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Echo_getParamfv(const EffectProps *props, ALenum param, float *vals)
@@ -198,7 +227,8 @@ struct EchoCommitter::Exception : public EaxException {
 template<>
 [[noreturn]] void EchoCommitter::fail(const char *message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 template<>

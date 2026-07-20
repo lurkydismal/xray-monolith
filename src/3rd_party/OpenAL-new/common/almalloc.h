@@ -33,7 +33,8 @@ void *al_calloc(size_t alignment, size_t size);
             "Incorrect container type specified");                            \
         if(void *ret{al_malloc(alignof(T), size)})                            \
             return ret;                                                       \
-        throw std::bad_alloc();                                               \
+        std::bad_alloc tmp{};                                               \
+        std::terminate(); \
     }                                                                         \
     void *operator new[](size_t size) { return operator new(size); }          \
     void operator delete(void *block) noexcept { al_free(block); }            \
@@ -62,7 +63,8 @@ enum FamCount : size_t { };
     {                                                                         \
         if(void *ret{al_malloc(alignof(T), T::Sizeof(count))})                \
             return ret;                                                       \
-        throw std::bad_alloc();                                               \
+        std::bad_alloc tmp{};                                               \
+        std::terminate(); \
     }                                                                         \
     void *operator new[](size_t /*size*/) = delete;                           \
     void operator delete(void *block, FamCount) { al_free(block); }           \
@@ -96,9 +98,14 @@ struct allocator {
 
     T *allocate(std::size_t n)
     {
-        if(n > std::numeric_limits<std::size_t>::max()/sizeof(T)) throw std::bad_alloc();
+        if(n > std::numeric_limits<std::size_t>::max()/sizeof(T))
+        {
+            std::bad_alloc tmp{};
+            std::terminate();
+        }
         if(auto p = al_malloc(alignment, n*sizeof(T))) return static_cast<T*>(p);
-        throw std::bad_alloc();
+        std::bad_alloc tmp{};
+        std::terminate();
     }
     void deallocate(T *p, std::size_t) noexcept { al_free(p); }
 };
@@ -176,16 +183,20 @@ T> uninitialized_default_construct_n(T first, N count)
     T current{first};
     if(count != 0)
     {
+#if 0
         try {
+#endif
             do {
                 ::new(static_cast<void*>(std::addressof(*current))) ValueT;
                 ++current;
             } while(--count);
+#if 0
         }
         catch(...) {
             al::destroy(first, current);
-            throw;
+            std::terminate();
         }
+#endif
     }
     return current;
 }

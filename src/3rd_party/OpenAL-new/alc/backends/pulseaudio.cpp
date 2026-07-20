@@ -444,8 +444,7 @@ using MainloopLockGuard = std::lock_guard<PulseMainloop>;
 pa_context *MainloopUniqueLock::connectContext()
 {
     pa_context *context{pa_context_new(mutex()->getApi(), nullptr)};
-    if(!context) throw al::backend_exception{al::backend_error::OutOfMemory,
-        "pa_context_new() failed"};
+    if(!context) std::terminate();
 
     pa_context_set_state_callback(context, [](pa_context *ctx, void *pdata) noexcept
     { return static_cast<MainloopUniqueLock*>(pdata)->contextStateCallback(ctx); }, this);
@@ -471,8 +470,7 @@ pa_context *MainloopUniqueLock::connectContext()
     if(err < 0)
     {
         pa_context_unref(context);
-        throw al::backend_exception{al::backend_error::DeviceError, "Context did not connect (%s)",
-            pa_strerror(err)};
+        std::terminate();
     }
 
     return context;
@@ -485,8 +483,7 @@ pa_stream *MainloopUniqueLock::connectStream(const char *device_name, pa_context
     const char *stream_id{(type==BackendType::Playback) ? "Playback Stream" : "Capture Stream"};
     pa_stream *stream{pa_stream_new(context, stream_id, spec, chanmap)};
     if(!stream)
-        throw al::backend_exception{al::backend_error::OutOfMemory, "pa_stream_new() failed (%s)",
-            pa_strerror(pa_context_errno(context))};
+        std::terminate();
 
     pa_stream_set_state_callback(stream, [](pa_stream *strm, void *pdata) noexcept
     { return static_cast<MainloopUniqueLock*>(pdata)->streamStateCallback(strm); }, this);
@@ -497,8 +494,7 @@ pa_stream *MainloopUniqueLock::connectStream(const char *device_name, pa_context
     if(err < 0)
     {
         pa_stream_unref(stream);
-        throw al::backend_exception{al::backend_error::DeviceError, "%s did not connect (%s)",
-            stream_id, pa_strerror(err)};
+        std::terminate();
     }
 
     pa_stream_state_t state;
@@ -508,8 +504,7 @@ pa_stream *MainloopUniqueLock::connectStream(const char *device_name, pa_context
         {
             err = pa_context_errno(context);
             pa_stream_unref(stream);
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "%s did not get ready (%s)", stream_id, pa_strerror(err)};
+            std::terminate();
         }
 
         wait();
@@ -765,8 +760,7 @@ void PulsePlayback::open(const char *name)
         auto iter = std::find_if(PlaybackDevices.cbegin(), PlaybackDevices.cend(),
             [name](const DevMap &entry) -> bool { return entry.name == name; });
         if(iter == PlaybackDevices.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
         pulse_name = iter->device_name.c_str();
         dev_name = iter->name.c_str();
     }
@@ -907,7 +901,7 @@ bool PulsePlayback::reset()
     mSpec.rate = mDevice->Frequency;
     mSpec.channels = static_cast<uint8_t>(mDevice->channelsFromFmt());
     if(pa_sample_spec_valid(&mSpec) == 0)
-        throw al::backend_exception{al::backend_error::DeviceError, "Invalid sample spec"};
+        std::terminate();
 
     const auto frame_size = static_cast<uint>(pa_frame_size(&mSpec));
     mAttr.maxlength = ~0u;
@@ -1115,8 +1109,7 @@ void PulseCapture::open(const char *name)
         auto iter = std::find_if(CaptureDevices.cbegin(), CaptureDevices.cend(),
             [name](const DevMap &entry) -> bool { return entry.name == name; });
         if(iter == CaptureDevices.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
         pulse_name = iter->device_name.c_str();
         mDevice->DeviceName = iter->name;
     }
@@ -1150,8 +1143,7 @@ void PulseCapture::open(const char *name)
         break;
     case DevFmtX3D71:
     case DevFmtAmbi3D:
-        throw al::backend_exception{al::backend_error::DeviceError, "%s capture not supported",
-            DevFmtChannelsString(mDevice->FmtChans)};
+        std::terminate();
     }
     setDefaultWFXChannelOrder();
 
@@ -1173,13 +1165,12 @@ void PulseCapture::open(const char *name)
     case DevFmtByte:
     case DevFmtUShort:
     case DevFmtUInt:
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "%s capture samples not supported", DevFmtTypeString(mDevice->FmtType)};
+        std::terminate();
     }
     mSpec.rate = mDevice->Frequency;
     mSpec.channels = static_cast<uint8_t>(mDevice->channelsFromFmt());
     if(pa_sample_spec_valid(&mSpec) == 0)
-        throw al::backend_exception{al::backend_error::DeviceError, "Invalid sample format"};
+        std::terminate();
 
     const auto frame_size = static_cast<uint>(pa_frame_size(&mSpec));
     const uint samples{maxu(mDevice->BufferSize, 100 * mDevice->Frequency / 1000)};

@@ -22,27 +22,33 @@ void Compressor_setParami(EffectProps *props, ALenum param, int val)
     {
     case AL_COMPRESSOR_ONOFF:
         if(!(val >= AL_COMPRESSOR_MIN_ONOFF && val <= AL_COMPRESSOR_MAX_ONOFF))
-            throw effect_exception{AL_INVALID_VALUE, "Compressor state out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Compressor state out of range"};
+            std::terminate();
+        }
         props->Compressor.OnOff = (val != AL_FALSE);
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid compressor integer property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid compressor integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Compressor_setParamiv(EffectProps *props, ALenum param, const int *vals)
 { Compressor_setParami(props, param, vals[0]); }
 void Compressor_setParamf(EffectProps*, ALenum param, float)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid compressor float property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid compressor float property 0x%04x", param};
+    std::terminate();
+}
 void Compressor_setParamfv(EffectProps*, ALenum param, const float*)
 {
-    throw effect_exception{AL_INVALID_ENUM, "Invalid compressor float-vector property 0x%04x",
-        param};
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid compressor float-vector property 0x%04x", param};
+    std::terminate();
 }
 
 void Compressor_getParami(const EffectProps *props, ALenum param, int *val)
-{ 
+{
     switch(param)
     {
     case AL_COMPRESSOR_ONOFF:
@@ -50,18 +56,21 @@ void Compressor_getParami(const EffectProps *props, ALenum param, int *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid compressor integer property 0x%04x",
-            param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid compressor integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Compressor_getParamiv(const EffectProps *props, ALenum param, int *vals)
 { Compressor_getParami(props, param, vals); }
 void Compressor_getParamf(const EffectProps*, ALenum param, float*)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid compressor float property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid compressor float property 0x%04x", param};
+    std::terminate();
+}
 void Compressor_getParamfv(const EffectProps*, ALenum param, float*)
 {
-    throw effect_exception{AL_INVALID_ENUM, "Invalid compressor float-vector property 0x%04x",
-        param};
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid compressor float-vector property 0x%04x", param};
+    std::terminate();
 }
 
 EffectProps genDefaultProps() noexcept
@@ -112,7 +121,8 @@ struct CompressorCommitter::Exception : public EaxException
 template<>
 [[noreturn]] void CompressorCommitter::fail(const char *message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 template<>

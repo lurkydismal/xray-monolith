@@ -896,7 +896,11 @@ END_API_FUNC
 ALeffectslot::ALeffectslot(ALCcontext *context)
 {
     EffectStateFactory *factory{getFactoryByType(EffectSlotType::None)};
-    if(!factory) throw std::runtime_error{"Failed to get null effect factory"};
+    if(!factory)
+    {
+        std::runtime_error tmp{"Failed to get null effect factory"};
+        std::terminate();
+    }
 
     al::intrusive_ptr<EffectState> state{factory->create()};
     Effect.State = state;
@@ -1084,7 +1088,8 @@ void ALeffectslot::eax_commit()
 
 [[noreturn]] void ALeffectslot::eax_fail(const char* message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 [[noreturn]] void ALeffectslot::eax_fail_unknown_effect_id()

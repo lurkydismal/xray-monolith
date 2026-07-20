@@ -43,7 +43,8 @@ inline ALenum EnumFromWaveform(ChorusWaveform type)
     case ChorusWaveform::Sinusoid: return AL_CHORUS_WAVEFORM_SINUSOID;
     case ChorusWaveform::Triangle: return AL_CHORUS_WAVEFORM_TRIANGLE;
     }
-    throw std::runtime_error{"Invalid chorus waveform: "+std::to_string(static_cast<int>(type))};
+    std::runtime_error tmp{"Invalid chorus waveform: "+std::to_string(static_cast<int>(type))};
+    std::terminate();
 }
 
 void Chorus_setParami(EffectProps *props, ALenum param, int val)
@@ -54,17 +55,24 @@ void Chorus_setParami(EffectProps *props, ALenum param, int val)
         if(auto formopt = WaveformFromEnum(val))
             props->Chorus.Waveform = *formopt;
         else
-            throw effect_exception{AL_INVALID_VALUE, "Invalid chorus waveform: 0x%04x", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Invalid chorus waveform: 0x%04x", val};
+            std::terminate();
+        }
         break;
 
     case AL_CHORUS_PHASE:
         if(!(val >= AL_CHORUS_MIN_PHASE && val <= AL_CHORUS_MAX_PHASE))
-            throw effect_exception{AL_INVALID_VALUE, "Chorus phase out of range: %d", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Chorus phase out of range: %d", val};
+            std::terminate();
+        }
         props->Chorus.Phase = val;
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid chorus integer property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid chorus integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Chorus_setParamiv(EffectProps *props, ALenum param, const int *vals)
@@ -75,30 +83,43 @@ void Chorus_setParamf(EffectProps *props, ALenum param, float val)
     {
     case AL_CHORUS_RATE:
         if(!(val >= AL_CHORUS_MIN_RATE && val <= AL_CHORUS_MAX_RATE))
-            throw effect_exception{AL_INVALID_VALUE, "Chorus rate out of range: %f", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Chorus rate out of range: %f", val};
+            std::terminate();
+        }
         props->Chorus.Rate = val;
         break;
 
     case AL_CHORUS_DEPTH:
         if(!(val >= AL_CHORUS_MIN_DEPTH && val <= AL_CHORUS_MAX_DEPTH))
-            throw effect_exception{AL_INVALID_VALUE, "Chorus depth out of range: %f", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Chorus depth out of range: %f", val};
+            std::terminate();
+        }
         props->Chorus.Depth = val;
         break;
 
     case AL_CHORUS_FEEDBACK:
         if(!(val >= AL_CHORUS_MIN_FEEDBACK && val <= AL_CHORUS_MAX_FEEDBACK))
-            throw effect_exception{AL_INVALID_VALUE, "Chorus feedback out of range: %f", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Chorus feedback out of range: %f", val};
+            std::terminate();
+        }
         props->Chorus.Feedback = val;
         break;
 
     case AL_CHORUS_DELAY:
         if(!(val >= AL_CHORUS_MIN_DELAY && val <= AL_CHORUS_MAX_DELAY))
-            throw effect_exception{AL_INVALID_VALUE, "Chorus delay out of range: %f", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Chorus delay out of range: %f", val};
+            std::terminate();
+        }
         props->Chorus.Delay = val;
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid chorus float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid chorus float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Chorus_setParamfv(EffectProps *props, ALenum param, const float *vals)
@@ -117,7 +138,8 @@ void Chorus_getParami(const EffectProps *props, ALenum param, int *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid chorus integer property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid chorus integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Chorus_getParamiv(const EffectProps *props, ALenum param, int *vals)
@@ -143,7 +165,8 @@ void Chorus_getParamf(const EffectProps *props, ALenum param, float *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid chorus float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid chorus float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Chorus_getParamfv(const EffectProps *props, ALenum param, float *vals)
@@ -170,17 +193,24 @@ void Flanger_setParami(EffectProps *props, ALenum param, int val)
         if(auto formopt = WaveformFromEnum(val))
             props->Chorus.Waveform = *formopt;
         else
-            throw effect_exception{AL_INVALID_VALUE, "Invalid flanger waveform: 0x%04x", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Invalid flanger waveform: 0x%04x", val};
+            std::terminate();
+        }
         break;
 
     case AL_FLANGER_PHASE:
         if(!(val >= AL_FLANGER_MIN_PHASE && val <= AL_FLANGER_MAX_PHASE))
-            throw effect_exception{AL_INVALID_VALUE, "Flanger phase out of range: %d", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Flanger phase out of range: %d", val};
+            std::terminate();
+        }
         props->Chorus.Phase = val;
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid flanger integer property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid flanger integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Flanger_setParamiv(EffectProps *props, ALenum param, const int *vals)
@@ -191,30 +221,43 @@ void Flanger_setParamf(EffectProps *props, ALenum param, float val)
     {
     case AL_FLANGER_RATE:
         if(!(val >= AL_FLANGER_MIN_RATE && val <= AL_FLANGER_MAX_RATE))
-            throw effect_exception{AL_INVALID_VALUE, "Flanger rate out of range: %f", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Flanger rate out of range: %f", val};
+            std::terminate();
+        }
         props->Chorus.Rate = val;
         break;
 
     case AL_FLANGER_DEPTH:
         if(!(val >= AL_FLANGER_MIN_DEPTH && val <= AL_FLANGER_MAX_DEPTH))
-            throw effect_exception{AL_INVALID_VALUE, "Flanger depth out of range: %f", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Flanger depth out of range: %f", val};
+            std::terminate();
+        }
         props->Chorus.Depth = val;
         break;
 
     case AL_FLANGER_FEEDBACK:
         if(!(val >= AL_FLANGER_MIN_FEEDBACK && val <= AL_FLANGER_MAX_FEEDBACK))
-            throw effect_exception{AL_INVALID_VALUE, "Flanger feedback out of range: %f", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Flanger feedback out of range: %f", val};
+            std::terminate();
+        }
         props->Chorus.Feedback = val;
         break;
 
     case AL_FLANGER_DELAY:
         if(!(val >= AL_FLANGER_MIN_DELAY && val <= AL_FLANGER_MAX_DELAY))
-            throw effect_exception{AL_INVALID_VALUE, "Flanger delay out of range: %f", val};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Flanger delay out of range: %f", val};
+            std::terminate();
+        }
         props->Chorus.Delay = val;
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid flanger float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid flanger float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Flanger_setParamfv(EffectProps *props, ALenum param, const float *vals)
@@ -233,7 +276,8 @@ void Flanger_getParami(const EffectProps *props, ALenum param, int *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid flanger integer property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid flanger integer property 0x%04x", param};
+        std::terminate();
     }
 }
 void Flanger_getParamiv(const EffectProps *props, ALenum param, int *vals)
@@ -259,7 +303,8 @@ void Flanger_getParamf(const EffectProps *props, ALenum param, float *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid flanger float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid flanger float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Flanger_getParamfv(const EffectProps *props, ALenum param, float *vals)
@@ -649,7 +694,8 @@ struct ChorusCommitter::Exception : public EaxException
 template<>
 [[noreturn]] void ChorusCommitter::fail(const char *message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 template<>
@@ -690,7 +736,8 @@ struct FlangerCommitter::Exception : public EaxException
 template<>
 [[noreturn]] void FlangerCommitter::fail(const char *message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 template<>

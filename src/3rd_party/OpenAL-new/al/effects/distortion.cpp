@@ -17,11 +17,14 @@
 namespace {
 
 void Distortion_setParami(EffectProps*, ALenum param, int)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid distortion integer property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid distortion integer property 0x%04x", param};
+    std::terminate();
+}
 void Distortion_setParamiv(EffectProps*, ALenum param, const int*)
 {
-    throw effect_exception{AL_INVALID_ENUM, "Invalid distortion integer-vector property 0x%04x",
-        param};
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid distortion integer-vector property 0x%04x", param};
+    std::terminate();
 }
 void Distortion_setParamf(EffectProps *props, ALenum param, float val)
 {
@@ -29,47 +32,66 @@ void Distortion_setParamf(EffectProps *props, ALenum param, float val)
     {
     case AL_DISTORTION_EDGE:
         if(!(val >= AL_DISTORTION_MIN_EDGE && val <= AL_DISTORTION_MAX_EDGE))
-            throw effect_exception{AL_INVALID_VALUE, "Distortion edge out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Distortion edge out of range"};
+            std::terminate();
+        }
         props->Distortion.Edge = val;
         break;
 
     case AL_DISTORTION_GAIN:
         if(!(val >= AL_DISTORTION_MIN_GAIN && val <= AL_DISTORTION_MAX_GAIN))
-            throw effect_exception{AL_INVALID_VALUE, "Distortion gain out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Distortion gain out of range"};
+            std::terminate();
+        }
         props->Distortion.Gain = val;
         break;
 
     case AL_DISTORTION_LOWPASS_CUTOFF:
         if(!(val >= AL_DISTORTION_MIN_LOWPASS_CUTOFF && val <= AL_DISTORTION_MAX_LOWPASS_CUTOFF))
-            throw effect_exception{AL_INVALID_VALUE, "Distortion low-pass cutoff out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Distortion low-pass cutoff out of range"};
+            std::terminate();
+        }
         props->Distortion.LowpassCutoff = val;
         break;
 
     case AL_DISTORTION_EQCENTER:
         if(!(val >= AL_DISTORTION_MIN_EQCENTER && val <= AL_DISTORTION_MAX_EQCENTER))
-            throw effect_exception{AL_INVALID_VALUE, "Distortion EQ center out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Distortion EQ center out of range"};
+            std::terminate();
+        }
         props->Distortion.EQCenter = val;
         break;
 
     case AL_DISTORTION_EQBANDWIDTH:
         if(!(val >= AL_DISTORTION_MIN_EQBANDWIDTH && val <= AL_DISTORTION_MAX_EQBANDWIDTH))
-            throw effect_exception{AL_INVALID_VALUE, "Distortion EQ bandwidth out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Distortion EQ bandwidth out of range"};
+            std::terminate();
+        }
         props->Distortion.EQBandwidth = val;
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid distortion float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid distortion float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Distortion_setParamfv(EffectProps *props, ALenum param, const float *vals)
 { Distortion_setParamf(props, param, vals[0]); }
 
 void Distortion_getParami(const EffectProps*, ALenum param, int*)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid distortion integer property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid distortion integer property 0x%04x", param};
+    std::terminate();
+}
 void Distortion_getParamiv(const EffectProps*, ALenum param, int*)
 {
-    throw effect_exception{AL_INVALID_ENUM, "Invalid distortion integer-vector property 0x%04x",
-        param};
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid distortion integer-vector property 0x%04x", param};
+    std::terminate();
 }
 void Distortion_getParamf(const EffectProps *props, ALenum param, float *val)
 {
@@ -96,7 +118,8 @@ void Distortion_getParamf(const EffectProps *props, ALenum param, float *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid distortion float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid distortion float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Distortion_getParamfv(const EffectProps *props, ALenum param, float *vals)
@@ -201,7 +224,8 @@ struct DistortionCommitter::Exception : public EaxException {
 template<>
 [[noreturn]] void DistortionCommitter::fail(const char *message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 template<>

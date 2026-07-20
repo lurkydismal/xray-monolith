@@ -13,8 +13,11 @@ void eax_log_exception(const char *message) noexcept
     const auto exception_ptr = std::current_exception();
     assert(exception_ptr);
 
+#if 0
     try {
+#endif
         std::rethrow_exception(exception_ptr);
+#if 0
     }
     catch(const std::exception& ex) {
         const auto ex_message = ex.what();
@@ -23,4 +26,5 @@ void eax_log_exception(const char *message) noexcept
     catch(...) {
         ERR("%s %s\n", message ? message : "", "Generic exception.");
     }
+#endif
 }

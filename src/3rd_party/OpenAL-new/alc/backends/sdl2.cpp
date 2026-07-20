@@ -122,7 +122,7 @@ void Sdl2Backend::open(const char *name)
             devid = SDL_OpenAudioDevice(name, SDL_FALSE, &want, &have, SDL_AUDIO_ALLOW_ANY_CHANGE);
     }
     if(!devid)
-        throw al::backend_exception{al::backend_error::NoDevice, "%s", SDL_GetError()};
+        std::terminate();
 
     DevFmtChannels devchans{};
     if(have.channels >= 2)
@@ -132,8 +132,7 @@ void Sdl2Backend::open(const char *name)
     else
     {
         SDL_CloseAudioDevice(devid);
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Unhandled SDL channel count: %d", int{have.channels}};
+        std::terminate();
     }
 
     DevFmtType devtype{};
@@ -147,8 +146,7 @@ void Sdl2Backend::open(const char *name)
     case AUDIO_F32SYS: devtype = DevFmtFloat;  break;
     default:
         SDL_CloseAudioDevice(devid);
-        throw al::backend_exception{al::backend_error::DeviceError, "Unhandled SDL format: 0x%04x",
-            have.format};
+        std::terminate();
     }
 
     if(mDeviceID)

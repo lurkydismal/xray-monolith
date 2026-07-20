@@ -52,8 +52,7 @@ void OboePlayback::open(const char *name)
     if(!name)
         name = device_name;
     else if(std::strcmp(name, device_name) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
 
     /* Open a basic output stream, just to ensure it can work. */
     oboe::ManagedStream stream;
@@ -61,8 +60,7 @@ void OboePlayback::open(const char *name)
         ->setPerformanceMode(oboe::PerformanceMode::LowLatency)
         ->openManagedStream(stream)};
     if(result != oboe::Result::OK)
-        throw al::backend_exception{al::backend_error::DeviceError, "Failed to create stream: %s",
-            oboe::convertToText(result)};
+        std::terminate();
 
     mDevice->DeviceName = name;
 }
@@ -133,8 +131,7 @@ bool OboePlayback::reset()
         result = builder.openManagedStream(mStream);
     }
     if(result != oboe::Result::OK)
-        throw al::backend_exception{al::backend_error::DeviceError, "Failed to create stream: %s",
-            oboe::convertToText(result)};
+        std::terminate();
     mStream->setBufferSizeInFrames(mini(static_cast<int32_t>(mDevice->BufferSize),
         mStream->getBufferCapacityInFrames()));
     TRACE("Got stream with properties:\n%s", oboe::convertToText(mStream.get()));
@@ -146,8 +143,7 @@ bool OboePlayback::reset()
         else if(mStream->getChannelCount() == 1)
             mDevice->FmtChans = DevFmtMono;
         else
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Got unhandled channel count: %d", mStream->getChannelCount()};
+            std::terminate();
     }
     setDefaultWFXChannelOrder();
 
@@ -167,8 +163,7 @@ bool OboePlayback::reset()
 #endif
     case oboe::AudioFormat::Unspecified:
     case oboe::AudioFormat::Invalid:
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Got unhandled sample type: %s", oboe::convertToText(mStream->getFormat())};
+        std::terminate();
     }
     mDevice->Frequency = static_cast<uint32_t>(mStream->getSampleRate());
 
@@ -189,16 +184,14 @@ void OboePlayback::start()
 {
     const oboe::Result result{mStream->start()};
     if(result != oboe::Result::OK)
-        throw al::backend_exception{al::backend_error::DeviceError, "Failed to start stream: %s",
-            oboe::convertToText(result)};
+        std::terminate();
 }
 
 void OboePlayback::stop()
 {
     oboe::Result result{mStream->stop()};
     if(result != oboe::Result::OK)
-        throw al::backend_exception{al::backend_error::DeviceError, "Failed to stop stream: %s",
-            oboe::convertToText(result)};
+        std::terminate();
 }
 
 
@@ -232,8 +225,7 @@ void OboeCapture::open(const char *name)
     if(!name)
         name = device_name;
     else if(std::strcmp(name, device_name) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
 
     oboe::AudioStreamBuilder builder;
     builder.setDirection(oboe::Direction::Input)
@@ -261,8 +253,7 @@ void OboeCapture::open(const char *name)
     case DevFmtX714:
     case DevFmtX3D71:
     case DevFmtAmbi3D:
-        throw al::backend_exception{al::backend_error::DeviceError, "%s capture not supported",
-            DevFmtChannelsString(mDevice->FmtChans)};
+        std::terminate();
     }
 
     /* FIXME: This really should support UByte, but Oboe doesn't. We'll need to
@@ -285,14 +276,12 @@ void OboeCapture::open(const char *name)
     case DevFmtUByte:
     case DevFmtUShort:
     case DevFmtUInt:
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "%s capture samples not supported", DevFmtTypeString(mDevice->FmtType)};
+        std::terminate();
     }
 
     oboe::Result result{builder.openManagedStream(mStream)};
     if(result != oboe::Result::OK)
-        throw al::backend_exception{al::backend_error::DeviceError, "Failed to create stream: %s",
-            oboe::convertToText(result)};
+        std::terminate();
 
     TRACE("Got stream with properties:\n%s", oboe::convertToText(mStream.get()));
 
@@ -307,16 +296,14 @@ void OboeCapture::start()
 {
     const oboe::Result result{mStream->start()};
     if(result != oboe::Result::OK)
-        throw al::backend_exception{al::backend_error::DeviceError, "Failed to start stream: %s",
-            oboe::convertToText(result)};
+        std::terminate();
 }
 
 void OboeCapture::stop()
 {
     const oboe::Result result{mStream->stop()};
     if(result != oboe::Result::OK)
-        throw al::backend_exception{al::backend_error::DeviceError, "Failed to stop stream: %s",
-            oboe::convertToText(result)};
+        std::terminate();
 }
 
 uint OboeCapture::availableSamples()

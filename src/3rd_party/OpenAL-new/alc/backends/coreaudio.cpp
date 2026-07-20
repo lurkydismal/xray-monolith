@@ -317,8 +317,7 @@ void CoreAudioPlayback::open(const char *name)
         { return entry.mName == name; };
         auto devmatch = std::find_if(PlaybackList.cbegin(), PlaybackList.cend(), find_name);
         if(devmatch == PlaybackList.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
 
         audioDevice = devmatch->mId;
     }
@@ -326,8 +325,7 @@ void CoreAudioPlayback::open(const char *name)
     if(!name)
         name = ca_device;
     else if(strcmp(name, ca_device) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
 #endif
 
     /* open the default output unit */
@@ -345,13 +343,12 @@ void CoreAudioPlayback::open(const char *name)
 
     AudioComponent comp{AudioComponentFindNext(NULL, &desc)};
     if(comp == nullptr)
-        throw al::backend_exception{al::backend_error::NoDevice, "Could not find audio component"};
+        std::terminate();
 
     AudioUnit audioUnit{};
     OSStatus err{AudioComponentInstanceNew(comp, &audioUnit)};
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::NoDevice,
-            "Could not create component instance: %u", err};
+        std::terminate();
 
 #if CAN_ENUMERATE
     if(audioDevice != kAudioDeviceUnknown)
@@ -361,8 +358,7 @@ void CoreAudioPlayback::open(const char *name)
 
     err = AudioUnitInitialize(audioUnit);
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Could not initialize audio unit: %u", err};
+        std::terminate();
 
     /* WARNING: I don't know if "valid" audio unit values are guaranteed to be
      * non-0. If not, this logic is broken.
@@ -508,8 +504,7 @@ void CoreAudioPlayback::start()
 {
     const OSStatus err{AudioOutputUnitStart(mAudioUnit)};
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "AudioOutputUnitStart failed: %d", err};
+        std::terminate();
 }
 
 void CoreAudioPlayback::stop()
@@ -606,8 +601,7 @@ void CoreAudioCapture::open(const char *name)
         { return entry.mName == name; };
         auto devmatch = std::find_if(CaptureList.cbegin(), CaptureList.cend(), find_name);
         if(devmatch == CaptureList.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
 
         audioDevice = devmatch->mId;
     }
@@ -615,8 +609,7 @@ void CoreAudioCapture::open(const char *name)
     if(!name)
         name = ca_device;
     else if(strcmp(name, ca_device) != 0)
-        throw al::backend_exception{al::backend_error::NoDevice, "Device name \"%s\" not found",
-            name};
+        std::terminate();
 #endif
 
     AudioComponentDescription desc{};
@@ -634,29 +627,26 @@ void CoreAudioCapture::open(const char *name)
     // Search for component with given description
     AudioComponent comp{AudioComponentFindNext(NULL, &desc)};
     if(comp == NULL)
-        throw al::backend_exception{al::backend_error::NoDevice, "Could not find audio component"};
+        std::terminate();
 
     // Open the component
     OSStatus err{AudioComponentInstanceNew(comp, &mAudioUnit)};
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::NoDevice,
-            "Could not create component instance: %u", err};
+        std::terminate();
 
     // Turn off AudioUnit output
     UInt32 enableIO{0};
     err = AudioUnitSetProperty(mAudioUnit, kAudioOutputUnitProperty_EnableIO,
         kAudioUnitScope_Output, OutputElement, &enableIO, sizeof(enableIO));
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Could not disable audio unit output property: %u", err};
+        std::terminate();
 
     // Turn on AudioUnit input
     enableIO = 1;
     err = AudioUnitSetProperty(mAudioUnit, kAudioOutputUnitProperty_EnableIO,
         kAudioUnitScope_Input, InputElement, &enableIO, sizeof(enableIO));
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Could not enable audio unit input property: %u", err};
+        std::terminate();
 
 #if CAN_ENUMERATE
     if(audioDevice != kAudioDeviceUnknown)
@@ -672,22 +662,19 @@ void CoreAudioCapture::open(const char *name)
     err = AudioUnitSetProperty(mAudioUnit, kAudioOutputUnitProperty_SetInputCallback,
         kAudioUnitScope_Global, InputElement, &input, sizeof(AURenderCallbackStruct));
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Could not set capture callback: %u", err};
+        std::terminate();
 
     // Disable buffer allocation for capture
     UInt32 flag{0};
     err = AudioUnitSetProperty(mAudioUnit, kAudioUnitProperty_ShouldAllocateBuffer,
         kAudioUnitScope_Output, InputElement, &flag, sizeof(flag));
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Could not disable buffer allocation property: %u", err};
+        std::terminate();
 
     // Initialize the device
     err = AudioUnitInitialize(mAudioUnit);
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Could not initialize audio unit: %u", err};
+        std::terminate();
 
     // Get the hardware format
     AudioStreamBasicDescription hardwareFormat{};
@@ -695,8 +682,7 @@ void CoreAudioCapture::open(const char *name)
     err = AudioUnitGetProperty(mAudioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,
         InputElement, &hardwareFormat, &propertySize);
     if(err != noErr || propertySize != sizeof(hardwareFormat))
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Could not get input format: %u", err};
+        std::terminate();
 
     // Set up the requested format description
     AudioStreamBasicDescription requestedFormat{};
@@ -751,8 +737,7 @@ void CoreAudioCapture::open(const char *name)
     case DevFmtX714:
     case DevFmtX3D71:
     case DevFmtAmbi3D:
-        throw al::backend_exception{al::backend_error::DeviceError, "%s not supported",
-            DevFmtChannelsString(mDevice->FmtChans)};
+        std::terminate();
     }
 
     requestedFormat.mBytesPerFrame = requestedFormat.mChannelsPerFrame * requestedFormat.mBitsPerChannel / 8;
@@ -776,8 +761,7 @@ void CoreAudioCapture::open(const char *name)
     err = AudioUnitSetProperty(mAudioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output,
         InputElement, &outputFormat, sizeof(outputFormat));
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Could not set input format: %u", err};
+        std::terminate();
 
     /* Calculate the minimum AudioUnit output format frame count for the pre-
      * conversion ring buffer. Ensure at least 100ms for the total buffer.
@@ -787,16 +771,14 @@ void CoreAudioCapture::open(const char *name)
         static_cast<UInt32>(outputFormat.mSampleRate)/10);
     FrameCount64 += MaxResamplerPadding;
     if(FrameCount64 > std::numeric_limits<int32_t>::max())
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Calculated frame count is too large: %" PRIu64, FrameCount64};
+        std::terminate();
 
     UInt32 outputFrameCount{};
     propertySize = sizeof(outputFrameCount);
     err = AudioUnitGetProperty(mAudioUnit, kAudioUnitProperty_MaximumFramesPerSlice,
         kAudioUnitScope_Global, OutputElement, &outputFrameCount, &propertySize);
     if(err != noErr || propertySize != sizeof(outputFrameCount))
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Could not get input frame count: %u", err};
+        std::terminate();
 
     mCaptureData.resize(outputFrameCount * mFrameSize);
 
@@ -833,8 +815,7 @@ void CoreAudioCapture::start()
 {
     OSStatus err{AudioOutputUnitStart(mAudioUnit)};
     if(err != noErr)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "AudioOutputUnitStart failed: %d", err};
+        std::terminate();
 }
 
 void CoreAudioCapture::stop()

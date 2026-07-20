@@ -26,41 +26,57 @@ void Autowah_setParamf(EffectProps *props, ALenum param, float val)
     {
     case AL_AUTOWAH_ATTACK_TIME:
         if(!(val >= AL_AUTOWAH_MIN_ATTACK_TIME && val <= AL_AUTOWAH_MAX_ATTACK_TIME))
-            throw effect_exception{AL_INVALID_VALUE, "Autowah attack time out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Autowah attack time out of range"};
+            std::terminate();
+        }
         props->Autowah.AttackTime = val;
         break;
 
     case AL_AUTOWAH_RELEASE_TIME:
         if(!(val >= AL_AUTOWAH_MIN_RELEASE_TIME && val <= AL_AUTOWAH_MAX_RELEASE_TIME))
-            throw effect_exception{AL_INVALID_VALUE, "Autowah release time out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Autowah release time out of range"};
+            std::terminate();
+        }
         props->Autowah.ReleaseTime = val;
         break;
 
     case AL_AUTOWAH_RESONANCE:
         if(!(val >= AL_AUTOWAH_MIN_RESONANCE && val <= AL_AUTOWAH_MAX_RESONANCE))
-            throw effect_exception{AL_INVALID_VALUE, "Autowah resonance out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Autowah resonance out of range"};
+            std::terminate();
+        }
         props->Autowah.Resonance = val;
         break;
 
     case AL_AUTOWAH_PEAK_GAIN:
         if(!(val >= AL_AUTOWAH_MIN_PEAK_GAIN && val <= AL_AUTOWAH_MAX_PEAK_GAIN))
-            throw effect_exception{AL_INVALID_VALUE, "Autowah peak gain out of range"};
+        {
+            effect_exception tmp{AL_INVALID_VALUE, "Autowah peak gain out of range"};
+            std::terminate();
+        }
         props->Autowah.PeakGain = val;
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid autowah float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid autowah float property 0x%04x", param};
+        std::terminate();
     }
 }
 void Autowah_setParamfv(EffectProps *props,  ALenum param, const float *vals)
 { Autowah_setParamf(props, param, vals[0]); }
 
 void Autowah_setParami(EffectProps*, ALenum param, int)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid autowah integer property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid autowah integer property 0x%04x", param};
+    std::terminate();
+}
 void Autowah_setParamiv(EffectProps*, ALenum param, const int*)
 {
-    throw effect_exception{AL_INVALID_ENUM, "Invalid autowah integer vector property 0x%04x",
-        param};
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid autowah integer vector property 0x%04x", param};
+    std::terminate();
 }
 
 void Autowah_getParamf(const EffectProps *props, ALenum param, float *val)
@@ -84,7 +100,8 @@ void Autowah_getParamf(const EffectProps *props, ALenum param, float *val)
         break;
 
     default:
-        throw effect_exception{AL_INVALID_ENUM, "Invalid autowah float property 0x%04x", param};
+        effect_exception tmp{AL_INVALID_ENUM, "Invalid autowah float property 0x%04x", param};
+        std::terminate();
     }
 
 }
@@ -92,11 +109,14 @@ void Autowah_getParamfv(const EffectProps *props, ALenum param, float *vals)
 { Autowah_getParamf(props, param, vals); }
 
 void Autowah_getParami(const EffectProps*, ALenum param, int*)
-{ throw effect_exception{AL_INVALID_ENUM, "Invalid autowah integer property 0x%04x", param}; }
+{
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid autowah integer property 0x%04x", param};
+    std::terminate();
+}
 void Autowah_getParamiv(const EffectProps*, ALenum param, int*)
 {
-    throw effect_exception{AL_INVALID_ENUM, "Invalid autowah integer vector property 0x%04x",
-        param};
+    effect_exception tmp{AL_INVALID_ENUM, "Invalid autowah integer vector property 0x%04x", param};
+    std::terminate();
 }
 
 EffectProps genDefaultProps() noexcept
@@ -186,7 +206,8 @@ struct AutowahCommitter::Exception : public EaxException
 template<>
 [[noreturn]] void AutowahCommitter::fail(const char *message)
 {
-    throw Exception{message};
+    Exception tmp{message};
+    std::terminate();
 }
 
 template<>

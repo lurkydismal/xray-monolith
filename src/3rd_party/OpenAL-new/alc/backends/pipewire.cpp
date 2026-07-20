@@ -1413,8 +1413,7 @@ void PipeWirePlayback::open(const char *name)
             { return n.mType != NodeType::Source; };
             match = std::find_if(devlist.cbegin(), devlist.cend(), match_playback);
             if(match == devlist.cend())
-                throw al::backend_exception{al::backend_error::NoDevice,
-                    "No PipeWire playback device found"};
+                std::terminate();
         }
 
         targetid = match->mSerial;
@@ -1429,8 +1428,7 @@ void PipeWirePlayback::open(const char *name)
         { return n.mType != NodeType::Source && n.mName == name; };
         auto match = std::find_if(devlist.cbegin(), devlist.cend(), match_name);
         if(match == devlist.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
 
         targetid = match->mSerial;
         devname = match->mName;
@@ -1442,11 +1440,9 @@ void PipeWirePlayback::open(const char *name)
         const std::string thread_name{"ALSoftP" + std::to_string(count)};
         mLoop = ThreadMainloop::Create(thread_name.c_str());
         if(!mLoop)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to create PipeWire mainloop (errno: %d)", errno};
+            std::terminate();
         if(int res{mLoop.start()})
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to start PipeWire mainloop (res: %d)", res};
+            std::terminate();
     }
     MainloopUniqueLock mlock{mLoop};
     if(!mContext)
@@ -1454,15 +1450,13 @@ void PipeWirePlayback::open(const char *name)
         pw_properties *cprops{pw_properties_new(PW_KEY_CONFIG_NAME, "client-rt.conf", nullptr)};
         mContext = mLoop.newContext(cprops);
         if(!mContext)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to create PipeWire event context (errno: %d)\n", errno};
+            std::terminate();
     }
     if(!mCore)
     {
         mCore = PwCorePtr{pw_context_connect(mContext.get(), nullptr, 0)};
         if(!mCore)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to connect PipeWire event context (errno: %d)\n", errno};
+            std::terminate();
     }
     mlock.unlock();
 
@@ -1532,8 +1526,7 @@ bool PipeWirePlayback::reset()
 
     const spa_pod *params{spa_format_audio_raw_build(&b, SPA_PARAM_EnumFormat, &info)};
     if(!params)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to set PipeWire audio format parameters"};
+        std::terminate();
 
     /* TODO: Which properties are actually needed here? Any others that could
      * be useful?
@@ -1548,8 +1541,7 @@ bool PipeWirePlayback::reset()
         PW_KEY_NODE_ALWAYS_PROCESS, "true",
         nullptr)};
     if(!props)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to create PipeWire stream properties (errno: %d)", errno};
+        std::terminate();
 
     pw_properties_setf(props, PW_KEY_NODE_LATENCY, "%u/%u", mDevice->UpdateSize,
         mDevice->Frequency);
@@ -1564,8 +1556,7 @@ bool PipeWirePlayback::reset()
     /* The stream takes overship of 'props', even in the case of failure. */
     mStream = PwStreamPtr{pw_stream_new(mCore.get(), "Playback Stream", props)};
     if(!mStream)
-        throw al::backend_exception{al::backend_error::NoDevice,
-            "Failed to create PipeWire stream (errno: %d)", errno};
+        std::terminate();
     static constexpr pw_stream_events streamEvents{CreateEvents()};
     pw_stream_add_listener(mStream.get(), &mStreamListener, &streamEvents, this);
 
@@ -1574,8 +1565,7 @@ bool PipeWirePlayback::reset()
     if(GetConfigValueBool(mDevice->DeviceName.c_str(), "pipewire", "rt-mix", true))
         flags |= PW_STREAM_FLAG_RT_PROCESS;
     if(int res{pw_stream_connect(mStream.get(), PW_DIRECTION_OUTPUT, PwIdAny, flags, &params, 1)})
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Error connecting PipeWire stream (res: %d)", res};
+        std::terminate();
 
     /* Wait for the stream to become paused (ready to start streaming). */
     plock.wait([stream=mStream.get()]()
@@ -1583,8 +1573,7 @@ bool PipeWirePlayback::reset()
         const char *error{};
         pw_stream_state state{pw_stream_get_state(stream, &error)};
         if(state == PW_STREAM_STATE_ERROR)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Error connecting PipeWire stream: \"%s\"", error};
+            std::terminate();
         return state == PW_STREAM_STATE_PAUSED;
     });
 
@@ -1608,8 +1597,7 @@ void PipeWirePlayback::start()
 {
     MainloopUniqueLock plock{mLoop};
     if(int res{pw_stream_set_active(mStream.get(), true)})
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start PipeWire stream (res: %d)", res};
+        std::terminate();
 
     /* Wait for the stream to start playing (would be nice to not, but we need
      * the actual update size which is only available after starting).
@@ -1619,8 +1607,7 @@ void PipeWirePlayback::start()
         const char *error{};
         pw_stream_state state{pw_stream_get_state(stream, &error)};
         if(state == PW_STREAM_STATE_ERROR)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "PipeWire stream error: %s", error ? error : "(unknown)"};
+            std::terminate();
         return state == PW_STREAM_STATE_STREAMING;
     });
 
@@ -1686,8 +1673,7 @@ void PipeWirePlayback::stop()
 {
     MainloopUniqueLock plock{mLoop};
     if(int res{pw_stream_set_active(mStream.get(), false)})
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to stop PipeWire stream (res: %d)", res};
+        std::terminate();
 
     /* Wait for the stream to stop playing. */
     plock.wait([stream=mStream.get()]()
@@ -1868,8 +1854,7 @@ void PipeWireCapture::open(const char *name)
         {
             match = devlist.cbegin();
             if(match == devlist.cend())
-                throw al::backend_exception{al::backend_error::NoDevice,
-                    "No PipeWire capture device found"};
+                std::terminate();
         }
 
         targetid = match->mSerial;
@@ -1892,8 +1877,7 @@ void PipeWireCapture::open(const char *name)
             match = std::find_if(devlist.cbegin(), devlist.cend(), match_sinkname);
         }
         if(match == devlist.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
 
         targetid = match->mSerial;
         devname = name;
@@ -1905,11 +1889,9 @@ void PipeWireCapture::open(const char *name)
         const std::string thread_name{"ALSoftC" + std::to_string(count)};
         mLoop = ThreadMainloop::Create(thread_name.c_str());
         if(!mLoop)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to create PipeWire mainloop (errno: %d)", errno};
+            std::terminate();
         if(int res{mLoop.start()})
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to start PipeWire mainloop (res: %d)", res};
+            std::terminate();
     }
     MainloopUniqueLock mlock{mLoop};
     if(!mContext)
@@ -1917,15 +1899,13 @@ void PipeWireCapture::open(const char *name)
         pw_properties *cprops{pw_properties_new(PW_KEY_CONFIG_NAME, "client-rt.conf", nullptr)};
         mContext = mLoop.newContext(cprops);
         if(!mContext)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to create PipeWire event context (errno: %d)\n", errno};
+            std::terminate();
     }
     if(!mCore)
     {
         mCore = PwCorePtr{pw_context_connect(mContext.get(), nullptr, 0)};
         if(!mCore)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Failed to connect PipeWire event context (errno: %d)\n", errno};
+            std::terminate();
     }
     mlock.unlock();
 
@@ -1958,8 +1938,7 @@ void PipeWireCapture::open(const char *name)
 
     const spa_pod *params[]{spa_format_audio_raw_build(&b, SPA_PARAM_EnumFormat, &info)};
     if(!params[0])
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to set PipeWire audio format parameters"};
+        std::terminate();
 
     auto&& binary = GetProcBinary();
     const char *appname{binary.fname.length() ? binary.fname.c_str() : "OpenAL Soft"};
@@ -1972,8 +1951,7 @@ void PipeWireCapture::open(const char *name)
         PW_KEY_NODE_ALWAYS_PROCESS, "true",
         nullptr)};
     if(!props)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to create PipeWire stream properties (errno: %d)", errno};
+        std::terminate();
 
     /* We don't actually care what the latency/update size is, as long as it's
      * reasonable. Unfortunately, when unspecified PipeWire seems to default to
@@ -1991,16 +1969,14 @@ void PipeWireCapture::open(const char *name)
     MainloopUniqueLock plock{mLoop};
     mStream = PwStreamPtr{pw_stream_new(mCore.get(), "Capture Stream", props)};
     if(!mStream)
-        throw al::backend_exception{al::backend_error::NoDevice,
-            "Failed to create PipeWire stream (errno: %d)", errno};
+        std::terminate();
     static constexpr pw_stream_events streamEvents{CreateEvents()};
     pw_stream_add_listener(mStream.get(), &mStreamListener, &streamEvents, this);
 
     constexpr pw_stream_flags Flags{PW_STREAM_FLAG_AUTOCONNECT | PW_STREAM_FLAG_INACTIVE
         | PW_STREAM_FLAG_MAP_BUFFERS | PW_STREAM_FLAG_RT_PROCESS};
     if(int res{pw_stream_connect(mStream.get(), PW_DIRECTION_INPUT, PwIdAny, Flags, params, 1)})
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Error connecting PipeWire stream (res: %d)", res};
+        std::terminate();
 
     /* Wait for the stream to become paused (ready to start streaming). */
     plock.wait([stream=mStream.get()]()
@@ -2008,8 +1984,7 @@ void PipeWireCapture::open(const char *name)
         const char *error{};
         pw_stream_state state{pw_stream_get_state(stream, &error)};
         if(state == PW_STREAM_STATE_ERROR)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "Error connecting PipeWire stream: \"%s\"", error};
+            std::terminate();
         return state == PW_STREAM_STATE_PAUSED;
     });
     plock.unlock();
@@ -2026,16 +2001,14 @@ void PipeWireCapture::start()
 {
     MainloopUniqueLock plock{mLoop};
     if(int res{pw_stream_set_active(mStream.get(), true)})
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start PipeWire stream (res: %d)", res};
+        std::terminate();
 
     plock.wait([stream=mStream.get()]()
     {
         const char *error{};
         pw_stream_state state{pw_stream_get_state(stream, &error)};
         if(state == PW_STREAM_STATE_ERROR)
-            throw al::backend_exception{al::backend_error::DeviceError,
-                "PipeWire stream error: %s", error ? error : "(unknown)"};
+            std::terminate();
         return state == PW_STREAM_STATE_STREAMING;
     });
 }
@@ -2044,8 +2017,7 @@ void PipeWireCapture::stop()
 {
     MainloopUniqueLock plock{mLoop};
     if(int res{pw_stream_set_active(mStream.get(), false)})
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to stop PipeWire stream (res: %d)", res};
+        std::terminate();
 
     plock.wait([stream=mStream.get()]()
     { return pw_stream_get_state(stream, nullptr) != PW_STREAM_STATE_STREAMING; });

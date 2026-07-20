@@ -323,15 +323,13 @@ void OSSPlayback::open(const char *name)
             { return entry.name == name; }
         );
         if(iter == PlaybackDevices.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
         devname = iter->device_name.c_str();
     }
 
     int fd{::open(devname, O_WRONLY)};
     if(fd == -1)
-        throw al::backend_exception{al::backend_error::NoDevice, "Could not open %s: %s", devname,
-            strerror(errno)};
+        std::terminate();
 
     if(mFd != -1)
         ::close(mFd);
@@ -425,8 +423,7 @@ void OSSPlayback::start()
         mThread = std::thread{std::mem_fn(&OSSPlayback::mixerProc), this};
     }
     catch(std::exception& e) {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start mixing thread: %s", e.what()};
+        std::terminate();
     }
 }
 
@@ -531,15 +528,13 @@ void OSScapture::open(const char *name)
             { return entry.name == name; }
         );
         if(iter == CaptureDevices.cend())
-            throw al::backend_exception{al::backend_error::NoDevice,
-                "Device name \"%s\" not found", name};
+            std::terminate();
         devname = iter->device_name.c_str();
     }
 
     mFd = ::open(devname, O_RDONLY);
     if(mFd == -1)
-        throw al::backend_exception{al::backend_error::NoDevice, "Could not open %s: %s", devname,
-            strerror(errno)};
+        std::terminate();
 
     int ossFormat{};
     switch(mDevice->FmtType)
@@ -557,8 +552,7 @@ void OSScapture::open(const char *name)
     case DevFmtInt:
     case DevFmtUInt:
     case DevFmtFloat:
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "%s capture samples not supported", DevFmtTypeString(mDevice->FmtType)};
+        std::terminate();
     }
 
     uint periods{4};
@@ -571,8 +565,7 @@ void OSScapture::open(const char *name)
 
     audio_buf_info info{};
 #define CHECKERR(func) if((func) < 0) {                                       \
-    throw al::backend_exception{al::backend_error::DeviceError, #func " failed: %s", \
-        strerror(errno)};                                                     \
+    std::terminate();                                                     \
 }
     CHECKERR(ioctl(mFd, SNDCTL_DSP_SETFRAGMENT, &numFragmentsLogSize));
     CHECKERR(ioctl(mFd, SNDCTL_DSP_SETFMT, &ossFormat));
@@ -582,16 +575,12 @@ void OSScapture::open(const char *name)
 #undef CHECKERR
 
     if(mDevice->channelsFromFmt() != numChannels)
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to set %s, got %d channels instead", DevFmtChannelsString(mDevice->FmtChans),
-            numChannels};
+        std::terminate();
 
     if(!((ossFormat == AFMT_S8 && mDevice->FmtType == DevFmtByte)
         || (ossFormat == AFMT_U8 && mDevice->FmtType == DevFmtUByte)
         || (ossFormat == AFMT_S16_NE && mDevice->FmtType == DevFmtShort)))
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to set %s samples, got OSS format %#x", DevFmtTypeString(mDevice->FmtType),
-            ossFormat};
+        std::terminate();
 
     mRing = RingBuffer::Create(mDevice->BufferSize, frameSize, false);
 
@@ -605,8 +594,7 @@ void OSScapture::start()
         mThread = std::thread{std::mem_fn(&OSScapture::recordProc), this};
     }
     catch(std::exception& e) {
-        throw al::backend_exception{al::backend_error::DeviceError,
-            "Failed to start recording thread: %s", e.what()};
+        std::terminate();
     }
 }
 

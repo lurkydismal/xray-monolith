@@ -236,7 +236,7 @@ int luabind::detail::class_rep::gettable(lua_State* L)
 		tbl.get(L);
 		lua_pushvalue(L, 2);
 		lua_gettable(L, -2);
-		if (!lua_isnil(L, -1)) 
+		if (!lua_isnil(L, -1))
 		{
 			lua_remove(L, -2); // more table
 			return 1;
@@ -249,7 +249,7 @@ int luabind::detail::class_rep::gettable(lua_State* L)
 	lua_pushvalue(L, 2);
 	lua_gettable(L, -2);
 
-	if (!lua_isnil(L, -1)) 
+	if (!lua_isnil(L, -1))
 	{
 		lua_remove(L, -2); // more table
 		return 1;
@@ -548,7 +548,7 @@ int luabind::detail::class_rep::constructor_dispatcher(lua_State* L)
 #ifndef LUABIND_NO_EXCEPTIONS
 
 	}
-    
+
     catch(const error&)
     {
     }
@@ -705,8 +705,10 @@ int luabind::detail::class_rep::function_dispatcher(lua_State* L)
 
 #else
         bool success = true;
+#if 0
         try
         {
+#endif
 
             const overload_rep& o = rep->overloads()[match_index];
 
@@ -718,6 +720,7 @@ int luabind::detail::class_rep::function_dispatcher(lua_State* L)
             {
                 return o.call(L, force_static_call != 0);
             }
+#if 0
         }
         catch (...)
         {
@@ -728,6 +731,7 @@ int luabind::detail::class_rep::function_dispatcher(lua_State* L)
             }
             success = false;
         }
+#endif
 
         if (!success)
         {
@@ -743,7 +747,7 @@ int luabind::detail::class_rep::function_dispatcher(lua_State* L)
                 return o.call(L, force_static_call != 0);
             }
         }
-        
+
 #endif
 #ifndef LUABIND_NO_EXCEPTIONS
 
@@ -797,7 +801,7 @@ void luabind::detail::class_rep::add_base_class(const luabind::detail::class_rep
     }
 
 	// import all getters from the base
-	for (map_class<const char*, callback, ltstr>::const_iterator i = bcrep->m_getters.begin(); 
+	for (map_class<const char*, callback, ltstr>::const_iterator i = bcrep->m_getters.begin();
 			i != bcrep->m_getters.end(); ++i)
 	{
 		callback& m = m_getters[i->first];
@@ -811,7 +815,7 @@ void luabind::detail::class_rep::add_base_class(const luabind::detail::class_rep
 	}
 
 	// import all setters from the base
-	for (map_class<const char*, callback, ltstr>::const_iterator i = bcrep->m_setters.begin(); 
+	for (map_class<const char*, callback, ltstr>::const_iterator i = bcrep->m_setters.begin();
 			i != bcrep->m_setters.end(); ++i)
 	{
 		callback& m = m_setters[i->first];
@@ -825,7 +829,7 @@ void luabind::detail::class_rep::add_base_class(const luabind::detail::class_rep
 	}
 
 	// import all static constants
-	for (map_class<const char*, int, ltstr>::const_iterator i = bcrep->m_static_constants.begin(); 
+	for (map_class<const char*, int, ltstr>::const_iterator i = bcrep->m_static_constants.begin();
 			i != bcrep->m_static_constants.end(); ++i)
 	{
 		int& v = m_static_constants[i->first];
@@ -835,7 +839,7 @@ void luabind::detail::class_rep::add_base_class(const luabind::detail::class_rep
 	// import all operators
 	for (int i = 0; i < number_of_operators; ++i)
 	{
-		for (vector_class<operator_callback>::const_iterator j = bcrep->m_operators[i].begin(); 
+		for (vector_class<operator_callback>::const_iterator j = bcrep->m_operators[i].begin();
 				j != bcrep->m_operators[i].end(); ++j)
 			m_operators[i].push_back(*j);
 	}
@@ -847,7 +851,7 @@ void luabind::detail::class_rep::add_base_class(const luabind::detail::class_rep
 int luabind::detail::class_rep::super_callback(lua_State* L)
 {
 	int args = lua_gettop(L);
-		
+
 	object_rep* obj = static_cast<object_rep*>(lua_touserdata(L, lua_upvalueindex(2)));
 	class_rep* crep = static_cast<class_rep*>(lua_touserdata(L, lua_upvalueindex(1)));
 	class_rep* base = crep->bases()[0].base;
@@ -903,7 +907,7 @@ int luabind::detail::class_rep::super_callback(lua_State* L)
 		int match_index = -1;
 		int min_match = std::numeric_limits<int>::max();
 		[[maybe_unused]]bool found;
-			
+
 #ifdef LUABIND_NO_ERROR_CHECKING
 
 		if (rep->overloads.size() == 1)
@@ -923,7 +927,7 @@ int luabind::detail::class_rep::super_callback(lua_State* L)
 		}
 
 #else
-				
+
 		if (!found)
 		{
 			{
@@ -978,7 +982,7 @@ int luabind::detail::class_rep::super_callback(lua_State* L)
 			weak_ref backref(L, -1);
 			lua_pop(L, 1);
 
-			void* storage_ptr = obj->ptr();		
+			void* storage_ptr = obj->ptr();
 
 			if (!rep->overloads[match_index].has_wrapped_construct())
 			{
@@ -1006,7 +1010,7 @@ int luabind::detail::class_rep::super_callback(lua_State* L)
 
 				if (crep->has_holder())
 				{
-					crep->m_construct_holder(storage_ptr, instance);			
+					crep->m_construct_holder(storage_ptr, instance);
 				}
 				else
 				{
@@ -1071,7 +1075,7 @@ int luabind::detail::class_rep::lua_settable_dispatcher(lua_State* L)
 	lua_rawset(L, -3);
 
 	crep->m_operator_cache = 0; // invalidate cache
-	
+
 	return 0;
 }
 
@@ -1088,7 +1092,7 @@ int luabind::detail::class_rep::construct_lua_class_callback(lua_State* L)
 	ref.set(L);
 
 	bool has_bases = !crep->bases().empty();
-		
+
 	if (has_bases)
 	{
 		lua_pushstring(L, "super");
@@ -1212,14 +1216,14 @@ int luabind::detail::class_rep::lua_class_gettable(lua_State* L)
 		lua_pushboolean(L, p != 0);
 		return 1;
 	}
-	
+
 	// first look in the instance's table
 	detail::lua_reference const& tbl = obj->get_lua_table();
 	assert(tbl.is_valid());
 	tbl.get(L);
 	lua_pushvalue(L, 2);
 	lua_gettable(L, -2);
-	if (!lua_isnil(L, -1)) 
+	if (!lua_isnil(L, -1))
 	{
 		lua_remove(L, -2); // remove table
 		return 1;
@@ -1231,7 +1235,7 @@ int luabind::detail::class_rep::lua_class_gettable(lua_State* L)
 	lua_pushvalue(L, 2);
 	lua_gettable(L, -2);
 
-	if (!lua_isnil(L, -1)) 
+	if (!lua_isnil(L, -1))
 	{
 		lua_remove(L, -2); // more table
 		return 1;
@@ -1423,7 +1427,7 @@ void luabind::detail::finalize(lua_State* L, class_rep* crep)
 		lua_call(L, 1, 0);
 	}
 
-	for (vector_class<class_rep::base_info>::const_iterator 
+	for (vector_class<class_rep::base_info>::const_iterator
 			i = crep->bases().begin(); i != crep->bases().end(); ++i)
 	{
 		if (i->base) finalize(L, i->base);
