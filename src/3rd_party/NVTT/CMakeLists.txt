@@ -431,8 +431,7 @@ if(MSVC)
             /Zi
         >
         /std:c++latest;
-        /wd4005;
-        /EHsc
+        /wd4005
     )
     target_link_options(${PROJECT_NAME} PRIVATE
         /OPT:REF;
