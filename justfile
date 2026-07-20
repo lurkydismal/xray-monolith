@@ -20,12 +20,12 @@ make-build-directory:
 # Generates CMake build files for an MSVC Windows DX11 build in the build directory.
 [working-directory('src/build_msvc')]
 generate-build-files:
-    CC=cl CXX=cl \
-        cmake .. \
+    cmake .. \
         -DCMAKE_BUILD_TYPE=DX11 \
         -DCMAKE_SYSTEM_NAME=Windows \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-        -G "Ninja"
+        -G "Ninja" \
+        --toolchain ../../clang-cl-msvc-x64.cmake
 
 # Check Doxygen documentation comment coverage.
 [working-directory('docs')]
