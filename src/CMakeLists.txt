@@ -118,6 +118,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         -clang:-fms-extensions
         -clang:-fms-compatibility
         -clang:-fdelayed-template-parsing
+        -clang:-msse4.2
     )
 endif()
 
