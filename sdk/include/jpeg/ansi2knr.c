@@ -267,6 +267,7 @@ BY ANY OTHER PARTY.
 
 #endif /* not HAVE_CONFIG_H */
 
+#define STDC_HEADERS 1
 #if STDC_HEADERS
 # include <stdlib.h>
 #else
@@ -283,7 +284,6 @@ BY ANY OTHER PARTY.
 #  else
      extern char *malloc();
      extern int free();
-    extern void exit (int) __attribute__((noreturn));
 #  endif
 # endif
 
