@@ -1,9 +1,9 @@
 #!/usr/bin/env fish
-fish_add_path -g /mnt/hdd/msvc_wine/bin/x64/
-set -x BIN /mnt/hdd/msvc_wine/bin/x64/
-source '/mnt/hdd/Projects/msvc-wine/msvcenv-native.fish'
-# CC=cl CXX=cl \
-#     cmake .. \
+fish_add_path -g /path/to/msvc_wine/bin/x64/
+set -x BIN /path/to/msvc_wine/bin/x64/
+source '/path/to/repo/msvc-wine/msvcenv-native.fish'
+# NOTE: From src/build_msvc/
+# cmake .. \
 #     -DCMAKE_BUILD_TYPE=DX11 \
 #     -DCMAKE_SYSTEM_NAME=Windows \
 #     -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
