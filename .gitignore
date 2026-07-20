@@ -46,3 +46,4 @@ compressor/mod/
 /malformed.txt
 /docs/doxygen/xml
 /namespaces.txt
+/scan-build.log
