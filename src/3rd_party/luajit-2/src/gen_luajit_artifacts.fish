@@ -38,7 +38,7 @@ if not test -f host/minilua.exe
 
     link \
         /nologo \
-        /OPT:REF \
+        /OPT:NOREF \
         /OPT:ICF \
         /out:host/minilua.exe \
         minilua.obj
@@ -86,7 +86,7 @@ if not test -f host/buildvm.exe
 
     link \
         /nologo \
-        /OPT:REF \
+        /OPT:NOREF \
         /OPT:ICF \
         /out:host/buildvm.exe \
         buildvm.obj \

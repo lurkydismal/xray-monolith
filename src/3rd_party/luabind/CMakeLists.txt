@@ -409,52 +409,52 @@ if(MSVC)
     )
     target_link_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:DX10AVX>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:DX11>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:DX11AVX>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:DX8>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:DX8AVX>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:DX9>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:DX9AVX>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:ProfiledDX11>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:Release>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:ReleaseAVX>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:Verified>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:VerifiedDX11>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:VerifiedDX11ASAN>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:VerifiedDX8>:
-            /OPT:REF
+            /OPT:NOREF
         >
         $<$<CONFIG:VerifiedDX9>:
-            /OPT:REF
+            /OPT:NOREF
         >
         /DYNAMICBASE:NO
     )

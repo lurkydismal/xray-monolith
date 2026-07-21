@@ -48,7 +48,7 @@ set LJLINK \
     link \
     /nologo \
     /debug \
-    /OPT:REF \
+    /OPT:NOREF \
     /OPT:ICF \
     /LTCG
 

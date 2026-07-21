@@ -17,7 +17,7 @@
 
 @setlocal
 @set LJCOMPILE=cl /nologo /c /O2 /Ob3 /Oi /Ot /Oy /GT /GL /W3 /fp:precise /MD /GF /GS- /Zi /D_CRT_SECURE_NO_DEPRECATE
-@set LJLINK=link /nologo /debug /OPT:REF /OPT:ICF /LTCG
+@set LJLINK=link /nologo /debug /OPT:NOREF /OPT:ICF /LTCG
 @set LJMT=mt /nologo
 @set LJLIB=lib /nologo
 @set DASMDIR=..\dynasm
