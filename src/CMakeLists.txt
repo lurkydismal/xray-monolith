@@ -275,6 +275,11 @@ CPMAddPackage(
     OPTIONS
         "SPDLOG_FMT_EXTERNAL ON"
 )
+if(MSVC)
+    target_compile_options(spdlog PRIVATE /EHsc)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    target_compile_options(spdlog PRIVATE -fexceptions)
+endif()
 
 ################################################################################
 # Sub-projects
