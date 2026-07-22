@@ -45,35 +45,43 @@ function(add_xray_discovered_tests)
         return()
     endif()
 
-    add_executable(xray_unit_tests ${XRAY_TEST_SOURCES})
+    set(TESTS_NAME xray_unit_tests)
+
+    add_executable(${TESTS_NAME} ${XRAY_TEST_SOURCES})
 
     file(GLOB XRAY_RUNTIME_DLLS
         "${CMAKE_SOURCE_DIR}/../sdk/binaries/*.dll"
     )
 
-    add_custom_command(TARGET xray_unit_tests POST_BUILD
+    add_custom_command(TARGET ${TESTS_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             ${XRAY_RUNTIME_DLLS}
-            "$<TARGET_FILE_DIR:xray_unit_tests>"
+            "$<TARGET_FILE_DIR:${TESTS_NAME}>"
+    )
+
+    add_custom_command(TARGET ${TESTS_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_RUNTIME_DLLS:${TESTS_NAME}>
+            $<TARGET_FILE_DIR:${TESTS_NAME}>
+        COMMAND_EXPAND_LISTS
     )
 
     # Tests include production headers directly from src and link against the
     # existing production targets rather than recompiling production sources.
-    target_include_directories(xray_unit_tests PRIVATE
+    target_include_directories(${TESTS_NAME} PRIVATE
         "${CMAKE_SOURCE_DIR}"
     )
 
     # GoogleTest supplies the test runner entry point; GoogleMock is linked so
     # tests can use mocks when they add value without requiring extra CMake edits.
-    target_link_libraries(xray_unit_tests PRIVATE
+    target_link_libraries(${TESTS_NAME} PRIVATE
         GTest::gtest_main
         GTest::gmock
-        xrCore
         xrEngine
     )
 
     # Match the engine's C++ language level for test translation units.
-    target_compile_features(xray_unit_tests PRIVATE cxx_std_17)
+    target_compile_features(${TESTS_NAME} PRIVATE cxx_std_20)
 
     execute_process(
         COMMAND wine cmd /c "dir C:\\windows\\system32\\concrt140.dll"
@@ -89,7 +97,7 @@ function(add_xray_discovered_tests)
 
     # Discover individual TEST/TEST_F cases from the built binary and register
     # them with CTest automatically.
-    gtest_discover_tests(xray_unit_tests)
+    gtest_discover_tests(${TESTS_NAME})
 endfunction()
 
 add_xray_discovered_tests()
