@@ -1082,7 +1082,7 @@ if(MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE
         /NODEFAULTLIB:LIBCMT;
         /OPT:NOREF;
-        /OPT:ICF;
+        /OPT:NOICF;
         /DYNAMICBASE:NO
     )
 endif()

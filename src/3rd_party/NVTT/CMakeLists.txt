@@ -435,7 +435,7 @@ if(MSVC)
     )
     target_link_options(${PROJECT_NAME} PRIVATE
         /OPT:NOREF;
-        /OPT:ICF
+        /OPT:NOICF
     )
 endif()
 

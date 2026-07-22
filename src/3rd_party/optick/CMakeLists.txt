@@ -344,47 +344,47 @@ if(MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:DX10AVX>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:DX11>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:DX11AVX>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:DX8>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:DX8AVX>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:DX9>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:DX9AVX>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:ProfiledDX11>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:Release>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
         $<$<CONFIG:ReleaseAVX>:
             /OPT:NOREF;
-            /OPT:ICF
+            /OPT:NOICF
         >
     )
 endif()

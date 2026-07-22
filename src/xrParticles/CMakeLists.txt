@@ -414,7 +414,7 @@ if(MSVC)
     target_link_options(${PROJECT_NAME} PRIVATE
         /NOLOGO;
         /OPT:NOREF;
-        /OPT:ICF;
+        /OPT:NOICF;
         /DYNAMICBASE:NO;
         /MACHINE:X64
     )
