@@ -485,7 +485,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUN
 target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/.;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/optick-git/src;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include;"
+    ${simde_SOURCE_DIR}
 )
 
 ################################################################################
