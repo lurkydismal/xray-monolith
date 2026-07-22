@@ -2,7 +2,8 @@
 
 #include <array>
 
-#include "simde/x86/sse4.2.h"
+#include <simde/x86/sse4.2.h>
+#include "cpuid.h"
 
 namespace
 {
@@ -36,8 +37,11 @@ namespace
     }
 
     static constexpr auto crc32_table = generate_crc32_lookup_table();
+}
 
-    u32 crc32_sse42(const void* P, u32 len, u32 starting_crc = ~0u) noexcept
+namespace crc32_internal
+{
+    u32 crc32_sse42(const void* P, u32 len, u32 starting_crc) noexcept
     {
         const u8* buffer = static_cast<const u8*>(P);
         u32 crc = starting_crc;
@@ -70,53 +74,47 @@ namespace
 
         return crc;
     }
+
+    u32 crc32_table_based(const void* P, u32 len, u32 starting_crc) noexcept
+    {
+        const u8* buffer = static_cast<const u8*>(P);
+        u32 ulCRC = starting_crc;
+        while (len--)
+        {
+            ulCRC = (ulCRC >> 8) ^ crc32_table[(ulCRC & 0xFF) ^ *buffer++];
+        }
+        return ulCRC;
+    }
 }
 
 u32 crc32(const void* P, u32 len)
 {
     if (CPU::ID.feature & _CPU_FEATURE_SSE4_2)
     {
-        return crc32_sse42(P, len);
+        return crc32_internal::crc32_sse42(P, len, ~0u);
     }
-
-    u32 ulCRC = 0xffffffff;
-    u8* buffer = (u8*)P;
-
-    while (len--)
-    {
-        ulCRC = (ulCRC >> 8) ^ crc32_table[(ulCRC & 0xFF) ^ *buffer++];
-    }
-
-    return ulCRC ^ 0xffffffff;
+    return crc32_internal::crc32_table_based(P, len, 0xffffffff) ^ 0xffffffff;
 }
 
 u32 crc32(const void* P, u32 len, u32 starting_crc)
 {
     if (CPU::ID.feature & _CPU_FEATURE_SSE4_2)
     {
-        return crc32_sse42(P, len, ~starting_crc);
+        return crc32_internal::crc32_sse42(P, len, ~starting_crc);
     }
-
-    u32 ulCRC = 0xffffffff ^ starting_crc;
-    u8* buffer = (u8*)P;
-
-    while (len--)
-    {
-        ulCRC = (ulCRC >> 8) ^ crc32_table[(ulCRC & 0xFF) ^ *buffer++];
-    }
-
-    return ulCRC ^ 0xffffffff;
+    return crc32_internal::crc32_table_based(P, len, 0xffffffff ^ starting_crc) ^ 0xffffffff;
 }
 
 u32 path_crc32(const char* path, u32 len)
 {
     u32 ulCRC = 0xffffffff;
-    u8* buffer = (u8*)path;
-
-    while (len--) {
+    const u8* buffer = (const u8*)path;
+    while (len--)
+    {
         const u8 c = *buffer;
-        if (c != '/' && c != '\\') {
-            ulCRC = (ulCRC >> 8) ^ crc32_table[(ulCRC & 0xFF) ^ *buffer];
+        if (c != '/' && c != '\\')
+        {
+            ulCRC = (ulCRC >> 8) ^ crc32_table[(ulCRC & 0xFF) ^ c];
         }
         ++buffer;
     }
