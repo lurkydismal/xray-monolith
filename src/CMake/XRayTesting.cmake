@@ -97,7 +97,10 @@ function(add_xray_discovered_tests)
 
     # Discover individual TEST/TEST_F cases from the built binary and register
     # them with CTest automatically.
-    gtest_discover_tests(${TESTS_NAME})
+    gtest_discover_tests(
+        ${TESTS_NAME}
+        DISCOVERY_TIMEOUT 30
+    )
 endfunction()
 
 add_xray_discovered_tests()
