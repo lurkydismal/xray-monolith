@@ -313,16 +313,4 @@ extern XRCORE_API u32 crc32(const void* P, u32 len);
 extern XRCORE_API u32 crc32(const void* P, u32 len, u32 starting_crc);
 extern XRCORE_API u32 path_crc32(const char* path, u32 len); // ignores '/' and '\'
 
-// Internals exposed ONLY so tests can exercise each code path directly,
-// independent of whatever CPU::ID.feature resolves to at runtime.
-namespace crc32_internal
-{
-    // Raw accumulator functions: caller supplies the initial CRC register
-    // value directly (no implicit ~0 init / final XOR-out). This mirrors
-    // exactly what the original inline loops did, just given names.
-    u32 crc32_sse42(const void* P, u32 len, u32 starting_crc) noexcept;
-    u32 crc32_table_based(const void* P, u32 len, u32 starting_crc) noexcept;
-}
-
-
 #endif // _STD_EXT_internal
