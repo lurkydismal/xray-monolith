@@ -75,7 +75,7 @@ function(add_xray_discovered_tests)
     # GoogleTest supplies the test runner entry point; GoogleMock is linked so
     # tests can use mocks when they add value without requiring extra CMake edits.
     target_link_libraries(${TESTS_NAME} PRIVATE
-        GTest::gtest_main
+        GTest::gtest
         GTest::gmock
 
         stdfunc::stdfunc
