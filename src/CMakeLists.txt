@@ -274,8 +274,14 @@ CPMAddPackage(
     SOURCE_SUBDIR build/cmake
 )
 CPMAddPackage("gh:stephenberry/glaze@7.9.1")
-# FIX: Add package
-# add_subdirectory(3rd_party/ctre)
+CPMAddPackage(
+    URI "gh:hanickadot/compile-time-regular-expressions@3.11.0"
+    OPTIONS
+        "CTRE_BUILD_TESTS OFF"
+        "CTRE_BUILD_PACKAGE OFF"
+        "CTRE_BUILD_PACKAGE_DEB OFF"
+        "CTRE_BUILD_PACKAGE_RPM OFF"
+)
 CPMAddPackage("gh:lurkydismal/stdfunc@0.1.0")
 CPMAddPackage(
     URI "gh:gabime/spdlog#v2.x"
