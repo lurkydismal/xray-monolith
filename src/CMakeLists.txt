@@ -249,6 +249,7 @@ include("${CMAKE_SOURCE_DIR}/CMake/CPM.cmake")
 ################################################################################
 # Dependencies
 ################################################################################
+CPMAddPackage("gh:microsoft/GSL@4.2.2")
 CPMAddPackage("gh:simd-everywhere/simde@0.8.2")
 CPMAddPackage("gh:fmtlib/fmt#12.2.0")
 CPMAddPackage(
