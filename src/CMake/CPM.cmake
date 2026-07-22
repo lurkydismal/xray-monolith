@@ -1,41 +1,28 @@
-# Minimal CPM.cmake-compatible dependency helper for this project.
-# It implements the CPMAddPackage arguments used by the test integration while
-# delegating the actual download/populate work to CMake's FetchContent module.
-include(FetchContent)
+# SPDX-License-Identifier: MIT
+#
+# SPDX-FileCopyrightText: Copyright (c) 2019-2023 Lars Melchior and contributors
 
-# CPMAddPackage declares and makes a dependency available by name.
-# Supported arguments intentionally match this repository's usage: NAME,
-# GITHUB_REPOSITORY, GIT_TAG, and OPTIONS.
-function(CPMAddPackage)
-    set(oneValueArgs NAME GITHUB_REPOSITORY GIT_TAG)
-    set(multiValueArgs OPTIONS)
-    cmake_parse_arguments(CPM "" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+set(CPM_DOWNLOAD_VERSION 0.43.1)
+set(CPM_HASH_SUM "1c40fc102ce9625d7de7eb14f541cab30cc3138dca627f0b0ec40293ce6c2934")
 
-    if(NOT CPM_NAME)
-        message(FATAL_ERROR "CPMAddPackage requires NAME")
-    endif()
+if(CPM_PATH)
+  set(CPM_DOWNLOAD_LOCATION "${CPM_PATH}/CPM.cmake")
+elseif(DEFINED ENV{CPM_PATH})
+  file(TO_CMAKE_PATH "$ENV{CPM_PATH}/CPM.cmake" CPM_DOWNLOAD_LOCATION)
+elseif(CPM_SOURCE_CACHE)
+  set(CPM_DOWNLOAD_LOCATION "${CPM_SOURCE_CACHE}/cpm/CPM_${CPM_DOWNLOAD_VERSION}.cmake")
+elseif(DEFINED ENV{CPM_SOURCE_CACHE})
+  set(CPM_DOWNLOAD_LOCATION "$ENV{CPM_SOURCE_CACHE}/cpm/CPM_${CPM_DOWNLOAD_VERSION}.cmake")
+else()
+  set(CPM_DOWNLOAD_LOCATION "${CMAKE_BINARY_DIR}/cmake/CPM_${CPM_DOWNLOAD_VERSION}.cmake")
+endif()
 
-    # Apply dependency-specific cache options before FetchContent configures the
-    # dependency so callers can keep third-party settings local to the package.
-    foreach(option_pair IN LISTS CPM_OPTIONS)
-        string(REGEX MATCH "^([^ ]+) (.*)$" option_match "${option_pair}")
-        if(option_match)
-            set("${CMAKE_MATCH_1}" "${CMAKE_MATCH_2}" CACHE BOOL "CPM option for ${CPM_NAME}" FORCE)
-        endif()
-    endforeach()
+# Expand relative path. This is important if the provided path contains a tilde (~)
+get_filename_component(CPM_DOWNLOAD_LOCATION ${CPM_DOWNLOAD_LOCATION} ABSOLUTE)
 
-    if(CPM_GITHUB_REPOSITORY)
-        set(CPM_GIT_REPOSITORY "https://github.com/${CPM_GITHUB_REPOSITORY}.git")
-    else()
-        message(FATAL_ERROR "CPMAddPackage(${CPM_NAME}) requires GITHUB_REPOSITORY")
-    endif()
+file(DOWNLOAD
+     https://github.com/cpm-cmake/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake
+     ${CPM_DOWNLOAD_LOCATION} EXPECTED_HASH SHA256=${CPM_HASH_SUM}
+)
 
-    # FetchContent_MakeAvailable preserves the normal add_subdirectory behavior
-    # expected by CPM-managed CMake dependencies such as GoogleTest/GoogleMock.
-    FetchContent_Declare(
-        ${CPM_NAME}
-        GIT_REPOSITORY "${CPM_GIT_REPOSITORY}"
-        GIT_TAG "${CPM_GIT_TAG}"
-    )
-    FetchContent_MakeAvailable(${CPM_NAME})
-endfunction()
+include(${CPM_DOWNLOAD_LOCATION})
