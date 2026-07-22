@@ -1,6 +1,0 @@
-[submodule "stdfunc"]
-	path = src/3rd_party/stdfunc
-	url = https://github.com/lurkydismal/stdfunc.git
-[submodule "ctre"]
-	path = src/3rd_party/ctre
-	url = https://github.com/lurkydismal/ctre.git
