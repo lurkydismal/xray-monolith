@@ -1025,6 +1025,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     OpenAL32
     optick
     ${RENDERER_LIB}
+    stdfunc::stdfunc
+    spdlog::spdlog
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
