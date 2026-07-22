@@ -4,6 +4,12 @@ set(CMAKE_SYSTEM_VERSION 10.0 CACHE STRING "" FORCE)
 
 project(engine-vs2022 C CXX)
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(IS_CLANG ON)
+else()
+    set(IS_CLANG OFF)
+endif()
+
 ################################################################################
 # Set target arch type if empty. Visual studio solution generator provides it.
 ################################################################################
@@ -109,7 +115,7 @@ if(MSVC)
     set(CMAKE_CXX_FLAGS_VERIFIEDDX9 "")
 endif()
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+if(IS_CLANG)
     add_compile_options(
         -clang:-Wno-c++11-narrowing
         -clang:-Wno-microsoft-cast
@@ -277,7 +283,7 @@ CPMAddPackage(
 )
 if(MSVC)
     target_compile_options(spdlog PRIVATE /EHsc)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+elseif(IS_CLANG)
     target_compile_options(spdlog PRIVATE -fexceptions)
 endif()
 
