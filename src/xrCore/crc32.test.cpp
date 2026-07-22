@@ -4,7 +4,6 @@
 
 #include <cstring>
 #include <string>
-#include <vector>
 
 namespace
 {
@@ -171,10 +170,4 @@ TEST(PathCrc32, PathOfOnlySlashesIsZero)
 {
     const char* path = "///\\\\/";
     EXPECT_EQ(path_crc32(path, static_cast<u32>(std::strlen(path))), kCrcEmpty);
-}
-
-int main(int argc, char** argv)
-{
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }
