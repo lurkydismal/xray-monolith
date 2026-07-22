@@ -124,7 +124,7 @@ if(IS_CLANG)
         -clang:-fms-extensions
         -clang:-fms-compatibility
         -clang:-fdelayed-template-parsing
-        -clang:-msse4.2
+        -clang:-march=native
     )
 endif()
 
