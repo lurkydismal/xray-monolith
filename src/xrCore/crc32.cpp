@@ -2,6 +2,8 @@
 
 #include <array>
 
+#include "simde/x86/sse4.2.h"
+
 namespace
 {
     constexpr u32 reflect(u32 ref, int ch) noexcept
@@ -42,28 +44,28 @@ namespace
 
         while (len >= 8)
         {
-            crc = (u32)_mm_crc32_u64(crc, *reinterpret_cast<const u64*>(buffer));
+            crc = (u32)simde_mm_crc32_u64(crc, *reinterpret_cast<const u64*>(buffer));
             buffer += 8;
             len -= 8;
         }
 
         if (len >= 4)
         {
-            crc = _mm_crc32_u32(crc, *reinterpret_cast<const u32*>(buffer));
+            crc = simde_mm_crc32_u32(crc, *reinterpret_cast<const u32*>(buffer));
             buffer += 4;
             len -= 4;
         }
 
         if (len >= 2)
         {
-            crc = _mm_crc32_u16(crc, *reinterpret_cast<const u16*>(buffer));
+            crc = simde_mm_crc32_u16(crc, *reinterpret_cast<const u16*>(buffer));
             buffer += 2;
             len -= 2;
         }
 
         if (len)
         {
-            crc = _mm_crc32_u8(crc, *buffer);
+            crc = simde_mm_crc32_u8(crc, *buffer);
         }
 
         return crc;
