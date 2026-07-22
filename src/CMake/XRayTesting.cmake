@@ -15,9 +15,6 @@ endif()
 # CTest must be enabled at the top level before test executables are registered.
 include(CTest)
 
-# CPM.cmake is the required dependency manager for test-only dependencies.
-include("${CMAKE_CURRENT_LIST_DIR}/CPM.cmake")
-
 # GoogleTest's CMake package also provides GoogleMock targets; both are fetched
 # through CPM so tests can link to GTest::gtest_main and GTest::gmock.
 CPMAddPackage(
