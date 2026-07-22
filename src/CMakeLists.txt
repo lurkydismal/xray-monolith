@@ -276,7 +276,7 @@ CPMAddPackage(
 CPMAddPackage("gh:stephenberry/glaze@7.9.1")
 # FIX: Add package
 # add_subdirectory(3rd_party/ctre)
-add_subdirectory(3rd_party/stdfunc)
+CPMAddPackage("gh:lurkydismal/stdfunc@0.1.0")
 CPMAddPackage(
     URI "gh:gabime/spdlog#v2.x"
     OPTIONS
