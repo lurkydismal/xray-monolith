@@ -77,6 +77,10 @@ function(add_xray_discovered_tests)
     target_link_libraries(${TESTS_NAME} PRIVATE
         GTest::gtest_main
         GTest::gmock
+
+        stdfunc::stdfunc
+        Microsoft.GSL::GSL
+
         xrEngine
     )
 
