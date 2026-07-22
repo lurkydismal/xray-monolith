@@ -249,7 +249,7 @@ include("${CMAKE_SOURCE_DIR}/CMake/CPM.cmake")
 ################################################################################
 # Dependencies
 ################################################################################
-CPMAddPackage("gh:simd-everywhere/simde@0.8.4-rc3 ")
+CPMAddPackage("gh:simd-everywhere/simde@0.8.2")
 CPMAddPackage("gh:fmtlib/fmt#12.2.0")
 CPMAddPackage(
     URI "gh:Cyan4973/xxHash@0.8.3"
