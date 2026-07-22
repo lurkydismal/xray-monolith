@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.23.0 FATAL_ERROR)
 
 set(CMAKE_SYSTEM_VERSION 10.0 CACHE STRING "" FORCE)
 
@@ -243,7 +243,38 @@ include("${CMAKE_SOURCE_DIR}/CMake/CPM.cmake")
 ################################################################################
 # Dependencies
 ################################################################################
-CPMAddPackage("gh:fmtlib/fmt@12.2.0")
+CPMAddPackage("gh:fmtlib/fmt#12.2.0")
+CPMAddPackage(
+    URI "gh:Cyan4973/xxHash@0.8.3"
+    OPTIONS
+        "XXHASH_BUILD_ENABLE_INLINE_API OFF"
+        "XXHASH_BUILD_XXHSUM OFF"
+    SOURCE_SUBDIR cmake_unofficial
+)
+CPMAddPackage(
+    URI "gh:google/snappy#1.2.2"
+    OPTIONS
+        "SNAPPY_BUILD_TESTS OFF"
+        "SNAPPY_BUILD_BENCHMARKS OFF"
+        "SNAPPY_INSTALL OFF"
+)
+CPMAddPackage(
+    URI "gh:facebook/zstd@1.5.7"
+    OPTIONS
+        "ZSTD_BUILD_STATIC OFF"
+        "ZSTD_BUILD_SHARED ON"
+        "ZSTD_BUILD_PROGRAMS OFF"
+    SOURCE_SUBDIR build/cmake
+)
+CPMAddPackage("gh:stephenberry/glaze@7.9.1")
+# FIX: Add package
+# add_subdirectory(3rd_party/ctre)
+add_subdirectory(3rd_party/stdfunc)
+CPMAddPackage(
+    URI "gh:gabime/spdlog#v2.x"
+    OPTIONS
+        "SPDLOG_FMT_EXTERNAL ON"
+)
 
 ################################################################################
 # Sub-projects
