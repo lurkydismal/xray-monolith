@@ -1,0 +1,3 @@
+[submodule "stdfunc"]
+	path = src/3rd_party/stdfunc
+	url = https://github.com/lurkydismal/stdfunc.git
