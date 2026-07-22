@@ -18,9 +18,7 @@ include(CTest)
 # GoogleTest's CMake package also provides GoogleMock targets; both are fetched
 # through CPM so tests can link to GTest::gtest_main and GTest::gmock.
 CPMAddPackage(
-    NAME googletest
-    GITHUB_REPOSITORY google/googletest
-    GIT_TAG v1.15.2
+    URI "gh:google/googletest#1.15.2"
     OPTIONS
         "INSTALL_GTEST OFF"
         "gtest_force_shared_crt ON"
