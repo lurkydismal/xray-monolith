@@ -7,6 +7,8 @@
 //-----------------------------------------------------------------------------
 #include "stdafx.h"
 
+extern ULONGLONG startup_begin_time;
+
 extern "C" void XR_EARLY_INIT();
 
 int APIENTRY WinMain_impl(HINSTANCE hInstance,
@@ -46,6 +48,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
                      char* lpCmdLine,
                      int nCmdShow)
 {
+	startup_begin_time = GetTickCount64();
     // Initialize LuaJIT low-memory pool FIRST, before any DLLs load and fragment
 	// the lower 2GB address space.
 	XR_EARLY_INIT();
