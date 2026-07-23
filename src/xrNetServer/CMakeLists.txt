@@ -405,6 +405,9 @@ add_dependencies(${PROJECT_NAME}
 # Link with other targets.
 target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
+
+    spdlog::spdlog
+    stdfunc::stdfunc
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES

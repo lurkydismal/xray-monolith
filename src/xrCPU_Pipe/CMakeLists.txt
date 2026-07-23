@@ -415,6 +415,9 @@ endif()
 # Link with other targets.
 target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
+
+    spdlog::spdlog
+    stdfunc::stdfunc
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC

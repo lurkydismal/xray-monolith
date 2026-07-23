@@ -135,6 +135,10 @@ ShaderElement::ShaderElement()
 
 BOOL ShaderElement::equal(ShaderElement& S)
 {
+    spdlog::trace("ShaderElement::equal(&): ''");
+#if 0
+    spdlog::trace("ShaderElement::equal(&): '{}'", S);
+#endif
 	if (flags.iPriority != S.flags.iPriority) return FALSE;
 	if (flags.bStrictB2F != S.flags.bStrictB2F) return FALSE;
 	if (flags.bEmissive != S.flags.bEmissive) return FALSE;
@@ -152,6 +156,7 @@ BOOL ShaderElement::equal(ShaderElement& S)
 
 BOOL ShaderElement::equal(ShaderElement* S)
 {
+    spdlog::trace("ShaderElement::equal(*): '{}'", fmt::ptr(S));
 	if (0 == S && 0 == this) return TRUE;
 	if (0 == S || 0 == this) return FALSE;
 	return equal(*S);
@@ -160,7 +165,7 @@ BOOL ShaderElement::equal(ShaderElement* S)
 //
 BOOL Shader::equal(Shader& S)
 {
-    spdlog::trace("Shader::equal: S {}", static_cast<const void*>(&S));
+    spdlog::trace("Shader::equal(&): S {}", S);
 	return
 		E[0]->equal(&*S.E[0]) &&
 		E[1]->equal(&*S.E[1]) &&
@@ -171,6 +176,7 @@ BOOL Shader::equal(Shader& S)
 
 BOOL Shader::equal(Shader* S)
 {
+    spdlog::trace("Shader::equal(*): '{}'", fmt::ptr(S));
 	return equal(*S);
 }
 

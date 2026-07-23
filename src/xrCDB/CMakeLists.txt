@@ -480,6 +480,9 @@ endif()
 target_link_libraries(${PROJECT_NAME} PUBLIC
     xrAPI
     xrCore
+
+    spdlog::spdlog
+    stdfunc::stdfunc
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC

@@ -609,10 +609,12 @@ Shader* CResourceManager::_lua_Create(LPCSTR d_shader, LPCSTR s_textures)
 		S.E[4] = C._lua_Compile(s_shader, "l_special");
 	}
 
+    spdlog::trace("1 CResourceManager::_lua_Create: '{}', '{}', '{}'", S, v_shaders.size());
+
 	// Search equal in shaders array
     for (u32 it = 0; it < v_shaders.size(); it++)
     {
-        spdlog::trace("CResourceManager::_lua_Create: '{}', '{}', '{}'", S, v_shaders.size(), fmt::ptr(v_shaders[it]));
+        spdlog::trace("2 CResourceManager::_lua_Create: '{}'", fmt::ptr(v_shaders[it]));
         if (S.equal(v_shaders[it]))
         {
             return v_shaders[it];
