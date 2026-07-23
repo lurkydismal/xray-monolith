@@ -216,6 +216,137 @@ enum SE_R1
 #pragma pack(pop)
 
 template <>
+struct fmt::formatter<STextureList>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const STextureList& list, FormatContext& ctx) const
+    {
+        auto out = ctx.out();
+
+        out = fmt::format_to(
+            out,
+            "STextureList {{\n"
+            "  refs     = {},\n"
+            "  flags    = {},\n"
+            "  textures = [",
+            list.dwReference.load(std::memory_order_relaxed),
+            list.dwFlags);
+
+        if (!list.empty())
+            out = fmt::format_to(out, "\n");
+
+        for (u32 i = 0; i < list.size(); ++i)
+        {
+            out = fmt::format_to(
+                out,
+                "    {{ stage = {}, texture = {} }}",
+                list[i].first,
+                list[i].second);
+
+            if (i + 1 != list.size())
+                out = fmt::format_to(out, ",");
+
+            out = fmt::format_to(out, "\n");
+        }
+
+        return fmt::format_to(out, "  ]\n}}");
+    }
+};
+
+template <>
+struct fmt::formatter<SMatrixList>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const SMatrixList& list, FormatContext& ctx) const
+    {
+        return fmt::format_to(
+            ctx.out(),
+            "SMatrixList {{\n"
+            "  refs     = {},\n"
+            "  flags    = {},\n"
+            "  matrices = {}\n"
+            "}}",
+            list.dwReference.load(std::memory_order_relaxed),
+            list.dwFlags,
+            static_cast<const svector<ref_matrix, 4>&>(list));
+    }
+};
+
+template <>
+struct fmt::formatter<SConstantList>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const SConstantList& list, FormatContext& ctx) const
+    {
+        return fmt::format_to(
+            ctx.out(),
+            "SConstantList {{\n"
+            "  refs      = {},\n"
+            "  flags     = {},\n"
+            "  constants = {}\n"
+            "}}",
+            list.dwReference.load(std::memory_order_relaxed),
+            list.dwFlags,
+            static_cast<const svector<ref_constant_obsolette, 4>&>(list));
+    }
+};
+
+template <>
+struct fmt::formatter<SGeometry>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const SGeometry& geom, FormatContext& ctx) const
+    {
+        return fmt::format_to(
+            ctx.out(),
+            "SGeometry {{\n"
+            "  refs      = {},\n"
+            "  flags     = {},\n"
+            "  dcl       = {},\n"
+            "  vb        = {},\n"
+            "  ib        = {},\n"
+            "  vb_stride = {}\n"
+            "}}",
+            geom.dwReference.load(std::memory_order_relaxed),
+            geom.dwFlags,
+            geom.dcl,
+            fmt::ptr(geom.vb),
+            fmt::ptr(geom.ib),
+            geom.vb_stride);
+    }
+};
+
+template <>
+struct fmt::formatter<resptrcode_geom> : fmt::formatter<resptr_base<SGeometry>>
+{
+    template <typename FormatContext>
+    auto format(const resptrcode_geom& geom, FormatContext& ctx) const
+    {
+        return fmt::formatter<resptr_base<SGeometry>>::format(geom, ctx);
+    }
+};
+
+template <>
 struct fmt::formatter<SPass>
 {
     constexpr auto parse(fmt::format_parse_context& ctx)
