@@ -849,6 +849,7 @@ public:
 
 	void register_in_combat();
 	void unregister_in_combat();
+	void make_enemy_visible(CScriptGameObject* enemy);
 	CCoverPoint const* find_best_cover(Fvector position_to_cover_from);
 
 	// approved by Dima smart covers functions
@@ -1068,6 +1069,8 @@ public:
 	void set_hud_fire_bone2(LPCSTR bone_name);
 	void set_hud_fire_bone_silencer(u16 bone_id);
 	void set_hud_fire_bone_silencer(LPCSTR bone_name);
+	bool hud_inertion_enabled() const;
+	void set_hud_inertion_enabled(bool value);
 	//Works for anything with visual
 	u16 bone_id(LPCSTR bone_name, bool bHud);
 	u16 bone_id(LPCSTR bone_name) { return bone_id(bone_name, false); }
@@ -1106,8 +1109,13 @@ public:
 
 	::luabind::object list_bones(bool bHud = false);
 
-	bool IsBoneVisible(LPCSTR bone_name, bool bHud = false);
-	void SetBoneVisible(LPCSTR bone_name, bool bVisibility, bool bRecursive = true, bool bHud = false);
+#ifdef CBULLETMANAGER_EX
+    bool GetBulletCheckVisual();
+    void SetBulletCheckVisual(bool value);
+#endif
+
+	bool IsBoneVisible(LPCSTR bone_name, bool bHud = false);	
+	void SetBoneVisible(LPCSTR bone_name, bool bVisibility, bool bRecursive = true, bool bHud = false);	
 	//CAI_Stalker
 	void ResetBoneProtections(LPCSTR imm_sect, LPCSTR bone_sect);
 	//Anything with PPhysicShell (ie. car, actor, stalker, monster, heli)
