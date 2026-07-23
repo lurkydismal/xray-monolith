@@ -56,7 +56,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
     spdlog::global_logger()->sinks().push_back(g_fileSink);
     spdlog::set_level(spdlog::level::trace);
-    spdlog::trace("WinMain: {} {} {} {}", static_cast<void*>(hInstance), static_cast<void*>(hPrevInstance), lpCmdLine, nCmdShow);
+    spdlog::trace("WinMain: {} {} {} {}", static_cast<void*>(hInstance), static_cast<void*>(hPrevInstance), lpCmdLine[0] ? lpCmdLine : "<empty>", nCmdShow);
 
 	// Enable per-monitor DPI awareness so GetMonitorInfo returns real pixel sizes.
 	// Without this, monitors with different DPI scaling report wrong resolutions

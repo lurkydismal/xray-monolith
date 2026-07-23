@@ -10,6 +10,9 @@ using str_c = const char*;
 #include "intrusive_ptr.h"
 #include "mezz_stringbuffer_class.hpp"
 
+#include <fmt/base.h>
+#include <fmt/format.h>
+
 class XRCORE_API xr_string : public std::basic_string<char, std::char_traits<char>, xalloc<char>>
 {
 public:
@@ -255,6 +258,39 @@ public:
 		if (vs_sz) _set(buf);
 		return (shared_str&)*this;
 	}
+};
+
+template <>
+struct fmt::formatter<shared_str>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const shared_str& s, FormatContext& ctx) const
+    {
+        const char* str = s.c_str();
+
+        if (!str)
+        {
+            return fmt::format_to(ctx.out(),
+                "{{ptr={}, value=<nullptr>}}",
+                fmt::ptr(s._get()));
+        }
+
+        if (*str == '\0')
+        {
+            return fmt::format_to(ctx.out(),
+                "{{ptr={}, value=<empty>}}",
+                fmt::ptr(s._get()));
+        }
+
+        return fmt::format_to(ctx.out(),
+            "{{ptr={}, value=\"{}\"}}",
+            fmt::ptr(s._get()), str);
+    }
 };
 
 namespace std

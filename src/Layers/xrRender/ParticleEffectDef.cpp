@@ -11,6 +11,8 @@
 #include "ParticleEffectActions.h"
 #endif
 
+#include <spdlog/spdlog.h>
+
 //---------------------------------------------------------------------------
 using namespace PAPI;
 using namespace PS;
@@ -59,8 +61,11 @@ float CPEDef::GetFStep()
 
 void CPEDef::CreateShader()
 {
-	if (*m_ShaderName && *m_TextureName)
-		m_CachedShader.create(*m_ShaderName, *m_TextureName);
+    if (*m_ShaderName && *m_TextureName)
+    {
+        spdlog::trace("CPEDef::CreateShader: '{}', '{}'", m_ShaderName, m_TextureName);
+        m_CachedShader.create(*m_ShaderName, *m_TextureName);
+    }
 }
 
 void CPEDef::DestroyShader()
@@ -297,7 +302,7 @@ BOOL CPEDef::Load(IReader& F)
 BOOL CPEDef::Load2(CInifile& ini)
 {
 	//.	u16 version		= ini.r_u16("_effect", "version");
-	if (ini.line_exist("_effect", "update_step")) 
+	if (ini.line_exist("_effect", "update_step"))
 	{
 		m_uStep = ini.r_u32("_effect", "update_step");
 		m_fStep = float(m_uStep) / 1000.f;

@@ -4,6 +4,7 @@
 #include "_thread_types.h"
 
 #include <fmt/base.h>
+#include <fmt/format.h>
 
 // resource itself, the base class for all derived resources
 class XRCORE_API xr_resource
@@ -218,25 +219,20 @@ struct fmt::formatter<resptr_base<T>>
         if (!p)
             return fmt::format_to(ctx.out(), "nullptr");
 
-        return fmt::format_to(ctx.out(),
-            "resptr{{addr={:p}, value={}}}",
-            static_cast<const void*>(p),
+        return fmt::format_to(
+            ctx.out(),
+            "resptr{{addr={}, refs={}, value={}}}",
+            fmt::ptr(p),
+            p->dwReference.load(std::memory_order_relaxed),
             *p);
     }
 };
 
 template<class T, class C>
-struct fmt::formatter<resptr_core<T, C>> : fmt::formatter<std::string>
+struct fmt::formatter<resptr_core<T, C>> : fmt::formatter<resptr_base<T>>
 {
     auto format(resptr_core<T, C> ptr, format_context &ctx) const -> decltype(ctx.out())
     {
-        if (!ptr)
-            return fmt::format_to(ctx.out(), "nullptr");
-
-        return fmt::format_to(
-            ctx.out(),
-            "resptr_core<{}>({addr={:p}, value={:p})",
-            static_cast<const void*>(ptr),
-            *ptr);
+        return fmt::formatter<resptr_base<T>>::format(ptr, ctx);
     }
 };

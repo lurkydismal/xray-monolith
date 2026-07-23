@@ -3,6 +3,8 @@
 
 #include "ResourceManager.h"
 
+#include <spdlog/spdlog.h>
+
 dxRenderDeviceRender::dxRenderDeviceRender()
 	: Resources(0)
 {
@@ -155,7 +157,9 @@ void dxRenderDeviceRender::OnDeviceCreate(LPCSTR shName)
 	RCache.OnDeviceCreate();
 	m_Gamma.Update();
 	Resources->OnDeviceCreate(shName);
+    spdlog::trace("1 dxRenderDeviceRender::OnDeviceCreate: {}", shName[0] ? shName : "<empty>" );
 	::Render->create();
+    spdlog::trace("2 dxRenderDeviceRender::OnDeviceCreate: {}", shName[0] ? shName : "<empty>" );
 	Device.Statistic->OnDeviceCreate();
 
 	//#ifndef DEDICATED_SERVER

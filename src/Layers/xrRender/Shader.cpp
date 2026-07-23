@@ -58,6 +58,12 @@ void resptrcode_shader::create(LPCSTR s_shader, LPCSTR s_textures, LPCSTR s_cons
 #ifdef SPAWN_ANTIFREEZE
 	xrCriticalSectionGuard g(shaderCreate_cs);
 #endif
+    spdlog::trace("resptrcode_shader::create: '{}', '{}'",
+        s_shader[0] ? s_shader : "<empty>",
+        s_textures[0] ? s_textures : "<empty>",
+        s_constants[0] ? s_constants : "<empty>",
+        s_matrices[0] ? s_matrices : "<empty>"
+    );
 	_set(DEV->Create(s_shader, s_textures, s_constants, s_matrices));
 }
 

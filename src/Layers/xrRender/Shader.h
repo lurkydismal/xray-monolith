@@ -215,16 +215,91 @@ enum SE_R1
 
 #pragma pack(pop)
 
-template<>
-struct fmt::formatter<Shader> : fmt::formatter<std::string>
+template <>
+struct fmt::formatter<ShaderElement>
 {
-    auto format(Shader my, format_context &ctx) const -> decltype(ctx.out())
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const ShaderElement& elem, FormatContext& ctx) const
+    {
+        const auto& f = elem.flags;
+
+        return fmt::format_to(
+            ctx.out(),
+            "ShaderElement {{\n"
+            "  refs  = {},\n"
+            "  flags = {{\n"
+            "    priority    = {},\n"
+            "    strict_b2f  = {},\n"
+            "    emissive    = {},\n"
+            "    distort     = {},\n"
+            "    watermark   = {},\n"
+            "    landscape   = {},\n"
+            "    isLandscape = {},\n"
+            "    isWater     = {},\n"
+            "    scopeLense  = {}\n"
+            "  }},\n"
+            "  passes = [\n"
+            "    {},\n"
+            "    {}\n"
+            "  ]\n"
+            "}}",
+            elem.dwReference.load(std::memory_order_relaxed),
+            f.iPriority,
+            f.bStrictB2F,
+            f.bEmissive,
+            f.bDistort,
+            f.bWmark,
+            f.bLandscape,
+            f.isLandscape,
+            f.isWater,
+            f.iScopeLense,
+            elem.passes.size() > 0 ? elem.passes[0] : ref_pass{},
+            elem.passes.size() > 1 ? elem.passes[1] : ref_pass{}
+        );
+    }
+
+#if 0
+            static_cast<const svector<ref_pass, SHADER_PASSES_MAX>&>(elem.passes));
+#endif
+};
+
+template<>
+struct fmt::formatter<Shader>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    auto format(const Shader& shader, format_context &ctx) const -> decltype(ctx.out())
     {
         return fmt::format_to(
             ctx.out(),
-            "[Shader E=[{}, {}, {}, {}, {}, {}]]",
-            my.E[0], my.E[1], my.E[2],
-            my.E[3], my.E[4], my.E[5]);
+            "Shader {{\n"
+            "  refs  = {},\n"
+            "  flags = {},\n"
+            "  E = [\n"
+            "    {},\n"
+            "    {},\n"
+            "    {},\n"
+            "    {},\n"
+            "    {},\n"
+            "    {}\n"
+            "  ]\n"
+            "}}",
+            shader.dwReference.load(std::memory_order_relaxed),
+            shader.dwFlags,
+            shader.E[0],
+            shader.E[1],
+            shader.E[2],
+            shader.E[3],
+            shader.E[4],
+            shader.E[5]);
     }
 };
 

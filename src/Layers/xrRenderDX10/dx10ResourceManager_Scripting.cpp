@@ -1,3 +1,4 @@
+#include <spdlog/spdlog.h>
 #include "stdafx.h"
 #pragma hdrstop
 
@@ -609,8 +610,14 @@ Shader* CResourceManager::_lua_Create(LPCSTR d_shader, LPCSTR s_textures)
 	}
 
 	// Search equal in shaders array
-	for (u32 it = 0; it < v_shaders.size(); it++)
-		if (S.equal(v_shaders[it])) return v_shaders[it];
+    for (u32 it = 0; it < v_shaders.size(); it++)
+    {
+        spdlog::trace("CResourceManager::_lua_Create: '{}', '{}', '{}'", S, v_shaders.size(), fmt::ptr(v_shaders[it]));
+        if (S.equal(v_shaders[it]))
+        {
+            return v_shaders[it];
+        }
+    }
 
 	// Create _new_ entry
 	Shader* N = xr_new<Shader>(S);

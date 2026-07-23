@@ -19,6 +19,8 @@
 
 #include "D3DX10core.h"
 
+#include <spdlog/spdlog.h>
+
 CRender RImplementation;
 
 //////////////////////////////////////////////////////////////////////////
@@ -88,7 +90,7 @@ ShaderElement* CRender::rimp_select_sh_static(dxRender_Visual* pVisual, float cd
 		{
 			float sec_dist = _sqrt(cdist_sq) - pVisual->vis.sphere.R;
 			id = (sec_dist < ps_ssfx_terrain_quality.x * 10) ? SE_R2_NORMAL_HQ : SE_R2_NORMAL_LQ;
-			
+
 			// Very low shader variation
 			if (sec_dist > 240)
 				id = 3;
@@ -229,7 +231,7 @@ void CRender::create()
 
 		//.	    _tzset			();
 		//.		??? _strdate	( date, 128 );	???
-		//.		??? if (date < 22-march-07)		
+		//.		??? if (date < 22-march-07)
 		if (0)
 		{
 			u32 device_id = HW.Caps.id_device;
@@ -491,7 +493,7 @@ void CRender::create()
 	o.ssfx_fog = FS.exist(fn, "$game_shaders$", "r3\\ssfx_fog_scattering", ".ps") ? 1 : 0;
 	o.ssfx_motionblur = FS.exist(fn, "$game_shaders$", "r3\\ssfx_motion_blur", ".ps") ? 1 : 0;
 	o.ssfx_motionvectors = FS.exist(fn, "$game_shaders$", "r3\\screenspace_mvectors", ".h") ? 1 : 0;
-	o.ssfx_glass = FS.exist(fn, "$game_shaders$", "r3\\ssfx_glass", ".ps") ? 1 : 0; 
+	o.ssfx_glass = FS.exist(fn, "$game_shaders$", "r3\\ssfx_glass", ".ps") ? 1 : 0;
 
 	Msg("- Supports SSS UPDATE 23");
 	Msg("- SSS CORE INSTALLED %i", o.ssfx_core);
@@ -532,7 +534,13 @@ void CRender::create()
 	Target = xr_new<CRenderTarget>(); // Main target
 
 	Models = xr_new<CModelPool>();
+
+    spdlog::trace("1 CRender::create");
+
 	PSLibrary.OnCreate();
+
+    spdlog::trace("2 CRender::create");
+
 	HWOCC.occq_create(occq_size);
 
 	rmNormal();
@@ -599,7 +607,7 @@ void CRender::reset_end()
 void CRender::OnFrame()
 {
 	PROF_EVENT("CRender::OnFrame()");
-	
+
 	Models->DeleteQueue();
 
 	//Lights Delete queue
@@ -1251,7 +1259,7 @@ HRESULT CRender::shader_compile(
 	char c_ssao [32];
 	char c_sun_quality [32];
 	char c_smaa_quality [32];
-	
+
 	// SSS preprocessor stuff
 	char c_ssfx_sss_dir_quality[32];
 	char c_ssfx_sss_omni_quality[32];
@@ -1645,7 +1653,7 @@ HRESULT CRender::shader_compile(
 		++len;
 	}
 
-	//////////////////////////////////lvutner	
+	//////////////////////////////////lvutner
 
 	if (ps_r2_anomaly_flags.test(R2_AN_FLAG_WATER_REFLECTIONS))
 	{
@@ -1676,7 +1684,7 @@ HRESULT CRender::shader_compile(
 		++len;
 	}
 
-	//Useful shit. 
+	//Useful shit.
 	if (HW.Caps.id_vendor == 0x1002) //AMD hardware
 	{
 		defines[def_it].Name = "INT_RENDER_AMD";
@@ -1690,7 +1698,7 @@ HRESULT CRender::shader_compile(
 		defines[def_it].Definition = "1";
 		def_it++;
 	}
-	
+
 	/////////////////////////////////////////////
 
 
@@ -1722,7 +1730,7 @@ HRESULT CRender::shader_compile(
 	}
 	sh_name[len] = '0' + char(o.dx10_minmax_sm != 0);
 	++len;
-	
+
 	if (ps_ssfx_rain_1.w > 0)
 	{
 		xr_sprintf(c_rain_quality, "%d", u8(ps_ssfx_rain_1.w));
@@ -1919,7 +1927,7 @@ HRESULT CRender::shader_compile(
 	defines[def_it].Definition = 0;
 	def_it ++;
 
-	// 
+	//
 	if (0 == xr_strcmp(pFunctionName, "main"))
 	{
 		if ('v' == pTarget[0])

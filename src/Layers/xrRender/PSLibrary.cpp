@@ -1,12 +1,15 @@
 //----------------------------------------------------
 // file: PSLibrary.cpp
 //----------------------------------------------------
+#include <fmt/format.h>
 #include "stdafx.h"
 #pragma hdrstop
 
 #include "PSLibrary.h"
 #include "ParticleEffect.h"
 #include "ParticleGroup.h"
+
+#include <spdlog/spdlog.h>
 
 #ifdef _EDITOR
 #	include "ParticleEffectActions.h"
@@ -32,6 +35,7 @@ void CPSLibrary::OnCreate()
 	{
 		string_path fn;
 		FS.update_path(fn,_game_data_, "particles.xr");
+        spdlog::trace("CPSLibrary::OnCreate: {}", fn[0] ? fmt::string_view(fn, strnlen(fn, sizeof(fn))) : "<empty>" );
 		Load(fn);
 	}
 }
@@ -333,8 +337,11 @@ bool CPSLibrary::Load(const char* nm)
 	std::sort(m_PEDs.begin(), m_PEDs.end(), ped_sort_pred);
 	std::sort(m_PGDs.begin(), m_PGDs.end(), pgd_sort_pred);
 
-	for (PS::PEDIt e_it = m_PEDs.begin(); e_it != m_PEDs.end(); ++e_it)
-		(*e_it)->CreateShader();
+    for (PS::PEDIt e_it = m_PEDs.begin(); e_it != m_PEDs.end(); ++e_it)
+    {
+        spdlog::trace("CPSLibrary::Load: {}", fmt::ptr(*e_it) );
+        (*e_it)->CreateShader();
+    }
 
 	return bRes;
 }
