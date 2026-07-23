@@ -9,7 +9,9 @@
 
 #include "logger.hpp"
 
+#if 0
 #include <spdlog/spdlog.h>
+#endif
 
 extern "C" void XR_EARLY_INIT();
 
@@ -54,9 +56,11 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	// the lower 2GB address space.
 	XR_EARLY_INIT();
 
+#if 0
     spdlog::global_logger()->sinks().push_back(g_fileSink);
     spdlog::set_level(spdlog::level::trace);
     spdlog::trace("WinMain: {} {} {} {}", static_cast<void*>(hInstance), static_cast<void*>(hPrevInstance), lpCmdLine[0] ? lpCmdLine : "<empty>", nCmdShow);
+#endif
 
 	// Enable per-monitor DPI awareness so GetMonitorInfo returns real pixel sizes.
 	// Without this, monitors with different DPI scaling report wrong resolutions

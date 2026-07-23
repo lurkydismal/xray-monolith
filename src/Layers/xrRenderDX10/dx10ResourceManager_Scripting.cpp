@@ -1,4 +1,3 @@
-#include <spdlog/spdlog.h>
 #include "stdafx.h"
 #pragma hdrstop
 
@@ -16,6 +15,10 @@
 #include	"luabind/return_reference_to_policy.hpp"
 
 #include	"../xrRender/dxRenderDeviceRender.h"
+
+#if 0
+#include <spdlog/spdlog.h>
+#endif
 
 using namespace luabind;
 
@@ -609,12 +612,16 @@ Shader* CResourceManager::_lua_Create(LPCSTR d_shader, LPCSTR s_textures)
 		S.E[4] = C._lua_Compile(s_shader, "l_special");
 	}
 
+#if 0
     spdlog::trace("1 CResourceManager::_lua_Create: '{}', '{}', '{}'", S, v_shaders.size());
+#endif
 
 	// Search equal in shaders array
     for (u32 it = 0; it < v_shaders.size(); it++)
     {
+#if 0
         spdlog::trace("2 CResourceManager::_lua_Create: '{}'", fmt::ptr(v_shaders[it]));
+#endif
         if (S.equal(v_shaders[it]))
         {
             return v_shaders[it];

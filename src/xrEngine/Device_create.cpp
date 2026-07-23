@@ -7,7 +7,9 @@
 #include "dedicated_server_only.h"
 #include "../xrCDB/xrXRC.h"
 
+#if 0
 #include <spdlog/spdlog.h>
+#endif
 
 //#include "securom_api.h"
 
@@ -121,7 +123,9 @@ void CRenderDevice::_Create(LPCSTR shName)
 	b_is_Ready = TRUE;
 	_SetupStates();
 
+#if 0
     spdlog::trace("CRenderDevice::_Create: {}", shName[0] ? shName : "<empty>" );
+#endif
 	m_pRender->OnDeviceCreate(shName);
 	m_imgui.OnDeviceCreate();
 	dwFrame = 0;
@@ -246,7 +250,9 @@ PROTECT_API void CRenderDevice::Create()
 	FS.update_path(fname, "$game_data$", "shaders.xr");
 
 	//////////////////////////////////////////////////////////////////////////
+#if 0
     spdlog::trace("CRenderDevice::Create: {}", fname[0] ? fmt::string_view(fname, strnlen(fname, sizeof(fname))) : "<empty>" );
+#endif
 	_Create(fname);
 
 	PreCache(0, false, false);
