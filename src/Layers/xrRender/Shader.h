@@ -216,6 +216,66 @@ enum SE_R1
 #pragma pack(pop)
 
 template <>
+struct fmt::formatter<SPass>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const SPass& pass, FormatContext& ctx) const
+    {
+        auto out = ctx.out();
+
+        out = fmt::format_to(
+            out,
+            "SPass {{\n"
+            "  refs      = {},\n"
+            "  flags     = {},\n"
+            "  state     = {},\n"
+            "  ps        = {},\n"
+            "  vs        = {},\n",
+            pass.dwReference.load(std::memory_order_relaxed),
+            pass.dwFlags,
+            pass.state,
+            pass.ps,
+            pass.vs);
+
+#if defined(USE_DX10) || defined(USE_DX11)
+        out = fmt::format_to(out, "  gs        = {},\n", pass.gs);
+#   ifdef USE_DX11
+        out = fmt::format_to(out,
+            "  hs        = {},\n"
+            "  ds        = {},\n"
+            "  cs        = {},\n",
+            pass.hs,
+            pass.ds,
+            pass.cs);
+#   endif
+#endif
+
+        out = fmt::format_to(
+            out,
+            "  constants = {},\n"
+            "  textures  = {},\n"
+            "  cbuffer   = {}",
+            pass.constants,
+            pass.T,
+            pass.C);
+
+#ifdef _EDITOR
+        out = fmt::format_to(out,
+            ",\n"
+            "  matrices  = {}",
+            pass.M);
+#endif
+
+        return fmt::format_to(out, "\n}}");
+    }
+};
+
+template <>
 struct fmt::formatter<ShaderElement>
 {
     constexpr auto parse(fmt::format_parse_context& ctx)
@@ -258,14 +318,9 @@ struct fmt::formatter<ShaderElement>
             f.isLandscape,
             f.isWater,
             f.iScopeLense,
-            elem.passes.size() > 0 ? elem.passes[0] : ref_pass{},
-            elem.passes.size() > 1 ? elem.passes[1] : ref_pass{}
+            static_cast<const svector<ref_pass, SHADER_PASSES_MAX>&>(elem.passes)
         );
     }
-
-#if 0
-            static_cast<const svector<ref_pass, SHADER_PASSES_MAX>&>(elem.passes));
-#endif
 };
 
 template<>
