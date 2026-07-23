@@ -5,7 +5,10 @@
 // Oles - Oles Shishkovtsov
 // AlexMX - Alexander Maksimchuk
 //-----------------------------------------------------------------------------
+#include <spdlog/spdlog.h>
 #include "stdafx.h"
+
+#include "logger.hpp"
 
 extern "C" void XR_EARLY_INIT();
 
@@ -49,7 +52,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
   // Initialize LuaJIT low-memory pool FIRST, before any DLLs load and fragment
 	// the lower 2GB address space.
 	XR_EARLY_INIT();
-  
+
 	// Enable per-monitor DPI awareness so GetMonitorInfo returns real pixel sizes.
 	// Without this, monitors with different DPI scaling report wrong resolutions
 	// (e.g. a 1920x1080 secondary monitor reports 2400x1290 when primary is at 125%).
@@ -78,7 +81,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 			}
 		}
 	}
-  
+
 	//DllMainOpenAL32(NULL, DLL_PROCESS_ATTACH, NULL);
 	DllMainXrCore(NULL, DLL_PROCESS_ATTACH, NULL);
 	DllMainXrPhysics(NULL, DLL_PROCESS_ATTACH, NULL);
@@ -87,6 +90,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 	__try
 	{
+        spdlog::global_logger()->sinks().push_back(g_fileSink);
+        spdlog::set_level(spdlog::level::trace);
+        spdlog::trace("MAIN IMPL");
 		WinMain_impl(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 	}
 	__except (stack_overflow_exception_filter(GetExceptionCode()))
