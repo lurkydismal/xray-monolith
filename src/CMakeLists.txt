@@ -255,7 +255,7 @@ CPMAddPackage("gh:fmtlib/fmt#12.2.0")
 CPMAddPackage(
     URI "gh:Cyan4973/xxHash@0.8.3"
     OPTIONS
-        "XXHASH_BUILD_ENABLE_INLINE_API OFF"
+        "XXHASH_BUILD_ENABLE_INLINE_API ON"
         "XXHASH_BUILD_XXHSUM OFF"
     SOURCE_SUBDIR cmake_unofficial
 )
@@ -269,8 +269,8 @@ CPMAddPackage(
 CPMAddPackage(
     URI "gh:facebook/zstd@1.5.7"
     OPTIONS
-        "ZSTD_BUILD_STATIC OFF"
-        "ZSTD_BUILD_SHARED ON"
+        "ZSTD_BUILD_STATIC ON"
+        "ZSTD_BUILD_SHARED OFF"
         "ZSTD_BUILD_PROGRAMS OFF"
         "ZSTD_BUILD_TESTS OFF"
     SOURCE_SUBDIR build/cmake
