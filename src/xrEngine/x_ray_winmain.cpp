@@ -5,10 +5,11 @@
 // Oles - Oles Shishkovtsov
 // AlexMX - Alexander Maksimchuk
 //-----------------------------------------------------------------------------
-#include <spdlog/spdlog.h>
 #include "stdafx.h"
 
 #include "logger.hpp"
+
+#include <spdlog/spdlog.h>
 
 extern "C" void XR_EARLY_INIT();
 
