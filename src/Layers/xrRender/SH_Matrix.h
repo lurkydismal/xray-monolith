@@ -74,4 +74,88 @@ public:
 typedef resptr_core<CMatrix, resptr_base<CMatrix>>
 ref_matrix;
 
+constexpr std::string_view matrix_mode_name(u32 mode)
+{
+    switch (mode)
+    {
+    case CMatrix::modeProgrammable: return "Programmable";
+    case CMatrix::modeTCM:          return "TCM";
+    case CMatrix::modeS_refl:       return "S_refl";
+    case CMatrix::modeC_refl:       return "C_refl";
+    case CMatrix::modeDetail:       return "Detail";
+    default:                        return "<unknown>";
+    }
+}
+
+inline std::string matrix_tcm_flags(u32 flags)
+{
+    std::string r;
+
+    auto append = [&](const char* s)
+    {
+        if (!r.empty())
+            r += '|';
+        r += s;
+    };
+
+    if (flags & CMatrix::tcmScale)
+        append("Scale");
+
+    if (flags & CMatrix::tcmRotate)
+        append("Rotate");
+
+    if (flags & CMatrix::tcmScroll)
+        append("Scroll");
+
+    if (r.empty())
+        r = "<none>";
+
+    return r;
+}
+
+template <>
+struct fmt::formatter<CMatrix>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const CMatrix& m, FormatContext& ctx) const
+    {
+        return fmt::format_to(
+            ctx.out(),
+            "CMatrix {{\n"
+            "  refs      = {},\n"
+            "  flags     = {},\n"
+            "  name      = {},\n"
+            "  mode      = {},\n"
+            "  frame     = {},\n"
+            "  tcm       = {} (0x{:08X}),\n"
+            "  xform     = {},\n"
+            "  waveforms = {{\n"
+            "    scaleU  = {},\n"
+            "    scaleV  = {},\n"
+            "    rotate  = {},\n"
+            "    scrollU = {},\n"
+            "    scrollV = {}\n"
+            "  }}\n"
+            "}}",
+            m.dwReference.load(std::memory_order_relaxed),
+            m.dwFlags,
+            m.cName,
+            matrix_mode_name(m.dwMode),
+            m.dwFrame,
+            matrix_tcm_flags(m.tcm),
+            m.tcm,
+            m.xform,
+            m.scaleU,
+            m.scaleV,
+            m.rotate,
+            m.scrollU,
+            m.scrollV);
+    }
+};
+
 #endif

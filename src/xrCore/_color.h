@@ -1,6 +1,8 @@
 #ifndef __C__
 #define __C__
 
+#include <fmt/base.h>
+
 // maps unsigned 8 bits/channel to D3DCOLOR
 ICF u32 color_argb(u32 a, u32 r, u32 g, u32 b)
 {
@@ -275,5 +277,32 @@ typedef _color<double> Dcolor;
 
 template <class T>
 BOOL _valid(const _color<T>& c) { return _valid(c.r) && _valid(c.g) && _valid(c.b) && _valid(c.a); }
+
+template <typename T>
+struct fmt::formatter<_color<T>>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const _color<T>& c, FormatContext& ctx) const
+    {
+        return fmt::format_to(
+            ctx.out(),
+            "Color {{ "
+            "r={:.3f}, "
+            "g={:.3f}, "
+            "b={:.3f}, "
+            "a={:.3f}, "
+            "argb=0x{:08X} }}",
+            static_cast<double>(c.r),
+            static_cast<double>(c.g),
+            static_cast<double>(c.b),
+            static_cast<double>(c.a),
+            c.get());
+    }
+};
 
 #endif

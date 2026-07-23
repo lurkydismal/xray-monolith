@@ -2,6 +2,9 @@
 #define WAVEFORM_H
 #pragma once
 
+#include <string_view>
+#include <fmt/base.h>
+
 #pragma pack(push,4)
 struct WaveForm
 {
@@ -70,4 +73,46 @@ public:
 };
 
 #pragma pack(pop)
+
+constexpr std::string_view waveform_function_name(WaveForm::EFunction f)
+{
+    switch (f)
+    {
+    case WaveForm::fCONSTANT:    return "Constant";
+    case WaveForm::fSIN:         return "Sin";
+    case WaveForm::fTRIANGLE:    return "Triangle";
+    case WaveForm::fSQUARE:      return "Square";
+    case WaveForm::fSAWTOOTH:    return "SawTooth";
+    case WaveForm::fINVSAWTOOTH: return "InvSawTooth";
+    default:                     return "<unknown>";
+    }
+}
+
+template <>
+struct fmt::formatter<WaveForm>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const WaveForm& wf, FormatContext& ctx) const
+    {
+        return fmt::format_to(
+            ctx.out(),
+            "WaveForm {{ "
+            "function={}, "
+            "base={:.3f}, "
+            "amplitude={:.3f}, "
+            "phase={:.3f}, "
+            "frequency={:.3f} }}",
+            waveform_function_name(wf.F),
+            wf.arg[0],
+            wf.arg[1],
+            wf.arg[2],
+            wf.arg[3]);
+    }
+};
+
 #endif

@@ -65,7 +65,7 @@ void CTexture::surface_set(ID3DBaseTexture* surf)
 	pSurface = surf;
 }
 
-ID3DBaseTexture* CTexture::surface_get()
+ID3DBaseTexture* CTexture::surface_get() const
 {
 	while (flags.bLoading)
 	{
@@ -233,7 +233,7 @@ void CTexture::Load()
 		flags.bLoaded = true;
 		return;
 	}
-	if (0!=strstr(*cName,"$user$"))	
+	if (0!=strstr(*cName,"$user$"))
 	{
 		flags.bUser	= true;
 		flags.bLoading = false;
@@ -436,7 +436,7 @@ void CTexture::Unload()
 	bind = xr_make_delegate(this, &CTexture::apply_load);
 }
 
-void CTexture::desc_update()
+void CTexture::desc_update() const
 {
 	while (flags.bLoading)
 	{
