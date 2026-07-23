@@ -991,28 +991,4 @@ BOOL _valid(const _matrix<T>& m)
 extern XRCORE_API Fmatrix Fidentity;
 extern XRCORE_API Dmatrix Didentity;
 
-template <typename T, typename CharT>
-struct fmt::formatter<_matrix<T>, CharT>
-{
-    constexpr auto parse(fmt::basic_format_parse_context<CharT>& ctx)
-    {
-        return ctx.begin();
-    }
-
-    template <typename FormatContext>
-    auto format(const _matrix<T>& m, FormatContext& ctx) const
-    {
-        return fmt::format_to(
-            ctx.out(),
-            "[[{:.6g}, {:.6g}, {:.6g}, {:.6g}], "
-            "[{:.6g}, {:.6g}, {:.6g}, {:.6g}], "
-            "[{:.6g}, {:.6g}, {:.6g}, {:.6g}], "
-            "[{:.6g}, {:.6g}, {:.6g}, {:.6g}]]",
-            m._11, m._12, m._13, m._14,
-            m._21, m._22, m._23, m._24,
-            m._31, m._32, m._33, m._34,
-            m._41, m._42, m._43, m._44);
-    }
-};
-
 #endif

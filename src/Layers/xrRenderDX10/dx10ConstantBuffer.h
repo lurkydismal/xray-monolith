@@ -7,8 +7,6 @@ struct R_constant_load;
 
 class dx10ConstantBuffer : public xr_resource_named
 {
-    friend struct fmt::formatter<dx10ConstantBuffer>;
-
 public:
 	dx10ConstantBuffer(ID3DShaderReflectionConstantBuffer* pTable);
 	~dx10ConstantBuffer();
@@ -55,39 +53,5 @@ private:
 };
 
 typedef resptr_core<dx10ConstantBuffer, resptr_base<dx10ConstantBuffer>> ref_cbuffer;
-
-template <>
-struct fmt::formatter<dx10ConstantBuffer> : fmt::formatter<std::string_view>
-{
-    auto format(const dx10ConstantBuffer& v, fmt::format_context& ctx) const
-    {
-        return fmt::format_to(
-            ctx.out(),
-            "dx10ConstantBuffer{{"
-            "name=\"{}\", "
-            "bufferName=\"{}\", "
-            "bufferType={}, "
-            "membersCRC={:#010x}, "
-            "members={}, "
-            "memberNames={}, "
-            "buffer={}, "
-            "bufferSize={}, "
-            "bufferData={}, "
-            "changed={}, "
-            "refCount={}"
-            "}}",
-            v.cName.c_str(),
-            v.m_strBufferName.c_str(),
-            v.m_eBufferType,
-            v.m_uiMembersCRC,
-            v.m_MembersList.size(),
-            v.m_MembersNames.size(),
-            fmt::ptr(v.m_pBuffer),
-            v.m_uiBufferSize,
-            fmt::ptr(v.m_pBufferData),
-            v.m_bChanged,
-            v.dwReference.load());
-    }
-};
 
 #endif	//	dx10ConstantBuffer_included

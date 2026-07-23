@@ -9,10 +9,6 @@
 #include "ParticleEffect.h"
 #include "ParticleGroup.h"
 
-#if 0
-#include <spdlog/spdlog.h>
-#endif
-
 #ifdef _EDITOR
 #	include "ParticleEffectActions.h"
 #include "../ECore/Editor/ui_main.h"
@@ -37,9 +33,6 @@ void CPSLibrary::OnCreate()
 	{
 		string_path fn;
 		FS.update_path(fn,_game_data_, "particles.xr");
-#if 0
-        spdlog::trace("CPSLibrary::OnCreate: {}", fn[0] ? fmt::string_view(fn, strnlen(fn, sizeof(fn))) : "<empty>" );
-#endif
 		Load(fn);
 	}
 }
@@ -343,9 +336,6 @@ bool CPSLibrary::Load(const char* nm)
 
     for (PS::PEDIt e_it = m_PEDs.begin(); e_it != m_PEDs.end(); ++e_it)
     {
-#if 0
-        spdlog::trace("CPSLibrary::Load: {}", fmt::ptr(*e_it) );
-#endif
         (*e_it)->CreateShader();
     }
 

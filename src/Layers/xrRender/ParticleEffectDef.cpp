@@ -11,10 +11,6 @@
 #include "ParticleEffectActions.h"
 #endif
 
-#if 0
-#include <spdlog/spdlog.h>
-#endif
-
 //---------------------------------------------------------------------------
 using namespace PAPI;
 using namespace PS;
@@ -65,9 +61,6 @@ void CPEDef::CreateShader()
 {
     if (*m_ShaderName && *m_TextureName)
     {
-#if 0
-        spdlog::trace("CPEDef::CreateShader: '{}', '{}'", m_ShaderName, m_TextureName);
-#endif
         m_CachedShader.create(*m_ShaderName, *m_TextureName);
     }
 }

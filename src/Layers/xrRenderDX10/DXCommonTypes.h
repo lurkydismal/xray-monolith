@@ -520,22 +520,3 @@ typedef	ID3D10ShaderReflectionType						ID3DShaderReflectionType;
 
 typedef dx10State ID3DState;
 #define DX10_ONLY(expr)			expr
-
-template <>
-struct fmt::formatter<D3D_CBUFFER_TYPE> : fmt::formatter<std::string_view>
-{
-    auto format(D3D_CBUFFER_TYPE value, fmt::format_context& ctx) const
-    {
-        std::string_view name = "Unknown";
-
-        switch (value)
-        {
-        case D3D_CT_CBUFFER:            name = "D3D_CT_CBUFFER"; break;
-        case D3D_CT_TBUFFER:            name = "D3D_CT_TBUFFER"; break;
-        case D3D_CT_INTERFACE_POINTERS: name = "D3D_CT_INTERFACE_POINTERS"; break;
-        case D3D_CT_RESOURCE_BIND_INFO: name = "D3D_CT_RESOURCE_BIND_INFO"; break;
-        }
-
-        return fmt::format_to(ctx.out(), "{} ({})", name, std::to_underlying(value));
-    }
-};

@@ -19,10 +19,6 @@
 
 #include "D3DX10core.h"
 
-#if 0
-#include <spdlog/spdlog.h>
-#endif
-
 CRender RImplementation;
 
 //////////////////////////////////////////////////////////////////////////
@@ -537,15 +533,7 @@ void CRender::create()
 
 	Models = xr_new<CModelPool>();
 
-#if 0
-    spdlog::trace("1 CRender::create");
-#endif
-
 	PSLibrary.OnCreate();
-
-#if 0
-    spdlog::trace("2 CRender::create");
-#endif
 
 	HWOCC.occq_create(occq_size);
 

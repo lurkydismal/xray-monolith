@@ -123,42 +123,4 @@ public:
 	}
 };
 
-template <class T, int Dim>
-struct fmt::formatter<svector<T, Dim>>
-{
-    constexpr auto parse(fmt::format_parse_context& ctx)
-    {
-        return ctx.begin();
-    }
-
-    template <typename FormatContext>
-    auto format(const svector<T, Dim>& vec, FormatContext& ctx) const
-    {
-        auto out = ctx.out();
-
-        out = fmt::format_to(out,
-            "svector {{\n"
-            "  size = {},\n"
-            "  capacity = {},\n"
-            "  values = [",
-            vec.size(), Dim);
-
-        if (!vec.empty())
-            out = fmt::format_to(out, "\n");
-
-        for (u32 i = 0; i < vec.size(); ++i)
-        {
-            out = fmt::format_to(out, "    {}", vec[i]);
-
-            if (i + 1 != vec.size())
-                out = fmt::format_to(out, ",");
-
-            out = fmt::format_to(out, "\n");
-        }
-
-        out = fmt::format_to(out, "  ]\n}}");
-        return out;
-    }
-};
-
 #endif

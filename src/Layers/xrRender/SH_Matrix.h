@@ -113,49 +113,4 @@ inline std::string matrix_tcm_flags(u32 flags)
     return r;
 }
 
-template <>
-struct fmt::formatter<CMatrix>
-{
-    constexpr auto parse(fmt::format_parse_context& ctx)
-    {
-        return ctx.begin();
-    }
-
-    template <typename FormatContext>
-    auto format(const CMatrix& m, FormatContext& ctx) const
-    {
-        return fmt::format_to(
-            ctx.out(),
-            "CMatrix {{\n"
-            "  refs      = {},\n"
-            "  flags     = {},\n"
-            "  name      = {},\n"
-            "  mode      = {},\n"
-            "  frame     = {},\n"
-            "  tcm       = {} (0x{:08X}),\n"
-            "  xform     = {},\n"
-            "  waveforms = {{\n"
-            "    scaleU  = {},\n"
-            "    scaleV  = {},\n"
-            "    rotate  = {},\n"
-            "    scrollU = {},\n"
-            "    scrollV = {}\n"
-            "  }}\n"
-            "}}",
-            m.dwReference.load(std::memory_order_relaxed),
-            m.dwFlags,
-            m.cName,
-            matrix_mode_name(m.dwMode),
-            m.dwFrame,
-            matrix_tcm_flags(m.tcm),
-            m.tcm,
-            m.xform,
-            m.scaleU,
-            m.scaleV,
-            m.rotate,
-            m.scrollU,
-            m.scrollV);
-    }
-};
-
 #endif

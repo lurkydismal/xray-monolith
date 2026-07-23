@@ -10,8 +10,6 @@ class CGIFAnimationPlayer;
 
 class ECORE_API CTexture : public xr_resource_named
 {
-    friend struct fmt::formatter<CTexture>;
-
 public:
 	//	Since DX10 allows up to 128 unique textures,
 	//	distance between enum values should be at leas 128
@@ -157,110 +155,5 @@ constexpr std::string_view texture_shader_type_name(CTexture::ResourceShaderType
     default:                    return "<unknown>";
     }
 }
-
-template <>
-struct fmt::formatter<CTexture>
-{
-    constexpr auto parse(fmt::format_parse_context& ctx)
-    {
-        return ctx.begin();
-    }
-
-    template <typename FormatContext>
-    auto format(const CTexture& tex, FormatContext& ctx) const
-    {
-    #if 0
-        "CTexture {{\n"
-        "  refs          = {},\n"
-        "  flags         = {},\n"
-        "  name          = {},\n"
-        "  loaded        = {},\n"
-        "  loading       = {},\n"
-        "  user          = {},\n"
-        "  seqCycles     = {},\n"
-        "  memoryUsage   = {} bytes,\n"
-        "  lastUsedFrame = {},\n"
-        "  size          = {}x{},\n"
-        "  material      = {},\n"
-        "  bumpmap       = {},\n"
-        "  hot           = {},\n"
-        "  glowing       = {},\n"
-        "  surface       = {},\n"
-        "  avi           = {},\n"
-        "  theora        = {},\n"
-        "  gifPlayer     = {}"
-#if defined(USE_DX10) || defined(USE_DX11)
-        ",\n"
-        "  shaderView    = {}"
-#endif
-        "\n"
-        "}}",
-    #endif
-        return fmt::format_to(
-            ctx.out(),
-            "CTexture {{\n"
-            "  refs          = {},\n"
-            "  flags         = {},\n"
-            "  name          = {},\n"
-            "  loaded        = {},\n"
-            "  loading       = {},\n"
-            "  user          = {},\n"
-            "  seqCycles     = {},\n"
-            "  memoryUsage   = {} bytes,\n"
-            "  lastUsedFrame = {},\n"
-            "  material      = {},\n"
-            "  bumpmap       = {},\n"
-            "  hot           = {},\n"
-            "  glowing       = {},\n"
-            "  avi           = {},\n"
-            "  theora        = {},\n"
-            "  gifPlayer     = {}"
-#if defined(USE_DX10) || defined(USE_DX11)
-#endif
-            "\n"
-            "}}",
-            tex.dwReference.load(std::memory_order_relaxed),
-            tex.dwFlags,
-            tex.cName,
-            tex.flags.bLoaded,
-            tex.flags.bLoading,
-            tex.flags.bUser,
-            tex.flags.seqCycles,
-            tex.flags.MemoryUsage,
-            tex.dwLastUsedFrame,
-#if 0
-            tex.get_Width(),
-            tex.get_Height(),
-#endif
-            tex.m_material,
-            tex.m_bumpmap,
-            tex.m_is_hot,
-            tex.m_is_glowing,
-#if 0
-            fmt::ptr(tex.surface_get()),
-#endif
-            fmt::ptr(tex.pAVI),
-            fmt::ptr(tex.pTheora),
-            fmt::ptr(tex.gifPlayer)
-#if defined(USE_DX10) || defined(USE_DX11)
-#if 0
-            ,
-            fmt::ptr(tex.get_SRView())
-#endif
-#endif
-        );
-    }
-};
-
-template <>
-struct fmt::formatter<resptrcode_texture>
-    : fmt::formatter<resptr_base<CTexture>>
-{
-    template <typename FormatContext>
-    auto format(const resptrcode_texture& tex, FormatContext& ctx) const
-    {
-        return fmt::formatter<resptr_base<CTexture>>::format(tex, ctx);
-    }
-};
 
 #endif

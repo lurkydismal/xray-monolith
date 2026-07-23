@@ -126,8 +126,6 @@ set(FS
     "LocatorAPI_defs.h"
     "log.cpp"
     "log.h"
-    "logger.cpp"
-    "logger.hpp"
     "NET_utils.cpp"
     "net_utils.h"
     "RingBuffer.h"

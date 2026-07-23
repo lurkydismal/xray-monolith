@@ -84,46 +84,4 @@ constexpr std::string_view constant_mode_name(u32 mode)
     }
 }
 
-template <>
-struct fmt::formatter<CConstant>
-{
-    constexpr auto parse(fmt::format_parse_context& ctx)
-    {
-        return ctx.begin();
-    }
-
-    template <typename FormatContext>
-    auto format(const CConstant& c, FormatContext& ctx) const
-    {
-        return fmt::format_to(
-            ctx.out(),
-            "CConstant {{\n"
-            "  refs        = {},\n"
-            "  flags       = {},\n"
-            "  name        = {},\n"
-            "  mode        = {},\n"
-            "  frame       = {},\n"
-            "  float       = {},\n"
-            "  dword       = 0x{:08X},\n"
-            "  waveforms = {{\n"
-            "    R = {},\n"
-            "    G = {},\n"
-            "    B = {},\n"
-            "    A = {}\n"
-            "  }}\n"
-            "}}",
-            c.dwReference.load(std::memory_order_relaxed),
-            c.dwFlags,
-            c.cName,
-            constant_mode_name(c.dwMode),
-            c.dwFrame,
-            c.const_float,
-            c.const_dword,
-            c._R,
-            c._G,
-            c._B,
-            c._A);
-    }
-};
-
 #endif

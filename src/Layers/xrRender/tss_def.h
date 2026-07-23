@@ -5,8 +5,6 @@
 
 class SimulatorStates
 {
-    friend struct fmt::formatter<SimulatorStates>;
-
 private:
 	struct State
 	{
@@ -55,41 +53,6 @@ public:
 	void UpdateDesc(D3D_SAMPLER_DESC descArray[D3D_COMMONSHADER_SAMPLER_SLOT_COUNT],
 	                bool SamplerUsed[D3D_COMMONSHADER_SAMPLER_SLOT_COUNT], int iBaseSamplerIndex) const;
 #endif	//	USE_DX10
-};
-
-template <>
-struct fmt::formatter<SimulatorStates> : fmt::formatter<std::string_view>
-{
-    auto format(const SimulatorStates& v, fmt::format_context& ctx) const
-    {
-        auto out = fmt::format_to(ctx.out(), "SimulatorStates{{count={}, states=[", v.States.size());
-
-        bool first = true;
-        for (const auto& s : v.States)
-        {
-            if (!first)
-                out = fmt::format_to(out, ", ");
-            first = false;
-
-            const char* type = "UNKNOWN";
-            switch (s.type)
-            {
-            case 0: type = "RS"; break;
-            case 1: type = "TSS"; break;
-            case 2: type = "SAMP"; break;
-            }
-
-            out = fmt::format_to(
-                out,
-                "{{type={}, v1={}, v2={}, v3={}}}",
-                type,
-                s.v1,
-                s.v2,
-                s.v3);
-        }
-
-        return fmt::format_to(out, "]}}");
-    }
 };
 
 #endif

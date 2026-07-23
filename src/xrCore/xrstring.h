@@ -260,39 +260,6 @@ public:
 	}
 };
 
-template <>
-struct fmt::formatter<shared_str>
-{
-    constexpr auto parse(fmt::format_parse_context& ctx)
-    {
-        return ctx.begin();
-    }
-
-    template <typename FormatContext>
-    auto format(const shared_str& s, FormatContext& ctx) const
-    {
-        const char* str = s.c_str();
-
-        if (!str)
-        {
-            return fmt::format_to(ctx.out(),
-                "{{ptr={}, value=<nullptr>}}",
-                fmt::ptr(s._get()));
-        }
-
-        if (*str == '\0')
-        {
-            return fmt::format_to(ctx.out(),
-                "{{ptr={}, value=<empty>}}",
-                fmt::ptr(s._get()));
-        }
-
-        return fmt::format_to(ctx.out(),
-            "{{ptr={}, value=\"{}\"}}",
-            fmt::ptr(s._get()), str);
-    }
-};
-
 namespace std
 {
 	template<>

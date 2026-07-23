@@ -33,10 +33,6 @@
 #include "xrSASH.h"
 #include "MonitorList.h"
 
-#if 0
-#include <spdlog/spdlog.h>
-#endif
-
 extern "C" void XR_EARLY_INIT();
 
 //#include "securom_api.h"
@@ -647,9 +643,6 @@ void Startup()
 	}
 
 	// Initialize APP
-#if 0
-    spdlog::trace("Startup");
-#endif
 	Device.Create();
 
 	LALib.OnCreate();
@@ -978,10 +971,6 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
                           char* lpCmdLine,
                           int nCmdShow)
 {
-#if 0
-    spdlog::trace("WinMain_impl: {} {} {} {}", static_cast<void*>(hInstance), static_cast<void*>(hPrevInstance), lpCmdLine, nCmdShow);
-#endif
-
 #ifdef DEDICATED_SERVER
     Debug._initialize(true);
 #else // DEDICATED_SERVER

@@ -10,10 +10,6 @@
 
 #include "dxRenderDeviceRender.h"
 
-#if 0
-#include <spdlog/spdlog.h>
-#endif
-
 //
 STextureList::~STextureList()
 {
@@ -59,14 +55,6 @@ void resptrcode_shader::create(LPCSTR s_shader, LPCSTR s_textures, LPCSTR s_cons
 {
 #ifdef SPAWN_ANTIFREEZE
 	xrCriticalSectionGuard g(shaderCreate_cs);
-#endif
-#if 0
-    spdlog::trace("resptrcode_shader::create: '{}', '{}'",
-        s_shader[0] ? s_shader : "<empty>",
-        s_textures[0] ? s_textures : "<empty>",
-        s_constants[0] ? s_constants : "<empty>",
-        s_matrices[0] ? s_matrices : "<empty>"
-    );
 #endif
 	_set(DEV->Create(s_shader, s_textures, s_constants, s_matrices));
 }
@@ -139,12 +127,6 @@ ShaderElement::ShaderElement()
 
 BOOL ShaderElement::equal(ShaderElement& S)
 {
-#if 0
-    spdlog::trace("ShaderElement::equal(&): ''");
-#endif
-#if 0
-    spdlog::trace("ShaderElement::equal(&): '{}'", S);
-#endif
 	if (flags.iPriority != S.flags.iPriority) return FALSE;
 	if (flags.bStrictB2F != S.flags.bStrictB2F) return FALSE;
 	if (flags.bEmissive != S.flags.bEmissive) return FALSE;
@@ -162,9 +144,6 @@ BOOL ShaderElement::equal(ShaderElement& S)
 
 BOOL ShaderElement::equal(ShaderElement* S)
 {
-#if 0
-    spdlog::trace("ShaderElement::equal(*): '{}'", fmt::ptr(S));
-#endif
 	if (0 == S && 0 == this) return TRUE;
 	if (0 == S || 0 == this) return FALSE;
 	return equal(*S);
@@ -173,9 +152,6 @@ BOOL ShaderElement::equal(ShaderElement* S)
 //
 BOOL Shader::equal(Shader& S)
 {
-#if 0
-    spdlog::trace("Shader::equal(&): S {}", S);
-#endif
 	return
 		E[0]->equal(&*S.E[0]) &&
 		E[1]->equal(&*S.E[1]) &&
@@ -186,9 +162,6 @@ BOOL Shader::equal(Shader& S)
 
 BOOL Shader::equal(Shader* S)
 {
-#if 0
-    spdlog::trace("Shader::equal(*): '{}'", fmt::ptr(S));
-#endif
 	return equal(*S);
 }
 
