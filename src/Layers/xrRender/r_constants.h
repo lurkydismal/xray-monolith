@@ -225,6 +225,197 @@ public:
 
 typedef resptr_core<R_constant_table, resptr_base<R_constant_table>> ref_ctable;
 
+constexpr std::string_view rc_type_name(u16 type)
+{
+    switch (type)
+    {
+    case RC_float:       return "float";
+    case RC_int:         return "int";
+    case RC_bool:        return "bool";
+    case RC_sampler:     return "sampler";
+    case RC_dx10texture: return "texture";
+    case RC_dx11UAV:     return "uav";
+    default:             return "<unknown>";
+    }
+}
+
+constexpr std::string_view rc_class_name(u16 cls)
+{
+    switch (cls)
+    {
+    case RC_1x1:  return "1x1";
+    case RC_1x2:  return "1x2";
+    case RC_1x3:  return "1x3";
+    case RC_1x4:  return "1x4";
+    case RC_2x4:  return "2x4";
+    case RC_3x4:  return "3x4";
+    case RC_4x4:  return "4x4";
+    case RC_1x4a: return "1x4[]";
+    case RC_3x4a: return "3x4[]";
+    case RC_4x4a: return "4x4[]";
+    default:      return "<unknown>";
+    }
+}
+
+inline std::string rc_destination_name(u32 dest)
+{
+    std::string r;
+
+    auto append = [&](const char* s)
+    {
+        if (!r.empty())
+            r += '|';
+        r += s;
+    };
+
+    if (dest & RC_dest_pixel)    append("pixel");
+    if (dest & RC_dest_vertex)   append("vertex");
+    if (dest & RC_dest_sampler)  append("sampler");
+    if (dest & RC_dest_geometry) append("geometry");
+#ifdef USE_DX11
+    if (dest & RC_dest_hull)     append("hull");
+    if (dest & RC_dest_domain)   append("domain");
+    if (dest & RC_dest_compute)  append("compute");
+#endif
+
+    if (r.empty())
+        r = "<none>";
+
+    return r;
+}
+
+template <>
+struct fmt::formatter<R_constant_load>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const R_constant_load& load, FormatContext& ctx) const
+    {
+        return fmt::format_to(
+            ctx.out(),
+            "{{index={}, class={}}}",
+            load.index,
+            rc_class_name(load.cls));
+    }
+};
+
+template <>
+struct fmt::formatter<R_constant>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const R_constant& c, FormatContext& ctx) const
+    {
+        auto out = ctx.out();
+
+        out = fmt::format_to(
+            out,
+            "R_constant {{\n"
+            "  refs        = {},\n"
+            "  name        = {},\n"
+            "  type        = {},\n"
+            "  destination = {},\n"
+            "  ps          = {},\n"
+            "  vs          = {},\n",
+            c.dwReference.load(std::memory_order_relaxed),
+            c.name,
+            rc_type_name(c.type),
+            rc_destination_name(c.destination),
+            c.ps,
+            c.vs);
+
+#if defined(USE_DX10) || defined(USE_DX11)
+        out = fmt::format_to(out, "  gs          = {},\n", c.gs);
+#   ifdef USE_DX11
+        out = fmt::format_to(out,
+            "  hs          = {},\n"
+            "  ds          = {},\n"
+            "  cs          = {},\n",
+            c.hs,
+            c.ds,
+            c.cs);
+#   endif
+#endif
+
+        return fmt::format_to(
+            out,
+            "  sampler     = {},\n"
+            "  handler     = {}\n"
+            "}}",
+            c.samp,
+            fmt::ptr(c.handler));
+    }
+};
+
+template <>
+struct fmt::formatter<R_constant_table>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const R_constant_table& tbl, FormatContext& ctx) const
+    {
+        auto out = ctx.out();
+
+        out = fmt::format_to(
+            out,
+            "R_constant_table {{\n"
+            "  refs  = {},\n"
+            "  flags = {},\n"
+            "  constants = [",
+            tbl.dwReference.load(std::memory_order_relaxed),
+            tbl.dwFlags);
+
+        if (!tbl.table.empty())
+            out = fmt::format_to(out, "\n");
+
+        for (size_t i = 0; i < tbl.table.size(); ++i)
+        {
+            out = fmt::format_to(out, "    {}", tbl.table[i]);
+
+            if (i + 1 != tbl.table.size())
+                out = fmt::format_to(out, ",");
+
+            out = fmt::format_to(out, "\n");
+        }
+
+        out = fmt::format_to(out, "  ]");
+
+#if defined(USE_DX10) || defined(USE_DX11)
+        out = fmt::format_to(out, ",\n  constant_buffers = [\n");
+
+        for (size_t i = 0; i < tbl.m_CBTable.size(); ++i)
+        {
+            out = fmt::format_to(
+                out,
+                "    {{slot={}, buffer={}}}",
+                tbl.m_CBTable[i].first,
+                tbl.m_CBTable[i].second);
+
+            if (i + 1 != tbl.m_CBTable.size())
+                out = fmt::format_to(out, ",");
+
+            out = fmt::format_to(out, "\n");
+        }
+
+        out = fmt::format_to(out, "  ]");
+#endif
+
+        return fmt::format_to(out, "\n}}");
+    }
+};
+
 #if defined(USE_DX10) || defined(USE_DX11)
 #include "../xrRenderDX10/dx10ConstantBuffer_impl.h"
 #endif	//	USE_DX10
