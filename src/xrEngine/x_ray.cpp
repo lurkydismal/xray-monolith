@@ -1296,20 +1296,6 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 	return 0;
 }
 
-int stack_overflow_exception_filter(int exception_code)
-{
-	if (exception_code == EXCEPTION_STACK_OVERFLOW)
-	{
-		// Do not call _resetstkoflw here, because
-		// at this point, the stack is not yet unwound.
-		// Instead, signal that the handler (the __except block)
-		// is to be executed.
-		return EXCEPTION_EXECUTE_HANDLER;
-	}
-	else
-		return EXCEPTION_CONTINUE_SEARCH;
-}
-
 //extern BOOL DllMainOpenAL32(HANDLE module, DWORD reason, LPVOID reserved);
 extern BOOL DllMainXrCore(HANDLE hinstDLL, DWORD ul_reason_for_call, LPVOID lpvReserved);
 extern BOOL DllMainXrPhysics(HANDLE hModule, DWORD ul_reason_for_call, LPVOID lpReserved);
