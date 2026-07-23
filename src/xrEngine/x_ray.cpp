@@ -645,6 +645,7 @@ void Startup()
 	}
 
 	// Initialize APP
+    spdlog::trace("Startup");
 	Device.Create();
 
 	LALib.OnCreate();
