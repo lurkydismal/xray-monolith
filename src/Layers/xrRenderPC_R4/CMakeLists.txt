@@ -1096,7 +1096,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
     xrCPU_Pipe
     imgui
-    fmt::fmt
     spdlog::spdlog
 )
 

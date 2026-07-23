@@ -15,8 +15,6 @@
 #include "SH_Constant.h"
 #include "SH_RT.h"
 
-#include <fmt/base.h>
-
 typedef xr_vector<shared_str> sh_list;
 class CBlender_Compile;
 class IBlender;
@@ -26,9 +24,9 @@ class IBlender;
 #pragma pack(push,4)
 
 //////////////////////////////////////////////////////////////////////////
-struct ECORE_API STextureList :
-	public xr_resource_flagged,
-	public xr_vector<std::pair<u32,ref_texture> >
+struct ECORE_API STextureList : 
+	public xr_resource_flagged, 
+	public xr_vector<std::pair<u32,ref_texture> >	
 {
 	typedef xr_vector<std::pair<u32, ref_texture>> inherited_vec;
 	~STextureList();
@@ -147,7 +145,7 @@ public:
 		u32 isLandscape : 1;
 		u32 isWater : 1;
 
-		u32 iScopeLense : 2; //  Redotix99: for 3D Shader Based Scopes
+		u32 iScopeLense : 2; //  Redotix99: for 3D Shader Based Scopes 		
 	};
 
 public:
@@ -170,7 +168,7 @@ typedef resptr_core<ShaderElement, resptr_base<ShaderElement>> ref_selement;
 struct ECORE_API Shader : public xr_resource_flagged
 {
 public:
-	ref_selement E [SHADER_ELEMENTS_MAX]; // R1 - 0=norm_lod0(det),	1=norm_lod1(normal),	2=L_point,		3=L_spot,	4=L_for_models,
+	ref_selement E [SHADER_ELEMENTS_MAX]; // R1 - 0=norm_lod0(det),	1=norm_lod1(normal),	2=L_point,		3=L_spot,	4=L_for_models,	
 	// R2 - 0=deffer,			1=norm_lod1(normal),	2=psm,			3=ssm,		4=dsm
 	//Shader();
 	//Shader& operator=(const Shader& Other) = delete;
@@ -208,24 +206,11 @@ enum SE_R1
 //#define		SE_R2_NORMAL_HQ		0	// high quality/detail
 //#define		SE_R2_NORMAL_LQ		1	// low quality
 //#define		SE_R2_SHADOW		2	// shadow generation
-//	E[3] - can use for night vision but need to extend SE_R1. Will need
+//	E[3] - can use for night vision but need to extend SE_R1. Will need 
 //	Extra shader element.
-//	E[4] - distortion or self illumination(self emission).
+//	E[4] - distortion or self illumination(self emission). 
 //	E[4] Can use for lightmap capturing.
 
 #pragma pack(pop)
-
-template<>
-struct fmt::formatter<Shader> : fmt::formatter<std::string>
-{
-    auto format(Shader my, format_context &ctx) const -> decltype(ctx.out())
-    {
-        return fmt::format_to(
-            ctx.out(),
-            "[Shader E=[{}, {}, {}, {}, {}, {}]]",
-            my.E[0], my.E[1], my.E[2],
-            my.E[3], my.E[4], my.E[5]);
-    }
-};
 
 #endif // !defined(AFX_SHADER_H__9CBD70DD_E147_446B_B4EE_5DA321EB726F__INCLUDED_)
