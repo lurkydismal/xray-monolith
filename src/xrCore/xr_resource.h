@@ -3,6 +3,8 @@
 #include <fast_dynamic_cast/fast_dynamic_cast.hpp>
 #include "_thread_types.h"
 
+#include <fmt/base.h>
+
 // resource itself, the base class for all derived resources
 class XRCORE_API xr_resource
 {
@@ -199,3 +201,42 @@ resptr_core<T, D> static_pointer_cast(resptr_core<U, D> const& p) { return stati
 
 template <class T, class U, typename D>
 resptr_core<T, D> dynamic_pointer_cast(resptr_core<U, D> const& p) { return fast_dynamic_cast<T*>(p.get()); }
+
+template <class T>
+struct fmt::formatter<resptr_base<T>>
+{
+    constexpr auto parse(fmt::format_parse_context& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template <typename FormatContext>
+    auto format(const resptr_base<T>& ptr, FormatContext& ctx) const
+    {
+        T* p = ptr._get();
+
+        if (!p)
+            return fmt::format_to(ctx.out(), "nullptr");
+
+        return fmt::format_to(ctx.out(),
+            "resptr{{addr={:p}, value={}}}",
+            static_cast<const void*>(p),
+            *p);
+    }
+};
+
+template<class T, class C>
+struct fmt::formatter<resptr_core<T, C>> : fmt::formatter<std::string>
+{
+    auto format(resptr_core<T, C> ptr, format_context &ctx) const -> decltype(ctx.out())
+    {
+        if (!ptr)
+            return fmt::format_to(ctx.out(), "nullptr");
+
+        return fmt::format_to(
+            ctx.out(),
+            "resptr_core<{}>({addr={:p}, value={:p})",
+            static_cast<const void*>(ptr),
+            *ptr);
+    }
+};
