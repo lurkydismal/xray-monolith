@@ -33,6 +33,8 @@
 #include "xrSASH.h"
 #include "MonitorList.h"
 
+#include <spdlog/spdlog.h>
+
 extern "C" void XR_EARLY_INIT();
 
 //#include "securom_api.h"
@@ -971,6 +973,8 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
                           char* lpCmdLine,
                           int nCmdShow)
 {
+    spdlog::trace("WinMain_impl: {} {} {} {}", static_cast<void*>(hInstance), static_cast<void*>(hPrevInstance), lpCmdLine, nCmdShow);
+
 #ifdef DEDICATED_SERVER
     Debug._initialize(true);
 #else // DEDICATED_SERVER

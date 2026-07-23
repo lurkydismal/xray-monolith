@@ -50,9 +50,13 @@ int APIENTRY WinMain(HINSTANCE hInstance,
                      char* lpCmdLine,
                      int nCmdShow)
 {
-  // Initialize LuaJIT low-memory pool FIRST, before any DLLs load and fragment
+    // Initialize LuaJIT low-memory pool FIRST, before any DLLs load and fragment
 	// the lower 2GB address space.
 	XR_EARLY_INIT();
+
+    spdlog::global_logger()->sinks().push_back(g_fileSink);
+    spdlog::set_level(spdlog::level::trace);
+    spdlog::trace("WinMain: {} {} {} {}", static_cast<void*>(hInstance), static_cast<void*>(hPrevInstance), lpCmdLine, nCmdShow);
 
 	// Enable per-monitor DPI awareness so GetMonitorInfo returns real pixel sizes.
 	// Without this, monitors with different DPI scaling report wrong resolutions
@@ -91,9 +95,6 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 	__try
 	{
-        spdlog::global_logger()->sinks().push_back(g_fileSink);
-        spdlog::set_level(spdlog::level::trace);
-        spdlog::trace("MAIN IMPL");
 		WinMain_impl(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
 	}
 	__except (stack_overflow_exception_filter(GetExceptionCode()))
