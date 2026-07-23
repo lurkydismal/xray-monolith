@@ -272,6 +272,7 @@ CPMAddPackage(
         "ZSTD_BUILD_STATIC OFF"
         "ZSTD_BUILD_SHARED ON"
         "ZSTD_BUILD_PROGRAMS OFF"
+        "ZSTD_BUILD_TESTS OFF"
     SOURCE_SUBDIR build/cmake
 )
 CPMAddPackage("gh:stephenberry/glaze@7.9.1")
