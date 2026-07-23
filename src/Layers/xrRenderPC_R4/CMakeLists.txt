@@ -1096,6 +1096,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
     xrCPU_Pipe
     imgui
+    spdlog::spdlog
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
