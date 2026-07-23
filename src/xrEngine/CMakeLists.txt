@@ -998,6 +998,12 @@ add_dependencies(${EXECUTABLE_TARGET}
 )
 
 # Link with other targets.
+target_link_libraries(${OBJECT_TARGET}
+    PUBLIC
+        spdlog::spdlog
+        stdfunc::stdfunc
+)
+
 target_link_libraries(${PROJECT_NAME} PUBLIC
     LuaJIT-2
     luabind
@@ -1025,8 +1031,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     OpenAL32
     optick
     ${RENDERER_LIB}
-    stdfunc::stdfunc
-    spdlog::spdlog
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES
