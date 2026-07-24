@@ -10,7 +10,7 @@
 #include "alife_graph_registry.h"
 #include "../xrEngine/x_ray.h"
 #include "../xrEngine/IGame_Persistent.h"
-#include "level.h"
+#include "Level.h"
 
 using namespace ALife;
 
