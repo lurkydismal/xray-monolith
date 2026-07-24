@@ -20,8 +20,13 @@ endif()
 # Dependencies
 ################################################################################
 CPMAddPackage("gh:microsoft/GSL@4.2.2")
+
+# Portable SIMD
 CPMAddPackage("gh:simd-everywhere/simde@0.8.2")
-CPMAddPackage("gh:fmtlib/fmt#12.2.0")
+
+################################################################################
+# stdfunc
+################################################################################
 CPMAddPackage(
     URI "gh:Cyan4973/xxHash@0.8.3"
     OPTIONS
@@ -54,9 +59,13 @@ CPMAddPackage(
         "CTRE_BUILD_PACKAGE_DEB OFF"
         "CTRE_BUILD_PACKAGE_RPM OFF"
 )
+
 CPMAddPackage("gh:lurkydismal/stdfunc@0.1.0")
-# TODO: Add Rust support
-# CPMAddPackage("gh:corrosion-rs/corrosion@0.6.1")
+
+################################################################################
+# Logging
+################################################################################
+CPMAddPackage("gh:fmtlib/fmt#12.2.0")
 CPMAddPackage(
     URI "gh:gabime/spdlog#v2.x"
     OPTIONS
@@ -67,3 +76,8 @@ if(MSVC)
 elseif(IS_CLANG)
     target_compile_options(spdlog PRIVATE -fexceptions)
 endif()
+
+################################################################################
+# Rust
+################################################################################
+CPMAddPackage("gh:corrosion-rs/corrosion@0.6.1")
