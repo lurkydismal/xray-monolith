@@ -244,10 +244,25 @@ void xrDebug::do_exit(const std::string& message)
 }
 
 #ifdef NO_BUG_TRAP
+
+#ifdef USE_OWN_MINI_DUMP
+void save_mini_dump (_EXCEPTION_POINTERS* pExceptionInfo);
+#endif
+
 //AVO: simplified function
 void xrDebug::backend(const char* expression, const char* description, const char* argument0, const char* argument1,
                       const char* file, int line, const char* function, bool& ignore_always)
 {
+#ifdef USE_OWN_MINI_DUMP
+    __try
+    {
+        RaiseException(EXCEPTION_NONCONTINUABLE_EXCEPTION, EXCEPTION_NONCONTINUABLE, 0, nullptr);
+    }
+    __except (save_mini_dump(GetExceptionInformation()), EXCEPTION_EXECUTE_HANDLER)
+    {
+    }
+#endif
+
     // we save first
     crash_saving::save();
 
