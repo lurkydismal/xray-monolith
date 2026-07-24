@@ -77,7 +77,7 @@ template <typename T, typename Ref>
 inline T* CResourceManager::CreateShader(const char* name, Ref* keep_alive)
 {
 	xrCriticalSectionGuard shader_guard(shader_creation_guard(name));
-	ShaderTypeTraits<T>::MapType& sh_map = GetShaderMap<ShaderTypeTraits<T>::MapType>();
+	typename ShaderTypeTraits<T>::MapType& sh_map = GetShaderMap<typename ShaderTypeTraits<T>::MapType>();
 	LPSTR N = LPSTR(name);
 	{
 		xrCriticalSectionGuard guard(creationGuard);
