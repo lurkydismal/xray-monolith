@@ -245,7 +245,7 @@ dxRender_Visual* CModelPool::Instance_Load(const char* N, BOOL allow_register, b
 				Msg("!Can't find model file '%s'.",name);
                 return 0;
 #else
-				if (assert)	
+				if (assert)
 					Debug.fatal(DEBUG_INFO, "Can't find model file '%s'.", name);
 				else
 					return nullptr;
@@ -271,7 +271,7 @@ dxRender_Visual* CModelPool::Instance_Load(const char* N, BOOL allow_register, b
 	g_pGamePersistent->RegisterModel(V);
 
 	// Registration
-	if (allow_register) 
+	if (allow_register)
 		V = Instance_Register(N, V);
 
 	return V;
@@ -287,7 +287,7 @@ dxRender_Visual* CModelPool::Instance_Load(LPCSTR name, IReader* data, BOOL allo
 	V->Load(name, data, 0);
 
 	// Registration
-	if (allow_register) 
+	if (allow_register)
 		V = Instance_Register(name, V);
 	return V;
 }
@@ -411,7 +411,7 @@ dxRender_Visual* CModelPool::Create(const char* name, IReader* data, bool assert
 	xr_strcpy(low_name, name);
 	strlwr(low_name);
 	if (strext(low_name)) *strext(low_name) = 0;
-	
+
 	// 0. Search POOL
 	POOL_IT it = Pool.find(low_name);
 	if (it != Pool.end())
@@ -471,7 +471,7 @@ dxRender_Visual* CModelPool::CreateChild(LPCSTR name, IReader* data)
 	return Model;
 }
 
-extern  xr_atomic_bool ENGINE_API g_bRendering; 
+extern  xr_atomic_bool ENGINE_API g_bRendering;
 
 void CModelPool::DeleteInternal(dxRender_Visual* & V, BOOL bDiscard)
 {
@@ -550,7 +550,7 @@ void CModelPool::DeleteQueuedDeffer()
     {
         if (Vis)
             DeleteInternal(Vis);
-    }	
+    }
 
 	ModelsToDeleteDeffer.clear();
 }
@@ -665,26 +665,32 @@ xr_shared_ptr<CModelPool::ModelBlueprint> CModelPool::PrepareBlueprint(LPCSTR na
 
 	if (producer)
 	{
+#if 0
 		try
 		{
+#endif
 			if (resolved)
 			{
 				IReader* source = FS.r_open(resolved_path.c_str());
 				if (source)
 				{
 					int size = 0;
+#if 0
 					try
 					{
+#endif
 						size = source->length();
 						R_ASSERT(size > 0);
 						blueprint->data.resize(size);
 						CopyMemory(blueprint->data.data(), source->pointer(), size);
+#if 0
 					}
 					catch (...)
 					{
 						FS.r_close(source);
 						throw;
 					}
+#endif
 					FS.r_close(source);
 					blueprint->found = true;
 
@@ -710,16 +716,20 @@ xr_shared_ptr<CModelPool::ModelBlueprint> CModelPool::PrepareBlueprint(LPCSTR na
 						blueprint->preparedVisual = Instance_Create(header.type);
 						const bool previous_defer = g_defer_visual_shader_creation;
 						g_defer_visual_shader_creation = true;
+#if 0
 						try
 						{
+#endif
 							IReader visual_reader(blueprint->data.data(), size);
 							blueprint->preparedVisual->Load(normalized.c_str(), &visual_reader, 0);
+#if 0
 						}
 						catch (...)
 						{
 							g_defer_visual_shader_creation = previous_defer;
 							throw;
 						}
+#endif
 						g_defer_visual_shader_creation = previous_defer;
 					}
 #endif
@@ -728,6 +738,7 @@ xr_shared_ptr<CModelPool::ModelBlueprint> CModelPool::PrepareBlueprint(LPCSTR na
 			std::sort(blueprint->textures.begin(), blueprint->textures.end());
 			blueprint->textures.erase(std::unique(blueprint->textures.begin(), blueprint->textures.end()),
 				blueprint->textures.end());
+#if 0
 		}
 		catch (...)
 		{
@@ -735,6 +746,7 @@ xr_shared_ptr<CModelPool::ModelBlueprint> CModelPool::PrepareBlueprint(LPCSTR na
 			SetEvent(blueprint->completed);
 			throw;
 		}
+#endif
 		SetEvent(blueprint->completed);
 	}
 	else
@@ -779,8 +791,10 @@ bool CModelPool::PrefetchPrepared(LPCSTR name, LPCSTR canonical_level_path, bool
 	else
 	{
 		dxRender_Visual* base = prepared;
+#if 0
 		try
 		{
+#endif
 			if (base)
 				base->CommitShaderTexture();
 			else
@@ -788,20 +802,25 @@ bool CModelPool::PrefetchPrepared(LPCSTR name, LPCSTR canonical_level_path, bool
 				IReader data(blueprint->data.data(), static_cast<int>(blueprint->data.size()));
 				const BOOL previous_allow_children_duplicate = bAllowChildrenDuplicate;
 				bAllowChildrenDuplicate = FALSE;
+#if 0
 				try
 				{
+#endif
 					base = Instance_Load(normalized.c_str(), &data, FALSE);
+#if 0
 				}
 				catch (...)
 				{
 					bAllowChildrenDuplicate = previous_allow_children_duplicate;
 					throw;
 				}
+#endif
 				bAllowChildrenDuplicate = previous_allow_children_duplicate;
 			}
 			g_pGamePersistent->RegisterModel(base);
 			Instance_Register(normalized.c_str(), base);
 			base = nullptr;
+#if 0
 		}
 		catch (...)
 		{
@@ -812,6 +831,7 @@ bool CModelPool::PrefetchPrepared(LPCSTR name, LPCSTR canonical_level_path, bool
 			}
 			throw;
 		}
+#endif
 	}
 
 	Prefetch_One(normalized.c_str(), assert);
@@ -838,7 +858,7 @@ bool CModelPool::Exists(LPCSTR N)
 
 	// Prefetch model
 	dxRender_Visual* V = Create(N, 0, false);
-	if (V) 
+	if (V)
 	{
 		Delete(V, FALSE);
 		return true;
@@ -972,7 +992,7 @@ void CModelPool::memory_stats(u32& vb_mem_video, u32& vb_mem_system, u32& ib_mem
 #ifdef _EDITOR
 IC bool	_IsBoxVisible(dxRender_Visual* visual, const Fmatrix& transform)
 {
-    Fbox 		bb; 
+    Fbox 		bb;
     bb.xform	(visual->vis.box,transform);
     return 		::Render->occ_visible(bb);
 }
