@@ -99,8 +99,10 @@ void xrServer::SendConnectionData(IClient* _CL)
 	FS.update_path(resolved_level_path, "$level$", "");
 	const xr_string level_path = resolved_level_path;
 	const bool prepare_local_resources = !g_dedicated_server && CL == GetServerClient();
+#if 0
 	try
 	{
+#endif
 		if (prepare_local_resources)
 		for (PreparedClientSpawn& spawn : prepared)
 		{
@@ -143,6 +145,7 @@ void xrServer::SendConnectionData(IClient* _CL)
 		}
 		Msg("* [client-spawn] prepared=%u models=%u textures=%u order_hash=%08x", static_cast<u32>(prepared.size()),
 			model_count, texture_count, order_hash);
+#if 0
 	}
 	catch (...)
 	{
@@ -150,10 +153,19 @@ void xrServer::SendConnectionData(IClient* _CL)
 		// Submitted workers keep references to vector elements. Drain every batch
 		// before the vector can unwind, even when one task failed first.
 		for (const PreparedClientSpawn& spawn : prepared)
-			if (spawn.resource_batch.Valid())
-				try { executor.Wait(spawn.resource_batch); } catch (...) {}
+        if (spawn.resource_batch.Valid())
+        {
+#if 0
+            try {
+#endif
+                executor.Wait(spawn.resource_batch);
+#if 0
+            } catch (...) {}
+#endif
+        }
 		std::rethrow_exception(failure);
 	}
+#endif
 
 	// Start to send server logo and rules
 	SendServerInfoToClient(CL->ID);
