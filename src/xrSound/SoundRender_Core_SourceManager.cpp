@@ -57,14 +57,18 @@ CSoundRender_Source* CSoundRender_Core::i_create_source(LPCSTR name)
 
 		PreparedSoundSource prepared;
 		xr_string error;
+#if 0
 		try
 		{
+#endif
 			CSoundRender_Source::prepare(job->path.c_str(), prepared, error);
+#if 0
 		}
 		catch (...)
 		{
 			error = make_string("Unhandled exception while preparing sound: %s", job->path.c_str()).c_str();
 		}
+#endif
 		finish_source_prepare(*job, std::move(prepared), std::move(error));
 		lock.lock();
 	}
@@ -173,14 +177,18 @@ void CSoundRender_Core::source_prefetch_worker()
 
 		PreparedSoundSource prepared;
 		xr_string error;
+#if 0
 		try
 		{
+#endif
 			CSoundRender_Source::prepare(job->path.c_str(), prepared, error, false);
+#if 0
 		}
 		catch (...)
 		{
 			error = make_string("Unhandled exception while preparing sound: %s", job->path.c_str()).c_str();
 		}
+#endif
 		const bool succeeded = error.empty();
 		finish_source_prepare(*job, std::move(prepared), std::move(error));
 		if (succeeded)
@@ -320,9 +328,12 @@ void CSoundRender_Core::source_prefetch_start()
 	m_source_prefetch_running = true;
 	if (!m_source_prefetch_started_at)
 		m_source_prefetch_started_at = GetTickCount();
+#if 0
 	try
 	{
+#endif
 		m_source_prefetch_thread = std::thread(&CSoundRender_Core::source_prefetch_worker, this);
+#if 0
 	}
 	catch (...)
 	{
@@ -330,6 +341,7 @@ void CSoundRender_Core::source_prefetch_start()
 		m_source_prefetch_running = false;
 		throw;
 	}
+#endif
 	Msg("* [SOUND PREFETCH] started: remaining=%u", source_prefetch_remaining_locked());
 }
 
@@ -393,14 +405,18 @@ void CSoundRender_Core::source_prefetch_prepare(const xr_vector<xr_string>& sour
 
 		PreparedSoundSource prepared;
 		xr_string error;
+#if 0
 		try
 		{
+#endif
 			CSoundRender_Source::prepare(job->path.c_str(), prepared, error, false);
+#if 0
 		}
 		catch (...)
 		{
 			error = make_string("Unhandled exception while preparing sound: %s", job->path.c_str()).c_str();
 		}
+#endif
 		finish_source_prepare(*job, std::move(prepared), std::move(error));
 	});
 	Msg("* [SOUND PREFETCH] requested sources prepared: requested=%u time=%u ms",
