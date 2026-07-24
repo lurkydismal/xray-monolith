@@ -1,5 +1,3 @@
-# utils file for projects came from visual studio solution with cmake-converter.
-
 ################################################################################
 # Wrap each token of the command with condition
 ################################################################################
@@ -231,4 +229,3 @@ endfunction()
 # Default properties of visual studio projects
 ################################################################################
 set(DEFAULT_CXX_PROPS "${CMAKE_CURRENT_LIST_DIR}/DefaultCXX.cmake")
-set(DEFAULT_Fortran_PROPS "${CMAKE_CURRENT_LIST_DIR}/DefaultFortran.cmake")

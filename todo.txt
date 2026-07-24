@@ -1,1 +1,13 @@
-justfile: add docs build, improve build files generation
+justfile: improve build files generation
+cmake: refactor
+tests: cover 3rd party and sdk
+deps: update or replace with rust
+cmake: implement xray_clear_msvc_flags and xray_clear_msvc_linker_flags
+cmake: interface targets:
+    add_compile_options(...)
+    add_link_options(...)
+    to
+    add_library(project_options INTERFACE)
+    target_compile_options(project_options INTERFACE ...)
+    target_link_options(project_options INTERFACE ...)
+cmake: right now names are mixed. Adopt one convention: XR_ for variables, xray_ for functions
