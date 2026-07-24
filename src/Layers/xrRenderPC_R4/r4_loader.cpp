@@ -707,15 +707,19 @@ void CRender::CommitLevelEnvironmentOwner()
 void CRender::level_AbortAsyncLoad()
 {
 	m_level_async_failed.store(true, std::memory_order_release);
+#if 0
 	try
 	{
+#endif
 		WaitLevelPrepare();
+#if 0
 	}
 	catch (...)
 	{
 		// The load path owns and reports the original task failure. Preparation
 		// has still been drained, so its private package can now be discarded.
 	}
+#endif
 	if (m_prepared_level_geometry)
 		dxRenderDeviceRender::Instance().Resources->ReleaseLevelShaderCache(
 			m_prepared_level_geometry->key.c_str(), m_prepared_level_geometry->identity);
@@ -1415,9 +1419,12 @@ void CRender::LoadVisualLeaf(dxRender_Visual* visual, IReader* chunk, const Visu
 	const VisualGeometrySource* previous_geometry = m_visual_geometry_source;
 	g_defer_visual_shader_creation = true;
 	m_visual_geometry_source = geometry;
+#if 0
 	try
 	{
+#endif
 		visual->Load(nullptr, chunk, 0);
+#if 0
 	}
 	catch (...)
 	{
@@ -1425,6 +1432,7 @@ void CRender::LoadVisualLeaf(dxRender_Visual* visual, IReader* chunk, const Visu
 		g_defer_visual_shader_creation = previous_defer;
 		throw;
 	}
+#endif
 	m_visual_geometry_source = previous_geometry;
 	g_defer_visual_shader_creation = previous_defer;
 }
@@ -1464,8 +1472,10 @@ void CRender::PrepareVisuals(IReader* fs, xr_vector<dxRender_Visual*>& visuals,
 	};
 	NativeLoadExecutor& executor = NativeLoadExecutor::Instance();
 	NativeLoadExecutor::Batch visual_batch = executor.BeginBatch(executor.CurrentGeneration());
+#if 0
 	try
 	{
+#endif
 		if (visual_batch.Valid())
 		{
 			for (u32 index = 0; index < chunks.size(); ++index)
@@ -1475,6 +1485,7 @@ void CRender::PrepareVisuals(IReader* fs, xr_vector<dxRender_Visual*>& visuals,
 		}
 		else
 			xr_parallel_for(0u, static_cast<u32>(chunks.size()), load_leaf);
+#if 0
 	}
 	catch (...)
 	{
@@ -1483,6 +1494,7 @@ void CRender::PrepareVisuals(IReader* fs, xr_vector<dxRender_Visual*>& visuals,
 				chunk->close();
 		throw;
 	}
+#endif
 	for (IReader*& chunk : chunks)
 		if (chunk)
 			chunk->close();
@@ -1493,15 +1505,19 @@ void CRender::LinkPreparedVisuals(IReader* fs, xr_vector<dxRender_Visual*>& visu
 	const xr_vector<dxRender_Visual*>* previous_visuals = m_visual_table_source;
 	m_visual_table_source = &visuals;
 	u32 index = 0;
+#if 0
 	try
 	{
+#endif
 		for (;; ++index)
 		{
 			IReader* chunk = fs->open_chunk(index);
 			if (!chunk)
 				break;
+#if 0
 			try
 			{
+#endif
 				R_ASSERT(index < visuals.size());
 				ogf_header header;
 				R_ASSERT(chunk->r_chunk_safe(OGF_HEADER, &header, sizeof(header)));
@@ -1510,21 +1526,25 @@ void CRender::LinkPreparedVisuals(IReader* fs, xr_vector<dxRender_Visual*>& visu
 					LoadVisualLeaf(visuals[index], chunk, nullptr);
 				else if (!IsWorkerSafeLevelVisual(header.type))
 					visuals[index]->Load(nullptr, chunk, 0);
+#if 0
 			}
 			catch (...)
 			{
 				chunk->close();
 				throw;
 			}
+#endif
 			chunk->close();
 		}
 		R_ASSERT(index == visuals.size());
+#if 0
 	}
 	catch (...)
 	{
 		m_visual_table_source = previous_visuals;
 		throw;
 	}
+#endif
 	m_visual_table_source = previous_visuals;
 }
 
