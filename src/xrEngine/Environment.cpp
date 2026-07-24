@@ -125,9 +125,12 @@ CEnvironment::CEnvironment() :
 				FS.update_path(fileName, "$game_config$", configNames[index]), TRUE, TRUE, FALSE);
 		});
 	}
+#if 0
 	try
 	{
+#endif
 		configTasks.wait();
+#if 0
 	}
 	catch (...)
 	{
@@ -135,6 +138,7 @@ CEnvironment::CEnvironment() :
 			xr_delete(config);
 		throw;
 	}
+#endif
 
 	m_ambients_config = configs[0];
 	m_sound_channels_config = configs[1];
@@ -561,7 +565,7 @@ void CEnvironment::OnFrame()
 
 	float WindDir = -CurrentEnv->wind_direction + PI_DIV_2;
 	Fvector2 WDir = { _cos(WindDir), _sin(WindDir) };
-	
+
 	wind_anim.x += WindVel * WDir.x * Device.fTimeDelta;
 	wind_anim.y += WindVel * WDir.y * Device.fTimeDelta;
 	wind_anim.z += clampr(WindVel * 1.33f, 0.0f, 1.0f) * Device.fTimeDelta;
