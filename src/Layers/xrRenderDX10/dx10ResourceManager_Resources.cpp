@@ -798,8 +798,10 @@ void CResourceManager::ResolveTextureSource(LPCSTR name, LPCSTR canonical_level_
 
 	if (producer)
 	{
+#if 0
 		try
 		{
+#endif
 			TextureSourceInfo sourceInfo;
 			sourceInfo.loadKind = CTexture::LoadKindDds;
 			string_path path = {};
@@ -856,11 +858,13 @@ void CResourceManager::ResolveTextureSource(LPCSTR name, LPCSTR canonical_level_
 				}
 			}
 			job->source = std::move(sourceInfo);
+#if 0
 		}
 		catch (...)
 		{
 			job->failure = std::current_exception();
 		}
+#endif
 		SetEvent(job->completed);
 	}
 	else
