@@ -297,15 +297,19 @@ private:
 
     ~NativeLoadExecutor()
     {
+#if 0
         try
         {
+#endif
             const GenerationId id = CurrentGeneration();
             if (id)
                 CancelGeneration(id);
+#if 0
         }
         catch (...)
         {
         }
+#endif
     }
 
     std::shared_ptr<GenerationState> FindGeneration(GenerationId id) const
@@ -368,9 +372,12 @@ private:
         while (pumps_to_start--)
         {
             ++generation->active_pumps;
+#if 0
             try
             {
+#endif
                 generation->pumps->run([this, generation] { Pump(generation); });
+#if 0
             }
             catch (...)
             {
@@ -380,6 +387,7 @@ private:
                 generation->pumps_idle.notify_all();
                 break;
             }
+#endif
         }
     }
 
@@ -427,25 +435,33 @@ private:
         std::exception_ptr failure;
         if (execute)
         {
+#if 0
             try
             {
+#endif
                 work.function();
+#if 0
             }
             catch (...)
             {
                 failure = std::current_exception();
             }
+#endif
         }
         else if (work.cancel)
         {
+#if 0
             try
             {
+#endif
                 work.cancel();
+#if 0
             }
             catch (...)
             {
                 failure = std::current_exception();
             }
+#endif
         }
 		if (!execute && !failure)
 		{
@@ -540,14 +556,18 @@ private:
 		WaitForGeneration(generation);
 
         std::exception_ptr failure;
+#if 0
         try
         {
+#endif
             generation->pumps->wait();
+#if 0
         }
         catch (...)
         {
             failure = std::current_exception();
         }
+#endif
 
         {
             std::lock_guard<std::mutex> guard(mutex);
