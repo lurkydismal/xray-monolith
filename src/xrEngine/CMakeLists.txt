@@ -891,89 +891,41 @@ if(MSVC)
     target_compile_options(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJECT_TARGET},COMPILE_OPTIONS>")
     target_link_options(${EXECUTABLE_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:DX10AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:DX11>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:DX11AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:DX8>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:DX8AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:DX9>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:DX9AVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:ProfiledDX11>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:Release>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:ReleaseAVX>:
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
         >
         $<$<CONFIG:Verified>:
-            /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
+            /FIXED:NO
         >
         $<$<CONFIG:VerifiedDX11>:
-            /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
+            /FIXED:NO
         >
         $<$<CONFIG:VerifiedDX11ASAN>:
-            /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
+            /FIXED:NO
         >
         $<$<CONFIG:VerifiedDX8>:
-            /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
+            /FIXED:NO
         >
         $<$<CONFIG:VerifiedDX9>:
-            /FIXED:NO;
-            /OPT:NOREF;
-            /OPT:NOICF;
-            /INCREMENTAL
+            /FIXED:NO
         >
         /DEBUG;
         /SUBSYSTEM:WINDOWS;

@@ -425,8 +425,6 @@ if(MSVC)
         /std:c++latest
     )
     target_link_options(${PROJECT_NAME} PRIVATE
-        /OPT:NOREF;
-        /OPT:NOICF;
         /DYNAMICBASE:NO
     )
 endif()

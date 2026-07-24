@@ -242,6 +242,25 @@ if(ENABLE_IPO)
 endif()
 
 ################################################################################
+# Incremental linking
+################################################################################
+option(ENABLE_INCREMENTAL_LINKING "Enable MSVC incremental linking" OFF)
+
+if(MSVC AND ENABLE_INCREMENTAL_LINKING AND NOT ENABLE_IPO)
+    add_link_options(
+        /INCREMENTAL
+        /OPT:NOREF
+        /OPT:NOICF
+    )
+else()
+    add_link_options(
+        /INCREMENTAL:NO
+        /OPT:REF
+        /OPT:ICF
+    )
+endif()
+
+################################################################################
 # CPM / Package manager
 ################################################################################
 include("${CMAKE_SOURCE_DIR}/CMake/CPM.cmake")
