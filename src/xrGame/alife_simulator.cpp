@@ -16,8 +16,8 @@
 #include "object_factory.h"
 #include "alife_object_registry.h"
 #include "saved_game_wrapper.h"
-#include "level.h"
-#include "../xrEngine/xr_ioconsole.h"
+#include "Level.h"
+#include "../xrEngine/XR_IOConsole.h"
 #include "../xrEngine/Render.h"
 
 #ifdef DEBUG
