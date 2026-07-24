@@ -14,8 +14,8 @@
 #include "saved_game_wrapper.h"
 #include "level_graph.h"
 #include "file_transfer.h"
-#include "message_filter.h"
-#include "../xrphysics/iphworld.h"
+#include "Message_Filter.h"
+#include "../xrPhysics/IPHWorld.h"
 #include "../xrEngine/x_ray.h"
 
 extern LPCSTR map_ver_string;
@@ -46,7 +46,7 @@ static bool SimmulateNetworkLag()
 
 	if (!lag_simmulator_max_ping && !lag_simmulator_min_ping)
 		return false;
-	
+
 	if (!max_lag_time || (max_lag_time <= Device.dwTimeGlobal))
 	{
 		CRandom				tmp_random(Device.dwTimeGlobal);
@@ -89,7 +89,7 @@ void CLevel::ClientReceive()
 		{
 		case M_SPAWN:
 			{
-				if (!bReady) //!m_bGameConfigStarted || 
+				if (!bReady) //!m_bGameConfigStarted ||
 				{
 					Msg("! Unconventional M_SPAWN received : map_data[%s] | bReady[%s] | deny_m_spawn[%s]",
 					    (map_data.m_map_sync_received) ? "true" : "false",
@@ -427,7 +427,7 @@ void CLevel::ClientReceive()
 					P->r_seek(str_start);
 					P->r_stringZ(LevelName);
 
-										
+
 					str_start = P->r_tell();
 					P->skip_stringZ();
 					str_end = P->r_tell();
