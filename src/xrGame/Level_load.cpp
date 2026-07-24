@@ -55,25 +55,33 @@ struct level_game_specific_prepare
 	void wait()
 	{
 		std::exception_ptr failure;
+#if 0
 		try
 		{
+#endif
 			wait_environment();
+#if 0
 		}
 		catch (...)
 		{
 			failure = std::current_exception();
 		}
+#endif
+#if 0
 		try
 		{
+#endif
 			if (batch.Valid())
 				NativeLoadExecutor::Instance().Wait(batch);
 			fallback_tasks.wait();
+#if 0
 		}
 		catch (...)
 		{
 			if (!failure)
 				failure = std::current_exception();
 		}
+#endif
 		if (failure)
 			std::rethrow_exception(failure);
 	}
@@ -261,13 +269,17 @@ void CLevel::ShutdownGameSpecificPrepare()
 	if (!m_game_specific_prepare)
 		return;
 
+#if 0
 	try
 	{
+#endif
 		m_game_specific_prepare->wait();
+#if 0
 	}
 	catch (...)
 	{
 	}
+#endif
 	xr_delete(m_game_specific_prepare);
 }
 
