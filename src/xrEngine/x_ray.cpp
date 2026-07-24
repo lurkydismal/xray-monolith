@@ -6,8 +6,8 @@
 // AlexMX - Alexander Maksimchuk
 //-----------------------------------------------------------------------------
 #include "stdafx.h"
-#include "igame_level.h"
-#include "igame_persistent.h"
+#include "IGame_Level.h"
+#include "IGame_Persistent.h"
 #include "Render.h"
 
 #include "dedicated_server_only.h"
@@ -230,9 +230,12 @@ PROTECT_API void InitSettings()
 	xr_task_group settingsTasks;
 	settingsTasks.run([&]() { systemSettings = xr_new<CInifile>(systemPath, TRUE); });
 	settingsTasks.run([&]() { gameSettings = xr_new<CInifile>(gamePath, TRUE); });
+#if 0
 	try
 	{
+#endif
 		settingsTasks.wait();
+#if 0
 	}
 	catch (...)
 	{
@@ -240,6 +243,7 @@ PROTECT_API void InitSettings()
 		xr_delete(gameSettings);
 		throw;
 	}
+#endif
 	pSettings = systemSettings;
 	pGameIni = gameSettings;
 	CHECK_OR_EXIT(0 != pSettings->section_count(),
@@ -718,8 +722,14 @@ void Startup()
 		Sound->source_prefetch_stop();
 	if (pApp && pApp->LoadSessionActive())
 	{
-		try { pApp->LoadSessionCancel("main loop stopped"); }
+#if 0
+		try {
+#endif
+            pApp->LoadSessionCancel("main loop stopped");
+#if 0
+        }
 		catch (...) { Msg("! [load-session] cleanup failed after main loop stopped"); }
+#endif
 	}
 
 	// Discord
@@ -1562,11 +1572,14 @@ void CApplication::LoadSessionBegin(LPCSTR scenario)
 	m_load_session.started_at = Device.TimerAsync();
 	m_load_session.client_event_hash = 14695981039346656037ULL;
 	xr_strcpy(m_load_session.scenario, scenario ? scenario : "unknown");
+#if 0
 	try
 	{
+#endif
 		m_load_session.native_generation = NativeLoadExecutor::Instance().BeginGeneration();
 		if (Device.m_pRender)
 			m_load_session.resource_generation = Device.m_pRender->ResourcesBeginLoadGeneration();
+#if 0
 	}
 	catch (...)
 	{
@@ -1574,6 +1587,7 @@ void CApplication::LoadSessionBegin(LPCSTR scenario)
 		ZeroMemory(&m_load_session, sizeof(m_load_session));
 		throw;
 	}
+#endif
 	m_load_session.active = true;
 	Msg("* [load-session] begin scenario=%s", m_load_session.scenario);
 	if (Sound)
@@ -1608,37 +1622,49 @@ void CApplication::LoadSessionCancel(LPCSTR reason)
 		return;
 
 	std::exception_ptr failure;
+#if 0
 	try
 	{
+#endif
 		if (m_load_session.native_generation)
 			NativeLoadExecutor::Instance().CancelGeneration(m_load_session.native_generation);
+#if 0
 	}
 	catch (...)
 	{
 		failure = std::current_exception();
 	}
+#endif
 	if (::Render)
 		::Render->level_AbortAsyncLoad();
+#if 0
 	try
 	{
+#endif
 		if (Device.m_pRender && m_load_session.resource_generation)
 			Device.m_pRender->ResourcesAbortLoadGeneration(m_load_session.resource_generation);
+#if 0
 	}
 	catch (...)
 	{
 		if (!failure)
 			failure = std::current_exception();
 	}
+#endif
+#if 0
 	try
 	{
+#endif
 		if (Device.m_pRender)
 			Device.m_pRender->ResourcesDestroyNecessaryTextures();
+#if 0
 	}
 	catch (...)
 	{
 		if (!failure)
 			failure = std::current_exception();
 	}
+#endif
 	Msg("* [load-session] cancelled scenario=%s after %u ms (%s)", m_load_session.scenario,
 		Device.TimerAsync() - m_load_session.started_at, reason ? reason : "unknown");
 	ZeroMemory(&m_load_session, sizeof(m_load_session));
@@ -1799,10 +1825,13 @@ void CApplication::LoadSessionTryFinish(bool level_ready, bool control_ready, bo
 		return;
 
 	LoadSessionPhaseBegin(LoadSessionResourceWait);
+#if 0
 	try
 	{
+#endif
 		if (m_load_session.native_generation)
 			NativeLoadExecutor::Instance().FinalizeGeneration(m_load_session.native_generation);
+#if 0
 	}
 	catch (...)
 	{
@@ -1810,6 +1839,7 @@ void CApplication::LoadSessionTryFinish(bool level_ready, bool control_ready, bo
 			Device.m_pRender->ResourcesAbortLoadGeneration(m_load_session.resource_generation);
 		throw;
 	}
+#endif
 	if (Device.m_pRender && m_load_session.resource_generation)
 		Device.m_pRender->ResourcesFinalizeLoadGeneration(m_load_session.resource_generation);
 	if (Device.m_pRender)
