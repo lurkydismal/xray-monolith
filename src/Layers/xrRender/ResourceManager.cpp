@@ -498,8 +498,10 @@ ref_shader CResourceManager::CreateLevelCppShader(LPCSTR s_shader, LPCSTR s_text
 	}
 
 	ref_shader shader;
+#if 0
 	try
 	{
+#endif
 		// A worker never compiles through the shared shader.xr blender instance.
 		// Serialize it to an owned snapshot, then restore a private clone.
 		CMemoryWriter snapshot;
@@ -545,6 +547,7 @@ ref_shader CResourceManager::CreateLevelCppShader(LPCSTR s_shader, LPCSTR s_text
 			job->result = shader;
 			m_level_shader_jobs.erase(key);
 		}
+#if 0
 	}
 	catch (...)
 	{
@@ -556,6 +559,7 @@ ref_shader CResourceManager::CreateLevelCppShader(LPCSTR s_shader, LPCSTR s_text
 		SetEvent(job->completed);
 		throw;
 	}
+#endif
 
 	SetEvent(job->completed);
 	return shader;
@@ -609,17 +613,21 @@ void CResourceManager::DrainOwnerTextureLoads(const ResourceLoadGenerationPtr& g
 			aborted = generation->aborted;
 		}
 
+#if 0
 		try
 		{
+#endif
 			if (aborted)
 				texture->CancelQueuedLoad();
 			else
 				texture->LoadQueued();
+#if 0
 		}
 		catch (...)
 		{
 			RecordTextureLoadFailure(generation, std::current_exception());
 		}
+#endif
 		CompleteTextureLoad(generation);
 	}
 }
@@ -686,29 +694,38 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 	{
 		if (!async)
 		{
+#if 0
 			try
 			{
+#endif
 				m_ownerTextureLoads.push_back(texture);
+#if 0
 			}
 			catch (...)
 			{
 				texture->CancelQueuedLoad();
 				throw;
 			}
+#endif
 		}
 		else
 		{
+#if 0
 			try
 			{
+#endif
 				textureLoadTasks.run([this, texture, originThread]()
 				{
+#if 0
 					try
 					{
+#endif
 						if (originThread != GetCurrentThreadId())
 						{
 							PROF_THREAD("X-Ray PPL Thread")
 						}
 						texture->LoadQueued();
+#if 0
 					}
 					catch (...)
 					{
@@ -716,13 +733,16 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 						if (!textureLoadFailure)
 							textureLoadFailure = std::current_exception();
 					}
+#endif
 				});
+#if 0
 			}
 			catch (...)
 			{
 				texture->CancelQueuedLoad();
 				throw;
 			}
+#endif
 		}
 		++textureLoadSerial;
 		return;
@@ -733,9 +753,12 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 	++generation->serial;
 	if (!async)
 	{
+#if 0
 		try
 		{
+#endif
 			generation->ownerTextureLoads.push_back(texture);
+#if 0
 		}
 		catch (...)
 		{
@@ -745,15 +768,19 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 				SetEvent(generation->completed);
 			throw;
 		}
+#endif
 		SetEvent(generation->ownerWorkAvailable);
 		return;
 	}
 
 	NativeLoadExecutor& executor = NativeLoadExecutor::Instance();
 	NativeLoadExecutor::Batch batch;
+#if 0
 	try
 	{
+#endif
 		batch = executor.BeginBatch(generation->native_generation);
+#if 0
 	}
 	catch (...)
 	{
@@ -763,6 +790,7 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 			SetEvent(generation->completed);
 		throw;
 	}
+#endif
 	if (!batch.Valid())
 	{
 		generation->aborted = true;
@@ -772,8 +800,10 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 		return;
 	}
 
+#if 0
 	try
 	{
+#endif
 		const bool submitted = executor.Submit(batch, NativeLoadPriority::ShaderTexture,
 			[this, texture, generation, originThread]()
 			{
@@ -788,18 +818,22 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 					xrCriticalSectionGuard guard(textureLoadGuard);
 					aborted = generation->aborted;
 				}
+#if 0
 				try
 				{
+#endif
 					if (aborted)
 						texture->CancelQueuedLoad();
 					else
 						texture->LoadQueued();
+#if 0
 				}
 				catch (...)
 				{
 					failure = std::current_exception();
 					RecordTextureLoadFailure(generation, failure);
 				}
+#endif
 				CompleteTextureLoad(generation);
 				if (failure)
 					std::rethrow_exception(failure);
@@ -816,6 +850,7 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 			if (--generation->pending == 0)
 				SetEvent(generation->completed);
 		}
+#if 0
 	}
 	catch (...)
 	{
@@ -827,6 +862,7 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 			SetEvent(generation->completed);
 		throw;
 	}
+#endif
 }
 
 void CResourceManager::WaitForTextureLoads()
@@ -857,9 +893,12 @@ void CResourceManager::WaitForTextureLoads()
 		// Startup fallback: video, sequence and GIF decoders stay on the render/owner thread.
 		for (u32 index = 0; index < ownerTextures.size(); ++index)
 		{
+#if 0
 			try
 			{
+#endif
 				ownerTextures[index]->LoadQueued();
+#if 0
 			}
 			catch (...)
 			{
@@ -867,6 +906,7 @@ void CResourceManager::WaitForTextureLoads()
 					ownerTextures[index]->CancelQueuedLoad();
 				throw;
 			}
+#endif
 		}
 		textureLoadTasks.wait();
 
@@ -894,9 +934,12 @@ u64 CResourceManager::BeginLoadGeneration()
 		resourceLoadGenerationStarting = true;
 	}
 
+#if 0
 	try
 	{
+#endif
 		WaitForTextureLoads();
+#if 0
 	}
 	catch (...)
 	{
@@ -904,6 +947,7 @@ u64 CResourceManager::BeginLoadGeneration()
 		resourceLoadGenerationStarting = false;
 		throw;
 	}
+#endif
 
 	xr_vector<ref_texture> crossedRequests;
 	ResourceLoadGenerationPtr startedGeneration;
@@ -912,26 +956,33 @@ u64 CResourceManager::BeginLoadGeneration()
 		xrCriticalSectionGuard guard(textureLoadGuard);
 		if (++nextResourceLoadGeneration == 0)
 			++nextResourceLoadGeneration;
+#if 0
 		try
 		{
+#endif
 			const u64 nativeGeneration = NativeLoadExecutor::Instance().CurrentGeneration();
 			R_ASSERT2(nativeGeneration, "Native load generation must begin before texture load generation");
 			startedGeneration = xr_make_shared<ResourceLoadGeneration>(nextResourceLoadGeneration, nativeGeneration);
 			activeResourceLoadGeneration = startedGeneration;
+#if 0
 		}
 		catch (...)
 		{
 			resourceLoadGenerationStarting = false;
 			throw;
 		}
+#endif
 		resourceLoadGenerationStarting = false;
 		crossedRequests.swap(m_generationStartingTextureLoads);
 		result = nextResourceLoadGeneration;
 	}
+#if 0
 	try
 	{
+#endif
 		for (const ref_texture& texture : crossedRequests)
 			QueueTextureLoad(texture);
+#if 0
 	}
 	catch (...)
 	{
@@ -940,6 +991,7 @@ u64 CResourceManager::BeginLoadGeneration()
 		AbortLoadGeneration(result);
 		std::rethrow_exception(failure);
 	}
+#endif
 	return result;
 }
 
@@ -1064,9 +1116,12 @@ void CResourceManager::PrepareLoad()
 	}
 	for (u32 index = 0; index < ownerTextures.size(); ++index)
 	{
+#if 0
 		try
 		{
+#endif
 			ownerTextures[index]->LoadQueued();
+#if 0
 		}
 		catch (...)
 		{
@@ -1074,6 +1129,7 @@ void CResourceManager::PrepareLoad()
 				ownerTextures[index]->CancelQueuedLoad();
 			throw;
 		}
+#endif
 	}
 }
 
