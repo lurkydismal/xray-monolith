@@ -87,15 +87,33 @@ endif()
 ################################################################################
 # Incremental linking
 ################################################################################
-if(MSVC AND ENABLE_INCREMENTAL_LINKING AND NOT ENABLE_IPO)
+set(INCREMENTAL_LINKING_ENABLED OFF)
+if(ENABLE_INCREMENTAL_LINKING)
+    if(MSVC)
+        if(NOT ENABLE_IPO)
+            set(INCREMENTAL_LINKING_ENABLED ON)
+            message(WARNING "Incremental linking enabled")
+            add_link_options(
+                /INCREMENTAL
+            )
+        else()
+            message(WARNING "Incremental linking disabled (IPO/LTO is enabled)")
+            add_link_options(
+                /INCREMENTAL:NO
+            )
+        endif()
+    else()
+        message(WARNING "Incremental linking is only supported with MSVC; option ignored")
+    endif()
+endif()
+
+if(INCREMENTAL_LINKING_ENABLED)
     add_link_options(
-        /INCREMENTAL
         /OPT:NOREF
         /OPT:NOICF
     )
 else()
     add_link_options(
-        /INCREMENTAL:NO
         /OPT:REF
         /OPT:ICF
     )
