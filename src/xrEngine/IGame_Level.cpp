@@ -71,7 +71,7 @@ void IGame_Level::net_Stop()
         Objects.Update(false);
         Objects.ProcessDestroyQueue();
     }
-		
+
 	// Destroy all objects
 	Objects.Unload();
 	IR_Release();
@@ -157,24 +157,32 @@ bool IGame_Level::Load(u32 dwNum)
 		if (level_tasks_drained)
 			return;
 		std::exception_ptr failure;
+#if 0
 		try
 		{
+#endif
 			if (level_load_batch.Valid())
 				load_executor.Wait(level_load_batch);
+#if 0
 		}
 		catch (...)
 		{
 			failure = std::current_exception();
 		}
+#endif
+#if 0
 		try
 		{
+#endif
 			fallback_level_tasks.wait();
+#if 0
 		}
 		catch (...)
 		{
 			if (!failure)
 				failure = std::current_exception();
 		}
+#endif
 		level_tasks_drained = true;
 		if (failure)
 			std::rethrow_exception(failure);
@@ -184,7 +192,13 @@ bool IGame_Level::Load(u32 dwNum)
 		std::function<void()> drain;
 		~level_task_drain_guard()
 		{
-			try { drain(); } catch (...) {}
+#if 0
+			try {
+#endif
+                drain();
+#if 0
+            } catch (...) {}
+#endif
 		}
 	} task_drain_guard{drain_level_tasks};
 	CTimer game_specific_before_timer;
@@ -200,9 +214,12 @@ bool IGame_Level::Load(u32 dwNum)
 	CTimer render_timer;
 	render_timer.Start();
 	Render->level_BeginAsyncLoad();
+#if 0
 	try
 	{
+#endif
 		Render->level_Load(LL_Stream);
+#if 0
 	}
 	catch (...)
 	{
@@ -212,6 +229,7 @@ bool IGame_Level::Load(u32 dwNum)
 		FS.r_close(LL_Stream);
 		std::rethrow_exception(failure);
 	}
+#endif
 	Msg("* [LEVEL LOAD] renderer: %d ms", render_timer.GetElapsed_ms());
 	CTimer barrier_timer;
 	barrier_timer.Start();
