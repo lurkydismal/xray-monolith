@@ -1,9 +1,9 @@
 #include "pch_script.h"
-#include "gamepersistent.h"
-#include "../xrEngine/fmesh.h"
+#include "GamePersistent.h"
+#include "../xrEngine/Fmesh.h"
 #include "../xrEngine/x_ray.h"
-#include "../xrEngine/xr_ioconsole.h"
-#include "../xrEngine/gamemtllib.h"
+#include "../xrEngine/XR_IOConsole.h"
+#include "../xrEngine/GameMtlLib.h"
 #include "../Include/xrRender/Kinematics.h"
 #include "profiler.h"
 #include "MainMenu.h"
@@ -78,12 +78,12 @@ CGamePersistent::CGamePersistent(void)
     m_frame_counter = 0;
     m_last_stats_frame = u32(-2);
 #endif
-	// 
+	//
 	//dSetAllocHandler			(ode_alloc		);
 	//dSetReallocHandler			(ode_realloc	);
 	//dSetFreeHandler				(ode_free		);
 
-	// 
+	//
 	BOOL bDemoMode = Core.ParamsData.test(ECoreParams::demomode);
 	if (bDemoMode)
 	{
@@ -317,7 +317,7 @@ void CGamePersistent::WeathersUpdate()
 
 			auto I = vec.cbegin();
 			const auto E = vec.cend();
-			
+
 			for (size_t idx = 0; I != E; ++I, ++idx)
 			{
 				CEnvAmbient::SSndChannel& ch = **I;
@@ -346,7 +346,7 @@ void CGamePersistent::WeathersUpdate()
 					ambient_sound_next_time[idx] = Device.dwTimeGlobal + _length_ms + ch.get_rnd_sound_time();
 				}
 			}
-			
+
 			// start effect
 			if ((FALSE == bIndoor) && (0 == ambient_particles) && Device.dwTimeGlobal > ambient_effect_next_time)
 			{
