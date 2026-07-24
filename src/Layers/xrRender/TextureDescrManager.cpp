@@ -170,25 +170,33 @@ void CTextureDescrMngr::Load()
 	xr_task_group scans;
 	scans.run([&]()
 	{
+#if 0
 		try
 		{
+#endif
 			LoadTHM("$game_textures$", gameDetails, gameScalers);
+#if 0
 		}
 		catch (...)
 		{
 			gameFailure = std::current_exception();
 		}
+#endif
 	});
 	scans.run([&]()
 	{
+#if 0
 		try
 		{
+#endif
 			LoadTHM("$level$", levelDetails, levelScalers);
+#if 0
 		}
 		catch (...)
 		{
 			levelFailure = std::current_exception();
 		}
+#endif
 	});
 	scans.wait();
 
