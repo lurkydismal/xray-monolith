@@ -545,8 +545,10 @@ void CTexture::Load(bool queued)
 	PROF_EVENT("CTexture::Load");
 	if (!BeginLoad(queued))
 		return;
+#if 0
 	try
 	{
+#endif
 
 	flags.bLoaded = false;
 	desc_cache = 0;
@@ -771,12 +773,14 @@ void CTexture::Load(bool queued)
 	}
 	PostLoad();
 	FinishLoad();
+#if 0
 	}
 	catch (...)
 	{
 		FailLoad();
 		throw;
 	}
+#endif
 }
 
 void CTexture::Unload()
