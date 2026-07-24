@@ -60,13 +60,17 @@ struct prepared_save
 
 void cleanup_prepared_save()
 {
+#if 0
 	try
 	{
+#endif
 		g_prepared_save.wait();
+#if 0
 	}
 	catch (...)
 	{
 	}
+#endif
 	g_prepared_save.data.clear();
 	g_prepared_save.name.clear();
 	g_prepared_save.file_name[0] = 0;
