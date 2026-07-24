@@ -170,11 +170,11 @@ bool CALifeUpdateManager::change_level(NET_Packet& net_packet)
 #endif
 
 	//	prepare_objects_for_save		();
-	// we couldn't use prepare_objects_for_save since we need 
-	// get updates from client 
-	// then change actor server entity 
-	// then call client net_Save 
-	// then restore actor server entity 
+	// we couldn't use prepare_objects_for_save since we need
+	// get updates from client
+	// then change actor server entity
+	// then call client net_Save
+	// then restore actor server entity
 	Level().ClientSend();
 
 	m_changing_level = true;
@@ -315,15 +315,19 @@ void CALifeUpdateManager::load(LPCSTR game_name, bool no_assert, bool new_only)
 	g_pGamePersistent->LoadTitle(true, g_pGameLevel->name());
 	// Immutable level data was prepared in parallel with ALife/Lua. Publish it
 	// only now, after the Lua lifecycle has completed, on the owner thread.
+#if 0
 	try
 	{
+#endif
 		graph().finish_level_load();
+#if 0
 	}
 	catch (...)
 	{
 		::Render->level_AbortAsyncLoad();
 		throw;
 	}
+#endif
 	pApp->LoadSessionPhaseEnd(LoadSessionNativeLevel);
 }
 
