@@ -47,3 +47,4 @@ compressor/mod/
 /docs/doxygen/xml
 /namespaces.txt
 /scan-build.log
+/reports
