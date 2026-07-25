@@ -10,6 +10,8 @@ set -l CPPCHECK_DIR "$REPORT_DIR/cppcheck"
 set -l CLANG_TIDY_DIR "$REPORT_DIR/clang_tidy"
 set -l CPPCHECK_HTML_DIR "$CPPCHECK_DIR/html"
 
+set -l CLANG_TIDY_LOG "$REPORT_DIR/clang-tidy.log"
+
 if not test -f "$COMPDB"
     echo "error: $COMPDB not found"
     exit 1
@@ -91,9 +93,9 @@ end
 
 ./run-clang-tidy.py \
     -p "$BUILD_DIR" \
-    -j (nproc)
+    -j (nproc) 2>&1 | tee "$CLANG_TIDY_LOG"
 
-set -l tidy_status $status
+set -l tidy_status $pipestatus[1]
 
 mv -f "$COMPDB_BACKUP" "$COMPDB"
 functions -e restore_compdb
