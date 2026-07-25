@@ -71,7 +71,7 @@ echo "==> Running clang-tidy..."
 
 set -l COMPDB_BACKUP "$COMPDB.bak"
 
-cp "$COMPDB" "$COMPDB_BACKUP"
+cp -f "$COMPDB" "$COMPDB_BACKUP"
 or begin
     echo "error: failed to back up compile_commands.json"
     exit 1
@@ -83,7 +83,7 @@ function restore_compdb --on-event fish_exit
     end
 end
 
-cp "$FILTERED_COMPDB" "$COMPDB"
+cp -f "$FILTERED_COMPDB" "$COMPDB"
 or begin
     echo "error: failed to replace compile_commands.json"
     exit 1
