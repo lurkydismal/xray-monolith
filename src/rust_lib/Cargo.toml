@@ -6,8 +6,4 @@ edition = "2024"
 [lib]
 crate-type = ["staticlib", "cdylib"]
 
-[build-dependencies]
-bindgen = "0.72.1"
-clang = "2"
-
 [dependencies]
