@@ -63,7 +63,7 @@ public:
 	//	void								Apply			(u32 dwStage);
 
 	void surface_set(ID3DBaseTexture* surf);
-	ID3DBaseTexture* surface_get();
+	ID3DBaseTexture* surface_get() const;
 
 	IC BOOL isUser() { return flags.bUser; }
 	IC u32 get_Width()
@@ -109,7 +109,7 @@ private:
 	void ReleaseLoadedData();
 	IC BOOL desc_valid() { wait_for_loading(); return pSurface==desc_cache; }
 	IC void desc_enshure() { wait_for_loading(); if (!desc_valid()) desc_update(); }
-	void desc_update();
+	void desc_update() const;
 #if defined(USE_DX10) || defined(USE_DX11)
 	void								Apply			(u32 dwStage);
 	void								ProcessStaging();
@@ -156,7 +156,7 @@ private:
 	xr_vector<ID3DBaseTexture*> seqDATA;
 
 	// Description
-	ID3DBaseTexture* desc_cache;
+	mutable ID3DBaseTexture* desc_cache;
 	D3D_TEXTURE2D_DESC desc;
 
     CGIFAnimationPlayer* gifPlayer;
