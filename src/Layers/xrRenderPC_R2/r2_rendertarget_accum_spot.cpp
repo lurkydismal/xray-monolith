@@ -59,7 +59,7 @@ void CRenderTarget::accum_spot(light* L)
 	RCache.set_ColorWriteEnable();
 	RCache.set_CullMode(CULL_CW); // back
 
-	// 2D texgens 
+	// 2D texgens
 	Fmatrix m_Texgen;
 	u_compute_texgen_screen(m_Texgen);
 	Fmatrix m_Texgen_J;
@@ -215,7 +215,7 @@ void CRenderTarget::accum_volumetric(light* L)
 	RCache.set_ColorWriteEnable();
 	RCache.set_CullMode(CULL_NONE); // back
 
-	// 2D texgens 
+	// 2D texgens
 	Fmatrix m_Texgen;
 	u_compute_texgen_screen(m_Texgen);
 	Fmatrix m_Texgen_J;
@@ -307,19 +307,19 @@ void CRenderTarget::accum_volumetric(light* L)
 	//Fvector pt = L->spatial.sphere.P;
 	Device.mView.transform(pt);
 	aabb.setb(pt, rr);
-	/*	
+	/*
 		//	Calculate presise AABB assuming we are drawing for the spot light
 		{
 			aabb.invalidate();
 			Fmatrix	transform;
-			transform.mul( Device.mView, L->m_xform);		 
+			transform.mul( Device.mView, L->m_xform);
 			for (u32 i=0; i<DU_CONE_NUMVERTEX; ++i)
 			{
 				Fvector		pt = du_cone_vertices[i];
 				transform.transform(pt);
 				aabb.modify(pt);
 			}
-			
+
 		}
 	*/
 	// Common constants
@@ -361,7 +361,7 @@ void CRenderTarget::accum_volumetric(light* L)
 		//	Set correct depth surface
 		//	It's slow. Make this when shader is created
 		{
-			char* pszSMapName;
+			const char* pszSMapName;
 			BOOL b_HW_smap = RImplementation.o.HW_smap;
 			BOOL b_HW_PCF = RImplementation.o.HW_smap_PCF;
 			if (b_HW_smap)
@@ -426,8 +426,8 @@ void CRenderTarget::accum_volumetric(light* L)
 		/*
 		float	clip[4];
 		clip[0] = 1;
-		clip[1] = 
-		clip[2] = 
+		clip[1] =
+		clip[2] =
 		clip[3] = 0;
 		HW.pDevice->SetClipPlane( 0, clip);
 		*/
