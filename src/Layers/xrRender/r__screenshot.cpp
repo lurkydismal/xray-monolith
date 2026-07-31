@@ -253,9 +253,6 @@ void CRender::ScreenshotImpl(ScreenshotMode mode, LPCSTR name, CMemoryWriter* me
 	                                                     D3DPOOL_SYSTEMMEM, &pFB, nullptr);
 	if (FAILED(hr)) return;
 
-    u32* pPixel = nullptr;
-    u32* pEnd = nullptr;
-
 	hr = HW.pDevice->GetRenderTargetData(HW.pBaseRT, pFB);
 	if (FAILED(hr)) goto _end_;
 
@@ -263,8 +260,8 @@ void CRender::ScreenshotImpl(ScreenshotMode mode, LPCSTR name, CMemoryWriter* me
 	if (FAILED(hr)) goto _end_;
 
 	// Image processing (gamma-correct)
-	pPixel = (u32*)D.pBits;
-	pEnd = pPixel + (Device.dwWidth * Device.dwHeight);
+	u32* pPixel = (u32*)D.pBits;
+	u32* pEnd = pPixel + (Device.dwWidth * Device.dwHeight);
 
 	//	Kill alpha
 	for (; pPixel != pEnd; pPixel++)
@@ -385,7 +382,7 @@ void CRender::ScreenshotImpl(ScreenshotMode mode, LPCSTR name, CMemoryWriter* me
 			TGAdesc p;
 			p.format = IMG_24B;
 
-			//	TODO: DX10: This is totally incorrect but mimics
+			//	TODO: DX10: This is totally incorrect but mimics 
 			//	original behavior. Fix later.
 			hr = pFB->LockRect(&D, 0,D3DLOCK_NOSYSLOCK);
 			if (hr != D3D_OK) return;
@@ -601,17 +598,17 @@ void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encodi
 	clamp(encoding, eDXE_A8R8G8B8, eDXE_DXT5);
 	switch (encoding)
 	{
-	case IRender_interface::eDXE_A8R8G8B8:
+	case IRender_interface::eDXE_A8R8G8B8: 
 	{
 		dx_encoding = DXGI_FORMAT_R8G8B8A8_UNORM;
 	}
 	break;
-	case IRender_interface::eDXE_DXT1:
+	case IRender_interface::eDXE_DXT1: 
 	{
 		dx_encoding = DXGI_FORMAT_BC1_UNORM;
 	}
 	break;
-	case IRender_interface::eDXE_DXT5:
+	case IRender_interface::eDXE_DXT5: 
 	{
 		dx_encoding = DXGI_FORMAT_BC5_UNORM;
 	}
@@ -650,7 +647,7 @@ void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encodi
 		NULL, pSrcSmallTexture));
 #endif
 
-
+	
 
 	// save (logical & physical)
 	ID3DBlob* saved = 0;
@@ -679,7 +676,7 @@ void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encodi
 void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encoding)
 {
 	if (!Device.b_is_Ready) return;
-
+	
 	string_path fname;
 	if (0 == strext(path)) strconcat(sizeof(fname), fname, path, ".dds");
 	else xr_strcpy(fname, sizeof(fname), path);
@@ -722,21 +719,14 @@ void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encodi
 		D3DPOOL_SYSTEMMEM, &pFB, nullptr);
 	if (FAILED(hr)) return;
 
-    u32* pPixel = nullptr;
-    u32* pEnd = nullptr;
-	ID3DTexture2D* texture = nullptr;
-    IDirect3DSurface9* surface = nullptr;
-    ID3DBlob* saved = nullptr;
-    IWriter* fs = nullptr;
-
 	hr = HW.pDevice->GetRenderTargetData(HW.pBaseRT, pFB);
 	if (FAILED(hr)) goto _end_;
 
 	hr = pFB->LockRect(&D, 0, D3DLOCK_NOSYSLOCK);
 	if (FAILED(hr)) goto _end_;
 	// Image processing (gamma-correct)
-	pPixel = (u32*)D.pBits;
-	pEnd = pPixel + (Device.dwWidth * Device.dwHeight);
+	u32* pPixel = (u32*)D.pBits;
+	u32* pEnd = pPixel + (Device.dwWidth * Device.dwHeight);
 	//	Kill alpha
 	for (; pPixel != pEnd; pPixel++)
 	{
@@ -747,13 +737,13 @@ void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encodi
 	hr = pFB->UnlockRect();
 	if (hr != D3D_OK) goto _end_;
 	// texture width/height = resolution
-	texture = NULL;
+	ID3DTexture2D* texture = NULL;
 	hr = D3DXCreateTexture(HW.pDevice, u32(width), u32(height), 1, 0, dx_encoding, D3DPOOL_SCRATCH,
 		&texture);
 	if (hr != D3D_OK) goto _end_;
 	if (NULL == texture) goto _end_;
 	// resize&convert to surface
-	surface = 0;
+	IDirect3DSurface9* surface = 0;
 	hr = texture->GetSurfaceLevel(0, &surface);
 	if (hr != D3D_OK) goto _end_;
 	VERIFY(surface);
@@ -762,11 +752,11 @@ void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encodi
 	_RELEASE(surface);
 	if (hr != D3D_OK) goto _end_;
 	// save (logical & physical)
-	saved = nullptr;
+	ID3DBlob* saved = 0;
 	hr = D3DXSaveTextureToFileInMemory(&saved, D3DXIFF_DDS, texture, 0);
 	if (hr != D3D_OK) goto _end_;
 
-	fs = FS.w_open(fname);
+	IWriter* fs = FS.w_open(fname);
 	if (fs)
 	{
 		fs->w(saved->GetBufferPointer(), saved->GetBufferSize());

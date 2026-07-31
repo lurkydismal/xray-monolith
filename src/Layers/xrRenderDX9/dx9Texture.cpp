@@ -294,7 +294,7 @@ IC u32 it_difference(u32 d, u32 orig, u32 ucomp)
 		128 + (int(color_get_R(orig)) - int(color_get_R(ucomp))) * 2, // R-error
 		128 + (int(color_get_G(orig)) - int(color_get_G(ucomp))) * 2, // G-error
 		128 + (int(color_get_B(orig)) - int(color_get_B(ucomp))) * 2, // B-error
-		128 + (int(color_get_A(orig)) - int(color_get_A(ucomp))) * 2); // A-error
+		128 + (int(color_get_A(orig)) - int(color_get_A(ucomp))) * 2); // A-error	
 }
 
 IC u32 it_height_rev(u32 d, u32 s)
@@ -334,7 +334,6 @@ ID3DBaseTexture* CRender::texture_load(LPCSTR fRName, u32& ret_msize)
 	xr_strcpy(fname, fRName); //. andy if (strext(fname)) *strext(fname)=0;
 	fix_texture_name(fname);
 	IReader* S = NULL;
-    HRESULT result = 0;
 	//if (FS.exist(fn,"$game_textures$",fname,	".dds")	&& strstr(fname,"_bump"))	goto _BUMP;
 	if (strstr(fname, "_bump"))
 	{
@@ -379,8 +378,6 @@ ID3DBaseTexture* CRender::texture_load(LPCSTR fRName, u32& ret_msize)
 	return 0;
 #else
 
-    result = 0;
-
 	Msg("! Can't find texture '%s'", fname);
 	R_ASSERT(FS.exist(fn,"$game_textures$", "ed\\ed_not_existing_texture",".dds"));
 	goto _DDS;
@@ -399,7 +396,7 @@ _DDS:
 #endif // DEBUG
 		img_size = S->length();
 		R_ASSERT(S);
-		result = D3DXGetImageInfoFromFileInMemory(S->pointer(), S->length(), &IMG);
+		HRESULT const result = D3DXGetImageInfoFromFileInMemory(S->pointer(), S->length(), &IMG);
 		if (FAILED(result))
 		{
 			Msg("! Can't get image info for texture '%s'", fn);
@@ -520,7 +517,7 @@ _BUMP:
 		fmt								= D3DFMT_DXT5;
 		ID3DTexture2D*	T_normal_1C	= TW_LoadTextureFromTexture(T_normal_1,fmt,psTextureLOD,dwWidth,dwHeight);
 		//TW_Save						(T_normal_1C,fname,"debug-3","normal-G-C");
-
+		
 #if RENDER==R_R2
 		// Decompress (back)
 		fmt								= D3DFMT_A8R8G8B8;
@@ -544,7 +541,7 @@ _BUMP:
 		_RELEASE					(T_normal_1U	);
 		_RELEASE					(T_normal_1D	);
 
-		//
+		// 
 		string256			fnameB;
 		strconcat			(fnameB,"$user$",fname,"X");
 		ref_texture			t_temp		= dxRenderDeviceRender::Instance().Resources->_CreateTexture	(fnameB);
@@ -637,7 +634,7 @@ _BUMP_from_base:
 		_RELEASE(T_normal_1U);
 		_RELEASE(T_normal_1D);
 
-		//
+		// 
 		string256 fnameB;
 		strconcat(sizeof(fnameB), fnameB, "$user$", fname, "_bumpX");
 		ref_texture t_temp = dxRenderDeviceRender::Instance().Resources->_CreateTexture(fnameB);
