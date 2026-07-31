@@ -862,7 +862,7 @@ void CRenderTarget::accum_direct_volumetric(u32 sub_phase, const u32 Offset, con
 	//	Set correct depth surface
 	//	It's slow. Make this when shader is created
 	{
-		const char* pszSMapName;
+		char* pszSMapName;
 		BOOL b_HW_smap = RImplementation.o.HW_smap;
 		BOOL b_HW_PCF = RImplementation.o.HW_smap_PCF;
 		if (b_HW_smap)
@@ -973,7 +973,7 @@ void CRenderTarget::accum_direct_volumetric(u32 sub_phase, const u32 Offset, con
 		//RCache.set_Stencil			(TRUE,D3DCMP_LESSEQUAL,dwLightMarkerID,0xff,0x00);
 
 		RCache.Render(D3DPT_TRIANGLELIST, Offset, 0, 8, 0, 16);
-
+		
 		// Fetch4 : disable
 		if (RImplementation.o.HW_smap_FETCH4)
 		{
