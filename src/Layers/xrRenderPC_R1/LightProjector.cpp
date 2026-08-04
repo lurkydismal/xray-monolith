@@ -6,7 +6,7 @@
 #include "LightProjector.h"
 #include "../../Include/xrRender/RenderVisual.h"
 #include "../../xrEngine/xr_object.h"
-#include "../xrRender/lighttrack.h"
+#include "../xrRender/LightTrack.h"
 #include "../xrServerEntities/smart_cast.h"
 
 #ifndef _EDITOR
