@@ -63,7 +63,7 @@ void CTexture::surface_set(ID3DBaseTexture* surf)
 	pSurface = surf;
 }
 
-ID3DBaseTexture* CTexture::surface_get() const
+ID3DBaseTexture* CTexture::surface_get()
 {
 	wait_for_loading();
 	if (pSurface) pSurface->AddRef();
@@ -296,8 +296,10 @@ void CTexture::Load(bool queued)
 	PROF_EVENT("CTexture::Load");
 	if (!BeginLoad(queued))
 		return;
+#if 0
 	try
 	{
+#endif
 
 	flags.bLoaded = false;
 	desc_cache = 0;
@@ -465,12 +467,14 @@ void CTexture::Load(bool queued)
 	}
 	PostLoad();
 	FinishLoad();
+#if 0
 	}
 	catch (...)
 	{
 		FailLoad();
 		throw;
 	}
+#endif
 }
 
 void CTexture::Unload()
@@ -534,7 +538,7 @@ void CTexture::ReleaseLoadedData()
 	bind = xr_make_delegate(this, &CTexture::apply_load);
 }
 
-void CTexture::desc_update() const
+void CTexture::desc_update()
 {
 	wait_for_loading();
 	desc_cache = pSurface;
