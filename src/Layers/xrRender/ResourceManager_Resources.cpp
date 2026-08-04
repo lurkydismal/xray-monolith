@@ -35,8 +35,8 @@ void simplify_texture(string_path& fn)
 template <class T>
 BOOL reclaim(xr_vector<T*>& vec, const T* ptr)
 {
-	xr_vector<T*>::iterator it = vec.begin();
-	xr_vector<T*>::iterator end = vec.end();
+	typename xr_vector<T*>::iterator it = vec.begin();
+	typename xr_vector<T*>::iterator end = vec.end();
 	for (; it != end; it++)
 		if (*it == ptr)
 		{
@@ -50,7 +50,7 @@ BOOL reclaim(xr_vector<T*>& vec, const T* ptr)
 SState* CResourceManager::_CreateState(SimulatorStates& state_code, ref_state* keep_alive)
 {
 	xrCriticalSectionGuard guard(creationGuard);
-	// Search equal state-code 
+	// Search equal state-code
 	for (u32 it = 0; it < v_states.size(); it++)
 	{
 		SState* C = v_states[it];;
@@ -526,7 +526,7 @@ void	CResourceManager::DBG_VerifyTextures	()
 {
 	map_Texture::iterator I		= m_textures.begin	();
 	map_Texture::iterator E		= m_textures.end	();
-	for (; I!=E; I++) 
+	for (; I!=E; I++)
 	{
 		R_ASSERT(I->first);
 		R_ASSERT(I->second);
@@ -783,7 +783,7 @@ SVS*	CResourceManager::_CreateVS		(LPCSTR _name, ref_vs* keep_alive)
 
 		if (strstr(pfs, "main_vs_1_1"))			{ c_target = "vs_1_1"; c_entry = "main_vs_1_1";	}
 		if (strstr(pfs, "main_vs_2_0"))			{ c_target = "vs_2_0"; c_entry = "main_vs_2_0";	}
-		
+
 		xr_free(pfs);
 
 		// vertex
@@ -797,7 +797,7 @@ SVS*	CResourceManager::_CreateVS		(LPCSTR _name, ref_vs* keep_alive)
 			if (pShaderBuf)
 			{
 				_hr = HW.pDevice->CreateVertexShader	((DWORD*)pShaderBuf->GetBufferPointer(), &_vs->vs);
-				if (SUCCEEDED(_hr))	
+				if (SUCCEEDED(_hr))
 				{
 					LPCVOID			data		= NULL;
 					_hr	= D3DXFindShaderComment	((DWORD*)pShaderBuf->GetBufferPointer(),MAKEFOURCC('C','T','A','B'),&data,NULL);
@@ -805,7 +805,7 @@ SVS*	CResourceManager::_CreateVS		(LPCSTR _name, ref_vs* keep_alive)
 					{
 						pConstants				= LPD3DXSHADER_CONSTANTTABLE(data);
 						_vs->constants.parse	(pConstants,0x2);
-					} 
+					}
 					else
 					{
 						Log	("! VS: ", _name);
