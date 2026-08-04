@@ -159,7 +159,7 @@ public:
 	}
 };
 
-// wrapper																																					
+// wrapper
 class adopt_compiler
 {
 	CBlender_Compile* C;
@@ -309,7 +309,7 @@ static void *lua_alloc		(void *ud, void *ptr, size_t osize, size_t nsize) {
 	}
 
 	if ( !ptr ) {
-		void* const result			= 
+		void* const result			=
 			g_render_lua_allocator.malloc_impl((u32)nsize);
 		memory_monitor::monitor_alloc (result,nsize,"render:LUA");
 		return						result;
@@ -340,7 +340,7 @@ void CResourceManager::LS_Load()
 		return;
 	}
 
-	// initialize lua standard library functions 
+	// initialize lua standard library functions
 	luaopen_base(LSVM);
 	luaopen_table(LSVM);
 	luaopen_string(LSVM);
@@ -426,14 +426,18 @@ void CResourceManager::LS_Load()
 		if (0 == namesp[0]) xr_strcpy(namesp, "_G");
 		strconcat(sizeof(fn), fn, ::Render->getShaderPath(), (*folder)[it]);
 		FS.update_path(fn, "$game_shaders$", fn);
+#if 0
 		try
 		{
+#endif
 			Script::bfLoadFileIntoNamespace(LSVM, fn, namesp, true);
+#if 0
 		}
 		catch (...)
 		{
 			Log(lua_tostring(LSVM, -1));
 		}
+#endif
 	}
 	FS.file_list_close(folder);
 }
