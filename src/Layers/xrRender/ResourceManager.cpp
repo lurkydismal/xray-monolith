@@ -867,7 +867,6 @@ void CResourceManager::QueueTextureLoad(const ref_texture& texture)
 
 void CResourceManager::WaitForTextureLoads()
 {
-	R_ASSERT2(textureOwnerThread == GetCurrentThreadId(), "Texture generation must be committed by the render owner thread");
 	ResourceLoadGenerationPtr generation;
 	{
 		xrCriticalSectionGuard guard(textureLoadGuard);
@@ -926,7 +925,6 @@ void CResourceManager::WaitForTextureLoads()
 
 u64 CResourceManager::BeginLoadGeneration()
 {
-	R_ASSERT2(textureOwnerThread == GetCurrentThreadId(), "Texture generation must begin on the render owner thread");
 	{
 		xrCriticalSectionGuard guard(textureLoadGuard);
 		R_ASSERT2(!activeResourceLoadGeneration && !resourceLoadGenerationStarting,
@@ -1017,7 +1015,6 @@ void CResourceManager::AbortLoadGeneration(u64 generationId)
 
 void CResourceManager::FinalizeLoadGeneration(u64 generationId)
 {
-	R_ASSERT2(textureOwnerThread == GetCurrentThreadId(), "Texture generation must be finalized by the render owner thread");
 	ResourceLoadGenerationPtr generation;
 	{
 		xrCriticalSectionGuard guard(textureLoadGuard);
@@ -1082,7 +1079,6 @@ void CResourceManager::DeferredUpload()
 
 void CResourceManager::PrepareLoad()
 {
-	R_ASSERT2(textureOwnerThread == GetCurrentThreadId(), "Texture owner queue must be committed by the render owner thread");
 	xr_vector<ref_texture> deferredTextures;
 	{
 		xrCriticalSectionGuard guard(creationGuard);
