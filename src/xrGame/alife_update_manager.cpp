@@ -161,7 +161,6 @@ bool CALifeUpdateManager::change_level(NET_Packet& net_packet)
 {
 	if (m_changing_level)
 		return (false);
-    Msg("[change_level] thread=%lu", GetCurrentThreadId());
 	pApp->LoadSessionBegin("level-change");
 
 #ifdef	ENGINE_LUA_ALIFE_UPDAGE_MANAGER_CALLBACKS

@@ -1031,8 +1031,6 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
                           char* lpCmdLine,
                           int nCmdShow)
 {
-    SetThreadDescription( GetCurrentThread(), L"\"Main Thread\"" );
-
 #ifdef DEDICATED_SERVER
     Debug._initialize(true);
 #else // DEDICATED_SERVER
@@ -1574,7 +1572,6 @@ void CApplication::LoadSessionBegin(LPCSTR scenario)
 	m_load_session.started_at = Device.TimerAsync();
 	m_load_session.client_event_hash = 14695981039346656037ULL;
 	xr_strcpy(m_load_session.scenario, scenario ? scenario : "unknown");
-    Msg("* [load-session] scenario=%s thread=%lu", m_load_session.scenario, GetCurrentThreadId());
 #if 0
 	try
 	{
@@ -1592,6 +1589,7 @@ void CApplication::LoadSessionBegin(LPCSTR scenario)
 	}
 #endif
 	m_load_session.active = true;
+	Msg("* [load-session] begin scenario=%s", m_load_session.scenario);
 	if (Sound)
 		Sound->source_prefetch_pause();
 }

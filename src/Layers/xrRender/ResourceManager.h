@@ -295,7 +295,6 @@ public:
 	CResourceManager() : bDeferredLoad(TRUE)
 	{
 		textureOwnerThread = GetCurrentThreadId();
-        Msg("Texture owner initialized to %lu", (DWORD)textureOwnerThread);
 	}
 
 	~CResourceManager();

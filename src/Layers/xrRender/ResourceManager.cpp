@@ -15,7 +15,6 @@
 #include "blenders/Blender.h"
 #include "blenders/Blender_Recorder.h"
 #include "../../xrCore/_thread_types.h"
-#include "../xrEngine/thread_desc.hpp"
 
 //	Already defined in Texture.cpp
 void fix_texture_name(LPSTR fn);
@@ -927,9 +926,6 @@ void CResourceManager::WaitForTextureLoads()
 
 u64 CResourceManager::BeginLoadGeneration()
 {
-    LogCurrentThread();
-    Msg("textureOwnerThread = %llu", textureOwnerThread);
-    Msg("currentThread      = %llu", GetCurrentThreadId());
 	R_ASSERT2(textureOwnerThread == GetCurrentThreadId(), "Texture generation must begin on the render owner thread");
 	{
 		xrCriticalSectionGuard guard(textureLoadGuard);
