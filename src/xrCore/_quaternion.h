@@ -462,7 +462,7 @@ public:
 		x = t * Q.x;
 		y = t * Q.y;
 		z = t * Q.z;
-		w = .5f * _log(n + Q.w * Q.w);
+		w = .5f * std::log(n + Q.w * Q.w);
 		return *this;
 	}
 
