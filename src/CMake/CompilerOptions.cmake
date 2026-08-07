@@ -66,3 +66,15 @@ if(IS_CLANG AND MSVC)
         -clang:-march=native
     )
 endif()
+
+if(XRay_BUILD_COVERAGE)
+    add_compile_options(
+        -O0
+        -g
+        --coverage
+    )
+
+    add_link_options(
+        --coverage
+    )
+endif()
