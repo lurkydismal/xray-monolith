@@ -244,7 +244,11 @@ void Detect()
 }
 };
 
+namespace _math_internal {
+
 bool g_initialize_cpu_called = false;
+
+}
 
 //------------------------------------------------------------------------------------
 void _initialize_cpu(void)
@@ -291,7 +295,7 @@ void _initialize_cpu(void)
 	FPU::initialize();
 	_initialize_cpu_thread();
 
-	g_initialize_cpu_called = true;
+    _math_internal::g_initialize_cpu_called = true;
 }
 
 #ifdef M_BORLAND
@@ -422,6 +426,8 @@ void thread_spawn(thread_t* entry, const char* name, unsigned stack, void* argli
 //    }
 //}
 
+namespace _math_internal {
+
 void spline2(float t, Fvector* p, Fvector* ret)
 {
 	float s = 1.0f - t;
@@ -460,4 +466,6 @@ void spline3(float t, Fvector* p, Fvector* ret)
 	ret->x = p[0].x * b0 + p[1].x * b1 + p[2].x * b2 + p[3].x * b3;
 	ret->y = p[0].y * b0 + p[1].y * b1 + p[2].y * b2 + p[3].y * b3;
 	ret->z = p[0].z * b0 + p[1].z * b1 + p[2].z * b2 + p[3].z * b3;
+}
+
 }
