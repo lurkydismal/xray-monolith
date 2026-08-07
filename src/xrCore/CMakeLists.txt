@@ -180,6 +180,7 @@ set(Math
     "_flags.h"
     "_math.cpp"
     "_math.h"
+    "_math.hpp"
     "_matrix.h"
     "_matrix.cpp"
     "_matrix33.h"
