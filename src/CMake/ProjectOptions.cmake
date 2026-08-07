@@ -32,5 +32,3 @@ option(ENABLE_IPO "Enable interprocedural optimization (LTO)" OFF)
 option(ENABLE_INCREMENTAL_LINKING "Enable MSVC incremental linking" OFF)
 
 option(BUILD_DOCS "Enable documentation target" ON)
-
-option(XRay_BUILD_COVERAGE "Build with coverage" OFF)
