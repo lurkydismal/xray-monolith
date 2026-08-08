@@ -672,11 +672,8 @@ TEST(VectorHelpers, EulerInertionUsesShortestAnglePath)
             0.05f
         );
 
-    const float before =
-        angle_difference(current.x, target.x);
-
-    const float after =
-        angle_difference(result.x, target.x);
-
-    EXPECT_LT(after, before);
+    // The shortest path is forward by +0.2 radians rather than almost
+    // a complete revolution in the opposite direction.
+    EXPECT_GT(result.x, current.x);
+    EXPECT_LT(result.x, 0.1f);
 }
