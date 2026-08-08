@@ -48,14 +48,23 @@ TEST(ChooseTypes, ChooseItemStoresNameAndHint)
 
     EXPECT_STREQ(item.name.c_str(), "test_name");
     EXPECT_STREQ(item.hint.c_str(), "test_hint");
+
+    EXPECT_EQ(item.name.size(), 9);
+    EXPECT_EQ(item.hint.size(), 9);
 }
 
-TEST(ChooseTypes, ChooseItemAllowsNullStrings)
+TEST(ChooseTypes, ChooseItemWithNullStringsIsEmpty)
 {
     SChooseItem item(nullptr, nullptr);
 
-    EXPECT_TRUE(item.name.empty());
-    EXPECT_TRUE(item.hint.empty());
+    EXPECT_TRUE(!item.name);
+    EXPECT_TRUE(!item.hint);
+
+    EXPECT_EQ(item.name.size(), 0);
+    EXPECT_EQ(item.hint.size(), 0);
+
+    EXPECT_EQ(item.name.c_str(), nullptr);
+    EXPECT_EQ(item.hint.c_str(), nullptr);
 }
 
 TEST(ChooseTypes, ChooseEventsDefaultValues)
