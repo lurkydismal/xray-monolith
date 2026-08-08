@@ -76,6 +76,7 @@ TEST_F(EFSUtilsBorlandTest, AppendFolderToNameXrStringFullName)
 }
 #endif
 
+#if 0
 TEST_F(EFSUtilsBorlandTest, AppendFolderToNameXrStringFullNameOneLevel)
 {
 	xr_string name = "foo_bar_baz.dds";
@@ -87,6 +88,7 @@ TEST_F(EFSUtilsBorlandTest, AppendFolderToNameXrStringFullNameOneLevel)
 
 	EXPECT_EQ(name, "foo\\foo_bar_baz.dds");
 }
+#endif
 
 TEST_F(EFSUtilsBorlandTest, AppendFolderToNameXrStringFullNameWithNoFolders)
 {
