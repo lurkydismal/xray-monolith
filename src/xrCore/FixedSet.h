@@ -58,8 +58,7 @@ private:
 			}
 		}
 		if (nodes)
-		allocator:
-			dealloc(nodes);
+            allocator::dealloc(nodes);
 
 		nodes = newNodes;
 		limit = newLimit;
@@ -107,8 +106,7 @@ public:
 
 	~FixedSET()
 	{
-	allocator:
-		dealloc(nodes);
+	allocator::dealloc(nodes);
 	}
 
 	IC TNode* insert(const K& k)
