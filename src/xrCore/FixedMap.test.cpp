@@ -210,9 +210,9 @@ TEST_F(FixedMapTest, InsertWithoutValueLeavesValueDefaultInitialized)
 
 TEST_F(FixedMapTest, InsertInAnyWayAllowsDuplicateKeys)
 {
-	auto* first = map.insertInAnyWay(10, 100);
-	auto* second = map.insertInAnyWay(10, 200);
-	auto* third = map.insertInAnyWay(10, 300);
+	auto* first = map.insertInAnyWay(10);
+	auto* second = map.insertInAnyWay(10);
+	auto* third = map.insertInAnyWay(10);
 
 	ASSERT_NE(first, nullptr);
 	ASSERT_NE(second, nullptr);
@@ -226,13 +226,28 @@ TEST_F(FixedMapTest, InsertInAnyWayAllowsDuplicateKeys)
 	EXPECT_EQ(first->key, 10);
 	EXPECT_EQ(second->key, 10);
 	EXPECT_EQ(third->key, 10);
+
+	EXPECT_EQ(first->left, second);
+	EXPECT_EQ(second->left, third);
+}
+
+TEST_F(FixedMapTest, InsertDoesNotAllowDuplicateKeys)
+{
+	auto* first = map.insert(10);
+	auto* second = map.insert(10);
+
+	ASSERT_NE(first, nullptr);
+	ASSERT_NE(second, nullptr);
+
+	EXPECT_EQ(first, second);
+	EXPECT_EQ(map.size(), 1u);
 }
 
 TEST_F(FixedMapTest, InsertInAnyWayPlacesDuplicatesOnLeft)
 {
-	auto* first = map.insertInAnyWay(10, 100);
-	auto* second = map.insertInAnyWay(10, 200);
-	auto* third = map.insertInAnyWay(10, 300);
+	auto* first = map.insertInAnyWay(10);
+	auto* second = map.insertInAnyWay(10);
+	auto* third = map.insertInAnyWay(10);
 
 	ASSERT_NE(first, nullptr);
 	ASSERT_NE(second, nullptr);
@@ -240,6 +255,14 @@ TEST_F(FixedMapTest, InsertInAnyWayPlacesDuplicatesOnLeft)
 
 	EXPECT_EQ(first->left, second);
 	EXPECT_EQ(second->left, third);
+
+	EXPECT_EQ(first->key, 10);
+	EXPECT_EQ(second->key, 10);
+	EXPECT_EQ(third->key, 10);
+
+	EXPECT_EQ(first->right, nullptr);
+	EXPECT_EQ(second->right, nullptr);
+	EXPECT_EQ(third->right, nullptr);
 }
 
 TEST_F(FixedMapTest, InsertInAnyWayWithRvalueStoresValue)
