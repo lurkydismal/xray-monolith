@@ -8,11 +8,9 @@
 
 #include <cmath>
 
-#if 0
-static constexpr float EPS = 1e-5f;
-#endif
+static constexpr float g_EPS = 1e-5f;
 
-static void expect_quat_near(const Fquaternion& a, const Fquaternion& b, float eps = EPS)
+static void expect_quat_near(const Fquaternion& a, const Fquaternion& b, float eps = g_EPS)
 {
 	EXPECT_NEAR(a.x, b.x, eps);
 	EXPECT_NEAR(a.y, b.y, eps);
@@ -20,7 +18,7 @@ static void expect_quat_near(const Fquaternion& a, const Fquaternion& b, float e
 	EXPECT_NEAR(a.w, b.w, eps);
 }
 
-static void expect_vec_near(const Fvector& a, const Fvector& b, float eps = EPS)
+static void expect_vec_near(const Fvector& a, const Fvector& b, float eps = g_EPS)
 {
 	EXPECT_NEAR(a.x, b.x, eps);
 	EXPECT_NEAR(a.y, b.y, eps);
@@ -64,10 +62,10 @@ TEST(Quaternion, Normalize)
 	q.set(10, 0, 0, 0);
 	q.normalize();
 
-	EXPECT_NEAR(q.w, 1.0f, EPS);
-	EXPECT_NEAR(q.x, 0.0f, EPS);
-	EXPECT_NEAR(q.y, 0.0f, EPS);
-	EXPECT_NEAR(q.z, 0.0f, EPS);
+	EXPECT_NEAR(q.w, 1.0f, g_EPS);
+	EXPECT_NEAR(q.x, 0.0f, g_EPS);
+	EXPECT_NEAR(q.y, 0.0f, g_EPS);
+	EXPECT_NEAR(q.z, 0.0f, g_EPS);
 
 	EXPECT_TRUE(q.isUnit());
 }
@@ -101,10 +99,10 @@ TEST(Quaternion, Inverse)
 
 	result.mul(q, inv);
 
-	EXPECT_NEAR(result.w, 1.0f, EPS);
-	EXPECT_NEAR(result.x, 0.0f, EPS);
-	EXPECT_NEAR(result.y, 0.0f, EPS);
-	EXPECT_NEAR(result.z, 0.0f, EPS);
+	EXPECT_NEAR(result.w, 1.0f, g_EPS);
+	EXPECT_NEAR(result.x, 0.0f, g_EPS);
+	EXPECT_NEAR(result.y, 0.0f, g_EPS);
+	EXPECT_NEAR(result.z, 0.0f, g_EPS);
 }
 
 
@@ -128,7 +126,7 @@ TEST(Quaternion, Multiplication)
 
 	EXPECT_TRUE(result.isValid());
 
-	EXPECT_NEAR(result.magnitude(), 1.0f, EPS);
+	EXPECT_NEAR(result.magnitude(), 1.0f, g_EPS);
 }
 
 
@@ -154,7 +152,7 @@ TEST(Quaternion, AxisAngle)
 	EXPECT_NEAR(
 		angle,
 		PI_DIV_2,
-		EPS
+		g_EPS
 	);
 }
 
@@ -173,7 +171,7 @@ TEST(Quaternion, RotationYawPitchRollProducesUnit)
 	EXPECT_NEAR(
 		q.magnitude(),
 		1.0f,
-		EPS
+		g_EPS
 	);
 }
 
@@ -222,7 +220,7 @@ TEST(Quaternion, SlerpMiddleIsUnit)
 	EXPECT_NEAR(
 		out.magnitude(),
 		1.0f,
-		EPS
+		g_EPS
 	);
 }
 

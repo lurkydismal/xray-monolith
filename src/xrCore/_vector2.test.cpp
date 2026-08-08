@@ -7,14 +7,12 @@
 #include <cmath>
 
 
-#if 0
-static constexpr float EPS = 1e-5f;
-#endif
+static constexpr float g_EPS = 1e-5f;
 
 void expectVec(const Fvector2& v, float x, float y)
 {
-    EXPECT_NEAR(v.x, x, EPS);
-    EXPECT_NEAR(v.y, y, EPS);
+    EXPECT_NEAR(v.x, x, g_EPS);
+    EXPECT_NEAR(v.y, y, g_EPS);
 }
 
 
@@ -242,8 +240,8 @@ TEST(Vector2NormalizeTest, Normalize)
 
     v.normalize();
 
-    EXPECT_NEAR(v.x, .6f, EPS);
-    EXPECT_NEAR(v.y, .8f, EPS);
+    EXPECT_NEAR(v.x, .6f, g_EPS);
+    EXPECT_NEAR(v.y, .8f, g_EPS);
 }
 
 
@@ -406,7 +404,7 @@ TEST(Vector2Test, HeadingPositiveY)
     Fvector2 v;
     v.set(0.f, 1.f);
 
-    EXPECT_NEAR(v.getH(), 0.f, EPS);
+    EXPECT_NEAR(v.getH(), 0.f, g_EPS);
 }
 
 
@@ -415,7 +413,7 @@ TEST(Vector2Test, HeadingPositiveX)
     Fvector2 v;
     v.set(1.f, 0.f);
 
-    EXPECT_NEAR(v.getH(), -PI_DIV_2, EPS);
+    EXPECT_NEAR(v.getH(), -PI_DIV_2, g_EPS);
 }
 
 

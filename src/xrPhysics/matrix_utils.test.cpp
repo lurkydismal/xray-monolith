@@ -7,15 +7,13 @@
 #include "_matrix.h"
 #include "_quaternion.h"
 
-#if 0
-static constexpr float EPS = 1e-5f;
-#endif
+static constexpr float g_EPS = 1e-5f;
 
 
 static void expect_vec_near(
 	const Fvector& a,
 	const Fvector& b,
-	float eps = EPS)
+	float eps = g_EPS)
 {
 	EXPECT_NEAR(a.x, b.x, eps);
 	EXPECT_NEAR(a.y, b.y, eps);
@@ -34,14 +32,14 @@ TEST(MatrixUtils, ClampQuaternionRotationBelowLimit)
 
 	float result = clamp_rotation(q, 1.0f);
 
-	EXPECT_NEAR(result, 0.5f, EPS);
+	EXPECT_NEAR(result, 0.5f, g_EPS);
 
 	Fvector axis;
 	float angle;
 
 	ASSERT_TRUE(q.get_axis_angle(axis, angle));
 
-	EXPECT_NEAR(angle, 0.5f, EPS);
+	EXPECT_NEAR(angle, 0.5f, g_EPS);
 }
 
 
@@ -56,15 +54,15 @@ TEST(MatrixUtils, ClampQuaternionRotationAboveLimit)
 
 	float result = clamp_rotation(q, 1.0f);
 
-	EXPECT_NEAR(result, 1.5f, EPS);
+	EXPECT_NEAR(result, 1.5f, g_EPS);
 
 	Fvector axis;
 	float angle;
 
 	ASSERT_TRUE(q.get_axis_angle(axis, angle));
 
-	EXPECT_NEAR(angle, 1.0f, EPS);
-	EXPECT_NEAR(q.magnitude(), 1.0f, EPS);
+	EXPECT_NEAR(angle, 1.0f, g_EPS);
+	EXPECT_NEAR(q.magnitude(), 1.0f, g_EPS);
 }
 
 
@@ -81,7 +79,7 @@ TEST(MatrixUtils, ClampMatrixRotationPreservesTranslation)
 
 	float result = clamp_rotation(m, 0.5f);
 
-	EXPECT_NEAR(result, 1.5f, EPS);
+	EXPECT_NEAR(result, 1.5f, g_EPS);
 
 	expect_vec_near(
 		m.c,
@@ -94,7 +92,7 @@ TEST(MatrixUtils, ClampMatrixRotationPreservesTranslation)
 
 	get_axis_angle(m, axis, angle);
 
-	EXPECT_NEAR(angle, 0.5f, EPS);
+	EXPECT_NEAR(angle, 0.5f, g_EPS);
 }
 
 
@@ -108,7 +106,7 @@ TEST(MatrixUtils, GetAxisAngleIdentity)
 
 	get_axis_angle(m, axis, angle);
 
-	EXPECT_NEAR(angle, 0.0f, EPS);
+	EXPECT_NEAR(angle, 0.0f, g_EPS);
 }
 
 
@@ -126,7 +124,7 @@ TEST(MatrixUtils, GetAxisAngleRotation)
 
 	get_axis_angle(m, axis, angle);
 
-	EXPECT_NEAR(angle, PI_DIV_2, EPS);
+	EXPECT_NEAR(angle, PI_DIV_2, g_EPS);
 
 	expect_vec_near(
 		axis,
@@ -147,8 +145,8 @@ TEST(MatrixUtils, CompareEqualMatrices)
 		cmp_matrix(
 			a,
 			b,
-			EPS,
-			EPS
+			g_EPS,
+			g_EPS
 		)
 	);
 }
@@ -168,7 +166,7 @@ TEST(MatrixUtils, CompareDifferentTranslation)
 			a,
 			b,
 			1.0f,
-			EPS
+			g_EPS
 		)
 	);
 }
@@ -195,7 +193,7 @@ TEST(MatrixUtils, CompareDifferentRotation)
 		angular,
 		a,
 		b,
-		EPS,
+		g_EPS,
 		0.1f
 	);
 
@@ -223,8 +221,8 @@ TEST(MatrixUtils, GetDiffValueTranslation)
 	);
 
 
-	EXPECT_NEAR(linear, 5.0f, EPS);
-	EXPECT_NEAR(angular, 0.0f, EPS);
+	EXPECT_NEAR(linear, 5.0f, g_EPS);
+	EXPECT_NEAR(angular, 0.0f, g_EPS);
 }
 
 
@@ -250,8 +248,8 @@ TEST(MatrixUtils, GetDiffValueRotation)
 		angular
 	);
 
-	EXPECT_NEAR(linear, 0.0f, EPS);
-	EXPECT_NEAR(angular, PI_DIV_2, EPS);
+	EXPECT_NEAR(linear, 0.0f, g_EPS);
+	EXPECT_NEAR(angular, PI_DIV_2, g_EPS);
 }
 
 
