@@ -418,7 +418,7 @@ public:
 		return *this;
 	}
 
-	IC SelfRef sMxVpV(Tvector& R, float s1, const Tvector& V1, const Tvector& V2) const
+	IC SelfCRef sMxVpV(Tvector& R, float s1, const Tvector& V1, const Tvector& V2) const
 	{
 		R.x = s1 * (m[0][0] * V1.x + m[0][1] * V1.y + m[0][2] * V1.z) + V2.x;
 		R.y = s1 * (m[1][0] * V1.x + m[1][1] * V1.y + m[1][2] * V1.z) + V2.y;
@@ -456,7 +456,7 @@ public:
 		return *this;
 	}
 
-	IC SelfRef MxV(Tvector& R, const Tvector& V1) const
+	IC SelfCRef MxV(Tvector& R, const Tvector& V1) const
 	{
 		R.x = (m[0][0] * V1.x + m[0][1] * V1.y + m[0][2] * V1.z);
 		R.y = (m[1][0] * V1.x + m[1][1] * V1.y + m[1][2] * V1.z);
@@ -478,7 +478,7 @@ public:
 		v.set(res);
 	}
 
-	IC SelfRef MxVpV(Tvector& R, const Tvector& V1, const Tvector& V2) const
+	IC SelfCRef MxVpV(Tvector& R, const Tvector& V1, const Tvector& V2) const
 	{
 		R.x = (m[0][0] * V1.x + m[0][1] * V1.y + m[0][2] * V1.z + V2.x);
 		R.y = (m[1][0] * V1.x + m[1][1] * V1.y + m[1][2] * V1.z + V2.y);
