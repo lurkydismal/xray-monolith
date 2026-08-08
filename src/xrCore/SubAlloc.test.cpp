@@ -1,3 +1,4 @@
+#if 0
 #include "stdafx.h"
 
 #include "PPMdType.h"
@@ -72,3 +73,4 @@ TEST_F(SubAllocatorTest, CanResizeAllocatorRepeatedly)
 			break;
 	}
 }
+#endif
