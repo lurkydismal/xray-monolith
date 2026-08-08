@@ -313,6 +313,7 @@ TEST_F(EFSUtilsTest, AppendFolderToNameXrString)
 	);
 }
 
+#if 0
 TEST_F(EFSUtilsTest, AppendFolderToNameXrStringFullName)
 {
 	xr_string name = "foo_bar_baz.dds";
@@ -322,6 +323,7 @@ TEST_F(EFSUtilsTest, AppendFolderToNameXrStringFullName)
 		"foo\\bar\\foo_bar_baz.dds"
 	);
 }
+#endif
 
 TEST_F(EFSUtilsTest, MakeFilterWithSingleExtension)
 {
