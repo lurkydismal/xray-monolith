@@ -53,8 +53,8 @@ public:
 	};
 	IC SelfRef identity()
 	{
-		min.set(-0.5, -0.5, -0.5);
-		max.set(0.5, 0.5, 0.5);
+		min.set(-0.5, -0.5);
+		max.set(0.5, 0.5);
 		return *this;
 	};
 	IC SelfRef invalidate()
