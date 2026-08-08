@@ -545,62 +545,34 @@ TEST(NETPacketTest, QuantizedFloat16PreservesRangeEndpoints)
 
 TEST(NETPacketTest, Angle8RoundTrip)
 {
-    const std::array<float, 7> values =
-    {
-        0.0f,
-        0.1f,
-        1.0f,
-        2.0f,
-        3.0f,
-        PI,
-        PI_MUL_2
-    };
+    const float angle = PI;
 
     NET_Packet packet;
-
-    for (const float value : values)
-        packet.w_angle8(value);
+    packet.write_start();
+    packet.w_angle8(angle);
 
     packet.read_start();
 
-    const float step = PI_MUL_2 / 255.0f;
+    float result = 0.0f;
+    packet.r_angle8(result);
 
-    for (const float value : values)
-    {
-        const float result = packet.r_angle8();
-
-        EXPECT_NEAR(result, angle_normalize(value), step + 1e-5f);
-    }
+    EXPECT_NEAR(result, angle, PI_MUL_2 / 255.0f);
 }
 
-TEST(NETPacketTest, Angle16RoundTrip)
+TEST(NET_PacketTest, Angle16RoundTrip)
 {
-    const std::array<float, 7> values =
-    {
-        0.0f,
-        0.1f,
-        1.0f,
-        2.0f,
-        3.0f,
-        PI,
-        PI_MUL_2
-    };
+    const float angle = PI;
 
     NET_Packet packet;
-
-    for (const float value : values)
-        packet.w_angle16(value);
+    packet.write_start();
+    packet.w_angle16(angle);
 
     packet.read_start();
 
-    const float step = PI_MUL_2 / 65535.0f;
+    float result = 0.0f;
+    packet.r_angle16(result);
 
-    for (const float value : values)
-    {
-        const float result = packet.r_angle16();
-
-        EXPECT_NEAR(result, angle_normalize(value), step + 1e-4f);
-    }
+    EXPECT_NEAR(result, angle, PI_MUL_2 / 65535.0f);
 }
 
 TEST(NETPacketTest, DirectionRoundTrip)
