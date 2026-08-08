@@ -167,11 +167,7 @@ TEST(PathNotificatorTest, RegisterPathCanRegisterPath)
 {
 	CFS_PathNotificator notificator;
 
-	FS_Path path;
-
-	// Adjust this assignment if FS_Path in your tree requires initialization
-	// through a constructor instead.
-	path.m_Path = ".";
+	FS_Path path(".", "", nullptr, nullptr, 0);
 
 	notificator.RegisterPath(path);
 
@@ -182,8 +178,7 @@ TEST(PathNotificatorTest, RegisterSamePathCanBeCalledMoreThanOnce)
 {
 	CFS_PathNotificator notificator;
 
-	FS_Path path;
-	path.m_Path = ".";
+	FS_Path path(".", "", nullptr, nullptr, 0);
 
 	notificator.RegisterPath(path);
 	notificator.RegisterPath(path);
@@ -195,11 +190,34 @@ TEST(PathNotificatorTest, RegisterDifferentPaths)
 {
 	CFS_PathNotificator notificator;
 
-	FS_Path first;
-	FS_Path second;
+	FS_Path first(".", "", nullptr, nullptr, 0);
+	FS_Path second("..", "", nullptr, nullptr, 0);
 
-	first.m_Path = ".";
-	second.m_Path = "..";
+	notificator.RegisterPath(first);
+	notificator.RegisterPath(second);
+
+	SUCCEED();
+}
+
+TEST(PathNotificatorTest, SamePathWithDifferentRecursionIsRegisteredSeparately)
+{
+	CFS_PathNotificator notificator;
+
+	FS_Path nonRecursive(".", "", nullptr, nullptr, 0);
+	FS_Path recursive(".", "", nullptr, nullptr, FS_Path::flRecurse);
+
+	notificator.RegisterPath(nonRecursive);
+	notificator.RegisterPath(recursive);
+
+	SUCCEED();
+}
+
+TEST(PathNotificatorTest, SamePathAndSameRecursionIsDeduplicated)
+{
+	CFS_PathNotificator notificator;
+
+	FS_Path first(".", "", nullptr, nullptr, FS_Path::flRecurse);
+	FS_Path second(".", "", nullptr, nullptr, FS_Path::flRecurse);
 
 	notificator.RegisterPath(first);
 	notificator.RegisterPath(second);
