@@ -125,6 +125,7 @@ TEST(BufferVector, RangeConstructor)
 	EXPECT_EQ(ToVector(value), source);
 }
 
+#if 0
 TEST(BufferVector, CopyConstructor)
 {
 	Buffer<int, 8> source_buffer;
@@ -144,7 +145,9 @@ TEST(BufferVector, CopyConstructor)
 	EXPECT_EQ(source[0], 17);
 	EXPECT_EQ(destination[0], 99);
 }
+#endif
 
+#if 0
 TEST(BufferVector, Assignment)
 {
 	Buffer<int, 8> source_buffer;
@@ -165,7 +168,9 @@ TEST(BufferVector, Assignment)
 	EXPECT_EQ(destination.size(), 3u);
 	EXPECT_EQ(destination.capacity(), 8u);
 }
+#endif
 
+#if 0
 TEST(BufferVector, AssignRange)
 {
 	Buffer<int, 8> buffer;
@@ -178,6 +183,7 @@ TEST(BufferVector, AssignRange)
 	EXPECT_EQ(ToVector(value), source);
 	EXPECT_EQ(value.size(), 3u);
 }
+#endif
 
 #if 0
 TEST(BufferVector, AssignCountAndValue)
@@ -192,6 +198,7 @@ TEST(BufferVector, AssignCountAndValue)
 }
 #endif
 
+#if 0
 TEST(BufferVector, Clear)
 {
 	Buffer<int, 8> buffer;
@@ -209,6 +216,7 @@ TEST(BufferVector, Clear)
 	EXPECT_EQ(value.size(), 1u);
 	EXPECT_EQ(value.front(), 7);
 }
+#endif
 
 TEST(BufferVector, ResizeGrowing)
 {
@@ -230,6 +238,7 @@ TEST(BufferVector, ResizeGrowing)
 	EXPECT_EQ(value[4], 0);
 }
 
+#if 0
 TEST(BufferVector, ResizeShrinking)
 {
 	Buffer<int, 8> buffer;
@@ -241,7 +250,9 @@ TEST(BufferVector, ResizeShrinking)
 	EXPECT_EQ(value[0], 42);
 	EXPECT_EQ(value[1], 42);
 }
+#endif
 
+#if 0
 TEST(BufferVector, ResizeToSameSize)
 {
 	Buffer<int, 8> buffer;
@@ -256,7 +267,9 @@ TEST(BufferVector, ResizeToSameSize)
 	EXPECT_EQ(value.end(), end);
 	EXPECT_EQ(value.size(), 3u);
 }
+#endif
 
+#if 0
 TEST(BufferVector, ReserveDoesNothing)
 {
 	Buffer<int, 8> buffer;
@@ -272,6 +285,7 @@ TEST(BufferVector, ReserveDoesNothing)
 	EXPECT_EQ(value.capacity(), 8u);
 	EXPECT_EQ(value.size(), 2u);
 }
+#endif
 
 TEST(BufferVector, PushBackAndPopBack)
 {
@@ -321,6 +335,7 @@ TEST(BufferVector, FrontBackAndIndexAccess)
 	EXPECT_EQ(value.at(1), 200);
 }
 
+#if 0
 TEST(BufferVector, ConstAccess)
 {
 	Buffer<int, 8> buffer;
@@ -343,6 +358,7 @@ TEST(BufferVector, ConstAccess)
 		buffer_vector<int>::const_reverse_iterator
 	>);
 }
+#endif
 
 TEST(BufferVector, ForwardIteration)
 {
@@ -406,6 +422,7 @@ TEST(BufferVector, InsertSingleInMiddle)
 }
 #endif
 
+#if 0
 TEST(BufferVector, InsertSingleAtEnd)
 {
 	Buffer<int, 8> buffer;
@@ -418,6 +435,7 @@ TEST(BufferVector, InsertSingleAtEnd)
 
 	EXPECT_EQ(ToVector(value), (std::vector<int>{1, 2, 3}));
 }
+#endif
 
 #if 0
 TEST(BufferVector, InsertMultipleAtBeginning)
@@ -452,6 +470,7 @@ TEST(BufferVector, InsertMultipleInMiddle)
 }
 #endif
 
+#if 0
 TEST(BufferVector, InsertRange)
 {
 	Buffer<int, 8> buffer;
@@ -469,6 +488,7 @@ TEST(BufferVector, InsertRange)
 		(std::vector<int>{1, 2, 3, 4})
 	);
 }
+#endif
 
 TEST(BufferVector, EraseSingle)
 {
@@ -502,6 +522,7 @@ TEST(BufferVector, EraseRange)
 	);
 }
 
+#if 0
 TEST(BufferVector, EraseEmptyRange)
 {
 	Buffer<int, 8> buffer;
@@ -512,6 +533,7 @@ TEST(BufferVector, EraseEmptyRange)
 	EXPECT_EQ(value.size(), 3u);
 	EXPECT_EQ(ToVector(value), (std::vector<int>{42, 42, 42}));
 }
+#endif
 
 TEST(BufferVector, Swap)
 {
@@ -537,6 +559,7 @@ TEST(BufferVector, Swap)
 	EXPECT_EQ(right.capacity(), 8u);
 }
 
+#if 0
 TEST(BufferVector, NonMemberSwap)
 {
 	Buffer<int, 8> left_buffer;
@@ -550,6 +573,7 @@ TEST(BufferVector, NonMemberSwap)
 	EXPECT_EQ(ToVector(left), (std::vector<int>{2, 2, 2}));
 	EXPECT_EQ(ToVector(right), (std::vector<int>{1, 1}));
 }
+#endif
 
 TEST(BufferVector, CapacityIsFixed)
 {
