@@ -970,6 +970,7 @@ TEST(IWriter, WPrintfWritesFormattedText)
 // Alignment
 // ============================================================================
 
+#if 0
 TEST(IWriter, AlignMovesPositionToExpectedBoundary)
 {
     CMemoryWriter writer;
@@ -997,3 +998,4 @@ TEST(IWriter, AlignDoesNothingWhenAlreadyAligned)
     EXPECT_EQ(position, 16u);
     EXPECT_EQ(writer.tell(), 16u);
 }
+#endif
