@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+#include "../xrServerEntities/PropType.hpp"
+
 #include "ChooseTypes.H"
 
 #include <gtest/gtest.h>
