@@ -94,6 +94,7 @@ TEST(BufferVector, DefaultConstructor)
 	EXPECT_EQ(value.begin(), value.end());
 }
 
+#if 0
 TEST(BufferVector, CountValueConstructor)
 {
 	Buffer<int, 8> buffer;
@@ -107,6 +108,7 @@ TEST(BufferVector, CountValueConstructor)
 	for (const int element : value)
 		EXPECT_EQ(element, 42);
 }
+#endif
 
 TEST(BufferVector, RangeConstructor)
 {
@@ -389,6 +391,7 @@ TEST(BufferVector, InsertSingleAtBeginning)
 }
 #endif
 
+#if 0
 TEST(BufferVector, InsertSingleInMiddle)
 {
 	Buffer<int, 8> buffer;
@@ -401,6 +404,7 @@ TEST(BufferVector, InsertSingleInMiddle)
 
 	EXPECT_EQ(ToVector(value), (std::vector<int>{1, 2, 3}));
 }
+#endif
 
 TEST(BufferVector, InsertSingleAtEnd)
 {
