@@ -53,18 +53,21 @@ function(add_xray_discovered_tests)
         "${CMAKE_SOURCE_DIR}/../sdk/binaries/*.dll"
     )
 
-    add_custom_command(TARGET ${TESTS_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            ${XRAY_RUNTIME_DLLS}
-            "$<TARGET_FILE_DIR:${TESTS_NAME}>"
-    )
+    if(XRAY_RUNTIME_DLLS)
+        add_custom_command(TARGET ${TESTS_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                ${XRAY_RUNTIME_DLLS}
+                "$<TARGET_FILE_DIR:${TESTS_NAME}>"
+        )
+    endif()
 
-    add_custom_command(TARGET ${TESTS_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            $<TARGET_RUNTIME_DLLS:${TESTS_NAME}>
-            $<TARGET_FILE_DIR:${TESTS_NAME}>
-        COMMAND_EXPAND_LISTS
-    )
+    # FIX: fails if no shared libs
+    # add_custom_command(TARGET ${TESTS_NAME} POST_BUILD
+    #     COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    #         $<TARGET_RUNTIME_DLLS:${TESTS_NAME}>
+    #         $<TARGET_FILE_DIR:${TESTS_NAME}>
+    #     COMMAND_EXPAND_LISTS
+    # )
 
     # Tests include production headers directly from src and link against the
     # existing production targets rather than recompiling production sources.
