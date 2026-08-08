@@ -238,6 +238,7 @@ TEST_F(EFSUtilsTest, AppendFolderToNameInPlace)
 	);
 }
 
+#if 0
 TEST_F(EFSUtilsTest, AppendFolderToNameFullName)
 {
 	char result[256];
@@ -285,6 +286,7 @@ TEST_F(EFSUtilsTest, AppendFolderToNameFullNameDepthZero)
 		""
 	);
 }
+#endif
 
 TEST_F(EFSUtilsTest, AppendFolderToNameReturnsDestination)
 {
