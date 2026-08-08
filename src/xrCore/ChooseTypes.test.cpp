@@ -111,71 +111,93 @@ TEST(ChooseTypes, ChooseEventsSetReplacesExistingState)
     EXPECT_FALSE(events.flags.test(SChooseEvents::flAnimated));
 }
 
-TEST(ChooseTypes, ChooseEventsSetStoresFillCallback)
+class ChooseEventsTest : public ::testing::Test
 {
-    bool called = false;
+public:
+    bool fill_called = false;
 
-    TOnChooseFillItems callback =
-        [&called](ChooseItemVec&, void*)
-        {
-            called = true;
-        };
+    void FillItems(ChooseItemVec&, void*)
+    {
+        fill_called = true;
+    }
+};
 
+TEST_F(ChooseEventsTest, ChooseEventsSetStoresFillCallback)
+{
     SChooseEvents events;
-    events.Set("Test", callback, {}, {}, {}, 0);
+
+    events.Set(
+        "Test",
+        TOnChooseFillItems(this, &ChooseEventsTest::FillItems),
+        {},
+        {},
+        {},
+        0
+    );
 
     ChooseItemVec items;
     events.on_fill(items, nullptr);
 
-    EXPECT_TRUE(called);
+    EXPECT_TRUE(fill_called);
 }
+
+namespace
+{
+
+bool close_called = false;
+
+void TestCloseCallback()
+{
+    close_called = true;
+}
+
+} // namespace
 
 TEST(ChooseTypes, ChooseEventsSetStoresCloseCallback)
 {
-    bool called = false;
-
-    TOnChooseClose callback =
-        [&called]()
-        {
-            called = true;
-        };
+    close_called = false;
 
     SChooseEvents events;
-    events.Set("Test", {}, {}, {}, callback, 0);
+    events.Set("Test", {}, {}, {}, TestCloseCallback, 0);
 
     events.on_close();
 
-    EXPECT_TRUE(called);
+    EXPECT_TRUE(close_called);
 }
+
+namespace
+{
+
+void TestFirstFillCallback(ChooseItemVec&, void* data)
+{
+    auto* calls = static_cast<int*>(data);
+    *calls += 1;
+}
+
+void TestSecondFillCallback(ChooseItemVec&, void* data)
+{
+    auto* calls = static_cast<int*>(data);
+    *calls += 10;
+}
+
+} // namespace
 
 TEST(ChooseTypes, ChooseEventsSetReplacesCallbacks)
 {
     int calls = 0;
 
-    TOnChooseFillItems first =
-        [&calls](ChooseItemVec&, void*)
-        {
-            calls += 1;
-        };
-
-    TOnChooseFillItems second =
-        [&calls](ChooseItemVec&, void*)
-        {
-            calls += 10;
-        };
-
     SChooseEvents events;
 
-    events.Set("First", first, {}, {}, {}, 0);
+    events.Set("First", TestFirstFillCallback, {}, {}, {}, 0);
 
     ChooseItemVec items;
-    events.on_fill(items, nullptr);
+    events.on_fill(items, &calls);
 
     EXPECT_EQ(calls, 1);
 
-    events.Set("Second", second, {}, {}, {}, 0);
+    events.Set("Second", TestSecondFillCallback, {}, {}, {}, 0);
 
-    events.on_fill(items, nullptr);
+    events.on_fill(items, &calls);
 
     EXPECT_EQ(calls, 11);
 }
