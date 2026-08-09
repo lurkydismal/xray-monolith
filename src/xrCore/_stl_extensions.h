@@ -700,6 +700,7 @@ public:
     }
 
     // Erase by iterator: O(log N) map lookup + O(1) unlinking
+#if 0
     iterator erase(const_iterator pos)
     {
         if (pos == m_sequence.end()) return m_sequence.end();
@@ -707,6 +708,36 @@ public:
         auto next_it = std::next(pos);
         m_lookup.erase(pos->first);
         m_sequence.erase(pos);
+        return next_it;
+    }
+#endif
+
+    iterator erase(iterator pos)
+    {
+        if (pos == m_sequence.end())
+            return m_sequence.end();
+
+        auto next_it = std::next(pos);
+        m_lookup.erase(pos->first);
+        m_sequence.erase(pos);
+        return next_it;
+    }
+
+    iterator erase(const_iterator pos)
+    {
+        if (pos == m_sequence.cend())
+            return m_sequence.end();
+
+        auto key = pos->first;
+
+        auto it = m_sequence.begin();
+        std::advance(it, std::distance(m_sequence.cbegin(), pos));
+
+        auto next_it = std::next(it);
+
+        m_lookup.erase(key);
+        m_sequence.erase(it);
+
         return next_it;
     }
 
@@ -737,14 +768,16 @@ public:
     mapped_type& at(const key_type& key)
     {
         auto map_it = m_lookup.find(key);
-        R_ASSERT3(map_it != m_lookup.end(), "xr_ordered_map, key not found ", key);
+        const auto keyStr = std::to_string(key);
+        R_ASSERT3(map_it != m_lookup.end(), "xr_ordered_map, key not found ", keyStr.c_str());
         return map_it->second->second;
     }
 
     const mapped_type& at(const key_type& key) const
     {
         auto map_it = m_lookup.find(key);
-        R_ASSERT3(map_it != m_lookup.end(), "xr_ordered_map, key not found ", key);
+        const auto keyStr = std::to_string(key);
+        R_ASSERT3(map_it != m_lookup.end(), "xr_ordered_map, key not found ", keyStr.c_str());
         return map_it->second->second;
     }
 
@@ -966,7 +999,8 @@ public:
     {
         check_bounds(key);
         sparse_index_t idx = m_sparse[key];
-        R_ASSERT3(idx != INVALID_INDEX, "xr_sparse_map: Item not found by ID ", key);
+        const auto keyStr = std::to_string(key);
+        R_ASSERT3(idx != INVALID_INDEX, "xr_sparse_map: Item not found by ID ", keyStr.c_str());
         return m_dense[idx].second;
     }
 
