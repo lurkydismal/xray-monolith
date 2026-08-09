@@ -5561,6 +5561,8 @@ set(UI__Multiplayer__BuyWeaponWnd__TAB
     "ui/UIBuyWeaponTab.h"
     "ui/UITabButtonMP.cpp"
     "ui/UITabButtonMP.h"
+    "ui/UITabScrollArrows.cpp"
+    "ui/UITabScrollArrows.h"
 )
 source_group("UI\\Multiplayer\\BuyWeaponWnd\\TAB" FILES ${UI__Multiplayer__BuyWeaponWnd__TAB})
 
@@ -5892,6 +5894,7 @@ set(UI__UIWindows__TabControl
     "ui/UITabButton.h"
     "ui/UITabControl.cpp"
     "ui/UITabControl.h"
+    "ui/UITabControl_scroll.cpp"
     "ui/UITabControl_script.cpp"
 )
 source_group("UI\\UIWindows\\TabControl" FILES ${UI__UIWindows__TabControl})
