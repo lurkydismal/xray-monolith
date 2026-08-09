@@ -31,6 +31,16 @@ protected:
     smem_container container;
 };
 
+template <size_t N>
+struct SmemTestValue
+{
+    std::array<u8, sizeof(smem_value) + N> storage{};
+
+    smem_value* get()
+    {
+        return reinterpret_cast<smem_value*>(storage.data());
+    }
+};
 
 // -----------------------------------------------------------------------------
 // smem_sort
@@ -56,75 +66,67 @@ TEST_F(SharedMemoryTest, SmemSortOrdersByLengthWhenCrcMatches)
     const u8 value_a[] = {'a'};
     const u8 value_b[] = {'a', 'b'};
 
-    struct TestValue
-    {
-        smem_value header;
-        u8 data[2];
-    };
+    SmemTestValue<sizeof(value_a)> a_storage;
+    SmemTestValue<sizeof(value_b)> b_storage;
 
-    TestValue a{};
-    TestValue b{};
+    auto* a = a_storage.get();
+    auto* b = b_storage.get();
 
-    a.header.dwCRC = 100;
-    a.header.dwLength = 1;
-    std::memcpy(a.header.value, value_a, sizeof(value_a));
+    a->dwCRC = 100;
+    a->dwLength = sizeof(value_a);
+    std::memcpy(a->value, value_a, sizeof(value_a));
 
-    b.header.dwCRC = 100;
-    b.header.dwLength = 2;
-    std::memcpy(b.header.value, value_b, sizeof(value_b));
+    b->dwCRC = 100;
+    b->dwLength = sizeof(value_b);
+    std::memcpy(b->value, value_b, sizeof(value_b));
 
-    EXPECT_TRUE(smem_sort(&a.header, &b.header));
-    EXPECT_FALSE(smem_sort(&b.header, &a.header));
+    EXPECT_TRUE(smem_sort(a, b));
+    EXPECT_FALSE(smem_sort(b, a));
 }
 
 TEST_F(SharedMemoryTest, SmemSortUsesValueWhenCrcAndLengthMatch)
 {
-    struct TestValue
-    {
-        smem_value header;
-        u8 data[3];
-    };
+    const u8 value_a[] = {'a', 'b', 'c'};
+    const u8 value_b[] = {'a', 'd', 'c'};
 
-    TestValue a{};
-    TestValue b{};
+    SmemTestValue<sizeof(value_a)> a_storage;
+    SmemTestValue<sizeof(value_b)> b_storage;
 
-    a.header.dwCRC = 100;
-    a.header.dwLength = 3;
-    a.data[0] = 'a';
-    a.data[1] = 'b';
-    a.data[2] = 'c';
+    auto* a = a_storage.get();
+    auto* b = b_storage.get();
 
-    b.header.dwCRC = 100;
-    b.header.dwLength = 3;
-    b.data[0] = 'a';
-    b.data[1] = 'd';
-    b.data[2] = 'c';
+    a->dwCRC = 100;
+    a->dwLength = sizeof(value_a);
+    std::memcpy(a->value, value_a, sizeof(value_a));
 
-    EXPECT_TRUE(smem_sort(&a.header, &b.header));
-    EXPECT_FALSE(smem_sort(&b.header, &a.header));
+    b->dwCRC = 100;
+    b->dwLength = sizeof(value_b);
+    std::memcpy(b->value, value_b, sizeof(value_b));
+
+    EXPECT_TRUE(smem_sort(a, b));
+    EXPECT_FALSE(smem_sort(b, a));
 }
 
 TEST_F(SharedMemoryTest, SmemSortReturnsFalseForEqualValues)
 {
-    struct TestValue
-    {
-        smem_value header;
-        u8 data[3];
-    };
+    const u8 value[] = {'a', 'b', 'c'};
 
-    TestValue a{};
-    TestValue b{};
+    SmemTestValue<sizeof(value)> a_storage;
+    SmemTestValue<sizeof(value)> b_storage;
 
-    a.header.dwCRC = 100;
-    a.header.dwLength = 3;
-    std::memcpy(a.data, "abc", 3);
+    auto* a = a_storage.get();
+    auto* b = b_storage.get();
 
-    b.header.dwCRC = 100;
-    b.header.dwLength = 3;
-    std::memcpy(b.data, "abc", 3);
+    a->dwCRC = 100;
+    a->dwLength = sizeof(value);
+    std::memcpy(a->value, value, sizeof(value));
 
-    EXPECT_FALSE(smem_sort(&a.header, &b.header));
-    EXPECT_FALSE(smem_sort(&b.header, &a.header));
+    b->dwCRC = 100;
+    b->dwLength = sizeof(value);
+    std::memcpy(b->value, value, sizeof(value));
+
+    EXPECT_FALSE(smem_sort(a, b));
+    EXPECT_FALSE(smem_sort(b, a));
 }
 
 
@@ -164,26 +166,26 @@ TEST_F(SharedMemoryTest, SmemSearchOrdersByLengthWhenCrcMatches)
 
 TEST_F(SharedMemoryTest, SmemSearchIgnoresValue)
 {
-    struct TestValue
-    {
-        smem_value header;
-        u8 data[3];
-    };
+    const u8 value_a[] = {'a', 'b', 'c'};
+    const u8 value_b[] = {'x', 'y', 'z'};
 
-    TestValue a{};
-    TestValue b{};
+    SmemTestValue<sizeof(value_a)> a_storage;
+    SmemTestValue<sizeof(value_b)> b_storage;
 
-    a.header.dwCRC = 100;
-    a.header.dwLength = 3;
-    std::memcpy(a.data, "abc", 3);
+    auto* a = a_storage.get();
+    auto* b = b_storage.get();
 
-    b.header.dwCRC = 100;
-    b.header.dwLength = 3;
-    std::memcpy(b.data, "xyz", 3);
+    a->dwCRC = 100;
+    a->dwLength = sizeof(value_a);
+    std::memcpy(a->value, value_a, sizeof(value_a));
+
+    b->dwCRC = 100;
+    b->dwLength = sizeof(value_b);
+    std::memcpy(b->value, value_b, sizeof(value_b));
 
     // Same CRC and length means neither is less according to smem_search.
-    EXPECT_FALSE(smem_search(&a.header, &b.header));
-    EXPECT_FALSE(smem_search(&b.header, &a.header));
+    EXPECT_FALSE(smem_search(a, b));
+    EXPECT_FALSE(smem_search(b, a));
 }
 
 
@@ -193,97 +195,84 @@ TEST_F(SharedMemoryTest, SmemSearchIgnoresValue)
 
 TEST_F(SharedMemoryTest, SmemEqualReturnsTrueForIdenticalValue)
 {
-    struct TestValue
-    {
-        smem_value header;
-        u8 data[5];
-    };
+    const u8 data[] = {'h', 'e', 'l', 'l', 'o'};
 
-    TestValue value{};
+    SmemTestValue<sizeof(data)> storage;
+    auto* value = storage.get();
 
-    value.header.dwCRC = 1234;
-    value.header.dwLength = 5;
-    std::memcpy(value.data, "hello", 5);
+    value->dwCRC = 1234;
+    value->dwLength = sizeof(data);
+    std::memcpy(value->value, data, sizeof(data));
 
     EXPECT_TRUE(
         smem_equal(
-            &value.header,
+            value,
             1234,
-            5,
-            value.data
+            sizeof(data),
+            value->value
         )
     );
 }
 
 TEST_F(SharedMemoryTest, SmemEqualRejectsDifferentCrc)
 {
-    struct TestValue
-    {
-        smem_value header;
-        u8 data[5];
-    };
+    const u8 data[] = {'h', 'e', 'l', 'l', 'o'};
 
-    TestValue value{};
+    SmemTestValue<sizeof(data)> storage;
+    auto* value = storage.get();
 
-    value.header.dwCRC = 1234;
-    value.header.dwLength = 5;
-    std::memcpy(value.data, "hello", 5);
+    value->dwCRC = 1234;
+    value->dwLength = sizeof(data);
+    std::memcpy(value->value, data, sizeof(data));
 
     EXPECT_FALSE(
         smem_equal(
-            &value.header,
+            value,
             5678,
-            5,
-            value.data
+            sizeof(data),
+            value->value
         )
     );
 }
 
 TEST_F(SharedMemoryTest, SmemEqualRejectsDifferentLength)
 {
-    struct TestValue
-    {
-        smem_value header;
-        u8 data[5];
-    };
+    const u8 data[] = {'h', 'e', 'l', 'l', 'o'};
 
-    TestValue value{};
+    SmemTestValue<sizeof(data)> storage;
+    auto* value = storage.get();
 
-    value.header.dwCRC = 1234;
-    value.header.dwLength = 5;
-    std::memcpy(value.data, "hello", 5);
+    value->dwCRC = 1234;
+    value->dwLength = sizeof(data);
+    std::memcpy(value->value, data, sizeof(data));
 
     EXPECT_FALSE(
         smem_equal(
-            &value.header,
+            value,
             1234,
             4,
-            value.data
+            value->value
         )
     );
 }
 
 TEST_F(SharedMemoryTest, SmemEqualRejectsDifferentValue)
 {
-    struct TestValue
-    {
-        smem_value header;
-        u8 data[5];
-    };
-
-    TestValue value{};
-
-    value.header.dwCRC = 1234;
-    value.header.dwLength = 5;
-    std::memcpy(value.data, "hello", 5);
-
+    const u8 data[] = {'h', 'e', 'l', 'l', 'o'};
     const u8 different[] = {'h', 'e', 'l', 'p', 'o'};
+
+    SmemTestValue<sizeof(data)> storage;
+    auto* value = storage.get();
+
+    value->dwCRC = 1234;
+    value->dwLength = sizeof(data);
+    std::memcpy(value->value, data, sizeof(data));
 
     EXPECT_FALSE(
         smem_equal(
-            &value.header,
+            value,
             1234,
-            5,
+            sizeof(different),
             const_cast<u8*>(different)
         )
     );
