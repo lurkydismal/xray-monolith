@@ -49,6 +49,12 @@ function(add_xray_discovered_tests)
 
     add_executable(${TESTS_NAME} ${XRAY_TEST_SOURCES})
 
+    if(MSVC)
+        target_compile_options(${TESTS_NAME} PRIVATE /Zi)
+
+        target_link_options(${TESTS_NAME} PRIVATE /DEBUG)
+    endif()
+
     file(GLOB XRAY_RUNTIME_DLLS
         "${CMAKE_SOURCE_DIR}/../sdk/binaries/*.dll"
     )
