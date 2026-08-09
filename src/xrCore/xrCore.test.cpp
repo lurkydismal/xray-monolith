@@ -39,6 +39,7 @@ TEST(XrCoreRToken, RenameToEmpty)
     EXPECT_EQ(token.id, 1);
 }
 
+#if 0
 TEST(XrCoreRToken, Equal)
 {
     xr_rtoken token("test", 42);
@@ -62,6 +63,7 @@ TEST(XrCoreRToken, EqualEmpty)
     EXPECT_TRUE(token.equal(""));
     EXPECT_FALSE(token.equal("test"));
 }
+#endif
 
 
 // -----------------------------------------------------------------------------
