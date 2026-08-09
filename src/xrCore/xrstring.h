@@ -239,6 +239,11 @@ public:
 		else return p_->length;
 	}
 
+    bool empty() const
+    {
+        return !p_;
+    }
+
 	void swap(shared_str& rhs)
 	{
 		std::swap(p_, rhs.p_);
