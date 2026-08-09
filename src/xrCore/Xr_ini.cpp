@@ -289,12 +289,12 @@ static inline void TrimStringInPlace(xr_string& str)
 	size_t start = 0;
 	while (start < str.length() && isspace((u8)str[start]))
 		++start;
-	
+
 	// Skip trailing whitespace
 	size_t end = str.length();
 	while (end > start && isspace((u8)str[end - 1]))
 		--end;
-	
+
 	if (start > 0 || end < str.length())
 	{
 		str = str.substr(start, end - start);
@@ -414,7 +414,7 @@ void CInifile::StashCurrentSection(
 void CInifile::SortAndFilterSection(Sect& Data)
 {
 	if (Data.Data.size() < 2) return;
-	
+
 	static shared_str DLTX_DELETE = "DLTX_DELETE";
 
 	// 1. Sort by Key, then by Depth (Ascending), then by insertionOrder (Descending).
@@ -926,7 +926,7 @@ CInifile::Items CInifile::MergeSections(
 	while (b_it != BaseItems.end() || o_it != OverrideItems.end())
 	{
 		// 1. Handle end of streams
-		if (b_it == BaseItems.end()) 
+		if (b_it == BaseItems.end())
 		{
 			if (o_it->second == DLTX_DELETE)
 			{
@@ -937,17 +937,17 @@ CInifile::Items CInifile::MergeSections(
 			}
 			else
 			{
-				Result.push_back(*o_it);	
+				Result.push_back(*o_it);
 			}
 
 			o_it++;
 			continue;
 		}
 
-		if (o_it == OverrideItems.end()) 
-		{ 
+		if (o_it == OverrideItems.end())
+		{
 			Result.push_back(*b_it++);
-			continue; 
+			continue;
 		}
 
 		// 2. Compare Keys
@@ -997,7 +997,7 @@ CInifile::Items CInifile::MergeSections(
 			{
 				Result.push_back(*o_it);
 			}
-				
+
 			o_it++;
 			b_it++;
 		}
@@ -1305,7 +1305,7 @@ void CInifile::Load(IReader* F, LPCSTR path
 )
 {
 	R_ASSERT(F);
-	
+
 	static shared_str DLTX_DELETE = "DLTX_DELETE";
 	string_path currentFileName;
 
@@ -1463,7 +1463,7 @@ void CInifile::DLTX_print(LPCSTR sec, LPCSTR line)
 		Msg("[%s]", I.Name.c_str());
 		printIniItemLine(*A);
 	}
-	
+
 }
 LPCSTR CInifile::DLTX_getFilenameOfLine(LPCSTR sec, LPCSTR line)
 {
