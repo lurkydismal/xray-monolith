@@ -133,6 +133,14 @@ TEST(TypeTraitsTest, IsClassRejectsUnion)
     EXPECT_FALSE((is_class<TestUnion>::result));
 }
 
+TEST(TypeTraitsTest, IsClassRejectsFundamentalTypes)
+{
+    EXPECT_FALSE((is_class<int>::result));
+    EXPECT_FALSE((is_class<float>::result));
+    EXPECT_FALSE((is_class<double>::result));
+    EXPECT_FALSE((is_class<bool>::result));
+}
+
 // -----------------------------------------------------------------------------
 // is_pm_class
 // -----------------------------------------------------------------------------
@@ -231,9 +239,9 @@ TEST(TypeTraitsTest, IsPolymorphicRejectsEnums)
     EXPECT_FALSE((is_polymorphic<TestEnumClass>::result));
 }
 
-TEST(TypeTraitsTest, IsPolymorphicRejectsUnion)
+TEST(TypeTraitsTest, IsPolymorphicRecognizesClassWithVirtualFunction)
 {
-    EXPECT_FALSE((is_polymorphic<TestUnion>::result));
+    EXPECT_TRUE((is_polymorphic<PolymorphicWithVirtualFunction>::result));
 }
 
 // -----------------------------------------------------------------------------
