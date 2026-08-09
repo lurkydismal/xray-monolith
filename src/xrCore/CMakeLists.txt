@@ -9,6 +9,7 @@ set(no_group_source_files
     "../build_config_defines.h"
     "ChooseTypes.H"
     "client_id.h"
+    "TimeUtils.cpp"
     "TimeUtils.h"
     "xrParams.cpp"
     "xrParams.h"
