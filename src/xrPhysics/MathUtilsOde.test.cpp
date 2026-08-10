@@ -1,19 +1,20 @@
 #include "stdafx.h"
 
+#include "ExtendedGeom.h"
 #include "MathUtilsOde.h"
 
 #include <gtest/gtest.h>
 
 namespace
 {
-	constexpr float EPS = 1e-5f;
+	constexpr float g_EPS = 1e-5f;
 
 	void expect_vector_near(
 		const float* actual,
 		float x,
 		float y,
 		float z,
-		float epsilon = EPS)
+		float epsilon = g_EPS)
 	{
 		EXPECT_NEAR(actual[0], x, epsilon);
 		EXPECT_NEAR(actual[1], y, epsilon);
@@ -41,7 +42,7 @@ TEST(MathUtilsOde, AccurateNormalizeNormalizesVector)
 	accurate_normalize(v);
 
 	expect_vector_near(v, 0.6f, 0.8f, 0.f);
-	EXPECT_NEAR(magnitude(v), 1.f, EPS);
+	EXPECT_NEAR(magnitude(v), 1.f, g_EPS);
 }
 
 TEST(MathUtilsOde, AccurateNormalizeNormalizesThreeDimensionalVector)
@@ -52,10 +53,10 @@ TEST(MathUtilsOde, AccurateNormalizeNormalizesThreeDimensionalVector)
 
 	const float expected_length = std::sqrt(49.f);
 
-	EXPECT_NEAR(magnitude(v), 1.f, EPS);
-	EXPECT_NEAR(v[0], 2.f / expected_length, EPS);
-	EXPECT_NEAR(v[1], 3.f / expected_length, EPS);
-	EXPECT_NEAR(v[2], 6.f / expected_length, EPS);
+	EXPECT_NEAR(magnitude(v), 1.f, g_EPS);
+	EXPECT_NEAR(v[0], 2.f / expected_length, g_EPS);
+	EXPECT_NEAR(v[1], 3.f / expected_length, g_EPS);
+	EXPECT_NEAR(v[2], 6.f / expected_length, g_EPS);
 }
 
 TEST(MathUtilsOde, AccurateNormalizePreservesPositiveDirection)
@@ -66,9 +67,9 @@ TEST(MathUtilsOde, AccurateNormalizePreservesPositiveDirection)
 
 	accurate_normalize(v);
 
-	EXPECT_NEAR(v[0], 1.f / before_length, EPS);
-	EXPECT_NEAR(v[1], 2.f / before_length, EPS);
-	EXPECT_NEAR(v[2], 3.f / before_length, EPS);
+	EXPECT_NEAR(v[0], 1.f / before_length, g_EPS);
+	EXPECT_NEAR(v[1], 2.f / before_length, g_EPS);
+	EXPECT_NEAR(v[2], 3.f / before_length, g_EPS);
 }
 
 TEST(MathUtilsOde, AccurateNormalizePreservesNegativeDirection)
@@ -79,9 +80,9 @@ TEST(MathUtilsOde, AccurateNormalizePreservesNegativeDirection)
 
 	accurate_normalize(v);
 
-	EXPECT_NEAR(v[0], -1.f / before_length, EPS);
-	EXPECT_NEAR(v[1], -2.f / before_length, EPS);
-	EXPECT_NEAR(v[2], -3.f / before_length, EPS);
+	EXPECT_NEAR(v[0], -1.f / before_length, g_EPS);
+	EXPECT_NEAR(v[1], -2.f / before_length, g_EPS);
+	EXPECT_NEAR(v[2], -3.f / before_length, g_EPS);
 }
 
 TEST(MathUtilsOde, AccurateNormalizeHandlesZeroVector)
@@ -104,7 +105,7 @@ TEST(MathUtilsOde, AccurateNormalizeHandlesVerySmallVector)
 
 	accurate_normalize(v);
 
-	EXPECT_NEAR(magnitude(v), 1.f, EPS);
+	EXPECT_NEAR(magnitude(v), 1.f, g_EPS);
 
 	// Direction should be preserved even through the small-vector path.
 	EXPECT_GT(v[0], 0.f);
@@ -114,12 +115,12 @@ TEST(MathUtilsOde, AccurateNormalizeHandlesVerySmallVector)
 	EXPECT_NEAR(
 		v[1] / v[0],
 		2.f,
-		EPS);
+		g_EPS);
 
 	EXPECT_NEAR(
 		v[2] / v[0],
 		3.f,
-		EPS);
+		g_EPS);
 }
 
 TEST(MathUtilsOde, AccurateNormalizeHandlesNegativeDominantX)
@@ -128,7 +129,7 @@ TEST(MathUtilsOde, AccurateNormalizeHandlesNegativeDominantX)
 
 	accurate_normalize(v);
 
-	EXPECT_NEAR(magnitude(v), 1.f, EPS);
+	EXPECT_NEAR(magnitude(v), 1.f, g_EPS);
 	EXPECT_LT(v[0], 0.f);
 	EXPECT_GT(v[1], 0.f);
 	EXPECT_GT(v[2], 0.f);
@@ -140,7 +141,7 @@ TEST(MathUtilsOde, AccurateNormalizeHandlesNegativeDominantY)
 
 	accurate_normalize(v);
 
-	EXPECT_NEAR(magnitude(v), 1.f, EPS);
+	EXPECT_NEAR(magnitude(v), 1.f, g_EPS);
 	EXPECT_GT(v[0], 0.f);
 	EXPECT_LT(v[1], 0.f);
 	EXPECT_GT(v[2], 0.f);
@@ -152,7 +153,7 @@ TEST(MathUtilsOde, AccurateNormalizeHandlesNegativeDominantZ)
 
 	accurate_normalize(v);
 
-	EXPECT_NEAR(magnitude(v), 1.f, EPS);
+	EXPECT_NEAR(magnitude(v), 1.f, g_EPS);
 	EXPECT_GT(v[0], 0.f);
 	EXPECT_GT(v[1], 0.f);
 	EXPECT_LT(v[2], 0.f);
@@ -239,7 +240,7 @@ TEST(MathUtilsOde, VectorLimitScalesVectorDownToLimit)
 
 	EXPECT_TRUE(limited);
 
-	EXPECT_NEAR(magnitude(result), 2.5f, EPS);
+	EXPECT_NEAR(magnitude(result), 2.5f, g_EPS);
 
 	expect_vector_near(
 		result,
@@ -263,13 +264,13 @@ TEST(MathUtilsOde, VectorLimitPreservesDirection)
 
 	ASSERT_TRUE(limited);
 
-	EXPECT_NEAR(magnitude(result), limit, EPS);
+	EXPECT_NEAR(magnitude(result), limit, g_EPS);
 
 	const float scale = limit / original_length;
 
-	EXPECT_NEAR(result[0], v[0] * scale, EPS);
-	EXPECT_NEAR(result[1], v[1] * scale, EPS);
-	EXPECT_NEAR(result[2], v[2] * scale, EPS);
+	EXPECT_NEAR(result[0], v[0] * scale, g_EPS);
+	EXPECT_NEAR(result[1], v[1] * scale, g_EPS);
+	EXPECT_NEAR(result[2], v[2] * scale, g_EPS);
 }
 
 TEST(MathUtilsOde, VectorLimitDoesNotModifyInput)
