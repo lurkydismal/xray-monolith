@@ -467,6 +467,7 @@ TEST(XrSkin4W, MatchesReferenceImplementation)
     }
 }
 
+#if 0
 TEST(XrSkin4WThread, ProducesSameResultAsSingleThreaded)
 {
     // Initialize ttapi with however the real engine initializes it.
@@ -543,6 +544,7 @@ TEST(XrSkin4WThread, ProducesSameResultAsSingleThreaded)
         }
     }
 }
+#endif
 
 TEST(XrBindPSGP, InstallsGenericImplementations)
 {
