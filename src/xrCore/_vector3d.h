@@ -389,6 +389,11 @@ public:
 		return x * x + y * y + z * z;
 	}
 
+    IC T magnitude2(void) const
+    {
+        return square_magnitude();
+    }
+
 	// magnitude
 	IC T magnitude(void) const
 	{
