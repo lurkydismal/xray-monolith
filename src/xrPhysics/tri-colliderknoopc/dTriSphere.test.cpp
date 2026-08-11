@@ -166,11 +166,13 @@ TEST_F(PointSphereTest, NegativeRadiusCurrentlyProducesNoCollision)
 }
 #endif
 
+#if 0
 class SegmentSphereTest : public ::testing::Test
 {
 protected:
     dcTriListCollider collider;
 };
+#endif
 
 // -----------------------------------------------------------------------------
 // FragmentonSphereTest(center, radius, pt1, pt2, norm, depth) -> bool
@@ -370,6 +372,7 @@ TEST_F(SegmentSphereTest, ClosestPointAtSphereCenterUsesFallbackNormal)
 }
 #endif
 
+#if 0
 TEST_F(SegmentSphereTest, ZeroLengthSegmentIsCurrentUndefinedBehavior)
 {
     // This test is intentionally NOT asserting the result.
@@ -384,6 +387,7 @@ TEST_F(SegmentSphereTest, ZeroLengthSegmentIsCurrentUndefinedBehavior)
     // deciding whether zero-length segments are supposed to be supported.
     GTEST_SKIP() << "Current implementation does not define zero-length segments";
 }
+#endif
 
 #if 0
 TEST_F(SegmentSphereTest, DiagonalSegmentThroughCenterUsesFallbackNormal)
