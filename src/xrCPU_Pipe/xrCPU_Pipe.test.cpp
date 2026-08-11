@@ -1,5 +1,9 @@
+#define ENGINE_API
+#define ECORE_API
+
 #include "../xrCore/xrCore.h"
 #include "../Layers/xrRender/SkeletonXVertRender.h"
+#include "bone.h"
 #include "xrCPU_Pipe.h"
 
 #include <gtest/gtest.h>
@@ -9,7 +13,23 @@
 #include <cstdint>
 #include <vector>
 
-#if 0
+extern xrSkin1W xrSkin1W_x86;
+extern xrSkin2W xrSkin2W_x86;
+extern xrSkin3W xrSkin3W_x86;
+extern xrSkin4W xrSkin4W_x86;
+
+extern xrSkin1W xrSkin1W_SSE;
+extern xrSkin2W xrSkin2W_SSE;
+extern xrSkin3W xrSkin3W_SSE;
+extern xrSkin4W xrSkin4W_SSE;
+
+extern xrSkin4W xrSkin4W_thread;
+
+extern xrPLC_calc3 PLC_calc3_x86;
+extern xrPLC_calc3 PLC_calc3_SSE;
+
+extern "C" void __cdecl xrBind_PSGP(xrDispatchTable* T, _processor_info* ID);
+
 namespace
 {
 
@@ -34,7 +54,6 @@ struct BoneFixture
 };
 
 } // namespace
-#endif
 
 namespace
 {
