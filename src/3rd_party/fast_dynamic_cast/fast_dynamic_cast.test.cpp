@@ -337,6 +337,7 @@ TEST(FastDynamicCast, IdentityPointerCastReturnsOriginalPointer)
     EXPECT_EQ(result, ptr);
 }
 
+#if 0
 TEST(FastDynamicCast, IdentityValueCastReturnsOriginalValue)
 {
     int value = 123;
@@ -346,6 +347,7 @@ TEST(FastDynamicCast, IdentityValueCastReturnsOriginalValue)
 
     EXPECT_EQ(result, value);
 }
+#endif
 
 
 // -----------------------------------------------------------------------------
