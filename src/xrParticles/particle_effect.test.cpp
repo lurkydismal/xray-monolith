@@ -65,7 +65,7 @@ namespace
 
 		EXPECT_FLOAT_EQ(actual.age, expected.age);
 		EXPECT_EQ(actual.frame, expected.frame);
-		EXPECT_EQ(actual.flags, expected.flags);
+		EXPECT_EQ(actual.flags.flags, expected.flags);
 	}
 }
 
@@ -149,7 +149,7 @@ TEST(ParticleEffect, AddStoresParticleData)
 
 	EXPECT_FLOAT_EQ(p.age, 42.5f);
 	EXPECT_EQ(p.frame, 123);
-	EXPECT_EQ(p.flags, 0x4567);
+	EXPECT_EQ(p.flags.flags, 0x4567);
 }
 
 TEST(ParticleEffect, AddConvertsARGBColorToNormalizedComponents)
