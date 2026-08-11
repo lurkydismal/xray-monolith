@@ -103,6 +103,13 @@ namespace PAPI
 		{
 			return pVector(y * b.z - z * b.y, z * b.x - x * b.z, x * b.y - y * b.x);
 		}
+
+        friend bool operator==(const pVector& lhs, const pVector& rhs)
+        {
+            return lhs.x == rhs.x &&
+                lhs.y == rhs.y &&
+                lhs.z == rhs.z;
+        }
 	};
 
 	// A single particle
@@ -116,6 +123,7 @@ namespace PAPI
 			float inv = 1.f - v;
 			x = v * x + inv * p.x;
 		}
+        friend bool operator==(const Rotation&, const Rotation&) = default;
 	};
 
 	struct Particle
@@ -130,7 +138,7 @@ namespace PAPI
 		pVector pos; // 12
 		pVector posI; // 12
 		pVector posB; // 12
-		pVector vel; // 12  	
+		pVector vel; // 12
 		pVector velI; // 12
 		pVector size; // 12
 		pVector sizeI; // 12
@@ -138,9 +146,11 @@ namespace PAPI
 		float colorG; // 4
 		float colorB; // 4
 		float colorA; // 4
-		float age; // 4       
+		float age; // 4
 		u16 frame; // 2
 		Flags16 flags; // 2
+
+        friend bool operator==(const Particle&, const Particle&) = default;
 	}; // = 116
 
 	typedef void (* OnBirthParticleCB)(void* owner, u32 param, PAPI::Particle& P, u32 idx);
@@ -184,7 +194,7 @@ namespace PAPI
 		PABounceID,
 		// Bounce particles off a domain of space.
 		PACallActionListID_obsolette,
-		// 
+		//
 		PACopyVertexBID,
 		// Set the secondary position from current position.
 		PADampingID,
@@ -198,47 +208,47 @@ namespace PAPI
 		PAGravityID,
 		// Acceleration in the given direction.
 		PAJetID,
-		// 
+		//
 		PAKillOldID,
-		// 
+		//
 		PAMatchVelocityID,
-		// 
+		//
 		PAMoveID,
-		// 
+		//
 		PAOrbitLineID,
-		// 
+		//
 		PAOrbitPointID,
-		// 
+		//
 		PARandomAccelID,
-		// 
+		//
 		PARandomDisplaceID,
-		// 
+		//
 		PARandomVelocityID,
-		// 
+		//
 		PARestoreID,
-		// 
+		//
 		PASinkID,
-		// 
+		//
 		PASinkVelocityID,
-		// 
+		//
 		PASourceID,
-		// 
+		//
 		PASpeedLimitID,
-		// 
+		//
 		PATargetColorID,
-		// 
+		//
 		PATargetSizeID,
-		// 
+		//
 		PATargetRotateID,
-		// 
+		//
 		PATargetRotateDID,
-		// 
+		//
 		PATargetVelocityID,
-		// 
+		//
 		PATargetVelocityDID,
-		// 
+		//
 		PAVortexID,
-		// 
+		//
 		PATurbulenceID,
 		//
 		PAScatterID,
