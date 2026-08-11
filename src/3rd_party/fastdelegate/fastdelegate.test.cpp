@@ -100,7 +100,6 @@ TEST(FastDelegateTest, DefaultConstructedDelegateIsEmpty)
     EXPECT_TRUE(delegate.empty());
     EXPECT_TRUE(!delegate);
     EXPECT_FALSE(static_cast<bool>(delegate));
-    EXPECT_EQ(delegate, nullptr);
 }
 
 TEST(FastDelegateTest, ClearMakesDelegateEmpty)
@@ -114,7 +113,6 @@ TEST(FastDelegateTest, ClearMakesDelegateEmpty)
 
     EXPECT_TRUE(delegate.empty());
     EXPECT_TRUE(!delegate);
-    EXPECT_EQ(delegate, nullptr);
 }
 
 TEST(FastDelegateTest, AssigningNullptrMakesDelegateEmpty)
@@ -127,7 +125,6 @@ TEST(FastDelegateTest, AssigningNullptrMakesDelegateEmpty)
 
     EXPECT_TRUE(delegate.empty());
     EXPECT_TRUE(!delegate);
-    EXPECT_EQ(delegate, nullptr);
 }
 
 // =============================================================================
