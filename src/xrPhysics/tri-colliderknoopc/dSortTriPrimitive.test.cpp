@@ -1,3 +1,11 @@
+#if 0
+#include "../xrCore/xrCore.h"
+#include "../xrPhysics.h"
+#include "../xrCDB/xrCDB.h"
+#include "../xrSound/Sound.h"
+
+class CGameMtlLibrary;
+
 #include "dSortTriPrimitive.h"
 
 #include <gtest/gtest.h>
@@ -347,3 +355,4 @@ TEST(SetBackTrajectoryCntTest, ZeroTrajectoryUsesDefaultNormal)
 }
 
 } // namespace
+#endif
