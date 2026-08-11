@@ -1,18 +1,18 @@
 /**
  * Fast Dynamic Cast version 1.6
- * 
+ *
  * Copyright (c) 2016 tobspr <tobias.springer1@googlemail.com>
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -39,7 +39,7 @@
 // conversion yet. Should be a fairly high value to avoid collisions.
 #if _WIN64
   #define DCAST_NO_OFFSET 0x7FFFFFFFFFFFFFFFLL
-#else 
+#else
   #define DCAST_NO_OFFSET 0x7FFFFFFLL
 #endif
 
@@ -51,7 +51,8 @@
 #endif
 
 // Only works with Visual Studio 2013 and upwards (Could work in MSVC2010, but yet untested)
-#if FAST_DYNAMIC_CAST_ENABLED && defined(_MSC_VER) && (_MSC_VER >= 1800)
+#if 0
+// #if FAST_DYNAMIC_CAST_ENABLED && defined(_MSC_VER) && (_MSC_VER >= 1800)
 
 // Include memory header for std::dynamic_pointer_cast. You can replace this
 // with your own memory include.
