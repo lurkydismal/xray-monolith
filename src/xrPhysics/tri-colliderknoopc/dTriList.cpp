@@ -187,3 +187,27 @@ dxGeom* dCreateTriList(dSpaceID space, dTriCallback* Callback, dTriArrayCallback
 
 	return g;
 }
+
+#if 0
+void dGeomTriListGetTriangle(dGeomID g, int Index, dVector3* v0, dVector3* v1, dVector3* v2)
+{
+    dxTriList* Data = (dxTriList*)dGeomGetClassData(g);
+
+    const int* Indices = Data->Collider->GetIndices();
+    const dcVector3* Vertices = Data->Collider->GetVertices();
+
+    const int TriangleIndex = Index * 3;
+
+    const dcVector3& V0 = Vertices[Indices[TriangleIndex + 0]];
+    const dcVector3& V1 = Vertices[Indices[TriangleIndex + 1]];
+    const dcVector3& V2 = Vertices[Indices[TriangleIndex + 2]];
+
+    (*v0)[0] = V0.x;
+    (*v0)[1] = V0.y;
+    (*v0)[2] = V0.z;
+
+    (*v1)[0] = V1.x;
+    (*v1)[1] = V1.y;
+    (*v1)[2] = V1.z;
+}
+#endif
