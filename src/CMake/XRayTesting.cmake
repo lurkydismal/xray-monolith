@@ -34,7 +34,7 @@ include(GoogleTest)
 file(GLOB_RECURSE XRAY_TEST_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/*.test.cpp"
 )
-list(FILTER XRAY_TEST_SOURCES EXCLUDE REGEX "${CMAKE_SOURCE_DIR}/3rd_party/")
+# list(FILTER XRAY_TEST_SOURCES EXCLUDE REGEX "${CMAKE_SOURCE_DIR}/3rd_party/")
 
 # add_xray_discovered_tests creates the single aggregate unit-test executable.
 # Keeping the production libraries separate ensures *.test.cpp files never become
