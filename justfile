@@ -25,7 +25,11 @@ generate-build-files:
         -DCMAKE_SYSTEM_NAME=Windows \
         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
         -G "Ninja" \
-        --toolchain ../../clang-cl-msvc-x64.cmake
+        --toolchain ../../clang-cl-msvc-x64.cmake \
+        -DBUILD_SHARED_LIBS=OFF \
+        -DENABLE_INCREMENTAL=ON \
+        -DENABLE_IPO=OFF \
+        -DDISABLE_OPTIMIZATIONS=ON
 
 # Check Doxygen documentation comment coverage.
 [working-directory('docs')]
