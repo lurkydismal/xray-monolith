@@ -74,7 +74,7 @@ target_compile_options(${PROPS_TARGET}
         $<$<CXX_COMPILER_ID:MSVC>:
             /MP
             /GS
-            /O2
+            ${XRAY_OPTIMIZATION_FLAG}
             /fp:precise
             /Gy
         >

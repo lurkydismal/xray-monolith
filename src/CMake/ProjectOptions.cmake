@@ -27,6 +27,8 @@ endif()
 ################################################################################
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+option(DISABLE_OPTIMIZATIONS "Disable compiler optimizations (-O0 or /Od)" OFF)
+
 option(ENABLE_IPO "Enable interprocedural optimization (LTO)" OFF)
 
 option(ENABLE_INCREMENTAL_LINKING "Enable MSVC incremental linking" OFF)

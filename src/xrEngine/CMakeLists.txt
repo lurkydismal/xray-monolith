@@ -718,7 +718,7 @@ target_compile_definitions(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJ
 if(MSVC)
     target_compile_options(${OBJECT_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -728,7 +728,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX10AVX>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -739,7 +739,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX11>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -749,7 +749,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX11AVX>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -760,7 +760,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX8>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -770,7 +770,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX8AVX>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -781,7 +781,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX9>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -791,7 +791,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:DX9AVX>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -802,7 +802,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:ProfiledDX11>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -811,7 +811,7 @@ if(MSVC)
             /Zi
         >
         $<$<CONFIG:Release>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
@@ -821,7 +821,7 @@ if(MSVC)
             /Ob3
         >
         $<$<CONFIG:ReleaseAVX>:
-            /O2;
+            ${XRAY_OPTIMIZATION_FLAG};
             /Oi;
             /GF;
             /GT;
