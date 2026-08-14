@@ -368,9 +368,9 @@ TEST(InitTriangleTest, CalculatesSideVectorsAndNormal)
 	Triangle triangle{};
 
 	Point vertices[3] = {
-		Point((dReal[3]){0, 0, 0}),
-		Point((dReal[3]){1, 0, 0}),
-		Point((dReal[3]){0, 1, 0})
+		Point(0, 0, 0),
+		Point(1, 0, 0),
+		Point(0, 1, 0)
 	};
 
 	InitTriangle(&tri, triangle, vertices);
