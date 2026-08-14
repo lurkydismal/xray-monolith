@@ -1,7 +1,5 @@
 // TODO: Implement
 #if 0
-#include "stdafx.h"
-
 #include "file_stream_reader.h"
 
 #include <gtest/gtest.h>
@@ -9,6 +7,8 @@
 #include <cstdio>
 #include <fstream>
 #include <string>
+
+#include "stdafx.h"
 
 namespace
 {

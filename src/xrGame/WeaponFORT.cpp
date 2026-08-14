@@ -1,22 +1,16 @@
-#include "pch_script.h"
 #include "WeaponFORT.h"
 
-CWeaponFORT::CWeaponFORT()
-{
-}
+#include "pch_script.h"
 
-CWeaponFORT::~CWeaponFORT()
-{
-}
+CWeaponFORT::CWeaponFORT() {}
+
+CWeaponFORT::~CWeaponFORT() {}
 
 using namespace luabind;
 
-#pragma optimize("s",on)
-void CWeaponFORT::script_register(lua_State* L)
-{
-	module(L)
-	[
-		class_<CWeaponFORT, CGameObject>("CWeaponFORT")
-		.def(constructor<>())
-	];
+#pragma optimize( "s", on )
+
+void CWeaponFORT::script_register( lua_State* L ) {
+    module( L )[ class_< CWeaponFORT, CGameObject >( "CWeaponFORT" )
+                     .def( constructor<>() ) ];
 }

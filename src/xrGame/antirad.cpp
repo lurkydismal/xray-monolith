@@ -3,15 +3,11 @@
 // Antirad - таблетки выводящие радиацию
 ///////////////////////////////////////////////////////////////
 
+#include "antirad.h"
+
+#include "../xrPhysics/PhysicsShell.h"
 #include "StdAfx.h"
 
-#include "antirad.h"
-#include "../xrPhysics/PhysicsShell.h"
+CAntirad::CAntirad( void ) {}
 
-CAntirad::CAntirad(void)
-{
-}
-
-CAntirad::~CAntirad(void)
-{
-}
+CAntirad::~CAntirad( void ) {}

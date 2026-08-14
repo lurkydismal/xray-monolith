@@ -6,16 +6,14 @@
 //	Description : Script object action class
 ////////////////////////////////////////////////////////////////////////////
 
-#include "StdAfx.h"
 #include "script_object_action.h"
+
+#include "StdAfx.h"
 #include "script_game_object.h"
 
-CScriptObjectAction::~CScriptObjectAction()
-{
-}
+CScriptObjectAction::~CScriptObjectAction() {}
 
-void CScriptObjectAction::SetObject(CScriptGameObject* tpLuaGameObject)
-{
-	m_tpObject = tpLuaGameObject->operator CObject*();
-	m_bCompleted = false;
+void CScriptObjectAction::SetObject( CScriptGameObject* tpLuaGameObject ) {
+    m_tpObject = tpLuaGameObject->operator CObject*();
+    m_bCompleted = false;
 }

@@ -3,27 +3,34 @@
 
 using namespace luabind;
 
-ScriptWallmarksManager* GetManager()
-{
-	return &g_pGamePersistent->GetWallmarksManager();
+ScriptWallmarksManager* GetManager() {
+    return &g_pGamePersistent->GetWallmarksManager();
 }
 
-#pragma optimize("s",on)
-template<>
-void CScriptWallmarksManager::script_register(lua_State *L)
-{
-	module(L)
-	[
-		class_<ScriptWallmarksManager>("ScriptWallmarksManager")
-		.def(constructor<>())
-		.def("place", (void (ScriptWallmarksManager::*)(Fvector, Fvector, float, float, LPCSTR, CScriptGameObject*, float))(&ScriptWallmarksManager::PlaceWallmark))
-		.def("place", (void (ScriptWallmarksManager::*)(Fvector, Fvector, float, float, LPCSTR, CScriptGameObject*, float, bool))(&ScriptWallmarksManager::PlaceWallmark))
+#pragma optimize( "s", on )
 
-		// demonized: add user defined rotation to wallmark
-		.def("place", (void (ScriptWallmarksManager::*)(Fvector, Fvector, float, float, LPCSTR, CScriptGameObject*, float, float))(&ScriptWallmarksManager::PlaceWallmark))
+template <>
+void CScriptWallmarksManager::script_register( lua_State* L ) {
+    module(
+        L )[ class_< ScriptWallmarksManager >( "ScriptWallmarksManager" )
+                 .def( constructor<>() )
+                 .def( "place", ( void ( ScriptWallmarksManager::* )(
+                                    Fvector, Fvector, float, float, LPCSTR,
+                                    CScriptGameObject*, float ) )(
+                                    &ScriptWallmarksManager::PlaceWallmark ) )
+                 .def( "place", ( void ( ScriptWallmarksManager::* )(
+                                    Fvector, Fvector, float, float, LPCSTR,
+                                    CScriptGameObject*, float, bool ) )(
+                                    &ScriptWallmarksManager::PlaceWallmark ) )
 
-		.def("place_skeleton", &ScriptWallmarksManager::PlaceSkeletonWallmark),
+                 // demonized: add user defined rotation to wallmark
+                 .def( "place", ( void ( ScriptWallmarksManager::* )(
+                                    Fvector, Fvector, float, float, LPCSTR,
+                                    CScriptGameObject*, float, float ) )(
+                                    &ScriptWallmarksManager::PlaceWallmark ) )
 
-		def("wallmarks_manager", &GetManager)
-	];
+                 .def( "place_skeleton",
+                       &ScriptWallmarksManager::PlaceSkeletonWallmark ),
+
+             def( "wallmarks_manager", &GetManager ) ];
 }

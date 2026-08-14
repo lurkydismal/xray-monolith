@@ -6,20 +6,21 @@
 //	Description : Script particle action class
 ////////////////////////////////////////////////////////////////////////////
 
-#include "StdAfx.h"
 #include "script_particle_action.h"
-#include "ParticlesObject.h"
 
-CScriptParticleAction::~CScriptParticleAction()
-{
-	//xr_delete			(m_tpParticleSystem);
+#include "ParticlesObject.h"
+#include "StdAfx.h"
+
+CScriptParticleAction::~CScriptParticleAction() {
+    // xr_delete			(m_tpParticleSystem);
 }
 
-void CScriptParticleAction::SetParticle(LPCSTR caParticleToRun, bool bAutoRemove)
-{
-	m_caParticleToRun = caParticleToRun;
-	m_tGoalType = eGoalTypeParticleAttached;
-	m_tpParticleSystem = Particles::Details::Create(*m_caParticleToRun, BOOL(m_bAutoRemove = bAutoRemove));
-	m_bStartedToPlay = false;
-	m_bCompleted = false;
+void CScriptParticleAction::SetParticle( LPCSTR caParticleToRun,
+                                         bool bAutoRemove ) {
+    m_caParticleToRun = caParticleToRun;
+    m_tGoalType = eGoalTypeParticleAttached;
+    m_tpParticleSystem = Particles::Details::Create(
+        *m_caParticleToRun, BOOL( m_bAutoRemove = bAutoRemove ) );
+    m_bStartedToPlay = false;
+    m_bCompleted = false;
 }

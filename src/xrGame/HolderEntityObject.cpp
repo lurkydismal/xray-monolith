@@ -1,210 +1,192 @@
-#include "StdAfx.h"
 #include "HolderEntityObject.h"
+
 #include "../Include/xrRender/Kinematics.h"
 #include "../xrPhysics/PhysicsShell.h"
-#include "object_broker.h"
 #include "Actor.h"
 #include "ActorEffector.h"
 #include "CameraFirstEye.h"
-#include "xr_level_controller.h"
-#include "game_object_space.h"
 #include "Level.h"
+#include "StdAfx.h"
+#include "game_object_space.h"
+#include "object_broker.h"
+#include "xr_level_controller.h"
 
-void CHolderEntityObject::BoneCallbackX(CBoneInstance* B)
-{
+void CHolderEntityObject::BoneCallbackX( CBoneInstance* B ) {}
+
+void CHolderEntityObject::BoneCallbackY( CBoneInstance* B ) {}
+
+CHolderEntityObject::CHolderEntityObject() {
+    m_camera_position = Fvector().set( 0.0f, 0.0f, 0.0f );
+    camera = xr_new< CCameraFirstEye >(
+        this, CCameraBase::flRelativeLink | CCameraBase::flPositionRigid |
+                  CCameraBase::flDirectionRigid );
+    camera->Load( "holder_entity_object_cam" );
 }
 
-void CHolderEntityObject::BoneCallbackY(CBoneInstance* B)
-{
+CHolderEntityObject::~CHolderEntityObject() {
+    xr_delete( camera );
 }
 
-CHolderEntityObject::CHolderEntityObject()
-{
-	m_camera_position = Fvector().set(0.0f, 0.0f, 0.0f);
-	camera = xr_new<CCameraFirstEye>(
-		this, CCameraBase::flRelativeLink | CCameraBase::flPositionRigid | CCameraBase::flDirectionRigid);
-	camera->Load("holder_entity_object_cam");
+void CHolderEntityObject::SetBoneCallbacks() {
+    m_pPhysicsShell->EnabledCallbacks( FALSE );
 }
 
-CHolderEntityObject::~CHolderEntityObject()
-{
-	xr_delete(camera);
+void CHolderEntityObject::ResetBoneCallbacks() {
+    m_pPhysicsShell->EnabledCallbacks( TRUE );
 }
 
-void CHolderEntityObject::SetBoneCallbacks()
-{
-	m_pPhysicsShell->EnabledCallbacks(FALSE);
+void CHolderEntityObject::Load( LPCSTR section ) {
+    inheritedPH::Load( section );
+    m_bAllowWeapon = !!pSettings->r_bool( section, "allow_weapon" );
+    m_bExitLocked = !!pSettings->r_bool( section, "lock_exit" );
+    m_bEnterLocked = !!pSettings->r_bool( section, "lock_enter" );
+
+    m_exit_position =
+        READ_IF_EXISTS( pSettings, r_fvector3, section, "exit_pos",
+                        Fvector().set( 0.0f, 0.0f, 0.0f ) );
+    m_camera_position =
+        READ_IF_EXISTS( pSettings, r_fvector3, section, "camera_pos",
+                        Fvector().set( 0.0f, 0.0f, 0.0f ) );
+    m_camera_angle =
+        READ_IF_EXISTS( pSettings, r_fvector3, section, "camera_angle",
+                        Fvector().set( 0.0f, 0.0f, 0.0f ) );
+    m_sUseAction =
+        READ_IF_EXISTS( pSettings, r_string, section, "use_action_hint", NULL );
 }
 
-void CHolderEntityObject::ResetBoneCallbacks()
-{
-	m_pPhysicsShell->EnabledCallbacks(TRUE);
+BOOL CHolderEntityObject::net_Spawn( CSE_Abstract* DC ) {
+    if ( !inheritedPH::net_Spawn( DC ) )
+        return FALSE;
+
+    IKinematics* K = smart_cast< IKinematics* >( Visual() );
+    U16Vec fixed_bones;
+    fixed_bones.push_back( K->LL_GetBoneRoot() );
+    PPhysicsShell() = P_build_Shell( this, false, fixed_bones );
+
+    processing_activate();
+    setVisible( TRUE );
+    setEnabled( TRUE );
+    return TRUE;
 }
 
-void CHolderEntityObject::Load(LPCSTR section)
-{
-	inheritedPH::Load(section);
-	m_bAllowWeapon = !!pSettings->r_bool(section, "allow_weapon");
-	m_bExitLocked = !!pSettings->r_bool(section, "lock_exit");
-	m_bEnterLocked = !!pSettings->r_bool(section, "lock_enter");
-
-	m_exit_position = READ_IF_EXISTS(pSettings, r_fvector3, section, "exit_pos", Fvector().set(0.0f, 0.0f, 0.0f));
-	m_camera_position = READ_IF_EXISTS(pSettings, r_fvector3, section, "camera_pos", Fvector().set(0.0f, 0.0f, 0.0f));
-	m_camera_angle = READ_IF_EXISTS(pSettings, r_fvector3, section, "camera_angle", Fvector().set(0.0f, 0.0f, 0.0f));
-	m_sUseAction = READ_IF_EXISTS(pSettings, r_string, section, "use_action_hint", NULL);
+void CHolderEntityObject::net_Destroy() {
+    inheritedPH::net_Destroy();
+    processing_deactivate();
 }
 
-BOOL CHolderEntityObject::net_Spawn(CSE_Abstract* DC)
+void CHolderEntityObject::net_Export( NET_Packet& P ) // export to server
 {
-	if (!inheritedPH::net_Spawn(DC)) return FALSE;
-
-	IKinematics* K = smart_cast<IKinematics*>(Visual());
-	U16Vec fixed_bones;
-	fixed_bones.push_back(K->LL_GetBoneRoot());
-	PPhysicsShell() = P_build_Shell(this, false, fixed_bones);
-
-	processing_activate();
-	setVisible(TRUE);
-	setEnabled(TRUE);
-	return TRUE;
+    inheritedPH::net_Export( P );
 }
 
-void CHolderEntityObject::net_Destroy()
+void CHolderEntityObject::net_Import( NET_Packet& P ) // import from server
 {
-	inheritedPH::net_Destroy();
-	processing_deactivate();
+    inheritedPH::net_Import( P );
 }
 
-void CHolderEntityObject::net_Export(NET_Packet& P) // export to server
-{
-	inheritedPH::net_Export(P);
+void CHolderEntityObject::attach_actor_script( bool bForce ) {
+    Actor()->use_HolderEx( smart_cast< CHolderCustom* >( this ), bForce );
 }
 
-void CHolderEntityObject::net_Import(NET_Packet& P) // import from server
-{
-	inheritedPH::net_Import(P);
+void CHolderEntityObject::detach_actor_script( bool bForce ) {
+    Actor()->use_HolderEx( NULL, bForce );
 }
 
-void CHolderEntityObject::attach_actor_script(bool bForce)
-{
-	Actor()->use_HolderEx(smart_cast<CHolderCustom*>(this), bForce);
+void CHolderEntityObject::UpdateCL() {
+    inheritedPH::UpdateCL();
+
+    if ( OwnerActor() && OwnerActor()->IsMyCamera() ) {
+        cam_Update( Device.fTimeDelta, g_fov );
+        OwnerActor()->Cameras().UpdateFromCamera( Camera() );
+        OwnerActor()->Cameras().ApplyDevice( VIEWPORT_NEAR );
+    }
 }
 
-void CHolderEntityObject::detach_actor_script(bool bForce)
-{
-	Actor()->use_HolderEx(NULL, bForce);
+void CHolderEntityObject::Hit( SHit* pHDS ) {
+    if ( NULL == Owner() )
+        inheritedPH::Hit( pHDS );
 }
 
-void CHolderEntityObject::UpdateCL()
-{
-	inheritedPH::UpdateCL();
+void CHolderEntityObject::cam_Update( float dt, float fov ) {
+    Fvector P;
 
-	if (OwnerActor() && OwnerActor()->IsMyCamera())
-	{
-		cam_Update(Device.fTimeDelta, g_fov);
-		OwnerActor()->Cameras().UpdateFromCamera(Camera());
-		OwnerActor()->Cameras().ApplyDevice(VIEWPORT_NEAR);
-	}
+    XFORM().transform_tiny( P, m_camera_position );
+
+    if ( OwnerActor() ) {
+        // rotate head
+        OwnerActor()->Orientation().yaw = -Camera()->yaw;
+        OwnerActor()->Orientation().pitch = -Camera()->pitch;
+    }
+
+    Camera()->f_fov = fov;
+    Camera()->Update( P, m_camera_angle );
+    Level().Cameras().UpdateFromCamera( Camera() );
 }
 
-void CHolderEntityObject::Hit(SHit* pHDS)
-{
-	if (NULL == Owner())
-		inheritedPH::Hit(pHDS);
+void CHolderEntityObject::renderable_Render( IDSGraphManager* DM ) {
+    inheritedPH::renderable_Render( DM );
 }
 
-void CHolderEntityObject::cam_Update(float dt, float fov)
-{
-	Fvector P;
-
-	XFORM().transform_tiny(P, m_camera_position);
-
-	if (OwnerActor())
-	{
-		// rotate head
-		OwnerActor()->Orientation().yaw = -Camera()->yaw;
-		OwnerActor()->Orientation().pitch = -Camera()->pitch;
-	}
-
-	Camera()->f_fov = fov;
-	Camera()->Update(P, m_camera_angle);
-	Level().Cameras().UpdateFromCamera(Camera());
+void CHolderEntityObject::Action( u16 id, u32 flags ) {
+    inheritedHolder::Action( id, flags );
+    /*
+    switch (id){
+            case kWPN_FIRE:{
+                    if(flags==CMD_START)	FireStart	();
+                    else					FireEnd
+    (); }break;
+    }
+    */
 }
 
-void CHolderEntityObject::renderable_Render(IDSGraphManager* DM)
-{
-	inheritedPH::renderable_Render(DM);
+void CHolderEntityObject::SetParam( int id, Fvector2 val ) {
+    inheritedHolder::SetParam( id, val );
 }
 
-void CHolderEntityObject::Action(u16 id, u32 flags)
-{
-	inheritedHolder::Action(id, flags);
-	/*
-	switch (id){
-		case kWPN_FIRE:{
-			if(flags==CMD_START)	FireStart	();
-			else					FireEnd		();
-		}break;
-	}
-	*/
+bool CHolderEntityObject::attach_Actor( CGameObject* actor ) {
+    inheritedHolder::attach_Actor( actor );
+    SetBoneCallbacks();
+    return true;
 }
 
-void CHolderEntityObject::SetParam(int id, Fvector2 val)
-{
-	inheritedHolder::SetParam(id, val);
+void CHolderEntityObject::detach_Actor() {
+    inheritedHolder::detach_Actor();
+    ResetBoneCallbacks();
 }
 
-bool CHolderEntityObject::attach_Actor(CGameObject* actor)
-{
-	inheritedHolder::attach_Actor(actor);
-	SetBoneCallbacks();
-	return true;
+void CHolderEntityObject::OnMouseMove( int dx, int dy ) {
+    if ( Remote() )
+        return;
+    CCameraBase* C = camera;
+    float scale = ( C->f_fov / g_fov ) * psMouseSens * psMouseSensScale / 50.f;
+    if ( dx ) {
+        float d = float( dx ) * scale;
+        C->Move( ( d < 0 ) ? kLEFT : kRIGHT, _abs( d ) );
+    }
+    if ( dy ) {
+        float d = ( ( psMouseInvert.test( 1 ) ) ? -1 : 1 ) * float( dy ) *
+                  scale * psMouseSensVerticalK * 3.f / 4.f;
+        C->Move( ( d > 0 ) ? kUP : kDOWN, _abs( d ) );
+    }
 }
 
-void CHolderEntityObject::detach_Actor()
-{
-	inheritedHolder::detach_Actor();
-	ResetBoneCallbacks();
+void CHolderEntityObject::OnKeyboardPress( int dik ) {
+    if ( Remote() )
+        return;
+
+    switch ( dik ) {
+        case kWPN_FIRE:
+            break;
+    };
 }
 
-void CHolderEntityObject::OnMouseMove(int dx, int dy)
-{
-	if (Remote()) return;
-	CCameraBase* C = camera;
-	float scale = (C->f_fov / g_fov) * psMouseSens * psMouseSensScale / 50.f;
-	if (dx)
-	{
-		float d = float(dx) * scale;
-		C->Move((d < 0) ? kLEFT : kRIGHT, _abs(d));
-	}
-	if (dy)
-	{
-		float d = ((psMouseInvert.test(1)) ? -1 : 1) * float(dy) * scale * psMouseSensVerticalK * 3.f / 4.f;
-		C->Move((d > 0) ? kUP : kDOWN, _abs(d));
-	}
+void CHolderEntityObject::OnKeyboardRelease( int dik ) {
+    if ( Remote() )
+        return;
+    switch ( dik ) {
+        case kWPN_FIRE:
+            break;
+    };
 }
 
-void CHolderEntityObject::OnKeyboardPress(int dik)
-{
-	if (Remote()) return;
-
-	switch (dik)
-	{
-	case kWPN_FIRE:
-		break;
-	};
-}
-
-void CHolderEntityObject::OnKeyboardRelease(int dik)
-{
-	if (Remote()) return;
-	switch (dik)
-	{
-	case kWPN_FIRE:
-		break;
-	};
-}
-
-void CHolderEntityObject::OnKeyboardHold(int dik)
-{
-}
+void CHolderEntityObject::OnKeyboardHold( int dik ) {}

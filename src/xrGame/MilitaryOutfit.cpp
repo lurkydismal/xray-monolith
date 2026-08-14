@@ -5,13 +5,10 @@
 
 #pragma once
 
-#include "StdAfx.h"
 #include "MilitaryOutfit.h"
 
-CMilitaryOutfit::CMilitaryOutfit()
-{
-}
+#include "StdAfx.h"
 
-CMilitaryOutfit::~CMilitaryOutfit()
-{
-}
+CMilitaryOutfit::CMilitaryOutfit() {}
+
+CMilitaryOutfit::~CMilitaryOutfit() {}

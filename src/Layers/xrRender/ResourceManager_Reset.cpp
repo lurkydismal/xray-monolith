@@ -3,200 +3,208 @@
 
 #include "ResourceManager.h"
 #ifndef _EDITOR
-#include	"../../xrEngine/Render.h"
+#include "../../xrEngine/Render.h"
 #else
-	#include "../../Include/xrAPI/xrAPI.h"
+#include "../../Include/xrAPI/xrAPI.h"
 #endif
 
-void CResourceManager::reset_begin()
-{
-	NativeLoadExecutor::Instance().WaitCurrentGenerationIdle();
-	WaitForTextureLoads();
-	InvalidateTextureSourceCache();
+void CResourceManager::reset_begin() {
+    NativeLoadExecutor::Instance().WaitCurrentGenerationIdle();
+    WaitForTextureLoads();
+    InvalidateTextureSourceCache();
 
-	// destroy everything, renderer may use
-	::Render->reset_begin();
+    // destroy everything, renderer may use
+    ::Render->reset_begin();
 
-	// destroy state-blocks
-	for (u32 _it = 0; _it < v_states.size(); _it++)
-	_RELEASE(v_states[_it]->state);
+    // destroy state-blocks
+    for ( u32 _it = 0; _it < v_states.size(); _it++ )
+        _RELEASE( v_states[ _it ]->state );
 
-	// destroy RTs
-	for (map_RTIt rt_it = m_rtargets.begin(); rt_it != m_rtargets.end(); rt_it++)
-		rt_it->second->reset_begin();
-	//	DX10 cut 	for (map_RTCIt rtc_it=m_rtargets_c.begin(); rtc_it!=m_rtargets_c.end(); rtc_it++)
-	//	DX10 cut 		rtc_it->second->reset_begin();
+    // destroy RTs
+    for ( map_RTIt rt_it = m_rtargets.begin(); rt_it != m_rtargets.end();
+          rt_it++ )
+        rt_it->second->reset_begin();
+    //	DX10 cut 	for (map_RTCIt rtc_it=m_rtargets_c.begin();
+    //rtc_it!=m_rtargets_c.end(); rtc_it++) 	DX10 cut
+    //rtc_it->second->reset_begin();
 
-	// destroy DStreams
-	RCache.old_QuadIB = RCache.QuadIB;
-	HW.stats_manager.decrement_stats_ib(RCache.QuadIB);
-	_RELEASE(RCache.QuadIB);
+    // destroy DStreams
+    RCache.old_QuadIB = RCache.QuadIB;
+    HW.stats_manager.decrement_stats_ib( RCache.QuadIB );
+    _RELEASE( RCache.QuadIB );
 
-	RCache.Index.reset_begin();
-	RCache.Vertex.reset_begin();
+    RCache.Index.reset_begin();
+    RCache.Vertex.reset_begin();
 }
 
-bool cmp_rt(const CRT* A, const CRT* B) { return A->_order < B->_order; }
-//	DX10 cut bool	cmp_rtc	(const CRTC* A,const CRTC* B)	{ return A->_order < B->_order; }
-
-void CResourceManager::reset_end()
-{
-	// create RDStreams
-	RCache.Vertex.reset_end();
-	RCache.Index.reset_end();
-	Evict();
-	RCache.CreateQuadIB();
-
-	// remark geom's which point to dynamic VB/IB
-	{
-		for (u32 _it = 0; _it < v_geoms.size(); _it++)
-		{
-			SGeometry* _G = v_geoms[_it];
-			if (_G->vb == RCache.Vertex.old_pVB)
-				_G->vb = RCache.Vertex.Buffer();
-
-			// Here we may recover the buffer using one of
-			// RCache's index buffers.
-			// Do not remove else.
-			if (_G->ib == RCache.Index.old_pIB)
-			{
-				_G->ib = RCache.Index.Buffer();
-			}
-			else if (_G->ib == RCache.old_QuadIB)
-			{
-				_G->ib = RCache.QuadIB;
-			}
-		}
-	}
-
-	// create RTs in the same order as them was first created
-	{
-		// RT
-#pragma todo("container is created in stack!")
-		xr_vector<CRT*> rt;
-		for (map_RTIt rt_it = m_rtargets.begin(); rt_it != m_rtargets.end(); rt_it++) rt.push_back(rt_it->second);
-		std::sort(rt.begin(), rt.end(), cmp_rt);
-		for (u32 _it = 0; _it < rt.size(); _it++) rt[_it]->reset_end();
-	}
-	{
-		// RTc
-#pragma todo("container is created in stack!")
-		//	DX10 cut 		xr_vector<CRTC*>	rt;
-		//	DX10 cut 		for (map_RTCIt rt_it=m_rtargets_c.begin(); rt_it!=m_rtargets_c.end(); rt_it++)	rt.push_back(rt_it->second);
-		//	DX10 cut 		std::sort(rt.begin(),rt.end(),cmp_rtc);
-		//	DX10 cut 		for (u32 _it=0; _it<rt.size(); _it++)	rt[_it]->reset_end	();
-	}
-
-	// create state-blocks
-	{
-		for (u32 _it = 0; _it < v_states.size(); _it++)
-#if defined(USE_DX10) || defined(USE_DX11)
-			v_states[_it]->state = ID3DState::Create(v_states[_it]->state_code);
-#else	//	USE_DX10
-			v_states[_it]->state = v_states[_it]->state_code.record();
-#endif	//	USE_DX10
-	}
-
-	// create everything, renderer may use
-	::Render->reset_end();
-	Dump(true);
+bool cmp_rt( const CRT* A, const CRT* B ) {
+    return A->_order < B->_order;
 }
 
-template <class C>
-void mdump(C c)
-{
-	if (0 == c.size()) return;
-	for (typename C::iterator I = c.begin(); I != c.end(); I++)
-		Msg("*        : %3d: %s", I->second->dwReference.load(std::memory_order_relaxed), I->second->cName.c_str());
+//	DX10 cut bool	cmp_rtc	(const CRTC* A,const CRTC* B)	{ return
+//A->_order < B->_order; }
+
+void CResourceManager::reset_end() {
+    // create RDStreams
+    RCache.Vertex.reset_end();
+    RCache.Index.reset_end();
+    Evict();
+    RCache.CreateQuadIB();
+
+    // remark geom's which point to dynamic VB/IB
+    {
+        for ( u32 _it = 0; _it < v_geoms.size(); _it++ ) {
+            SGeometry* _G = v_geoms[ _it ];
+            if ( _G->vb == RCache.Vertex.old_pVB )
+                _G->vb = RCache.Vertex.Buffer();
+
+            // Here we may recover the buffer using one of
+            // RCache's index buffers.
+            // Do not remove else.
+            if ( _G->ib == RCache.Index.old_pIB ) {
+                _G->ib = RCache.Index.Buffer();
+            } else if ( _G->ib == RCache.old_QuadIB ) {
+                _G->ib = RCache.QuadIB;
+            }
+        }
+    }
+
+    // create RTs in the same order as them was first created
+    {
+        // RT
+#pragma todo( "container is created in stack!" )
+        xr_vector< CRT* > rt;
+        for ( map_RTIt rt_it = m_rtargets.begin(); rt_it != m_rtargets.end();
+              rt_it++ )
+            rt.push_back( rt_it->second );
+        std::sort( rt.begin(), rt.end(), cmp_rt );
+        for ( u32 _it = 0; _it < rt.size(); _it++ )
+            rt[ _it ]->reset_end();
+    }
+    {
+        // RTc
+#pragma todo( "container is created in stack!" )
+        //	DX10 cut 		xr_vector<CRTC*>	rt;
+        //	DX10 cut 		for (map_RTCIt
+        //rt_it=m_rtargets_c.begin(); rt_it!=m_rtargets_c.end(); rt_it++)
+        //rt.push_back(rt_it->second); 	DX10 cut
+        //std::sort(rt.begin(),rt.end(),cmp_rtc); 	DX10 cut 		for (u32
+        //_it=0; _it<rt.size(); _it++)	rt[_it]->reset_end	();
+    }
+
+    // create state-blocks
+    {
+        for ( u32 _it = 0; _it < v_states.size(); _it++ )
+#if defined( USE_DX10 ) || defined( USE_DX11 )
+            v_states[ _it ]->state =
+                ID3DState::Create( v_states[ _it ]->state_code );
+#else  //	USE_DX10
+            v_states[ _it ]->state = v_states[ _it ]->state_code.record();
+#endif //	USE_DX10
+    }
+
+    // create everything, renderer may use
+    ::Render->reset_end();
+    Dump( true );
 }
 
-CResourceManager::~CResourceManager()
-{
-	WaitForTextureLoads();
-	DestroyNecessaryTextures();
-	m_deferredTextureLoads.clear();
-	m_ownerTextureLoads.clear();
-	m_prefetchedTextures.clear();
-	Dump(false);
+template < class C >
+void mdump( C c ) {
+    if ( 0 == c.size() )
+        return;
+    for ( typename C::iterator I = c.begin(); I != c.end(); I++ )
+        Msg( "*        : %3d: %s",
+             I->second->dwReference.load( std::memory_order_relaxed ),
+             I->second->cName.c_str() );
 }
 
-void CResourceManager::InvalidateTextureSourceCache()
-{
-	xrCriticalSectionGuard guard(textureSourceGuard);
-	m_textureSourceCache.clear();
+CResourceManager::~CResourceManager() {
+    WaitForTextureLoads();
+    DestroyNecessaryTextures();
+    m_deferredTextureLoads.clear();
+    m_ownerTextureLoads.clear();
+    m_prefetchedTextures.clear();
+    Dump( false );
 }
 
-void CResourceManager::InvalidateLevelShaderCache()
-{
-	xr_map<xr_string, ref_shader> cache;
-	for (;;)
-	{
-		xr_vector<xr_shared_ptr<level_shader_job>> jobs;
-		{
-			xrCriticalSectionGuard guard(creationGuard);
-			if (m_level_shader_jobs.empty())
-			{
-				cache.swap(m_level_shader_cache);
-				break;
-			}
-			jobs.reserve(m_level_shader_jobs.size());
-			for (const auto& item : m_level_shader_jobs)
-				jobs.push_back(item.second);
-		}
-		for (const xr_shared_ptr<level_shader_job>& job : jobs)
-			WaitForSingleObject(job->completed, INFINITE);
-	}
-	cache.clear();
+void CResourceManager::InvalidateTextureSourceCache() {
+    xrCriticalSectionGuard guard( textureSourceGuard );
+    m_textureSourceCache.clear();
 }
 
-void CResourceManager::ReleaseLevelShaderCache(LPCSTR canonical_level_path, u64 recipe_identity)
-{
-	if (!canonical_level_path || !canonical_level_path[0])
-		return;
-
-	string32 identity;
-	xr_sprintf(identity, "%016llx", recipe_identity);
-	xr_string suffix = "\n";
-	suffix += canonical_level_path;
-	suffix += '\n';
-	suffix += identity;
-
-	xr_map<xr_string, ref_shader> released;
-	{
-		xrCriticalSectionGuard guard(creationGuard);
-		for (auto item = m_level_shader_cache.begin(); item != m_level_shader_cache.end();)
-		{
-			const xr_string& key = item->first;
-			if (key.size() < suffix.size() || key.compare(key.size() - suffix.size(), suffix.size(), suffix))
-			{
-				++item;
-				continue;
-			}
-			released.emplace(item->first, item->second);
-			item = m_level_shader_cache.erase(item);
-		}
-	}
-	released.clear();
+void CResourceManager::InvalidateLevelShaderCache() {
+    xr_map< xr_string, ref_shader > cache;
+    for ( ;; ) {
+        xr_vector< xr_shared_ptr< level_shader_job > > jobs;
+        {
+            xrCriticalSectionGuard guard( creationGuard );
+            if ( m_level_shader_jobs.empty() ) {
+                cache.swap( m_level_shader_cache );
+                break;
+            }
+            jobs.reserve( m_level_shader_jobs.size() );
+            for ( const auto& item : m_level_shader_jobs )
+                jobs.push_back( item.second );
+        }
+        for ( const xr_shared_ptr< level_shader_job >& job : jobs )
+            WaitForSingleObject( job->completed, INFINITE );
+    }
+    cache.clear();
 }
 
-void CResourceManager::Dump(bool bBrief)
-{
-	xrCriticalSectionGuard guard(creationGuard);
-	Msg("* RM_Dump: textures  : %d", m_textures.size());
-	if (!bBrief) mdump(m_textures);
-	Msg("* RM_Dump: rtargets  : %d", m_rtargets.size());
-	if (!bBrief) mdump(m_rtargets);
-	//	DX10 cut 	Msg		("* RM_Dump: rtargetsc : %d",		m_rtargets_c.size());	if(!bBrief) mdump(m_rtargets_c);
-	Msg("* RM_Dump: vs        : %d", m_vs.size());
-	if (!bBrief) mdump(m_vs);
-	Msg("* RM_Dump: ps        : %d", m_ps.size());
-	if (!bBrief) mdump(m_ps);
-	Msg("* RM_Dump: dcl       : %d", v_declarations.size());
-	Msg("* RM_Dump: states    : %d", v_states.size());
-	Msg("* RM_Dump: tex_list  : %d", lst_textures.size());
-	Msg("* RM_Dump: matrices  : %d", lst_matrices.size());
-	Msg("* RM_Dump: lst_constants: %d", lst_constants.size());
-	Msg("* RM_Dump: v_passes  : %d", v_passes.size());
-	Msg("* RM_Dump: v_elements: %d", v_elements.size());
-	Msg("* RM_Dump: v_shaders : %d", v_shaders.size());
+void CResourceManager::ReleaseLevelShaderCache( LPCSTR canonical_level_path,
+                                                u64 recipe_identity ) {
+    if ( !canonical_level_path || !canonical_level_path[ 0 ] )
+        return;
+
+    string32 identity;
+    xr_sprintf( identity, "%016llx", recipe_identity );
+    xr_string suffix = "\n";
+    suffix += canonical_level_path;
+    suffix += '\n';
+    suffix += identity;
+
+    xr_map< xr_string, ref_shader > released;
+    {
+        xrCriticalSectionGuard guard( creationGuard );
+        for ( auto item = m_level_shader_cache.begin();
+              item != m_level_shader_cache.end(); ) {
+            const xr_string& key = item->first;
+            if ( key.size() < suffix.size() ||
+                 key.compare( key.size() - suffix.size(), suffix.size(),
+                              suffix ) ) {
+                ++item;
+                continue;
+            }
+            released.emplace( item->first, item->second );
+            item = m_level_shader_cache.erase( item );
+        }
+    }
+    released.clear();
+}
+
+void CResourceManager::Dump( bool bBrief ) {
+    xrCriticalSectionGuard guard( creationGuard );
+    Msg( "* RM_Dump: textures  : %d", m_textures.size() );
+    if ( !bBrief )
+        mdump( m_textures );
+    Msg( "* RM_Dump: rtargets  : %d", m_rtargets.size() );
+    if ( !bBrief )
+        mdump( m_rtargets );
+    //	DX10 cut 	Msg		("* RM_Dump: rtargetsc : %d",
+    //m_rtargets_c.size());	if(!bBrief) mdump(m_rtargets_c);
+    Msg( "* RM_Dump: vs        : %d", m_vs.size() );
+    if ( !bBrief )
+        mdump( m_vs );
+    Msg( "* RM_Dump: ps        : %d", m_ps.size() );
+    if ( !bBrief )
+        mdump( m_ps );
+    Msg( "* RM_Dump: dcl       : %d", v_declarations.size() );
+    Msg( "* RM_Dump: states    : %d", v_states.size() );
+    Msg( "* RM_Dump: tex_list  : %d", lst_textures.size() );
+    Msg( "* RM_Dump: matrices  : %d", lst_matrices.size() );
+    Msg( "* RM_Dump: lst_constants: %d", lst_constants.size() );
+    Msg( "* RM_Dump: v_passes  : %d", v_passes.size() );
+    Msg( "* RM_Dump: v_elements: %d", v_elements.size() );
+    Msg( "* RM_Dump: v_shaders : %d", v_shaders.size() );
 }

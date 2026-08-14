@@ -5,13 +5,10 @@
 
 #pragma once
 
-#include "StdAfx.h"
 #include "ScientificOutfit.h"
 
-CScientificOutfit::CScientificOutfit()
-{
-}
+#include "StdAfx.h"
 
-CScientificOutfit::~CScientificOutfit()
-{
-}
+CScientificOutfit::CScientificOutfit() {}
+
+CScientificOutfit::~CScientificOutfit() {}

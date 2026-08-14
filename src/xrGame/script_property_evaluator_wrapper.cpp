@@ -6,30 +6,31 @@
 //	Description : Script property evaluator wrapper
 ////////////////////////////////////////////////////////////////////////////
 
-#include "pch_script.h"
 #include "script_property_evaluator_wrapper.h"
-#include "script_game_object.h"
+
 #include "ai_space.h"
+#include "pch_script.h"
 #include "script_engine.h"
+#include "script_game_object.h"
 
-void CScriptPropertyEvaluatorWrapper::setup(CScriptGameObject* object, CPropertyStorage* storage)
-{
-	::luabind::call_member<void>(this, "setup", object, storage);
+void CScriptPropertyEvaluatorWrapper::setup( CScriptGameObject* object,
+                                             CPropertyStorage* storage ) {
+    ::luabind::call_member< void >( this, "setup", object, storage );
 }
 
-void CScriptPropertyEvaluatorWrapper::setup_static(CScriptPropertyEvaluator* evaluator, CScriptGameObject* object,
-                                                   CPropertyStorage* storage)
-{
-	evaluator->CScriptPropertyEvaluator::setup(object, storage);
+void CScriptPropertyEvaluatorWrapper::setup_static(
+    CScriptPropertyEvaluator* evaluator,
+    CScriptGameObject* object,
+    CPropertyStorage* storage ) {
+    evaluator->CScriptPropertyEvaluator::setup( object, storage );
 }
 
-bool CScriptPropertyEvaluatorWrapper::evaluate()
-{
+bool CScriptPropertyEvaluatorWrapper::evaluate() {
 #if 0
 	try
 	{
 #endif
-		return (::luabind::call_member<bool>(this, "evaluate"));
+    return ( ::luabind::call_member< bool >( this, "evaluate" ) );
 #if 0
 	}
 #ifdef DEBUG
@@ -49,10 +50,10 @@ bool CScriptPropertyEvaluatorWrapper::evaluate()
 		                                m_evaluator_name);
 	}
 #endif
-	return (false);
+    return ( false );
 }
 
-bool CScriptPropertyEvaluatorWrapper::evaluate_static(CScriptPropertyEvaluator* evaluator)
-{
-	return (evaluator->CScriptPropertyEvaluator::evaluate());
+bool CScriptPropertyEvaluatorWrapper::evaluate_static(
+    CScriptPropertyEvaluator* evaluator ) {
+    return ( evaluator->CScriptPropertyEvaluator::evaluate() );
 }

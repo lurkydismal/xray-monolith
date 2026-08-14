@@ -3,19 +3,14 @@
 // GalantineArtefact - артефакт ведбмин студень
 ///////////////////////////////////////////////////////////////
 
-#include "StdAfx.h"
 #include "GalantineArtifact.h"
 
+#include "StdAfx.h"
 
-CGalantineArtefact::CGalantineArtefact(void)
-{
-}
+CGalantineArtefact::CGalantineArtefact( void ) {}
 
-CGalantineArtefact::~CGalantineArtefact(void)
-{
-}
+CGalantineArtefact::~CGalantineArtefact( void ) {}
 
-void CGalantineArtefact::Load(LPCSTR section)
-{
-	inherited::Load(section);
+void CGalantineArtefact::Load( LPCSTR section ) {
+    inherited::Load( section );
 }

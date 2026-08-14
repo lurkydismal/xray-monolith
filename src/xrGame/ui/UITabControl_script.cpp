@@ -1,29 +1,32 @@
-#include "pch_script.h"
-#include "UITabControl.h"
 #include "UITabButton.h"
+#include "UITabControl.h"
+#include "pch_script.h"
 
 using namespace luabind;
 
-#pragma optimize("s",on)
-void CUITabControl::script_register(lua_State* L)
-{
-	module(L)
-	[
-		class_<CUITabControl, CUIWindow>("CUITabControl")
-		.def(constructor<>())
-		.def("AddItem", (bool (CUITabControl::*)(CUITabButton*))(&CUITabControl::AddItem), adopt<2>())
-		.def("AddItem", (bool (CUITabControl::*)(LPCSTR, LPCSTR, Fvector2, Fvector2))&CUITabControl::AddItem)
-		.def("RemoveAll", &CUITabControl::RemoveAll)
-		.def("AddTab", &CUITabControl::AddTab)
-		.def("RecalcScroll", &CUITabControl::RecalcScroll)
-		.def("GetActiveId", &CUITabControl::GetActiveId_script)
-		.def("GetTabsCount", &CUITabControl::GetTabsCount)
-		.def("SetActiveTab", &CUITabControl::SetActiveTab_script)
-		.def("GetButtonById", &CUITabControl::GetButtonById_script)
-		.def("GetEnabled", &CUITabControl::GetAcceleratorsMode)
-		.def("SetEnabled", &CUITabControl::SetAcceleratorsMode),
+#pragma optimize( "s", on )
 
-		class_<CUITabButton, CUIButton>("CUITabButton")
-		.def(constructor<>())
-	];
+void CUITabControl::script_register( lua_State* L ) {
+    module(
+        L )[ class_< CUITabControl, CUIWindow >( "CUITabControl" )
+                 .def( constructor<>() )
+                 .def( "AddItem",
+                       ( bool ( CUITabControl::* )( CUITabButton* ) )(
+                           &CUITabControl::AddItem ),
+                       adopt< 2 >() )
+                 .def( "AddItem", ( bool ( CUITabControl::* )(
+                                      LPCSTR, LPCSTR, Fvector2,
+                                      Fvector2 ) )&CUITabControl::AddItem )
+                 .def( "RemoveAll", &CUITabControl::RemoveAll )
+                 .def( "AddTab", &CUITabControl::AddTab )
+                 .def( "RecalcScroll", &CUITabControl::RecalcScroll )
+                 .def( "GetActiveId", &CUITabControl::GetActiveId_script )
+                 .def( "GetTabsCount", &CUITabControl::GetTabsCount )
+                 .def( "SetActiveTab", &CUITabControl::SetActiveTab_script )
+                 .def( "GetButtonById", &CUITabControl::GetButtonById_script )
+                 .def( "GetEnabled", &CUITabControl::GetAcceleratorsMode )
+                 .def( "SetEnabled", &CUITabControl::SetAcceleratorsMode ),
+
+             class_< CUITabButton, CUIButton >( "CUITabButton" )
+                 .def( constructor<>() ) ];
 }

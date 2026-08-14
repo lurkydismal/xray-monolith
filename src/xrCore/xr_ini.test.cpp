@@ -1,13 +1,13 @@
 // TODO: Finish
 #if 0
-#include "stdafx.h"
-
 #include "xr_ini.h"
 
 #include <gtest/gtest.h>
 
 #include <cstring>
 #include <string>
+
+#include "stdafx.h"
 
 // These are defined in xr_ini.cpp but aren't declared by xr_ini.h.
 XRCORE_API BOOL _parse(LPSTR dest, LPCSTR src);

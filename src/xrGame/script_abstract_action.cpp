@@ -6,14 +6,12 @@
 //	Description : Script abstract action
 ////////////////////////////////////////////////////////////////////////////
 
-#include "StdAfx.h"
 #include "script_abstract_action.h"
 
-CScriptAbstractAction::~CScriptAbstractAction()
-{
-}
+#include "StdAfx.h"
 
-bool CScriptAbstractAction::completed()
-{
-	return (m_bCompleted);
+CScriptAbstractAction::~CScriptAbstractAction() {}
+
+bool CScriptAbstractAction::completed() {
+    return ( m_bCompleted );
 }

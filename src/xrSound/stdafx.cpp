@@ -8,10 +8,10 @@
 // and not in this file
 
 #ifdef __BORLANDC__
-#	pragma comment(lib,	"xrCoreB.lib"		)
-#	pragma comment(lib,	"EToolsB.lib"		)
-#	pragma comment(lib,	"OpenAL32B.lib"		)
+#pragma comment( lib, "xrCoreB.lib" )
+#pragma comment( lib, "EToolsB.lib" )
+#pragma comment( lib, "OpenAL32B.lib" )
 #else
 // #	pragma comment(lib,	"xrCore.lib"		)
-#	pragma comment(lib,	"xrCDB.lib"			)
+#pragma comment( lib, "xrCDB.lib" )
 #endif
