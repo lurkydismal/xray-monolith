@@ -954,6 +954,7 @@ target_link_libraries(${OBJECT_TARGET}
     PUBLIC
         spdlog::spdlog
         stdfunc::stdfunc
+        rust_lib
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
