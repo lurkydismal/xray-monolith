@@ -536,7 +536,6 @@ endif()
 target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
 
-    spdlog::spdlog
     stdfunc::stdfunc
 )
 

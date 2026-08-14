@@ -350,7 +350,6 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    spdlog::spdlog
     stdfunc::stdfunc
 
     # TODO: Refactor into a separate target

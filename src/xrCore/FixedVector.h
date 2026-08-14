@@ -2,8 +2,6 @@
 #define FixedVectorH
 #pragma once
 
-#include <fmt/base.h>
-
 using u32 = uint32_t;
 
 template <class T, const int dim>

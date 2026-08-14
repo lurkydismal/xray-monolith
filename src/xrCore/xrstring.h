@@ -10,9 +10,6 @@ using str_c = const char*;
 #include "intrusive_ptr.h"
 #include "mezz_stringbuffer_class.hpp"
 
-#include <fmt/base.h>
-#include <fmt/format.h>
-
 class XRCORE_API xr_string : public std::basic_string<char, std::char_traits<char>, xalloc<char>>
 {
 public:

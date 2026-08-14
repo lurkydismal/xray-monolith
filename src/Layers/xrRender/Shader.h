@@ -15,8 +15,6 @@
 #include "SH_Constant.h"
 #include "SH_RT.h"
 
-#include <fmt/base.h>
-
 typedef xr_vector<shared_str> sh_list;
 class CBlender_Compile;
 class IBlender;

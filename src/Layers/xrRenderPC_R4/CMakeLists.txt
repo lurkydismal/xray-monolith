@@ -1095,7 +1095,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCPU_Pipe
     imgui
     fmt::fmt
-    spdlog::spdlog
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES

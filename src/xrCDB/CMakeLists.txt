@@ -479,7 +479,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrAPI
     xrCore
 
-    spdlog::spdlog
     stdfunc::stdfunc
 )
 

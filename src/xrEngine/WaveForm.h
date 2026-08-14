@@ -3,7 +3,6 @@
 #pragma once
 
 #include <string_view>
-#include <fmt/base.h>
 
 #pragma pack(push,4)
 struct WaveForm

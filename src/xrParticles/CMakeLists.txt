@@ -426,7 +426,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
     xrCPU_Pipe
 
-    spdlog::spdlog
     stdfunc::stdfunc
 )
 

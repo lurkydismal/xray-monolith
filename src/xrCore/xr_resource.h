@@ -3,9 +3,6 @@
 #include <fast_dynamic_cast/fast_dynamic_cast.hpp>
 #include "_thread_types.h"
 
-#include <fmt/base.h>
-#include <fmt/format.h>
-
 // resource itself, the base class for all derived resources
 class XRCORE_API xr_resource
 {

@@ -952,7 +952,7 @@ add_dependencies(${EXECUTABLE_TARGET}
 # Link with other targets.
 target_link_libraries(${OBJECT_TARGET}
     PUBLIC
-        spdlog::spdlog
+        fmt::fmt
         stdfunc::stdfunc
         rust_lib
 )

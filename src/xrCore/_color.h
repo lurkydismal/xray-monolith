@@ -1,8 +1,6 @@
 #ifndef __C__
 #define __C__
 
-#include <fmt/base.h>
-
 // maps unsigned 8 bits/channel to D3DCOLOR
 ICF u32 color_argb(u32 a, u32 r, u32 g, u32 b)
 {

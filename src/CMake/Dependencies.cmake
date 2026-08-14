@@ -66,16 +66,6 @@ CPMAddPackage("gh:lurkydismal/stdfunc@0.1.0")
 # Logging
 ################################################################################
 CPMAddPackage("gh:fmtlib/fmt#12.2.0")
-CPMAddPackage(
-    URI "gh:gabime/spdlog#v2.x"
-    OPTIONS
-        "SPDLOG_FMT_EXTERNAL ON"
-)
-if(MSVC)
-    target_compile_options(spdlog PRIVATE /EHsc)
-elseif(IS_CLANG)
-    target_compile_options(spdlog PRIVATE -fexceptions)
-endif()
 
 ################################################################################
 # Rust
