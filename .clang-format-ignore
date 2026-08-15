@@ -1,0 +1,11 @@
+sdk/**
+src/3rd party/**
+
+src/Layers/**/*.cpp
+src/xrCore/**/*.cpp
+src/xrEngine/**/*.cpp
+src/xrGame/**/*.cpp
+src/xrServerEntities/**/*.cpp
+
+src/xrCore/rt_lzodefs.h
+src/xrCore/rt_miniacc.h
