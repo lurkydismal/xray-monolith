@@ -10,37 +10,41 @@
 
 #include "debug_make_final.hpp"
 
-namespace MonsterSpace {
-enum EBodyState;
+namespace MonsterSpace
+{
+	enum EBodyState;
 }; // namespace MonsterSpace
 
-namespace smart_cover {
-namespace transitions {
-class animation_action;
+namespace smart_cover
+{
+	namespace transitions
+	{
+		class animation_action;
 
-class action : private debug::make_final< action >, private xray::noncopyable {
-public:
-    typedef xr_vector< animation_action* > Animations;
+		class action :
+			private debug::make_final<action>,
+			private xray::noncopyable
+		{
+		public:
+			typedef xr_vector<animation_action *> Animations;
 
-private:
-    shared_str m_precondition_functor;
-    shared_str m_precondition_params;
-    Animations m_animations;
+		private:
+			shared_str m_precondition_functor;
+			shared_str m_precondition_params;
+			Animations m_animations;
 
-public:
-    action( ::luabind::object const& table );
-    ~action();
-    bool applicable() const;
-    animation_action const& animation() const;
-    animation_action const& animation(
-        MonsterSpace::EBodyState const& target_body_state ) const;
+		public:
+			action(::luabind::object const& table);
+			~action();
+			bool applicable() const;
+			animation_action const& animation() const;
+			animation_action const& animation(MonsterSpace::EBodyState const& target_body_state) const;
+			IC Animations const& animations() const { return m_animations; };
 
-    IC Animations const& animations() const { return m_animations; };
-
-private:
-    void load_animations( ::luabind::object const& table );
-};
-} // namespace transitions
+		private:
+			void load_animations(::luabind::object const& table);
+		};
+	} // namespace transitions
 } // namespace smart_cover
 
 #endif // SMART_COVER_TRANSITION_HPP_INCLUDED

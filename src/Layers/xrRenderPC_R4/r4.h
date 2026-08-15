@@ -1,619 +1,531 @@
 #pragma once
 
-#include "../../xrEngine/Fmesh.h"
-#include "../../xrEngine/IRenderable.h"
-#include "../xrRender/DetailManager.h"
-#include "../xrRender/HOM.h"
-#include "../xrRender/LightTrack.h"
-#include "../xrRender/Light_DB.h"
-#include "../xrRender/ModelPool.h"
-#include "../xrRender/PSLibrary.h"
-#include "../xrRender/WallmarksEngine.h"
 #include "../xrRender/r__dsgraph_manager.h"
-#include "../xrRender/r__occlusion.h"
 #include "../xrRender/r__sector.h"
-#include "../xrRender/r_sun_cascades.h"
-#include "../xrRenderDX10/3DFluid/dx103DFluidData.h"
-#include "SMAP_Allocator.h"
+#include "../xrRender/r__occlusion.h"
+
+#include "../xrRender/PSLibrary.h"
+
 #include "r2_types.h"
 #include "r4_rendertarget.h"
+
+#include "../xrRender/HOM.h"
+#include "../xrRender/DetailManager.h"
+#include "../xrRender/ModelPool.h"
+#include "../xrRender/WallmarksEngine.h"
+
+#include "SMAP_Allocator.h"
+#include "../xrRender/Light_DB.h"
+#include "../xrRender/LightTrack.h"
+#include "../xrRender/r_sun_cascades.h"
+#include "../xrRenderDX10/3DFluid/dx103DFluidData.h"
+
+#include "../../xrEngine/IRenderable.h"
+#include "../../xrEngine/Fmesh.h"
 
 class dxRender_Visual;
 
 // definition
-class CRender : public IRender_interface, public pureFrame {
+class CRender : public IRender_interface, public pureFrame
+{
 public:
-    enum {
-        MSAA_ATEST_NONE = 0x0,
-        //	Hi bit - DX10.1 mode
-        MSAA_ATEST_DX10_0_ATOC = 0x1,
-        //	Lo bit - ATOC mode
-        MSAA_ATEST_DX10_1_NATIVE = 0x2,
-        MSAA_ATEST_DX10_1_ATOC = 0x3,
-    };
-
-public:
-    struct _options {
-        u32 ssfx_branches : 1;
-        u32 ssfx_blood : 1;
-        u32 ssfx_rain : 1;
-        u32 ssfx_hud_raindrops : 1;
-        u32 ssfx_ssr : 1;
-        u32 ssfx_terrain : 1;
-        u32 ssfx_volumetric : 1;
-        u32 ssfx_water : 1;
-        u32 ssfx_ao : 1;
-        u32 ssfx_il : 1;
-        u32 ssfx_core : 1;
-        u32 ssfx_bloom : 1;
-        u32 ssfx_sss : 1;
-        u32 ssfx_fog : 1;
-        u32 ssfx_motionblur : 1;
-        u32 ssfx_taa : 1;
-        u32 ssfx_motionvectors : 1;
-        u32 ssfx_glass : 1;
-
-        u32 bug : 1;
-
-        u32 ssao_blur_on : 1;
-        u32 ssao_opt_data : 1;
-        u32 ssao_half_data : 1;
-        u32 ssao_hbao : 1;
-        u32 ssao_hdao : 1;
-        u32 ssao_ultra : 1;
-        u32 hbao_vectorized : 1;
-
-        u32 volsize : 16;
-        u32 smapsize : 16;
-        u32 depth16 : 1;
-        u32 mrt : 1;
-        u32 mrtmixdepth : 1;
-        u32 fp16_filter : 1;
-        u32 fp16_blend : 1;
-        u32 albedo_wo : 1; // work-around albedo on less capable HW
-        u32 HW_smap : 1;
-        u32 HW_smap_PCF : 1;
-        u32 HW_smap_FETCH4 : 1;
-
-        u32 HW_smap_FORMAT : 32;
-
-        u32 nvstencil : 1;
-        u32 nvdbt : 1;
-
-        u32 nullrt : 1;
-        u32 no_ram_textures : 1; // don't keep textures in RAM
-
-        u32 distortion : 1;
-        u32 distortion_enabled : 1;
-
-        u32 sunfilter : 1;
-        u32 sunstatic : 1;
-        u32 sjitter : 1;
-        u32 noshadows : 1;
-        u32 Tshadows : 1; // transluent shadows
-        u32 disasm : 1;
-        u32 advancedpp
-            : 1; //	advanced post process (DOF, SSAO, volumetrics, etc.)
-        u32 volumetricfog : 1;
-
-        u32 dx10_msaa : 1; //	DX10.0 path
-        u32 dx10_msaa_hybrid
-            : 1; //	DX10.0 main path with DX10.1 A-test msaa allowed
-        u32 dx10_msaa_opt : 1;       //	DX10.1 path
-        u32 dx10_sm4_1 : 1;          //	DX10.1 path
-        u32 dx10_msaa_alphatest : 2; //	A-test mode
-        u32 dx10_msaa_samples : 4;
-
-        u32 dx10_minmax_sm : 2;
-        u32 dx10_minmax_sm_screenarea_threshold;
-
-        u32 dx11_enable_tessellation : 1;
-
-        u32 forcegloss : 1;
-        u32 forceskinw : 1;
-
-        // HDR10
-        u32 dx11_hdr10 : 1;
-
-        float forcegloss_v;
-    } o;
-
-    struct _stats {
-        u32 l_total, l_visible;
-        u32 l_shadowed, l_unshadowed;
-        s32 s_used, s_merged, s_finalclip;
-        u32 o_queries, o_culled;
-        u32 ic_total, ic_culled;
-        u32 ls_shadowed_in;
-        u32 ls_shadowed_after_vis;
-        u32 ls_shadowed_rendered;
-        u32 ls_shadowed_pending_skipped;
-        u32 ls_shadowed_invisible_skipped;
-        u32 ls_shadowed_peak_in;
-        u32 ls_shadowed_peak_after_vis;
-        u32 ls_unshadowed_point_in;
-        u32 ls_unshadowed_spot_in;
-        u32 ls_unshadowed_point_rendered;
-        u32 ls_unshadowed_spot_rendered;
-    } stats;
+	enum
+	{
+		MSAA_ATEST_NONE = 0x0,
+		//	Hi bit - DX10.1 mode
+		MSAA_ATEST_DX10_0_ATOC = 0x1,
+		//	Lo bit - ATOC mode
+		MSAA_ATEST_DX10_1_NATIVE = 0x2,
+		MSAA_ATEST_DX10_1_ATOC = 0x3,
+	};
 
 public:
-    bool is_sun();
-    // Sector detection and visibility
-    CSector* pLastSector;
-    CSector* pOutdoorSector;
-    Fvector vLastCameraPos;
-    u32 uLastLTRACK;
-    xr_vector< IRender_Portal* > Portals;
-    xr_vector< IRender_Sector* > Sectors;
-    xrXRC Sectors_xrc;
-    CDB::MODEL* rmPortals;
-    CHOM HOM;
-    R_occlusion HWOCC;
+	struct _options
+	{
+		u32 ssfx_branches : 1;
+		u32 ssfx_blood : 1;
+		u32 ssfx_rain : 1;
+		u32 ssfx_hud_raindrops : 1;
+		u32 ssfx_ssr : 1;
+		u32 ssfx_terrain : 1;
+		u32 ssfx_volumetric : 1;
+		u32 ssfx_water : 1;
+		u32 ssfx_ao : 1;
+		u32 ssfx_il : 1;
+		u32 ssfx_core : 1;
+		u32 ssfx_bloom : 1;
+		u32 ssfx_sss : 1;
+		u32 ssfx_fog : 1;
+		u32 ssfx_motionblur : 1;
+		u32 ssfx_taa : 1;
+		u32 ssfx_motionvectors : 1;
+		u32 ssfx_glass : 1;
 
-    // Global vertex-buffer container
-    xr_vector< FSlideWindowItem > SWIs;
-    xr_vector< ref_shader > Shaders;
-    typedef svector< D3DVERTEXELEMENT9, MAXD3DDECLLENGTH + 1 > VertexDeclarator;
-    xr_vector< VertexDeclarator > nDC, xDC;
-    xr_vector< ID3DVertexBuffer* > nVB, xVB;
-    xr_vector< ID3DIndexBuffer* > nIB, xIB;
-    xr_vector< dxRender_Visual* > Visuals;
-    CPSLibrary PSLibrary;
+		u32 bug : 1;
 
-    CDetailManager* Details;
-    CModelPool* Models;
-    CWallmarksEngine* Wallmarks;
+		u32 ssao_blur_on : 1;
+		u32 ssao_opt_data : 1;
+		u32 ssao_half_data : 1;
+		u32 ssao_hbao : 1;
+		u32 ssao_hdao : 1;
+		u32 ssao_ultra : 1;
+		u32 hbao_vectorized : 1;
 
-    CRenderTarget* Target; // Render-target
+		u32 volsize : 16;
+		u32 smapsize : 16;
+		u32 depth16 : 1;
+		u32 mrt : 1;
+		u32 mrtmixdepth : 1;
+		u32 fp16_filter : 1;
+		u32 fp16_blend : 1;
+		u32 albedo_wo : 1; // work-around albedo on less capable HW
+		u32 HW_smap : 1;
+		u32 HW_smap_PCF : 1;
+		u32 HW_smap_FETCH4 : 1;
 
-    CLight_DB Lights;
-    SMAP_Allocator LP_smap_pool;
-    light_Package LP_normal;
-    light_Package LP_pending;
+		u32 HW_smap_FORMAT : 32;
 
-    shared_str c_sbase;
-    shared_str c_lmaterial;
-    float o_hemi;
-    float o_hemi_cube[ CROS_impl::NUM_FACES ];
-    float o_sun;
+		u32 nvstencil : 1;
+		u32 nvdbt : 1;
 
-    bool m_bMakeAsyncSS;
-    bool m_bFirstFrameAfterReset; // Determines weather the frame is the first
-                                  // after resetting device.
-    xr_vector< sun::cascade > m_sun_cascades;
+		u32 nullrt : 1;
+		u32 no_ram_textures : 1; // don't keep textures in RAM
 
-    CFrustum rainwet_cull_frustum;
-    Fvector3 rainwet_cull_COP;
-    Fmatrix rainwet_cull_xform;
+		u32 distortion : 1;
+		u32 distortion_enabled : 1;
 
-    CDSGraphManager GMRainWet =
-        CDSGraphManager( u32( 0 ),
-                         u32( STYPE_RENDERABLE ),
-                         { true, false, false, false, true, false, false } );
-    CDSGraphManager GMBase = CDSGraphManager(
-        u32( CDSGraphManager::VQ_HOM + CDSGraphManager::VQ_SSA +
-             CDSGraphManager::VQ_FADE ),
-        u32( STYPE_RENDERABLE + STYPE_PARTICLE + STYPE_LIGHTSOURCE ),
-        { true, true, true, true, false, false, false } );
+		u32 sunfilter : 1;
+		u32 sunstatic : 1;
+		u32 sjitter : 1;
+		u32 noshadows : 1;
+		u32 Tshadows : 1; // transluent shadows
+		u32 disasm : 1;
+		u32 advancedpp : 1; //	advanced post process (DOF, SSAO, volumetrics, etc.)
+		u32 volumetricfog : 1;
 
-    xr_task_group main_task_static, main_task_dynamic, sun_cascades_task,
-        raimwet_task;
+		u32 dx10_msaa : 1; //	DX10.0 path
+		u32 dx10_msaa_hybrid : 1; //	DX10.0 main path with DX10.1 A-test msaa allowed
+		u32 dx10_msaa_opt : 1; //	DX10.1 path
+		u32 dx10_sm4_1 : 1; //	DX10.1 path
+		u32 dx10_msaa_alphatest : 2; //	A-test mode
+		u32 dx10_msaa_samples : 4;
 
-    xr_set< light* > v_all_lights;
-    xr_list< light* > v_all_lights_dque;
+		u32 dx10_minmax_sm : 2;
+		u32 dx10_minmax_sm_screenarea_threshold;
+
+		u32 dx11_enable_tessellation : 1;
+
+		u32 forcegloss : 1;
+		u32 forceskinw : 1;
+		
+		// HDR10
+		u32 dx11_hdr10 : 1;
+		
+		float forcegloss_v;
+	} o;
+
+	struct _stats
+	{
+		u32 l_total, l_visible;
+		u32 l_shadowed, l_unshadowed;
+		s32 s_used, s_merged, s_finalclip;
+		u32 o_queries, o_culled;
+		u32 ic_total, ic_culled;
+		u32 ls_shadowed_in;
+		u32 ls_shadowed_after_vis;
+		u32 ls_shadowed_rendered;
+		u32 ls_shadowed_pending_skipped;
+		u32 ls_shadowed_invisible_skipped;
+		u32 ls_shadowed_peak_in;
+		u32 ls_shadowed_peak_after_vis;
+		u32 ls_unshadowed_point_in;
+		u32 ls_unshadowed_spot_in;
+		u32 ls_unshadowed_point_rendered;
+		u32 ls_unshadowed_spot_rendered;
+	} stats;
+
+public:
+	bool is_sun();
+	// Sector detection and visibility
+	CSector* pLastSector;
+	CSector* pOutdoorSector;
+	Fvector vLastCameraPos;
+	u32 uLastLTRACK;
+	xr_vector<IRender_Portal*> Portals;
+	xr_vector<IRender_Sector*> Sectors;
+	xrXRC Sectors_xrc;
+	CDB::MODEL* rmPortals;
+	CHOM HOM;
+	R_occlusion HWOCC;
+
+	// Global vertex-buffer container
+	xr_vector<FSlideWindowItem> SWIs;
+	xr_vector<ref_shader> Shaders;
+	typedef svector<D3DVERTEXELEMENT9,MAXD3DDECLLENGTH + 1> VertexDeclarator;
+	xr_vector<VertexDeclarator> nDC, xDC;
+	xr_vector<ID3DVertexBuffer*> nVB, xVB;
+	xr_vector<ID3DIndexBuffer*> nIB, xIB;
+	xr_vector<dxRender_Visual*> Visuals;
+	CPSLibrary PSLibrary;
+
+	CDetailManager* Details;
+	CModelPool* Models;
+	CWallmarksEngine* Wallmarks;
+
+	CRenderTarget* Target; // Render-target
+
+	CLight_DB Lights;
+	SMAP_Allocator LP_smap_pool;
+	light_Package LP_normal;
+	light_Package LP_pending;
+
+
+
+	shared_str c_sbase;
+	shared_str c_lmaterial;
+	float o_hemi;
+	float o_hemi_cube[CROS_impl::NUM_FACES];
+	float o_sun;
+
+	bool m_bMakeAsyncSS;
+	bool m_bFirstFrameAfterReset; // Determines weather the frame is the first after resetting device.
+	xr_vector<sun::cascade> m_sun_cascades;
+
+	CFrustum rainwet_cull_frustum;
+	Fvector3 rainwet_cull_COP;
+	Fmatrix rainwet_cull_xform;
+
+	CDSGraphManager GMRainWet = CDSGraphManager(u32(0), u32(STYPE_RENDERABLE), { true,false,false,false,true,false,false });
+	CDSGraphManager GMBase = CDSGraphManager(u32(CDSGraphManager::VQ_HOM + CDSGraphManager::VQ_SSA + CDSGraphManager::VQ_FADE),
+		u32(STYPE_RENDERABLE + STYPE_PARTICLE + STYPE_LIGHTSOURCE),
+		{ true,true,true,true,false,false,false });
+
+	xr_task_group												main_task_static, main_task_dynamic, sun_cascades_task, raimwet_task;
+
+	xr_set<light*>												v_all_lights;
+	xr_list<light*>												v_all_lights_dque;
 
 private:
-    // Loading / Unloading
-    struct LevelShaderDescription {
-        xr_string shader;
-        xr_string textures;
-    };
-    struct LevelStaticPackage;
+	// Loading / Unloading
+	struct LevelShaderDescription
+	{
+		xr_string shader;
+		xr_string textures;
+	};
+	struct LevelStaticPackage;
+	struct VisualGeometrySource
+	{
+		const xr_vector<VertexDeclarator>* normal_declarations;
+		const xr_vector<VertexDeclarator>* fast_declarations;
+		const xr_vector<ID3DVertexBuffer*>* normal_vertex_buffers;
+		const xr_vector<ID3DVertexBuffer*>* fast_vertex_buffers;
+		const xr_vector<ID3DIndexBuffer*>* normal_index_buffers;
+		const xr_vector<ID3DIndexBuffer*>* fast_index_buffers;
+		const xr_vector<FSlideWindowItem>* swis;
+	};
+	static thread_local const VisualGeometrySource* m_visual_geometry_source;
+	static thread_local const xr_vector<dxRender_Visual*>* m_visual_table_source;
+	xr_vector<LevelStaticPackage*> m_level_cache;
+	LevelStaticPackage* m_prepared_level_geometry = nullptr;
+	shared_str m_active_level_key;
+	u64 m_active_level_identity = 0;
+	xr_task_group m_level_prepare_tasks;
+	NativeLoadExecutor::Batch m_level_prepare_batch;
+	shared_str m_prepared_level_path;
+	u64 m_level_prepare_generation = 0;
+	u32 m_level_prepare_started_at = 0;
+	xr_vector<LevelShaderDescription> m_level_shader_descriptions;
+	xr_vector<ref_shader> m_level_shader_cpp_results;
+	xr_vector<ref_shader> m_level_shader_owner_results;
+	xr_vector<LevelShaderDescription> m_active_level_shader_descriptions;
+	xr_vector<ref_shader> m_active_level_shader_cpp_results;
+	xr_vector<u32> m_active_level_shader_indices;
+	u64 m_level_shader_identity = 0;
+	bool m_level_shader_owner_required = false;
+	CHOM::StaticData m_level_prepared_hom;
+	xr_vector<u8> m_level_prepared_lights_dynamic;
+	xr_vector<u8> m_level_prepared_lights_hemi;
+	CLight_DB* m_level_prepared_lights = nullptr;
+	xr_vector<u8> m_active_level_lights_dynamic;
+	xr_vector<u8> m_active_level_lights_hemi;
+	xr_vector<u8> m_level_prepared_portals;
+	xr_vector<xr_vector<u8>> m_level_prepared_sectors;
+	CDB::MODEL* m_level_prepared_portals_model = nullptr;
+	xr_vector<dx103DFluidData::PreparedData> m_level_fluid_descriptors;
+	xr_vector<dxRender_Visual*> m_level_prepared_visuals;
+	xr_vector<u8> m_level_prepared_visual_data;
+	IReader* m_level_owner_reader = nullptr;
+	xr_atomic_bool m_level_async_failed;
+	bool m_level_cache_attach_pending = false;
+	bool m_level_prepared_sectors_ready = false;
+	bool m_level_prepared_visuals_ready = false;
 
-    struct VisualGeometrySource {
-        const xr_vector< VertexDeclarator >* normal_declarations;
-        const xr_vector< VertexDeclarator >* fast_declarations;
-        const xr_vector< ID3DVertexBuffer* >* normal_vertex_buffers;
-        const xr_vector< ID3DVertexBuffer* >* fast_vertex_buffers;
-        const xr_vector< ID3DIndexBuffer* >* normal_index_buffers;
-        const xr_vector< ID3DIndexBuffer* >* fast_index_buffers;
-        const xr_vector< FSlideWindowItem >* swis;
-    };
-
-    static thread_local const VisualGeometrySource* m_visual_geometry_source;
-    static thread_local const xr_vector< dxRender_Visual* >*
-        m_visual_table_source;
-    xr_vector< LevelStaticPackage* > m_level_cache;
-    LevelStaticPackage* m_prepared_level_geometry = nullptr;
-    shared_str m_active_level_key;
-    u64 m_active_level_identity = 0;
-    xr_task_group m_level_prepare_tasks;
-    NativeLoadExecutor::Batch m_level_prepare_batch;
-    shared_str m_prepared_level_path;
-    u64 m_level_prepare_generation = 0;
-    u32 m_level_prepare_started_at = 0;
-    xr_vector< LevelShaderDescription > m_level_shader_descriptions;
-    xr_vector< ref_shader > m_level_shader_cpp_results;
-    xr_vector< ref_shader > m_level_shader_owner_results;
-    xr_vector< LevelShaderDescription > m_active_level_shader_descriptions;
-    xr_vector< ref_shader > m_active_level_shader_cpp_results;
-    xr_vector< u32 > m_active_level_shader_indices;
-    u64 m_level_shader_identity = 0;
-    bool m_level_shader_owner_required = false;
-    CHOM::StaticData m_level_prepared_hom;
-    xr_vector< u8 > m_level_prepared_lights_dynamic;
-    xr_vector< u8 > m_level_prepared_lights_hemi;
-    CLight_DB* m_level_prepared_lights = nullptr;
-    xr_vector< u8 > m_active_level_lights_dynamic;
-    xr_vector< u8 > m_active_level_lights_hemi;
-    xr_vector< u8 > m_level_prepared_portals;
-    xr_vector< xr_vector< u8 > > m_level_prepared_sectors;
-    CDB::MODEL* m_level_prepared_portals_model = nullptr;
-    xr_vector< dx103DFluidData::PreparedData > m_level_fluid_descriptors;
-    xr_vector< dxRender_Visual* > m_level_prepared_visuals;
-    xr_vector< u8 > m_level_prepared_visual_data;
-    IReader* m_level_owner_reader = nullptr;
-    xr_atomic_bool m_level_async_failed;
-    bool m_level_cache_attach_pending = false;
-    bool m_level_prepared_sectors_ready = false;
-    bool m_level_prepared_visuals_ready = false;
-
-    void CommitLevelShaderComponentsOwner();
-    void CommitLevelEnvironmentOwner();
-    void LoadBuffers( CStreamReader* fs,
-                      xr_vector< VertexDeclarator >& declarations,
-                      xr_vector< ID3DVertexBuffer* >& vertex_buffers,
-                      xr_vector< ID3DIndexBuffer* >& index_buffers );
-    void PrepareVisuals( IReader* fs,
-                         xr_vector< dxRender_Visual* >& visuals,
-                         const VisualGeometrySource* geometry );
-    void LinkPreparedVisuals( IReader* fs,
-                              xr_vector< dxRender_Visual* >& visuals );
-    void LoadVisualLeaf( dxRender_Visual* visual,
-                         IReader* chunk,
-                         const VisualGeometrySource* geometry );
-    void DiscardPreparedVisuals();
-    void LoadLights( IReader* fs );
-    void LoadPortals( IReader* fs );
-    void LoadSectors( IReader* fs );
-    void LoadPreparedSectors();
-    void LoadSWIs( CStreamReader* fs, xr_vector< FSlideWindowItem >& swis );
-    void Commit3DFluid();
-    void Remove3DFluid();
-    void WaitLevelPrepare();
-    LevelStaticPackage* DetachLevelStaticPackage();
-    bool RestoreLevelStaticPackage( const shared_str& key, u64 identity );
-    void ReleaseLevelCache();
-    void EvictLevelCacheUnderPressure();
-    void DestroyActiveLevel();
+	void CommitLevelShaderComponentsOwner();
+	void CommitLevelEnvironmentOwner();
+	void LoadBuffers(CStreamReader* fs, xr_vector<VertexDeclarator>& declarations,
+		xr_vector<ID3DVertexBuffer*>& vertex_buffers, xr_vector<ID3DIndexBuffer*>& index_buffers);
+	void PrepareVisuals(IReader* fs, xr_vector<dxRender_Visual*>& visuals, const VisualGeometrySource* geometry);
+	void LinkPreparedVisuals(IReader* fs, xr_vector<dxRender_Visual*>& visuals);
+	void LoadVisualLeaf(dxRender_Visual* visual, IReader* chunk, const VisualGeometrySource* geometry);
+	void DiscardPreparedVisuals();
+	void LoadLights(IReader* fs);
+	void LoadPortals(IReader* fs);
+	void LoadSectors(IReader* fs);
+	void LoadPreparedSectors();
+	void LoadSWIs(CStreamReader* fs, xr_vector<FSlideWindowItem>& swis);
+	void Commit3DFluid();
+	void Remove3DFluid();
+	void WaitLevelPrepare();
+	LevelStaticPackage* DetachLevelStaticPackage();
+	bool RestoreLevelStaticPackage(const shared_str& key, u64 identity);
+	void ReleaseLevelCache();
+	void EvictLevelCacheUnderPressure();
+	void DestroyActiveLevel();
 
 public:
-    IRender_Sector* rimp_detectSector( Fvector& P, Fvector& D );
-    void render_forward();
-    void render_Reticle();
-    void render_smap_direct( Fmatrix& mCombined );
-    void render_indirect( light* L );
-    void render_lights( light_Package& LP );
-    void render_menu();
-    void render_rain();
+	IRender_Sector* rimp_detectSector(Fvector& P, Fvector& D);
+	void render_forward();
+	void render_Reticle();
+	void render_smap_direct(Fmatrix& mCombined);
+	void render_indirect(light* L);
+	void render_lights(light_Package& LP);
+	void render_menu();
+	void render_rain();
 
-    void render_sun_cascade( u32 cascade_ind );
-    void init_cacades();
-    void render_sun_cascades();
+	void render_sun_cascade(u32 cascade_ind);
+	void init_cacades();
+	void render_sun_cascades();
 
 public:
-    ShaderElement* rimp_select_sh_static( dxRender_Visual* pVisual,
-                                          float cdist_sq );
-    ShaderElement* rimp_select_sh_dynamic( dxRender_Visual* pVisual,
-                                           float cdist_sq );
-    D3DVERTEXELEMENT9* getVB_Format( int id, BOOL _alt = FALSE );
-    ID3DVertexBuffer* getVB( int id, BOOL _alt = FALSE );
-    ID3DIndexBuffer* getIB( int id, BOOL _alt = FALSE );
-    FSlideWindowItem* getSWI( int id );
-    IRender_Portal* getPortal( int id );
-    IRender_Sector* getSectorActive();
-    IRenderVisual* model_CreatePE( LPCSTR name );
-    IRender_Sector* detectSector( const Fvector& P, Fvector& D );
-    IRender_Sector* detectLastSector( const Fvector& P );
-    void detectSectors_sphere( CSector* sector,
-                               FixedSet< IRender_Sector* >& m_sectors,
-                               const Fvector& b_center,
-                               const Fvector& b_dim );
-    void detectSectors_frustum( CSector* sector,
-                                FixedSet< IRender_Sector* >& m_sectors,
-                                CFrustum* _frustum );
-    int translateSector( IRender_Sector* pSector );
+	ShaderElement* rimp_select_sh_static(dxRender_Visual* pVisual, float cdist_sq);
+	ShaderElement* rimp_select_sh_dynamic(dxRender_Visual* pVisual, float cdist_sq);
+	D3DVERTEXELEMENT9* getVB_Format(int id, BOOL _alt = FALSE);
+	ID3DVertexBuffer* getVB(int id, BOOL _alt = FALSE);
+	ID3DIndexBuffer* getIB(int id, BOOL _alt = FALSE);
+	FSlideWindowItem* getSWI(int id);
+	IRender_Portal* getPortal(int id);
+	IRender_Sector* getSectorActive();
+	IRenderVisual* model_CreatePE(LPCSTR name);
+	IRender_Sector* detectSector(const Fvector& P, Fvector& D);
+	IRender_Sector* detectLastSector(const Fvector& P);
+	void detectSectors_sphere (CSector* sector, FixedSet<IRender_Sector*>& m_sectors, const Fvector& b_center, const Fvector& b_dim);
+	void detectSectors_frustum (CSector* sector, FixedSet<IRender_Sector*>& m_sectors, CFrustum* _frustum);
+	int translateSector(IRender_Sector* pSector);
 
-    // HW-occlusion culling
-    IC u32 occq_begin( u32& ID ) { return HWOCC.occq_begin( ID ); }
+	// HW-occlusion culling
+	IC u32 occq_begin(u32& ID) { return HWOCC.occq_begin(ID); }
+	IC void occq_end(u32& ID) { HWOCC.occq_end(ID); }
+	IC R_occlusion::occq_result occq_get(u32& ID) { return HWOCC.occq_get(ID); }
 
-    IC void occq_end( u32& ID ) { HWOCC.occq_end( ID ); }
-
-    IC R_occlusion::occq_result occq_get( u32& ID ) {
-        return HWOCC.occq_get( ID );
-    }
-
-    ICF void apply_object( IRenderable* O ) {
-        if ( 0 == O )
-            return;
-        if ( 0 == O->renderable_ROS() )
-            return;
-        CROS_impl& LT = *( ( CROS_impl* )O->renderable_ROS() );
-        LT.update_smooth( O );
-        o_hemi = 0.75f * LT.get_hemi();
-        // o_hemi						=
-        // 0.5f*LT.get_hemi			()	;
-        o_sun = 0.75f * LT.get_sun();
-        //--DSR-- HeatVision_start
-        RCache.hemi.set_hotness( O->GetHotness(), O->GetTransparency(), 0.f,
-                                 0.f ); //--DSR-- HeatVision
-        RCache.hemi.set_glowing(        //--DSR-- SilencerOverheat
-            sil_glow_color.x, sil_glow_color.y, sil_glow_color.z,
-            O->GetGlowing() );
-        //--DSR-- HeatVision_end
-        CopyMemory( o_hemi_cube, LT.get_hemi_cube(),
-                    CROS_impl::NUM_FACES * sizeof( float ) );
-    }
-
-    IC void apply_lmaterial() {
-        R_constant* C = RCache.get_c( c_sbase ); // get sampler
-        if ( 0 == C )
-            return;
-        VERIFY( RC_dest_sampler == C->destination );
-        VERIFY( RC_dx10texture == C->type );
-        CTexture* T = RCache.get_ActiveTexture( u32( C->samp.index ) );
-        VERIFY( T );
-        float mtl = T ? T->m_material : 0.f;
-#ifdef DEBUG
-        if ( ps_r2_ls_flags.test( R2FLAG_GLOBALMATERIAL ) )
-            mtl = ps_r2_gmaterial;
+	ICF void apply_object(IRenderable* O)
+	{
+		if (0 == O) return;
+		if (0 == O->renderable_ROS()) return;
+		CROS_impl& LT = *((CROS_impl*)O->renderable_ROS());
+		LT.update_smooth(O);
+		o_hemi = 0.75f * LT.get_hemi();
+		//o_hemi						= 0.5f*LT.get_hemi			()	;
+		o_sun = 0.75f * LT.get_sun();
+		//--DSR-- HeatVision_start
+		RCache.hemi.set_hotness(O->GetHotness(), O->GetTransparency(), 0.f, 0.f);			//--DSR-- HeatVision
+		RCache.hemi.set_glowing(															//--DSR-- SilencerOverheat
+			sil_glow_color.x, 
+			sil_glow_color.y,
+			sil_glow_color.z, O->GetGlowing());
+		//--DSR-- HeatVision_end
+		CopyMemory(o_hemi_cube, LT.get_hemi_cube(), CROS_impl::NUM_FACES*sizeof(float));
+	}
+	
+	IC void apply_lmaterial()
+	{
+		R_constant* C = RCache.get_c(c_sbase); // get sampler
+		if (0 == C) return;
+		VERIFY(RC_dest_sampler == C->destination);
+		VERIFY(RC_dx10texture == C->type);
+		CTexture* T = RCache.get_ActiveTexture(u32(C->samp.index));
+		VERIFY(T);
+		float mtl = T ? T->m_material : 0.f;
+#ifdef	DEBUG
+        if (ps_r2_ls_flags.test(R2FLAG_GLOBALMATERIAL))	mtl=ps_r2_gmaterial;
 #endif
-        if ( !( T && T->m_is_hot ) ) //--DSR-- HeatVision
-            RCache.hemi.set_hotness( 0.f, 0.f, 0.f, 0.f );
-        if ( !( T && T->m_is_glowing ) ) //--DSR-- SilencerOverheat
-            RCache.hemi.set_glowing( 0.f, 0.f, 0.f, 0.f );
+		if (!(T && T->m_is_hot))										//--DSR-- HeatVision
+			RCache.hemi.set_hotness(0.f, 0.f, 0.f, 0.f);
+		if (!(T && T->m_is_glowing))									//--DSR-- SilencerOverheat
+			RCache.hemi.set_glowing(0.f, 0.f, 0.f, 0.f);
 
-        RCache.hemi.set_material( o_hemi, o_sun, 0,
-                                  ( mtl < 5 ? ( mtl + .5f ) / 4.f : mtl ) );
-        RCache.hemi.set_pos_faces( o_hemi_cube[ CROS_impl::CUBE_FACE_POS_X ],
-                                   o_hemi_cube[ CROS_impl::CUBE_FACE_POS_Y ],
-                                   o_hemi_cube[ CROS_impl::CUBE_FACE_POS_Z ] );
-        RCache.hemi.set_neg_faces( o_hemi_cube[ CROS_impl::CUBE_FACE_NEG_X ],
-                                   o_hemi_cube[ CROS_impl::CUBE_FACE_NEG_Y ],
-                                   o_hemi_cube[ CROS_impl::CUBE_FACE_NEG_Z ] );
-    }
+		RCache.hemi.set_material(o_hemi, o_sun, 0, (mtl < 5 ? (mtl + .5f) / 4.f : mtl));
+		RCache.hemi.set_pos_faces(o_hemi_cube[CROS_impl::CUBE_FACE_POS_X],
+		                          o_hemi_cube[CROS_impl::CUBE_FACE_POS_Y],
+		                          o_hemi_cube[CROS_impl::CUBE_FACE_POS_Z]);
+		RCache.hemi.set_neg_faces(o_hemi_cube[CROS_impl::CUBE_FACE_NEG_X],
+		                          o_hemi_cube[CROS_impl::CUBE_FACE_NEG_Y],
+		                          o_hemi_cube[CROS_impl::CUBE_FACE_NEG_Z]);
+	}
 
 public:
-    // feature level
-    virtual GenerationLevel get_generation() {
-        return IRender_interface::GENERATION_R2;
-    }
+	// feature level
+	virtual GenerationLevel get_generation() { return IRender_interface::GENERATION_R2; }
 
-    virtual bool is_sun_static() { return o.sunstatic; }
+	virtual bool is_sun_static() { return o.sunstatic; }
+	virtual DWORD get_dx_level() { return HW.FeatureLevel >= D3D_FEATURE_LEVEL_10_1 ? 0x000A0001 : 0x000A0000; }
 
-    virtual DWORD get_dx_level() {
-        return HW.FeatureLevel >= D3D_FEATURE_LEVEL_10_1 ? 0x000A0001
-                                                         : 0x000A0000;
-    }
+	// Loading / Unloading
+	virtual void create();
+	virtual void destroy();
+	virtual void reset_begin();
+	virtual void reset_end();
 
-    // Loading / Unloading
-    virtual void create();
-    virtual void destroy();
-    virtual void reset_begin();
-    virtual void reset_end();
+	virtual void level_Load(IReader*);
+	virtual void level_Unload();
+	virtual bool level_StaticCacheReady(LPCSTR canonical_level_path);
+	virtual void level_Prepare(LPCSTR canonical_level_path);
+	virtual void level_InvalidateStaticCache();
+	virtual void level_BeginAsyncLoad();
+	virtual void level_AbortAsyncLoad();
 
-    virtual void level_Load( IReader* );
-    virtual void level_Unload();
-    virtual bool level_StaticCacheReady( LPCSTR canonical_level_path );
-    virtual void level_Prepare( LPCSTR canonical_level_path );
-    virtual void level_InvalidateStaticCache();
-    virtual void level_BeginAsyncLoad();
-    virtual void level_AbortAsyncLoad();
+	ID3DBaseTexture* texture_load(LPCSTR fname, u32& msize, bool bStaging = false, LPCSTR resolvedPath = nullptr);
+	virtual HRESULT shader_compile(
+		LPCSTR name,
+		DWORD const* pSrcData,
+		UINT SrcDataLen,
+		LPCSTR pFunctionName,
+		LPCSTR pTarget,
+		DWORD Flags,
+		void*& result);
 
-    ID3DBaseTexture* texture_load( LPCSTR fname,
-                                   u32& msize,
-                                   bool bStaging = false,
-                                   LPCSTR resolvedPath = nullptr );
-    virtual HRESULT shader_compile( LPCSTR name,
-                                    DWORD const* pSrcData,
-                                    UINT SrcDataLen,
-                                    LPCSTR pFunctionName,
-                                    LPCSTR pTarget,
-                                    DWORD Flags,
-                                    void*& result );
+	// Information
+	virtual void Statistics(CGameFont* F);
+	virtual LPCSTR getShaderPath() { return "r3\\"; }
+	virtual ref_shader getShader(int id);
+	virtual IRender_Sector* getSector(int id);
+	virtual IRenderVisual* getVisual(int id);
+	virtual IRender_Sector* detectSector(const Fvector& P);
+	virtual IRender_Target* getTarget();
 
-    // Information
-    virtual void Statistics( CGameFont* F );
+	// Main
+	virtual void flush();
+	virtual void add_Occluder(Fbox2& bb_screenspace); // mask screen region as oclluded
 
-    virtual LPCSTR getShaderPath() { return "r3\\"; }
+	// wallmarks
+	// demonized: add user defined rotation to wallmark
+	virtual void add_StaticWallmark(ref_shader& S, const Fvector& P, float s, CDB::TRI* T, Fvector* V, float ttl = 0.f, bool ignore_opt = false, bool random_rotation = true);
+	virtual void add_StaticWallmark(ref_shader& S, const Fvector& P, float s, CDB::TRI* T, Fvector* V, float ttl, bool ignore_opt, float rotation);
+	virtual void add_StaticWallmark(IWallMarkArray* pArray, const Fvector& P, float s, CDB::TRI* T, Fvector* V, float ttl = 0.f, bool ignore_opt = false, bool random_rotation = true);
+	virtual void add_StaticWallmark(IWallMarkArray* pArray, const Fvector& P, float s, CDB::TRI* T, Fvector* V, float ttl, bool ignore_opt, float rotation);
 
-    virtual ref_shader getShader( int id );
-    virtual IRender_Sector* getSector( int id );
-    virtual IRenderVisual* getVisual( int id );
-    virtual IRender_Sector* detectSector( const Fvector& P );
-    virtual IRender_Target* getTarget();
+	virtual void add_StaticWallmark(const wm_shader& S, const Fvector& P, float s, CDB::TRI* T, Fvector* V);
+	virtual void clear_static_wallmarks();
+	virtual void add_SkeletonWallmark(intrusive_ptr<CSkeletonWallmark> wm);
+	virtual void add_SkeletonWallmark(const Fmatrix* xf, CKinematics* obj, ref_shader& sh, const Fvector& start,
+	                                  const Fvector& dir, float size, float ttl = 0.f, bool ignore_opt = false);
+	virtual void add_SkeletonWallmark(const Fmatrix* xf, IKinematics* obj, IWallMarkArray* pArray, const Fvector& start,
+	                                  const Fvector& dir, float size, float ttl = 0.f, bool ignore_opt = false);
 
-    // Main
-    virtual void flush();
-    virtual void add_Occluder(
-        Fbox2& bb_screenspace ); // mask screen region as oclluded
-
-    // wallmarks
-    // demonized: add user defined rotation to wallmark
-    virtual void add_StaticWallmark( ref_shader& S,
-                                     const Fvector& P,
-                                     float s,
-                                     CDB::TRI* T,
-                                     Fvector* V,
-                                     float ttl = 0.f,
-                                     bool ignore_opt = false,
-                                     bool random_rotation = true );
-    virtual void add_StaticWallmark( ref_shader& S,
-                                     const Fvector& P,
-                                     float s,
-                                     CDB::TRI* T,
-                                     Fvector* V,
-                                     float ttl,
-                                     bool ignore_opt,
-                                     float rotation );
-    virtual void add_StaticWallmark( IWallMarkArray* pArray,
-                                     const Fvector& P,
-                                     float s,
-                                     CDB::TRI* T,
-                                     Fvector* V,
-                                     float ttl = 0.f,
-                                     bool ignore_opt = false,
-                                     bool random_rotation = true );
-    virtual void add_StaticWallmark( IWallMarkArray* pArray,
-                                     const Fvector& P,
-                                     float s,
-                                     CDB::TRI* T,
-                                     Fvector* V,
-                                     float ttl,
-                                     bool ignore_opt,
-                                     float rotation );
-
-    virtual void add_StaticWallmark( const wm_shader& S,
-                                     const Fvector& P,
-                                     float s,
-                                     CDB::TRI* T,
-                                     Fvector* V );
-    virtual void clear_static_wallmarks();
-    virtual void add_SkeletonWallmark( intrusive_ptr< CSkeletonWallmark > wm );
-    virtual void add_SkeletonWallmark( const Fmatrix* xf,
-                                       CKinematics* obj,
-                                       ref_shader& sh,
-                                       const Fvector& start,
-                                       const Fvector& dir,
-                                       float size,
-                                       float ttl = 0.f,
-                                       bool ignore_opt = false );
-    virtual void add_SkeletonWallmark( const Fmatrix* xf,
-                                       IKinematics* obj,
-                                       IWallMarkArray* pArray,
-                                       const Fvector& start,
-                                       const Fvector& dir,
-                                       float size,
-                                       float ttl = 0.f,
-                                       bool ignore_opt = false );
-
-    virtual void remove_SkeletonWallmarksFromObject( IKinematics* obj );
+    virtual void remove_SkeletonWallmarksFromObject(IKinematics* obj);
     virtual void update_Wallmarks();
 
-    //
-    virtual IBlender* blender_create( CLASS_ID cls );
-    virtual void blender_destroy( IBlender*& );
+	//
+	virtual IBlender* blender_create(CLASS_ID cls);
+	virtual void blender_destroy(IBlender* &);
 
-    //
-    virtual IRender_ObjectSpecific* ros_create( IRenderable* parent );
-    virtual void ros_destroy( IRender_ObjectSpecific*& );
+	//
+	virtual IRender_ObjectSpecific* ros_create(IRenderable* parent);
+	virtual void ros_destroy(IRender_ObjectSpecific* &);
 
-    // Lighting
-    virtual IRender_Light* light_create();
-    virtual IRender_Glow* glow_create();
+	// Lighting
+	virtual IRender_Light* light_create();
+	virtual IRender_Glow* glow_create();
 
-    // Models
-    virtual IRenderVisual* model_CreateParticles( LPCSTR name );
-    virtual IRender_DetailModel* model_CreateDM( IReader* F );
-    virtual IRenderVisual* model_Create( LPCSTR name, IReader* data = 0 );
-    virtual IRenderVisual* model_CreateChild( LPCSTR name, IReader* data );
-    virtual IRenderVisual* model_Duplicate( IRenderVisual* V );
-    virtual void model_Delete( IRenderVisual*& V, BOOL bDiscard );
-    virtual void model_Delete_Deffered( IRenderVisual*& V );
-    virtual void model_Delete( IRender_DetailModel*& F );
+	// Models
+	virtual IRenderVisual* model_CreateParticles(LPCSTR name);
+	virtual IRender_DetailModel* model_CreateDM(IReader* F);
+	virtual IRenderVisual* model_Create(LPCSTR name, IReader* data = 0);
+	virtual IRenderVisual* model_CreateChild(LPCSTR name, IReader* data);
+	virtual IRenderVisual* model_Duplicate(IRenderVisual* V);
+	virtual void model_Delete(IRenderVisual* & V, BOOL bDiscard);
+	virtual void model_Delete_Deffered(IRenderVisual* & V);
+	virtual void model_Delete(IRender_DetailModel* & F);
+	virtual void model_Logging(BOOL bEnable) { Models->Logging(bEnable); }
+	virtual void models_Prefetch();
+	virtual void models_PrefetchOne(LPCSTR name, bool assert = true);
+	virtual void model_CollectTextures(LPCSTR name, LPCSTR canonical_level_path,
+		xr_vector<xr_string>& textures) override;
+	virtual bool models_PrefetchPrepared(LPCSTR name, LPCSTR canonical_level_path, bool assert = true) override;
+	virtual void models_InvalidatePrepared() override;
+	virtual void models_Clear(BOOL b_complete);
+	virtual bool models_Exists(LPCSTR name);
+	
+	// anglobes: Sun Values
+	virtual Fvector GetSunPosition()
+	{
+		static Fvector default_pos = { 0, 0, 0 };
+		light* sun = (light*)Lights.sun_adapted._get();
+		if (!sun)
+			return default_pos;
+		return sun->position;
+	};
+	virtual Fcolor GetSunColor()
+	{
+		static Fcolor default_color = { 0.0f, 0.0f, 0.0f, 0.0f };
+		light* sun = (light*)Lights.sun_adapted._get();
+		if (!sun)
+			return default_color;
+		return sun->color;
+	};
+	virtual float GetSunIntensity()
+	{
+		static float default_intensity = 0.0f;
+		light* sun = (light*)Lights.sun_adapted._get();
+		if (!sun)
+			return default_intensity;
+		return sun->color.intensity();
+	};
+	virtual bool IsSun()
+	{
+		return is_sun();
+	};
 
-    virtual void model_Logging( BOOL bEnable ) { Models->Logging( bEnable ); }
+	//antglobes: Selective DDS Screenshot
+	virtual void TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encoding = eDXE_A8R8G8B8);
 
-    virtual void models_Prefetch();
-    virtual void models_PrefetchOne( LPCSTR name, bool assert = true );
-    virtual void model_CollectTextures(
-        LPCSTR name,
-        LPCSTR canonical_level_path,
-        xr_vector< xr_string >& textures ) override;
-    virtual bool models_PrefetchPrepared( LPCSTR name,
-                                          LPCSTR canonical_level_path,
-                                          bool assert = true ) override;
-    virtual void models_InvalidatePrepared() override;
-    virtual void models_Clear( BOOL b_complete );
-    virtual bool models_Exists( LPCSTR name );
+	// Occlusion culling
+	virtual BOOL occ_visible(vis_data& V);
+	virtual BOOL occ_visible(Fbox& B);
+	virtual BOOL occ_visible(sPoly& P);
 
-    // anglobes: Sun Values
-    virtual Fvector GetSunPosition() {
-        static Fvector default_pos = { 0, 0, 0 };
-        light* sun = ( light* )Lights.sun_adapted._get();
-        if ( !sun )
-            return default_pos;
-        return sun->position;
-    };
+	// Main
+	virtual void Calculate();
+	virtual void Render();
+	virtual void Screenshot(ScreenshotMode mode = SM_NORMAL, LPCSTR name = 0);
+	virtual void Screenshot(ScreenshotMode mode, CMemoryWriter& memory_writer);
+	virtual void ScreenshotAsyncBegin();
+	virtual void ScreenshotAsyncEnd(CMemoryWriter& memory_writer);
+	virtual void _BCL OnFrame();
 
-    virtual Fcolor GetSunColor() {
-        static Fcolor default_color = { 0.0f, 0.0f, 0.0f, 0.0f };
-        light* sun = ( light* )Lights.sun_adapted._get();
-        if ( !sun )
-            return default_color;
-        return sun->color;
-    };
+	// Particles
+	virtual void ExportParticles();
+	virtual void ImportParticles();
 
-    virtual float GetSunIntensity() {
-        static float default_intensity = 0.0f;
-        light* sun = ( light* )Lights.sun_adapted._get();
-        if ( !sun )
-            return default_intensity;
-        return sun->color.intensity();
-    };
+	// Render mode
+	virtual void rmNear();
+	virtual void rmFar();
+	virtual void rmNormal();
+	virtual u32 active_phase() { return phase; }; //Swartz: actor shadow
+	void RenderToTarget(RRT target) override;
+	// Constructor/destructor/loader
+	CRender();
+	virtual ~CRender();
 
-    virtual bool IsSun() { return is_sun(); };
+	void addShaderOption(const char* name, const char* value);
+	void clearAllShaderOptions() { m_ShaderOptions.clear(); }
 
-    // antglobes: Selective DDS Screenshot
-    virtual void TakeScreenshot( LPCSTR path,
-                                 Fvector2 dimensions,
-                                 DxEncoding encoding = eDXE_A8R8G8B8 );
-
-    // Occlusion culling
-    virtual BOOL occ_visible( vis_data& V );
-    virtual BOOL occ_visible( Fbox& B );
-    virtual BOOL occ_visible( sPoly& P );
-
-    // Main
-    virtual void Calculate();
-    virtual void Render();
-    virtual void Screenshot( ScreenshotMode mode = SM_NORMAL, LPCSTR name = 0 );
-    virtual void Screenshot( ScreenshotMode mode,
-                             CMemoryWriter& memory_writer );
-    virtual void ScreenshotAsyncBegin();
-    virtual void ScreenshotAsyncEnd( CMemoryWriter& memory_writer );
-    virtual void _BCL OnFrame();
-
-    // Particles
-    virtual void ExportParticles();
-    virtual void ImportParticles();
-
-    // Render mode
-    virtual void rmNear();
-    virtual void rmFar();
-    virtual void rmNormal();
-
-    virtual u32 active_phase() { return phase; }; // Swartz: actor shadow
-
-    void RenderToTarget( RRT target ) override;
-    // Constructor/destructor/loader
-    CRender();
-    virtual ~CRender();
-
-    void addShaderOption( const char* name, const char* value );
-
-    void clearAllShaderOptions() { m_ShaderOptions.clear(); }
-
-    virtual size_t SectorsCount() { return Sectors.size(); }
+	virtual size_t SectorsCount() { return Sectors.size(); }
 
 private:
-    xr_vector< D3D_SHADER_MACRO > m_ShaderOptions;
+	xr_vector<D3D_SHADER_MACRO> m_ShaderOptions;
 
 protected:
-    virtual void ScreenshotImpl( ScreenshotMode mode,
-                                 LPCSTR name,
-                                 CMemoryWriter* memory_writer );
+	virtual void ScreenshotImpl(ScreenshotMode mode, LPCSTR name, CMemoryWriter* memory_writer);
 
 private:
 };

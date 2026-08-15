@@ -1,103 +1,105 @@
 #pragma once
-#include "../../../../xrServerEntities/script_export_space.h"
 #include "pseudodog.h"
+#include "../../../../xrServerEntities/script_export_space.h"
 
 class CPsyDogPhantom;
 
-class CPsyDog : public CAI_PseudoDog {
-    typedef CAI_PseudoDog inherited;
+class CPsyDog : public CAI_PseudoDog
+{
+	typedef CAI_PseudoDog inherited;
 
-    friend class CPsyDogPhantom;
-    friend class CPsyDogAura;
+	friend class CPsyDogPhantom;
+	friend class CPsyDogAura;
 
-    // эффектор у актера при нахождении в поле
-    CPsyDogAura* m_aura;
+	// эффектор у актера при нахождении в поле
+	CPsyDogAura* m_aura;
 
-    // enemy transfered from phantom
-    CActor* m_enemy;
+	// enemy transfered from phantom
+	CActor* m_enemy;
 
-    // externals
-    u8 m_min_phantoms_count;
-    u8 m_max_phantoms_count;
-    u32 m_time_phantom_respawn;
+	// externals
+	u8 m_min_phantoms_count;
+	u8 m_max_phantoms_count;
+	u32 m_time_phantom_respawn;
 
-    static u32 const s_phantom_immediate_respawn_flag = 0;
-    static u32 const s_phantom_alive_flag = 1;
+	static u32 const s_phantom_immediate_respawn_flag = 0;
+	static u32 const s_phantom_alive_flag = 1;
 
-    TTime* m_phantoms_die_time;
+	TTime* m_phantoms_die_time;
 
 public:
-    CPsyDog();
-    virtual ~CPsyDog();
+	CPsyDog();
+	virtual ~CPsyDog();
 
-    virtual void Load( LPCSTR section );
-    virtual BOOL net_Spawn( CSE_Abstract* dc );
-    virtual void reinit();
-    virtual void reload( LPCSTR section );
-    virtual void net_Destroy();
-    virtual void Die( CObject* who );
+	virtual void Load(LPCSTR section);
+	virtual BOOL net_Spawn(CSE_Abstract* dc);
+	virtual void reinit();
+	virtual void reload(LPCSTR section);
+	virtual void net_Destroy();
+	virtual void Die(CObject* who);
 
-    virtual void Think();
-    //				void	on_phantom_appear	();
-    virtual IStateManagerBase* create_state_manager();
+	virtual void Think();
+	//				void	on_phantom_appear	();
+	virtual IStateManagerBase* create_state_manager();
 
-    virtual const char* get_monster_class_name() { return "psydog"; }
+	virtual const char* get_monster_class_name() { return "psydog"; }
 
-    u8 get_phantoms_count();
+	u8 get_phantoms_count();
+	bool must_hide() { return get_phantoms_count() < m_min_phantoms_count; }
+private:
+	bool spawn_phantom();
+	void delete_phantom(CPsyDogPhantom*);
+	void register_phantom(CPsyDogPhantom*);
+	void unregister_phantom(CPsyDogPhantom*);
 
-    bool must_hide() { return get_phantoms_count() < m_min_phantoms_count; }
+	void delete_all_phantoms();
 
 private:
-    bool spawn_phantom();
-    void delete_phantom( CPsyDogPhantom* );
-    void register_phantom( CPsyDogPhantom* );
-    void unregister_phantom( CPsyDogPhantom* );
+	xr_vector<CPsyDogPhantom*> m_storage;
 
-    void delete_all_phantoms();
-
-private:
-    xr_vector< CPsyDogPhantom* > m_storage;
-
-    DECLARE_SCRIPT_REGISTER_FUNCTION
+DECLARE_SCRIPT_REGISTER_FUNCTION
 };
 
 //////////////////////////////////////////////////////////////////////////
 // Phantom Psy Dog
 //////////////////////////////////////////////////////////////////////////
 
-class CPsyDogPhantom : public CAI_PseudoDog {
-    typedef CAI_PseudoDog inherited;
+class CPsyDogPhantom : public CAI_PseudoDog
+{
+	typedef CAI_PseudoDog inherited;
 
-    CPsyDog* m_parent;
+	CPsyDog* m_parent;
 
-    enum { eWaitToAppear, eAttack } m_state;
+	enum
+	{
+		eWaitToAppear,
+		eAttack
+	} m_state;
 
-    SAttackEffector m_appear_effector;
+	SAttackEffector m_appear_effector;
 
-    LPCSTR m_particles_appear;
-    LPCSTR m_particles_disappear;
+	LPCSTR m_particles_appear;
+	LPCSTR m_particles_disappear;
 
-    u16 m_parent_id;
+	u16 m_parent_id;
 
-    u32 m_time_spawned;
+	u32 m_time_spawned;
 
 public:
-    CPsyDogPhantom();
-    virtual ~CPsyDogPhantom();
-    virtual BOOL net_Spawn( CSE_Abstract* dc );
-    virtual void Think();
-    virtual void Hit( SHit* pHDS );
+	CPsyDogPhantom();
+	virtual ~CPsyDogPhantom();
+	virtual BOOL net_Spawn(CSE_Abstract* dc);
+	virtual void Think();
+	virtual void Hit(SHit* pHDS);
 
-    virtual void net_Destroy();
-    virtual void Die( CObject* who );
+	virtual void net_Destroy();
+	virtual void Die(CObject* who);
 
-    void destroy_from_parent();
-
+	void destroy_from_parent();
 private:
-    void destroy_me();
-    void try_to_register_to_parent();
+	void destroy_me();
+	void try_to_register_to_parent();
+	bool is_wait_to_destroy_object() { return (m_parent_id == 0xffff); }
 
-    bool is_wait_to_destroy_object() { return ( m_parent_id == 0xffff ); }
-
-    DECLARE_SCRIPT_REGISTER_FUNCTION
+DECLARE_SCRIPT_REGISTER_FUNCTION
 };

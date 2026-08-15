@@ -1,15 +1,15 @@
 #pragma once
 
-class CBlender_lut : public IBlender {
+
+class CBlender_lut : public IBlender
+{
 public:
-    virtual LPCSTR getComment() { return "Lookup table!"; }
+	virtual LPCSTR getComment() { return "Lookup table!"; }
+	virtual BOOL canBeDetailed() { return FALSE; }
+	virtual BOOL canBeLMAPped() { return FALSE; }
 
-    virtual BOOL canBeDetailed() { return FALSE; }
+	virtual void Compile(CBlender_Compile& C);
 
-    virtual BOOL canBeLMAPped() { return FALSE; }
-
-    virtual void Compile( CBlender_Compile& C );
-
-    CBlender_lut();
-    virtual ~CBlender_lut();
+	CBlender_lut();
+	virtual ~CBlender_lut();
 };

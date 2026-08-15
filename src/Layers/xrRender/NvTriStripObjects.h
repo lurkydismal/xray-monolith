@@ -2,7 +2,6 @@
 #define NV_TRISTRIP_OBJECTS_H
 
 #include <assert.h>
-
 #include "VertexCache.h"
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -11,242 +10,239 @@
 //
 /////////////////////////////////////////////////////////////////////////////////
 
-struct MyVertex {
-    float x, y, z;
-    float nx, ny, nz;
+struct MyVertex
+{
+	float x, y, z;
+	float nx, ny, nz;
 };
 
 typedef MyVertex MyVector;
 
-struct MyFace {
-    int v1, v2, v3;
-    float nx, ny, nz;
+struct MyFace
+{
+	int v1, v2, v3;
+	float nx, ny, nz;
 };
 
-class NvFaceInfo {
-public:
-    // vertex indices
-    NvFaceInfo( int v0, int v1, int v2 ) {
-        m_v0 = v0;
-        m_v1 = v1;
-        m_v2 = v2;
-        m_stripId = -1;
-        m_testStripId = -1;
-        m_experimentId = -1;
-    }
 
-    // data members are left public
-    int m_v0, m_v1, m_v2;
-    int m_stripId;      // real strip Id
-    int m_testStripId;  // strip Id in an experiment
-    int m_experimentId; // in what experiment was it given an experiment Id?
+class NvFaceInfo
+{
+public:
+
+	// vertex indices
+	NvFaceInfo(int v0, int v1, int v2)
+	{
+		m_v0 = v0;
+		m_v1 = v1;
+		m_v2 = v2;
+		m_stripId = -1;
+		m_testStripId = -1;
+		m_experimentId = -1;
+	}
+
+	// data members are left public
+	int m_v0, m_v1, m_v2;
+	int m_stripId; // real strip Id
+	int m_testStripId; // strip Id in an experiment
+	int m_experimentId; // in what experiment was it given an experiment Id?
 };
 
 // nice and dumb edge class that points knows its
 // indices, the two faces, and the next edge using
 // the lesser of the indices
-class NvEdgeInfo {
+class NvEdgeInfo
+{
 public:
-    // constructor puts 1 ref on us
-    NvEdgeInfo( int v0, int v1 ) {
-        m_v0 = v0;
-        m_v1 = v1;
-        m_face0 = NULL;
-        m_face1 = NULL;
-        m_nextV0 = NULL;
-        m_nextV1 = NULL;
 
-        // we will appear in 2 lists.  this is a good
-        // way to make sure we _delete it the second time
-        // we hit it in the edge infos
-        m_refCount = 2;
-    }
+	// constructor puts 1 ref on us
+	NvEdgeInfo(int v0, int v1)
+	{
+		m_v0 = v0;
+		m_v1 = v1;
+		m_face0 = NULL;
+		m_face1 = NULL;
+		m_nextV0 = NULL;
+		m_nextV1 = NULL;
 
-    // ref and unref
-    void Unref() {
-        if ( --m_refCount == 0 ) {
-            delete this;
-        }
-    }
+		// we will appear in 2 lists.  this is a good
+		// way to make sure we _delete it the second time
+		// we hit it in the edge infos
+		m_refCount = 2;
+	}
 
-    // data members are left public
-    UINT m_refCount;
-    NvFaceInfo *m_face0, *m_face1;
-    int m_v0, m_v1;
-    NvEdgeInfo *m_nextV0, *m_nextV1;
+	// ref and unref
+	void Unref()
+	{
+		if (--m_refCount == 0)
+		{
+			delete this;
+		}
+	}
+
+	// data members are left public
+	UINT m_refCount;
+	NvFaceInfo *m_face0, *m_face1;
+	int m_v0, m_v1;
+	NvEdgeInfo *m_nextV0, *m_nextV1;
 };
+
 
 // This class is a quick summary of parameters used
 // to begin a triangle strip.  Some operations may
 // want to create lists of such items, so they were
 // pulled out into a class
-class NvStripStartInfo {
+class NvStripStartInfo
+{
 public:
-    NvStripStartInfo( NvFaceInfo* startFace,
-                      NvEdgeInfo* startEdge,
-                      bool toV1 ) {
-        m_startFace = startFace;
-        m_startEdge = startEdge;
-        m_toV1 = toV1;
-    }
+	NvStripStartInfo(NvFaceInfo* startFace, NvEdgeInfo* startEdge, bool toV1)
+	{
+		m_startFace = startFace;
+		m_startEdge = startEdge;
+		m_toV1 = toV1;
+	}
 
-    NvFaceInfo* m_startFace;
-    NvEdgeInfo* m_startEdge;
-    bool m_toV1;
+	NvFaceInfo* m_startFace;
+	NvEdgeInfo* m_startEdge;
+	bool m_toV1;
 };
 
-typedef xr_vector< NvFaceInfo* > NvFaceInfoVec;
-typedef xr_list< NvFaceInfo* > NvFaceInfoList;
-typedef xr_list< NvFaceInfoVec* > NvStripList;
-typedef xr_vector< NvEdgeInfo* > NvEdgeInfoVec;
 
-typedef xr_vector< u16 > WordVec;
-typedef xr_vector< int > IntVec;
-typedef xr_vector< MyVertex > MyVertexVec;
-typedef xr_vector< MyFace > MyFaceVec;
+typedef xr_vector<NvFaceInfo*> NvFaceInfoVec;
+typedef xr_list<NvFaceInfo*> NvFaceInfoList;
+typedef xr_list<NvFaceInfoVec*> NvStripList;
+typedef xr_vector<NvEdgeInfo*> NvEdgeInfoVec;
 
-template < class T >
-inline void SWAP( T& first, T& second ) {
-    T temp = first;
-    first = second;
-    second = temp;
+typedef xr_vector<u16> WordVec;
+typedef xr_vector<int> IntVec;
+typedef xr_vector<MyVertex> MyVertexVec;
+typedef xr_vector<MyFace> MyFaceVec;
+
+template <class T>
+inline void SWAP(T& first, T& second)
+{
+	T temp = first;
+	first = second;
+	second = temp;
 }
 
 // This is a summary of a strip that has been built
-class NvStripInfo {
+class NvStripInfo
+{
 public:
-    // A little information about the creation of the triangle strips
-    NvStripInfo( const NvStripStartInfo& startInfo,
-                 int stripId,
-                 int experimentId = -1 )
-        : m_startInfo( startInfo ) {
-        m_stripId = stripId;
-        m_experimentId = experimentId;
-        visited = false;
-    }
 
-    // This is an experiment if the experiment id is >= 0
-    inline bool IsExperiment() const { return m_experimentId >= 0; }
+	// A little information about the creation of the triangle strips
+	NvStripInfo(const NvStripStartInfo& startInfo, int stripId, int experimentId = -1) :
+		m_startInfo(startInfo)
+	{
+		m_stripId = stripId;
+		m_experimentId = experimentId;
+		visited = false;
+	}
 
-    inline bool IsInStrip( const NvFaceInfo* faceInfo ) const {
-        if ( faceInfo == NULL )
-            return false;
+	// This is an experiment if the experiment id is >= 0
+	inline bool IsExperiment() const { return m_experimentId >= 0; }
 
-        return ( m_experimentId >= 0 ? faceInfo->m_testStripId == m_stripId
-                                     : faceInfo->m_stripId == m_stripId );
-    }
+	inline bool IsInStrip(const NvFaceInfo* faceInfo) const
+	{
+		if (faceInfo == NULL)
+			return false;
 
-    bool SharesEdge( const NvFaceInfo* faceInfo, NvEdgeInfoVec& edgeInfos );
+		return (m_experimentId >= 0 ? faceInfo->m_testStripId == m_stripId : faceInfo->m_stripId == m_stripId);
+	}
 
-    // take the given forward and backward strips and combine them together
-    void Combine( const NvFaceInfoVec& forward, const NvFaceInfoVec& backward );
+	bool SharesEdge(const NvFaceInfo* faceInfo, NvEdgeInfoVec& edgeInfos);
 
-    // returns true if the face is "unique", i.e. has a vertex which doesn't
-    // exist in the faceVec
-    bool Unique( NvFaceInfoVec& faceVec, NvFaceInfo* face );
+	// take the given forward and backward strips and combine them together
+	void Combine(const NvFaceInfoVec& forward, const NvFaceInfoVec& backward);
 
-    // mark the triangle as taken by this strip
-    bool IsMarked( NvFaceInfo* faceInfo );
-    void MarkTriangle( NvFaceInfo* faceInfo );
+	//returns true if the face is "unique", i.e. has a vertex which doesn't exist in the faceVec
+	bool Unique(NvFaceInfoVec& faceVec, NvFaceInfo* face);
 
-    // build the strip
-    void Build( NvEdgeInfoVec& edgeInfos, NvFaceInfoVec& faceInfos );
+	// mark the triangle as taken by this strip
+	bool IsMarked(NvFaceInfo* faceInfo);
+	void MarkTriangle(NvFaceInfo* faceInfo);
 
-    // public data members
-    NvStripStartInfo m_startInfo;
-    NvFaceInfoVec m_faces;
-    int m_stripId;
-    int m_experimentId;
+	// build the strip
+	void Build(NvEdgeInfoVec& edgeInfos, NvFaceInfoVec& faceInfos);
 
-    bool visited;
+	// public data members
+	NvStripStartInfo m_startInfo;
+	NvFaceInfoVec m_faces;
+	int m_stripId;
+	int m_experimentId;
+
+	bool visited;
 };
 
-typedef xr_vector< NvStripInfo* > NvStripInfoVec;
+typedef xr_vector<NvStripInfo*> NvStripInfoVec;
 
-// The actual stripifier
-class NvStripifier {
+
+//The actual stripifier
+class NvStripifier
+{
 public:
-    // Constructor
-    NvStripifier();
-    ~NvStripifier();
 
-    // the target vertex cache size, the structure to place the strips in, and
-    // the input indices
-    void Stripify( const WordVec& in_indices,
-                   const int in_cacheSize,
-                   const int in_minStripLength,
-                   NvStripInfoVec& allStrips,
-                   NvFaceInfoVec& allFaces );
-    void CreateStrips( const NvStripInfoVec& allStrips,
-                       IntVec& stripIndices,
-                       const bool bStitchStrips,
-                       unsigned int& numSeparateStrips );
+	// Constructor
+	NvStripifier();
+	~NvStripifier();
 
-    static int GetUniqueVertexInB( NvFaceInfo* faceA, NvFaceInfo* faceB );
-    static int GetSharedVertex( NvFaceInfo* faceA, NvFaceInfo* faceB );
+	//the target vertex cache size, the structure to place the strips in, and the input indices
+	void Stripify(const WordVec& in_indices, const int in_cacheSize, const int in_minStripLength,
+	              NvStripInfoVec& allStrips, NvFaceInfoVec& allFaces);
+	void CreateStrips(const NvStripInfoVec& allStrips, IntVec& stripIndices, const bool bStitchStrips,
+	                  unsigned int& numSeparateStrips);
+
+	static int GetUniqueVertexInB(NvFaceInfo* faceA, NvFaceInfo* faceB);
+	static int GetSharedVertex(NvFaceInfo* faceA, NvFaceInfo* faceB);
 
 protected:
-    WordVec indices;
-    int cacheSize;
-    int minStripLength;
-    float meshJump;
-    bool bFirstTimeResetPoint;
 
-    /////////////////////////////////////////////////////////////////////////////////
-    //
-    // Big mess of functions called during stripification
-    //
-    /////////////////////////////////////////////////////////////////////////////////
+	WordVec indices;
+	int cacheSize;
+	int minStripLength;
+	float meshJump;
+	bool bFirstTimeResetPoint;
 
-    bool IsCW( NvFaceInfo* faceInfo, int v0, int v1 );
-    bool NextIsCW( const int numIndices );
-    static int GetNextIndex( const WordVec& indices, NvFaceInfo* face );
-    static NvEdgeInfo* FindEdgeInfo( NvEdgeInfoVec& edgeInfos, int v0, int v1 );
-    static NvFaceInfo* FindOtherFace( NvEdgeInfoVec& edgeInfos,
-                                      int v0,
-                                      int v1,
-                                      NvFaceInfo* faceInfo );
-    NvFaceInfo* FindGoodResetPoint( NvFaceInfoVec& faceInfos,
-                                    NvEdgeInfoVec& edgeInfos );
+	/////////////////////////////////////////////////////////////////////////////////
+	//
+	// Big mess of functions called during stripification
+	//
+	/////////////////////////////////////////////////////////////////////////////////
 
-    void FindAllStrips( NvStripInfoVec& allStrips,
-                        NvFaceInfoVec& allFaceInfos,
-                        NvEdgeInfoVec& allEdgeInfos,
-                        int numSamples );
-    void SplitUpStripsAndOptimize( NvStripInfoVec& allStrips,
-                                   NvStripInfoVec& outStrips,
-                                   NvEdgeInfoVec& edgeInfos,
-                                   NvFaceInfoVec& outFaceList );
-    void RemoveSmallStrips( NvStripInfoVec& allStrips,
-                            NvStripInfoVec& allBigStrips,
-                            NvFaceInfoVec& faceList );
+	bool IsCW(NvFaceInfo* faceInfo, int v0, int v1);
+	bool NextIsCW(const int numIndices);
+	static int GetNextIndex(const WordVec& indices, NvFaceInfo* face);
+	static NvEdgeInfo* FindEdgeInfo(NvEdgeInfoVec& edgeInfos, int v0, int v1);
+	static NvFaceInfo* FindOtherFace(NvEdgeInfoVec& edgeInfos, int v0, int v1, NvFaceInfo* faceInfo);
+	NvFaceInfo* FindGoodResetPoint(NvFaceInfoVec& faceInfos, NvEdgeInfoVec& edgeInfos);
 
-    bool FindTraversal( NvFaceInfoVec& faceInfos,
-                        NvEdgeInfoVec& edgeInfos,
-                        NvStripInfo* strip,
-                        NvStripStartInfo& startInfo );
-    int CountRemainingTris( xr_list< NvStripInfo* >::iterator iter,
-                            xr_list< NvStripInfo* >::iterator end );
+	void FindAllStrips(NvStripInfoVec& allStrips, NvFaceInfoVec& allFaceInfos, NvEdgeInfoVec& allEdgeInfos,
+	                   int numSamples);
+	void SplitUpStripsAndOptimize(NvStripInfoVec& allStrips, NvStripInfoVec& outStrips, NvEdgeInfoVec& edgeInfos,
+	                              NvFaceInfoVec& outFaceList);
+	void RemoveSmallStrips(NvStripInfoVec& allStrips, NvStripInfoVec& allBigStrips, NvFaceInfoVec& faceList);
 
-    void CommitStrips( NvStripInfoVec& allStrips,
-                       const NvStripInfoVec& strips );
+	bool FindTraversal(NvFaceInfoVec& faceInfos, NvEdgeInfoVec& edgeInfos, NvStripInfo* strip,
+	                   NvStripStartInfo& startInfo);
+	int CountRemainingTris(xr_list<NvStripInfo*>::iterator iter, xr_list<NvStripInfo*>::iterator end);
 
-    float AvgStripSize( const NvStripInfoVec& strips );
-    int FindStartPoint( NvFaceInfoVec& faceInfos, NvEdgeInfoVec& edgeInfos );
+	void CommitStrips(NvStripInfoVec& allStrips, const NvStripInfoVec& strips);
 
-    void UpdateCacheStrip( VertexCache* vcache, NvStripInfo* strip );
-    void UpdateCacheFace( VertexCache* vcache, NvFaceInfo* face );
-    float CalcNumHitsStrip( VertexCache* vcache, NvStripInfo* strip );
-    int CalcNumHitsFace( VertexCache* vcache, NvFaceInfo* face );
-    int NumNeighbors( NvFaceInfo* face, NvEdgeInfoVec& edgeInfoVec );
+	float AvgStripSize(const NvStripInfoVec& strips);
+	int FindStartPoint(NvFaceInfoVec& faceInfos, NvEdgeInfoVec& edgeInfos);
 
-    void BuildStripifyInfo( NvFaceInfoVec& faceInfos,
-                            NvEdgeInfoVec& edgeInfos );
-    bool AlreadyExists( NvFaceInfo* faceInfo, NvFaceInfoVec& faceInfos );
+	void UpdateCacheStrip(VertexCache* vcache, NvStripInfo* strip);
+	void UpdateCacheFace(VertexCache* vcache, NvFaceInfo* face);
+	float CalcNumHitsStrip(VertexCache* vcache, NvStripInfo* strip);
+	int CalcNumHitsFace(VertexCache* vcache, NvFaceInfo* face);
+	int NumNeighbors(NvFaceInfo* face, NvEdgeInfoVec& edgeInfoVec);
 
-    // let our strip info classes and the other classes get
-    // to these protected stripificaton methods if they want
-    friend NvStripInfo;
+	void BuildStripifyInfo(NvFaceInfoVec& faceInfos, NvEdgeInfoVec& edgeInfos);
+	bool AlreadyExists(NvFaceInfo* faceInfo, NvFaceInfoVec& faceInfos);
+
+	// let our strip info classes and the other classes get
+	// to these protected stripificaton methods if they want
+	friend NvStripInfo;
 };
 
 #endif

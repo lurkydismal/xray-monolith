@@ -1,76 +1,78 @@
 #pragma once
 
-#include "../xrCore/_stl_extensions.h"
 #include "ISheduled.h"
+#include "../xrCore/_stl_extensions.h"
 
-class ENGINE_API CSheduler {
+class ENGINE_API CSheduler
+{
 private:
-    struct Item {
-        shared_str scheduled_name;
-        u32 dwTimeForExecute;
-        u32 dwTimeOfLastExecute;
-        ISheduled* Object;
+	struct Item
+	{
+		shared_str scheduled_name;
+		u32 dwTimeForExecute;
+		u32 dwTimeOfLastExecute;
+		ISheduled* Object;
 
-        IC bool operator<( Item& I ) {
-            return dwTimeForExecute > I.dwTimeForExecute;
-        }
-    };
+		IC bool operator <(Item& I)
+		{
+			return dwTimeForExecute > I.dwTimeForExecute;
+		}
+	};
 
-    struct ItemReg {
-        BOOL OP;
-        BOOL RT;
-        ISheduled* Object;
-    };
+	struct ItemReg
+	{
+		BOOL OP;
+		BOOL RT;
+		ISheduled* Object;
+	};
 
 private:
-    xr_vector< Item > ItemsRT;
-    xr_vector< Item > Items;
-    xr_vector< ItemReg > Registration;
+	xr_vector<Item> ItemsRT;
+	xr_vector<Item> Items;
+	xr_vector<ItemReg> Registration;
 
-    xrSRWLock ItemsLock;
+	xrSRWLock ItemsLock;
 
-    volatile ISheduled* m_current_step_obj;
+	volatile ISheduled* m_current_step_obj;
 
-    bool m_processing_now;
-    bool m_processing_nowRT;
+	bool m_processing_now;
+	bool m_processing_nowRT;
 
-    IC void PushImpl( Item& I );
-    IC void PushImpl( Item&& I );
-    IC void Push( Item& I );
-    IC void Push( Item&& I );
-    IC void Pop();
-    IC void PopImpl();
+	IC void PushImpl(Item& I);
+	IC void PushImpl(Item&& I);
+	IC void Push(Item& I);
+	IC void Push(Item&& I);
+	IC void Pop();
+	IC void PopImpl();
+	IC Item& Top()
+	{
+		return Items.front();
+	}
 
-    IC Item& Top() { return Items.front(); }
-
-    void internal_Register( ISheduled* A, BOOL RT = FALSE );
-    bool internal_Unregister( ISheduled* A,
-                              BOOL RT,
-                              bool warn_on_not_found = true );
-    void internal_Registration();
-
+	void internal_Register(ISheduled* A, BOOL RT = FALSE);
+	bool internal_Unregister(ISheduled* A, BOOL RT, bool warn_on_not_found = true);
+	void internal_Registration();
 public:
-    u64 cycles_start;
-    u64 cycles_limit;
-    volatile bool m_bTerminating;
-
+	u64 cycles_start;
+	u64 cycles_limit;
+	volatile bool m_bTerminating;
 public:
-    void ProcessStep();
-    void Process();
+	void ProcessStep();
+	void Process();
 
-    void UpdateInit();
-    void UpdateRT();
-    void UpdateDeferred();
-    void UpdateFinalize();
-    void Update();
+	void UpdateInit();
+	void UpdateRT();
+	void UpdateDeferred();
+	void UpdateFinalize();
+	void Update();
 
 #ifdef DEBUG
-    bool Registered( ISheduled* object ) const;
+    bool Registered(ISheduled* object) const;
 #endif // DEBUG
-    void Register( ISheduled* A, BOOL RT = FALSE );
-    void Unregister( ISheduled* A );
-    void EnsureOrder( ISheduled* Before, ISheduled* After );
+	void Register(ISheduled* A, BOOL RT = FALSE);
+	void Unregister(ISheduled* A);
+	void EnsureOrder(ISheduled* Before, ISheduled* After);
 
-    void Initialize();
-    void Destroy();
+	void Initialize();
+	void Destroy();
 };

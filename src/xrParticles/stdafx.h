@@ -7,5 +7,5 @@
 #pragma once
 
 #include "../xrEngine/stdafx.h"
-#include "../xrServerEntities/smart_cast.h"
 #include "psystem.h"
+#include "../xrServerEntities/smart_cast.h"

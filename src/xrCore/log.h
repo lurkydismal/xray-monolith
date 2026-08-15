@@ -1,87 +1,86 @@
 #pragma once
 
-#include <atomic>
-
 #include "DateTime.hpp"
+#include <atomic>
 #include "_stl_extensions.h"
 
-#define VPUSH( a ) ( ( a ).x ), ( ( a ).y ), ( ( a ).z )
+#define VPUSH(a)	((a).x), ((a).y), ((a).z)
 
-void XRCORE_API Msg( const char* format, ... );
+void 	XRCORE_API		Msg	(const char* format, ...);
 
 // Old shit
-void XRCORE_API Log( const char* msg );
-void XRCORE_API Log( const char* msg, const Fvector& dop );
-void XRCORE_API Log( const char* msg, const Fmatrix& dop );
-void XRCORE_API Log( const char* msg, const char* dop );
-void XRCORE_API Log( const char* msg, u32 dop );
-void XRCORE_API Log( const char* msg, int dop );
-void XRCORE_API Log( const char* msg, float dop );
-void XRCORE_API LogWinErr( const char* msg, long err_code );
+void 	XRCORE_API		Log			(const char* msg);
+void 	XRCORE_API		Log			(const char* msg, const Fvector& dop);
+void 	XRCORE_API		Log			(const char* msg, const Fmatrix& dop);
+void 	XRCORE_API		Log			(const char* msg, const char* dop);
+void 	XRCORE_API		Log			(const char* msg, u32 dop);
+void 	XRCORE_API		Log			(const char* msg, int dop);
+void 	XRCORE_API		Log			(const char* msg, float dop);
+void 	XRCORE_API		LogWinErr(const char* msg, long err_code);
 
-xr_string FormatString( LPCSTR fmt, ... );
+xr_string FormatString(LPCSTR fmt, ...);
 
-class XRCORE_API xrLogger {
+class XRCORE_API xrLogger
+{
 public:
-    using LogCallback = void ( * )( const char* string );
+	using LogCallback = void(*)	(const char* string);
 
-    void Msg( LPCSTR Msg, va_list argList );
-    void SimpleMessage( LPCSTR Message, u32 MessageSize = 0 );
+	void Msg(LPCSTR Msg, va_list argList);
+	void SimpleMessage(LPCSTR Message, u32 MessageSize = 0);
 
-    static void OpenLogFile();
-    static const string_path& GetLogPath();
-    static void EnableFastDebugLog();
-    static void InitLog();
-    static void FlushLog();
-    static void CloseLog();
-    static void SetImmediateMode( bool enable );
+	static void OpenLogFile();
+	static const string_path& GetLogPath();
+	static void EnableFastDebugLog();
+	static void InitLog();
+	static void FlushLog();
+	static void CloseLog();
+	static void SetImmediateMode(bool enable);
 
-    static void AddLogCallback( LogCallback logCb );
-    static void RemoveLogCallback( LogCallback logCb );
+	static void AddLogCallback(LogCallback logCb);
+	static void RemoveLogCallback(LogCallback logCb);
 
-    void PauseLogging();
-    void UnpauseLogging();
+	void PauseLogging();
+	void UnpauseLogging();
 
-    xrLogger();
-    ~xrLogger();
+	xrLogger();
+	~xrLogger();
 
-    void LogThreadEntry();
+	void LogThreadEntry();
 
 private:
-    void InternalCloseLog();
-    volatile bool bIsAlive;
-    ThreadID hLogThread;
+	void InternalCloseLog();
+	volatile bool bIsAlive;
+	ThreadID hLogThread;
 
-    void InternalOpenLogFile();
+	void InternalOpenLogFile();
 
-    void InternalPrintRecord();
-    void InternalPrintAllRecords();
+	void InternalPrintRecord();
+	void InternalPrintAllRecords();
 
-    void InternalFlushLog();
+	void InternalFlushLog();
 
-    string_path logFileName;
-    volatile IWriter* logFile;
+	string_path logFileName;
+	volatile IWriter* logFile;
 
-    struct LogRecord {
-        LogRecord() {}
+	struct LogRecord
+	{
+		LogRecord() {}
+		LogRecord(LPCSTR Msg, u32 sizeMsg);
+		xr_string Message;
+		Time time;
+	};
 
-        LogRecord( LPCSTR Msg, u32 sizeMsg );
-        xr_string Message;
-        Time time;
-    };
+	xrCriticalSection logDataGuard;
+	xrCriticalSection logCallbackGuard;
+	xrCriticalSection logFlushGuard;
+	bool bFastDebugLog;
 
-    xrCriticalSection logDataGuard;
-    xrCriticalSection logCallbackGuard;
-    xrCriticalSection logFlushGuard;
-    bool bFastDebugLog;
+	std::atomic_bool bFlushRequested;
+	bool bImmediateMode;
 
-    std::atomic_bool bFlushRequested;
-    bool bImmediateMode;
-
-    // LogCallback onLogMsg;
-    xr_list< LogCallback > logCallbackList;
-    xr_fixedqueue< xr_string, 512 > tempLogData;
-
+	//LogCallback onLogMsg;
+	xr_list<LogCallback> logCallbackList;
+	xr_fixedqueue<xr_string, 512> tempLogData;
 public:
-    static xr_queue< LogRecord >* logData;
+	static xr_queue <LogRecord>* logData;
 };

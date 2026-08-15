@@ -2,60 +2,50 @@
 #define _CPS_Instance_H_
 
 #include "../xrCDB/ISpatial.h"
-#include "IRenderable.h"
 #include "ISheduled.h"
+#include "IRenderable.h"
 
-class ENGINE_API CPS_Instance : public IRenderable, public intrusive_base {
-    friend class IGame_Persistent;
-    friend class CParticlesAsync;
+class ENGINE_API CPS_Instance	:
+	public IRenderable,
+	public intrusive_base
+{
+	friend class IGame_Persistent;
+	friend class CParticlesAsync;
 
-    template < bool _is_pm, typename T >
-    friend struct xr_special_free;
+	template <bool _is_pm, typename T>
+	friend struct xr_special_free;
 
 private:
-    bool m_destroy_on_game_load;
+	bool m_destroy_on_game_load;
 
 protected:
-    u32 dwLastTime;
-    int m_iLifeTime;
-    BOOL m_bAutoRemove;
-    BOOL m_bDead;
-    volatile bool m_NeedDestroy = false;
+	u32 dwLastTime;
+	int m_iLifeTime;
+	BOOL m_bAutoRemove;
+	BOOL m_bDead;
+	volatile bool m_NeedDestroy = false;
 
 protected:
-    virtual ~CPS_Instance();
-    virtual void PSI_internal_delete();
+	virtual ~CPS_Instance();
+	virtual void PSI_internal_delete();
 
 public:
-    CPS_Instance( bool destroy_on_game_load );
+	CPS_Instance(bool destroy_on_game_load);
 
-    IC const bool& destroy_on_game_load() const {
-        return m_destroy_on_game_load;
-    }
+	IC const bool& destroy_on_game_load() const { return m_destroy_on_game_load; }
+	virtual void PSI_destroy();
+	IC BOOL PSI_alive() { return m_iLifeTime > 0; }
+	IC BOOL PSI_IsAutomatic() { return m_bAutoRemove; }
+	IC void PSI_SetLifeTime(float life_time) { m_iLifeTime = iFloor(life_time * 1000); }
 
-    virtual void PSI_destroy();
+	virtual void Play(bool bHudMode) = 0;
+	virtual BOOL Locked() { return FALSE; }
+	virtual void Update(u32 dt) {};
 
-    IC BOOL PSI_alive() { return m_iLifeTime > 0; }
+	virtual shared_str shedule_Name() const { return shared_str("particle_instance"); };
 
-    IC BOOL PSI_IsAutomatic() { return m_bAutoRemove; }
-
-    IC void PSI_SetLifeTime( float life_time ) {
-        m_iLifeTime = iFloor( life_time * 1000 );
-    }
-
-    virtual void Play( bool bHudMode ) = 0;
-
-    virtual BOOL Locked() { return FALSE; }
-
-    virtual void Update( u32 dt ) {};
-
-    virtual shared_str shedule_Name() const {
-        return shared_str( "particle_instance" );
-    };
-
-    virtual void shedule_Update( u32 dt );
-
-    virtual IRenderable* dcast_Renderable() { return this; }
+	virtual void shedule_Update(u32 dt);
+	virtual IRenderable* dcast_Renderable() { return this; }
 };
 
 #endif

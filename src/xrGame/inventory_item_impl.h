@@ -10,8 +10,9 @@
 
 #include "Inventory.h"
 
-IC CInventoryOwner& CInventoryItem::inventory_owner() const {
-    VERIFY( m_pInventory );
-    VERIFY( m_pInventory->GetOwner() );
-    return ( *m_pInventory->GetOwner() );
+IC CInventoryOwner& CInventoryItem::inventory_owner() const
+{
+	VERIFY(m_pInventory);
+	VERIFY(m_pInventory->GetOwner());
+	return (*m_pInventory->GetOwner());
 }

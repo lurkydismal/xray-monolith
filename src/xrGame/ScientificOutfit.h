@@ -3,15 +3,16 @@
 // ScientificOutfit - защитный костюм ученого
 ///////////////////////////////////////////////////////////////
 
+
 #pragma once
 
 #include "CustomOutfit.h"
 
-class CScientificOutfit : public CCustomOutfit {
+class CScientificOutfit : public CCustomOutfit
+{
 private:
-    typedef CCustomOutfit inherited;
-
+	typedef CCustomOutfit inherited;
 public:
-    CScientificOutfit( void );
-    virtual ~CScientificOutfit( void );
+	CScientificOutfit(void);
+	virtual ~CScientificOutfit(void);
 };

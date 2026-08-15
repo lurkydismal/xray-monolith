@@ -13,75 +13,56 @@ class CLevelGraph;
 class CGameLevelCrossTable;
 class CGameGraph;
 
-#include "game_graph_space.h"
 #include "object_interfaces.h"
+#include "game_graph_space.h"
 
-class CPatrolPoint : public IPureSerializeObject< IReader, IWriter > {
-    friend class CPatrolPathStorage;
+class CPatrolPoint : public IPureSerializeObject<IReader, IWriter>
+{
+	friend class CPatrolPathStorage;
 
 protected:
-    shared_str m_name;
-    Fvector m_position;
-    u32 m_flags;
-    u32 m_level_vertex_id;
-    GameGraph::_GRAPH_ID m_game_vertex_id;
+	shared_str m_name;
+	Fvector m_position;
+	u32 m_flags;
+	u32 m_level_vertex_id;
+	GameGraph::_GRAPH_ID m_game_vertex_id;
 
 protected:
 #ifdef DEBUG
-    bool m_initialized;
-    const CPatrolPath* m_path;
+	bool								m_initialized;
+	const CPatrolPath					*m_path;
 #endif
 
 private:
-    IC void correct_position( const CLevelGraph* level_graph,
-                              const CGameLevelCrossTable* cross,
-                              const CGameGraph* game_graph );
+	IC void correct_position(const CLevelGraph* level_graph, const CGameLevelCrossTable* cross,
+	                         const CGameGraph* game_graph);
 #ifdef DEBUG
-    void verify_vertex_id( const CLevelGraph* level_graph,
-                           const CGameLevelCrossTable* cross,
-                           const CGameGraph* game_graph ) const;
+	void verify_vertex_id(const CLevelGraph *level_graph, const CGameLevelCrossTable *cross, const CGameGraph *game_graph) const;
 #endif
 
 public:
-    CPatrolPoint( const CLevelGraph* level_graph,
-                  const CGameLevelCrossTable* cross,
-                  const CGameGraph* game_graph,
-                  const CPatrolPath* path,
-                  const Fvector& position,
-                  u32 level_vertex_id,
-                  u32 flags,
-                  shared_str name );
-    CPatrolPoint( const CPatrolPath* path = 0 );
-    virtual void load( IReader& stream );
-    virtual void save( IWriter& stream );
-    CPatrolPoint& load_raw( const CLevelGraph* level_graph,
-                            const CGameLevelCrossTable* cross,
-                            const CGameGraph* game_graph,
-                            IReader& stream );
-    CPatrolPoint& load_from_config( CInifile* ini_paths,
-                                    LPCSTR patrol_name,
-                                    LPCSTR point_name );
-    void set_lvid_from_position( const CLevelGraph* level_graph );
-    IC const Fvector& position() const;
-    IC const u32& level_vertex_id( const CLevelGraph* level_graph,
-                                   const CGameLevelCrossTable* cross,
-                                   const CGameGraph* game_graph ) const;
-    IC const GameGraph::_GRAPH_ID& game_vertex_id(
-        const CLevelGraph* level_graph,
-        const CGameLevelCrossTable* cross,
-        const CGameGraph* game_graph ) const;
-    IC const u32& flags() const;
-    IC const shared_str& name() const;
+	CPatrolPoint(const CLevelGraph* level_graph, const CGameLevelCrossTable* cross, const CGameGraph* game_graph, const CPatrolPath* path, const Fvector& position, u32 level_vertex_id, u32 flags, shared_str name);
+	CPatrolPoint(const CPatrolPath* path = 0);
+	virtual void load(IReader& stream);
+	virtual void save(IWriter& stream);
+	CPatrolPoint& load_raw(const CLevelGraph* level_graph, const CGameLevelCrossTable* cross, const CGameGraph* game_graph, IReader& stream);
+	CPatrolPoint& load_from_config(CInifile* ini_paths, LPCSTR patrol_name, LPCSTR point_name);
+	void set_lvid_from_position(const CLevelGraph* level_graph);
+	IC const Fvector& position() const;
+	IC const u32& level_vertex_id(const CLevelGraph* level_graph, const CGameLevelCrossTable* cross, const CGameGraph* game_graph) const;
+	IC const GameGraph::_GRAPH_ID& game_vertex_id(const CLevelGraph* level_graph, const CGameLevelCrossTable* cross, const CGameGraph* game_graph) const;
+	IC const u32& flags() const;
+	IC const shared_str& name() const;
 
 public:
 #ifdef XRGAME_EXPORTS
-    const u32& level_vertex_id() const;
-    const GameGraph::_GRAPH_ID& game_vertex_id() const;
+	const u32& level_vertex_id() const;
+	const GameGraph::_GRAPH_ID& game_vertex_id() const;
 #endif
 
 #ifdef DEBUG
 public:
-    IC void path( const CPatrolPath* path );
+	IC void path(const CPatrolPath *path);
 #endif
 };
 

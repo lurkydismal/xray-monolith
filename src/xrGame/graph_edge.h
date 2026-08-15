@@ -8,59 +8,60 @@
 
 #pragma once
 
-template < typename _edge_weight_type, typename _vertex_type >
-class CEdgeBase {
+template <typename _edge_weight_type, typename _vertex_type>
+class CEdgeBase
+{
 public:
-    typedef _edge_weight_type _edge_weight_type;
-    typedef _vertex_type _vertex_type;
-    typedef typename _vertex_type::_vertex_id_type _vertex_id_type;
+	typedef _edge_weight_type _edge_weight_type;
+	typedef _vertex_type _vertex_type;
+	typedef typename _vertex_type::_vertex_id_type _vertex_id_type;
 
 private:
-    _edge_weight_type m_weight;
-    _vertex_type* m_vertex;
+	_edge_weight_type m_weight;
+	_vertex_type* m_vertex;
 
 public:
-    IC CEdgeBase( const _edge_weight_type& weight, _vertex_type* vertex );
-    IC const _edge_weight_type& weight() const;
-    IC _vertex_type* vertex() const;
-    IC const _vertex_id_type& vertex_id() const;
+	IC CEdgeBase(const _edge_weight_type& weight, _vertex_type* vertex);
+	IC const _edge_weight_type& weight() const;
+	IC _vertex_type* vertex() const;
+	IC const _vertex_id_type& vertex_id() const;
 };
 
-template < typename _edge_weight_type,
-           typename _vertex_type,
-           typename _edge_data_type >
-class CEdge : public CEdgeBase< _edge_weight_type, _vertex_type > {
+template <typename _edge_weight_type, typename _vertex_type, typename _edge_data_type>
+class CEdge :
+	public CEdgeBase<_edge_weight_type,_vertex_type>
+{
 private:
-    typedef CEdgeBase< _edge_weight_type, _vertex_type > inherited;
+	typedef CEdgeBase<_edge_weight_type, _vertex_type> inherited;
 
 public:
     using _vertex_id_type = typename inherited::_vertex_id_type;
 
-    using inherited::vertex;
     using inherited::weight;
+    using inherited::vertex;
 
 private:
-    _edge_data_type m_data;
+	_edge_data_type m_data;
 
 public:
-    IC CEdge( const _edge_weight_type& weight, _vertex_type* vertex );
-    IC bool operator==( const _vertex_id_type& vertex_id ) const;
-    IC bool operator==( const CEdge& obj ) const;
-    IC const _edge_data_type& data() const;
-    IC _edge_data_type& data();
+	IC CEdge(const _edge_weight_type& weight, _vertex_type* vertex);
+	IC bool operator==(const _vertex_id_type& vertex_id) const;
+	IC bool operator==(const CEdge& obj) const;
+	IC const _edge_data_type& data() const;
+	IC _edge_data_type& data();
 };
 
-template < typename _edge_weight_type, typename _vertex_type >
-class CEdge< _edge_weight_type, _vertex_type, xr_empty >
-    : public CEdgeBase< _edge_weight_type, _vertex_type > {
+template <typename _edge_weight_type, typename _vertex_type>
+class CEdge<_edge_weight_type, _vertex_type, xr_empty> :
+	public CEdgeBase<_edge_weight_type,_vertex_type> {
 private:
-    typedef CEdgeBase< _edge_weight_type, _vertex_type > inherited;
-    using _vertex_id_type = inherited::_vertex_id_type;
+	typedef CEdgeBase<_edge_weight_type, _vertex_type> inherited;
+	using _vertex_id_type = inherited::_vertex_id_type;
 
 public:
-    IC CEdge( const _edge_weight_type& weight, _vertex_type* vertex );
-    IC bool operator==( const _vertex_id_type& vertex_id ) const;
-    IC bool operator==( const CEdge& obj ) const;
+	IC CEdge(const _edge_weight_type& weight, _vertex_type* vertex);
+	IC bool operator==(const _vertex_id_type& vertex_id) const;
+	IC bool operator==(const CEdge& obj) const;
 };
 
 #include "graph_edge_inline.h"

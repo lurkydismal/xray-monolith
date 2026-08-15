@@ -1,52 +1,53 @@
 #pragma once
 
-#include "../../../../xrServerEntities/script_export_space.h"
 #include "../basemonster/base_monster.h"
+#include "../../../../xrServerEntities/script_export_space.h"
 
-class CAI_PseudoDog : public CBaseMonster {
-    typedef CBaseMonster inherited;
-
-public:
-    float m_anger_hunger_threshold;
-    float m_anger_loud_threshold;
-
-    TTime m_time_became_angry;
-
-    TTime time_growling; // время нахождения в состоянии пугания
-
-    enum {
-        eAdditionalSounds = MonsterSound::eMonsterSoundCustom,
-        ePsyAttack = eAdditionalSounds | 0,
-    };
+class CAI_PseudoDog : public CBaseMonster
+{
+	typedef CBaseMonster inherited;
 
 public:
-    CAI_PseudoDog();
-    virtual ~CAI_PseudoDog();
 
-    virtual DLL_Pure* _construct();
+	float m_anger_hunger_threshold;
+	float m_anger_loud_threshold;
 
-    virtual void Load( LPCSTR section );
+	TTime m_time_became_angry;
 
-    virtual void reinit();
-    virtual void reload( LPCSTR section );
+	TTime time_growling; // время нахождения в состоянии пугания
 
-    virtual bool ability_can_drag() { return true; }
+	enum
+	{
+		eAdditionalSounds = MonsterSound::eMonsterSoundCustom,
+		ePsyAttack = eAdditionalSounds | 0,
+	};
 
-    virtual bool ability_psi_attack() { return true; }
+public:
+	CAI_PseudoDog();
+	virtual ~CAI_PseudoDog();
 
-    virtual void CheckSpecParams( u32 spec_params );
-    // virtual void	play_effect_sound	();
+	virtual DLL_Pure* _construct();
 
-    virtual void HitEntityInJump( const CEntity* pEntity );
+	virtual void Load(LPCSTR section);
 
-    virtual IStateManagerBase* create_state_manager();
+	virtual void reinit();
+	virtual void reload(LPCSTR section);
 
-    virtual const char* get_monster_class_name() { return "pseudodog"; }
+	virtual bool ability_can_drag() { return true; }
+	virtual bool ability_psi_attack() { return true; }
+
+	virtual void CheckSpecParams(u32 spec_params);
+	//virtual void	play_effect_sound	();
+
+	virtual void HitEntityInJump(const CEntity* pEntity);
+
+	virtual IStateManagerBase* create_state_manager();
+	virtual const char* get_monster_class_name() { return "pseudodog"; }
 
 private:
 #ifdef _DEBUG
-    virtual void debug_on_key( int key );
+	virtual void	debug_on_key		(int key);
 #endif
 
-    DECLARE_SCRIPT_REGISTER_FUNCTION
+DECLARE_SCRIPT_REGISTER_FUNCTION
 };

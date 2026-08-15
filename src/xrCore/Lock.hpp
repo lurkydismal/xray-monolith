@@ -2,41 +2,39 @@
 #include <atomic>
 
 #ifdef CONFIG_PROFILE_LOCKS
-typedef void ( *add_profile_portion_callback )( LPCSTR id, const u64& time );
-void XRCORE_API
-set_add_profile_portion( add_profile_portion_callback callback );
+typedef void(*add_profile_portion_callback)(LPCSTR id, const u64& time);
+void XRCORE_API set_add_profile_portion(add_profile_portion_callback callback);
 
 #define MUTEX_PROFILE_PREFIX_ID #mutexes /
-#define MUTEX_PROFILE_ID( a ) \
-    MACRO_TO_STRING( CONCATENIZE( MUTEX_PROFILE_PREFIX_ID, a ) )
+#define MUTEX_PROFILE_ID(a) MACRO_TO_STRING(CONCATENIZE(MUTEX_PROFILE_PREFIX_ID, a))
 #endif // CONFIG_PROFILE_LOCKS
 
-class Lock : xray::noncopyable {
-    struct LockImpl* impl;
-
+class Lock : xray::noncopyable
+{
+	struct LockImpl* impl;
 public:
 #ifdef CONFIG_PROFILE_LOCKS
-    Lock( const char* id );
+	Lock(const char* id);
 #else
-    Lock();
+	Lock();
 #endif
-    ~Lock();
+	~Lock();
 
 #ifdef CONFIG_PROFILE_LOCKS
-    void Enter();
+	void Enter();
 #else
-    void Enter();
+	void Enter();
 #endif
 
-    bool TryEnter();
+	bool TryEnter();
 
-    void Leave();
+	void Leave();
 
-    bool IsLocked() const { return !!lockCounter; }
+	bool IsLocked() const { return !!lockCounter; }
 
 private:
-    std::atomic_int lockCounter;
+	std::atomic_int lockCounter;
 #ifdef CONFIG_PROFILE_LOCKS
-    const char* id;
+	const char* id;
 #endif
 };
