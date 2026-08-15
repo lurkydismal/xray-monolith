@@ -1,3 +1,2 @@
-#include "pseudodog_psi_effector.h"
-
 #include "StdAfx.h"
+#include "pseudodog_psi_effector.h"

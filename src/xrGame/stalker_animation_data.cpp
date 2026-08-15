@@ -6,13 +6,12 @@
 //	Description : Stalker animation data
 ////////////////////////////////////////////////////////////////////////////
 
+#include "StdAfx.h"
 #include "stalker_animation_data.h"
 
-#include "StdAfx.h"
-
-CStalkerAnimationData::CStalkerAnimationData(
-    IKinematicsAnimated* skeleton_animated ) {
-    m_part_animations.Load( skeleton_animated, "" );
-    m_head_animations.Load( skeleton_animated, "" );
-    m_global_animations.Load( skeleton_animated, "item_" );
+CStalkerAnimationData::CStalkerAnimationData(IKinematicsAnimated* skeleton_animated)
+{
+	m_part_animations.Load(skeleton_animated, "");
+	m_head_animations.Load(skeleton_animated, "");
+	m_global_animations.Load(skeleton_animated, "item_");
 }

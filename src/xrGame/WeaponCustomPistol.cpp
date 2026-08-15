@@ -1,23 +1,30 @@
-#include "WeaponCustomPistol.h"
-
-#include "Entity.h"
 #include "StdAfx.h"
 
-CWeaponCustomPistol::CWeaponCustomPistol()
-    : CWeaponMagazined( SOUND_TYPE_WEAPON_PISTOL ) {}
+#include "Entity.h"
+#include "WeaponCustomPistol.h"
 
-CWeaponCustomPistol::~CWeaponCustomPistol() {}
-
-void CWeaponCustomPistol::switch2_Fire() {
-    m_bFireSingleShot = true;
-    bWorking = false;
-    m_iShotNum = 0;
-    m_bStopedAfterQueueFired = false;
+CWeaponCustomPistol::CWeaponCustomPistol() : CWeaponMagazined(SOUND_TYPE_WEAPON_PISTOL)
+{
 }
 
-void CWeaponCustomPistol::FireEnd() {
-    if ( fShotTimeCounter <= 0 ) {
-        SetPending( FALSE );
-        inherited::FireEnd();
-    }
+CWeaponCustomPistol::~CWeaponCustomPistol()
+{
+}
+
+void CWeaponCustomPistol::switch2_Fire()
+{
+	m_bFireSingleShot = true;
+	bWorking = false;
+	m_iShotNum = 0;
+	m_bStopedAfterQueueFired = false;
+}
+
+
+void CWeaponCustomPistol::FireEnd()
+{
+	if (fShotTimeCounter <= 0)
+	{
+		SetPending(FALSE);
+		inherited::FireEnd();
+	}
 }

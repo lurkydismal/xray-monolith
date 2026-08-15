@@ -3,15 +3,20 @@
 // FadedBall - артефакт блеклый шар
 ///////////////////////////////////////////////////////////////
 
-#include "FadedBall.h"
-
-#include "../xrPhysics/PhysicsShell.h"
 #include "StdAfx.h"
+#include "FadedBall.h"
+#include "../xrPhysics/PhysicsShell.h"
 
-CFadedBall::CFadedBall( void ) {}
 
-CFadedBall::~CFadedBall( void ) {}
+CFadedBall::CFadedBall(void)
+{
+}
 
-void CFadedBall::Load( LPCSTR section ) {
-    inherited::Load( section );
+CFadedBall::~CFadedBall(void)
+{
+}
+
+void CFadedBall::Load(LPCSTR section)
+{
+	inherited::Load(section);
 }

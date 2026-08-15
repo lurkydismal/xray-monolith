@@ -6,18 +6,17 @@
 //	Description : Danger explosive class
 ////////////////////////////////////////////////////////////////////////////
 
-#include "danger_explosive.h"
-
-#include "Explosive.h"
-#include "GameObject.h"
 #include "StdAfx.h"
+#include "danger_explosive.h"
+#include "GameObject.h"
+#include "Explosive.h"
 
-bool CDangerExplosive::operator==( const u16& object_id ) const {
-    if ( !m_grenade )
-        return ( false );
+bool CDangerExplosive::operator==(const u16& object_id) const
+{
+	if (!m_grenade)
+		return (false);
 
-    const CGameObject* game_object =
-        smart_cast< const CGameObject* >( m_grenade );
-    VERIFY( game_object );
-    return ( game_object->ID() == object_id );
+	const CGameObject* game_object = smart_cast<const CGameObject*>(m_grenade);
+	VERIFY(game_object);
+	return (game_object->ID() == object_id);
 }

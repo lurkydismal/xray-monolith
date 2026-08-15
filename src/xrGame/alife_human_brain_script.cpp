@@ -6,14 +6,16 @@
 //	Description : ALife human brain class script export
 ////////////////////////////////////////////////////////////////////////////
 
-#include "alife_human_brain.h"
 #include "pch_script.h"
+#include "alife_human_brain.h"
 
 using namespace luabind;
 
-#pragma optimize( "s", on )
-
-void CALifeHumanBrain::script_register( lua_State* L ) {
-    module( L )[ class_< CALifeHumanBrain, CALifeMonsterBrain >(
-        "CALifeHumanBrain" ) ];
+#pragma optimize("s",on)
+void CALifeHumanBrain::script_register(lua_State* L)
+{
+	module(L)
+	[
+		class_<CALifeHumanBrain, CALifeMonsterBrain>("CALifeHumanBrain")
+	];
 }

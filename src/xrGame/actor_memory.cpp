@@ -6,37 +6,45 @@
 //	Description : actor memory
 ////////////////////////////////////////////////////////////////////////////
 
-#include "actor_memory.h"
-
-#include "../xrEngine/CameraBase.h"
-#include "Actor.h"
-#include "GamePersistent.h"
 #include "StdAfx.h"
+#include "actor_memory.h"
+#include "Actor.h"
+#include "../xrEngine/CameraBase.h"
+#include "GamePersistent.h"
 
-CActorMemory::CActorMemory( CActor* actor )
-    : inherited( actor, 100 ), m_actor( actor ) {
-    VERIFY( m_actor );
+CActorMemory::CActorMemory(CActor* actor) :
+	inherited(
+		actor,
+		100
+	),
+	m_actor(actor)
+{
+	VERIFY(m_actor);
 }
 
-bool CActorMemory::feel_vision_isRelevant( CObject* O ) {
-    CEntityAlive* entity_alive = smart_cast< CEntityAlive* >( O );
-    if ( !entity_alive )
-        return ( false );
+bool CActorMemory::feel_vision_isRelevant(CObject* O)
+{
+	CEntityAlive* entity_alive = smart_cast<CEntityAlive*>(O);
+	if (!entity_alive)
+		return (false);
 
-    return ( true );
+	return (true);
 }
 
-void CActorMemory::camera( Fvector& position,
-                           Fvector& direction,
-                           Fvector& normal,
-                           float& field_of_view,
-                           float& aspect_ratio,
-                           float& near_plane,
-                           float& far_plane ) {
-    CCameraBase& camera = *m_actor->cam_Active();
-    camera.Get( position, direction, normal );
-    field_of_view = deg2rad( camera.f_fov );
-    aspect_ratio = camera.f_aspect;
-    near_plane = .1f;
-    far_plane = g_pGamePersistent->Environment().CurrentEnv->far_plane;
+void CActorMemory::camera(
+	Fvector& position,
+	Fvector& direction,
+	Fvector& normal,
+	float& field_of_view,
+	float& aspect_ratio,
+	float& near_plane,
+	float& far_plane
+)
+{
+	CCameraBase& camera = *m_actor->cam_Active();
+	camera.Get(position, direction, normal);
+	field_of_view = deg2rad(camera.f_fov);
+	aspect_ratio = camera.f_aspect;
+	near_plane = .1f;
+	far_plane = g_pGamePersistent->Environment().CurrentEnv->far_plane;
 }

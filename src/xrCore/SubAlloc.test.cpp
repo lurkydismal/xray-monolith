@@ -1,10 +1,10 @@
 #if 0
+#include "stdafx.h"
+
+#include "PPMdType.h"
 #include "SubAlloc.hpp"
 
 #include <gtest/gtest.h>
-
-#include "PPMdType.h"
-#include "stdafx.h"
 
 class SubAllocatorTest : public ::testing::Test
 {

@@ -6,11 +6,11 @@
 //	Description : Danger cover location
 ////////////////////////////////////////////////////////////////////////////
 
-#include "danger_cover_location.h"
-
 #include "StdAfx.h"
+#include "danger_cover_location.h"
 #include "cover_point.h"
 
-const Fvector& CDangerCoverLocation::position() const {
-    return ( m_cover->position() );
+const Fvector& CDangerCoverLocation::position() const
+{
+	return (m_cover->position());
 }

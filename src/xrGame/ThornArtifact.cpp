@@ -3,15 +3,20 @@
 // ThornArtefact - артефакт колючка
 ///////////////////////////////////////////////////////////////
 
-#include "ThornArtifact.h"
-
-#include "../xrPhysics/PhysicsShell.h"
 #include "StdAfx.h"
+#include "ThornArtifact.h"
+#include "../xrPhysics/PhysicsShell.h"
 
-CThornArtefact::CThornArtefact( void ) {}
 
-CThornArtefact::~CThornArtefact( void ) {}
+CThornArtefact::CThornArtefact(void)
+{
+}
 
-void CThornArtefact::Load( LPCSTR section ) {
-    inherited::Load( section );
+CThornArtefact::~CThornArtefact(void)
+{
+}
+
+void CThornArtefact::Load(LPCSTR section)
+{
+	inherited::Load(section);
 }

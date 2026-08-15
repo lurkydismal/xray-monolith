@@ -6,38 +6,41 @@
 //	Description : Script objects binder
 ////////////////////////////////////////////////////////////////////////////
 
+#include "pch_script.h"
+#include "ai_space.h"
+#include "script_engine.h"
 #include "script_binder.h"
-
+#include "xrServer_Objects_ALife.h"
+#include "script_binder_object.h"
+#include "script_game_object.h"
 #include "GameObject.h"
 #include "Level.h"
-#include "ai_space.h"
-#include "pch_script.h"
-#include "script_binder_object.h"
-#include "script_engine.h"
-#include "script_game_object.h"
-#include "xrServer_Objects_ALife.h"
 
 // comment next string when commiting
-// #define DBG_DISABLE_SCRIPTS
+//#define DBG_DISABLE_SCRIPTS
 
-CScriptBinder::CScriptBinder() {
-    init();
+CScriptBinder::CScriptBinder()
+{
+	init();
 }
 
-CScriptBinder::~CScriptBinder() {
-    VERIFY( !m_object );
+CScriptBinder::~CScriptBinder()
+{
+	VERIFY(!m_object);
 }
 
-void CScriptBinder::init() {
-    m_object = 0;
+void CScriptBinder::init()
+{
+	m_object = 0;
 }
 
-void CScriptBinder::clear() {
+void CScriptBinder::clear()
+{
 #if 0
 	try
 	{
 #endif
-    xr_delete( m_object );
+		xr_delete(m_object);
 #if 0
 	}
 	catch (...)
@@ -45,21 +48,23 @@ void CScriptBinder::clear() {
 		m_object = 0;
 	}
 #endif
-    init();
+	init();
 }
 
-void CScriptBinder::reinit() {
+void CScriptBinder::reinit()
+{
 #ifdef DEBUG_MEMORY_MANAGER
-    size_t start = 0;
-    if ( g_bMEMO )
-        start = Memory.mem_usage();
+	size_t									start = 0;
+	if (g_bMEMO)
+		start							= Memory.mem_usage();
 #endif // DEBUG_MEMORY_MANAGER
-    if ( m_object ) {
+	if (m_object)
+	{
 #if 0
 		try
 		{
 #endif
-        m_object->reinit();
+			m_object->reinit();
 #if 0
 		}
 		catch (...)
@@ -67,48 +72,48 @@ void CScriptBinder::reinit() {
 			clear();
 		}
 #endif
-    }
+	}
 #ifdef DEBUG_MEMORY_MANAGER
-    if ( g_bMEMO ) {
-        //		lua_gc
-        //(ai().script_engine().lua(),LUA_GCCOLLECT,0); 		lua_gc
-        //(ai().script_engine().lua(),LUA_GCCOLLECT,0);
-        Msg( "CScriptBinder::reinit() : %lld", Memory.mem_usage() - start );
-    }
+	if (g_bMEMO) {
+//		lua_gc				(ai().script_engine().lua(),LUA_GCCOLLECT,0);
+//		lua_gc				(ai().script_engine().lua(),LUA_GCCOLLECT,0);
+		Msg					("CScriptBinder::reinit() : %lld",Memory.mem_usage() - start);
+	}
 #endif // DEBUG_MEMORY_MANAGER
 }
 
-void CScriptBinder::Load( LPCSTR section ) {}
+void CScriptBinder::Load(LPCSTR section)
+{
+}
 
-void CScriptBinder::reload( LPCSTR section ) {
-    PROF_EVENT( "CScriptBinder::reload" );
+void CScriptBinder::reload(LPCSTR section)
+{
+	PROF_EVENT("CScriptBinder::reload");
 #ifdef DEBUG_MEMORY_MANAGER
-    size_t start = 0;
-    if ( g_bMEMO )
-        start = Memory.mem_usage();
+	size_t									start = 0;
+	if (g_bMEMO)
+		start							= Memory.mem_usage();
 #endif // DEBUG_MEMORY_MANAGER
 #ifndef DBG_DISABLE_SCRIPTS
-    VERIFY( !m_object );
-    if ( !pSettings->line_exist( section, "script_binding" ) )
-        return;
+	VERIFY(!m_object);
+	if (!pSettings->line_exist(section, "script_binding"))
+		return;
 
-    ::luabind::functor< void > lua_function;
-    if ( !ai().script_engine().functor(
-             pSettings->r_string( section, "script_binding" ),
-             lua_function ) ) {
-        ai().script_engine().script_log(
-            ScriptStorage::eLuaMessageTypeError, "function %s is not loaded!",
-            pSettings->r_string( section, "script_binding" ) );
-        return;
-    }
+	::luabind::functor<void> lua_function;
+	if (!ai().script_engine().functor(pSettings->r_string(section, "script_binding"), lua_function))
+	{
+		ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError, "function %s is not loaded!",
+		                                pSettings->r_string(section, "script_binding"));
+		return;
+	}
 
-    CGameObject* game_object = smart_cast< CGameObject* >( this );
+	CGameObject* game_object = smart_cast<CGameObject*>(this);
 
 #if 0
 	try
 	{
 #endif
-    lua_function( game_object ? game_object->lua_game_object() : 0 );
+		lua_function(game_object ? game_object->lua_game_object() : 0);
 #if 0
 	}
 	catch (...)
@@ -118,12 +123,13 @@ void CScriptBinder::reload( LPCSTR section ) {
 	}
 #endif
 
-    if ( m_object ) {
+	if (m_object)
+	{
 #if 0
 		try
 		{
 #endif
-        m_object->reload( section );
+			m_object->reload(section);
 #if 0
 		}
 		catch (...)
@@ -131,33 +137,34 @@ void CScriptBinder::reload( LPCSTR section ) {
 			clear();
 		}
 #endif
-    }
+	}
 #endif
 #ifdef DEBUG_MEMORY_MANAGER
-    if ( g_bMEMO ) {
-        //		lua_gc
-        //(ai().script_engine().lua(),LUA_GCCOLLECT,0); 		lua_gc
-        //(ai().script_engine().lua(),LUA_GCCOLLECT,0);
-        Msg( "CScriptBinder::reload() : %lld", Memory.mem_usage() - start );
-    }
+	if (g_bMEMO) {
+//		lua_gc				(ai().script_engine().lua(),LUA_GCCOLLECT,0);
+//		lua_gc				(ai().script_engine().lua(),LUA_GCCOLLECT,0);
+		Msg					("CScriptBinder::reload() : %lld",Memory.mem_usage() - start);
+	}
 #endif // DEBUG_MEMORY_MANAGER
 }
 
-BOOL CScriptBinder::net_Spawn( CSE_Abstract* DC ) {
-    PROF_EVENT( "CScriptBinder::net_Spawn" );
+BOOL CScriptBinder::net_Spawn(CSE_Abstract* DC)
+{
+	PROF_EVENT("CScriptBinder::net_Spawn");
 #ifdef DEBUG_MEMORY_MANAGER
-    size_t start = 0;
-    if ( g_bMEMO )
-        start = Memory.mem_usage();
+	size_t									start = 0;
+	if (g_bMEMO)
+		start							= Memory.mem_usage();
 #endif // DEBUG_MEMORY_MANAGER
-    CSE_Abstract* abstract = ( CSE_Abstract* )DC;
-    CSE_ALifeObject* object = smart_cast< CSE_ALifeObject* >( abstract );
-    if ( object && m_object ) {
+	CSE_Abstract* abstract = (CSE_Abstract*)DC;
+	CSE_ALifeObject* object = smart_cast<CSE_ALifeObject*>(abstract);
+	if (object && m_object)
+	{
 #if 0
 		try
 		{
 #endif
-        return ( ( BOOL )m_object->net_Spawn( object ) );
+			return ((BOOL)m_object->net_Spawn(object));
 #if 0
 		}
 		catch (...)
@@ -165,34 +172,32 @@ BOOL CScriptBinder::net_Spawn( CSE_Abstract* DC ) {
 			clear();
 		}
 #endif
-    }
+	}
 
 #ifdef DEBUG_MEMORY_MANAGER
-    if ( g_bMEMO ) {
-        //		lua_gc
-        //(ai().script_engine().lua(),LUA_GCCOLLECT,0); 		lua_gc
-        //(ai().script_engine().lua(),LUA_GCCOLLECT,0);
-        Msg( "CScriptBinder::net_Spawn() : %lld", Memory.mem_usage() - start );
-    }
+	if (g_bMEMO) {
+//		lua_gc				(ai().script_engine().lua(),LUA_GCCOLLECT,0);
+//		lua_gc				(ai().script_engine().lua(),LUA_GCCOLLECT,0);
+		Msg					("CScriptBinder::net_Spawn() : %lld",Memory.mem_usage() - start);
+	}
 #endif // DEBUG_MEMORY_MANAGER
 
-    return ( TRUE );
+	return (TRUE);
 }
 
-void CScriptBinder::net_Destroy() {
-    PROF_EVENT( "CScriptBinder::net_Destroy" );
-    if ( m_object ) {
+void CScriptBinder::net_Destroy()
+{
+	PROF_EVENT("CScriptBinder::net_Destroy");
+	if (m_object)
+	{
 #ifdef _DEBUG
-        Msg( "* Core object %s is UNbinded from the script object",
-             smart_cast< CGameObject* >( this )
-                 ? *smart_cast< CGameObject* >( this )->cName()
-                 : "" );
+		Msg						("* Core object %s is UNbinded from the script object",smart_cast<CGameObject*>(this) ? *smart_cast<CGameObject*>(this)->cName() : "");
 #endif // _DEBUG
 #if 0
 		try
 		{
 #endif
-        m_object->net_Destroy();
+			m_object->net_Destroy();
 #if 0
 		}
 		catch (...)
@@ -200,33 +205,36 @@ void CScriptBinder::net_Destroy() {
 			clear();
 		}
 #endif
-    }
-    xr_delete( m_object );
+	}
+	xr_delete(m_object);
 }
 
-void CScriptBinder::set_object( CScriptBinderObject* object ) {
-    if ( IsGameTypeSingle() ) {
-        VERIFY2( !m_object, "Cannot bind to the object twice!" );
+void CScriptBinder::set_object(CScriptBinderObject* object)
+{
+	if (IsGameTypeSingle())
+	{
+		VERIFY2(!m_object, "Cannot bind to the object twice!");
 #ifdef _DEBUG
-        Msg( "* Core object %s is binded with the script object",
-             smart_cast< CGameObject* >( this )
-                 ? *smart_cast< CGameObject* >( this )->cName()
-                 : "" );
+		Msg					("* Core object %s is binded with the script object",smart_cast<CGameObject*>(this) ? *smart_cast<CGameObject*>(this)->cName() : "");
 #endif // _DEBUG
-        m_object = object;
-    } else {
-        xr_delete( object );
-    }
+		m_object = object;
+	}
+	else
+	{
+		xr_delete(object);
+	}
 }
 
-void CScriptBinder::shedule_Update( u32 time_delta ) {
-    PROF_EVENT( "CScriptBinder::shedule_Update" );
-    if ( m_object ) {
+void CScriptBinder::shedule_Update(u32 time_delta)
+{
+	PROF_EVENT("CScriptBinder::shedule_Update");
+	if (m_object)
+	{
 #if 0
 		try
 		{
 #endif
-        m_object->shedule_Update( time_delta );
+			m_object->shedule_Update(time_delta);
 #if 0
 		}
 		catch (...)
@@ -234,17 +242,19 @@ void CScriptBinder::shedule_Update( u32 time_delta ) {
 			clear();
 		}
 #endif
-    }
+	}
 }
 
-void CScriptBinder::save( NET_Packet& output_packet ) {
-    PROF_EVENT( "CScriptBinder::save" );
-    if ( m_object ) {
+void CScriptBinder::save(NET_Packet& output_packet)
+{
+	PROF_EVENT("CScriptBinder::save");
+	if (m_object)
+	{
 #if 0
 		try
 		{
 #endif
-        m_object->save( &output_packet );
+			m_object->save(&output_packet);
 #if 0
 		}
 		catch (...)
@@ -252,17 +262,19 @@ void CScriptBinder::save( NET_Packet& output_packet ) {
 			clear();
 		}
 #endif
-    }
+	}
 }
 
-void CScriptBinder::load( IReader& input_packet ) {
-    PROF_EVENT( "CScriptBinder::load" );
-    if ( m_object ) {
+void CScriptBinder::load(IReader& input_packet)
+{
+	PROF_EVENT("CScriptBinder::load");
+	if (m_object)
+	{
 #if 0
 		try
 		{
 #endif
-        m_object->load( &input_packet );
+			m_object->load(&input_packet);
 #if 0
 		}
 		catch (...)
@@ -270,16 +282,18 @@ void CScriptBinder::load( IReader& input_packet ) {
 			clear();
 		}
 #endif
-    }
+	}
 }
 
-BOOL CScriptBinder::net_SaveRelevant() {
-    if ( m_object ) {
+BOOL CScriptBinder::net_SaveRelevant()
+{
+	if (m_object)
+	{
 #if 0
 		try
 		{
 #endif
-        return ( m_object->net_SaveRelevant() );
+			return (m_object->net_SaveRelevant());
 #if 0
 		}
 		catch (...)
@@ -287,19 +301,21 @@ BOOL CScriptBinder::net_SaveRelevant() {
 			clear();
 		}
 #endif
-    }
-    return ( FALSE );
+	}
+	return (FALSE);
 }
 
-void CScriptBinder::net_Relcase( CObject* object ) {
-    PROF_EVENT( "CScriptBinder::net_Relcase" );
-    CGameObject* game_object = smart_cast< CGameObject* >( object );
-    if ( m_object && game_object ) {
+void CScriptBinder::net_Relcase(CObject* object)
+{
+	PROF_EVENT("CScriptBinder::net_Relcase");
+	CGameObject* game_object = smart_cast<CGameObject*>(object);
+	if (m_object && game_object)
+	{
 #if 0
 		try
 		{
 #endif
-        m_object->net_Relcase( game_object->lua_game_object() );
+			m_object->net_Relcase(game_object->lua_game_object());
 #if 0
 		}
 		catch (...)
@@ -307,5 +323,5 @@ void CScriptBinder::net_Relcase( CObject* object ) {
 			clear();
 		}
 #endif
-    }
+	}
 }

@@ -6,8 +6,9 @@
 //	Description : XRay Script hit class
 ////////////////////////////////////////////////////////////////////////////
 
+#include "StdAfx.h"
 #include "script_hit.h"
 
-#include "StdAfx.h"
-
-CScriptHit::~CScriptHit() {}
+CScriptHit::~CScriptHit()
+{
+}

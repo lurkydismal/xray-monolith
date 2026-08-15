@@ -14,7 +14,7 @@ Copyright (c) 1997-2000 John Robbins -- All rights reserved.
 // STL will not compile at /W4 /WX.  Not good.
 #ifndef _DEBUG
 // function '' not inlined
-#pragma warning( disable : 4710 )
+#pragma warning ( disable : 4710 )
 #endif
 #pragma warning( push, 3 )
 #include <vector>
@@ -41,10 +41,10 @@ typedef vector<ULONG> ADDRVECTOR ;
                            File Scope Globals
 //////////////////////////////////////////////////////////////////////*/
 // The HMODULE vector.
-#pragma warning( push )
-#pragma warning( disable : 4530 )
+#pragma warning(push)
+#pragma warning(disable:4530)
 static HINSTVECTOR g_HMODVector ;
-#pragma warning( pop )
+#pragma warning(pop)
 
 // The DiagAssert display options.
 static DWORD g_DiagAssertOptions = DA_SHOWMSGBOX | DA_SHOWODS ;
@@ -163,7 +163,7 @@ BOOL  __stdcall
 }
 
 // Turn off unreachable code error after ExitProcess.
-#pragma warning( disable : 4702 )
+#pragma warning ( disable : 4702 )
 
 // The code that does the real assertion work.
 BOOL __stdcall RealAssert  ( DWORD  dwOverrideOpts  ,
@@ -329,7 +329,7 @@ BOOL __stdcall RealAssert  ( DWORD  dwOverrideOpts  ,
     return ( TRUE ) ;
 }
 // Turn on unreachable code error
-#pragma warning( default : 4702 )
+#pragma warning ( default : 4702 )
 
 HANDLE  __stdcall
     SetDiagOutputFile ( HANDLE hFile )
@@ -475,7 +475,7 @@ static DWORD __stdcall GetModBase ( HANDLE hProcess , DWORD dwAddr )
                 TRACE ( "SymLoadModule failed : 0x%08X\n" ,
                         GetLastError ( )                   ) ;
             }
-#endif // _DEBUG
+#endif  // _DEBUG
             return ( (DWORD)stMBI.AllocationBase ) ;
         }
     }
@@ -616,10 +616,10 @@ void DoStackTrace ( LPTSTR szString  ,
     // The symbol engine is initialized so do the stack walk.
 
     // The array of addresses.
-#pragma warning( push )
-#pragma warning( disable : 4530 )
+#pragma warning(push)
+#pragma warning(disable:4530)
     ADDRVECTOR vAddrs ;
-#pragma warning( pop )
+#pragma warning(pop)
 
     // The thread information.
     CONTEXT    stCtx  ;
@@ -638,7 +638,7 @@ void DoStackTrace ( LPTSTR szString  ,
 
         stFrame.AddrPC.Mode = AddrModeFlat ;
 
-#if defined( _M_IX86 )
+#if defined (_M_IX86)
         dwMachine                = IMAGE_FILE_MACHINE_I386 ;
 
         stFrame.AddrPC.Offset    = stCtx.Eip    ;
@@ -648,7 +648,7 @@ void DoStackTrace ( LPTSTR szString  ,
         stFrame.AddrStack.Mode   = AddrModeFlat ;
         stFrame.AddrFrame.Mode   = AddrModeFlat ;
 
-#elif defined( _M_ALPHA )
+#elif defined (_M_ALPHA)
         dwMachine                = IMAGE_FILE_MACHINE_ALPHA ;
         stFrame.AddrPC.Offset    = (unsigned long)stCtx.Fir ;
 #else

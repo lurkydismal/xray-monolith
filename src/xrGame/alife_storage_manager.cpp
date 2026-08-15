@@ -6,27 +6,26 @@
 //	Description : ALife Simulator storage manager
 ////////////////////////////////////////////////////////////////////////////
 
-#include "alife_storage_manager.h"
-
-#include "../xrEngine/IGame_Persistent.h"
-#include "../xrEngine/x_ray.h"
-#include "Level.h"
 #include "StdAfx.h"
+#include "alife_storage_manager.h"
+#include "alife_simulator_header.h"
+#include "alife_time_manager.h"
+#include "alife_spawn_registry.h"
+#include "alife_object_registry.h"
 #include "alife_graph_registry.h"
 #include "alife_group_registry.h"
-#include "alife_object_registry.h"
 #include "alife_registry_container.h"
-#include "alife_simulator_header.h"
-#include "alife_spawn_registry.h"
-#include "alife_time_manager.h"
-#include "autosave_manager.h"
+#include "xrServer.h"
+#include "Level.h"
+#include "../xrEngine/x_ray.h"
 #include "saved_game_wrapper.h"
 #include "string_table.h"
-#include "xrServer.h"
-// Alundaio
+#include "../xrEngine/IGame_Persistent.h"
+#include "autosave_manager.h"
+//Alundaio
 #ifdef ENGINE_LUA_ALIFE_STORAGE_MANAGER_CALLBACKS
-#include "../../xrServerEntities/script_engine.h"
 #include "pch_script.h"
+#include "../../xrServerEntities/script_engine.h"
 #endif
 //-Alundaio
 
@@ -34,318 +33,314 @@ extern XRCORE_API string_path g_bug_report_file;
 
 using namespace ALife;
 #ifdef ENGINE_LUA_ALIFE_STORAGE_MANAGER_CALLBACKS
-// Alundaio
+ //Alundaio
 #endif
 
 extern string_path g_last_saved_game;
 
-namespace {
-struct prepared_save {
-    NativeLoadExecutor::Batch batch;
-    xr_task_group fallback_task;
-    xr_vector< u8 > data;
-    xr_string name;
-    string_path file_name{};
-    bool active = false;
-    bool valid = false;
+namespace
+{
+struct prepared_save
+{
+	NativeLoadExecutor::Batch batch;
+	xr_task_group fallback_task;
+	xr_vector<u8> data;
+	xr_string name;
+	string_path file_name{};
+	bool active = false;
+	bool valid = false;
 
-    void wait() {
-        if ( batch.Valid() )
-            NativeLoadExecutor::Instance().Wait( batch );
-        fallback_task.wait();
-    }
+	void wait()
+	{
+		if (batch.Valid())
+			NativeLoadExecutor::Instance().Wait(batch);
+		fallback_task.wait();
+	}
 } g_prepared_save;
 
-void cleanup_prepared_save() {
+void cleanup_prepared_save()
+{
 #if 0
 	try
 	{
 #endif
-    g_prepared_save.wait();
+		g_prepared_save.wait();
 #if 0
 	}
 	catch (...)
 	{
 	}
 #endif
-    g_prepared_save.data.clear();
-    g_prepared_save.name.clear();
-    g_prepared_save.file_name[ 0 ] = 0;
-    g_prepared_save.active = false;
-    g_prepared_save.valid = false;
-    g_prepared_save.batch = {};
+	g_prepared_save.data.clear();
+	g_prepared_save.name.clear();
+	g_prepared_save.file_name[0] = 0;
+	g_prepared_save.active = false;
+	g_prepared_save.valid = false;
+	g_prepared_save.batch = {};
 }
-} // namespace
-
-void CALifeStorageManager::prepare_load( LPCSTR save_name ) {
-    cleanup_prepared_save();
-    g_prepared_save.name = save_name;
-    g_prepared_save.active = true;
-    g_prepared_save.valid = false;
-    CSavedGameWrapper::saved_game_full_name( save_name,
-                                             g_prepared_save.file_name );
-    NativeLoadExecutor& executor = NativeLoadExecutor::Instance();
-    g_prepared_save.batch = executor.BeginBatch( executor.CurrentGeneration() );
-    auto prepare = []() {
-        IReader* stream = FS.r_open( g_prepared_save.file_name );
-        if ( !stream || !CSavedGameWrapper::valid_saved_game( *stream ) ) {
-            if ( stream )
-                FS.r_close( stream );
-            return;
-        }
-
-        u32 source_count = stream->r_u32();
-        g_prepared_save.data.resize( source_count );
-        rtc_decompress( g_prepared_save.data.data(), source_count,
-                        stream->pointer(),
-                        stream->length() - 3 * sizeof( u32 ) );
-        FS.r_close( stream );
-        g_prepared_save.valid = true;
-    };
-    if ( g_prepared_save.batch.Valid() )
-        executor.Submit( g_prepared_save.batch, NativeLoadPriority::Spawn,
-                         std::move( prepare ) );
-    else
-        g_prepared_save.fallback_task.run( std::move( prepare ) );
 }
 
-CALifeStorageManager::~CALifeStorageManager() {
-    cleanup_prepared_save();
-    *g_last_saved_game = 0;
+void CALifeStorageManager::prepare_load(LPCSTR save_name)
+{
+	cleanup_prepared_save();
+	g_prepared_save.name = save_name;
+	g_prepared_save.active = true;
+	g_prepared_save.valid = false;
+	CSavedGameWrapper::saved_game_full_name(save_name, g_prepared_save.file_name);
+	NativeLoadExecutor& executor = NativeLoadExecutor::Instance();
+	g_prepared_save.batch = executor.BeginBatch(executor.CurrentGeneration());
+	auto prepare = []()
+	{
+		IReader* stream = FS.r_open(g_prepared_save.file_name);
+		if (!stream || !CSavedGameWrapper::valid_saved_game(*stream))
+		{
+			if (stream)
+				FS.r_close(stream);
+			return;
+		}
+
+		u32 source_count = stream->r_u32();
+		g_prepared_save.data.resize(source_count);
+		rtc_decompress(g_prepared_save.data.data(), source_count, stream->pointer(), stream->length() - 3 * sizeof(u32));
+		FS.r_close(stream);
+		g_prepared_save.valid = true;
+	};
+	if (g_prepared_save.batch.Valid())
+		executor.Submit(g_prepared_save.batch, NativeLoadPriority::Spawn, std::move(prepare));
+	else
+		g_prepared_save.fallback_task.run(std::move(prepare));
 }
 
-void CALifeStorageManager::save( LPCSTR save_name_no_check, bool update_name ) {
-    PROF_EVENT();
-    LPCSTR game_saves_path = FS.get_path( "$game_saves$" )->m_Path;
+CALifeStorageManager::~CALifeStorageManager()
+{
+	cleanup_prepared_save();
+	*g_last_saved_game = 0;
+}
 
-    string_path save_name;
-    strncpy_s( save_name, sizeof( save_name ), save_name_no_check,
-               sizeof( save_name ) - 5 - xr_strlen( SAVE_EXTENSION ) -
-                   xr_strlen( game_saves_path ) );
+void CALifeStorageManager::save(LPCSTR save_name_no_check, bool update_name)
+{
+	PROF_EVENT();
+	LPCSTR game_saves_path = FS.get_path("$game_saves$")->m_Path;
 
-    xr_strcpy( g_last_saved_game, save_name );
+	string_path save_name;
+	strncpy_s(save_name, sizeof(save_name), save_name_no_check,
+	          sizeof(save_name) - 5 - xr_strlen(SAVE_EXTENSION) - xr_strlen(game_saves_path));
 
-    string_path save;
-    xr_strcpy( save, m_save_name );
-    if ( save_name ) {
-        strconcat( sizeof( m_save_name ), m_save_name, save_name,
-                   SAVE_EXTENSION );
-    } else {
-        if ( !xr_strlen( m_save_name ) ) {
-            Log( "There is no file name specified!" );
-            return;
-        }
-    }
+	xr_strcpy(g_last_saved_game, save_name);
 
-    // Alundaio: To get the savegame fname to make our own custom save states
+	string_path save;
+	xr_strcpy(save, m_save_name);
+	if (save_name)
+	{
+		strconcat(sizeof(m_save_name), m_save_name, save_name, SAVE_EXTENSION);
+	}
+	else
+	{
+		if (!xr_strlen(m_save_name))
+		{
+			Log("There is no file name specified!");
+			return;
+		}
+	}
+
+	//Alundaio: To get the savegame fname to make our own custom save states
 #ifdef ENGINE_LUA_ALIFE_STORAGE_MANAGER_CALLBACKS
-    ::luabind::functor< void > funct1;
-    if ( ai().script_engine().functor(
-             "alife_storage_manager.CALifeStorageManager_before_save",
-             funct1 ) )
-        funct1( ( LPCSTR )m_save_name );
+	::luabind::functor<void> funct1;
+	if (ai().script_engine().functor("alife_storage_manager.CALifeStorageManager_before_save", funct1))
+		funct1((LPCSTR)m_save_name);
 #endif
-    //-Alundaio
+	//-Alundaio
 
-    u32 source_count;
-    u32 dest_count;
-    void* dest_data;
-    {
-        CMemoryWriter stream;
-        header().save( stream );
-        time_manager().save( stream );
-        spawns().save( stream );
-        objects().save( stream );
-        registry().save( stream );
+	u32 source_count;
+	u32 dest_count;
+	void* dest_data;
+	{
+		CMemoryWriter stream;
+		header().save(stream);
+		time_manager().save(stream);
+		spawns().save(stream);
+		objects().save(stream);
+		registry().save(stream);
 
-        source_count = stream.tell();
-        void* source_data = stream.pointer();
-        dest_count = rtc_csize( source_count );
-        dest_data = xr_malloc( dest_count );
-        dest_count =
-            rtc_compress( dest_data, dest_count, source_data, source_count );
-    }
+		source_count = stream.tell();
+		void* source_data = stream.pointer();
+		dest_count = rtc_csize(source_count);
+		dest_data = xr_malloc(dest_count);
+		dest_count = rtc_compress(dest_data, dest_count, source_data, source_count);
+	}
 
-    string_path temp;
-    FS.update_path( temp, "$game_saves$", m_save_name );
-    IWriter* writer = FS.w_open( temp );
-    writer->w_u32( u32( -1 ) );
-    writer->w_u32( ALIFE_VERSION );
+	string_path temp;
+	FS.update_path(temp, "$game_saves$", m_save_name);
+	IWriter* writer = FS.w_open(temp);
+	writer->w_u32(u32(-1));
+	writer->w_u32(ALIFE_VERSION);
 
-    writer->w_u32( source_count );
-    writer->w( dest_data, dest_count );
-    xr_free( dest_data );
-    FS.w_close( writer );
+	writer->w_u32(source_count);
+	writer->w(dest_data, dest_count);
+	xr_free(dest_data);
+	FS.w_close(writer);
 #ifdef DEBUG
-    Msg( "* Game %s is successfully saved to file '%s' (%d bytes compressed to "
-         "%d)",
-         m_save_name, temp, source_count, dest_count + 4 );
-#else  // DEBUG
-    Msg( "* Game %s is successfully saved to file '%s'", m_save_name, temp );
+	Msg							("* Game %s is successfully saved to file '%s' (%d bytes compressed to %d)",m_save_name,temp,source_count,dest_count + 4);
+#else // DEBUG
+	Msg("* Game %s is successfully saved to file '%s'", m_save_name, temp);
 #endif // DEBUG
 
-    // Alundaio: To get the savegame fname to make our own custom save states
+	//Alundaio: To get the savegame fname to make our own custom save states
 #ifdef ENGINE_LUA_ALIFE_STORAGE_MANAGER_CALLBACKS
-    ::luabind::functor< void > funct2;
-    if ( ai().script_engine().functor(
-             "alife_storage_manager.CALifeStorageManager_save", funct2 ) )
-        funct2( ( LPCSTR )m_save_name );
+	::luabind::functor<void> funct2;
+	if (ai().script_engine().functor("alife_storage_manager.CALifeStorageManager_save", funct2))
+		funct2((LPCSTR)m_save_name);
 #endif
-    //-Alundaio
+	//-Alundaio
 
-    if ( !update_name )
-        xr_strcpy( m_save_name, save );
+	if (!update_name)
+		xr_strcpy(m_save_name, save);
 }
 
-void CALifeStorageManager::load( void* buffer,
-                                 const u32& buffer_size,
-                                 LPCSTR file_name ) {
-    // Alundaio: So we can get the fname to make our own custom save states
+void CALifeStorageManager::load(void* buffer, const u32& buffer_size, LPCSTR file_name)
+{
+	//Alundaio: So we can get the fname to make our own custom save states
 #ifdef ENGINE_LUA_ALIFE_STORAGE_MANAGER_CALLBACKS
-    ::luabind::functor< void > funct;
-    if ( ai().script_engine().functor(
-             "alife_storage_manager.CALifeStorageManager_load", funct ) )
-        funct( file_name );
+	::luabind::functor<void> funct;
+	if (ai().script_engine().functor("alife_storage_manager.CALifeStorageManager_load", funct))
+		funct(file_name);
 #endif
-    //-Alundaio
+	//-Alundaio
 
-    IReader source( buffer, buffer_size );
-    header().load( source );
-    time_manager().load( source );
-    spawns().load( source, file_name );
-    graph().on_load();
-    objects().load( source );
+	IReader source(buffer, buffer_size);
+	header().load(source);
+	time_manager().load(source);
+	spawns().load(source, file_name);
+	graph().on_load();
+	objects().load(source);
 
-    VERIFY( can_register_objects() );
-    can_register_objects( false );
-    CALifeObjectRegistry::OBJECT_REGISTRY::iterator B =
-        objects().objects().begin();
-    CALifeObjectRegistry::OBJECT_REGISTRY::iterator E =
-        objects().objects().end();
-    CALifeObjectRegistry::OBJECT_REGISTRY::iterator I;
-    for ( I = B; I != E; ++I ) {
-        CSE_ALifeCreatureActor* actor =
-            smart_cast< CSE_ALifeCreatureActor* >( ( *I ).second );
-        if ( actor ) {
-            graph().prepare_current_level( actor );
-            break;
-        }
-    }
-    VERIFY( I != E );
+	VERIFY(can_register_objects());
+	can_register_objects(false);
+	CALifeObjectRegistry::OBJECT_REGISTRY::iterator B = objects().objects().begin();
+	CALifeObjectRegistry::OBJECT_REGISTRY::iterator E = objects().objects().end();
+	CALifeObjectRegistry::OBJECT_REGISTRY::iterator I;
+	for (I = B; I != E; ++I)
+	{
+		CSE_ALifeCreatureActor* actor = smart_cast<CSE_ALifeCreatureActor*>((*I).second);
+		if (actor)
+		{
+			graph().prepare_current_level(actor);
+			break;
+		}
+	}
+	VERIFY(I != E);
 
-    for ( I = B; I != E; ++I ) {
-        ALife::_OBJECT_ID id = ( *I ).second->ID;
-        ( *I ).second->ID = server().PerformIDgen( id );
-        VERIFY( id == ( *I ).second->ID );
-        register_object( ( *I ).second, false );
-    }
+	for (I = B; I != E; ++I)
+	{
+		ALife::_OBJECT_ID id = (*I).second->ID;
+		(*I).second->ID = server().PerformIDgen(id);
+		VERIFY(id == (*I).second->ID);
+		register_object((*I).second, false);
+	}
 
-    registry().load( source );
+	registry().load(source);
 
-    can_register_objects( true );
+	can_register_objects(true);
 
-    for ( I = B; I != E; ++I )
-        ( *I ).second->on_register();
+	for (I = B; I != E; ++I)
+		(*I).second->on_register();
 
-    if ( !g_pGameLevel )
-        return;
+	if (!g_pGameLevel)
+		return;
 
-    Level().autosave_manager().on_game_loaded();
+	Level().autosave_manager().on_game_loaded();
 }
 
-bool CALifeStorageManager::load( LPCSTR save_name_no_check ) {
-    LPCSTR game_saves_path = FS.get_path( "$game_saves$" )->m_Path;
+bool CALifeStorageManager::load(LPCSTR save_name_no_check)
+{
+	LPCSTR game_saves_path = FS.get_path("$game_saves$")->m_Path;
 
-    string_path save_name;
-    strncpy_s( save_name, sizeof( save_name ), save_name_no_check,
-               sizeof( save_name ) - 5 - xr_strlen( SAVE_EXTENSION ) -
-                   xr_strlen( game_saves_path ) );
+	string_path save_name;
+	strncpy_s(save_name, sizeof(save_name), save_name_no_check,
+	          sizeof(save_name) - 5 - xr_strlen(SAVE_EXTENSION) - xr_strlen(game_saves_path));
 
-    CTimer timer;
-    timer.Start();
+	CTimer timer;
+	timer.Start();
 
-    string_path save;
-    xr_strcpy( save, m_save_name );
-    if ( !save_name ) {
-        if ( !xr_strlen( m_save_name ) )
-            R_ASSERT2( false, "There is no file name specified!" );
-    } else {
-        strconcat( sizeof( m_save_name ), m_save_name, save_name,
-                   SAVE_EXTENSION );
-    }
-    string_path file_name;
-    FS.update_path( file_name, "$game_saves$", m_save_name );
+	string_path save;
+	xr_strcpy(save, m_save_name);
+	if (!save_name)
+	{
+		if (!xr_strlen(m_save_name))
+			R_ASSERT2(false, "There is no file name specified!");
+	}
+	else
+	{
+		strconcat(sizeof(m_save_name), m_save_name, save_name, SAVE_EXTENSION);
+	}
+	string_path file_name;
+	FS.update_path(file_name, "$game_saves$", m_save_name);
 
-    xr_strcpy( g_last_saved_game, save_name );
-    xr_strcpy( g_bug_report_file, file_name );
+	xr_strcpy(g_last_saved_game, save_name);
+	xr_strcpy(g_bug_report_file, file_name);
 
-    const bool prepared =
-        g_prepared_save.active && g_prepared_save.name == save_name;
-    IReader* stream = prepared ? nullptr : FS.r_open( file_name );
-    if ( !prepared && !stream ) {
-        Msg( "* Cannot find saved game %s", file_name );
-        xr_strcpy( m_save_name, save );
-        return ( false );
-    }
+	const bool prepared = g_prepared_save.active && g_prepared_save.name == save_name;
+	IReader* stream = prepared ? nullptr : FS.r_open(file_name);
+	if (!prepared && !stream)
+	{
+		Msg("* Cannot find saved game %s", file_name);
+		xr_strcpy(m_save_name, save);
+		return (false);
+	}
 
-    if ( !prepared )
-        CHECK_OR_EXIT(
-            CSavedGameWrapper::valid_saved_game( *stream ),
-            make_string(
-                "%s\nSaved game version mismatch or saved game is corrupted",
-                file_name ) );
-    /*
-            string512					temp;
-            strconcat
-       (sizeof(temp),temp,CStringTable().translate("st_loading_saved_game").c_str(),"
-       \"",save_name,SAVE_EXTENSION,"\""); g_pGamePersistent->LoadTitle(temp);
-    */
-    g_pGamePersistent->LoadTitle();
+	if (!prepared)
+		CHECK_OR_EXIT(CSavedGameWrapper::valid_saved_game(*stream),
+		              make_string("%s\nSaved game version mismatch or saved game is corrupted",file_name));
+	/*
+		string512					temp;
+		strconcat					(sizeof(temp),temp,CStringTable().translate("st_loading_saved_game").c_str()," \"",save_name,SAVE_EXTENSION,"\"");
+		g_pGamePersistent->LoadTitle(temp);
+	*/
+	g_pGamePersistent->LoadTitle();
 
-    unload();
-    reload( m_section );
+	unload();
+	reload(m_section);
 
-    if ( prepared ) {
-        g_prepared_save.wait();
-        CHECK_OR_EXIT(
-            g_prepared_save.valid,
-            make_string(
-                "%s\nSaved game version mismatch or saved game is corrupted",
-                file_name ) );
-        load( g_prepared_save.data.data(), g_prepared_save.data.size(),
-              file_name );
-        cleanup_prepared_save();
-    } else {
-        u32 source_count = stream->r_u32();
-        void* source_data = xr_malloc( source_count );
-        rtc_decompress( source_data, source_count, stream->pointer(),
-                        stream->length() - 3 * sizeof( u32 ) );
-        FS.r_close( stream );
-        load( source_data, source_count, file_name );
-        xr_free( source_data );
-    }
+	if (prepared)
+	{
+		g_prepared_save.wait();
+		CHECK_OR_EXIT(g_prepared_save.valid,
+		              make_string("%s\nSaved game version mismatch or saved game is corrupted",file_name));
+		load(g_prepared_save.data.data(), g_prepared_save.data.size(), file_name);
+		cleanup_prepared_save();
+	}
+	else
+	{
+		u32 source_count = stream->r_u32();
+		void* source_data = xr_malloc(source_count);
+		rtc_decompress(source_data, source_count, stream->pointer(), stream->length() - 3 * sizeof(u32));
+		FS.r_close(stream);
+		load(source_data, source_count, file_name);
+		xr_free(source_data);
+	}
 
-    groups().on_after_game_load();
+	groups().on_after_game_load();
 
-    VERIFY( graph().actor() );
+	VERIFY(graph().actor());
 
-    Msg( "* Game %s is successfully loaded from file '%s' (%.3fs)", save_name,
-         file_name, timer.GetElapsed_sec() );
+	Msg("* Game %s is successfully loaded from file '%s' (%.3fs)", save_name, file_name, timer.GetElapsed_sec());
 
-    return ( true );
+	return (true);
 }
 
-void CALifeStorageManager::save( NET_Packet& net_packet ) {
-    PROF_EVENT();
-    prepare_objects_for_save();
+void CALifeStorageManager::save(NET_Packet& net_packet)
+{
+	PROF_EVENT();
+	prepare_objects_for_save();
 
-    shared_str game_name;
-    net_packet.r_stringZ( game_name );
-    save( *game_name, !!net_packet.r_u8() );
+	shared_str game_name;
+	net_packet.r_stringZ(game_name);
+	save(*game_name, !!net_packet.r_u8());
 }
 
-void CALifeStorageManager::prepare_objects_for_save() {
-    PROF_EVENT();
-    Level().ClientSend();
-    Level().ClientSave();
+void CALifeStorageManager::prepare_objects_for_save()
+{
+	PROF_EVENT();
+	Level().ClientSend();
+	Level().ClientSave();
 }
