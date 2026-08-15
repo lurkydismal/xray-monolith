@@ -1,34 +1,31 @@
 #pragma once
 
+#include "../alife_time_manager.h"
 #include "UIWindow.h"
 #include "xrUIXmlParser.h"
-#include "../alife_time_manager.h"
 class CUIStatic;
 class CUITextWnd;
 struct GAME_NEWS_DATA;
 
-class CUINewsItemWnd : public CUIWindow
-{
-	typedef CUIWindow inherited;
+class CUINewsItemWnd : public CUIWindow {
+    typedef CUIWindow inherited;
 
-	CUITextWnd* m_UIDate;
-	CUITextWnd* m_UICaption;
-	CUITextWnd* m_UIText;
-	CUIStatic* m_UIImage;
+    CUITextWnd* m_UIDate;
+    CUITextWnd* m_UICaption;
+    CUITextWnd* m_UIText;
+    CUIStatic* m_UIImage;
 
-	// Store GAME_NEWS_DATA time
+    // Store GAME_NEWS_DATA time
 public:
-	ALife::_TIME_ID receive_time = 0;
+    ALife::_TIME_ID receive_time = 0;
 
 public:
-	CUINewsItemWnd();
-	virtual ~CUINewsItemWnd();
-	void Init(CUIXml& uiXml, LPCSTR start_from);
-	void Setup(GAME_NEWS_DATA& news_data);
+    CUINewsItemWnd();
+    virtual ~CUINewsItemWnd();
+    void Init( CUIXml& uiXml, LPCSTR start_from );
+    void Setup( GAME_NEWS_DATA& news_data );
 
-	virtual void Update()
-	{
-	};
+    virtual void Update() {};
 
-	virtual CUIWindow* ui_cast_window() { return this; }
+    virtual CUIWindow* ui_cast_window() { return this; }
 };

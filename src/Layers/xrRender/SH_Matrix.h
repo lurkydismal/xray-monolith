@@ -7,107 +7,108 @@
 class IReader;
 class IWriter;
 
-class ECORE_API CMatrix : public xr_resource_named
-{
+class ECORE_API CMatrix : public xr_resource_named {
 public:
-	enum { modeProgrammable=0, modeTCM, modeS_refl, modeC_refl, modeDetail };
+    enum { modeProgrammable = 0, modeTCM, modeS_refl, modeC_refl, modeDetail };
 
-	enum
-	{
-		tcmScale = (1 << 0),
-		tcmRotate = (1 << 1),
-		tcmScroll = (1 << 2),
-		tcmFORCE32 = u32(-1)
-	};
+    enum {
+        tcmScale = ( 1 << 0 ),
+        tcmRotate = ( 1 << 1 ),
+        tcmScroll = ( 1 << 2 ),
+        tcmFORCE32 = u32( -1 )
+    };
 
 public:
-	Fmatrix xform;
+    Fmatrix xform;
 
-	u32 dwFrame;
-	u32 dwMode;
+    u32 dwFrame;
+    u32 dwMode;
 
-	union
-	{
-		u32 tcm; // mask for tc-modifiers
-		Flags32 tcm_flags;
-	};
+    union {
+        u32 tcm; // mask for tc-modifiers
+        Flags32 tcm_flags;
+    };
 
-	WaveForm scaleU, scaleV;
-	WaveForm rotate;
-	WaveForm scrollU, scrollV;
+    WaveForm scaleU, scaleV;
+    WaveForm rotate;
+    WaveForm scrollU, scrollV;
 
-	// Non-Copyable (mt-safe)
-	/*CMatrix& operator=(const CMatrix& Other) = delete;
-	CMatrix& operator=(CMatrix&& Other) = delete;
-	CMatrix(const CMatrix& Other) = delete;*/
+    // Non-Copyable (mt-safe)
+    /*CMatrix& operator=(const CMatrix& Other) = delete;
+    CMatrix& operator=(CMatrix&& Other) = delete;
+    CMatrix(const CMatrix& Other) = delete;*/
 
-	CMatrix()
-	{
-		Memory.mem_fill(this, 0, sizeof(CMatrix));
-	}
+    CMatrix() { Memory.mem_fill( this, 0, sizeof( CMatrix ) ); }
 
-	IC void tc_trans(Fmatrix& T, float u, float v)
-	{
-		T.identity();
-		T.m[2][0] = u;
-		T.m[2][1] = v;
-	}
+    IC void tc_trans( Fmatrix& T, float u, float v ) {
+        T.identity();
+        T.m[ 2 ][ 0 ] = u;
+        T.m[ 2 ][ 1 ] = v;
+    }
 
-	void Calculate();
+    void Calculate();
 
-	IC BOOL Similar(CMatrix& M) // comare by modes and params
-	{
-		if (dwMode != M.dwMode) return FALSE;
-		if (tcm != M.tcm) return FALSE;
-		if (!scaleU.Similar(M.scaleU)) return FALSE;
-		if (!scaleV.Similar(M.scaleV)) return FALSE;
-		if (!rotate.Similar(M.rotate)) return FALSE;
-		if (!scrollU.Similar(M.scrollU)) return FALSE;
-		if (!scrollV.Similar(M.scrollV)) return FALSE;
-		return TRUE;
-	}
+    IC BOOL Similar( CMatrix& M ) // comare by modes and params
+    {
+        if ( dwMode != M.dwMode )
+            return FALSE;
+        if ( tcm != M.tcm )
+            return FALSE;
+        if ( !scaleU.Similar( M.scaleU ) )
+            return FALSE;
+        if ( !scaleV.Similar( M.scaleV ) )
+            return FALSE;
+        if ( !rotate.Similar( M.rotate ) )
+            return FALSE;
+        if ( !scrollU.Similar( M.scrollU ) )
+            return FALSE;
+        if ( !scrollV.Similar( M.scrollV ) )
+            return FALSE;
+        return TRUE;
+    }
 
-	void Load(IReader* fs);
-	void Save(IWriter* fs);
+    void Load( IReader* fs );
+    void Save( IWriter* fs );
 };
 
-typedef resptr_core<CMatrix, resptr_base<CMatrix>>
-ref_matrix;
+typedef resptr_core< CMatrix, resptr_base< CMatrix > > ref_matrix;
 
-constexpr std::string_view matrix_mode_name(u32 mode)
-{
-    switch (mode)
-    {
-    case CMatrix::modeProgrammable: return "Programmable";
-    case CMatrix::modeTCM:          return "TCM";
-    case CMatrix::modeS_refl:       return "S_refl";
-    case CMatrix::modeC_refl:       return "C_refl";
-    case CMatrix::modeDetail:       return "Detail";
-    default:                        return "<unknown>";
+constexpr std::string_view matrix_mode_name( u32 mode ) {
+    switch ( mode ) {
+        case CMatrix::modeProgrammable:
+            return "Programmable";
+        case CMatrix::modeTCM:
+            return "TCM";
+        case CMatrix::modeS_refl:
+            return "S_refl";
+        case CMatrix::modeC_refl:
+            return "C_refl";
+        case CMatrix::modeDetail:
+            return "Detail";
+        default:
+            return "<unknown>";
     }
 }
 
-inline std::string matrix_tcm_flags(u32 flags)
-{
+inline std::string matrix_tcm_flags( u32 flags ) {
     std::string r;
 
-    auto append = [&](const char* s)
-    {
-        if (!r.empty())
+    auto append = [ & ]( const char* s ) {
+        if ( !r.empty() )
             r += '|';
         r += s;
     };
 
-    if (flags & CMatrix::tcmScale)
-        append("Scale");
+    if ( flags & CMatrix::tcmScale )
+        append( "Scale" );
 
-    if (flags & CMatrix::tcmRotate)
-        append("Rotate");
+    if ( flags & CMatrix::tcmRotate )
+        append( "Rotate" );
 
-    if (flags & CMatrix::tcmScroll)
-        append("Scroll");
+    if ( flags & CMatrix::tcmScroll )
+        append( "Scroll" );
 
-    if (r.empty())
+    if ( r.empty() )
         r = "<none>";
 
     return r;

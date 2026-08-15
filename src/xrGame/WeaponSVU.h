@@ -3,13 +3,12 @@
 #include "WeaponCustomPistol.h"
 #include "script_export_space.h"
 
-class CWeaponSVU :
-	public CWeaponCustomPistol
-{
-	typedef CWeaponCustomPistol inherited;
-public:
-	CWeaponSVU(void);
-	virtual ~CWeaponSVU(void);
+class CWeaponSVU : public CWeaponCustomPistol {
+    typedef CWeaponCustomPistol inherited;
 
-DECLARE_SCRIPT_REGISTER_FUNCTION
+public:
+    CWeaponSVU( void );
+    virtual ~CWeaponSVU( void );
+
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

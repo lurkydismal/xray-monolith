@@ -1,7 +1,6 @@
 #pragma once
 #include "UIWindow.h"
 
-
 class CInventoryItem;
 class CUIStatic;
 class CUITextWnd;
@@ -18,63 +17,72 @@ class CUICellItem;
 
 extern const char* const fieldsCaptionColor;
 
-class CUIItemInfo : public CUIWindow
-{
+class CUIItemInfo : public CUIWindow {
 private:
-	typedef CUIWindow inherited;
+    typedef CUIWindow inherited;
 
-	struct _desc_info
-	{
-		CGameFont* pDescFont;
-		u32 uDescClr;
-		bool bShowDescrText;
-	};
+    struct _desc_info {
+        CGameFont* pDescFont;
+        u32 uDescClr;
+        bool bShowDescrText;
+    };
 
-	_desc_info m_desc_info;
-	CInventoryItem* m_pInvItem;
+    _desc_info m_desc_info;
+    CInventoryItem* m_pInvItem;
+
 public:
-	CUIItemInfo();
-	virtual ~CUIItemInfo();
-	CInventoryItem* CurrentItem() const { return m_pInvItem; }
-	void InitItemInfo(Fvector2 pos, Fvector2 size, LPCSTR xml_name);
-	void InitItemInfo(LPCSTR xml_name);
-	void InitItem(CUICellItem* pCellItem, CInventoryItem* pCompareItem = NULL, u32 item_price = u32(-1),
-	              LPCSTR trade_tip = NULL);
+    CUIItemInfo();
+    virtual ~CUIItemInfo();
 
+    CInventoryItem* CurrentItem() const { return m_pInvItem; }
 
-	void TryAddConditionInfo(CInventoryItem& pInvItem, CInventoryItem* pCompareItem);
-	void TryAddWpnInfo(CInventoryItem& pInvItem, CInventoryItem* pCompareItem);
-	void TryAddArtefactInfo(CInventoryItem& pInvItem); //(const shared_str& af_section);
-	void TryAddOutfitInfo(CInventoryItem& pInvItem, CInventoryItem* pCompareItem);
-	void TryAddUpgradeInfo(CInventoryItem& pInvItem);
-	void TryAddBoosterInfo(CInventoryItem& pInvItem);
+    void InitItemInfo( Fvector2 pos, Fvector2 size, LPCSTR xml_name );
+    void InitItemInfo( LPCSTR xml_name );
+    void InitItem( CUICellItem* pCellItem,
+                   CInventoryItem* pCompareItem = NULL,
+                   u32 item_price = u32( -1 ),
+                   LPCSTR trade_tip = NULL );
 
-	virtual CUIWindow* ui_cast_window() { return this; }
+    void TryAddConditionInfo( CInventoryItem& pInvItem,
+                              CInventoryItem* pCompareItem );
+    void TryAddWpnInfo( CInventoryItem& pInvItem,
+                        CInventoryItem* pCompareItem );
+    void TryAddArtefactInfo(
+        CInventoryItem& pInvItem ); //(const shared_str& af_section);
+    void TryAddOutfitInfo( CInventoryItem& pInvItem,
+                           CInventoryItem* pCompareItem );
+    void TryAddUpgradeInfo( CInventoryItem& pInvItem );
+    void TryAddBoosterInfo( CInventoryItem& pInvItem );
 
-	virtual void Draw();
-	bool m_b_FitToHeight;
-	u32 delay;
+    virtual CUIWindow* ui_cast_window() { return this; }
 
-	CUIFrameWindow* UIBackground;
-	CUITextWnd* UIName;
-	CUITextWnd* UIWeight;
-	CUITextWnd* UICost;
-	CUITextWnd* UITradeTip;
-	//	CUIStatic*			UIDesc_line;
-	CUIScrollView* UIDesc;
-	bool m_complex_desc;
+    virtual void Draw();
+    bool m_b_FitToHeight;
+    u32 delay;
 
-	//	CUIConditionParams*		UIConditionWnd;
-	CUIWpnParams* UIWpnParams;
-	CUIArtefactParams* UIArtefactParams;
-	UIInvUpgPropertiesWnd* UIProperties;
-	CUIOutfitInfo* UIOutfitInfo;
-	CUIBoosterInfo* UIBoosterInfo;
+    CUIFrameWindow* UIBackground;
+    CUITextWnd* UIName;
+    CUITextWnd* UIWeight;
+    CUITextWnd* UICost;
+    CUITextWnd* UITradeTip;
+    //	CUIStatic*			UIDesc_line;
+    CUIScrollView* UIDesc;
+    bool m_complex_desc;
 
-	Fvector2 UIItemImageSize;
-	CUIStatic* UIItemImage;
+    //	CUIConditionParams*		UIConditionWnd;
+    CUIWpnParams* UIWpnParams;
+    CUIArtefactParams* UIArtefactParams;
+    UIInvUpgPropertiesWnd* UIProperties;
+    CUIOutfitInfo* UIOutfitInfo;
+    CUIBoosterInfo* UIBoosterInfo;
+
+    Fvector2 UIItemImageSize;
+    CUIStatic* UIItemImage;
+
 private:
-	LPCSTR GetItemName(CInventoryItem& pInvItem, LPCSTR m_item_name);
-	LPCSTR GetItemShortName(CInventoryItem& pInvItem, LPCSTR m_item_short_name);
-	LPCSTR GetItemDescription(CInventoryItem& pInvItem, LPCSTR m_item_description);
+    LPCSTR GetItemName( CInventoryItem& pInvItem, LPCSTR m_item_name );
+    LPCSTR GetItemShortName( CInventoryItem& pInvItem,
+                             LPCSTR m_item_short_name );
+    LPCSTR GetItemDescription( CInventoryItem& pInvItem,
+                               LPCSTR m_item_description );
 };

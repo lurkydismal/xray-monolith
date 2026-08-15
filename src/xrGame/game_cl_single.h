@@ -2,40 +2,39 @@
 #include "game_cl_base.h"
 #include "script_export_space.h"
 
-class game_cl_Single : public game_cl_GameState
-{
-	typedef game_cl_GameState inherited;
-public :
-	game_cl_Single();
-	virtual CUIGameCustom* createGameUI();
-	virtual const char* getTeamSection(int Team);
-	virtual bool IsServerControlHits() { return true; };
+class game_cl_Single : public game_cl_GameState {
+    typedef game_cl_GameState inherited;
 
-	virtual ALife::_TIME_ID GetStartGameTime();
-	virtual ALife::_TIME_ID GetGameTime();
-	virtual float GetGameTimeFactor();
-	virtual void SetGameTimeFactor(const float fTimeFactor);
+public:
+    game_cl_Single();
+    virtual CUIGameCustom* createGameUI();
+    virtual const char* getTeamSection( int Team );
 
-	virtual ALife::_TIME_ID GetEnvironmentGameTime();
-	virtual float GetEnvironmentGameTimeFactor();
-	virtual void SetEnvironmentGameTimeFactor(const float fTimeFactor);
+    virtual bool IsServerControlHits() { return true; };
 
-	void OnDifficultyChanged();
+    virtual ALife::_TIME_ID GetStartGameTime();
+    virtual ALife::_TIME_ID GetGameTime();
+    virtual float GetGameTimeFactor();
+    virtual void SetGameTimeFactor( const float fTimeFactor );
+
+    virtual ALife::_TIME_ID GetEnvironmentGameTime();
+    virtual float GetEnvironmentGameTimeFactor();
+    virtual void SetEnvironmentGameTimeFactor( const float fTimeFactor );
+
+    void OnDifficultyChanged();
 };
 
-
 // game difficulty
-enum ESingleGameDifficulty
-{
-	egdNovice = 0,
-	egdStalker = 1,
-	egdVeteran = 2,
-	egdMaster = 3,
-	egdCount,
-	egd_force_u32 = u32(-1)
+enum ESingleGameDifficulty {
+    egdNovice = 0,
+    egdStalker = 1,
+    egdVeteran = 2,
+    egdMaster = 3,
+    egdCount,
+    egd_force_u32 = u32( -1 )
 };
 
 extern ESingleGameDifficulty g_SingleGameDifficulty;
-extern xr_token difficulty_type_token [ ];
+extern xr_token difficulty_type_token[];
 
-typedef enum_exporter<ESingleGameDifficulty> CScriptGameDifficulty;
+typedef enum_exporter< ESingleGameDifficulty > CScriptGameDifficulty;

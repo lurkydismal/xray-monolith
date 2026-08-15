@@ -4,41 +4,44 @@
 
 #include "SoundRender.h"
 
-class CSoundRender_Target
-{
+class CSoundRender_Target {
 protected:
-	CSoundRender_Emitter* m_pEmitter;
-	BOOL rendering;
+    CSoundRender_Emitter* m_pEmitter;
+    BOOL rendering;
+
 public:
-	float priority;
+    float priority;
+
 protected:
-	OggVorbis_File ovf;
-	IReader* wave;
-	void attach();
-	void dettach();
-public:
-	OggVorbis_File* get_data()
-	{
-		if (!wave) attach();
-		return &ovf;
-	}
+    OggVorbis_File ovf;
+    IReader* wave;
+    void attach();
+    void dettach();
 
 public:
-	CSoundRender_Target();
-	virtual ~CSoundRender_Target();
+    OggVorbis_File* get_data() {
+        if ( !wave )
+            attach();
+        return &ovf;
+    }
 
-	CSoundRender_Emitter* get_emitter() const { return m_pEmitter; }
-	BOOL get_Rendering() const { return rendering; }
+public:
+    CSoundRender_Target();
+    virtual ~CSoundRender_Target();
 
-	virtual BOOL _initialize() =0;
-	virtual void _destroy() =0;
-	virtual void _restart() =0;
+    CSoundRender_Emitter* get_emitter() const { return m_pEmitter; }
 
-	virtual void start(CSoundRender_Emitter* E) =0;
-	virtual void render() =0;
-	virtual void rewind() =0;
-	virtual void stop() =0;
-	virtual void update() =0;
-	virtual void fill_parameters() =0;
+    BOOL get_Rendering() const { return rendering; }
+
+    virtual BOOL _initialize() = 0;
+    virtual void _destroy() = 0;
+    virtual void _restart() = 0;
+
+    virtual void start( CSoundRender_Emitter* E ) = 0;
+    virtual void render() = 0;
+    virtual void rewind() = 0;
+    virtual void stop() = 0;
+    virtual void update() = 0;
+    virtual void fill_parameters() = 0;
 };
 #endif

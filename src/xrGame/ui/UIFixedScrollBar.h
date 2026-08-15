@@ -5,38 +5,41 @@ class CUI3tButton;
 class CUIScrollBox;
 class CUIFrameLineWnd;
 
-class CUIFixedScrollBar : public CUIScrollBar
-{
+class CUIFixedScrollBar : public CUIScrollBar {
 private:
-	typedef CUIWindow inherited;
+    typedef CUIWindow inherited;
+
 protected:
-	CUI3tButton* m_ScrollBox;
-	Ivector2 m_ScrollBoxOffset;
+    CUI3tButton* m_ScrollBox;
+    Ivector2 m_ScrollBoxOffset;
 
-	virtual void UpdateScrollBar();
-	virtual void ClampByViewRect();
-	virtual void SetPosScrollFromView(float view_pos, float view_width, float view_offs);
+    virtual void UpdateScrollBar();
+    virtual void ClampByViewRect();
+    virtual void SetPosScrollFromView( float view_pos,
+                                       float view_width,
+                                       float view_offs );
+
 public:
-	CUIFixedScrollBar();
-	virtual ~CUIFixedScrollBar();
-	virtual void InitScrollBar(Fvector2 pos, bool horizontal, LPCSTR profile = "pda");
+    CUIFixedScrollBar();
+    virtual ~CUIFixedScrollBar();
+    virtual void InitScrollBar( Fvector2 pos,
+                                bool horizontal,
+                                LPCSTR profile = "pda" );
 
-	virtual void SetWidth(float width)
-	{
-	};
+    virtual void SetWidth( float width ) {};
 
-	virtual void SetHeight(float height)
-	{
-	};
-	virtual void Draw() { inherited::Draw(); };
+    virtual void SetHeight( float height ) {};
 
-	virtual void SendMessage(CUIWindow* pWnd, s16 msg, void* pData);
-	virtual bool OnMouseAction(float x, float y, EUIMessages mouse_action);
-	virtual bool OnMouseDown(int mouse_btn);
-	virtual bool OnMouseDownEx();
-	virtual void OnMouseUp(int mouse_btn);
-	virtual bool OnKeyboardHold(int dik);
+    virtual void Draw() { inherited::Draw(); };
 
-	virtual CUIWindow* ui_cast_window() { return this; }
-	virtual CUIFixedScrollBar* ui_cast_fixed_scroll_bar() { return this; }
+    virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData );
+    virtual bool OnMouseAction( float x, float y, EUIMessages mouse_action );
+    virtual bool OnMouseDown( int mouse_btn );
+    virtual bool OnMouseDownEx();
+    virtual void OnMouseUp( int mouse_btn );
+    virtual bool OnKeyboardHold( int dik );
+
+    virtual CUIWindow* ui_cast_window() { return this; }
+
+    virtual CUIFixedScrollBar* ui_cast_fixed_scroll_bar() { return this; }
 };

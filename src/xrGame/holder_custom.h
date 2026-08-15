@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "GameObject.h"
+// #include "GameObject.h"
 
 #include "script_export_space.h"
 
@@ -11,76 +11,85 @@ class CActor;
 class CScriptGameObject;
 class CWeaponStatMgun;
 
-class CHolderCustom
-{
+class CHolderCustom {
 private:
-	CGameObject* m_owner;
-	CActor* m_ownerActor;
+    CGameObject* m_owner;
+    CActor* m_ownerActor;
+
 protected:
-	CGameObject* Owner() { return m_owner; }
-	CActor* OwnerActor() { return m_ownerActor; }
-	bool m_bEnterLocked;
-	bool m_bExitLocked;
+    CGameObject* Owner() { return m_owner; }
+
+    CActor* OwnerActor() { return m_ownerActor; }
+
+    bool m_bEnterLocked;
+    bool m_bExitLocked;
+
 public:
-	CHolderCustom()
-	{
-		m_owner = NULL;
-		m_ownerActor = NULL;
-		m_bEnterLocked = false;
-		m_bExitLocked = false;
-	}
+    CHolderCustom() {
+        m_owner = NULL;
+        m_ownerActor = NULL;
+        m_bEnterLocked = false;
+        m_bExitLocked = false;
+    }
 
-	virtual ~CHolderCustom() { ; }
+    virtual ~CHolderCustom() { ; }
 
-	virtual void UpdateEx(float fov)
-	{
-	}; //called by owner
+    virtual void UpdateEx( float fov ) {}; // called by owner
 
-	virtual CHolderCustom* cast_holder_custom() { return this; }
-	virtual CCar* cast_car() { return nullptr; }
-	virtual CGameObject* cast_game_object() { return nullptr; }
-	virtual CWeaponStatMgun* cast_weapon_stat_mgun() { return nullptr; }
+    virtual CHolderCustom* cast_holder_custom() { return this; }
 
-	bool Engaged() { return m_owner != NULL; }
-	virtual void OnMouseMove(int x, int y) = 0;
-	virtual void OnKeyboardPress(int dik) = 0;
-	virtual void OnKeyboardRelease(int dik) = 0;
-	virtual void OnKeyboardHold(int dik) = 0;
-	// Inventory for the car
-	virtual CInventory* GetInventory() = 0;
+    virtual CCar* cast_car() { return nullptr; }
 
-	virtual void cam_Update(float dt, float fov = 90.0f) = 0;
+    virtual CGameObject* cast_game_object() { return nullptr; }
 
-	virtual bool EnterLocked() { return m_bEnterLocked; }
-	virtual bool ExitLocked() { return m_bExitLocked; }
-	virtual void SetEnterLocked(bool v) { m_bEnterLocked = v; }
-	virtual void SetExitLocked(bool v) { m_bExitLocked = v; }
-	virtual bool Use(const Fvector& pos, const Fvector& dir, const Fvector& foot_pos) { return true; }
-	virtual bool attach_Actor(CGameObject* actor);
-	virtual void detach_Actor();
-	virtual bool allowWeapon() const = 0;
-	virtual bool HUDView() const = 0;
-	virtual Fvector ExitPosition() = 0;
-	virtual Fvector ExitVelocity() { return Fvector().set(0, 0, 0); }
-	virtual CCameraBase* Camera() = 0;
+    virtual CWeaponStatMgun* cast_weapon_stat_mgun() { return nullptr; }
 
-	virtual void Action(u16 id, u32 flags)
-	{
-	};
+    bool Engaged() { return m_owner != NULL; }
 
-	virtual void SetParam(int id, Fvector2 val)
-	{
-	};
+    virtual void OnMouseMove( int x, int y ) = 0;
+    virtual void OnKeyboardPress( int dik ) = 0;
+    virtual void OnKeyboardRelease( int dik ) = 0;
+    virtual void OnKeyboardHold( int dik ) = 0;
+    // Inventory for the car
+    virtual CInventory* GetInventory() = 0;
 
-	virtual void SetParam(int id, Fvector val)
-	{
-	};
+    virtual void cam_Update( float dt, float fov = 90.0f ) = 0;
 
-	shared_str m_sUseAction;
+    virtual bool EnterLocked() { return m_bEnterLocked; }
+
+    virtual bool ExitLocked() { return m_bExitLocked; }
+
+    virtual void SetEnterLocked( bool v ) { m_bEnterLocked = v; }
+
+    virtual void SetExitLocked( bool v ) { m_bExitLocked = v; }
+
+    virtual bool Use( const Fvector& pos,
+                      const Fvector& dir,
+                      const Fvector& foot_pos ) {
+        return true;
+    }
+
+    virtual bool attach_Actor( CGameObject* actor );
+    virtual void detach_Actor();
+    virtual bool allowWeapon() const = 0;
+    virtual bool HUDView() const = 0;
+    virtual Fvector ExitPosition() = 0;
+
+    virtual Fvector ExitVelocity() { return Fvector().set( 0, 0, 0 ); }
+
+    virtual CCameraBase* Camera() = 0;
+
+    virtual void Action( u16 id, u32 flags ) {};
+
+    virtual void SetParam( int id, Fvector2 val ) {};
+
+    virtual void SetParam( int id, Fvector val ) {};
+
+    shared_str m_sUseAction;
 
 #ifdef HOLDERCUSTOM_NEW
-	CScriptGameObject *Owner_script();
+    CScriptGameObject* Owner_script();
 #endif
 
-DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

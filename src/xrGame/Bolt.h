@@ -1,35 +1,34 @@
 #pragma once
-#include "Missile.h"
 #include "../xrPhysics/DamageSource.h"
+#include "Missile.h"
 
-class CBolt :
-	public CMissile,
-	public IDamageSource
-{
-	typedef CMissile inherited;
-	u16 m_thrower_id;
+class CBolt : public CMissile, public IDamageSource {
+    typedef CMissile inherited;
+    u16 m_thrower_id;
+
 public:
-	CBolt();
-	virtual ~CBolt();
+    CBolt();
+    virtual ~CBolt();
 
-	virtual void OnH_A_Chield();
+    virtual void OnH_A_Chield();
 
-	virtual void SetInitiator(u16 id);
-	virtual u16 Initiator();
+    virtual void SetInitiator( u16 id );
+    virtual u16 Initiator();
 
-	virtual void Throw();
-	virtual bool Action(u16 cmd, u32 flags);
-	virtual bool Useful() const;
-	virtual void activate_physic_shell();
+    virtual void Throw();
+    virtual bool Action( u16 cmd, u32 flags );
+    virtual bool Useful() const;
+    virtual void activate_physic_shell();
 
-	void PutNextToSlot();
-	virtual void State(u32 state, u32 old_state);
+    void PutNextToSlot();
+    virtual void State( u32 state, u32 old_state );
 
-	virtual BOOL UsedAI_Locations() { return FALSE; }
-	virtual IDamageSource* cast_IDamageSource() { return this; }
+    virtual BOOL UsedAI_Locations() { return FALSE; }
 
-	virtual CBolt* cast_bolt() { return this; }
+    virtual IDamageSource* cast_IDamageSource() { return this; }
+
+    virtual CBolt* cast_bolt() { return this; }
 
 private:
-	bool m_thrown;
+    bool m_thrown;
 };

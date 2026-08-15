@@ -8,191 +8,210 @@ class ENGINE_API CAviPlayerCustom;
 class CTheoraSurface;
 class CGIFAnimationPlayer;
 
-class ECORE_API CTexture : public xr_resource_named
-{
+class ECORE_API CTexture : public xr_resource_named {
 public:
-	//	Since DX10 allows up to 128 unique textures,
-	//	distance between enum values should be at leas 128
-	enum ResourceShaderType //	Don't change this since it's hardware-dependent
-	{
-		rstPixel = 0,
-		//	Default texture offset
-		rstVertex = D3DVERTEXTEXTURESAMPLER0,
-		rstGeometry = rstVertex + 256,
-		rstHull = rstGeometry + 256,
-		rstDomain = rstHull + 256,
-		rstCompute = rstDomain + 256,
-		rstInvalid = rstCompute + 256
-	};
+    //	Since DX10 allows up to 128 unique textures,
+    //	distance between enum values should be at leas 128
+    enum ResourceShaderType //	Don't change this since it's hardware-dependent
+    {
+        rstPixel = 0,
+        //	Default texture offset
+        rstVertex = D3DVERTEXTEXTURESAMPLER0,
+        rstGeometry = rstVertex + 256,
+        rstHull = rstGeometry + 256,
+        rstDomain = rstHull + 256,
+        rstCompute = rstDomain + 256,
+        rstInvalid = rstCompute + 256
+    };
 
 public:
-	void __stdcall apply_load(u32 stage);
-	void __stdcall apply_theora(u32 stage);
-	void __stdcall apply_avi(u32 stage);
-	void __stdcall apply_seq(u32 stage);
-    void __stdcall apply_gif(u32 stage);
-	void __stdcall apply_normal(u32 stage);
+    void __stdcall apply_load( u32 stage );
+    void __stdcall apply_theora( u32 stage );
+    void __stdcall apply_avi( u32 stage );
+    void __stdcall apply_seq( u32 stage );
+    void __stdcall apply_gif( u32 stage );
+    void __stdcall apply_normal( u32 stage );
 
-	void Preload();
-	void Load();
-	void LoadQueued();
-	void PostLoad();
-	void Unload(void);
-	void Bind(u32 stage)
-	{
-		wait_for_loading();
-		bind(stage);
-	}
-	bool TryQueueLoad();
-	void CancelQueuedLoad();
-	bool CanLoadAsync() const;
-	bool is_loaded() const;
-	void wait_for_loading() const;
-#if defined(USE_DX10) || defined(USE_DX11)
-	enum ELoadKind : u32
-	{
-		LoadKindUnknown,
-		LoadKindDds,
-		LoadKindOgm,
-		LoadKindAvi,
-		LoadKindSequence,
-		LoadKindGif,
-	};
-	void SetLoadSource(LPCSTR logical_name, LPCSTR resolved_path, ELoadKind kind);
+    void Preload();
+    void Load();
+    void LoadQueued();
+    void PostLoad();
+    void Unload( void );
+
+    void Bind( u32 stage ) {
+        wait_for_loading();
+        bind( stage );
+    }
+
+    bool TryQueueLoad();
+    void CancelQueuedLoad();
+    bool CanLoadAsync() const;
+    bool is_loaded() const;
+    void wait_for_loading() const;
+#if defined( USE_DX10 ) || defined( USE_DX11 )
+    enum ELoadKind : u32 {
+        LoadKindUnknown,
+        LoadKindDds,
+        LoadKindOgm,
+        LoadKindAvi,
+        LoadKindSequence,
+        LoadKindGif,
+    };
+
+    void SetLoadSource( LPCSTR logical_name,
+                        LPCSTR resolved_path,
+                        ELoadKind kind );
 #endif
-	//	void								Apply			(u32 dwStage);
+    //	void								Apply
+    //(u32 dwStage);
 
-	void surface_set(ID3DBaseTexture* surf);
-	ID3DBaseTexture* surface_get();
+    void surface_set( ID3DBaseTexture* surf );
+    ID3DBaseTexture* surface_get();
 
-	IC BOOL isUser() { return flags.bUser; }
-	IC u32 get_Width()
-	{
-		desc_enshure();
-		return desc.Width;
-	}
+    IC BOOL isUser() { return flags.bUser; }
 
-	IC u32 get_Height()
-	{
-		desc_enshure();
-		return desc.Height;
-	}
+    IC u32 get_Width() {
+        desc_enshure();
+        return desc.Width;
+    }
 
-	void video_Sync(u32 _time) { m_play_time = _time; }
-	void video_Play(BOOL looped, u32 _time = 0xFFFFFFFF);
-	void video_Pause(BOOL state);
-	void video_Stop();
-	BOOL video_IsPlaying();
+    IC u32 get_Height() {
+        desc_enshure();
+        return desc.Height;
+    }
 
-	CTexture();
-	virtual ~CTexture();
+    void video_Sync( u32 _time ) { m_play_time = _time; }
 
-#if defined(USE_DX10) || defined(USE_DX11)
-	ID3DShaderResourceView*				get_SRView() {return m_pSRView;}
-#endif	//	USE_DX10
+    void video_Play( BOOL looped, u32 _time = 0xFFFFFFFF );
+    void video_Pause( BOOL state );
+    void video_Stop();
+    BOOL video_IsPlaying();
+
+    CTexture();
+    virtual ~CTexture();
+
+#if defined( USE_DX10 ) || defined( USE_DX11 )
+    ID3DShaderResourceView* get_SRView() { return m_pSRView; }
+#endif //	USE_DX10
 
 private:
-	enum ELoadState : u32
-	{
-		LoadStateUnloaded,
-		LoadStateQueued,
-		LoadStateLoading,
-		LoadStateLoaded,
-		LoadStateUnloading,
-		LoadStateFailed,
-	};
+    enum ELoadState : u32 {
+        LoadStateUnloaded,
+        LoadStateQueued,
+        LoadStateLoading,
+        LoadStateLoaded,
+        LoadStateUnloading,
+        LoadStateFailed,
+    };
 
-	void Load(bool queued);
-	bool BeginLoad(bool queued);
-	void FinishLoad();
-	void FailLoad();
-	void ReleaseLoadedData();
-	IC BOOL desc_valid() { wait_for_loading(); return pSurface==desc_cache; }
-	IC void desc_enshure() { wait_for_loading(); if (!desc_valid()) desc_update(); }
-	void desc_update();
-#if defined(USE_DX10) || defined(USE_DX11)
-	void								Apply			(u32 dwStage);
-	void								ProcessStaging();
-	D3D_USAGE							GetUsage();
-#endif	//	USE_DX10
+    void Load( bool queued );
+    bool BeginLoad( bool queued );
+    void FinishLoad();
+    void FailLoad();
+    void ReleaseLoadedData();
 
-	//	Class data
+    IC BOOL desc_valid() {
+        wait_for_loading();
+        return pSurface == desc_cache;
+    }
+
+    IC void desc_enshure() {
+        wait_for_loading();
+        if ( !desc_valid() )
+            desc_update();
+    }
+
+    void desc_update();
+#if defined( USE_DX10 ) || defined( USE_DX11 )
+    void Apply( u32 dwStage );
+    void ProcessStaging();
+    D3D_USAGE GetUsage();
+#endif //	USE_DX10
+
+    //	Class data
 public: //	Public class members (must be encapsulated furthur)
-	struct
-	{
-		u32 bLoaded : 1;
-		u32 bUser : 1;
-		u32 seqCycles : 1;
-		u32 MemoryUsage : 27;
-#if defined(USE_DX10) || defined(USE_DX11)
-		u32					bLoadedAsStaging: 1;
-#endif	//	USE_DX10
-	} flags;
-	xr_atomic_u32 loadState;
-	mutable xr_atomic_u32 loadKind;
+    struct {
+        u32 bLoaded : 1;
+        u32 bUser : 1;
+        u32 seqCycles : 1;
+        u32 MemoryUsage : 27;
+#if defined( USE_DX10 ) || defined( USE_DX11 )
+        u32 bLoadedAsStaging : 1;
+#endif //	USE_DX10
+    } flags;
 
-    u32 dwLastUsedFrame = 0; // frame index of last Apply() call — used for eviction
+    xr_atomic_u32 loadState;
+    mutable xr_atomic_u32 loadKind;
 
-	xr_delegate<void(u32)> bind;
+    u32 dwLastUsedFrame =
+        0; // frame index of last Apply() call — used for eviction
 
+    xr_delegate< void( u32 ) > bind;
 
-	CAviPlayerCustom* pAVI;
-	CTheoraSurface* pTheora;
-	float m_material;
-	shared_str m_bumpmap;
+    CAviPlayerCustom* pAVI;
+    CTheoraSurface* pTheora;
+    float m_material;
+    shared_str m_bumpmap;
 
-	bool m_is_hot = false;		//--DSR-- HeatVision
-	bool m_is_glowing = false;	//--DSR-- SilencerOverheat
+    bool m_is_hot = false;     //--DSR-- HeatVision
+    bool m_is_glowing = false; //--DSR-- SilencerOverheat
 
-	union
-	{
-		u32 m_play_time; // sync theora time
-		u32 seqMSPF; // Sequence data milliseconds per frame
-	};
+    union {
+        u32 m_play_time; // sync theora time
+        u32 seqMSPF;     // Sequence data milliseconds per frame
+    };
 
 private:
-	ID3DBaseTexture* pSurface;
-	// Sequence data
-	xr_vector<ID3DBaseTexture*> seqDATA;
+    ID3DBaseTexture* pSurface;
+    // Sequence data
+    xr_vector< ID3DBaseTexture* > seqDATA;
 
-	// Description
-	ID3DBaseTexture* desc_cache;
-	D3D_TEXTURE2D_DESC desc;
+    // Description
+    ID3DBaseTexture* desc_cache;
+    D3D_TEXTURE2D_DESC desc;
 
     CGIFAnimationPlayer* gifPlayer;
 
-#if defined(USE_DX10) || defined(USE_DX11)
-	ID3DShaderResourceView*			m_pSRView;
-	shared_str m_loadName;
-	shared_str m_resolvedSourcePath;
-	// Sequence view data
-	xr_vector<ID3DShaderResourceView*>m_seqSRView;
-#endif	//	USE_DX10
+#if defined( USE_DX10 ) || defined( USE_DX11 )
+    ID3DShaderResourceView* m_pSRView;
+    shared_str m_loadName;
+    shared_str m_resolvedSourcePath;
+    // Sequence view data
+    xr_vector< ID3DShaderResourceView* > m_seqSRView;
+#endif //	USE_DX10
 };
 
-struct resptrcode_texture : public resptr_base<CTexture>
-{
-	void create(LPCSTR _name);
-	void destroy() { _set(NULL); }
-	shared_str bump_get() { return _get() ? _get()->m_bumpmap : shared_str(); }
-	bool bump_exist() { return 0 != bump_get().size(); }
+struct resptrcode_texture : public resptr_base< CTexture > {
+    void create( LPCSTR _name );
+
+    void destroy() { _set( NULL ); }
+
+    shared_str bump_get() { return _get() ? _get()->m_bumpmap : shared_str(); }
+
+    bool bump_exist() { return 0 != bump_get().size(); }
 };
 
-typedef resptr_core<CTexture, resptrcode_texture>
-ref_texture;
+typedef resptr_core< CTexture, resptrcode_texture > ref_texture;
 
-constexpr std::string_view texture_shader_type_name(CTexture::ResourceShaderType t)
-{
-    switch (t)
-    {
-    case CTexture::rstPixel:    return "Pixel";
-    case CTexture::rstVertex:   return "Vertex";
-    case CTexture::rstGeometry: return "Geometry";
-    case CTexture::rstHull:     return "Hull";
-    case CTexture::rstDomain:   return "Domain";
-    case CTexture::rstCompute:  return "Compute";
-    case CTexture::rstInvalid:  return "Invalid";
-    default:                    return "<unknown>";
+constexpr std::string_view texture_shader_type_name(
+    CTexture::ResourceShaderType t ) {
+    switch ( t ) {
+        case CTexture::rstPixel:
+            return "Pixel";
+        case CTexture::rstVertex:
+            return "Vertex";
+        case CTexture::rstGeometry:
+            return "Geometry";
+        case CTexture::rstHull:
+            return "Hull";
+        case CTexture::rstDomain:
+            return "Domain";
+        case CTexture::rstCompute:
+            return "Compute";
+        case CTexture::rstInvalid:
+            return "Invalid";
+        default:
+            return "<unknown>";
     }
 }
 

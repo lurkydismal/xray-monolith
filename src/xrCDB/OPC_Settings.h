@@ -23,7 +23,8 @@
 //! Use CPU comparisons (comment that line to use standard FPU compares)
 #define OPC_CPU_COMPARE
 
-//! Use FCOMI / FCMOV on Pentium-Pro based processors (comment that line to use plain C++)
+//! Use FCOMI / FCMOV on Pentium-Pro based processors (comment that line to use
+//! plain C++)
 //	#define OPC_USE_FCOMI
 
 //! Use epsilon value in tri-tri overlap test
@@ -35,6 +36,7 @@
 //! Use callbacks or direct pointers
 //	#define OPC_USE_CALLBACKS
 
-// NB: no compilation flag to enable/disable stats since they're actually needed in the box/box overlap test
+// NB: no compilation flag to enable/disable stats since they're actually needed
+// in the box/box overlap test
 
 #endif //__OPC_SETTINGS_H__

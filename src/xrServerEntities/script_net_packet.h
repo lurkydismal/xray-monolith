@@ -11,4 +11,4 @@
 #include "script_export_space.h"
 class NET_Packet;
 
-typedef class_exporter<NET_Packet> CScriptNetPacket;
+typedef class_exporter< NET_Packet > CScriptNetPacket;

@@ -10,62 +10,67 @@
 
 #include "UISubLine.h"
 
-class Word
-{
+class Word {
 public:
-	Word()
-	{
-		len = 0;
-		len_full = 0;
-		pos = 0;
-	}
+    Word() {
+        len = 0;
+        len_full = 0;
+        pos = 0;
+    }
 
-	int len;
-	int len_full;
-	int pos;
-	IC int last_symbol() { return pos + len - 1; }
-	IC int last_space() { return pos + len_full - 1; }
-	IC bool exist() { return len > 0; }
+    int len;
+    int len_full;
+    int pos;
+
+    IC int last_symbol() { return pos + len - 1; }
+
+    IC int last_space() { return pos + len_full - 1; }
+
+    IC bool exist() { return len > 0; }
 };
 
-class Position
-{
+class Position {
 public:
-	Word word_1;
-	Word word_2;
-	u32 curr_subline;
-	u32 slash_n_size() { return 2; }
-	IC bool is_separated() { return (0 == word_2.pos) || (word_1.pos >= word_2.pos); }
+    Word word_1;
+    Word word_2;
+    u32 curr_subline;
+
+    u32 slash_n_size() { return 2; }
+
+    IC bool is_separated() {
+        return ( 0 == word_2.pos ) || ( word_1.pos >= word_2.pos );
+    }
 };
 
 // Attention! Destructor is not virtual.
 // if you want to inherit this class then make _coresponding_ changes
-class CUILine
-{
-	friend class CUILines;
+class CUILine {
+    friend class CUILines;
+
 public:
-	CUILine();
-	~CUILine();
-	void setTextFromSublines();
-	CUILine(const CUILine& other);
-	CUILine& operator=(const CUILine& other);
-	void AddSubLine(const xr_string& str, u32 color);
-	void AddSubLine(const char* str, u32 color);
-	void AddSubLine(const CUISubLine* subLine);
-	void Clear();
-	void ProcessNewLines();
+    CUILine();
+    ~CUILine();
+    void setTextFromSublines();
+    CUILine( const CUILine& other );
+    CUILine& operator=( const CUILine& other );
+    void AddSubLine( const xr_string& str, u32 color );
+    void AddSubLine( const char* str, u32 color );
+    void AddSubLine( const CUISubLine* subLine );
+    void Clear();
+    void ProcessNewLines();
 
-	void Draw(CGameFont* pFont, float x, float y) const;
-	bool IsEmpty() { return m_subLines.empty(); }
+    void Draw( CGameFont* pFont, float x, float y ) const;
 
-	int GetSize();
-	xr_vector<CUISubLine> m_subLines;
+    bool IsEmpty() { return m_subLines.empty(); }
 
-	xr_string m_text;
+    int GetSize();
+    xr_vector< CUISubLine > m_subLines;
+
+    xr_string m_text;
 
 protected:
-	const CUILine* Cut2Pos(Position& pos, bool to_first = true);
-	const CUILine* GetEmptyLine();
+    const CUILine* Cut2Pos( Position& pos, bool to_first = true );
+    const CUILine* GetEmptyLine();
 
-	CUILine* m_tmpLine;
+    CUILine* m_tmpLine;
 };

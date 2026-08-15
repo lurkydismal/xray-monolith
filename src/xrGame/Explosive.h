@@ -4,199 +4,221 @@
 
 #pragma once
 
-#include "../xrEngine/Render.h"
 #include "../xrEngine/Feel_Touch.h"
-#include "inventory_item.h"
-#include "ai_sounds.h"
-#include "script_export_space.h"
+#include "../xrEngine/Render.h"
 #include "../xrPhysics/DamageSource.h"
-#include "wallmark_manager.h"
-#include "ParticlesObject.h"
 #include "HudSound.h"
+#include "ParticlesObject.h"
+#include "ai_sounds.h"
+#include "inventory_item.h"
+#include "script_export_space.h"
+#include "wallmark_manager.h"
 
 class IRender_Light;
-DEFINE_VECTOR(CPhysicsShellHolder*, BLASTED_OBJECTS_V, BLASTED_OBJECTS_I);
+DEFINE_VECTOR( CPhysicsShellHolder*, BLASTED_OBJECTS_V, BLASTED_OBJECTS_I );
 
-class CExplosive :
-	public IDamageSource
-{
+class CExplosive : public IDamageSource {
 private:
-	collide::rq_results rq_storage;
+    collide::rq_results rq_storage;
 
 public:
-	CExplosive(void);
-	virtual ~CExplosive(void);
+    CExplosive( void );
+    virtual ~CExplosive( void );
 
-	virtual void Load(LPCSTR section);
-	virtual void Load(CInifile const* ini, LPCSTR section);
+    virtual void Load( LPCSTR section );
+    virtual void Load( CInifile const* ini, LPCSTR section );
 
-	virtual void net_Destroy();
-	virtual void net_Relcase(CObject* O);
-	virtual void UpdateCL();
+    virtual void net_Destroy();
+    virtual void net_Relcase( CObject* O );
+    virtual void UpdateCL();
 
 private:
-	virtual void Explode();
+    virtual void Explode();
+
 public:
-	virtual void ExplodeParams(const Fvector& pos, const Fvector& dir);
+    virtual void ExplodeParams( const Fvector& pos, const Fvector& dir );
 
-	static float ExplosionEffect(collide::rq_results& storage, CExplosive* exp_obj, CPhysicsShellHolder* blasted_obj,
-	                             const Fvector& expl_centre, const float expl_radius);
+    static float ExplosionEffect( collide::rq_results& storage,
+                                  CExplosive* exp_obj,
+                                  CPhysicsShellHolder* blasted_obj,
+                                  const Fvector& expl_centre,
+                                  const float expl_radius );
 
+    virtual void OnEvent( NET_Packet& P,
+                          u16 type ); //{inherited::OnEvent( P, type);}
+    virtual void OnAfterExplosion();
+    virtual void OnBeforeExplosion();
 
-	virtual void OnEvent(NET_Packet& P, u16 type); //{inherited::OnEvent( P, type);}
-	virtual void OnAfterExplosion();
-	virtual void OnBeforeExplosion();
-	virtual void SetCurrentParentID(u16 parent_id) { m_iCurrentParentID = parent_id; }
-	IC u16 CurrentParentID() const { return m_iCurrentParentID; }
+    virtual void SetCurrentParentID( u16 parent_id ) {
+        m_iCurrentParentID = parent_id;
+    }
 
-	virtual void SetInitiator(u16 id) { SetCurrentParentID(id); }
-	virtual u16 Initiator();
+    IC u16 CurrentParentID() const { return m_iCurrentParentID; }
 
-	virtual void UpdateExplosionPos()
-	{
-	}
+    virtual void SetInitiator( u16 id ) { SetCurrentParentID( id ); }
 
-	virtual void GetExplVelocity(Fvector& v);
-	virtual void GetExplPosition(Fvector& p);
-	virtual void GetExplDirection(Fvector& d);
-	virtual void GenExplodeEvent(const Fvector& pos, const Fvector& normal);
-	virtual void FindNormal(Fvector& normal);
-	virtual CGameObject* cast_game_object() =0;
-	virtual CExplosive* cast_explosive() { return this; }
-	virtual IDamageSource* cast_IDamageSource() { return this; }
-	virtual void GetRayExplosionSourcePos(Fvector& pos);
-	virtual void GetExplosionBox(Fvector& size);
-	virtual void ActivateExplosionBox(const Fvector& size, Fvector& in_out_pos);
-	void SetExplosionSize(const Fvector& new_size);
-	virtual bool Useful() const;
+    virtual u16 Initiator();
+
+    virtual void UpdateExplosionPos() {}
+
+    virtual void GetExplVelocity( Fvector& v );
+    virtual void GetExplPosition( Fvector& p );
+    virtual void GetExplDirection( Fvector& d );
+    virtual void GenExplodeEvent( const Fvector& pos, const Fvector& normal );
+    virtual void FindNormal( Fvector& normal );
+    virtual CGameObject* cast_game_object() = 0;
+
+    virtual CExplosive* cast_explosive() { return this; }
+
+    virtual IDamageSource* cast_IDamageSource() { return this; }
+
+    virtual void GetRayExplosionSourcePos( Fvector& pos );
+    virtual void GetExplosionBox( Fvector& size );
+    virtual void ActivateExplosionBox( const Fvector& size,
+                                       Fvector& in_out_pos );
+    void SetExplosionSize( const Fvector& new_size );
+    virtual bool Useful() const;
+
 protected:
-	bool IsSoundPlaying() { return !!m_layered_sounds.FindSoundItem("sndExplode", true)->playing(); }
-	bool IsExploded() { return !!m_explosion_flags.test(flExploded); }
+    bool IsSoundPlaying() {
+        return !!m_layered_sounds.FindSoundItem( "sndExplode", true )
+                     ->playing();
+    }
+
+    bool IsExploded() { return !!m_explosion_flags.test( flExploded ); }
+
 public:
-	bool IsExploding() { return !!m_explosion_flags.test(flExploding); }
+    bool IsExploding() { return !!m_explosion_flags.test( flExploding ); }
+
 private:
-	void PositionUpdate();
-	static void GetRaySourcePos(CExplosive* exp_obj, const Fvector& expl_centre, Fvector& p);
+    void PositionUpdate();
+    static void GetRaySourcePos( CExplosive* exp_obj,
+                                 const Fvector& expl_centre,
+                                 Fvector& p );
 
-	void ExplodeWaveProcessObject(collide::rq_results& storage, CPhysicsShellHolder* sh);
-	void ExplodeWaveProcess();
-	static float TestPassEffect(const Fvector& source_p, const Fvector& dir, float range, float ef_radius,
-	                            collide::rq_results& storage, CObject* blasted_obj);
-	void LightCreate();
-	void LightDestroy();
+    void ExplodeWaveProcessObject( collide::rq_results& storage,
+                                   CPhysicsShellHolder* sh );
+    void ExplodeWaveProcess();
+    static float TestPassEffect( const Fvector& source_p,
+                                 const Fvector& dir,
+                                 float range,
+                                 float ef_radius,
+                                 collide::rq_results& storage,
+                                 CObject* blasted_obj );
+    void LightCreate();
+    void LightDestroy();
+
 protected:
-	HUD_SOUND_COLLECTION_LAYERED m_layered_sounds;
+    HUD_SOUND_COLLECTION_LAYERED m_layered_sounds;
 
-	CWalmarkManager m_wallmark_manager;
-	//ID персонажа который иницировал действие
-	u16 m_iCurrentParentID;
+    CWalmarkManager m_wallmark_manager;
+    // ID персонажа который иницировал действие
+    u16 m_iCurrentParentID;
 
-	//bool						m_bReadyToExplode;
-	Fvector m_vExplodePos;
-	Fvector m_vExplodeSize;
-	Fvector m_vExplodeDir;
+    // bool						m_bReadyToExplode;
+    Fvector m_vExplodePos;
+    Fvector m_vExplodeSize;
+    Fvector m_vExplodeDir;
 
-	//параметры взрыва
-	float m_fBlastHit;
-	float m_fBlastHitImpulse;
-	float m_fBlastRadius;
+    // параметры взрыва
+    float m_fBlastHit;
+    float m_fBlastHitImpulse;
+    float m_fBlastRadius;
 
-	//параметры и количество осколков
-	float m_fFragsRadius;
-	float m_fFragHit;
-	float m_fFragHitImpulse;
-	int m_iFragsNum;
+    // параметры и количество осколков
+    float m_fFragsRadius;
+    float m_fFragHit;
+    float m_fFragHitImpulse;
+    int m_iFragsNum;
 
-	//типы наносимых хитов
-	ALife::EHitType m_eHitTypeBlast;
-	ALife::EHitType m_eHitTypeFrag;
+    // типы наносимых хитов
+    ALife::EHitType m_eHitTypeBlast;
+    ALife::EHitType m_eHitTypeFrag;
 
-	//фактор подпроса предмета вверх взрывной волной 
-	float m_fUpThrowFactor;
+    // фактор подпроса предмета вверх взрывной волной
+    float m_fUpThrowFactor;
 
-	//список пораженных объектов
-	BLASTED_OBJECTS_V m_blasted_objects;
+    // список пораженных объектов
+    BLASTED_OBJECTS_V m_blasted_objects;
 
-	//текущая продолжительность взрыва
-	float m_fExplodeDuration;
-	//общее время взрыва
-	float m_fExplodeDurationMax;
-	//Время, через которое надо сделать взрывчатку невиимой, если она не становится невидимой во время взрыва
-	float m_fExplodeHideDurationMax;
+    // текущая продолжительность взрыва
+    float m_fExplodeDuration;
+    // общее время взрыва
+    float m_fExplodeDurationMax;
+    // Время, через которое надо сделать взрывчатку невиимой, если она не
+    // становится невидимой во время взрыва
+    float m_fExplodeHideDurationMax;
 
-	//флаг состояния взрыва
-	enum
-	{
-		flExploding =1 << 0,
-		flExplodEventSent =1 << 1,
-		flReadyToExplode =1 << 2,
-		flExploded =1 << 3
-	};
+    // флаг состояния взрыва
+    enum {
+        flExploding = 1 << 0,
+        flExplodEventSent = 1 << 1,
+        flReadyToExplode = 1 << 2,
+        flExploded = 1 << 3
+    };
 
-	Flags8 m_explosion_flags;
-	///////////////////////////////////////////////
-	//Должен ли объект быть скрыт после взрыва: true - для всех кроме дымовой гранаты
-	BOOL m_bHideInExplosion;
-	bool m_bAlreadyHidden;
-	virtual void HideExplosive();
-	//bool						m_bExploding;
-	//bool						m_bExplodeEventSent;
+    Flags8 m_explosion_flags;
+    ///////////////////////////////////////////////
+    // Должен ли объект быть скрыт после взрыва: true - для всех кроме дымовой
+    // гранаты
+    BOOL m_bHideInExplosion;
+    bool m_bAlreadyHidden;
+    virtual void HideExplosive();
+    // bool						m_bExploding;
+    // bool						m_bExplodeEventSent;
 
-	//////////////////////////////////////////////
-	//для разлета осколков
-	float m_fFragmentSpeed;
+    //////////////////////////////////////////////
+    // для разлета осколков
+    float m_fFragmentSpeed;
 
-	//звуки
-	ESoundTypes m_eSoundExplode;
+    // звуки
+    ESoundTypes m_eSoundExplode;
 
-	//размер отметки на стенах
-	float fWallmarkSize;
+    // размер отметки на стенах
+    float fWallmarkSize;
 
-	//эффекты и подсветка
-	shared_str m_sExplodeParticles;
+    // эффекты и подсветка
+    shared_str m_sExplodeParticles;
 
-	//подсветка взрыва
-	ref_light m_pLight;
-	Fcolor m_LightColor;
-	float m_fLightRange;
-	float m_fLightTime;
+    // подсветка взрыва
+    ref_light m_pLight;
+    Fcolor m_LightColor;
+    float m_fLightRange;
+    float m_fLightTime;
 
-	// momopate: Extended shrapnel customization
-	float m_fFragAP;
-	float m_fFragAirRes;
-	bool m_bFragTracer;
-	bool m_bFrag4to1Tracer;
-	bool m_bFragMagneticBeamShot;
-	bool m_bFragAllowRicochet;
-	u8 u8FragColorID;
+    // momopate: Extended shrapnel customization
+    float m_fFragAP;
+    float m_fFragAirRes;
+    bool m_bFragTracer;
+    bool m_bFrag4to1Tracer;
+    bool m_bFragMagneticBeamShot;
+    bool m_bFragAllowRicochet;
+    u8 u8FragColorID;
 
-	virtual void StartLight();
-	virtual void StopLight();
+    virtual void StartLight();
+    virtual void StopLight();
 
-	BOOL m_bDynamicParticles;
-	CParticlesObject* m_pExpParticle;
-	virtual void UpdateExplosionParticles();
+    BOOL m_bDynamicParticles;
+    CParticlesObject* m_pExpParticle;
+    virtual void UpdateExplosionParticles();
 
-
-	struct
-	{
-		shared_str effect_sect_name;
-	} effector;
+    struct {
+        shared_str effect_sect_name;
+    } effector;
 
 #ifdef EXPLOSIVE_CHANGE
-	shared_str m_on_explode_callback;
-	void LoadExplosiveSection(LPCSTR section);
-	void LoadExplosiveSection(CInifile *ini, LPCSTR section);
+    shared_str m_on_explode_callback;
+    void LoadExplosiveSection( LPCSTR section );
+    void LoadExplosiveSection( CInifile* ini, LPCSTR section );
 #endif
-DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };
 
-IC void random_point_in_object_box(Fvector& out_pos, CObject* obj)
-{
-	const Fbox& l_b1 = obj->BoundingBox();
-	Fvector l_c, l_d;
-	l_b1.get_CD(l_c, l_d);
-	out_pos.random_point(l_d);
-	obj->XFORM().transform_tiny(out_pos);
-	out_pos.add(l_c);
+IC void random_point_in_object_box( Fvector& out_pos, CObject* obj ) {
+    const Fbox& l_b1 = obj->BoundingBox();
+    Fvector l_c, l_d;
+    l_b1.get_CD( l_c, l_d );
+    out_pos.random_point( l_d );
+    obj->XFORM().transform_tiny( out_pos );
+    out_pos.add( l_c );
 }

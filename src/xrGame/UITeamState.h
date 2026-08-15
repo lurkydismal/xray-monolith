@@ -1,16 +1,14 @@
 #ifndef UITEAMSTATE
 #define UITEAMSTATE
 
-#include "ui/UIWindow.h"
-#include "ui/xrUIXmlParser.h"
-#include "ui/UIXmlInit.h"
-
+#include "Level.h"
+#include "associative_vector.h"
+#include "game_base.h"
 #include "game_cl_base.h"
 #include "string_table.h"
-#include "game_base.h"
-#include "Level.h"
-
-#include "associative_vector.h"
+#include "ui/UIWindow.h"
+#include "ui/UIXmlInit.h"
+#include "ui/xrUIXmlParser.h"
 
 class UITeamPanels;
 class CUIFrameLineWnd;
@@ -19,72 +17,68 @@ class CUIXml;
 class UIPlayerItem;
 class UITeamHeader;
 
-class UITeamState : public CUIWindow
-{
+class UITeamState : public CUIWindow {
 private:
-	typedef CUIWindow inherited;
+    typedef CUIWindow inherited;
 
-	typedef std::pair<CUIScrollView*, UITeamHeader*> TScrollPanel;
-	typedef xr_vector<TScrollPanel> TScrollPanels;
+    typedef std::pair< CUIScrollView*, UITeamHeader* > TScrollPanel;
+    typedef xr_vector< TScrollPanel > TScrollPanels;
 
-	struct TPlayerItem
-	{
-		UIPlayerItem* m_player_wnd;
-		TScrollPanels::size_type m_panel_number;
+    struct TPlayerItem {
+        UIPlayerItem* m_player_wnd;
+        TScrollPanels::size_type m_panel_number;
 
-		TPlayerItem(UIPlayerItem* player_wnd, TScrollPanels::size_type panel_number)
-		{
-			m_player_wnd = player_wnd;
-			m_panel_number = panel_number;
-		}
-	};
+        TPlayerItem( UIPlayerItem* player_wnd,
+                     TScrollPanels::size_type panel_number ) {
+            m_player_wnd = player_wnd;
+            m_panel_number = panel_number;
+        }
+    };
 
-	typedef associative_vector<ClientID, TPlayerItem> MapClientIdToUIPlayer;
+    typedef associative_vector< ClientID, TPlayerItem > MapClientIdToUIPlayer;
 
+    ETeam myTeam;
+    MapClientIdToUIPlayer myPlayers;
 
-	ETeam myTeam;
-	MapClientIdToUIPlayer myPlayers;
+    XML_NODE* teamXmlNode;
+    CUIXml* mainUiXml;
 
-	XML_NODE* teamXmlNode;
-	CUIXml* mainUiXml;
+    TScrollPanels m_scroll_panels;
 
+    xr_vector< ClientID > toDeletePlayers;
 
-	TScrollPanels m_scroll_panels;
+    s32 m_artefact_count;
 
-	xr_vector<ClientID> toDeletePlayers;
+    UITeamPanels* m_teamPanels;
 
-	s32 m_artefact_count;
+    UITeamState();
+    bool __stdcall SortingLessFunction( CUIWindow* left, CUIWindow* right );
+    int InitScrollPanels();
 
-	UITeamPanels* m_teamPanels;
+    int m_last_panel;
 
-	UITeamState();
-	bool __stdcall SortingLessFunction(CUIWindow* left, CUIWindow* right);
-	int InitScrollPanels();
+    inline TScrollPanels::size_type GetNeedScrollPanelIndex();
+    void ReStoreAllPlayers();
+    void CleanupInternal();
 
-	int m_last_panel;
-
-	inline TScrollPanels::size_type GetNeedScrollPanelIndex();
-	void ReStoreAllPlayers();
-	void CleanupInternal();
 public:
-	UITeamState(ETeam teamId, UITeamPanels* teamPanels);
-	virtual ~UITeamState();
-	void Init(CUIXml& uiXml, LPCSTR teamNodeName, int index);
+    UITeamState( ETeam teamId, UITeamPanels* teamPanels );
+    virtual ~UITeamState();
+    void Init( CUIXml& uiXml, LPCSTR teamNodeName, int index );
 
+    void AddPlayer( ClientID const& clientId );
+    void RemovePlayer( ClientID const& clientId );
+    bool UpdatePlayer( ClientID const& clientId );
 
-	void AddPlayer(ClientID const& clientId);
-	void RemovePlayer(ClientID const& clientId);
-	bool UpdatePlayer(ClientID const& clientId);
+    void SetArtefactsCount( s32 greenTeamArtC, s32 blueTeamArtC );
 
-	void SetArtefactsCount(s32 greenTeamArtC, s32 blueTeamArtC);
+    s32 GetFieldValue( shared_str const& field_name ) const;
+    s32 GetSummaryFrags() const;
 
-	s32 GetFieldValue(shared_str const& field_name) const;
-	s32 GetSummaryFrags() const;
+    virtual void Update();
+    virtual void Draw();
 
-	virtual void Update();
-	virtual void Draw();
-
-	virtual CUIWindow* ui_cast_window() { return this; }
+    virtual CUIWindow* ui_cast_window() { return this; }
 };
 
 #endif

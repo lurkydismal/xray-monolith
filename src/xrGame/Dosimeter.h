@@ -4,14 +4,13 @@
 
 class CUIDosimeter;
 
-class CDosimeter : public CCustomDevice
-{
-	typedef CCustomDevice inherited;
-public:
+class CDosimeter : public CCustomDevice {
+    typedef CCustomDevice inherited;
 
-	void render_item_3d_ui();
+public:
+    void render_item_3d_ui();
 
 protected:
-	void CreateUI();
-	CUIDosimeter& ui();
+    void CreateUI();
+    CUIDosimeter& ui();
 };

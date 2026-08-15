@@ -3,18 +3,23 @@
 
 class CActorStatisticsWrapper;
 
-class CActorStatisticMgr
-{
+class CActorStatisticMgr {
 private:
-	CActorStatisticsWrapper* m_actor_stats_wrapper;
-	vStatSectionData& GetStorage();
-public:
-	CActorStatisticMgr();
-	~CActorStatisticMgr();
-	SStatSectionData& GetSection(const shared_str& key);
+    CActorStatisticsWrapper* m_actor_stats_wrapper;
+    vStatSectionData& GetStorage();
 
-	void AddPoints(const shared_str& key, const shared_str& detail_key, const shared_str& str_value);
-	void AddPoints(const shared_str& key, const shared_str& detail_key, s32 cnt, s32 pts);
-	s32 GetSectionPoints(const shared_str& key);
-	const vStatSectionData& GetCStorage();
+public:
+    CActorStatisticMgr();
+    ~CActorStatisticMgr();
+    SStatSectionData& GetSection( const shared_str& key );
+
+    void AddPoints( const shared_str& key,
+                    const shared_str& detail_key,
+                    const shared_str& str_value );
+    void AddPoints( const shared_str& key,
+                    const shared_str& detail_key,
+                    s32 cnt,
+                    s32 pts );
+    s32 GetSectionPoints( const shared_str& key );
+    const vStatSectionData& GetCStorage();
 };

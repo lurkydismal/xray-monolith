@@ -3,13 +3,12 @@
 #include "WeaponMagazinedWGrenade.h"
 #include "script_export_space.h"
 
-class CWeaponGroza :
-	public CWeaponMagazinedWGrenade
-{
-	typedef CWeaponMagazinedWGrenade inherited;
-public:
-	CWeaponGroza();
-	virtual ~CWeaponGroza();
+class CWeaponGroza : public CWeaponMagazinedWGrenade {
+    typedef CWeaponMagazinedWGrenade inherited;
 
-DECLARE_SCRIPT_REGISTER_FUNCTION
+public:
+    CWeaponGroza();
+    virtual ~CWeaponGroza();
+
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

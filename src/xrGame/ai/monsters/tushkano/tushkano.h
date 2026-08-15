@@ -1,22 +1,20 @@
 #pragma once
+#include "../../../../xrServerEntities/script_export_space.h"
 #include "../basemonster/base_monster.h"
 #include "../controlled_entity.h"
-#include "../../../../xrServerEntities/script_export_space.h"
 
-class CTushkano : public CBaseMonster,
-                  public CControlledEntity<CTushkano>
-{
-	typedef CBaseMonster inherited;
-	typedef CControlledEntity<CTushkano> CControlled;
+class CTushkano : public CBaseMonster, public CControlledEntity< CTushkano > {
+    typedef CBaseMonster inherited;
+    typedef CControlledEntity< CTushkano > CControlled;
 
 public:
-	CTushkano();
-	virtual ~CTushkano();
+    CTushkano();
+    virtual ~CTushkano();
 
-	virtual void Load(LPCSTR section);
-	virtual void CheckSpecParams(u32 spec_params);
-	virtual const char* get_monster_class_name() { return "tushkano"; }
+    virtual void Load( LPCSTR section );
+    virtual void CheckSpecParams( u32 spec_params );
 
+    virtual const char* get_monster_class_name() { return "tushkano"; }
 
-DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

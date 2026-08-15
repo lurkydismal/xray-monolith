@@ -3,22 +3,19 @@
 
 #include "UIListBoxItem.h"
 
-class CUIListBoxItemMsgChain : public CUIListBoxItem
-{
-	typedef CUIListBoxItem inherited;
+class CUIListBoxItemMsgChain : public CUIListBoxItem {
+    typedef CUIListBoxItem inherited;
+
 public:
-	CUIListBoxItemMsgChain(float height) : CUIListBoxItem(height)
-	{
-	};
+    CUIListBoxItemMsgChain( float height ) : CUIListBoxItem( height ) {};
 
-	virtual ~CUIListBoxItemMsgChain()
-	{
-	};
+    virtual ~CUIListBoxItemMsgChain() {};
 
-	virtual bool OnMouseDown(int mouse_btn);
+    virtual bool OnMouseDown( int mouse_btn );
 
-	virtual CUIWindow* ui_cast_window() { return this; }
-	virtual CUIListBoxItem* ui_cast_list_box_item() { return this; }
+    virtual CUIWindow* ui_cast_window() { return this; }
+
+    virtual CUIListBoxItem* ui_cast_list_box_item() { return this; }
 };
 
-#endif //#ifndef UILISTBOXITEMMSGCHAIN_H_INCLUDED
+#endif // #ifndef UILISTBOXITEMMSGCHAIN_H_INCLUDED

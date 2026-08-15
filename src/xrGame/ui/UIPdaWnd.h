@@ -1,7 +1,7 @@
 #pragma once
 
-#include "UIDialogWnd.h"
 #include "../encyclopedia_article_defs.h"
+#include "UIDialogWnd.h"
 
 class CInventoryOwner;
 class CUIFrameLineWnd;
@@ -23,105 +23,113 @@ class CUIProgressBar;
 
 class CMapSpot;
 
+class CUIPdaWnd : public CUIDialogWnd {
+    typedef CUIDialogWnd inherited;
 
-class CUIPdaWnd : public CUIDialogWnd
-{
-	typedef CUIDialogWnd inherited;
 protected:
-	CUITabControl* UITabControl;
-	CUI3tButton* m_btn_close;
+    CUITabControl* UITabControl;
+    CUI3tButton* m_btn_close;
 
-	CUIStatic* UIMainPdaFrame;
-	CUIStatic* UINoice;
+    CUIStatic* UIMainPdaFrame;
+    CUIStatic* UINoice;
 
-	CUITextWnd* m_caption;
-	shared_str m_caption_const;
-	//	CUIAnimatedStatic*		m_anim_static;
-	CUITextWnd* m_clock;
+    CUITextWnd* m_caption;
+    shared_str m_caption_const;
+    //	CUIAnimatedStatic*		m_anim_static;
+    CUITextWnd* m_clock;
 
-	// Текущий активный диалог
-	CUIWindow* m_pActiveDialog;
-	shared_str m_sActiveSection;
+    // Текущий активный диалог
+    CUIWindow* m_pActiveDialog;
+    shared_str m_sActiveSection;
 
-	shared_str g_pda_xml_path;
+    shared_str g_pda_xml_path;
 
-	UIHint* m_hint_wnd;
+    UIHint* m_hint_wnd;
 
-	u32 dwPDAFrame;
+    u32 dwPDAFrame;
 
-	CUIProgressBar* m_battery_bar;
+    CUIProgressBar* m_battery_bar;
 
-	bool bButtonL, bButtonR;
+    bool bButtonL, bButtonR;
 
 public:
-	CUITaskWnd* pUITaskWnd;
-	//-	CUIFactionWarWnd*		pUIFactionWarWnd;
-	CUIRankingWnd* pUIRankingWnd;
-	CUILogsWnd* pUILogsWnd;
-	Frect m_cursor_box;
-	CMapSpot* pSelectedMapSpot;
+    CUITaskWnd* pUITaskWnd;
+    //-	CUIFactionWarWnd*		pUIFactionWarWnd;
+    CUIRankingWnd* pUIRankingWnd;
+    CUILogsWnd* pUILogsWnd;
+    Frect m_cursor_box;
+    CMapSpot* pSelectedMapSpot;
 
-	virtual void Reset();
+    virtual void Reset();
 
-	virtual CUIWindow* ui_cast_window() { return this; }
+    virtual CUIWindow* ui_cast_window() { return this; }
+
 public:
-	CUIPdaWnd();
-	virtual ~CUIPdaWnd();
+    CUIPdaWnd();
+    virtual ~CUIPdaWnd();
 
-	virtual void Init();
+    virtual void Init();
 
-	virtual void SendMessage(CUIWindow* pWnd, s16 msg, void* pData = NULL);
+    virtual void SendMessage( CUIWindow* pWnd, s16 msg, void* pData = NULL );
 
-	virtual void Draw();
-	virtual void Update();
-	virtual void Show(bool status);
+    virtual void Draw();
+    virtual void Update();
+    virtual void Show( bool status );
 
-	virtual bool OnMouseAction(float x, float y, EUIMessages mouse_action);
-	void MouseMovement(float x, float y);
-	virtual void Enable(bool status);
-	virtual bool OnKeyboardAction(int dik, EUIMessages keyboard_action);
+    virtual bool OnMouseAction( float x, float y, EUIMessages mouse_action );
+    void MouseMovement( float x, float y );
+    virtual void Enable( bool status );
+    virtual bool OnKeyboardAction( int dik, EUIMessages keyboard_action );
 
-	UIHint* get_hint_wnd() const { return m_hint_wnd; }
-	void DrawHint();
+    UIHint* get_hint_wnd() const { return m_hint_wnd; }
 
-	void SetActiveCaption();
-	void SetCaption(LPCSTR text);
-	void Show_SecondTaskWnd(bool status);
-	void Show_MapLegendWnd(bool status);
+    void DrawHint();
 
-	void SetActiveDialog(CUIWindow* pUI) { m_pActiveDialog = pUI; };
-	CUIWindow* GetActiveDialog() { return m_pActiveDialog; };
-	LPCSTR GetActiveSection() { return m_sActiveSection.c_str(); };
-	LPCSTR GetPdaXml() { return g_pda_xml_path.c_str(); }
-	void SetPdaXml(LPCSTR xml);
-	CUITabControl* GetTabControl() { return UITabControl; };
+    void SetActiveCaption();
+    void SetCaption( LPCSTR text );
+    void Show_SecondTaskWnd( bool status );
+    void Show_MapLegendWnd( bool status );
 
-	void RebuildExtraTabs();
+    void SetActiveDialog( CUIWindow* pUI ) { m_pActiveDialog = pUI; };
 
-	void SetActiveSubdialog(const shared_str& section);
-	void SetActiveSubdialog_script(LPCSTR section) { SetActiveSubdialog((const shared_str&)section); };
-	virtual bool StopAnyMove() { return false; }
+    CUIWindow* GetActiveDialog() { return m_pActiveDialog; };
 
-	void UpdatePda();
-	void UpdateRankingWnd();
-	void ResetCursor();
-	float m_power;
-	Fvector2 last_cursor_pos;
+    LPCSTR GetActiveSection() { return m_sActiveSection.c_str(); };
 
-	Fvector target_joystickrot, joystickrot;
-	float target_buttonpress, buttonpress;
+    LPCSTR GetPdaXml() { return g_pda_xml_path.c_str(); }
 
-	void ResetJoystick(bool bForce)
-	{
-		if (bForce)
-		{
-			joystickrot.set(0.f, 0.f, 0.f);
-			buttonpress = 0.f;
-		}
-		
-		target_joystickrot.set(0.f, 0.f, 0.f);
-		target_buttonpress = 0.f;
-	}
+    void SetPdaXml( LPCSTR xml );
 
-DECLARE_SCRIPT_REGISTER_FUNCTION
+    CUITabControl* GetTabControl() { return UITabControl; };
+
+    void RebuildExtraTabs();
+
+    void SetActiveSubdialog( const shared_str& section );
+
+    void SetActiveSubdialog_script( LPCSTR section ) {
+        SetActiveSubdialog( ( const shared_str& )section );
+    };
+
+    virtual bool StopAnyMove() { return false; }
+
+    void UpdatePda();
+    void UpdateRankingWnd();
+    void ResetCursor();
+    float m_power;
+    Fvector2 last_cursor_pos;
+
+    Fvector target_joystickrot, joystickrot;
+    float target_buttonpress, buttonpress;
+
+    void ResetJoystick( bool bForce ) {
+        if ( bForce ) {
+            joystickrot.set( 0.f, 0.f, 0.f );
+            buttonpress = 0.f;
+        }
+
+        target_joystickrot.set( 0.f, 0.f, 0.f );
+        target_buttonpress = 0.f;
+    }
+
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

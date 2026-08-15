@@ -3,23 +3,27 @@
 
 class CUITextWnd;
 
-class CUIButtonHint : public CUIFrameWindow
-{
-	CUIWindow* m_ownerWnd;
+class CUIButtonHint : public CUIFrameWindow {
+    CUIWindow* m_ownerWnd;
 
-	CUITextWnd* m_text;
-	bool m_enabledOnFrame;
+    CUITextWnd* m_text;
+    bool m_enabledOnFrame;
+
 public:
-	CUIButtonHint();
-	virtual ~CUIButtonHint();
-	CUIWindow* Owner() { return m_ownerWnd; }
-	void Discard() { m_ownerWnd = NULL; };
-	void OnRender();
-	void Draw_() { m_enabledOnFrame = true; };
-	void SetHintText(CUIWindow* w, LPCSTR text);
+    CUIButtonHint();
+    virtual ~CUIButtonHint();
 
-	virtual CUIWindow* ui_cast_window() { return this; }
+    CUIWindow* Owner() { return m_ownerWnd; }
 
+    void Discard() { m_ownerWnd = NULL; };
+
+    void OnRender();
+
+    void Draw_() { m_enabledOnFrame = true; };
+
+    void SetHintText( CUIWindow* w, LPCSTR text );
+
+    virtual CUIWindow* ui_cast_window() { return this; }
 };
 
 extern CUIButtonHint* g_btnHint;

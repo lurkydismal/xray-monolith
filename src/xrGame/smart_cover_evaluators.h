@@ -13,218 +13,225 @@
 
 class CAI_Stalker;
 
-typedef CWrapperAbstract2<CAI_Stalker, CPropertyEvaluator> CStalkerPropertyEvaluator;
+typedef CWrapperAbstract2< CAI_Stalker, CPropertyEvaluator >
+    CStalkerPropertyEvaluator;
 
-namespace smart_cover
-{
-	class animation_planner;
-	class target_selector;
+namespace smart_cover {
+class animation_planner;
+class target_selector;
 
-	namespace evaluators
-	{
-		//////////////////////////////////////////////////////////////////////////
-		// in_cover_evaluator
-		//////////////////////////////////////////////////////////////////////////
+namespace evaluators {
+//////////////////////////////////////////////////////////////////////////
+// in_cover_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		class in_cover_evaluator : public CStalkerPropertyEvaluator
-		{
-		private:
-			typedef CStalkerPropertyEvaluator inherited;
+class in_cover_evaluator : public CStalkerPropertyEvaluator {
+private:
+    typedef CStalkerPropertyEvaluator inherited;
 
-		public:
-			in_cover_evaluator(CAI_Stalker* object, LPCSTR evaluator_name);
-			virtual _value_type evaluate();
-		};
+public:
+    in_cover_evaluator( CAI_Stalker* object, LPCSTR evaluator_name );
+    virtual _value_type evaluate();
+};
 
-		//////////////////////////////////////////////////////////////////////////
-		// cover_actual_evaluator
-		//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+// cover_actual_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		class cover_actual_evaluator : public CStalkerPropertyEvaluator
-		{
-		private:
-			typedef CStalkerPropertyEvaluator inherited;
+class cover_actual_evaluator : public CStalkerPropertyEvaluator {
+private:
+    typedef CStalkerPropertyEvaluator inherited;
 
-		public:
-			cover_actual_evaluator(CAI_Stalker* object, LPCSTR evaluator_name);
-			virtual _value_type evaluate();
-		};
+public:
+    cover_actual_evaluator( CAI_Stalker* object, LPCSTR evaluator_name );
+    virtual _value_type evaluate();
+};
 
-		//////////////////////////////////////////////////////////////////////////
-		// cover_entered_evaluator
-		//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+// cover_entered_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		class cover_entered_evaluator : public CStalkerPropertyEvaluator
-		{
-		private:
-			typedef CStalkerPropertyEvaluator inherited;
+class cover_entered_evaluator : public CStalkerPropertyEvaluator {
+private:
+    typedef CStalkerPropertyEvaluator inherited;
 
-		public:
-			cover_entered_evaluator(CAI_Stalker* object, LPCSTR evaluator_name);
-			virtual _value_type evaluate();
-		};
+public:
+    cover_entered_evaluator( CAI_Stalker* object, LPCSTR evaluator_name );
+    virtual _value_type evaluate();
+};
 
-		//////////////////////////////////////////////////////////////////////////
-		// loophole_actual_evaluator
-		//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+// loophole_actual_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		class loophole_actual_evaluator : public CStalkerPropertyEvaluator
-		{
-		private:
-			typedef CStalkerPropertyEvaluator inherited;
+class loophole_actual_evaluator : public CStalkerPropertyEvaluator {
+private:
+    typedef CStalkerPropertyEvaluator inherited;
 
-		private:
-			u32 m_loophole_value;
-			animation_planner* m_planner;
+private:
+    u32 m_loophole_value;
+    animation_planner* m_planner;
 
-		public:
-			loophole_actual_evaluator(CAI_Stalker* object, LPCSTR evaluator_name, animation_planner* planner,
-			                          u32 const& loophole_value);
-			virtual _value_type evaluate();
-		};
+public:
+    loophole_actual_evaluator( CAI_Stalker* object,
+                               LPCSTR evaluator_name,
+                               animation_planner* planner,
+                               u32 const& loophole_value );
+    virtual _value_type evaluate();
+};
 
-		//////////////////////////////////////////////////////////////////////////
-		// loophole_hit_long_ago_evaluator
-		//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+// loophole_hit_long_ago_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		class loophole_hit_long_ago_evaluator : public CPropertyEvaluator<animation_planner>
-		{
-		private:
-			typedef CPropertyEvaluator<animation_planner> inherited;
+class loophole_hit_long_ago_evaluator
+    : public CPropertyEvaluator< animation_planner > {
+private:
+    typedef CPropertyEvaluator< animation_planner > inherited;
 
-		private:
-			u32 m_time_to_wait;
-		public:
-			loophole_hit_long_ago_evaluator(animation_planner* object, LPCSTR evaluator_name, u32 const& time_to_wait);
-			virtual _value_type evaluate();
-		};
+private:
+    u32 m_time_to_wait;
 
-		//////////////////////////////////////////////////////////////////////////
-		// loophole_planner_const_evaluator
-		//////////////////////////////////////////////////////////////////////////
+public:
+    loophole_hit_long_ago_evaluator( animation_planner* object,
+                                     LPCSTR evaluator_name,
+                                     u32 const& time_to_wait );
+    virtual _value_type evaluate();
+};
 
-		class loophole_planner_const_evaluator : public CPropertyEvaluator<animation_planner>
-		{
-		private:
-			typedef CPropertyEvaluator<animation_planner> inherited;
+//////////////////////////////////////////////////////////////////////////
+// loophole_planner_const_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		private:
-			bool m_value;
+class loophole_planner_const_evaluator
+    : public CPropertyEvaluator< animation_planner > {
+private:
+    typedef CPropertyEvaluator< animation_planner > inherited;
 
-		public:
-			loophole_planner_const_evaluator(animation_planner* object, LPCSTR evaluator_name, bool const& value);
-			virtual _value_type evaluate();
-		};
+private:
+    bool m_value;
 
-		//////////////////////////////////////////////////////////////////////////
-		// is_action_available_evaluator
-		//////////////////////////////////////////////////////////////////////////
+public:
+    loophole_planner_const_evaluator( animation_planner* object,
+                                      LPCSTR evaluator_name,
+                                      bool const& value );
+    virtual _value_type evaluate();
+};
 
-		class is_action_available_evaluator : public CPropertyEvaluator<animation_planner>
-		{
-		private:
-			typedef CPropertyEvaluator<animation_planner> inherited;
+//////////////////////////////////////////////////////////////////////////
+// is_action_available_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		private:
-			shared_str m_action_id;
+class is_action_available_evaluator
+    : public CPropertyEvaluator< animation_planner > {
+private:
+    typedef CPropertyEvaluator< animation_planner > inherited;
 
-		public:
-			is_action_available_evaluator(animation_planner* object, LPCSTR evaluator_name, LPCSTR action_id);
-			virtual _value_type evaluate();
-		};
+private:
+    shared_str m_action_id;
 
-		//////////////////////////////////////////////////////////////////////////
-		// loophole_exitable_evaluator
-		//////////////////////////////////////////////////////////////////////////
+public:
+    is_action_available_evaluator( animation_planner* object,
+                                   LPCSTR evaluator_name,
+                                   LPCSTR action_id );
+    virtual _value_type evaluate();
+};
 
-		class loophole_exitable_evaluator : public CStalkerPropertyEvaluator
-		{
-		private:
-			typedef CStalkerPropertyEvaluator inherited;
+//////////////////////////////////////////////////////////////////////////
+// loophole_exitable_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		public:
-			loophole_exitable_evaluator(CAI_Stalker* object, LPCSTR evaluator_name);
-			virtual _value_type evaluate();
-		};
+class loophole_exitable_evaluator : public CStalkerPropertyEvaluator {
+private:
+    typedef CStalkerPropertyEvaluator inherited;
 
-		//////////////////////////////////////////////////////////////////////////
-		// can_exit_loophole_with_animation
-		//////////////////////////////////////////////////////////////////////////
+public:
+    loophole_exitable_evaluator( CAI_Stalker* object, LPCSTR evaluator_name );
+    virtual _value_type evaluate();
+};
 
-		class can_exit_loophole_with_animation : public CStalkerPropertyEvaluator
-		{
-		private:
-			typedef CStalkerPropertyEvaluator inherited;
+//////////////////////////////////////////////////////////////////////////
+// can_exit_loophole_with_animation
+//////////////////////////////////////////////////////////////////////////
 
-		public:
-			can_exit_loophole_with_animation(CAI_Stalker* object, LPCSTR evaluator_name);
-			virtual _value_type evaluate();
-		};
+class can_exit_loophole_with_animation : public CStalkerPropertyEvaluator {
+private:
+    typedef CStalkerPropertyEvaluator inherited;
 
-		//////////////////////////////////////////////////////////////////////////
-		// default_behaviour_evaluator
-		//////////////////////////////////////////////////////////////////////////
+public:
+    can_exit_loophole_with_animation( CAI_Stalker* object,
+                                      LPCSTR evaluator_name );
+    virtual _value_type evaluate();
+};
 
-		class default_behaviour_evaluator : public CPropertyEvaluator<animation_planner>
-		{
-		private:
-			typedef CPropertyEvaluator<animation_planner> inherited;
+//////////////////////////////////////////////////////////////////////////
+// default_behaviour_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		public:
-			default_behaviour_evaluator(animation_planner* object, LPCSTR evaluator_name);
-			virtual _value_type evaluate();
-		};
+class default_behaviour_evaluator
+    : public CPropertyEvaluator< animation_planner > {
+private:
+    typedef CPropertyEvaluator< animation_planner > inherited;
 
-		//////////////////////////////////////////////////////////////////////////
-		// can_fire_at_enemy_evaluator
-		//////////////////////////////////////////////////////////////////////////
+public:
+    default_behaviour_evaluator( animation_planner* object,
+                                 LPCSTR evaluator_name );
+    virtual _value_type evaluate();
+};
 
-		class can_fire_at_enemy_evaluator : public CPropertyEvaluator<animation_planner>
-		{
-		private:
-			typedef CPropertyEvaluator<animation_planner> inherited;
+//////////////////////////////////////////////////////////////////////////
+// can_fire_at_enemy_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		public:
-			can_fire_at_enemy_evaluator(animation_planner* object, LPCSTR evaluator_name);
-			virtual _value_type evaluate();
-		};
+class can_fire_at_enemy_evaluator
+    : public CPropertyEvaluator< animation_planner > {
+private:
+    typedef CPropertyEvaluator< animation_planner > inherited;
 
-		//////////////////////////////////////////////////////////////////////////
-		// idle_time_interval_passed_evaluator
-		//////////////////////////////////////////////////////////////////////////
+public:
+    can_fire_at_enemy_evaluator( animation_planner* object,
+                                 LPCSTR evaluator_name );
+    virtual _value_type evaluate();
+};
 
-		class idle_time_interval_passed_evaluator : public CPropertyEvaluator<animation_planner>
-		{
-		private:
-			typedef CPropertyEvaluator<animation_planner> inherited;
+//////////////////////////////////////////////////////////////////////////
+// idle_time_interval_passed_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		private:
-			u32 m_time_interval;
+class idle_time_interval_passed_evaluator
+    : public CPropertyEvaluator< animation_planner > {
+private:
+    typedef CPropertyEvaluator< animation_planner > inherited;
 
-		public:
-			idle_time_interval_passed_evaluator(animation_planner* object, LPCSTR evaluator_name,
-			                                    u32 const& time_interval);
-			virtual _value_type evaluate();
-		};
+private:
+    u32 m_time_interval;
 
-		//////////////////////////////////////////////////////////////////////////
-		// lookout_time_interval_passed_evaluator
-		//////////////////////////////////////////////////////////////////////////
+public:
+    idle_time_interval_passed_evaluator( animation_planner* object,
+                                         LPCSTR evaluator_name,
+                                         u32 const& time_interval );
+    virtual _value_type evaluate();
+};
 
-		class lookout_time_interval_passed_evaluator : public CPropertyEvaluator<animation_planner>
-		{
-		private:
-			typedef CPropertyEvaluator<animation_planner> inherited;
+//////////////////////////////////////////////////////////////////////////
+// lookout_time_interval_passed_evaluator
+//////////////////////////////////////////////////////////////////////////
 
-		private:
-			u32 m_time_interval;
+class lookout_time_interval_passed_evaluator
+    : public CPropertyEvaluator< animation_planner > {
+private:
+    typedef CPropertyEvaluator< animation_planner > inherited;
 
-		public:
-			lookout_time_interval_passed_evaluator(animation_planner* object, LPCSTR evaluator_name,
-			                                       u32 const& time_interval);
-			virtual _value_type evaluate();
-		};
-	} // namespace evaluators
-} // namespace smart_covers
+private:
+    u32 m_time_interval;
+
+public:
+    lookout_time_interval_passed_evaluator( animation_planner* object,
+                                            LPCSTR evaluator_name,
+                                            u32 const& time_interval );
+    virtual _value_type evaluate();
+};
+} // namespace evaluators
+} // namespace smart_cover
 
 #endif // SMART_COVER_EVALUATORS_H_INCLUDED

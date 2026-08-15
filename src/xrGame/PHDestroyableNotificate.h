@@ -3,17 +3,18 @@
 class CSE_Abstract;
 class CPhysicsShellHolder;
 
-class CPHDestroyableNotificate
-{
+class CPHDestroyableNotificate {
 public:
-	virtual CPHDestroyableNotificate* cast_phdestroyable_notificate() { return this; }
-	virtual CPhysicsShellHolder* PPhysicsShellHolder() =0;
+    virtual CPHDestroyableNotificate* cast_phdestroyable_notificate() {
+        return this;
+    }
 
-	virtual void spawn_init()
-	{
-	}
+    virtual CPhysicsShellHolder* PPhysicsShellHolder() = 0;
 
-	void spawn_notificate(CSE_Abstract*);
+    virtual void spawn_init() {}
+
+    void spawn_notificate( CSE_Abstract* );
+
 protected:
 private:
 };

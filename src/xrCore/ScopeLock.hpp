@@ -4,11 +4,10 @@
 
 class Lock;
 
-class ScopeLock : xray::noncopyable
-{
-	Lock* syncObject;
+class ScopeLock : xray::noncopyable {
+    Lock* syncObject;
 
 public:
-	ScopeLock(Lock* SyncObject);
-	~ScopeLock();
+    ScopeLock( Lock* SyncObject );
+    ~ScopeLock();
 };

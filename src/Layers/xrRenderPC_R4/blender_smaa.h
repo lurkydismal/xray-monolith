@@ -1,28 +1,29 @@
 #pragma once
 
-
-class CBlender_smaa : public IBlender
-{
+class CBlender_smaa : public IBlender {
 public:
-	virtual LPCSTR getComment() { return "SMAA"; }
-	virtual BOOL canBeDetailed() { return FALSE; }
-	virtual BOOL canBeLMAPped() { return FALSE; }
+    virtual LPCSTR getComment() { return "SMAA"; }
 
-	virtual void Compile(CBlender_Compile& C);
+    virtual BOOL canBeDetailed() { return FALSE; }
 
-	CBlender_smaa();
-	virtual ~CBlender_smaa();
+    virtual BOOL canBeLMAPped() { return FALSE; }
+
+    virtual void Compile( CBlender_Compile& C );
+
+    CBlender_smaa();
+    virtual ~CBlender_smaa();
 };
 
-class CBlender_ssfx_taa : public IBlender
-{
+class CBlender_ssfx_taa : public IBlender {
 public:
-	virtual LPCSTR getComment() { return "TAA"; }
-	virtual BOOL canBeDetailed() { return FALSE; }
-	virtual BOOL canBeLMAPped() { return FALSE; }
+    virtual LPCSTR getComment() { return "TAA"; }
 
-	virtual void Compile(CBlender_Compile& C);
+    virtual BOOL canBeDetailed() { return FALSE; }
 
-	CBlender_ssfx_taa();
-	virtual ~CBlender_ssfx_taa();
+    virtual BOOL canBeLMAPped() { return FALSE; }
+
+    virtual void Compile( CBlender_Compile& C );
+
+    CBlender_ssfx_taa();
+    virtual ~CBlender_ssfx_taa();
 };

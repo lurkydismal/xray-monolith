@@ -1,30 +1,28 @@
 #pragma once
 
-#include "player_state_param.h"
 #include "accumulative_states.h"
+#include "player_state_param.h"
 
-namespace award_system
-{
-	class player_multichampion : public player_state_param
-	{
-		typedef player_state_param inherited;
-	public:
-		player_multichampion(game_state_accumulator* owner);
+namespace award_system {
+class player_multichampion : public player_state_param {
+    typedef player_state_param inherited;
 
-		virtual ~player_multichampion()
-		{
-		};
+public:
+    player_multichampion( game_state_accumulator* owner );
 
-		virtual void update()
-		{
-		};
-		virtual u32 const get_u32_param();
-		virtual float const get_float_param() { return 0.0f; };
-		virtual void reset_game();
+    virtual ~player_multichampion() {};
 
-		virtual void OnRoundEnd();
-	protected:
-		bool m_can_be_multichampion;
-	}; //class player_multichampion
+    virtual void update() {};
+    virtual u32 const get_u32_param();
 
-}
+    virtual float const get_float_param() { return 0.0f; };
+
+    virtual void reset_game();
+
+    virtual void OnRoundEnd();
+
+protected:
+    bool m_can_be_multichampion;
+}; // class player_multichampion
+
+} // namespace award_system

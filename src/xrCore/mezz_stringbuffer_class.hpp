@@ -1,25 +1,23 @@
 #pragma once
 
-#include <memory>
 #include <cstdint>
+#include <memory>
+#include <regex>
 #include <sstream>
 #include <vector>
-#include <regex>
 
-class MezzStringBuffer
-{
+class MezzStringBuffer {
 public:
-	MezzStringBuffer(uint32_t Size = 4096);
+    MezzStringBuffer( uint32_t Size = 4096 );
 
-	char* GetBuffer() const;
-	uint32_t GetSize() const;
+    char* GetBuffer() const;
+    uint32_t GetSize() const;
 
-	operator char* () const;
+    operator char*() const;
 
 private:
-	std::unique_ptr<char[]> StringBuffer;
+    std::unique_ptr< char[] > StringBuffer;
 
-	char* BufferRaw;
-	uint32_t BufferSize;
+    char* BufferRaw;
+    uint32_t BufferSize;
 };
-

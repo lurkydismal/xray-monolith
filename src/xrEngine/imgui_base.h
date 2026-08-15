@@ -1,94 +1,94 @@
 #pragma once
 
-#include "IInputReceiver.h"
 #include "../Include/xrRender/ImGuiRender.h"
+#include "IInputReceiver.h"
 
 #define IMGUI_DISABLE_OBSOLETE_KEYIO
 struct ImGuiContext;
 struct ImFont;
 struct ImFontConfig;
 
-namespace xr_imgui
-{
-    struct ide_backend;
+namespace xr_imgui {
+struct ide_backend;
 
-    class ide :
-        public pureRender,
-        public pureFrame,
-        public pureAppActivate,
-        public pureAppDeactivate,
-        public pureAppStart,
-        public pureAppEnd,
-        public pureScreenResolutionChanged,
-        public IInputReceiver
-    {
-    public:
-        ide();
-        ~ide();
+class ide : public pureRender,
+            public pureFrame,
+            public pureAppActivate,
+            public pureAppDeactivate,
+            public pureAppStart,
+            public pureAppEnd,
+            public pureScreenResolutionChanged,
+            public IInputReceiver {
+public:
+    ide();
+    ~ide();
 
-        bool is_shown() const { return m_shown; }
-        void Show(bool bShow = true);
-        bool is_input() const { return m_input; }
-        void EnableInput(bool bInput = true);
+    bool is_shown() const { return m_shown; }
 
-    public:
-        void OnDeviceCreate();
-        void OnDeviceDestroy();
-        void OnDeviceResetBegin() const;
-        void OnDeviceResetEnd() const;
+    void Show( bool bShow = true );
 
-    public:
-        // Interface implementations
-        void OnFrame() final;
-        void OnRender() final;
+    bool is_input() const { return m_input; }
 
-        void OnAppActivate() final;
-        void OnAppDeactivate() final;
+    void EnableInput( bool bInput = true );
 
-        void OnAppStart() final;
-        void OnAppEnd() final;
+public:
+    void OnDeviceCreate();
+    void OnDeviceDestroy();
+    void OnDeviceResetBegin() const;
+    void OnDeviceResetEnd() const;
 
-        virtual void OnScreenResolutionChanged();
+public:
+    // Interface implementations
+    void OnFrame() final;
+    void OnRender() final;
 
-        virtual void IR_Capture();
-        virtual void IR_Release();
+    void OnAppActivate() final;
+    void OnAppDeactivate() final;
 
-        void IR_OnMousePress(int key) final;
-        void IR_OnMouseRelease(int key) final;
-        void IR_OnMouseWheel(int direction) final;
-        void IR_OnMouseMove(int x, int y) final;
+    void OnAppStart() final;
+    void OnAppEnd() final;
 
-        void IR_OnKeyboardPress(int key) final;
-        void IR_OnKeyboardRelease(int key) final;
+    virtual void OnScreenResolutionChanged();
 
-        // ImGui handles hold state on its own
-        void IR_OnMouseHold(int key) final {};
-        void IR_OnKeyboardHold(int key) final {};
+    virtual void IR_Capture();
+    virtual void IR_Release();
 
-        void InputChar(WPARAM param);
-        void UpdateInputLang();
+    void IR_OnMousePress( int key ) final;
+    void IR_OnMouseRelease( int key ) final;
+    void IR_OnMouseWheel( int direction ) final;
+    void IR_OnMouseMove( int x, int y ) final;
 
-        ImFont* GetFont(LPCSTR name);
-        ImFontConfig LoadImGuiFontConfig(string_path path, LPCSTR name);
-        void LoadImGuiFont(string_path path, LPCSTR name);
+    void IR_OnKeyboardPress( int key ) final;
+    void IR_OnKeyboardRelease( int key ) final;
 
-    private:
-        void InitBackend();
-        void ShutdownBackend();
+    // ImGui handles hold state on its own
+    void IR_OnMouseHold( int key ) final {};
+    void IR_OnKeyboardHold( int key ) final {};
 
-    private:
-        void ShowMain();
+    void InputChar( WPARAM param );
+    void UpdateInputLang();
 
-    private:
-        CTimer m_timer;
-        IImGuiRender* m_render;
-        ImGuiContext* m_context;
-        ide_backend* m_backend_data;
-        bool m_shown;
-        bool m_input;
-        bool firstframe;
-        UINT32 keyboard_code_page;
-        xr_vector<IReader*> ImGuiFontsPtr;
-        xr_map<shared_str, ImFont*> ImFonts;
-    };
+    ImFont* GetFont( LPCSTR name );
+    ImFontConfig LoadImGuiFontConfig( string_path path, LPCSTR name );
+    void LoadImGuiFont( string_path path, LPCSTR name );
+
+private:
+    void InitBackend();
+    void ShutdownBackend();
+
+private:
+    void ShowMain();
+
+private:
+    CTimer m_timer;
+    IImGuiRender* m_render;
+    ImGuiContext* m_context;
+    ide_backend* m_backend_data;
+    bool m_shown;
+    bool m_input;
+    bool firstframe;
+    UINT32 keyboard_code_page;
+    xr_vector< IReader* > ImGuiFontsPtr;
+    xr_map< shared_str, ImFont* > ImFonts;
+};
 } // namespace xr_imgui

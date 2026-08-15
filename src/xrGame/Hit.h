@@ -2,88 +2,88 @@
 
 class CScriptHit;
 
-struct SHit
-{
-	SHit(float powerA, Fvector& dirA, CObject* whoA, u16 elementA, Fvector p_in_bone_spaceA,
-	     float impulseA, ALife::EHitType hit_typeA, float armor_piercingA/*=0.0f*/, bool AimBullet/*=false*/);
+struct SHit {
+    SHit( float powerA,
+          Fvector& dirA,
+          CObject* whoA,
+          u16 elementA,
+          Fvector p_in_bone_spaceA,
+          float impulseA,
+          ALife::EHitType hit_typeA,
+          float armor_piercingA /*=0.0f*/,
+          bool AimBullet /*=false*/ );
 
-	SHit();
-	bool is_valide() const;
-	void invalidate();
-	IC float damage() const
-	{
-		VERIFY(is_valide());
-		return power;
-	}
+    SHit();
+    bool is_valide() const;
+    void invalidate();
 
-	IC const Fvector& direction() const
-	{
-		VERIFY(is_valide());
-		return dir;
-	}
+    IC float damage() const {
+        VERIFY( is_valide() );
+        return power;
+    }
 
-	IC const CObject* initiator() const
-	{
-		VERIFY(is_valide());
-		return who;
-	}
+    IC const Fvector& direction() const {
+        VERIFY( is_valide() );
+        return dir;
+    }
 
-	IC u16 bone() const
-	{
-		VERIFY(is_valide());
-		return boneID;
-	}
+    IC const CObject* initiator() const {
+        VERIFY( is_valide() );
+        return who;
+    }
 
-	IC const Fvector& bone_space_position() const
-	{
-		VERIFY(is_valide());
-		return p_in_bone_space;
-	}
+    IC u16 bone() const {
+        VERIFY( is_valide() );
+        return boneID;
+    }
 
-	IC float phys_impulse() const
-	{
-		VERIFY(is_valide());
-		return impulse;
-	}
+    IC const Fvector& bone_space_position() const {
+        VERIFY( is_valide() );
+        return p_in_bone_space;
+    }
 
-	IC ALife::EHitType type() const
-	{
-		VERIFY(is_valide());
-		return hit_type;
-	}
+    IC float phys_impulse() const {
+        VERIFY( is_valide() );
+        return impulse;
+    }
 
-	void ApplyScriptHit(CScriptHit* tLuaHit);
+    IC ALife::EHitType type() const {
+        VERIFY( is_valide() );
+        return hit_type;
+    }
 
-	void Read_Packet(NET_Packet P);
-	void Read_Packet_Cont(NET_Packet P);
-	void Write_Packet(NET_Packet& P);
-	void Write_Packet_Cont(NET_Packet& P);
+    void ApplyScriptHit( CScriptHit* tLuaHit );
 
-	void GenHeader(u16 PacketType, u16 ID);
-	//private:
-	//GE_HIT
-	u32 Time;
-	u16 PACKET_TYPE;
-	u16 DestID;
+    void Read_Packet( NET_Packet P );
+    void Read_Packet_Cont( NET_Packet P );
+    void Write_Packet( NET_Packet& P );
+    void Write_Packet_Cont( NET_Packet& P );
 
-	float power;
-	Fvector dir;
-	CObject* who;
-	u16 whoID;
-	u16 weaponID;
-	u16 boneID;
-	Fvector p_in_bone_space;
-	float impulse;
+    void GenHeader( u16 PacketType, u16 ID );
+    // private:
+    // GE_HIT
+    u32 Time;
+    u16 PACKET_TYPE;
+    u16 DestID;
 
-	ALife::EHitType hit_type;
-	float armor_piercing;
-	bool add_wound;
-	bool aim_bullet;
-	//---------------------------------------------------
-	//GE_HIT_STATISTIC
-	u32 BulletID;
-	u32 SenderID;
+    float power;
+    Fvector dir;
+    CObject* who;
+    u16 whoID;
+    u16 weaponID;
+    u16 boneID;
+    Fvector p_in_bone_space;
+    float impulse;
+
+    ALife::EHitType hit_type;
+    float armor_piercing;
+    bool add_wound;
+    bool aim_bullet;
+    //---------------------------------------------------
+    // GE_HIT_STATISTIC
+    u32 BulletID;
+    u32 SenderID;
 #ifdef DEBUG
-	void				_dump				();
+    void _dump();
 #endif
 };

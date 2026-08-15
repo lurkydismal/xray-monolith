@@ -3,22 +3,21 @@
 
 class CPS_Instance;
 
-class CParticlesAsync
-{
+class CParticlesAsync {
 public:
-	static void Play();
-	static void Wait();
+    static void Play();
+    static void Wait();
 
-	static void ForceUpdate(intrusive_ptr<CPS_Instance> Obj);
-	static bool NeedForceUpdate();
+    static void ForceUpdate( intrusive_ptr< CPS_Instance > Obj );
+    static bool NeedForceUpdate();
 
 private:
-	void UpdateParticle(intrusive_ptr<CPS_Instance> particle) const;
-	static void Start();
+    void UpdateParticle( intrusive_ptr< CPS_Instance > particle ) const;
+    static void Start();
 
 public:
-	CParticlesAsync();
+    CParticlesAsync();
 
 private:
-	volatile bool IsStarted = false;
+    volatile bool IsStarted = false;
 };

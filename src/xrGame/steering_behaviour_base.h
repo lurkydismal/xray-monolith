@@ -9,31 +9,25 @@
 #ifndef STEERING_BEHAVIOUR_BASE_H_INCLUDED
 #define STEERING_BEHAVIOUR_BASE_H_INCLUDED
 
-
-
 class CAI_Rat;
 
-namespace steering_behaviour
-{
-	class base : private xray::noncopyable
-	{
-	public:
-		base(CAI_Rat const* object);
+namespace steering_behaviour {
+class base : private xray::noncopyable {
+public:
+    base( CAI_Rat const* object );
 
-		virtual ~base()
-		{
-		}
+    virtual ~base() {}
 
-		virtual Fvector direction() = 0;
+    virtual Fvector direction() = 0;
 
-	public:
-		IC void enabled(bool const& value);
-		IC bool const& enabled() const;
+public:
+    IC void enabled( bool const& value );
+    IC bool const& enabled() const;
 
-	private:
-		CAI_Rat const* m_object;
-		bool m_enabled;
-	};
+private:
+    CAI_Rat const* m_object;
+    bool m_enabled;
+};
 } // namespace steering_behaviour
 
 #include "steering_behaviour_base_inline.h"

@@ -1,25 +1,24 @@
 #pragma once
-#include "../basemonster/base_monster.h"
 #include "../../../../xrServerEntities/script_export_space.h"
+#include "../basemonster/base_monster.h"
 
-class CCat : public CBaseMonster
-{
-	typedef CBaseMonster inherited;
+class CCat : public CBaseMonster {
+    typedef CBaseMonster inherited;
+
 public:
-	CCat();
-	virtual ~CCat();
+    CCat();
+    virtual ~CCat();
 
-	virtual void Load(LPCSTR section);
-	virtual void reinit();
+    virtual void Load( LPCSTR section );
+    virtual void reinit();
 
-	virtual void UpdateCL();
+    virtual void UpdateCL();
 
-	virtual void CheckSpecParams(u32 spec_params);
+    virtual void CheckSpecParams( u32 spec_params );
 
-	virtual void HitEntityInJump(const CEntity* pEntity);
+    virtual void HitEntityInJump( const CEntity* pEntity );
 
-	virtual const char* get_monster_class_name() { return "cat"; }
+    virtual const char* get_monster_class_name() { return "cat"; }
 
-
-DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

@@ -1,13 +1,12 @@
 #pragma once
 
-#define WIDEN2(x) L##x
-#define WIDEN(x) WIDEN2(x)
+#define WIDEN2( x ) L##x
+#define WIDEN( x ) WIDEN2( x )
 
-#define PIX_EVENT(Name) dxPixEventWrapper pixEvent##Name(WIDEN(#Name))
+#define PIX_EVENT( Name ) dxPixEventWrapper pixEvent##Name( WIDEN( #Name ) )
 
-class dxPixEventWrapper
-{
+class dxPixEventWrapper {
 public:
-    dxPixEventWrapper(LPCWSTR wszName);
+    dxPixEventWrapper( LPCWSTR wszName );
     ~dxPixEventWrapper();
 };

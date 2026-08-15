@@ -2,30 +2,28 @@
 
 #include "RocketLauncher.h"
 #include "WeaponMagazined.h"
-#include "script_export_space.h"
 #include "WeaponSSRS.h"
+#include "script_export_space.h"
 
-class CWeaponSSRS : public CRocketLauncher,
-                    public CWeaponMagazined
-{
-	typedef CRocketLauncher inheritedRL;
-	typedef CWeaponMagazined inheritedWM;
+class CWeaponSSRS : public CRocketLauncher, public CWeaponMagazined {
+    typedef CRocketLauncher inheritedRL;
+    typedef CWeaponMagazined inheritedWM;
 
 public:
-	virtual ~CWeaponSSRS();
-	virtual BOOL net_Spawn(CSE_Abstract* DC);
-	virtual void Load(LPCSTR section);
-	virtual void OnEvent(NET_Packet& P, u16 type);
+    virtual ~CWeaponSSRS();
+    virtual BOOL net_Spawn( CSE_Abstract* DC );
+    virtual void Load( LPCSTR section );
+    virtual void OnEvent( NET_Packet& P, u16 type );
 
 #ifdef CROCKETLAUNCHER_CHANGE
-	virtual void UnloadRocket();
+    virtual void UnloadRocket();
 #endif
 
 protected:
-	virtual void FireStart();
-	virtual void ReloadMagazine();
-	virtual void state_Fire(float dt);
-	float fAiOneShotTime;
+    virtual void FireStart();
+    virtual void ReloadMagazine();
+    virtual void state_Fire( float dt );
+    float fAiOneShotTime;
 
-DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };
