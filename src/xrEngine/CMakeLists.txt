@@ -982,7 +982,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrPhysics
     xrXMLParser
     OpenAL32
-    optick
+    # optick
     ${RENDERER_LIB}
 )
 
