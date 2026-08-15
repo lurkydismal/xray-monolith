@@ -1,14 +1,14 @@
 #if 0
-#include "../xrCDB/xrCDB.h"
 #include "../xrCore/xrCore.h"
 #include "../xrPhysics.h"
+#include "../xrCDB/xrCDB.h"
 #include "../xrSound/Sound.h"
 
 class CGameMtlLibrary;
 
-#include <gtest/gtest.h>
-
 #include "dSortTriPrimitive.h"
+
+#include <gtest/gtest.h>
 
 namespace
 {
