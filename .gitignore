@@ -2,6 +2,15 @@
 .*
 !.gitignore
 !.gitattributes
+!.clang
+!.clang-format
+!.clang-format-ignore
+!.clang-tidy
+!.clangd
+!.gitattributes
+!.gitmodules
+!.pre-commit-config.yaml
+!.python-version
 
 # exclude binaries and temporary files
 _build/
