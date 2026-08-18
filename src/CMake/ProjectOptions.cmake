@@ -35,3 +35,11 @@ option(ENABLE_IPO "Enable interprocedural optimization (LTO)" OFF)
 option(ENABLE_INCREMENTAL_LINKING "Enable MSVC incremental linking" OFF)
 
 option(BUILD_DOCS "Enable documentation target" ON)
+
+if(IS_CLANG AND NOT MSVC)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+        CXX_STANDARD 26
+        CXX_STANDARD_REQUIRED ON
+        CXX_EXTENSIONS ON
+    )
+endif()
