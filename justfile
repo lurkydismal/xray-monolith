@@ -27,7 +27,7 @@ generate-build-files:
         -G "Ninja" \
         --toolchain ../../clang-cl-msvc-x64.cmake \
         -DBUILD_SHARED_LIBS=OFF \
-        -DENABLE_INCREMENTAL=ON \
+        -DENABLE_INCREMENTAL_LINKING=ON \
         -DENABLE_IPO=OFF \
         -DDISABLE_OPTIMIZATIONS=ON
 
