@@ -442,6 +442,9 @@ if(MSVC)
         >
         /DYNAMICBASE:NO
     )
+elseif(IS_CLANG AND NOT MSVC)
+    xray_target_compile_options(${PROJECT_NAME})
+    xray_target_link_options(${PROJECT_NAME})
 endif()
 
 ################################################################################

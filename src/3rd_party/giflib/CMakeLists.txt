@@ -354,5 +354,8 @@ if(MSVC)
         ${DEFAULT_CXX_EXCEPTION_HANDLING};
         /Y-
     )
+elseif(IS_CLANG AND NOT MSVC)
+    xray_target_compile_options(${PROJECT_NAME})
+    xray_target_link_options(${PROJECT_NAME})
 endif()
 

@@ -450,6 +450,15 @@ if(MSVC)
         /DYNAMICBASE:NO;
         /ignore:4099
     )
+elseif(IS_CLANG AND NOT MSVC)
+    xray_target_compile_options(${PROJECT_NAME})
+    xray_target_link_options(${PROJECT_NAME})
+
+    set_source_files_properties(
+        guids.cpp
+        PROPERTIES
+            SKIP_PRECOMPILE_HEADERS ON
+    )
 endif()
 
 ################################################################################

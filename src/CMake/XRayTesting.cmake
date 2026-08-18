@@ -53,6 +53,9 @@ function(add_xray_discovered_tests)
         target_compile_options(${TESTS_NAME} PRIVATE /Zi)
 
         target_link_options(${TESTS_NAME} PRIVATE /DEBUG)
+    elseif(IS_CLANG AND NOT MSVC)
+        xray_target_compile_options(${TESTS_NAME})
+        xray_target_link_options(${TESTS_NAME})
     endif()
 
     file(GLOB XRAY_RUNTIME_DLLS
