@@ -16,8 +16,8 @@
 #include "opthelpers.h"
 
 
-inline constexpr int64_t operator "" _i64(unsigned long long int n) noexcept { return static_cast<int64_t>(n); }
-inline constexpr uint64_t operator "" _u64(unsigned long long int n) noexcept { return static_cast<uint64_t>(n); }
+inline constexpr int64_t operator""_i64(unsigned long long int n) noexcept { return static_cast<int64_t>(n); }
+inline constexpr uint64_t operator""_u64(unsigned long long int n) noexcept { return static_cast<uint64_t>(n); }
 
 
 constexpr inline float minf(float a, float b) noexcept
