@@ -1,5 +1,6 @@
-# TODO: Limit to windows-only
-set(CMAKE_SYSTEM_VERSION 10.0 CACHE STRING "" FORCE)
+if(WIN32)
+    set(CMAKE_SYSTEM_VERSION 10.0 CACHE STRING "" FORCE)
+endif()
 
 ################################################################################
 # Is clang compiler
