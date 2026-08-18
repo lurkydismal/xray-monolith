@@ -35,11 +35,3 @@ generate-build-files:
 [working-directory('docs')]
 check-docs-coverage:
     uv run doc-coverage.py
-
-# TODO: Comment
-scan-build target="":
-    if [ -n "{{ target }}" ]; then \
-        scan-build -enable-checker core,security,nullability,deadcode,cplusplus,optin --exclude sdk --exclude 'src/3rd_party' cmake --build src/build_msvc --target '{{ target }}' --clean-first; \
-    else \
-        scan-build -enable-checker core,security,nullability,deadcode,cplusplus,optin --exclude sdk --exclude 'src/3rd_party' cmake --build src/build_msvc --clean-first; \
-    fi
