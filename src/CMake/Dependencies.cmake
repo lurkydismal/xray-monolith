@@ -34,22 +34,22 @@ CPMAddPackage(
         "XXHASH_BUILD_XXHSUM OFF"
     SOURCE_SUBDIR cmake_unofficial
 )
-CPMAddPackage(
-    URI "gh:google/snappy#1.2.2"
-    OPTIONS
-        "SNAPPY_BUILD_TESTS OFF"
-        "SNAPPY_BUILD_BENCHMARKS OFF"
-        "SNAPPY_INSTALL OFF"
-)
-CPMAddPackage(
-    URI "gh:facebook/zstd@1.5.7"
-    OPTIONS
-        "ZSTD_BUILD_STATIC ${ZSTD_BUILD_STATIC}"
-        "ZSTD_BUILD_SHARED ${ZSTD_BUILD_SHARED}"
-        "ZSTD_BUILD_PROGRAMS OFF"
-        "ZSTD_BUILD_TESTS OFF"
-    SOURCE_SUBDIR build/cmake
-)
+# CPMAddPackage(
+#     URI "gh:google/snappy#1.2.2"
+#     OPTIONS
+#         "SNAPPY_BUILD_TESTS OFF"
+#         "SNAPPY_BUILD_BENCHMARKS OFF"
+#         "SNAPPY_INSTALL OFF"
+# )
+# CPMAddPackage(
+#     URI "gh:facebook/zstd@1.5.7"
+#     OPTIONS
+#         "ZSTD_BUILD_STATIC ${ZSTD_BUILD_STATIC}"
+#         "ZSTD_BUILD_SHARED ${ZSTD_BUILD_SHARED}"
+#         "ZSTD_BUILD_PROGRAMS OFF"
+#         "ZSTD_BUILD_TESTS OFF"
+#     SOURCE_SUBDIR build/cmake
+# )
 CPMAddPackage("gh:stephenberry/glaze@7.9.1")
 CPMAddPackage(
     URI "gh:hanickadot/compile-time-regular-expressions@3.11.0"
