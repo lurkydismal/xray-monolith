@@ -226,6 +226,38 @@ function(source_file_compile_options SOURCE_FILE)
 endfunction()
 
 ################################################################################
+# Applies common compiler options used by X-Ray targets.
+# Enables optimization, debug information, and places functions/data into
+# separate sections to allow unused sections to be discarded by the linker.
+################################################################################
+function(xray_target_compile_options TARGET)
+    target_compile_options(${TARGET} PRIVATE
+        ${XRAY_OPTIMIZATION_FLAG}
+        -g
+        -ffunction-sections
+        -fdata-sections
+    )
+endfunction()
+
+# Linker flags
+include(CheckLinkerFlag)
+
+check_linker_flag(CXX "LINKER:--gc-sections" HAS_LINKER_GC_SECTIONS)
+check_linker_flag(CXX "LINKER:-O1" HAS_LINKER_O1)
+
+################################################################################
+# Applies common linker options used by X-Ray targets.
+# Enables removal of unused sections and, for Release builds, linker-level
+# optimization when supported by the selected linker.
+################################################################################
+function(xray_target_link_options TARGET)
+    target_link_options(
+        ${TARGET} PRIVATE $<$<BOOL:${HAS_LINKER_GC_SECTIONS}>:LINKER:--gc-sections>
+        $<$<AND:$<CONFIG:Release>,$<BOOL:${HAS_LINKER_O1}>>:LINKER:-O1>
+    )
+endfunction()
+
+################################################################################
 # Default properties of visual studio projects
 ################################################################################
 set(DEFAULT_CXX_PROPS "${CMAKE_CURRENT_LIST_DIR}/DefaultCXX.cmake")
