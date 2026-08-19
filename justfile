@@ -29,7 +29,8 @@ generate-build-files:
         -DBUILD_SHARED_LIBS=OFF \
         -DENABLE_INCREMENTAL_LINKING=ON \
         -DENABLE_IPO=OFF \
-        -DDISABLE_OPTIMIZATIONS=ON
+        -DDISABLE_OPTIMIZATIONS=ON \
+        -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL
 
 # Check Doxygen documentation comment coverage.
 [working-directory('docs')]
