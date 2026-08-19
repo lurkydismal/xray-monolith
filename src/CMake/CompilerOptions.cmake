@@ -59,7 +59,7 @@ if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
         -Wno-microsoft-enum-value
         -Wno-invalid-offsetof
         -fms-extensions
-        # -fms-compatibility
+        -fms-compatibility
         -fdelayed-template-parsing
         -march=native
     )
