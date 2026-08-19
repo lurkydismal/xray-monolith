@@ -2,7 +2,7 @@
 # Global linker options
 ################################################################################
 # TODO: Refactor
-if(MSVC)
+if(TRUE)
     # remove default flags provided with CMake for MSVC
     set(CMAKE_EXE_LINKER_FLAGS "")
     set(CMAKE_MODULE_LINKER_FLAGS "")

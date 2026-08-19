@@ -2,7 +2,7 @@
 # Global compiler options
 ################################################################################
 # TODO: Refactor
-if(MSVC)
+if(TRUE)
     # remove default flags provided with CMake for MSVC
     set(CMAKE_C_FLAGS "")
     set(CMAKE_C_FLAGS_DX10 "")
