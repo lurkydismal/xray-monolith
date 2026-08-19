@@ -19,7 +19,7 @@ if(IS_CLANG AND NOT MSVC)
         -fdelayed-template-parsing
         -march=native
     )
-elseif(IS_CLANG AND MSVC)
+elseif((IS_CLANG AND MSVC) OR IS_CLANG_CL)
     add_compile_options(
         -clang:-Wno-c++11-narrowing
         -clang:-Wno-microsoft-cast
