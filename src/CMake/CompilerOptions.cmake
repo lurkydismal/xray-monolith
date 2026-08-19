@@ -49,6 +49,10 @@ endif()
 # endforeach()
 
 if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
+    set(CMAKE_CXX_STANDARD 26)
+    set(CMAKE_CXX_STANDARD_REQUIRED ON)
+    set(CMAKE_CXX_EXTENSIONS ON)
+
     add_compile_options(
         -Wno-c++11-narrowing
         -Wno-microsoft-cast

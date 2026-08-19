@@ -26,10 +26,3 @@ option(ENABLE_IPO "Enable interprocedural optimization (LTO)" OFF)
 option(ENABLE_INCREMENTAL_LINKING "Enable MSVC incremental linking" OFF)
 
 option(BUILD_DOCS "Enable documentation target" ON)
-
-if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
-    set(CMAKE_CXX_STANDARD 26)
-    set(CMAKE_CXX_STANDARD_REQUIRED ON)
-    set(CMAKE_CXX_EXTENSIONS ON)
-    add_compile_options(-Wno-error)
-endif()
