@@ -539,6 +539,6 @@ endif()
 target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
 
-    stdfunc::stdfunc
+    stdfunc::core
 )
 

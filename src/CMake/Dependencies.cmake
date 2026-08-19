@@ -61,7 +61,7 @@ CPMAddPackage("gh:simd-everywhere/simde@0.8.2")
 # )
 
 CPMAddPackage(
-    URI "gh:lurkydismal/stdfunc@0.2.0"
+    URI "gh:lurkydismal/stdfunc@0.3.0"
     OPTIONS
         "STDFUNC_USE_XXHASH OFF"
         "STDFUNC_USE_SNAPPY OFF"

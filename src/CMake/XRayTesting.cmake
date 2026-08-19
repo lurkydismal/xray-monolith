@@ -90,7 +90,7 @@ function(add_xray_discovered_tests)
         GTest::gtest
         GTest::gmock
 
-        stdfunc::stdfunc
+        stdfunc::core
         Microsoft.GSL::GSL
 
         xrEngine

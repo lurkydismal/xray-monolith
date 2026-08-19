@@ -482,7 +482,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrAPI
     xrCore
 
-    stdfunc::stdfunc
+    stdfunc::core
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC

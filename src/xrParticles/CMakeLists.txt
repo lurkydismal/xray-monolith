@@ -429,7 +429,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
     xrCPU_Pipe
 
-    stdfunc::stdfunc
+    stdfunc::core
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC
