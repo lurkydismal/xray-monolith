@@ -19,7 +19,7 @@ endif()
 ################################################################################
 # Dependencies
 ################################################################################
-CPMAddPackage("gh:microsoft/GSL@4.2.2")
+# CPMAddPackage("gh:microsoft/GSL@4.2.2")
 
 # Portable SIMD
 CPMAddPackage("gh:simd-everywhere/simde@0.8.2")
@@ -27,13 +27,13 @@ CPMAddPackage("gh:simd-everywhere/simde@0.8.2")
 ################################################################################
 # stdfunc
 ################################################################################
-CPMAddPackage(
-    URI "gh:Cyan4973/xxHash@0.8.3"
-    OPTIONS
-        "XXHASH_BUILD_ENABLE_INLINE_API ${XXHASH_BUILD_ENABLE_INLINE_API}"
-        "XXHASH_BUILD_XXHSUM OFF"
-    SOURCE_SUBDIR cmake_unofficial
-)
+# CPMAddPackage(
+#     URI "gh:Cyan4973/xxHash@0.8.3"
+#     OPTIONS
+#         "XXHASH_BUILD_ENABLE_INLINE_API ${XXHASH_BUILD_ENABLE_INLINE_API}"
+#         "XXHASH_BUILD_XXHSUM OFF"
+#     SOURCE_SUBDIR cmake_unofficial
+# )
 # CPMAddPackage(
 #     URI "gh:google/snappy#1.2.2"
 #     OPTIONS
@@ -50,24 +50,24 @@ CPMAddPackage(
 #         "ZSTD_BUILD_TESTS OFF"
 #     SOURCE_SUBDIR build/cmake
 # )
-CPMAddPackage("gh:stephenberry/glaze@7.9.1")
-CPMAddPackage(
-    URI "gh:hanickadot/compile-time-regular-expressions@3.11.0"
-    OPTIONS
-        "CTRE_BUILD_TESTS OFF"
-        "CTRE_BUILD_PACKAGE OFF"
-        "CTRE_BUILD_PACKAGE_DEB OFF"
-        "CTRE_BUILD_PACKAGE_RPM OFF"
-)
+# CPMAddPackage("gh:stephenberry/glaze@7.9.1")
+# CPMAddPackage(
+#     URI "gh:hanickadot/compile-time-regular-expressions@3.11.0"
+#     OPTIONS
+#         "CTRE_BUILD_TESTS OFF"
+#         "CTRE_BUILD_PACKAGE OFF"
+#         "CTRE_BUILD_PACKAGE_DEB OFF"
+#         "CTRE_BUILD_PACKAGE_RPM OFF"
+# )
 
-CPMAddPackage("gh:lurkydismal/stdfunc@0.1.0")
+CPMAddPackage("gh:lurkydismal/stdfunc@0.2.0-rc1")
 
 ################################################################################
 # Logging
 ################################################################################
-CPMAddPackage("gh:fmtlib/fmt#12.2.0")
+# CPMAddPackage("gh:fmtlib/fmt#12.2.0")
 
 ################################################################################
 # Rust
 ################################################################################
-CPMAddPackage("gh:corrosion-rs/corrosion@0.6.1")
+# CPMAddPackage("gh:corrosion-rs/corrosion@0.6.1")

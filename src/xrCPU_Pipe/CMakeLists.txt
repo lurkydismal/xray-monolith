@@ -417,7 +417,7 @@ endif()
 target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
 
-    stdfunc::stdfunc
+    # stdfunc::stdfunc
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC

@@ -955,9 +955,9 @@ add_dependencies(${EXECUTABLE_TARGET}
 # Link with other targets.
 target_link_libraries(${OBJECT_TARGET}
     PUBLIC
-        fmt::fmt
+#         fmt::fmt
         stdfunc::stdfunc
-        rust_lib
+#         rust_lib
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC

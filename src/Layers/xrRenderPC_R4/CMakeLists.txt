@@ -1097,7 +1097,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
     xrCPU_Pipe
     imgui
-    fmt::fmt
+    # fmt::fmt
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES

@@ -350,7 +350,7 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    stdfunc::stdfunc
+    # stdfunc::stdfunc
 
     # TODO: Refactor into a separate target
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
