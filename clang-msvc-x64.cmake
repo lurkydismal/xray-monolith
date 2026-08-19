@@ -11,6 +11,8 @@ set(CMAKE_CXX_COMPILER_TARGET x86_64-w64-windows-msvc)
 
 set(CMAKE_LINKER lld-link)
 
-set(CMAKE_AR llvm-lib)
+set(CMAKE_AR llvm-ar)
+
+set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
 
 set(IS_CLANG_MSVC ON)
