@@ -65,6 +65,7 @@ if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
     )
 
     add_compile_options(-Wno-error)
+    add_compile_options(-fno-exceptions)
 elseif(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
     add_compile_options(
         -clang:-Wno-c++11-narrowing
