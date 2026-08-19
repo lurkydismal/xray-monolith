@@ -63,6 +63,8 @@ if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
         -fdelayed-template-parsing
         -march=native
     )
+
+    add_compile_options(-Wno-error)
 elseif(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
     add_compile_options(
         -clang:-Wno-c++11-narrowing
