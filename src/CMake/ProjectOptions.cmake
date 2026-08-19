@@ -3,19 +3,6 @@ if(WIN32)
 endif()
 
 ################################################################################
-# Is clang compiler
-################################################################################
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    if (CMAKE_CXX_COMPILER MATCHES "clang-cl")
-        set(IS_CLANG OFF)
-        set(IS_CLANG_CL ON)
-    else()
-        set(IS_CLANG ON)
-        set(IS_CLANG_CL OFF)
-    endif()
-endif()
-
-################################################################################
 # Set target arch type if empty. Visual studio solution generator provides it.
 ################################################################################
 if(NOT CMAKE_VS_PLATFORM_NAME)
@@ -40,7 +27,7 @@ option(ENABLE_INCREMENTAL_LINKING "Enable MSVC incremental linking" OFF)
 
 option(BUILD_DOCS "Enable documentation target" ON)
 
-if(IS_CLANG AND NOT MSVC)
+if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
     set(CMAKE_CXX_STANDARD 26)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
     set(CMAKE_CXX_EXTENSIONS ON)

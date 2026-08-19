@@ -12,3 +12,5 @@ set(CMAKE_CXX_COMPILER_TARGET x86_64-w64-windows-gnu)
 set(CMAKE_LINKER ld.lld)
 
 set(CMAKE_AR llvm-ar)
+
+set(IS_CLANG_MINGW ON)

@@ -269,7 +269,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 ################################################################################
 # Compile and link options
 ################################################################################
-if(MSVC)
+if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
             ${XRAY_OPTIMIZATION_FLAG};
@@ -450,7 +450,7 @@ if(MSVC)
         /DYNAMICBASE:NO;
         /ignore:4099
     )
-elseif(IS_CLANG AND NOT MSVC)
+elseif(IS_CLANG_MINGW OR IS_CLANG_MSVC)
     xray_target_compile_options(${PROJECT_NAME})
     xray_target_link_options(${PROJECT_NAME})
 

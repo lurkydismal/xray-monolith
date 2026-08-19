@@ -48,7 +48,7 @@ endif()
 #     set(CMAKE_CXX_FLAGS_${CFG} "" CACHE STRING "" FORCE)
 # endforeach()
 
-if(IS_CLANG AND NOT MSVC)
+if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
     add_compile_options(
         -Wno-c++11-narrowing
         -Wno-microsoft-cast
@@ -59,7 +59,7 @@ if(IS_CLANG AND NOT MSVC)
         -fdelayed-template-parsing
         -march=native
     )
-elseif((IS_CLANG AND MSVC) OR IS_CLANG_CL)
+elseif(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
     add_compile_options(
         -clang:-Wno-c++11-narrowing
         -clang:-Wno-microsoft-cast

@@ -12,3 +12,5 @@ set(CMAKE_CXX_COMPILER_TARGET x86_64-w64-windows-msvc)
 set(CMAKE_LINKER lld-link)
 
 set(CMAKE_AR llvm-lib)
+
+set(IS_CLANG_MSVC ON)
