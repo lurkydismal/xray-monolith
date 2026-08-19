@@ -107,14 +107,16 @@ if(ENABLE_INCREMENTAL_LINKING)
     endif()
 endif()
 
-if(INCREMENTAL_LINKING_ENABLED)
-    add_link_options(
-        /OPT:NOREF
-        /OPT:NOICF
-    )
-else()
-    add_link_options(
-        /OPT:REF
-        /OPT:ICF
-    )
+if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
+    if(INCREMENTAL_LINKING_ENABLED)
+        add_link_options(
+            /OPT:NOREF
+            /OPT:NOICF
+        )
+    else()
+        add_link_options(
+            /OPT:REF
+            /OPT:ICF
+        )
+    endif()
 endif()
