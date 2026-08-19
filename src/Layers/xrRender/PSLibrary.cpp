@@ -1,7 +1,6 @@
 //----------------------------------------------------
 // file: PSLibrary.cpp
 //----------------------------------------------------
-#include <fmt/format.h>
 #include "stdafx.h"
 #pragma hdrstop
 
