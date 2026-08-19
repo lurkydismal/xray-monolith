@@ -5,10 +5,14 @@ endif()
 ################################################################################
 # Is clang compiler
 ################################################################################
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(IS_CLANG ON)
-else()
-    set(IS_CLANG OFF)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    if (CMAKE_CXX_COMPILER MATCHES "clang-cl")
+        set(IS_CLANG OFF)
+        set(IS_CLANG_CL ON)
+    else()
+        set(IS_CLANG ON)
+        set(IS_CLANG_CL OFF)
+    endif()
 endif()
 
 ################################################################################
