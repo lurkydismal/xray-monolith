@@ -88,6 +88,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 
 	DllMainXrCore(NULL, DLL_THREAD_ATTACH, NULL);
 
+#ifdef __MINGW32__
+    WinMain_impl(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+#else
 	__try
 	{
 		WinMain_impl(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
@@ -97,6 +100,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 		_resetstkoflw();
 		FATAL("stack overflow");
 	}
+#endif
 
 	DllMainXrPhysics(NULL, DLL_PROCESS_DETACH, NULL);
 	DllMainXrCore(NULL, DLL_PROCESS_DETACH, NULL);
