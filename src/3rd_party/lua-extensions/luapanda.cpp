@@ -9,6 +9,7 @@
 #include <list>
 #include <map>
 #include <string>
+#include <cstring>
 
 //using namespace std;
 static int cur_run_state = 0;       //当前运行状态， c 和 lua 都可能改变这个状态，要保持同步
@@ -823,7 +824,7 @@ void debug_hook_c(lua_State* L, lua_Debug* ar) {
     if (lua_getinfo(L, "Slf", ar) != 0) {
         //if in c function , return
         if (!hook_process_cfunction(L, ar)) return;
-        //if in debugger , return	
+        //if in debugger , return
         int source_len = (int)strlen(ar->source);
         if (debug_file_path_len == source_len) {
             if (!strcmp(debug_file_path, ar->source))	return;
