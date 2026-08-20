@@ -750,6 +750,15 @@ HRESULT WINAPI
 //
 //---------------------------------------------------------------------------
 
+#ifdef __MINGW32__
+HRESULT WINAPI
+    D3DX10SHProjectCubeMap(
+        UINT                                Order,
+        ID3D10Texture2D                                    *pCubeMap,
+        __out_ecount(Order*Order) FLOAT                    *pROut,
+        FLOAT                *pGOut,
+        FLOAT                *pBOut);
+#else
 HRESULT WINAPI
     D3DX10SHProjectCubeMap(
         __in_range(2,6) UINT                                Order,
@@ -757,6 +766,7 @@ HRESULT WINAPI
         __out_ecount(Order*Order) FLOAT                    *pROut,
         __out_ecount_opt(Order*Order) FLOAT                *pGOut,
         __out_ecount_opt(Order*Order) FLOAT                *pBOut);
+#endif
 
 #ifdef __cplusplus
 }
