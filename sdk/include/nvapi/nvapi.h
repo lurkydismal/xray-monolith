@@ -1524,7 +1524,15 @@ typedef struct _NV_GPU_DISPLAYIDS
 //! \endcode
 //! \ingroup gpu
 ///////////////////////////////////////////////////////////////////////////////
+#ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_GetConnectedDisplayIds(
+     NvPhysicalGpuHandle hPhysicalGpu,
+     NV_GPU_DISPLAYIDS* pDisplayIds,
+     NvU32* pDisplayIdCount,
+     NvU32 flags);
+#else
 NVAPI_INTERFACE NvAPI_GPU_GetConnectedDisplayIds(__in NvPhysicalGpuHandle hPhysicalGpu,  __inout_ecount_part_opt(*pDisplayIdCount, *pDisplayIdCount) NV_GPU_DISPLAYIDS* pDisplayIds, __inout NvU32* pDisplayIdCount, __in NvU32 flags);
+#endif
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1566,7 +1574,14 @@ NVAPI_INTERFACE NvAPI_GPU_GetConnectedDisplayIds(__in NvPhysicalGpuHandle hPhysi
 //!
 //! \ingroup gpu
 ///////////////////////////////////////////////////////////////////////////////
+#ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_GetAllDisplayIds(
+     NvPhysicalGpuHandle hPhysicalGpu,
+     NV_GPU_DISPLAYIDS* pDisplayIds,
+     NvU32* pDisplayIdCount);
+#else
 NVAPI_INTERFACE NvAPI_GPU_GetAllDisplayIds(__in NvPhysicalGpuHandle hPhysicalGpu, __inout_ecount_part_opt(*pDisplayIdCount, *pDisplayIdCount) NV_GPU_DISPLAYIDS* pDisplayIds, __inout NvU32* pDisplayIdCount);
+#endif
 
 
 
@@ -1857,7 +1872,13 @@ typedef enum _NV_GPU_TYPE
 //!
 //!  \ingroup gpu 
 ///////////////////////////////////////////////////////////////////////////////     
+#ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_GetGPUType(
+     NvPhysicalGpuHandle hPhysicalGpu,
+     NV_GPU_TYPE *pGpuType);
+#else
 NVAPI_INTERFACE NvAPI_GPU_GetGPUType(__in NvPhysicalGpuHandle hPhysicalGpu, __inout NV_GPU_TYPE *pGpuType);
+#endif
 
 
 
@@ -2289,7 +2310,11 @@ typedef NV_GPU_CLOCK_FREQUENCIES_V2 NV_GPU_CLOCK_FREQUENCIES;
 //! \retval  NVAPI_INVALID_ARGUMENT     pClkFreqs is NULL.
 //! \ingroup gpuclock
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_GetAllClockFrequencies(NvPhysicalGpuHandle hPhysicalGPU, NV_GPU_CLOCK_FREQUENCIES *pClkFreqs);
+ #else
 NVAPI_INTERFACE NvAPI_GPU_GetAllClockFrequencies(__in NvPhysicalGpuHandle hPhysicalGPU, __inout NV_GPU_CLOCK_FREQUENCIES *pClkFreqs);
+ #endif
 
 
 //! \addtogroup gpupstate
@@ -2709,7 +2734,11 @@ typedef NV_GPU_PERF_PSTATES20_INFO_V2   NV_GPU_PERF_PSTATES20_INFO;
 //!
 //! \ingroup gpupstate
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_GetPstates20(NvPhysicalGpuHandle hPhysicalGpu, NV_GPU_PERF_PSTATES20_INFO *pPstatesInfo);
+ #else
 NVAPI_INTERFACE NvAPI_GPU_GetPstates20(__in NvPhysicalGpuHandle hPhysicalGpu, __inout NV_GPU_PERF_PSTATES20_INFO *pPstatesInfo);
+ #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -3126,7 +3155,11 @@ typedef enum
 } NVAPI_GPU_WORKSTATION_FEATURE_MASK;
 
 //! \ingroup gpu
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_WorkstationFeatureSetup(NvPhysicalGpuHandle hPhysicalGpu, NvU32 featureEnableMask, NvU32 featureDisableMask);
+ #else
 NVAPI_INTERFACE NvAPI_GPU_WorkstationFeatureSetup(__in NvPhysicalGpuHandle hPhysicalGpu, __in NvU32 featureEnableMask, __in NvU32 featureDisableMask);
+ #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -3150,7 +3183,11 @@ NVAPI_INTERFACE NvAPI_GPU_WorkstationFeatureSetup(__in NvPhysicalGpuHandle hPhys
 ///////////////////////////////////////////////////////////////////////////////
 
 //! \ingroup gpu
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_WorkstationFeatureQuery(NvPhysicalGpuHandle hPhysicalGpu, NvU32 *pConfiguredFeatureMask, NvU32 *pConsistentFeatureMask);
+ #else
 NVAPI_INTERFACE NvAPI_GPU_WorkstationFeatureQuery(__in NvPhysicalGpuHandle hPhysicalGpu, __out_opt NvU32 *pConfiguredFeatureMask, __out_opt NvU32 *pConsistentFeatureMask);
+ #endif
 
 /////////////////////////////////////////////////////////////////////////////// 
 // 
@@ -3565,7 +3602,11 @@ typedef struct _NV_SCANOUT_INTENSITY_STATE_DATA
 //!
 //! \ingroup gpu
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_GetScanoutIntensityState(NvU32 displayId, NV_SCANOUT_INTENSITY_STATE_DATA* scanoutIntensityStateData);
+ #else
 NVAPI_INTERFACE NvAPI_GPU_GetScanoutIntensityState(__in NvU32 displayId, __inout NV_SCANOUT_INTENSITY_STATE_DATA* scanoutIntensityStateData);
+ #endif
 
 
 //! \ingroup gpu
@@ -3647,7 +3688,11 @@ typedef struct _NV_SCANOUT_WARPING_STATE_DATA
 //!
 //! \ingroup gpu
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_GetScanoutWarpingState(NvU32 displayId, NV_SCANOUT_WARPING_STATE_DATA* scanoutWarpingStateData);
+ #else
 NVAPI_INTERFACE NvAPI_GPU_GetScanoutWarpingState(__in NvU32 displayId, __inout NV_SCANOUT_WARPING_STATE_DATA* scanoutWarpingStateData);
+ #endif
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -3707,7 +3752,11 @@ typedef struct _NV_SCANOUT_INFORMATION
 //!
 //! \ingroup gpu
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_GetScanoutConfigurationEx(NvU32 displayId, NV_SCANOUT_INFORMATION *pScanoutInformation);
+ #else
 NVAPI_INTERFACE NvAPI_GPU_GetScanoutConfigurationEx(__in NvU32 displayId, __inout NV_SCANOUT_INFORMATION *pScanoutInformation);
+ #endif
 
 
 //! Used in NvAPI_GPU_GetPerfDecreaseInfo.
@@ -3739,7 +3788,11 @@ typedef enum _NVAPI_GPU_PERF_DECREASE
 //!
 //! \ingroup gpu
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_GetPerfDecreaseInfo(NvPhysicalGpuHandle hPhysicalGpu, NvU32 *pPerfDecrInfo);
+ #else
 NVAPI_INTERFACE NvAPI_GPU_GetPerfDecreaseInfo(__in NvPhysicalGpuHandle hPhysicalGpu, __inout NvU32 *pPerfDecrInfo);
+ #endif
 
 //! \ingroup gpu
 typedef enum _NV_GPU_ILLUMINATION_ATTRIB
@@ -3801,7 +3854,11 @@ typedef NV_GPU_QUERY_ILLUMINATION_SUPPORT_PARM_V1      NV_GPU_QUERY_ILLUMINATION
 #define NV_GPU_QUERY_ILLUMINATION_SUPPORT_PARM_VER     NV_GPU_QUERY_ILLUMINATION_SUPPORT_PARM_VER_1
 
 //! \ingroup gpu 
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GPU_QueryIlluminationSupport(NV_GPU_QUERY_ILLUMINATION_SUPPORT_PARM *pIlluminationSupportInfo);
+ #else
 NVAPI_INTERFACE NvAPI_GPU_QueryIlluminationSupport(__inout NV_GPU_QUERY_ILLUMINATION_SUPPORT_PARM *pIlluminationSupportInfo);
+ #endif
 
 
 
@@ -4250,7 +4307,11 @@ typedef struct
 //
 ///////////////////////////////////////////////////////////////////////////////
 //! \ingroup        dispcontrol
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GetDisplayPortInfo(NvDisplayHandle hNvDisplay, NvU32 outputId, NV_DISPLAY_PORT_INFO *pInfo);
+ #else
 NVAPI_INTERFACE NvAPI_GetDisplayPortInfo(__in_opt NvDisplayHandle hNvDisplay, __in NvU32 outputId, __inout NV_DISPLAY_PORT_INFO *pInfo);
+ #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // FUNCTION NAME:   NvAPI_SetDisplayPort
@@ -4363,7 +4424,11 @@ typedef struct
 
 
 //! \ingroup dispcontrol
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GetHDMISupportInfo(NvDisplayHandle hNvDisplay, NvU32 outputId, NV_HDMI_SUPPORT_INFO *pInfo);
+ #else
 NVAPI_INTERFACE NvAPI_GetHDMISupportInfo(__in_opt NvDisplayHandle hNvDisplay, __in NvU32 outputId, __inout NV_HDMI_SUPPORT_INFO *pInfo);
+ #endif
 
 
 //! \ingroup dispcontrol
@@ -4848,7 +4913,11 @@ typedef struct
 //!
 //! \ingroup dispcontrol
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_Disp_InfoFrameControl(NvU32 displayId, NV_INFOFRAME_DATA *pInfoframeData);
+ #else
 NVAPI_INTERFACE NvAPI_Disp_InfoFrameControl(__in NvU32 displayId, __inout NV_INFOFRAME_DATA *pInfoframeData);
+ #endif
 
 
 
@@ -4985,7 +5054,11 @@ typedef struct _NV_TIMING_INPUT
 //!
 //! \ingroup dispcontrol
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_GetTiming( NvU32 displayId,NV_TIMING_INPUT *timingInput, NV_TIMING *pTiming); 
+ #else
 NVAPI_INTERFACE NvAPI_DISP_GetTiming( __in NvU32 displayId,__in NV_TIMING_INPUT *timingInput, __out NV_TIMING *pTiming); 
+ #endif
 
 
 
@@ -5101,7 +5174,11 @@ typedef struct _NV_MONITOR_CAPABILITIES
 //! SUPPORTED OS:  Windows Vista and higher
 //!
 //! \ingroup dispcontrol
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_GetMonitorCapabilities(NvU32 displayId, NV_MONITOR_CAPABILITIES *pMonitorCapabilities);
+ #else
 NVAPI_INTERFACE NvAPI_DISP_GetMonitorCapabilities(__in NvU32 displayId, __inout NV_MONITOR_CAPABILITIES *pMonitorCapabilities);
+ #endif
 
 //! \ingroup dispcontrol
 typedef struct _NV_MONITOR_COLOR_DATA
@@ -5157,7 +5234,11 @@ typedef NV_MONITOR_COLOR_CAPS_V1 NV_MONITOR_COLOR_CAPS;
 //! \ingroup dispcontrol
 //!
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_GetMonitorColorCapabilities(NvU32 displayId, NV_MONITOR_COLOR_CAPS *pMonitorColorCapabilities, NvU32 *pColorCapsCount);
+ #else
 NVAPI_INTERFACE NvAPI_DISP_GetMonitorColorCapabilities(__in NvU32 displayId, __inout_ecount_part_opt(*pColorCapsCount, *pColorCapsCount) NV_MONITOR_COLOR_CAPS *pMonitorColorCapabilities, __inout NvU32 *pColorCapsCount);
+ #endif
 
 //! \ingroup dispcontrol
 //! Used in NvAPI_DISP_EnumCustomDisplay() and NvAPI_DISP_TryCustomDisplay().
@@ -5206,7 +5287,11 @@ typedef struct
 //!
 //! \ingroup dispcontrol
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_EnumCustomDisplay( NvU32 displayId, NvU32 index, NV_CUSTOM_DISPLAY *pCustDisp);
+ #else
 NVAPI_INTERFACE NvAPI_DISP_EnumCustomDisplay( __in NvU32 displayId, __in NvU32 index, __inout NV_CUSTOM_DISPLAY *pCustDisp);
+ #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // FUNCTION NAME:   NvAPI_DISP_TryCustomDisplay
@@ -5238,7 +5323,11 @@ NVAPI_INTERFACE NvAPI_DISP_EnumCustomDisplay( __in NvU32 displayId, __in NvU32 i
 //! 
 //! \ingroup dispcontrol
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_TryCustomDisplay( NvU32 *pDisplayIds, NvU32 count, NV_CUSTOM_DISPLAY *pCustDisp);
+ #else
 NVAPI_INTERFACE NvAPI_DISP_TryCustomDisplay( __in_ecount(count) NvU32 *pDisplayIds, __in NvU32 count, __in_ecount(count) NV_CUSTOM_DISPLAY *pCustDisp);
+ #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // FUNCTION NAME:   NvAPI_DISP_DeleteCustomDisplay
@@ -5261,7 +5350,11 @@ NVAPI_INTERFACE NvAPI_DISP_TryCustomDisplay( __in_ecount(count) NvU32 *pDisplayI
 //!
 //! \ingroup dispcontrol 
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_DeleteCustomDisplay( NvU32 *pDisplayIds, NvU32 count, NV_CUSTOM_DISPLAY *pCustDisp);
+ #else
 NVAPI_INTERFACE NvAPI_DISP_DeleteCustomDisplay( __in_ecount(count) NvU32 *pDisplayIds, __in NvU32 count, __in NV_CUSTOM_DISPLAY *pCustDisp);
+ #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // FUNCTION NAME:   NvAPI_DISP_SaveCustomDisplay
@@ -5288,7 +5381,11 @@ NVAPI_INTERFACE NvAPI_DISP_DeleteCustomDisplay( __in_ecount(count) NvU32 *pDispl
 //!
 //! \ingroup dispcontrol
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_SaveCustomDisplay( NvU32 *pDisplayIds, NvU32 count, NvU32 isThisOutputIdOnly, NvU32 isThisMonitorIdOnly);
+ #else
 NVAPI_INTERFACE NvAPI_DISP_SaveCustomDisplay( __in_ecount(count) NvU32 *pDisplayIds, __in NvU32 count, __in NvU32 isThisOutputIdOnly, __in NvU32 isThisMonitorIdOnly);
+ #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // FUNCTION NAME:   NvAPI_DISP_RevertCustomDisplayTrial
@@ -5312,7 +5409,11 @@ NVAPI_INTERFACE NvAPI_DISP_SaveCustomDisplay( __in_ecount(count) NvU32 *pDisplay
 //!
 //! \ingroup dispcontrol
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_RevertCustomDisplayTrial( NvU32* pDisplayIds, NvU32 count);
+ #else
 NVAPI_INTERFACE NvAPI_DISP_RevertCustomDisplayTrial( __in_ecount(count) NvU32* pDisplayIds, __in NvU32 count);
+ #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // FUNCTION NAME:   NvAPI_GetView
@@ -5457,7 +5558,11 @@ NVAPI_INTERFACE NvAPI_DISP_GetDisplayIdByDisplayName(const char *displayName, Nv
 //!                                       
 //! \ingroup dispcontrol
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_GetDisplayConfig(NvU32 *pathInfoCount, NV_DISPLAYCONFIG_PATH_INFO *pathInfo);
+ #else
 NVAPI_INTERFACE NvAPI_DISP_GetDisplayConfig(__inout NvU32 *pathInfoCount, __out_ecount_full_opt(*pathInfoCount) NV_DISPLAYCONFIG_PATH_INFO *pathInfo);
+ #endif
 
 
 
@@ -5490,7 +5595,11 @@ NVAPI_INTERFACE NvAPI_DISP_GetDisplayConfig(__inout NvU32 *pathInfoCount, __out_
 //!
 //! \ingroup dispcontrol
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_DISP_SetDisplayConfig(NvU32 pathInfoCount, NV_DISPLAYCONFIG_PATH_INFO* pathInfo, NvU32 flags);
+ #else
 NVAPI_INTERFACE NvAPI_DISP_SetDisplayConfig(__in NvU32 pathInfoCount, __in_ecount(pathInfoCount) NV_DISPLAYCONFIG_PATH_INFO* pathInfo, __in NvU32 flags);
+ #endif
 
 
 
@@ -6104,7 +6213,11 @@ typedef NV_MOSAIC_GRID_TOPO_V1           NV_MOSAIC_GRID_TOPO;
 //! Do not return an error if no configuration will work with all of the grids.
 #define NV_MOSAIC_SETDISPLAYTOPO_FLAG_ALLOW_INVALID        NV_BIT(3)
 
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_Mosaic_SetDisplayGrids(NV_MOSAIC_GRID_TOPO *pGridTopologies, NvU32 gridCount, NvU32 setTopoFlags);
+ #else
 NVAPI_INTERFACE NvAPI_Mosaic_SetDisplayGrids(__in_ecount(gridCount) NV_MOSAIC_GRID_TOPO *pGridTopologies, __in NvU32 gridCount, __in NvU32 setTopoFlags);
+ #endif
 
 
 //! \ingroup mosaicapi
@@ -6171,10 +6284,17 @@ typedef struct
 //!
 //! \ingroup mosaicapi 
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_Mosaic_ValidateDisplayGrids(NvU32 setTopoFlags,
+        NV_MOSAIC_GRID_TOPO *pGridTopologies,
+        NV_MOSAIC_DISPLAY_TOPO_STATUS *pTopoStatus,
+        NvU32 gridCount);
+ #else
 NVAPI_INTERFACE NvAPI_Mosaic_ValidateDisplayGrids(__in NvU32 setTopoFlags,
         __in_ecount(gridCount) NV_MOSAIC_GRID_TOPO *pGridTopologies,
         __inout_ecount_full(gridCount) NV_MOSAIC_DISPLAY_TOPO_STATUS *pTopoStatus,
         __in NvU32 gridCount);
+ #endif
 
 
 
@@ -6206,9 +6326,15 @@ NVAPI_INTERFACE NvAPI_Mosaic_ValidateDisplayGrids(__in NvU32 setTopoFlags,
 //!
 //! \ingroup mosaciapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_Mosaic_EnumDisplayModes(NV_MOSAIC_GRID_TOPO *pGridTopology,
+        NV_MOSAIC_DISPLAY_SETTING *pDisplaySettings,
+        NvU32 *pDisplayCount);
+ #else
 NVAPI_INTERFACE NvAPI_Mosaic_EnumDisplayModes(__in NV_MOSAIC_GRID_TOPO *pGridTopology,
         __inout_ecount_part_opt(*pDisplayCount, *pDisplayCount) NV_MOSAIC_DISPLAY_SETTING *pDisplaySettings,
         __inout NvU32 *pDisplayCount);
+ #endif
 
 
 //! SUPPORTED OS:  Windows 7 and higher
@@ -6239,8 +6365,13 @@ NVAPI_INTERFACE NvAPI_Mosaic_EnumDisplayModes(__in NV_MOSAIC_GRID_TOPO *pGridTop
 //!
 //! \ingroup mosaicapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_Mosaic_EnumDisplayGrids(NV_MOSAIC_GRID_TOPO *pGridTopologies,
+        NvU32 *pGridCount);
+ #else
 NVAPI_INTERFACE NvAPI_Mosaic_EnumDisplayGrids(__inout_ecount_part_opt(*pGridCount, *pGridCount) NV_MOSAIC_GRID_TOPO *pGridTopologies,
         __inout NvU32 *pGridCount);
+ #endif
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -6454,7 +6585,11 @@ NVAPI_INTERFACE NvAPI_EnableCurrentMosaicTopology(NvU32 enable);
 //!
 //! \ingroup gsyncapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GSync_EnumSyncDevices(NvGSyncDeviceHandle nvGSyncHandles[NVAPI_MAX_GSYNC_DEVICES], NvU32 *gsyncCount);
+ #else
 NVAPI_INTERFACE NvAPI_GSync_EnumSyncDevices(__out NvGSyncDeviceHandle nvGSyncHandles[NVAPI_MAX_GSYNC_DEVICES], __out NvU32 *gsyncCount);
+ #endif
 
 
 
@@ -6502,7 +6637,11 @@ typedef struct _NV_GSYNC_CAPABILITIES
 //!
 //! \ingroup gsyncapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GSync_QueryCapabilities(NvGSyncDeviceHandle hNvGSyncDevice, NV_GSYNC_CAPABILITIES *pNvGSyncCapabilities);
+ #else
 NVAPI_INTERFACE NvAPI_GSync_QueryCapabilities(__in NvGSyncDeviceHandle hNvGSyncDevice, __inout NV_GSYNC_CAPABILITIES *pNvGSyncCapabilities);
+ #endif
 
 
 
@@ -6581,8 +6720,13 @@ typedef struct _NV_GSYNC_DISPLAY
 //!
 //! \ingroup gsyncapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GSync_GetTopology(NvGSyncDeviceHandle hNvGSyncDevice, NvU32 *gsyncGpuCount,  NV_GSYNC_GPU *gsyncGPUs,
+                                        NvU32 *gsyncDisplayCount, NV_GSYNC_DISPLAY *gsyncDisplays);
+ #else
 NVAPI_INTERFACE NvAPI_GSync_GetTopology(__in NvGSyncDeviceHandle hNvGSyncDevice, __inout_opt NvU32 *gsyncGpuCount,  __inout_ecount_part_opt(*gsyncGpuCount, *gsyncGpuCount) NV_GSYNC_GPU *gsyncGPUs,
                                         __inout_opt NvU32 *gsyncDisplayCount, __inout_ecount_part_opt(*gsyncDisplayCount, *gsyncDisplayCount) NV_GSYNC_DISPLAY *gsyncDisplays);
+ #endif
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -6614,7 +6758,11 @@ NVAPI_INTERFACE NvAPI_GSync_GetTopology(__in NvGSyncDeviceHandle hNvGSyncDevice,
 //!
 //! \ingroup gsyncapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GSync_SetSyncStateSettings(NvU32 gsyncDisplayCount, NV_GSYNC_DISPLAY *pGsyncDisplays, NvU32 flags);
+ #else
 NVAPI_INTERFACE NvAPI_GSync_SetSyncStateSettings(__in NvU32 gsyncDisplayCount, __in_ecount(gsyncDisplayCount) NV_GSYNC_DISPLAY *pGsyncDisplays, __in NvU32 flags);
+ #endif
 
 
 //! \ingroup gsyncapi
@@ -6694,7 +6842,11 @@ typedef struct _NV_GSYNC_CONTROL_PARAMS
 //!
 //! \ingroup gsyncapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GSync_GetControlParameters(NvGSyncDeviceHandle hNvGSyncDevice, NV_GSYNC_CONTROL_PARAMS *pGsyncControls);
+ #else
 NVAPI_INTERFACE NvAPI_GSync_GetControlParameters(__in NvGSyncDeviceHandle hNvGSyncDevice, __inout NV_GSYNC_CONTROL_PARAMS *pGsyncControls);
+ #endif
 
 
 
@@ -6720,7 +6872,11 @@ NVAPI_INTERFACE NvAPI_GSync_GetControlParameters(__in NvGSyncDeviceHandle hNvGSy
 //!
 //! \ingroup gsyncapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GSync_SetControlParameters(NvGSyncDeviceHandle hNvGSyncDevice, NV_GSYNC_CONTROL_PARAMS *pGsyncControls);
+ #else
 NVAPI_INTERFACE NvAPI_GSync_SetControlParameters(__in NvGSyncDeviceHandle hNvGSyncDevice, __inout NV_GSYNC_CONTROL_PARAMS *pGsyncControls);
+ #endif
 
 
 
@@ -6754,7 +6910,11 @@ typedef enum _NVAPI_GSYNC_DELAY_TYPE
 //!
 //! \ingroup gsyncapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GSync_AdjustSyncDelay(NvGSyncDeviceHandle hNvGSyncDevice, NVAPI_GSYNC_DELAY_TYPE delayType, NV_GSYNC_DELAY *pGsyncDelay, NvU32* syncSteps);
+ #else
 NVAPI_INTERFACE NvAPI_GSync_AdjustSyncDelay(__in NvGSyncDeviceHandle hNvGSyncDevice, __in NVAPI_GSYNC_DELAY_TYPE delayType, __inout NV_GSYNC_DELAY *pGsyncDelay, __out_opt NvU32* syncSteps);
+ #endif
 
 
 
@@ -6793,7 +6953,11 @@ typedef struct _NV_GSYNC_STATUS
 //!
 //! \ingroup gsyncapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_GSync_GetSyncStatus(NvGSyncDeviceHandle hNvGSyncDevice, NvPhysicalGpuHandle hPhysicalGpu, NV_GSYNC_STATUS *status);
+ #else
 NVAPI_INTERFACE NvAPI_GSync_GetSyncStatus(__in NvGSyncDeviceHandle hNvGSyncDevice, __in NvPhysicalGpuHandle hPhysicalGpu, __inout NV_GSYNC_STATUS *status);
+ #endif
 
 
 //! \ingroup gsyncapi
@@ -8588,8 +8752,13 @@ typedef NVVIOPCIINFO_V1                                         NVVIOPCIINFO;
 //                specific meaning for this API, they are listed below.
 //
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_VIO_GetPCIInfo(NvVioHandle hVioHandle, 
+                                            NVVIOPCIINFO* pVioPCIInfo);
+ #else
 NVAPI_INTERFACE NvAPI_VIO_GetPCIInfo(__in NvVioHandle hVioHandle, 
                                             __inout NVVIOPCIINFO* pVioPCIInfo);
+ #endif
 
 ////////////////////////////////////////////////////////////////////////////////
 //!   Function:    NvAPI_VIO_IsRunning
@@ -9001,7 +9170,11 @@ typedef NVAPI_STEREO_CAPS_V1    NVAPI_STEREO_CAPS;
 //!
 //! \ingroup stereoapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_Stereo_GetStereoSupport(NvMonitorHandle hMonitor, NVAPI_STEREO_CAPS *pCaps);
+ #else
 NVAPI_INTERFACE NvAPI_Stereo_GetStereoSupport(__in NvMonitorHandle hMonitor, __out NVAPI_STEREO_CAPS *pCaps);
+ #endif
 
 
 
@@ -9252,7 +9425,11 @@ typedef enum _NVAPI_STEREO_INIT_ACTIVATION_FLAGS
     NVAPI_STEREO_INIT_ACTIVATION_DELAYED = 0x01,
 } NVAPI_STEREO_INIT_ACTIVATION_FLAGS;
 
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_Stereo_InitActivation(StereoHandle hStereoHandle, NVAPI_STEREO_INIT_ACTIVATION_FLAGS flags);
+ #else
 NVAPI_INTERFACE NvAPI_Stereo_InitActivation(__in StereoHandle hStereoHandle, __in NVAPI_STEREO_INIT_ACTIVATION_FLAGS flags);
+ #endif
 
 //! @}
 
@@ -9277,7 +9454,11 @@ NVAPI_INTERFACE NvAPI_Stereo_InitActivation(__in StereoHandle hStereoHandle, __i
 //!
 //! \ingroup stereoapi
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_Stereo_Trigger_Activation(StereoHandle hStereoHandle);
+ #else
 NVAPI_INTERFACE NvAPI_Stereo_Trigger_Activation(__in StereoHandle hStereoHandle);
+ #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 //
