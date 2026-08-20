@@ -24,7 +24,9 @@ xr_string FormatString(LPCSTR fmt, ...)
 
 // Timestamp flag and helpers
 BOOL logTimestamps = FALSE;
-enum Console_mark;
+
+#include "../xrEngine/Console_mark.hpp"
+
 extern bool is_console_mark(Console_mark type);
 
 void Log(const char* s)
@@ -202,7 +204,7 @@ void xrLogger::SimpleMessage(LPCSTR Message, u32 MessageSize /*= 0*/)
 		logData->emplace(LogRecord(msgToLog.c_str(), (u32)msgToLog.size()));
 		UnpauseLogging();
 	}
-	
+
 }
 
 void xrLogger::OpenLogFile()
@@ -238,7 +240,7 @@ void xrLogger::InitLog()
 		theLogger = new xrLogger;
 		xrLogger::logData = new xr_queue <xrLogger::LogRecord>;
 		thread_spawn(LogThreadEntryStartup, "X-Ray Log Thread", 0, nullptr);
-	}	
+	}
 }
 
 void xrLogger::InternalFlushLog()
@@ -263,7 +265,7 @@ void xrLogger::SetImmediateMode(bool enable)
 	if (theLogger == nullptr)
 		return;
 
-	theLogger->bImmediateMode = enable;		
+	theLogger->bImmediateMode = enable;
 }
 
 void xrLogger::CloseLog()
@@ -304,7 +306,7 @@ void xrLogger::InternalCloseLog()
 }
 
 xrLogger::xrLogger()
-	: logFile(nullptr), bFastDebugLog(false), 
+	: logFile(nullptr), bFastDebugLog(false),
 	bIsAlive(true),
 	bFlushRequested(false),
 	bImmediateMode(false)
@@ -437,7 +439,7 @@ void xrLogger::LogThreadEntry()
 			CloseHandle(hLogThread);
 			return;
 		}
-		
+
 		WaitForSingleObject(hLogThread, INFINITE);
 		{
 			PROF_EVENT("Log Frame");
