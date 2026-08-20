@@ -55,6 +55,8 @@
  #define CXIMAGE_SUPPORT_WINDOWS 0
 #endif
 
+#include <math.h>
+
 #ifndef min
 #define min(a,b) (((a)<(b))?(a):(b))
 #endif
@@ -73,7 +75,6 @@
 #endif
 
 #include <stdio.h>
-#include <math.h>
 
 #ifdef __BORLANDC__
 

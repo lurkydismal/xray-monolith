@@ -1,6 +1,8 @@
 #if !defined(__ximaCFG_h)
 #define __ximaCFG_h
 
+#include <stddef.h>
+
 extern "C" void*	cxalloc(size_t size);
 extern "C" void		cxfree(void* ptr);
 extern "C" void*	cxrealloc(void* ptr, size_t size);
