@@ -97,6 +97,9 @@ void SetThreadName(DWORD dwThreadID, LPCSTR szThreadName)
 		info.dwThreadID = dwThreadID;
 		info.dwFlags = 0;
 	}
+#ifdef __MINGW32__
+    RaiseException(0x406D1388, 0, sizeof(info) / sizeof(DWORD), (ULONG_PTR*)&info);
+#else
 	__try
 	{
 		RaiseException(0x406D1388, 0, sizeof(info) / sizeof(DWORD), (ULONG_PTR*)&info);
@@ -104,6 +107,7 @@ void SetThreadName(DWORD dwThreadID, LPCSTR szThreadName)
 	__except (EXCEPTION_CONTINUE_EXECUTION)
 	{
 	}
+#endif
 }
 
 DWORD ttapi_Init(_processor_info* ID)
@@ -169,7 +173,7 @@ DWORD ttapi_Init(_processor_info* ID)
 			return 0;
 
 		// Modern Thread Naming (Windows 10 Build 1607+)
-		// Falls back gracefully on older windows if not available, 
+		// Falls back gracefully on older windows if not available,
 		// much cleaner than the old "Throw Exception" hack.
 		sprintf_s(szThreadName, "Helper Thread #%u", i);
 	}
