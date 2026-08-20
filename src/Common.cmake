@@ -61,6 +61,13 @@ target_compile_definitions(${PROPS_TARGET}
         _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
 )
 
+if(IS_CLANG_MINGW OR IS_CLANG_CL_MINGW)
+    target_compile_definitions(${PROPS_TARGET}
+        PRIVATE
+            _MT
+    )
+endif()
+
 # There is no direct equivalent of
 # <UndefinePreprocessorDefinitions>USE_LUAJIT_ONE</...>
 # If another script adds it, remove it there instead.
