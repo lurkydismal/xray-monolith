@@ -200,7 +200,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 ################################################################################
 # Compile and link options
 ################################################################################
-if(CLANG_CL_MINGW OR CLANG_CL_MSVC)
+if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
             ${XRAY_OPTIMIZATION_FLAG};
@@ -386,6 +386,9 @@ if(CLANG_CL_MINGW OR CLANG_CL_MSVC)
         /wd4127;
         /wd4706
     )
+elseif(IS_CLANG_MINGW OR IS_CLANG_MSVC)
+    xray_target_compile_options(${PROJECT_NAME})
+    xray_target_link_options(${PROJECT_NAME})
 endif()
 
 
@@ -565,7 +568,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 ################################################################################
 # Compile and link options
 ################################################################################
-if(CLANG_CL_MINGW OR CLANG_CL_MSVC)
+if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
             ${XRAY_OPTIMIZATION_FLAG};

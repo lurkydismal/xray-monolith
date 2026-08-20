@@ -89,7 +89,7 @@ endif()
 ################################################################################
 set(INCREMENTAL_LINKING_ENABLED OFF)
 if(ENABLE_INCREMENTAL_LINKING)
-    if(CLANG_CL_MINGW OR CLANG_CL_MSVC)
+    if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
         if(NOT ENABLE_IPO)
             set(INCREMENTAL_LINKING_ENABLED ON)
             message(WARNING "Incremental linking enabled")
