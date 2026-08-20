@@ -317,7 +317,7 @@ namespace reshade
 		static const auto func = reinterpret_cast<void(*)(addon_event, void *)>(
 			GetProcAddress(internal::get_reshade_module_handle(), "ReShadeRegisterEvent"));
 		if (func != nullptr)
-			func(ev, static_cast<void *>(callback));
+			func(ev, reinterpret_cast<void *>(callback));
 #endif
 	}
 	/// <summary>
@@ -334,7 +334,7 @@ namespace reshade
 		static const auto func = reinterpret_cast<void(*)(addon_event, void *)>(
 			GetProcAddress(internal::get_reshade_module_handle(), "ReShadeUnregisterEvent"));
 		if (func != nullptr)
-			func(ev, static_cast<void *>(callback));
+			func(ev, reinterpret_cast<void *>(callback));
 #endif
 	}
 
