@@ -1124,6 +1124,21 @@ void IPureClient::Sync_Thread()
 		clPing.dwTime_ClientSend = TimerAsync(device_timer);
 
 		// Send it
+    #ifdef __MINGW32__
+		{
+			DPN_BUFFER_DESC desc;
+			DPNHANDLE hAsync = 0;
+			desc.dwBufferSize = sizeof(clPing);
+			desc.pBufferData = LPBYTE(&clPing);
+			if (0 == NET || net_Disconnected) break;
+
+			if (FAILED(NET->Send(&desc,1,0,0,&hAsync,net_flags(FALSE,FALSE,TRUE))))
+			{
+				Msg("* CLIENT: SyncThread: EXIT. (failed to send - disconnected?)");
+				break;
+			}
+		}
+    #else
 		__try
 		{
 			DPN_BUFFER_DESC desc;
@@ -1143,6 +1158,7 @@ void IPureClient::Sync_Thread()
 			Msg("* CLIENT: SyncThread: EXIT. (failed to send - disconnected?)");
 			break;
 		}
+    #endif
 
 		// Waiting for reply-packet to arrive
 		if (!net_Syncronised)
@@ -1204,7 +1220,11 @@ BOOL IPureClient::net_IsSyncronised()
 	return net_Syncronised;
 }
 
+#ifdef __MINGW32__
+#include <winsock2.h>
+#else
 #include <WinSock2.h>
+#endif
 #include <ws2tcpip.h>
 
 bool IPureClient::GetServerAddress(ip_address& pAddress, DWORD* pPort)
