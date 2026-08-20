@@ -7310,9 +7310,15 @@ NVAPI_INTERFACE NvAPI_D3D9_VideoSetStereoInfo(IDirect3DDevice9 *pDev,
 //!
 //! \ingroup dx
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_D3D11_IsNvShaderExtnOpCodeSupported(IUnknown *pDev,
+                                                          NvU32 opCode,
+													      bool *pSupported);
+ #else
 NVAPI_INTERFACE NvAPI_D3D11_IsNvShaderExtnOpCodeSupported(__in  IUnknown *pDev,
                                                           __in  NvU32 opCode,
 													      __out bool *pSupported);
+ #endif
 
 #endif //defined (__cplusplus) && (defined(__d3d11_h__) || defined(__d3d11_1_h__))
 
@@ -7345,8 +7351,13 @@ NVAPI_INTERFACE NvAPI_D3D11_IsNvShaderExtnOpCodeSupported(__in  IUnknown *pDev,
 //!
 //! \ingroup dx
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_D3D11_SetNvShaderExtnSlot(IUnknown *pDev,
+                                                NvU32 uavSlot);
+ #else
 NVAPI_INTERFACE NvAPI_D3D11_SetNvShaderExtnSlot(__in IUnknown *pDev,
                                                 __in NvU32 uavSlot);
+ #endif
 
 #endif //defined (__cplusplus) && (defined(__d3d11_h__) || defined(__d3d11_1_h__))
 
@@ -7370,7 +7381,11 @@ NVAPI_INTERFACE NvAPI_D3D11_SetNvShaderExtnSlot(__in IUnknown *pDev,
 //!
 //! \ingroup dx
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_D3D11_BeginUAVOverlap(IUnknown *pDeviceOrContext);
+ #else
 NVAPI_INTERFACE NvAPI_D3D11_BeginUAVOverlap(__in  IUnknown *pDeviceOrContext);
+ #endif
 
 #endif //defined (__cplusplus) && (defined(__d3d11_h__) || defined(__d3d11_1_h__))
 
@@ -7392,7 +7407,11 @@ NVAPI_INTERFACE NvAPI_D3D11_BeginUAVOverlap(__in  IUnknown *pDeviceOrContext);
 //!
 //! \ingroup dx
 ///////////////////////////////////////////////////////////////////////////////
+ #ifdef __MINGW32__
+NVAPI_INTERFACE NvAPI_D3D11_EndUAVOverlap(IUnknown *pDeviceOrContext);
+ #else
 NVAPI_INTERFACE NvAPI_D3D11_EndUAVOverlap(__in  IUnknown *pDeviceOrContext);
+ #endif
 
 #endif //defined (__cplusplus) && (defined(__d3d11_h__) || defined(__d3d11_1_h__))
 
