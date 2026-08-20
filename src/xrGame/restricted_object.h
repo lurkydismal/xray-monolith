@@ -14,10 +14,15 @@ class CSE_Abstract;
 class CCustomMonster;
 class CGameObject;
 
+
+#ifdef __MINGW32__
+#include "ERestrictorTypes.hpp"
+#else
 namespace RestrictionSpace
 {
 	enum ERestrictorTypes;
 };
+#endif
 
 template <bool add>
 struct CRestrictionPredicate;

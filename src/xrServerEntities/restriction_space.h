@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "ERestrictorTypes.hpp"
+
 namespace RestrictionSpace
 {
 	struct CTimeIntrusiveBase : public intrusive_base_deferred
@@ -22,15 +24,5 @@ namespace RestrictionSpace
 		{
 			m_last_time_dec = Device.dwTimeGlobal;
 		}
-	};
-
-	enum ERestrictorTypes
-	{
-		eDefaultRestrictorTypeNone = u8(0),
-		eDefaultRestrictorTypeOut = u8(1),
-		eDefaultRestrictorTypeIn = u8(2),
-		eRestrictorTypeNone = u8(3),
-		eRestrictorTypeIn = u8(4),
-		eRestrictorTypeOut = u8(5),
 	};
 };
