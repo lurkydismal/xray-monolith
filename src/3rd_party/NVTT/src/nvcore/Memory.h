@@ -13,39 +13,53 @@
 // Custom memory allocator
 namespace nv
 {
-	namespace mem 
+	namespace mem
 	{
 		NVCORE_API void * malloc(size_t size);
 		NVCORE_API void * malloc(size_t size, const char * file, int line);
-		
+
 		NVCORE_API void free(const void * ptr);
 		NVCORE_API void * realloc(void * ptr, size_t size);
-		
+
 	} // mem namespace
-	
+
 } // nv namespace
 
 
 // Override new/delete
 
+#ifdef __MINGW32__
+_GLIBCXX_NODISCARD void * operator new (size_t size)
+{
+	return nv::mem::malloc(size);
+}
+#else
 inline void * operator new (size_t size) throw()
 {
-	return nv::mem::malloc(size); 
+	return nv::mem::malloc(size);
 }
+#endif
 
 inline void operator delete (void *p) throw()
 {
-	nv::mem::free(p); 
+	nv::mem::free(p);
 }
 
+#ifdef __MINGW32__
+_GLIBCXX_NODISCARD void * operator new [] (size_t size)
+{
+	return nv::mem::malloc(size);
+}
+#else
 inline void * operator new [] (size_t size) throw()
 {
 	return nv::mem::malloc(size);
 }
+#endif
 
 inline void operator delete [] (void * p) throw()
 {
-	nv::mem::free(p); 
+	nv::mem::free(p);
 }
 
 /*
@@ -58,7 +72,7 @@ inline void operator delete [] (void * p) throw()
 #if 0
 /*
     File:	main.cpp
-    
+
     Version:	1.0
 
 	Abstract: Overrides the C++ 'operator new' and 'operator delete'.
@@ -112,7 +126,7 @@ inline void operator delete [] (void * p) throw()
 namespace {
   unsigned long long gNewCounter; // number of times 'new' was called
   unsigned long long gDeleteCounter;  // number of times 'delete' was called
-  
+
   void printCounters()  // print the counters above
   {
 	std::cout << "new was called " << gNewCounter << " times and delete was called " << gDeleteCounter << " times\n";
@@ -172,7 +186,7 @@ void operator delete(void* p, const std::nothrow_t&) throw()
 void __attribute__((weak, visibility("default"))) workaroundFor4067110 () { }
 
 /* This is a simple test program that causes the runtime library to call new and delete.  */
-int main() 
+int main()
 {
 	atexit (printCounters);
 	try {

@@ -30,7 +30,7 @@
 
 #else // NV_NO_ASSERT
 
-#	if NV_CC_MSVC
+#	if NV_CC_MSVC || XRAY_MSVC_COMPAT
 		// @@ Does this work in msvc-6 and earlier?
 		// @@ Do I have to include <intrin.h> ?
 #		define nvDebugBreak()		__debugbreak()
@@ -39,11 +39,11 @@
 #		define nvDebugBreak()		__asm__ volatile ("trap");
 #	elif NV_CC_GNUC && NV_CPU_X86 && NV_OS_DARWIN
 #		define nvDebugBreak()		__asm__ volatile ("int3");
-#	elif NV_CC_GNUC && NV_CPU_X86 
+#	elif NV_CC_GNUC && NV_CPU_X86
 #		define nvDebugBreak()		__asm__ ( "int %0" : :"I"(3) )
 #	else
 #		include <signal.h>
-#		define nvDebugBreak()		raise(SIGTRAP); 
+#		define nvDebugBreak()		raise(SIGTRAP);
 		// define nvDebugBreak() 		*((int *)(0)) = 0
 #	endif
 
@@ -101,27 +101,27 @@ namespace nv
 	/** Message handler interface. */
 	struct MessageHandler {
 		virtual void log(const char * str, va_list arg) = 0;
-		virtual ~MessageHandler() {}	
+		virtual ~MessageHandler() {}
 	};
-	
+
 	/** Assert handler interface. */
 	struct AssertHandler {
 		virtual int assert(const char *exp, const char *file, int line, const char *func = 0) = 0;
-		virtual ~AssertHandler() {}	
+		virtual ~AssertHandler() {}
 	};
 
 
 	namespace debug
 	{
 		NVCORE_API void dumpInfo();
-	
+
 		// These functions are not thread safe.
 		NVCORE_API void setMessageHandler( MessageHandler * messageHandler );
 		NVCORE_API void resetMessageHandler();
-	
+
 		NVCORE_API void setAssertHandler( AssertHandler * assertHanlder );
 		NVCORE_API void resetAssertHandler();
-	
+
 		NVCORE_API void enableSigHandler();
 		NVCORE_API void disableSigHandler();
 	}
