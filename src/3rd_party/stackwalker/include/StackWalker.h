@@ -1,7 +1,7 @@
 #ifndef __STACKWALKER_H__
 #define __STACKWALKER_H__
 
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) || XRAY_MSVC_COMPAT
 
 /**********************************************************************
  *
@@ -44,7 +44,7 @@
 #include <windows.h>
 
 // special defines for VC5/6 (if no actual PSDK is installed):
-#if _MSC_VER < 1300
+#if _MSC_VER < 1300 && !XRAY_MSVC_COMPAT
 typedef unsigned __int64 DWORD64, *PDWORD64;
 #if defined(_WIN64)
 typedef unsigned __int64 SIZE_T, *PSIZE_T;
@@ -140,7 +140,7 @@ public:
 
   BOOL ShowObject(LPVOID pObject);
 
-#if _MSC_VER >= 1300
+#if _MSC_VER >= 1300 || XRAY_MSVC_COMPAT
   // due to some reasons, the "STACKWALK_MAX_NAMELEN" must be declared as "public"
   // in older compilers in order to use it... starting with VC7 we can declare it as "protected"
 protected:
