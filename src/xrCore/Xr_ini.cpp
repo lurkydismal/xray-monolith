@@ -509,7 +509,10 @@ void CInifile::LTXLoad (
 	{
 		const std::regex& Pattern = GetCachedRegex(PatternString);
 		std::smatch MatchResult;
+        std::string input = InputString.c_str();
+#if 0
 		xr_string input = InputString.c_str();
+#endif
 
 		std::regex_search(input, MatchResult, Pattern);
 
