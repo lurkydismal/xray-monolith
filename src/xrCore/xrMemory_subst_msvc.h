@@ -40,6 +40,27 @@ IC T* xr_new(Args&&... args)
 template <bool _is_pm, typename T>
 struct xr_special_free
 {
+#ifdef __MINGW32__
+	IC void operator()(T* ptr)
+	{
+		if (ptr == nullptr)
+		{
+			return;
+		}
+
+		if constexpr (_is_pm)
+		{
+			void* _real_ptr = fast_dynamic_cast<void*>(ptr);
+			ptr->~T();
+			Memory.mem_free(_real_ptr);
+		}
+		else
+		{
+			ptr->~T();
+			Memory.mem_free(ptr);
+		}
+	}
+#else
 	IC void operator()(T*& ptr)
 	{
 		if (ptr == nullptr)
@@ -59,21 +80,35 @@ struct xr_special_free
 			Memory.mem_free(ptr);
 		}
 	}
+#endif
 };
 
 template <typename T>
 struct xr_special_free<false, T>
 {
+#ifdef __MINGW32__
+	IC void operator()(T* ptr)
+	{
+		if (ptr == nullptr)
+		{
+			return;
+		}
+
+		ptr->~T();
+		Memory.mem_free(ptr);
+	}
+#else
 	IC void operator()(T*& ptr)
 	{
 		if (ptr == nullptr)
 		{
 			return;
 		}
-		
+
 		ptr->~T();
 		Memory.mem_free(ptr);
 	}
+#endif
 };
 
 template <class T>
