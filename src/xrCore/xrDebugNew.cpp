@@ -708,10 +708,12 @@ void save_mini_dump (_EXCEPTION_POINTERS* pExceptionInfo)
             xr_strcat ( szDumpPath, ".mdmp" );
 
         #if defined(__MINGW32__)
-            string_path temp;
-            xr_strcpy (temp,szDumpPath);
-            xr_strcpy (szDumpPath,"logs/");
-            xr_strcat (szDumpPath,temp);
+            {
+                string_path temp;
+                xr_strcpy (temp,szDumpPath);
+                xr_strcpy (szDumpPath,"logs/");
+                xr_strcat (szDumpPath,temp);
+            }
         #else
             __try
             {
