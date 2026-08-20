@@ -98,7 +98,9 @@ void SetThreadName(DWORD dwThreadID, LPCSTR szThreadName)
 		info.dwFlags = 0;
 	}
 #ifdef __MINGW32__
-    RaiseException(0x406D1388, 0, sizeof(info) / sizeof(DWORD), (ULONG_PTR*)&info);
+    {
+        RaiseException(0x406D1388, 0, sizeof(info) / sizeof(DWORD), (ULONG_PTR*)&info);
+    }
 #else
 	__try
 	{
