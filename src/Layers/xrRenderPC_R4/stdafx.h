@@ -17,7 +17,11 @@
 #include <d3d11.h>
 #include <d3d11_1.h>
 #include <d3d11_2.h>
+#ifdef __MINGW32__
+#include <d3d11.h>
+#else
 #include <D3DX11core.h>
+#endif
 #include <d3dcompiler.h>
 
 #include "../xrRender/xrD3DDefs.h"
