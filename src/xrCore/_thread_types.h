@@ -8,6 +8,7 @@
 #include "tbb/compat/ppl.h"
 #include "tbb/concurrent_unordered_map.h"
 #include "tbb/concurrent_vector.h"
+#include "tbb/parallel_sort.h"
 #endif
 
 #include <atomic>
@@ -29,6 +30,7 @@ namespace concurrency {
     using namespace Concurrency;
     using tbb::concurrent_unordered_map;
     using tbb::concurrent_vector;
+    using tbb::parallel_sort;
 }
 #endif
 
