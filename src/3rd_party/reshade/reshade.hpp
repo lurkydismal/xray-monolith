@@ -8,7 +8,11 @@
 #include "reshade_events.hpp"
 #include "reshade_overlay.hpp"
 #include <charconv>
+#ifndef __MINGW32__
 #include <Windows.h>
+#else
+#include <windows.h>
+#endif
 
 // Current version of the ReShade API
 #define RESHADE_API_VERSION 16

@@ -82,7 +82,11 @@ namespace crash_saving
 }
 
 // demonized: print stack trace
+#ifndef __MINGW32__
 #include <Windows.h>
+#else
+#include <windows.h>
+#endif
 #include "mezz_stringbuffer.h"
 #include "../3rd_party/stackwalker/include/StackWalker.h"
 class xr_StackWalker : public StackWalker {

@@ -2,7 +2,11 @@
 #define _DISCORD_GAME_SDK_H_
 
 #ifdef _WIN32
+#ifndef __MINGW32__
 #include <Windows.h>
+#else
+#include <windows.h>
+#endif
 #include <dxgi.h>
 #endif
 
