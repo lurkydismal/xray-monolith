@@ -38,8 +38,8 @@ template <
 		typename _2,
 		typename _3,
 		template <
-			typename _1,
-			typename _2
+			typename __1,
+			typename __2
 		>
 		class _4
 	>
