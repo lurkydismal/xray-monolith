@@ -13,6 +13,8 @@
 
 #include "profiler.h"
 
+#include <float.h>
+
 // Initialized on startup
 XRCORE_API Fmatrix Fidentity;
 XRCORE_API Dmatrix Didentity;
@@ -25,38 +27,38 @@ namespace FPU
 {
 	XRCORE_API void m24(void)
 	{
-		_control87(_PC_64, MCW_PC);
-		_control87(_RC_CHOP, MCW_RC);
+		_control87(_PC_64, _MCW_PC);
+		_control87(_RC_CHOP, _MCW_RC);
 	}
 
 	XRCORE_API void m24r(void)
 	{
-		_control87(_PC_64, MCW_PC);
-		_control87(_RC_NEAR, MCW_RC);
+		_control87(_PC_64, _MCW_PC);
+		_control87(_RC_NEAR, _MCW_RC);
 	}
 
 	XRCORE_API void m53(void)
 	{
-		_control87(_PC_53, MCW_PC);
-		_control87(_RC_CHOP, MCW_RC);
+		_control87(_PC_53, _MCW_PC);
+		_control87(_RC_CHOP, _MCW_RC);
 	}
 
 	XRCORE_API void m53r(void)
 	{
-		_control87(_PC_53, MCW_PC);
-		_control87(_RC_NEAR, MCW_RC);
+		_control87(_PC_53, _MCW_PC);
+		_control87(_RC_NEAR, _MCW_RC);
 	}
 
 	XRCORE_API void m64(void)
 	{
-		_control87(_PC_64, MCW_PC);
-		_control87(_RC_CHOP, MCW_RC);
+		_control87(_PC_64, _MCW_PC);
+		_control87(_RC_CHOP, _MCW_RC);
 	}
 
 	XRCORE_API void m64r(void)
 	{
-		_control87(_PC_64, MCW_PC);
-		_control87(_RC_NEAR, MCW_RC);
+		_control87(_PC_64, _MCW_PC);
+		_control87(_RC_NEAR, _MCW_RC);
 	}
 
 	void initialize()
@@ -328,6 +330,15 @@ void _initialize_cpu_thread()
 		_MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
 		if (_denormals_are_zero_supported)
 		{
+        #ifdef __MINGW32__
+            _MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
+
+            const unsigned mxcsr = _mm_getcsr();
+
+            _denormals_are_zero_supported =
+                (mxcsr & _MM_DENORMALS_ZERO_MASK) != 0;
+            // FIX: NEEDS LOGGING
+        #else
 			__try
 			{
 				_MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
@@ -336,6 +347,7 @@ void _initialize_cpu_thread()
 			{
 				_denormals_are_zero_supported = FALSE;
 			}
+        #endif
 		}
 	}
 }
@@ -357,6 +369,9 @@ void thread_name(const char* name)
 	tn.szName = name;
 	tn.dwThreadID = DWORD(-1);
 	tn.dwFlags = 0;
+#ifdef __MINGW32__
+    RaiseException(0x406D1388, 0, sizeof(tn) / sizeof(DWORD), (ULONG_PTR *)&tn);
+#else
 	__try
 	{
 		RaiseException(0x406D1388, 0, sizeof(tn) / sizeof(DWORD), (ULONG_PTR *)&tn);
@@ -364,6 +379,7 @@ void thread_name(const char* name)
 	__except (EXCEPTION_CONTINUE_EXECUTION)
 	{
 	}
+#endif
 }
 #pragma pack(pop)
 
