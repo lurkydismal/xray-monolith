@@ -331,13 +331,15 @@ void _initialize_cpu_thread()
 		if (_denormals_are_zero_supported)
 		{
         #ifdef __MINGW32__
-            _MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
+            {
+                _MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
 
-            const unsigned mxcsr = _mm_getcsr();
+                const unsigned mxcsr = _mm_getcsr();
 
-            _denormals_are_zero_supported =
-                (mxcsr & _MM_DENORMALS_ZERO_MASK) != 0;
-            // FIX: NEEDS LOGGING
+                _denormals_are_zero_supported =
+                    (mxcsr & _MM_DENORMALS_ZERO_MASK) != 0;
+                // FIX: NEEDS LOGGING
+            }
         #else
 			__try
 			{
@@ -370,7 +372,9 @@ void thread_name(const char* name)
 	tn.dwThreadID = DWORD(-1);
 	tn.dwFlags = 0;
 #ifdef __MINGW32__
-    RaiseException(0x406D1388, 0, sizeof(tn) / sizeof(DWORD), (ULONG_PTR *)&tn);
+    {
+        RaiseException(0x406D1388, 0, sizeof(tn) / sizeof(DWORD), (ULONG_PTR *)&tn);
+    }
 #else
 	__try
 	{
