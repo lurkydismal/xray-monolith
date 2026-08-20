@@ -23,6 +23,7 @@
 #pragma once
 
 #include <luabind/config.hpp>
+#include <cstring>
 
 namespace luabind { namespace detail
 {
@@ -52,7 +53,7 @@ namespace luabind { namespace detail
 	};
 
 	template<int N>
-	struct aligned 
+	struct aligned
 	{
 		char storage[N];
 	};
