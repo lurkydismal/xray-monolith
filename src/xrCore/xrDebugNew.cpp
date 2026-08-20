@@ -707,6 +707,12 @@ void save_mini_dump (_EXCEPTION_POINTERS* pExceptionInfo)
             xr_strcat ( szDumpPath, t_stemp );
             xr_strcat ( szDumpPath, ".mdmp" );
 
+        #if defined(__MINGW32__)
+            string_path temp;
+            xr_strcpy (temp,szDumpPath);
+            xr_strcpy (szDumpPath,"logs/");
+            xr_strcat (szDumpPath,temp);
+        #else
             __try
             {
                 if (FS.path_exist("$logs$"))
@@ -719,6 +725,7 @@ void save_mini_dump (_EXCEPTION_POINTERS* pExceptionInfo)
                 xr_strcpy (szDumpPath,"logs/");
                 xr_strcat (szDumpPath,temp);
             }
+        #endif
 
             // create the file
             HANDLE hFile = ::CreateFile( szDumpPath, GENERIC_WRITE, FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL );
