@@ -755,6 +755,16 @@ HRESULT WINAPI
 //
 //---------------------------------------------------------------------------
 
+#ifdef __MINGW32__
+HRESULT WINAPI
+    D3DX11SHProjectCubeMap(
+        ID3D11DeviceContext                                *pContext,
+        UINT                                Order,
+        ID3D11Texture2D                                    *pCubeMap,
+        __out_ecount(Order*Order) FLOAT                    *pROut,
+        FLOAT                *pGOut,
+        FLOAT                *pBOut);
+#else
 HRESULT WINAPI
     D3DX11SHProjectCubeMap(
         ID3D11DeviceContext                                *pContext,
@@ -763,6 +773,7 @@ HRESULT WINAPI
         __out_ecount(Order*Order) FLOAT                    *pROut,
         __out_ecount_opt(Order*Order) FLOAT                *pGOut,
         __out_ecount_opt(Order*Order) FLOAT                *pBOut);
+#endif
 
 #ifdef __cplusplus
 }
