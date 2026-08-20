@@ -433,6 +433,7 @@ if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
 elseif(IS_CLANG_MINGW OR IS_CLANG_MSVC)
     xray_target_compile_options(${PROJECT_NAME})
     xray_target_link_options(${PROJECT_NAME})
+    target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
 endif()
 
 ################################################################################
