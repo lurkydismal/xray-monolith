@@ -101,7 +101,9 @@ public:
 class PropItem
 {
 	friend class CPropHelper;
+#if 0
 	friend class TProperties;
+#endif
 	shared_str key;
 	EPropType type;
 	void* item;
@@ -109,7 +111,9 @@ public:
 	DEFINE_VECTOR(PropValue*, PropValueVec, PropValueIt);
 private:
 	PropValueVec values;
+#if 0
 	TProperties* m_Owner;
+#endif
 	// events
 public:
 	typedef xr_delegate<void(PropItem*)> TOnPropItemFocused;
@@ -141,7 +145,9 @@ public:
 		for (PropValueIt it = values.begin(); values.end() != it; ++it)
 			xr_delete(*it);
 	};
+#if 0
 	IC TProperties* Owner() { return m_Owner; }
+#endif
 
 	void SetName(const shared_str& name)
 	{
