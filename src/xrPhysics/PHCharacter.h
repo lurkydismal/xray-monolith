@@ -18,10 +18,14 @@ class CElevatorState;
 class CPHActorCharacter;
 class CPHAICharacter;
 
+#ifdef __MINGW32__
+#include "../xrServerEntities/EHitType.hpp"
+#else
 namespace ALife
 {
 	enum EHitType;
 };
+#endif
 
 static enum EEnvironment
 {
