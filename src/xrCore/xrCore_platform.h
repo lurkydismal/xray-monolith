@@ -17,6 +17,8 @@
 #ifndef _WIN32_WINNT
 #ifdef _MSC_VER
 #define _WIN32_WINNT _WIN32_WINNT_WIN7
+#elif XRAY_MSVC_COMPAT
+#pragma message("Not changing _WIN32_WINNT, because XRAY_MSVC_COMPAT is defined")
 #else // ifdef _MSC_VER
 #define _WIN32_WINNT 0x0501
 #endif // ifdef _MSC_VER
@@ -47,7 +49,11 @@
 
 #pragma warning(push)
 #pragma warning(disable:4005)
+#ifndef __MINGW32__
+#include <Windows.h>
+#else
 #include <windows.h>
+#endif
 #ifndef __BORLANDC__
 #include <windowsx.h>
 #endif
