@@ -382,7 +382,7 @@ void CRender::ScreenshotImpl(ScreenshotMode mode, LPCSTR name, CMemoryWriter* me
 			TGAdesc p;
 			p.format = IMG_24B;
 
-			//	TODO: DX10: This is totally incorrect but mimics 
+			//	TODO: DX10: This is totally incorrect but mimics
 			//	original behavior. Fix later.
 			hr = pFB->LockRect(&D, 0,D3DLOCK_NOSYSLOCK);
 			if (hr != D3D_OK) return;
@@ -598,17 +598,17 @@ void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encodi
 	clamp(encoding, eDXE_A8R8G8B8, eDXE_DXT5);
 	switch (encoding)
 	{
-	case IRender_interface::eDXE_A8R8G8B8: 
+	case IRender_interface::eDXE_A8R8G8B8:
 	{
 		dx_encoding = DXGI_FORMAT_R8G8B8A8_UNORM;
 	}
 	break;
-	case IRender_interface::eDXE_DXT1: 
+	case IRender_interface::eDXE_DXT1:
 	{
 		dx_encoding = DXGI_FORMAT_BC1_UNORM;
 	}
 	break;
-	case IRender_interface::eDXE_DXT5: 
+	case IRender_interface::eDXE_DXT5:
 	{
 		dx_encoding = DXGI_FORMAT_BC5_UNORM;
 	}
@@ -647,7 +647,7 @@ void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encodi
 		NULL, pSrcSmallTexture));
 #endif
 
-	
+
 
 	// save (logical & physical)
 	ID3DBlob* saved = 0;
@@ -676,7 +676,7 @@ void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encodi
 void CRender::TakeScreenshot(LPCSTR path, Fvector2 dimensions, DxEncoding encoding)
 {
 	if (!Device.b_is_Ready) return;
-	
+
 	string_path fname;
 	if (0 == strext(path)) strconcat(sizeof(fname), fname, path, ".dds");
 	else xr_strcpy(fname, sizeof(fname), path);
