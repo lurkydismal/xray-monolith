@@ -16,7 +16,7 @@
 #endif
 
 // Select platform
-#ifdef _MSC_VER
+#if defined _MSC_VER  || XRAY_MSVC_COMPAT
 #define M_VISUAL
 #endif
 #ifdef __BORLANDC__
