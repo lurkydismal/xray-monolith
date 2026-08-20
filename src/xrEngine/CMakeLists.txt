@@ -932,9 +932,9 @@ if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
         /ignore:4099
     )
 elseif(IS_CLANG_MINGW OR IS_CLANG_MSVC)
-    xray_target_compile_options(${PROJECT_NAME})
-    xray_target_link_options(${PROJECT_NAME})
-    target_link_options(${PROJECT_NAME} PRIVATE -mwindows)
+    xray_target_compile_options(${OBJECT_TARGET})
+    xray_target_link_options(${EXECUTABLE_TARGET})
+    target_link_options(${EXECUTABLE_TARGET} PRIVATE -mwindows)
 endif()
 
 ################################################################################
