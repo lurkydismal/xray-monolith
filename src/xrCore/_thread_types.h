@@ -1,8 +1,15 @@
 #pragma once
 
+#if __has_include("ppl.h")
 #include <ppl.h>
 #include <concurrent_unordered_map.h>
 #include <concurrent_vector.h>
+#else
+#include "tbb/compat/ppl.h"
+#include "tbb/concurrent_unordered_map.h"
+#include "tbb/concurrent_vector.h"
+#endif
+
 #include <atomic>
 #include <array>
 #include <condition_variable>
@@ -16,6 +23,14 @@
 #include <iterator>
 #include <type_traits>
 #include <utility>
+
+#if !__has_include("ppl.h")
+namespace concurrency {
+    using namespace Concurrency;
+    using tbb::concurrent_unordered_map;
+    using tbb::concurrent_vector;
+}
+#endif
 
 // Atomic types
 using xr_atomic_u32 = std::atomic_uint32_t;
