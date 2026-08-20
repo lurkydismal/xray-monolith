@@ -88,6 +88,29 @@ namespace xray
 
 			void check_stack_overflow(u32 stack_increment)
 			{
+            #ifdef __MINGW32__
+                // TODO: Maybe improve
+                NT_TIB* tib = reinterpret_cast<NT_TIB*>(NtCurrentTeb());
+
+                void* stack_base = tib->StackBase;
+                void* stack_limit = tib->StackLimit;
+
+                char marker;
+
+                const auto current = reinterpret_cast<uintptr_t>(&marker);
+                const auto limit   = reinterpret_cast<uintptr_t>(stack_limit);
+
+                const size_t available = current - limit;
+
+                if (available > stack_increment)
+                {
+                    void* p = _alloca(stack_increment);
+                    (void)p;
+                } else {
+                    // Not enough stack.
+                    _resetstkoflw();
+                }
+            #else
 				__try
 				{
 					void* p = _alloca(stack_increment);
@@ -97,6 +120,7 @@ namespace xray
 				{
 					_resetstkoflw();
 				}
+            #endif
 			}
 
 			void string_tupples::error_process() const
