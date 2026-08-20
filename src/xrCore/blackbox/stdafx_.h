@@ -1,7 +1,7 @@
 #ifndef AFX_STDAFX_H__
 #define AFX_STDAFX_H__
 
-#if _MSC_VER > 1000
+#if (_MSC_VER > 1000) || XRAY_MSVC_COMPAT
 #pragma once
 #endif // _MSC_VER > 1000
 
