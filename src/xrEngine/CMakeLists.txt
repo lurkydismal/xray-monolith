@@ -958,7 +958,7 @@ target_link_libraries(${OBJECT_TARGET}
     PUBLIC
         # fmt::fmt
         stdfunc::core
-        rust_lib
+        # rust_lib
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
