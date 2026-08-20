@@ -3,6 +3,7 @@
 
 #include <array>
 #include <stdlib.h>
+#include <cstdint>
 
 #include "alspan.h"
 #include "core/bufferline.h"
