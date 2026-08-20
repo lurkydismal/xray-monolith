@@ -45,23 +45,32 @@
 
 enum EPdaMsg;
 enum ESoundTypes;
-enum ETaskState;
 
+#ifdef __MINGW32__
+#include "ETaskState.hpp"
+#else
+enum ETaskState;
+#endif
+
+
+#ifdef __MINGW32__
+#include "EPathType.hpp"
+#include "EDetailPathType.hpp"
+#include "ESightType.hpp"
+#else
 namespace ALife { enum ERelationType; }
 namespace ScriptEntity { enum EActionType; }
 namespace MovementManager { enum EPathType; }
 namespace DetailPathManager { enum EDetailPathType; }
 namespace SightManager { enum ESightType; }
+#endif
 namespace smart_cover { class object; }
 namespace doors { class door; }
 
 class NET_Packet;
 class CGameTask;
 
-namespace PatrolPathManager {
-	enum EPatrolStartType;
-	enum EPatrolRouteType;
-};
+#include "patrol_path_manager_space.h"
 
 namespace MemorySpace {
 	struct CMemoryInfo;
@@ -71,6 +80,11 @@ namespace MemorySpace {
 	struct CNotYetVisibleObject;
 };
 
+#ifdef __MINGW32__
+#include "MonsterSpace.hpp"
+#include "EDirectionType.hpp"
+#include "EPathState.hpp"
+#else
 namespace MonsterSpace {
 	enum EBodyState;
 	enum EMovementType;
@@ -84,14 +98,18 @@ namespace MonsterSpace {
 	enum EScriptMonsterAnimAction;
 	enum EScriptMonsterGlobalAction;
 	enum EScriptSoundAnim;
+    // FIX: Not defined or used anywhere else
 	enum EMonsterSounds;
 	enum EMonsterHeadAnimType;
 	struct SBoneRotation;
 };
+#endif
 
+#ifndef __MINGW32__
 namespace GameObject {
 	enum ECallbackType;
 };
+#endif
 
 class CGameObject;
 class CScriptHit;

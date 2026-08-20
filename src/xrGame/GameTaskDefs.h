@@ -1,13 +1,7 @@
 #pragma once
 #include "alife_abstract_registry.h"
 
-enum ETaskState
-{
-	eTaskStateFail = 0,
-	eTaskStateInProgress,
-	eTaskStateCompleted,
-	eTaskStateDummy = u16(-1)
-};
+#include "ETaskState.hpp"
 
 // all task has `storyline`-type now (10.10.2008)(sea)
 enum ETaskType

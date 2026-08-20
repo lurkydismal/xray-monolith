@@ -8,15 +8,10 @@
 
 #pragma once
 
+#include "EDetailPathType.hpp"
+
 namespace DetailPathManager
 {
-	enum EDetailPathType
-	{
-		eDetailPathTypeSmooth,
-		eDetailPathTypeSmoothDodge,
-		eDetailPathTypeSmoothCriteria,
-	};
-
 	struct STravelPathPoint
 	{
 		Fvector position;
