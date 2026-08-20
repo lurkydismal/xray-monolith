@@ -66,6 +66,7 @@ if(IS_CLANG_MINGW OR IS_CLANG_CL_MINGW)
     target_compile_definitions(${PROPS_TARGET}
         PRIVATE
             _MT
+            _WIN32_WINNT=0x0A00
     )
 endif()
 
