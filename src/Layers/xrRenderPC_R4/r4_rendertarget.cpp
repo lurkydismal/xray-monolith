@@ -32,7 +32,11 @@
 #include "../xrRender/dxRenderDeviceRender.h"
 #include "../xrRender/xrRender_console.h"
 
-#include <D3DX10tex.h>
+#if defined(USE_DX10)
+#include "D3DX10tex.h"
+#elif defined(USE_DX11)
+#include "D3DX11tex.h"
+#endif	//	USE_DX10
 
 D3D_VIEWPORT custom_viewport[1] = { 0, 0, 0, 0, 0.f, 1.f };
 
@@ -423,7 +427,7 @@ CRenderTarget::CRenderTarget()
 	b_hdr10_bloom_downsample = xr_new<CBlender_hdr10_bloom_downsample>();
 	b_hdr10_bloom_blur 		 = xr_new<CBlender_hdr10_bloom_blur>();
 	b_hdr10_bloom_upsample   = xr_new<CBlender_hdr10_bloom_upsample>();
-	
+
 	b_hdr10_lens_flare_downsample = xr_new<CBlender_hdr10_lens_flare_downsample>();
 	b_hdr10_lens_flare_fgen 	  = xr_new<CBlender_hdr10_lens_flare_fgen>();
 	b_hdr10_lens_flare_blur       = xr_new<CBlender_hdr10_lens_flare_blur>();
@@ -593,7 +597,7 @@ CRenderTarget::CRenderTarget()
 			rt_ssfx_prev_frame.create(r2_RT_ssfx_prev_frame, w, h, D3DFMT_A8R8G8B8); // Temp RT
 
 		rt_ssfx_motion_vectors.create(r2_RT_ssfx_motion_vectors, w, h, D3DFMT_A16B16G16R16F, SampleCount); // HUD mask & Velocity buffer
-		
+
 		rt_ssfx.create(r2_RT_ssfx, w, h, D3DFMT_A8R8G8B8); // Temp RT
 		rt_ssfx_temp.create(r2_RT_ssfx_temp, w, h, D3DFMT_A8R8G8B8); // Temp RT
 		rt_ssfx_temp2.create(r2_RT_ssfx_temp2, w, h, D3DFMT_A8R8G8B8); // Temp RT
@@ -1281,7 +1285,7 @@ CRenderTarget::CRenderTarget()
 
 				HW.pContext->CopySubresourceRegion(t_noise_surf_mipped, 0, 0, 0, 0, t_noise_surf[0], 0, 0);
 
-				D3DX11FilterTexture(HW.pContext, t_noise_surf_mipped, 0, D3DX10_FILTER_POINT);
+				D3DX11FilterTexture(HW.pContext, t_noise_surf_mipped, 0, D3DX11_FILTER_POINT);
 			}
 		}
 	}
@@ -1405,7 +1409,7 @@ CRenderTarget::~CRenderTarget()
 	xr_delete(b_hdr10_bloom_downsample);
 	xr_delete(b_hdr10_bloom_blur);
 	xr_delete(b_hdr10_bloom_upsample);
-	
+
 	xr_delete(b_hdr10_lens_flare_downsample);
 	xr_delete(b_hdr10_lens_flare_fgen);
 	xr_delete(b_hdr10_lens_flare_blur);
