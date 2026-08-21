@@ -12,7 +12,7 @@
 #include "data_storage_constructor.h"
 
 template <
-	typename _dist_type,
+	typename __dist_type,
 	typename _priority_queue,
 	typename _vertex_manager,
 	typename _vertex_allocator,
@@ -40,12 +40,12 @@ template <
 		typename _manager,
 		typename _builder,
 		typename _allocator,
-		template <typename _T> class _vertex,
+		template <typename _T> class __vertex,
 		template <
 			typename _1,
 			typename _2
 		>
-		class _builder_allocator_constructor = CBuilderAllocatorConstructor,
+		class __builder_allocator_constructor = CBuilderAllocatorConstructor,
 		template <
 			typename _1,
 			typename _2,
@@ -56,7 +56,7 @@ template <
 			>
 			class _4
 		>
-		class _manager_builder_allocator_constructor = CManagerBuilderAllocatorConstructor
+		class __manager_builder_allocator_constructor = CManagerBuilderAllocatorConstructor
 	>
 	class _data_storage_constructor = CDataStorageConstructor,
 	typename _iteration_type = u32
@@ -67,7 +67,7 @@ public:
 	template <typename T1>
 	struct _Vertex : public _vertex<T1>
 	{
-		typedef _dist_type _dist_type;
+		typedef __dist_type _dist_type;
 
 		_dist_type _f;
 		T1* _back;
