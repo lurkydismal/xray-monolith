@@ -103,7 +103,7 @@ CrosshairSettings g_crosshair_device_near = CrosshairSettings(
 	.5f
 );
 
-static float lerp(float a, float b, float t)
+static float _lerp(float a, float b, float t)
 {
 	clamp(t, 0.f, 1.f);
 	return a * (1 - t) + b * t;
@@ -129,7 +129,7 @@ void TargetCrosshair::IntegratePosition(const SPickParam& pp, float dist, bool i
 {
 	// Transform ray start and direction into camera space
 	Fvector p, d;
-	
+
 	Fmatrix mat = pp.barrel_matrix;
 	CActor* actor = Actor();
 	if (actor && actor->HUDview())
@@ -163,7 +163,7 @@ void TargetCrosshair::IntegratePosition(const SPickParam& pp, float dist, bool i
 void TargetCrosshair::IntegrateOpacity(const SPickParam& pp, float opacity_target)
 {
 	// Interpolate opacity offset toward target
-	opacity = lerp(opacity, opacity_target, Device.fTimeDelta * settings.occlusion_fade_rate);
+	opacity = _lerp(opacity, opacity_target, Device.fTimeDelta * settings.occlusion_fade_rate);
 }
 
 void TargetCrosshair::Update(const SPickParam& pp, bool is_far)
@@ -252,7 +252,7 @@ void CrosshairPair::Update(const SPickParam& pp)
 	Fmatrix mat = Fmatrix().mul(Device.mFullTransform, mat_aim);
 	Fvector4 pos = Fvector4().set(mat._41, mat._42, mat._43, mat._44);
 	float t = remap(pos.w / zFar, crosshair_near.settings.depth / zFar, crosshair_far.settings.depth / zFar, 0.f, 1.f);
-	float near_size = pos.w * lerp(crosshair_near.settings.size, crosshair_far.settings.size, t) * (Device.fFOV / 90.f);
+	float near_size = pos.w * _lerp(crosshair_near.settings.size, crosshair_far.settings.size, t) * (Device.fFOV / 90.f);
 	crosshair_near.crosshair.SetScale(near_size);
 
 	// Scale far crosshair
