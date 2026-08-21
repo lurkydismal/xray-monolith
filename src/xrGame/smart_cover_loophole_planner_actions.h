@@ -16,10 +16,14 @@
 class CAI_Stalker;
 class CPropertyStorage;
 
+#ifdef __MINGW32__
+#include "stalker_decision_space.h"
+#else
 namespace StalkerDecisionSpace
 {
 	enum EWorldProperties;
 }
+#endif
 
 namespace smart_cover
 {
