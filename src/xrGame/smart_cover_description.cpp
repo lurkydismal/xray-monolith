@@ -262,8 +262,8 @@ IC void delete_data(const CGraphAbstract<_data_type, _edge_weight_type, _vertex_
 
 	Graph& graph = const_cast<Graph&>(graph_);
 
-	typedef Graph::VERTICES Vertices;
-	typedef Graph::EDGES Edges;
+	typedef typename Graph::VERTICES Vertices;
+	typedef typename Graph::EDGES Edges;
 
 	Vertices& verts = graph.vertices();
 
