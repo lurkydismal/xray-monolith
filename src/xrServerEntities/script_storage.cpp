@@ -391,7 +391,7 @@ void CScriptStorage::reinit()
 {
 	if (m_virtual_machine)
 		lua_close(m_virtual_machine);
-	
+
 #ifdef USE_GSC_MEM_ALLOC
     m_virtual_machine = lua_newstate(lua_alloc, NULL);
 #else
@@ -410,7 +410,7 @@ void CScriptStorage::reinit()
 	if (Core.ParamsData.test(ECoreParams::nojit))
 		luaJIT_setmode(lua(), 0, LUAJIT_MODE_ENGINE | LUAJIT_MODE_OFF);
 #else // USE_LUAJIT_ONE
-    // initialize lua standard library functions    
+    // initialize lua standard library functions
 
     luajit::open_lib(lua(), "", luaopen_base);
     luajit::open_lib(lua(), LUA_LOADLIBNAME, luaopen_package);
@@ -463,7 +463,7 @@ void CScriptStorage::reinit()
 			LoadKernelScriptToGlobal(lua(), "LuaPanda.lua");
 		}
 	}
-	
+
 	if (Core.ParamsData.test(ECoreParams::_g))
 		file_header = file_header_new; //AVO: I get fatal crash at the start if this is used
 	else
@@ -729,6 +729,44 @@ bool CScriptStorage::load_buffer(lua_State* L, LPCSTR caBuffer, size_t tSize, LP
 		LPSTR script = 0;
 		bool dynamic_allocation = false;
 
+    #ifdef __MINGW32__
+        {
+            // TODO: Maybe improve
+            const auto stack_increment = total_size;
+
+            auto* tib = reinterpret_cast<NT_TIB*>(NtCurrentTeb());
+
+            void* stack_base = tib->StackBase;
+            void* stack_limit = tib->StackLimit;
+
+            char marker;
+
+            const auto current = reinterpret_cast<uintptr_t>(&marker);
+            const auto limit   = reinterpret_cast<uintptr_t>(stack_limit);
+
+            const size_t available = current - limit;
+
+            if (available > stack_increment)
+            {
+                if (total_size < 768 * 1024) {
+                    script = (LPSTR)_alloca(total_size);
+                    (void)script;
+
+                } else {
+#ifdef DEBUG
+                    script = (LPSTR)Memory.mem_alloc(total_size, "lua script file");
+#else //!DEBUG
+                    script = (LPSTR)Memory.mem_alloc(total_size);
+#endif //-DEBUG
+                    dynamic_allocation = true;
+                }
+
+            } else {
+                // Not enough stack.
+                _resetstkoflw();
+            }
+        }
+    #else
 		__try
 		{
 			if (total_size < 768 * 1024)
@@ -754,6 +792,7 @@ bool CScriptStorage::load_buffer(lua_State* L, LPCSTR caBuffer, size_t tSize, LP
 #endif //#ifdef DEBUG
 			dynamic_allocation = true;
 		};
+    #endif
 
 		xr_strcpy(script, total_size, insert);
 		CopyMemory(script + str_len, caBuffer, u32(tSize));
@@ -803,7 +842,8 @@ static bool unlocalRegex(xr_set<xr_string>& unlocals, xr_string& s, const std::r
 	if (std::regex_match(s, pattern)) {
 		//Msg("matching local function pattern");
 		std::smatch match;
-		std::regex_search(s, match, pattern);
+        std::string l_s = s.c_str();
+		std::regex_search(l_s, match, pattern);
 		xr_string variable = std::string(match[group]).c_str();
 		if (unlocals.find(variable) != unlocals.end()) {
 			Msg("[unlocalRegex] found variable %s to unlocal", variable.c_str());
@@ -945,7 +985,8 @@ bool CScriptStorage::do_file(LPCSTR caScriptName, LPCSTR caNameSpaceName)
 			pattern = std::regex(R"((^local)([\t ]+)(.*))");
 			if (std::regex_match(s, pattern)) {
 				std::smatch match;
-				std::regex_search(s, match, pattern);
+                std::string l_s = s.c_str();
+				std::regex_search(l_s, match, pattern);
 				xr_string m = std::string(match[3]).c_str();
 
 				// strip comments
@@ -953,7 +994,8 @@ bool CScriptStorage::do_file(LPCSTR caScriptName, LPCSTR caNameSpaceName)
 				if (std::regex_match(m, r)) {
 					//Msg("found comments\n");
 					std::smatch noncomments;
-					std::regex_search(m, noncomments, r);
+                    std::string l_m = m.c_str();
+					std::regex_search(l_m, noncomments, r);
 					m = std::string(noncomments[1]).c_str();
 				}
 
@@ -974,7 +1016,8 @@ bool CScriptStorage::do_file(LPCSTR caScriptName, LPCSTR caNameSpaceName)
 							if (std::regex_match(s, r)) {
 								//Msg("found comments\n");
 								std::smatch noncomments;
-								std::regex_search(s, noncomments, r);
+                                std::string l_s = s.c_str();
+								std::regex_search(l_s, noncomments, r);
 								s = xr_string((std::string(noncomments[1]) + "= nil " + std::string(noncomments[2])).c_str());
 							} else {
 								s += " = nil";
