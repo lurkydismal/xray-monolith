@@ -16,6 +16,10 @@ class CWeapon;
 class CMissile;
 class CFoodItem;
 
+#ifdef __MINGW32__
+#include "object_handler_space.h"
+#include "MonsterSpace.hpp"
+#else
 namespace ObjectHandlerSpace
 {
 	enum EWorldProperties;
@@ -25,6 +29,7 @@ namespace MonsterSpace
 {
 	enum EObjectAction;
 };
+#endif
 
 class CObjectHandlerPlanner : public CActionPlanner<CAI_Stalker, true>
 {
