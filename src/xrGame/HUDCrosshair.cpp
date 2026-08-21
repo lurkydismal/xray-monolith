@@ -1,5 +1,5 @@
 // HUDCrosshair.cpp:  крестик прицела, отображающий текущую дисперсию
-// 
+//
 //////////////////////////////////////////////////////////////////////
 
 #include "StdAfx.h"
@@ -65,7 +65,7 @@ void CHUDCrosshair::SetDispersion(float d)
 
 extern ENGINE_API xr_atomic_bool g_bRendering;
 
-static float lerp(float a, float b, float t)
+static float _lerp(float a, float b, float t)
 {
 	clamp(t, 0.f, 1.f);
 	return a * (1 - t) + b * t;
