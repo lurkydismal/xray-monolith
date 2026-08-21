@@ -76,7 +76,7 @@ IC void update_blend(CBlend* & b)
 		b = 0;
 }
 
-IC float lerp(float t, float a, float b)
+static IC float _lerp(float t, float a, float b)
 {
 	return (a + t * (b - a));
 }
@@ -223,7 +223,7 @@ void CIKLimbsController::ObjectShift(float static_shift, const SCalculateData cd
 
 	CPhysicsShellHolder* sh = smart_cast<CPhysicsShellHolder*>(m_object);
 	VERIFY(sh);
-	//CCharacterPhysicsSupport *ch = sh->character_physics_support();	
+	//CCharacterPhysicsSupport *ch = sh->character_physics_support();
 	_object_shift.freeze(!!Device.Paused()); //ch->interactive_motion() ||
 
 	if (cnt_in_step != sz && PredictObjectShift(cd)) //cnt_in_step > 0 &&
@@ -377,7 +377,7 @@ void _stdcall CIKLimbsController::IKVisualCallback(IKinematics* K)
 
                             ik->Calculate();
                         }
-					    
+
 				    }
 				    else
 				    {
@@ -421,15 +421,15 @@ void CIKLimbsController::Update()
 
 	/*
 	Fmatrix predict;
-	_pose_extrapolation.extrapolate( predict, Device.fTimeGlobal  ); 
+	_pose_extrapolation.extrapolate( predict, Device.fTimeGlobal  );
 
 
 
 
 	DBG_DrawMatrix( m_object->XFORM(), 1 );
 	DBG_DrawMatrix( predict, 1 );
-	
-	_pose_extrapolation.extrapolate( predict, Device.fTimeGlobal + 1  ); 
+
+	_pose_extrapolation.extrapolate( predict, Device.fTimeGlobal + 1  );
 	DBG_DrawMatrix( predict, 1 );
 	*/
 }
