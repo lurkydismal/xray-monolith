@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 class CSE_Abstract;
 class CPhysicItem;
@@ -241,7 +241,7 @@ public:
 	virtual bool render_item_3d_ui_query() { return true; }
 
 	virtual bool CheckCompatibility(CHudItem*) { return true; }
-protected:
+public:
 
 	IC void SetPending(bool H) { m_huditem_flags.set(fl_pending, H); }
 	shared_str hud_sect;
