@@ -9,11 +9,17 @@
 #ifndef STALKER_MOVEMENT_PARAMS_H_INCLUDED
 #define STALKER_MOVEMENT_PARAMS_H_INCLUDED
 
+#ifdef __MINGW32__
+#include "MonsterSpace.hpp"
+#include "EPathType.hpp"
+#include "EDetailPathType.hpp"
+#else
 namespace MonsterSpace
 {
 	enum EBodyState;
 	enum EMovementType;
 	enum EMentalState;
+    // FIX: Never used and never defined
 	enum EPathType;
 };
 
@@ -26,6 +32,7 @@ namespace DetailPathManager
 {
 	enum EDetailPathType;
 };
+#endif
 
 namespace smart_cover
 {
