@@ -12,8 +12,8 @@
 #include "data_storage_constructor.h"
 
 template <
-	typename _path_id_type,
-	typename _index_type,
+	typename __path_id_type,
+	typename __index_type,
 	u32 hash_size,
 	u32 fix_size
 >
@@ -25,7 +25,7 @@ struct CVertexManagerHashFixed
 		template <typename T2>
 		struct _vertex : public T1<T2>
 		{
-			typedef _index_type _index_type;
+			typedef __index_type _index_type;
 			_index_type _index;
 			bool _opened;
 
@@ -79,7 +79,7 @@ struct CVertexManagerHashFixed
 		};
 #pragma pack(pop)
 
-		typedef _path_id_type _path_id_type;
+		typedef __path_id_type _path_id_type;
 		typedef SGraphIndexVertex<_path_id_type> CGraphIndexVertex;
 
 	protected:
