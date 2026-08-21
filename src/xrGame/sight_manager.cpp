@@ -618,7 +618,18 @@ Fvector CSightManager::aiming_position() const
 	return (result);
 }
 
-static inline float lerp(float low, float high, float value)
+// Moves a value toward a target by a specified amount without overshooting.
+//
+// If @p low is less than @p high, the value is increased by @p value.
+// If @p low is greater than @p high, the value is decreased by @p value.
+// The result is clamped to the range between @p low and @p high.
+//
+// @param low    The starting value.
+// @param high   The target value.
+// @param value  The amount by which to move toward the target.
+//
+// @return The value moved toward @p high by @p value, clamped to @p high.
+static inline float _lerp(float low, float high, float value)
 {
 	float result;
 	if (low > high)
@@ -656,21 +667,21 @@ void CSightManager::process_action(float const time_delta)
 	Fvector const& factors = current_action().use_torso_look() ? s_danger_factors : s_free_factors;
 	VERIFY(_valid(factors));
 	//	if ( object().cName() == "level_prefix_stalker" ) {
-	//		Msg							("[%6d][%6d] [%f] + [%f] = [%f] ([%f])",  Device.dwFrame, Device.dwTimeGlobal, m_current.m_head.m_factor,		s_factor_lerp_speed*time_delta,		lerp ( m_current.m_head.m_factor,		factors.x, s_factor_lerp_speed*time_delta ), factors.x );
-	//		Msg							("[%6d][%6d] [%f] + [%f] = [%f] ([%f])",  Device.dwFrame, Device.dwTimeGlobal, m_current.m_shoulder.m_factor,	s_factor_lerp_speed*time_delta,		lerp ( m_current.m_shoulder.m_factor,	factors.y, s_factor_lerp_speed*time_delta ), factors.y );
-	//		Msg							("[%6d][%6d] [%f] + [%f] = [%f] ([%f])",  Device.dwFrame, Device.dwTimeGlobal, m_current.m_spine.m_factor,	s_factor_lerp_speed*time_delta,		lerp ( m_current.m_spine.m_factor,		factors.z, s_factor_lerp_speed*time_delta ), factors.z );
+	//		Msg							("[%6d][%6d] [%f] + [%f] = [%f] ([%f])",  Device.dwFrame, Device.dwTimeGlobal, m_current.m_head.m_factor,		s_factor_lerp_speed*time_delta,		_lerp ( m_current.m_head.m_factor,		factors.x, s_factor_lerp_speed*time_delta ), factors.x );
+	//		Msg							("[%6d][%6d] [%f] + [%f] = [%f] ([%f])",  Device.dwFrame, Device.dwTimeGlobal, m_current.m_shoulder.m_factor,	s_factor_lerp_speed*time_delta,		_lerp ( m_current.m_shoulder.m_factor,	factors.y, s_factor_lerp_speed*time_delta ), factors.y );
+	//		Msg							("[%6d][%6d] [%f] + [%f] = [%f] ([%f])",  Device.dwFrame, Device.dwTimeGlobal, m_current.m_spine.m_factor,	s_factor_lerp_speed*time_delta,		_lerp ( m_current.m_spine.m_factor,		factors.z, s_factor_lerp_speed*time_delta ), factors.z );
 	//	}
 
 	VERIFY(_valid(m_current.m_head.m_factor));
-	m_current.m_head.m_factor = lerp(m_current.m_head.m_factor, factors.x, s_factor_lerp_speed * time_delta);
+	m_current.m_head.m_factor = _lerp(m_current.m_head.m_factor, factors.x, s_factor_lerp_speed * time_delta);
 	VERIFY(_valid(m_current.m_head.m_factor));
 
 	VERIFY(_valid(m_current.m_shoulder.m_factor));
-	m_current.m_shoulder.m_factor = lerp(m_current.m_shoulder.m_factor, factors.y, s_factor_lerp_speed * time_delta);
+	m_current.m_shoulder.m_factor = _lerp(m_current.m_shoulder.m_factor, factors.y, s_factor_lerp_speed * time_delta);
 	VERIFY(_valid(m_current.m_shoulder.m_factor));
 
 	VERIFY(_valid(m_current.m_spine.m_factor));
-	m_current.m_spine.m_factor = lerp(m_current.m_spine.m_factor, factors.z, s_factor_lerp_speed * time_delta);
+	m_current.m_spine.m_factor = _lerp(m_current.m_spine.m_factor, factors.z, s_factor_lerp_speed * time_delta);
 	VERIFY(_valid(m_current.m_spine.m_factor));
 
 	Fvector const angles =
