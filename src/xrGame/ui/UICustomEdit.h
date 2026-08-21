@@ -2,10 +2,16 @@
 
 #include "UIStatic.h"
 
+#ifdef __MINGW32__
+#include "../../xrEngine/init_mode.hpp"
+#endif
+
 namespace text_editor
 {
 	class ENGINE_API line_edit_control;
+#ifndef __MINGW32__
 	enum init_mode;
+#endif
 };
 
 class CUICustomEdit : public CUIStatic
