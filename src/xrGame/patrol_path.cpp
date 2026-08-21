@@ -99,10 +99,11 @@ std::pair<u32, float> CPatrolPath::parse_point_link(LPCSTR patrol_name, xr_strin
 
     std::regex pattern("(\\w+)\\((\\d+)\\)");
     std::smatch matches;
+    std::string l_link = link.c_str();
 
-	bool matched = std::regex_search(link, matches, pattern);
+	bool matched = std::regex_search(l_link, matches, pattern);
 	R_ASSERT4(matched, "Bad format for patrol path link", patrol_name, link.c_str());
-	
+
 	xr_string target = matches[1].str().c_str();
 	float prob = std::stof(matches[2].str());
 
