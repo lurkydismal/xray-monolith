@@ -139,7 +139,7 @@ void CHudItem::renderable_Render(IDSGraphManager* DM)
                 CInventoryItem* self = smart_cast<CInventoryItem*>(this);
                 if (owner->attached(self))
                     on_renderable_Render(DM);
-            }			
+            }
 		}
 	}
 }
@@ -233,7 +233,7 @@ void CHudItem::OnAnimationEnd(u32 state)
 	}
 }
 
-bool CHudItem::TryPlayAnimBore() 
+bool CHudItem::TryPlayAnimBore()
 {
 	if (HudAnimationExist("anm_bore"))
 	{
@@ -498,7 +498,7 @@ float CHudItem::GetNearWallRange()
 	return m_nearwall_dist_max - m_nearwall_dist_min;
 }
 
-static float lerp(float a, float b, float t)
+static float _lerp(float a, float b, float t)
 {
 	clamp(t, 0.f, 1.f);
 	return a * (1 - t) + b * t;
@@ -532,7 +532,7 @@ void CHudItem::UpdateNearWall()
 	{
 		if (g_nearwall_trace == NT_CAM)
 		{
-			// Use the HUD trace, and lerp between min and max distances
+			// Use the HUD trace, and _lerp between min and max distances
 			collide::rq_result& rq = HUD().GetRQ();
 
 			float dist = rq.range;
@@ -572,7 +572,7 @@ void CHudItem::UpdateCL()
 
                     motion_prev_time = (((float)m_dwMotionCurrTm - (float)m_dwMotionStartTm) / 1000.0f) * speed * final_anim_speed;
                     motion_curr_time = (((float)Device.dwTimeGlobal - (float)m_dwMotionStartTm) / 1000.0f) * speed * final_anim_speed;
-                    
+
                 }
 
 				xr_vector<motion_marks>::const_iterator it = marks.begin();
@@ -721,7 +721,7 @@ u32 CHudItem::PlayHUDMotion(shared_str M, BOOL bMixIn, CHudItem* W, u32 state, f
 		::luabind::functor<::luabind::object> funct;
 		if (ai().script_engine().functor("_G.CHudItem__PlayHUDMotion", funct))
 		{
-			
+
 			::luabind::object table = ::luabind::newtable(ai().script_engine().lua());
 			table["anm_name"] = *M;
 			table["anm_mixin"] = !!bMixIn;
@@ -925,7 +925,7 @@ bool CHudItem::PlayAnimCrouchIdleMoving()
 
 //-AVO
 
-bool CHudItem::NeedBlendAnm() 
+bool CHudItem::NeedBlendAnm()
 {
 	u32 state = GetState();
 	return (state != eIdle && state != eHidden);
@@ -980,7 +980,7 @@ bool CHudItem::IsAttachedToHUD()
 		return false;
 
 	attachable_hud_item* hi = nullptr;
-	
+
 	hi = g_player_hud->attached_item(0);
 	if (hi && hi->m_parent_hud_item == this)
 		return true;
@@ -1196,10 +1196,10 @@ void CHudItem::OnFrame()
 	float t = m_nearwall_speed_mod * Device.fTimeDelta;
 
 	float target_fov = GetTargetHudFov();
-	m_hud_fov = lerp(m_hud_fov, target_fov, t);
+	m_hud_fov = _lerp(m_hud_fov, target_fov, t);
 
 	float target_ofs = GetTargetNearWallOffset();
-	m_nearwall_ofs = lerp(m_nearwall_ofs, target_ofs, t);
+	m_nearwall_ofs = _lerp(m_nearwall_ofs, target_ofs, t);
 }
 
 void CHudItem::net_Relcase(CObject* O)
