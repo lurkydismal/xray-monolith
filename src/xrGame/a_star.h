@@ -15,7 +15,7 @@
 namespace AStar
 {
 	template <
-		typename _dist_type,
+		typename __dist_type,
 		template <typename _T> class T1
 	>
 	struct _Vertex
@@ -23,7 +23,7 @@ namespace AStar
 		template <typename T2>
 		struct _vertex : public T1<T2>
 		{
-			typedef _dist_type _dist_type;
+			typedef __dist_type _dist_type;
 
 			_dist_type _g;
 			_dist_type _h;
@@ -42,7 +42,7 @@ namespace AStar
 }
 
 template <
-	typename _dist_type,
+	typename __dist_type,
 	typename _priority_queue,
 	typename _vertex_manager,
 	typename _vertex_allocator,
@@ -59,8 +59,8 @@ template <
 		typename _2,
 		typename _3,
 		template <
-			typename _1,
-			typename _2
+			typename __1,
+			typename __2
 		>
 		class _4
 	>
@@ -70,35 +70,35 @@ template <
 		typename _manager,
 		typename _builder,
 		typename _allocator,
-		template <typename _T> class _vertex,
+		template <typename _T> class __vertex,
 		template <
 			typename _1,
 			typename _2
 		>
-		class _builder_allocator_constructor = CBuilderAllocatorConstructor,
+		class __builder_allocator_constructor = CBuilderAllocatorConstructor,
 		template <
 			typename _1,
 			typename _2,
 			typename _3,
 			template <
-				typename _1,
-				typename _2
+				typename __1,
+				typename __2
 			>
 			class _4
 		>
-		class _manager_builder_allocator_constructor = CManagerBuilderAllocatorConstructor
+		class __manager_builder_allocator_constructor = CManagerBuilderAllocatorConstructor
 	>
 	class _data_storage_constructor = CDataStorageConstructor,
 	typename _iteration_type = u32
 >
 class CAStar : public CDijkstra<
-		_dist_type,
+		__dist_type,
 		_priority_queue,
 		_vertex_manager,
 		_vertex_allocator,
 		euclidian_heuristics,
 		_data_storage_base,
-        AStar::_Vertex<_dist_type, _vertex>::template _vertex,
+        AStar::_Vertex<__dist_type, _vertex>::template _vertex,
 		_builder_allocator_constructor,
 		_manager_builder_allocator_constructor,
 		_data_storage_constructor,
@@ -107,13 +107,13 @@ class CAStar : public CDijkstra<
 {
 protected:
     using inherited = typename CDijkstra<
-		_dist_type,
+		__dist_type,
 		_priority_queue,
 		_vertex_manager,
 		_vertex_allocator,
 		euclidian_heuristics,
 		_data_storage_base,
-        AStar::_Vertex<_dist_type, _vertex>::template _vertex,
+        AStar::_Vertex<__dist_type, _vertex>::template _vertex,
 		_builder_allocator_constructor,
 		_manager_builder_allocator_constructor,
 		_data_storage_constructor,
