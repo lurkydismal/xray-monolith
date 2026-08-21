@@ -41,6 +41,10 @@
 	>								script_planner;
 #endif
 
+#ifdef __MINGW32__
+#include "MonsterSpace.hpp"
+#include "ai_stalker_space.h"
+#else
 namespace MonsterSpace
 {
 	enum EMovementDirection;
@@ -50,6 +54,7 @@ namespace StalkerSpace
 {
 	enum EBodyAction;
 };
+#endif
 
 namespace smart_cover
 {
@@ -62,7 +67,11 @@ namespace smart_cover
 	};
 };
 
+#ifdef __MINGW32__
+#include "stalker_animation_names.h"
+#else
 enum ECriticalWoundType;
+#endif
 
 class CALifeSimulator;
 class CCharacterPhysicsSupport;
@@ -767,7 +776,7 @@ public:
 
 	//////////////////////////////////////////////////////////////////////////
 	// Critical Wounds
-	//////////////////////////////////////////////////////////////////////////	
+	//////////////////////////////////////////////////////////////////////////
 private:
 	virtual void load_critical_wound_bones();
 	virtual bool critical_wound_external_conditions_suitable();
