@@ -12,8 +12,8 @@
 #include "builder_allocator_constructor.h"
 
 template <
-	typename _path_id_type,
-	typename _index_type,
+	typename __path_id_type,
+	typename __index_type,
 	u8 mask
 >
 struct CVertexManagerFixed
@@ -24,7 +24,7 @@ struct CVertexManagerFixed
 		template <typename T2>
 		struct _vertex : public T1<T2>
 		{
-			typedef _index_type _index_type;
+			typedef __index_type _index_type;
 			_index_type _index : 8 * sizeof(_index_type) - mask;
 			_index_type _opened : mask;
 
@@ -63,7 +63,7 @@ struct CVertexManagerFixed
 		};
 #pragma pack(pop)
 
-		typedef _path_id_type _path_id_type;
+		typedef __path_id_type _path_id_type;
 		typedef SGraphIndexVertex<_path_id_type> CGraphIndexVertex;
 
 	protected:
