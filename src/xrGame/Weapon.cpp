@@ -539,7 +539,7 @@ float CWeapon::GetTargetHudFov()
 	return base;
 }
 
-static float lerp(float a, float b, float t)
+static float _lerp(float a, float b, float t)
 {
 	return a * (1 - t) + b * t;
 }
@@ -549,7 +549,7 @@ float CWeapon::GetTargetNearWallOffset()
 	float ofs = inherited::GetTargetNearWallOffset();
 	float ofs_ads = ofs;
 	clamp(ofs_ads, ofs_ads, m_nearwall_zoomed_range);
-	return lerp(ofs, ofs_ads, GetZRotatingFactor());
+	return _lerp(ofs, ofs_ads, GetZRotatingFactor());
 }
 
 void CWeapon::ForceUpdateFireParticles()
