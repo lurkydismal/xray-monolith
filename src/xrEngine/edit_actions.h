@@ -9,10 +9,15 @@
 #define EDIT_ACTIONS_H_INCLUDED
 
 
+#ifdef __MINGW32__
+#include "key_state.hpp"
+#endif
 
 namespace text_editor
 {
+#ifndef __MINGW32__
 	enum key_state;
+#endif
 	class line_edit_control;
 
 	class base : private xray::noncopyable
