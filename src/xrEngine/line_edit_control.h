@@ -10,6 +10,9 @@
 
 //
 
+#include "key_state.hpp"
+#include "init_mode.hpp"
+
 namespace text_editor
 {
 	void remove_spaces(PSTR str); // in & out
@@ -17,6 +20,7 @@ namespace text_editor
 
 	class base;
 
+#if 0
 	enum key_state // Flags32
 	{
 		ks_free = u32(0),
@@ -37,17 +41,7 @@ namespace text_editor
 
 		ks_force = u32(-1)
 	}; // enum key_state
-
-	enum init_mode
-	{
-		im_standart = 0,
-		im_number_only,
-		im_read_only,
-		im_file_name_mode,
-		// not "/\\:*?\"<>|^()[]%"
-
-		im_count
-	}; // init_mode
+#endif
 
 
 	class ENGINE_API line_edit_control
