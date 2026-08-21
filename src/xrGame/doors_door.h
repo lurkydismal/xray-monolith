@@ -11,10 +11,16 @@
 
 class CPhysicObject;
 
+#ifdef __MINGW32__
+#include "door_state.hpp"
+#endif
+
 namespace doors
 {
 	class actor;
+#ifndef __MINGW32__
 	enum door_state;
+#endif
 
 	class door : private xray::noncopyable
 	{
