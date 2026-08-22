@@ -10,6 +10,8 @@
 #include <xmmintrin.h>
 #endif
 
+#include <cmath>
+
 using namespace PAPI;
 using namespace PS;
 
@@ -172,7 +174,7 @@ void CParticleEffect::OnFrame(u32 frame_dt)
 					m_Def->ExecuteAnimate(particles, p_cnt, fDT_STEP);
 				if (m_Def->m_Flags.is(CPEDef::dfCollision))
 					m_Def->ExecuteCollision(particles, p_cnt, fDT_STEP, this, m_CollisionCallback);
-				
+
 				//-move action
 				if (p_cnt)
 				{
@@ -239,7 +241,7 @@ void CParticleEffect::OnFrame(u32 frame_dt)
 				vis.box.grow(p_size);
 				vis.box.getsphere(vis.sphere.P, vis.sphere.R);
 			}
-			
+
 			bool deffered_stop = true;
 			if (m_Def->m_Flags.is(CPEDef::dfTimeLimit))
 			{
@@ -714,8 +716,8 @@ void CParticleEffect::Render(float)
 //----------------------------------------------------
 IC void FillSprite	(FVF::LIT*& pv, const Fvector& T, const Fvector& R, const Fvector& pos, const Fvector2& lt, const Fvector2& rb, float r1, float r2, u32 clr, float angle)
 {
-	float sa	= _sin(angle);  
-	float ca	= _cos(angle);  
+	float sa	= _sin(angle);
+	float ca	= _cos(angle);
 	Fvector Vr, Vt;
 	Vr.x 		= T.x*r1*sa+R.x*r1*ca;
 	Vr.y 		= T.y*r1*sa+R.y*r1*ca;
@@ -737,8 +739,8 @@ IC void FillSprite	(FVF::LIT*& pv, const Fvector& T, const Fvector& R, const Fve
 
 IC void FillSprite	(FVF::LIT*& pv, const Fvector& pos, const Fvector& dir, const Fvector2& lt, const Fvector2& rb, float r1, float r2, u32 clr, float angle)
 {
-	float sa	= _sin(angle);  
-	float ca	= _cos(angle);  
+	float sa	= _sin(angle);
+	float ca	= _cos(angle);
 	const Fvector& T 	= dir;
 	Fvector R; 	R.crossproduct(T,RDEVICE.vCameraDirection).normalize_safe();
 	Fvector Vr, Vt;
@@ -790,7 +792,7 @@ void CParticleEffect::Render(float )
 				if (m_Def->m_Flags.is(CPEDef::dfAlignToPath)){
 					float speed	= m.vel.magnitude();
                     if ((speed<EPS_S)&&m_Def->m_Flags.is(CPEDef::dfWorldAlign)){
-                    	Fmatrix	M;  	
+                    	Fmatrix	M;
                         M.setXYZ			(m_Def->m_APDefaultRotation);
                         if (m_RT_Flags.is(flRT_XFORM)){
                             Fvector p;
@@ -802,7 +804,7 @@ void CParticleEffect::Render(float )
                         }
                     }else if ((speed>=EPS_S)&&m_Def->m_Flags.is(CPEDef::dfFaceAlign)){
                     	Fmatrix	M;  		M.identity();
-                        M.k.div				(m.vel,speed);            
+                        M.k.div				(m.vel,speed);
                         M.j.set 			(0,1,0);	if (_abs(M.j.dotproduct(M.k))>.99f)  M.j.set(0,0,1);
                         M.i.crossproduct	(M.j,M.k);	M.i.normalize	();
                         M.j.crossproduct   	(M.k,M.i);	M.j.normalize  ();
@@ -839,7 +841,7 @@ void CParticleEffect::Render(float )
 			}
 			dwCount 			= u32(pv-pv_start);
 			RCache.Vertex.Unlock(dwCount,geom->vb_stride);
-			if (dwCount)    
+			if (dwCount)
 			{
 #ifndef _EDITOR
 				CHudInitializer initalizer(false);
@@ -856,7 +858,7 @@ void CParticleEffect::Render(float )
 
                 RCache.set_CullMode		(m_Def->m_Flags.is(CPEDef::dfCulling)?(m_Def->m_Flags.is(CPEDef::dfCullCCW)?CULL_CCW:CULL_CW):CULL_NONE);
 				RCache.Render	   		(D3DPT_TRIANGLELIST,dwOffset,0,dwCount,0,dwCount/2);
-                RCache.set_CullMode		(CULL_CCW	); 
+                RCache.set_CullMode		(CULL_CCW	);
 #ifndef _EDITOR
 				if(GetHudMode())
 				{
