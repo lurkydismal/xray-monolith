@@ -108,7 +108,7 @@ void SMusicTrack::Load(LPCSTR fn, LPCSTR params)
 
 BOOL SMusicTrack::in(u32 game_time)
 {
-	// game_time -ms 
+	// game_time -ms
 	if (m_ActiveTime.x == 0 && m_ActiveTime.y)
 		return TRUE;
 
@@ -185,6 +185,15 @@ void CLevelSoundManager::Prepare(LPCSTR canonical_level_path, PreparedData& data
 	}
 }
 
+#if 0
+/* FIX:
+ * /usr/x86_64-w64-mingw32/include/c++/16.1.0/bits/uniform_int_dist.h:261:31: error: expected unqualified-id
+ *  261 |           static_assert(!_Up_traits::__is_signed, "U must be unsigned");
+ *      |                                      ^
+ *  /usr/x86_64-w64-mingw32/include/c++/16.1.0/bits/uniform_int_dist.h:262:31: error: expected unqualified-id
+ *  262 |           static_assert(!_Wp_traits::__is_signed, "W must be unsigned");
+ *      |                                      ^
+*/
 void CLevelSoundManager::Commit(const PreparedData& data)
 {
 	// Sound objects and their backend registrations stay on the owner thread.
@@ -229,6 +238,7 @@ void CLevelSoundManager::Commit(const PreparedData& data)
 		}
 	}
 }
+#endif
 
 void CLevelSoundManager::Unload()
 {
@@ -239,6 +249,7 @@ void CLevelSoundManager::Unload()
 	m_PlayedMusicIndices.clear();
 }
 
+#if 0
 void CLevelSoundManager::Update()
 {
 	PROF_EVENT("CLevelSoundManager::Update");
@@ -268,7 +279,7 @@ void CLevelSoundManager::Update()
 					T.Stop();
 					// Msg("Stopping track %d", k);
 				}
-				if ((T.in(game_time) && m_PlayedMusicIndices.empty()) || 
+				if ((T.in(game_time) && m_PlayedMusicIndices.empty()) ||
 					(T.in(game_time) && !(std::find(m_PlayedMusicIndices.begin(), m_PlayedMusicIndices.end(), k) != m_PlayedMusicIndices.end()))) {
 					indices.push_back(k);
 					// Msg("Pushing track %d", k);
@@ -308,7 +319,7 @@ void CLevelSoundManager::Update()
 		{
 			SMusicTrack& T = m_MusicTracks[m_CurrentTrack];
 			if (!T.IsPlaying())
-			{	
+			{
 				m_CurrentTrack = -1;
 				m_NextTrackTime = engine_time;
 
@@ -318,3 +329,4 @@ void CLevelSoundManager::Update()
 		}
 	}
 }
+#endif
