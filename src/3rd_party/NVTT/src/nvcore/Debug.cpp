@@ -51,6 +51,14 @@
 
 #undef assert // defined on mingw
 
+#include <cstdlib>
+
+#ifdef __MINGW32__
+#define _terminate std::abort
+#else
+#define _terminate std::terminate
+#endif
+
 using namespace nv;
 
 namespace
@@ -353,7 +361,7 @@ namespace
 			if( ret == NV_ABORT_EXIT ) {
 				// Exit cleanly.
 				std::runtime_error tmp{"Assertion failed"};
-                std::terminate();
+                _terminate();
 			}
 
 			return ret;

@@ -29,10 +29,17 @@ namespace nv
 // Override new/delete
 
 #ifdef __MINGW32__
+#ifdef _GLIBCXX_NODISCARD
 _GLIBCXX_NODISCARD void * operator new (size_t size)
 {
 	return nv::mem::malloc(size);
 }
+#else
+void * operator new (size_t size)
+{
+	return nv::mem::malloc(size);
+}
+#endif
 #else
 inline void * operator new (size_t size) throw()
 {
@@ -46,10 +53,17 @@ inline void operator delete (void *p) throw()
 }
 
 #ifdef __MINGW32__
+#ifdef _GLIBCXX_NODISCARD
 _GLIBCXX_NODISCARD void * operator new [] (size_t size)
 {
 	return nv::mem::malloc(size);
 }
+#else
+void * operator new [] (size_t size)
+{
+	return nv::mem::malloc(size);
+}
+#endif
 #else
 inline void * operator new [] (size_t size) throw()
 {
