@@ -903,7 +903,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 ################################################################################
 # Compile and link options
 ################################################################################
-if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
+if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC OR IS_MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
             ${XRAY_OPTIMIZATION_FLAG};

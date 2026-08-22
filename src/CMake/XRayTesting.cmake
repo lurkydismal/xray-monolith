@@ -49,7 +49,7 @@ function(add_xray_discovered_tests)
 
     add_executable(${TESTS_NAME} ${XRAY_TEST_SOURCES})
 
-    if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC)
+    if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC OR IS_MSVC)
         target_compile_options(${TESTS_NAME} PRIVATE /Zi)
         target_link_options(${TESTS_NAME} PRIVATE /DEBUG)
     elseif(IS_CLANG_MINGW OR IS_CLANG_MSVC)
