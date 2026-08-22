@@ -7,6 +7,11 @@
 #include "api.h"
 #include "exception.h"
 
+#ifdef __MINGW32__
+#define _terminate std::abort
+#else
+#define _terminate std::terminate
+#endif
 
 namespace
 {
@@ -60,7 +65,7 @@ void EaxFxSlots::fail(
     const char* message)
 {
     EaxFxSlotsException tmp{message};
-    std::terminate();
+    _terminate();
 }
 
 void EaxFxSlots::initialize_fx_slots(ALCcontext& al_context)

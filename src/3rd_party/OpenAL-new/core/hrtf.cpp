@@ -37,6 +37,12 @@
 #include "vector.h"
 
 
+#ifdef __MINGW32__
+#define _terminate std::abort
+#else
+#define _terminate std::terminate
+#endif
+
 namespace {
 
 struct HrtfEntry {
@@ -416,7 +422,7 @@ std::unique_ptr<HrtfStore> CreateHrtfStore(uint rate, uint8_t irSize,
         offset += sizeof(delays_[0])*irCount;
 
         if(offset != total)
-            std::terminate();
+            _terminate();
 
         /* Copy input data to storage. */
         std::uninitialized_copy(fields.cbegin(), fields.cend(), field_);
