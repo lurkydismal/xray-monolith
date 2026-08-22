@@ -31,6 +31,13 @@
 #include <windows.h>
 
 #include <limits>
+#include <cstdlib>
+
+#ifdef __MINGW32__
+#define _terminate std::abort
+#else
+#define _terminate std::terminate
+#endif
 
 void althrd_setname(const char *name)
 {
@@ -68,10 +75,10 @@ namespace al {
 semaphore::semaphore(unsigned int initial)
 {
     if(initial > static_cast<unsigned int>(std::numeric_limits<int>::max()))
-        std::terminate();
+        _terminate();
     mSem = CreateSemaphore(nullptr, initial, std::numeric_limits<int>::max(), nullptr);
     if(mSem == nullptr)
-        std::terminate();
+        _terminate();
 }
 
 semaphore::~semaphore()
@@ -80,7 +87,7 @@ semaphore::~semaphore()
 void semaphore::post()
 {
     if(!ReleaseSemaphore(static_cast<HANDLE>(mSem), 1, nullptr))
-        std::terminate();
+        _terminate();
 }
 
 void semaphore::wait() noexcept

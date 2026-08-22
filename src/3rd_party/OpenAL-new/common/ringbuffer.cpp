@@ -29,6 +29,12 @@
 #include "almalloc.h"
 
 
+#ifdef __MINGW32__
+#define _terminate std::abort
+#else
+#define _terminate std::terminate
+#endif
+
 RingBufferPtr RingBuffer::Create(size_t sz, size_t elem_sz, int limit_writes)
 {
     size_t power_of_two{0u};
@@ -46,7 +52,7 @@ RingBufferPtr RingBuffer::Create(size_t sz, size_t elem_sz, int limit_writes)
     }
     ++power_of_two;
     if(power_of_two <= sz || power_of_two > std::numeric_limits<size_t>::max()/elem_sz)
-        std::terminate();
+        _terminate();
 
     const size_t bufbytes{power_of_two * elem_sz};
     RingBufferPtr rb{new(FamCount(bufbytes)) RingBuffer{bufbytes}};

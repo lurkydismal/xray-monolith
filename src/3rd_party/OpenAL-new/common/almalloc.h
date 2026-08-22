@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <cstdlib>
 #include <iterator>
 #include <limits>
 #include <memory>
@@ -26,6 +27,12 @@ void *al_calloc(size_t alignment, size_t size);
     void operator delete(void*) noexcept = delete;                            \
     void operator delete[](void*) noexcept = delete;
 
+#ifdef __MINGW32__
+#define _terminate std::abort
+#else
+#define _terminate std::terminate
+#endif
+
 #define DEF_NEWDEL(T)                                                         \
     void *operator new(size_t size)                                           \
     {                                                                         \
@@ -34,7 +41,7 @@ void *al_calloc(size_t alignment, size_t size);
         if(void *ret{al_malloc(alignof(T), size)})                            \
             return ret;                                                       \
         std::bad_alloc tmp{};                                               \
-        std::terminate(); \
+        _terminate(); \
     }                                                                         \
     void *operator new[](size_t size) { return operator new(size); }          \
     void operator delete(void *block) noexcept { al_free(block); }            \
@@ -64,7 +71,7 @@ enum FamCount : size_t { };
         if(void *ret{al_malloc(alignof(T), T::Sizeof(count))})                \
             return ret;                                                       \
         std::bad_alloc tmp{};                                               \
-        std::terminate(); \
+        _terminate(); \
     }                                                                         \
     void *operator new[](size_t /*size*/) = delete;                           \
     void operator delete(void *block, FamCount) { al_free(block); }           \
@@ -101,11 +108,11 @@ struct allocator {
         if(n > std::numeric_limits<std::size_t>::max()/sizeof(T))
         {
             std::bad_alloc tmp{};
-            std::terminate();
+            _terminate();
         }
         if(auto p = al_malloc(alignment, n*sizeof(T))) return static_cast<T*>(p);
         std::bad_alloc tmp{};
-        std::terminate();
+        _terminate();
     }
     void deallocate(T *p, std::size_t) noexcept { al_free(p); }
 };

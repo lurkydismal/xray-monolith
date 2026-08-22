@@ -2,6 +2,12 @@
 #include "call.h"
 #include "exception.h"
 
+#ifdef __MINGW32__
+#define _terminate std::abort
+#else
+#define _terminate std::terminate
+#endif
+
 namespace {
 
 constexpr auto deferred_flag = 0x80000000U;
@@ -190,7 +196,7 @@ EaxCall::EaxCall(
 [[noreturn]] void EaxCall::fail(const char* message)
 {
     EaxCallException tmp{message};
-    std::terminate();
+    _terminate();
 }
 
 [[noreturn]] void EaxCall::fail_too_small()
@@ -209,7 +215,7 @@ EaxCall create_eax_call(
     if(!property_set_id)
     {
         EaxCallException tmp{"Null property set ID."};
-        std::terminate();
+        _terminate();
     }
 
     return EaxCall{

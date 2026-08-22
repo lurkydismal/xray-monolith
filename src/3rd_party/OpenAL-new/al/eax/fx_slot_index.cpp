@@ -5,6 +5,12 @@
 #include "exception.h"
 
 
+#ifdef __MINGW32__
+#define _terminate std::abort
+#else
+#define _terminate std::terminate
+#endif
+
 namespace
 {
 
@@ -68,5 +74,5 @@ void EaxFxSlotIndex::set(const GUID &guid)
 void EaxFxSlotIndex::fail(const char* message)
 {
     EaxFxSlotIndexException tmp{message};
-    std::terminate();
+    _terminate();
 }
