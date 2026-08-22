@@ -217,17 +217,7 @@ void CLevelSoundManager::Commit(const PreparedData& data)
 
 				// copy data and shuffle
 				CInifile::Items items = S.Data;
-#if 0
-/* FIX:
- * /usr/x86_64-w64-mingw32/include/c++/16.1.0/bits/uniform_int_dist.h:261:31: error: expected unqualified-id
- *  261 |           static_assert(!_Up_traits::__is_signed, "U must be unsigned");
- *      |                                      ^
- *  /usr/x86_64-w64-mingw32/include/c++/16.1.0/bits/uniform_int_dist.h:262:31: error: expected unqualified-id
- *  262 |           static_assert(!_Wp_traits::__is_signed, "W must be unsigned");
- *      |                                      ^
-*/
 				std::shuffle(items.begin(), items.end(), g);
-#endif
 
 				m_MusicTracks.reserve(items.size());
 				for (const auto& entry : items)
@@ -308,17 +298,7 @@ void CLevelSoundManager::Update()
 				m_PlayedMusicIndices.clear();
 				std::random_device rd;
 				std::mt19937 g(rd());
-#if 0
-/* FIX:
- * /usr/x86_64-w64-mingw32/include/c++/16.1.0/bits/uniform_int_dist.h:261:31: error: expected unqualified-id
- *  261 |           static_assert(!_Up_traits::__is_signed, "U must be unsigned");
- *      |                                      ^
- *  /usr/x86_64-w64-mingw32/include/c++/16.1.0/bits/uniform_int_dist.h:262:31: error: expected unqualified-id
- *  262 |           static_assert(!_Wp_traits::__is_signed, "W must be unsigned");
- *      |                                      ^
-*/
 				std::shuffle(m_MusicTracks.begin(), m_MusicTracks.end(), g);
-#endif
 				// Msg("Refreshing tracks");
 				m_NextTrackTime = engine_time + 10000; // next check after 10 sec
 			}
