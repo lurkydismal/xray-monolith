@@ -353,7 +353,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     stdfunc::core
     Boost::container
     Boost::stacktrace
-    # TBB::tbb
+    TBB::tbb
 )
 
 if(IS_CLANG_MSVC OR IS_CLANG_CL_MSVC OR IS_MSVC)
