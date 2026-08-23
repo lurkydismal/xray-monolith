@@ -83,6 +83,23 @@ CPMAddPackage(
 # )
 
 ################################################################################
+# Boost
+################################################################################
+# boost is a huge project and directly downloading the 'alternate release'
+# from github is much faster than recursively cloning the repo.
+CPMAddPackage(
+  NAME Boost
+  VERSION 1.92.0
+  URL https://github.com/boostorg/boost/releases/download/boost-1.92.0/boost-1.92.0-cmake.tar.xz
+  URL_HASH SHA256=9bed76128d4e46755dbe818487788c6fceb6f72b378f4daa49b7e1e600d9088d
+  OPTIONS
+    "BOOST_ENABLE_CMAKE ON"
+    "BOOST_ENABLE_EXCEPTIONS OFF"
+    "BOOST_SKIP_INSTALL_RULES ON"
+    "BOOST_INCLUDE_LIBRARIES container\\\;stacktrace"
+)
+
+################################################################################
 # Logging
 ################################################################################
 # CPMAddPackage("gh:fmtlib/fmt#12.2.0")

@@ -351,6 +351,8 @@ target_precompile_headers(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     stdfunc::core
+    Boost::container
+    Boost::stacktrace
     # TBB::tbb
 
     # TODO: Refactor into a separate target
