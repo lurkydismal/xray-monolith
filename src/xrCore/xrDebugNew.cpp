@@ -88,12 +88,12 @@ namespace crash_saving
 #include <windows.h>
 #endif
 #include "mezz_stringbuffer.h"
+
+extern void printLuaStack();
+
 #ifdef __MINGW32__
 #if __has_include("stacktrace")
 #include <stacktrace>
-#else
-#include <boost/stacktrace.hpp>
-#endif
 
 void LogStackTrace(LPCSTR header = nullptr, bool printStack = false)
 {
@@ -159,6 +159,76 @@ void LogStackTrace(LPCSTR header = nullptr, bool printStack = false)
         Msg("%s", text.c_str());
     }
 }
+
+#else // No std::stacktrace
+#include <boost/stacktrace.hpp>
+
+void LogStackTrace(LPCSTR header = nullptr, bool printStack = false)
+{
+    if (!shared_str_initialized)
+        return;
+
+    if (header)
+        Msg("%s", header);
+
+    if (!printStack)
+        return;
+
+    printLuaStack();
+    Msg("\n");
+
+    const auto trace = boost::stacktrace::stacktrace();
+
+    for (const auto& entry : trace)
+    {
+        if (!entry)
+            continue;
+
+        const std::string function = entry.name();
+        const std::string file = entry.source_file();
+        const auto line = entry.source_line();
+
+        std::string text = function;
+
+        if (!file.empty())
+        {
+            text += " [";
+            text += file;
+
+            if (line != 0)
+            {
+                text += ':';
+                text += std::to_string(line);
+            }
+
+            text += ']';
+        }
+
+        trim(text);
+
+        std::string lower = text;
+        toLowerCase(lower);
+
+        if (lower.find(".dll") != std::string::npos)
+            continue;
+
+        if (lower.find(".drv") != std::string::npos)
+            continue;
+
+        if (lower.find("__scrt_common_main_seh") != std::string::npos)
+            continue;
+
+        if (lower.find("filename not available") != std::string::npos)
+            continue;
+
+        if (lower.find("function-name not available") != std::string::npos)
+            continue;
+
+        Msg("%s", text.c_str());
+    }
+}
+#endif
+
 #else
 #include "../3rd_party/stackwalker/include/StackWalker.h"
 class xr_StackWalker : public StackWalker {
@@ -183,7 +253,6 @@ protected:
         Msg("%s", s.c_str());
     }
 };
-extern void printLuaStack();
 void LogStackTrace(LPCSTR header = nullptr, bool printStack = false)
 {
 	if (!shared_str_initialized)
