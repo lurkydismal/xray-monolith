@@ -27,6 +27,7 @@
 #include <type_traits>
 #include <utility>
 
+#if 0
 #if !__has_include("ppl.h")
 namespace concurrency {
     using namespace Concurrency;
@@ -34,6 +35,7 @@ namespace concurrency {
     using tbb::concurrent_vector;
     using tbb::parallel_sort;
 }
+#endif
 #endif
 
 // Atomic types
