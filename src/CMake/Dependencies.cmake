@@ -82,9 +82,7 @@ CPMAddPackage(
         "TBB_STRICT OFF"
 )
 if(WIN32)
-    if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC OR IS_MSVC)
-        target_compile_options(tbb PRIVATE /EHsc)
-    else()
+    if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
         target_compile_options(tbb PRIVATE -fexceptions)
         target_compile_options(tbb PRIVATE -mwaitpkg)
     endif()
