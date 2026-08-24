@@ -73,20 +73,20 @@ CPMAddPackage(
 ################################################################################
 # Threading / PPL replacement
 ################################################################################
-CPMAddPackage(
-    URI "gh:uxlfoundation/oneTBB@2023.1.0"
-    OPTIONS
-        "TBB_TEST OFF"
-        "TBB_ENABLE_IPO ${ENABLE_IPO}"
-        "TBB_INSTALL OFF"
-        "TBB_STRICT OFF"
-)
-if(WIN32)
-    if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
-        target_compile_options(tbb PRIVATE -fexceptions)
-        target_compile_options(tbb PRIVATE -mwaitpkg)
-    endif()
-endif()
+# CPMAddPackage(
+#     URI "gh:uxlfoundation/oneTBB@2023.1.0"
+#     OPTIONS
+#         "TBB_TEST OFF"
+#         "TBB_ENABLE_IPO ${ENABLE_IPO}"
+#         "TBB_INSTALL OFF"
+#         "TBB_STRICT OFF"
+# )
+# if(WIN32)
+#     if(IS_CLANG_MINGW OR IS_CLANG_MSVC)
+#         target_compile_options(tbb PRIVATE -fexceptions)
+#         target_compile_options(tbb PRIVATE -mwaitpkg)
+#     endif()
+# endif()
 
 ################################################################################
 # Boost
