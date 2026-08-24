@@ -92,7 +92,7 @@ namespace crash_saving
 extern void printLuaStack();
 
 #ifdef __MINGW32__
-#if __has_include("stacktrace")
+#if 0 && __has_include("stacktrace")
 #include <stacktrace>
 
 void LogStackTrace(LPCSTR header = nullptr, bool printStack = false)
@@ -229,47 +229,7 @@ void LogStackTrace(LPCSTR header = nullptr, bool printStack = false)
 }
 #endif
 
-#else
-#include "../3rd_party/stackwalker/include/StackWalker.h"
-class xr_StackWalker : public StackWalker {
-public:
-    xr_StackWalker() : StackWalker(StackWalker::StackWalkOptions::RetrieveSymbol
-        | StackWalker::StackWalkOptions::RetrieveLine
-        | StackWalker::StackWalkOptions::SymBuildPath
-    ) {}
-protected:
-    virtual void OnOutput(LPCSTR szText) {
-        std::string s = szText;
-        std::string sLowered = s;
-        toLowerCase(sLowered);
-        if (sLowered.find(".dll") != std::string::npos) return;
-        if (sLowered.find(".drv") != std::string::npos) return;
-        if (sLowered.find("__scrt_common_main_seh") != std::string::npos) return;
-        if (s.find("ERROR: SymGetSymFromAddr64") != std::string::npos) return;
-        if (s.find("ERROR: SymGetLineFromAddr64") != std::string::npos) return;
-        if (sLowered.find("filename not available") != std::string::npos) return;
-        if (sLowered.find("function-name not available") != std::string::npos) return;
-        trim(s);
-        Msg("%s", s.c_str());
-    }
-};
-void LogStackTrace(LPCSTR header = nullptr, bool printStack = false)
-{
-	if (!shared_str_initialized)
-		return;
-
-    if (header)
-	    Msg("%s", header);
-
-    if (printStack) {
-        printLuaStack();
-        Msg("\n");
-        auto s = xr_StackWalker();
-        s.ShowCallstack();
-    }
-}
 #endif
-
 void xrDebug::gather_info(const char* expression, const char* description, const char* argument0, const char* argument1,
                           const char* file, int line, const char* function, LPSTR assertion_info,
                           u32 const assertion_info_size)
