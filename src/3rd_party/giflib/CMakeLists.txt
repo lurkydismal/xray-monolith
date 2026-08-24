@@ -190,6 +190,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 # Compile and link options
 ################################################################################
 if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC OR IS_MSVC)
+    target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
     target_compile_options(${PROJECT_NAME} PRIVATE
         $<$<CONFIG:DX10>:
             ${XRAY_OPTIMIZATION_FLAG};
@@ -346,7 +347,6 @@ if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC OR IS_MSVC)
             /Zi
         >
         /permissive-;
-        /std:c++latest;
         /sdl;
         /W3;
         /D_CRT_NONSTDC_NO_WARNINGS;

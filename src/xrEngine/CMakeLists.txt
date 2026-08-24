@@ -716,6 +716,7 @@ target_compile_definitions(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJ
 # Compile and link options
 ################################################################################
 if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC OR IS_MSVC)
+    target_compile_features(${OBJECT_TARGET} PRIVATE cxx_std_20)
     target_compile_options(${OBJECT_TARGET} PRIVATE
         $<$<CONFIG:DX10>:
             ${XRAY_OPTIMIZATION_FLAG};
@@ -886,7 +887,6 @@ if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC OR IS_MSVC)
             /GS;
             /Zc:inline-
         >
-        /std:c++latest
     )
     target_compile_options(${EXECUTABLE_TARGET} PRIVATE "$<TARGET_PROPERTY:${OBJECT_TARGET},COMPILE_OPTIONS>")
     target_link_options(${EXECUTABLE_TARGET} PRIVATE
