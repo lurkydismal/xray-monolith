@@ -1100,6 +1100,7 @@ target_link_directories(${PROJECT_NAME} PUBLIC
     ">"
     "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/luajit-2/src/;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../../sdk/include/OpenAutomate/libraries;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my/"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/lib/my/;"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../../_build/_game/bin_dbg/x64/DX11"
 )
 
