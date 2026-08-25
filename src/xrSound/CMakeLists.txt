@@ -477,7 +477,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
     OpenAL32
 
-    TBB::tbb
+    # TBB::tbb
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES

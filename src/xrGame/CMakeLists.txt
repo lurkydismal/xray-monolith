@@ -7100,7 +7100,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
     imgui
 
-    TBB::tbb
+    # TBB::tbb
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC

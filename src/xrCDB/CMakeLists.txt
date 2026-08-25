@@ -483,7 +483,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
 
     stdfunc::core
-    TBB::tbb
+    # TBB::tbb
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC

@@ -960,7 +960,7 @@ target_link_libraries(${OBJECT_TARGET}
         stdfunc::core
         # rust_lib
         ReShadeCompat
-        TBB::tbb
+        # TBB::tbb
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
