@@ -92,12 +92,12 @@ if(ENABLE_INCREMENTAL_LINKING)
     if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC OR IS_MSVC)
         if(NOT ENABLE_IPO)
             set(INCREMENTAL_LINKING_ENABLED ON)
-            message(WARNING "Incremental linking enabled")
+            message(STATUS "Incremental linking enabled")
             add_link_options(
                 /INCREMENTAL
             )
         else()
-            message(WARNING "Incremental linking disabled (IPO/LTO is enabled)")
+            message(STATUS "Incremental linking disabled (IPO/LTO is enabled)")
             add_link_options(
                 /INCREMENTAL:NO
             )
