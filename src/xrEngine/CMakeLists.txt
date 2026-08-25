@@ -959,6 +959,7 @@ target_link_libraries(${OBJECT_TARGET}
         # fmt::fmt
         stdfunc::core
         # rust_lib
+        ReShadeCompat
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
