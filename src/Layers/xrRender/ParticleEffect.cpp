@@ -3,8 +3,8 @@
 
 #include "ParticleEffect.h"
 #include "CHudInitializer.h"
-#include <tbb/parallel_for.h>
-#include <tbb/blocked_range.h>
+#include <old/tbb/parallel_for.h>
+#include <old/tbb/blocked_range.h>
 
 #ifndef _EDITOR
 #include <xmmintrin.h>
