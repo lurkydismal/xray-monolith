@@ -98,6 +98,13 @@ CPMAddPackage(
     "BOOST_SKIP_INSTALL_RULES ON"
     "BOOST_INCLUDE_LIBRARIES container\\\;stacktrace"
 )
+if(WIN32)
+    if(IS_CLANG_CL_MINGW OR IS_CLANG_CL_MSVC OR IS_MSVC)
+        target_compile_options(boost_stacktrace_windbg PRIVATE /EHsc-)
+    else()
+        target_compile_options(boost_stacktrace_windbg PRIVATE -fno-exceptions)
+    endif()
+endif()
 
 ################################################################################
 # Logging
