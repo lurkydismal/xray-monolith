@@ -390,6 +390,8 @@ endif()
 target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCDB
     xrCore
+
+    TBB::tbb
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC

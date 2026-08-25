@@ -408,6 +408,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCore
 
     stdfunc::core
+    TBB::tbb
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES

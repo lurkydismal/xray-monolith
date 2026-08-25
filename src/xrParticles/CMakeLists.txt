@@ -430,6 +430,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     xrCPU_Pipe
 
     stdfunc::core
+    TBB::tbb
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC
