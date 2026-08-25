@@ -91,7 +91,6 @@ namespace crash_saving
 
 extern void printLuaStack();
 
-#ifdef __MINGW32__
 #if 0 && __has_include("stacktrace")
 #include <stacktrace>
 
@@ -229,7 +228,6 @@ void LogStackTrace(LPCSTR header = nullptr, bool printStack = false)
 }
 #endif
 
-#endif
 void xrDebug::gather_info(const char* expression, const char* description, const char* argument0, const char* argument1,
                           const char* file, int line, const char* function, LPSTR assertion_info,
                           u32 const assertion_info_size)
