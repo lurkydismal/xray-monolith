@@ -5,7 +5,9 @@
 #include <concurrent_unordered_map.h>
 #include <concurrent_vector.h>
 #else
+#if 0
 #include "tbb/compat/ppl.h"
+#endif
 #include "tbb/concurrent_unordered_map.h"
 #include "tbb/concurrent_vector.h"
 #include "tbb/parallel_sort.h"
