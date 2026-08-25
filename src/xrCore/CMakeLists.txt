@@ -354,10 +354,14 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Boost::container
     Boost::stacktrace
     # TBB::tbb
-
-    # TODO: Refactor into a separate target
-    "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
 )
+
+if(IS_CLANG_MSVC OR IS_CLANG_CL_MSVC OR IS_MSVC)
+    target_link_libraries(${PROJECT_NAME} PRIVATE
+        # TODO: Refactor into a separate target
+        "${CMAKE_CURRENT_SOURCE_DIR}/../3rd_party/stackwalker/lib/StackWalker.lib"
+    )
+endif()
 
 use_props(${PROJECT_NAME} "${CMAKE_CONFIGURATION_TYPES}" "${DEFAULT_CXX_PROPS}")
 ################################################################################
