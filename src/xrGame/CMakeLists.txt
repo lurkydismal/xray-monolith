@@ -7083,7 +7083,7 @@ endif()
 # Dependencies
 ################################################################################
 add_dependencies(${PROJECT_NAME}
-    CxImage
+    cximage
     libjpeg
 )
 

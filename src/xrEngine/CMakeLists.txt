@@ -974,7 +974,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     libvorbisfile_static
     libvorbis_static
     crypto
-    CxImage
+    cximage
     DXERR
     lua_extensions
     ode

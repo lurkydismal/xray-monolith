@@ -1,4 +1,4 @@
-set(PROJECT_NAME CxImage)
+set(PROJECT_NAME cximage)
 
 ################################################################################
 # Source groups
