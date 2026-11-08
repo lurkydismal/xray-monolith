@@ -19,6 +19,7 @@
 #include "x_ray.h"
 #include "discord/discord.h"
 #include "Render.h"
+#include "renderdoc_integration.h"
 #include <chrono>
 
 // must be defined before include of FS_impl.h
@@ -32,6 +33,7 @@
 
 #include "xrSASH.h"
 #include "IGame_Persistent.h"
+#include "shader_bus.h"
 
 #include "CustomHUD.h"
 #include "EngineThreading.h"
@@ -47,6 +49,7 @@ ENGINE_API CRenderDevice* DevicePtr = nullptr;
 
 ENGINE_API xr_atomic_bool g_bRendering = false;
 extern ENGINE_API float psHUD_FOV;
+extern ENGINE_API float psCamAttachedFOV;
 
 BOOL g_bLoaded = FALSE;
 ref_light precache_light = 0;
@@ -391,8 +394,21 @@ void CRenderDevice::on_idle()
 
 	{
 		PROF_EVENT("seqParallelBeforRender");
-		for (auto& it : Device.seqParallelBeforRender)
-			it();
+		xrCriticalSectionGuard guard(&Device.seqParallelBeforRenderCS);
+
+		// A callback invoked here can destroy an object that owns a particle
+		// group, and PS::CParticleGroup::SItem::~SItem cancels its own pending
+		// entry in this very vector. That cancellation clears the entry in
+		// place instead of erasing it, so the vector never changes size while
+		// we walk it. Skip the cleared entries; the clear() below drops them.
+		// Index by position and copy each delegate before invoking it, so an
+		// entry appended by a callback is still handled safely.
+		for (size_t it = 0; it < Device.seqParallelBeforRender.size(); ++it)
+		{
+			auto Callback = Device.seqParallelBeforRender[it];
+			if (Callback)
+				Callback();
+		}
 
 		Device.seqParallelBeforRender.clear();
 	}
@@ -442,7 +458,7 @@ void CRenderDevice::on_idle()
 	mProjectCam_prev = mProjectCam;
 	mFullTransformCam_prev = mFullTransformCam;
 
-	// Previous frame data -- 
+	// Previous frame data --
 	mView_prev = mView_saved;
 	mProject_prev = mProject_saved;
 	mFullTransform_prev = mFullTransform_saved; // Unused?
@@ -450,8 +466,8 @@ void CRenderDevice::on_idle()
 	m_pRender->SetCacheXform_prev(mView_prev, mProject_prev);
 
 	mProjectHud.build_projection(deg2rad(psHUD_FOV * 83.f), fASPECT, R_VIEWPORT_NEAR, g_pGamePersistent->Environment().CurrentEnv->far_plane);
-	mProjectCam.build_projection(deg2rad(83.f), fASPECT, R_VIEWPORT_NEAR, g_pGamePersistent->Environment().CurrentEnv->far_plane);
-	
+	mProjectCam.build_projection(deg2rad(psCamAttachedFOV), fASPECT, R_VIEWPORT_NEAR, g_pGamePersistent->Environment().CurrentEnv->far_plane);
+
 	mViewHud.set(mView);
 	mViewCam.set(mView);
 	mFullTransformHud.mul(mProjectHud, mViewHud);
@@ -496,7 +512,7 @@ void CRenderDevice::on_idle()
 	Device.LuaGCCount = 0;
 
 	secondary_tasks.run(&XRay::Engine::GameThread);
-	
+
 #ifdef ECO_RENDER // ECO_RENDER START
 	if (Device.Paused() || IsMainMenuActive() || ps_framelimiter)
 	{
@@ -549,7 +565,7 @@ void CRenderDevice::on_idle()
 	Statistic->RenderTOTAL_Real.End();
 	Statistic->RenderTOTAL_Real.FrameEnd();
 	Statistic->RenderTOTAL.accum = Statistic->RenderTOTAL_Real.accum;
-#endif 
+#endif
 	Device.isRendering = false;
 
 	const u64 secondary_wait_started_at = measure_precache_frame ? CPU::QPC() : 0;
@@ -690,6 +706,7 @@ void CRenderDevice::FrameMove()
 
 	dwFrame++;
 	Core.dwFrame = dwFrame;
+	renderdoc_poll_captures();
 	dwTimeContinual = TimerMM.GetElapsed_ms() - app_inactive_time;
 	if (psDeviceFlags.test(rsConstantFPS))
 	{
@@ -732,12 +749,14 @@ void CRenderDevice::FrameMove()
 	// Frame move
 	Statistic->EngineTOTAL.Begin();
 
+	ShaderBus::frame_latch();
+
 	START_PROFILE("Process seqFrame");
 	Device.seqFrame.Process(rp_Frame);
 	STOP_PROFILE;
-	
+
 	g_bLoaded = TRUE;
-	
+
 	Statistic->EngineTOTAL.End();
 }
 

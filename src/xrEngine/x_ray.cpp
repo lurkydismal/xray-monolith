@@ -33,6 +33,7 @@
 
 #include "xrSASH.h"
 #include "MonitorList.h"
+#include "renderdoc_integration.h"
 
 extern "C" void XR_EARLY_INIT();
 
@@ -356,7 +357,8 @@ void execUserScript()
 {
 	Console->Execute("default_controls");
 	Console->ExecuteScript(Console->ConfigFile);
-	Console->Execute("dump_cvar");
+    if (Console->GetBool("dump_cvar_enable"))
+	    Console->Execute("dump_cvar");
 }
 
 void slowdownthread(void*)
@@ -1105,7 +1107,7 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 #endif // DEDICATED_SERVER
 
 	// Title window
-	logoWindow = CreateDialog(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_STARTUP), 0, logDlgProc);
+    logoWindow = CreateDialog(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_STARTUP), 0, logDlgProc);
 
 	HWND logoPicture = GetDlgItem(logoWindow, IDC_STATIC_LOGO);
 	RECT logoRect;
@@ -1119,6 +1121,13 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 	GetMonitorPosition(monX, monY);
 	int x = monX + (screenW - splashW) / 2;
 	int y = monY + (screenH - splashH) / 2;
+
+    // verdatim: set the size of the splash window to be zero when the flag "-nosplashwindow" is given
+    if (strstr(xr_strdup(GetCommandLine()), "-nosplashwindow")) {
+        splashW = int(0);
+        splashH = int(0);
+    }
+
 
 	SetWindowPos(
 		logoWindow,
@@ -1158,6 +1167,7 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 	ULONGLONG early_phase_time = GetTickCount64();
 	Core._initialize("xray", NULL, TRUE, fsgame[0] ? fsgame : NULL);
 	Msg("* [STARTUP] core and filesystem: %llu ms", GetTickCount64() - early_phase_time);
+	renderdoc_initialize();
 
 	CTimer startup_phase_timer;
 	startup_phase_timer.Start();
@@ -1317,6 +1327,8 @@ extern BOOL DllMainXrPhysics(HANDLE hModule, DWORD ul_reason_for_call, LPVOID lp
 //extern BOOL DllMainXrRenderR3(HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved);
 //extern BOOL DllMainXrRenderR4(HANDLE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved);
 
+// FIX: Check if it works
+#if 0
 LPCSTR _GetFontTexName(LPCSTR section)
 {
 	static const char* tex_names[] = {"texture800", "texture", "texture1600", "texture2160"};
@@ -1346,6 +1358,9 @@ LPCSTR _GetFontTexName(LPCSTR section)
 	}
 	return pSettings->r_string(section, tex_names[def_idx]);
 }
+#endif
+
+LPCSTR _GetFontTexName(LPCSTR section) { return GetFontTextureName(section); }
 
 void _InitializeFont(CGameFont*& F, LPCSTR section, u32 flags)
 {

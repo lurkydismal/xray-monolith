@@ -70,6 +70,8 @@ void CFontManager::InitializeFonts()
 	pFontStat->SetInterval(0.75f, 1.0f);
 }
 
+// FIX: Check if works
+#if 0
 LPCSTR CFontManager::GetFontTexName(LPCSTR section)
 {
 	static const char* tex_names[] = {"texture800", "texture", "texture1600", "texture2160"};
@@ -98,6 +100,8 @@ LPCSTR CFontManager::GetFontTexName(LPCSTR section)
 	}
 	return pSettings->r_string(section, tex_names[def_idx]);
 }
+#endif
+LPCSTR CFontManager::GetFontTexName(LPCSTR section) { return GetFontTextureName(section); }
 
 void CFontManager::InitializeFont(CGameFont*& F, LPCSTR section, u32 flags)
 {

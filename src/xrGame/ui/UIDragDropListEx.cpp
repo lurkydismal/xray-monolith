@@ -155,8 +155,8 @@ void CUIDragDropListEx::DestroyDragItem()
 {
 	if (m_selected_item && m_drag_item && m_drag_item->ParentItem() == m_selected_item)
 	{
-		VERIFY(GetParent()->GetMouseCapturer()==m_drag_item);
-		GetParent()->SetCapture(NULL, false);
+		VERIFY(m_drag_item->IsMouseCapturer());
+		GetParent()->SetCapture(m_drag_item, false);
 
 		delete_data(m_drag_item);
 	}
@@ -857,7 +857,7 @@ u32 CUICellContainer::GetCellsInRange(const Irect& rect, UI_CELLS_VEC& res)
 		for (int y = rect.y1; y <= rect.y2; ++y)
 			res.push_back(GetCellAt(Ivector2().set(x, y)));
 
-	std::unique(res.begin(), res.end());
+	res.erase(std::unique(res.begin(), res.end()), res.end());
 	return res.size();
 }
 

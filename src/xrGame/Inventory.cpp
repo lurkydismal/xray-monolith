@@ -6,6 +6,7 @@
 #include "pch_script.h"
 #include "Inventory.h"
 #include "Actor.h"
+#include "../xrEngine/CameraBase.h"
 #include "CustomOutfit.h"
 #include "trade.h"
 #include "Weapon.h"
@@ -153,7 +154,7 @@ void CInventory::Take(CGameObject* pObj, bool bNotActivate, bool strict_placemen
 		if (!result)
 			pIItem->m_ItemCurrPlace.type = eItemPlaceUndefined;
 #ifdef DEBUG
-		if(!result) 
+		if(!result)
 			Msg("cant put in belt item %s", *pIItem->object().cName());
 #endif
 
@@ -163,7 +164,7 @@ void CInventory::Take(CGameObject* pObj, bool bNotActivate, bool strict_placemen
 		if (!result)
 			pIItem->m_ItemCurrPlace.type = eItemPlaceUndefined;
 #ifdef DEBUG
-		if(!result) 
+		if(!result)
 			Msg("cant put in ruck item %s", *pIItem->object().cName());
 #endif
 
@@ -173,7 +174,7 @@ void CInventory::Take(CGameObject* pObj, bool bNotActivate, bool strict_placemen
 		if (!result)
 			pIItem->m_ItemCurrPlace.type = eItemPlaceUndefined;
 #ifdef DEBUG
-		if(!result) 
+		if(!result)
 			Msg("cant slot in slot item %s", *pIItem->object().cName());
 #endif
 		break;
@@ -325,16 +326,18 @@ bool CInventory::DropItem(CGameObject* pObj, bool just_before_destroy, bool dont
 		if (Level().CurrentViewEntity() == pActor_owner)
 			CurrentGameUI()->OnInventoryAction(pIItem, GE_OWNERSHIP_REJECT);
 	};
-	if (smart_cast<CWeapon*>(pObj))
+	CActor* actor_owner = smart_cast<CActor*>(m_pOwner);
+	if (actor_owner && !dont_create_shell && smart_cast<CWeapon*>(pObj))
 	{
-		Fvector dir = Actor()->Direction();
+		Fvector dir = actor_owner->cam_Active()->vDirection;
+		dir.y = 0.f;
+		float speed = 7.f * dir.magnitude();
+		dir.normalize_safe();
 		dir.y = sin(-45.f * PI / 180.f);
 		dir.normalize();
-		smart_cast<CWeapon*>(pObj)->SetActivationSpeedOverride(dir.mul(7));
-		pObj->H_SetParent(nullptr, dont_create_shell);
+		smart_cast<CWeapon*>(pObj)->SetActivationSpeedOverride(dir.mul(speed));
 	}
-	else
-		pObj->H_SetParent(nullptr, dont_create_shell);
+	pObj->H_SetParent(nullptr, dont_create_shell);
 	return true;
 }
 
@@ -363,11 +366,11 @@ bool CInventory::Slot(u16 slot_id, PIItem pIItem, bool bNotActivate, bool strict
 	if (!strict_placement && !CanPutInSlot(pIItem, slot_id))
 	{
 #ifdef _DEBUG
-		Msg("there is item %s[%d,%x] in slot %d[%d,%x]", 
-				ItemFromSlot(pIItem->GetSlot())->object().cName().c_str(), 
-				ItemFromSlot(pIItem->GetSlot())->object().ID(), 
-				ItemFromSlot(pIItem->GetSlot()), 
-				pIItem->GetSlot(), 
+		Msg("there is item %s[%d,%x] in slot %d[%d,%x]",
+				ItemFromSlot(pIItem->GetSlot())->object().cName().c_str(),
+				ItemFromSlot(pIItem->GetSlot())->object().ID(),
+				ItemFromSlot(pIItem->GetSlot()),
+				pIItem->GetSlot(),
 				pIItem->object().ID(),
 				pIItem);
 #endif
@@ -944,7 +947,7 @@ PIItem CInventory::Same(const PIItem pIItem, bool bSearchRuck) const
 	return NULL;
 }
 
-//ищем на поясе вещь для слота 
+//ищем на поясе вещь для слота
 
 PIItem CInventory::SameSlot(const u16 slot, PIItem pIItem, bool bSearchRuck) const
 {
@@ -1096,7 +1099,7 @@ CInventoryItem* CInventory::get_object_by_id(ALife::_OBJECT_ID tObjectID)
 	return (0);
 }
 
-//скушать предмет 
+//скушать предмет
 #include "game_object_space.h"
 #include "script_callback_ex.h"
 #include "script_game_object.h"

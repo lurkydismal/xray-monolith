@@ -11,6 +11,7 @@
 #include "CameraManager.h"
 #include "xr_object.h"
 #include "Feel_Sound.h"
+#include "shader_bus.h"
 
 #include "../xrCore/profiler.h"
 
@@ -256,6 +257,8 @@ bool IGame_Level::Load(u32 dwNum)
 	Device.seqFrame.Add(this);
 	Msg("* [LEVEL LOAD] total: %d ms", level_timer.GetElapsed_ms());
 
+	ShaderBus::dump();
+
 	//SECUROM_MARKER_PERFORMANCE_OFF(10)
 
 	return true;
@@ -421,7 +424,10 @@ void IGame_Level::SoundEvent_Register(ref_sound_data_ptr S, float range)
 
 	// Query objects
 	Fvector bb_size = {range, range, range};
-	g_SpatialSpace->q_box(snd_ER, 0, STYPE_REACTTOSOUND, snd_position, bb_size);
+	{
+		PROF_EVENT("Sound: hearing spatial query");
+		g_SpatialSpace->q_box(snd_ER, 0, STYPE_REACTTOSOUND, snd_position, bb_size);
+	}
 
 	// Iterate
 	auto it = snd_ER.begin();

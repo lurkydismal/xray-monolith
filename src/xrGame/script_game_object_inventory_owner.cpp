@@ -60,6 +60,10 @@
 #include "ai_space.h"
 #include "ActorBackpack.h"
 
+// Boeker: zoom inertia factor support
+#include "EffectorZoomInertion.h"
+#include "ActorEffector.h"
+
 //
 //-Alundaio
 
@@ -1957,6 +1961,19 @@ bool CScriptGameObject::is_hit_anim_playing()
 	return (entity_alive->character_physics_support()->is_hit_anim_playing());
 }
 
+void CScriptGameObject::set_movement_hold(bool value)
+{
+	CAI_Stalker* stalker = smart_cast<CAI_Stalker*>(&object());
+	if (!stalker)
+	{
+		ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError,
+		                                "CAI_Stalker : cannot access class member set_movement_hold!");
+		return;
+	}
+
+	stalker->movement_hold(value);
+}
+
 bool CScriptGameObject::can_kill_enemy()
 {
 	CAI_Stalker* stalker = smart_cast<CAI_Stalker*>(&object());
@@ -2828,6 +2845,46 @@ void CScriptGameObject::SetActorLookoutCoef(float val)
 		return;
 	}
 	pActor->m_fLookoutFactor = val;
+}
+
+// verdatim: set damage stagger time factor
+float CScriptGameObject::GetActorDamageStaggerTimeFactor() const
+{
+    CActor* pActor = smart_cast<CActor*>(&object());
+    if (!pActor)
+    {
+        ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError,
+            "CActor : cannot access class member GetActorDamageStaggerTimeFactor!");
+        return (false);
+    }
+    return (pActor->DamageStaggerTimeFactor);
+}
+void CScriptGameObject::SetActorDamageStaggerTimeFactor(float val)
+{
+    CActor* pActor = smart_cast<CActor*>(&object());
+    if (!pActor)
+    {
+        ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError,
+            "CActor : cannot access class member SetActorDamageStaggerTimeFactor!");
+        return;
+    }
+    pActor->DamageStaggerTimeFactor = val;
+}
+
+// Boeker: zoom inertia factor support
+void CScriptGameObject::SetZoomInertionFactor(float factor)
+{
+    CActor* pActor = smart_cast<CActor*>(&object());
+    if (!pActor)
+        return;
+
+    CEffectorZoomInertion* eff = smart_cast<CEffectorZoomInertion*>(
+        pActor->Cameras().GetCamEffector(eCEZoom)
+    );
+    if (!eff)
+        return;
+
+    eff->SetUserFactor(clampr(factor, 0.f, 2.f));
 }
 
 // demonized: Additional exports

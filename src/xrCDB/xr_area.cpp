@@ -75,7 +75,7 @@ CObjectSpace::CObjectSpace()
 #endif
 {
 #ifdef DEBUG
-	if( RenderFactory )	
+	if( RenderFactory )
 		m_pRender = CNEW(FactoryPtr<IObjectSpaceRender>)() ;
 
 	//sh_debug.create				("debug\\wireframe","$null");
@@ -276,6 +276,7 @@ void CObjectSpace::Load(LPCSTR path, LPCSTR fname, CDB::build_callback build_cal
 
 void CObjectSpace::Load(IReader* F, CDB::build_callback build_callback)
 {
+    // NOTE: Maybe remove
 	Static.async_cform_load.wait();
 
 	hdrCFORM H;
@@ -287,17 +288,32 @@ void CObjectSpace::Load(IReader* F, CDB::build_callback build_callback)
 	g_SpatialSpacePhysic->initialize(m_BoundingVolume);
 	g_SpatialSpaceLights->initialize(m_BoundingVolume);
 
-	static DWORD this_thread_id = 0;
-	this_thread_id = GetCurrentThreadId();
-	Static.async_cform_load.run([=]()
+	// Copy the geometry out of the reader on this thread, so GetStaticVerts() and
+	// GetStaticTris() return usable arrays before Load returns. The reader can then
+	// be closed here instead of from the task.
+	Fvector* verts = (Fvector*)F->pointer();
+	CDB::TRI* tris = (CDB::TRI*)(verts + H.vertcount);
+	Static.build_arrays(verts, H.vertcount, tris, H.facecount, build_callback);
+	FS.r_close(F);
+
+	// Only the OPCODE tree build goes to the background. It is the expensive half,
+	// so the overlap with the rest of the level load is kept. The four syncronize()
+	// calls in the CDB query paths already cover the tree.
+	const DWORD this_thread_id = GetCurrentThreadId();
+	Static.async_cform_load.run([this, this_thread_id]()
 	{
 		if (this_thread_id != GetCurrentThreadId()) { PROF_THREAD("X-Ray PPL Thread") }
+#if 0
+        // FIX: Check if it works
 		PROF_EVENT("Async cform loading");
 		Fvector* verts = (Fvector*)F->pointer();
 		CDB::TRI* tris = (CDB::TRI*)(verts + H.vertcount);
 		Create(verts, tris, H, build_callback, false);
 		IReader* reader = F;
 		FS.r_close(reader);
+#endif
+		PROF_EVENT("Async cform tree build");
+		Static.build_tree();
 	});
 }
 

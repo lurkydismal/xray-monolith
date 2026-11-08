@@ -57,3 +57,4 @@ compressor/mod/
 /namespaces.txt
 /scan-build.log
 /reports
+__pycache__/

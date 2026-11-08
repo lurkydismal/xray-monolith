@@ -13,6 +13,7 @@
 #pragma warning(default:4995)
 #include "../xrRender/HW.h"
 #include "../../xrEngine/XR_IOConsole.h"
+#include "../../xrEngine/renderdoc_integration.h"
 #include "../../Include/xrAPI/xrAPI.h"
 #include "../xrRender/xrRender_console.h"
 
@@ -547,7 +548,7 @@ void CHW::CreateDevice(HWND hwnd, bool move_window)
 #ifdef DEBUG
 	//createDeviceFlags |= D3Dxx_CREATE_DEVICE_DEBUG;
 #endif
-    HRESULT R;
+    HRESULT R = S_OK; // DX11: every creation failure is already R_CHK'd
     // Create the device
     //	DX10 don't need it?
 	//u32 GPU		= selectGPU();
@@ -619,6 +620,8 @@ void CHW::CreateDevice(HWND hwnd, bool move_window)
 
     R_CHK(pContext->QueryInterface(__uuidof(ID3DUserDefinedAnnotation), (void**)&pAnnotation));
     const u32 setupMs = startupTimer.GetElapsed_ms() - factoryMs - deviceMs - swapchainMs;
+
+    renderdoc_set_active_window(pDevice, m_hWnd);
 
 #else
 	R = D3DX10CreateDeviceAndSwapChain(m_pAdapter,

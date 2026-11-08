@@ -426,6 +426,9 @@ public:
 	};
 	CUIWindow* ZoomTexture();
 
+	bool StopZoom();
+	bool IsTextureZoomActive();
+
 	bool ZoomHideCrosshair();
 
 	IC float GetZoomFactor() const
