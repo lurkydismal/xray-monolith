@@ -17,11 +17,6 @@ private:
 		{
 			return dwTimeForExecute > I.dwTimeForExecute;
 		}
-
-        IC bool operator<(const Item& I) const
-        {
-            return dwTimeForExecute > I.dwTimeForExecute;
-        }
 	};
 
 	struct ItemReg

@@ -3,15 +3,8 @@
 
 #include <algorithm>
 #include <cstdint>
-#include <cstdlib>
 #include <string>
 #include <type_traits>
-
-#ifdef __MINGW32__
-#define _terminate std::abort
-#else
-#define _terminate std::terminate
-#endif
 
 using EaxDirtyFlags = unsigned int;
 
@@ -40,7 +33,7 @@ void eax_validate_range(
         std::to_string(max_value) + ").";
 
     TException tml{message.c_str()};
-    _terminate();
+    std::terminate();
 }
 
 namespace detail {
