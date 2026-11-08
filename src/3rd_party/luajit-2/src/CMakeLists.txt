@@ -40,6 +40,8 @@ set(Sources
     "lj_ctype.c"
     "lj_debug.c"
     "lj_dispatch.c"
+    "lj_profile.c"
+    "lj_allocprof.c"
     "lj_err.c"
     "lj_ffrecord.c"
     "lj_func.c"

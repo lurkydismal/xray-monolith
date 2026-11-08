@@ -408,6 +408,7 @@ set(Refactored__Execution__3D__Shaders__Resources
     "../xrRenderDX10/dx10ConstantBuffer.cpp"
     "../xrRenderDX10/dx10ConstantBuffer.h"
     "../xrRenderDX10/dx10ConstantBuffer_impl.h"
+    "../xrRenderDX10/dx10DebugName.h"
     "../xrRenderDX10/dx10r_constants.cpp"
     "../xrRenderDX10/dx10SH_RT.cpp"
     "../xrRenderDX10/dx10SH_Texture.cpp"

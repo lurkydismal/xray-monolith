@@ -2583,10 +2583,22 @@ source_group("AI\\AMonsters\\monsters\\Zombie\\States" FILES ${AI__AMonsters__mo
 set(AI__ANavigation__GameGraph
     "../xrServerEntities/game_graph_space.h"
     "game_graph.h"
+    "game_graph_builder.cpp"
+    "game_graph_builder.h"
     "game_graph_inline.h"
     "game_graph_script.cpp"
 )
 source_group("AI\\ANavigation\\GameGraph" FILES ${AI__ANavigation__GameGraph})
+
+set(AI__ANavigation__Spawn
+    "spawn_overlays.cpp"
+    "spawn_overlays.h"
+    "spawn_packs.cpp"
+    "spawn_packs.h"
+    "spawn_templates.cpp"
+    "spawn_templates.h"
+)
+source_group("AI\\ANavigation\\GameGraph" FILES ${AI__ANavigation__Spawn})
 
 set(AI__ANavigation__GameLevelCrossTable
     "game_level_cross_table.h"
@@ -2827,6 +2839,12 @@ set(AI__AScript__ScriptClasses__Console
 )
 source_group("AI\\AScript\\ScriptClasses\\Console" FILES ${AI__AScript__ScriptClasses__Console})
 
+set(AI__AScript__ScriptClasses__ShaderBus
+    "shader_bus_script.h"
+    "shader_bus_script.cpp"
+)
+source_group("AI\\AScript\\ScriptClasses\\Console" FILES ${AI__AScript__ScriptClasses__ShaderBus})
+
 set(AI__AScript__ScriptClasses__KeyBindings
     "key_binding_registrator.h"
     "key_binding_registrator_script.cpp"
@@ -3052,6 +3070,18 @@ set(AI__AScript__ScriptClasses__ScriptMonsterHitInfo
     "script_monster_hit_info_script.cpp"
 )
 source_group("AI\\AScript\\ScriptClasses\\ScriptMonsterHitInfo" FILES ${AI__AScript__ScriptClasses__ScriptMonsterHitInfo})
+
+set(AI__AScript__ScriptClasses__ScriptMonsterEnemyInfo
+    "script_monster_enemy_info.h"
+    "script_monster_enemy_info_script.cpp"
+)
+source_group("AI\\AScript\\ScriptClasses\\ScriptMonsterHitInfo" FILES ${AI__AScript__ScriptClasses__ScriptMonsterEnemyInfo})
+
+set(AI__AScript__ScriptClasses__ScriptMonsterHomeInfo
+    "script_monster_home_info.h"
+    "script_monster_home_info_script.cpp"
+)
+source_group("AI\\AScript\\ScriptClasses\\ScriptMonsterHitInfo" FILES ${AI__AScript__ScriptClasses__ScriptMonsterHomeInfo})
 
 set(AI__AScript__ScriptClasses__ScriptNetPacket
     "../xrServerEntities/script_net_packet.h"
@@ -6297,6 +6327,7 @@ set(ALL_FILES
     ${AI__AMonsters__monsters__Zombie__Script}
     ${AI__AMonsters__monsters__Zombie__States}
     ${AI__ANavigation__GameGraph}
+    ${AI__ANavigation__Spawn}
     ${AI__ANavigation__GameLevelCrossTable}
     ${AI__ANavigation__GraphAbstract__GraphEdge}
     ${AI__ANavigation__GraphAbstract__GraphVertex}
@@ -6334,6 +6365,7 @@ set(ALL_FILES
     ${AI__AScript__ScriptClasses}
     ${AI__AScript__ScriptClasses__BaseClientClasses}
     ${AI__AScript__ScriptClasses__Console}
+    ${AI__AScript__ScriptClasses__ShaderBus}
     ${AI__AScript__ScriptClasses__KeyBindings}
     ${AI__AScript__ScriptClasses__ScriptActions__acript_animation_action}
     ${AI__AScript__ScriptClasses__ScriptActions__script_abstract_action}
@@ -6364,6 +6396,8 @@ set(ALL_FILES
     ${AI__AScript__ScriptClasses__ScriptIniFile__ScriptTokenList}
     ${AI__AScript__ScriptClasses__ScriptLAnim}
     ${AI__AScript__ScriptClasses__ScriptMonsterHitInfo}
+    ${AI__AScript__ScriptClasses__ScriptMonsterEnemyInfo}
+    ${AI__AScript__ScriptClasses__ScriptMonsterHomeInfo}
     ${AI__AScript__ScriptClasses__ScriptNetPacket}
     ${AI__AScript__ScriptClasses__ScriptParticles}
     ${AI__AScript__ScriptClasses__ScriptReader}

@@ -84,17 +84,14 @@ void CScriptRenderDevice::script_register(lua_State* L)
 		//			.def_readonly("view",					&CRenderDevice::mView)
 		//			.def_readonly("projection",				&CRenderDevice::mProject)
 		//			.def_readonly("full_transform",			&CRenderDevice::mFullTransform)
-		.def_readonly("fov", &CRenderDevice::fFOV)
-		.def_readonly("aspect_ratio", &CRenderDevice::fASPECT)
 		.def("time_global", &time_global)
 		.def("time_continual", &time_continual)
 		.def("set_cam_attached_fov", &set_cam_attached_fov)
 		.def("get_cam_attached_fov", &get_cam_attached_fov)
-		.def_readonly("precache_frame", &CRenderDevice::dwPrecacheFrame)
-		.def_readonly("frame", &CRenderDevice::dwFrame)
 		.def("is_paused", &is_device_paused)
 		.def("pause", &set_device_paused)
 		.def("pause_ex", &set_device_paused_ex),
+
 		def("app_ready", &is_app_ready)
 	];
 }

@@ -75,7 +75,7 @@ void CControlJump::activate()
 		u32 mask = m_script_flags_mask & (SControlJumpData::eUseAutoAim | SControlJumpData::eGroundSkip);
 		if ((m_script_flags_mask & SControlJumpData::ePrepareInMove) && m_data.state_prepare_in_move.motion.valid())
 			mask |= SControlJumpData::ePrepareInMove;
-		m_data.flags.or(mask);
+		m_data.flags.assign_or(mask);
 	}
 
 	m_man->capture_pure(this);
@@ -145,7 +145,7 @@ void CControlJump::start_jump(const Fvector& point)
 	// ignore collision hit when object is landing
 	m_object->set_ignore_collision_hit(true);
 
-	// select correct state 
+	// select correct state
 	if (is_flag(SControlJumpData::ePrepareSkip))
 	{
 		m_anim_state_current = eStateGlide;
@@ -385,7 +385,7 @@ bool CControlJump::is_on_the_ground()
 }
 
 //////////////////////////////////////////////////////////////////////////
-// 
+//
 //////////////////////////////////////////////////////////////////////////
 
 void CControlJump::grounding()
@@ -598,7 +598,7 @@ bool CControlJump::jump_intersect_geometry(Fvector const& target, CObject* const
 	pass_jump_picks		=	&jump_picks;
 	xr_vector<Fvector>		collide_tris;
 	pass_collide_tris	=	&collide_tris;
-#endif // #ifdef DEBUG		
+#endif // #ifdef DEBUG
 
 	Fvector const sizes = {0.8f, 1.4f, 0.8f};
 
@@ -624,7 +624,7 @@ bool CControlJump::jump_intersect_geometry(Fvector const& target, CObject* const
 #ifdef DEBUG
 		m_object->m_jump_picks			=	jump_picks;
 		m_object->m_jump_collide_tris	=	collide_tris;
-#endif // #ifdef DEBUG		
+#endif // #ifdef DEBUG
 
 		return true;
 	}

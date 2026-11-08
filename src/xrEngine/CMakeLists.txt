@@ -159,6 +159,13 @@ set(Game_API__Environment__Effects
 )
 source_group("Game API\\Environment\\Effects" FILES ${Game_API__Environment__Effects})
 
+set(Renderdoc_App_Integration
+    "renderdoc_app.h"
+    "renderdoc_integration.cpp"
+    "renderdoc_integration.h"
+)
+source_group("Game API\\Environment\\Effects" FILES ${Renderdoc_App_Integration})
+
 set(Game_API__Feelers
     "Feel_Sound.h"
     "Feel_Touch.cpp"
@@ -188,6 +195,8 @@ set(Game_API__Objects
     "pure_relcase.cpp"
     "pure_relcase.h"
     "ShadersExternalData.h"
+    "shader_bus.cpp"
+    "shader_bus.h"
     "xr_object.cpp"
     "xr_object.h"
     "xr_object_list.cpp"
@@ -421,6 +430,7 @@ set(ALL_FILES
     ${Game_API__Demo}
     ${Game_API__Environment}
     ${Game_API__Environment__Effects}
+    ${Renderdoc_App_Integration}
     ${Game_API__Feelers}
     ${Game_API__GameMaterials}
     ${Game_API__HUD}

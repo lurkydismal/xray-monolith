@@ -89,8 +89,8 @@ void CStateMonsterAttackAbstract::execute()
 	bool can_attack_on_move = this->object->can_attack_on_move();
 
 	// a Lua-proposed substate is taken only if registered and its own start conditions pass
-	u32 proposed_substate = object->script_combat_substate();
-	CSState* proposed_state = (proposed_substate != u32(-1)) ? this->get_state_if_present(proposed_substate) : 0;
+	u32 proposed_substate = this->object->script_combat_substate();
+	auto* proposed_state = (proposed_substate != u32(-1)) ? this->get_state_if_present(proposed_substate) : 0;
 
 	if (proposed_state && proposed_state->check_start_conditions())
 		this->select_state(proposed_substate);
